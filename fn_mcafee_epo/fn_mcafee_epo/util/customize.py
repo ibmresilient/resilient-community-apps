@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# Generated with resilient-sdk v50.0.151
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.0.2.575
 
-"""Generate the Resilient customizations required for fn_mcafee_epo"""
+"""Generate the SOAR customizations required for fn_mcafee_epo"""
 
 import base64
 import os
@@ -110,7 +110,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 49.0.8803
 
     Contents:
     - Message Destinations:

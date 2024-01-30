@@ -2407,7 +2407,7 @@ inputs.mcafee_epo_username = row.user_name
 results = playbook.functions.results.remove_user
 if results.get("success"):
   row.user_deleted = True
-  incident.addNote("User: {} removed  from ePO server".format(row.user_name))
+  incident.addNote("User: {} removed from ePO server".format(row.user_name))
 ```
 
 </p>

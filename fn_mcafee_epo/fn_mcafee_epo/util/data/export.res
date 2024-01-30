@@ -3,7 +3,8 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1696872258881,
+  "case_matching_profiles": [],
+  "export_date": 1706557529887,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_new_username",
       "hide_notification": false,
-      "id": 5683,
+      "id": 4565,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -46,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_skip_if_installed",
       "hide_notification": false,
-      "id": 5684,
+      "id": 4566,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -75,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_use_all_agent_handlers",
       "hide_notification": false,
-      "id": 5685,
+      "id": 4567,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -104,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_due",
       "hide_notification": false,
-      "id": 5686,
+      "id": 4568,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -133,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_fullname",
       "hide_notification": false,
-      "id": 5687,
+      "id": 4569,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -162,7 +163,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent",
       "hide_notification": false,
-      "id": 5688,
+      "id": 4570,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -191,7 +192,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_ticket_id",
       "hide_notification": false,
-      "id": 5689,
+      "id": 4571,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -220,7 +221,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_abort_after_minutes",
       "hide_notification": false,
-      "id": 5690,
+      "id": 4572,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -234,7 +235,7 @@
       "tags": [],
       "templates": [],
       "text": "mcafee_epo_abort_after_minutes",
-      "tooltip": "Number of minutes to wait to abort a call that isn't responding",
+      "tooltip": "Number of minutes to wait to abort a call that isn\u0027t responding",
       "type_id": 11,
       "uuid": "8fbb495a-2958-4929-b0b3-ae2b1072e695",
       "values": []
@@ -249,7 +250,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_password",
       "hide_notification": false,
-      "id": 5691,
+      "id": 4573,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -278,7 +279,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_severity",
       "hide_notification": false,
-      "id": 5692,
+      "id": 4574,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -303,7 +304,7 @@
           "label": "Unknown",
           "properties": null,
           "uuid": "b5611556-6d46-4755-9aab-38c72c55ad8d",
-          "value": 1692
+          "value": 802
         },
         {
           "default": false,
@@ -312,7 +313,7 @@
           "label": "Lowest",
           "properties": null,
           "uuid": "54900b0d-3fc1-48b0-aec3-1e99bc1cf400",
-          "value": 1693
+          "value": 803
         },
         {
           "default": false,
@@ -321,7 +322,7 @@
           "label": "Low",
           "properties": null,
           "uuid": "202dcca4-df0f-4235-9a08-e755fa24fa42",
-          "value": 1694
+          "value": 804
         },
         {
           "default": false,
@@ -330,7 +331,7 @@
           "label": "Medium",
           "properties": null,
           "uuid": "926be454-c8e7-49db-bc7c-e3b93ac02e5f",
-          "value": 1695
+          "value": 805
         },
         {
           "default": false,
@@ -339,7 +340,7 @@
           "label": "High",
           "properties": null,
           "uuid": "c0088c8b-75bb-43d3-966f-5414cbe26266",
-          "value": 1696
+          "value": 806
         },
         {
           "default": false,
@@ -348,7 +349,7 @@
           "label": "Highest",
           "properties": null,
           "uuid": "058df23b-a5d3-49b2-a4c6-496e63c77c89",
-          "value": 1697
+          "value": 807
         }
       ]
     },
@@ -362,7 +363,7 @@
       "deprecated": false,
       "export_key": "__function/datatable_name",
       "hide_notification": false,
-      "id": 5693,
+      "id": 4575,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -391,7 +392,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_user_disabled",
       "hide_notification": false,
-      "id": 5694,
+      "id": 4576,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -420,7 +421,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_force_install",
       "hide_notification": false,
-      "id": 5695,
+      "id": 4577,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -449,7 +450,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_retry_intervals_in_seconds",
       "hide_notification": false,
-      "id": 5696,
+      "id": 4578,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -478,7 +479,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_query_group",
       "hide_notification": false,
-      "id": 5697,
+      "id": 4579,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -507,7 +508,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_state",
       "hide_notification": false,
-      "id": 5698,
+      "id": 4580,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -532,7 +533,7 @@
           "label": "Unknown",
           "properties": null,
           "uuid": "10234f71-637e-4dd6-906a-19e32ef335ca",
-          "value": 1698
+          "value": 808
         },
         {
           "default": false,
@@ -541,7 +542,7 @@
           "label": "New",
           "properties": null,
           "uuid": "4c89f37f-b974-47da-a1d7-c42a9040c74e",
-          "value": 1699
+          "value": 809
         },
         {
           "default": false,
@@ -550,7 +551,7 @@
           "label": "Assigned",
           "properties": null,
           "uuid": "e305315f-04c7-4368-bea1-373c5eea12a6",
-          "value": 1700
+          "value": 810
         },
         {
           "default": false,
@@ -559,7 +560,7 @@
           "label": "Resolved",
           "properties": null,
           "uuid": "7f562e50-15d2-4a15-b5c1-82de0f633437",
-          "value": 1701
+          "value": 811
         },
         {
           "default": false,
@@ -568,7 +569,7 @@
           "label": "Closed",
           "properties": null,
           "uuid": "d570c184-9c28-4cbb-a16f-9324ffbdbb4f",
-          "value": 1702
+          "value": 812
         }
       ]
     },
@@ -582,7 +583,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_object_id",
       "hide_notification": false,
-      "id": 5699,
+      "id": 4581,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -611,7 +612,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_product_id",
       "hide_notification": false,
-      "id": 5700,
+      "id": 4582,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -640,7 +641,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_suppress_ui",
       "hide_notification": false,
-      "id": 5701,
+      "id": 4583,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -669,7 +670,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_delete_if_removed",
       "hide_notification": false,
-      "id": 5702,
+      "id": 4584,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -698,7 +699,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_retry_attempts",
       "hide_notification": false,
-      "id": 5703,
+      "id": 4585,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -727,7 +728,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_notes",
       "hide_notification": false,
-      "id": 5704,
+      "id": 4586,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -756,7 +757,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_systems",
       "hide_notification": false,
-      "id": 5705,
+      "id": 4587,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -785,7 +786,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_username",
       "hide_notification": false,
-      "id": 5706,
+      "id": 4588,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -814,7 +815,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_admin",
       "hide_notification": false,
-      "id": 5707,
+      "id": 4589,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -843,7 +844,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_email",
       "hide_notification": false,
-      "id": 5708,
+      "id": 4590,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -872,7 +873,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_domain_name",
       "hide_notification": false,
-      "id": 5709,
+      "id": 4591,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -901,7 +902,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_name",
       "hide_notification": false,
-      "id": 5710,
+      "id": 4592,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -930,7 +931,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_assignee",
       "hide_notification": false,
-      "id": 5711,
+      "id": 4593,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -959,7 +960,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_package_path",
       "hide_notification": false,
-      "id": 5712,
+      "id": 4594,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -988,7 +989,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_random_minutes",
       "hide_notification": false,
-      "id": 5713,
+      "id": 4595,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1017,7 +1018,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_stop_after_minutes",
       "hide_notification": false,
-      "id": 5714,
+      "id": 4596,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1046,7 +1047,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_description",
       "hide_notification": false,
-      "id": 5715,
+      "id": 4597,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1075,7 +1076,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_uninstall",
       "hide_notification": false,
-      "id": 5716,
+      "id": 4598,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1104,7 +1105,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_type_id",
       "hide_notification": false,
-      "id": 5717,
+      "id": 4599,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1133,7 +1134,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_allowed_ips",
       "hide_notification": false,
-      "id": 5718,
+      "id": 4600,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1162,7 +1163,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_pass",
       "hide_notification": false,
-      "id": 5719,
+      "id": 4601,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1191,7 +1192,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_query_order",
       "hide_notification": false,
-      "id": 5720,
+      "id": 4602,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1220,7 +1221,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_flatten_tree_structure",
       "hide_notification": false,
-      "id": 5721,
+      "id": 4603,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1249,7 +1250,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_id",
       "hide_notification": false,
-      "id": 5722,
+      "id": 4604,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1278,7 +1279,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_properties",
       "hide_notification": false,
-      "id": 5723,
+      "id": 4605,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1307,7 +1308,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_priority",
       "hide_notification": false,
-      "id": 5724,
+      "id": 4606,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1332,7 +1333,7 @@
           "label": "Unknown",
           "properties": null,
           "uuid": "026f887f-61d5-4806-9c17-4fadddc2d58f",
-          "value": 1703
+          "value": 813
         },
         {
           "default": false,
@@ -1341,7 +1342,7 @@
           "label": "Lowest",
           "properties": null,
           "uuid": "86511491-26f4-4353-baa5-d773536da011",
-          "value": 1704
+          "value": 814
         },
         {
           "default": false,
@@ -1350,7 +1351,7 @@
           "label": "Low",
           "properties": null,
           "uuid": "356e7a8e-13be-4eaa-80f4-894d1505f2e8",
-          "value": 1705
+          "value": 815
         },
         {
           "default": false,
@@ -1359,7 +1360,7 @@
           "label": "Medium",
           "properties": null,
           "uuid": "2fa8bbb9-d020-425b-948f-eaffbc0fc430",
-          "value": 1706
+          "value": 816
         },
         {
           "default": false,
@@ -1368,7 +1369,7 @@
           "label": "High",
           "properties": null,
           "uuid": "6c78f5c3-fffb-49a2-bdbf-e2161eb394b0",
-          "value": 1707
+          "value": 817
         },
         {
           "default": false,
@@ -1377,7 +1378,7 @@
           "label": "Highest",
           "properties": null,
           "uuid": "a5fe3e7f-37d8-4590-b809-b5507a731020",
-          "value": 1708
+          "value": 818
         }
       ]
     },
@@ -1391,7 +1392,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_ticket_server_name",
       "hide_notification": false,
-      "id": 5725,
+      "id": 4607,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1420,7 +1421,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_phone_number",
       "hide_notification": false,
-      "id": 5726,
+      "id": 4608,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1449,7 +1450,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_tag",
       "hide_notification": false,
-      "id": 5727,
+      "id": 4609,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1478,7 +1479,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_system_name_or_id",
       "hide_notification": false,
-      "id": 5728,
+      "id": 4610,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1507,7 +1508,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 5729,
+      "id": 4611,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1536,7 +1537,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_uninstall_software",
       "hide_notification": false,
-      "id": 5730,
+      "id": 4612,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1565,7 +1566,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_sub_group",
       "hide_notification": false,
-      "id": 5731,
+      "id": 4613,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1594,7 +1595,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_windowsdomain",
       "hide_notification": false,
-      "id": 5732,
+      "id": 4614,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1623,7 +1624,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_timeout_in_hours",
       "hide_notification": false,
-      "id": 5733,
+      "id": 4615,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1652,7 +1653,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_allow_duplicates",
       "hide_notification": false,
-      "id": 5734,
+      "id": 4616,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1681,7 +1682,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_push_agent_install_path",
       "hide_notification": false,
-      "id": 5735,
+      "id": 4617,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1710,7 +1711,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_subjectdn",
       "hide_notification": false,
-      "id": 5736,
+      "id": 4618,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1739,7 +1740,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_resolution",
       "hide_notification": false,
-      "id": 5737,
+      "id": 4619,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1764,7 +1765,7 @@
           "label": "None",
           "properties": null,
           "uuid": "7a9a788f-93c6-4575-bdb0-d22f9823624f",
-          "value": 1709
+          "value": 819
         },
         {
           "default": false,
@@ -1773,7 +1774,7 @@
           "label": "Fixed",
           "properties": null,
           "uuid": "51871e15-184d-4c05-b486-583e5e4d511d",
-          "value": 1710
+          "value": 820
         },
         {
           "default": false,
@@ -1782,7 +1783,7 @@
           "label": "Waived",
           "properties": null,
           "uuid": "15685a92-a121-47f1-a065-a2a8803d0dc9",
-          "value": 1711
+          "value": 821
         },
         {
           "default": false,
@@ -1791,7 +1792,7 @@
           "label": "Will Not Fix",
           "properties": null,
           "uuid": "924e3517-61dc-4478-9258-380ade7f8fc1",
-          "value": 1712
+          "value": 822
         }
       ]
     },
@@ -1805,7 +1806,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_username",
       "hide_notification": false,
-      "id": 5738,
+      "id": 4620,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1834,7 +1835,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_target",
       "hide_notification": false,
-      "id": 5739,
+      "id": 4621,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1863,7 +1864,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_issue_type",
       "hide_notification": false,
-      "id": 5740,
+      "id": 4622,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1888,7 +1889,7 @@
           "label": "Basic",
           "properties": null,
           "uuid": "fa68645e-e98b-4ba0-9ff6-f3bff26f20a4",
-          "value": 1713
+          "value": 823
         }
       ]
     },
@@ -1902,7 +1903,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_search_text",
       "hide_notification": false,
-      "id": 5741,
+      "id": 4623,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1931,7 +1932,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_group_id",
       "hide_notification": false,
-      "id": 5742,
+      "id": 4624,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1960,7 +1961,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_reset_inheritance",
       "hide_notification": false,
-      "id": 5743,
+      "id": 4625,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1989,7 +1990,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_task_id",
       "hide_notification": false,
-      "id": 5744,
+      "id": 4626,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -2018,7 +2019,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_query_select",
       "hide_notification": false,
-      "id": 5745,
+      "id": 4627,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2047,7 +2048,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_queryid",
       "hide_notification": false,
-      "id": 5746,
+      "id": 4628,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -2076,7 +2077,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_windowsusername",
       "hide_notification": false,
-      "id": 5747,
+      "id": 4629,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2105,7 +2106,7 @@
       "deprecated": false,
       "export_key": "__function/mcafee_epo_permsetname",
       "hide_notification": false,
-      "id": 5748,
+      "id": 4630,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2138,7 +2139,7 @@
   ],
   "functions": [
     {
-      "created_date": 1695737414751,
+      "created_date": 1706555032152,
       "description": {
         "content": "Add permission set(s) to an ePO user.\nMcAfee user requires administrator rights for this function.",
         "format": "text"
@@ -2146,20 +2147,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Add Permission sets to user",
       "export_key": "mcafee_epo_add_permission_sets_to_user",
-      "id": 244,
+      "id": 1,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862025452,
+      "last_modified_time": 1706555032152,
       "name": "mcafee_epo_add_permission_sets_to_user",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": true, \"raw\": null, \"inputs\": {\"mcafee_epo_username\": \"test\", \"mcafee_epo_permsetname\": \"Global Reviewer\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 593, \"timestamp\": \"2022-08-02 12:48:58\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"boolean\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_username\": {\"type\": \"string\"}, \"mcafee_epo_permsetname\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6492efd0-43f0-4078-943e-46e033ceccb6",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "38fb4df9-f658-48d9-9f41-594c053337e2",
@@ -2181,7 +2186,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737414813,
+      "created_date": 1706555032273,
       "description": {
         "content": "Add a system to the ePO server.\nMcAfee user requires permission to edit System Tree for this function.",
         "format": "text"
@@ -2189,20 +2194,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Add System",
       "export_key": "mcafee_epo_add_system",
-      "id": 245,
+      "id": 2,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862025546,
+      "last_modified_time": 1706555032273,
       "name": "mcafee_epo_add_system",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": true, \"raw\": null, \"inputs\": {\"mcafee_epo_push_agent_install_path\": null, \"mcafee_epo_push_agent_package_path\": null, \"mcafee_epo_push_agent_force_install\": null, \"mcafee_epo_group_id\": 2, \"mcafee_epo_push_agent\": null, \"mcafee_epo_push_agent_domain_name\": null, \"mcafee_epo_flatten_tree_structure\": null, \"mcafee_epo_allow_duplicates\": null, \"mcafee_epo_delete_if_removed\": null, \"mcafee_epo_push_agent_username\": null, \"mcafee_epo_uninstall\": null, \"mcafee_epo_push_agent_skip_if_installed\": null, \"mcafee_epo_system_name_or_id\": \"fffff\", \"mcafee_epo_push_agent_suppress_ui\": null, \"mcafee_epo_push_agent_password\": null}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 176568, \"timestamp\": \"2022-08-16 14:16:44\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"boolean\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_push_agent_install_path\": {}, \"mcafee_epo_push_agent_package_path\": {}, \"mcafee_epo_push_agent_force_install\": {}, \"mcafee_epo_group_id\": {\"type\": \"integer\"}, \"mcafee_epo_push_agent\": {}, \"mcafee_epo_push_agent_domain_name\": {}, \"mcafee_epo_flatten_tree_structure\": {}, \"mcafee_epo_allow_duplicates\": {}, \"mcafee_epo_delete_if_removed\": {}, \"mcafee_epo_push_agent_username\": {}, \"mcafee_epo_uninstall\": {}, \"mcafee_epo_push_agent_skip_if_installed\": {}, \"mcafee_epo_system_name_or_id\": {\"type\": \"string\"}, \"mcafee_epo_push_agent_suppress_ui\": {}, \"mcafee_epo_push_agent_password\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "b30f5c25-c4f3-49ed-ba15-fe4d82c71249",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "1f6f5cd4-cccf-4d78-9cc6-84a6550152c6",
@@ -2328,7 +2337,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737414874,
+      "created_date": 1706555032377,
       "description": {
         "content": "Add a user to the ePO server.\nMcAfee user requires administrator rights for this function.",
         "format": "text"
@@ -2336,20 +2345,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Add User",
       "export_key": "mcafee_epo_add_user",
-      "id": 246,
+      "id": 3,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862025633,
+      "last_modified_time": 1706555032377,
       "name": "mcafee_epo_add_user",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": true, \"raw\": null, \"inputs\": {\"mcafee_epo_pass\": \"password\", \"mcafee_epo_allowed_ips\": null, \"mcafee_epo_phone_number\": \"534-452-0287\", \"mcafee_epo_email\": \"jeff@example.com\", \"mcafee_epo_username\": \"jeff\", \"mcafee_epo_notes\": \"jefferson notes\", \"mcafee_epo_user_disabled\": false, \"mcafee_epo_fullname\": \"jeff\", \"mcafee_epo_admin\": true}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 604, \"timestamp\": \"2022-08-10 12:55:56\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"boolean\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_pass\": {\"type\": \"string\"}, \"mcafee_epo_allowed_ips\": {}, \"mcafee_epo_phone_number\": {\"type\": \"string\"}, \"mcafee_epo_email\": {\"type\": \"string\"}, \"mcafee_epo_username\": {\"type\": \"string\"}, \"mcafee_epo_notes\": {\"type\": \"string\"}, \"mcafee_epo_user_disabled\": {\"type\": \"boolean\"}, \"mcafee_epo_fullname\": {\"type\": \"string\"}, \"mcafee_epo_admin\": {\"type\": \"boolean\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "0d34aa89-8ebf-4c17-9c7f-4ea851c37a82",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "38fb4df9-f658-48d9-9f41-594c053337e2",
@@ -2427,7 +2440,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737414932,
+      "created_date": 1706555032477,
       "description": {
         "content": "Assigns policy to the specified group no ePO server.\nMcAfee user requires permission to at least one group in the System Tree and edit permission for at least one product for this function.",
         "format": "text"
@@ -2435,20 +2448,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Assign Policy to Group",
       "export_key": "mcafee_epo_assign_policy_to_group",
-      "id": 247,
+      "id": 4,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862025725,
+      "last_modified_time": 1706555032477,
       "name": "mcafee_epo_assign_policy_to_group",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": true, \"raw\": null, \"inputs\": {\"mcafee_epo_product_id\": \"MARCOBA_META\", \"mcafee_epo_group_id\": 5, \"mcafee_epo_object_id\": 39}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 751, \"timestamp\": \"2022-08-22 12:05:01\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"boolean\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_product_id\": {\"type\": \"string\"}, \"mcafee_epo_group_id\": {\"type\": \"integer\"}, \"mcafee_epo_object_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "4dc3b4db-1f72-4b4e-b7e0-c5996f743697",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "53bbb755-1c65-48c2-a323-c64ca989de16",
@@ -2486,7 +2503,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737414990,
+      "created_date": 1706555032571,
       "description": {
         "content": "Assigns the policy to a supplied list of systems on the ePO server.\nMcAfee user requires permission to at least one group in the System Tree and edit permission for at least one product for this function.",
         "format": "text"
@@ -2494,20 +2511,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Assign Policy to Systems",
       "export_key": "mcafee_epo_assign_policy_to_systems",
-      "id": 248,
+      "id": 5,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862025808,
+      "last_modified_time": 1706555032571,
       "name": "mcafee_epo_assign_policy_to_systems",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"name\": \"SystemA\", \"id\": \"12\", \"message\": \"Assign policy succeeded\", \"status\": 0}], \"raw\": null, \"inputs\": {\"mcafee_epo_product_id\": \"MARCOBA_META\", \"mcafee_epo_system_name_or_id\": \"SystemA\", \"mcafee_epo_object_id\": 39, \"mcafee_epo_type_id\": 19}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 709, \"timestamp\": \"2022-08-22 12:13:29\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"message\": {\"type\": \"string\"}, \"status\": {\"type\": \"integer\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_product_id\": {\"type\": \"string\"}, \"mcafee_epo_system_name_or_id\": {\"type\": \"string\"}, \"mcafee_epo_object_id\": {\"type\": \"integer\"}, \"mcafee_epo_type_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "81575bf7-1c92-45d0-a674-4682f9e735c7",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "1f6f5cd4-cccf-4d78-9cc6-84a6550152c6",
@@ -2553,7 +2574,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415051,
+      "created_date": 1706555032666,
       "description": {
         "content": "Create an issue on the ePO server.\nMcAfee user requires permission to edit issues for this function.",
         "format": "text"
@@ -2561,20 +2582,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Create Issue",
       "export_key": "mcafee_epo_create_issue",
-      "id": 249,
+      "id": 6,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862025898,
+      "last_modified_time": 1706555032666,
       "name": "mcafee_epo_create_issue",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": 13, \"raw\": null, \"inputs\": {\"mcafee_epo_issue_name\": \"New issue\", \"mcafee_epo_issue_properties\": null, \"mcafee_epo_ticket_server_name\": null, \"mcafee_epo_issue_due\": 1661950852000, \"mcafee_epo_issue_state\": \"Assigned\", \"mcafee_epo_issue_severity\": \"Low\", \"mcafee_epo_issue_description\": \"Test issue creation\", \"mcafee_epo_issue_assignee\": \"Jefferson\", \"mcafee_epo_issue_type\": \"Basic\", \"mcafee_epo_ticket_id\": null, \"mcafee_epo_issue_priority\": \"Medium\", \"mcafee_epo_issue_resolution\": \"Will Not Fix\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 547, \"timestamp\": \"2022-08-19 09:00:56\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"integer\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_issue_name\": {\"type\": \"string\"}, \"mcafee_epo_issue_properties\": {}, \"mcafee_epo_ticket_server_name\": {}, \"mcafee_epo_issue_due\": {\"type\": \"integer\"}, \"mcafee_epo_issue_state\": {\"type\": \"string\"}, \"mcafee_epo_issue_severity\": {\"type\": \"string\"}, \"mcafee_epo_issue_description\": {\"type\": \"string\"}, \"mcafee_epo_issue_assignee\": {\"type\": \"string\"}, \"mcafee_epo_issue_type\": {\"type\": \"string\"}, \"mcafee_epo_ticket_id\": {}, \"mcafee_epo_issue_priority\": {\"type\": \"string\"}, \"mcafee_epo_issue_resolution\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "8bbcc714-05ce-4894-bd65-9f5daff302e5",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "cd420db2-85fa-4b36-836e-b84b08da53d0",
@@ -2676,7 +2701,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415116,
+      "created_date": 1706555032758,
       "description": {
         "content": "Delete an issue from the ePO server.\nMcAfee user requires permission to edit issues for this function.",
         "format": "text"
@@ -2684,20 +2709,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Delete Issue",
       "export_key": "mcafee_epo_delete_issue",
-      "id": 250,
+      "id": 7,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862025982,
+      "last_modified_time": 1706555032758,
       "name": "mcafee_epo_delete_issue",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": 1, \"raw\": null, \"inputs\": {\"mcafee_epo_issue_id\": 12}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 538, \"timestamp\": \"2022-08-19 09:01:12\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"integer\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_issue_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "9edf3f57-b79b-4a50-bc6b-632ea6406dfe",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "050a0e76-1842-47ef-9f3f-5132db7ebe86",
@@ -2711,7 +2740,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415179,
+      "created_date": 1706555032850,
       "description": {
         "content": "Delete a system from the ePO server.\nMcAfee user requires permission to edit System Tree groups and systems for this function.",
         "format": "text"
@@ -2719,20 +2748,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Delete System",
       "export_key": "mcafee_epo_delete_system",
-      "id": 251,
+      "id": 8,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026066,
+      "last_modified_time": 1706555032850,
       "name": "mcafee_epo_delete_system",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"name\": \"toDelete\", \"id\": \"15\", \"message\": \"Computer deleted successfully\", \"status\": 0}], \"raw\": null, \"inputs\": {\"mcafee_epo_system_name_or_id\": \"toDelete\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 615, \"timestamp\": \"2022-08-12 09:11:56\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"message\": {\"type\": \"string\"}, \"status\": {\"type\": \"integer\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_system_name_or_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "4011b9c6-eeba-49da-b5f7-27fdce026c83",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "1f6f5cd4-cccf-4d78-9cc6-84a6550152c6",
@@ -2762,7 +2795,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415242,
+      "created_date": 1706555032947,
       "description": {
         "content": "Execute a query on the ePO server.\nMcAfee user requires permission to use queries for this function.",
         "format": "text"
@@ -2770,20 +2803,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Execute Query",
       "export_key": "mcafee_epo_execute_query",
-      "id": 252,
+      "id": 9,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026163,
+      "last_modified_time": 1706555032947,
       "name": "mcafee_epo_execute_query",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"EPOLeafNode.Tags\": \"Intel(R) Xeon(R) CPU, Linux, Server\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": \"2022-08-12T06:10:31-07:00\", \"EPOLeafNode.os\": \"Linux|Server|4.9|227-1.mlos2.x86_64\", \"EPOLeafNode.NodeName\": \"int-mcafee-tie\", \"EPOLeafNode.ManagedState\": 1, \"EPOLeafNode.AgentVersion\": \"5.6.5.236\", \"EPOLeafNode.AgentGUID\": \"E1ABB618-09C4-11ED-2BBA-005056B43418\", \"EPOLeafNode.ResortEnabled\": false, \"EPOLeafNode.TransferSiteListsID\": false, \"EPOLeafNode.SequenceErrorCount\": 0, \"EPOLeafNode.SequenceErrorCountLastUpdate\": null, \"EPOLeafNode.LastCommSecure\": \"1\"}, {\"EPOLeafNode.Tags\": \"Intel Core Processor, Server, Windows server 2016\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": \"2022-08-12T05:42:46-07:00\", \"EPOLeafNode.os\": \"Windows Server 2016|Server|10.0|\", \"EPOLeafNode.NodeName\": \"MCAFEE-EPO-CLIE\", \"EPOLeafNode.ManagedState\": 1, \"EPOLeafNode.AgentVersion\": \"5.5.1.388\", \"EPOLeafNode.AgentGUID\": \"D770FEB6-3C1E-40A9-ACB2-B74E5FF66D5E\", \"EPOLeafNode.ResortEnabled\": false, \"EPOLeafNode.TransferSiteListsID\": false, \"EPOLeafNode.SequenceErrorCount\": 0, \"EPOLeafNode.SequenceErrorCountLastUpdate\": null, \"EPOLeafNode.LastCommSecure\": \"1\"}, {\"EPOLeafNode.Tags\": \"Intel(R) Xeon(R) CPU, Server, Windows server 2016\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": \"2022-08-12T06:00:08-07:00\", \"EPOLeafNode.os\": \"Windows Server 2016|Server|10.0|\", \"EPOLeafNode.NodeName\": \"WIN-MTHJTQ4ELBP\", \"EPOLeafNode.ManagedState\": 1, \"EPOLeafNode.AgentVersion\": \"5.6.6.232\", \"EPOLeafNode.AgentGUID\": \"B7E3C7E0-CDE7-11EB-3210-005056B41000\", \"EPOLeafNode.ResortEnabled\": false, \"EPOLeafNode.TransferSiteListsID\": false, \"EPOLeafNode.SequenceErrorCount\": 0, \"EPOLeafNode.SequenceErrorCountLastUpdate\": null, \"EPOLeafNode.LastCommSecure\": \"1\"}, {\"EPOLeafNode.Tags\": \"\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": null, \"EPOLeafNode.os\": \"|||\", \"EPOLeafNode.NodeName\": \"SystemA\", \"EPOLeafNode.ManagedState\": 0, \"EPOLeafNode.AgentVersion\": null, \"EPOLeafNode.AgentGUID\": null, \"EPOLeafNode.ResortEnabled\": false, \"EPOLeafNode.TransferSiteListsID\": false, \"EPOLeafNode.SequenceErrorCount\": 0, \"EPOLeafNode.SequenceErrorCountLastUpdate\": null, \"EPOLeafNode.LastCommSecure\": \"0\"}, {\"EPOLeafNode.Tags\": \"\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": null, \"EPOLeafNode.os\": \"|||\", \"EPOLeafNode.NodeName\": \"LostSystem\", \"EPOLeafNode.ManagedState\": 0, \"EPOLeafNode.AgentVersion\": null, \"EPOLeafNode.AgentGUID\": null, \"EPOLeafNode.ResortEnabled\": false, \"EPOLeafNode.TransferSiteListsID\": false, \"EPOLeafNode.SequenceErrorCount\": 0, \"EPOLeafNode.SequenceErrorCountLastUpdate\": null, \"EPOLeafNode.LastCommSecure\": \"0\"}, {\"EPOLeafNode.Tags\": \"\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": null, \"EPOLeafNode.os\": \"|||\", \"EPOLeafNode.NodeName\": \"toDelete\", \"EPOLeafNode.ManagedState\": 0, \"EPOLeafNode.AgentVersion\": null, \"EPOLeafNode.AgentGUID\": null, \"EPOLeafNode.ResortEnabled\": false, \"EPOLeafNode.TransferSiteListsID\": false, \"EPOLeafNode.SequenceErrorCount\": 0, \"EPOLeafNode.SequenceErrorCountLastUpdate\": null, \"EPOLeafNode.LastCommSecure\": \"0\"}], \"raw\": null, \"inputs\": {\"incident_id\": 2108, \"datatable_name\": \"mcafee_epo_systems\", \"mcafee_epo_target\": \"EPOLeafNode\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1252, \"timestamp\": \"2022-08-12 09:10:36\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"EPOLeafNode.Tags\": {\"type\": \"string\"}, \"EPOLeafNode.ExcludedTags\": {\"type\": \"string\"}, \"EPOLeafNode.LastUpdate\": {\"type\": [\"null\", \"string\"]}, \"EPOLeafNode.os\": {\"type\": \"string\"}, \"EPOLeafNode.NodeName\": {\"type\": \"string\"}, \"EPOLeafNode.ManagedState\": {\"type\": \"integer\"}, \"EPOLeafNode.AgentVersion\": {\"type\": [\"null\", \"string\"]}, \"EPOLeafNode.AgentGUID\": {\"type\": [\"null\", \"string\"]}, \"EPOLeafNode.ResortEnabled\": {\"type\": \"boolean\"}, \"EPOLeafNode.TransferSiteListsID\": {\"type\": \"boolean\"}, \"EPOLeafNode.SequenceErrorCount\": {\"type\": \"integer\"}, \"EPOLeafNode.SequenceErrorCountLastUpdate\": {}, \"EPOLeafNode.LastCommSecure\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"datatable_name\": {\"type\": \"string\"}, \"mcafee_epo_target\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "3a78912f-473f-4eaf-86b3-05dc87c5e14a",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "71c94599-1aee-4b14-84ca-8bade00be741",
@@ -2845,7 +2882,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415304,
+      "created_date": 1706555033045,
       "description": {
         "content": "Find an ePO system based on a property such as system name, tag, IP address, MAC address, etc.\nMcAfee user requires permission to at least one group in the System Tree for this function.",
         "format": "text"
@@ -2853,20 +2890,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Find a System",
       "export_key": "mcafee_epo_find_a_system",
-      "id": 253,
+      "id": 10,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026255,
+      "last_modified_time": 1706555033045,
       "name": "mcafee_epo_find_a_system",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"EPOComputerProperties.ParentID\": 13, \"EPOComputerProperties.ComputerName\": \"test_server\", \"EPOComputerProperties.Description\": null, \"EPOComputerProperties.ComputerDescription\": null, \"EPOComputerProperties.TimeZone\": \"\", \"EPOComputerProperties.DefaultLangID\": \"\", \"EPOComputerProperties.UserName\": \"\", \"EPOComputerProperties.DomainName\": \"\", \"EPOComputerProperties.IPHostName\": \"\", \"EPOComputerProperties.IPV6\": null, \"EPOComputerProperties.IPAddress\": \"\", \"EPOComputerProperties.IPSubnet\": null, \"EPOComputerProperties.IPSubnetMask\": null, \"EPOComputerProperties.IPV4x\": null, \"EPOComputerProperties.IPXAddress\": \"\", \"EPOComputerProperties.SubnetAddress\": \"\", \"EPOComputerProperties.SubnetMask\": \"\", \"EPOComputerProperties.NetAddress\": \"\", \"EPOComputerProperties.OSType\": \"\", \"EPOComputerProperties.OSVersion\": \"\", \"EPOComputerProperties.OSCsdVersion\": \"\", \"EPOComputerProperties.OSBuildNum\": 0, \"EPOComputerProperties.OSPlatform\": \"\", \"EPOComputerProperties.OSOEMID\": \"\", \"EPOComputerProperties.CPUType\": \"\", \"EPOComputerProperties.CPUSpeed\": 0, \"EPOComputerProperties.NumOfCPU\": 0, \"EPOComputerProperties.CPUSerialNumber\": \"\", \"EPOComputerProperties.TotalPhysicalMemory\": 0, \"EPOComputerProperties.FreeMemory\": 0, \"EPOComputerProperties.FreeDiskSpace\": 0, \"EPOComputerProperties.TotalDiskSpace\": 0, \"EPOComputerProperties.IsPortable\": -1, \"EPOComputerProperties.Vdi\": -1, \"EPOComputerProperties.OSBitMode\": -1, \"EPOComputerProperties.LastAgentHandler\": null, \"EPOComputerProperties.UserProperty1\": null, \"EPOComputerProperties.UserProperty2\": null, \"EPOComputerProperties.UserProperty3\": null, \"EPOComputerProperties.UserProperty4\": null, \"EPOComputerProperties.UserProperty5\": null, \"EPOComputerProperties.UserProperty6\": null, \"EPOComputerProperties.UserProperty7\": null, \"EPOComputerProperties.UserProperty8\": null, \"EPOComputerProperties.Free_Space_of_Drive_C\": 0, \"EPOComputerProperties.Total_Space_of_Drive_C\": 0, \"EPOLeafNode.Tags\": \"myTag, Server, SOAR\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": null, \"EPOLeafNode.ManagedState\": 0, \"EPOLeafNode.AgentGUID\": null, \"EPOLeafNode.AgentVersion\": null, \"EPOBranchNode.AutoID\": 2}], \"raw\": null, \"inputs\": {\"mcafee_epo_systems\": \"test_server\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 649, \"timestamp\": \"2022-07-01 12:40:10\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"EPOComputerProperties.ParentID\": {\"type\": \"integer\"}, \"EPOComputerProperties.ComputerName\": {\"type\": \"string\"}, \"EPOComputerProperties.Description\": {}, \"EPOComputerProperties.ComputerDescription\": {}, \"EPOComputerProperties.TimeZone\": {\"type\": \"string\"}, \"EPOComputerProperties.DefaultLangID\": {\"type\": \"string\"}, \"EPOComputerProperties.UserName\": {\"type\": \"string\"}, \"EPOComputerProperties.DomainName\": {\"type\": \"string\"}, \"EPOComputerProperties.IPHostName\": {\"type\": \"string\"}, \"EPOComputerProperties.IPV6\": {}, \"EPOComputerProperties.IPAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.IPSubnet\": {}, \"EPOComputerProperties.IPSubnetMask\": {}, \"EPOComputerProperties.IPV4x\": {}, \"EPOComputerProperties.IPXAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.SubnetAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.SubnetMask\": {\"type\": \"string\"}, \"EPOComputerProperties.NetAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.OSType\": {\"type\": \"string\"}, \"EPOComputerProperties.OSVersion\": {\"type\": \"string\"}, \"EPOComputerProperties.OSCsdVersion\": {\"type\": \"string\"}, \"EPOComputerProperties.OSBuildNum\": {\"type\": \"integer\"}, \"EPOComputerProperties.OSPlatform\": {\"type\": \"string\"}, \"EPOComputerProperties.OSOEMID\": {\"type\": \"string\"}, \"EPOComputerProperties.CPUType\": {\"type\": \"string\"}, \"EPOComputerProperties.CPUSpeed\": {\"type\": \"integer\"}, \"EPOComputerProperties.NumOfCPU\": {\"type\": \"integer\"}, \"EPOComputerProperties.CPUSerialNumber\": {\"type\": \"string\"}, \"EPOComputerProperties.TotalPhysicalMemory\": {\"type\": \"integer\"}, \"EPOComputerProperties.FreeMemory\": {\"type\": \"integer\"}, \"EPOComputerProperties.FreeDiskSpace\": {\"type\": \"integer\"}, \"EPOComputerProperties.TotalDiskSpace\": {\"type\": \"integer\"}, \"EPOComputerProperties.IsPortable\": {\"type\": \"integer\"}, \"EPOComputerProperties.Vdi\": {\"type\": \"integer\"}, \"EPOComputerProperties.OSBitMode\": {\"type\": \"integer\"}, \"EPOComputerProperties.LastAgentHandler\": {}, \"EPOComputerProperties.UserProperty1\": {}, \"EPOComputerProperties.UserProperty2\": {}, \"EPOComputerProperties.UserProperty3\": {}, \"EPOComputerProperties.UserProperty4\": {}, \"EPOComputerProperties.UserProperty5\": {}, \"EPOComputerProperties.UserProperty6\": {}, \"EPOComputerProperties.UserProperty7\": {}, \"EPOComputerProperties.UserProperty8\": {}, \"EPOComputerProperties.Free_Space_of_Drive_C\": {\"type\": \"integer\"}, \"EPOComputerProperties.Total_Space_of_Drive_C\": {\"type\": \"integer\"}, \"EPOLeafNode.Tags\": {\"type\": \"string\"}, \"EPOLeafNode.ExcludedTags\": {\"type\": \"string\"}, \"EPOLeafNode.LastUpdate\": {}, \"EPOLeafNode.ManagedState\": {\"type\": \"integer\"}, \"EPOLeafNode.AgentGUID\": {}, \"EPOLeafNode.AgentVersion\": {}, \"EPOBranchNode.AutoID\": {\"type\": \"integer\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_systems\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "0030078d-417f-4d92-9212-6853914b56af",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "bf25606e-96aa-4328-aa15-1cd5a8b8dc02",
@@ -2880,7 +2921,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415366,
+      "created_date": 1706555033139,
       "description": {
         "content": "Find client tasks on the ePO server.\nMcAfee user requires view permission for at least one product for this function.",
         "format": "text"
@@ -2888,20 +2929,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Find Client Tasks",
       "export_key": "mcafee_epo_find_client_tasks",
-      "id": 254,
+      "id": 11,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026345,
+      "last_modified_time": 1706555033139,
       "name": "mcafee_epo_find_client_tasks",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"productId\": \"EPOAGENTMETA\", \"typeName\": \"McAfee Agent: McAfee Agent Statistics\", \"objectName\": \"Collect All\", \"typeId\": 4, \"objectId\": 7, \"productName\": \"McAfee Agent \"}, {\"productId\": \"EPOAGENTMETA\", \"typeName\": \"McAfee Agent: McAfee Agent Wakeup\", \"objectName\": \"Get changed properties\", \"typeId\": 3, \"objectId\": 14, \"productName\": \"McAfee Agent \"}, {\"productId\": \"EPOAGENTMETA\", \"typeName\": \"McAfee Agent: Product Update\", \"objectName\": \"Update all packages\", \"typeId\": 1, \"objectId\": 15, \"productName\": \"McAfee Agent \"}], \"raw\": null, \"inputs\": {\"incident_id\": 2108, \"datatable_name\": \"mcafee_epo_client_tasks\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1088, \"timestamp\": \"2022-08-12 09:58:29\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"productId\": {\"type\": \"string\"}, \"typeName\": {\"type\": \"string\"}, \"objectName\": {\"type\": \"string\"}, \"typeId\": {\"type\": \"integer\"}, \"objectId\": {\"type\": \"integer\"}, \"productName\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"datatable_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "948b9c0a-1d8e-47c4-a277-1180ee5d3f5e",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "9767f563-47d2-4daf-b353-284342833db8",
@@ -2931,7 +2976,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415428,
+      "created_date": 1706555033239,
       "description": {
         "content": "Find groups on the ePO server.\nMcAfee user requires access to at least one group in the System Tree for this function.",
         "format": "text"
@@ -2939,20 +2984,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Find Groups",
       "export_key": "mcafee_epo_find_groups",
-      "id": 255,
+      "id": 12,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026434,
+      "last_modified_time": 1706555033239,
       "name": "mcafee_epo_find_groups",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"groupId\": 2, \"groupPath\": \"My Organization\"}, {\"groupId\": 3, \"groupPath\": \"My Organization\\\\Lost and Found\"}, {\"groupId\": 4, \"groupPath\": \"My Organization\\\\Lost and Found\\\\rtp.raleigh.ibm.com\"}, {\"groupId\": 5, \"groupPath\": \"My Organization\\\\Test\"}], \"raw\": null, \"inputs\": {\"incident_id\": 2108, \"datatable_name\": \"mcafee_epo_groups\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1217, \"timestamp\": \"2022-08-11 08:48:38\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"groupId\": {\"type\": \"integer\"}, \"groupPath\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"datatable_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "cec9d0f8-06bc-4168-9fec-554d2fef8a99",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "4ebc533a-359e-486d-9355-6c2a45a52d02",
@@ -2982,7 +3031,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415491,
+      "created_date": 1706555033341,
       "description": {
         "content": "Finds all policies that match the given search text or find all policies if no search text is given.\nMcAfee user requires view permission for at least one product for this function.",
         "format": "text"
@@ -2990,20 +3039,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Find Policies",
       "export_key": "mcafee_epo_find_policies",
-      "id": 256,
+      "id": 13,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026513,
+      "last_modified_time": 1706555033341,
       "name": "mcafee_epo_find_policies",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"productId\": \"MARCOBA_META\", \"featureName\": \"MARCOBA_META\", \"typeName\": \"General\", \"objectName\": \"McAfee Default\", \"typeId\": 19, \"featureId\": \"MARCOBA_META\", \"objectId\": 39, \"productName\": \"Active Response 2.4.4\", \"objectNotes\": \"\"}, {\"productId\": \"MARCOBA_META\", \"featureName\": \"MARCOBA_META\", \"typeName\": \"General\", \"objectName\": \"Full Visibility\", \"typeId\": 19, \"featureId\": \"MARCOBA_META\", \"objectId\": 40, \"productName\": \"Active Response 2.4.4\", \"objectNotes\": \"\"}, {\"productId\": \"MARCOBA_META\", \"featureName\": \"MARCOBA_META\", \"typeName\": \"General\", \"objectName\": \"Full Monitoring\", \"typeId\": 19, \"featureId\": \"MARCOBA_META\", \"objectId\": 41, \"productName\": \"Active Response 2.4.4\", \"objectNotes\": \"\"}, {\"productId\": \"MARCOBA_META\", \"featureName\": \"MARCOBA_META\", \"typeName\": \"General\", \"objectName\": \"My Default\", \"typeId\": 19, \"featureId\": \"MARCOBA_META\", \"objectId\": 42, \"productName\": \"Active Response 2.4.4\", \"objectNotes\": \"\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"General\", \"objectName\": \"McAfee Default\", \"typeId\": 3, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 4, \"productName\": \"McAfee Agent \", \"objectNotes\": \"The McAfee Default policy is configured with settings recommended by McAfee to protect many environments\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"General\", \"objectName\": \"Large Organization Default\", \"typeId\": 3, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 9, \"productName\": \"McAfee Agent \", \"objectNotes\": \"The Large Organization Default policy is configured with settings recommended by McAfee to protect large enterprise environments.\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"General\", \"objectName\": \"My Default\", \"typeId\": 3, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 11, \"productName\": \"McAfee Agent \", \"objectNotes\": \"\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Repository\", \"objectName\": \"McAfee Default\", \"typeId\": 4, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 5, \"productName\": \"McAfee Agent \", \"objectNotes\": \"The McAfee Default policy is configured with settings recommended by McAfee to protect many environments\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Repository\", \"objectName\": \"My Default\", \"typeId\": 4, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 12, \"productName\": \"McAfee Agent \", \"objectNotes\": \"\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Troubleshooting\", \"objectName\": \"McAfee Default\", \"typeId\": 5, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 6, \"productName\": \"McAfee Agent \", \"objectNotes\": \"The McAfee Default policy is configured with settings recommended by McAfee to protect many environments\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Troubleshooting\", \"objectName\": \"My Default\", \"typeId\": 5, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 13, \"productName\": \"McAfee Agent \", \"objectNotes\": \"\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Custom Properties\", \"objectName\": \"McAfee Default\", \"typeId\": 6, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 7, \"productName\": \"McAfee Agent \", \"objectNotes\": \"\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Custom Properties\", \"objectName\": \"My Default\", \"typeId\": 6, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 14, \"productName\": \"McAfee Agent \", \"objectNotes\": \"\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Product Improvement Program\", \"objectName\": \"McAfee Default\", \"typeId\": 7, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 8, \"productName\": \"McAfee Agent \", \"objectNotes\": \"The McAfee Default policy is configured with settings recommended by McAfee to protect many environments\"}, {\"productId\": \"EPOAGENTMETA\", \"featureName\": \"McAfee Agent\", \"typeName\": \"Product Improvement Program\", \"objectName\": \"My Default\", \"typeId\": 7, \"featureId\": \"EPOAGENTMETA\", \"objectId\": 15, \"productName\": \"McAfee Agent \", \"objectNotes\": \"\"}, {\"productId\": \"DXLBROKRMETA\", \"featureName\": \"McAfee DXL Broker Management\", \"typeName\": \"General\", \"objectName\": \"McAfee Default\", \"typeId\": 13, \"featureId\": \"DXLBROKRMETA\", \"objectId\": 24, \"productName\": \"McAfee DXL Broker Management 6.0.0\", \"objectNotes\": \"\"}, {\"productId\": \"DXLBROKRMETA\", \"featureName\": \"McAfee DXL Broker Management\", \"typeName\": \"General\", \"objectName\": \"My Default\", \"typeId\": 13, \"featureId\": \"DXLBROKRMETA\", \"objectId\": 28, \"productName\": \"McAfee DXL Broker Management 6.0.0\", \"objectNotes\": \"\"}, {\"productId\": \"DXLCLNT_META\", \"featureName\": \"McAfee DXL Client\", \"typeName\": \"General\", \"objectName\": \"McAfee Default\", \"typeId\": 17, \"featureId\": \"DXLCLNT_META\", \"objectId\": 33, \"productName\": \"McAfee DXL Client 6.0.0\", \"objectNotes\": \"\"}, {\"productId\": \"DXLCLNT_META\", \"featureName\": \"McAfee DXL Client\", \"typeName\": \"General\", \"objectName\": \"My Default\", \"typeId\": 17, \"featureId\": \"DXLCLNT_META\", \"objectId\": 35, \"productName\": \"McAfee DXL Client 6.0.0\", \"objectNotes\": \"\"}], \"raw\": null, \"inputs\": {\"incident_id\": 2108, \"datatable_name\": \"mcafee_epo_policies\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 620661, \"timestamp\": \"2022-08-22 11:43:00\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"productId\": {\"type\": \"string\"}, \"featureName\": {\"type\": \"string\"}, \"typeName\": {\"type\": \"string\"}, \"objectName\": {\"type\": \"string\"}, \"typeId\": {\"type\": \"integer\"}, \"featureId\": {\"type\": \"string\"}, \"objectId\": {\"type\": \"integer\"}, \"productName\": {\"type\": \"string\"}, \"objectNotes\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"datatable_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "a8259648-09cc-4d7f-a21a-3a6d455646d3",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "4ebc533a-359e-486d-9355-6c2a45a52d02",
@@ -3033,7 +3086,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415555,
+      "created_date": 1706555033447,
       "description": {
         "content": "Find systems in a specified group on ePO server.\nMcAfee user requires access to at least one group for this function.",
         "format": "text"
@@ -3041,20 +3094,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Find Systems in Group",
       "export_key": "mcafee_epo_find_systems_in_group",
-      "id": 257,
+      "id": 14,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026591,
+      "last_modified_time": 1706555033447,
       "name": "mcafee_epo_find_systems_in_group",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"EPOComputerProperties.ParentID\": 12, \"EPOComputerProperties.ComputerName\": \"SystemA\", \"EPOComputerProperties.Description\": null, \"EPOComputerProperties.ComputerDescription\": null, \"EPOComputerProperties.TimeZone\": \"\", \"EPOComputerProperties.DefaultLangID\": \"\", \"EPOComputerProperties.UserName\": \"\", \"EPOComputerProperties.DomainName\": \"\", \"EPOComputerProperties.IPHostName\": \"\", \"EPOComputerProperties.IPV6\": null, \"EPOComputerProperties.IPAddress\": \"\", \"EPOComputerProperties.IPSubnet\": null, \"EPOComputerProperties.IPSubnetMask\": null, \"EPOComputerProperties.IPV4x\": null, \"EPOComputerProperties.IPXAddress\": \"\", \"EPOComputerProperties.SubnetAddress\": \"\", \"EPOComputerProperties.SubnetMask\": \"\", \"EPOComputerProperties.NetAddress\": \"\", \"EPOComputerProperties.OSType\": \"\", \"EPOComputerProperties.OSVersion\": \"\", \"EPOComputerProperties.OSCsdVersion\": \"\", \"EPOComputerProperties.OSBuildNum\": 0, \"EPOComputerProperties.OSPlatform\": \"\", \"EPOComputerProperties.OSOEMID\": \"\", \"EPOComputerProperties.CPUType\": \"\", \"EPOComputerProperties.CPUSpeed\": 0, \"EPOComputerProperties.NumOfCPU\": 0, \"EPOComputerProperties.CPUSerialNumber\": \"\", \"EPOComputerProperties.TotalPhysicalMemory\": 0, \"EPOComputerProperties.FreeMemory\": 0, \"EPOComputerProperties.FreeDiskSpace\": 0, \"EPOComputerProperties.TotalDiskSpace\": 0, \"EPOComputerProperties.IsPortable\": -1, \"EPOComputerProperties.Vdi\": -1, \"EPOComputerProperties.OSBitMode\": -1, \"EPOComputerProperties.LastAgentHandler\": null, \"EPOComputerProperties.UserProperty1\": null, \"EPOComputerProperties.UserProperty2\": null, \"EPOComputerProperties.UserProperty3\": null, \"EPOComputerProperties.UserProperty4\": null, \"EPOComputerProperties.UserProperty5\": null, \"EPOComputerProperties.UserProperty6\": null, \"EPOComputerProperties.UserProperty7\": null, \"EPOComputerProperties.UserProperty8\": null, \"EPOComputerProperties.Free_Space_of_Drive_C\": 0, \"EPOComputerProperties.Total_Space_of_Drive_C\": 0, \"EPOLeafNode.Tags\": \"\", \"EPOLeafNode.ExcludedTags\": \"\", \"EPOLeafNode.LastUpdate\": null, \"EPOLeafNode.ManagedState\": 0, \"EPOLeafNode.AgentGUID\": null, \"EPOLeafNode.AgentVersion\": null, \"EPOBranchNode.AutoID\": 5}], \"raw\": null, \"inputs\": {\"mcafee_epo_group_id\": 5}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 578, \"timestamp\": \"2022-08-22 11:45:56\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"EPOComputerProperties.ParentID\": {\"type\": \"integer\"}, \"EPOComputerProperties.ComputerName\": {\"type\": \"string\"}, \"EPOComputerProperties.Description\": {}, \"EPOComputerProperties.ComputerDescription\": {}, \"EPOComputerProperties.TimeZone\": {\"type\": \"string\"}, \"EPOComputerProperties.DefaultLangID\": {\"type\": \"string\"}, \"EPOComputerProperties.UserName\": {\"type\": \"string\"}, \"EPOComputerProperties.DomainName\": {\"type\": \"string\"}, \"EPOComputerProperties.IPHostName\": {\"type\": \"string\"}, \"EPOComputerProperties.IPV6\": {}, \"EPOComputerProperties.IPAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.IPSubnet\": {}, \"EPOComputerProperties.IPSubnetMask\": {}, \"EPOComputerProperties.IPV4x\": {}, \"EPOComputerProperties.IPXAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.SubnetAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.SubnetMask\": {\"type\": \"string\"}, \"EPOComputerProperties.NetAddress\": {\"type\": \"string\"}, \"EPOComputerProperties.OSType\": {\"type\": \"string\"}, \"EPOComputerProperties.OSVersion\": {\"type\": \"string\"}, \"EPOComputerProperties.OSCsdVersion\": {\"type\": \"string\"}, \"EPOComputerProperties.OSBuildNum\": {\"type\": \"integer\"}, \"EPOComputerProperties.OSPlatform\": {\"type\": \"string\"}, \"EPOComputerProperties.OSOEMID\": {\"type\": \"string\"}, \"EPOComputerProperties.CPUType\": {\"type\": \"string\"}, \"EPOComputerProperties.CPUSpeed\": {\"type\": \"integer\"}, \"EPOComputerProperties.NumOfCPU\": {\"type\": \"integer\"}, \"EPOComputerProperties.CPUSerialNumber\": {\"type\": \"string\"}, \"EPOComputerProperties.TotalPhysicalMemory\": {\"type\": \"integer\"}, \"EPOComputerProperties.FreeMemory\": {\"type\": \"integer\"}, \"EPOComputerProperties.FreeDiskSpace\": {\"type\": \"integer\"}, \"EPOComputerProperties.TotalDiskSpace\": {\"type\": \"integer\"}, \"EPOComputerProperties.IsPortable\": {\"type\": \"integer\"}, \"EPOComputerProperties.Vdi\": {\"type\": \"integer\"}, \"EPOComputerProperties.OSBitMode\": {\"type\": \"integer\"}, \"EPOComputerProperties.LastAgentHandler\": {}, \"EPOComputerProperties.UserProperty1\": {}, \"EPOComputerProperties.UserProperty2\": {}, \"EPOComputerProperties.UserProperty3\": {}, \"EPOComputerProperties.UserProperty4\": {}, \"EPOComputerProperties.UserProperty5\": {}, \"EPOComputerProperties.UserProperty6\": {}, \"EPOComputerProperties.UserProperty7\": {}, \"EPOComputerProperties.UserProperty8\": {}, \"EPOComputerProperties.Free_Space_of_Drive_C\": {\"type\": \"integer\"}, \"EPOComputerProperties.Total_Space_of_Drive_C\": {\"type\": \"integer\"}, \"EPOLeafNode.Tags\": {\"type\": \"string\"}, \"EPOLeafNode.ExcludedTags\": {\"type\": \"string\"}, \"EPOLeafNode.LastUpdate\": {}, \"EPOLeafNode.ManagedState\": {\"type\": \"integer\"}, \"EPOLeafNode.AgentGUID\": {}, \"EPOLeafNode.AgentVersion\": {}, \"EPOBranchNode.AutoID\": {\"type\": \"integer\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_group_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "0cbf4250-b833-421d-a9be-a36e0d236022",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "53bbb755-1c65-48c2-a323-c64ca989de16",
@@ -3076,7 +3133,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415619,
+      "created_date": 1706555033542,
       "description": {
         "content": "Get all of the permission sets on an ePO server.\nMcAfee user requires administrator rights for this function.",
         "format": "text"
@@ -3084,20 +3141,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Get All Permission sets",
       "export_key": "mcafee_epo_get_all_permission_sets",
-      "id": 258,
+      "id": 15,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026672,
+      "last_modified_time": 1706555033542,
       "name": "mcafee_epo_get_all_permission_sets",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"id\": 4, \"name\": \"Executive Reviewer\"}, {\"id\": 1, \"name\": \"Global Reviewer\"}, {\"id\": 2, \"name\": \"Group Admin\"}, {\"id\": 3, \"name\": \"Group Reviewer\"}], \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 552, \"timestamp\": \"2022-08-02 09:43:53\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "4c45547c-5c2f-4711-90c1-7715706605fc",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "38fb4df9-f658-48d9-9f41-594c053337e2",
@@ -3127,7 +3188,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415682,
+      "created_date": 1706555033642,
       "description": {
         "content": "Get all the users on a ePO server.\nMcAfee user requires administrator rights for this function.",
         "format": "text"
@@ -3135,20 +3196,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Get All Users",
       "export_key": "mcafee_epo_get_all_users",
-      "id": 259,
+      "id": 16,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026785,
+      "last_modified_time": 1706555033642,
       "name": "mcafee_epo_get_all_users",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [], \"raw\": null, \"inputs\": {\"mcafee_epo_permsetname\": \"Global Reviewer\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 566, \"timestamp\": \"2022-08-11 08:07:14\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_permsetname\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6b9906aa-5409-44cb-b88b-192c49598d35",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "750a2448-13cb-4204-a2ea-2a4e0f1d9dc5",
@@ -3178,7 +3243,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415746,
+      "created_date": 1706555033746,
       "description": {
         "content": "List the issues on the ePO server.\nMcAfee user requires permission to view issues for this function.",
         "format": "text"
@@ -3186,20 +3251,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO List Issues",
       "export_key": "mcafee_epo_list_issues",
-      "id": 260,
+      "id": 17,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026873,
+      "last_modified_time": 1706555033746,
       "name": "mcafee_epo_list_issues",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"severity\": \"LOW\", \"activityLog\": [{\"date\": \"2022-08-19T06:00:56-07:00\", \"dirty\": true, \"issueId\": 13, \"details\": \"\", \"id\": 17, \"title\": \"Issue Created\", \"username\": \"admin\"}], \"dueDate\": 1661965252000, \"creatorName\": \"admin\", \"description\": \"Test issue creation\", \"ticketServerName\": null, \"priority\": \"MEDIUM\", \"type\": \"issue.type.untyped\", \"resolution\": \"WILLNOTFIX\", \"createdDate\": \"2022-08-19T06:00:56-07:00\", \"assigneeName\": \"Jefferson\", \"subtype\": null, \"name\": \"New issue\", \"assignee\": null, \"id\": 13, \"state\": \"ASSIGNED\", \"ticketId\": null}], \"raw\": null, \"inputs\": {\"incident_id\": 2108, \"datatable_name\": \"mcafee_epo_issues\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1434, \"timestamp\": \"2022-08-19 09:03:21\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"severity\": {\"type\": \"string\"}, \"activityLog\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"date\": {\"type\": \"string\"}, \"dirty\": {\"type\": \"boolean\"}, \"issueId\": {\"type\": \"integer\"}, \"details\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"title\": {\"type\": \"string\"}, \"username\": {\"type\": \"string\"}}}}, \"dueDate\": {\"type\": \"integer\"}, \"creatorName\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"ticketServerName\": {}, \"priority\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"resolution\": {\"type\": \"string\"}, \"createdDate\": {\"type\": \"string\"}, \"assigneeName\": {\"type\": \"string\"}, \"subtype\": {}, \"name\": {\"type\": \"string\"}, \"assignee\": {}, \"id\": {\"type\": \"integer\"}, \"state\": {\"type\": \"string\"}, \"ticketId\": {}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"datatable_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "e271a8f5-9886-4c2a-8e05-cbca9ed1c632",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "050a0e76-1842-47ef-9f3f-5132db7ebe86",
@@ -3229,7 +3298,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415811,
+      "created_date": 1706555033856,
       "description": {
         "content": "Find all tags specified in ePO.\nMcAfee user requires Tag use permission for this function.",
         "format": "text"
@@ -3237,20 +3306,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO List Tags",
       "export_key": "mcafee_epo_list_tags",
-      "id": 261,
+      "id": 18,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862026952,
+      "last_modified_time": 1706555033856,
       "name": "mcafee_epo_list_tags",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"tagNotes\": \"Default tag for systems identified as a Server\", \"tagId\": 1, \"tagName\": \"Server\"}, {\"tagNotes\": \"Default tag for systems identified as a Workstation\", \"tagId\": 2, \"tagName\": \"Workstation\"}, {\"tagNotes\": \"\", \"tagId\": 3, \"tagName\": \"SOAR\"}, {\"tagNotes\": \"\", \"tagId\": 4, \"tagName\": \"Windows server 2016\"}, {\"tagNotes\": \"\", \"tagId\": 5, \"tagName\": \"Linux\"}, {\"tagNotes\": \"\", \"tagId\": 6, \"tagName\": \"Intel(R) Xeon(R) CPU\"}, {\"tagNotes\": \"\", \"tagId\": 7, \"tagName\": \"Intel Core Processor\"}, {\"tagNotes\": \"\", \"tagId\": 8, \"tagName\": \"Test\"}, {\"tagNotes\": \"\", \"tagId\": 9, \"tagName\": \"AA\"}, {\"tagNotes\": \"\", \"tagId\": 10, \"tagName\": \"123\"}], \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 580, \"timestamp\": \"2022-07-22 14:03:38\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"tagNotes\": {\"type\": \"string\"}, \"tagId\": {\"type\": \"integer\"}, \"tagName\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "b9d82be9-83b0-4b88-90ca-7e0d2fb09dc7",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "9767f563-47d2-4daf-b353-284342833db8",
@@ -3272,7 +3345,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415879,
+      "created_date": 1706555033959,
       "description": {
         "content": "Remove permission set(s) from an ePO user.\nMcAfee user requires administrator rights for this function.",
         "format": "text"
@@ -3280,20 +3353,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Remove Permission sets from user",
       "export_key": "mcafee_epo_remove_permission_sets_from_user",
-      "id": 262,
+      "id": 19,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027030,
+      "last_modified_time": 1706555033959,
       "name": "mcafee_epo_remove_permission_sets_from_user",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": true, \"raw\": null, \"inputs\": {\"mcafee_epo_username\": \"test\", \"mcafee_epo_permsetname\": \"Executive Reviewer\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 584, \"timestamp\": \"2022-08-02 12:46:01\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"boolean\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_username\": {\"type\": \"string\"}, \"mcafee_epo_permsetname\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "85f46ad5-4275-4478-a0f9-1789729d39e5",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "38fb4df9-f658-48d9-9f41-594c053337e2",
@@ -3315,7 +3392,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737415946,
+      "created_date": 1706555034067,
       "description": {
         "content": "Remove a tag associated with an ePO system(s).\nMcAfee user requires Tag use permission for this function.",
         "format": "text"
@@ -3323,20 +3400,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Remove Tag",
       "export_key": "mcafee_epo_remove_tag",
-      "id": 263,
+      "id": 20,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027119,
+      "last_modified_time": 1706555034067,
       "name": "mcafee_epo_remove_tag",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": 1, \"raw\": null, \"inputs\": {\"mcafee_epo_systems\": \"test_server\", \"mcafee_epo_tag\": \"[u\u0027Workstation\u0027]\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 660, \"timestamp\": \"2022-07-01 12:43:15\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"integer\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_systems\": {\"type\": \"string\"}, \"mcafee_epo_tag\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "1cb1fd7a-0eeb-4230-9edb-c8f6f47b1ae9",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "bf25606e-96aa-4328-aa15-1cd5a8b8dc02",
@@ -3358,7 +3439,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737416012,
+      "created_date": 1706555034167,
       "description": {
         "content": "Delete a user from the ePO server.\nMcAfee user requires administrator rights for this function.",
         "format": "text"
@@ -3366,20 +3447,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Remove User",
       "export_key": "mcafee_epo_remove_user",
-      "id": 264,
+      "id": 21,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027210,
+      "last_modified_time": 1706555034167,
       "name": "mcafee_epo_remove_user",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": true, \"raw\": null, \"inputs\": {\"mcafee_epo_username\": \"testUser\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 597, \"timestamp\": \"2022-08-11 08:07:17\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"boolean\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_username\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "83c00069-064a-4f1b-b8e5-043d36cb79de",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "38fb4df9-f658-48d9-9f41-594c053337e2",
@@ -3393,7 +3478,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737416078,
+      "created_date": 1706555034268,
       "description": {
         "content": "Run a client task on specified system(s).\nMcAfee user requires edit permission for at least one product for this function.",
         "format": "text"
@@ -3401,20 +3486,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Run Client Task",
       "export_key": "mcafee_epo_run_client_task",
-      "id": 265,
+      "id": 22,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027292,
+      "last_modified_time": 1706555034268,
       "name": "mcafee_epo_run_client_task",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": \"Succeeded\", \"raw\": null, \"inputs\": {\"mcafee_epo_product_id\": \"EPOAGENTMETA\", \"mcafee_epo_task_id\": 7, \"mcafee_epo_system_name_or_id\": \"WIN-MTHJTQ4ELBP\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 615, \"timestamp\": \"2022-08-15 08:05:18\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"string\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_product_id\": {\"type\": \"string\"}, \"mcafee_epo_task_id\": {\"type\": \"integer\"}, \"mcafee_epo_system_name_or_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "c87c8e6f-71bf-40e4-af85-08d716ed25a1",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "1f6f5cd4-cccf-4d78-9cc6-84a6550152c6",
@@ -3500,7 +3589,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737416147,
+      "created_date": 1706555034375,
       "description": {
         "content": "Update an issue on the ePO server.\nMcAfee user requires permission to edit the issue for this function.",
         "format": "text"
@@ -3508,20 +3597,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Update Issue",
       "export_key": "mcafee_epo_update_issue",
-      "id": 266,
+      "id": 23,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027373,
+      "last_modified_time": 1706555034375,
       "name": "mcafee_epo_update_issue",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": 13, \"raw\": null, \"inputs\": {\"mcafee_epo_issue_name\": null, \"mcafee_epo_issue_properties\": null, \"mcafee_epo_ticket_server_name\": null, \"mcafee_epo_issue_due\": null, \"mcafee_epo_issue_state\": \"Resolved\", \"mcafee_epo_issue_id\": 13, \"mcafee_epo_issue_severity\": null, \"mcafee_epo_issue_description\": null, \"mcafee_epo_issue_assignee\": null, \"mcafee_epo_ticket_id\": null, \"mcafee_epo_issue_priority\": null, \"mcafee_epo_issue_resolution\": \"Fixed\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 576, \"timestamp\": \"2022-08-19 09:05:15\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"integer\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_issue_name\": {}, \"mcafee_epo_issue_properties\": {}, \"mcafee_epo_ticket_server_name\": {}, \"mcafee_epo_issue_due\": {}, \"mcafee_epo_issue_state\": {\"type\": \"string\"}, \"mcafee_epo_issue_id\": {\"type\": \"integer\"}, \"mcafee_epo_issue_severity\": {}, \"mcafee_epo_issue_description\": {}, \"mcafee_epo_issue_assignee\": {}, \"mcafee_epo_ticket_id\": {}, \"mcafee_epo_issue_priority\": {}, \"mcafee_epo_issue_resolution\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "d11a1d48-231a-4c2f-b9a9-f482d785aa23",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "050a0e76-1842-47ef-9f3f-5132db7ebe86",
@@ -3623,7 +3716,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737416220,
+      "created_date": 1706555034478,
       "description": {
         "content": "Update a user on the ePO server.\nMcAfee user requires administrator rights for this function.",
         "format": "text"
@@ -3631,20 +3724,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Update User",
       "export_key": "mcafee_epo_update_user",
-      "id": 267,
+      "id": 24,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027455,
+      "last_modified_time": 1706555034478,
       "name": "mcafee_epo_update_user",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": true, \"raw\": null, \"inputs\": {\"mcafee_epo_email\": \"jefferson@example.com\", \"mcafee_epo_user_disabled\": false, \"mcafee_epo_windowsdomain\": null, \"mcafee_epo_admin\": false, \"mcafee_epo_windowsusername\": null, \"mcafee_epo_allowed_ips\": null, \"mcafee_epo_pass\": null, \"mcafee_epo_phone_number\": \"7930445234\", \"mcafee_epo_username\": \"jeff\", \"mcafee_epo_new_username\": \"jefferson\", \"mcafee_epo_notes\": \"This is Jeffersons account\", \"mcafee_epo_fullname\": \"Jefferson Greg\", \"mcafee_epo_subjectdn\": null}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 609, \"timestamp\": \"2022-08-10 13:53:43\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"boolean\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_email\": {\"type\": \"string\"}, \"mcafee_epo_user_disabled\": {\"type\": \"boolean\"}, \"mcafee_epo_windowsdomain\": {}, \"mcafee_epo_admin\": {\"type\": \"boolean\"}, \"mcafee_epo_windowsusername\": {}, \"mcafee_epo_allowed_ips\": {}, \"mcafee_epo_pass\": {}, \"mcafee_epo_phone_number\": {\"type\": \"string\"}, \"mcafee_epo_username\": {\"type\": \"string\"}, \"mcafee_epo_new_username\": {\"type\": \"string\"}, \"mcafee_epo_notes\": {\"type\": \"string\"}, \"mcafee_epo_fullname\": {\"type\": \"string\"}, \"mcafee_epo_subjectdn\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "a45c768a-d8d0-4666-a002-b7ddf6624fe6",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "38fb4df9-f658-48d9-9f41-594c053337e2",
@@ -3754,7 +3851,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737416289,
+      "created_date": 1706555034584,
       "description": {
         "content": "Wake up an ePO agent.\nMcAfee user requires Agent wakeup permission for this function.",
         "format": "text"
@@ -3762,20 +3859,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee ePO Wake up agent",
       "export_key": "mcafee_epo_wake_up_agent",
-      "id": 268,
+      "id": 25,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027534,
+      "last_modified_time": 1706555034584,
       "name": "mcafee_epo_wake_up_agent",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": \"completed: 1\\nfailed: 0\\nexpired: 0\", \"raw\": null, \"inputs\": {\"mcafee_epo_systems\": \"WIN-MTHJTQ4ELBP\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 25666, \"timestamp\": \"2022-07-25 08:43:47\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"string\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_systems\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "a8b3bef5-36fc-4d69-b366-6fd3def996d2",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "bf25606e-96aa-4328-aa15-1cd5a8b8dc02",
@@ -3789,7 +3890,7 @@
       "workflows": []
     },
     {
-      "created_date": 1695737416358,
+      "created_date": 1706555034691,
       "description": {
         "content": "Applies tag to the systems in ePO. Inputs include:\n- mcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO.\n- mcafee_epo_tag: A tag managed on ePO.\n\nMcAfee user requires Tag use permission for this function.",
         "format": "text"
@@ -3797,20 +3898,24 @@
       "destination_handle": "mcafee_epo_message_destination",
       "display_name": "McAfee Tag an ePO Asset",
       "export_key": "mcafee_tag_an_epo_asset",
-      "id": 269,
+      "id": 26,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862027614,
+      "last_modified_time": 1706555034691,
       "name": "mcafee_tag_an_epo_asset",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": 1, \"raw\": null, \"inputs\": {\"mcafee_epo_systems\": \"test_server\", \"mcafee_epo_tag\": \"[u\u0027Workstation\u0027]\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-mcafee-epo\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 596, \"timestamp\": \"2022-07-01 12:42:07\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"integer\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"mcafee_epo_systems\": {\"type\": \"string\"}, \"mcafee_epo_tag\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "67c5b852-f38f-40f7-8a68-1ae8e8a78549",
-      "version": 16,
+      "version": 0,
       "view_items": [
         {
           "content": "bf25606e-96aa-4328-aa15-1cd5a8b8dc02",
@@ -3834,13 +3939,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 145,
+  "id": 2,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1696872257207,
+      "create_date": 1706557528227,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -3849,18 +3954,15 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1696872257207,
+      "update_date": 1706557528227,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [
-        "b619a210-75c9-4469-95a7-7279e871d503"
-      ],
+      "api_keys": [],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "mcafee_epo_message_destination",
@@ -3868,7 +3970,7 @@
       "programmatic_name": "mcafee_epo_message_destination",
       "tags": [],
       "users": [
-        "k@example.com"
+        "a@example.com"
       ],
       "uuid": "b0a31bf9-305f-4120-a5e6-aab5a965cac6"
     }
@@ -3880,14 +3982,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6b196974_87cd_4216_91bd_5988b5234dad\" isExecutable=\"true\" name=\"playbook_6b196974_87cd_4216_91bd_5988b5234dad\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0kxci3g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Add Permission sets to user\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6492efd0-43f0-4078-943e-46e033ceccb6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_username = playbook.inputs.epo_username\\ninputs.mcafee_epo_permsetname = row.permission_set_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_perm_set\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kxci3g\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sxzi12\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0kxci3g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e31827bc-d9e0-43db-995e-e9fffc014bd0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1sxzi12\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fbtx7d\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1sxzi12\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fbtx7d\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0fbtx7d\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6b196974_87cd_4216_91bd_5988b5234dad\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fbtx7d\" id=\"Flow_0fbtx7d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sxzi12\" id=\"Flow_1sxzi12_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kxci3g\" id=\"Flow_0kxci3g_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6b196974_87cd_4216_91bd_5988b5234dad\" isExecutable=\"true\" name=\"playbook_6b196974_87cd_4216_91bd_5988b5234dad\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0kxci3g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Add Permission sets to user\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6492efd0-43f0-4078-943e-46e033ceccb6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_username\\\", None):\\n  inputs.mcafee_epo_username = getattr(playbook.inputs, \\\"epo_username\\\", None)\\ninputs.mcafee_epo_permsetname = row.permission_set_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_perm_set\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kxci3g\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sxzi12\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0kxci3g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e31827bc-d9e0-43db-995e-e9fffc014bd0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1sxzi12\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fbtx7d\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1sxzi12\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fbtx7d\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0fbtx7d\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6b196974_87cd_4216_91bd_5988b5234dad\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fbtx7d\" id=\"Flow_0fbtx7d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sxzi12\" id=\"Flow_1sxzi12_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kxci3g\" id=\"Flow_0kxci3g_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696272862736,
+      "create_date": 1706555035231,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_6b196974_87cd_4216_91bd_5988b5234dad",
@@ -3913,7 +4015,7 @@
             "deprecated": false,
             "export_key": "playbook_6b196974_87cd_4216_91bd_5988b5234dad/epo_username",
             "hide_notification": false,
-            "id": 5757,
+            "id": 4631,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3928,7 +4030,7 @@
             "templates": [],
             "text": "ePO Username",
             "tooltip": "User name of an ePO user",
-            "type_id": 1236,
+            "type_id": 1009,
             "uuid": "20fcc1bb-72da-4ed2-8521-65c4ddfdfda2",
             "values": []
           }
@@ -3953,28 +4055,28 @@
         "uuid": "aea63249-353d-43d5-8cf3-ace04a8c7381"
       },
       "has_logical_errors": false,
-      "id": 188,
+      "id": 1,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696871834031,
+      "last_modified_time": 1706555314974,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696357244653,
+          "created_date": 1706555035468,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 214,
+          "export_key": "mcafee epo post process",
+          "id": 17,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696871832075,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706555259019,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_permission_sets",
           "playbook_handle": "mcafee_epo_add_permission_set_to_user",
           "programmatic_name": "mcafee_epo_add_permission_set_to_user_post_process",
@@ -4004,7 +4106,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_6b196974-87cd-4216-91bd-5988b5234dad",
-        "id": 193,
+        "id": 1,
         "name": "playbook_6b196974_87cd_4216_91bd_5988b5234dad",
         "type": "playbook",
         "uuid": "2db3a1c9-8d25-456d-967c-7e394fdfa918"
@@ -4012,19 +4114,19 @@
       "tags": [],
       "type": "default",
       "uuid": "6b196974-87cd-4216-91bd-5988b5234dad",
-      "version": 15
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238\" isExecutable=\"true\" name=\"playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jadihc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Add System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b30f5c25-c4f3-49ed-ba15-fe4d82c71249\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Required\\ninputs.mcafee_epo_group_id = playbook.inputs.epo_group_id\\ninputs.mcafee_epo_system_name_or_id = playbook.inputs.epo_system_names_or_ids\\n\\n# Optional\\ninputs.mcafee_epo_allow_duplicates = getattr(playbook.inputs, \\\"epo_allow_duplicates\\\")\\ninputs.mcafee_epo_delete_if_removed = getattr(playbook.inputs, \\\"epo_delete_if_removed\\\")\\ninputs.mcafee_epo_flatten_tree_structure = getattr(playbook.inputs, \\\"epo_flatten_tree_structure\\\")\\ninputs.mcafee_epo_push_agent = getattr(playbook.inputs, \\\"epo_push_agent\\\")\\ninputs.mcafee_epo_push_agent_domain_name = getattr(playbook.inputs, \\\"epo_push_agent_domain_name\\\")\\ninputs.mcafee_epo_push_agent_force_install = getattr(playbook.inputs, \\\"epo_push_agent_force_install\\\")\\ninputs.mcafee_epo_push_agent_package_path = getattr(playbook.inputs, \\\"epo_push_agent_package_path\\\")\\ninputs.mcafee_epo_push_agent_password = getattr(playbook.inputs, \\\"epo_push_agent_password\\\")\\ninputs.mcafee_epo_push_agent_skip_if_installed = getattr(playbook.inputs, \\\"epo_push_agent_skip_if_installed\\\")\\ninputs.mcafee_epo_push_agent_suppress_ui = getattr(playbook.inputs, \\\"epo_push_agent_suppress_ui\\\")\\ninputs.mcafee_epo_push_agent_username = getattr(playbook.inputs, \\\"epo_push_agent_user_name\\\")\\ninputs.mcafee_epo_uninstall = getattr(playbook.inputs, \\\"epo_uninstall_removed\\\")\\ninputs.mcafee_epo_push_agent_install_path = getattr(playbook.inputs, \\\"epo_push_agent_install_path\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_sys\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jadihc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1u8kw2s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0jadihc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"08b6fc5a-7686-47d3-ad1f-2669db1261ad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1u8kw2s\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vfsybt\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1u8kw2s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vfsybt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1vfsybt\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jadihc\" id=\"Flow_0jadihc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1u8kw2s\" id=\"Flow_1u8kw2s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vfsybt\" id=\"Flow_1vfsybt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238\" isExecutable=\"true\" name=\"playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jadihc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Add System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b30f5c25-c4f3-49ed-ba15-fe4d82c71249\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Required\\ninputs.mcafee_epo_group_id = playbook.inputs.epo_group_id\\ninputs.mcafee_epo_system_name_or_id = playbook.inputs.epo_system_names_or_ids\\n\\n# Optional\\nif getattr(playbook.inputs, \\\"epo_allow_duplicates\\\", None):\\n  inputs.mcafee_epo_allow_duplicates = getattr(playbook.inputs, \\\"epo_allow_duplicates\\\")\\nif getattr(playbook.inputs, \\\"epo_delete_if_removed\\\", None):\\n  inputs.mcafee_epo_delete_if_removed = getattr(playbook.inputs, \\\"epo_delete_if_removed\\\")\\nif getattr(playbook.inputs, \\\"epo_flatten_tree_structure\\\", None):\\n  inputs.mcafee_epo_flatten_tree_structure = getattr(playbook.inputs, \\\"epo_flatten_tree_structure\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent\\\", None):\\n  inputs.mcafee_epo_push_agent = getattr(playbook.inputs, \\\"epo_push_agent\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_domain_name\\\", None):\\n  inputs.mcafee_epo_push_agent_domain_name = getattr(playbook.inputs, \\\"epo_push_agent_domain_name\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_force_install\\\", None):\\n  inputs.mcafee_epo_push_agent_force_install = getattr(playbook.inputs, \\\"epo_push_agent_force_install\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_package_path\\\", None):\\n  inputs.mcafee_epo_push_agent_package_path = getattr(playbook.inputs, \\\"epo_push_agent_package_path\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_password\\\", None):\\n  inputs.mcafee_epo_push_agent_password = getattr(playbook.inputs, \\\"epo_push_agent_password\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_skip_if_installed\\\", None):\\n  inputs.mcafee_epo_push_agent_skip_if_installed = getattr(playbook.inputs, \\\"epo_push_agent_skip_if_installed\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_suppress_ui\\\", None):\\n  inputs.mcafee_epo_push_agent_suppress_ui = getattr(playbook.inputs, \\\"epo_push_agent_suppress_ui\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_user_name\\\", None):\\n  inputs.mcafee_epo_push_agent_username = getattr(playbook.inputs, \\\"epo_push_agent_user_name\\\")\\nif getattr(playbook.inputs, \\\"epo_uninstall_removed\\\", None):\\n  inputs.mcafee_epo_uninstall = getattr(playbook.inputs, \\\"epo_uninstall_removed\\\")\\nif getattr(playbook.inputs, \\\"epo_push_agent_install_path\\\", None):\\n  inputs.mcafee_epo_push_agent_install_path = getattr(playbook.inputs, \\\"epo_push_agent_install_path\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_sys\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jadihc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1u8kw2s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0jadihc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"08b6fc5a-7686-47d3-ad1f-2669db1261ad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1u8kw2s\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vfsybt\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1u8kw2s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vfsybt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1vfsybt\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vfsybt\" id=\"Flow_1vfsybt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1u8kw2s\" id=\"Flow_1u8kw2s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jadihc\" id=\"Flow_0jadihc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696272942517,
+      "create_date": 1706555036142,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238",
@@ -4050,7 +4152,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_allow_duplicates",
             "hide_notification": false,
-            "id": 5758,
+            "id": 4632,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4065,7 +4167,7 @@
             "templates": [],
             "text": "ePO Allow Duplicates",
             "tooltip": "Allow duplicates or do not allow",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "ad2166f0-8d62-4f50-8eb6-ae9c651908af",
             "values": []
           },
@@ -4079,7 +4181,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_delete_if_removed",
             "hide_notification": false,
-            "id": 5759,
+            "id": 4633,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4094,7 +4196,7 @@
             "templates": [],
             "text": "ePO Delete If Removed",
             "tooltip": "Should system be deleted if removed",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "b9a54afd-772c-49f4-bac4-a09f0b140fec",
             "values": []
           },
@@ -4108,7 +4210,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_flatten_tree_structure",
             "hide_notification": false,
-            "id": 5760,
+            "id": 4634,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4123,7 +4225,7 @@
             "templates": [],
             "text": "ePO Flatten Tree Structure",
             "tooltip": "Should flatten tree structure",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "8ffacd57-53ac-472e-bf9c-bb4f453512b9",
             "values": []
           },
@@ -4137,7 +4239,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_group_id",
             "hide_notification": false,
-            "id": 5761,
+            "id": 4635,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -4153,7 +4255,7 @@
             "templates": [],
             "text": "ePO Group ID",
             "tooltip": "ID for the group",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "4acabc9e-d586-4756-b897-abbef342dc78",
             "values": []
           },
@@ -4167,7 +4269,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent",
             "hide_notification": false,
-            "id": 5762,
+            "id": 4636,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4182,7 +4284,7 @@
             "templates": [],
             "text": "ePO Push Agent",
             "tooltip": "True or false push the agent to the system",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "d13cea70-520a-4e14-a8fe-44c9e9ad4789",
             "values": []
           },
@@ -4196,7 +4298,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_domain_name",
             "hide_notification": false,
-            "id": 5763,
+            "id": 4637,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4211,7 +4313,7 @@
             "templates": [],
             "text": "ePO Push Agent Domain Name",
             "tooltip": "Domain name for system to push agent",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "bddfa22c-a7c6-413f-9b73-5dc45f613cd9",
             "values": []
           },
@@ -4225,7 +4327,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_force_install",
             "hide_notification": false,
-            "id": 5764,
+            "id": 4638,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4240,7 +4342,7 @@
             "templates": [],
             "text": "ePO Push Agent Force Install",
             "tooltip": "True or false push agent and force install",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "675a2914-1ca4-447a-b27c-48a83a936d0e",
             "values": []
           },
@@ -4254,7 +4356,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_install_path",
             "hide_notification": false,
-            "id": 5765,
+            "id": 4639,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4269,7 +4371,7 @@
             "templates": [],
             "text": "ePO Push Agent Install Path",
             "tooltip": "path to where the agent should be installed on the system",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "634cab3f-5d85-4a3a-bb02-f0562d9f066a",
             "values": []
           },
@@ -4283,7 +4385,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_package_path",
             "hide_notification": false,
-            "id": 5766,
+            "id": 4640,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4298,7 +4400,7 @@
             "templates": [],
             "text": "ePO Push Agent Package Path",
             "tooltip": "Path the package on the new system",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "bd75c851-c47c-4352-a7bf-3b10181cb99f",
             "values": []
           },
@@ -4312,7 +4414,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_password",
             "hide_notification": false,
-            "id": 5767,
+            "id": 4641,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4327,7 +4429,7 @@
             "templates": [],
             "text": "ePO Push Agent Password",
             "tooltip": "Password for the system",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "994fb051-7f62-4f76-a83f-953dd38d9cc8",
             "values": []
           },
@@ -4341,7 +4443,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_skip_if_installed",
             "hide_notification": false,
-            "id": 5768,
+            "id": 4642,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4356,7 +4458,7 @@
             "templates": [],
             "text": "ePO Push Agent Skip If Installed",
             "tooltip": "Skip pushing agent if it is installed",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "e91a190c-01a7-468f-a725-83de87a44b36",
             "values": []
           },
@@ -4370,7 +4472,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_suppress_ui",
             "hide_notification": false,
-            "id": 5769,
+            "id": 4643,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4385,7 +4487,7 @@
             "templates": [],
             "text": "ePO Push Agent Suppress UI",
             "tooltip": "Push agent and suppress ui",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "9d7062e4-61a5-434c-887d-d72cdfa081b4",
             "values": []
           },
@@ -4399,7 +4501,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_push_agent_user_name",
             "hide_notification": false,
-            "id": 5770,
+            "id": 4644,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4414,7 +4516,7 @@
             "templates": [],
             "text": "ePO Push Agent User Name",
             "tooltip": "username for system",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "f1cf38b6-79ba-4803-9b9f-e6469a473771",
             "values": []
           },
@@ -4428,7 +4530,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_system_names_or_ids",
             "hide_notification": false,
-            "id": 5771,
+            "id": 4645,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4444,7 +4546,7 @@
             "templates": [],
             "text": "ePO System Names or IDs",
             "tooltip": "Comma separated list of system names or IDs",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "c56eaac0-d3d2-4834-b6b7-ad41fe43e5b5",
             "values": []
           },
@@ -4458,7 +4560,7 @@
             "deprecated": false,
             "export_key": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238/epo_uninstall_removed",
             "hide_notification": false,
-            "id": 5772,
+            "id": 4646,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4473,7 +4575,7 @@
             "templates": [],
             "text": "ePO Uninstall Removed",
             "tooltip": "True or false to uninstall system",
-            "type_id": 1237,
+            "type_id": 1010,
             "uuid": "768bf58b-62be-4412-89a1-01402e15b3ea",
             "values": []
           }
@@ -4498,28 +4600,28 @@
         "uuid": "4a1d106e-f063-4d67-afc1-f824aef5a4fe"
       },
       "has_logical_errors": false,
-      "id": 189,
+      "id": 2,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862029033,
+      "last_modified_time": 1706555534453,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696358206387,
+          "created_date": 1706555036771,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 215,
+          "export_key": "mcafee epo post process",
+          "id": 18,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696358206401,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706555530734,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_add_system",
           "programmatic_name": "mcafee_epo_add_system_post_process",
@@ -4661,7 +4763,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_7d50d799-8edd-4e8b-ad01-e987bcff7238",
-        "id": 194,
+        "id": 2,
         "name": "playbook_7d50d799_8edd_4e8b_ad01_e987bcff7238",
         "type": "playbook",
         "uuid": "dd30c854-c372-49ce-9fc6-42a063206ebb"
@@ -4669,19 +4771,19 @@
       "tags": [],
       "type": "default",
       "uuid": "7d50d799-8edd-4e8b-ad01-e987bcff7238",
-      "version": 12
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699\" isExecutable=\"true\" name=\"playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07zrtcu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Add User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0d34aa89-8ebf-4c17-9c7f-4ea851c37a82\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_username = getattr(playbook.inputs, \\\"epo_username\\\")\\ninputs.mcafee_epo_pass = getattr(playbook.inputs, \\\"epo_user_password\\\")\\ninputs.mcafee_epo_admin = getattr(playbook.inputs, \\\"epo_admin\\\")\\ninputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, \\\"epo_allowed_ips\\\")\\ninputs.mcafee_epo_email = getattr(playbook.inputs, \\\"epo_email\\\")\\ninputs.mcafee_epo_fullname = getattr(playbook.inputs, \\\"epo_full_name\\\")\\ninputs.mcafee_epo_notes = getattr(playbook.inputs, \\\"epo_notes\\\")\\ninputs.mcafee_epo_phone_number = getattr(playbook.inputs, \\\"epo_phone_number\\\")\\ninputs.mcafee_epo_user_disabled = getattr(playbook.inputs, \\\"epo_user_disabled\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_user\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07zrtcu\u003c/incoming\u003e\u003coutgoing\u003eFlow_1uncbt8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07zrtcu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"124409e0-a46f-4c30-8ca5-ebcd7c988b82\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1uncbt8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hqwnst\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1uncbt8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1hqwnst\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1hqwnst\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hqwnst\" id=\"Flow_1hqwnst_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1uncbt8\" id=\"Flow_1uncbt8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07zrtcu\" id=\"Flow_07zrtcu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.0419999999999\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699\" isExecutable=\"true\" name=\"playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07zrtcu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Add User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0d34aa89-8ebf-4c17-9c7f-4ea851c37a82\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_username\\\", None):\\n  inputs.mcafee_epo_username = getattr(playbook.inputs, \\\"epo_username\\\")\\nif getattr(playbook.inputs, \\\"epo_user_password\\\", None):\\n  inputs.mcafee_epo_pass = getattr(playbook.inputs, \\\"epo_user_password\\\")\\nif getattr(playbook.inputs, \\\"epo_admin\\\", None):\\n  inputs.mcafee_epo_admin = getattr(playbook.inputs, \\\"epo_admin\\\")\\nif getattr(playbook.inputs, \\\"epo_allowed_ips\\\", None):\\n  inputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, \\\"epo_allowed_ips\\\")\\nif getattr(playbook.inputs, \\\"epo_email\\\", None):\\n  inputs.mcafee_epo_email = getattr(playbook.inputs, \\\"epo_email\\\")\\nif getattr(playbook.inputs, \\\"epo_full_name\\\", None):\\n  inputs.mcafee_epo_fullname = getattr(playbook.inputs, \\\"epo_full_name\\\")\\nif getattr(playbook.inputs, \\\"epo_notes\\\", None):\\n  inputs.mcafee_epo_notes = getattr(playbook.inputs, \\\"epo_notes\\\")\\nif getattr(playbook.inputs, \\\"epo_phone_number\\\", None):\\n  inputs.mcafee_epo_phone_number = getattr(playbook.inputs, \\\"epo_phone_number\\\")\\nif getattr(playbook.inputs, \\\"epo_user_disabled\\\", None):\\n  inputs.mcafee_epo_user_disabled = getattr(playbook.inputs, \\\"epo_user_disabled\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_user\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07zrtcu\u003c/incoming\u003e\u003coutgoing\u003eFlow_1uncbt8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07zrtcu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"124409e0-a46f-4c30-8ca5-ebcd7c988b82\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1uncbt8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hqwnst\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1uncbt8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1hqwnst\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1hqwnst\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hqwnst\" id=\"Flow_1hqwnst_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1uncbt8\" id=\"Flow_1uncbt8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07zrtcu\" id=\"Flow_07zrtcu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.0419999999999\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696862028993,
+      "create_date": 1706555037274,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699",
@@ -4707,7 +4809,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_admin",
             "hide_notification": false,
-            "id": 5840,
+            "id": 4647,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4722,7 +4824,7 @@
             "templates": [],
             "text": "ePO Admin",
             "tooltip": "If user should be admin",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "ac9c5ac3-2712-4ec5-bad6-2de85c63f390",
             "values": []
           },
@@ -4736,7 +4838,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_allowed_ips",
             "hide_notification": false,
-            "id": 5849,
+            "id": 4648,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4751,7 +4853,7 @@
             "templates": [],
             "text": "ePO Allowed IPs",
             "tooltip": "A list of allowed IPs that can access ths user",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "93d98c9c-bfa3-420f-8c07-d5cd74cf6e9e",
             "values": []
           },
@@ -4765,7 +4867,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_email",
             "hide_notification": false,
-            "id": 5842,
+            "id": 4649,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4780,7 +4882,7 @@
             "templates": [],
             "text": "ePO Email",
             "tooltip": "Email for the ePO user",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "f0c00d72-bfd6-493d-b64f-947ae3b4956e",
             "values": []
           },
@@ -4794,7 +4896,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_full_name",
             "hide_notification": false,
-            "id": 5843,
+            "id": 4650,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4809,7 +4911,7 @@
             "templates": [],
             "text": "ePO Full Name",
             "tooltip": "Full name of the ePO user",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "c9369c3e-ad4b-4547-8812-a406b6e55287",
             "values": []
           },
@@ -4823,7 +4925,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_notes",
             "hide_notification": false,
-            "id": 5844,
+            "id": 4651,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4838,7 +4940,7 @@
             "templates": [],
             "text": "ePO Notes",
             "tooltip": "Notes to add to the ePO user",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "af77bc9a-cc29-413a-bac4-13f1be6358a6",
             "values": []
           },
@@ -4852,7 +4954,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_phone_number",
             "hide_notification": false,
-            "id": 5845,
+            "id": 4652,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4867,7 +4969,7 @@
             "templates": [],
             "text": "ePO Phone Number",
             "tooltip": "Phone number for the ePO user",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "50cf2225-2b68-41b5-b788-e491764d8934",
             "values": []
           },
@@ -4881,7 +4983,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_user_disabled",
             "hide_notification": false,
-            "id": 5846,
+            "id": 4653,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4896,7 +4998,7 @@
             "templates": [],
             "text": "ePO User Disabled",
             "tooltip": "If the user should be disabled",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "0fb5d320-df61-4b90-826d-b04d4b35e2a5",
             "values": []
           },
@@ -4910,7 +5012,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_user_password",
             "hide_notification": false,
-            "id": 5847,
+            "id": 4654,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4926,7 +5028,7 @@
             "templates": [],
             "text": "ePO User Password",
             "tooltip": "Password for the ePO user",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "54c0bfbd-634a-47f5-8b5e-f6277831b533",
             "values": []
           },
@@ -4940,7 +5042,7 @@
             "deprecated": false,
             "export_key": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699/epo_username",
             "hide_notification": false,
-            "id": 5848,
+            "id": 4655,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4956,7 +5058,7 @@
             "templates": [],
             "text": "ePO Username",
             "tooltip": "User name of an ePO user",
-            "type_id": 1268,
+            "type_id": 1011,
             "uuid": "a2772b6a-d118-4206-aa67-23a4cd5d947b",
             "values": []
           }
@@ -4981,32 +5083,32 @@
         "uuid": "9ee1c360-7073-41d0-bd41-34b5b7b23540"
       },
       "has_logical_errors": false,
-      "id": 220,
+      "id": 3,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862118212,
+      "last_modified_time": 1706555730465,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696862029420,
+          "created_date": 1706555037698,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 246,
+          "export_key": "mcafee epo post process",
+          "id": 19,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696862029446,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706555725806,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_add_user",
           "programmatic_name": "mcafee_epo_add_user_post_process",
-          "script_text": "results = playbook.functions.results.add_user\n\nif results.get(\"success\"):\n  incident.addNote(\"User: {} successfully created.\".format(playbook.functions.epo_username))",
+          "script_text": "results = playbook.functions.results.add_user\nif results.get(\"success\"):\n  incident.addNote(\"User: {} successfully created.\".format(playbook.functions.epo_username))",
           "tags": [],
           "uuid": "124409e0-a46f-4c30-8ca5-ebcd7c988b82"
         }
@@ -5096,7 +5198,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_5d55dd4f-2d29-43ca-8b96-29a2c73b5699",
-        "id": 225,
+        "id": 3,
         "name": "playbook_5d55dd4f_2d29_43ca_8b96_29a2c73b5699",
         "type": "playbook",
         "uuid": "04c96619-7ecc-49a3-bd29-19350780d277"
@@ -5104,19 +5206,19 @@
       "tags": [],
       "type": "default",
       "uuid": "5d55dd4f-2d29-43ca-8b96-29a2c73b5699",
-      "version": 7
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c\" isExecutable=\"true\" name=\"playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kdvgxz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee Tag an ePO Asset\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"67c5b852-f38f-40f7-8a68-1ae8e8a78549\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = getattr(playbook.inputs, \\\"epo_system\\\")\\ninputs.mcafee_epo_tag = row[\u0027epo_tag\u0027]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_tag\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kdvgxz\u003c/incoming\u003e\u003coutgoing\u003eFlow_07im2fr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kdvgxz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b0d8bb3b-db63-4274-80a8-000ba81fd7d2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07im2fr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xaoh32\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_07im2fr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xaoh32\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xaoh32\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xaoh32\" id=\"Flow_0xaoh32_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07im2fr\" id=\"Flow_07im2fr_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kdvgxz\" id=\"Flow_1kdvgxz_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"138\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"138\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642.325\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"640\" y=\"34\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c\" isExecutable=\"true\" name=\"playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kdvgxz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee Tag an ePO Asset\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"67c5b852-f38f-40f7-8a68-1ae8e8a78549\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_system\\\", None):\\n  inputs.mcafee_epo_systems = getattr(playbook.inputs, \\\"epo_system\\\", None)\\ninputs.mcafee_epo_tag = row[\u0027epo_tag\u0027]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_tag\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kdvgxz\u003c/incoming\u003e\u003coutgoing\u003eFlow_07im2fr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kdvgxz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b0d8bb3b-db63-4274-80a8-000ba81fd7d2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07im2fr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xaoh32\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_07im2fr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xaoh32\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xaoh32\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xaoh32\" id=\"Flow_0xaoh32_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07im2fr\" id=\"Flow_07im2fr_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kdvgxz\" id=\"Flow_1kdvgxz_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"138\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"640\" y=\"34\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"138\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642.325\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696273684026,
+      "create_date": 1706555038166,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c",
@@ -5142,7 +5244,7 @@
             "deprecated": false,
             "export_key": "playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c/epo_system",
             "hide_notification": false,
-            "id": 5782,
+            "id": 4656,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5157,8 +5259,8 @@
             "tags": [],
             "templates": [],
             "text": "ePO System",
-            "tooltip": "Comma separated list of systems properties or one system ",
-            "type_id": 1239,
+            "tooltip": "Comma separated list of systems properties or one system",
+            "type_id": 1012,
             "uuid": "2d927be3-16a8-4e19-9ed2-d4ac5563cee1",
             "values": []
           }
@@ -5183,28 +5285,28 @@
         "uuid": "0ce9a050-5c59-445e-90f0-8bcd93c8cd90"
       },
       "has_logical_errors": false,
-      "id": 191,
+      "id": 4,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862030515,
+      "last_modified_time": 1706555781922,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696358467441,
+          "created_date": 1706555038335,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 217,
+          "export_key": "mcafee epo post process",
+          "id": 20,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696358467455,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706555777070,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_tags",
           "playbook_handle": "mcafee_epo_apply_a_tag",
           "programmatic_name": "mcafee_epo_apply_a_tag_post_process",
@@ -5234,7 +5336,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d73505d1-a44b-4dd8-ad9b-5cdcdf9ba89c",
-        "id": 196,
+        "id": 4,
         "name": "playbook_d73505d1_a44b_4dd8_ad9b_5cdcdf9ba89c",
         "type": "playbook",
         "uuid": "2d57ca01-c780-427d-8188-772736996682"
@@ -5242,19 +5344,19 @@
       "tags": [],
       "type": "default",
       "uuid": "d73505d1-a44b-4dd8-ad9b-5cdcdf9ba89c",
-      "version": 13
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe\" isExecutable=\"true\" name=\"playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1vniy2f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee Tag an ePO Asset\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"67c5b852-f38f-40f7-8a68-1ae8e8a78549\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\ninputs.mcafee_epo_tag = str(getattr(playbook.inputs, \\\"list_of_tags\\\"))\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"tags\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vniy2f\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w6ghxj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1vniy2f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"382f5b86-6ea3-44cb-8ac5-f0069fef7be7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0w6ghxj\u003c/incoming\u003e\u003coutgoing\u003eFlow_1gn9nta\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0w6ghxj\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1gn9nta\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1gn9nta\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vniy2f\" id=\"Flow_1vniy2f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w6ghxj\" id=\"Flow_0w6ghxj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gn9nta\" id=\"Flow_1gn9nta_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.984\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe\" isExecutable=\"true\" name=\"playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1vniy2f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee Tag an ePO Asset\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"67c5b852-f38f-40f7-8a68-1ae8e8a78549\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\nif getattr(playbook.inputs, \\\"list_of_tags\\\", None):\\n  inputs.mcafee_epo_tag = str(getattr(playbook.inputs, \\\"list_of_tags\\\", None))\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"tags\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vniy2f\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w6ghxj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1vniy2f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"382f5b86-6ea3-44cb-8ac5-f0069fef7be7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0w6ghxj\u003c/incoming\u003e\u003coutgoing\u003eFlow_1gn9nta\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0w6ghxj\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1gn9nta\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1gn9nta\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gn9nta\" id=\"Flow_1gn9nta_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w6ghxj\" id=\"Flow_0w6ghxj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vniy2f\" id=\"Flow_1vniy2f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.984\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696441940442,
+      "create_date": 1706555038862,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe",
@@ -5280,7 +5382,7 @@
             "deprecated": false,
             "export_key": "playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe/list_of_tags",
             "hide_notification": false,
-            "id": 5828,
+            "id": 4657,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5294,8 +5396,8 @@
             "tags": [],
             "templates": [],
             "text": "List of tags",
-            "tooltip": "Comman separated list of tags",
-            "type_id": 1262,
+            "tooltip": "Comma separated list of tags",
+            "type_id": 1013,
             "uuid": "e1970149-1e9a-4c1b-a0cb-18f6b01b1153",
             "values": []
           }
@@ -5320,28 +5422,28 @@
         "uuid": "66e901e6-50af-4480-9e82-83c42fe4dc78"
       },
       "has_logical_errors": false,
-      "id": 214,
+      "id": 5,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862031133,
+      "last_modified_time": 1706555851004,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696442528490,
+          "created_date": 1706555039038,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 240,
+          "export_key": "mcafee epo post process",
+          "id": 21,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696442528551,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706555846871,
+          "name": "mcafee epo post process",
           "object_type": "artifact",
           "playbook_handle": "mcafee_epo_apply_tags",
           "programmatic_name": "mcafee_epo_apply_tags_post_process",
@@ -5384,7 +5486,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_3d53d18a-5790-4751-bd84-23b5fa34b0fe",
-        "id": 219,
+        "id": 5,
         "name": "playbook_3d53d18a_5790_4751_bd84_23b5fa34b0fe",
         "type": "playbook",
         "uuid": "3c5c5563-e360-4c17-beb2-881f4af7129e"
@@ -5392,19 +5494,19 @@
       "tags": [],
       "type": "default",
       "uuid": "3d53d18a-5790-4751-bd84-23b5fa34b0fe",
-      "version": 13
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3\" isExecutable=\"true\" name=\"playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0u9unf9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4dc3b4db-1f72-4b4e-b7e0-c5996f743697\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_group_id = row.group_id\\ninputs.mcafee_epo_object_id = getattr(playbook.inputs, \\\"epo_policy_id\\\")\\ninputs.mcafee_epo_product_id = getattr(playbook.inputs, \\\"epo_product_id\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0u9unf9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kil06p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0u9unf9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"25d58d6f-93fd-4395-85fd-09d85baf85b9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kil06p\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ll4pe2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0kil06p\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ll4pe2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ll4pe2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0u9unf9\" id=\"Flow_0u9unf9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kil06p\" id=\"Flow_0kil06p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ll4pe2\" id=\"Flow_1ll4pe2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3\" isExecutable=\"true\" name=\"playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0u9unf9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4dc3b4db-1f72-4b4e-b7e0-c5996f743697\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_group_id = row.group_id\\nif getattr(playbook.inputs, \\\"epo_policy_id\\\", None):\\n  inputs.mcafee_epo_object_id = getattr(playbook.inputs, \\\"epo_policy_id\\\")\\nif getattr(playbook.inputs, \\\"epo_product_id\\\", None):\\n  inputs.mcafee_epo_product_id = getattr(playbook.inputs, \\\"epo_product_id\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0u9unf9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kil06p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0u9unf9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"25d58d6f-93fd-4395-85fd-09d85baf85b9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kil06p\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ll4pe2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0kil06p\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ll4pe2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ll4pe2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ll4pe2\" id=\"Flow_1ll4pe2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kil06p\" id=\"Flow_0kil06p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0u9unf9\" id=\"Flow_0u9unf9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696273811219,
+      "create_date": 1706555039691,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3",
@@ -5430,7 +5532,7 @@
             "deprecated": false,
             "export_key": "playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3/epo_policy_id",
             "hide_notification": false,
-            "id": 5783,
+            "id": 4658,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -5446,7 +5548,7 @@
             "templates": [],
             "text": "ePO Policy ID",
             "tooltip": "ID of the policy name",
-            "type_id": 1240,
+            "type_id": 1014,
             "uuid": "4ec64ee5-1c8d-402e-88d6-c2cd025e9b81",
             "values": []
           },
@@ -5460,7 +5562,7 @@
             "deprecated": false,
             "export_key": "playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3/epo_product_id",
             "hide_notification": false,
-            "id": 5784,
+            "id": 4659,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5476,7 +5578,7 @@
             "templates": [],
             "text": "ePO Product ID",
             "tooltip": "ID of the product the task is associated with",
-            "type_id": 1240,
+            "type_id": 1014,
             "uuid": "b7106d0a-598b-4390-8e1a-26e64017ee21",
             "values": []
           }
@@ -5501,28 +5603,28 @@
         "uuid": "70a924dc-d005-45d6-b06b-78281690018b"
       },
       "has_logical_errors": false,
-      "id": 192,
+      "id": 6,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862031638,
+      "last_modified_time": 1706555911276,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696358580055,
+          "created_date": 1706555039866,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 218,
+          "export_key": "mcafee epo post process",
+          "id": 22,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696358580068,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706555906168,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_groups",
           "playbook_handle": "mcafee_epo_assign_policy_to_group_from_group",
           "programmatic_name": "mcafee_epo_assign_policy_to_group_from_group_post_process",
@@ -5560,7 +5662,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_805fa62e-4ff6-463b-aeb8-fb17c403cda3",
-        "id": 197,
+        "id": 6,
         "name": "playbook_805fa62e_4ff6_463b_aeb8_fb17c403cda3",
         "type": "playbook",
         "uuid": "23857141-9b4c-48f7-bb3f-22713ff795b3"
@@ -5568,19 +5670,19 @@
       "tags": [],
       "type": "default",
       "uuid": "805fa62e-4ff6-463b-aeb8-fb17c403cda3",
-      "version": 12
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_687eb09c_6337_47fd_9543_35fe0f8036e9\" isExecutable=\"true\" name=\"playbook_687eb09c_6337_47fd_9543_35fe0f8036e9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_14f7rne\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4dc3b4db-1f72-4b4e-b7e0-c5996f743697\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_group_id = getattr(playbook.inputs, \\\"epo_group_id\\\")\\ninputs.mcafee_epo_object_id = row.object_id\\ninputs.mcafee_epo_product_id = row.product_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14f7rne\u003c/incoming\u003e\u003coutgoing\u003eFlow_1yl4nqk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_14f7rne\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6b05c6f5-015d-4fe4-8385-c7cc1715de3b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1yl4nqk\u003c/incoming\u003e\u003coutgoing\u003eFlow_0yv212o\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1yl4nqk\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0yv212o\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0yv212o\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_687eb09c_6337_47fd_9543_35fe0f8036e9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14f7rne\" id=\"Flow_14f7rne_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yl4nqk\" id=\"Flow_1yl4nqk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yv212o\" id=\"Flow_0yv212o_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_687eb09c_6337_47fd_9543_35fe0f8036e9\" isExecutable=\"true\" name=\"playbook_687eb09c_6337_47fd_9543_35fe0f8036e9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_14f7rne\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4dc3b4db-1f72-4b4e-b7e0-c5996f743697\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_group_id\\\", None):\\n  inputs.mcafee_epo_group_id = getattr(playbook.inputs, \\\"epo_group_id\\\")\\ninputs.mcafee_epo_object_id = row.object_id\\ninputs.mcafee_epo_product_id = row.product_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14f7rne\u003c/incoming\u003e\u003coutgoing\u003eFlow_1yl4nqk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_14f7rne\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6b05c6f5-015d-4fe4-8385-c7cc1715de3b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1yl4nqk\u003c/incoming\u003e\u003coutgoing\u003eFlow_0yv212o\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1yl4nqk\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0yv212o\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0yv212o\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_687eb09c_6337_47fd_9543_35fe0f8036e9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yv212o\" id=\"Flow_0yv212o_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yl4nqk\" id=\"Flow_1yl4nqk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14f7rne\" id=\"Flow_14f7rne_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696273977054,
+      "create_date": 1706555040339,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_687eb09c_6337_47fd_9543_35fe0f8036e9",
@@ -5606,7 +5708,7 @@
             "deprecated": false,
             "export_key": "playbook_687eb09c_6337_47fd_9543_35fe0f8036e9/epo_group_id",
             "hide_notification": false,
-            "id": 5785,
+            "id": 4660,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -5622,7 +5724,7 @@
             "templates": [],
             "text": "ePO Group ID",
             "tooltip": "ID for the group",
-            "type_id": 1241,
+            "type_id": 1015,
             "uuid": "45861c3b-c434-4323-8814-7da0842d2c59",
             "values": []
           }
@@ -5647,28 +5749,28 @@
         "uuid": "369d17bd-7291-4132-bc3e-c89fef6721ed"
       },
       "has_logical_errors": false,
-      "id": 193,
+      "id": 7,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862032117,
+      "last_modified_time": 1706555956445,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696358668662,
+          "created_date": 1706555040491,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 219,
+          "export_key": "mcafee epo post process",
+          "id": 23,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696358668678,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706555952716,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_policies",
           "playbook_handle": "mcafee_epo_assign_policy_to_group_from_policy",
           "programmatic_name": "mcafee_epo_assign_policy_to_group_from_policy_post_process",
@@ -5698,7 +5800,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_687eb09c-6337-47fd-9543-35fe0f8036e9",
-        "id": 198,
+        "id": 7,
         "name": "playbook_687eb09c_6337_47fd_9543_35fe0f8036e9",
         "type": "playbook",
         "uuid": "a49d368d-681e-4d62-b567-44925915c4b8"
@@ -5706,19 +5808,19 @@
       "tags": [],
       "type": "default",
       "uuid": "687eb09c-6337-47fd-9543-35fe0f8036e9",
-      "version": 12
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b\" isExecutable=\"true\" name=\"playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1v6050k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Systems\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"81575bf7-1c92-45d0-a674-4682f9e735c7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = row.epo_system_name\\ninputs.mcafee_epo_product_id = getattr(playbook.inputs, \\\"epo_product_id\\\")\\ninputs.mcafee_epo_type_id = getattr(playbook.inputs, \\\"epo_policy_type_id\\\")\\ninputs.mcafee_epo_object_id = getattr(playbook.inputs, \\\"epo_policy_id\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1v6050k\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xbnxfh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1v6050k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e5825dc7-4d54-45f1-b22c-f07f70da598f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xbnxfh\u003c/incoming\u003e\u003coutgoing\u003eFlow_090ne4g\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xbnxfh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_090ne4g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_090ne4g\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_090ne4g\" id=\"Flow_090ne4g_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xbnxfh\" id=\"Flow_0xbnxfh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v6050k\" id=\"Flow_1v6050k_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b\" isExecutable=\"true\" name=\"playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1v6050k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Systems\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"81575bf7-1c92-45d0-a674-4682f9e735c7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = row.epo_system_name\\nif getattr(playbook.inputs, \\\"epo_product_id\\\", None):\\n  inputs.mcafee_epo_product_id = getattr(playbook.inputs, \\\"epo_product_id\\\")\\nif getattr(playbook.inputs, \\\"epo_policy_type_id\\\", None):\\n  inputs.mcafee_epo_type_id = getattr(playbook.inputs, \\\"epo_policy_type_id\\\")\\nif getattr(playbook.inputs, \\\"epo_policy_id\\\", None):\\n  inputs.mcafee_epo_object_id = getattr(playbook.inputs, \\\"epo_policy_id\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1v6050k\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xbnxfh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1v6050k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e5825dc7-4d54-45f1-b22c-f07f70da598f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xbnxfh\u003c/incoming\u003e\u003coutgoing\u003eFlow_090ne4g\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xbnxfh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_090ne4g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_090ne4g\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_090ne4g\" id=\"Flow_090ne4g_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xbnxfh\" id=\"Flow_0xbnxfh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v6050k\" id=\"Flow_1v6050k_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696442576285,
+      "create_date": 1706555040964,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b",
@@ -5744,7 +5846,7 @@
             "deprecated": false,
             "export_key": "playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b/epo_policy_id",
             "hide_notification": false,
-            "id": 5829,
+            "id": 4661,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -5760,7 +5862,7 @@
             "templates": [],
             "text": "ePO Policy ID",
             "tooltip": "ID of the policy name",
-            "type_id": 1263,
+            "type_id": 1016,
             "uuid": "ccb3f52d-7851-49fc-a402-060207a845da",
             "values": []
           },
@@ -5774,7 +5876,7 @@
             "deprecated": false,
             "export_key": "playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b/epo_policy_type_id",
             "hide_notification": false,
-            "id": 5830,
+            "id": 4662,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -5790,7 +5892,7 @@
             "templates": [],
             "text": "ePO Policy Type ID",
             "tooltip": "Policy type ID",
-            "type_id": 1263,
+            "type_id": 1016,
             "uuid": "510ba9d2-367b-4098-959d-2a146c082b63",
             "values": []
           },
@@ -5804,7 +5906,7 @@
             "deprecated": false,
             "export_key": "playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b/epo_product_id",
             "hide_notification": false,
-            "id": 5831,
+            "id": 4663,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5820,7 +5922,7 @@
             "templates": [],
             "text": "ePO Product ID",
             "tooltip": "ID of the product the task is associated with",
-            "type_id": 1263,
+            "type_id": 1016,
             "uuid": "1c7b0f81-e2c9-4875-9997-9bab770fc1c5",
             "values": []
           }
@@ -5845,28 +5947,28 @@
         "uuid": "8af13fd3-10d8-45fc-b46f-87216ad1bdb1"
       },
       "has_logical_errors": false,
-      "id": 215,
+      "id": 8,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862032624,
+      "last_modified_time": 1706556021841,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696442849502,
+          "created_date": 1706555041186,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 241,
+          "export_key": "mcafee epo post process",
+          "id": 24,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696442849518,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556018650,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_systems_dt",
           "playbook_handle": "mcafee_epo_assign_policy_to_system_from_system",
           "programmatic_name": "mcafee_epo_assign_policy_to_system_from_system_post_process",
@@ -5912,7 +6014,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8a83aeff-5dc6-4a15-b02d-445a0e83e65b",
-        "id": 220,
+        "id": 8,
         "name": "playbook_8a83aeff_5dc6_4a15_b02d_445a0e83e65b",
         "type": "playbook",
         "uuid": "431583e6-6883-4108-8612-4af198ed0908"
@@ -5920,19 +6022,19 @@
       "tags": [],
       "type": "default",
       "uuid": "8a83aeff-5dc6-4a15-b02d-445a0e83e65b",
-      "version": 11
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08\" isExecutable=\"true\" name=\"playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10t1jah\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Systems\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"81575bf7-1c92-45d0-a674-4682f9e735c7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = getattr(playbook.inputs, \\\"epo_system_names_or_ids\\\")\\ninputs.mcafee_epo_product_id = row.product_id\\ninputs.mcafee_epo_type_id = row.type_id\\ninputs.mcafee_epo_object_id = row.object_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10t1jah\u003c/incoming\u003e\u003coutgoing\u003eFlow_1laswzw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10t1jah\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f7ce22ad-4019-43b7-a585-283a6ef86310\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1laswzw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rhcqk1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1laswzw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1rhcqk1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1rhcqk1\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10t1jah\" id=\"Flow_10t1jah_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"163\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"163\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1laswzw\" id=\"Flow_1laswzw_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"310\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"310\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rhcqk1\" id=\"Flow_1rhcqk1_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"423\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"423\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602.325\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08\" isExecutable=\"true\" name=\"playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10t1jah\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Assign Policy to Systems\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"81575bf7-1c92-45d0-a674-4682f9e735c7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_system_names_or_ids\\\", None):\\n  inputs.mcafee_epo_system_name_or_id = getattr(playbook.inputs, \\\"epo_system_names_or_ids\\\")\\ninputs.mcafee_epo_product_id = row.product_id\\ninputs.mcafee_epo_type_id = row.type_id\\ninputs.mcafee_epo_object_id = row.object_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_policy\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10t1jah\u003c/incoming\u003e\u003coutgoing\u003eFlow_1laswzw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10t1jah\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f7ce22ad-4019-43b7-a585-283a6ef86310\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1laswzw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rhcqk1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1laswzw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1rhcqk1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1rhcqk1\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rhcqk1\" id=\"Flow_1rhcqk1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1laswzw\" id=\"Flow_1laswzw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10t1jah\" id=\"Flow_10t1jah_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696274024785,
+      "create_date": 1706555041650,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08",
@@ -5958,7 +6060,7 @@
             "deprecated": false,
             "export_key": "playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08/epo_system_names_or_ids",
             "hide_notification": false,
-            "id": 5786,
+            "id": 4664,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5974,7 +6076,7 @@
             "templates": [],
             "text": "ePO System Names or IDs",
             "tooltip": "Comma separated list of system names or IDs",
-            "type_id": 1242,
+            "type_id": 1017,
             "uuid": "292a1dce-aa99-4ce1-9a70-cf777a6ba514",
             "values": []
           }
@@ -5999,28 +6101,28 @@
         "uuid": "8d8016ec-bf58-4705-ba16-34e12f02a831"
       },
       "has_logical_errors": false,
-      "id": 194,
+      "id": 9,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862033157,
+      "last_modified_time": 1706556069079,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696358846731,
+          "created_date": 1706555041810,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 220,
+          "export_key": "mcafee epo post process",
+          "id": 25,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696358846744,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556064763,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_policies",
           "playbook_handle": "mcafee_epo_assign_policy_to_systems_from_policy",
           "programmatic_name": "mcafee_epo_assign_policy_to_systems_from_policy_post_process",
@@ -6050,7 +6152,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_ad7f84c1-f522-45e4-a4b7-307600d1dd08",
-        "id": 199,
+        "id": 9,
         "name": "playbook_ad7f84c1_f522_45e4_a4b7_307600d1dd08",
         "type": "playbook",
         "uuid": "24723b62-e93a-4bad-ac78-85837e3a75f9"
@@ -6058,19 +6160,19 @@
       "tags": [],
       "type": "default",
       "uuid": "ad7f84c1-f522-45e4-a4b7-307600d1dd08",
-      "version": 12
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d\" isExecutable=\"true\" name=\"playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ec6r0w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Create Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8bbcc714-05ce-4894-bd65-9f5daff302e5\"\u003e{\"inputs\":{\"cd420db2-85fa-4b36-836e-b84b08da53d0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e64b4847-576c-41fd-9ebe-30388463d740\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4daa5700-47bc-4a1d-9e4d-1d32fe202286\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"fa68645e-e98b-4ba0-9ff6-f3bff26f20a4\"}},\"b114ab6f-268c-496f-9fd6-64ae4fc96e10\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"10234f71-637e-4dd6-906a-19e32ef335ca\"}},\"079bf7ef-d3a9-4b0d-9e72-cdcbb4783d01\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"026f887f-61d5-4806-9c17-4fadddc2d58f\"}},\"9477b98a-5618-40d3-aab3-3c0f2c56ff59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"b5611556-6d46-4755-9aab-38c72c55ad8d\"}},\"3561f86b-44c7-4c83-9fc5-962bf0231192\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"7a9a788f-93c6-4575-bdb0-d22f9823624f\"}},\"d20dd061-06ce-4daf-8942-92b9b5f745b0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"83a16190-0db4-4b8d-a247-e5918309ff9c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0c19dd34-7797-48b2-b2c8-f6279da97148\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8bf4d417-d784-4752-9862-1b3aed4e385d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"06bece11-b70f-4205-9e67-37db3d3f5dda\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, \\\"epo_issue_assignee\\\")\\ninputs.mcafee_epo_issue_description = getattr(playbook.inputs, \\\"epo_issue_description\\\")\\ninputs.mcafee_epo_issue_due = getattr(playbook.inputs, \\\"epo_issue_due\\\")\\ninputs.mcafee_epo_issue_name = getattr(playbook.inputs, \\\"epo_issue_name\\\")\\ninputs.mcafee_epo_issue_priority = getattr(playbook.inputs, \\\"epo_issue_priority\\\")\\ninputs.mcafee_epo_issue_properties = getattr(playbook.inputs, \\\"epo_issue_properties\\\")\\ninputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, \\\"epo_issue_resolution\\\")\\ninputs.mcafee_epo_issue_severity = getattr(playbook.inputs, \\\"epo_issue_severity\\\")\\ninputs.mcafee_epo_issue_state = getattr(playbook.inputs, \\\"epo_issue_state\\\")\\ninputs.mcafee_epo_ticket_id = getattr(playbook.inputs, \\\"epo_ticket_id\\\")\\ninputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, \\\"epo_ticket_server_name\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_issue\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ec6r0w\u003c/incoming\u003e\u003coutgoing\u003eFlow_08lzqgo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ec6r0w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"36f83a6e-de19-4b08-a004-a85710cacaaa\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08lzqgo\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lhtqs3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08lzqgo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1lhtqs3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1lhtqs3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ec6r0w\" id=\"Flow_0ec6r0w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08lzqgo\" id=\"Flow_08lzqgo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lhtqs3\" id=\"Flow_1lhtqs3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d\" isExecutable=\"true\" name=\"playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ec6r0w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Create Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8bbcc714-05ce-4894-bd65-9f5daff302e5\"\u003e{\"inputs\":{\"cd420db2-85fa-4b36-836e-b84b08da53d0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e64b4847-576c-41fd-9ebe-30388463d740\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4daa5700-47bc-4a1d-9e4d-1d32fe202286\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"fa68645e-e98b-4ba0-9ff6-f3bff26f20a4\"}},\"b114ab6f-268c-496f-9fd6-64ae4fc96e10\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"10234f71-637e-4dd6-906a-19e32ef335ca\"}},\"079bf7ef-d3a9-4b0d-9e72-cdcbb4783d01\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"026f887f-61d5-4806-9c17-4fadddc2d58f\"}},\"9477b98a-5618-40d3-aab3-3c0f2c56ff59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"b5611556-6d46-4755-9aab-38c72c55ad8d\"}},\"3561f86b-44c7-4c83-9fc5-962bf0231192\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"7a9a788f-93c6-4575-bdb0-d22f9823624f\"}},\"d20dd061-06ce-4daf-8942-92b9b5f745b0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"83a16190-0db4-4b8d-a247-e5918309ff9c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0c19dd34-7797-48b2-b2c8-f6279da97148\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8bf4d417-d784-4752-9862-1b3aed4e385d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"06bece11-b70f-4205-9e67-37db3d3f5dda\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_issue_assignee\\\", None):\\n  inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, \\\"epo_issue_assignee\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_description\\\", None):\\n  inputs.mcafee_epo_issue_description = getattr(playbook.inputs, \\\"epo_issue_description\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_due\\\", None):\\n  inputs.mcafee_epo_issue_due = getattr(playbook.inputs, \\\"epo_issue_due\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_name\\\", None):\\n  inputs.mcafee_epo_issue_name = getattr(playbook.inputs, \\\"epo_issue_name\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_priority\\\", None):\\n  inputs.mcafee_epo_issue_priority = getattr(playbook.inputs, \\\"epo_issue_priority\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_properties\\\", None):\\n  inputs.mcafee_epo_issue_properties = getattr(playbook.inputs, \\\"epo_issue_properties\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_resolution\\\", None):\\n  inputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, \\\"epo_issue_resolution\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_severity\\\", None):\\n  inputs.mcafee_epo_issue_severity = getattr(playbook.inputs, \\\"epo_issue_severity\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_state\\\", None):\\n  inputs.mcafee_epo_issue_state = getattr(playbook.inputs, \\\"epo_issue_state\\\")\\nif getattr(playbook.inputs, \\\"epo_ticket_id\\\", None):\\n  inputs.mcafee_epo_ticket_id = getattr(playbook.inputs, \\\"epo_ticket_id\\\")\\nif getattr(playbook.inputs, \\\"epo_ticket_server_name\\\", None):\\n  inputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, \\\"epo_ticket_server_name\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_issue\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ec6r0w\u003c/incoming\u003e\u003coutgoing\u003eFlow_08lzqgo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ec6r0w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"36f83a6e-de19-4b08-a004-a85710cacaaa\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08lzqgo\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lhtqs3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08lzqgo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1lhtqs3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1lhtqs3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lhtqs3\" id=\"Flow_1lhtqs3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08lzqgo\" id=\"Flow_08lzqgo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ec6r0w\" id=\"Flow_0ec6r0w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696274073760,
+      "create_date": 1706555042283,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d",
@@ -6096,7 +6198,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_assignee",
             "hide_notification": false,
-            "id": 5787,
+            "id": 4665,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -6111,7 +6213,7 @@
             "templates": [],
             "text": "ePO Issue Assignee",
             "tooltip": "Username of the user to assign to the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "de8dd35e-a274-48f9-a568-fa51b7bbf77d",
             "values": []
           },
@@ -6125,7 +6227,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_description",
             "hide_notification": false,
-            "id": 5788,
+            "id": 4666,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -6141,7 +6243,7 @@
             "templates": [],
             "text": "ePO Issue Description",
             "tooltip": "Description of the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "f9cf7852-451c-4f1f-bd01-a547a01c1038",
             "values": []
           },
@@ -6155,7 +6257,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_due",
             "hide_notification": false,
-            "id": 5789,
+            "id": 4667,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -6170,7 +6272,7 @@
             "templates": [],
             "text": "ePO Issue Due",
             "tooltip": "Due date of the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "e1efab9c-856a-463c-8855-17400e150c59",
             "values": []
           },
@@ -6184,7 +6286,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_name",
             "hide_notification": false,
-            "id": 5790,
+            "id": 4668,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -6200,7 +6302,7 @@
             "templates": [],
             "text": "ePO Issue Name",
             "tooltip": "Name of the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "492439d9-df19-4bdd-bd50-50a449ad4da9",
             "values": []
           },
@@ -6214,7 +6316,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_priority",
             "hide_notification": false,
-            "id": 5791,
+            "id": 4669,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -6228,8 +6330,8 @@
             "tags": [],
             "templates": [],
             "text": "ePO Issue Priority",
-            "tooltip": "The  priority of the issue",
-            "type_id": 1243,
+            "tooltip": "The priority of the issue",
+            "type_id": 1018,
             "uuid": "a5c9a0fd-8464-42fb-aaa4-965453486f50",
             "values": [
               {
@@ -6239,7 +6341,7 @@
                 "label": "Unknown",
                 "properties": null,
                 "uuid": "ea439dcb-bde4-43bf-a35d-ae3d0e972a2b",
-                "value": 1714
+                "value": 824
               },
               {
                 "default": false,
@@ -6248,7 +6350,7 @@
                 "label": "Lowest",
                 "properties": null,
                 "uuid": "d7c777da-0119-41f7-9567-e7eaf33a5098",
-                "value": 1715
+                "value": 825
               },
               {
                 "default": false,
@@ -6257,7 +6359,7 @@
                 "label": "Low",
                 "properties": null,
                 "uuid": "02e4ed15-e5ad-45c6-9c94-6392977746b4",
-                "value": 1716
+                "value": 826
               },
               {
                 "default": false,
@@ -6266,7 +6368,7 @@
                 "label": "Medium",
                 "properties": null,
                 "uuid": "02773598-e457-47a9-a8e3-5530f5999021",
-                "value": 1717
+                "value": 827
               },
               {
                 "default": false,
@@ -6275,7 +6377,7 @@
                 "label": "High",
                 "properties": null,
                 "uuid": "184e3396-d9ba-451f-adfa-61c197e8be5a",
-                "value": 1718
+                "value": 828
               },
               {
                 "default": false,
@@ -6284,7 +6386,7 @@
                 "label": "Highest",
                 "properties": null,
                 "uuid": "14ccd790-8780-4874-919e-01926a09333e",
-                "value": 1719
+                "value": 829
               }
             ]
           },
@@ -6298,7 +6400,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_properties",
             "hide_notification": false,
-            "id": 5792,
+            "id": 4670,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -6313,7 +6415,7 @@
             "templates": [],
             "text": "ePO Issue Properties",
             "tooltip": "Properties for the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "25bf8bb9-079a-4d8d-84a2-b1f3e4af6e2a",
             "values": []
           },
@@ -6327,7 +6429,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_resolution",
             "hide_notification": false,
-            "id": 5793,
+            "id": 4671,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -6342,7 +6444,7 @@
             "templates": [],
             "text": "ePO Issue Resolution",
             "tooltip": "Resolution of the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "afe73a3a-be98-45a8-9e5e-6cc945686672",
             "values": [
               {
@@ -6352,7 +6454,7 @@
                 "label": "None",
                 "properties": null,
                 "uuid": "d3b89c17-4198-41f0-9426-7c113b5470ab",
-                "value": 1720
+                "value": 830
               },
               {
                 "default": false,
@@ -6361,7 +6463,7 @@
                 "label": "Fixed",
                 "properties": null,
                 "uuid": "6b42591b-b6ee-4485-9f35-75fe53ad4473",
-                "value": 1721
+                "value": 831
               },
               {
                 "default": false,
@@ -6370,7 +6472,7 @@
                 "label": "Waived",
                 "properties": null,
                 "uuid": "3039871f-8de2-4b6b-87cd-61b0481e0e56",
-                "value": 1722
+                "value": 832
               },
               {
                 "default": false,
@@ -6379,7 +6481,7 @@
                 "label": "Will Not Fix",
                 "properties": null,
                 "uuid": "b57eeb36-0907-4736-b2c5-5f68d5de44f0",
-                "value": 1723
+                "value": 833
               }
             ]
           },
@@ -6393,7 +6495,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_severity",
             "hide_notification": false,
-            "id": 5794,
+            "id": 4672,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -6408,7 +6510,7 @@
             "templates": [],
             "text": "ePO Issue Severity",
             "tooltip": "Severity of the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "5e600859-4513-4de5-8ebe-ebe5c6d7922e",
             "values": [
               {
@@ -6418,7 +6520,7 @@
                 "label": "Unknown",
                 "properties": null,
                 "uuid": "5823f0a8-d6ed-4493-9423-fd4e4d44f00f",
-                "value": 1724
+                "value": 834
               },
               {
                 "default": false,
@@ -6427,7 +6529,7 @@
                 "label": "Lowest",
                 "properties": null,
                 "uuid": "7fbc03a7-fbbb-4675-96b5-36413b07ac28",
-                "value": 1725
+                "value": 835
               },
               {
                 "default": false,
@@ -6436,7 +6538,7 @@
                 "label": "Low",
                 "properties": null,
                 "uuid": "ae855288-8d1f-43b1-a4f3-1ae485dbe1f1",
-                "value": 1726
+                "value": 836
               },
               {
                 "default": false,
@@ -6445,7 +6547,7 @@
                 "label": "Medium",
                 "properties": null,
                 "uuid": "f4759c77-14f6-412b-a188-e8134d5242e4",
-                "value": 1727
+                "value": 837
               },
               {
                 "default": false,
@@ -6454,7 +6556,7 @@
                 "label": "High",
                 "properties": null,
                 "uuid": "530d9125-d32d-4613-a730-5086f7232413",
-                "value": 1728
+                "value": 838
               },
               {
                 "default": false,
@@ -6463,7 +6565,7 @@
                 "label": "Highest",
                 "properties": null,
                 "uuid": "fad18f5e-da45-491b-8460-f52a9f818a51",
-                "value": 1729
+                "value": 839
               }
             ]
           },
@@ -6477,7 +6579,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_state",
             "hide_notification": false,
-            "id": 5795,
+            "id": 4673,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -6492,7 +6594,7 @@
             "templates": [],
             "text": "ePO Issue State",
             "tooltip": "State of the issue",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "1d466af2-8dcf-4a2e-a6ef-bc0a3daae5da",
             "values": [
               {
@@ -6502,7 +6604,7 @@
                 "label": "Unknown",
                 "properties": null,
                 "uuid": "cb96b21d-080f-4874-b413-d74503c90cf0",
-                "value": 1730
+                "value": 840
               },
               {
                 "default": false,
@@ -6511,7 +6613,7 @@
                 "label": "New",
                 "properties": null,
                 "uuid": "c7c6993d-e8c5-43b5-ab3f-1c16d7821d3f",
-                "value": 1731
+                "value": 841
               },
               {
                 "default": false,
@@ -6520,7 +6622,7 @@
                 "label": "Assigned",
                 "properties": null,
                 "uuid": "6495bf1d-64db-463c-b99a-d538bfd60118",
-                "value": 1732
+                "value": 842
               },
               {
                 "default": false,
@@ -6529,7 +6631,7 @@
                 "label": "Resolved",
                 "properties": null,
                 "uuid": "5f67265a-40b4-4b42-b82e-900e08094f76",
-                "value": 1733
+                "value": 843
               },
               {
                 "default": false,
@@ -6538,7 +6640,7 @@
                 "label": "Closed",
                 "properties": null,
                 "uuid": "43de6582-f027-46e0-841b-b041e872d1d6",
-                "value": 1734
+                "value": 844
               }
             ]
           },
@@ -6552,7 +6654,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_issue_type",
             "hide_notification": false,
-            "id": 5796,
+            "id": 4674,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -6567,7 +6669,7 @@
             "templates": [],
             "text": "ePO Issue Type",
             "tooltip": "Issue type",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "fec53d69-d0c7-4d44-a050-0bbad407ffff",
             "values": [
               {
@@ -6577,7 +6679,7 @@
                 "label": "BASIC",
                 "properties": null,
                 "uuid": "9937ef4f-974d-4155-a423-777e7d7d09e5",
-                "value": 1735
+                "value": 845
               }
             ]
           },
@@ -6591,7 +6693,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_ticket_id",
             "hide_notification": false,
-            "id": 5797,
+            "id": 4675,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -6606,7 +6708,7 @@
             "templates": [],
             "text": "ePO Ticket ID",
             "tooltip": "ID of the ticket",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "a52ed479-2da8-4b3d-8708-2b93ca60bedf",
             "values": []
           },
@@ -6620,7 +6722,7 @@
             "deprecated": false,
             "export_key": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d/epo_ticket_server_name",
             "hide_notification": false,
-            "id": 5798,
+            "id": 4676,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -6635,7 +6737,7 @@
             "templates": [],
             "text": "ePO Ticket Server Name",
             "tooltip": "Name of the ticket server",
-            "type_id": 1243,
+            "type_id": 1018,
             "uuid": "97c6a58a-066c-4a9b-a059-6924d9d72a73",
             "values": []
           }
@@ -6660,32 +6762,32 @@
         "uuid": "e83575f9-9ad3-4fda-8e36-802b6f66a02f"
       },
       "has_logical_errors": false,
-      "id": 195,
+      "id": 10,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862033638,
+      "last_modified_time": 1706556243231,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696359031132,
+          "created_date": 1706555042787,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 221,
+          "export_key": "mcafee epo post process",
+          "id": 26,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696359031147,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556239357,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_create_issue",
           "programmatic_name": "mcafee_epo_create_issue_post_process",
-          "script_text": "results = playbook.functions.results.create_issue\nif results.get(\"success\"):\n  row = incident.addRow(\"mcafee_epo_issues\")\n  row[\"issue_name\"] = getattr(playbook.inputs, \"epo_issue_name\")\n  row[\"issue_id\"] = results.get(\"content\")\n  row[\"severity\"] = getattr(playbook.inputs, \"epo_issue_severity\")\n  row[\"issue_due_date\"] = getattr(playbook.inputs, \"epo_issue_due\")\n  row[\"issue_description\"] = getattr(playbook.inputs, \"epo_issue_description\")\n  row[\"ticket_server_name\"] = getattr(playbook.inputs, \"epo_ticket_server_name\")\n  row[\"priority\"] = getattr(playbook.inputs, \"epo_issue_priority\")\n  row[\"type\"] = getattr(playbook.inputs, \"epo_issue_type\")\n  row[\"resolution\"] = getattr(playbook.inputs, \"epo_issue_resolution\")\n  row[\"assignee_name\"] =getattr(playbook.inputs, \"epo_issue_assignee\")\n  row[\"issue_state\"] = getattr(playbook.inputs, \"epo_issue_state\")\n  row[\"ticket_id\"] = getattr(playbook.inputs, \"epo_ticket_id\")\n  row[\"issue_deleted\"] = False",
+          "script_text": "results = playbook.functions.results.create_issue\nif results.get(\"success\"):\n  row = incident.addRow(\"mcafee_epo_issues\")\n  row[\"issue_name\"] = getattr(playbook.inputs, \"epo_issue_name\")\n  row[\"issue_id\"] = results.get(\"content\", {})\n  row[\"severity\"] = getattr(playbook.inputs, \"epo_issue_severity\")\n  row[\"issue_due_date\"] = getattr(playbook.inputs, \"epo_issue_due\")\n  row[\"issue_description\"] = getattr(playbook.inputs, \"epo_issue_description\")\n  row[\"ticket_server_name\"] = getattr(playbook.inputs, \"epo_ticket_server_name\")\n  row[\"priority\"] = getattr(playbook.inputs, \"epo_issue_priority\")\n  row[\"type\"] = getattr(playbook.inputs, \"epo_issue_type\")\n  row[\"resolution\"] = getattr(playbook.inputs, \"epo_issue_resolution\")\n  row[\"assignee_name\"] =getattr(playbook.inputs, \"epo_issue_assignee\")\n  row[\"issue_state\"] = getattr(playbook.inputs, \"epo_issue_state\")\n  row[\"ticket_id\"] = getattr(playbook.inputs, \"epo_ticket_id\")\n  row[\"issue_deleted\"] = False",
           "tags": [],
           "uuid": "36f83a6e-de19-4b08-a004-a85710cacaaa"
         }
@@ -6799,7 +6901,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_393fc26e-ed1f-42e2-a51e-d939d1e1332d",
-        "id": 200,
+        "id": 10,
         "name": "playbook_393fc26e_ed1f_42e2_a51e_d939d1e1332d",
         "type": "playbook",
         "uuid": "3bdf9f5e-7972-4ad0-bab0-bd746edfd1de"
@@ -6807,19 +6909,19 @@
       "tags": [],
       "type": "default",
       "uuid": "393fc26e-ed1f-42e2-a51e-d939d1e1332d",
-      "version": 13
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8\" isExecutable=\"true\" name=\"playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0pjlomi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Delete Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9edf3f57-b79b-4a50-bc6b-632ea6406dfe\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_issue_id = row.issue_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_issue\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0pjlomi\u003c/incoming\u003e\u003coutgoing\u003eFlow_10t21bz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0pjlomi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"005e27d8-51b8-4eaa-b40b-d127a61ebd2b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10t21bz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0twx5p3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_10t21bz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0twx5p3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0twx5p3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0pjlomi\" id=\"Flow_0pjlomi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10t21bz\" id=\"Flow_10t21bz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"345\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"345\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0twx5p3\" id=\"Flow_0twx5p3_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632.325\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8\" isExecutable=\"true\" name=\"playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0pjlomi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Delete Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9edf3f57-b79b-4a50-bc6b-632ea6406dfe\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_issue_id = row.issue_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_issue\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0pjlomi\u003c/incoming\u003e\u003coutgoing\u003eFlow_10t21bz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0pjlomi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"005e27d8-51b8-4eaa-b40b-d127a61ebd2b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10t21bz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0twx5p3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_10t21bz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0twx5p3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0twx5p3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0twx5p3\" id=\"Flow_0twx5p3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10t21bz\" id=\"Flow_10t21bz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0pjlomi\" id=\"Flow_0pjlomi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696338840121,
+      "create_date": 1706555043250,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8",
@@ -6855,28 +6957,28 @@
         "uuid": "efca4a49-83ca-4607-80ac-53bc628b31f8"
       },
       "has_logical_errors": false,
-      "id": 196,
+      "id": 11,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862034131,
+      "last_modified_time": 1706556271559,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696359113365,
+          "created_date": 1706555043365,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 222,
+          "export_key": "mcafee epo post process",
+          "id": 27,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696359113378,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556269175,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_issues",
           "playbook_handle": "mcafee_epo_delete_issue",
           "programmatic_name": "mcafee_epo_delete_issue_post_process",
@@ -6897,7 +6999,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_51fb97b3-6bbd-4ad6-a8bd-861238c897e8",
-        "id": 201,
+        "id": 11,
         "name": "playbook_51fb97b3_6bbd_4ad6_a8bd_861238c897e8",
         "type": "playbook",
         "uuid": "444f3720-fd8e-4f0a-be38-ec8f4cf005d5"
@@ -6905,19 +7007,19 @@
       "tags": [],
       "type": "default",
       "uuid": "51fb97b3-6bbd-4ad6-a8bd-861238c897e8",
-      "version": 12
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa\" isExecutable=\"true\" name=\"playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1sshwqy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Delete System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4011b9c6-eeba-49da-b5f7-27fdce026c83\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = row.epo_system_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_system\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1sshwqy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0dcl1h4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1sshwqy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d523f6f4-2065-4b1e-adcb-423436e8c4d6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dcl1h4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h1ir1a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0dcl1h4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1h1ir1a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1h1ir1a\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h1ir1a\" id=\"Flow_1h1ir1a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dcl1h4\" id=\"Flow_0dcl1h4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sshwqy\" id=\"Flow_1sshwqy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa\" isExecutable=\"true\" name=\"playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1sshwqy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Delete System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4011b9c6-eeba-49da-b5f7-27fdce026c83\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = row.epo_system_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_system\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1sshwqy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0dcl1h4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1sshwqy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d523f6f4-2065-4b1e-adcb-423436e8c4d6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dcl1h4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h1ir1a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0dcl1h4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1h1ir1a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1h1ir1a\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h1ir1a\" id=\"Flow_1h1ir1a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dcl1h4\" id=\"Flow_0dcl1h4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sshwqy\" id=\"Flow_1sshwqy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696442891473,
+      "create_date": 1706555043851,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa",
@@ -6953,28 +7055,28 @@
         "uuid": "99dc4dec-a52d-4c4f-9eb4-9547f5832e83"
       },
       "has_logical_errors": false,
-      "id": 216,
+      "id": 12,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862034661,
+      "last_modified_time": 1706556293441,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696442979514,
+          "created_date": 1706555043986,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 242,
+          "export_key": "mcafee epo post process",
+          "id": 28,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696443473633,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556291150,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_systems_dt",
           "playbook_handle": "mcafee_epo_delete_system",
           "programmatic_name": "mcafee_epo_delete_system_post_process",
@@ -6995,7 +7097,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_ca2ba2a5-57f0-488c-99fc-76faa1151dfa",
-        "id": 221,
+        "id": 12,
         "name": "playbook_ca2ba2a5_57f0_488c_99fc_76faa1151dfa",
         "type": "playbook",
         "uuid": "4503a946-c898-4a1a-a35d-2a055b9d479b"
@@ -7003,19 +7105,19 @@
       "tags": [],
       "type": "default",
       "uuid": "ca2ba2a5-57f0-488c-99fc-76faa1151dfa",
-      "version": 13
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679\" isExecutable=\"true\" name=\"playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0r5y073\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find Client Tasks\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"948b9c0a-1d8e-47c4-a277-1180ee5d3f5e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_client_tasks\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"client_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0r5y073\u003c/incoming\u003e\u003coutgoing\u003eFlow_05s7g50\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0r5y073\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e02de6f5-d602-4e29-aef2-1f103da340de\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05s7g50\u003c/incoming\u003e\u003coutgoing\u003eFlow_0c736x4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05s7g50\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0c736x4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0c736x4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r5y073\" id=\"Flow_0r5y073_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05s7g50\" id=\"Flow_05s7g50_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c736x4\" id=\"Flow_0c736x4_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"418\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"418\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632.0419999999999\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679\" isExecutable=\"true\" name=\"playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0r5y073\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find Client Tasks\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"948b9c0a-1d8e-47c4-a277-1180ee5d3f5e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_client_tasks\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"client_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0r5y073\u003c/incoming\u003e\u003coutgoing\u003eFlow_05s7g50\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0r5y073\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e02de6f5-d602-4e29-aef2-1f103da340de\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05s7g50\u003c/incoming\u003e\u003coutgoing\u003eFlow_0c736x4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05s7g50\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0c736x4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0c736x4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c736x4\" id=\"Flow_0c736x4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05s7g50\" id=\"Flow_05s7g50_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r5y073\" id=\"Flow_0r5y073_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353419011,
+      "create_date": 1706555044522,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679",
@@ -7051,32 +7153,32 @@
         "uuid": "8c2407fe-495a-4cdc-bac5-fb2e73912d41"
       },
       "has_logical_errors": false,
-      "id": 197,
+      "id": 13,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862035173,
+      "last_modified_time": 1706556331775,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696359293923,
+          "created_date": 1706555044662,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 223,
+          "export_key": "mcafee epo post process",
+          "id": 29,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696359293935,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556327118,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_find_all_client_tasks",
           "programmatic_name": "mcafee_epo_find_all_client_tasks_post_process",
-          "script_text": "results = playbook.functions.results.client_task\nif results.get(\"success\"):\n  for x in results.get(\"content\"):\n    table = incident.addRow(\"mcafee_epo_client_tasks\")\n    table[\"object_name\"] = x.get(\"objectName\")\n    table[\"type_name\"] = x.get(\"typeName\")\n    table[\"product_name\"] = x.get(\"productName\")\n    table[\"product_id\"] = x.get(\"productId\")\n    table[\"task_id\"] = x.get(\"objectId\")",
+          "script_text": "results = playbook.functions.results.client_task\nif results.get(\"success\"):\n  for x in results.get(\"content\", {}):\n    table = incident.addRow(\"mcafee_epo_client_tasks\")\n    table[\"object_name\"] = x.get(\"objectName\")\n    table[\"type_name\"] = x.get(\"typeName\")\n    table[\"product_name\"] = x.get(\"productName\")\n    table[\"product_id\"] = x.get(\"productId\")\n    table[\"task_id\"] = x.get(\"objectId\")",
           "tags": [],
           "uuid": "e02de6f5-d602-4e29-aef2-1f103da340de"
         }
@@ -7093,7 +7195,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a71cb98d-8eeb-43f7-87cc-6256eecbe679",
-        "id": 202,
+        "id": 13,
         "name": "playbook_a71cb98d_8eeb_43f7_87cc_6256eecbe679",
         "type": "playbook",
         "uuid": "8c8207f1-d75b-4617-a81e-95ec5ee63bc4"
@@ -7101,19 +7203,19 @@
       "tags": [],
       "type": "default",
       "uuid": "a71cb98d-8eeb-43f7-87cc-6256eecbe679",
-      "version": 9
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d\" isExecutable=\"true\" name=\"playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19nep0a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cec9d0f8-06bc-4168-9fec-554d2fef8a99\"\u003e{\"inputs\":{},\"pre_processing_script\":\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"groups\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19nep0a\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cmqpb3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19nep0a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_groups\\\"\\ninputs.incident_id = incident.id\\ninputs.mcafee_epo_target = \\\"EPOLeafNode\\\"\\ninputs.mcafee_epo_query_select = \\\"EPOLeafNode.NodeName EPOBranchNode.NodeName EPOBranchNode.NodeTextPath2\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cmqpb3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wtj45q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1cmqpb3\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6fb85cc3-bcff-4d21-ae81-9ce737f3949a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wtj45q\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zbyxgy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wtj45q\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0zbyxgy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0zbyxgy\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19nep0a\" id=\"Flow_19nep0a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cmqpb3\" id=\"Flow_1cmqpb3_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wtj45q\" id=\"Flow_0wtj45q_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"488\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zbyxgy\" id=\"Flow_0zbyxgy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"572\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"614\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"488\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"614\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d\" isExecutable=\"true\" name=\"playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19nep0a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cec9d0f8-06bc-4168-9fec-554d2fef8a99\"\u003e{\"inputs\":{},\"result_name\":\"groups\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19nep0a\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cmqpb3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19nep0a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_groups\\\"\\ninputs.incident_id = incident.id\\ninputs.mcafee_epo_target = \\\"EPOLeafNode\\\"\\ninputs.mcafee_epo_query_select = \\\"EPOLeafNode.NodeName EPOBranchNode.NodeName EPOBranchNode.NodeTextPath2\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cmqpb3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wtj45q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1cmqpb3\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6fb85cc3-bcff-4d21-ae81-9ce737f3949a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wtj45q\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zbyxgy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wtj45q\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0zbyxgy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0zbyxgy\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zbyxgy\" id=\"Flow_0zbyxgy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"572\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"614\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wtj45q\" id=\"Flow_0wtj45q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"488\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cmqpb3\" id=\"Flow_1cmqpb3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19nep0a\" id=\"Flow_19nep0a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"488\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"614\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353459768,
+      "create_date": 1706555045172,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d",
@@ -7149,32 +7251,32 @@
         "uuid": "c178631f-5b80-4ad9-b1e5-ef45263a71d9"
       },
       "has_logical_errors": false,
-      "id": 198,
+      "id": 14,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862035664,
+      "last_modified_time": 1706556404481,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696359526426,
+          "created_date": 1706555045326,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 224,
+          "export_key": "mcafee epo post process",
+          "id": 30,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696359526440,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556399959,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_find_all_groups",
           "programmatic_name": "mcafee_epo_find_all_groups_post_process",
-          "script_text": "results = playbook.functions.results.query\ngroupsResults = playbook.functions.results.groups\nif results.get(\"success\"):\n  for groupInfo in groupsResults.get(\"content\"):\n    groupPath = groupInfo.get(\"groupPath\")\n    table = incident.addRow(\"mcafee_epo_groups\")\n    table[\"group_id\"] = int(groupInfo.get(\"groupId\"))\n    table[\"group_path\"] = groupPath\n    systems = \"\"\n    for group in results.get(\"content\"):\n      # EPOBranchNode.NodeTextPath2 only returns path after My Organization\n      path2 = group.get(\"EPOBranchNode.NodeTextPath2\")\n      # EPOBranchNode.NodeTextPath2 returns the path, Lost and Found, as, Lost\u0026Found,\n      # so it needs to be converted in order to compare paths.\n      path2 = path2.replace(\"Lost\u0026Found\", \"Lost and Found\")\n      # Add, My Organization, to the beginning of the path\n      path2 = \"My Organization{}\".format(path2[:len(path2)-1])\n\n      if groupPath == path2:\n        systems = \"{}, {}\".format(systems, group.get(\"EPOLeafNode.NodeName\"))\n    table[\"systems\"] = systems[2:]",
+          "script_text": "results = playbook.functions.results.query\ngroupsResults = playbook.functions.results.groups\nif results.get(\"success\"):\n  for groupInfo in groupsResults.get(\"content\", {}):\n    groupPath = groupInfo.get(\"groupPath\")\n    table = incident.addRow(\"mcafee_epo_groups\")\n    table[\"group_id\"] = int(groupInfo.get(\"groupId\"))\n    table[\"group_path\"] = groupPath\n    systems = \"\"\n    for group in results.get(\"content\", {}):\n      # EPOBranchNode.NodeTextPath2 only returns path after My Organization\n      path2 = group.get(\"EPOBranchNode.NodeTextPath2\")\n      # EPOBranchNode.NodeTextPath2 returns the path, Lost and Found, as, Lost\u0026Found,\n      # so it needs to be converted in order to compare paths.\n      path2 = path2.replace(\"Lost\u0026Found\", \"Lost and Found\")\n      # Add, My Organization, to the beginning of the path\n      path2 = \"My Organization{}\".format(path2[:len(path2)-1])\n\n      if groupPath == path2:\n        systems = \"{}, {}\".format(systems, group.get(\"EPOLeafNode.NodeName\"))\n    table[\"systems\"] = systems[2:]",
           "tags": [],
           "uuid": "6fb85cc3-bcff-4d21-ae81-9ce737f3949a"
         }
@@ -7191,7 +7293,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_e60054c5-4bf5-4601-aba7-cd07f5a7615d",
-        "id": 203,
+        "id": 14,
         "name": "playbook_e60054c5_4bf5_4601_aba7_cd07f5a7615d",
         "type": "playbook",
         "uuid": "e25b4f7a-9b2b-433a-84fd-51497a467475"
@@ -7199,19 +7301,19 @@
       "tags": [],
       "type": "default",
       "uuid": "e60054c5-4bf5-4601-aba7-cd07f5a7615d",
-      "version": 10
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1099ac52_7897_4bf9_805a_700f182cf920\" isExecutable=\"true\" name=\"playbook_1099ac52_7897_4bf9_805a_700f182cf920\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1md932t\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find Policies\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a8259648-09cc-4d7f-a21a-3a6d455646d3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"policies\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1md932t\u003c/incoming\u003e\u003coutgoing\u003eFlow_10lgybi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1md932t\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_target = \\\"EPOAssignedPolicy\\\"\\ninputs.mcafee_epo_query_select = \\\"EPOAssignedPolicy.NodeName EPOAssignedPolicy.PolicyObjectID\\\"\\ninputs.datatable_name = \\\"mcafee_epo_policies\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10lgybi\u003c/incoming\u003e\u003coutgoing\u003eFlow_1pul75y\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10lgybi\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"80335e8e-8d3f-48e3-8fb5-c170d5eb5c1c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1pul75y\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rrbzzi\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1pul75y\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rrbzzi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rrbzzi\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1099ac52_7897_4bf9_805a_700f182cf920\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1md932t\" id=\"Flow_1md932t_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10lgybi\" id=\"Flow_10lgybi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"340\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"340\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1pul75y\" id=\"Flow_1pul75y_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"548\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rrbzzi\" id=\"Flow_0rrbzzi_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"632\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"643\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"643\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"654\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632.042\" y=\"548\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"654\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1099ac52_7897_4bf9_805a_700f182cf920\" isExecutable=\"true\" name=\"playbook_1099ac52_7897_4bf9_805a_700f182cf920\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1md932t\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find Policies\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a8259648-09cc-4d7f-a21a-3a6d455646d3\"\u003e{\"inputs\":{},\"result_name\":\"policies\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1md932t\u003c/incoming\u003e\u003coutgoing\u003eFlow_10lgybi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1md932t\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_target = \\\"EPOAssignedPolicy\\\"\\ninputs.mcafee_epo_query_select = \\\"EPOAssignedPolicy.NodeName EPOAssignedPolicy.PolicyObjectID\\\"\\ninputs.datatable_name = \\\"mcafee_epo_policies\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10lgybi\u003c/incoming\u003e\u003coutgoing\u003eFlow_1pul75y\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10lgybi\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"80335e8e-8d3f-48e3-8fb5-c170d5eb5c1c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1pul75y\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rrbzzi\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1pul75y\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rrbzzi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rrbzzi\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1099ac52_7897_4bf9_805a_700f182cf920\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rrbzzi\" id=\"Flow_0rrbzzi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"632\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"674\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1pul75y\" id=\"Flow_1pul75y_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"548\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10lgybi\" id=\"Flow_10lgybi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1md932t\" id=\"Flow_1md932t_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"548\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"674\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353491829,
+      "create_date": 1706555045851,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_1099ac52_7897_4bf9_805a_700f182cf920",
@@ -7247,32 +7349,32 @@
         "uuid": "8b9b6657-40d9-4c31-9ac8-781f0da034b4"
       },
       "has_logical_errors": false,
-      "id": 199,
+      "id": 15,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862036172,
+      "last_modified_time": 1706556454542,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696359737322,
+          "created_date": 1706555045984,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 225,
+          "export_key": "mcafee epo post process",
+          "id": 31,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696359737335,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556450973,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_find_policies",
           "programmatic_name": "mcafee_epo_find_policies_post_process",
-          "script_text": "results = playbook.functions.results.query\npoliciesResults = playbook.functions.results.policies\nif results.get(\"success\"):\n  for policy in policiesResults.get(\"content\", {}):\n    policyId = int(policy.get(\"objectId\"))\n    table_row = incident.addRow(\"mcafee_epo_policies\")\n    table_row[\"object_name\"] = policy.get(\"objectName\")\n    table_row[\"object_id\"] = policyId\n    table_row[\"type_name\"] = policy.get(\"typeName\")\n    table_row[\"type_id\"] = int(policy.get(\"typeId\"))\n    table_row[\"product_id\"] = policy.get(\"productId\")\n    table_row[\"object_notes\"] = policy.get(\"objectNotes\")\n    systems = \"\"\n    for assigned in results.get(\"content\"):\n      if assigned.get(\"EPOAssignedPolicy.PolicyObjectID\") == policyId:\n        systems = \"{}, {}\".format(systems, assigned.get(\"EPOAssignedPolicy.NodeName\"))\n\n    table_row[\"systems\"] = systems[2:]",
+          "script_text": "results = playbook.functions.results.query\npoliciesResults = playbook.functions.results.policies\nif results.get(\"success\"):\n  for policy in policiesResults.get(\"content\", {}):\n    policyId = int(policy.get(\"objectId\"))\n    table_row = incident.addRow(\"mcafee_epo_policies\")\n    table_row[\"object_name\"] = policy.get(\"objectName\")\n    table_row[\"object_id\"] = policyId\n    table_row[\"type_name\"] = policy.get(\"typeName\")\n    table_row[\"type_id\"] = int(policy.get(\"typeId\"))\n    table_row[\"product_id\"] = policy.get(\"productId\")\n    table_row[\"object_notes\"] = policy.get(\"objectNotes\")\n    systems = \"\"\n    for assigned in results.get(\"content\", {}):\n      if assigned.get(\"EPOAssignedPolicy.PolicyObjectID\") == policyId:\n        systems = \"{}, {}\".format(systems, assigned.get(\"EPOAssignedPolicy.NodeName\"))\n\n    table_row[\"systems\"] = systems[2:]",
           "tags": [],
           "uuid": "80335e8e-8d3f-48e3-8fb5-c170d5eb5c1c"
         }
@@ -7289,7 +7391,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1099ac52-7897-4bf9-805a-700f182cf920",
-        "id": 204,
+        "id": 15,
         "name": "playbook_1099ac52_7897_4bf9_805a_700f182cf920",
         "type": "playbook",
         "uuid": "641bd87e-2b29-47b2-9d38-ab0440414cde"
@@ -7297,19 +7399,19 @@
       "tags": [],
       "type": "default",
       "uuid": "1099ac52-7897-4bf9-805a-700f182cf920",
-      "version": 11
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5\" isExecutable=\"true\" name=\"playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1i4ypr7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Get All Permission sets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4c45547c-5c2f-4711-90c1-7715706605fc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"perm_sets\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i4ypr7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1x9j8dj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1i4ypr7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_permission_sets\\\"\\ninputs.incident_id = incident.id\\ninputs.mcafee_epo_target = \\\"EntitlementView\\\"\\ninputs.mcafee_epo_query_select = \\\"EntitlementView.PrincipalName EntitlementView.GroupName\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1x9j8dj\u003c/incoming\u003e\u003coutgoing\u003eFlow_1d4rxyp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1x9j8dj\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5e79f475-0e2c-4989-9f74-9f40c296701f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1d4rxyp\u003c/incoming\u003e\u003coutgoing\u003eFlow_0gsuz3f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1d4rxyp\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0gsuz3f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0gsuz3f\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gsuz3f\" id=\"Flow_0gsuz3f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"622\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"648\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"648\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"674\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1d4rxyp\" id=\"Flow_1d4rxyp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"538\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1x9j8dj\" id=\"Flow_1x9j8dj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i4ypr7\" id=\"Flow_1i4ypr7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"538\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"814\" y=\"674\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5\" isExecutable=\"true\" name=\"playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1i4ypr7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Get All Permission sets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4c45547c-5c2f-4711-90c1-7715706605fc\"\u003e{\"inputs\":{},\"result_name\":\"perm_sets\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i4ypr7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1x9j8dj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1i4ypr7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_permission_sets\\\"\\ninputs.incident_id = incident.id\\ninputs.mcafee_epo_target = \\\"EntitlementView\\\"\\ninputs.mcafee_epo_query_select = \\\"EntitlementView.PrincipalName EntitlementView.GroupName\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1x9j8dj\u003c/incoming\u003e\u003coutgoing\u003eFlow_1d4rxyp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1x9j8dj\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5e79f475-0e2c-4989-9f74-9f40c296701f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1d4rxyp\u003c/incoming\u003e\u003coutgoing\u003eFlow_0gsuz3f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1d4rxyp\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0gsuz3f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0gsuz3f\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gsuz3f\" id=\"Flow_0gsuz3f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"622\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"694\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1d4rxyp\" id=\"Flow_1d4rxyp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"538\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1x9j8dj\" id=\"Flow_1x9j8dj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i4ypr7\" id=\"Flow_1i4ypr7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"538\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"694\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353519171,
+      "create_date": 1706555046575,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5",
@@ -7345,32 +7447,32 @@
         "uuid": "60e1bbf0-a3e3-4e57-b19f-2065673444fe"
       },
       "has_logical_errors": false,
-      "id": 200,
+      "id": 16,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696863066131,
+      "last_modified_time": 1706556497421,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696359873237,
+          "created_date": 1706555046724,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 226,
+          "export_key": "mcafee epo post process",
+          "id": 32,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696863060539,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556493700,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_get_all_permission_sets",
           "programmatic_name": "mcafee_epo_get_all_permission_sets_post_process",
-          "script_text": "results = playbook.functions.results.query\nperm_sets = playbook.functions.results.perm_sets\nif results.get(\"success\"):\n  for permset in perm_sets.get(\"content\"):\n    permsetName = permset.get(\"name\")\n    table_row = incident.addRow(\"mcafee_epo_permission_sets\")\n    table_row[\"permission_set_name\"] = permsetName\n    users = \"\"\n    for perm in results.get(\"content\"):\n      user = perm.get(\"EntitlementView.PrincipalName\")\n      permGroup = perm.get(\"EntitlementView.GroupName\")\n      if user and permGroup and permsetName.lower() == permGroup.lower() and user not in users:\n        users = \"{}, {}\".format(users, user)\n    table_row[\"users\"] = users[2:]",
+          "script_text": "results = playbook.functions.results.query\nperm_sets = playbook.functions.results.perm_sets\nif results.get(\"success\"):\n  for permset in perm_sets.get(\"content\", {}):\n    permsetName = permset.get(\"name\")\n    table_row = incident.addRow(\"mcafee_epo_permission_sets\")\n    table_row[\"permission_set_name\"] = permsetName\n    users = \"\"\n    for perm in results.get(\"content\", {}):\n      user = perm.get(\"EntitlementView.PrincipalName\")\n      permGroup = perm.get(\"EntitlementView.GroupName\")\n      if user and permGroup and permsetName.lower() == permGroup.lower() and user not in users:\n        users = \"{}, {}\".format(users, user)\n    table_row[\"users\"] = users[2:]",
           "tags": [],
           "uuid": "5e79f475-0e2c-4989-9f74-9f40c296701f"
         }
@@ -7387,7 +7489,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_0c407aa1-187f-4a8b-8656-74a9b29bebd5",
-        "id": 205,
+        "id": 16,
         "name": "playbook_0c407aa1_187f_4a8b_8656_74a9b29bebd5",
         "type": "playbook",
         "uuid": "69953b8c-8eb9-47e4-920a-14e1dae53f3a"
@@ -7395,19 +7497,19 @@
       "tags": [],
       "type": "default",
       "uuid": "0c407aa1-187f-4a8b-8656-74a9b29bebd5",
-      "version": 10
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_9ba02015_c550_4ee5_b995_c5061f80c679\" isExecutable=\"true\" name=\"playbook_9ba02015_c550_4ee5_b995_c5061f80c679\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_11i8eje\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_target = \\\"EPOLeafNode\\\"\\ninputs.datatable_name = \\\"mcafee_epo_systems_dt\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11i8eje\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rhdblo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_11i8eje\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9b752428-e3d9-4f08-974a-1a399ddd386d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rhdblo\u003c/incoming\u003e\u003coutgoing\u003eFlow_10z98nd\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0rhdblo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_10z98nd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_10z98nd\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_9ba02015_c550_4ee5_b995_c5061f80c679\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11i8eje\" id=\"Flow_11i8eje_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rhdblo\" id=\"Flow_0rhdblo_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10z98nd\" id=\"Flow_10z98nd_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602.042\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_9ba02015_c550_4ee5_b995_c5061f80c679\" isExecutable=\"true\" name=\"playbook_9ba02015_c550_4ee5_b995_c5061f80c679\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_11i8eje\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_target = \\\"EPOLeafNode\\\"\\ninputs.datatable_name = \\\"mcafee_epo_systems_dt\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11i8eje\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rhdblo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_11i8eje\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9b752428-e3d9-4f08-974a-1a399ddd386d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rhdblo\u003c/incoming\u003e\u003coutgoing\u003eFlow_10z98nd\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0rhdblo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_10z98nd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_10z98nd\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_9ba02015_c550_4ee5_b995_c5061f80c679\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10z98nd\" id=\"Flow_10z98nd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rhdblo\" id=\"Flow_0rhdblo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11i8eje\" id=\"Flow_11i8eje_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353541959,
+      "create_date": 1706555047204,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_9ba02015_c550_4ee5_b995_c5061f80c679",
@@ -7443,28 +7545,28 @@
         "uuid": "9d9f0b3d-5417-4616-9904-64928f3a2a6c"
       },
       "has_logical_errors": false,
-      "id": 201,
+      "id": 17,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862037147,
+      "last_modified_time": 1706556533771,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696359977876,
+          "created_date": 1706555047327,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 227,
+          "export_key": "mcafee epo post process",
+          "id": 33,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696359977891,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556528142,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_get_all_systems",
           "programmatic_name": "mcafee_epo_get_all_systems_post_process",
@@ -7485,7 +7587,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_9ba02015-c550-4ee5-b995-c5061f80c679",
-        "id": 206,
+        "id": 17,
         "name": "playbook_9ba02015_c550_4ee5_b995_c5061f80c679",
         "type": "playbook",
         "uuid": "5f645865-6198-43fc-ab2b-ab08d47f668e"
@@ -7493,19 +7595,19 @@
       "tags": [],
       "type": "default",
       "uuid": "9ba02015-c550-4ee5-b995-c5061f80c679",
-      "version": 9
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d\" isExecutable=\"true\" name=\"playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1p6sx9w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Get All Users\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6b9906aa-5409-44cb-b88b-192c49598d35\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_users\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"users\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1p6sx9w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0hbh9bv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1p6sx9w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"79eb5bb1-4c62-491f-b068-20151768a302\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0hbh9bv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1n6kmad\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0hbh9bv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1n6kmad\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1n6kmad\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1p6sx9w\" id=\"Flow_1p6sx9w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hbh9bv\" id=\"Flow_0hbh9bv_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1n6kmad\" id=\"Flow_1n6kmad_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.042\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d\" isExecutable=\"true\" name=\"playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1p6sx9w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Get All Users\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6b9906aa-5409-44cb-b88b-192c49598d35\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_users\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"users\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1p6sx9w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0hbh9bv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1p6sx9w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"79eb5bb1-4c62-491f-b068-20151768a302\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0hbh9bv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1n6kmad\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0hbh9bv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1n6kmad\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1n6kmad\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1n6kmad\" id=\"Flow_1n6kmad_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hbh9bv\" id=\"Flow_0hbh9bv_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1p6sx9w\" id=\"Flow_1p6sx9w_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.042\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"616\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353568819,
+      "create_date": 1706555047780,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d",
@@ -7541,32 +7643,32 @@
         "uuid": "68242072-8483-49c4-b9a5-8e7040d10fb5"
       },
       "has_logical_errors": false,
-      "id": 202,
+      "id": 18,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862037663,
+      "last_modified_time": 1706556587297,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696360061535,
+          "created_date": 1706555047897,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 228,
+          "export_key": "mcafee epo post process",
+          "id": 34,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696360061549,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556582118,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_get_all_users",
           "programmatic_name": "mcafee_epo_get_all_users_post_process",
-          "script_text": "results = playbook.functions.results.users\nif results.get(\"success\"):\n  for user in results[\"content\"]:\n    table_row = incident.addRow(\"mcafee_epo_users\")\n    table_row[\"user_name\"] = user.get(\"name\")\n    table_row[\"full_name\"] = user.get(\"fullName\")\n    table_row[\"email\"] = user.get(\"email\")\n    table_row[\"phone_number\"] = user.get(\"phoneNumber\")\n    table_row[\"disabled\"] = bool(user.get(\"disabled\"))\n    table_row[\"admin\"] = bool(user.get(\"admin\"))\n    table_row[\"notes\"] = user.get(\"notes\")\n    table_row[\"allowed_ips\"] = user.get(\"allowedIPs\")\n    table_row[\"user_deleted\"] = False",
+          "script_text": "results = playbook.functions.results.users\nif results.get(\"success\"):\n  for user in results.get(\"content\", {}):\n    table_row = incident.addRow(\"mcafee_epo_users\")\n    table_row[\"user_name\"] = user.get(\"name\")\n    table_row[\"full_name\"] = user.get(\"fullName\")\n    table_row[\"email\"] = user.get(\"email\")\n    table_row[\"phone_number\"] = user.get(\"phoneNumber\")\n    table_row[\"disabled\"] = bool(user.get(\"disabled\"))\n    table_row[\"admin\"] = bool(user.get(\"admin\"))\n    table_row[\"notes\"] = user.get(\"notes\")\n    table_row[\"allowed_ips\"] = user.get(\"allowedIPs\")\n    table_row[\"user_deleted\"] = False",
           "tags": [],
           "uuid": "79eb5bb1-4c62-491f-b068-20151768a302"
         }
@@ -7583,7 +7685,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d3407fab-f6d1-46a6-bd44-868c85f82f4d",
-        "id": 207,
+        "id": 18,
         "name": "playbook_d3407fab_f6d1_46a6_bd44_868c85f82f4d",
         "type": "playbook",
         "uuid": "625aca18-75bd-4b65-8e00-dbd927664850"
@@ -7591,19 +7693,19 @@
       "tags": [],
       "type": "default",
       "uuid": "d3407fab-f6d1-46a6-bd44-868c85f82f4d",
-      "version": 9
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ef702d91_95ef_452d_b50c_eb09641fb54e\" isExecutable=\"true\" name=\"playbook_ef702d91_95ef_452d_b50c_eb09641fb54e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0uiupe5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find a System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"system\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0uiupe5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1886fv8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0uiupe5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d5982415-e220-48ac-8a51-b5953b62738a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1886fv8\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sleuny\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1886fv8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0sleuny\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0sleuny\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ef702d91_95ef_452d_b50c_eb09641fb54e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0uiupe5\" id=\"Flow_0uiupe5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1886fv8\" id=\"Flow_1886fv8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"320\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"320\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sleuny\" id=\"Flow_0sleuny_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.2\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ef702d91_95ef_452d_b50c_eb09641fb54e\" isExecutable=\"true\" name=\"playbook_ef702d91_95ef_452d_b50c_eb09641fb54e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0uiupe5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find a System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"system\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0uiupe5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1886fv8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0uiupe5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d5982415-e220-48ac-8a51-b5953b62738a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1886fv8\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sleuny\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1886fv8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0sleuny\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0sleuny\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ef702d91_95ef_452d_b50c_eb09641fb54e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sleuny\" id=\"Flow_0sleuny_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1886fv8\" id=\"Flow_1886fv8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0uiupe5\" id=\"Flow_0uiupe5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353602997,
+      "create_date": 1706555048320,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_ef702d91_95ef_452d_b50c_eb09641fb54e",
@@ -7639,32 +7741,32 @@
         "uuid": "48f2af3a-ebf9-463a-a674-48b25a66bfcb"
       },
       "has_logical_errors": false,
-      "id": 203,
+      "id": 19,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862038287,
+      "last_modified_time": 1706556687512,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696360287802,
+          "created_date": 1706555048443,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 230,
+          "export_key": "mcafee epo post process",
+          "id": 35,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696360287859,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556684876,
+          "name": "mcafee epo post process",
           "object_type": "artifact",
           "playbook_handle": "mcafee_epo_get_system_info",
           "programmatic_name": "mcafee_epo_get_system_info_post_process",
-          "script_text": "results = playbook.functions.results.system\nif not results.get(\"success\"):\n  info = \"ePO system not found\"\nelse:\n  info = \"ePO system info\\n\"\n  for system in results.content:\n    for setting in system:\n      info = \"{}\\n{}: {}\".format(info, setting, system.get(\"setting\"))\n\nif artifact.description:\n  artifact.description = \"{}\\n\\n{}\".format(artifact.description.content, info)\nelse:\n  artifact.description = info\n\nincident.addNote(info)",
+          "script_text": "results = playbook.functions.results.system\nif not results.get(\"success\"):\n  info = \"ePO system not found\"\nelse:\n  info = \"ePO system info\\n\"\n  for system in results.get(\"content\", {}):\n    for setting in system:\n      info = \"{}\\n{}: {}\".format(info, setting, system.get(\"setting\"))\n\nif artifact.description:\n  artifact.description = \"{}\\n\\n{}\".format(artifact.description.content, info)\nelse:\n  artifact.description = info\n\nincident.addNote(info)",
           "tags": [],
           "uuid": "d5982415-e220-48ac-8a51-b5953b62738a"
         }
@@ -7694,7 +7796,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_ef702d91-95ef-452d-b50c-eb09641fb54e",
-        "id": 208,
+        "id": 19,
         "name": "playbook_ef702d91_95ef_452d_b50c_eb09641fb54e",
         "type": "playbook",
         "uuid": "743eab2f-f72b-4052-ae80-08a58f0952fe"
@@ -7702,19 +7804,19 @@
       "tags": [],
       "type": "default",
       "uuid": "ef702d91-95ef-452d-b50c-eb09641fb54e",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec\" isExecutable=\"true\" name=\"playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_148z4mz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find a System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = getattr(playbook.inputs, \\\"epo_system\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"system\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_148z4mz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0c9j1o7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_148z4mz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"04a6ff75-c9bc-4091-a8d2-66ea686bc46d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c9j1o7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ay5zho\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0c9j1o7\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ay5zho\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ay5zho\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ay5zho\" id=\"Flow_1ay5zho_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"453\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"453\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c9j1o7\" id=\"Flow_0c9j1o7_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"315\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"315\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_148z4mz\" id=\"Flow_148z4mz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.0419999999999\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec\" isExecutable=\"true\" name=\"playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_148z4mz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Find a System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_system\\\", None):\\n  inputs.mcafee_epo_systems = getattr(playbook.inputs, \\\"epo_system\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"system\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_148z4mz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0c9j1o7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_148z4mz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"04a6ff75-c9bc-4091-a8d2-66ea686bc46d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c9j1o7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ay5zho\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0c9j1o7\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ay5zho\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ay5zho\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ay5zho\" id=\"Flow_1ay5zho_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c9j1o7\" id=\"Flow_0c9j1o7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_148z4mz\" id=\"Flow_148z4mz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353670267,
+      "create_date": 1706555048981,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec",
@@ -7740,7 +7842,7 @@
             "deprecated": false,
             "export_key": "playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec/epo_system",
             "hide_notification": false,
-            "id": 5799,
+            "id": 4677,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -7755,8 +7857,8 @@
             "tags": [],
             "templates": [],
             "text": "ePO System",
-            "tooltip": "Comma separated list of systems properties or one system ",
-            "type_id": 1252,
+            "tooltip": "Comma separated list of systems properties or one system",
+            "type_id": 1028,
             "uuid": "6008e703-ea2a-4dad-8e5f-81961e1b424d",
             "values": []
           }
@@ -7781,28 +7883,28 @@
         "uuid": "7b748dd7-4015-402f-8b05-e5e02c3c8bfb"
       },
       "has_logical_errors": false,
-      "id": 204,
+      "id": 20,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696863937147,
+      "last_modified_time": 1706556642417,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696360181438,
+          "created_date": 1706555049148,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 229,
+          "export_key": "mcafee epo post process",
+          "id": 36,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696864040765,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556639565,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_get_system_info_from_property",
           "programmatic_name": "mcafee_epo_get_system_info_from_property_post_process",
@@ -7832,7 +7934,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_62aa5bc9-2fd1-4c6c-a250-b024b765d2ec",
-        "id": 209,
+        "id": 20,
         "name": "playbook_62aa5bc9_2fd1_4c6c_a250_b024b765d2ec",
         "type": "playbook",
         "uuid": "6145a4f8-e406-4ec6-9923-eba648f4f14f"
@@ -7840,19 +7942,19 @@
       "tags": [],
       "type": "default",
       "uuid": "62aa5bc9-2fd1-4c6c-a250-b024b765d2ec",
-      "version": 12
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087\" isExecutable=\"true\" name=\"playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0yxqhvi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO List Issues\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e271a8f5-9886-4c2a-8e05-cbca9ed1c632\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_issues\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"issues\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0yxqhvi\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ijrchd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0yxqhvi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b651755f-740c-4c7b-b3ce-86ce8b94dda7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ijrchd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1isdbas\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ijrchd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1isdbas\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1isdbas\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yxqhvi\" id=\"Flow_0yxqhvi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ijrchd\" id=\"Flow_0ijrchd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1isdbas\" id=\"Flow_1isdbas_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"483\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"483\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.0419999999999\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087\" isExecutable=\"true\" name=\"playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0yxqhvi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO List Issues\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e271a8f5-9886-4c2a-8e05-cbca9ed1c632\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_issues\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"issues\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0yxqhvi\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ijrchd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0yxqhvi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b651755f-740c-4c7b-b3ce-86ce8b94dda7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ijrchd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1isdbas\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ijrchd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1isdbas\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1isdbas\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1isdbas\" id=\"Flow_1isdbas_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ijrchd\" id=\"Flow_0ijrchd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yxqhvi\" id=\"Flow_0yxqhvi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.0419999999999\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353781930,
+      "create_date": 1706555049624,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087",
@@ -7888,32 +7990,32 @@
         "uuid": "1fba6fdd-aac6-481e-8083-3df3c55758d0"
       },
       "has_logical_errors": false,
-      "id": 205,
+      "id": 21,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862039269,
+      "last_modified_time": 1706556726840,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696360393136,
+          "created_date": 1706555049754,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 231,
+          "export_key": "mcafee epo post process",
+          "id": 37,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696360393161,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556723056,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_list_issues",
           "programmatic_name": "mcafee_epo_list_issues_post_process",
-          "script_text": "results = playbook.functions.results.issues\nif results.get(\"success\"):\n  for c in results.get(\"content\"):\n    row = incident.addRow(\"mcafee_epo_issues\")\n    row[\"issue_name\"] = c.get(\"name\")\n    row[\"issue_id\"] = int(c.get(\"id\"))\n    row[\"severity\"] = c.get(\"severity\")\n    row[\"issue_due_date\"] = c.get(\"dueDate\")\n    row[\"issue_description\"] = c.get(\"description\")\n    row[\"ticket_server_name\"] = c.get(\"ticketServerName\")\n    row[\"priority\"] = c.get(\"priority\")\n    row[\"type\"] = c.get(\"type\")\n    row[\"resolution\"] = c.get(\"resolution\")\n    row[\"assignee_name\"] = c.get(\"assigneeName\")\n    row[\"issue_state\"] = c.get(\"state\")\n    row[\"ticket_id\"] = int(c.get(\"ticketId\")) if c.get(\"ticketId\") else None\n    row[\"issue_deleted\"] = False",
+          "script_text": "results = playbook.functions.results.issues\nif results.get(\"success\"):\n  for c in results.get(\"content\", {}):\n    row = incident.addRow(\"mcafee_epo_issues\")\n    row[\"issue_name\"] = c.get(\"name\")\n    row[\"issue_id\"] = int(c.get(\"id\"))\n    row[\"severity\"] = c.get(\"severity\")\n    row[\"issue_due_date\"] = c.get(\"dueDate\")\n    row[\"issue_description\"] = c.get(\"description\")\n    row[\"ticket_server_name\"] = c.get(\"ticketServerName\")\n    row[\"priority\"] = c.get(\"priority\")\n    row[\"type\"] = c.get(\"type\")\n    row[\"resolution\"] = c.get(\"resolution\")\n    row[\"assignee_name\"] = c.get(\"assigneeName\")\n    row[\"issue_state\"] = c.get(\"state\")\n    row[\"ticket_id\"] = int(c.get(\"ticketId\")) if c.get(\"ticketId\") else None\n    row[\"issue_deleted\"] = False",
           "tags": [],
           "uuid": "b651755f-740c-4c7b-b3ce-86ce8b94dda7"
         }
@@ -7930,7 +8032,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a064c0bb-0bfc-4b70-8929-528a4fdac087",
-        "id": 210,
+        "id": 21,
         "name": "playbook_a064c0bb_0bfc_4b70_8929_528a4fdac087",
         "type": "playbook",
         "uuid": "f149e3de-8723-4c49-95e2-4a532692f2f7"
@@ -7938,19 +8040,19 @@
       "tags": [],
       "type": "default",
       "uuid": "a064c0bb-0bfc-4b70-8929-528a4fdac087",
-      "version": 9
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5\" isExecutable=\"true\" name=\"playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1e6zcu4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO List Tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b9d82be9-83b0-4b88-90ca-7e0d2fb09dc7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_tags\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"tags\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1e6zcu4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1w912p0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1e6zcu4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6c63c4ab-7f8b-4d92-95eb-de07ba371bfd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1w912p0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1t2xci8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1w912p0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1t2xci8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1t2xci8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1e6zcu4\" id=\"Flow_1e6zcu4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"163\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"163\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w912p0\" id=\"Flow_1w912p0_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"418\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t2xci8\" id=\"Flow_1t2xci8_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"502\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"528\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"528\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632.042\" y=\"418\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5\" isExecutable=\"true\" name=\"playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1e6zcu4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO List Tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b9d82be9-83b0-4b88-90ca-7e0d2fb09dc7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_tags\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"tags\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1e6zcu4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1w912p0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1e6zcu4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6c63c4ab-7f8b-4d92-95eb-de07ba371bfd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1w912p0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1t2xci8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1w912p0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1t2xci8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1t2xci8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t2xci8\" id=\"Flow_1t2xci8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"502\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w912p0\" id=\"Flow_1w912p0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"418\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1e6zcu4\" id=\"Flow_1e6zcu4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"418\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353807814,
+      "create_date": 1706555050199,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5",
@@ -7986,32 +8088,32 @@
         "uuid": "bf81a18f-6d5b-4678-9c61-571459226ba5"
       },
       "has_logical_errors": false,
-      "id": 206,
+      "id": 22,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862039726,
+      "last_modified_time": 1706556794315,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696360572631,
+          "created_date": 1706555050324,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 232,
+          "export_key": "mcafee epo post process",
+          "id": 38,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696360572644,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556789614,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_list_tags",
           "programmatic_name": "mcafee_epo_list_tags_post_process",
-          "script_text": "results = playbook.functions.results.tags\nif results.get(\"success\"):\n  for tag in sorted(results.content, key = lambda i: i[\u0027tagName\u0027].lower()):\n    row = incident.addRow(\"mcafee_epo_tags\")\n    row[\u0027epo_id\u0027] = tag[\u0027tagId\u0027]\n    row[\u0027epo_tag\u0027] = tag[\u0027tagName\u0027]\n    row[\u0027epo_notes\u0027] = tag[\u0027tagNotes\u0027]",
+          "script_text": "results = playbook.functions.results.tags\nif results.get(\"success\"):\n  for tag in sorted(results.get(\"content\", {}), key = lambda i: i[\u0027tagName\u0027].lower()):\n    row = incident.addRow(\"mcafee_epo_tags\")\n    row[\u0027epo_id\u0027] = tag.get(\u0027tagId\u0027)\n    row[\u0027epo_tag\u0027] = tag.get(\u0027tagName\u0027)\n    row[\u0027epo_notes\u0027] = tag.get(\u0027tagNotes\u0027)",
           "tags": [],
           "uuid": "6c63c4ab-7f8b-4d92-95eb-de07ba371bfd"
         }
@@ -8028,7 +8130,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_18625df3-65b7-4f26-8cb7-6da3e9e550c5",
-        "id": 211,
+        "id": 22,
         "name": "playbook_18625df3_65b7_4f26_8cb7_6da3e9e550c5",
         "type": "playbook",
         "uuid": "b44659bf-7c02-4a0e-8b0e-dea665a30351"
@@ -8036,19 +8138,19 @@
       "tags": [],
       "type": "default",
       "uuid": "18625df3-65b7-4f26-8cb7-6da3e9e550c5",
-      "version": 9
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661\" isExecutable=\"true\" name=\"playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0eng97s\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Remove Permission sets from user\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"85f46ad5-4275-4478-a0f9-1789729d39e5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_permsetname = row.permission_set_name\\ninputs.mcafee_epo_username = getattr(playbook.inputs, \\\"epo_username\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"remove_perms\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eng97s\u003c/incoming\u003e\u003coutgoing\u003eFlow_02ppxym\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0eng97s\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"340cf108-43b0-4f79-8523-c59fbdfcc2cb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02ppxym\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kox60f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_02ppxym\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kox60f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1kox60f\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kox60f\" id=\"Flow_1kox60f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02ppxym\" id=\"Flow_02ppxym_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"290\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"290\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eng97s\" id=\"Flow_0eng97s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661\" isExecutable=\"true\" name=\"playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0eng97s\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Remove Permission sets from user\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"85f46ad5-4275-4478-a0f9-1789729d39e5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_permsetname = row.permission_set_name\\nif getattr(playbook.inputs, \\\"epo_username\\\", None):\\n  inputs.mcafee_epo_username = getattr(playbook.inputs, \\\"epo_username\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"remove_perms\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eng97s\u003c/incoming\u003e\u003coutgoing\u003eFlow_02ppxym\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0eng97s\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"340cf108-43b0-4f79-8523-c59fbdfcc2cb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02ppxym\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kox60f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_02ppxym\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kox60f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1kox60f\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kox60f\" id=\"Flow_1kox60f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02ppxym\" id=\"Flow_02ppxym_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eng97s\" id=\"Flow_0eng97s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353840784,
+      "create_date": 1706555050789,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661",
@@ -8074,7 +8176,7 @@
             "deprecated": false,
             "export_key": "playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661/epo_username",
             "hide_notification": false,
-            "id": 5800,
+            "id": 4678,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8090,7 +8192,7 @@
             "templates": [],
             "text": "ePO Username",
             "tooltip": "User name of an ePO user",
-            "type_id": 1255,
+            "type_id": 1031,
             "uuid": "3f5fcb7e-45ca-4c03-a6af-0c744153128f",
             "values": []
           }
@@ -8115,28 +8217,28 @@
         "uuid": "96fea631-58d4-49cc-8481-5d4ee8465e15"
       },
       "has_logical_errors": false,
-      "id": 207,
+      "id": 23,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696871946107,
+      "last_modified_time": 1706556844991,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696360726802,
+          "created_date": 1706555050957,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 233,
+          "export_key": "mcafee epo post process",
+          "id": 39,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696871944160,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556842466,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_permission_sets",
           "playbook_handle": "mcafee_epo_remove_permission_set_from_user",
           "programmatic_name": "mcafee_epo_remove_permission_set_from_user_post_process",
@@ -8166,7 +8268,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_ae1f573a-6b10-4f7d-bd2f-24caa1c57661",
-        "id": 212,
+        "id": 23,
         "name": "playbook_ae1f573a_6b10_4f7d_bd2f_24caa1c57661",
         "type": "playbook",
         "uuid": "836f3529-5161-4bae-8ca5-4a8b74dad29a"
@@ -8174,19 +8276,19 @@
       "tags": [],
       "type": "default",
       "uuid": "ae1f573a-6b10-4f7d-bd2f-24caa1c57661",
-      "version": 11
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7d925708_1a18_4695_bb12_03cfae0c7263\" isExecutable=\"true\" name=\"playbook_7d925708_1a18_4695_bb12_03cfae0c7263\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15w0xbd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Remove Tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1cb1fd7a-0eeb-4230-9edb-c8f6f47b1ae9\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\ninputs.mcafee_epo_tag = str(getattr(playbook.inputs, \\\"list_of_tags\\\"))\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"tags\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15w0xbd\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w6h3wm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15w0xbd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6c29f3b6-a626-4b70-9667-a6c87c44095e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0w6h3wm\u003c/incoming\u003e\u003coutgoing\u003eFlow_1arafgk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0w6h3wm\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1arafgk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1arafgk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7d925708_1a18_4695_bb12_03cfae0c7263\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15w0xbd\" id=\"Flow_15w0xbd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w6h3wm\" id=\"Flow_0w6h3wm_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"300\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"300\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1arafgk\" id=\"Flow_1arafgk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"448\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"448\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.2\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7d925708_1a18_4695_bb12_03cfae0c7263\" isExecutable=\"true\" name=\"playbook_7d925708_1a18_4695_bb12_03cfae0c7263\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15w0xbd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Remove Tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1cb1fd7a-0eeb-4230-9edb-c8f6f47b1ae9\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\nif getattr(playbook.inputs, \\\"list_of_tags\\\", None):\\n  inputs.mcafee_epo_tag = str(getattr(playbook.inputs, \\\"list_of_tags\\\"))\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"tags\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15w0xbd\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w6h3wm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15w0xbd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6c29f3b6-a626-4b70-9667-a6c87c44095e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0w6h3wm\u003c/incoming\u003e\u003coutgoing\u003eFlow_1arafgk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0w6h3wm\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1arafgk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1arafgk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7d925708_1a18_4695_bb12_03cfae0c7263\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1arafgk\" id=\"Flow_1arafgk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w6h3wm\" id=\"Flow_0w6h3wm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15w0xbd\" id=\"Flow_15w0xbd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.2\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696353909059,
+      "create_date": 1706555051454,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_7d925708_1a18_4695_bb12_03cfae0c7263",
@@ -8212,7 +8314,7 @@
             "deprecated": false,
             "export_key": "playbook_7d925708_1a18_4695_bb12_03cfae0c7263/list_of_tags",
             "hide_notification": false,
-            "id": 5801,
+            "id": 4679,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8228,7 +8330,7 @@
             "templates": [],
             "text": "List of tags",
             "tooltip": "Comma separated list of tags to remove",
-            "type_id": 1256,
+            "type_id": 1032,
             "uuid": "c7634c50-451a-4400-a5b9-348e13961825",
             "values": []
           }
@@ -8253,32 +8355,32 @@
         "uuid": "f8370241-ec3e-4e92-b88c-ae741c87a4d1"
       },
       "has_logical_errors": false,
-      "id": 208,
+      "id": 24,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862040833,
+      "last_modified_time": 1706556902242,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696361117587,
+          "created_date": 1706555051628,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 234,
+          "export_key": "mcafee epo post process",
+          "id": 40,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696361117642,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556898685,
+          "name": "mcafee epo post process",
           "object_type": "artifact",
           "playbook_handle": "mcafee_epo_remove_tags",
           "programmatic_name": "mcafee_epo_remove_tags_post_process",
-          "script_text": "results = playbook.functions.results.tags\nif not results.get(\"success\"):\n  note = u\"ePO system not found or tag not applied: {}\".format(results.inputs.get(\u0027mcafee_epo_tag\u0027))\nelse:\n  note = u\"ePO tag(s) removed: {}\".format(results.inputs.get(\u0027mcafee_epo_tag\u0027))\n\nif artifact.description:\n  artifact.description = u\"{}\\n\\n{}\".format(artifact.description.content, note)\nelse:\n  artifact.description = note",
+          "script_text": "results = playbook.functions.results.tags\nif not results.get(\"success\"):\n  note = \"ePO system not found or tag not applied: {}\".format(results.inputs.get(\u0027mcafee_epo_tag\u0027))\nelse:\n  note = \"ePO tag(s) removed: {}\".format(results.inputs.get(\u0027mcafee_epo_tag\u0027))\n\nif artifact.description:\n  artifact.description = u\"{}\\n\\n{}\".format(artifact.description.content, note)\nelse:\n  artifact.description = note",
           "tags": [],
           "uuid": "6c29f3b6-a626-4b70-9667-a6c87c44095e"
         }
@@ -8317,7 +8419,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_7d925708-1a18-4695-bb12-03cfae0c7263",
-        "id": 213,
+        "id": 24,
         "name": "playbook_7d925708_1a18_4695_bb12_03cfae0c7263",
         "type": "playbook",
         "uuid": "71f923d3-dd56-4609-b5d6-cc8e90bd88be"
@@ -8325,19 +8427,19 @@
       "tags": [],
       "type": "default",
       "uuid": "7d925708-1a18-4695-bb12-03cfae0c7263",
-      "version": 12
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5cf5fef9_939a_443e_be27_2f6fa045af96\" isExecutable=\"true\" name=\"playbook_5cf5fef9_939a_443e_be27_2f6fa045af96\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ijhtin\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Remove User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"83c00069-064a-4f1b-b8e5-043d36cb79de\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_username = row.user_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"remove_user\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ijhtin\u003c/incoming\u003e\u003coutgoing\u003eFlow_0u31xkp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ijhtin\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"66a2c8ba-cae8-401e-9f67-56ad7c16d368\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0u31xkp\u003c/incoming\u003e\u003coutgoing\u003eFlow_1bb8esc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0u31xkp\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1bb8esc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1bb8esc\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5cf5fef9_939a_443e_be27_2f6fa045af96\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ijhtin\" id=\"Flow_0ijhtin_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0u31xkp\" id=\"Flow_0u31xkp_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bb8esc\" id=\"Flow_1bb8esc_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642.325\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5cf5fef9_939a_443e_be27_2f6fa045af96\" isExecutable=\"true\" name=\"playbook_5cf5fef9_939a_443e_be27_2f6fa045af96\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ijhtin\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Remove User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"83c00069-064a-4f1b-b8e5-043d36cb79de\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_username = row.user_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"remove_user\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ijhtin\u003c/incoming\u003e\u003coutgoing\u003eFlow_0u31xkp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ijhtin\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"66a2c8ba-cae8-401e-9f67-56ad7c16d368\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0u31xkp\u003c/incoming\u003e\u003coutgoing\u003eFlow_1bb8esc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0u31xkp\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1bb8esc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1bb8esc\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5cf5fef9_939a_443e_be27_2f6fa045af96\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bb8esc\" id=\"Flow_1bb8esc_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0u31xkp\" id=\"Flow_0u31xkp_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ijhtin\" id=\"Flow_0ijhtin_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642.325\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696354075588,
+      "create_date": 1706555052219,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_5cf5fef9_939a_443e_be27_2f6fa045af96",
@@ -8373,28 +8475,28 @@
         "uuid": "6c2d4d5b-0608-44cf-b3d0-fc425ac78f70"
       },
       "has_logical_errors": false,
-      "id": 209,
+      "id": 25,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862041364,
+      "last_modified_time": 1706556928426,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696361254870,
+          "created_date": 1706555052360,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 235,
+          "export_key": "mcafee epo post process",
+          "id": 41,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696361254883,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556926200,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_users",
           "playbook_handle": "mcafee_epo_remove_user",
           "programmatic_name": "mcafee_epo_remove_user_post_process",
@@ -8415,7 +8517,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_5cf5fef9-939a-443e-be27-2f6fa045af96",
-        "id": 214,
+        "id": 25,
         "name": "playbook_5cf5fef9_939a_443e_be27_2f6fa045af96",
         "type": "playbook",
         "uuid": "f139c83b-c259-4477-bec4-2fc6e196a6ed"
@@ -8423,19 +8525,19 @@
       "tags": [],
       "type": "default",
       "uuid": "5cf5fef9-939a-443e-be27-2f6fa045af96",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529\" isExecutable=\"true\" name=\"playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rafwf6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Run Client Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c87c8e6f-71bf-40e4-af85-08d716ed25a1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = getattr(playbook.inputs, \\\"epo_system_names_or_ids\\\")\\ninputs.mcafee_epo_product_id = row.product_id\\ninputs.mcafee_epo_task_id = int(row.task_id)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"run_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rafwf6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wuf7qy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rafwf6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d686c7eb-9611-402e-b200-e583799b00d0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wuf7qy\u003c/incoming\u003e\u003coutgoing\u003eFlow_104l50x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wuf7qy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_104l50x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_104l50x\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rafwf6\" id=\"Flow_0rafwf6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wuf7qy\" id=\"Flow_1wuf7qy_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_104l50x\" id=\"Flow_104l50x_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"493\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"493\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602.325\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529\" isExecutable=\"true\" name=\"playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rafwf6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Run Client Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c87c8e6f-71bf-40e4-af85-08d716ed25a1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_system_names_or_ids\\\", None):\\n  inputs.mcafee_epo_system_name_or_id = getattr(playbook.inputs, \\\"epo_system_names_or_ids\\\")\\ninputs.mcafee_epo_product_id = row.product_id\\ninputs.mcafee_epo_task_id = int(row.task_id)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"run_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rafwf6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wuf7qy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rafwf6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d686c7eb-9611-402e-b200-e583799b00d0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wuf7qy\u003c/incoming\u003e\u003coutgoing\u003eFlow_104l50x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wuf7qy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_104l50x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_104l50x\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_104l50x\" id=\"Flow_104l50x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wuf7qy\" id=\"Flow_1wuf7qy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rafwf6\" id=\"Flow_0rafwf6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696354106851,
+      "create_date": 1706555052867,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529",
@@ -8461,7 +8563,7 @@
             "deprecated": false,
             "export_key": "playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529/epo_system_names_or_ids",
             "hide_notification": false,
-            "id": 5802,
+            "id": 4680,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8477,7 +8579,7 @@
             "templates": [],
             "text": "ePO System Names or IDs",
             "tooltip": "Comma separated list of system names or IDs",
-            "type_id": 1258,
+            "type_id": 1034,
             "uuid": "0aa09e4d-bb6b-44dc-8316-049f380de222",
             "values": []
           }
@@ -8502,28 +8604,28 @@
         "uuid": "4f853d12-0163-44d6-bfdb-f9d16c8cdf63"
       },
       "has_logical_errors": false,
-      "id": 210,
+      "id": 26,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862041919,
+      "last_modified_time": 1706557032673,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696361454524,
+          "created_date": 1706555053036,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 236,
+          "export_key": "mcafee epo post process",
+          "id": 42,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696361454537,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706557030375,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_client_tasks",
           "playbook_handle": "mcafee_epo_run_client_task",
           "programmatic_name": "mcafee_epo_run_client_task_post_process",
@@ -8553,7 +8655,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_e6ea99e4-081b-4db8-ac5c-4bdd5fe0f529",
-        "id": 215,
+        "id": 26,
         "name": "playbook_e6ea99e4_081b_4db8_ac5c_4bdd5fe0f529",
         "type": "playbook",
         "uuid": "62d06a1d-3008-4300-9401-581eb3fd2ad4"
@@ -8561,19 +8663,19 @@
       "tags": [],
       "type": "default",
       "uuid": "e6ea99e4-081b-4db8-ac5c-4bdd5fe0f529",
-      "version": 12
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab\" isExecutable=\"true\" name=\"playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jsltn7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Run Client Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c87c8e6f-71bf-40e4-af85-08d716ed25a1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = row.epo_system_name\\ninputs.mcafee_epo_product_id = getattr(playbook.inputs, \\\"epo_product_id\\\")\\ninputs.mcafee_epo_task_id = getattr(playbook.inputs, \\\"epo_task_id\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"run_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jsltn7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1y7wrtd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0jsltn7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b7ac1238-6550-4c0e-a134-edc19ebb2ad1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1y7wrtd\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k196uy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1y7wrtd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0k196uy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0k196uy\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jsltn7\" id=\"Flow_0jsltn7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y7wrtd\" id=\"Flow_1y7wrtd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k196uy\" id=\"Flow_0k196uy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab\" isExecutable=\"true\" name=\"playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jsltn7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Run Client Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c87c8e6f-71bf-40e4-af85-08d716ed25a1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = row.epo_system_name\\nif getattr(playbook.inputs, \\\"epo_product_id\\\", None):\\n  inputs.mcafee_epo_product_id = getattr(playbook.inputs, \\\"epo_product_id\\\")\\nif getattr(playbook.inputs, \\\"epo_task_id\\\", None):\\n  inputs.mcafee_epo_task_id = getattr(playbook.inputs, \\\"epo_task_id\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"run_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jsltn7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1y7wrtd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0jsltn7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b7ac1238-6550-4c0e-a134-edc19ebb2ad1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1y7wrtd\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k196uy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1y7wrtd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0k196uy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0k196uy\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k196uy\" id=\"Flow_0k196uy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y7wrtd\" id=\"Flow_1y7wrtd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jsltn7\" id=\"Flow_0jsltn7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696443023366,
+      "create_date": 1706555053555,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab",
@@ -8599,7 +8701,7 @@
             "deprecated": false,
             "export_key": "playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab/epo_product_id",
             "hide_notification": false,
-            "id": 5832,
+            "id": 4681,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8615,7 +8717,7 @@
             "templates": [],
             "text": "ePO Product ID",
             "tooltip": "ID of the product the task is associated with",
-            "type_id": 1265,
+            "type_id": 1035,
             "uuid": "9d51b224-68ea-4a4a-8194-b1f894947553",
             "values": []
           },
@@ -8629,7 +8731,7 @@
             "deprecated": false,
             "export_key": "playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab/epo_task_id",
             "hide_notification": false,
-            "id": 5833,
+            "id": 4682,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -8645,7 +8747,7 @@
             "templates": [],
             "text": "ePO Task ID",
             "tooltip": "Id for the task to run on the system",
-            "type_id": 1265,
+            "type_id": 1035,
             "uuid": "b6574c0a-e13f-43c9-b46d-3cd9cf7f01d0",
             "values": []
           }
@@ -8670,32 +8772,32 @@
         "uuid": "a2e79c35-8056-4be1-b584-075144732eb5"
       },
       "has_logical_errors": false,
-      "id": 217,
+      "id": 27,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862042482,
+      "last_modified_time": 1706556989269,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696443203585,
+          "created_date": 1706555053778,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 243,
+          "export_key": "mcafee epo post process",
+          "id": 43,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696443203599,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706556985297,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_systems_dt",
           "playbook_handle": "mcafee_epo_run_client_task_on_system",
           "programmatic_name": "mcafee_epo_run_client_task_on_system_post_process",
-          "script_text": "results = playbook.functions.results.run_task\nif results.get(\"content\") and results.get(\"content\") == \"Succeeded\":\n  incident.addNote(\"System(s): \u0027{}\u0027 ran client task: \u0027{}\u0027 successfully.\".format(row.epo_system_name, getattr(playbook.inputs, \"epo_task_id\")))",
+          "script_text": "results = playbook.functions.results.run_task\nif results.get(\"content\", {}) and results.get(\"content\", {}) == \"Succeeded\":\n  incident.addNote(\"System(s): \u0027{}\u0027 ran client task: \u0027{}\u0027 successfully.\".format(row.epo_system_name, getattr(playbook.inputs, \"epo_task_id\")))",
           "tags": [],
           "uuid": "b7ac1238-6550-4c0e-a134-edc19ebb2ad1"
         }
@@ -8729,7 +8831,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1c734080-62ea-4e86-b50c-a91d6f8676ab",
-        "id": 222,
+        "id": 27,
         "name": "playbook_1c734080_62ea_4e86_b50c_a91d6f8676ab",
         "type": "playbook",
         "uuid": "c1f8e8be-2056-4afb-ba1b-1c915d6eed39"
@@ -8737,19 +8839,19 @@
       "tags": [],
       "type": "default",
       "uuid": "1c734080-62ea-4e86-b50c-a91d6f8676ab",
-      "version": 9
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641\" isExecutable=\"true\" name=\"playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fzsfit\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Update Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d11a1d48-231a-4c2f-b9a9-f482d785aa23\"\u003e{\"inputs\":{\"050a0e76-1842-47ef-9f3f-5132db7ebe86\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"cd420db2-85fa-4b36-836e-b84b08da53d0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e64b4847-576c-41fd-9ebe-30388463d740\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b114ab6f-268c-496f-9fd6-64ae4fc96e10\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"10234f71-637e-4dd6-906a-19e32ef335ca\"}},\"079bf7ef-d3a9-4b0d-9e72-cdcbb4783d01\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"026f887f-61d5-4806-9c17-4fadddc2d58f\"}},\"9477b98a-5618-40d3-aab3-3c0f2c56ff59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"b5611556-6d46-4755-9aab-38c72c55ad8d\"}},\"3561f86b-44c7-4c83-9fc5-962bf0231192\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"7a9a788f-93c6-4575-bdb0-d22f9823624f\"}},\"83a16190-0db4-4b8d-a247-e5918309ff9c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d20dd061-06ce-4daf-8942-92b9b5f745b0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0c19dd34-7797-48b2-b2c8-f6279da97148\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8bf4d417-d784-4752-9862-1b3aed4e385d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"06bece11-b70f-4205-9e67-37db3d3f5dda\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, \\\"epo_issue_assignee\\\")\\ninputs.mcafee_epo_issue_description = getattr(playbook.inputs, \\\"epo_issue_description\\\")\\ninputs.mcafee_epo_issue_due = getattr(playbook.inputs, \\\"epo_issue_due\\\")\\ninputs.mcafee_epo_issue_id = row.issue_id\\ninputs.mcafee_epo_issue_name = getattr(playbook.inputs, \\\"epo_issue_name\\\")\\ninputs.mcafee_epo_issue_priority = getattr(playbook.inputs, \\\"epo_issue_priority\\\")\\ninputs.mcafee_epo_issue_properties = getattr(playbook.inputs, \\\"epo_issue_properties\\\")\\ninputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, \\\"epo_issue_resolution\\\")\\ninputs.mcafee_epo_issue_severity = getattr(playbook.inputs, \\\"epo_issue_severity\\\")\\ninputs.mcafee_epo_issue_state = getattr(playbook.inputs, \\\"epo_issue_state\\\")\\ninputs.mcafee_epo_ticket_id = getattr(playbook.inputs, \\\"epo_ticket_id\\\")\\ninputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, \\\"epo_ticket_server_name\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"issue\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fzsfit\u003c/incoming\u003e\u003coutgoing\u003eFlow_0484rwc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fzsfit\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"de8f0d6a-4628-454d-88a8-1da9b3b851a2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0484rwc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xywta5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0484rwc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1xywta5\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1xywta5\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fzsfit\" id=\"Flow_1fzsfit_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0484rwc\" id=\"Flow_0484rwc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"325\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"325\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xywta5\" id=\"Flow_1xywta5_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"483\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"483\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632.325\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"574\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641\" isExecutable=\"true\" name=\"playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fzsfit\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Update Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d11a1d48-231a-4c2f-b9a9-f482d785aa23\"\u003e{\"inputs\":{\"050a0e76-1842-47ef-9f3f-5132db7ebe86\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"cd420db2-85fa-4b36-836e-b84b08da53d0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e64b4847-576c-41fd-9ebe-30388463d740\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b114ab6f-268c-496f-9fd6-64ae4fc96e10\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"10234f71-637e-4dd6-906a-19e32ef335ca\"}},\"079bf7ef-d3a9-4b0d-9e72-cdcbb4783d01\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"026f887f-61d5-4806-9c17-4fadddc2d58f\"}},\"9477b98a-5618-40d3-aab3-3c0f2c56ff59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"b5611556-6d46-4755-9aab-38c72c55ad8d\"}},\"3561f86b-44c7-4c83-9fc5-962bf0231192\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"7a9a788f-93c6-4575-bdb0-d22f9823624f\"}},\"83a16190-0db4-4b8d-a247-e5918309ff9c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d20dd061-06ce-4daf-8942-92b9b5f745b0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0c19dd34-7797-48b2-b2c8-f6279da97148\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8bf4d417-d784-4752-9862-1b3aed4e385d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"06bece11-b70f-4205-9e67-37db3d3f5dda\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_issue_assignee\\\", None):\\n  inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, \\\"epo_issue_assignee\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_description\\\", None):\\n  inputs.mcafee_epo_issue_description = getattr(playbook.inputs, \\\"epo_issue_description\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_due\\\", None):\\n  inputs.mcafee_epo_issue_due = getattr(playbook.inputs, \\\"epo_issue_due\\\")\\ninputs.mcafee_epo_issue_id = row.issue_id\\nif getattr(playbook.inputs, \\\"epo_issue_name\\\", None):\\n  inputs.mcafee_epo_issue_name = getattr(playbook.inputs, \\\"epo_issue_name\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_priority\\\", None):\\n  inputs.mcafee_epo_issue_priority = getattr(playbook.inputs, \\\"epo_issue_priority\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_properties\\\", None):\\n  inputs.mcafee_epo_issue_properties = getattr(playbook.inputs, \\\"epo_issue_properties\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_resolution\\\", None):\\n  inputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, \\\"epo_issue_resolution\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_severity\\\", None):\\n  inputs.mcafee_epo_issue_severity = getattr(playbook.inputs, \\\"epo_issue_severity\\\")\\nif getattr(playbook.inputs, \\\"epo_issue_state\\\", None):\\n  inputs.mcafee_epo_issue_state = getattr(playbook.inputs, \\\"epo_issue_state\\\")\\nif getattr(playbook.inputs, \\\"epo_ticket_id\\\", None):\\n  inputs.mcafee_epo_ticket_id = getattr(playbook.inputs, \\\"epo_ticket_id\\\")\\nif getattr(playbook.inputs, \\\"epo_ticket_server_name\\\", None):\\n  inputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, \\\"epo_ticket_server_name\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"issue\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fzsfit\u003c/incoming\u003e\u003coutgoing\u003eFlow_0484rwc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fzsfit\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"de8f0d6a-4628-454d-88a8-1da9b3b851a2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0484rwc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xywta5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0484rwc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1xywta5\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1xywta5\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xywta5\" id=\"Flow_1xywta5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0484rwc\" id=\"Flow_0484rwc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fzsfit\" id=\"Flow_1fzsfit_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696354189359,
+      "create_date": 1706555054374,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641",
@@ -8775,7 +8877,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_assignee",
             "hide_notification": false,
-            "id": 5803,
+            "id": 4683,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8790,7 +8892,7 @@
             "templates": [],
             "text": "ePO Issue Assignee",
             "tooltip": "Username of the user to assign to the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "445372c6-12bd-4e73-8cdd-0a921b245158",
             "values": []
           },
@@ -8804,7 +8906,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_description",
             "hide_notification": false,
-            "id": 5804,
+            "id": 4684,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8819,7 +8921,7 @@
             "templates": [],
             "text": "ePO Issue Description",
             "tooltip": "Description of the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "2d3977b9-c5e7-40ee-981a-77a1a437022a",
             "values": []
           },
@@ -8833,7 +8935,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_due",
             "hide_notification": false,
-            "id": 5805,
+            "id": 4685,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -8848,7 +8950,7 @@
             "templates": [],
             "text": "ePO Issue Due",
             "tooltip": "Due date of the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "ea57b8cf-9830-46b4-8a41-2ea6e033e18e",
             "values": []
           },
@@ -8862,7 +8964,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_name",
             "hide_notification": false,
-            "id": 5806,
+            "id": 4686,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8877,7 +8979,7 @@
             "templates": [],
             "text": "ePO Issue Name",
             "tooltip": "Name of the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "456d4d34-7ea0-4d67-a02f-5dbcd0750d38",
             "values": []
           },
@@ -8891,7 +8993,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_priority",
             "hide_notification": false,
-            "id": 5807,
+            "id": 4687,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -8905,8 +9007,8 @@
             "tags": [],
             "templates": [],
             "text": "ePO Issue Priority",
-            "tooltip": "The  priority of the issue",
-            "type_id": 1259,
+            "tooltip": "The priority of the issue",
+            "type_id": 1036,
             "uuid": "05f0fc62-c433-451e-b850-9fec0891b4f9",
             "values": [
               {
@@ -8916,7 +9018,7 @@
                 "label": "Unknown",
                 "properties": null,
                 "uuid": "072b5f62-ec54-44d9-8e41-dfe9c036cb14",
-                "value": 1738
+                "value": 846
               },
               {
                 "default": false,
@@ -8925,7 +9027,7 @@
                 "label": "Lowest",
                 "properties": null,
                 "uuid": "545a1003-896d-4ecb-9072-74f857385482",
-                "value": 1739
+                "value": 847
               },
               {
                 "default": false,
@@ -8934,7 +9036,7 @@
                 "label": "Low",
                 "properties": null,
                 "uuid": "b7470cf1-21e0-438a-b42d-529d16e29c29",
-                "value": 1740
+                "value": 848
               },
               {
                 "default": false,
@@ -8943,7 +9045,7 @@
                 "label": "Medium",
                 "properties": null,
                 "uuid": "1204454c-cdb7-4bc3-b5b4-b3206fd152c9",
-                "value": 1741
+                "value": 849
               },
               {
                 "default": false,
@@ -8952,7 +9054,7 @@
                 "label": "High",
                 "properties": null,
                 "uuid": "570aa5bb-6ae3-483a-b8f6-09a703991f94",
-                "value": 1742
+                "value": 850
               },
               {
                 "default": false,
@@ -8961,7 +9063,7 @@
                 "label": "Highest",
                 "properties": null,
                 "uuid": "26e17edf-ca47-44fb-9d7e-0a966faedd9d",
-                "value": 1743
+                "value": 851
               }
             ]
           },
@@ -8975,7 +9077,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_properties",
             "hide_notification": false,
-            "id": 5808,
+            "id": 4688,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8990,7 +9092,7 @@
             "templates": [],
             "text": "ePO Issue Properties",
             "tooltip": "Properties for the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "e26840c7-37af-4c4d-9cd1-c901e92d5783",
             "values": []
           },
@@ -9004,7 +9106,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_resolution",
             "hide_notification": false,
-            "id": 5809,
+            "id": 4689,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -9019,7 +9121,7 @@
             "templates": [],
             "text": "ePO Issue Resolution",
             "tooltip": "Resolution of the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "101672aa-bb7d-4c6a-92ea-8ef65c4026de",
             "values": [
               {
@@ -9029,7 +9131,7 @@
                 "label": "None",
                 "properties": null,
                 "uuid": "70e05540-7b59-4c76-99ac-37c8e8feefe4",
-                "value": 1744
+                "value": 852
               },
               {
                 "default": false,
@@ -9038,7 +9140,7 @@
                 "label": "Fixed",
                 "properties": null,
                 "uuid": "3857a354-b68b-42b0-bb66-649d1cd8c331",
-                "value": 1745
+                "value": 853
               },
               {
                 "default": false,
@@ -9047,7 +9149,7 @@
                 "label": "Waived",
                 "properties": null,
                 "uuid": "bb1f0410-7062-49f6-9671-a7d9d72070c0",
-                "value": 1746
+                "value": 854
               },
               {
                 "default": false,
@@ -9056,7 +9158,7 @@
                 "label": "Will Not Fix",
                 "properties": null,
                 "uuid": "d4fcbf53-e96e-4946-b0cd-549bbfbd5900",
-                "value": 1747
+                "value": 855
               }
             ]
           },
@@ -9070,7 +9172,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_severity",
             "hide_notification": false,
-            "id": 5810,
+            "id": 4690,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -9085,7 +9187,7 @@
             "templates": [],
             "text": "ePO Issue Severity",
             "tooltip": "Severity of the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "83727826-f562-4afb-879b-f86d0ee14a7c",
             "values": [
               {
@@ -9095,7 +9197,7 @@
                 "label": "Unknown",
                 "properties": null,
                 "uuid": "da776e9e-2134-4f2a-8b81-597d74e73b17",
-                "value": 1748
+                "value": 856
               },
               {
                 "default": false,
@@ -9104,7 +9206,7 @@
                 "label": "Lowest",
                 "properties": null,
                 "uuid": "0c5bf299-81b4-4ed6-ab0a-5956518ee646",
-                "value": 1749
+                "value": 857
               },
               {
                 "default": false,
@@ -9113,7 +9215,7 @@
                 "label": "Low",
                 "properties": null,
                 "uuid": "0a78aa6b-9dae-4e07-9f49-251549e433b7",
-                "value": 1750
+                "value": 858
               },
               {
                 "default": false,
@@ -9122,7 +9224,7 @@
                 "label": "Medium",
                 "properties": null,
                 "uuid": "a1dbd732-e4b3-4544-8f82-e19e6ebc2eb7",
-                "value": 1751
+                "value": 859
               },
               {
                 "default": false,
@@ -9131,7 +9233,7 @@
                 "label": "High",
                 "properties": null,
                 "uuid": "89f0fff6-4e7e-4058-b1c2-43b9a501560f",
-                "value": 1752
+                "value": 860
               },
               {
                 "default": false,
@@ -9140,7 +9242,7 @@
                 "label": "Highest",
                 "properties": null,
                 "uuid": "6d858f19-2da4-4fb6-b912-633eb6af5d9d",
-                "value": 1753
+                "value": 861
               }
             ]
           },
@@ -9154,7 +9256,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_state",
             "hide_notification": false,
-            "id": 5811,
+            "id": 4691,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -9169,7 +9271,7 @@
             "templates": [],
             "text": "ePO Issue State",
             "tooltip": "State of the issue",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "48c3e1d1-cdf9-4235-9583-f952764b4f7f",
             "values": [
               {
@@ -9179,7 +9281,7 @@
                 "label": "Unknown",
                 "properties": null,
                 "uuid": "e49cd6bc-e76e-43ba-add3-f56e7070d5d7",
-                "value": 1754
+                "value": 862
               },
               {
                 "default": false,
@@ -9188,7 +9290,7 @@
                 "label": "New",
                 "properties": null,
                 "uuid": "ec4aad03-6be6-460b-83d4-1a5ea5d35b54",
-                "value": 1755
+                "value": 863
               },
               {
                 "default": false,
@@ -9197,7 +9299,7 @@
                 "label": "Assigned",
                 "properties": null,
                 "uuid": "0df583fb-2ac7-4c82-bc68-0999667c09de",
-                "value": 1756
+                "value": 864
               },
               {
                 "default": false,
@@ -9206,7 +9308,7 @@
                 "label": "Resolved",
                 "properties": null,
                 "uuid": "f8189786-4513-4dd5-9d5a-997dbf761e86",
-                "value": 1757
+                "value": 865
               },
               {
                 "default": false,
@@ -9215,7 +9317,7 @@
                 "label": "Closed",
                 "properties": null,
                 "uuid": "df6f446e-c290-4db5-a3fa-7cccd853cfc2",
-                "value": 1758
+                "value": 866
               }
             ]
           },
@@ -9229,7 +9331,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_issue_type",
             "hide_notification": false,
-            "id": 5812,
+            "id": 4692,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -9244,7 +9346,7 @@
             "templates": [],
             "text": "ePO Issue Type",
             "tooltip": "Issue type",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "f0e28e97-71c1-46a3-ac29-bb9c0e64033e",
             "values": [
               {
@@ -9254,7 +9356,7 @@
                 "label": "BASIC",
                 "properties": null,
                 "uuid": "7589a954-9944-40db-8ef7-3e79bb85d81d",
-                "value": 1759
+                "value": 867
               }
             ]
           },
@@ -9268,7 +9370,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_ticket_id",
             "hide_notification": false,
-            "id": 5813,
+            "id": 4693,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -9283,7 +9385,7 @@
             "templates": [],
             "text": "ePO Ticket ID",
             "tooltip": "ID of the ticket",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "857f8a73-3f1a-47ba-bc45-bd2c7aa04543",
             "values": []
           },
@@ -9297,7 +9399,7 @@
             "deprecated": false,
             "export_key": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641/epo_ticket_server_name",
             "hide_notification": false,
-            "id": 5814,
+            "id": 4694,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9312,7 +9414,7 @@
             "templates": [],
             "text": "ePO Ticket Server Name",
             "tooltip": "Name of the ticket server",
-            "type_id": 1259,
+            "type_id": 1036,
             "uuid": "4a7e470d-f313-48da-9647-8aaa28fb3eff",
             "values": []
           }
@@ -9337,28 +9439,28 @@
         "uuid": "c3e16b9b-e7ab-4c6a-afcd-1287e9dc4c21"
       },
       "has_logical_errors": false,
-      "id": 211,
+      "id": 28,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862043034,
+      "last_modified_time": 1706557203682,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696361592672,
+          "created_date": 1706555055014,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 237,
+          "export_key": "mcafee epo post process",
+          "id": 44,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696361592685,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706557200081,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_issues",
           "playbook_handle": "mcafee_epo_update_issue",
           "programmatic_name": "mcafee_epo_update_issue_post_process",
@@ -9476,7 +9578,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_3fcaf09a-bc52-444a-87c1-da2d1b933641",
-        "id": 216,
+        "id": 28,
         "name": "playbook_3fcaf09a_bc52_444a_87c1_da2d1b933641",
         "type": "playbook",
         "uuid": "ed69f7d4-5fd0-43e3-978b-700c4f817426"
@@ -9484,19 +9586,19 @@
       "tags": [],
       "type": "default",
       "uuid": "3fcaf09a-bc52-444a-87c1-da2d1b933641",
-      "version": 10
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6\" isExecutable=\"true\" name=\"playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rspiih\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Update User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a45c768a-d8d0-4666-a002-b7ddf6624fe6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_admin = getattr(playbook.inputs, \\\"epo_admin\\\")\\ninputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, \\\"epo_allowed_ips\\\")\\ninputs.mcafee_epo_email = getattr(playbook.inputs, \\\"epo_email\\\")\\ninputs.mcafee_epo_fullname = getattr(playbook.inputs, \\\"epo_full_name\\\")\\ninputs.mcafee_epo_notes = getattr(playbook.inputs, \\\"epo_notes\\\")\\ninputs.mcafee_epo_pass = getattr(playbook.inputs, \\\"epo_user_password\\\")\\ninputs.mcafee_epo_phone_number = getattr(playbook.inputs, \\\"epo_phone_number\\\")\\ninputs.mcafee_epo_user_disabled = getattr(playbook.inputs, \\\"epo_user_disabled\\\")\\ninputs.mcafee_epo_username = row.user_name\\ninputs.mcafee_epo_new_username = getattr(playbook.inputs, \\\"epo_new_username\\\")\\ninputs.mcafee_epo_subjectdn = getattr(playbook.inputs, \\\"epo_subject_dn\\\")\\ninputs.mcafee_epo_windowsdomain = getattr(playbook.inputs, \\\"epo_windows_domain\\\")\\ninputs.mcafee_epo_windowsusername = getattr(playbook.inputs, \\\"epo_windows_username\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"user\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rspiih\u003c/incoming\u003e\u003coutgoing\u003eFlow_04k5cy2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rspiih\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c3d07138-3393-47e0-8542-14880a2633e3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04k5cy2\u003c/incoming\u003e\u003coutgoing\u003eFlow_01si52k\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_04k5cy2\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01si52k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_01si52k\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rspiih\" id=\"Flow_0rspiih_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04k5cy2\" id=\"Flow_04k5cy2_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01si52k\" id=\"Flow_01si52k_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592.325\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"624\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6\" isExecutable=\"true\" name=\"playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rspiih\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Update User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a45c768a-d8d0-4666-a002-b7ddf6624fe6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_admin\\\", None):\\n  inputs.mcafee_epo_admin = getattr(playbook.inputs, \\\"epo_admin\\\")\\nif getattr(playbook.inputs, \\\"epo_allowed_ips\\\", None):\\n  inputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, \\\"epo_allowed_ips\\\")\\nif getattr(playbook.inputs, \\\"epo_email\\\", None):\\n  inputs.mcafee_epo_email = getattr(playbook.inputs, \\\"epo_email\\\")\\nif getattr(playbook.inputs, \\\"epo_full_name\\\", None):\\n  inputs.mcafee_epo_fullname = getattr(playbook.inputs, \\\"epo_full_name\\\")\\nif getattr(playbook.inputs, \\\"epo_notes\\\", None):\\n  inputs.mcafee_epo_notes = getattr(playbook.inputs, \\\"epo_notes\\\")\\nif getattr(playbook.inputs, \\\"epo_user_password\\\", None):\\n  inputs.mcafee_epo_pass = getattr(playbook.inputs, \\\"epo_user_password\\\")\\nif getattr(playbook.inputs, \\\"epo_phone_number\\\", None):\\n  inputs.mcafee_epo_phone_number = getattr(playbook.inputs, \\\"epo_phone_number\\\")\\nif getattr(playbook.inputs, \\\"epo_user_disabled\\\", None):\\n  inputs.mcafee_epo_user_disabled = getattr(playbook.inputs, \\\"epo_user_disabled\\\")\\ninputs.mcafee_epo_username = row.user_name\\nif getattr(playbook.inputs, \\\"epo_new_username\\\", None):\\n  inputs.mcafee_epo_new_username = getattr(playbook.inputs, \\\"epo_new_username\\\")\\nif getattr(playbook.inputs, \\\"epo_subject_dn\\\", None):\\n  inputs.mcafee_epo_subjectdn = getattr(playbook.inputs, \\\"epo_subject_dn\\\")\\nif getattr(playbook.inputs, \\\"epo_windows_domain\\\", None):\\n  inputs.mcafee_epo_windowsdomain = getattr(playbook.inputs, \\\"epo_windows_domain\\\")\\nif getattr(playbook.inputs, \\\"epo_windows_username\\\", None):\\n  inputs.mcafee_epo_windowsusername = getattr(playbook.inputs, \\\"epo_windows_username\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"user\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rspiih\u003c/incoming\u003e\u003coutgoing\u003eFlow_04k5cy2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rspiih\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c3d07138-3393-47e0-8542-14880a2633e3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04k5cy2\u003c/incoming\u003e\u003coutgoing\u003eFlow_01si52k\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_04k5cy2\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01si52k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_01si52k\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01si52k\" id=\"Flow_01si52k_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04k5cy2\" id=\"Flow_04k5cy2_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rspiih\" id=\"Flow_0rspiih_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592.325\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"624\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"590\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696354604488,
+      "create_date": 1706555055563,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6",
@@ -9522,7 +9624,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_admin",
             "hide_notification": false,
-            "id": 5815,
+            "id": 4695,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -9537,7 +9639,7 @@
             "templates": [],
             "text": "ePO Admin",
             "tooltip": "If user should be admin",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "12eaff1d-34da-4acd-9f92-7cea4d70019a",
             "values": []
           },
@@ -9551,7 +9653,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_allowed_ips",
             "hide_notification": false,
-            "id": 5816,
+            "id": 4696,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9566,7 +9668,7 @@
             "templates": [],
             "text": "ePO Allowed IPs",
             "tooltip": "List if IPs allowed to access the user",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "1c94fa9c-1b80-457a-9806-c6086e8d6189",
             "values": []
           },
@@ -9580,7 +9682,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_email",
             "hide_notification": false,
-            "id": 5817,
+            "id": 4697,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9595,7 +9697,7 @@
             "templates": [],
             "text": "ePO Email",
             "tooltip": "Email for the ePO user",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "4a1ab47d-de80-4ad4-9dc7-d862f8bb9fa6",
             "values": []
           },
@@ -9609,7 +9711,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_full_name",
             "hide_notification": false,
-            "id": 5818,
+            "id": 4698,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9624,7 +9726,7 @@
             "templates": [],
             "text": "ePO Full Name",
             "tooltip": "Full name of the ePO user",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "58e8cd00-f46b-480c-85b7-e5895c749106",
             "values": []
           },
@@ -9638,7 +9740,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_new_username",
             "hide_notification": false,
-            "id": 5819,
+            "id": 4699,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9653,7 +9755,7 @@
             "templates": [],
             "text": "ePO New Username",
             "tooltip": "Change ePO users username",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "49a5044e-ba35-4ff8-a2fb-33b1ee79ac1d",
             "values": []
           },
@@ -9667,7 +9769,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_notes",
             "hide_notification": false,
-            "id": 5820,
+            "id": 4700,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9682,7 +9784,7 @@
             "templates": [],
             "text": "ePO Notes",
             "tooltip": "Notes to add to the ePO user",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "bcc2752c-a085-4a4c-b6ce-d9b0fdb33697",
             "values": []
           },
@@ -9696,7 +9798,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_phone_number",
             "hide_notification": false,
-            "id": 5821,
+            "id": 4701,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9711,7 +9813,7 @@
             "templates": [],
             "text": "ePO Phone Number",
             "tooltip": "Phone number for the ePO user",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "9ccd91f4-6528-417e-9321-c2846b54bd71",
             "values": []
           },
@@ -9725,7 +9827,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_subject_dn",
             "hide_notification": false,
-            "id": 5822,
+            "id": 4702,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9740,7 +9842,7 @@
             "templates": [],
             "text": "ePO Subject DN",
             "tooltip": "Subject DN to add to ePO user",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "1a6c81e1-71d3-46ec-a3e3-6317b7c62c42",
             "values": []
           },
@@ -9754,7 +9856,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_user_disabled",
             "hide_notification": false,
-            "id": 5823,
+            "id": 4703,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -9769,7 +9871,7 @@
             "templates": [],
             "text": "ePO User Disabled",
             "tooltip": "If the user should be disabled",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "75bb0532-7645-489c-afa4-33f4806ffb29",
             "values": []
           },
@@ -9783,7 +9885,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_user_password",
             "hide_notification": false,
-            "id": 5824,
+            "id": 4704,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9798,7 +9900,7 @@
             "templates": [],
             "text": "ePO User Password",
             "tooltip": "Password for the ePO user",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "be2b9e57-1234-42e4-924e-b538dc2f9fe8",
             "values": []
           },
@@ -9812,7 +9914,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_windows_domain",
             "hide_notification": false,
-            "id": 5825,
+            "id": 4705,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9827,7 +9929,7 @@
             "templates": [],
             "text": "ePO Windows Domain",
             "tooltip": "A windows domain to add to ePO server",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "6c987dfe-50cf-47ed-b178-ad106f0333d4",
             "values": []
           },
@@ -9841,7 +9943,7 @@
             "deprecated": false,
             "export_key": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6/epo_windows_username",
             "hide_notification": false,
-            "id": 5826,
+            "id": 4706,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9856,7 +9958,7 @@
             "templates": [],
             "text": "ePO Windows Username",
             "tooltip": "Windows username for ePO server",
-            "type_id": 1260,
+            "type_id": 1037,
             "uuid": "69db1045-d66d-454d-ba8d-82b6d568cb24",
             "values": []
           }
@@ -9881,28 +9983,28 @@
         "uuid": "4773d9d1-655e-4acb-98bb-60ab717ef2c9"
       },
       "has_logical_errors": false,
-      "id": 212,
+      "id": 29,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862043596,
+      "last_modified_time": 1706557370038,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696361725962,
+          "created_date": 1706555056177,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 238,
+          "export_key": "mcafee epo post process",
+          "id": 45,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696361725976,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706557366736,
+          "name": "mcafee epo post process",
           "object_type": "mcafee_epo_users",
           "playbook_handle": "mcafee_epo_update_user",
           "programmatic_name": "mcafee_epo_update_user_post_process",
@@ -10020,7 +10122,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_fb9ace0b-3645-4f13-aa23-444247dc91a6",
-        "id": 217,
+        "id": 29,
         "name": "playbook_fb9ace0b_3645_4f13_aa23_444247dc91a6",
         "type": "playbook",
         "uuid": "aea03409-fb26-4e94-938e-d11848be263c"
@@ -10028,19 +10130,19 @@
       "tags": [],
       "type": "default",
       "uuid": "fb9ace0b-3645-4f13-aa23-444247dc91a6",
-      "version": 10
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_531dc646_95fe_40bf_9715_52bb514f613d\" isExecutable=\"true\" name=\"playbook_531dc646_95fe_40bf_9715_52bb514f613d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_021ggo7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Wake up agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a8b3bef5-36fc-4d69-b366-6fd3def996d2\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mcafee_epo_systems = getattr(playbook.inputs, \\\"epo_system\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"wake_agent\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_021ggo7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wmz4qa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_021ggo7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cf18a133-7726-43f2-bf0d-a09712a364cb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wmz4qa\u003c/incoming\u003e\u003coutgoing\u003eFlow_0l24ggb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wmz4qa\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0l24ggb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0l24ggb\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_531dc646_95fe_40bf_9715_52bb514f613d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_021ggo7\" id=\"Flow_021ggo7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wmz4qa\" id=\"Flow_0wmz4qa_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"340\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"340\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l24ggb\" id=\"Flow_0l24ggb_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"478\"/\u003e\u003comgdi:waypoint x=\"780\" y=\"478\"/\u003e\u003comgdi:waypoint x=\"780\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602.0419999999999\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"714\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_531dc646_95fe_40bf_9715_52bb514f613d\" isExecutable=\"true\" name=\"playbook_531dc646_95fe_40bf_9715_52bb514f613d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_021ggo7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"McAfee ePO Wake up agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a8b3bef5-36fc-4d69-b366-6fd3def996d2\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if getattr(playbook.inputs, \\\"epo_system\\\", None):\\n  inputs.mcafee_epo_systems = getattr(playbook.inputs, \\\"epo_system\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"wake_agent\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_021ggo7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wmz4qa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_021ggo7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"mcafee epo post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cf18a133-7726-43f2-bf0d-a09712a364cb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wmz4qa\u003c/incoming\u003e\u003coutgoing\u003eFlow_0l24ggb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wmz4qa\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0l24ggb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0l24ggb\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_531dc646_95fe_40bf_9715_52bb514f613d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l24ggb\" id=\"Flow_0l24ggb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wmz4qa\" id=\"Flow_0wmz4qa_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_021ggo7\" id=\"Flow_021ggo7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1696355639385,
+      "create_date": 1706555056715,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_531dc646_95fe_40bf_9715_52bb514f613d",
@@ -10066,7 +10168,7 @@
             "deprecated": false,
             "export_key": "playbook_531dc646_95fe_40bf_9715_52bb514f613d/epo_system",
             "hide_notification": false,
-            "id": 5827,
+            "id": 4707,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -10081,8 +10183,8 @@
             "tags": [],
             "templates": [],
             "text": "ePO System",
-            "tooltip": "Comma separated list of systems properties or one system ",
-            "type_id": 1261,
+            "tooltip": "Comma separated list of systems properties or one system",
+            "type_id": 1038,
             "uuid": "ddd4fc2c-653c-4f88-813c-8b3f407c391f",
             "values": []
           }
@@ -10107,32 +10209,32 @@
         "uuid": "7f827f0c-e918-40be-8a35-c002879e4d31"
       },
       "has_logical_errors": false,
-      "id": 213,
+      "id": 30,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 47,
-        "name": "k@example.com",
+        "id": 35,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1696862043893,
+      "last_modified_time": 1706557417317,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1696361807465,
+          "created_date": 1706555056913,
           "description": "",
           "enabled": false,
-          "export_key": "post process",
-          "id": 239,
+          "export_key": "mcafee epo post process",
+          "id": 46,
           "language": "python3",
-          "last_modified_by": "k@example.com",
-          "last_modified_time": 1696361807481,
-          "name": "post process",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1706557413567,
+          "name": "mcafee epo post process",
           "object_type": "incident",
           "playbook_handle": "mcafee_epo_wake_up_agent",
           "programmatic_name": "mcafee_epo_wake_up_agent_post_process",
-          "script_text": "results = playbook.functions.results.wake_agent\nif results.get(\"success\"):\n  incident.addNote(results.get(\"content\"))",
+          "script_text": "results = playbook.functions.results.wake_agent\nif results.get(\"success\"):\n  incident.addNote(results.get(\"content\", {}))",
           "tags": [],
           "uuid": "cf18a133-7726-43f2-bf0d-a09712a364cb"
         }
@@ -10158,7 +10260,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_531dc646-95fe-40bf-9715-52bb514f613d",
-        "id": 218,
+        "id": 30,
         "name": "playbook_531dc646_95fe_40bf_9715_52bb514f613d",
         "type": "playbook",
         "uuid": "8d0742c9-87bd-4386-a270-f5d4789d5ba2"
@@ -10166,17 +10268,17 @@
       "tags": [],
       "type": "default",
       "uuid": "531dc646-95fe-40bf-9715-52bb514f613d",
-      "version": 9
+      "version": 5
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 7899,
-    "major": 45,
+    "build_number": 8803,
+    "major": 49,
     "minor": 0,
-    "version": "45.0.7899"
+    "version": "49.0.8803"
   },
   "tags": [],
   "task_order": [],
@@ -10197,7 +10299,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_client_tasks/object_name",
           "hide_notification": false,
-          "id": 5477,
+          "id": 4517,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10213,7 +10315,7 @@
           "templates": [],
           "text": "Object Name",
           "tooltip": "Name of the client task",
-          "type_id": 1227,
+          "type_id": 1001,
           "uuid": "93178ed6-513c-4c4d-b1e3-6359cce6d3b5",
           "values": [],
           "width": 175
@@ -10228,7 +10330,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_client_tasks/product_id",
           "hide_notification": false,
-          "id": 5478,
+          "id": 4518,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10244,7 +10346,7 @@
           "templates": [],
           "text": "Product ID",
           "tooltip": "ID for the product",
-          "type_id": 1227,
+          "type_id": 1001,
           "uuid": "ca19a865-d1cc-4b07-bce6-7bbaa164c29c",
           "values": [],
           "width": 153
@@ -10259,7 +10361,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_client_tasks/product_name",
           "hide_notification": false,
-          "id": 5479,
+          "id": 4519,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10275,7 +10377,7 @@
           "templates": [],
           "text": "Product Name",
           "tooltip": "Name of the product associated with the client task",
-          "type_id": 1227,
+          "type_id": 1001,
           "uuid": "e809fd12-a34a-4ece-870a-235b0d0d4964",
           "values": [],
           "width": 189
@@ -10290,7 +10392,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_client_tasks/task_id",
           "hide_notification": false,
-          "id": 5480,
+          "id": 4520,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -10306,7 +10408,7 @@
           "templates": [],
           "text": "Task ID",
           "tooltip": "ID for the task",
-          "type_id": 1227,
+          "type_id": 1001,
           "uuid": "b7915e57-dfbe-4140-b9b0-4a00ecb1b171",
           "values": [],
           "width": 50
@@ -10321,7 +10423,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_client_tasks/type_name",
           "hide_notification": false,
-          "id": 5481,
+          "id": 4521,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10337,7 +10439,7 @@
           "templates": [],
           "text": "Type Name",
           "tooltip": "Type of client task",
-          "type_id": 1227,
+          "type_id": 1001,
           "uuid": "9da657fd-ff26-42c6-8c75-63c5b48107d4",
           "values": [],
           "width": 157
@@ -10377,7 +10479,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_groups/group_id",
           "hide_notification": false,
-          "id": 5482,
+          "id": 4522,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -10393,7 +10495,7 @@
           "templates": [],
           "text": "Group ID",
           "tooltip": "ID of the group",
-          "type_id": 1228,
+          "type_id": 1002,
           "uuid": "2de87667-95f3-4320-a85a-da3c5b627f97",
           "values": [],
           "width": 218
@@ -10408,7 +10510,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_groups/group_path",
           "hide_notification": false,
-          "id": 5483,
+          "id": 4523,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10424,7 +10526,7 @@
           "templates": [],
           "text": "Group Path",
           "tooltip": "Path to the group on the ePO server",
-          "type_id": 1228,
+          "type_id": 1002,
           "uuid": "db3dc49e-1ef6-45c3-a2ff-2410a30b06ae",
           "values": [],
           "width": 254
@@ -10439,7 +10541,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_groups/systems",
           "hide_notification": false,
-          "id": 5484,
+          "id": 4524,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10455,7 +10557,7 @@
           "templates": [],
           "text": "Systems",
           "tooltip": "Name of the systems in the group",
-          "type_id": 1228,
+          "type_id": 1002,
           "uuid": "21d97c6d-690e-4ccf-8509-4988debe3d1a",
           "values": [],
           "width": 209
@@ -10495,7 +10597,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/assignee_name",
           "hide_notification": false,
-          "id": 5485,
+          "id": 4525,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10511,7 +10613,7 @@
           "templates": [],
           "text": "Assignee Name",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "4a8f45ad-3965-4105-9e11-29d8d3491fbe",
           "values": [],
           "width": 121
@@ -10526,7 +10628,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/issue_deleted",
           "hide_notification": false,
-          "id": 5486,
+          "id": 4526,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -10542,7 +10644,7 @@
           "templates": [],
           "text": "Deleted",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "64b21505-7a73-4e95-a689-d9ade553d6f5",
           "values": [],
           "width": 59
@@ -10557,7 +10659,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/issue_description",
           "hide_notification": false,
-          "id": 5487,
+          "id": 4527,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10573,7 +10675,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "4dd43761-38a6-475a-b8c3-c40f01f6e5a3",
           "values": [],
           "width": 121
@@ -10588,7 +10690,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/issue_due_date",
           "hide_notification": false,
-          "id": 5488,
+          "id": 4528,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -10604,7 +10706,7 @@
           "templates": [],
           "text": "Due Date",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "bfe6b839-dd5b-4a0d-b6e2-dbf991d5500a",
           "values": [],
           "width": 71
@@ -10619,7 +10721,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/issue_id",
           "hide_notification": false,
-          "id": 5489,
+          "id": 4529,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -10635,7 +10737,7 @@
           "templates": [],
           "text": "Issue ID",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "dea02fe3-a5a8-4d77-bbe4-90f2743e5af4",
           "values": [],
           "width": 70
@@ -10650,7 +10752,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/issue_name",
           "hide_notification": false,
-          "id": 5490,
+          "id": 4530,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10666,7 +10768,7 @@
           "templates": [],
           "text": "Issue Name",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "dae3b587-0ece-4704-905b-e0562e18a8b6",
           "values": [],
           "width": 106
@@ -10681,7 +10783,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/issue_state",
           "hide_notification": false,
-          "id": 5491,
+          "id": 4531,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10697,7 +10799,7 @@
           "templates": [],
           "text": "State",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "865c78bc-2cf2-46b3-86e3-28547729a579",
           "values": [],
           "width": 40
@@ -10712,7 +10814,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/priority",
           "hide_notification": false,
-          "id": 5492,
+          "id": 4532,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10728,7 +10830,7 @@
           "templates": [],
           "text": "Priority",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "b6ddf514-db11-47e1-98ec-54c9625c3bb6",
           "values": [],
           "width": 57
@@ -10743,7 +10845,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/resolution",
           "hide_notification": false,
-          "id": 5493,
+          "id": 4533,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10759,7 +10861,7 @@
           "templates": [],
           "text": "Resolution",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "e0476262-9839-4cb1-9239-8e00b74ff0b4",
           "values": [],
           "width": 81
@@ -10774,7 +10876,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/severity",
           "hide_notification": false,
-          "id": 5494,
+          "id": 4534,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10790,7 +10892,7 @@
           "templates": [],
           "text": "Severity",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "22c28e9b-78cc-4f64-b209-29943f6e2554",
           "values": [],
           "width": 69
@@ -10805,7 +10907,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/ticket_id",
           "hide_notification": false,
-          "id": 5495,
+          "id": 4535,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -10821,7 +10923,7 @@
           "templates": [],
           "text": "Ticket ID",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "7e9da847-7728-4d2e-a510-7322d23fa982",
           "values": [],
           "width": 70
@@ -10836,7 +10938,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/ticket_server_name",
           "hide_notification": false,
-          "id": 5496,
+          "id": 4536,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10852,7 +10954,7 @@
           "templates": [],
           "text": "Ticket Server Name",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "65e95335-7ec2-456a-8db6-b77483571bbf",
           "values": [],
           "width": 151
@@ -10867,7 +10969,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_issues/type",
           "hide_notification": false,
-          "id": 5497,
+          "id": 4537,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10883,7 +10985,7 @@
           "templates": [],
           "text": "Type",
           "tooltip": "",
-          "type_id": 1229,
+          "type_id": 1003,
           "uuid": "88b48c83-1118-4c92-9973-3e0d1d73a96a",
           "values": [],
           "width": 36
@@ -10923,7 +11025,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_permission_sets/permission_set_name",
           "hide_notification": false,
-          "id": 5498,
+          "id": 4538,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10939,7 +11041,7 @@
           "templates": [],
           "text": "Permission Set Name",
           "tooltip": "",
-          "type_id": 1230,
+          "type_id": 1004,
           "uuid": "5f787b3b-1acd-40f6-9268-a20f47bed288",
           "values": [],
           "width": 495
@@ -10954,7 +11056,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_permission_sets/users",
           "hide_notification": false,
-          "id": 5499,
+          "id": 4539,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10970,7 +11072,7 @@
           "templates": [],
           "text": "Users",
           "tooltip": "Users that have the permission set",
-          "type_id": 1230,
+          "type_id": 1004,
           "uuid": "9fc75e0d-663d-4365-81f3-17d697664569",
           "values": [],
           "width": 151
@@ -11010,7 +11112,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_policies/object_id",
           "hide_notification": false,
-          "id": 5500,
+          "id": 4540,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -11026,7 +11128,7 @@
           "templates": [],
           "text": "Object ID",
           "tooltip": "ID of the policy",
-          "type_id": 1231,
+          "type_id": 1005,
           "uuid": "aa1bb5ed-dfd2-4218-bd80-4221d5fe4634",
           "values": [],
           "width": 74
@@ -11041,7 +11143,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_policies/object_name",
           "hide_notification": false,
-          "id": 5501,
+          "id": 4541,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11057,7 +11159,7 @@
           "templates": [],
           "text": "Object Name",
           "tooltip": "Name of the policy",
-          "type_id": 1231,
+          "type_id": 1005,
           "uuid": "61811680-b221-4f08-ad65-b9059352c740",
           "values": [],
           "width": 118
@@ -11072,7 +11174,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_policies/object_notes",
           "hide_notification": false,
-          "id": 5502,
+          "id": 4542,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11088,7 +11190,7 @@
           "templates": [],
           "text": "Object Notes",
           "tooltip": "Notes for the policy",
-          "type_id": 1231,
+          "type_id": 1005,
           "uuid": "435c7d4b-403d-43c4-90eb-27b3cf01dfd9",
           "values": [],
           "width": 500
@@ -11103,7 +11205,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_policies/product_id",
           "hide_notification": false,
-          "id": 5503,
+          "id": 4543,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11119,7 +11221,7 @@
           "templates": [],
           "text": "Product ID",
           "tooltip": "ID of the product",
-          "type_id": 1231,
+          "type_id": 1005,
           "uuid": "f78db4ae-b369-4af1-9eca-5e920879fe0f",
           "values": [],
           "width": 102
@@ -11134,7 +11236,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_policies/systems",
           "hide_notification": false,
-          "id": 5504,
+          "id": 4544,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11150,7 +11252,7 @@
           "templates": [],
           "text": "Systems",
           "tooltip": "Systems assigned to the policy",
-          "type_id": 1231,
+          "type_id": 1005,
           "uuid": "e3d77afc-5692-402c-a576-999c973c2296",
           "values": [],
           "width": 76
@@ -11165,7 +11267,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_policies/type_id",
           "hide_notification": false,
-          "id": 5505,
+          "id": 4545,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -11181,7 +11283,7 @@
           "templates": [],
           "text": "Type ID",
           "tooltip": "ID of the type of policy",
-          "type_id": 1231,
+          "type_id": 1005,
           "uuid": "16920895-82fd-41d9-a19a-8d4b7c62f34e",
           "values": [],
           "width": 61
@@ -11196,7 +11298,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_policies/type_name",
           "hide_notification": false,
-          "id": 5506,
+          "id": 4546,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11212,7 +11314,7 @@
           "templates": [],
           "text": "Type Name",
           "tooltip": "Name of the type of policy",
-          "type_id": 1231,
+          "type_id": 1005,
           "uuid": "ac6b5e2b-05fa-44d5-8e39-094b568b07ce",
           "values": [],
           "width": 86
@@ -11252,7 +11354,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_systems_dt/epo_agent_guid",
           "hide_notification": false,
-          "id": 5751,
+          "id": 4547,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11269,7 +11371,7 @@
           "templates": [],
           "text": "Agent GUID",
           "tooltip": "",
-          "type_id": 1235,
+          "type_id": 1006,
           "uuid": "70b00212-4685-47f7-aaa8-4b1b1a15003f",
           "values": [],
           "width": 87
@@ -11284,7 +11386,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_systems_dt/epo_deleted",
           "hide_notification": false,
-          "id": 5752,
+          "id": 4548,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -11301,7 +11403,7 @@
           "templates": [],
           "text": "Deleted",
           "tooltip": "If the System is deleted or not",
-          "type_id": 1235,
+          "type_id": 1006,
           "uuid": "ff9cbac3-d322-4a7c-8637-77fdf52904fb",
           "values": [],
           "width": 80
@@ -11316,7 +11418,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_systems_dt/epo_last_communication",
           "hide_notification": false,
-          "id": 5753,
+          "id": 4549,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11333,7 +11435,7 @@
           "templates": [],
           "text": "Last Communication",
           "tooltip": "",
-          "type_id": 1235,
+          "type_id": 1006,
           "uuid": "af096b0d-447b-41d1-bc5a-7477fdac1fe4",
           "values": [],
           "width": 154
@@ -11348,7 +11450,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_systems_dt/epo_operating_system",
           "hide_notification": false,
-          "id": 5754,
+          "id": 4550,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11365,7 +11467,7 @@
           "templates": [],
           "text": "Operating System",
           "tooltip": "",
-          "type_id": 1235,
+          "type_id": 1006,
           "uuid": "3e413786-812a-4052-afe9-af710f194de0",
           "values": [],
           "width": 132
@@ -11380,7 +11482,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_systems_dt/epo_system_name",
           "hide_notification": false,
-          "id": 5755,
+          "id": 4551,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11397,7 +11499,7 @@
           "templates": [],
           "text": "System Name",
           "tooltip": "",
-          "type_id": 1235,
+          "type_id": 1006,
           "uuid": "7465a60c-c724-4c47-bba8-7bd6a1f82c20",
           "values": [],
           "width": 102
@@ -11412,7 +11514,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_systems_dt/epo_tags",
           "hide_notification": false,
-          "id": 5756,
+          "id": 4552,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11429,7 +11531,7 @@
           "templates": [],
           "text": "Tags",
           "tooltip": "",
-          "type_id": 1235,
+          "type_id": 1006,
           "uuid": "285ac96f-7be0-439e-8f27-b2ce7c7bbe4b",
           "values": [],
           "width": 73
@@ -11469,7 +11571,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_tags/epo_id",
           "hide_notification": false,
-          "id": 5513,
+          "id": 4553,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -11486,7 +11588,7 @@
           "templates": [],
           "text": "Id",
           "tooltip": "",
-          "type_id": 1233,
+          "type_id": 1007,
           "uuid": "565bbe14-2671-442e-9f9c-1fd9cdc82dd5",
           "values": [],
           "width": 35
@@ -11501,7 +11603,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_tags/epo_notes",
           "hide_notification": false,
-          "id": 5514,
+          "id": 4554,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11517,7 +11619,7 @@
           "templates": [],
           "text": "Notes",
           "tooltip": "",
-          "type_id": 1233,
+          "type_id": 1007,
           "uuid": "bf2dc924-ab97-40fe-abba-3e395d175323",
           "values": [],
           "width": 490
@@ -11532,7 +11634,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_tags/epo_tag",
           "hide_notification": false,
-          "id": 5515,
+          "id": 4555,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11549,7 +11651,7 @@
           "templates": [],
           "text": "Tag",
           "tooltip": "",
-          "type_id": 1233,
+          "type_id": 1007,
           "uuid": "033ee0aa-d253-47c1-976e-0bcfbce40f46",
           "values": [],
           "width": 88
@@ -11589,7 +11691,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/admin",
           "hide_notification": false,
-          "id": 5516,
+          "id": 4556,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -11605,7 +11707,7 @@
           "templates": [],
           "text": "Admin",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "a93f7791-1434-4039-af77-5f168b277358",
           "values": [],
           "width": 49
@@ -11620,7 +11722,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/allowed_ips",
           "hide_notification": false,
-          "id": 5517,
+          "id": 4557,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11636,7 +11738,7 @@
           "templates": [],
           "text": "Allowed IPs",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "ccadefac-141f-467f-80f8-2f737f75f729",
           "values": [],
           "width": 111
@@ -11651,7 +11753,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/disabled",
           "hide_notification": false,
-          "id": 5518,
+          "id": 4558,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -11667,7 +11769,7 @@
           "templates": [],
           "text": "Disabled",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "52f87819-f180-4c73-a9da-a9ee792d8106",
           "values": [],
           "width": 67
@@ -11682,7 +11784,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/email",
           "hide_notification": false,
-          "id": 5519,
+          "id": 4559,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11698,7 +11800,7 @@
           "templates": [],
           "text": "Email",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "f75d189b-54b1-4866-99ab-494d35fb5463",
           "values": [],
           "width": 82
@@ -11713,7 +11815,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/full_name",
           "hide_notification": false,
-          "id": 5520,
+          "id": 4560,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11729,7 +11831,7 @@
           "templates": [],
           "text": "Full Name",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "d907a966-84e5-44b4-b67d-68bd2a0b8984",
           "values": [],
           "width": 99
@@ -11744,7 +11846,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/notes",
           "hide_notification": false,
-          "id": 5521,
+          "id": 4561,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11760,7 +11862,7 @@
           "templates": [],
           "text": "Notes",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "063a6b3b-73ab-458b-8855-ed8aca82c7f9",
           "values": [],
           "width": 94
@@ -11775,7 +11877,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/phone_number",
           "hide_notification": false,
-          "id": 5522,
+          "id": 4562,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11791,7 +11893,7 @@
           "templates": [],
           "text": "Phone Number",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "c9638dca-a693-47f6-a616-cd31d8c4d366",
           "values": [],
           "width": 144
@@ -11806,7 +11908,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/user_deleted",
           "hide_notification": false,
-          "id": 5523,
+          "id": 4563,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -11822,7 +11924,7 @@
           "templates": [],
           "text": "User Deleted",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "3cbbe5b4-e52c-4b1f-89a1-197c86f3e16e",
           "values": [],
           "width": 59
@@ -11837,7 +11939,7 @@
           "deprecated": false,
           "export_key": "mcafee_epo_users/user_name",
           "hide_notification": false,
-          "id": 5524,
+          "id": 4564,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11853,7 +11955,7 @@
           "templates": [],
           "text": "User Name",
           "tooltip": "",
-          "type_id": 1234,
+          "type_id": 1008,
           "uuid": "67c46a44-701f-4af9-b90c-14482e92415c",
           "values": [],
           "width": 179
