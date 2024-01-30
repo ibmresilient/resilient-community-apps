@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "boolean"
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "mcafee_epo_push_agent_install_path": {},
+        "mcafee_epo_push_agent_package_path": {},
+        "mcafee_epo_push_agent_force_install": {},
+        "mcafee_epo_group_id": {
+          "type": "integer"
+        },
+        "mcafee_epo_push_agent": {},
+        "mcafee_epo_push_agent_domain_name": {},
+        "mcafee_epo_flatten_tree_structure": {},
+        "mcafee_epo_allow_duplicates": {},
+        "mcafee_epo_delete_if_removed": {},
+        "mcafee_epo_push_agent_username": {},
+        "mcafee_epo_uninstall": {},
+        "mcafee_epo_push_agent_skip_if_installed": {},
+        "mcafee_epo_system_name_or_id": {
+          "type": "string"
+        },
+        "mcafee_epo_push_agent_suppress_ui": {},
+        "mcafee_epo_push_agent_password": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
