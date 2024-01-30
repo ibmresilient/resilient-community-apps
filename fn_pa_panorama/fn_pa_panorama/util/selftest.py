@@ -42,7 +42,10 @@ def selftest_function(opts):
         Current Configs in app.config file:
         ---------
         panorama_host: {options.get("panorama_host")}
-        cert: {options.get("cert")}"""
+        api_version: {options.get("api_version")}
+        cert: {options.get("cert")}
+        sf_location: {options.get("sf_location")}
+        sf_vsys: {options.get("sf_vsys")}"""
 
     return {
         "state": "success" if status else "failure",
