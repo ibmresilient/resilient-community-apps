@@ -20,6 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_misp',
+    display_name='MISP Threat Sharing',
     version='3.0.2',
     license='MIT',
     author='IBM QRadar SOAR',
@@ -34,15 +35,15 @@ setup(
                      "Additional search functions allow one to search all attributes and return sightings from an event. "
                      "This package does not replace or supersede the MISP Custom Threat Service, "
                      "the aim is to supplement it and create a bi-directional connection and integration. "
-                     "The package is built in a flexible way so it can be used with any real rule or workflow configuration. "
-                     "Sample rules and workflows are provided. "
-                     "Custom attribute types can be mapped from the workflow pre-processing script of the function. "
-                     "See the sample workflows for sample payloads returned.",
+                     "The package is built in a flexible way so it can be used with any real playbook configuration. "
+                     "Sample playbooks are provided. "
+                     "Custom attribute types can be mapped from the playbook input script of the function. ",
     install_requires=['resilient_circuits>=49.0',
                       'pymisp~=2.4; python_version>="3"',
                       'pymisp==2.4.119.1; python_version<"3"'
                       ],
     packages=find_packages(),
+    python_requires='>=3.6',
     include_package_data=True,
     platforms='any',
     classifiers=[
