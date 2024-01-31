@@ -89,7 +89,7 @@ if getattr(playbook.inputs, "epo_user_disabled", None):
 ```python
 results = playbook.functions.results.add_user
 if results.get("success"):
-  incident.addNote("User: {} successfully created.".format(playbook.functions.epo_username))
+  incident.addNote("User: {} successfully created.".format(playbook.inputs.epo_username))
 ```
 
 ---
