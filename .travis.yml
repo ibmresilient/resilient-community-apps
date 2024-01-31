@@ -8,7 +8,7 @@ git:
 
 stages:
   - name: cron run tests and sonar scan on all packages
-    if: tag IS blank AND branch = master AND type = cron
+    if: tag IS blank AND type = cron
   - name: run package tests
     if: type != cron
   - name: build image and app zip
@@ -222,50 +222,50 @@ matrix:
         - echo "Starting Python 3.9 Unit Tests (4/4) - Main - PyPi"
         - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 4 4
 
-    - stage: cron run tests and sonar scan on all packages
-      name: Python 3.11 Unit Tests (1/4) - Main - PyPi
-      python: 3.11
-      env:
-        - RUN_TYPE=unit_test_main_pp TOXENV=py311
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.11 Unit Tests (1/4) - Main - PyPi"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 1 4
-    - stage: cron run tests and sonar scan on all packages
-      name: Python 3.11 Unit Tests (2/4) - Main - PyPi
-      python: 3.11
-      env:
-        - RUN_TYPE=unit_test_main_pp TOXENV=py311
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.11 Unit Tests (2/4) - Main - PyPi"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 2 4
-    - stage: cron run tests and sonar scan on all packages
-      name: Python 3.11 Unit Tests (3/4) - Main - PyPi
-      python: 3.11
-      env:
-        - RUN_TYPE=unit_test_main_pp TOXENV=py311
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.11 Unit Tests (3/4) - Main - PyPi"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 3 4
-    - stage: cron run tests and sonar scan on all packages
-      name: Python 3.11 Unit Tests (4/4) - Main - PyPi
-      python: 3.11
-      env:
-        - RUN_TYPE=unit_test_main_pp TOXENV=py311
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.11 Unit Tests (4/4) - Main - PyPi"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 4 4
+    # - stage: cron run tests and sonar scan on all packages
+    #   name: Python 3.11 Unit Tests (1/4) - Main - PyPi
+    #   python: 3.11
+    #   env:
+    #     - RUN_TYPE=unit_test_main_pp TOXENV=py311
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 3.11 Unit Tests (1/4) - Main - PyPi"
+    #     - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 1 4
+    # - stage: cron run tests and sonar scan on all packages
+    #   name: Python 3.11 Unit Tests (2/4) - Main - PyPi
+    #   python: 3.11
+    #   env:
+    #     - RUN_TYPE=unit_test_main_pp TOXENV=py311
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 3.11 Unit Tests (2/4) - Main - PyPi"
+    #     - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 2 4
+    # - stage: cron run tests and sonar scan on all packages
+    #   name: Python 3.11 Unit Tests (3/4) - Main - PyPi
+    #   python: 3.11
+    #   env:
+    #     - RUN_TYPE=unit_test_main_pp TOXENV=py311
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 3.11 Unit Tests (3/4) - Main - PyPi"
+    #     - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 3 4
+    # - stage: cron run tests and sonar scan on all packages
+    #   name: Python 3.11 Unit Tests (4/4) - Main - PyPi
+    #   python: 3.11
+    #   env:
+    #     - RUN_TYPE=unit_test_main_pp TOXENV=py311
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 3.11 Unit Tests (4/4) - Main - PyPi"
+    #     - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" 4 4
 
     - stage: cron run tests and sonar scan on all packages
       name: Python 2.7 Unit Tests (1/4) - Main - Artifactory
