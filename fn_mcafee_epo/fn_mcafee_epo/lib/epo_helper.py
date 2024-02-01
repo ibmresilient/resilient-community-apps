@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 from logging import getLogger
@@ -70,7 +70,7 @@ class Client:
         url = urljoin(self.url, f'remote/{command_name}')
 
         # Make request
-        r = self.rc.execute_call_v2("get", url, **request_params)
+        r = self.rc.execute("get", url, **request_params)
 
         if r.status_code >= 300 or not r.text.startswith('OK'):
             raise IntegrationError(f"Failed: {r.text}")
@@ -88,12 +88,3 @@ def b_to_s(value):
         return value.decode()
     except Exception:
         return value
-
-def get_list(tags):
-    tag_list = [tags]
-    try:
-        tag_list = loads(tags.replace("'", '"').replace('u"', '"'))
-    except Exception:
-        pass
-
-    return tag_list
