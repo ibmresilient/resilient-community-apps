@@ -34,7 +34,12 @@ def create_misp_sighting(misp_client, my_misp_sighting):
     return misp_client.add_sighting(misp_sighting)
 
 def search_misp_attribute(misp_client, search_attribute):
-    search_results = misp_client.search(value=search_attribute)
+    # search_results = misp_client.search(value=search_attribute)
+    body = {
+        "returnFormat": "json",
+        "value": search_attribute
+    }
+    search_results = misp_client.direct_call("attributes/restSearch", body)
     if not isinstance(search_results, list):
         raise IntegrationError(f"Received an unexpected response type from the MISP API. Expected a list but received: {type(search_results)}")
     return {

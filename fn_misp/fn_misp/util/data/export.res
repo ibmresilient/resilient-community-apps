@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1706627630141,
+  "export_date": 1706803317743,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -649,13 +649,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 8,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1706627628672,
+      "create_date": 1706803316448,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -664,7 +664,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1706627628672,
+      "update_date": 1706803316448,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -822,7 +822,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2cff5126_d654_4201_9aa4_b7b22d579d05\" isExecutable=\"true\" name=\"playbook_2cff5126_d654_4201_9aa4_b7b22d579d05\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0t65rdw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Create Event\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8f9b7c45-9d4e-4d35-8bdd-eb2e2923413a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_analysis_level = 2\\ninputs.misp_distribution = 0\\ninputs.misp_threat_level = 1\\ninputs.misp_event_name = incident.name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_event\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0t65rdw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0yeryou\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0t65rdw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"MISP post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b2db4ea9-5ba3-466e-be20-6ca062b4a21c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0yeryou\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sj5wsa\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0yeryou\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0sj5wsa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0sj5wsa\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2cff5126_d654_4201_9aa4_b7b22d579d05\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sj5wsa\" id=\"Flow_0sj5wsa_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yeryou\" id=\"Flow_0yeryou_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0t65rdw\" id=\"Flow_0t65rdw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1706627296611,
@@ -874,7 +874,7 @@
         "name": "c@example.com",
         "type": "user"
       },
-      "last_modified_time": 1706627394406,
+      "last_modified_time": 1706803216267,
       "local_scripts": [
         {
           "actions": [],
@@ -885,12 +885,12 @@
           "id": 55,
           "language": "python3",
           "last_modified_by": "c@example.com",
-          "last_modified_time": 1706627387125,
+          "last_modified_time": 1706803197595,
           "name": "MISP post process",
           "object_type": "incident",
           "playbook_handle": "misp_create_event",
           "programmatic_name": "misp_create_event_post_process",
-          "script_text": "results = playbook.functions.results.misp_event\nif results.get(\"success\"):\n  incident.properties.misp_event_id = results.get(\"content\", {}).get(\"Event\", {}).get(\"id\")",
+          "script_text": "results = playbook.functions.results.misp_event\nif results.get(\"success\"):\n  event_id = results.get(\"content\", {}).get(\"Event\", {}).get(\"id\")\n  incident.properties.misp_event_id = event_id\n  incident.addNote(f\"Event created on MISP with ID: {event_id}\")",
           "tags": [],
           "uuid": "b2db4ea9-5ba3-466e-be20-6ca062b4a21c"
         }
@@ -923,12 +923,12 @@
       "tags": [],
       "type": "default",
       "uuid": "2cff5126-d654-4201-9aa4-b7b22d579d05",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\" isExecutable=\"true\" name=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0959ipc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Create Sighting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e9df792b-a3af-4d67-ae90-e48aabca138c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_sighting = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_sighting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0959ipc\u003c/incoming\u003e\u003coutgoing\u003eFlow_012ao5b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0959ipc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"MISP post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4c03238e-ef59-4e1b-8591-f8ca184ac840\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_012ao5b\u003c/incoming\u003e\u003coutgoing\u003eFlow_05hjwli\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_012ao5b\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_05hjwli\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_05hjwli\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05hjwli\" id=\"Flow_05hjwli_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_012ao5b\" id=\"Flow_012ao5b_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0959ipc\" id=\"Flow_0959ipc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1706627297038,
@@ -980,7 +980,7 @@
         "name": "c@example.com",
         "type": "user"
       },
-      "last_modified_time": 1706627432192,
+      "last_modified_time": 1706803281079,
       "local_scripts": [
         {
           "actions": [],
@@ -1021,7 +1021,7 @@
       "tags": [],
       "type": "default",
       "uuid": "10d913f7-0b85-4020-bf18-496113b72824",
-      "version": 5
+      "version": 6
     },
     {
       "activation_type": "manual",
@@ -1320,7 +1320,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\" isExecutable=\"true\" name=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1anrt8h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Sighting List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8b531827-741d-40e8-90a5-1ec99cb1710d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_event_id = incident.properties.misp_event_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_sighting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1anrt8h\u003c/incoming\u003e\u003coutgoing\u003eFlow_05qajxv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1anrt8h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"MISP post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1db98320-52e4-4d0a-8bcc-a397db8e24cc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05qajxv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wizgrw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05qajxv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1wizgrw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1wizgrw\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wizgrw\" id=\"Flow_1wizgrw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05qajxv\" id=\"Flow_05qajxv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1anrt8h\" id=\"Flow_1anrt8h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1706627298895,
@@ -1372,7 +1372,7 @@
         "name": "c@example.com",
         "type": "user"
       },
-      "last_modified_time": 1706627532675,
+      "last_modified_time": 1706803303832,
       "local_scripts": [
         {
           "actions": [],
@@ -1421,7 +1421,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b7f5aee8-0b88-4ce9-92f6-b24b757d29ac",
-      "version": 4
+      "version": 5
     }
   ],
   "regulators": null,

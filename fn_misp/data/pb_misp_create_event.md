@@ -62,7 +62,9 @@ inputs.misp_event_name = incident.name
 ```python
 results = playbook.functions.results.misp_event
 if results.get("success"):
-  incident.properties.misp_event_id = results.get("content", {}).get("Event", {}).get("id")
+  event_id = results.get("content", {}).get("Event", {}).get("id")
+  incident.properties.misp_event_id = event_id
+  incident.addNote(f"Event created on MISP with ID: {event_id}")
 ```
 
 ---
