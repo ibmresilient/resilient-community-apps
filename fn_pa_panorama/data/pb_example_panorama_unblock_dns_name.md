@@ -107,12 +107,23 @@ member_list.remove(dns_name)
 
 inputs.panorama_name_parameter = group_name
 
+# If using api version 9.0 or before uncomment below for the body
+# body = {
+#   "entry": {
+#     "@name": group_name,
+#     "description": des,
+#     "static": {
+#       "member": dumps(member_list)
+#     }
+#   }
+# }
+
 body = {
   "entry": {
     "@name": group_name,
     "description": des,
     "static": {
-      "member": dumps(member_list)
+      "member": member_list
     }
   }
 }

@@ -5,7 +5,7 @@
 
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, literal_eval
 
 FN_NAME = "panorama_edit_address_group"
 
@@ -49,7 +49,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             results = panorama_util.edit_address_groups(fn_inputs.panorama_name_parameter,
-                                                        self.get_textarea_param(fn_inputs.panorama_request_body))
+                                                        fn_inputs.panorama_request_body)
         except Exception as err:
             reason = err
             success = False

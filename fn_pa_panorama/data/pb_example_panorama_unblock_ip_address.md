@@ -64,12 +64,23 @@ if ip_address_name in member_list:
 
 inputs.panorama_name_parameter = group_name
 
+# If using api version 9.0 or under uncomment the below to use as the body
+# body = {
+#   "entry": {
+#     "@name": group_name,
+#     "description": des,
+#     "static": {
+#       "member": dumps(member_list)
+#     }
+#   }
+# }
+
 body = {
   "entry": {
     "@name": group_name,
     "description": des,
     "static": {
-      "member": dumps(member_list)
+      "member": member_list
     }
   }
 }
