@@ -7,7 +7,7 @@ from resilient_lib import IntegrationError
 log = getLogger(__name__)
 
 def get_misp_client(URL, API_KEY, VERIFY_CERT, proxies):
-    return ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT, proxies=proxies)
+    return ExpandedPyMISP(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
 def create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name):
     misp_event = MISPEvent()
@@ -34,12 +34,7 @@ def create_misp_sighting(misp_client, my_misp_sighting):
     return misp_client.add_sighting(misp_sighting)
 
 def search_misp_attribute(misp_client, search_attribute):
-    # search_results = misp_client.search(value=search_attribute)
-    body = {
-        "returnFormat": "json",
-        "value": search_attribute
-    }
-    search_results = misp_client.direct_call("attributes/restSearch", body)
+    search_results = misp_client.search(value=search_attribute)
     if not isinstance(search_results, list):
         raise IntegrationError(f"Received an unexpected response type from the MISP API. Expected a list but received: {type(search_results)}")
     return {
