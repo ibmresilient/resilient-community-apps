@@ -109,7 +109,6 @@ class TestFnOcr:
         with pytest.raises(BaseFunctionError):
             results = call_fn_ocr_function(circuits_app, mock_inputs)
 
-    @staticmethod
     def side_effect_1(img_rbg, output_type, config):
         # pytest mocked side_effect, which returns a dataframe similar to what tesseract would return
         path = sys.path[2] + "/SO_output.csv"

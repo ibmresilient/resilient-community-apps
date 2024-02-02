@@ -31,14 +31,20 @@ This release modified the base portion of the Data Feeder which is controlled by
 | workspaces | "Default Workspace": ["sqlserver_feed"], "workspace A": ["kafka_feed", "resilient_feed"] | This setting allows for the partitioning of Data Feeder execution among different workspaces. The format is to specify the workspace name with the data feeder components to associated with it: "workspace": ["app.config section_name"]. If unused, data from all workspaces is accessed. |
 | include_attachment_data | true/false | set to true if attachment data should be part of the sent payload. When 'true', the attachment's byte data is saved in base64 format. |
 
+### 1.2.0 Changes
+This release modified the base portion of the Data Feeder which is controlled by the `[feed]` section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:
+
+| Parameter | Value(s) | Capability |
+| --------- | -------- | ---------- |
+| parallel_execution | True, False | parallel execution for faster ingestion to Splunk |
+
 ## Compatibility
+SOAR: 45.0 or higher
 
-SOAR Compatibilty: 30.0 or higher
-
-CP4S Compatibility: 1.4 or higher
+CP4S: 1.10 or higher
 
 ## Installation
-The data feeder app for Splunk contains Python components that are called by the IBM SOAR platform. It can either by installed directly in the app for management and execution through the App Host, or installed on your own Integration server, running our integration framework: resilient-circuits. It is prefered that an enterprise use App Host, as all the component installation and dependencies are already packaged.
+The data feeder app for Splunk contains Python components that are called by the IBM SOAR platform. It can either by installed directly in the app for management and execution through the App Host, or installed on your own Integration server, running our integration framework: resilient-circuits. It is preferred that an enterprise use App Host, as all the component installation and dependencies are already packaged.
 
 ### App Host
 Simply install the .zip file into the app. It includes:
@@ -99,6 +105,8 @@ include_attachment_data=false
 # if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
 # ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
 workspaces=
+# parallel execution disabled for splunkfeed
+parallel_execution = False
 ```
 
 ## SplunkHECFeed Class
