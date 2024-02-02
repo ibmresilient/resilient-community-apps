@@ -31,29 +31,33 @@ class FunctionComponent(AppFunctionComponent):
         # Determine if a list of tags was given
         if "," in fn_inputs.mcafee_epo_tag:
             # List of tags given
-            tags_list = fn_inputs.mcafee_epo_tag.split(",")
+            temp_list = fn_inputs.mcafee_epo_tag.split(",")
+            # This will filter out empty spaces after a comma and commas that have nothing after them (Helps prevent some user errors)
+            tags_list = [tag.strip() for tag in temp_list if tag.strip()]
         else: # Single tag given
-            tags_list = [fn_inputs.mcafee_epo_tag]
+            tags_list = [fn_inputs.mcafee_epo_tag.strip()]
 
         # Determine if a list of systems was given
         if "," in fn_inputs.mcafee_epo_systems:
             # List of systems given
-            systems_list = fn_inputs.mcafee_epo_systems.split(",")
+            temp_list = fn_inputs.mcafee_epo_systems.split(",")
+            # This will filter out empty spaces after a comma and commas that have nothing after them (Helps prevent some user errors)
+            systems_list = [system.strip() for system in temp_list if system.strip()]
         else: # Single system given
-            systems_list = [fn_inputs.mcafee_epo_systems]
+            systems_list = [fn_inputs.mcafee_epo_systems.strip()]
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
-        # Loop through list of systems and remove a single tag to a single system at a time
-        for system in systems_list:
-            # Loop through list of tags remove one tag at a time
-            for tag in tags_list:
+        # Loop through list of tags remove one tag at a time
+        for tag in tags_list:
+            # Loop through list of systems and remove a single tag to a single system at a time
+            for system in systems_list:
                 params = {
-                    "names": system.strip(),
-                    "tagName": tag.strip()
+                    "names": system,
+                    "tagName": tag
                 }
-            response = client.request("system.clearTag", params)
+                response = client.request("system.clearTag", params)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

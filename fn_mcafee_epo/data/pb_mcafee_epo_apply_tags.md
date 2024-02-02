@@ -21,7 +21,7 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| List of tags | `list_of_tags` | text | Comma separated list of tags | Optional |
+| List of tags | `list_of_tags` | text | Comma separated list of tags that exist on ePO | Optional |
 
 ### Object Type
 `artifact`
@@ -37,7 +37,7 @@ None
 `mcafee_tag_an_epo_asset`
 
 ### Output Name
-`tags`
+`tags_results`
 
 ### Message Destination
 `mcafee_epo_message_destination`
@@ -47,6 +47,23 @@ None
 inputs.mcafee_epo_systems = artifact.value
 if getattr(playbook.inputs, "list_of_tags", None):
   inputs.mcafee_epo_tag = str(getattr(playbook.inputs, "list_of_tags", None))
+```
+
+---
+## Function - McAfee ePO List Tags
+
+### API Name
+`mcafee_epo_list_tags`
+
+### Output Name
+`tags`
+
+### Message Destination
+`mcafee_epo_message_destination`
+
+### Function-Input Script
+```python
+None
 ```
 
 ---
@@ -64,7 +81,7 @@ if getattr(playbook.inputs, "list_of_tags", None):
 
 ### Script Content
 ```python
-results = playbook.functions.results.tags
+results = playbook.functions.results.tags_results
 if results.get("success"):
   note = "ePO tag(s) added: {}".format(str(getattr(playbook.inputs, "list_of_tags")))
 else:
@@ -74,6 +91,23 @@ if artifact.description:
   artifact.description = "{}\n\n{}".format(artifact.description.content, note)
 else:
   artifact.description = note
+```
+
+---
+## Global script - ePO tags error
+
+### Description
+
+
+### Script Type
+`Global script`
+
+### Object Type
+`artifact`
+
+### Script Content
+```python
+incident.addNote(f"Failed to edit tag(s): '{playbook.inputs.list_of_tags}' on system(s): '{artifact.value}' with reason: The given tag(s) have to exist on ePO")
 ```
 
 ---

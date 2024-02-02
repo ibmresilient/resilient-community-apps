@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Generated with resilient-sdk v51.0.0.2.575
 
 """Generate the SOAR customizations required for fn_mcafee_epo"""
@@ -69,7 +69,9 @@ def codegen_reload_data():
             u"mcafee_epo_users"
         ],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [
+            u"ePO tags error"
+        ],
         "playbooks": [
             u"mcafee_epo_add_permission_set_to_user",
             u"mcafee_epo_add_system",
@@ -182,6 +184,8 @@ def customization_data(client=None):
         - mcafee_epo_systems_dt
         - mcafee_epo_tags
         - mcafee_epo_users
+    - Scripts:
+        - ePO tags error
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
