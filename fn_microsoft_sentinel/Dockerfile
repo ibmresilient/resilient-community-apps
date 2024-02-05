@@ -1,5 +1,5 @@
 # Generated with resilient-sdk v48.0.4034
-# docker build -t ibmresilient/fn_microsoft_sentinel:1.1.0 -t ibmresilient/fn_microsoft_sentinel:latest .
+# docker build -t ibmresilient/fn_microsoft_sentinel:1.2.0 -t ibmresilient/fn_microsoft_sentinel:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest

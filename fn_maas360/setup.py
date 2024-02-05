@@ -22,11 +22,11 @@ def snake_to_camel(word):
 
 setup(
     name="fn_maas360",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     url='https://ibm.com/mysupport',
-    description="This package enables Mobile Device Management (MDM) actions from IBM Resilient.",
+    description="This package enables Mobile Device Management (MDM) actions from IBM SOAR.",
     long_description="""
 The MaaS360 function package enables users to perform the following Mobile Device Management (MDM) actions:<br>
 - Basic device search.<br>
@@ -38,8 +38,8 @@ The MaaS360 function package enables users to perform the following Mobile Devic
 - Stop app distribution across specific target devices.<br>
 - Delete an app from the MaaS360 catalog.""",
     install_requires=[
-        "resilient_circuits>=35.0.0",
-        "resilient-lib>35.0.0"
+        "resilient_circuits>=46.0.0",
+        "resilient-lib>46.0.0"
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2023. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=pointless-string-statement, line-too-long, wrong-import-order
 
 """Function implementation"""
 
 import logging
-import unicodedata
 from urllib.parse import urlsplit
 from fn_network_utilities.util.distance import damerau_levenshtein_distance
 from fn_network_utilities.util.confusable import Confusable
@@ -40,8 +39,8 @@ class FunctionComponent(ResilientComponent):
         parsed = urlsplit(domain)
         if parsed.scheme:
             return parsed.hostname
-        else:
-            return parsed.path
+
+        return parsed.path
 
     @function("network_utilities_domain_distance")
     def _domain_distance_function(self, event, *args, **kwargs):

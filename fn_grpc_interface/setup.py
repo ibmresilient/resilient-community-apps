@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #!/usr/bin/env python
@@ -23,23 +23,20 @@ def snake_to_camel(word):
 
 setup(
     name='fn_grpc_interface',
-    version='1.1.1',
+    version='1.1.3',
     license='MIT',
     author='IBM SOAR',
     author_email='',
     url="http://ibm.biz/soarcommunity",
-    description="This Function provides a general purpose wrapper that allows you to call gRPC services from within IBM Resilient",
-    long_description="""This Function provides a general wrapper that allows you to call gRPC services from within IBM Resilient,
-                    making it easier for you create distributed application and services with IBM Resilient.""",
+    description="This Function provides a general purpose wrapper that allows you to call gRPC services from within IBM SOAR",
+    long_description="""This Function provides a general wrapper that allows you to call gRPC services from within IBM SOAR,
+                    making it easier for you create distributed application and services with IBM SOAR.""",
     install_requires=[
         "resilient_circuits>=30.0.0",
-
-        "grpcio ~= 1.41;python_version<'3.6'",
-        "grpcio == 1.44.0;python_version>='3.6'",
-
-        "grpcio-tools ~= 1.41;python_version<'3.6'",
-        "grpcio-tools == 1.44.0;python_version>='3.6'"
+        "grpcio ~= 1.57.0",
+        "grpcio-tools ~= 1.57.0"
     ],
+    python_requires='>=3.7',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

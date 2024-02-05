@@ -16,14 +16,16 @@
 
 # fn_google_cloud_dlp
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
   - [Resilient platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Authenticating to Google Cloud](#authenticating-to-google-cloud) 
+  - [Authenticating to Google Cloud](#authenticating-to-google-cloud)
+    - [Using an Integration Server:](#using-an-integration-server)
+    - [Using App Host:](#using-app-host)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
 - [Installation](#installation)
@@ -32,7 +34,8 @@
 - [Function - Google Cloud DLP: De-Identify Content](#function---google-cloud-dlp-de-identify-content)
 - [Function - Google Cloud DLP: Inspect Content](#function---google-cloud-dlp-inspect-content)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -44,7 +47,9 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 06/2019 | Initial Release |
 | 1.1.0 | 09/2021 | Added App Host Support |
-| 1.2.0 | 06/2022 | Dropped Python v2 Support |
+| 1.2.0 | 06/2022 | Only Python 3.6 or 3.9 supported |
+| 1.2.1 | 08/2023 | Only Python 3.9 supported |
+| 1.2.2 | 11/2023 | Convert Workflow/Script to Python3 |
 
 ---
 
@@ -78,13 +83,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `43.1.49`.
+* Resilient platform >= `46.0.8131`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `43.1.49`.
+* Resilient platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -125,7 +130,7 @@ When configuring the app after installing, you must create a new file in the "Co
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 3.6 and Python 3.9 are supported.
+Python 3.7 or greater is supported for this app.
 Additional package dependencies may exist for each of these packages:
 *'resilient_circuits>=45.0.0',
 *'google-cloud-dlp~=3.7.1',
@@ -264,16 +269,20 @@ except:
 <p>
 
 ```python
-if results.success:
-  """Print all the findings as a richtext note. This note may be very long if you run the integration on a large file with lots of PII. In these cases you may want to limit how many findings are put into the note."""
-  if results.content['findings'] != None:
-    note_text = u"""Findings were found from attachment <b>{}</b><br><br> Findings: <br>""".format(results.content["attachment_name"])
-    for finding in results.content['findings']:
-      note_text += u"""Text Quote: <b>{}</b>
-                      <br> Information Type Suspected: <b>{}</b>
-                      <br> Likelihood / Confidence: <b>{}</b><br><br>""".format(finding["quote"],finding["info_type"],finding["likelihood"])
-                      
-    incident.addNote(helper.createRichText(note_text))
+if results.get("success"):
+    """Print all the findings as a richtext note. This note may be very long if you run the integration on a large file with lots of PII. In these cases you may want to limit how many findings are put into the note."""
+    if results.get("content", {}).get("findings") is not None:
+        attachment_name = results.get("content", {}).get("attachment_name")
+        note_text = """Findings were found from attachment <b>{}</b><br><br> Findings: <br>""".format(attachment_name)
+        for finding in results.get("content", {}).get("findings", []):
+            text_quote = finding.get("quote")
+            info_type = finding.get("info_type")
+            likelihood = finding.get("likelihood")
+            note_text += """Text Quote: <b>{}</b>
+                            <br> Information Type Suspected: <b>{}</b>
+                            <br> Likelihood / Confidence: <b>{}</b><br><br>""".format(text_quote, info_type, likelihood)
+        incident.addNote(helper.createRichText(note_text))
+
 ```
 
 </p>

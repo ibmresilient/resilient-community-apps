@@ -2,11 +2,9 @@
 """Tests using pytest_resilient_circuits"""
 import logging
 import pytest
-
 from urllib import parse
 from unittest.mock import patch
 from resilient_lib import RequestsCommon
-
 from fn_teams.lib import constants
 from fn_teams.lib.microsoft_authentication import MicrosoftAuthentication
 

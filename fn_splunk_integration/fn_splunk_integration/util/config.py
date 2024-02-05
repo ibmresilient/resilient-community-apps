@@ -25,6 +25,8 @@ username=admin
 splunkpassword=changeme
 #token=
 verify_cert=false|/path/to/cert
+# uncomment as necessary for proxies
+#https_proxy=https://yourproxy.com
 
 [fn_splunk_integration:splunk_label2]
 host=localhost
@@ -33,4 +35,6 @@ username=admin
 splunkpassword=changeme
 #token=
 verify_cert=false|/path/to/cert
+# uncomment as necessary for proxies
+#https_proxy=https://yourproxy.com
 '''

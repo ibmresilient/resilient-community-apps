@@ -6,20 +6,62 @@
     "result": [
       {
         "id": 1,
-        "name": "Test_activity_map_1",
-        "short_code": "wGCGL",
-        "description": "Test map 1",
+        "name": "My-activity-map",
+        "short_code": "6Tk88",
+        "description": "testing SOAR app",
         "weighting": "bytes",
-        "owner": "setup",
+        "owner": "owner@example.com",
         "mode": "2dforce",
-        "mod_time": 1644514002331,
+        "mod_time": 1680790675151,
         "show_alert_status": false,
         "walks": [
           {
             "origins": [
               {
                 "object_type": "device",
-                "object_id": 6
+                "object_id": 4294967298
+              }
+            ],
+            "steps": [
+              {
+                "relationships": [
+                  {
+                    "protocol": "any",
+                    "role": "any"
+                  }
+                ]
+              },
+              {
+                "relationships": [
+                  {
+                    "protocol": "aaa",
+                    "role": "server"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "rights": [
+          "view"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "My-activity-map-2",
+        "short_code": "mnKTM",
+        "description": "Testing SOAR app",
+        "weighting": "bytes",
+        "owner": "owner@example.com",
+        "mode": "2dforce",
+        "mod_time": 1680790704719,
+        "show_alert_status": false,
+        "walks": [
+          {
+            "origins": [
+              {
+                "object_type": "device_group",
+                "object_id": 100
               }
             ],
             "steps": [
@@ -35,10 +77,6 @@
           }
         ],
         "rights": [
-          "delete",
-          "edit",
-          "share",
-          "transfer",
           "view"
         ]
       }
@@ -50,8 +88,8 @@
     "version": "1.0",
     "package": "fn-extrahop",
     "package_version": "1.0.0",
-    "host": "myhost.ibm.com",
-    "execution_time_ms": 1063,
-    "timestamp": "2022-04-13 16:50:16"
+    "host": "MBP",
+    "execution_time_ms": 2996,
+    "timestamp": "2023-04-10 13:42:33"
   }
 }

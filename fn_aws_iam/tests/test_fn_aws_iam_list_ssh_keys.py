@@ -57,7 +57,7 @@ class TestFnAwsIamListSshKeys:
 
     @patch("fn_aws_iam.components.fn_aws_iam_list_ssh_keys.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, expected_results", [
-        ("iam_test_user", [{'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G',
+        ("iam_test_user", [{'SSHPublicKeyId': 'ABCDEFGH',
                             'Status': 'Active',
                             'UploadDate': '2020-02-25 11:05:17',
                             'UserName': 'iam_test_user'}

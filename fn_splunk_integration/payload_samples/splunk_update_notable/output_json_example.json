@@ -12,17 +12,17 @@
   },
   "raw": null,
   "inputs": {
-    "event_id": "7D8101AA-B8DB-44FF-94A2-E06831523B77@@notable@@4cac62644c673525583605a6cb16de15",
+    "event_id": "0DE6791A-6F7D-42DC-BAF0-26D58032AE40@@notable@@b98308abb5851cacd0589ec3177389d6",
     "notable_event_status": 2,
     "comment": "SOAR incident is active",
-    "splunk_label": "splunk_76"
+    "splunk_label": null
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.3.0",
+    "package_version": "1.4.0",
     "host": "local",
-    "execution_time_ms": 4489,
-    "timestamp": "2022-06-15 09:03:50"
+    "execution_time_ms": 3790,
+    "timestamp": "2023-08-29 09:55:24"
   }
 }

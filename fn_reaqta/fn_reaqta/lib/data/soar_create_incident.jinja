@@ -18,7 +18,7 @@
     "DEFAULT": "Unknown"
   }'''
   %}
-  "name": "ReaQta Alert - {{ triggerCondition | string | soar_substitute(triggercondition_lookup) }}, Endpoint: {{ endpoint.name }}",
+  "name": "QRadar EDR Alert - {{ triggerCondition | string | soar_substitute(triggercondition_lookup) }}, Endpoint: {{ endpoint.name }}",
   "description": "{{ title | replace('"', '\\"') }}",
   {# start_date cannot be after discovered_date #}
   {% set start_date = happenedAt if happenedAt <= receivedAt else receivedAt %}

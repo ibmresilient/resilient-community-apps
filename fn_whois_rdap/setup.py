@@ -33,7 +33,8 @@ setup(
         'ipwhois==1.1.0',
         'tldextract~=3.0; python_version>="3.0"',
         'tldextract~=2.2; python_version<"3.0"',
-        'future~=0.18'
+        'future~=0.18',
+        "requests-file==1.5.1; python_version<='3.6'"
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -7,11 +7,13 @@ import abc
 import json
 import logging
 import pytz
+import traceback
 from cachetools import cached, TTLCache
 from datetime import datetime
 
 LOG = logging.getLogger(__name__)
 
+INCIDENT_NOT_FOUND_ERROR = 404
 
 class TypeInfo(object):
     """
@@ -316,19 +318,19 @@ class TypeInfo(object):
         if incident:
             return self.get_workspace_from_id(incident['workspace'])
 
+        LOG.error(f"incident id: {inc_id} not found")
         return None
 
     def get_workspace_from_id(self, workspace_id):
-        """ get an incident workspace label from the workspace id """
+        """ get an incident workspace label based on the workspace id """
 
         incident_type = self.get_type(0) # incident
         for workspace_value in incident_type['fields']['workspace']['values']:
-            if workspace_value['default']:
-                default_workspace = workspace_value['label']
             if workspace_id == workspace_value['value']:
                 return workspace_value['label']
 
-        return default_workspace
+        LOG.error(f"workspace id: {workspace_id} not found within type_info")
+        return None
 
     def get_type_name(self, type_id, pretty=True):
         """
@@ -619,4 +621,9 @@ class FullTypeInfo(TypeInfo):
 @cached(cache=TTLCache(maxsize=1000, ttl=60), key=lambda rest_client_helper, inc_id: str(inc_id))
 def get_incident(rest_client_helper, inc_id):
     """ get an incident based on it's id. Results are cached """
-    return rest_client_helper.get("/incidents/{}".format(inc_id))
+    # don't retry incident not found errors (404)
+    try:
+        return rest_client_helper.get("/incidents/{}".format(inc_id), skip_retry=[INCIDENT_NOT_FOUND_ERROR])
+    except Exception:
+        traceback.print_exc()
+        return None

@@ -163,6 +163,12 @@ class AppCommon():
         response, err_msg = self.api_call("POST", url, None)
         return response.json(), err_msg
 
+    def deisolate_machine(self, endpoint_id):
+        url = urljoin(ENDPOINT_URI.format(endpoint_id), "deisolate")
+
+        response, err_msg = self.api_call("POST", url, None)
+        return response.json(), err_msg
+
     def get_processes(self, endpoint_id):
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "processes")
 

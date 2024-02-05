@@ -24,10 +24,10 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_channel_name": {
+        "ms_groupteam_id": {
           "type": "string"
         },
-        "ms_groupteam_name": {
+        "ms_channel_name": {
           "type": "string"
         }
       }

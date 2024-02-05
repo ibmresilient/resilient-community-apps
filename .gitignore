@@ -25,5 +25,7 @@ resilient_circuits_lockfile
 *.bak
 .python-version
 */dist
+.env
+app.config
 
 !.drivers/**

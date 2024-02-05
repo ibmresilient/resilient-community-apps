@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v49.1.51
 
 """Generate the Resilient customizations required for fn_ldap_utilities"""
 
@@ -22,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_ldap_utilities",
         "message_destinations": [u"fn_ldap_utilities"],
         "functions": [u"ldap_utilities_add", u"ldap_utilities_add_to_groups", u"ldap_utilities_remove_from_groups", u"ldap_utilities_search", u"ldap_utilities_set_password", u"ldap_utilities_toggle_access", u"ldap_utilities_update"],
-        "workflows": [u"example_ldap_utilities_add", u"example_ldap_utilities_add_users_to_groups", u"example_ldap_utilities_remove_user_from_groups", u"example_ldap_utilities_search", u"example_ldap_utilities_set_password", u"example_ldap_utilities_toggle_access", u"example_ldap_utilities_update"],
-        "actions": [u"Example: LDAP Utilities: Add", u"Example: LDAP Utilities: Add User(s) to Group(s)", u"Example: LDAP Utilities: Remove User(s) from Group(s)", u"Example: LDAP Utilities: Search", u"Example: LDAP Utilities: Set Password", u"Example: LDAP Utilities: Toggle Access", u"Example: LDAP Utilities: Update"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [u"ldap_base_dn", u"ldap_domain_name"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"ldap_query_results"],
         "automatic_tasks": [],
-        "scripts": [],
-        "playbooks": []
+        "scripts": [u"No search results"],
+        "playbooks": [u"example_ldap_utilities_add", u"example_ldap_utilities_add_users_to_groups", u"example_ldap_utilities_remove_users_from_groups", u"example_ldap_utilities_search", u"example_ldap_utilities_set_password", u"example_ldap_utilities_toggle_access", u"example_ldap_utilities_update"]
     }
 
 
@@ -39,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 42.0.7058
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -52,27 +53,21 @@ def customization_data(client=None):
         - ldap_utilities_set_password
         - ldap_utilities_toggle_access
         - ldap_utilities_update
-    - Workflows:
+    - Playbooks:
         - example_ldap_utilities_add
         - example_ldap_utilities_add_users_to_groups
-        - example_ldap_utilities_remove_user_from_groups
+        - example_ldap_utilities_remove_users_from_groups
         - example_ldap_utilities_search
         - example_ldap_utilities_set_password
         - example_ldap_utilities_toggle_access
         - example_ldap_utilities_update
-    - Rules:
-        - Example: LDAP Utilities: Add
-        - Example: LDAP Utilities: Add User(s) to Group(s)
-        - Example: LDAP Utilities: Remove User(s) from Group(s)
-        - Example: LDAP Utilities: Search
-        - Example: LDAP Utilities: Set Password
-        - Example: LDAP Utilities: Toggle Access
-        - Example: LDAP Utilities: Update
     - Incident Fields:
         - ldap_base_dn
         - ldap_domain_name
     - Data Tables:
         - ldap_query_results
+    - Scripts:
+        - No search results
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

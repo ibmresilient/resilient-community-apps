@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from logging import getLogger
-from resilient_lib import validate_fields, IntegrationError, str_to_bool
-from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils, SplunkClient
+from resilient_lib import validate_fields, IntegrationError, str_to_bool, RequestsCommon
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
 
 PACKAGE_NAME = "fn_splunk_integration"
 QUERY_PARAM = "splunk_query_param"
@@ -14,7 +14,7 @@ def make_query_string(query_string, params):
     Substitute parameters into the query
     :param query: Input query with params
     :param params: Values used to substitute
-    :return: (str) Query with params substitued
+    :return: (str) Query with params substituted
     """
 
     for param in params:
@@ -49,7 +49,7 @@ def make_item_dict(params):
 
 def get_servers_list(opts):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: List of options
     :return: List of splunk servers
     """
@@ -79,11 +79,17 @@ def get_servers_list(opts):
 
     return servers_list
 
-def function_basics(fn_inputs, servers_list, utils=True):
+def function_basics(fn_inputs, servers_list, opts):
     # Make that calls that all of the functions use
     options = SplunkServers.splunk_label_test(getattr(fn_inputs, "splunk_label", None), servers_list)
+    rc = RequestsCommon(opts, options)
 
-    splunk_verify_cert = str_to_bool(options.get("verify_cert", ""))
+    verify = options.get("verify_cert", True)
+    # convert potential strings to boolean if necessary
+    # NOTE: it is possible that a string path should be returned,
+    # in which case we don't want there to be a boolean conversion
+    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
+        verify = str_to_bool(verify)
 
     # Log all the info
     LOG.info(str(fn_inputs))
@@ -91,19 +97,11 @@ def function_basics(fn_inputs, servers_list, utils=True):
     # Log the splunk server we are using
     LOG.info(f"Splunk host: {options.get('host')}, port: {options.get('port')}")
 
-    if utils:
-        splunk = SplunkUtils(host=options.get("host"),
-                             port=options.get("port"),
-                             username=options.get("username", None),
-                             password=options.get("splunkpassword", None),
-                             token=options.get("token", None),
-                             verify=splunk_verify_cert)
-    else:
-        splunk = SplunkClient(host=options.get("host"),
-                              port=options.get("port"),
-                              username=options.get("username", None),
-                              password=options.get("splunkpassword", None),
-                              token=options.get("token", None),
-                              verify=splunk_verify_cert)
-
-    return splunk, splunk_verify_cert
+    return SplunkUtils(host=options.get("host"),
+                            port=options.get("port"),
+                            username=options.get("username", None),
+                            password=options.get("splunkpassword", None),
+                            token=options.get("token", None),
+                            verify=verify,
+                            proxies=rc.get_proxies(),
+                            rc=rc)

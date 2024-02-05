@@ -21,6 +21,12 @@
       "old_value": {"text": "A"},
       "new_value": {"text": "C"},
       "field": {"name": "plan_status"}
+    },
+    {# The following is required for the automation playbook, Jira Close Issue, to not run when the poller closes a SOAR incident. #}
+    {
+      "old_value": {"boolean": {% if soar["properties"]["jira_issue_closed_on_jira"] is none %} null {% elif soar["properties"]["jira_issue_closed_on_jira"] is False %} false {% else %} true {% endif %}},
+      "new_value": {"boolean": true},
+      "field": {"name": "jira_issue_closed_on_jira"}
     }
   ]
 }

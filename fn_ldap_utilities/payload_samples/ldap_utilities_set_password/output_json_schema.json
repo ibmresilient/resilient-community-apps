@@ -3,16 +3,22 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
     },
     "reason": {},
-    "content": {},
-    "raw": {
-      "type": "string"
+    "content": {
+      "type": "object",
+      "properties": {
+        "user_dn": {
+          "type": "string"
+        },
+        "ldap_new_password": {}
+      }
     },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -27,9 +33,6 @@
         },
         "ldap_return_new_password": {
           "type": "boolean"
-        },
-        "ldap_new_auto_password_len": {
-          "type": "integer"
         }
       }
     },
@@ -55,9 +58,6 @@
           "type": "string"
         }
       }
-    },
-    "user_dn": {
-      "type": "string"
     }
   }
 }

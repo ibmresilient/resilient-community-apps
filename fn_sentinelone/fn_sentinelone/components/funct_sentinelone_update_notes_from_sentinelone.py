@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_sentinelone.lib.resilient_common import ResilientCommon
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from resilient_lib import SOARCommon
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME, SOAR_HEADER)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_update_notes_from_sentinelone"
 
 
@@ -31,17 +30,28 @@ class FunctionComponent(AppFunctionComponent):
         incident_id = fn_inputs.incident_id
         threat_id = fn_inputs.sentinelone_threat_id
 
-        resilient_api = ResilientCommon(self.rest_client())
-        sentinelone_api = SentinelOneClient(self.opts, self.options)
+        soar_common = SOARCommon(self.rest_client())
+        app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
 
-        threat_notes = sentinelone_api.get_threat_notes(threat_id)
+        threat_notes = app_common.get_threat_notes(threat_id)
 
-        new_comments = resilient_api.filter_resilient_comments(incident_id, threat_notes)
+        # Create a list of formatted text for filtering just new comments.
+        threat_note_list = []
+        for comment in threat_notes:
+            formatted_text = app_common.format_threat_note(comment)
+            if formatted_text:
+                threat_note_list.append(formatted_text)
 
-        for comment in new_comments:
-            resilient_api.create_incident_comment(incident_id,
-                                                  comment['id'],
-                                                  comment['text'])
+        new_comments = []
+        if threat_note_list:
+            new_comments = soar_common.filter_soar_comments(incident_id, threat_note_list, SOAR_HEADER)
+
+        if new_comments:
+
+            for comment in new_comments:
+                soar_common.create_case_comment(case_id = incident_id,
+                                                note=comment)
+
         results = {"success": True,
                    "notes_created": len(new_comments)}      
 

@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-#
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
-#
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 #   Util classes for qradar
-#
 
 from base64 import b64encode
 import logging
@@ -420,7 +417,7 @@ class QRadarClient(object):
 
         ret = []
         for r_set in ref_sets:
-            LOG.info(u"Looking for {} in reference set {}".format(
+            LOG.debug(u"Looking for {} in reference set {}".format(
                 value, r_set["name"]))
             element = QRadarClient.search_ref_set(r_set["name"], value)
             if element["found"] == "True":

@@ -10,13 +10,21 @@
     },
     "reason": {},
     "content": {
-      "type": "string"
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        }
+      }
     },
     "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "reaqta_alert_id": {
+          "type": "string"
+        },
+        "reaqta_hive": {
           "type": "string"
         },
         "reaqta_note": {

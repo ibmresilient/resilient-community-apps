@@ -45,7 +45,7 @@ class TestFnAwsIamDeleteAccessKeys:
 
     @patch("fn_aws_iam.components.fn_aws_iam_delete_access_keys.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, aws_iam_access_keys, expected_results", [
-        ("iam_test_User_1", "AKIA4EQBBG2YLGK6O42H", [{"AccessKeyId": "AKIA4EQBBG2YLGK6O42H",
+        ("iam_test_User_1", "ABCDEFGH", [{"AccessKeyId": "ABCDEFGH",
                                                       "Status": get_func_responses("delete_access_key_good")}]),
         ("iam_test_User_1", "AAABBBCCCDDDEENOSUCH", [{"AccessKeyId": "AAABBBCCCDDDEENOSUCH",
                                                       "Status": get_func_responses("delete_access_key_nosuch")}])

@@ -1,23 +1,27 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
-
 """ SOAR functions component to execute queries against an LDAP server """
 
-from logging import getLogger
 from json import loads
 from re import search, sub
-from resilient_lib import validate_fields, ResultPayload
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+
 from ldap3 import ALL_ATTRIBUTES
-from ldap3.core.exceptions import LDAPSocketOpenError, LDAPInvalidFilterError
+from ldap3.core.exceptions import LDAPInvalidFilterError, LDAPSocketOpenError
 from ldap3.utils.conv import escape_filter_chars
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
+from resilient_lib import validate_fields
+
+from fn_ldap_utilities.util.helper import (PACKAGE_NAME, LDAPUtilitiesHelper,
+                                           get_domains_list)
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
-LOG = getLogger(__name__)
+FN_NAME = "ldap_utilities_search"
+PAGED_SIZE = 1000
+cookie_path = "1.2.840.113556.1.4.319"
 
-class FunctionComponent(ResilientComponent):
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'ldap_utilities_search'
 
       The Function does an LDAP lookup and takes the following parameters:
@@ -50,18 +54,21 @@ class FunctionComponent(ResilientComponent):
     """
 
     def __init__(self, opts):
-        """Constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.domains_list = get_domains_list(opts)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.domains_list = get_domains_list(opts)
-
-    @function("ldap_utilities_search")
-    def _ldap_utilities_search_function(self, event, *args, **kwargs):
-        """SOAR Function: entry point """
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Function: A function that allows the user to search LDAP.
+        Inputs:
+            -   fn_inputs.ldap_domain_name
+            -   fn_inputs.ldap_search_base
+            -   fn_inputs.ldap_search_base
+            -   fn_inputs.ldap_search_filter
+            -   fn_inputs.ldap_search_attributes
+            -   fn_inputs.ldap_search_param
+        """
 
         def replace_ldap_param(ldap_param_value=None, ldap_search_filter=""):
 
@@ -72,112 +79,115 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError(f"The LDAP Search Filter '{ldap_search_filter}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.")
                 else:
                     # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
-                    ldap_search_filter = sub(
-                        re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
+                    ldap_search_filter = sub(re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
 
             return ldap_search_filter
 
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+
+        # Validate that required fields are given
+        validate_fields(["ldap_search_base", "ldap_search_filter"], fn_inputs)
+
+        # Get function inputs
+        ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
+        input_ldap_search_base = getattr(fn_inputs, "ldap_search_base") # text (required)
+        input_ldap_search_filter = self.get_textarea_param(getattr(fn_inputs, "ldap_search_filter")) # textarea (required)
+        input_ldap_search_attributes = getattr(fn_inputs, "ldap_search_attributes", ALL_ATTRIBUTES) # text (optional)
+        input_ldap_search_param = getattr(fn_inputs, "ldap_search_param") # text (optional)
+
+        if input_ldap_search_attributes and input_ldap_search_attributes is not ALL_ATTRIBUTES:
+            input_ldap_search_attributes = [str(attr) for attr in input_ldap_search_attributes.split(',')]
+
+        if input_ldap_search_param:
+            # Escape special chars from the search_param
+            input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
+
+        self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
+        self.LOG.info(f"LDAP Search Base: {input_ldap_search_base}")
+        self.LOG.info(f"LDAP Search Filter: {input_ldap_search_filter}")
+        self.LOG.info(f"LDAP Search Attributes: {input_ldap_search_attributes}")
+        self.LOG.info(f"LDAP Search Param: {input_ldap_search_param}")
+
+        # Initiate variable, so that it does not error when called
+        conn = ""
+
+        # Instansiate helper (which gets appconfigs from file)
+        ldap = LDAPDomains(self.opts)
+        helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
+
+        input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)
+
+        # Instansiate LDAP Server and Connection
+        conn = helper.get_ldap_connection()
+
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+            # Bind to the connection
+            conn.bind()
+        except Exception as err:
+            raise ValueError(f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
 
-            yield StatusMessage(f"Starting 'ldap_utilities_search' running in workflow '{wf_instance_id}'")
+        # Inform user
+        yield self.status_message(f"Connected to {'Active Directory' if helper.LDAP_IS_ACTIVE_DIRECTORY else 'LDAP Server'}")
 
-            # Validate that required fields are given
-            validate_fields(["ldap_search_base", "ldap_search_filter"], kwargs)
+        # All of the returned search results
+        all_entries = []
+        success = False
 
-            # Get function inputs
-            ldap_domain_name = kwargs.get("ldap_domain_name", "") # text
-            input_ldap_search_base = kwargs.get("ldap_search_base") # text (required)
-            input_ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter")) # textarea (required)
-            input_ldap_search_attributes = kwargs.get("ldap_search_attributes", ALL_ATTRIBUTES) # text (optional)
-            input_ldap_search_param = kwargs.get("ldap_search_param") # text (optional)
+        yield self.status_message("Attempting to Search")
 
-            if input_ldap_search_attributes and input_ldap_search_attributes is not ALL_ATTRIBUTES:
-                input_ldap_search_attributes = [str(attr) for attr in input_ldap_search_attributes.split(',')]
-
-            if input_ldap_search_param:
-                # Escape special chars from the search_param
-                input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
-
-            LOG.info("LDAP Domain Name: %s", ldap_domain_name)
-            LOG.info("LDAP Search Base: %s", input_ldap_search_base)
-            LOG.info("LDAP Search Filter: %s", input_ldap_search_filter)
-            LOG.info("LDAP Search Attributes: %s", input_ldap_search_attributes)
-            LOG.info("LDAP Search Param: %s", input_ldap_search_param)
-
-            yield StatusMessage("Function Inputs OK")
-
-            # Initiate variable, so that it does not error when called
-            conn = ""
-
-            # Instansiate helper (which gets appconfigs from file)
-            ldap = LDAPDomains(self.opts)
-            helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
-            yield StatusMessage("Appconfig Settings OK")
-
-            input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)
-
-            # Instansiate LDAP Server and Connection
-            conn = helper.get_ldap_connection()
-
-            try:
-                # Bind to the connection
-                conn.bind()
-            except Exception as err:
-                raise ValueError(f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
-
-            try:
-                # Inform user
-                yield StatusMessage(f"Connected to {'Active Directory' if helper.LDAP_IS_ACTIVE_DIRECTORY else 'LDAP Server'}")
-
-                entries = []
-                success = False
-
-                yield StatusMessage("Attempting to Search")
-
-                res = conn.search(
+        try:
+            # Perform a paged search on the LDAP server
+            res = conn.search(
+                search_base=input_ldap_search_base,
+                search_filter=input_ldap_search_filter,
+                attributes=input_ldap_search_attributes,
+                paged_size=PAGED_SIZE
+            )
+            # Add the search results to the `all_entries` list
+            all_entries.extend(loads(conn.response_to_json())["entries"])
+            # Get the cookies from the search
+            cookie = conn.result['controls'][cookie_path]['value']['cookie']
+            while cookie:
+                #Perform a paged search with the cookies from the last search
+                conn.search(
                     search_base=input_ldap_search_base,
                     search_filter=input_ldap_search_filter,
-                    attributes=input_ldap_search_attributes)
+                    attributes=input_ldap_search_attributes,
+                    paged_size=PAGED_SIZE,
+                    paged_cookie=cookie
+                )
+                # Add the search results to the `all_entries` list
+                all_entries.extend(loads(conn.response_to_json())["entries"])
+                # Get the cookies from the search
+                cookie = conn.result['controls'][cookie_path]['value']['cookie']
 
-                if res and len(conn.entries) > 0:
-                    entries = loads(conn.response_to_json())["entries"]
-                    LOG.info("Result contains %s entries", len(entries))
+            if res and len(all_entries) > 0:
+                self.LOG.info("Result contains %s entries", len(all_entries))
 
-                    # Each entry has 'dn' and dict of 'attributes'. Move attributes to the top level for easier processing.
-                    for entry in entries:
-                        entry.update(entry.pop("attributes", None))
+                # Each entry has 'dn' and dict of 'attributes'. Move attributes to the top level for easier processing.
+                for entry in all_entries:
+                    entry.update(entry.pop("attributes", None))
 
-                    yield StatusMessage(f"{len(entries)} entries found")
-                    success = True
+                yield self.status_message(f"{len(all_entries)} entries found")
+                success = True
 
-                else:
-                    yield StatusMessage("No entries found")
+            else:
+                yield self.status_message("No entries found")
 
-            except LDAPSocketOpenError as err:
-                LOG.debug(f"Error: {err}")
-                raise ValueError("Invalid Search Base", input_ldap_search_base)
-            except LDAPInvalidFilterError as err:
-                LOG.debug(f"Error: {err}")
-                raise ValueError("Invalid search filter", input_ldap_search_filter)
-            except Exception as err:
-                raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", err)
+        except LDAPSocketOpenError as err:
+            self.LOG.error(f"Error: {err}")
+            raise ValueError("Invalid Search Base", input_ldap_search_base)
+        except LDAPInvalidFilterError as err:
+            self.LOG.error(f"Error: {err}")
+            raise ValueError("Invalid search filter", input_ldap_search_filter)
+        except Exception as err:
+            raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", err)
 
-            finally:
-                # Unbind connection
-                conn.unbind()
+        finally:
+            # Unbind connection
+            conn.unbind()
 
-            # Initialize ResultPayload object
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            results = rp.done(success, entries)
-            results["entries"] = entries
-
-            yield StatusMessage(f"Finished 'ldap_utilities_search' running in workflow '{wf_instance_id}'")
-            LOG.debug("RESULTS: %s", results)
-
-            # Produce a FunctionResult with the return value.
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the return value.
+        yield FunctionResult({"entries": all_entries}, success=success)

@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_sep',
     display_name='Symantec Endpoint Protection',
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     author='IBM SOAR',
     author_email='',

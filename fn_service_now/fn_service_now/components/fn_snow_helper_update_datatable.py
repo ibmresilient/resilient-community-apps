@@ -1,22 +1,22 @@
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-import time
-
+from logging import getLogger
+from time import time
 from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
                                                   ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
+
     def __init__(self, inputs):
         self.success = True
         self.inputs = inputs
@@ -48,18 +48,22 @@ class FunctionComponent(ResilientComponent):
     def _fn_snow_helper_update_datatable_function(self, event, *args, **kwargs):
         """Function: A helper function that updates the ServiceNow Records Data Table when the status of an Incident/Task is changed."""
 
-        log = logging.getLogger(__name__)
+        log = getLogger(__name__)
 
         try:
-            # Instansiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
+            validate_fields(["incident_id", "sn_resilient_status"], kwargs)
 
             # Get the function inputs:
             inputs = {
-                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),  # number (required)
-                "task_id": res_helper.get_function_input(kwargs, "task_id", True),  # number (optional)
-                "sn_resilient_status": res_helper.get_function_input(kwargs, "sn_resilient_status"),  # text (required)
+                # number (required)
+                "incident_id": kwargs.get("incident_id"),
+                # number (optional)
+                "task_id": kwargs.get("task_id"),
+                # text (required)
+                "sn_resilient_status": kwargs.get("sn_resilient_status"),
             }
 
             # Create payload dict with inputs
@@ -67,36 +71,41 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Function Inputs OK")
 
-            # Instansiate new Resilient API object
+            # Instantiate new Resilient API object
             res_client = self.rest_client()
 
-            # Instansiate a reference to the ServiceNow Datatable
-            res_datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
+            # Instantiate a reference to the ServiceNow Datatable
+            res_datatable = ServiceNowRecordsDataTable(
+                res_client, payload.inputs["incident_id"])
 
             # Get the datatable data and rows
             res_datatable.get_data()
 
             # Generate the res_id
-            payload.res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
+            payload.res_id = res_helper.generate_res_id(
+                payload.inputs["incident_id"], payload.inputs["task_id"])
 
             # Search for a row that contains the res_id
-            row_found = res_datatable.get_row("sn_records_dt_res_id", payload.res_id)
+            row_found = res_datatable.get_row(
+                "sn_records_dt_res_id", payload.res_id)
 
             # Get current time (*1000 as API does not accept int)
-            now = int(time.time() * 1000)
+            now = int(time() * 1000)
 
             if row_found:
 
-                resilient_status = res_helper.state_to_text(payload.inputs.get("sn_resilient_status"))
+                resilient_status = res_helper.state_to_text(
+                    payload.inputs.get("sn_resilient_status"))
 
-                yield StatusMessage("Row found for {0}. Updating resilient_status to {1}".format(
-                    payload.res_id, resilient_status))
+                yield StatusMessage(f"Row found for {payload.res_id}. Updating resilient_status to {resilient_status}")
 
                 if resilient_status == "Active":
-                    resilient_status = res_helper.convert_text_to_richtext("Active", "green")
+                    resilient_status = res_helper.convert_text_to_richtext(
+                        "Active", "green")
 
                 else:
-                    resilient_status = res_helper.convert_text_to_richtext("Closed", "red")
+                    resilient_status = res_helper.convert_text_to_richtext(
+                        "Closed", "red")
 
                 cells_to_update = {
                     "sn_records_dt_time": now,
@@ -104,7 +113,8 @@ class FunctionComponent(ResilientComponent):
                 }
 
                 # Update the row
-                update_row_response = res_datatable.update_row(row_found, cells_to_update)
+                update_row_response = res_datatable.update_row(
+                    row_found, cells_to_update)
                 payload.row_id = update_row_response["id"]
 
             else:
@@ -115,13 +125,15 @@ class FunctionComponent(ResilientComponent):
                     err_msg = err_msg.format("Task", payload.inputs["task_id"])
 
                 else:
-                    err_msg = err_msg.format("Incident", payload.inputs["incident_id"])
+                    err_msg = err_msg.format(
+                        "Incident", payload.inputs["incident_id"])
 
                 yield StatusMessage(err_msg)
 
             results = payload.as_dict()
             rp_results = rp.done(results.get("success"), results)
-            rp_results.update(results) # add in all results for backward-compatibility
+            # add in all results for backward-compatibility
+            rp_results.update(results)
 
             log.debug("RESULTS: %s", rp_results)
             log.info("Complete")

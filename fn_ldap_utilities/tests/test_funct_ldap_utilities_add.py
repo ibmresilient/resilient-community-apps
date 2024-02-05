@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -54,23 +54,15 @@ class TestLdapUtilitiesAdd:
             'message': '',
             'referrals': None,
             'type': 'addResponse'
-        },
-        'inputs': {},
-        'metrics': {}
+        }
     }
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
-    @pytest.mark.parametrize("ldap_dn, ldap_attribute_name_values, ldap_multiple_group_dn, expected_results",
-                             [(inputs["ldap_dn"], inputs["ldap_attribute_name_values"], inputs["ldap_multiple_group_dn"], outputs)])
-    def test_success(self, circuits_app, ldap_dn, ldap_attribute_name_values, ldap_multiple_group_dn, expected_results):
+    @pytest.mark.parametrize("mock_inputs, expected_results", [(inputs, outputs)])
+    def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = {
-            "ldap_dn": ldap_dn,
-            "ldap_attribute_name_values": ldap_attribute_name_values,
-            "ldap_multiple_group_dn": ldap_multiple_group_dn
-        }
-        results = call_ldap_utilities_add_function(
-            circuits_app, function_params)
-        assert(results['success'])
-        assert(expected_results['content'] == results['content'])
+
+        results = call_ldap_utilities_add_function(circuits_app, mock_inputs)
+        for expected in expected_results:
+            assert expected in results

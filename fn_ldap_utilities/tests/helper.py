@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from ldap3 import Server, Connection, MOCK_SYNC
 from mock import Mock

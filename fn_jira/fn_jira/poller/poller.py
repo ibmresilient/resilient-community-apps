@@ -134,7 +134,7 @@ class PollerComponent(AppFunctionComponent):
     @poller("polling_interval", "last_poller_time")
     def run(self, *args, **kwargs):
         """
-        Process to query for changes in datasource entities and the cooresponding update SOAR case.
+        Process to query for changes in datasource entities and the corresponding update SOAR case.
         The steps taken are:
            1) query SOAR for all open entities associated with the datasource
            2) query datasource entities for changes based on these incidents
@@ -186,12 +186,12 @@ class PollerComponent(AppFunctionComponent):
                 # Get the max_results settings from the servers settings
                 max_results = options.get("max_issues_returned")
 
-            # If poller_filters and or max_results are defnined in the global_settings
+            # If poller_filters and or max_results are defined in the global_settings
             poller_filters = self.global_settings.get("poller_filters")
             if poller_filters:
                 # Validate poller_filter
                 validate_fields([poller_filters_validator], self.global_settings)
-            else: # If poller_filters is defnined in individual Jira server settings
+            else: # If poller_filters is defined in individual Jira server settings
                 # Validate poller_filter
                 validate_fields([poller_filters_validator], options)
                 # Get the poller_filters settings from the servers settings
@@ -319,7 +319,7 @@ class PollerComponent(AppFunctionComponent):
                 elif jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
-                elif not jira_issue.get("fields").get("resolutiondate"):
+                elif jira_issue.get("fields").get("status", {}).get("statusCategory", {}).get("name") != "Done":
                     # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
                     jira_issues_to_add_to_soar.append(jira_issue)
 
@@ -340,7 +340,7 @@ class PollerComponent(AppFunctionComponent):
                         # Check if SOAR incident needs to be updated
                         if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
                             # Check if the Jira issue has been closed
-                            if jira_issue.get("fields").get("resolutiondate"):
+                            if jira_issue.get("fields").get("status", {}).get("statusCategory", {}).get("name") == "Done":
                                 # Add matching SOAR case and Jira issue to soar_cases_to_close list
                                 soar_cases_to_close.append([jira_issue, soar_case])
                                 break
@@ -374,7 +374,7 @@ class PollerComponent(AppFunctionComponent):
         options = get_server_settings(self.opts, server_label)
 
         # Collect the override templates to use when creating, updating and closing cases
-        # If a path to a poller template is set in the indiviual Jira server configs, then it will ignore
+        # If a path to a poller template is set in the individual Jira server configs, then it will ignore
         #  setting in the Global_settings
         if template_name == "create_case":
             return options.get(create_case) if options.get(create_case) else self.soar_create_case_template
@@ -495,7 +495,7 @@ class PollerComponent(AppFunctionComponent):
         # List of comments from the SOAR incident
         soar_comments = [clean_html(comment.get("content", "").replace("Added from Jira", "")) for comment in soar.get("comments", [])]
         # List of comments from the Jira issue
-        jira_comments = [comment.get("body", "").replace("\n", "") for comment in jira.get("renderedFields", {}).get("comment").get("comments", [])]
+        jira_comments = [comment.get("body", "").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields", {}).get("comment").get("comments", [])]
 
         if jira_comments:
             for comment in jira_comments:
@@ -550,8 +550,8 @@ class PollerComponent(AppFunctionComponent):
             # Update datatable
             self.update_task_datatable(task, jira)
 
-            # If the Jira issue has a resolutiondate then the issue is closed
-            if jira.get("fields", {}).get("resolutiondate") and not task.get("closed_date"):
+            # If the Jira issue's status has a status category equal to Done, then the Jira issue is closed
+            if jira.get("fields", {}).get("status", {}).get("statusCategory", {}).get("name") == "Done" and not task.get("closed_date"):
                 try:
                     self.res_client.get_put(f"/tasks/{task.get('id')}", lambda soar_task: close_task_status(soar_task))
                 except Exception as err:
@@ -567,7 +567,7 @@ class PollerComponent(AppFunctionComponent):
         # SOAR Task comments
         task_comments = [clean_html(note.get("text").replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note.get("text")]
         # Jira issue comments
-        jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
+        jira_comments = [comment.get("body").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
 
         # Update comments/notes
         if jira_comments:

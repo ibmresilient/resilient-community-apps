@@ -18,9 +18,6 @@
         "content": {
           "type": "object",
           "properties": {
-            "time_to_live": {
-              "type": "string"
-            },
             "timeout_type": {
               "type": "string"
             },
@@ -41,9 +38,6 @@
             },
             "collection_id": {
               "type": "integer"
-            },
-            "key_label": {
-              "type": "string"
             }
           }
         }

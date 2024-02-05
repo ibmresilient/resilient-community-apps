@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use, line-too-long
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 
 """Feed component implementation."""
 
@@ -9,14 +9,12 @@ import logging
 import sys
 import traceback
 
-from pydoc import locate
-from resilient_circuits import ResilientComponent, handler, ActionMessage
-from resilient_lib import str_to_bool, get_file_attachment
+from resilient_circuits import ResilientComponent, handler, ActionMessage, is_this_a_selftest
+from resilient_lib import str_to_bool
 from resilient import SimpleHTTPException
 
-
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo, get_incident
-from rc_data_feed.lib.feed import FeedContext
+from rc_data_feed.components.threadpool import PluginPool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
 
 LOG = logging.getLogger(__name__)
@@ -29,31 +27,6 @@ def _get_inc_id(payload):
 
 def _is_incident_or_task(parent_types):
     return {'incident', 'task'}.intersection(parent_types)
-
-def build_feed_outputs(rest_client_helper, opts, feed_names):
-    """
-    build array of all the classes which of datastores to populate
-    :param rest_client_helper:
-    :param opts:
-    :param feed_names:
-    :return: array of datastore classes
-    """
-    feed_config_names = [name.strip() for name in feed_names.split(',')]
-
-    feed_outputs = {}
-
-    for feed_config_name in feed_config_names:
-        feed_options = opts.get(feed_config_name, {})
-
-        class_name = feed_options.get("class")
-
-        namespace = 'data_feeder_plugins.{ns}.{ns}.{claz}Destination'.format(ns=class_name.lower(), claz=class_name)
-        LOG.debug(namespace)
-        obj = locate(namespace)(rest_client_helper, feed_options)
-
-        feed_outputs[feed_config_name] = obj
-
-    return feed_outputs
 
 def range_chunks(chunk_range, chunk_size):
     """
@@ -73,64 +46,6 @@ def range_chunks(chunk_range, chunk_size):
         yield (start + 1, min(stop, start + chunk_size))
 
         start += chunk_size
-
-def send_data(type_info, inc_id, rest_client_helper, payload,\
-              feed_outputs, workspaces, is_deleted, incl_attachment_data):
-    """
-    perform the sync to the different datastores
-    :param type_info:
-    :param inc_id:
-    :param rest_client:
-    :param payload of incident, task, artifact, etc.:
-    :param feed_outputs:
-    :param workspaces: mapping of workspace to feeds
-    :param is_deleted: true/false
-    :param incl_attachment_data: true/false
-    :return: None
-    """
-    context = FeedContext(type_info, inc_id, rest_client_helper.inst_rest_client, is_deleted)
-
-    type_name = type_info.get_pretty_type_name()
-    # make sure the incident has a org_name
-    if type_name == 'incident':
-        payload['org_name'] = type_info.get_org_name(payload['org_id'])
-
-    # collect attachment data to pass on
-    elif not is_deleted and incl_attachment_data \
-            and type_name == 'attachment':
-        # this will return a byte string
-        payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
-                                                 task_id=payload.get('task_id'),
-                                                 attachment_id=payload['id'])
-    elif not is_deleted and incl_attachment_data \
-            and type_name == 'artifact' \
-            and payload.get('attachment'):
-        # this will return a byte string
-        payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
-                                                 artifact_id=payload['id'])
-
-    # get the incident workspace for this data
-    # reload=true will not work as type_info is the wrong object type
-    if type_name == 'incident':
-        workspace = type_info.get_workspace_from_id(payload['workspace'])
-    else:
-        workspace = type_info.get_incident_workspace(inc_id)
-
-    item_sent = False
-    for feed_name, feed_output in feed_outputs.items():
-        # don't let a failure in one feed break all the rest
-        try:
-            if not workspaces or (workspace in workspaces and feed_name in workspaces[workspace]):
-                LOG.debug("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
-                feed_output.send_data(context, payload)
-                item_sent = True
-        except Exception as err:
-            LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
-            error_trace = traceback.format_exc()
-            LOG.error("Traceback %s", error_trace)
-
-    if not item_sent:
-        LOG.debug("No workspace found to satisfy data feed for %s (%s)", type_name, payload.get('id'))
 
 class FeedComponent(ResilientComponent):
     """This component handles initial population of a feed and ongoing
@@ -155,7 +70,6 @@ class FeedComponent(ResilientComponent):
             else:
                 rest_client_helper = RestClientHelper(self.rest_client)
 
-                self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
                 # build the list workspaces to plugin, if present
                 try:
                     self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
@@ -165,11 +79,18 @@ class FeedComponent(ResilientComponent):
                     LOG.error('Syntax: workspaces="workspaceA": "odbcfeed", "workspaceB": ["odbcfeed", "elasticfeed"]')
                     self.workspaces = {}
 
+                self.plugin_pool = PluginPool.get_instance(self.rest_client_helper,
+                                                           int(opts.get("resilient", {}).get("num_workers", 0)),
+                                                           self.options.get("feed_names", None),
+                                                           opts,
+                                                           self.workspaces,
+                                                           parallel_execution=str_to_bool(self.options.get("parallel_execution", 'false')))
+
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
                 # determine the reload options to follow
-                if str_to_bool(self.options.get('reload', 'false')):
+                if str_to_bool(self.options.get('reload', 'false')) and not is_this_a_selftest(self):
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 
                     reload_feeds = Reload(rest_client_helper, self.feed_outputs, self.workspaces,
@@ -459,7 +380,21 @@ class Reload(object):
 
         return len(item_list)
 
-    def _query_attachment(self, rest_client_helper, inc_id, type_info):
+    def _process_task_notes(self, notes_list, task_note_type_info, inc_id):
+        # go through all the task notes
+        for note in notes_list:
+            self.plugin_pool.send_data(task_note_type_info, inc_id, note, False, self.incl_attachment_data)
+            # children notes?
+            self._process_task_notes(note.get('children', []), task_note_type_info, inc_id)
+
+    def _query_task_note(self, inc_id, task_id, type_info):
+        query = "/tasks/{}/comments".format(task_id)
+        item_list = self.plugin_pool.rest_client_helper.get(query)
+        for item in item_list:
+            self.plugin_pool.send_data(type_info, inc_id, item, False, self.incl_attachment_data)
+
+
+    def _query_attachment(self, inc_id, type_info):
         query = "/incidents/{}/attachments/query?include_tasks=true".format(inc_id)
         item_list = rest_client_helper.post(query, None)
         for item in item_list['attachments']:
@@ -474,7 +409,7 @@ class Reload(object):
         for _, table in item_list.items():
             datatable_id = table['id']
             # only sync datatables expressed in app.config
-            if datatable_id in self.datatable_search_type_names.keys():
+            if datatable_id in self.datatable_search_type_names:
                 # We need the ID of the table, not the ID for the generic "datatable" type.
                 type_info = self.type_info_index[datatable_id]
 

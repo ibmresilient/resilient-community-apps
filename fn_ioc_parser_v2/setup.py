@@ -23,7 +23,7 @@ setup(
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='http://ibm.biz/resilientcommunity',
+    url='https://ibm.biz/soarcommunity',
     description="These functions extract Indicators of Compromise (IOCs) from Resilient attachments and files.",
     long_description="""Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and Artifacts. 
                         All unique IOCs that are found are added to the Resilient Incident as an Artifact.""",

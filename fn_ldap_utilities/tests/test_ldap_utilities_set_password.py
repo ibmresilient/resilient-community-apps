@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -39,22 +39,23 @@ class TestLdapUtilitiesSetPassword:
         assert func
 
     inputs = {
-      "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
-      "ldap_new_password": "Passw8rd!"
+        "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
+        "ldap_new_password": "Passw8rd!",
+        "ldap_return_new_password": False
     }
 
-    outputs = {"success": True, "user_dn": "CN=Test User8,CN=Users,dc=example,DC=com"}
+    outputs = {
+        "success": True,
+        "content": {
+            "user_dn": "CN=Test User8,CN=Users,dc=example,DC=com"
+        }
+    }
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
-    @pytest.mark.parametrize("ldap_dn, ldap_new_password, expected_results", [
-        (inputs["ldap_dn"], inputs["ldap_new_password"], outputs)])
-    def test_success(self, circuits_app, ldap_dn, ldap_new_password, expected_results):
+    @pytest.mark.parametrize("mock_inputs, expected_results", [(inputs, outputs)])
+    def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = {
-            "ldap_dn": ldap_dn,
-            "ldap_new_password": ldap_new_password
-        }
-        results = call_ldap_utilities_set_password_function(circuits_app, function_params)
+        results = call_ldap_utilities_set_password_function(circuits_app, mock_inputs)
         for expected_result in expected_results:
             assert expected_result in results

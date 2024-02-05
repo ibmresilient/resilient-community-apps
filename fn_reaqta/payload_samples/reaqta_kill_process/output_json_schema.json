@@ -39,6 +39,9 @@
         "reaqta_starttime": {
           "type": "integer"
         },
+        "reaqta_hive": {
+          "type": "string"
+        },
         "reaqta_endpoint_id": {
           "type": "string"
         },
