@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "tactics": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "has_ibm_default": {
+          "type": "boolean"
+        },
+        "last_updated": {
+          "type": "integer"
+        },
+        "mapping": {
+          "type": "object",
+          "properties": {
+            "Initial Access": {
+              "type": "object",
+              "properties": {
+                "confidence": {
+                  "type": "string"
+                },
+                "user_override": {
+                  "type": "boolean"
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "ibm_default": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "techniques": {
+                  "type": "object",
+                  "properties": {
+                    "Valid Accounts": {
+                      "type": "object",
+                      "properties": {
+                        "confidence": {
+                          "type": "string"
+                        },
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "min-mitre-version": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
