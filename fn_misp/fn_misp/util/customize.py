@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Generated with resilient-sdk v51.0.0.2.575
 
 """Generate the SOAR customizations required for fn_misp"""

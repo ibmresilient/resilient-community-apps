@@ -1,11 +1,11 @@
-# Generated with resilient-sdk v51.0.0.0.430
+# Generated with resilient-sdk v51.0.0.2.575
 # docker build -t ibmresilient/fn_misp:3.0.2 -t ibmresilient/fn_misp:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_misp
-ARG RESILIENT_CIRCUITS_VERSION=51.0.0.0.0
+ARG RESILIENT_CIRCUITS_VERSION=51.0.0.2.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container

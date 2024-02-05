@@ -6,36 +6,44 @@ from resilient_lib import IntegrationError
 
 log = getLogger(__name__)
 
+
 def get_misp_client(URL, API_KEY, VERIFY_CERT, proxies):
     return PyMISP(URL, API_KEY, VERIFY_CERT, 'json', proxies=proxies)
+
 
 def create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name):
     return misp_client.new_event(misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
 
+
 def create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value):
     return misp_client.add_named_attribute(misp_event_id, misp_attribute_type, misp_attribute_value)
 
+
 def create_misp_sighting(misp_client, misp_sighting):
     sighting_json = {
-        "values":[f"{misp_sighting}"],
+        "values": [f"{misp_sighting}"],
         "timestamp": int(time())
     }
     return misp_client.set_sightings(sighting_json)
+
 
 def search_misp_attribute(misp_client, search_attribute):
     search_results = misp_client.search('attributes', values=search_attribute)
     log.debug(dumps(search_results, indent=4))
     if not isinstance(search_results.get('response', {}).get('Attribute'), list):
         raise IntegrationError("Received an unexpected response type from the MISP API. "
-                                "Expected a dictionary containing a list of attributes, but received: {}".format(type(search_results.get('response', {}).get('Attribute'))))
-    search_results_len = len(search_results.get('response', {}).get('Attribute'))
+                               "Expected a dictionary containing a list of attributes, but received: {}".format(type(search_results.get('response', {}).get('Attribute'))))
+    search_results_len = len(search_results.get(
+        'response', {}).get('Attribute'))
     return {
         "search_status": True if search_results_len > 0 else False,
-        "search_results" : search_results.get('response', {}).get('Attribute')
+        "search_results": search_results.get('response', {}).get('Attribute')
     }
+
 
 def get_event_list(misp_client, attribute):
     return [event_id.get('event_id') for event_id in attribute]
+
 
 def get_event_tags(misp_client, misp_event_id):
     misp_tags = []
@@ -50,6 +58,7 @@ def get_event_tags(misp_client, misp_event_id):
         log.debug("No Tag Found for Event Result")
     return misp_tags
 
+
 def get_attribute_tags(attribute_result):
     misp_tags = []
     if 'Tag' in attribute_result.keys():
@@ -59,6 +68,7 @@ def get_attribute_tags(attribute_result):
     else:
         log.debug("No Tag Found for Attribute Result")
     return misp_tags
+
 
 def get_misp_attribute_tags(misp_client, search_results):
     misp_tags = []
@@ -81,6 +91,7 @@ def get_misp_attribute_tags(misp_client, search_results):
     misp_tag_names = list(set(misp_tag_names))
 
     return misp_tag_names
+
 
 def get_misp_sighting_list(misp_client, event_id):
     return misp_client.sighting_list(event_id, 'event')

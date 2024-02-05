@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`-`
+`incident.properties.misp_event_id has_a_value`
 
 ### Object Type
 `artifact`

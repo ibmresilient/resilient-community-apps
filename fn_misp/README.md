@@ -1,6 +1,5 @@
 # fn_misp
 
-
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
