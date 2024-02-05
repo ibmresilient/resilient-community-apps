@@ -21,17 +21,17 @@ def codegen_reload_data():
     Parameters required reload codegen for the fn_pa_panorama package
     """
     return {
-        "package": u"fn_pa_panorama",
+        "package":"fn_pa_panorama",
         "message_destinations": [
-            u"palo_alto_panorama"
+           "palo_alto_panorama"
         ],
         "functions": [
-            u"panorama_create_address",
-            u"panorama_edit_address_group",
-            u"panorama_edit_users_in_a_group",
-            u"panorama_get_address_groups",
-            u"panorama_get_addresses",
-            u"panorama_get_users_in_a_group"
+           "panorama_create_address",
+           "panorama_edit_address_group",
+           "panorama_edit_users_in_a_group",
+           "panorama_get_address_groups",
+           "panorama_get_addresses",
+           "panorama_get_users_in_a_group"
         ],
         "workflows": [],
         "actions": [],
@@ -42,13 +42,13 @@ def codegen_reload_data():
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
-            u"example_panorama_block_dns_name",
-            u"example_panorama_block_ip_address",
-            u"example_panorama_block_user",
-            u"example_panorama_get_address_groups",
-            u"example_panorama_unblock_dns_name",
-            u"example_panorama_unblock_ip_address",
-            u"example_panorama_unblock_user"
+           "example_panorama_block_dns_name",
+           "example_panorama_block_ip_address",
+           "example_panorama_block_user",
+           "example_panorama_get_address_groups",
+           "example_panorama_unblock_dns_name",
+           "example_panorama_unblock_ip_address",
+           "example_panorama_unblock_user"
         ]
     }
 

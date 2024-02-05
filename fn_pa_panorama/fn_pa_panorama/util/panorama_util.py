@@ -12,8 +12,10 @@ DEFAULT_API_VERSION = "v9.1"
 URI_PATH = "restapi"
 PACKAGE_NAME = "fn_pa_panorama"
 
+
 class PanoramaClient:
     """Object to handle the communication and authentication between the integration and Panorama"""
+
     def __init__(self, opts, pan_config, location, vsys=None):
         pan_config["location"] = location
 
@@ -21,7 +23,7 @@ class PanoramaClient:
         validate_fields(["panorama_host", "api_key", "location"], pan_config)
 
         api_version = pan_config.get("api_version", DEFAULT_API_VERSION)
-        self.__key = pan_config["api_key"] 
+        self.__key = pan_config["api_key"]
         self.__url_path = "/".join([URI_PATH, api_version])
         self.__vsys = vsys
 
@@ -39,25 +41,44 @@ class PanoramaClient:
             self.query_parameters["vsys"] = self.__vsys
 
     def __build_url(self, resource_uri):
-        "build url for api calls"
-        return u"/".join([self.host, self.__url_path, resource_uri])
+        """build url for api calls"""
+        return "/".join([self.host, self.__url_path, resource_uri])
 
     def __get(self, resource_uri, parameters):
         """Generic GET"""
-        response = self.rc.execute("GET", self.__build_url(resource_uri), params=parameters, verify=self.verify, headers=self.header)
+        response = self.rc.execute("GET",
+                                   self.__build_url(resource_uri),
+                                   params=parameters,
+                                   verify=self.verify,
+                                   headers=self.header
+                                )
         LOG.debug(f"Response: {response}")
         return response.json()
 
     def __post(self, resource_uri, params, payload):
         """Generic POST"""
-        response = self.rc.execute("POST", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify, headers=self.header)
-        LOG.debug(f"Status code: {response.status_code}, Response: {response.content}")
+        response = self.rc.execute("POST",
+                                   self.__build_url(resource_uri),
+                                   params=params,
+                                   json=loads(payload),
+                                   verify=self.verify,
+                                   headers=self.header
+                                )
+        LOG.debug(
+            f"Status code: {response.status_code}, Response: {response.content}")
         return response.json()
 
     def __put(self, resource_uri, params, payload):
         """Generic PUT"""
-        response = self.rc.execute("PUT", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify, headers=self.header)
-        LOG.debug(f"Status code: {response.status_code}, Response: {response.content}")
+        response = self.rc.execute("PUT",
+                                   self.__build_url(resource_uri),
+                                   params=params,
+                                   json=loads(payload),
+                                   verify=self.verify,
+                                   headers=self.header
+                                )
+        LOG.debug(
+            f"Status code: {response.status_code}, Response: {response.content}")
         return response.json()
 
     def get_addresses(self):
@@ -90,7 +111,13 @@ class PanoramaClient:
                   "action": "get",
                   "key": self.__key,
                   "xpath": xpath}
-        response = self.rc.execute("POST", f"{self.host}/api/", params=params, verify=self.verify, headers=self.header)
+        response = self.rc.execute(
+            "POST",
+            f"{self.host}/api/",
+            params=params,
+            verify=self.verify,
+            headers=self.header
+        )
         response.raise_for_status()
         return response.text
 
@@ -102,11 +129,20 @@ class PanoramaClient:
                   "key": self.__key,
                   "xpath": xpath,
                   "element": xml_object}
-        response = self.rc.execute("POST", f"{self.host}/api/?", params=params, verify=self.verify, headers=self.header)
+        response = self.rc.execute(
+            "POST",
+            f"{self.host}/api/?",
+            params=params,
+            verify=self.verify,
+            headers=self.header
+        )
         response.raise_for_status()
         return response.text
 
+
 class PanoramaServers():
+    """ Get multiple servers from the app.config """
+
     def __init__(self, opts):
         """
         Initialize the PanoramaServers class
@@ -132,7 +168,7 @@ class PanoramaServers():
 
         return servers, server_name_list
 
-    def panorama_label_test(panorama_label, servers_list):
+    def panorama_label_test(self, panorama_label, servers_list):
         """
         Check if the given panorama_label is in the app.config
         :param panorama_label: User selected server
@@ -141,17 +177,19 @@ class PanoramaServers():
         """
         # If label not given and using previous versions app.config [fn_pa_panorama]
         if not panorama_label and servers_list.get(PACKAGE_NAME):
-            return servers_list[PACKAGE_NAME]
-        elif not panorama_label:
-            raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
+            return servers_list.get(PACKAGE_NAME)
+        if not panorama_label:
+            raise IntegrationError(
+                "No label was given and is required if servers are labeled in the app.config")
 
         label = f"{PACKAGE_NAME}:{panorama_label}"
         if panorama_label and label in servers_list:
-            options = servers_list[label]
+            options = servers_list.get(label)
         elif len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
-            raise IntegrationError(f"{panorama_label} did not match labels given in the app.config")
+            raise IntegrationError(
+                f"{panorama_label} did not match labels given in the app.config")
 
         return options
 
@@ -169,17 +207,20 @@ class PanoramaServers():
         """
         return self.server_name_list
 
+
 def get_server_settings(opts, panorama_label):
     """
     Used for initializing or reloading the options variable
     :param opts: List of options
     :return: panorama server settings for specified server
     """
-    server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else PanoramaServers(opts).get_server_name_list()
+    server_list = {PACKAGE_NAME} if opts.get(
+        PACKAGE_NAME, {}) else PanoramaServers(opts).get_server_name_list()
 
     # Creates a dictionary that is filled with the panorama servers
     # and there configurations
-    servers_list = {server_name:opts.get(server_name, {}) for server_name in server_list}
+    servers_list = {server_name: opts.get(
+        server_name, {}) for server_name in server_list}
 
     # Get configuration for panorama server specified
-    return PanoramaServers.panorama_label_test(panorama_label, servers_list)
+    return PanoramaServers(opts).panorama_label_test(panorama_label, servers_list)

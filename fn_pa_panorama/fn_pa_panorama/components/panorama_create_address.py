@@ -9,6 +9,7 @@ from resilient_lib import validate_fields
 
 FN_NAME = "panorama_create_address"
 
+
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'panorama_create_address'"""
 
@@ -29,15 +30,18 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate required parameters
-        validate_fields(["panorama_name_parameter", "panorama_request_body", "panorama_location"], fn_inputs)
+        validate_fields(["panorama_name_parameter",
+                        "panorama_request_body", "panorama_location"], fn_inputs)
 
         # Log inputs
         self.LOG.info(fn_inputs)
 
         # Create connection to the user specific Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
-                                       self.get_select_param(fn_inputs.panorama_location),
+                                       get_server_settings(self.opts, getattr(
+                                           fn_inputs, "panorama_label", None)),
+                                       self.get_select_param(
+                                           fn_inputs.panorama_location),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
