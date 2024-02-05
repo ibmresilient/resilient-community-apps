@@ -41,7 +41,7 @@
 `incident`
 
 ### Description
-None
+If duplicates allowed then system is created. If duplicates not allowed then first check if system being created already exists. If it does not exist then create it.
 
 
 ---
@@ -92,6 +92,23 @@ if getattr(playbook.inputs, "epo_push_agent_install_path", None):
 ```
 
 ---
+## Function - McAfee ePO Find a System
+
+### API Name
+`mcafee_epo_find_a_system`
+
+### Output Name
+`find_system`
+
+### Message Destination
+`mcafee_epo_message_destination`
+
+### Function-Input Script
+```python
+inputs.mcafee_epo_systems = playbook.inputs.epo_system_names_or_ids
+```
+
+---
 
 ## Local script - mcafee epo post process
 
@@ -110,6 +127,24 @@ results = playbook.functions.results.add_sys
 if results.get("success"):
   row = incident.addRow("mcafee_epo_systems_dt")
   row["epo_system_name"] = playbook.inputs.epo_system_names_or_ids
+  row["epo_deleted"] = False
+```
+
+---
+## Local script - epo system found
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`incident`
+
+### Script Content
+```python
+incident.addNote(f"The system: {playbook.inputs.epo_system_names_or_ids} is already on the ePO system.")
 ```
 
 ---
