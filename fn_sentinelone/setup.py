@@ -23,18 +23,18 @@ def snake_to_camel(word):
 setup(
     name="fn_sentinelone",
     display_name="SentinelOne",
-    version="1.0.1",
+    version="1.1.0",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     author_email="",
-    url="https://github.com/ibmresilient/fn_sentinelone",
-    description="IBM Security SOAR app for SentinelOne",
-    long_description="""This app allows bi-directional synchronization between IBM SOAR and SentinelOne.
-    SentinelOne threats are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the threat.""",
+    url="https://ibm.com/mysupport",
+    description="IBM SOAR app - bidirectional synchronization and functions for SentinelOne",
+    long_description="""Bi-directional App for SentinelOne. Query SentinelOne for Threats based \
+         on user-defined query parameters and create and update cases in SOAR.<br>
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        "resilient-circuits>=40.0.0",
-                "resilient-lib",
-                "jinja2"
+        "resilient-circuits>=49.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
@@ -47,8 +47,11 @@ setup(
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
             "{}FunctionComponent = fn_sentinelone.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_sentinelone/components/f[a-zA-Z]*.py")
-            ]+
-            [ "PollerComponent = fn_sentinelone.components.sentinelone_poller:SentinelOnePollerComponent" ],
+            ]
+        + [
+            "PollerComponent = fn_sentinelone.poller.poller:PollerComponent"
+          ]
+        ,
         "resilient.circuits.configsection": ["gen_config = fn_sentinelone.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_sentinelone.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_sentinelone.util.selftest:selftest_function"]

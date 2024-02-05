@@ -43,8 +43,12 @@
         "qradar_search_param3": {
           "type": "string"
         },
-        "qradar_search_param4": {},
-        "qradar_search_param5": {},
+        "qradar_search_param4": {
+          "type": "string"
+        },
+        "qradar_search_param5": {
+          "type": "string"
+        },
         "qradar_label": {
           "type": "string"
         }

@@ -57,8 +57,8 @@ class TestFnAwsIamDeleteSshKeys:
 
     @patch("fn_aws_iam.components.fn_aws_iam_delete_ssh_keys.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, aws_iam_ssh_key_ids, expected_results", [
-        ("iam_test_user", "APKA4EQBBG2YCGOGDY5G",
-         [{'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'OK'}]),
+        ("iam_test_user", "ABCDEFGH",
+         [{'SSHPublicKeyId': 'ABCDEFGH', 'Status': 'OK'}]),
         ("iam_test_user", "not_exists",
          [{'SSHPublicKeyId': 'not_exists', 'Status': 'NoSuchEntity'}]),
     ])

@@ -36,7 +36,8 @@ You will need an API key for Shodan - https://developer.shodan.io/billing/signup
     install_requires=[
         "resilient_circuits>=33.0.0",
         "resilient-lib>=37.2.215",
-        "shodan>=1.23.0"
+        "shodan>=1.23.0",
+        "requests-file~=1.5; python_version<='3.6'"
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -40,6 +40,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.3 | 11/2023 | Convert Workflow script from Python2 to Python3 |
 | 1.1.2 | 08/2023 | Only Python 3.9 supported |
 | 1.1.1 | 04/2022 | Pinned `grpcio==1.44.0` and `grpcio-tools==1.44.0` |
 | 1.1.0 | 09/2021 | Add app host support; add configuration options for channel and function definition |
@@ -79,13 +80,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `46.0.8131`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -102,7 +103,7 @@ The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.10.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -225,17 +226,17 @@ def dict_to_json_str(d):
 
     if isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
-      entries.append(json_entry_str.format(unicode(key), unicode(value)))
+      entries.append(json_entry_str.format(key, value)
 
     elif isinstance(value, unicode):
-      entries.append(json_entry.format(unicode(key), unicode(value)))
+      entries.append(json_entry.format(key, value)
     
     elif isinstance(value, bool):
       value = 'true' if value == True else 'false'
       entries.append(json_entry.format(key, value))
 
     elif isinstance(value, int):
-      entries.append(json_entry.format(unicode(key), value))
+      entries.append(json_entry.format(key, value))
 
     elif isinstance(value, dict):
       entries.append(json_entry.format(key, dict_to_json_str(value)))
@@ -245,9 +246,9 @@ def dict_to_json_str(d):
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
 
-# Define Inputs assuming grpc_channel and grpc_function are defined in app.config
+# Define Inputs assuming grpc_channel is defined in app.config
 
-# The gRPC Function
+# The gRPC Function to call
 inputs.grpc_function = "helloworld:SayHello(HelloRequest)"
 
 # The gRPC Function Request Data

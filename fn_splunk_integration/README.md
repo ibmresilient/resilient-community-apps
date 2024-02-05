@@ -9,7 +9,6 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
@@ -21,7 +20,7 @@
 - [Data Table - Splunk Intel Results](#data-table---splunk-intel-results)
 - [Rules](#rules)
 - [How to configure to use a single Splunk Server](#how-to-configure-to-use-a-single-splunk-server)
-- [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-server/servers-in-app.config-are-labeled)
+- [Creating playbooks when server/servers in app.config are labeled](#creating-playbooks-when-server/servers-in-app.config-are-labeled)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -37,8 +36,17 @@
 | 1.2.0 | 05/2022 | Add more documentation and bug fix |
 | 1.3.0 | 06/222 | Add authentication using tokens |
 | 1.3.1 | 11/2022 | Bug Fix |
+| 1.4.0 | 10/2023 | Add Proxy support & Convert workflows/rules to playbooks |
 
 * For customers upgrading from a previous release to 1.1.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.1.0 Changes](#1.1.0-changes)
+
+### 1.4.0
+
+In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ---
 
@@ -59,7 +67,7 @@ Several functions to operate with Splunk ES intel collections, including updates
 ---
 
 ## Requirements
-- SOAR Server version 42 or later
+- SOAR Server version 48 or later
 - Splunk version 7.0 or later, or Splunk Cloud
 - Splunk ES 4.7.2 or later, or Splunk ES Cloud
 - Ability to connect to SOAR server with HTTPS on port 443 and 65001
@@ -71,13 +79,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `42.0.7058`.
+* SOAR platform >= `48.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `42.0.7058`.
+* SOAR platform >= `48.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=40.0.0`.
+* Integration server is running `resilient_circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -105,14 +113,13 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app does not support a proxy server.
+The app does support a proxy server.
 
 ### Python Environment
-Python 3.6 and 3.9 are supported.
+Python 3.6 and above are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=40.0.0
+* resilient_circuits>=48.0.0
 * resilient_lib
-* splunk-sdk
 
 ---
 
@@ -196,16 +203,16 @@ results = {
   "inputs": {
     "splunk_query_param1": "ip",
     "splunk_threat_intel_type": "ip_intel",
-    "splunk_label": "splunk_76",
-    "splunk_query_param2": "63.154.93.76"
+    "splunk_label": null,
+    "splunk_query_param2": "1.1.1.1"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.3.0",
+    "package_version": "1.4.0",
     "host": "local",
-    "execution_time_ms": 1120,
-    "timestamp": "2022-06-14 14:14:02"
+    "execution_time_ms": 1115,
+    "timestamp": "2023-08-29 09:40:23"
   }
 }
 ```
@@ -262,9 +269,9 @@ if artifact.type in lookup_map and lookup_map[artifact.type]:
   inputs.splunk_threat_intel_type = threat_type
   inputs.splunk_query_param1 = threat_field_name
   inputs.splunk_query_param2 = artifact.value
-  inputs.splunk_label = rule.properties.splunk_server
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
-  helper.fail("Artifact type not supported: {}".format(artifact.type))
+  helper.fail(f"Artifact type not supported: {artifact.type}")
 ```
 
 </p>
@@ -274,25 +281,27 @@ else:
 <p>
 
 ```python
-import java.util.Date as Date 
-
-now = Date().time
+from datetime import datetime
+results = playbook.functions.results.add_intel_item
+now = int(datetime.now().timestamp()*1000)
+results_content = results.get("content", {})
 
 result_note = u"""<b>Artifact</b>: {}<br><br>
 <b>Splunk Add Status</b>: {}<br>
 <b>Message</b>: {}""".format(artifact.value,
-                             "Successful" if results.get("content", {}).get("status", False) else "Unsuccessful",
-                             results.get("content", {}).get("message", "None"))
+                             "Successful" if results_content.get("status", False) else "Unsuccessful",
+                             results_content.get("message", "None"))
 
-if results.get("content", {}).get("status", False):
+if results_content.get("status", False):
   incident.addNote(helper.createRichText(result_note))
+  results_inputs = results.get("inputs", {})
   result_row = incident.addRow("splunk_intel_results")
   result_row.create_date = now
   result_row.status = "Added"
-  result_row.intel_collection = results.inputs['splunk_threat_intel_type']
-  result_row.intel_field = results.inputs['splunk_query_param1']
-  result_row.intel_value = results.inputs['splunk_query_param2']
-  result_row.splunk_server = rule.properties.splunk_server
+  result_row.intel_collection = results_inputs.get('splunk_threat_intel_type', None)
+  result_row.intel_field = results_inputs.get('splunk_query_param1', None)
+  result_row.intel_value = results_inputs.get('splunk_query_param2', None)
+  result_row.splunk_server = getattr(playbook.inputs, "splunk_server", None)
 ```
 
 </p>
@@ -332,17 +341,17 @@ results = {
   },
   "raw": null,
   "inputs": {
-    "splunk_threat_intel_key": "6634567c18814616a7fa28cce1862738",
+    "splunk_threat_intel_key": "dc3c8a0ce1f2464897d8c1995d66e1e4",
     "splunk_threat_intel_type": "ip_intel",
-    "splunk_label": "splunk_76"
+    "splunk_label": null
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.3.0",
+    "package_version": "1.4.0",
     "host": "local",
-    "execution_time_ms": 1416,
-    "timestamp": "2022-06-14 14:15:16"
+    "execution_time_ms": 875,
+    "timestamp": "2023-08-29 09:50:50"
   }
 }
 ```
@@ -366,14 +375,18 @@ inputs.splunk_label = row.splunk_server
 <p>
 
 ```python
+results = playbook.functions.results.delete_intel_item
+results_content = results.get("content", {})
+
 result_note = u"""<b>Artifact</b>: {}<br><br>
 <b>Splunk Delete Status</b>: {}<br>
 <b>Message</b>: {}""".format(row.intel_value,
-                             "Successful" if results.get("content", {}).get("status", False) else "Unsuccessful",
-                             results.get("content", {}).get("message", "None"))
+                             "Successful" if results_content.get("status", False) else "Unsuccessful",
+                             results_content.get("message", "None"))
 
 incident.addNote(helper.createRichText(result_note))
-row.status = "Deleted"
+if results_content.get("status"):
+  row.status = "Deleted"
 ```
 
 </p>
@@ -414,32 +427,42 @@ results = {
   "reason": null,
   "content": [
     {
-      "_key": "6634567c18814616a7fa28cce1862738",
-      "disabled": "0",
-      "ip": "63.154.93.76",
-      "item_key": "6634567c18814616a7fa28cce1862738",
+      "_key": "dc3c8a0ce1f2464897d8c1995d66e1e4",
+      "disabled": "1",
+      "ip": "1.1.1.1",
+      "item_key": "dc3c8a0ce1f2464897d8c1995d66e1e4",
       "threat_collection": "ip_intel",
       "threat_key": "restapi",
-      "time": "1655230442",
+      "time": "1693316401",
+      "updated": "0"
+    },
+    {
+      "_key": "ecbe47f05d3b47788529c89050c1bf56",
+      "disabled": "0",
+      "ip": "1.1.1.1",
+      "item_key": "ecbe47f05d3b47788529c89050c1bf56",
+      "threat_collection": "ip_intel",
+      "threat_key": "restapi",
+      "time": "1693316423",
       "updated": "0"
     }
   ],
   "raw": null,
   "inputs": {
-    "splunk_max_return": 10,
     "splunk_query_param1": "ip_intel",
+    "splunk_max_return": 10,
     "splunk_query": "| `%param1%` | eval item_key=_key | search %param2%=%param3%",
-    "splunk_label": "splunk_76",
-    "splunk_query_param3": "63.154.93.76",
+    "splunk_label": null,
+    "splunk_query_param3": "1.1.1.1",
     "splunk_query_param2": "ip"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.3.0",
+    "package_version": "1.4.0",
     "host": "local",
-    "execution_time_ms": 2404,
-    "timestamp": "2022-06-14 14:14:34"
+    "execution_time_ms": 9392,
+    "timestamp": "2023-08-29 09:50:33"
   }
 }
 ```
@@ -496,9 +519,12 @@ if artifact.type in lookup_map and lookup_map.get(artifact.type):
   inputs.splunk_query_param1 = threat_type
   inputs.splunk_query_param2 = threat_field_name
   inputs.splunk_query_param3 = artifact.value
-  inputs.splunk_label = rule.properties.splunk_server
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
+
+inputs.splunk_query = "| `%param1%` | eval item_key=_key | search %param2%=%param3%"
+inputs.splunk_max_return = 10
 ```
 
 </p>
@@ -508,26 +534,25 @@ else:
 <p>
 
 ```python
-if results.get("content", None):
-  for event in results.content:
+results = playbook.functions.results.search
+
+if results.get("content", {}):
+  for event in results.get("content", {}):
     result_row = incident.addRow("splunk_intel_results")
     result_row.create_date = int(float(event.pop("time"))*1000)
-    result_row.source = event.pop("threat_key")
-    result_row.intel_collection = results.inputs['splunk_query_param1']
-    result_row.intel_key = event.pop("_key")
-    result_row.splunk_server = rule.properties.splunk_server
-    result_row.status = "Active"
+    result_row.source = event.get("threat_key")
+    result_row.intel_collection = results.get("inputs", {}).get('splunk_query_param1')
+    result_row.intel_key = event.get("_key")
+    result_row.splunk_server = getattr(playbook.inputs, "splunk_server")
+    result_row.status = "Active" if int(event.get("disabled")) == 0 else "Disabled"
     event.pop("item_key") # not presented
-    # what's left is the artifact value
-    for k, v in event.items():
-      result_row.intel_field = k
-      result_row.intel_value = v
-      break
+    result_row.intel_field = results.get("inputs", {}).get("splunk_query_param2")
+    result_row.intel_value = results.get("inputs", {}).get("splunk_query_param3")
 else:
   result_row = incident.addRow("splunk_intel_results")
   result_row.intel_value = artifact.value
   result_row.status = "Not Found"
-  result_row.splunk_server = rule.properties.splunk_server
+  result_row.splunk_server = getattr(playbook.inputs, "splunk_server")
 ```
 
 </p>
@@ -575,18 +600,18 @@ results = {
   },
   "raw": null,
   "inputs": {
-    "event_id": "7D8101AA-B8DB-44FF-94A2-E06831523B77@@notable@@4cac62644c673525583605a6cb16de15",
+    "event_id": "0DE6791A-6F7D-42DC-BAF0-26D58032AE40@@notable@@b98308abb5851cacd0589ec3177389d6",
     "notable_event_status": 2,
     "comment": "SOAR incident is active",
-    "splunk_label": "splunk_76"
+    "splunk_label": null
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.3.0",
+    "package_version": "1.4.0",
     "host": "local",
-    "execution_time_ms": 6396,
-    "timestamp": "2022-06-14 14:14:59"
+    "execution_time_ms": 3790,
+    "timestamp": "2023-08-29 09:55:24"
   }
 }
 ```
@@ -598,6 +623,7 @@ results = {
 <p>
 
 ```python
+inputs.comment = "Updating information from SOAR"
 if incident.properties.splunk_notable_event_id:
   inputs.event_id = incident.properties.splunk_notable_event_id
   if incident.plan_status == "C":
@@ -606,7 +632,7 @@ if incident.properties.splunk_notable_event_id:
   else:
       inputs.notable_event_status = 2
       inputs.comment = "SOAR incident is active"
-  inputs.splunk_label = rule.properties.splunk_server
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail("Ensure that the incident custom field is set: splunk_notable_event_id")
 ```
@@ -618,13 +644,16 @@ else:
 <p>
 
 ```python
+results = playbook.functions.results.update_event
+results_content = results.get("content", {})
+
 result_note = u"<b>Splunk Update notable event</b>:<br><br>"
 if isinstance(results.get("content"), dict):
   result_note = result_note + u"""<b>Splunk Update Status</b>: {}<br>
-<b>Message</b>: {}""".format("Successful" if results.get("content", {}).get("success", False) else "Unsuccessful",
-                             results.get("content", {}).get("message", "None"))
+<b>Message</b>: {}""".format("Successful" if results_content.get("success", False) else "Unsuccessful",
+                             results_content.get("message", "None"))
 else:
-  result_note = result_note + results.get("content")
+  result_note = result_note + results_content
 
 incident.addNote(helper.createRichText(result_note))
 ```
@@ -656,13 +685,14 @@ splunk_intel_results
 
 ---
 
-## Rules
-| Rule Name | Object | Workflow Triggered |
+
+## Playbook
+| Playbook Name | Object | API Name |
 | --------- | ------ | ------------------ |
-| Add artifact to Splunk ES | artifact | `splunk_add_new_ip_intel` |
-| Delete an intel entry in Splunk ES | splunk_intel_results | `example_of_deleting_an_intel_entry_in_splunk_es` |
-| Search Splunk ES for an artifact | artifact | `search_splunk_ip_intel` |
-| Update Splunk ES notable event | incident | `splunk_update_notable` |
+| Splunk: Add Artifact - Example (PB) | artifact | `splunk_add_artifact` |
+| Splunk: Delete an intel entry - Example (PB) | datatable | `splunk_delete_an_intel_entry` |
+| Splunk: Search for an artifact - Example (PB) | artifact | `splunk_search_for_an_artifact` |
+| Splunk: Update notable event - Example (PB) | incident | `splunk_update_notable_event` |
 
 ---
 
@@ -687,13 +717,12 @@ splunkpassword=changeme
 verify_cert=false|/path/to/cert
 ```
 
-## Creating workflows when server/servers in app.config are labeled
-The function input field `splunk_label` is required when Splunk server/servers in the app.config are labeled. In the example workflows pre-process scripts the
+## Creating playbooks when server/servers in app.config are labeled
+The function input field `splunk_label` is required when Splunk server/servers in the app.config are labeled. In the example playbooks function script the
 input field `splunk_label` is defined the following way,
 ```python
-inputs.splunk_label = rule.properties.splunk_server
+inputs.splunk_label = playbook.inputs.splunk_server
 ```
-The rule field `splunk_server` is a select field that is filled with the labels of the splunk servers from the app.config when the integration is initialized.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

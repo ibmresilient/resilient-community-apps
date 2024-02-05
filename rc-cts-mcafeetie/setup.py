@@ -33,8 +33,10 @@ setup(
     author='IBM Resilient',
     install_requires=[
         'rc-cts',
+        'PySocks<1.7', # required for dxltieclient even though resilient circuits allows ~= 1.6
         'dxltieclient'
     ],
+    python_requires='<3.11', # because dxltieclient requires PySocks<1.7, PY311 requires PySocks >= 1.7
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Custom Threat Service for McAfee TIE client",
     long_description="Resilient Circuits Custom Threat Service Component for McAfee TIE client",

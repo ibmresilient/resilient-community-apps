@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import pytest
 import sys
 import time
 from collections import OrderedDict
+
+import pytest
 from data_feeder_plugins.elasticfeed.elasticfeed import ElasticFeedDestination
 from elasticsearch import Elasticsearch
+from mock import patch
+
 from rc_data_feed.lib.type_info import ActionMessageTypeInfo
 
 TYPE_NAME = "all_types"
@@ -51,9 +54,40 @@ else:
     RESULT_PAYLOAD['test_date']     = "2019-02-13T15:55:47.448000"
     RESULT_PAYLOAD['test_datetime'] = "2019-02-13T15:55:47.448000+00:00"
 
-def test_for_travis():
-    ### null test to allow travis to succeed
-    return True
+def test_send_data_index_with_patch():
+    """
+    simple test coverage for index
+    """
+
+    with patch("data_feeder_plugins.elasticfeed.elasticfeed.Elasticsearch") as mock_elastic:
+
+        es_feed = ElasticFeedDestination(None, APP_CONFIG)
+        context = Context()
+        mock_elastic.return_value.index.return_value = {"result": "created"}
+        es_feed.send_data(context, MSG_PAYLOAD)
+
+        # check properly constructed
+        assert mock_elastic.called
+        # check that index was called
+        assert mock_elastic.return_value.index.called
+
+def test_send_data_delete_with_patch():
+    """
+    simple test coverage for index
+    """
+
+    with patch("data_feeder_plugins.elasticfeed.elasticfeed.Elasticsearch") as mock_elastic:
+
+        es_feed = ElasticFeedDestination(None, APP_CONFIG)
+        context = Context(is_deleted=True)
+        mock_elastic.return_value.delete.return_value = {"result": "deleted"}
+        es_feed.send_data(context, MSG_PAYLOAD)
+
+        # check properly constructed
+        assert mock_elastic.called
+        # check that index was called
+        assert mock_elastic.return_value.delete.called
+
 
 @pytest.mark.livetest
 def test_index():

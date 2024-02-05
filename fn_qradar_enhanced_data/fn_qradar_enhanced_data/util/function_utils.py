@@ -3,11 +3,30 @@
 # Util functions
 
 from logging import getLogger
-from resilient_lib import IntegrationError, str_to_bool, validate_fields
+from resilient_lib import IntegrationError, str_to_bool, validate_fields, clean_html
 from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 
 LOG = getLogger(__name__)
+
+def filter_comments(soar_common, incident_id, qradar_notes, soar_str_to_remove=""):
+    """
+    Filter out comments that are already on the SOAR incident
+    :param soar_common: Connection to SOAR instance
+    :param incident_id: SOAR incident ID
+    :param qradar_notes: List of notes on the QRadar case
+    :param soar_str_to_remove: String to remove from SOAR comments that is added when a note is added to SOAR incident by QRadar.
+    """
+    soar_comments = soar_common.get_case_comments(str(incident_id))
+    # Remove html and given soar_str_to_remove
+    soar_comment_list = [clean_html(comment.get('text').replace(soar_str_to_remove, "")).strip() for comment in soar_comments]
+    # Remove html an given qradar_header_to_remove
+    qradar_notes_list = []
+    for note in qradar_notes:
+        qradar_notes_list.append(clean_html(note).strip())
+    # Check if the QRadar comment is already a note on the SOAR incident
+    return [comment for comment in qradar_notes_list\
+            if comment not in soar_comment_list]
 
 def get_sync_notes(global_settings, options):
     """
@@ -43,7 +62,7 @@ def make_query_string(query_string, params):
     Substitute parameters into the query
     :param query_string: Input query with params
     :param params: Values used to substitute
-    :return: (str) Query with params substitued
+    :return: (str) Query with params substituted
     """
     for index, param in enumerate(params):
         query_string = query_string.replace(f"%param{index+1}%", param if param else '')
@@ -52,7 +71,7 @@ def make_query_string(query_string, params):
 
 def get_server_settings(opts, qradar_label):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: List of options
     :return: QRadar server settings for specified server
     """

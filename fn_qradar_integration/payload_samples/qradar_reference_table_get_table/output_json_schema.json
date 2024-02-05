@@ -12,9 +12,6 @@
     "content": {
       "type": "object",
       "properties": {
-        "time_to_live": {
-          "type": "string"
-        },
         "timeout_type": {
           "type": "string"
         },
@@ -24,110 +21,10 @@
         "data": {
           "type": "object",
           "properties": {
-            "9": {
+            "None": {
               "type": "object",
               "properties": {
-                "case_id": {
-                  "type": "object",
-                  "properties": {
-                    "last_seen": {
-                      "type": "integer"
-                    },
-                    "first_seen": {
-                      "type": "integer"
-                    },
-                    "source": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "domain_id": {}
-                  }
-                },
-                "case_time": {
-                  "type": "object",
-                  "properties": {
-                    "last_seen": {
-                      "type": "integer"
-                    },
-                    "first_seen": {
-                      "type": "integer"
-                    },
-                    "source": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "domain_id": {}
-                  }
-                },
-                "domain_id": {
-                  "type": "object",
-                  "properties": {
-                    "last_seen": {
-                      "type": "integer"
-                    },
-                    "first_seen": {
-                      "type": "integer"
-                    },
-                    "source": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "domain_id": {}
-                  }
-                },
-                "org_id": {
-                  "type": "object",
-                  "properties": {
-                    "last_seen": {
-                      "type": "integer"
-                    },
-                    "first_seen": {
-                      "type": "integer"
-                    },
-                    "source": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "domain_id": {}
-                  }
-                }
-              }
-            },
-            "123": {
-              "type": "object",
-              "properties": {
-                "234": {
-                  "type": "object",
-                  "properties": {
-                    "last_seen": {
-                      "type": "integer"
-                    },
-                    "first_seen": {
-                      "type": "integer"
-                    },
-                    "source": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "domain_id": {}
-                  }
-                }
-              }
-            },
-            "463": {
-              "type": "object",
-              "properties": {
-                "457": {
+                "None": {
                   "type": "object",
                   "properties": {
                     "last_seen": {
@@ -157,6 +54,14 @@
         },
         "namespace": {
           "type": "string"
+        },
+        "key_name_types": {
+          "type": "object",
+          "properties": {
+            "Inner Key 1": {
+              "type": "string"
+            }
+          }
         },
         "element_type": {
           "type": "string"

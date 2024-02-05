@@ -68,20 +68,20 @@ class FunctionComponent(AppFunctionComponent):
             # Get search_timeout from app.config or set it to default 600 seconds
             timeout = get_search_timeout(global_settings, options)
 
-            # collect the retry settings, if any
+            # Collect the retry settings, if any
             empty_query_max = int(global_settings.get("empty_query_max", 1))
             empty_query_wait_secs = int(global_settings.get("empty_query_wait_secs", 0))
             empty_query_skip = [item.strip() for item in global_settings.get("empty_query_skip_types").split(',')] \
                 if global_settings.get("empty_query_skip_types") else []
-            # result structure template
+            # Result structure template
             results = {
                     "qrhost": options.get("host"),
                     "offenseid": qradar_search_param3,
-                    "events": [], # empty response
+                    "events": [], # Empty response
                     "current_time": 0
             }
 
-            # loop through the queries
+            # Loop through the queries
             query_count = 0
             response = None
             while query_count < empty_query_max:
@@ -97,15 +97,15 @@ class FunctionComponent(AppFunctionComponent):
                 self.LOG.info(f"({query_count}) Running query: {temp_query_string}")
                 response = qradar_client.ariel_graphql_search(temp_query_string, search_query_string, timeout=timeout)
 
-                # a response means the query completed
+                # A response means the query completed
                 if response:
                     break
 
-                # skip retry?
+                # Skip retry?
                 if qradar_fn_type in empty_query_skip or check_db_for_skip(qradar_query, empty_query_skip):
                     break
 
-                # continue through the loop if no response received
+                # Continue through the loop if no response received
                 query_count += 1
                 self.LOG.info(f"Waiting {empty_query_wait_secs}s retry: {query_count} for: {qradar_fn_type}")
                 sleep(empty_query_wait_secs)
@@ -131,7 +131,7 @@ class FunctionComponent(AppFunctionComponent):
 
                 response["events"] = list(map(lambda x: self.mapEventData(x), response["events"]))
 
-                # complete results to return
+                # Complete results to return
                 results["events"] = response["events"]
 
             if results["events"]:
@@ -142,7 +142,7 @@ class FunctionComponent(AppFunctionComponent):
 
             results["current_time"] = int(time())*1000
             function_result = FunctionResult(results)
-            # ensure backward compatibility with previous version of results
+            # Ensure backward compatibility with previous version of results
             for key, value in results.items():
                 setattr(function_result, key, value)
 
@@ -159,9 +159,10 @@ class FunctionComponent(AppFunctionComponent):
         return event
 
 def check_db_for_skip(qradar_query, empty_query_skip):
-    """The qradar_query contains the db to select from such as "SELECT %param1% FROM flows ..."
-        This logic will match "FROM flows" with the empty_query_skill_types list in order to 
-        bypass retry logic (if specified)
+    """
+    The qradar_query contains the db to select from such as "SELECT %param1% FROM flows ..."
+    This logic will match "FROM flows" with the empty_query_skill_types list in order to 
+    bypass retry logic (if specified)
 
     :param qradar_query: query string
     :type qradar_query: str
@@ -171,7 +172,7 @@ def check_db_for_skip(qradar_query, empty_query_skip):
     :rtype: boolean
     """
     b_skip = False
-    query = qradar_query.lower().replace(' ', '') # remove spaces to facilitate matching
+    query = qradar_query.lower().replace(' ', '') # Remove spaces to facilitate matching
     for skip_type in empty_query_skip:
         if f"from{skip_type}" in query:
             b_skip = True
@@ -187,7 +188,8 @@ def make_queries(qradar_fn_type,
                  qradar_search_param5,
                  qradar_search_param6,
                  qradar_query):
-    """build the queries used to populate the temporary table and to collect the results
+    """
+    Build the queries used to populate the temporary table and to collect the results
 
     :param qradar_fn_type: 'flows', 'events', 'sourceip', 'destinationip'
     :param qradar_search_param1: the field names portion of the query
@@ -200,7 +202,7 @@ def make_queries(qradar_fn_type,
     :return: (temp_query, data_query)
     """
 
-    # build temp table name
+    # Build temp table name
     temp_table = f"offense-{qradar_search_param3}-events-{qradar_fn_type}-1000-{str(time())}"
 
     qradar_temp_query = sub("FROM\s+{}".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS,qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS),
@@ -210,7 +212,7 @@ def make_queries(qradar_fn_type,
     qradar_search_query = sub("FROM\s+{}".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS,qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS),
                                     "FROM \"{}\"".format(temp_table), qradar_query, flags=IGNORECASE)
 
-    # temp table query
+    # Temp table query
     temp_query_string = make_query_string(qradar_temp_query,
                                           ["*",
                                             qradar_search_param2,
@@ -219,7 +221,7 @@ def make_queries(qradar_fn_type,
                                             " ",
                                             " "])
 
-    # query against results in temp table
+    # Query against results in temp table
     search_query_string = make_query_string(qradar_search_query,
                                             [qradar_search_param1,
                                             " ",

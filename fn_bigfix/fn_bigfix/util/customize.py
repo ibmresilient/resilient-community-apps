@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.1.262
 
-"""Generate the SOAR customizations required for fn_bigfix"""
+"""Generate the Resilient customizations required for fn_bigfix"""
 
 import base64
 import os
@@ -20,17 +22,36 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_bigfix",
-        "message_destinations": [u"fn_bigfix"],
-        "functions": [u"fn_bigfix_action_status", u"fn_bigfix_artifact", u"fn_bigfix_assets", u"fn_bigfix_remediation"],
-        "workflows": [u"bigfix_query_for_artifact", u"bigfix_remediate", u"bigfix_retrieve_resource_details", u"bigfix_update_action_status"],
-        "actions": [u"Example: BigFix Query for Artifact", u"Example: BigFix Remediate", u"Example: BigFix Retrieve Resource Details", u"Example: BigFix Update Action status"],
+        "message_destinations": [
+            u"fn_bigfix"
+        ],
+        "functions": [
+            u"fn_bigfix_action_status",
+            u"fn_bigfix_artifact",
+            u"fn_bigfix_assets",
+            u"fn_bigfix_remediation"
+        ],
+        "workflows": [
+            u"bigfix_query_for_artifact",
+            u"bigfix_remediate",
+            u"bigfix_retrieve_resource_details",
+            u"bigfix_update_action_status"
+        ],
+        "actions": [
+            u"Example: BigFix Query for Artifact",
+            u"Example: BigFix Remediate",
+            u"Example: BigFix Retrieve Resource Details",
+            u"Example: BigFix Update Action status"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"res_bigfix_query_results"],
+        "datatables": [
+            u"res_bigfix_query_results"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [],
     }
 
 
@@ -39,7 +60,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:

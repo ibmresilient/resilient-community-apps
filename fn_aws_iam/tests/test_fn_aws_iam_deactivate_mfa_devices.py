@@ -58,10 +58,10 @@ class TestFnAwsIamDeactivateMfaDevices:
 
     @patch("fn_aws_iam.components.fn_aws_iam_deactivate_mfa_devices.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, aws_iam_mfa_serial_nums, expected_results", [
-        ("iam_test_User", "arn:aws:iam::834299573936:mfa/iam_test_user",
-         [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}]),
-        ("iam_test_User", "arn:aws:iam::834299573936:mfa/not_exists",
-         [{"SerialNumber": "arn:aws:iam::834299573936:mfa/not_exists", "Status": "NoSuchEntity"}])
+        ("iam_test_User", "arn:aws:iam::123456789123:mfa/iam_test_user",
+         [{'SerialNumber': 'arn:aws:iam::123456789123:mfa/iam_test_user', 'Status': 'OK'}]),
+        ("iam_test_User", "arn:aws:iam::123456789123:mfa/not_exists",
+         [{"SerialNumber": "arn:aws:iam::123456789123:mfa/not_exists", "Status": "NoSuchEntity"}])
     ])
     def test_success(self, mock_post, circuits_app, aws_iam_user_name, aws_iam_mfa_serial_nums, expected_results):
         """ Test calling with sample values for the parameters """

@@ -8,9 +8,9 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u"""[elastic_feed]
+    return u"""[elastic_feed]
 class=ElasticFeed
-url=https://your_org.com
+url=https://your_elastic.com
 port=9200
 # if using multiple organizations, consider indexes such as resilient_<org_ID>
 # each document type will append to this index as elastic 6.0 only supports one document type per index
@@ -19,7 +19,6 @@ auth_user=
 auth_password=
 cafile=false
 """
-    return config_data
 
 def apphost_config_section_data():
     return u"""[feeds]
@@ -36,8 +35,11 @@ reload_query_api_method=false
 queue=feed_data
 
 # set to true if attachment data should be part of payload send to plugins
+# attachment data sent to elastic will be base64 encoded
 include_attachment_data=false
 # if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
 # ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
 workspaces=
+# support for parallel execution. Default is False
+parallel_execution = False
 """

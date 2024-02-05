@@ -10,6 +10,7 @@ fn_api_void
 fn_aws_guardduty
 fn_aws_iam
 fn_aws_utilities
+fn_azure_automation_utilities
 fn_bigfix
 fn_bmc_helix
 fn_calendar_invite
@@ -85,6 +86,7 @@ fn_qradar_integration
 fn_query_tor_network
 fn_randori
 fn_reaqta
+fn_relations
 fn_remedy
 fn_rest_api
 fn_rsa_netwitness
@@ -99,6 +101,7 @@ fn_shadowserver
 fn_shodan
 fn_siemplify
 fn_slack
+fn_snapshot_url
 fn_spamhaus_query
 fn_splunk_integration
 fn_symantec_dlp
@@ -130,7 +133,7 @@ fn_zia
 #Data_Feeder
 rc_data_feed
 rc_data_feed_plugin_elasticfeed
-#rc-data-feed-plugin-kafkafeed
+rc_data_feed_plugin_kafkafeed
 rc_data_feed_plugin_odbcfeed
 #rc-data-feed-plugin-resilientfeed
 rc_data_feed_plugin_splunkfeed

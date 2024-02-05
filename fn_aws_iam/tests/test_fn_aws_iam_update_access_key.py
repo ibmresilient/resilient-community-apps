@@ -45,8 +45,8 @@ class TestFnAwsIamUpdateAccessKey:
 
     @patch("fn_aws_iam.components.fn_aws_iam_update_access_key.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, aws_iam_access_key_id, aws_iam_status, expected_results", [
-        ("iam_test_User_1", "AKIA4EQBBG2YLGK6O42H", 'Active', "OK"),
-        ("iam_test_User_1", "AKIA4EQBBG2YLGK6O42H", 'Inactive', "OK"),
+        ("iam_test_User_1", "ABCDEFGH", 'Active', "OK"),
+        ("iam_test_User_1", "ABCDEFGH", 'Inactive', "OK"),
         ("iam_test_User_1", "AAABBBCCCDDDEENOSUCH", 'Active', "NoSuchEntity")
     ])
     def test_success(self, mock_post, circuits_app, aws_iam_user_name, aws_iam_access_key_id, aws_iam_status, expected_results):

@@ -8,17 +8,17 @@
   },
   "raw": null,
   "inputs": {
-    "splunk_query_param1": "domain",
+    "splunk_query_param1": "ip",
     "splunk_threat_intel_type": "ip_intel",
-    "splunk_label": "splunk_76",
-    "splunk_query_param2": "example.com"
+    "splunk_label": null,
+    "splunk_query_param2": "1.1.1.1"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.3.0",
+    "package_version": "1.4.0",
     "host": "local",
-    "execution_time_ms": 561,
-    "timestamp": "2022-06-15 09:02:53"
+    "execution_time_ms": 1115,
+    "timestamp": "2023-08-29 09:40:23"
   }
 }

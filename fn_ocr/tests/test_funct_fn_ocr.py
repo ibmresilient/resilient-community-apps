@@ -2,6 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 
 import sys
+import os
 
 import cv2
 import pandas as pd
@@ -141,7 +142,7 @@ class TestFnOcr:
     @pytest.mark.livetest
     def test_basic_ocr(self):
         # tests that the OCR is functional
-        path = sys.path[0] + "/../doc/screenshots/SO_title.png"
+        path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "doc/screenshots/SO_title.png")
         img = cv2.imread(path, cv2.IMREAD_COLOR)  # What is the correct path?
         img_rgb = cv2.cvtColor(
             img, cv2.COLOR_BGR2RGB
@@ -156,7 +157,7 @@ class TestFnOcr:
     @pytest.mark.livetest
     def test_basic_ocr_rotated(self):
         # tests that tesseract can correctly handle rotation
-        path = sys.path[0] + "/../doc/screenshots/SO_title.png"
+        path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "doc/screenshots/SO_title_rotated.png")
         img = cv2.imread(path, cv2.IMREAD_COLOR)  # What is the correct path?
         img_rgb = cv2.cvtColor(
             img, cv2.COLOR_BGR2RGB

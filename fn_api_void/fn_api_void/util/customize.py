@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_api_void"""
 
@@ -20,15 +22,39 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_api_void",
-        "message_destinations": [u"fn_api_void"],
-        "functions": [u"fn_api_void_request"],
-        "workflows": [u"example_apivoid_threatlog", u"example_apivoid_url_reputation", u"example_apivoid_dns_lookup", u"example_apivoid_ssl_info", u"example_apivoid_ip_reputation", u"example_apivoid_domain_reputation", u"example_apivoid_email_verify"],
-        "actions": [u"Example: APIVoid SSL Info", u"Example: APIVoid Email Verify", u"Example: APIVoid URL Reputation", u"Example: APIVoid ThreatLog", u"Example: APIVoid IP Reputation", u"Example: APIVoid DNS Lookup", u"Example: APIVoid Domain Reputation"],
+        "message_destinations": [
+            u"fn_api_void"
+        ],
+        "functions": [
+            u"fn_api_void_request"
+        ],
+        "workflows": [
+            u"example_apivoid_dns_lookup",
+            u"example_apivoid_domain_reputation",
+            u"example_apivoid_email_verify",
+            u"example_apivoid_ip_reputation",
+            u"example_apivoid_ssl_info",
+            u"example_apivoid_threatlog",
+            u"example_apivoid_url_reputation"
+        ],
+        "actions": [
+            u"Example: APIVoid DNS Lookup",
+            u"Example: APIVoid Domain Reputation",
+            u"Example: APIVoid Email Verify",
+            u"Example: APIVoid IP Reputation",
+            u"Example: APIVoid SSL Info",
+            u"Example: APIVoid ThreatLog",
+            u"Example: APIVoid URL Reputation"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [u"Convert JSON to rich text v1.1"],
+        "scripts": [
+            u"Convert JSON to rich text v1.3"
+        ],
+        "playbooks": [],
     }
 
 
@@ -37,7 +63,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 36.0.5634
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
@@ -45,23 +71,23 @@ def customization_data(client=None):
     - Functions:
         - fn_api_void_request
     - Workflows:
-        - example_apivoid_threatlog
-        - example_apivoid_url_reputation
         - example_apivoid_dns_lookup
-        - example_apivoid_ssl_info
-        - example_apivoid_ip_reputation
         - example_apivoid_domain_reputation
         - example_apivoid_email_verify
+        - example_apivoid_ip_reputation
+        - example_apivoid_ssl_info
+        - example_apivoid_threatlog
+        - example_apivoid_url_reputation
     - Rules:
-        - Example: APIVoid SSL Info
-        - Example: APIVoid Email Verify
-        - Example: APIVoid URL Reputation
-        - Example: APIVoid ThreatLog
-        - Example: APIVoid IP Reputation
         - Example: APIVoid DNS Lookup
         - Example: APIVoid Domain Reputation
+        - Example: APIVoid Email Verify
+        - Example: APIVoid IP Reputation
+        - Example: APIVoid SSL Info
+        - Example: APIVoid ThreatLog
+        - Example: APIVoid URL Reputation
     - Scripts:
-        - Convert JSON to rich text v1.1
+        - Convert JSON to rich text v1.3
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_incident_utils"""
 
@@ -20,15 +22,31 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_incident_utils",
-        "message_destinations": [u"fn_incident_utils"],
-        "functions": [u"incident_utils_close_incident", u"incident_utils_create_incident", u"search_incidents"],
-        "workflows": [u"example_close_incident", u"example_create_incident", u"example_search_incidents"],
-        "actions": [u"Example: Close Incident", u"Example: Create Incident", u"Example: Search Incidents"],
+        "message_destinations": [
+            u"fn_incident_utils"
+        ],
+        "functions": [
+            u"incident_utils_close_incident",
+            u"incident_utils_create_incident",
+            u"search_incidents"
+        ],
+        "workflows": [
+            u"example_close_incident",
+            u"example_create_incident",
+            u"example_search_incidents"
+        ],
+        "actions": [
+            u"Example: Close Incident",
+            u"Example: Create Incident",
+            u"Example: Search Incidents"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,7 +55,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 38.0.6006
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:

@@ -45,9 +45,7 @@
         "comment": {
           "type": "string"
         },
-        "splunk_label": {
-          "type": "string"
-        }
+        "splunk_label": {}
       }
     },
     "metrics": {

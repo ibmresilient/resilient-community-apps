@@ -4,7 +4,7 @@ FROM registry.access.redhat.com/ubi8/python-39:latest
 # rc-data-feeder will build plugins from a base image
 #FROM resilient/rc-data-feeder-base
 ARG APPLICATION=rc_data_feed
-ARG RESILIENT_CIRCUITS_VERSION=39
+ARG RESILIENT_CIRCUITS_VERSION=48.2.4321
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -15,19 +15,19 @@ ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 USER 0
 
 # Update to latest pip
-RUN pip install --upgrade pip
+RUN pip install --upgrade --trusted-host pypi.org --trusted-host files.pythonhosted.org pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
-#RUN yum -y update && yum clean all
+RUN yum -y update && yum clean all
 #RUN yum -y install <package>
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
