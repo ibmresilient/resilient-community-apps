@@ -18,30 +18,44 @@
 
 # Randori
 
-## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Function - Randori: Clear Data Table](#function---randori-clear-data-table)
-- [Function - Randori: Get Detections of Target](#function---randori-get-detections-of-target)
-- [Function - Randori: Get Target](#function---randori-get-target)
-- [Function - Randori: Send Note as Comment to Target](#function---randori-send-note-as-comment-to-target)
-- [Function - Randori: Update Notes from Randori Target](#function---randori-update-notes-from-randori-target)
-- [Function - Randori: Update Target Impact Score](#function---randori-update-target-impact-score)
-- [Function - Randori: Update Target Status](#function---randori-update-target-status)
-- [Data Table - Detections](#data-table---detections)
-- [Custom Fields](#custom-fields)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+## Table of Contents <!-- omit in toc -->
+- [Randori](#randori)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+    - [Randori Development Version](#randori-development-version)
+      - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+    - [Custom Layouts](#custom-layouts)
+  - [Poller Considerations](#poller-considerations)
+    - [Target Filtering](#target-filtering)
+  - [Function - Randori: Clear Data Table](#function---randori-clear-data-table)
+  - [Function - Randori: Get Detections of Target](#function---randori-get-detections-of-target)
+  - [Function - Randori: Get Paths](#function---randori-get-paths)
+  - [Function - Randori: Get Target](#function---randori-get-target)
+  - [Function - Randori: Send Note as Comment to Target](#function---randori-send-note-as-comment-to-target)
+  - [Function - Randori: Update Notes from Randori Target](#function---randori-update-notes-from-randori-target)
+  - [Function - Randori: Update Target Impact Score](#function---randori-update-target-impact-score)
+  - [Function - Randori: Update Target Status](#function---randori-update-target-status)
+  - [Data Table - Detections](#data-table---detections)
+  - [Data Table - Discovery Path](#data-table---discovery-path)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Custom Fields](#custom-fields)
+  - [Playbooks](#playbooks)
+  - [Templates for SOAR Cases](#templates-for-soar-cases)
+    - [soar\_create\_case.jinja](#soar_create_casejinja)
+    - [soar\_close\_case.jinja](#soar_close_casejinja)
+    - [soar\_update\_case.jinja](#soar_update_casejinja)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -198,7 +212,8 @@ The following Randori Tab custom layout is included in the app:
 
 The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
 <p>
-When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
+
+When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `polling_interval=0`.
 <p>
 
 ### Target Filtering 
@@ -212,7 +227,7 @@ If more than one filter is needed, separate each tuple with a comma. Enclose str
 <p>
 Here is an polling filter example that adds or updates targets that have a "target_temptation" greater or equal to 50 AND whose status is "Needs Investigation", "Needs Resolution", "Needs Review", or "None":
 
-    poller_filters=("target_temptation","greater_or_equal",50),("status","equal",["Needs Investigation","Needs Resolution","Needs Review","None"])
+    polling_filters=("target_temptation","greater_or_equal",50),("status","equal",["Needs Investigation","Needs Resolution","Needs Review","None"])
 
 The list of Randori supported JQuery `operators`:
 
