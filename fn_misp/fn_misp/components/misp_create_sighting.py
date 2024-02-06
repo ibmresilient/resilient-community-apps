@@ -1,67 +1,50 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
-import logging
-import sys
-if sys.version_info.major < 3:
+from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
+from resilient_lib import str_to_bool
+from sys import version_info
+if version_info.major < 3:
     from fn_misp.lib import misp_2_helper as misp_helper
 else:
     from fn_misp.lib import misp_3_helper as misp_helper
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_misp.lib import common
+
+PACKAGE_NAME = "fn_misp"
+FN_NAME = "misp_create_sighting"
 
 
-PACKAGE= "fn_misp"
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function(s)"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function(s)"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
+        super(FunctionComponent, self).__init__(
+            opts, PACKAGE_NAME, ["misp_key", "misp_url"])
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Create MISP sighting"""
+        # Get the function parameters:
+        misp_sighting = getattr(fn_inputs, "misp_sighting")  # text
 
-    @function("misp_create_sighting")
-    def _misp_create_sighting_function(self, event, *args, **kwargs):
-        """Function: """
-        try:
+        self.LOG.info("misp_sighting: %s", misp_sighting)
 
-            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
+        yield self.status_message("Setting up connection to MISP")
 
-            # Get the function parameters:
-            misp_sighting = kwargs.get("misp_sighting")  # text
+        verify = str_to_bool(self.options.get("verify_cert", "false").lower())
 
-            log = logging.getLogger(__name__)
-            log.info("misp_sighting: %s", misp_sighting)
+        # Create connection to MISP server
+        misp_client = misp_helper.get_misp_client(self.options.get(
+            "misp_url"), self.options.get("misp_key"), verify, proxies=self.rc.get_proxies())
 
-            yield StatusMessage("Setting up connection to MISP")
+        yield self.status_message(f"Marking {misp_sighting} as sighted")
 
-            proxies = common.get_proxies(self.opts, self.options)
+        sighting = misp_helper.create_misp_sighting(misp_client, misp_sighting)
 
-            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
+        self.LOG.debug(sighting)
 
-            yield StatusMessage(u"Marking {} as sighted".format(misp_sighting))
+        yield self.status_message("Sighting has been created")
 
-            sighting = misp_helper.create_misp_sighting(misp_client, misp_sighting)
-
-            log.debug(sighting)
-
-            yield StatusMessage("Sighting has been created")
-
-            results = { 
-                        "success": True,
-                        "content": sighting
-                    }
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult(sighting)

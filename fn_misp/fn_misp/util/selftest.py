@@ -3,15 +3,12 @@
 """Function implementation
    test with: resilient-circuits selftest -l fn_misp
 """
-
 import logging
 from pymisp import PyMISP
-
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """
@@ -19,16 +16,13 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     options = opts.get("fn_misp", {})
-
     verify_cert = True if options.get("verify_cert", "true").lower() == "true" else False
 
     try:
         misp_client = PyMISP(options.get("misp_url"), options.get("misp_key"), verify_cert, 'json')
 
-        result = misp_client.search_all(None)
+        result = misp_client.servers()
         return {"state": "success"}
     except Exception as err:
         print (err)
-        return {"state": "failed",
-                "reason": str(err)
-               }
+        return {"state": "failed", "reason": str(err)}

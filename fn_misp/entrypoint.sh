@@ -1,4 +1,5 @@
 #!/bin/sh
+# Generated with resilient-sdk v51.0.0.2.575
 # Script watches for changes in app.config and kills circuits when it changes
 # This is useful when using this image to run circuits in a Kubernetes Deployment because Kubernetes will start a new
 # container in the Pod and this new container will use the new configuration
