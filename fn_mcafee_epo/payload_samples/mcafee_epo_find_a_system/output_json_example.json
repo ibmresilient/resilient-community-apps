@@ -4,8 +4,8 @@
   "reason": null,
   "content": [
     {
-      "EPOComputerProperties.ParentID": 13,
-      "EPOComputerProperties.ComputerName": "test_server",
+      "EPOComputerProperties.ParentID": 1011,
+      "EPOComputerProperties.ComputerName": "richard test1",
       "EPOComputerProperties.Description": null,
       "EPOComputerProperties.ComputerDescription": null,
       "EPOComputerProperties.TimeZone": "",
@@ -50,7 +50,7 @@
       "EPOComputerProperties.UserProperty8": null,
       "EPOComputerProperties.Free_Space_of_Drive_C": 0,
       "EPOComputerProperties.Total_Space_of_Drive_C": 0,
-      "EPOLeafNode.Tags": "myTag, Server, SOAR",
+      "EPOLeafNode.Tags": "Workstation",
       "EPOLeafNode.ExcludedTags": "",
       "EPOLeafNode.LastUpdate": null,
       "EPOLeafNode.ManagedState": 0,
@@ -61,14 +61,14 @@
   ],
   "raw": null,
   "inputs": {
-    "mcafee_epo_systems": "test_server"
+    "mcafee_epo_systems": "richard test1"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 649,
-    "timestamp": "2022-07-01 12:40:10"
+    "execution_time_ms": 547,
+    "timestamp": "2023-10-09 13:07:06"
   }
 }

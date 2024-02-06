@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Assigns policy to the specified group no ePO server
+        Function: Assigns policy to the specified group no ePO server. McAfee user requires permission to at least one group in the System Tree and edit permission for at least one product for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_group_id
             -   fn_inputs.mcafee_epo_reset_inheritance
@@ -28,7 +28,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Validate parameters
+        # Validate required parameters
         validate_fields(["mcafee_epo_group_id", "mcafee_epo_product_id", "mcafee_epo_object_id"], fn_inputs)
 
         # Log parameters

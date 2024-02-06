@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
@@ -17,7 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Execute a query on the ePO server
+        Function: Execute a query on the ePO server. McAfee user requires permission to use queries for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_target
             -   fn_inputs.mcafee_epo_queryid

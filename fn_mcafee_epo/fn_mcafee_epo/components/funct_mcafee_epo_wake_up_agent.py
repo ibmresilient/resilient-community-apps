@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
@@ -18,14 +18,14 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Wake up an ePO agent
+        Function: Wake up an ePO agent. McAfee user requires Agent wakeup permission for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_systems
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Get the function parameters:
+        # Validate required parameters
         validate_fields(["mcafee_epo_systems"], fn_inputs)
 
         # Log parameters

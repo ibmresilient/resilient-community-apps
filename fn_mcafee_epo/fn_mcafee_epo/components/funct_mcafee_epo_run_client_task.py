@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Run a client task on specified system(s)
+        Function: Run a client task on specified system(s). McAfee user requires edit permission for at least one product for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_system_name_or_id
             -   fn_inputs.mcafee_epo_task_id
@@ -34,7 +34,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-         # Get the function parameters:
+        # Validate required parameters
         validate_fields(["mcafee_epo_system_name_or_id", "mcafee_epo_task_id", "mcafee_epo_product_id"], fn_inputs)
 
         # Log parameters
