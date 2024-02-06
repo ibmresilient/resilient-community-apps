@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 FN_NAME = "panorama_get_addresses"
+
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements Resilient function 'panorama_get_addresses"""
@@ -28,16 +29,27 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
-        # Create connection to the user specifiec Panorama Server
+        # Create connection to the user specific Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
-                                       self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
+                                       get_server_settings(self.opts, getattr(
+                                           fn_inputs, "panorama_label", None)),
+                                       self.get_select_param(
+                                           getattr(fn_inputs, "panorama_location", None)),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
-        response = panorama_util.get_addresses()
+        # Initialize function result variables
+        results = {}
+        success = True
+        reason = ""
 
-        yield self.status_message(f"{response['result']['@count']} addresses returned.")
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+        try:
+            results = panorama_util.get_addresses()
+        except Exception as err:
+            success = False
+            reason = err
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(response)
+        yield FunctionResult(results, success=success, reason=reason)
+
+        yield self.status_message(f"{results.get('result', {}).get('@count')} addresses returned.")
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

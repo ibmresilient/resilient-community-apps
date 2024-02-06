@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation
    test with: resilient-circuits selftest -l fn_pa_panorama
 """
@@ -18,8 +18,8 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
 
-    # Call the getAddresses API with the hardcoded 'vsys' and 'vsys1' for the location since those are typically
-    # function inputs. Returns success if the call is successful
+    # Call the getAddresses API with 'vsys' and 'vsys1' by default for the location if not specified in the app.config
+    # Returns success if the call is successful
 
     server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else PanoramaServers(opts).get_server_name_list()
 
@@ -27,7 +27,8 @@ def selftest_function(opts):
     try:
         for server_name in server_list:
             options = opts.get(server_name, {})
-            panorama_util = PanoramaClient(opts, options, "vsys", "vsys1")
+
+            panorama_util = PanoramaClient(opts, options, options.get("sf_location", "vsys"), options.get("sf_vsys", "vsys1"))
             panorama_util.get_addresses()
 
             status = True if panorama_util else False
@@ -41,7 +42,10 @@ def selftest_function(opts):
         Current Configs in app.config file:
         ---------
         panorama_host: {options.get("panorama_host")}
-        cert: {options.get("cert")}"""
+        api_version: {options.get("api_version")}
+        cert: {options.get("cert")}
+        sf_location: {options.get("sf_location")}
+        sf_vsys: {options.get("sf_vsys")}"""
 
     return {
         "state": "success" if status else "failure",
