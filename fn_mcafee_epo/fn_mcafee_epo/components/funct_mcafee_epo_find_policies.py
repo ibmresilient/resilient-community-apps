@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -17,7 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Finds all policies that match the given search text or find all policies if no search text is given
+        Function: Finds all policies that match the given search text or find all policies if no search text is given. McAfee user requires view permission for at least one product for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_search_text
             -   fn_inputs.incident_id

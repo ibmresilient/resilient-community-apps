@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
@@ -16,7 +16,7 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: list all tags defined in ePO"""
+        """Function: Find all tags specified in ePO. McAfee user requires Tag use permission for this function."""
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Connect to ePO server

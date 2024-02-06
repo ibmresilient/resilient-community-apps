@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
@@ -17,12 +17,11 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: Find ePO systems based on property such as system name, tag, IP address, MAC address, etc.
-           Return: List of systems found and information about the systems"""
+        """Function: Find an ePO system based on a property such as system name, tag, IP address, MAC address, etc. McAfee user requires permission to at least one group in the System Tree for this function."""
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Get the function parameters:
+        # Validate required parameters
         validate_fields(["mcafee_epo_systems"], fn_inputs)
 
         # Connect to ePO server

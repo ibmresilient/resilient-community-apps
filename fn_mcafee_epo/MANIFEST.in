@@ -3,6 +3,7 @@ include Dockerfile
 include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_mcafee_epo/util *
+recursive-include fn_mcafee_epo/lib *
 include fn_mcafee_epo/LICENSE
 include doc/*.md
 include doc/screenshots/*

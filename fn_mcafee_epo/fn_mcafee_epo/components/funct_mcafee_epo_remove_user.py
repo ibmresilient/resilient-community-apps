@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -18,14 +18,14 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Delete a user from the ePO server
+        Function: Delete a user from the ePO server. McAfee user requires administrator rights for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_username
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Validate parameters
+        # Validate required parameters
         validate_fields(["mcafee_epo_username"], fn_inputs)
 
         # Log parameters

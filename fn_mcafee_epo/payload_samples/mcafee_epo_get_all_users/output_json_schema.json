@@ -10,13 +10,54 @@
     },
     "reason": {},
     "content": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "authType": {
+            "type": "string"
+          },
+          "authDetails": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "allowedIPs": {
+            "type": "string"
+          }
+        }
+      }
     },
     "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
-        "mcafee_epo_permsetname": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "datatable_name": {
           "type": "string"
         }
       }

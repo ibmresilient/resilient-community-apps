@@ -1,10 +1,10 @@
-# docker build -t ibmresilient/fn_pa_panorama:1.2.0 -t ibmresilient/fn_pa_panorama:latest .
+# docker build -t ibmresilient/fn_pa_panorama:1.3.0 -t ibmresilient/fn_pa_panorama:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_pa_panorama
-ARG RESILIENT_CIRCUITS_VERSION=46.0.0
+ARG RESILIENT_CIRCUITS_VERSION=49.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -22,7 +22,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
-#RUN yum -y update && yum clean all
+RUN yum -y update && yum clean all
 #RUN yum -y install <package>
 
 # install the base package

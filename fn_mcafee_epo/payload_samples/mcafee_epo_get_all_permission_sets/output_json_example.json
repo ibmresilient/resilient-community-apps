@@ -18,6 +18,10 @@
     {
       "id": 3,
       "name": "Group Reviewer"
+    },
+    {
+      "id": 5,
+      "name": "test"
     }
   ],
   "raw": null,
@@ -25,9 +29,9 @@
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 552,
-    "timestamp": "2022-08-02 09:43:53"
+    "execution_time_ms": 606,
+    "timestamp": "2023-10-09 10:54:04"
   }
 }

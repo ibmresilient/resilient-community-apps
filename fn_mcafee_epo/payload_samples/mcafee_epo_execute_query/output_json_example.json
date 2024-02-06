@@ -4,9 +4,9 @@
   "reason": null,
   "content": [
     {
-      "EPOLeafNode.Tags": "Intel(R) Xeon(R) CPU, Linux, Server",
+      "EPOLeafNode.Tags": "Server",
       "EPOLeafNode.ExcludedTags": "",
-      "EPOLeafNode.LastUpdate": "2022-08-12T06:10:31-07:00",
+      "EPOLeafNode.LastUpdate": "2023-10-09T07:49:56-07:00",
       "EPOLeafNode.os": "Linux|Server|4.9|227-1.mlos2.x86_64",
       "EPOLeafNode.NodeName": "int-mcafee-tie",
       "EPOLeafNode.ManagedState": 1,
@@ -19,9 +19,9 @@
       "EPOLeafNode.LastCommSecure": "1"
     },
     {
-      "EPOLeafNode.Tags": "Intel Core Processor, Server, Windows server 2016",
+      "EPOLeafNode.Tags": "Server",
       "EPOLeafNode.ExcludedTags": "",
-      "EPOLeafNode.LastUpdate": "2022-08-12T05:42:46-07:00",
+      "EPOLeafNode.LastUpdate": "2022-07-22T07:42:36-07:00",
       "EPOLeafNode.os": "Windows Server 2016|Server|10.0|",
       "EPOLeafNode.NodeName": "MCAFEE-EPO-CLIE",
       "EPOLeafNode.ManagedState": 1,
@@ -34,9 +34,9 @@
       "EPOLeafNode.LastCommSecure": "1"
     },
     {
-      "EPOLeafNode.Tags": "Intel(R) Xeon(R) CPU, Server, Windows server 2016",
+      "EPOLeafNode.Tags": "Server",
       "EPOLeafNode.ExcludedTags": "",
-      "EPOLeafNode.LastUpdate": "2022-08-12T06:00:08-07:00",
+      "EPOLeafNode.LastUpdate": "2023-10-09T07:05:49-07:00",
       "EPOLeafNode.os": "Windows Server 2016|Server|10.0|",
       "EPOLeafNode.NodeName": "WIN-MTHJTQ4ELBP",
       "EPOLeafNode.ManagedState": 1,
@@ -53,7 +53,7 @@
       "EPOLeafNode.ExcludedTags": "",
       "EPOLeafNode.LastUpdate": null,
       "EPOLeafNode.os": "|||",
-      "EPOLeafNode.NodeName": "SystemA",
+      "EPOLeafNode.NodeName": "test",
       "EPOLeafNode.ManagedState": 0,
       "EPOLeafNode.AgentVersion": null,
       "EPOLeafNode.AgentGUID": null,
@@ -68,7 +68,7 @@
       "EPOLeafNode.ExcludedTags": "",
       "EPOLeafNode.LastUpdate": null,
       "EPOLeafNode.os": "|||",
-      "EPOLeafNode.NodeName": "LostSystem",
+      "EPOLeafNode.NodeName": "System1",
       "EPOLeafNode.ManagedState": 0,
       "EPOLeafNode.AgentVersion": null,
       "EPOLeafNode.AgentGUID": null,
@@ -83,7 +83,37 @@
       "EPOLeafNode.ExcludedTags": "",
       "EPOLeafNode.LastUpdate": null,
       "EPOLeafNode.os": "|||",
-      "EPOLeafNode.NodeName": "toDelete",
+      "EPOLeafNode.NodeName": "test1254",
+      "EPOLeafNode.ManagedState": 0,
+      "EPOLeafNode.AgentVersion": null,
+      "EPOLeafNode.AgentGUID": null,
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.LastCommSecure": "0"
+    },
+    {
+      "EPOLeafNode.Tags": "",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastUpdate": null,
+      "EPOLeafNode.os": "|||",
+      "EPOLeafNode.NodeName": "SomethingNew",
+      "EPOLeafNode.ManagedState": 0,
+      "EPOLeafNode.AgentVersion": null,
+      "EPOLeafNode.AgentGUID": null,
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.LastCommSecure": "0"
+    },
+    {
+      "EPOLeafNode.Tags": "",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastUpdate": null,
+      "EPOLeafNode.os": "|||",
+      "EPOLeafNode.NodeName": "richard test1",
       "EPOLeafNode.ManagedState": 0,
       "EPOLeafNode.AgentVersion": null,
       "EPOLeafNode.AgentGUID": null,
@@ -96,16 +126,16 @@
   ],
   "raw": null,
   "inputs": {
-    "incident_id": 2108,
-    "datatable_name": "mcafee_epo_systems",
+    "incident_id": 4057,
+    "datatable_name": "mcafee_epo_systems_dt",
     "mcafee_epo_target": "EPOLeafNode"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 1252,
-    "timestamp": "2022-08-12 09:10:36"
+    "execution_time_ms": 2391,
+    "timestamp": "2023-10-09 10:55:10"
   }
 }

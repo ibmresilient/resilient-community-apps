@@ -25,15 +25,7 @@
     },
     "raw": {},
     "inputs": {
-      "type": "object",
-      "properties": {
-        "incident_id": {
-          "type": "integer"
-        },
-        "datatable_name": {
-          "type": "string"
-        }
-      }
+      "type": "object"
     },
     "metrics": {
       "type": "object",

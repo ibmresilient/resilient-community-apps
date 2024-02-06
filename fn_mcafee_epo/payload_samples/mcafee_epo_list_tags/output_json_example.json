@@ -12,56 +12,19 @@
       "tagNotes": "Default tag for systems identified as a Workstation",
       "tagId": 2,
       "tagName": "Workstation"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 3,
-      "tagName": "SOAR"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 4,
-      "tagName": "Windows server 2016"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 5,
-      "tagName": "Linux"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 6,
-      "tagName": "Intel(R) Xeon(R) CPU"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 7,
-      "tagName": "Intel Core Processor"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 8,
-      "tagName": "Test"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 9,
-      "tagName": "AA"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 10,
-      "tagName": "123"
     }
   ],
   "raw": null,
-  "inputs": {},
+  "inputs": {
+    "incident_id": 4057,
+    "datatable_name": "mcafee_epo_tags"
+  },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 580,
-    "timestamp": "2022-07-22 14:03:38"
+    "execution_time_ms": 887,
+    "timestamp": "2023-10-09 13:02:57"
   }
 }

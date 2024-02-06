@@ -32,9 +32,7 @@
         "mcafee_epo_notes": {
           "type": "string"
         },
-        "mcafee_epo_user_disabled": {
-          "type": "boolean"
-        },
+        "mcafee_epo_user_disabled": {},
         "mcafee_epo_fullname": {
           "type": "string"
         },

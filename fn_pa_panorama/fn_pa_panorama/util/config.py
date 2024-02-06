@@ -8,7 +8,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    return u"""
+    return """
 # V1.2.0+ have the option to have multiple servers configured.
 # By default two examples of servers are given, example one is labeled `panorama_label1` and example two is labeled `panorama_label2`.
 # The label for a server is placed after `[fn_pa_panorama:` and then followed by `]`.
@@ -21,9 +21,12 @@ def config_section_data():
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
 # Versions of panorama can be used by changing the api_version to use a different API version
-api_version=9.0
+api_version=v9.1
 api_key=<Panorama_api_key>
 cert=[True|False]
+# Selftest options
+sf_location=vsys
+sf_vsys=vsys1
 # optional settings to access Panorama via proxies
 #http_proxy=http://proxy.domain:3128
 #https_proxy=https://proxy.domain:3128
@@ -32,9 +35,12 @@ cert=[True|False]
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
 # Versions of panorama can be used by changing the api_version to use a different API version
-api_version=9.0
+api_version=v9.1
 api_key=<Panorama_api_key>
 cert=[True|False]
+# Selftest options
+sf_location=vsys
+sf_vsys=vsys1
 # optional settings to access Panorama via proxies
 #http_proxy=http://proxy.domain:3128
 #https_proxy=https://proxy.domain:3128
