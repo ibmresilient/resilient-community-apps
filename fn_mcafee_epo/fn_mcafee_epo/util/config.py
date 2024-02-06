@@ -8,7 +8,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    return u"""[fn_mcafee_epo]
+    return """[fn_mcafee_epo]
 epo_url=https://<your_epo_server>:8443
 epo_username=<your_epo_username>
 epo_password=<your_epo_password>

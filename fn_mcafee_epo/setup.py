@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_mcafee_epo',
     display_name='McAfee ePO Integration for SOAR ',
-    version='3.0.0',
+    version='2.1.0',
     license='MIT',
     author='IBM SOAR',
     author_email="",
@@ -28,7 +28,7 @@ setup(
     description="IBM Security SOAR app for McAfee ePO",
     long_description="The McAfee ePO functions allow for manipulation of tags, systems, users, issues, policies and permission sets.",
     install_requires=[
-        'resilient_circuits>=45.0.0'
+        'resilient_circuits>=49.0.0'
     ],
     python_requires='>=3.6',
     packages=find_packages(),

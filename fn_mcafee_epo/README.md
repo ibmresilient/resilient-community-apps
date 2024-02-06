@@ -1,4 +1,4 @@
-# McAfee ePO Integration for SOAR 
+# McAfee ePO Integration for SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -56,7 +56,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 3.0.0 | 10/2023 | Convert from rule/workflows to playbooks |
+| 2.1.0 | 02/2024 | Convert from rule/workflows to playbooks |
 | 2.0.0 | 07/2022 | <ul><li>Add 20 new functions</li><li>Added 7 new data tables</li><li>Update funct_mcafee_epo_find_a_system function to allow a list of systems properties to be used and return a list of systems</li></ul> |
 | 1.0.3 | 10/2020 | Added functions: find system, get system info, remove tags and Updated capability to rule for add tag function |
 | 1.0.2 | 04/2020 | Support added for App Host |
@@ -65,8 +65,8 @@
 
 ---
 
-## 3.0.0 Changes
-In v3,0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+## 2.1.0 Changes
+In v2.1, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
 
@@ -123,34 +123,34 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `49.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `49.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* Integration server is running `resilient_circuits>=49.0.0`.
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
   | Incident | Edit |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -162,7 +162,7 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=45.0.0
+* resilient_circuits>=49.0.0
 
 ---
 
@@ -243,7 +243,8 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_username = playbook.inputs.epo_username
+if getattr(playbook.inputs, "epo_username", None):
+  inputs.mcafee_epo_username = getattr(playbook.inputs, "epo_username", None)
 inputs.mcafee_epo_permsetname = row.permission_set_name
 ```
 
@@ -353,19 +354,32 @@ inputs.mcafee_epo_group_id = playbook.inputs.epo_group_id
 inputs.mcafee_epo_system_name_or_id = playbook.inputs.epo_system_names_or_ids
 
 # Optional
-inputs.mcafee_epo_allow_duplicates = getattr(playbook.inputs, "epo_allow_duplicates")
-inputs.mcafee_epo_delete_if_removed = getattr(playbook.inputs, "epo_delete_if_removed")
-inputs.mcafee_epo_flatten_tree_structure = getattr(playbook.inputs, "epo_flatten_tree_structure")
-inputs.mcafee_epo_push_agent = getattr(playbook.inputs, "epo_push_agent")
-inputs.mcafee_epo_push_agent_domain_name = getattr(playbook.inputs, "epo_push_agent_domain_name")
-inputs.mcafee_epo_push_agent_force_install = getattr(playbook.inputs, "epo_push_agent_force_install")
-inputs.mcafee_epo_push_agent_package_path = getattr(playbook.inputs, "epo_push_agent_package_path")
-inputs.mcafee_epo_push_agent_password = getattr(playbook.inputs, "epo_push_agent_password")
-inputs.mcafee_epo_push_agent_skip_if_installed = getattr(playbook.inputs, "epo_push_agent_skip_if_installed")
-inputs.mcafee_epo_push_agent_suppress_ui = getattr(playbook.inputs, "epo_push_agent_suppress_ui")
-inputs.mcafee_epo_push_agent_username = getattr(playbook.inputs, "epo_push_agent_user_name")
-inputs.mcafee_epo_uninstall = getattr(playbook.inputs, "epo_uninstall_removed")
-inputs.mcafee_epo_push_agent_install_path = getattr(playbook.inputs, "epo_push_agent_install_path")
+if getattr(playbook.inputs, "epo_allow_duplicates", None):
+  inputs.mcafee_epo_allow_duplicates = getattr(playbook.inputs, "epo_allow_duplicates")
+if getattr(playbook.inputs, "epo_delete_if_removed", None):
+  inputs.mcafee_epo_delete_if_removed = getattr(playbook.inputs, "epo_delete_if_removed")
+if getattr(playbook.inputs, "epo_flatten_tree_structure", None):
+  inputs.mcafee_epo_flatten_tree_structure = getattr(playbook.inputs, "epo_flatten_tree_structure")
+if getattr(playbook.inputs, "epo_push_agent", None):
+  inputs.mcafee_epo_push_agent = getattr(playbook.inputs, "epo_push_agent")
+if getattr(playbook.inputs, "epo_push_agent_domain_name", None):
+  inputs.mcafee_epo_push_agent_domain_name = getattr(playbook.inputs, "epo_push_agent_domain_name")
+if getattr(playbook.inputs, "epo_push_agent_force_install", None):
+  inputs.mcafee_epo_push_agent_force_install = getattr(playbook.inputs, "epo_push_agent_force_install")
+if getattr(playbook.inputs, "epo_push_agent_package_path", None):
+  inputs.mcafee_epo_push_agent_package_path = getattr(playbook.inputs, "epo_push_agent_package_path")
+if getattr(playbook.inputs, "epo_push_agent_password", None):
+  inputs.mcafee_epo_push_agent_password = getattr(playbook.inputs, "epo_push_agent_password")
+if getattr(playbook.inputs, "epo_push_agent_skip_if_installed", None):
+  inputs.mcafee_epo_push_agent_skip_if_installed = getattr(playbook.inputs, "epo_push_agent_skip_if_installed")
+if getattr(playbook.inputs, "epo_push_agent_suppress_ui", None):
+  inputs.mcafee_epo_push_agent_suppress_ui = getattr(playbook.inputs, "epo_push_agent_suppress_ui")
+if getattr(playbook.inputs, "epo_push_agent_user_name", None):
+  inputs.mcafee_epo_push_agent_username = getattr(playbook.inputs, "epo_push_agent_user_name")
+if getattr(playbook.inputs, "epo_uninstall_removed", None):
+  inputs.mcafee_epo_uninstall = getattr(playbook.inputs, "epo_uninstall_removed")
+if getattr(playbook.inputs, "epo_push_agent_install_path", None):
+  inputs.mcafee_epo_push_agent_install_path = getattr(playbook.inputs, "epo_push_agent_install_path")
 ```
 
 </p>
@@ -379,6 +393,7 @@ results = playbook.functions.results.add_sys
 if results.get("success"):
   row = incident.addRow("mcafee_epo_systems_dt")
   row["epo_system_name"] = playbook.inputs.epo_system_names_or_ids
+  row["epo_deleted"] = False
 ```
 
 </p>
@@ -450,15 +465,24 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_username = getattr(playbook.inputs, "epo_username")
-inputs.mcafee_epo_pass = getattr(playbook.inputs, "epo_user_password")
-inputs.mcafee_epo_admin = getattr(playbook.inputs, "epo_admin")
-inputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, "epo_allowed_ips")
-inputs.mcafee_epo_email = getattr(playbook.inputs, "epo_email")
-inputs.mcafee_epo_fullname = getattr(playbook.inputs, "epo_full_name")
-inputs.mcafee_epo_notes = getattr(playbook.inputs, "epo_notes")
-inputs.mcafee_epo_phone_number = getattr(playbook.inputs, "epo_phone_number")
-inputs.mcafee_epo_user_disabled = getattr(playbook.inputs, "epo_user_disabled")
+if getattr(playbook.inputs, "epo_username", None):
+  inputs.mcafee_epo_username = getattr(playbook.inputs, "epo_username")
+if getattr(playbook.inputs, "epo_user_password", None):
+  inputs.mcafee_epo_pass = getattr(playbook.inputs, "epo_user_password")
+if getattr(playbook.inputs, "epo_admin", None):
+  inputs.mcafee_epo_admin = getattr(playbook.inputs, "epo_admin")
+if getattr(playbook.inputs, "epo_allowed_ips", None):
+  inputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, "epo_allowed_ips")
+if getattr(playbook.inputs, "epo_email", None):
+  inputs.mcafee_epo_email = getattr(playbook.inputs, "epo_email")
+if getattr(playbook.inputs, "epo_full_name", None):
+  inputs.mcafee_epo_fullname = getattr(playbook.inputs, "epo_full_name")
+if getattr(playbook.inputs, "epo_notes", None):
+  inputs.mcafee_epo_notes = getattr(playbook.inputs, "epo_notes")
+if getattr(playbook.inputs, "epo_phone_number", None):
+  inputs.mcafee_epo_phone_number = getattr(playbook.inputs, "epo_phone_number")
+if getattr(playbook.inputs, "epo_user_disabled", None):
+  inputs.mcafee_epo_user_disabled = getattr(playbook.inputs, "epo_user_disabled")
 ```
 
 </p>
@@ -469,9 +493,8 @@ inputs.mcafee_epo_user_disabled = getattr(playbook.inputs, "epo_user_disabled")
 
 ```python
 results = playbook.functions.results.add_user
-
 if results.get("success"):
-  incident.addNote("User: {} successfully created.".format(playbook.functions.epo_username))
+  incident.addNote("User: {} successfully created.".format(playbook.inputs.epo_username))
 ```
 
 </p>
@@ -532,9 +555,11 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_group_id = getattr(playbook.inputs, "epo_group_id")
-inputs.mcafee_epo_object_id = row.object_id
-inputs.mcafee_epo_product_id = row.product_id
+inputs.mcafee_epo_group_id = row.group_id
+if getattr(playbook.inputs, "epo_policy_id", None):
+  inputs.mcafee_epo_object_id = getattr(playbook.inputs, "epo_policy_id")
+if getattr(playbook.inputs, "epo_product_id", None):
+  inputs.mcafee_epo_product_id = getattr(playbook.inputs, "epo_product_id")
 ```
 
 </p>
@@ -546,7 +571,7 @@ inputs.mcafee_epo_product_id = row.product_id
 ```python
 results = playbook.functions.results.assign_policy
 if results.get("success"):
-  incident.addNote("Policy: '{}' Assigned to group: '{}'".format(row.object_name, getattr(playbook.inputs, "epo_group_id")))
+  incident.addNote("Policy: '{}' Assigned to Group: '{}'".format(getattr(playbook.inputs, "epo_policy_id"), row.group_id))
 ```
 
 </p>
@@ -616,10 +641,13 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_system_name_or_id = getattr(playbook.inputs, "epo_system_names_or_ids")
-inputs.mcafee_epo_product_id = row.product_id
-inputs.mcafee_epo_type_id = row.type_id
-inputs.mcafee_epo_object_id = row.object_id
+inputs.mcafee_epo_system_name_or_id = row.epo_system_name
+if getattr(playbook.inputs, "epo_product_id", None):
+  inputs.mcafee_epo_product_id = getattr(playbook.inputs, "epo_product_id")
+if getattr(playbook.inputs, "epo_policy_type_id", None):
+  inputs.mcafee_epo_type_id = getattr(playbook.inputs, "epo_policy_type_id")
+if getattr(playbook.inputs, "epo_policy_id", None):
+  inputs.mcafee_epo_object_id = getattr(playbook.inputs, "epo_policy_id")
 ```
 
 </p>
@@ -631,7 +659,7 @@ inputs.mcafee_epo_object_id = row.object_id
 ```python
 results = playbook.functions.results.assign_policy
 if results.get("success"):
-  incident.addNote("Policy: '{}' Assigned to system: '{}'".format(row.object_id, getattr(playbook.inputs, "epo_system_names_or_ids")))
+  incident.addNote("Policy: '{}' Assigned to system: '{}'".format(getattr(playbook.inputs, "epo_policy_id"), row.epo_system_name))
 ```
 
 </p>
@@ -709,17 +737,28 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, "epo_issue_assignee")
-inputs.mcafee_epo_issue_description = getattr(playbook.inputs, "epo_issue_description")
-inputs.mcafee_epo_issue_due = getattr(playbook.inputs, "epo_issue_due")
-inputs.mcafee_epo_issue_name = getattr(playbook.inputs, "epo_issue_name")
-inputs.mcafee_epo_issue_priority = getattr(playbook.inputs, "epo_issue_priority")
-inputs.mcafee_epo_issue_properties = getattr(playbook.inputs, "epo_issue_properties")
-inputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, "epo_issue_resolution")
-inputs.mcafee_epo_issue_severity = getattr(playbook.inputs, "epo_issue_severity")
-inputs.mcafee_epo_issue_state = getattr(playbook.inputs, "epo_issue_state")
-inputs.mcafee_epo_ticket_id = getattr(playbook.inputs, "epo_ticket_id")
-inputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, "epo_ticket_server_name")
+if getattr(playbook.inputs, "epo_issue_assignee", None):
+  inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, "epo_issue_assignee")
+if getattr(playbook.inputs, "epo_issue_description", None):
+  inputs.mcafee_epo_issue_description = getattr(playbook.inputs, "epo_issue_description")
+if getattr(playbook.inputs, "epo_issue_due", None):
+  inputs.mcafee_epo_issue_due = getattr(playbook.inputs, "epo_issue_due")
+if getattr(playbook.inputs, "epo_issue_name", None):
+  inputs.mcafee_epo_issue_name = getattr(playbook.inputs, "epo_issue_name")
+if getattr(playbook.inputs, "epo_issue_priority", None):
+  inputs.mcafee_epo_issue_priority = getattr(playbook.inputs, "epo_issue_priority")
+if getattr(playbook.inputs, "epo_issue_properties", None):
+  inputs.mcafee_epo_issue_properties = getattr(playbook.inputs, "epo_issue_properties")
+if getattr(playbook.inputs, "epo_issue_resolution", None):
+  inputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, "epo_issue_resolution")
+if getattr(playbook.inputs, "epo_issue_severity", None):
+  inputs.mcafee_epo_issue_severity = getattr(playbook.inputs, "epo_issue_severity")
+if getattr(playbook.inputs, "epo_issue_state", None):
+  inputs.mcafee_epo_issue_state = getattr(playbook.inputs, "epo_issue_state")
+if getattr(playbook.inputs, "epo_ticket_id", None):
+  inputs.mcafee_epo_ticket_id = getattr(playbook.inputs, "epo_ticket_id")
+if getattr(playbook.inputs, "epo_ticket_server_name", None):
+  inputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, "epo_ticket_server_name")
 ```
 
 </p>
@@ -733,7 +772,7 @@ results = playbook.functions.results.create_issue
 if results.get("success"):
   row = incident.addRow("mcafee_epo_issues")
   row["issue_name"] = getattr(playbook.inputs, "epo_issue_name")
-  row["issue_id"] = results.get("content")
+  row["issue_id"] = results.get("content", {})
   row["severity"] = getattr(playbook.inputs, "epo_issue_severity")
   row["issue_due_date"] = getattr(playbook.inputs, "epo_issue_due")
   row["issue_description"] = getattr(playbook.inputs, "epo_issue_description")
@@ -1213,7 +1252,8 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_systems = getattr(playbook.inputs, "epo_system")
+if getattr(playbook.inputs, "epo_system", None):
+  inputs.mcafee_epo_systems = getattr(playbook.inputs, "epo_system")
 ```
 
 </p>
@@ -1311,7 +1351,7 @@ inputs.incident_id = incident.id
 ```python
 results = playbook.functions.results.client_task
 if results.get("success"):
-  for x in results.get("content"):
+  for x in results.get("content", {}):
     table = incident.addRow("mcafee_epo_client_tasks")
     table["object_name"] = x.get("objectName")
     table["type_name"] = x.get("typeName")
@@ -1403,13 +1443,13 @@ results = {
 results = playbook.functions.results.query
 groupsResults = playbook.functions.results.groups
 if results.get("success"):
-  for groupInfo in groupsResults.get("content"):
+  for groupInfo in groupsResults.get("content", {}):
     groupPath = groupInfo.get("groupPath")
     table = incident.addRow("mcafee_epo_groups")
     table["group_id"] = int(groupInfo.get("groupId"))
     table["group_path"] = groupPath
     systems = ""
-    for group in results.get("content"):
+    for group in results.get("content", {}):
       # EPOBranchNode.NodeTextPath2 only returns path after My Organization
       path2 = group.get("EPOBranchNode.NodeTextPath2")
       # EPOBranchNode.NodeTextPath2 returns the path, Lost and Found, as, Lost&Found,
@@ -1621,7 +1661,7 @@ if results.get("success"):
     table_row["product_id"] = policy.get("productId")
     table_row["object_notes"] = policy.get("objectNotes")
     systems = ""
-    for assigned in results.get("content"):
+    for assigned in results.get("content", {}):
       if assigned.get("EPOAssignedPolicy.PolicyObjectID") == policyId:
         systems = "{}, {}".format(systems, assigned.get("EPOAssignedPolicy.NodeName"))
 
@@ -1838,12 +1878,12 @@ results = {
 results = playbook.functions.results.query
 perm_sets = playbook.functions.results.perm_sets
 if results.get("success"):
-  for permset in perm_sets.get("content"):
+  for permset in perm_sets.get("content", {}):
     permsetName = permset.get("name")
     table_row = incident.addRow("mcafee_epo_permission_sets")
     table_row["permission_set_name"] = permsetName
     users = ""
-    for perm in results.get("content"):
+    for perm in results.get("content", {}):
       user = perm.get("EntitlementView.PrincipalName")
       permGroup = perm.get("EntitlementView.GroupName")
       if user and permGroup and permsetName.lower() == permGroup.lower() and user not in users:
@@ -1973,7 +2013,7 @@ inputs.incident_id = incident.id
 ```python
 results = playbook.functions.results.users
 if results.get("success"):
-  for user in results["content"]:
+  for user in results.get("content", {}):
     table_row = incident.addRow("mcafee_epo_users")
     table_row["user_name"] = user.get("name")
     table_row["full_name"] = user.get("fullName")
@@ -2085,7 +2125,7 @@ inputs.incident_id = incident.id
 ```python
 results = playbook.functions.results.issues
 if results.get("success"):
-  for c in results.get("content"):
+  for c in results.get("content", {}):
     row = incident.addRow("mcafee_epo_issues")
     row["issue_name"] = c.get("name")
     row["issue_id"] = int(c.get("id"))
@@ -2181,11 +2221,11 @@ inputs.incident_id = incident.id
 ```python
 results = playbook.functions.results.tags
 if results.get("success"):
-  for tag in sorted(results.content, key = lambda i: i['tagName'].lower()):
+  for tag in sorted(results.get("content", {}), key = lambda i: i['tagName'].lower()):
     row = incident.addRow("mcafee_epo_tags")
-    row['epo_id'] = tag['tagId']
-    row['epo_tag'] = tag['tagName']
-    row['epo_notes'] = tag['tagNotes']
+    row['epo_id'] = tag.get('tagId')
+    row['epo_tag'] = tag.get('tagName')
+    row['epo_notes'] = tag.get('tagNotes')
 ```
 
 </p>
@@ -2244,7 +2284,8 @@ results = {
 
 ```python
 inputs.mcafee_epo_permsetname = row.permission_set_name
-inputs.mcafee_epo_username = getattr(playbook.inputs, "epo_username")
+if getattr(playbook.inputs, "epo_username", None):
+  inputs.mcafee_epo_username = getattr(playbook.inputs, "epo_username")
 ```
 
 </p>
@@ -2319,7 +2360,8 @@ results = {
 
 ```python
 inputs.mcafee_epo_systems = artifact.value
-inputs.mcafee_epo_tag = str(getattr(playbook.inputs, "list_of_tags"))
+if getattr(playbook.inputs, "list_of_tags", None):
+  inputs.mcafee_epo_tag = str(getattr(playbook.inputs, "list_of_tags"))
 ```
 
 </p>
@@ -2329,11 +2371,11 @@ inputs.mcafee_epo_tag = str(getattr(playbook.inputs, "list_of_tags"))
 <p>
 
 ```python
-results = playbook.functions.results.tags
+results = playbook.functions.results.tags_results
 if not results.get("success"):
-  note = u"ePO system not found or tag not applied: {}".format(results.inputs.get('mcafee_epo_tag'))
+  note = "ePO system not found or tag not applied: {}".format(results.inputs.get('mcafee_epo_tag'))
 else:
-  note = u"ePO tag(s) removed: {}".format(results.inputs.get('mcafee_epo_tag'))
+  note = "ePO tag(s) removed: {}".format(results.inputs.get('mcafee_epo_tag'))
 
 if artifact.description:
   artifact.description = u"{}\n\n{}".format(artifact.description.content, note)
@@ -2407,7 +2449,7 @@ inputs.mcafee_epo_username = row.user_name
 results = playbook.functions.results.remove_user
 if results.get("success"):
   row.user_deleted = True
-  incident.addNote("User: {} removed from ePO server".format(row.user_name))
+  incident.addNote("User: {} removed  from ePO server".format(row.user_name))
 ```
 
 </p>
@@ -2474,7 +2516,8 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_system_name_or_id = getattr(playbook.inputs, "epo_system_names_or_ids")
+if getattr(playbook.inputs, "epo_system_names_or_ids", None):
+  inputs.mcafee_epo_system_name_or_id = getattr(playbook.inputs, "epo_system_names_or_ids")
 inputs.mcafee_epo_product_id = row.product_id
 inputs.mcafee_epo_task_id = int(row.task_id)
 ```
@@ -2566,18 +2609,29 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, "epo_issue_assignee")
-inputs.mcafee_epo_issue_description = getattr(playbook.inputs, "epo_issue_description")
-inputs.mcafee_epo_issue_due = getattr(playbook.inputs, "epo_issue_due")
+if getattr(playbook.inputs, "epo_issue_assignee", None):
+  inputs.mcafee_epo_issue_assignee = getattr(playbook.inputs, "epo_issue_assignee")
+if getattr(playbook.inputs, "epo_issue_description", None):
+  inputs.mcafee_epo_issue_description = getattr(playbook.inputs, "epo_issue_description")
+if getattr(playbook.inputs, "epo_issue_due", None):
+  inputs.mcafee_epo_issue_due = getattr(playbook.inputs, "epo_issue_due")
 inputs.mcafee_epo_issue_id = row.issue_id
-inputs.mcafee_epo_issue_name = getattr(playbook.inputs, "epo_issue_name")
-inputs.mcafee_epo_issue_priority = getattr(playbook.inputs, "epo_issue_priority")
-inputs.mcafee_epo_issue_properties = getattr(playbook.inputs, "epo_issue_properties")
-inputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, "epo_issue_resolution")
-inputs.mcafee_epo_issue_severity = getattr(playbook.inputs, "epo_issue_severity")
-inputs.mcafee_epo_issue_state = getattr(playbook.inputs, "epo_issue_state")
-inputs.mcafee_epo_ticket_id = getattr(playbook.inputs, "epo_ticket_id")
-inputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, "epo_ticket_server_name")
+if getattr(playbook.inputs, "epo_issue_name", None):
+  inputs.mcafee_epo_issue_name = getattr(playbook.inputs, "epo_issue_name")
+if getattr(playbook.inputs, "epo_issue_priority", None):
+  inputs.mcafee_epo_issue_priority = getattr(playbook.inputs, "epo_issue_priority")
+if getattr(playbook.inputs, "epo_issue_properties", None):
+  inputs.mcafee_epo_issue_properties = getattr(playbook.inputs, "epo_issue_properties")
+if getattr(playbook.inputs, "epo_issue_resolution", None):
+  inputs.mcafee_epo_issue_resolution = getattr(playbook.inputs, "epo_issue_resolution")
+if getattr(playbook.inputs, "epo_issue_severity", None):
+  inputs.mcafee_epo_issue_severity = getattr(playbook.inputs, "epo_issue_severity")
+if getattr(playbook.inputs, "epo_issue_state", None):
+  inputs.mcafee_epo_issue_state = getattr(playbook.inputs, "epo_issue_state")
+if getattr(playbook.inputs, "epo_ticket_id", None):
+  inputs.mcafee_epo_ticket_id = getattr(playbook.inputs, "epo_ticket_id")
+if getattr(playbook.inputs, "epo_ticket_server_name", None):
+  inputs.mcafee_epo_ticket_server_name = getattr(playbook.inputs, "epo_ticket_server_name")
 ```
 
 </p>
@@ -2701,19 +2755,31 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_admin = getattr(playbook.inputs, "epo_admin")
-inputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, "epo_allowed_ips")
-inputs.mcafee_epo_email = getattr(playbook.inputs, "epo_email")
-inputs.mcafee_epo_fullname = getattr(playbook.inputs, "epo_full_name")
-inputs.mcafee_epo_notes = getattr(playbook.inputs, "epo_notes")
-inputs.mcafee_epo_pass = getattr(playbook.inputs, "epo_user_password")
-inputs.mcafee_epo_phone_number = getattr(playbook.inputs, "epo_phone_number")
-inputs.mcafee_epo_user_disabled = getattr(playbook.inputs, "epo_user_disabled")
+if getattr(playbook.inputs, "epo_admin", None):
+  inputs.mcafee_epo_admin = getattr(playbook.inputs, "epo_admin")
+if getattr(playbook.inputs, "epo_allowed_ips", None):
+  inputs.mcafee_epo_allowed_ips = getattr(playbook.inputs, "epo_allowed_ips")
+if getattr(playbook.inputs, "epo_email", None):
+  inputs.mcafee_epo_email = getattr(playbook.inputs, "epo_email")
+if getattr(playbook.inputs, "epo_full_name", None):
+  inputs.mcafee_epo_fullname = getattr(playbook.inputs, "epo_full_name")
+if getattr(playbook.inputs, "epo_notes", None):
+  inputs.mcafee_epo_notes = getattr(playbook.inputs, "epo_notes")
+if getattr(playbook.inputs, "epo_user_password", None):
+  inputs.mcafee_epo_pass = getattr(playbook.inputs, "epo_user_password")
+if getattr(playbook.inputs, "epo_phone_number", None):
+  inputs.mcafee_epo_phone_number = getattr(playbook.inputs, "epo_phone_number")
+if getattr(playbook.inputs, "epo_user_disabled", None):
+  inputs.mcafee_epo_user_disabled = getattr(playbook.inputs, "epo_user_disabled")
 inputs.mcafee_epo_username = row.user_name
-inputs.mcafee_epo_new_username = getattr(playbook.inputs, "epo_new_username")
-inputs.mcafee_epo_subjectdn = getattr(playbook.inputs, "epo_subject_dn")
-inputs.mcafee_epo_windowsdomain = getattr(playbook.inputs, "epo_windows_domain")
-inputs.mcafee_epo_windowsusername = getattr(playbook.inputs, "epo_windows_username")
+if getattr(playbook.inputs, "epo_new_username", None):
+  inputs.mcafee_epo_new_username = getattr(playbook.inputs, "epo_new_username")
+if getattr(playbook.inputs, "epo_subject_dn", None):
+  inputs.mcafee_epo_subjectdn = getattr(playbook.inputs, "epo_subject_dn")
+if getattr(playbook.inputs, "epo_windows_domain", None):
+  inputs.mcafee_epo_windowsdomain = getattr(playbook.inputs, "epo_windows_domain")
+if getattr(playbook.inputs, "epo_windows_username", None):
+  inputs.mcafee_epo_windowsusername = getattr(playbook.inputs, "epo_windows_username")
 ```
 
 </p>
@@ -2807,7 +2873,8 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_systems = getattr(playbook.inputs, "epo_system")
+if getattr(playbook.inputs, "epo_system", None):
+  inputs.mcafee_epo_systems = getattr(playbook.inputs, "epo_system")
 ```
 
 </p>
@@ -2819,7 +2886,7 @@ inputs.mcafee_epo_systems = getattr(playbook.inputs, "epo_system")
 ```python
 results = playbook.functions.results.wake_agent
 if results.get("success"):
-  incident.addNote(results.get("content"))
+  incident.addNote(results.get("content", {}))
 ```
 
 </p>
@@ -2881,7 +2948,8 @@ results = {
 
 ```python
 inputs.mcafee_epo_systems = artifact.value
-inputs.mcafee_epo_tag = str(getattr(playbook.inputs, "list_of_tags"))
+if getattr(playbook.inputs, "list_of_tags", None):
+  inputs.mcafee_epo_tag = str(getattr(playbook.inputs, "list_of_tags", None))
 ```
 
 </p>
@@ -2891,7 +2959,7 @@ inputs.mcafee_epo_tag = str(getattr(playbook.inputs, "list_of_tags"))
 <p>
 
 ```python
-results = playbook.functions.results.tags
+results = playbook.functions.results.tags_results
 if results.get("success"):
   note = "ePO tag(s) added: {}".format(str(getattr(playbook.inputs, "list_of_tags")))
 else:
