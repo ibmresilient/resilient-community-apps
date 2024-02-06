@@ -1306,7 +1306,7 @@
           "object_type": "artifact",
           "playbook_handle": "misp_search_attribute",
           "programmatic_name": "misp_search_attribute_post_process",
-          "script_text": "results = playbook.functions.results.misp_attributes\n\nif not results.get(\"success\"):\n  incident.addNote(f\"No attributes matching {artifact.value} found\")\nelse:\n  matched = []\n  for match in results.get(\"content\", {}):\n    matched.append(f\"Event: {match.get(\u0027Event\u0027, {}).get(\u0027info\u0027)}, ID: {match.get(\u0027Event\u0027, {}).get(\u0027id\u0027)}\")\n  incident.addNote(\"Attribute Search Macthes:\\n {}\".format(\u0027\\n\u0027.join(matched)))",
+          "script_text": "results = playbook.functions.results.misp_attributes\n\nif not results.get(\"success\"):\n  incident.addNote(f\"No attributes matching {artifact.value} found\")\nelse:\n  matched = []\n  for match in results.get(\"content\", {}):\n    matched.append(f\"Event: {match.get(\u0027Event\u0027, {}).get(\u0027info\u0027)}, ID: {match.get(\u0027Event\u0027, {}).get(\u0027id\u0027)}\")\n  incident.addNote(\"Attribute Search Matches:\\n {}\".format(\u0027\\n\u0027.join(matched)))",
           "tags": [],
           "uuid": "ac69fa8a-705a-414f-97d5-b7b78350f3db"
         }

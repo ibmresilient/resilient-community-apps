@@ -40,7 +40,6 @@
 | 1.0.0 | MM/YYYY | Initial Release |
 
 ### 3.0.2
-
 In v3.0.2, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
@@ -77,16 +76,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `49.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=49.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read, Edit |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
+The following SOAR platform guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -96,7 +95,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -127,9 +126,9 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **misp_url** | Yes | `10.10.10.10:5000` | *IP or URL of the MISP instance along with the http port* |
 | **misp_key** | Yes | `someAPIkey` | *API key to access the MISP API* |
-| **verify_cert** | Yes | `True` | *Secure connection* |
-| **https_proxy** | No | https://your.proxy.com | *https proxy for connecting to MISP* |
-| **http_proxy** | No | http://your.proxy.com | *http proxy for connecting to MISP* |
+| **verify_cert** | No | `True` | *Secure connection. True or False* |
+| **https_proxy** | No | `https://your.proxy.com` | *https proxy for connecting to MISP* |
+| **http_proxy** | No | `http://your.proxy.com` | *http proxy for connecting to MISP* |
 
 ---
 
@@ -368,7 +367,9 @@ inputs.misp_event_name = incident.name
 ```python
 results = playbook.functions.results.misp_event
 if results.get("success"):
-  incident.properties.misp_event_id = results.get("content", {}).get("Event", {}).get("id")
+  event_id = results.get("content", {}).get("Event", {}).get("id")
+  incident.properties.misp_event_id = event_id
+  incident.addNote(f"Event created on MISP with ID: {event_id}")
 ```
 
 </p>
@@ -719,7 +720,7 @@ else:
   matched = []
   for match in results.get("content", {}):
     matched.append(f"Event: {match.get('Event', {}).get('info')}, ID: {match.get('Event', {}).get('id')}")
-  incident.addNote("Attribute Search Macthes:\n {}".format('\n'.join(matched)))
+  incident.addNote("Attribute Search Matches:\n {}".format('\n'.join(matched)))
 ```
 
 </p>
@@ -809,19 +810,16 @@ if results.get("success"):
 
 ---
 
-
 ## Playbooks
-| Playbook Name | Description | Activation Type | Object | Status | Condition | 
-| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
-| MISP: Create Attribute - Example (PB) | Create an MISP event attribute based on an artifact value. This only works on incidents already submitted to MISP. | Manual | artifact | `enabled` | `artifact.type in ['IP Address', 'DNS Name', 'URL', 'Email Subject', 'Email Body', 'Email Attachment', 'Email Sender', 'Malware MD5 Hash', 'Malware SHA-1 Hash', 'Email Recipient', 'Port', 'File Name', 'Malware SHA-256 Hash', 'MAC Address', 'URI Path', 'Threat CVE ID'] AND incident.properties.misp_event_id has_a_value` | 
-| MISP: Create Event - Example (PB) | Create a MISP event from an incident | Manual | incident | `enabled` | `incident.properties.misp_event_id not_has_a_value` | 
-| MISP: Create Sighting - Example (PB) | Create a MISP Sighting from an artifact | Manual | artifact | `enabled` | `-` | 
-| MISP: Search Attribute - Example (PB) | Identify other MISP events with the same attribute | Manual | artifact | `enabled` | `-` | 
-| MISP: Sighting List - Example (PB) | Find sightings associated with a given event | Manual | incident | `enabled` | `incident.properties.misp_event_id has_a_value` | 
+| Playbook Name | Description | Activation Type | Object | Status | Condition |
+| ------------- | ----------- | --------------- | ------ | ------ | --------- |
+| MISP: Create Attribute - Example (PB) | Create an MISP event attribute based on an artifact value. This only works on incidents already submitted to MISP. | Manual | artifact | `enabled` | `artifact.type in ['IP Address', 'DNS Name', 'URL', 'Email Subject', 'Email Body', 'Email Attachment', 'Email Sender', 'Malware MD5 Hash', 'Malware SHA-1 Hash', 'Email Recipient', 'Port', 'File Name', 'Malware SHA-256 Hash', 'MAC Address', 'URI Path', 'Threat CVE ID'] AND incident.properties.misp_event_id has_a_value` |
+| MISP: Create Event - Example (PB) | Create a MISP event from an incident | Manual | incident | `enabled` | `incident.properties.misp_event_id not_has_a_value` |
+| MISP: Create Sighting - Example (PB) | Create a MISP Sighting from an artifact | Manual | artifact | `enabled` | `-` |
+| MISP: Search Attribute - Example (PB) | Identify other MISP events with the same attribute | Manual | artifact | `enabled` | `-` |
+| MISP: Sighting List - Example (PB) | Find sightings associated with a given event | Manual | incident | `enabled` | `incident.properties.misp_event_id has_a_value` |
 
 ---
-
-
 
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
@@ -830,11 +828,8 @@ if results.get("success"):
 
 ---
 
-
-
-
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
- 
+
 ### For Support
 This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

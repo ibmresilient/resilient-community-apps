@@ -65,7 +65,7 @@ else:
   matched = []
   for match in results.get("content", {}):
     matched.append(f"Event: {match.get('Event', {}).get('info')}, ID: {match.get('Event', {}).get('id')}")
-  incident.addNote("Attribute Search Macthes:\n {}".format('\n'.join(matched)))
+  incident.addNote("Attribute Search Matches:\n {}".format('\n'.join(matched)))
 ```
 
 ---

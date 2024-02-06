@@ -27,17 +27,17 @@ setup(
     author_email='',
     url='http://ibm.biz/resilientcommunity',
     description="Creates Events, Attributes and Sightings in MISP from incidents and artifacts in SOAR.",
-    long_description="The purpose of this package is to allow the creation of an event in MISP from an incident in SOAR. "
-                     "This could represent a multiple-to-one or a one-to-one relationship. Once the event is created, "
-                     "attributes can be populated to it. "
-                     "For artifacts which have a hit in MISP, one can create a sighting back to MISP to show threat "
-                     "intelligence teams the indicator has been seen in the wild. "
-                     "Additional search functions allow one to search all attributes and return sightings from an event. "
-                     "This package does not replace or supersede the MISP Custom Threat Service, "
-                     "the aim is to supplement it and create a bi-directional connection and integration. "
-                     "The package is built in a flexible way so it can be used with any real playbook configuration. "
-                     "Sample playbooks are provided. "
-                     "Custom attribute types can be mapped from the playbook input script of the function. ",
+    long_description="""The purpose of this package is to allow the creation of an event in MISP from an incident in SOAR. 
+                     This could represent a multiple-to-one or a one-to-one relationship. Once the event is created, 
+                     attributes can be populated to it. 
+                     For artifacts which have a hit in MISP, one can create a sighting back to MISP to show threat 
+                     intelligence teams the indicator has been seen in the wild. 
+                     Additional search functions allow one to search all attributes and return sightings from an event. 
+                     This package does not replace or supersede the MISP Custom Threat Service, 
+                     the aim is to supplement it and create a bi-directional connection and integration. 
+                     The package is built in a flexible way so it can be used with any real playbook configuration. 
+                     Sample playbooks are provided. 
+                     Custom attribute types can be mapped from the playbook input script of the function. """,
     install_requires=['resilient_circuits>=49.0',
                       'pymisp~=2.4; python_version>="3"',
                       'pymisp==2.4.119.1; python_version<"3"'

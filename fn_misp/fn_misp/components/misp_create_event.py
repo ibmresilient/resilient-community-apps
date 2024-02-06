@@ -23,8 +23,7 @@ class FunctionComponent(AppFunctionComponent):
             opts, PACKAGE_NAME, ["misp_key", "misp_url"])
         validate_fields([
             {"name": "misp_key", "placeholder": "http://localhost"},
-            {"name": "misp_url", "placeholder": "<your key>"},
-            {"name": "verify_cert"}
+            {"name": "misp_url", "placeholder": "<your key>"}
         ], self.options)
 
     @app_function(FN_NAME)
@@ -46,6 +45,7 @@ class FunctionComponent(AppFunctionComponent):
 
         verify = str_to_bool(self.options.get("verify_cert", "false").lower())
 
+        # Create connection to MISP server
         misp_client = misp_helper.get_misp_client(self.options.get(
             "misp_url"), self.options.get("misp_key"), verify, proxies=self.rc.get_proxies())
 

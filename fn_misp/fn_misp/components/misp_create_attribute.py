@@ -44,6 +44,7 @@ class FunctionComponent(AppFunctionComponent):
 
         verify = str_to_bool(self.options.get("verify_cert", "false").lower())
 
+        # Create connection to MISP server
         misp_client = misp_helper.get_misp_client(
             self.options.get("misp_url"),
             self.options.get("misp_key"),
