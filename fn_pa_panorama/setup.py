@@ -21,11 +21,11 @@ setup(
     name='fn_pa_panorama',
     version='1.3.0',
     license='MIT',
-    author='IBM SOAR',
+    author='IBM QRadar SOAR',
     description="SOAR Components to Integrate with the Panorama Platform",
-    long_description="This integration contains Functions to interact with address groups, "
-                     "addresses, and user groups within Palo Alto Panorama. This integration can be"
-                     " configured to work with one or multiple Panorama instances.",
+    long_description="""This integration contains Functions to interact with address groups, 
+                     addresses, and user groups within Palo Alto Panorama. This integration can be
+                     configured to work with one or multiple Panorama instances.""",
     install_requires=[
         'resilient_circuits>=49.0.0',
         'resilient-lib>=49.0.0',

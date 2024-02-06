@@ -43,6 +43,7 @@ class FunctionComponent(AppFunctionComponent):
                                            fn_inputs.panorama_location),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
+        # Initialize function result variables
         response = {}
         reason = ""
         success = True

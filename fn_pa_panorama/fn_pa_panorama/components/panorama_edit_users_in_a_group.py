@@ -62,7 +62,7 @@ class FunctionComponent(AppFunctionComponent):
                                        self.get_select_param(
                                            getattr(fn_inputs, "panorama_location", None)),
                                        None)
-        # Initialize variables
+        # Initialize function result variables
         results = {}
         success = True
         reason = ""

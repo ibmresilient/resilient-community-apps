@@ -76,16 +76,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `49.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=49.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read, Edit |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -216,7 +216,8 @@ body = {
 }
 
 inputs.panorama_request_body = dumps(body)
-inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
@@ -323,18 +324,28 @@ if ip_name not in member_list:
 
 inputs.panorama_name_parameter = group_name
 
+# If using api version 9.0 or before uncomment below for the body
+# body = {
+#   "entry": {
+#     "@name": group_name,
+#     "static": {
+#       "member": dumps(member_list)
+#     }
+#   }
+# }
+
 body = {
   "entry": {
     "@name": group_name,
-    "description": des,
     "static": {
-      "member": dumps(member_list)
+      "member": member_list
     }
   }
 }
 
 inputs.panorama_request_body = dumps(body)
-inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
@@ -344,11 +355,11 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 <p>
 
 ```python
-results = playbook.functions.results.edit_addresses_results
+results = playbook.functions.results.edit_groups_results
 if results.get("success"):
-  incident.addNote(f"Panorama DNS name: {artifact.value} was unblocked.")
+  incident.addNote(f"Panorama IP Address: {artifact.value} was blocked.")
 else:
-  incident.addNote(f"Panorama Unblock DNS failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Block IP failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -444,7 +455,8 @@ if artifact.value not in blocked_users:
 # Updated function creates the xml request body for you
 inputs.panorama_users_list = str(blocked_users)
 inputs.panorama_user_group_name = group_name
-inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 
 # Giving the xml request body as an input still works
 # # Build xml which the function will send to Panorama
@@ -473,9 +485,9 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```python
 results = playbook.functions.results.edit_users_results
 if results.get("success"):
-  incident.addNote(f"Panorama User account: {artifact.value} was unblocked.")
+  incident.addNote(f"Panorama User account: {artifact.value} was blocked.")
 else:
-  incident.addNote(f"Panorama Unblock User failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Block User failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -560,7 +572,8 @@ results = {
 <p>
 
 ```python
-inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = "Blocked Group"
@@ -577,7 +590,7 @@ from json import dumps
 results = playbook.functions.results.address_groups
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f'Panorama Get Address Groups\n{dumps(results.get("content", {}), indent=4)}')
 else:
   incident.addNote(f"Panorama Get address groups failed with reason: {results.get('reason')}")
 ```
@@ -750,7 +763,8 @@ results = {
 ```python
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
-inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
@@ -882,7 +896,8 @@ results = {
 ```python
 # Set this to the xpath of the group you are interested in
 inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
-inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 inputs.panorama_location = "vsys"
 ```
 
@@ -903,15 +918,15 @@ None
 
 
 ## Playbooks
-| Playbook Name | Description | Activation Type | Object | Status | Condition | 
-| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
-| Panorama: Block DNS Name - Example (PB) | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
-| Panorama: Block IP Address - Example (PB) | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
-| Panorama: Block User - Example (PB) | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
-| Panorama: Get Address Groups - Example (PB) | Get address groups on the Panorama server | Manual | incident | `enabled` | `-` | 
-| Panorama: Unblock DNS Name - Example (PB) | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
-| Panorama: Unblock IP Address - Example (PB) | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
-| Panorama: Unblock User - Example (PB) | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
+| Playbook Name | Description | Activation Type | Object | Status | Condition |
+| ------------- | ----------- | --------------- | ------ | ------ | --------- |
+| Panorama: Block DNS Name - Example (PB) | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` |
+| Panorama: Block IP Address - Example (PB) | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` |
+| Panorama: Block User - Example (PB) | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` |
+| Panorama: Get Address Groups - Example (PB) | Get address groups on the Panorama server | Manual | incident | `enabled` | `-` |
+| Panorama: Unblock DNS Name - Example (PB) | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` |
+| Panorama: Unblock IP Address - Example (PB) | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` |
+| Panorama: Unblock User - Example (PB) | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` |
 
 ---
 

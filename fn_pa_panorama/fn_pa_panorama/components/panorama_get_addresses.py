@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
                                            getattr(fn_inputs, "panorama_location", None)),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
-        # Initialize variables
+        # Initialize function result variables
         results = {}
         success = True
         reason = ""
