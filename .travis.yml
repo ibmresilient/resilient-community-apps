@@ -582,7 +582,7 @@ matrix:
       script:
         - echo "Installing and running Twistlock scan"
         - BASE_IMAGE_REPO_LOC=`if [ $DEV_DEPS == 1 ]; then echo "$DOCKER_BASE_IMAGE_ARTIFACTORY_LOCATION"; else echo "$QUAY_URL"; fi`
-        - $PATH_COMMON_SCRIPTS_DIR/run_twistlock.sh "$PACKAGE_NAME" "$TRAVIS_BUILD_DIR/$PACKAGE_NAME" "$BASE_IMAGE_REPO_LOC" "$PATH_COMMON_SCRIPTS_DIR"
+        - travis_wait 30 $PATH_COMMON_SCRIPTS_DIR/run_twistlock.sh "$PACKAGE_NAME" "$TRAVIS_BUILD_DIR/$PACKAGE_NAME" "$BASE_IMAGE_REPO_LOC" "$PATH_COMMON_SCRIPTS_DIR"
 
     - stage: sonarqube scan, twistlock scan, and validate
       name: resilient-sdk validate
