@@ -29,7 +29,6 @@ RUN yum -y install freetds
 # copy the driver configurations to the container
 COPY ./.drivers/drivers.ini /etc/odbc-drivers.ini
 COPY ./.drivers/drivers/ /tmp/lib/
-COPY ./.drivers/drivers/psqlodbc-12.01.0000.tar.gz /tmp/lib/psqlodbc-12.01.0000.tar.gz
 
 # install Oracle DB driver
 RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
