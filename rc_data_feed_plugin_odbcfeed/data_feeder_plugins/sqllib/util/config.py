@@ -24,7 +24,7 @@ pwd=<pwd>
 
 #[sqlserver_feed]
 #class=ODBCFeed
-#odbc_connect=DRIVER={ODBC Driver 17 for SQL Server};SERVER=127.0.0.1;PORT=1443;DATABASE=<db>
+#odbc_connect=DRIVER={FreeTDS};SERVER=127.0.0.1;PORT=1433;DATABASE=<db>
 #sql_dialect=SQLServerDialect
 #uid=<acct>
 #pwd=<pwd>
@@ -60,4 +60,6 @@ reload_types=
 # if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
 # ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
 workspaces=
+# parallel execution disabled for odbcfeed
+parallel_execution=False
 """

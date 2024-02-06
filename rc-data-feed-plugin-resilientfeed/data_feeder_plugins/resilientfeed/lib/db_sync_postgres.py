@@ -32,7 +32,7 @@ class PostgresDBSync(DBSyncInterface):
         try:
             connection_string = "{};Uid={};Pwd={}".format(connection_info, connection_user, connection_pwd)
             self.log.debug(connection_string)
-            self.db_connection = pyodbc.connect(connection_string)
+            self.db_connection = pyodbc.connect(connection_string, autocommit=True)
 
             self.create_tables(DBSyncInterface.SYNC_TABLE_DEF, DBSyncInterface.RETRY_TABLE_DEF)
         except pyodbc.Error as err:
