@@ -1,4 +1,0 @@
-include README.md
-recursive-include data_feeder_plugins *
-include LICENSE
-prune .drivers

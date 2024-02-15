@@ -1,9 +1,0 @@
-{
-    "access_token":"mock_token",
-    "signature":"A1HQR7rdwkziNy3QsiiaWe/79HsUcfAorAbcFYYUCuc=",
-    "scope":"chatter_api api",
-    "instance_url":"https://company.develop.my.salesforce.com",
-    "id":"***",
-    "token_type":"***",
-    "issued_at":"1688757915784"
- }

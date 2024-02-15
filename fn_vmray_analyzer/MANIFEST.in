@@ -1,4 +1,0 @@
-include README.md
-include fn_vmray_analyzer/util/*
-include fn_vmray_analyzer/LICENSE
-include fn_vmray_analyzer/doc/*

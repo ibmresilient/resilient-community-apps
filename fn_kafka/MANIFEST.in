@@ -1,4 +1,0 @@
-include README.md
-recursive-include fn_kafka/util *
-include fn_kafka/LICENSE
-include fn_kafka/doc/screenshots/*

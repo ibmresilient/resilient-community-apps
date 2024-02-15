@@ -1,5 +1,0 @@
-include README.md
-include fn_crowdstrike_falcon/util/*
-include fn_crowdstrike_falcon/LICENSE
-include screenshots/*
-include fn_crowdstrike_falcon_*.pdf

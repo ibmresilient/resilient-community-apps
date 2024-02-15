@@ -1,3 +1,0 @@
-include README.md
-include fn_bluecoat_site_review/util/*
-include fn_bluecoat_site_review/LICENSE

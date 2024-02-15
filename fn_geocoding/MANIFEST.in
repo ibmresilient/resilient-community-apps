@@ -1,3 +1,0 @@
-include README.md
-include fn_geocoding/util/*
-include fn_geocoding/LICENSE

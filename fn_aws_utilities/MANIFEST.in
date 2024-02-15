@@ -1,6 +1,0 @@
-include README.md
-include apikey_permissions.txt
-include entrypoint.sh
-recursive-include fn_aws_utilities/util *
-include fn_aws_utilities/LICENSE
-include doc/screeshots/*
