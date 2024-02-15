@@ -1,0 +1,1551 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../../../search.html" />
+
+    <link rel="shortcut icon" href="../../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>IBM Security QRadar SOAR Platform App for ServiceNow - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="ibm-security-qradar-soar-platform-app-for-servicenow">
+<h1>IBM Security QRadar SOAR Platform App for ServiceNow<a class="headerlink" href="#ibm-security-qradar-soar-platform-app-for-servicenow" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#app-config-settings-appconfig"><span class="xref myst">App Config Settings</span></a></p></li>
+<li><p><a class="reference internal" href="#functions"><span class="xref myst">Functions</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#function---snow-create-record"><span class="xref myst">Function - SNOW: Create Record</span></a></p></li>
+<li><p><a class="reference internal" href="#function---snow-update-record"><span class="xref myst">Function - SNOW: Update Record</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#sending-soar-artifacts-to-snow"><span class="xref myst">Sending SOAR artifacts to SNOW</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---snow-close-record"><span class="xref myst">Function - SNOW: Close Record</span></a></p></li>
+<li><p><a class="reference internal" href="#function---snow-add-note-to-record"><span class="xref myst">Function - SNOW: Add Note to Record</span></a></p></li>
+<li><p><a class="reference internal" href="#function---snow-add-attachment-to-record"><span class="xref myst">Function - SNOW: Add Attachment to Record</span></a></p></li>
+<li><p><a class="reference internal" href="#function---snow-lookup-sys_id"><span class="xref myst">Function - SNOW: Lookup sys_id</span></a></p></li>
+<li><p><a class="reference internal" href="#function---snow-helper-update-data-table"><span class="xref myst">Function - SNOW Helper: Update Data Table</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#servicenow-records"><span class="xref myst">ServiceNow Records Data Table</span></a></p></li>
+<li><p><a class="reference internal" href="#security-incident-response-specific-customizations"><span class="xref myst">Security Incident Response Specific Customizations</span></a></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h1>Overview:<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>This package contains 8 Functions, 12 playbooks, and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#function---snow-create-record"><span class="xref myst">SNOW: Create Record</span></a> gives you the ability to create a Record in ServiceNow from a SOAR Case/Incident or Task.</p></li>
+<li><p><a class="reference internal" href="#function---snow-update-record"><span class="xref myst">SNOW: Update Record</span></a> allows you to update multiple column fields in a ServiceNow Record.</p></li>
+<li><p><a class="reference internal" href="#function---snow-close-record"><span class="xref myst">SNOW: Close Record</span></a> lets you close a related Record in ServiceNow from a SOAR Case/Incident or Task.</p></li>
+<li><p><a class="reference internal" href="#function---snow-add-note-to-record"><span class="xref myst">SNOW: Add Note to Record</span></a> allows you to send a SOAR Note to a ServiceNow Record as a <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">Note</span></code> or <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Comment</span></code>.</p></li>
+<li><p><a class="reference internal" href="#function---snow-add-attachment-to-record"><span class="xref myst">SNOW: Add Attachment to Record</span></a> gives you the ability to send a SOAR Attachment to a ServiceNow Record.</p></li>
+<li><p><a class="reference internal" href="#function---snow-lookup-sysid"><span class="xref myst">SNOW: Lookup sys_id</span></a> queries your ServiceNow Instance for a Record and returns the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of that Record.</p></li>
+<li><p><a class="reference internal" href="#function---snow-helper-update-data-table"><span class="xref myst">SNOW Helper: Update Data Table</span></a> helper function that updates the ServiceNow Records Data Table status.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="app-config-settings-app-config">
+<h1>App Config Settings (app.config):<a class="headerlink" href="#app-config-settings-app-config" title="Link to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_service_now</span><span class="p">]</span>
+<span class="c1"># Link to your ServiceNow Instance</span>
+<span class="n">sn_host</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">instance</span><span class="o">.</span><span class="n">service</span><span class="o">-</span><span class="n">now</span><span class="o">.</span><span class="n">com</span>
+
+<span class="c1"># The URI to the ServiceNow App that handles the requests from SOAR</span>
+<span class="n">sn_api_uri</span><span class="o">=/</span><span class="n">api</span><span class="o">/</span><span class="n">x_ibmrt_resilient</span><span class="o">/</span><span class="n">api</span>
+
+<span class="c1"># The name of the table in ServiceNow you want to integrate with</span>
+<span class="c1"># as of v2.0 we support the &#39;incident&#39; and &#39;sn_si_incident&#39; tables</span>
+<span class="n">sn_table_name</span><span class="o">=</span><span class="n">incident</span>
+
+<span class="c1"># Username and Password for your Administrative User in ServiceNow</span>
+<span class="n">sn_username</span><span class="o">=</span><span class="n">ibmresilient</span>
+<span class="n">sn_password</span><span class="o">=</span><span class="n">MyPassword</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="functions">
+<h1>Functions:<a class="headerlink" href="#functions" title="Link to this heading">#</a></h1>
+<p><img alt="screenshot" src="../../../_images/110.png" /></p>
+<section id="function-snow-create-record">
+<h2>Function - SNOW: Create Record<a class="headerlink" href="#function-snow-create-record" title="Link to this heading">#</a></h2>
+<p>Uses the <code class="docutils literal notranslate"><span class="pre">/create</span></code> custom endpoint in ServiceNow to create a ServiceNow Record from an IBM SOAR Case/Incident or Task.</p>
+<p><img alt="screenshot" src="../../../_images/26.png" /></p>
+<details><summary>Inputs:</summary>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2105</span></code></p></td>
+<td><p>ID of the SOAR Case/Incident</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>ID of the SOAR Task</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_init_work_note</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;This</span> <span class="pre">Incident</span> <span class="pre">originated</span> <span class="pre">from</span> <span class="pre">our</span> <span class="pre">Cyber</span> <span class="pre">Security</span> <span class="pre">Team</span> <span class="pre">using</span> <span class="pre">the</span> <span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">platform&quot;</span></code></p></td>
+<td><p>Initial Work Note to be added to the new ServiceNow Record</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sn_optional_fields</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'{&quot;assignment_group&quot;:</span> <span class="pre">&quot;IT</span> <span class="pre">Security&quot;}'</span></code></p></td>
+<td><p>An extensible JSON String of the field names and values to set in the new ServiceNow Record</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>NOTE:</strong> by default this function:</p>
+<ul class="simple">
+<li><p>sets <code class="docutils literal notranslate"><span class="pre">short_description</span></code> in ServiceNow as the <code class="docutils literal notranslate"><span class="pre">incident.name</span></code> or <code class="docutils literal notranslate"><span class="pre">task.name</span></code></p></li>
+<li><p>sets <code class="docutils literal notranslate"><span class="pre">description</span></code> in ServiceNow as the <code class="docutils literal notranslate"><span class="pre">incident.description</span></code> or <code class="docutils literal notranslate"><span class="pre">task.instructions</span></code></p></li>
+<li><p>sets <code class="docutils literal notranslate"><span class="pre">work_notes</span></code> in ServiceNow as the <code class="docutils literal notranslate"><span class="pre">sn_init_work_note</span></code></p></li>
+</ul>
+<p><strong>These defaults can be overwritten</strong> by passing values from them in the <code class="docutils literal notranslate"><span class="pre">sn_optional_fields</span></code> input. To do this you would extend the example input Script provided with the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_optional_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
+    <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Custom Short Description&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Custom Long Description&quot;</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+</details>
+<details><summary>Output:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
+      <span class="s2">&quot;sn_init_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\n\n</span><span class="s2">Sync task to SNOW&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sn_optional_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103: Sample task&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="s2">&quot;12a586cd0bb23200ecfd818393673a30&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;res_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://9.30.213.40/#incidents/2117?task_id=103&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010025&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3294cbfa1b4d09103351ca2b234bcbfa&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Analysis&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_record_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_time_created&quot;</span><span class="p">:</span> <span class="mi">1642522089472</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">reason</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: 103, </span><span class="se">\&quot;</span><span class="s2">sn_init_work_note</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nSync task to SNOW</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_optional_fields</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">short_description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117-103: Sample task</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">assignment_group</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">12a586cd0bb23200ecfd818393673a30</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">caller_id</span><span class="se">\&quot;</span><span class="s2">: false}}, </span><span class="se">\&quot;</span><span class="s2">row_id</span><span class="se">\&quot;</span><span class="s2">: 29, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117-103</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">res_link</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://9.30.213.40/#incidents/2117?task_id=103</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010025</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_sys_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">3294cbfa1b4d09103351ca2b234bcbfa</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_state</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Analysis</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_link</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_time_created</span><span class="se">\&quot;</span><span class="s2">: 1642522089472}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
+    <span class="s2">&quot;sn_init_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\n\n</span><span class="s2">Sync task to SNOW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_optional_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103: Sample task&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="s2">&quot;12a586cd0bb23200ecfd818393673a30&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">false</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;res_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://9.30.213.40/#incidents/2117?task_id=103&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010025&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3294cbfa1b4d09103351ca2b234bcbfa&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Analysis&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_record_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_time_created&quot;</span><span class="p">:</span> <span class="mi">1642522089472</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example input Script:</summary>
+<ul>
+<li><p>We also make use of user inputs from <strong>Rule Activity Fields</strong> by using: <code class="docutils literal notranslate"><span class="pre">playbook.inputs.sn_initial_note</span></code>.</p></li>
+<li><p>In the supplied example playbook, there are 3 Functions chained together, with this Function being the third.</p>
+<ul>
+<li><p>We use the output of the first and second functions here:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="n">playbooks</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">assignment_group</span><span class="o">.</span><span class="n">sys_id</span><span class="p">,</span>
+    <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">playbooks</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">caller_id</span><span class="o">.</span><span class="n">sys_id</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="c1"># Map IBM SOAR severity values to ServiceNow severity values</span>
+<span class="n">sn_severity_map</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="c1"># Default text of the initial note added to the ServiceNow Record</span>
+<span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Record created from a IBM SOAR Incident ID: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">                          Severity: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="si">}</span>
+<span class="s2">                          Incident Type(s): </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># If the user adds a comment when they invoke the rule, that comment gets concatenated here</span>
+<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_initial_note</span><span class="o">.</span><span class="n">content</span>
+  <span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{init_snow_note_text}</span><span class="se">\n\n</span><span class="si">{playbook.inputs.sn_initial_note.content}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ID of this incident</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># Initial work note to attach to created ServiceNow Record</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_init_work_note</span> <span class="o">=</span> <span class="n">init_snow_note_text</span>
+
+<span class="c1"># Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.</span>
+<span class="c1"># ServiceNow Example:: setValue(&#39;assignment_group&#39;, request.body.data.sn_optional_fields.assignment_group)</span>
+<span class="c1"># For SIR tables it is recommended to map &quot;business_criticality&quot; to sn_severity_map as that is visible in the SNOW query_builder</span>
+<span class="c1"># (see the example commented out below)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_optional_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
+  <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;RES-</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="n">sn_severity_map</span><span class="p">[</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">],</span>
+  <span class="c1">#&quot;business_criticality&quot;: sn_severity_map[incident.severity_code],</span>
+  <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">assignment_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sys_id&quot;</span><span class="p">),</span>
+  <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">caller_id</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sys_id&quot;</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example Post-Processing Script:</summary>
+<ul class="simple">
+<li><p>This example updates two Custom Incident Fields <strong>sn_snow_record_id</strong> and <strong>sn_snow_record_link</strong> then <strong>adds a Note to the Incident</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_record</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="c1"># Set incident fields sn_snow_record_id and sn_snow_record_link</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_id</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sn_ref_id&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;Link&lt;/a&gt;&quot;&quot;&quot;</span>
+  
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;This Incident has been created in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_ref_id&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span>
+
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
+</pre></div>
+</div>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-snow-update-record">
+<h2>Function - SNOW: Update Record<a class="headerlink" href="#function-snow-update-record" title="Link to this heading">#</a></h2>
+<p>Uses the <code class="docutils literal notranslate"><span class="pre">/update</span></code> custom endpoint in ServiceNow to update a ServiceNow Record with a given dictionary of field name/value pairs.</p>
+<p><img alt="screenshot" src="../../../_images/8.png" /></p>
+<details><summary>Inputs:</summary>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1001</span></code></p></td>
+<td><p>ID of the SOAR Incident</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">20000002</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>The ID of the SOAR Task</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_res_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;RES-1001&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;RES-1001-20000002&quot;</span></code></p></td>
+<td><p>This ID is an accumulation of the SOAR Incident and/or Task ID. It is stored in the <code class="docutils literal notranslate"><span class="pre">sn_records_dt</span></code> Data Table</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sn_update_fields</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">JSON</span> <span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'{&quot;assignment_group&quot;:</span> <span class="pre">&quot;IT</span> <span class="pre">Security&quot;}'</span></code></p></td>
+<td><p>A JSON String of the ServiceNow field name and values you want to update. In our examples below we use the <code class="docutils literal notranslate"><span class="pre">dict_to_json_str(d)</span></code> Python Function to generate this JSON String.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details><summary>Output:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;sn_update_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_time_updated&quot;</span><span class="p">:</span> <span class="mi">1642522493078</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_res_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_update_fields</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">severity</span><span class="se">\&quot;</span><span class="s2">: 1}}, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_time_updated</span><span class="se">\&quot;</span><span class="s2">: 1642522493078}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;sn_update_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_time_updated&quot;</span><span class="p">:</span> <span class="mi">1642522493078</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example input Script:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="c1"># Map IBM SOAR severity values to ServiceNow severity values</span>
+<span class="n">sn_severity_map</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="c1"># Get the id of this incident</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># List all the fields you want to update in the ServiceNow Record here with the ServiceNow field_name being the key</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_update_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
+  <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="n">sn_severity_map</span><span class="p">[</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">],</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Post-Processing Script:</summary>
+<ul class="simple">
+<li><p>This example <strong>adds a Note to the Incident</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a Note to the Incident</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Severity of this Incident was updated to </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="si">}</span><span class="s2"> in IBM SOAR&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</details>
+<section id="sending-soar-artifacts-to-snow">
+<h3>Sending SOAR artifacts to SNOW<a class="headerlink" href="#sending-soar-artifacts-to-snow" title="Link to this heading">#</a></h3>
+<p>You can utilize the SNOW: Update Record function to send artifact values to SNOW records. The previous example for update is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:</p>
+<ol class="arabic">
+<li><p>Using the resilient-sdk, <code class="docutils literal notranslate"><span class="pre">clone</span></code> the example playbook into a new playbook with <code class="docutils literal notranslate"><span class="pre">changetype</span></code> artifact.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">resilient</span><span class="o">-</span><span class="n">sdk</span> <span class="n">clone</span> <span class="o">--</span><span class="n">playbook</span> <span class="n">example_snow_update_record_on_severity_change</span> <span class="o">&lt;</span><span class="n">new_playbook_name</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">changetype</span> <span class="n">artifact</span>
+</pre></div>
+</div>
+<p>More information on the resilient-sdk and the <code class="docutils literal notranslate"><span class="pre">clone</span></code> command can be found <a class="reference external" href="https://ibmresilient.github.io/resilient-python-api/pages/resilient-sdk/resilient-sdk.html#clone">here</a>.</p>
+</li>
+<li><p>Modify the input script to map desired artifact values to SNOW record fields using the <code class="docutils literal notranslate"><span class="pre">sn_update_fields</span></code> parameter of the “SNOW: Update Record” function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_update_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
+  <span class="s2">&quot;my_snow_column_name&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span> <span class="c1"># When the artifact type is IP Address the value will be the IP</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create a SOAR Rule to either manually or automatically trigger this new playbook.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-snow-close-record">
+<h2>Function - SNOW: Close Record<a class="headerlink" href="#function-snow-close-record" title="Link to this heading">#</a></h2>
+<p>Uses the <code class="docutils literal notranslate"><span class="pre">/close_record</span></code> custom endpoint in ServiceNow to change the state of a ServiceNow Record and add Close Notes and a Close Code to the Record.</p>
+<p><img alt="screenshot" src="../../../_images/34.png" /></p>
+<details><summary>Inputs:</summary>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2105</span></code></p></td>
+<td><p>ID of the SOAR Incident</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2251401</span></code></p></td>
+<td><p>ID of the SOAR Task</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_record_state</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span></code></p></td>
+<td><p>These are defined in ServiceNow (See Note below)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sn_close_notes</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;We</span> <span class="pre">have</span> <span class="pre">closed</span> <span class="pre">this</span> <span class="pre">Incident&quot;</span></code></p></td>
+<td><p>The notes required to close an Incident Record in ServiceNow</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_close_code</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Solved</span> <span class="pre">(Work</span> <span class="pre">Around)&quot;</span></code></p></td>
+<td><p>These are defined in ServiceNow (See Note below). We use an Activity Field in the Rule to define a Select field, where we list all the possible close_codes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sn_close_work_note</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;This</span> <span class="pre">record's</span> <span class="pre">state</span> <span class="pre">has</span> <span class="pre">be</span> <span class="pre">changed</span> <span class="pre">to</span> <span class="pre">'Resolved'</span> <span class="pre">by</span> <span class="pre">IBM</span> <span class="pre">SOAR&quot;</span></code></p></td>
+<td><p>If defined this text is added as a Work Note to the ServiceNow Record</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>NOTE:</strong></p>
+<ul class="simple">
+<li><p>If using the <strong>Security Incident Response</strong> table, the initial state of the created ServiceNow record is the <code class="docutils literal notranslate"><span class="pre">Analysis</span></code> state. This state must be changed to the <code class="docutils literal notranslate"><span class="pre">Contain</span></code> or other state to allow the ServiceNow Record to be closed otherwise this <code class="docutils literal notranslate"><span class="pre">Close</span></code> action will be ignored.</p></li>
+<li><p>To see your record_state and close_codes value in ServiceNow go to <strong>System Definition</strong> &gt; <strong>Dictionary</strong> &gt; <strong>Table Name</strong> &gt; <strong>Incident</strong> &gt; <strong>Column Name</strong> &gt; <strong>incident state/close_code</strong> and see their label and values.</p></li>
+<li><p>It is the value that we send from SOAR to ServiceNow.</p></li>
+</ul>
+<p><strong>Record State:</strong>
+<img alt="screenshot" src="../../../_images/43.png" /></p>
+<p><strong>Close Code:</strong>
+<img alt="screenshot" src="../../../_images/54.png" /></p>
+</div></blockquote>
+</details>
+<details><summary>Output:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Closing&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sn_close_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat mitigated&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sn_close_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;This record&#39;s state has be changed to [SIR] Review by IBM SOAR&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Review&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">reason</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_state</span><span class="se">\&quot;</span><span class="s2">: 100, </span><span class="se">\&quot;</span><span class="s2">sn_close_notes</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Closing</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_close_code</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Threat mitigated</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_close_work_note</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">This record&#39;s state has be changed to [SIR] Review by IBM SOAR</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_state</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Review</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Closing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_close_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat mitigated&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_close_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;This record&#39;s state has be changed to [SIR] Review by IBM SOAR&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Review&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example input Script:</summary>
+<ul class="simple">
+<li><p>This example <strong>creates a Python Dictionary</strong> to map the ServiceNow States to their corresponding numeric value.</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Note that for SIR tables, the record state options are new. If you intend to only use this with SIR or INC tables exclusively, you can remove the ones here that you don’t need. These string values correspond to the Activity Field SN Record State which can be customized as well.</em></p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A Dictionary that maps Record States to their corresponding codes</span>
+<span class="c1"># These codes are defined in ServiceNow and may be different for each ServiceNow configuration</span>
+<span class="c1"># Codes prepended with [SIR] are specific to Security Incident Response incidents</span>
+<span class="n">map_sn_record_states</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;New&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;In Progress&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;On Hold&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;[INC] Resolved&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="s2">&quot;[INC] Closed&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s2">&quot;[INC] Canceled&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+	<span class="s2">&quot;[SIR] Analysis&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+	<span class="s2">&quot;[SIR] Contain&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+	<span class="s2">&quot;[SIR] Eradicate&quot;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+	<span class="s2">&quot;[SIR] Recover&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+	<span class="s2">&quot;[SIR] Review&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+	<span class="s2">&quot;[SIR] Closed&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+	<span class="s2">&quot;[SIR] Canceled&quot;</span><span class="p">:</span> <span class="mi">7</span>
+<span class="p">}</span>
+
+<span class="c1"># ID of this incident</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># The state to change the record to</span>
+<span class="c1"># inputs.sn_record_state = map_sn_record_states[&quot;Closed&quot;]</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span> <span class="o">=</span> <span class="n">map_sn_record_states</span><span class="p">[</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span><span class="p">]</span>
+
+<span class="c1"># The resolution notes that are normally required when you close a ServiceNow record</span>
+<span class="c1"># inputs.sn_close_notes = &quot;This incident has been resolved in IBM SOAR. No further action required&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_notes</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_notes</span>
+
+<span class="c1"># The ServiceNow &#39;close_code&#39; that you normally select when closing a ServiceNow record</span>
+<span class="c1"># inputs.sn_close_code = &quot;Solved (Permanently)&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_code</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_code</span>
+
+<span class="c1"># Add a Work Note to the Record in ServiceNow</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_work_note</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;This record&#39;s state has been changed to </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span><span class="si">}</span><span class="s2"> by IBM SOAR&quot;</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Post-Processing Script:</summary>
+<ul class="simple">
+<li><p>This example <strong>adds a Note to the Incident</strong> detailing why the Incident was closed or if the playbook <strong>fails</strong> to close the ServiceNow Record</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">close_record</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;This Incident has been updated in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_ref_id&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Record State:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_state&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Closing Notes:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_close_notes&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Closing Code:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_close_code&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Failed to close this Incident in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;Reason:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
+</pre></div>
+</div>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-snow-add-note-to-record">
+<h2>Function - SNOW: Add Note to Record<a class="headerlink" href="#function-snow-add-note-to-record" title="Link to this heading">#</a></h2>
+<p>Uses the <code class="docutils literal notranslate"><span class="pre">/add</span></code> custom endpoint in ServiceNow to add a SOAR Note to a ServiceNow Record as a “Work Note” or “Additional Comment”.</p>
+<p><img alt="screenshot" src="../../../_images/62.png" /></p>
+<details><summary>Inputs:</summary>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2105</span></code></p></td>
+<td><p>ID of the SOAR Incident</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2251401</span></code></p></td>
+<td><p>ID of the SOAR Task</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_note_text</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Can</span> <span class="pre">your</span> <span class="pre">team</span> <span class="pre">look</span> <span class="pre">into</span> <span class="pre">this</span> <span class="pre">please&quot;</span></code></p></td>
+<td><p>Text of the new ServiceNow Note</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sn_note_type</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;work_note&quot;</span></code> OR <code class="docutils literal notranslate"><span class="pre">&quot;additional_comment&quot;</span></code></p></td>
+<td><p>Note type. Either <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">Note</span></code> or <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Comment</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details><summary>Output:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;sn_note_text&quot;</span><span class="p">:</span> <span class="s2">&quot;The Business Impact of this Incident was updated to High in IBM SOAR&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sn_note_type&quot;</span><span class="p">:</span> <span class="s2">&quot;work_note&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_note_text</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">The Business Impact of this Incident was updated to High in IBM SOAR</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_note_type</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">work_note</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;sn_note_text&quot;</span><span class="p">:</span> <span class="s2">&quot;The Business Impact of this Incident was updated to High in IBM SOAR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_note_type&quot;</span><span class="p">:</span> <span class="s2">&quot;work_note&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example input Script:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_note_type</span> <span class="o">=</span> <span class="s2">&quot;work_note&quot;</span>
+<span class="c1"># The id of this incident</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># If this is a task note, get the taskId</span>
+<span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;task&#39;</span><span class="p">:</span>
+  <span class="c1"># Set the task_id</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># Get the text of the note</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_note_text</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Post-Processing Script:</summary>
+<p>This example prepends a timestamp to the SOAR Note to track when the Note was sent to ServiceNow.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">note</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Sent to ServiceNow at </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-snow-add-attachment-to-record">
+<h2>Function - SNOW: Add Attachment to Record<a class="headerlink" href="#function-snow-add-attachment-to-record" title="Link to this heading">#</a></h2>
+<p>Uses the <code class="docutils literal notranslate"><span class="pre">/add</span></code> custom endpoint in ServiceNow to add a SOAR Attachment to a ServiceNow Record.</p>
+<p><img alt="screenshot" src="../../../_images/71.png" /></p>
+<details><summary>Inputs:</summary>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">39</span></code></p></td>
+<td><p>ID of the SOAR Attachment</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2105</span></code></p></td>
+<td><p>ID of the SOAR Incident</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2251401</span></code></p></td>
+<td><p>ID of the SOAR Task</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details><summary>Output:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;attachment_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;attachment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sample_attachment.png&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_attachment_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ef44473e1b4d09103351ca2b234bcbc6&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">attachment_id</span><span class="se">\&quot;</span><span class="s2">: 2, </span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null}, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">attachment_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">sample_attachment.png</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_attachment_sys_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">ef44473e1b4d09103351ca2b234bcbc6</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;attachment_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;attachment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sample_attachment.png&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;sn_attachment_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ef44473e1b4d09103351ca2b234bcbc6&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example input Script:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The id of this attachment</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span> <span class="o">=</span> <span class="n">attachment</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># The id of this incident</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># If this is a task attachment, get the taskId</span>
+<span class="k">if</span> <span class="n">attachment</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;task&#39;</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Post-Processing Script:</summary>
+<ul class="simple">
+<li><p>This example <strong>adds a Note to the Incident/Task</strong> detailing what attachment was sent to ServiceNow.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_attachment</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;</span><span class="si">{</span><span class="n">principal</span><span class="o">.</span><span class="n">display_name</span><span class="si">}</span><span class="s2"> has added an attachment to &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">attachment_name</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_ref_id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+  <span class="c1"># If this is a task attachment, add a note to the Task</span>
+  <span class="k">if</span> <span class="n">task</span><span class="p">:</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
+  <span class="c1"># Else add the note to the Incident</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
+</pre></div>
+</div>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-snow-lookup-sys-id">
+<h2>Function - SNOW: Lookup sys_id<a class="headerlink" href="#function-snow-lookup-sys-id" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Gets the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of a ServiceNow Record.</p></li>
+<li><p>Used when creating a ServiceNow Record to get the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of the <code class="docutils literal notranslate"><span class="pre">assignment_group</span></code> to assign the new Record to.</p></li>
+</ul>
+<p><img alt="screenshot" src="../../../_images/26.png" /></p>
+<details><summary>Inputs:</summary>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;sys_user_group&quot;</span></code></p></td>
+<td><p>The table name in ServiceNow to query</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sn_query_field</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code></p></td>
+<td><p>The column name in the table you want to query</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_query_value</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;IT</span> <span class="pre">Securities&quot;</span></code></p></td>
+<td><p>The cell value in the column you want to query</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details><summary>Output:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;sn_query_field&quot;</span><span class="p">:</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sn_table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sys_user&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sn_query_value&quot;</span><span class="p">:</span> <span class="s2">&quot;ibmresilient&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;sys_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: false, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">sn_query_field</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">email</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_table_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">sys_user</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_query_value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">ibmresilient</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">sys_id</span><span class="se">\&quot;</span><span class="s2">: null}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;sn_query_field&quot;</span><span class="p">:</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sys_user&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sn_query_value&quot;</span><span class="p">:</span> <span class="s2">&quot;ibmresilient&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;sys_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example input Script:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The table in ServiceNow to query</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_table_name</span> <span class="o">=</span> <span class="s2">&quot;sys_user_group&quot;</span>
+
+<span class="c1"># The name of the field/table column to query</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_field</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span>
+
+<span class="c1"># The value to equate the cell to</span>
+<span class="c1"># Get the group name from the Rule Activity Field with:</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_value</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_assignment_group</span>
+
+<span class="c1">## OR Set group name statically with:</span>
+<span class="c1">## inputs.sn_query_value = &quot;IT Securities&quot;</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Post-Processing Script:</summary>
+<p><em>There is generally no Post-Process Script for this Function. Its output is normally used as an input to the <strong>Create in ServiceNow</strong> function.</em></p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-snow-helper-update-data-table">
+<h2>Function - SNOW Helper: Update Data Table<a class="headerlink" href="#function-snow-helper-update-data-table" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot" src="../../../_images/10.png" /></p>
+<details><summary>Inputs:</summary>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2105</span></code></p></td>
+<td><p>ID of the Incident</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2251401</span></code></p></td>
+<td><p>ID of the Task</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_resilient_status</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;C&quot;</span></code></p></td>
+<td><p>“A”=Active Incident, “O”=Open Task, “C”=Closed Incident/Task</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details><summary>Output:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;sn_resilient_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">28</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_resilient_status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">C</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">row_id</span><span class="se">\&quot;</span><span class="s2">: 28}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;sn_resilient_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">28</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Example input Script:</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the incident id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># Get the new status of the incident</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_resilient_status</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span>
+</pre></div>
+</div>
+</details>
+<details><summary>Post-Processing Script:</summary>
+<p><em>There is generally no Post-Process Script for this Function.</em></p>
+</details>
+</section>
+</section>
+<hr class="docutils" />
+<section id="rules">
+<h1>Rules:<a class="headerlink" href="#rules" title="Link to this heading">#</a></h1>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head text-center"><p>Object Type</p></th>
+<th class="head"><p>Activity Fields</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+<th class="head"><p>Conditions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SNOW: Create Record [Incident]</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Assignment</span> <span class="pre">Group</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Initial</span> <span class="pre">Note</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Create</span> <span class="pre">Record</span> <span class="pre">[Incident]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> does not have a value</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: Create Record [Task]</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Assignment</span> <span class="pre">Group</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Initial</span> <span class="pre">Note</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Create</span> <span class="pre">Record</span> <span class="pre">[Task]</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: Update/Close Record [Incident]</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Record</span> <span class="pre">State</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Code</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Notes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Close</span> <span class="pre">Record</span> <span class="pre">[Incident]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> has a value</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: Update/Close Record [Task]</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Record</span> <span class="pre">State</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Code</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Notes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Close</span> <span class="pre">Record</span> <span class="pre">[Task]</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: Update/Close Record</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Table</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Record</span> <span class="pre">State</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Code</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Notes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Close</span> <span class="pre">Record</span> <span class="pre">[Task]</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: Send as Additional Comment</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Note</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Add</span> <span class="pre">Comment</span> <span class="pre">to</span> <span class="pre">Record</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Note</span> <span class="pre">Text</span></code> does not contain “Sent to ServiceNow at”</p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: Send as Work Note</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Note</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Add</span> <span class="pre">Work</span> <span class="pre">Note</span> <span class="pre">to</span> <span class="pre">Record</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Note</span> <span class="pre">Text</span></code> does not contain “Sent to ServiceNow at”</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: Add Attachment to Record</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Attachment</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Add</span> <span class="pre">Attachment</span> <span class="pre">to</span> <span class="pre">Record</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: [INC] Update Record on Severity Change</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Record</span> <span class="pre">on</span> <span class="pre">Severity</span> <span class="pre">Change</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Severity</span></code> is changed AND <code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> has a value AND is a INC incident in SNOW</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: [SIR] Update Record on Severity Change</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Record</span> <span class="pre">on</span> <span class="pre">Severity</span> <span class="pre">Change</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Severity</span></code> is changed AND <code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> has a value AND is a SIR Incident in SNOW</p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: Update Data Table on Status Change [Incident]</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Data</span> <span class="pre">Table</span> <span class="pre">on</span> <span class="pre">Status</span> <span class="pre">Change</span> <span class="pre">[Incident]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Status</span></code> is changed</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: Update Data Table on Status Change [Task]</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Data</span> <span class="pre">Table</span> <span class="pre">on</span> <span class="pre">Status</span> <span class="pre">Change</span> <span class="pre">[Task]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Status</span></code> is changed</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-table">
+<h1>Data Table:<a class="headerlink" href="#data-table" title="Link to this heading">#</a></h1>
+<section id="servicenow-records">
+<h2>ServiceNow Records<a class="headerlink" href="#servicenow-records" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot" src="../../../_images/9.png" /></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sn_records_dt</span></code></p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Last Updated</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_time</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DateTimePicker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>SOAR ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_res_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_sn_ref_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>SOAR Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_res_status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rich</span> <span class="pre">Text</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_snow_status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rich</span> <span class="pre">Text</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Links</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_links</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rich</span> <span class="pre">Text</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="security-incident-response-specific-customizations">
+<h1>Security Incident Response Specific Customizations<a class="headerlink" href="#security-incident-response-specific-customizations" title="Link to this heading">#</a></h1>
+<p>By default the severity of a SOAR incident/case is mapped to the <code class="docutils literal notranslate"><span class="pre">severity</span></code> field in ServiceNow.
+This field is available in both the <code class="docutils literal notranslate"><span class="pre">incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> tables, however, Security Incident (SIR) tables have another field labeled <code class="docutils literal notranslate"><span class="pre">business_criticality</span></code>.
+It is recommend after the install to customize your playbooks in SOAR and SNOW to handle <code class="docutils literal notranslate"><span class="pre">business_criticality</span></code> rather than <code class="docutils literal notranslate"><span class="pre">severity</span></code> in SNOW.
+Customize the “[SIR] SNOW Update Record on Severity Change” playbook and “SNOW: Create Record [Incident]”. The “RES_WF_CreateIncident” playbook on SNOW should be customized as well.
+See the <a class="reference internal" href="#../customize_snow_guide"><span class="xref myst">Customize ServiceNow App Guide</span></a> for more details.</p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">IBM Security QRadar SOAR Platform App for ServiceNow</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overview">Overview:</a></li>
+<li><a class="reference internal" href="#app-config-settings-app-config">App Config Settings (app.config):</a></li>
+<li><a class="reference internal" href="#functions">Functions:</a><ul>
+<li><a class="reference internal" href="#function-snow-create-record">Function - SNOW: Create Record</a></li>
+<li><a class="reference internal" href="#function-snow-update-record">Function - SNOW: Update Record</a><ul>
+<li><a class="reference internal" href="#sending-soar-artifacts-to-snow">Sending SOAR artifacts to SNOW</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-snow-close-record">Function - SNOW: Close Record</a></li>
+<li><a class="reference internal" href="#function-snow-add-note-to-record">Function - SNOW: Add Note to Record</a></li>
+<li><a class="reference internal" href="#function-snow-add-attachment-to-record">Function - SNOW: Add Attachment to Record</a></li>
+<li><a class="reference internal" href="#function-snow-lookup-sys-id">Function - SNOW: Lookup sys_id</a></li>
+<li><a class="reference internal" href="#function-snow-helper-update-data-table">Function - SNOW Helper: Update Data Table</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules:</a></li>
+<li><a class="reference internal" href="#data-table">Data Table:</a><ul>
+<li><a class="reference internal" href="#servicenow-records">ServiceNow Records</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#security-incident-response-specific-customizations">Security Incident Response Specific Customizations</a></li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

@@ -1,0 +1,1272 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Incident Utilities" href="../fn_incident_utils/README.html" /><link rel="prev" title="fn_html2pdf" href="../fn_html2pdf/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Symantec ICDx - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <!--
+  This README.md is generated by running:
+  "resilient-sdk docgen -p fn_icdx"
+
+  It is best edited using a Text Editor with a Markdown Previewer. VS Code
+  is a good example. Checkout https://guides.github.com/features/mastering-markdown/
+  for tips on writing with Markdown
+
+  All fields followed by "::CHANGE_ME::"" should be manually edited
+
+  If you make manual edits and run docgen again, a .bak file will be created
+
+  Store any screenshots in the "doc/screenshots" directory and reference them like:
+  ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
+
+  NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
+-->
+<section id="symantec-icdx">
+<h1>Symantec ICDx<a class="headerlink" href="#symantec-icdx" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---icdx-find-events"><span class="xref myst">Function - ICDx: Find Events</span></a></p></li>
+<li><p><a class="reference internal" href="#function---icdx-get-archive-list"><span class="xref myst">Function - ICDx: Get Archive List</span></a></p></li>
+<li><p><a class="reference internal" href="#function---icdx-get-event"><span class="xref myst">Function - ICDx: Get Event</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---icdx-queried-events"><span class="xref myst">Data Table - ICDx Queried Events</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>07/2022</p></td>
+<td><p>Drop support for Python 2.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>11/2020</p></td>
+<td><p>Added support for AppHost and Resilient API Keys</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>06/2020</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+<p><strong>Integration with ICDx which provides access to the ICDx Search API over AMQP</strong></p>
+<p>The Symantec Integrated Cyber Defense Exchange (ICDx) is a central hub used
+to gather information from a number of different products in the Symantec Catalogue, normalising the
+information from these products into a schema. This establishes ICDx as an enrichment platform
+reporting on events gathered from other Symantec products</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<!--
+  List the Key Features of the Integration
+-->
+<ul class="simple">
+<li><p>Asynchronous Component for creating Resilient incidents from ICDx Events</p></li>
+<li><p>Ability to perform a query for ICDx Events</p></li>
+<li><p>Ability to gather the details of a specific event by ID</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<!--
+  List any Requirements 
+--> 
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">36.0.0</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">36.0.0</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= 1.4.</p></li>
+<li><p>Cloud Pak is configured with an App Host.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app <strong>does</strong> support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<p>Both Python 3.6 and Python 3.9 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>ipaddress</p></li>
+<li><p>pika~=1.2</p></li>
+<li><p>resilient_circuits&gt;=45.0.0</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>icdx_amqp_host</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">icdx.example.com</span> </code></p></td>
+<td><p><em>Hostname for the ICDx installation, should be like my-server.com.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>icdx_amqp_port</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5672</span></code></p></td>
+<td><p><em>Port for the ICDx AMQP Service, defaults to 5672.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>icdx_amqp_vhost</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dx</span></code></p></td>
+<td><p><em>Virtual Host for the AMQP Exchange. Default is dx.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>icdx_amqp_username</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">admin</span></code></p></td>
+<td><p><em>Username of ICDx user.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>icdx_amqp_password</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">supersecret</span></code></p></td>
+<td><p><em>Password of ICDx user.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>icdx_search_limit</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">100</span></code></p></td>
+<td><p><em>A limiter for how many results are queried in ICDx. Default is 100 unless this value exceeds that.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>icdx_forwarder_toggle</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;True</span> <span class="pre">/</span> <span class="pre">False&gt;</span></code></p></td>
+<td><p><em>Boolean specifying whether the forwarder should be enabled when circuits is started.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>icdx_forwarder_inc_owner</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;USER_EMAIL</span> <span class="pre">/</span> <span class="pre">USER_ID</span> <span class="pre">/</span> <span class="pre">GROUP_NAME&gt;</span></code></p></td>
+<td><p><em>Who will be assigned incidents created by the forwarder</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-icdx-find-events">
+<h2>Function - ICDx: Find Events<a class="headerlink" href="#function-icdx-find-events" title="Link to this heading">#</a></h2>
+<p>Takes a number of parameters in a search request and attempts to gather events from the ICDx Platform. Returns a response containing a list of events or a response with a 204 status code when no results are found.</p>
+<p><img alt="screenshot: fn-icdx-find-events " src="../_images/fn-icdx-find-events.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">icdx_search_request</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">JSON</span> <span class="pre">Payload</span> <span class="pre">containing</span> <span class="pre">search</span> <span class="pre">Query</span></code></p></td>
+<td><p>The Find Events request retrieves the events that are within the specified time range and satisfy this search condition.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;result_set&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;num_of_results&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time&quot;</span><span class="p">:</span><span class="mi">1601631906772</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">result_set</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">num_of_results</span><span class="se">\&quot;</span><span class="s2">: 0, </span><span class="se">\&quot;</span><span class="s2">execution_time</span><span class="se">\&quot;</span><span class="s2">: 1601631906772}&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;icdx_search_request&quot;</span><span class="p">:{</span>
+         <span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;content&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">from</span><span class="se">\&quot;</span><span class="s2">:[</span><span class="se">\&quot;</span><span class="s2">default</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">dedicated/d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">dedicated/13547310-aec6-11e9-eb82-000000000002</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\&quot;</span><span class="s2">],</span><span class="se">\&quot;</span><span class="s2">start</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">-7d</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">filter</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">type = </span><span class="se">\\</span><span class="s2">&#39;NETWORK_EVENT</span><span class="se">\\</span><span class="s2">&#39;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">Query_Title</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Search for available archives, then search for NETWORK_EVENTs, limited to all available archives except system.</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">limit</span><span class="se">\&quot;</span><span class="s2">:5,</span><span class="se">\&quot;</span><span class="s2">where</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">severity_id &gt;= 3</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">:1}&quot;</span>
+      <span class="p">}</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-icdx&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;RG-MBP-18.local&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">1889</span><span class="p">,</span>
+      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02 10:45:06&quot;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#######################################</span>
+<span class="c1">### Define pre-processing functions ###</span>
+<span class="c1">#######################################</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;Query_Title&quot;</span><span class="p">:</span> <span class="s2">&quot;Search for available archives, then search for NETWORK_EVENTs, limited to all available archives except system.&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;id&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s2">&quot;start&quot;</span>  <span class="p">:</span> <span class="s2">&quot;-7d&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;where&quot;</span>  <span class="p">:</span> <span class="s2">&quot;severity_id &gt;= 3&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="s2">&quot;type = &#39;NETWORK_EVENT&#39;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;limit&quot;</span>  <span class="p">:</span> <span class="mi">5</span>
+   <span class="p">}</span>
+<span class="k">def</span> <span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that converts a dictionary into a JSON stringself.</span>
+<span class="sd">     Supports basestring, bool and int.</span>
+<span class="sd">     If the value is None, it sets it to False&quot;&quot;&quot;</span>
+
+  <span class="n">json_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;{ </span><span class="si">{0}</span><span class="s1"> }&quot;&#39;</span>
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:</span><span class="si">{1}</span><span class="s1">&#39;</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+  <span class="n">list_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:[</span><span class="si">{1}</span><span class="s1">]&#39;</span>
+  <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span> 
+  
+  <span class="c1"># Grab the available archives from the previous function </span>
+  <span class="n">archives_to_search</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">archive_search</span><span class="p">[</span><span class="s2">&quot;archives&quot;</span><span class="p">]</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  </span>
+<span class="sd">    Here we take the result of the previous function -- a list of available archives_to_search</span>
+<span class="sd">    A comma separated string of archives is prepared and then appended to our payload</span>
+<span class="sd">    </span>
+<span class="sd">    In the below example, we exclude the system archive by adding every other archive to our payload</span>
+<span class="sd">  </span>
+<span class="sd">    Replace &#39;system&#39; with any archives you DONT want to be searched</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">list_builder_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+  <span class="k">for</span> <span class="n">archive</span> <span class="ow">in</span> <span class="n">archives_to_search</span><span class="p">:</span>
+    <span class="c1"># If the archive isin&#39;t the system archive</span>
+    <span class="k">if</span> <span class="n">archive</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;system&quot;</span><span class="p">:</span>
+      <span class="c1"># Append to the list of archives we will search</span>
+      <span class="n">list_builder_str</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;,&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">archive</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
+          
+  <span class="c1"># Finally prepare our CSV string to be appended to the payload      </span>
+  <span class="k">if</span> <span class="n">list_builder_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+    <span class="n">list_builder_str</span> <span class="o">=</span> <span class="n">list_builder_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="n">list_builder_str</span><span class="p">))</span>
+  
+  <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">entry</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span>
+      
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+      
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+    
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+  
+  <span class="k">return</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+  
+  
+<span class="n">inputs</span><span class="o">.</span><span class="n">icdx_search_request</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Example of the return data for this workflow</span>
+<span class="sd">results = {</span>
+<span class="sd">            &quot;success&quot;: True or False</span>
+<span class="sd">            &quot;result_set&quot;: [{</span>
+<span class="sd">              Object containing ICDx event data</span>
+<span class="sd">            }],</span>
+<span class="sd">            &quot;num_of_results&quot;: How many results returned (INT),</span>
+<span class="sd">            &quot;execution_time&quot;: The time the function was executed</span>
+<span class="sd">          }</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;Search Request executed on ICDx :&lt;/b&gt;&quot;&quot;&quot;</span>
+
+<span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Number of results found: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">               &lt;br&gt;Results are being inserted into the ICDX Event Datatable&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">num_of_results</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;Query_Title&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;br&gt;A Query_Title attribute was provided with the input payload. </span>
+<span class="s2">                &lt;br&gt;Query Title: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;Query_Title&quot;</span><span class="p">])</span>
+  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;where&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Where Condition: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;where&quot;</span><span class="p">])</span> 
+  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;filter&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Filter Condition: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;filter&quot;</span><span class="p">])</span>
+                
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">num_of_results</span> <span class="o">&gt;=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;hard_limit&quot;</span><span class="p">]:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;br&gt;Query resulted in </span><span class="si">{0}</span><span class="s2"> matching events. ICDx Event Requests are batched with a configurable limit of </span><span class="si">{1}</span><span class="s2">.</span>
+<span class="s2">              &lt;br&gt; To access any results after the </span><span class="si">{1}</span><span class="s2">th returned result, please review the app.config parameter `icdx_search_limit` and update where necessary. </span>
+<span class="s2">              &lt;br&gt; The Last UUID appears to be &lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;limit&quot;</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;hard_limit&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">result_set</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;uuid&quot;</span><span class="p">])</span>
+
+
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">result_set</span><span class="p">:</span>
+  <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">result_set</span><span class="p">:</span>
+    <span class="c1"># Now have a handle on each event; Prepare DataTable</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;icdx_events&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_severity_id&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;severity_id&#39;</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_device_name&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;device_name&#39;</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_device_ip&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;device_ip&#39;</span><span class="p">]</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;No Type&quot;&quot;&quot;</span>
+      
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;execution_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">execution_time</span>
+    
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-icdx-get-archive-list">
+<h2>Function - ICDx: Get Archive List<a class="headerlink" href="#function-icdx-get-archive-list" title="Link to this heading">#</a></h2>
+<p>The Get Archive List API is used to return a list of archives in the ICDx system. The response is an unsorted list of archive metadata objects which can then be searched by a user.</p>
+<p><img alt="screenshot: fn-icdx-get-archive-list " src="../_images/fn-icdx-get-archive-list.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;archives&quot;</span><span class="p">:[</span>
+         <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;System Archive&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;system&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Default Archive&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;dedicated/d900b5f0-aa0d-11e9-e053-000000000001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;d900b5f0-aa0d-11e9-e053-000000000001&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;dedicated/13547310-aec6-11e9-eb82-000000000002&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;13547310-aec6-11e9-eb82-000000000002&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;3c7b5bd0-1f21-11e9-fa8e-000000000001&quot;</span>
+         <span class="p">}</span>
+      <span class="p">]</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">archives</span><span class="se">\&quot;</span><span class="s2">: [{</span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">System Archive</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Default Archive</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">default</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">dedicated/d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">dedicated/13547310-aec6-11e9-eb82-000000000002</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">13547310-aec6-11e9-eb82-000000000002</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\&quot;</span><span class="s2">}]}&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
+      
+   <span class="p">},</span>
+   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-icdx&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;RG-MBP-18.local&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">1874</span><span class="p">,</span>
+      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02 14:48:23&quot;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">results = {</span>
+<span class="sd">            &quot;success&quot;: True or False,</span>
+<span class="sd">            &quot;archives&quot;: List of available archives or None</span>
+<span class="sd">          }</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Found &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; archives available for searching&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">archives</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">archive</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">archives</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt; Archive Name: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; with path: </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">archive</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">archive</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
+
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-icdx-get-event">
+<h2>Function - ICDx: Get Event<a class="headerlink" href="#function-icdx-get-event" title="Link to this heading">#</a></h2>
+<p>Takes in an input of a UUID for an event and attempts to get the details of this event from the ICDx platform.</p>
+<p><img alt="screenshot: fn-icdx-get-event " src="../_images/fn-icdx-get-event.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">icdx_uuid</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>A UUID value for an ICDx Event.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;event&quot;</span><span class="p">:{</span>
+         <span class="s2">&quot;user_name&quot;</span><span class="p">:</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;session_uid&quot;</span><span class="p">:</span><span class="s2">&quot;hz73OQByQay0mAGlHJz4iw&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;feature_uid&quot;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;85c62850-0490-11eb-c000-000000000000&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;  feature_type&quot;</span><span class="p">:</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;device_name&quot;</span><span class="p">:</span><span class="s2">&quot;integration-icdx-ubuntu-2&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;subfeature_name&quot;</span><span class="p">:</span><span class="s2">&quot;com.symantec.platform.identity.audit.AuditLogger&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;status_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+         <span class="s2">&quot;category_id&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+         <span class="s2">&quot;feature_path&quot;</span><span class="p">:</span><span class="s2">&quot;system/id_epmp_dx&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;device_time&quot;</span><span class="p">:</span><span class="mi">1601630433109</span><span class="p">,</span>
+         <span class="s2">&quot;feature_name&quot;</span><span class="p">:</span><span class="s2">&quot;Identity Service&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;x-epmp-sampled&quot;</span><span class="p">:</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;device_os_name&quot;</span><span class="p">:</span><span class="s2">&quot;Linux&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;log_name&quot;</span><span class="p">:</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;type_id&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+         <span class="s2">&quot;device_os_ver&quot;</span><span class="p">:</span><span class="s2">&quot;4.4.0-131-generic&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;log_level&quot;</span><span class="p">:</span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;device_os_bits&quot;</span><span class="p">:</span><span class="s2">&quot;amd64&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;Successful login of admin&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;product_name&quot;</span><span class="p">:</span><span class="s2">&quot;Symantec Integrated Cyber Defense Exchange&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;log_time&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02T05:20:33.109-04:00&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;device_ip&quot;</span><span class="p">:</span><span class="s2">&quot;9.70.194.66&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;event_id&quot;</span><span class="p">:</span><span class="mi">20001</span><span class="p">,</span>
+         <span class="s2">&quot;x-epmp-traceId&quot;</span><span class="p">:</span><span class="s2">&quot;0482fb724eca2f19&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;x-epmp-spanId&quot;</span><span class="p">:</span><span class="s2">&quot;0482fb724eca2f19&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02T05:20:33.109-04:00&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;severity_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+         <span class="s2">&quot;status_thread_name&quot;</span><span class="p">:</span><span class="s2">&quot;SimpleAsyncTaskExecutor-2&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;artifacts&quot;</span><span class="p">:{</span>
+         
+      <span class="p">},</span>
+      <span class="s2">&quot;artifact_keys_as_list&quot;</span><span class="p">:[</span>
+         
+      <span class="p">],</span>
+      <span class="s2">&quot;artifact_values_as_list&quot;</span><span class="p">:[</span>
+         
+      <span class="p">]</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">event</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">user_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">session_uid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">hz73OQByQay0mAGlHJz4iw</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">feature_uid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">default</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">85c62850-0490-11eb-c000-000000000000</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">  feature_type</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">integration-icdx-ubuntu-2</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">subfeature_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">com.symantec.platform.identity.audit.AuditLogger</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">status_id</span><span class="se">\&quot;</span><span class="s2">: 1, </span><span class="se">\&quot;</span><span class="s2">category_id</span><span class="se">\&quot;</span><span class="s2">: 4, </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">: 1, </span><span class="se">\&quot;</span><span class="s2">feature_path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system/id_epmp_dx</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_time</span><span class="se">\&quot;</span><span class="s2">: 1601630433109, </span><span class="se">\&quot;</span><span class="s2">feature_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Identity Service</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">x-epmp-sampled</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">0</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_os_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Linux</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">log_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">type_id</span><span class="se">\&quot;</span><span class="s2">: 20, </span><span class="se">\&quot;</span><span class="s2">device_os_ver</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">4.4.0-131-generic</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">log_level</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">INFO</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_os_bits</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">amd64</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">message</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Successful login of admin</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">version</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">1.0</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">product_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Symantec Integrated Cyber Defense Exchange</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">log_time</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2020-10-02T05:20:33.109-04:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_ip</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">9.70.194.66</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">event_id</span><span class="se">\&quot;</span><span class="s2">: 20001, </span><span class="se">\&quot;</span><span class="s2">x-epmp-traceId</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">0482fb724eca2f19</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">x-epmp-spanId</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">0482fb724eca2f19</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">time</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2020-10-02T05:20:33.109-04:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">severity_id</span><span class="se">\&quot;</span><span class="s2">: 1, </span><span class="se">\&quot;</span><span class="s2">status_thread_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SimpleAsyncTaskExecutor-2</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">artifacts</span><span class="se">\&quot;</span><span class="s2">: </span><span class="si">{}</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">artifact_keys_as_list</span><span class="se">\&quot;</span><span class="s2">: [], </span><span class="se">\&quot;</span><span class="s2">artifact_values_as_list</span><span class="se">\&quot;</span><span class="s2">: []}&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;icdx_uuid&quot;</span><span class="p">:</span><span class="s2">&quot;85c62850-0490-11eb-c000-000000000000&quot;</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-icdx&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;RG-MBP-18.local&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">1851</span><span class="p">,</span>
+      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02 14:47:25&quot;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">icdx_uuid</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">icdx_uuid</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Example of return data </span>
+
+<span class="sd">results = {</span>
+<span class="sd">            &quot;inputs&quot;:{</span>
+<span class="sd">                &quot;icdx_uuid&quot;: The UUID we ran the request with</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;success&quot;: True or False,</span>
+<span class="sd">            &quot;event&quot;:  {</span>
+<span class="sd">              Object containing the ICDx Event data</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;artifacts&quot;: {</span>
+<span class="sd">              Object containing the artifacts we parsed from the event. </span>
+<span class="sd">              Structure is name_of_artifact:artifact_data</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;artifact_keys_as_list&quot;: [</span>
+<span class="sd">              List containing the types of artifacts we parsed from the event.</span>
+<span class="sd">            ],</span>
+<span class="sd">            &quot;artifact_values_as_list&quot;: [</span>
+<span class="sd">              List containing the artifact data we parsed from the event.</span>
+<span class="sd">            ]</span>
+<span class="sd">          }</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Add a note detailing what happened</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;Get Event request executed on ICDx :&lt;/b&gt;</span>
+<span class="s2">                &lt;br&gt;UUID Provided: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">])</span>
+                
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Query successful and found an event with matching UUID.&quot;&quot;&quot;</span>
+                  
+  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Type of Event : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Event Type ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;type_id&quot;</span><span class="p">])</span>
+    
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Event was gathered from the &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; archive&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;log_name&quot;</span><span class="p">])</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Artifacts generated from Event: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;[&#39;</span><span class="si">{}</span><span class="s2">&#39;]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;&#39;, &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span><span class="p">)))</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;No artifacts generated from Event.&lt;/b&gt;&quot;&quot;&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Query did not find a corresponding event or an exception occured. </span>
+<span class="s2">  Check the action status for more information&quot;&quot;&quot;</span>
+  
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>  
+
+
+<span class="c1"># First save the UUID as an artifact, exposing it to artifact level workflows </span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;String&#39;</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">],</span> <span class="s1">&#39;Escalated from ICDx Event with UUID </span><span class="si">{}</span><span class="s1">. Gathered from the ICDx Utilities Integration&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">]))</span>
+
+<span class="sd">&quot;&quot;&quot; Will only work in v31 upwards</span>
+<span class="sd">if results.artifacts not None:</span>
+<span class="sd">  for artifact_type, artifact_values in results.artifacts.items():</span>
+<span class="sd">    for artifact_value in artifact_values:</span>
+<span class="sd">      incident.addArtifact(artifact_type, artifact_value, &#39;Escalated from ICDx Event with UUID {}. Gathered from the ICDx Utilities Integration&#39;.format(results.inputs[&quot;icdx_uuid&quot;]))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Parse over the keys and values and add them as artifacts</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">artifact_values_as_list</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="k">for</span> <span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_values</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span><span class="p">,</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_values_as_list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">artifact_value</span> <span class="ow">in</span> <span class="n">artifact_values</span><span class="p">:</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="s1">&#39;Escalated from ICDx Event with UUID </span><span class="si">{}</span><span class="s1">. Gathered from the ICDx Utilities Integration&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">]))</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="data-table-icdx-queried-events">
+<h2>Data Table - ICDx Queried Events<a class="headerlink" href="#data-table-icdx-queried-events" title="Link to this heading">#</a></h2>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p>icdx_events</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Artifact Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Input Artifact Type that was queried</p></td>
+</tr>
+<tr class="row-odd"><td><p>Device IP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">icdx_device_ip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>A Device IP gathered from Event (If Any)</p></td>
+</tr>
+<tr class="row-even"><td><p>Device Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">icdx_device_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>A Device Name gathered from Event (If Any)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Execution Time</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">execution_time</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Severity ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">icdx_severity_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>The Severity of the Event. [1] Info; [2] Warning; [3] Minor; [4] Major; [5]; Critical; [6] Fatal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">icdx_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>A Type of Event.</p></td>
+</tr>
+<tr class="row-even"><td><p>UUID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">icdx_uuid</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>A Unique Identifier for the ICDx Event</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICDx: Get Event Data</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_icdx_get_event_data</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ICDx: Get Event Data from Row</p></td>
+<td><p>icdx_events</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_icdx_get_event_datatable</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ICDx: Search for Archives then query those archives for Events</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_icdx_search_for_events_from_archives_other_than_system</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ICDx: Search for Events (Input Value JSON)</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_icdx_search_for_events</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ICDx: Search for Events related to Device Name (Pre-Processing JSON)</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_icdx_search_for_events_related_to_device_name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ICDx: Search for Events related to IP (Pre-Processing JSON)</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_icdx_search_for_events_related_to_ip</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_incident_utils/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Incident Utilities</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_html2pdf/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">fn_html2pdf</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Symantec ICDx</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-icdx-find-events">Function - ICDx: Find Events</a></li>
+<li><a class="reference internal" href="#function-icdx-get-archive-list">Function - ICDx: Get Archive List</a></li>
+<li><a class="reference internal" href="#function-icdx-get-event">Function - ICDx: Get Event</a></li>
+<li><a class="reference internal" href="#data-table-icdx-queried-events">Data Table - ICDx Queried Events</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

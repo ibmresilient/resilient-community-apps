@@ -1,0 +1,2017 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Joe Sandbox Analysis Function for IBM SOAR" href="../fn_joe_sandbox_analysis/README.html" /><link rel="prev" title="fn-isitphishing Functions for IBM Resilient" href="../fn_isitphishing/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Jira App for IBM SOAR - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="jira-app-for-ibm-soar">
+<h1>Jira App for IBM SOAR<a class="headerlink" href="#jira-app-for-ibm-soar" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#multi-tenancy"><span class="xref myst">Multi-tenancy</span></a></p></li>
+<li><p><a class="reference internal" href="#configuring-oauth"><span class="xref myst">Configuring OAuth</span></a></p></li>
+<li><p><a class="reference internal" href="#poller-considerations"><span class="xref myst">Poller Considerations</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#poller-templates-for-soar-cases"><span class="xref myst">Poller Templates for SOAR Cases</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---jira-create-comment"><span class="xref myst">Function - Jira Create Comment</span></a></p></li>
+<li><p><a class="reference internal" href="#function---jira-open-issue"><span class="xref myst">Function - Jira Open Issue</span></a></p></li>
+<li><p><a class="reference internal" href="#function---jira-transition-issue"><span class="xref myst">Function - Jira Transition Issue</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---jira-task-references"><span class="xref myst">Data Table - Jira Task References</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
+<li><p><a class="reference internal" href="#how-to-configure-to-use-a-single-jira-server"><span class="xref myst">How to configure to use a single Jira Server</span></a></p></li>
+<li><p><a class="reference internal" href="#creating-workflows-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating workflows when server/servers in app.config are labeled</span></a></p></li>
+<li><p><a class="reference internal" href="#configuring-bidirectional-sync"><span class="xref myst">Configuring bidirectional sync</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3.0.5</p></td>
+<td><p>10/2023</p></td>
+<td><p>Bug fix for poller not closing SOAR incident</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.0.4</p></td>
+<td><p>10/2023</p></td>
+<td><p>Bug fix for transitioning a Jira issue from SOAR</p></td>
+</tr>
+<tr class="row-even"><td><p>3.0.3</p></td>
+<td><p>09/2023</p></td>
+<td><p>Bug fix for jira_transition_issue function</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.0.2</p></td>
+<td><p>08/2023</p></td>
+<td><p>Bug fix for playbook, Example: Jira Create Comment</p></td>
+</tr>
+<tr class="row-even"><td><p>3.0.1</p></td>
+<td><p>05/2023</p></td>
+<td><p>Bug fix for SOAR note synchronization</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.0.0</p></td>
+<td><p>01/2023</p></td>
+<td><p><ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li><li>Add global_settings to app.config that contains the settings for the poller</li></ul></p></td>
+</tr>
+<tr class="row-even"><td><p>2.2.0</p></td>
+<td><p>10/2022</p></td>
+<td><p><ul><li>Added support for multi-tenancy</li><li>Added support for authentication with token</li><li>Removed support for python 2</li></ul></p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1.1</p></td>
+<td><p>05/2022</p></td>
+<td><p>Updated version for pyjwt dependency</p></td>
+</tr>
+<tr class="row-even"><td><p>2.1.0</p></td>
+<td><p>04/2022</p></td>
+<td><p><ul><li>Added support for authentication with OAuth</li><li>Includes new configs: <code class="docutils literal notranslate"><span class="pre">access_token</span></code>, <code class="docutils literal notranslate"><span class="pre">access_token_secret</span></code>, <code class="docutils literal notranslate"><span class="pre">consumer_key_name</span></code>, <code class="docutils literal notranslate"><span class="pre">private_rsa_key_file_path</span></code></li><li>Added support for sending SOAR task notes to Jira – see updated example workflow</li><li>Added support for images in notes synchronizing to Jira</li><li>Added config <code class="docutils literal notranslate"><span class="pre">jira_task_references</span></code> for custom datatables</li><li>Added option in example rule to set Jira project ID as activity field</li></ul></p></td>
+</tr>
+<tr class="row-odd"><td><p>2.0.0</p></td>
+<td><p>10/2020</p></td>
+<td><p><ul><li>Added App Host support</li><li>Added proxy support</li><li>Added support for https://pypi.org/project/jira/</li><li>Changed config heading from <code class="docutils literal notranslate"><span class="pre">jira</span></code> to <code class="docutils literal notranslate"><span class="pre">fn_jira</span></code></li><li>Added configs: <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">auth_method</span></code>, <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> and <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code></li><li>Added incident field <code class="docutils literal notranslate"><span class="pre">jira_issue_id</span></code></li><li>Changed column name in <code class="docutils literal notranslate"><span class="pre">jira_task_references</span></code> Data Table from <code class="docutils literal notranslate"><span class="pre">jira_api_url</span></code> to <code class="docutils literal notranslate"><span class="pre">jira_issue_id_col</span></code></li></ul></p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>10/2019</p></td>
+<td><p>Improvements to data table handling and Bug fixes</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>04/2019</p></td>
+<td><p>Support for versions of SOAR 31.0 and beyond</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>12/2018</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>For customers upgrading from a previous release to 3.0.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See <a class="reference internal" href="#configuring-bidirectional-sync"><span class="xref myst">Configuring bidirectional sync</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p><strong>Provides integration with JIRA for Issue Creation, Issue Transition and Comment Creation</strong></p>
+<p><img alt="screenshot: main" src="../_images/main20.png" /></p>
+<p>This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bidirectional links are saved to allow for easy navigation between the applications.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                    It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in SOAR.
+
+                    Example rules and workflows can used used or modified to meet your business processes.
+</pre></div>
+</div>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Bidirectional sync between SOAR and Jira</p></li>
+<li><p>Issue creation</p></li>
+<li><p>Issue transition</p></li>
+<li><p>Comment creation</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.0</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.0</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>Incidents</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tasks</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
+<tr class="row-even"><td><p>Layout</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app does support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<p>Python 3.6 and Python 3.9 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>jira~=3.2</p></li>
+<li><p>pyjwt~=2.4</p></li>
+<li><p>resilient_circuits&gt;=45.0.0</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>auth_method</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AUTH</span></code></p></td>
+<td><p>The method of authentication to use when connecting to your Jira platform. Supported methods are <code class="docutils literal notranslate"><span class="pre">AUTH</span></code>, <code class="docutils literal notranslate"><span class="pre">BASIC</span></code>, and <code class="docutils literal notranslate"><span class="pre">OAUTH</span></code>. For more information on authentication see: https://jira.readthedocs.io/en/latest/examples.html#authentication</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>auth_token</strong></p></td>
+<td class="text-center"><p>Required for <code class="docutils literal notranslate"><span class="pre">TOKEN</span></code></p></td>
+<td><p>``</p></td>
+<td><p>Authentication token</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>access_token_secret</strong></p></td>
+<td class="text-center"><p>Required for <code class="docutils literal notranslate"><span class="pre">OAUTH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;oauth</span> <span class="pre">access</span> <span class="pre">secret&gt;</span></code></p></td>
+<td><p>Access token secret created through Jira OAuth 1.0a 3LO. Details below.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>consumer_key_name</strong></p></td>
+<td class="text-center"><p>Required for <code class="docutils literal notranslate"><span class="pre">OAUTH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;oauth</span> <span class="pre">consumer</span> <span class="pre">key&gt;</span></code></p></td>
+<td><p>Consumer Key name created through Jira UI. Details below.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>private_rsa_key_file_path</strong></p></td>
+<td class="text-center"><p>Required for <code class="docutils literal notranslate"><span class="pre">OAUTH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/etc/jira_privatekey.pem</span></code></p></td>
+<td><p>Path to file containing private RSA key associated with the public key that was uploaded in the UI. Details below.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>jira_dt_name</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_task_references</span></code></p></td>
+<td><p>The datatable in which to store the data for synced SOAR tasks. Default is <code class="docutils literal notranslate"><span class="pre">jira_task_references</span></code>. If using a custom Datatable, this table <em>must</em> include the <code class="docutils literal notranslate"><span class="pre">task_id</span></code>, <code class="docutils literal notranslate"><span class="pre">jira_issue_id_col</span></code>, and <code class="docutils literal notranslate"><span class="pre">jira_link</span></code> columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>access_token</strong></p></td>
+<td class="text-center"><p>Required for <code class="docutils literal notranslate"><span class="pre">OAUTH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;oauth</span> <span class="pre">access</span> <span class="pre">token&gt;</span></code></p></td>
+<td><p>Access token created through Jira OAuth 1.0a 3LO. Details below.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>max_issues_returned</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">50</span></code></p></td>
+<td><p>Max number of issues that can be returned from Jira issue search.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>password</strong></p></td>
+<td class="text-center"><p>Required for <code class="docutils literal notranslate"><span class="pre">AUTH</span></code> or <code class="docutils literal notranslate"><span class="pre">BASIC</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;jira</span> <span class="pre">user</span> <span class="pre">password&gt;</span></code></p></td>
+<td><p>The password or API Key for the Jira account to use with this integration. <code class="docutils literal notranslate"><span class="pre">AUTH</span></code> only supports password and <code class="docutils literal notranslate"><span class="pre">BASIC</span></code> supports both password and API Key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>poller_filters</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">priority</span> <span class="pre">in</span> <span class="pre">(high,</span> <span class="pre">medium,</span> <span class="pre">low)</span> <span class="pre">and</span> <span class="pre">status</span> <span class="pre">in</span> <span class="pre">('to</span> <span class="pre">do',</span> <span class="pre">'in</span> <span class="pre">progress',</span> <span class="pre">done)</span> <span class="pre">and</span> <span class="pre">project</span> <span class="pre">in</span> <span class="pre">(project_name1,</span> <span class="pre">project_name2)</span></code></p></td>
+<td><p>Search filters for Jira issue to sync with SOAR cases.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>polling_interval</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>Interval to poll Jira for changes (in seconds).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>polling_lookback</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p>Amount of time for poller to look back when syncing Jira issues and SOAR cases.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>timezone_offset</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-4:00</span></code></p></td>
+<td><p>Timezone off set from UTC time. Timezone off set needs to be set to be the same as the Jira servers timezone.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>timeout</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p>The number of seconds to timeout after when making a request to the Jira platform.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>url</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://&lt;jira</span> <span class="pre">url&gt;</span></code></p></td>
+<td><p>The URL of your Jira platform.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>user</strong></p></td>
+<td class="text-center"><p>Required for <code class="docutils literal notranslate"><span class="pre">AUTH</span></code> or <code class="docutils literal notranslate"><span class="pre">BASIC</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;jira</span> <span class="pre">user&gt;</span></code></p></td>
+<td><p>The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>verify_cert</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>A boolean value. Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want ti verify SSL certificates on each request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>http_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">http://localhost:3128</span></code></p></td>
+<td><p>Your HTTP Proxy.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>https_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://localhost:3128</span></code></p></td>
+<td><p>Your HTTPS Proxy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>soar_create_case_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/create_case.jinja</span></code></p></td>
+<td><p><em>Path to override template for automatic case creation. See <a class="reference internal" href="#poller-considerations"><span class="xref myst">Poller Considerations</span></a>.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>soar_update_case_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/update_case.jinja</span></code></p></td>
+<td><p><em>Path to override template for automatic case updating. See <a class="reference internal" href="#poller-considerations"><span class="xref myst">Poller Considerations</span></a>.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>soar_close_case_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/close_case.jinja</span></code></p></td>
+<td><p><em>Path to override template for automatic case closing. See <a class="reference internal" href="#poller-considerations"><span class="xref myst">Poller Considerations</span></a>.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>soar_update_task_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/update_task.jinja</span></code></p></td>
+<td><p><em>Path to override template for automatic case updating. See <a class="reference internal" href="#poller-considerations"><span class="xref myst">Poller Considerations</span></a>.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="multi-tenancy">
+<h4>Multi-tenancy<a class="headerlink" href="#multi-tenancy" title="Link to this heading">#</a></h4>
+<p>Starting in version 2.2.0, more than one Jira instance can be configured for SOAR. For enterprises with only one Jira instance, your app.config file will continue to define the Jira instance under the <code class="docutils literal notranslate"><span class="pre">[fn_jira]</span></code> section header.</p>
+<p>For enterprises with more than one Jira instance, each instance will have it’s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_jira:jira_label1]</span></code> where <code class="docutils literal notranslate"><span class="pre">jira_label1</span></code> represents any label helpful to define you Jira environment. You cannot mix <code class="docutils literal notranslate"><span class="pre">[fn_jira]</span></code> and <code class="docutils literal notranslate"><span class="pre">[fn_jira:jira_label1]</span></code> sections headers.</p>
+<p>Be aware that modifications to the workflows will be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">jira_label</span></code> function input field if the Jira server/servers in the app.config have labels.</p>
+<p>If you have existing custom workflows, see <a class="reference internal" href="#creating-workflows-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating workflows when server/servers in app.config are labeled</span></a> for more information about changing them to reference the <code class="docutils literal notranslate"><span class="pre">jira_label</span></code> function input field.</p>
+</section>
+</section>
+<section id="configuring-oauth">
+<h3>Configuring OAuth<a class="headerlink" href="#configuring-oauth" title="Link to this heading">#</a></h3>
+<p>OAuth authentication is supported with OAuth 1.0a protocol on Jira Server and Jira Cloud. This requires setting some configurations through the Jira UI followed by the 3 legged-dance described in the docs linked below. The main goal of this process is to generate a public and private RSA key, as well as a <code class="docutils literal notranslate"><span class="pre">access_token</span></code> and <code class="docutils literal notranslate"><span class="pre">access_token_secret</span></code>. Follow the steps at the appropriate links to setup the RSA keys and generate an access token. Then set the values as appropriate in your app.config. It is recommended to use App Host secrets to store the tokens if deploying on App Host.</p>
+<p>Follow the instructions at the appropriate link to create a public and private key and to create an incoming link in Jira:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.atlassian.com/server/jira/platform/oauth/#step-1--configure-jira">OAuth on Jira Server</a> (only step 1)</p></li>
+<li><p><a class="reference external" href="https://developer.atlassian.com/cloud/jira/platform/jira-rest-api-oauth-authentication/#step-2--configure-the-client-application-as-an-oauth-consumer">OAuth 1.0a on Jira Cloud</a> (only step 2)</p></li>
+</ul>
+<blockquote>
+<div><p>As of v2.1.0, this app only supports OAuth 1.0a authentication to Jira.</p>
+</div></blockquote>
+<p>Once you’ve completed the linked step above, you can continue with the rest of Jira’s guide (in Java) or you can follow the Python steps below.</p>
+<blockquote>
+<div><p>Note: these steps have been verified on Python 3.6. No matter the environment that you run the app in, it is recommended to run these steps with Python 3.6.</p>
+</div></blockquote>
+<ol class="arabic">
+<li><p>Create a python environment on a machine that has internet access to your Jira server. Install <code class="docutils literal notranslate"><span class="pre">jira</span></code> in the python environment and the required associated dependencies</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install jira cryptography pyjwt IPython
+</pre></div>
+</div>
+<p>This will also install the <code class="docutils literal notranslate"><span class="pre">jirashell</span></code> utility which will be used in the next step.</p>
+</li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">jirashell</span></code> utility to preform the OAuth dance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jirashell -s &lt;url_of_your_jira_server&gt; --oauth-dance --consumer-key &lt;name_of_consumer_key_in_jira_ui&gt; --key-cert &lt;path_to_private_rsa_key&gt; --print-tokens
+</pre></div>
+</div>
+<p>This will prompt you at a point to follow a link to sign-in and authorize the OAuth tokens. Click “Allow” and return to the shell. Type <code class="docutils literal notranslate"><span class="pre">y</span></code> and hit enter. The Access Token and Access Token Secret will be printed to your terminal. You can now exit the <code class="docutils literal notranslate"><span class="pre">jirashell</span></code> prompt.</p>
+</li>
+<li><p>Use the token and secret printed to your terminal to provide access to Jira for this app. If running in App Host, it is recommended to enter the values of the tokens as secrets in the app’s <strong>Configuration</strong> tab by clicking <strong>Add Secret</strong>.</p></li>
+<li><p>In App Host, upload the private key as a file by clicking <strong>New File</strong>. Paste the contents of the private key into the file and ensure that the path to the file is the same as what you wrote in your app.config.</p></li>
+</ol>
+</section>
+<section id="poller-considerations">
+<h3>Poller Considerations<a class="headerlink" href="#poller-considerations" title="Link to this heading">#</a></h3>
+<p>If the poller is configured in the app.config, then SOAR cases that are linked to Jira issues will be updated when the linked Jira issue is changed.
+The Jira issues are found when running the Jira search using the filters given in the app.config. Only Jira issues that meet the search requirements and have been updated within the polling_lookback
+time frame will be returned from the search.</p>
+<p>Disable the poller by changing the app.config setting to <code class="docutils literal notranslate"><span class="pre">poller_interval=0</span></code>.</p>
+<section id="poller-templates-for-soar-cases">
+<h4>Poller Templates for SOAR Cases<a class="headerlink" href="#poller-templates-for-soar-cases" title="Link to this heading">#</a></h4>
+<p>It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.</p>
+<p>This is especially relevant if you have required custom <em>close</em> fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom <code class="docutils literal notranslate"><span class="pre">close_case_template</span></code> and reference those required close fields in the template.</p>
+<p>When overriding the template in App Host, specify the file path for each file as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
+<p>Below are the default templates used which can be copied, modified, and used with app_config’s
+<code class="docutils literal notranslate"><span class="pre">soar_create_case_template</span></code>, <code class="docutils literal notranslate"><span class="pre">soar_update_case_template</span></code>, and <code class="docutils literal notranslate"><span class="pre">soar_close_case_template</span></code> settings to override the default templates.</p>
+<details><summary>soar_create_case_template.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from an endpoint #}</span>
+<span class="x">  &quot;name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;summary&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;description&quot;: </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">&quot;description&quot;</span><span class="o">]</span> <span class="k">is</span> <span class="nf">none</span> <span class="cp">%}</span><span class="x"> null </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> &quot;</span><span class="cp">{{</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">&quot;description&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot; </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">,</span>
+<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;priority&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;create_date&quot;: </span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;created&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;created&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
+<span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;jira_internal_url&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">internal_url</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;jira_issue_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">key</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;jira_server&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira_server</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;jira_url&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">url</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;jira_project_key&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;project&quot;</span><span class="o">][</span><span class="s2">&quot;key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;jira_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;status&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;jira_linked_to_incident&quot;: true</span>
+<span class="x">  },</span>
+<span class="x">  </span><span class="c">{# add comments as necessary #}</span>
+<span class="x">  &quot;comments&quot;: [</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">note</span> <span class="k">in</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">&quot;comment&quot;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">      { &quot;text&quot;: { &quot;format&quot;: &quot;html&quot;, &quot;content&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">note</span> <span class="cp">}}</span><span class="x">&quot; }, &quot;type&quot;: &quot;incident&quot; }</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nb">loop</span><span class="nv">.last</span> <span class="cp">%}</span>
+<span class="x">        ,</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="x">  ]</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_update_case_template.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for updating a new SOAR incident from an endpoint #}</span>
+<span class="x">  &quot;version&quot;: </span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;vers&quot;</span><span class="o">]</span> <span class="o">+</span> <span class="m">1</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;changes&quot;: [</span>
+<span class="x">      {</span>
+<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;severity_code&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;priority&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;severity_code&quot;}</span>
+<span class="x">      },</span>
+<span class="x">      {</span>
+<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_id&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_id&quot;}</span>
+<span class="x">      },</span>
+<span class="x">      {</span>
+<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_server&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;jira_server&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_server&quot;}</span>
+<span class="x">      },</span>
+<span class="x">      {</span>
+<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_project_key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;project&quot;</span><span class="o">][</span><span class="s2">&quot;key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_project_key&quot;}</span>
+<span class="x">      },</span>
+<span class="x">      {</span>
+<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_status&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;status&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_status&quot;}</span>
+<span class="x">      }</span>
+<span class="x">  ]</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_close_case_template.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
+<span class="x">  &quot;version&quot;: </span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;vers&quot;</span><span class="o">]</span> <span class="o">+</span> <span class="m">1</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;changes&quot;: [</span>
+<span class="x">    {</span>
+<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: null},</span>
+<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;Resolved&quot;},</span>
+<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;resolution_id&quot;}</span>
+<span class="x">    },</span>
+<span class="x">    {</span>
+<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: null},</span>
+<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;Closed by Jira&quot;},</span>
+<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;resolution_summary&quot;}</span>
+<span class="x">    },</span>
+<span class="x">    {</span>
+<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_status&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;status&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
+<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_status&quot;}</span>
+<span class="x">    },</span>
+<span class="x">    {</span>
+<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: &quot;A&quot;},</span>
+<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;C&quot;},</span>
+<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;plan_status&quot;}</span>
+<span class="x">    },</span>
+<span class="x">    </span><span class="c">{# The following is required for the automation playbook, Jira Close Issue, to not run when the poller closes a SOAR incident. #}</span>
+<span class="x">    {</span>
+<span class="x">      &quot;old_value&quot;: {&quot;boolean&quot;: </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_closed_on_jira&quot;</span><span class="o">]</span> <span class="k">is</span> <span class="nf">none</span> <span class="cp">%}</span><span class="x"> null </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_closed_on_jira&quot;</span><span class="o">]</span> <span class="k">is</span> <span class="nf">False</span> <span class="cp">%}</span><span class="x"> false </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> true </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">},</span>
+<span class="x">      &quot;new_value&quot;: {&quot;boolean&quot;: true},</span>
+<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_closed_on_jira&quot;}</span>
+<span class="x">    }</span>
+<span class="x">  ]</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+</section>
+</section>
+<section id="custom-layouts">
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Import the Data Tables and Custom Fields like the screenshot below:</p>
+<p><img alt="screenshot: custom_layouts" src="../_images/dt-jira-task-references.png" /></p>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-jira-create-comment">
+<h2>Function - Jira Create Comment<a class="headerlink" href="#function-jira-create-comment" title="Link to this heading">#</a></h2>
+<p>Create a Jira comment. To be used when a SOAR Note is created.
+See example workflow for configuration of function pre-processor and post-processor scripts</p>
+<p><img alt="screenshot: fn-jira-create-comment " src="../_images/fn-jira-create-comment.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jira_comment</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Updated</span> <span class="pre">in</span> <span class="pre">IBM</span> <span class="pre">SOAR&quot;</span></code></p></td>
+<td><p>The comment to add to the issue in Jira</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jira_issue_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">JRA-1000</span></code></p></td>
+<td><p>The ID of the issue in Jira. Also known as the issue key. E.g: “JRA-1330”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jira_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Enter the label of the server you wish to use</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;404 error is thrown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T09:52:58.464-0500&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10350&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_url&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">https://example.com/browse/JRA-45</span><span class="se">\&quot;\u003e</span><span class="s2">JRA-45</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jsdPublic&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10055/comment/10350&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updateAuthor&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T09:52:58.464-0500&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2230</span><span class="p">,</span>
+    <span class="s2">&quot;jira_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">404 error is thrown</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_label&quot;</span><span class="p">:</span> <span class="s2">&quot;my-server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">214</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">599</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-jira&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31 09:52:58&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;task&quot;</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># leave empty for tasks</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_id</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_server</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_comment</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-jira-open-issue">
+<h2>Function - Jira Open Issue<a class="headerlink" href="#function-jira-open-issue" title="Link to this heading">#</a></h2>
+<p>Create a jira issue. To be used when a SOAR Incident is created.
+See example workflow for configuration of function pre-processor and post-processor scripts</p>
+<p><img alt="screenshot: fn-jira-open-issue " src="../_images/fn-jira-open-issue.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jira_fields</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>A JSON String of the fields to set in Jira</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jira_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Enter the label of the server you wish to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>jira_fields example:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;ENG&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;issuetype&quot;</span><span class="p">:</span> <span class="s2">&quot;BUG&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">},</span>
+  <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR: Review artifact &#39;1.2.3.4&#39;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Created from IBM SOAR&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If using the Rule activity fields <code class="docutils literal notranslate"><span class="pre">jira_project_id</span></code> or <code class="docutils literal notranslate"><span class="pre">jira_issue_type</span></code>, modify the select list to represent your instance of Jira’s projects, and issue types, respectively.</p></li>
+</ul>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;expand&quot;</span><span class="p">:</span> <span class="s2">&quot;renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;aggregateprogress&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;aggregatetimeestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;aggregatetimeoriginalestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;aggregatetimespent&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;assignee&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;attachment&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;maxResults&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10058/comment&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;startAt&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;components&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T12:57:59.000-0500&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;customfield_10001&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10002&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10003&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10004&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10005&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10006&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10007&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10008&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10009&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10010&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10014&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10015&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10016&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10017&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10018&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;hasEpicLinkFieldDependency&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;nonEditableReason&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The Parent Link is only available to Jira Premium users.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;PLUGIN_LICENSE_ERROR&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;showField&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;customfield_10019&quot;</span><span class="p">:</span> <span class="s2">&quot;0|i0000v:&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10020&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10021&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10022&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10023&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10024&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10025&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10026&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10027&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10028&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10029&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10030&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10031&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;customfield_10035&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR Link: https://test.com:443/#incidents/2231</span><span class="se">\n\n</span><span class="s2">Created in IBM SOAR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;duedate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;fixVersions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;issuelinks&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;issuerestriction&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;issuerestrictions&quot;</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">&quot;shouldDisplay&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;issuetype&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;avatarId&quot;</span><span class="p">:</span> <span class="mi">10315</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Stories track functionality or features expressed as user goals.&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;entityId&quot;</span><span class="p">:</span> <span class="s2">&quot;28f65659-c37e-43ad-a17f-1d00d8d6d9ac&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;hierarchyLevel&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;iconUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10007&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Story&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issuetype/10007&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subtask&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;lastViewed&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;iconUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/images/icons/priorities/low.svg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/priority/4&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=xsmall&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=small&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10001&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Project&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;projectTypeKey&quot;</span><span class="p">:</span> <span class="s2">&quot;software&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/project/10001&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;simplified&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;reporter&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;resolutiondate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;security&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;iconUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10003&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;To Do&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/status/10003&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;statusCategory&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;colorName&quot;</span><span class="p">:</span> <span class="s2">&quot;blue-gray&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;new&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;To Do&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/statuscategory/2&quot;</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;statuscategorychangedate&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T12:57:59.508-0500&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subtasks&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR: h&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;timeestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;timeoriginalestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;timespent&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;timetracking&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T12:57:59.000-0500&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;votes&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;hasVoted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/JRA-47/votes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;votes&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;watches&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;isWatching&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/JRA-47/watchers&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;watchCount&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;worklog&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;maxResults&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+          <span class="s2">&quot;startAt&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;worklogs&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;workratio&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10058&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA-47&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10058&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;issue_key&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA-47&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;issue_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/browse/JRA-47&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;issue_url_internal&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10058&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_dt_name&quot;</span><span class="p">:</span> <span class="s2">&quot;jira_task_references&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2231</span><span class="p">,</span>
+    <span class="s2">&quot;jira_fields&quot;</span><span class="p">:</span> <span class="s2">&quot;{ </span><span class="se">\&quot;</span><span class="s2">summary</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">IBM SOAR: h</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">issuetype</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Story</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">project</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">JRA</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Created in IBM SOAR</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">priority</span><span class="se">\&quot;</span><span class="s2">:{ </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Low</span><span class="se">\&quot;</span><span class="s2"> } }&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_label&quot;</span><span class="p">:</span> <span class="s2">&quot;my-server&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1748</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-jira&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31 12:57:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Jira Open Issue [Incident] pre-processing script</span>
+<span class="k">def</span> <span class="nf">list_to_json_str</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Function that converts a list into a JSON string.</span>
+<span class="sd">  Supports types: basestring, unicode, bool, int, list and dicts.</span>
+<span class="sd">  If the value is None, it sets it to False.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">list_as_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">,&#39;</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;,&#39;</span>
+
+  <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+      <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">list_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+      <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">)</span>
+      <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+      <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+      <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;list_to_json_str does not support this type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+  <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="n">list_as_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="sa">u</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Function that converts a dictionary into a JSON string.</span>
+<span class="sd">  Supports types: basestring, unicode, bool, int, list and nested dicts.</span>
+<span class="sd">  If the value is None, it sets it to False.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:</span><span class="si">{1}</span><span class="s1">&#39;</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+  <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">entry</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span> 
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">list_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">)</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;dict_to_json_str does not support this type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+  <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="sa">u</span><span class="s1">&#39;}&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_label</span>
+
+<span class="c1"># ID of this incident</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># A map for JIRA priorities</span>
+<span class="n">priority_map</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;Lowest&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Lowest&quot;</span><span class="p">},</span> <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">},</span> <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">},</span> <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">},</span> <span class="s2">&quot;Highest&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Highest&quot;</span><span class="p">}</span> <span class="p">}</span>
+<span class="n">jira_priority</span> <span class="o">=</span> <span class="n">priority_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">})</span>
+
+<span class="c1"># Define JIRA fields here</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_fields</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">({</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_project_id</span><span class="p">,</span>
+  <span class="s2">&quot;issuetype&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_type</span><span class="p">,</span>
+  <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">jira_priority</span><span class="p">,</span>
+  <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="sa">u</span><span class="s2">&quot;IBM SOAR: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Created in IBM SOAR&quot;</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">create_result</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_result</span>
+<span class="k">if</span> <span class="n">create_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">results_content</span> <span class="o">=</span> <span class="n">create_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">issue_key</span> <span class="o">=</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_key&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_url</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;</span><span class="si">{}</span><span class="s2">&#39; target=&#39;blank&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_url&quot;</span><span class="p">),</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_key&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_internal_url</span> <span class="o">=</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_url_internal&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="n">issue_key</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_server</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_project_key</span> <span class="o">=</span> <span class="n">issue_key</span><span class="p">[:</span><span class="n">issue_key</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)]</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_status</span> <span class="o">=</span> <span class="s2">&quot;To Do&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-jira-transition-issue">
+<h2>Function - Jira Transition Issue<a class="headerlink" href="#function-jira-transition-issue" title="Link to this heading">#</a></h2>
+<p>Transition a Jira issue. This can be used when a SOAR Incident is closed or to change the Jira Issue’s workflow state.
+See example workflow for configuration of function pre-processor and post-processor scripts</p>
+<p><img alt="screenshot: fn-jira-transition-issue " src="../_images/fn-jira-transition-issue.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jira_comment</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Updated</span> <span class="pre">in</span> <span class="pre">IBM</span> <span class="pre">SOAR&quot;</span></code></p></td>
+<td><p>The comment to add to the issue in Jira</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jira_fields</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>A JSON String of the fields to set in Jira</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jira_issue_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">JRA-1000</span></code></p></td>
+<td><p>The ID of the issue in Jira. Also known as the issue key. E.g: “JRA-1330”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jira_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Enter the label of the server you wish to use</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jira_transition_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">11</span></code></p></td>
+<td><p>The ID to transition the Jira issue to. More information can be found in the Jira Documentation on transition_id</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;jira_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA-239&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_transition_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_fields&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">customfield_10041</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Resolved</span><span class="se">\&quot;</span><span class="s2">}}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_label&quot;</span><span class="p">:</span> <span class="s2">&quot;my-server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jira_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed in IBM SOAR</span><span class="se">\n\n</span><span class="s2">Resolution: Done</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-jira&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2387</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-25 15:31:42&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Jira Transition Issue pre-processing script</span>
+<span class="k">def</span> <span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that converts a dictionary into a JSON string.</span>
+<span class="sd">     Supports types: str, bool, int and nested dicts.</span>
+<span class="sd">     Does not support lists.</span>
+<span class="sd">     If the value is None, it sets it to False.&quot;&quot;&quot;</span>
+
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:</span><span class="si">{1}</span><span class="s1">&#39;</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+  <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">entry</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;dict_to_json_str does not support Python Lists&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;dict_to_json_str does not support this type: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+  <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="s2">&quot;}&quot;</span><span class="p">)</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_server</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_transition_id</span> <span class="o">=</span> <span class="s2">&quot;Done&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_comment</span> <span class="o">=</span> <span class="s2">&quot;Closed in IBM SOAR</span><span class="se">\n\n</span><span class="s2">Resolution: </span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">resolution_id</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c1"># Define JIRA fields here</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_fields</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">({})</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_status</span> <span class="o">=</span> <span class="s2">&quot;Done&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="data-table-jira-task-references">
+<h2>Data Table - Jira Task References<a class="headerlink" href="#data-table-jira-task-references" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-jira-task-references" src="../_images/dt-jira-task-references.png" /></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p>jira_task_references</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Action Date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jira Issue ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_issue_id_col</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Jira Link</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_link</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Last Updated</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">last_updated</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>Time the task was last updated</p></td>
+</tr>
+<tr class="row-even"><td><p>Server</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">server</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Label of the server being used</p></td>
+</tr>
+<tr class="row-odd"><td><p>Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">task</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Task Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+<th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Jira Internal URL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_internal_url</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The REST API URL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jira Issue ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_issue_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>JRA-1000</p></td>
+<td><p>The ID of the issue in Jira. E.g. JRA-1000</p></td>
+</tr>
+<tr class="row-even"><td><p>Jira Project Key</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_project_key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The key for the Jira project the issue is in</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jira Server</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_server</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Label of the server you wish to use</p></td>
+</tr>
+<tr class="row-even"><td><p>Jira Ticket URL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_url</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Contains URL back to the Jira issue created via the UI</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jira Issue Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_issue_status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The status of the linked Jira issue</p></td>
+</tr>
+<tr class="row-even"><td><p>Jira Issue Closed on Jira</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jira_issue_closed_on_jira</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>If the linked Jira issue is closed on Jira. This is used by Jira close Issue playbook to have it not run if the poller closes the SOAR incident.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Example: Jira Close Issue</p></td>
+<td><p>Close Jira issue when linked SOAR case is closed.</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: Jira Close Issue (Task)</p></td>
+<td><p>Close the SOAR task</p></td>
+<td><p>jira_task_references</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: Jira Create Comment</p></td>
+<td><p>When a note is added to the SOAR incident this playbook will automatically create a comment on the linked Jira issue.</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: Create Jira Issue</p></td>
+<td><p>Create a Jira issue from the SOAR incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: Create Jira Issue (Task)</p></td>
+<td><p>Create a Jira issue from a SOAR task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="how-to-configure-to-use-a-single-jira-server">
+<h2>How to configure to use a single Jira Server<a class="headerlink" href="#how-to-configure-to-use-a-single-jira-server" title="Link to this heading">#</a></h2>
+<p>To use only a single server there are two ways this can be configured</p>
+<ol class="arabic simple">
+<li><p>Use the configuration used in Jira Integration versions prior to V2.2.0</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_jira</span><span class="p">]</span>
+<span class="c1"># Url to Jira server</span>
+<span class="n">url</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">jira</span> <span class="n">url</span><span class="o">&gt;</span>
+<span class="c1"># Authentication method (AUTH, BASIC, TOKEN, OAUTH)</span>
+<span class="n">auth_method</span><span class="o">=</span><span class="n">BASIC</span>
+<span class="n">user</span><span class="o">=&lt;</span><span class="n">jira</span> <span class="n">username</span> <span class="ow">or</span> <span class="n">email</span><span class="o">&gt;</span>
+<span class="n">password</span><span class="o">=&lt;</span><span class="n">jira</span> <span class="n">user</span> <span class="n">password</span> <span class="ow">or</span> <span class="n">API</span> <span class="n">Key</span><span class="o">&gt;</span>
+<span class="c1"># For TOKEN authentication</span>
+<span class="c1">#auth_token=</span>
+<span class="c1"># For OAUTH connections, the four parameters below are required and user/password are ignored</span>
+<span class="c1">#access_token = &lt;oauth access token&gt;</span>
+<span class="c1">#access_token_secret = &lt;oauth access token secret&gt;</span>
+<span class="c1">#consumer_key_name = &lt;oauth consumer key - from Jira incoming link settings&gt;</span>
+<span class="c1">#private_rsa_key_file_path = &lt;private RSA key matched with public key on Jira&gt;</span>
+<span class="c1"># Maximum time in seconds to wait before timeout</span>
+<span class="n">timeout</span><span class="o">=</span><span class="mi">30</span>
+<span class="c1"># Data table name to hold data for tasks synced to Jira</span>
+<span class="n">jira_dt_name</span><span class="o">=</span><span class="n">jira_task_references</span>
+<span class="c1"># Path to certificate. False to disable certificate verification.</span>
+<span class="n">verify_cert</span><span class="o">=</span><span class="kc">True</span>
+<span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
+<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;to do&#39;</span><span class="p">,</span> <span class="s1">&#39;in progress&#39;</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
+<span class="c1"># Max number of issues that can be returned from Jira issue search</span>
+<span class="n">max_issues_returned</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># Proxies to use</span>
+<span class="c1">#https_proxy=</span>
+<span class="c1"># OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.</span>
+<span class="c1"># If templates under [fn_jira:global_settings] are configured, then templates</span>
+<span class="c1">#  that are configured under the individual Jira servers will be ignored.</span>
+<span class="c1"># See documentation section &quot;Templates for SOAR Cases&quot; for more details</span>
+<span class="c1">#soar_create_case_template=</span>
+<span class="c1">#soar_update_case_template=</span>
+<span class="c1">#soar_update_task_template=</span>
+<span class="c1">#soar_close_case_template=</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Either keep the label, jira_label1, or change it</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_jira</span><span class="p">:</span><span class="n">jira_label1</span><span class="p">]</span>
+<span class="c1"># Url to Jira server</span>
+<span class="n">url</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">jira</span> <span class="n">url</span><span class="o">&gt;</span>
+<span class="c1"># Authentication method (AUTH, BASIC, TOKEN, OAUTH)</span>
+<span class="n">auth_method</span><span class="o">=</span><span class="n">BASIC</span>
+<span class="n">user</span><span class="o">=&lt;</span><span class="n">jira</span> <span class="n">username</span> <span class="ow">or</span> <span class="n">email</span><span class="o">&gt;</span>
+<span class="n">password</span><span class="o">=&lt;</span><span class="n">jira</span> <span class="n">user</span> <span class="n">password</span> <span class="ow">or</span> <span class="n">API</span> <span class="n">Key</span><span class="o">&gt;</span>
+<span class="c1"># For TOKEN authentication</span>
+<span class="c1">#auth_token=</span>
+<span class="c1"># For OAUTH connections, the four parameters below are required and user/password are ignored</span>
+<span class="c1">#access_token = &lt;oauth access token&gt;</span>
+<span class="c1">#access_token_secret = &lt;oauth access token secret&gt;</span>
+<span class="c1">#consumer_key_name = &lt;oauth consumer key - from Jira incoming link settings&gt;</span>
+<span class="c1">#private_rsa_key_file_path = &lt;private RSA key matched with public key on Jira&gt;</span>
+<span class="c1"># Maximum time in seconds to wait before timeout</span>
+<span class="n">timeout</span><span class="o">=</span><span class="mi">30</span>
+<span class="c1"># Data table name to hold data for tasks synced to Jira</span>
+<span class="n">jira_dt_name</span><span class="o">=</span><span class="n">jira_task_references</span>
+<span class="c1"># Path to certificate. False to disable certificate verification.</span>
+<span class="n">verify_cert</span><span class="o">=</span><span class="kc">False</span>
+<span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
+<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;to do&#39;</span><span class="p">,</span> <span class="s1">&#39;in progress&#39;</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
+<span class="c1"># Max number of issues that can be returned from Jira issue search</span>
+<span class="n">max_issues_returned</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># Proxies to use</span>
+<span class="c1">#https_proxy=</span>
+<span class="c1"># OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.</span>
+<span class="c1"># If templates under [fn_jira:global_settings] are configured, then templates</span>
+<span class="c1">#  that are configured under the individual Jira servers will be ignored.</span>
+<span class="c1"># See documentation section &quot;Templates for SOAR Cases&quot; for more details</span>
+<span class="c1">#soar_create_case_template=</span>
+<span class="c1">#soar_update_case_template=</span>
+<span class="c1">#soar_update_task_template=</span>
+<span class="c1">#soar_close_case_template=</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-workflows-when-server-servers-in-app-config-are-labeled">
+<h2>Creating workflows when server/servers in app.config are labeled<a class="headerlink" href="#creating-workflows-when-server-servers-in-app-config-are-labeled" title="Link to this heading">#</a></h2>
+<p>The function input field <code class="docutils literal notranslate"><span class="pre">jira_label</span></code> is required when Jira server/servers in the app.config are labeled. In the example workflows pre-process scripts the input field <code class="docutils literal notranslate"><span class="pre">jira_label</span></code> is defined the following way,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_label</span>
+</pre></div>
+</div>
+<p>Example app.config server label: [fn_jira:jira_label1]
+<code class="docutils literal notranslate"><span class="pre">jira_label1</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">inputs.jira_label</span></code> in the above example.</p>
+</section>
+<section id="configuring-bidirectional-sync">
+<h2>Configuring bidirectional sync<a class="headerlink" href="#configuring-bidirectional-sync" title="Link to this heading">#</a></h2>
+<p>In version 3.0.0 bidirectional sync between SOAR and Jira was introduced. When updating from a previous version to 3.0.0 the app.config must be manually edited to add the new settings that allow the poller to sync SOAR and Jira tickets.
+The following must be added to the app.config for the poller to run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_jira</span><span class="p">:</span><span class="n">global_settings</span><span class="p">]</span>
+<span class="c1"># Maximum time in seconds to wait before timeout.</span>
+<span class="n">timeout</span><span class="o">=</span><span class="mi">30</span>
+<span class="c1"># Interval to poll Jira for changes (in seconds)</span>
+<span class="c1"># When polling_interval equals 0 the poller is off</span>
+<span class="n">polling_interval</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">polling_lookback</span><span class="o">=</span><span class="mi">60</span>
+<span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
+<span class="c1"># If poller_filters under [fn_jira:global_settings] is configured, then poller_filters</span>
+<span class="c1">#  that are configured under the individual Jira servers will be ignored</span>
+<span class="c1">#poller_filters= priority in (high, medium, low) and status in (&#39;to do&#39;, &#39;in progress&#39;, done) and project in (project_name1, project_name2)</span>
+<span class="c1"># Max number of issues that can be returned from Jira issue search.</span>
+<span class="c1"># If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned</span>
+<span class="c1">#  that are configured under the individual Jira servers will be ignored.</span>
+<span class="n">max_issues_returned</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># Proxies to use</span>
+<span class="c1"># If proxies are defined under [fn_jira:global_settings], then proxies defined</span>
+<span class="c1">#  under the individual Jira servers will be ignored</span>
+<span class="c1">#https_proxy=</span>
+<span class="c1"># OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.</span>
+<span class="c1"># If templates under [fn_jira:global_settings] are configured, then templates</span>
+<span class="c1">#  that are configured under the individual Jira servers will be ignored.</span>
+<span class="c1"># See documentation section &quot;Templates for SOAR Cases&quot; for more details</span>
+<span class="c1">#soar_create_case_template=</span>
+<span class="c1">#soar_update_case_template=</span>
+<span class="c1">#soar_update_task_template=</span>
+<span class="c1">#soar_close_case_template=</span>
+</pre></div>
+</div>
+<p>The following settings can be either configure under <code class="docutils literal notranslate"><span class="pre">[fn_jira:global_settings]</span></code> or under each individual Jira server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
+<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;to do&#39;</span><span class="p">,</span> <span class="s1">&#39;in progress&#39;</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
+<span class="c1"># Max number of issues that can be returned from Jira issue search</span>
+<span class="n">max_issues_returned</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_joe_sandbox_analysis/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Joe Sandbox Analysis Function for IBM SOAR</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_isitphishing/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">fn-isitphishing Functions for IBM Resilient</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Jira App for IBM SOAR</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a><ul>
+<li><a class="reference internal" href="#multi-tenancy">Multi-tenancy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuring-oauth">Configuring OAuth</a></li>
+<li><a class="reference internal" href="#poller-considerations">Poller Considerations</a><ul>
+<li><a class="reference internal" href="#poller-templates-for-soar-cases">Poller Templates for SOAR Cases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-jira-create-comment">Function - Jira Create Comment</a></li>
+<li><a class="reference internal" href="#function-jira-open-issue">Function - Jira Open Issue</a><ul>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-jira-transition-issue">Function - Jira Transition Issue</a></li>
+<li><a class="reference internal" href="#data-table-jira-task-references">Data Table - Jira Task References</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#how-to-configure-to-use-a-single-jira-server">How to configure to use a single Jira Server</a></li>
+<li><a class="reference internal" href="#creating-workflows-when-server-servers-in-app-config-are-labeled">Creating workflows when server/servers in app.config are labeled</a></li>
+<li><a class="reference internal" href="#configuring-bidirectional-sync">Configuring bidirectional sync</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

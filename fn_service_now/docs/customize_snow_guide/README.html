@@ -1,0 +1,1122 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../../../search.html" />
+
+    <link rel="shortcut icon" href="../../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>IBM Security QRadar SOAR Platform App for ServiceNow - Customization Guide - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="ibm-security-qradar-soar-platform-app-for-servicenow-customization-guide">
+<h1>IBM Security QRadar SOAR Platform App for ServiceNow - Customization Guide<a class="headerlink" href="#ibm-security-qradar-soar-platform-app-for-servicenow-customization-guide" title="Link to this heading">#</a></h1>
+<p><em>This guide shows how to adapt the App installed on your ServiceNow instance to suit your Incident Response Workflow</em></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#architectural-diagram"><span class="xref myst">Architectural Diagram</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#pre-defined-servicenow-workflows"><span class="xref myst">Pre-Defined ServiceNow Workflows</span></a></p></li>
+<li><p><a class="reference internal" href="#resilienthelper-api"><span class="xref myst">ResilientHelper API</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#creategliderecord-record-string-snrecordid-string-casename-object-options"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">create()</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#addnotestring-res_reference_id-string-notetext-string-noteformat"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">addNote()</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#updatestateinresilientstring-res_reference_id-string-snticketstate-string-snticketstatecolor"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">updateStateInResilient()</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#getresilientreferenceidgliderecord-record"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">getResilientReferenceId()</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#getresilientreferencelinkgliderecord-record"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">getResilientReferenceLink()</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#getresilienttypegliderecord-record"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">getResilientType()</span></code></span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#create-own-custom-servicenow-workflow"><span class="xref myst">Create Own Custom ServiceNow Workflow</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#step-1-use-correct-application-scope"><span class="xref myst">Step 1: <em>Use Correct Application Scope</em></span></a></p></li>
+<li><p><a class="reference internal" href="#step-2-create-a-copy-of-existing-res-workflow"><span class="xref myst">Step 2: <em>Create a Copy of Existing RES Workflow</em></span></a></p></li>
+<li><p><a class="reference internal" href="#step-3-modify-the-run-script"><span class="xref myst">Step 3: <em>Modify the Run Script</em></span></a></p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>SOAR Platform updated to at least <code class="docutils literal notranslate"><span class="pre">v31.0.0</span></code> or Cloud Pak for Security running at least <code class="docutils literal notranslate"><span class="pre">v1.9.0</span></code>.</p></li>
+<li><p>App Host <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.6.0</span></code> or an Integration Server setup with <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">31.0.0</span></code> installed.</p></li>
+<li><p>All steps in the <strong><a class="reference internal" href="#../install_guide"><span class="xref myst">Installation Guide</span></a></strong> complete.</p></li>
+<li><p>ServiceNow Instance with ITSM enabled and running a <code class="docutils literal notranslate"><span class="pre">Kingston</span></code> or later release.</p></li>
+<li><p>ServiceNow user with an <code class="docutils literal notranslate"><span class="pre">admin</span></code> role.</p></li>
+<li><p>A basic understanding of <strong>IBM SOAR Workflows</strong>.</p></li>
+<li><p>A basic understanding of <strong>ServiceNow Workflows</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="architectural-diagram">
+<h2>Architectural Diagram<a class="headerlink" href="#architectural-diagram" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot" src="../../../_images/01.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>When this App is installed, on your ServiceNow instance, you have access to the <strong>ResilientHelper</strong> class in any ServiceNow <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>, <code class="docutils literal notranslate"><span class="pre">UI</span> <span class="pre">Action</span></code> or <code class="docutils literal notranslate"><span class="pre">Script</span> <span class="pre">Include</span></code>.</p>
+<p>From the architectural diagram above, within ServiceNow, any SOAR action must start with a ServiceNow <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>. ServiceNow <code class="docutils literal notranslate"><span class="pre">Workflows</span></code> are invoked from <code class="docutils literal notranslate"><span class="pre">UI</span> <span class="pre">Actions</span></code> or <code class="docutils literal notranslate"><span class="pre">Business</span> <span class="pre">Rules</span></code>.</p>
+<p>This app comes with <strong>4 pre-defined ServiceNow Workflows:</strong></p>
+<ol class="arabic simple">
+<li><p>RES_WF_CreateIncident</p></li>
+<li><p>RES_WF_CreateTask</p></li>
+<li><p>RES_WF_AddComment</p></li>
+<li><p>RES_WF_AddWorkNote</p></li>
+<li><p>RES_WF_UpdateState</p></li>
+</ol>
+<p>The <strong>ResilientHelper API</strong> helps create your own ServiceNow <code class="docutils literal notranslate"><span class="pre">Workflows</span></code> that use the <strong>ResilientHelper</strong> class to call SOAR Actions.</p>
+</section>
+<hr class="docutils" />
+<section id="pre-defined-servicenow-workflows">
+<h2>Pre-Defined ServiceNow Workflows<a class="headerlink" href="#pre-defined-servicenow-workflows" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Each of the installed ‘out-of-the-box’ <code class="docutils literal notranslate"><span class="pre">Workflows</span></code> contain a <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Script</span></code></p></li>
+<li><p>It is in that <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Script</span></code> where we use the <strong>ResilientHelper</strong> class to invoke SOAR Actions</p></li>
+<li><p>Following this is the code for each <strong>Run Script</strong> of the pre-defined workflows</p></li>
+<li><p>Use this code for guidance along with the <strong><a class="reference internal" href="#resilienthelper-api"><span class="xref myst">ResilientHelper API</span></a></strong> (below) when creating your own Custom Workflows</p></li>
+</ul>
+<details><summary>RES_WF_CreateIncident</summary>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">RES_WF_CreateIncident</span><span class="p">(){</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">,</span><span class="w"> </span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">,</span><span class="w"> </span><span class="nx">caseName</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">,</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">,</span><span class="w"> </span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="c1">//Instantiate new ResilientHelper</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ResilientHelper</span><span class="p">();</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Get the required parameters to create an Incident</span>
+<span class="w">		</span><span class="nx">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;short_description&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
+
+<span class="w">		</span><span class="c1">//Map ServiceNow severity in digits to Resilient strings</span>
+<span class="w">		</span><span class="c1">//TIP: use the &#39;finfo&#39; command on Resilient Integrations Server</span>
+<span class="w">		</span><span class="c1">//to get Resilient field information</span>
+<span class="w">		</span><span class="nx">resSeverityMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="s2">&quot;1&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;2&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;3&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Low&quot;</span>
+<span class="w">		</span><span class="p">};</span>
+
+<span class="w">		</span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">[</span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;severity&quot;</span><span class="p">).</span><span class="nx">toString</span><span class="p">()];</span>
+
+<span class="w">		</span><span class="c1">//Initialize options</span>
+<span class="w">		</span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Incident created in IBM SOAR&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="nx">optionalFields</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
+<span class="w">				</span><span class="s2">&quot;severity_code&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">severityMapped</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">		</span><span class="p">};</span>
+
+<span class="w">		</span><span class="c1">// Call helper to create the Incident in Resilient</span>
+<span class="w">		</span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">,</span><span class="w"> </span><span class="nx">caseName</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">);</span>
+
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="c1">// Create the initial RES Note</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;This &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;&quot;</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&quot;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;html&quot;</span><span class="p">);</span>
+<span class="w">			</span>
+<span class="w">			</span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by &#39;\n\n&#39;</span>
+<span class="w">			</span><span class="nx">workNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+
+<span class="w">			</span><span class="c1">//Split the Work Notes on &#39;\n\n&#39;</span>
+<span class="w">			</span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">);</span>
+
+<span class="w">			</span><span class="c1">//Loop each Work Note and add a Resilient Note</span>
+<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">				</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="w">				</span><span class="k">if</span><span class="p">(</span><span class="nx">noteText</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">noteText</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">){</span>
+<span class="w">					</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">				</span><span class="p">}</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to create an Incident in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</details>
+<details><summary>RES_WF_CreateTask</summary>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">RES_WF_CreateTask</span><span class="p">(){</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">,</span><span class="w"> </span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">,</span><span class="w"> </span><span class="nx">caseName</span><span class="p">,</span><span class="w"> </span><span class="nx">incidentId</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">try</span><span class="p">{</span>
+<span class="w">		</span><span class="c1">//Instantiate new ResilientHelper</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ResilientHelper</span><span class="p">();</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Get the required parameters to create a Task</span>
+<span class="w">		</span><span class="nx">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;short_description&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">incidentId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workflow</span><span class="p">.</span><span class="nx">variables</span><span class="p">.</span><span class="nx">u_ibm_resilient_incident_id</span><span class="p">;</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Initialize options</span>
+<span class="w">		</span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Task created in IBM SOAR&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="nx">incidentId</span><span class="o">:</span><span class="w"> </span><span class="nx">incidentId</span><span class="p">,</span>
+<span class="w">			</span><span class="nx">optionalFields</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="s2">&quot;instr_text&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">		</span><span class="p">};</span>
+<span class="w">			</span>
+<span class="w">		</span><span class="c1">// Call helper to create the Incident in Resilient</span>
+<span class="w">		</span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">,</span><span class="w"> </span><span class="nx">caseName</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
+<span class="w">			</span><span class="c1">// Create the initial RES Note</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;This &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;&quot;</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&quot;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;html&quot;</span><span class="p">);</span>
+<span class="w">			</span>
+<span class="w">			</span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by &#39;\n\n&#39;</span>
+<span class="w">			</span><span class="nx">workNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+
+<span class="w">			</span><span class="c1">//Split the Work Notes on &#39;\n\n&#39;</span>
+<span class="w">			</span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">);</span>
+
+<span class="w">			</span><span class="c1">//Loop each Work Note and add a Resilient Note</span>
+<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">				</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="w">				</span><span class="k">if</span><span class="p">(</span><span class="nx">noteText</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">noteText</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">){</span>
+<span class="w">					</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">				</span><span class="p">}</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to create a Task in IBM SOAR for Incident &quot;</span><span class="o">+</span><span class="nx">incidentId</span><span class="o">+</span><span class="s2">&quot;.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</details>
+<details><summary>RES_WF_AddComment</summary>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">RES_WF_AddComment</span><span class="p">(){</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">,</span><span class="w"> </span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="k">try</span><span class="p">{</span>
+<span class="w">		</span><span class="c1">//Instantiate new ResilientHelper</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ResilientHelper</span><span class="p">();</span>
+<span class="w">	</span>
+<span class="w">		</span><span class="c1">//Get resilient_reference_id depending on what Table the record is in</span>
+<span class="w">		</span><span class="nx">res_reference_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">getResilientReferenceId</span><span class="p">(</span><span class="nx">current</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Set noteText to last additional comment added</span>
+<span class="w">		</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">comments</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Add a note in Resilient</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to add a note in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</details>
+<details><summary>RES_WF_AddWorkNote</summary>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">RES_WF_AddWorkNote</span><span class="p">(){</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">,</span><span class="w"> </span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="k">try</span><span class="p">{</span>
+<span class="w">		</span><span class="c1">//Instantiate new ResilientHelper</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ResilientHelper</span><span class="p">();</span>
+<span class="w">	</span>
+<span class="w">		</span><span class="c1">//Get resilient_reference_id depending on what Table the record is in</span>
+<span class="w">		</span><span class="nx">res_reference_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">getResilientReferenceId</span><span class="p">(</span><span class="nx">current</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Set noteText to last additional comment added</span>
+<span class="w">		</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Add a note in Resilient</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to add a note in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</details>
+<details><summary>RES_WF_UpdateState</summary>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">RES_WF_UpdateState</span><span class="p">(){</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">,</span><span class="w"> </span><span class="nx">stateToColorMap</span><span class="p">,</span><span class="w"> </span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">snTicketState</span><span class="p">,</span><span class="w"> </span><span class="nx">snTicketStateColor</span><span class="p">,</span><span class="w"> </span><span class="nx">resolutionNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">try</span><span class="p">{</span>
+<span class="w">		</span><span class="c1">//Instantiate new resHelper</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ResilientHelper</span><span class="p">();</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Map ServiceNow state to a color</span>
+<span class="w">		</span><span class="c1">//Colors accepted by resHelper.updateStateInResilient() = green/orange/yellow/red</span>
+<span class="w">		</span><span class="nx">stateToColorMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="s2">&quot;New&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;In Progress&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;On Hold&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Resolved&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Closed&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Canceled&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+
+<span class="w">			</span><span class="c1">// colors for security incidents states</span>
+<span class="w">			</span><span class="s2">&quot;Draft&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Analysis&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Contain&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Eradicate&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Recover&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Review&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span>
+<span class="w">		</span><span class="p">};</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Get resilient_reference_id depending on what Table the record is in</span>
+<span class="w">		</span><span class="nx">res_reference_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">getResilientReferenceId</span><span class="p">(</span><span class="nx">current</span><span class="p">);</span>
+<span class="w">		</span><span class="nx">snTicketState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getChoiceValue</span><span class="p">();</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">// Try get the snTicketStateColor that matches the snTicketState</span>
+<span class="w">		</span><span class="k">try</span><span class="p">{</span>
+<span class="w">			</span><span class="nx">snTicketStateColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">stateToColorMap</span><span class="p">[</span><span class="nx">snTicketState</span><span class="p">];</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="c1">// If it does not exist, default to green</span>
+<span class="w">		</span><span class="k">catch</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
+<span class="w">			</span><span class="nx">snTicketStateColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Update that status in the res datatable</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">updateStateInResilient</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">snTicketState</span><span class="p">,</span><span class="w"> </span><span class="nx">snTicketStateColor</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Add a note to the resilient incident/task stating the change</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ServiceNow Record state changed to: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snTicketState</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Get resolution notes if there are any</span>
+<span class="w">		</span><span class="nx">resolutionNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;close_notes&quot;</span><span class="p">);</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1">//Add a note to the resilient incident/task if there are resolution notes</span>
+<span class="w">		</span><span class="k">if</span><span class="p">(</span><span class="nx">resolutionNotes</span><span class="p">){</span>
+<span class="w">			</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">resolutionNotes</span><span class="p">);</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="k">catch</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to update state in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</details>
+</section>
+<hr class="docutils" />
+<section id="resilienthelper-api">
+<h2>ResilientHelper API<a class="headerlink" href="#resilienthelper-api" title="Link to this heading">#</a></h2>
+<section id="create-gliderecord-record-string-snrecordid-string-casename-object-options">
+<h3><code class="docutils literal notranslate"><span class="pre">create(GlideRecord</span> <span class="pre">record,</span> <span class="pre">String</span> <span class="pre">snRecordId,</span> <span class="pre">String</span> <span class="pre">caseName,</span> <span class="pre">Object</span> <span class="pre">options)</span></code><a class="headerlink" href="#create-gliderecord-record-string-snrecordid-string-casename-object-options" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Creates an Incident/Task in SOAR.</p></li>
+<li><p>Sets the the following Columns in ServiceNow:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">x_ibmrt_resilient_ibm_resilient_reference_id</span></code> (INC) OR <code class="docutils literal notranslate"><span class="pre">x_ibmrt_resilient_ibm_soar_reference_id</span></code> (SIR).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x_ibmrt_resilient_ibm_resilient_type</span></code> (INC) OR <code class="docutils literal notranslate"><span class="pre">x_ibmrt_resilient_ibm_soar_type</span></code> (SIR).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x_ibmrt_resilient_ibm_resilient_reference_link</span></code> (INC) OR <code class="docutils literal notranslate"><span class="pre">x_ibmrt_resilient_ibm_soar_reference_link</span></code> (SIR).</p></li>
+</ul>
+</li>
+<li><p>Adds a new row to the Data Table in SOAR.</p></li>
+</ul>
+<section id="parameters">
+<h4>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>record</p></td>
+<td><p>GlideRecord</p></td>
+<td><p>The current ServiceNow record</p></td>
+</tr>
+<tr class="row-odd"><td><p>snRecordId</p></td>
+<td><p>String</p></td>
+<td><p>Is the ID of the record, unique to its table. E.g. ‘INC123456’</p></td>
+</tr>
+<tr class="row-even"><td><p>caseName</p></td>
+<td><p>String</p></td>
+<td><p>The name of the Incident/Task to create in SOAR</p></td>
+</tr>
+<tr class="row-odd"><td><p>options</p></td>
+<td><p>Object</p></td>
+<td><p>There are 3 valid options that are all optional: <code class="docutils literal notranslate"><span class="pre">incidentId</span></code>: a String, if defined creates a Task in SOAR. <code class="docutils literal notranslate"><span class="pre">initSnNote</span></code>: a String, if defined adds it as a Work Note to the ServiceNow record. <code class="docutils literal notranslate"><span class="pre">optionalFields</span></code>: an Object, if defined takes each key/value pair and sets those fields in SOAR when creating the Incident/Task</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="return">
+<h4>Return:<a class="headerlink" href="#return" title="Link to this heading">#</a></h4>
+<p>Returns an object with the following keys:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>res_reference_id</p></td>
+<td><p>String</p></td>
+<td><p>Unique ID relative to the Incident/Task created in SOAR. E.g: RES-1234-100001</p></td>
+</tr>
+<tr class="row-odd"><td><p>res_reference_link</p></td>
+<td><p>String</p></td>
+<td><p>A link to the Incident/Task in SOAR</p></td>
+</tr>
+<tr class="row-even"><td><p>res_reference_type</p></td>
+<td><p>String</p></td>
+<td><p>The type of case created in SOAR. Incident/Task</p></td>
+</tr>
+<tr class="row-odd"><td><p>snLink</p></td>
+<td><p>String</p></td>
+<td><p>A link to the ServiceNow Record</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="addnote-string-res-reference-id-string-notetext-string-noteformat">
+<h3><code class="docutils literal notranslate"><span class="pre">addNote(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">noteText,</span> <span class="pre">String</span> <span class="pre">noteFormat)</span></code><a class="headerlink" href="#addnote-string-res-reference-id-string-notetext-string-noteformat" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Creates a note in SOAR.</p></li>
+</ul>
+<section id="id1">
+<h4>Parameters:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>res_reference_id</p></td>
+<td><p>String</p></td>
+<td><p>Unique ID relative to the Incident/Task created in IBM SOAR. E.g: RES-1234-100001</p></td>
+</tr>
+<tr class="row-odd"><td><p>noteText</p></td>
+<td><p>String</p></td>
+<td><p>The text of the note</p></td>
+</tr>
+<tr class="row-even"><td><p>noteFormat</p></td>
+<td><p>String</p></td>
+<td><p>Format of the note to create. Can be <code class="docutils literal notranslate"><span class="pre">text</span></code>/<code class="docutils literal notranslate"><span class="pre">html</span></code>. Use <code class="docutils literal notranslate"><span class="pre">html</span></code> if you want to create a RichText note in IBM SOAR</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id2">
+<h4>Return:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p><em>Does not return anything</em>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="updatestateinresilient-string-res-reference-id-string-snticketstate-string-snticketstatecolor">
+<h3><code class="docutils literal notranslate"><span class="pre">updateStateInResilient(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">snTicketState,</span> <span class="pre">String</span> <span class="pre">snTicketStateColor)</span></code><a class="headerlink" href="#updatestateinresilient-string-res-reference-id-string-snticketstate-string-snticketstatecolor" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Updates the <code class="docutils literal notranslate"><span class="pre">servicenow_status</span></code> column in the Data Table in IBM SOAR with the <code class="docutils literal notranslate"><span class="pre">snTicketState</span></code>.</p></li>
+</ul>
+<section id="id3">
+<h4>Parameters:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>res_reference_id</p></td>
+<td><p>String</p></td>
+<td><p>Unique ID relative to the Incident/Task created in IBM SOAR. E.g: RES-1234-100001</p></td>
+</tr>
+<tr class="row-odd"><td><p>snTicketState</p></td>
+<td><p>String</p></td>
+<td><p>The current state of the record. E.g.: ‘In Progress’</p></td>
+</tr>
+<tr class="row-even"><td><p>snTicketStateColor</p></td>
+<td><p>String</p></td>
+<td><p>Accepted values: <code class="docutils literal notranslate"><span class="pre">&quot;green&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;orange&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;yellow&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;red&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id4">
+<h4>Return:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<p><em>Does not return anything</em>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="getresilientreferenceid-gliderecord-record">
+<h3><code class="docutils literal notranslate"><span class="pre">getResilientReferenceId(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilientreferenceid-gliderecord-record" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Gets the IBM SOAR Reference ID for a linked record.</p></li>
+</ul>
+<section id="id5">
+<h4>Parameters:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>record</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GlideRecord</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GlideRecord</span></code> object of the current table record (usually this is <code class="docutils literal notranslate"><span class="pre">current</span></code> in Workflows)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="returns">
+<h4>Returns:<a class="headerlink" href="#returns" title="Link to this heading">#</a></h4>
+<p><em>A string containing the Reference ID of the SOAR record</em>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="getresilientreferencelink-gliderecord-record">
+<h3><code class="docutils literal notranslate"><span class="pre">getResilientReferenceLink(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilientreferencelink-gliderecord-record" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Gets the SOAR Reference Link to directly access the record in SOAR.</p></li>
+</ul>
+<section id="id6">
+<h4>Parameters:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>record</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GlideRecord</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GlideRecord</span></code> object of the current table record (usually this is <code class="docutils literal notranslate"><span class="pre">current</span></code> in Workflows)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id7">
+<h4>Returns:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<p><em>A string containing the URL link of the SOAR record</em>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="getresilienttype-gliderecord-record">
+<h3><code class="docutils literal notranslate"><span class="pre">getResilientType(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilienttype-gliderecord-record" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Gets the SOAR Type for a linked record (i.e. “Incident” or “Task”).</p></li>
+</ul>
+<section id="id8">
+<h4>Parameters:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>record</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GlideRecord</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GlideRecord</span></code> object of the current table record (usually this is <code class="docutils literal notranslate"><span class="pre">current</span></code> in Workflows)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id9">
+<h4>Returns:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<p><em>A string containing either “Task” or “Incident” indicating the type of record linked in SOAR</em>.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="create-own-custom-servicenow-workflow">
+<h2>Create Own Custom ServiceNow Workflow<a class="headerlink" href="#create-own-custom-servicenow-workflow" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A Custom Workflow can be created to <em>overwrite</em> the above pre-defined workflows.</p></li>
+<li><p>To have your custom workflow be invoked instead of a pre-defined workflow, use must use the <strong>correct naming convention</strong>.</p></li>
+<li><p>For example, to overwrite the Add Comment workflow, you would create a workflow with the name: <strong>CUSTOM_RES_WF_AddComment</strong>.</p></li>
+<li><p>Follow the steps below as a <strong>guide to create your own Custom Workflow</strong>.</p></li>
+</ul>
+<section id="step-1-use-correct-application-scope">
+<h3>Step 1: <em>Use Correct Application Scope</em><a class="headerlink" href="#step-1-use-correct-application-scope" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In ServiceNow, click the <strong>gear icon</strong> in the top right corner.</p></li>
+<li><p>Click <strong>Developer</strong> in the menu.</p></li>
+<li><p>Ensure:</p>
+<ul>
+<li><p><strong>Application:</strong> IBM Security QRadar SOAR.</p></li>
+<li><p><strong>Update Set:</strong> Default [IBM Security QRadar SOAR].
+<img alt="screenshot" src="../../../_images/111.png" /></p></li>
+</ul>
+</li>
+<li><p><strong>Close</strong> the popup.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="step-2-create-a-copy-of-existing-res-workflow">
+<h3>Step 2: <em>Create a Copy of Existing RES Workflow</em><a class="headerlink" href="#step-2-create-a-copy-of-existing-res-workflow" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Using the Navigation Panel, open the <strong>Workflow Editor</strong>:
+<img alt="screenshot" src="../../../_images/27.png" /></p></li>
+<li><p>On the right-hand side of the Workflow Editor, search for <strong>res_wf</strong>:
+<img alt="screenshot" src="../../../_images/35.png" /></p></li>
+<li><p>Click the Workflow you want to <em>overwrite</em>. The Workflow opens.</p></li>
+<li><p>Click the <strong>Burger Menu</strong> on the top left and then <strong>Copy</strong>:
+<img alt="screenshot" src="../../../_images/44.png" /></p></li>
+<li><p>In the popup enter the Workflow Name. Ensure you use the <strong>correct naming convention:</strong> <code class="docutils literal notranslate"><span class="pre">CUSTOM_&lt;original_workflow_name&gt;</span></code>:
+<img alt="screenshot" src="../../../_images/55.png" /></p></li>
+<li><p>Click <strong>OK</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="step-3-modify-the-run-script">
+<h3>Step 3: <em>Modify the Run Script</em><a class="headerlink" href="#step-3-modify-the-run-script" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Double click the <strong>Run Script</strong>:
+<img alt="screenshot" src="../../../_images/63.png" /></p></li>
+<li><p>In the <strong>popup</strong> that appears, copy the below script and paste it into the Script Editor:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">RES_WF_CreateIncident</span><span class="p">(){</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">,</span><span class="w"> </span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">,</span><span class="w"> </span><span class="nx">caseName</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">,</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">,</span><span class="w"> </span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Instantiate new ResilientHelper</span>
+<span class="w">        </span><span class="nx">resHelper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ResilientHelper</span><span class="p">();</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">//Get the required parameters to create an Incident</span>
+<span class="w">        </span><span class="nx">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;short_description&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">//Map ServiceNow severity in digits to Resilient strings</span>
+<span class="w">        </span><span class="c1">//TIP: use the &#39;finfo&#39; command on Resilient Integrations Server</span>
+<span class="w">        </span><span class="c1">//to get Resilient field information</span>
+<span class="w">        </span><span class="nx">resSeverityMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;1&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;2&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;3&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Low&quot;</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">[</span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;severity&quot;</span><span class="p">).</span><span class="nx">toString</span><span class="p">()];</span>
+
+<span class="w">        </span><span class="c1">//Initialize options</span>
+<span class="w">        </span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Incident created in IBM SOAR&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">optionalFields</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="s2">&quot;severity_code&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">severityMapped</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="c1">// Call helper to create the Incident in Resilient</span>
+<span class="w">        </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">,</span><span class="w"> </span><span class="nx">caseName</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Create the initial RES Note</span>
+<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;This &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&quot;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;html&quot;</span><span class="p">);</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by &#39;\n\n&#39;</span>
+<span class="w">            </span><span class="nx">workNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">//Split the Work Notes on &#39;\n\n&#39;</span>
+<span class="w">            </span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">//Loop each Work Note and add a Resilient Note</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">                </span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="nx">noteText</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">noteText</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">){</span>
+<span class="w">                    </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to create an Incident in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</li>
+<li><p>Edit the workflow script as fits your needs.</p></li>
+<li><p>Click <strong>Submit</strong>.</p></li>
+<li><p><strong>Publish your Workflow,</strong> by clicking the <strong>burger menu</strong> then clicking <strong>Publish</strong>:
+<img alt="screenshot" src="../../../_images/91.png" /></p></li>
+<li><p><strong>Close</strong> the tab that contains the Workflow Editor.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">IBM Security QRadar SOAR Platform App for ServiceNow - Customization Guide</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#architectural-diagram">Architectural Diagram</a></li>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#pre-defined-servicenow-workflows">Pre-Defined ServiceNow Workflows</a></li>
+<li><a class="reference internal" href="#resilienthelper-api">ResilientHelper API</a><ul>
+<li><a class="reference internal" href="#create-gliderecord-record-string-snrecordid-string-casename-object-options"><code class="docutils literal notranslate"><span class="pre">create(GlideRecord</span> <span class="pre">record,</span> <span class="pre">String</span> <span class="pre">snRecordId,</span> <span class="pre">String</span> <span class="pre">caseName,</span> <span class="pre">Object</span> <span class="pre">options)</span></code></a><ul>
+<li><a class="reference internal" href="#parameters">Parameters:</a></li>
+<li><a class="reference internal" href="#return">Return:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addnote-string-res-reference-id-string-notetext-string-noteformat"><code class="docutils literal notranslate"><span class="pre">addNote(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">noteText,</span> <span class="pre">String</span> <span class="pre">noteFormat)</span></code></a><ul>
+<li><a class="reference internal" href="#id1">Parameters:</a></li>
+<li><a class="reference internal" href="#id2">Return:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#updatestateinresilient-string-res-reference-id-string-snticketstate-string-snticketstatecolor"><code class="docutils literal notranslate"><span class="pre">updateStateInResilient(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">snTicketState,</span> <span class="pre">String</span> <span class="pre">snTicketStateColor)</span></code></a><ul>
+<li><a class="reference internal" href="#id3">Parameters:</a></li>
+<li><a class="reference internal" href="#id4">Return:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getresilientreferenceid-gliderecord-record"><code class="docutils literal notranslate"><span class="pre">getResilientReferenceId(GlideRecord</span> <span class="pre">record)</span></code></a><ul>
+<li><a class="reference internal" href="#id5">Parameters:</a></li>
+<li><a class="reference internal" href="#returns">Returns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getresilientreferencelink-gliderecord-record"><code class="docutils literal notranslate"><span class="pre">getResilientReferenceLink(GlideRecord</span> <span class="pre">record)</span></code></a><ul>
+<li><a class="reference internal" href="#id6">Parameters:</a></li>
+<li><a class="reference internal" href="#id7">Returns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getresilienttype-gliderecord-record"><code class="docutils literal notranslate"><span class="pre">getResilientType(GlideRecord</span> <span class="pre">record)</span></code></a><ul>
+<li><a class="reference internal" href="#id8">Parameters:</a></li>
+<li><a class="reference internal" href="#id9">Returns:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-own-custom-servicenow-workflow">Create Own Custom ServiceNow Workflow</a><ul>
+<li><a class="reference internal" href="#step-1-use-correct-application-scope">Step 1: <em>Use Correct Application Scope</em></a></li>
+<li><a class="reference internal" href="#step-2-create-a-copy-of-existing-res-workflow">Step 2: <em>Create a Copy of Existing RES Workflow</em></a></li>
+<li><a class="reference internal" href="#step-3-modify-the-run-script">Step 3: <em>Modify the Run Script</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

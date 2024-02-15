@@ -1,0 +1,799 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Darktrace" href="../fn_darktrace/README.html" /><link rel="prev" title="Zoom Functions for SOAR" href="../fn_create_zoom_meeting/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>CVE Search Function for IBM Resilient - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="cve-search-function-for-ibm-resilient">
+<h1>CVE Search Function for IBM Resilient<a class="headerlink" href="#cve-search-function-for-ibm-resilient" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#about-this-package"><span class="xref myst">About This Package</span></a></p></li>
+<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table"><span class="xref myst">Data Table</span></a></p></li>
+<li><p><a class="reference internal" href="#function-inputs"><span class="xref myst">Function Inputs</span></a></p></li>
+<li><p><a class="reference internal" href="#function-output"><span class="xref myst">Function Output</span></a></p></li>
+<li><p><a class="reference internal" href="#pre-process-script"><span class="xref myst">Pre-Process Script</span></a></p></li>
+<li><p><a class="reference internal" href="#post-process-script"><span class="xref myst">Post-Process Script</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#using-the-cve-function"><span class="xref myst">CVE Search Function Usage</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="change-log">
+<h2>Change Log<a class="headerlink" href="#change-log" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Version</p></th>
+<th class="head"><p>Change</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>6/2020</p></td>
+<td><p>1.0.2</p></td>
+<td><p>Proxy support added</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="about-this-package">
+<h2>About This Package:<a class="headerlink" href="#about-this-package" title="Link to this heading">#</a></h2>
+<p><strong>This package contains Resilient functions that allows one to search for Common Vulnerability Exposures (CVE).</strong></p>
+<ul class="simple">
+<li><p>This package implements different ways to search the CVE database such as:</p>
+<ul>
+<li><p>Browse product and vendor categories</p></li>
+<li><p>Search by specific CVE ID</p></li>
+<li><p>Retrieve last 30 CVE’s</p></li>
+</ul>
+</li>
+<li><p>This package makes use of the following CVE API call to get information on a given query
+<code class="docutils literal notranslate"><span class="pre">https://cve.circl.lu/api/{search</span> <span class="pre">param}/{vendor</span> <span class="pre">name}/{product</span> <span class="pre">name}</span></code></p></li>
+<li><p>For more information, see <a class="reference external" href="https://www.circl.lu/services/cve-search/">the circl website</a></p></li>
+</ul>
+<p><img alt="screenshot" src="../_images/13.png" /></p>
+<section id="cve-search-function-layout">
+<h3>CVE Search Function Layout:<a class="headerlink" href="#cve-search-function-layout" title="Link to this heading">#</a></h3>
+<p><img alt="screenshot" src="../_images/24.png" /></p>
+</section>
+<section id="cve-search-pre-process-script">
+<h3>CVE Search Pre-Process Script<a class="headerlink" href="#cve-search-pre-process-script" title="Link to this heading">#</a></h3>
+<p><img alt="screenshot" src="../_images/2_1.png" /></p>
+</section>
+<section id="cve-search-post-process-script">
+<h3>CVE Search Post-Process Script<a class="headerlink" href="#cve-search-post-process-script" title="Link to this heading">#</a></h3>
+<p><img alt="screenshot" src="../_images/2_2.png" /></p>
+</section>
+<section id="cve-browse-function-layout">
+<h3>CVE Browse Function Layout:<a class="headerlink" href="#cve-browse-function-layout" title="Link to this heading">#</a></h3>
+<p><img alt="screenshot" src="../_images/32.png" /></p>
+</section>
+<section id="cve-browse-pre-process-script">
+<h3>CVE Browse Pre-Process Script<a class="headerlink" href="#cve-browse-pre-process-script" title="Link to this heading">#</a></h3>
+<p><img alt="screenshot" src="../_images/3_1.png" /></p>
+</section>
+<section id="cve-browse-post-process-script">
+<h3>CVE Browse Post-Process Script<a class="headerlink" href="#cve-browse-post-process-script" title="Link to this heading">#</a></h3>
+<p><img alt="screenshot" src="../_images/3_2.png" /></p>
+</section>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites:<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Resilient Appliance &gt;= v31.0.0</p></li>
+<li><p>Integrations Server running resilient_circuits &gt;= v30.0.0</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>This package requires that it be installed on a RHEL or CentOS platform using the resilient-circuits framework.</p>
+<ul>
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file from the XForce App Exchange and extract it. You will find a file called: <code class="docutils literal notranslate"><span class="pre">fn_cve_search-&lt;version&gt;.tar.gz</span></code></p></li>
+<li><p>Copy this file to your Integrations Server</p></li>
+<li><p>To install the package, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install fn_cve_search-&lt;version&gt;.tar.gz
+</pre></div>
+</div>
+</li>
+<li><p>To import the function, example rules, data tables and workflows into your Resilient Appliance, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ resilient-circuits customize -l fn-cve-search
+</pre></div>
+</div>
+</li>
+<li><p>To update your <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file with the required CVE Search configurations, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ resilient-circuits config -u
+</pre></div>
+</div>
+</li>
+<li><p>Access your <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file and review the parameters added. Edit the <code class="docutils literal notranslate"><span class="pre">max_results_display</span></code> counter value to limit the maximum number of search results to display on table.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_cve_search</span><span class="p">]</span>
+<span class="c1"># Flag display maximum CVE Entries on the resilient table</span>
+<span class="n">max_results_display</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># Base URL of Common Vulnerability Exposures Data Base.</span>
+<span class="n">cve_base_url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cve</span><span class="o">.</span><span class="n">circl</span><span class="o">.</span><span class="n">lu</span><span class="o">/</span><span class="n">api</span>
+<span class="c1"># add proxies here or use [integrations] (see resilient-lib)</span>
+<span class="c1">#http_proxy=</span>
+<span class="c1">#https_proxy=</span>
+</pre></div>
+</div>
+</li>
+<li><p>To uninstall CVE Function from Resilient, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip uninstall fn_cve_search
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="data-table">
+<h2>Data Table<a class="headerlink" href="#data-table" title="Link to this heading">#</a></h2>
+<section id="data-table-utils-cve-searched-data">
+<h3>Data Table Utils: CVE Searched Data<a class="headerlink" href="#data-table-utils-cve-searched-data" title="Link to this heading">#</a></h3>
+<p>This table will contain the results of the CVE searches.
+<img alt="screenshot" src="../_images/41.png" /></p>
+<section id="display-the-data-table-in-an-incident">
+<h4>Display the Data Table in an incident<a class="headerlink" href="#display-the-data-table-in-an-incident" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>In order to display the CVE Searched datatable in your incident, you must modify your Layout Settings:</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Go to <strong>Customization Settings</strong> &gt; <strong>Layouts</strong> &gt; <strong>Incident Tabs</strong> &gt; <strong>+ Add Tab</strong>
+<img alt="screenshot" src="../_images/52.png" /></p></li>
+<li><p>Enter <code class="docutils literal notranslate"><span class="pre">CVE</span> <span class="pre">SEARCH</span> <span class="pre">DATA</span></code> and click <strong>Add</strong>
+<img alt="screenshot" src="../_images/61.png" /></p></li>
+<li><p><strong>Drag</strong> the Data table into the middle and click <strong>Save</strong>
+<img alt="screenshot" src="../_images/7.png" /></p></li>
+<li><p>Within an incident, the <strong>CVE Search Data</strong> tab contains the CVE Searched Data Table</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="function-inputs">
+<h2>Function Inputs<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h2>
+<section id="cve-search-function">
+<h3>CVE Search Function<a class="headerlink" href="#cve-search-function" title="Link to this heading">#</a></h3>
+<p>|Input Name |Type  |Example|Info|
+|—|—|—|—|—|
+|cve_id|String  |CVE-2008-3949 |Specific vulnerability ID |
+|cve_vendor|String| microsoft|a vendor name to search for cve. Unsupported as of 1.0.1 |
+|cve_product|String|excel|Name of the Product to Search in CVE Database. Unsupported as of 1.0.1|
+|cve_published_date_from|Date Picker|03/01/2019|Select CVE Published Date. Unsupported as of 1.0.1|
+|cve_published_date_to|Date Picker|03/01/2019|End date range to search cve data. Unsupported as of 1.0.1|</p>
+</section>
+<section id="cve-browse-function">
+<h3>CVE Browse Function<a class="headerlink" href="#cve-browse-function" title="Link to this heading">#</a></h3>
+<p>|Input Name |Type  |Example|Info|
+|—|—|—|—|—|
+|cve_browse_criteria |select |Browse | CVE Browse Criteria i.e Browse (for vendors &amp; product information)|
+|cve_vendor|text|apple|a vendor name to browse for cve |</p>
+</section>
+</section>
+<section id="function-output">
+<h2>Function Output<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>The payload from the function will contain the JSON from the CVE API Call and the name of the API Call</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="c1">#JSON returned from CVE API Call,</span>
+    <span class="s2">&quot;api_call&quot;</span><span class="p">:</span> <span class="c1">#&quot;last&quot;/&quot;browse&quot;/&quot;search&quot;/&quot;cve&quot;/&quot;db&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>To see the output of each of the API calls for this Function, we recommend running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span></code> in <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> mode.</p></li>
+<li><p>To do this run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ resilient-circuits run --loglevel=DEBUG
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="pre-process-script">
+<h2>Pre-Process Script<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>CVE Browse</p></li>
+</ul>
+<p>This example sets the <code class="docutils literal notranslate"><span class="pre">cve_browse_criteria</span></code>, <code class="docutils literal notranslate"><span class="pre">cve_vendor</span></code> inputs to the entered vendor name</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">cve_browse_criteria</span> <span class="o">=</span> <span class="s1">&#39;browse&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cve_vendor</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_vendor</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>CVE Search</p></li>
+</ul>
+<p>This example sets the <code class="docutils literal notranslate"><span class="pre">cve_id</span></code>, <code class="docutils literal notranslate"><span class="pre">cve_vendor</span></code>, <code class="docutils literal notranslate"><span class="pre">cve_product</span></code>, <code class="docutils literal notranslate"><span class="pre">cve_published_date_from</span></code>, <code class="docutils literal notranslate"><span class="pre">cve_published_date_to</span></code> inputs to search selections entered on the rule dialog box. See below for the combinations used in searches.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specific CVE ID</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cve_id</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_id</span>
+<span class="c1"># Name of the Vendor </span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cve_vendor</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">vendor</span>
+<span class="c1"># Name of the product</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cve_product</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">product</span>
+<span class="c1"># Search CVE Data from Date</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cve_published_date_from</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_published_date_from</span>
+<span class="c1"># Search CVE Data upto Date</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cve_published_date_to</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_published_date_to</span>
+</pre></div>
+</div>
+</section>
+<section id="post-process-script">
+<h2>Post-Process Script<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h2>
+<p>Returned results are parsed within the post-process script as <code class="docutils literal notranslate"><span class="pre">results.get(&quot;content&quot;)</span></code>. Based on the api_call type, the data is represented as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">CVE</span> <span class="pre">Browse</span></code> function data is displayed on incident notes,<br />
+and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">CVE</span> <span class="pre">Search</span></code> function data displayed on the <code class="docutils literal notranslate"><span class="pre">CVE</span> <span class="pre">Searched</span> <span class="pre">Data</span></code> table.</p></li>
+</ul>
+<section id="cve-search">
+<h3>CVE Search<a class="headerlink" href="#cve-search" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#globals</span>
+<span class="n">ENTRY_TO_DATATABLE_MAP</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="s2">&quot;cve&quot;</span><span class="p">:</span> <span class="s2">&quot;cve_id&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;pubdte&quot;</span><span class="p">:</span> <span class="s2">&quot;published_date&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;sum&quot;</span><span class="p">:</span> <span class="s2">&quot;summary&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ref&quot;</span><span class="p">:</span> <span class="s2">&quot;references&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;vc&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerability_configuration&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;vc2&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerable_configuration_cpe_2_2&quot;</span>
+<span class="p">}</span>
+
+<span class="n">api_call_type</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;api_call&#39;</span><span class="p">]</span>
+<span class="n">output_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+<span class="n">api_call_type_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;api call type :&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;/p&gt;&quot;</span>
+<span class="n">browse_rich_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp:&amp;ensp&lt;/b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp&amp;ensp&lt;/p&gt;&quot;</span>
+<span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="c1">#Adding data to table</span>
+<span class="n">ref_link_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">if</span> <span class="n">output_data</span><span class="p">:</span>
+     <span class="k">for</span> <span class="n">dict_element</span> <span class="ow">in</span> <span class="n">output_data</span><span class="p">:</span>
+          <span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+          <span class="n">table_row_object</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;cve_data&quot;</span><span class="p">)</span>
+          <span class="k">for</span> <span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span> <span class="ow">in</span> <span class="n">dict_element</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+               <span class="k">if</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;Published&#39;</span><span class="p">:</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;pubdte&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value_data</span><span class="p">)</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;cve&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value_data</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;summary&#39;</span><span class="p">:</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;sum&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value_data</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;references&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">link_url</span> <span class="ow">in</span> <span class="n">value_data</span><span class="p">:</span>
+                         <span class="n">ref_link_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;&lt;a href=&quot;</span><span class="si">{0}</span><span class="s1">&quot;&gt;</span><span class="si">{0}</span><span class="s1">&lt;/a&gt;&lt;/p&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link_url</span><span class="p">)</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ref_link_text</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;vulnerable_configuration&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">value_data</span><span class="p">:</span>
+                         <span class="k">for</span> <span class="n">vc_collection</span> <span class="ow">in</span> <span class="n">value_data</span><span class="p">:</span>
+                              <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
+                                   <span class="k">for</span> <span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span> <span class="ow">in</span> <span class="n">vc_collection</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                                        <span class="n">text</span> <span class="o">=</span> <span class="n">browse_rich_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span><span class="p">)</span>     
+                                        <span class="n">rich_text_tmp</span> <span class="o">+=</span> <span class="n">text</span>
+                              <span class="k">else</span><span class="p">:</span>
+                                   <span class="n">rich_text_tmp</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;</span><span class="si">{}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                         <span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;No Data&quot;</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;vc&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rich_text_tmp</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;vulnerable_configuration_cpe_2_2&#39;</span><span class="p">:</span>
+                    <span class="n">rich_text_tmp_2</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                    <span class="k">if</span> <span class="n">value_data</span><span class="p">:</span>
+                         <span class="k">for</span> <span class="n">vc_collection</span> <span class="ow">in</span> <span class="n">value_data</span><span class="p">:</span>
+                              <span class="n">rich_text_tmp_2</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;</span><span class="si">{}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                         <span class="n">rich_text_tmp_2</span> <span class="o">=</span> <span class="s2">&quot;No Data&quot;</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;vc2&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rich_text_tmp_2</span>
+<span class="k">else</span><span class="p">:</span>
+     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;No data returned from CVE Search</span><span class="se">\n\n</span><span class="s2">CVE-ID: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Vendor: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Product: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_id</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_vendor</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_product</span><span class="p">))</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>CVE Browse</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api_call_type</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;api_call&#39;</span><span class="p">]</span>
+<span class="n">output_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+<span class="n">api_call_type_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;api call type :&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;/p&gt;&lt;p&gt;&lt;b&gt;vendor :&lt;/b&gt; </span><span class="si">{}</span><span class="s2"> &lt;/p&gt;&quot;</span>
+<span class="n">browse_rich_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp:&amp;ensp&lt;/b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp&amp;ensp&lt;/p&gt;&quot;</span>
+<span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="c1">#Adding Browse data and Database information Notes Section</span>
+<span class="n">api_call_type_text</span> <span class="o">=</span> <span class="n">api_call_type_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api_call_type</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_vendor</span><span class="p">)</span>
+<span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="k">if</span> <span class="n">output_data</span><span class="p">:</span>
+     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">output_data</span><span class="p">:</span>
+          <span class="k">for</span> <span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+               <span class="n">text</span> <span class="o">=</span> <span class="n">browse_rich_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span><span class="p">)</span>
+               <span class="n">api_call_type_text</span> <span class="o">+=</span> <span class="n">text</span>
+     <span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">api_call_type_text</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+     <span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="s1">&#39;No searched data returned&#39;</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">browse_rich_text_final</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head text-center"><p>Object Type</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+<th class="head"><p>Activity Fields</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Example: CVE Browse</p></td>
+<td class="text-center"><p>Incident</p></td>
+<td><p>Example: CVE Browse</p></td>
+<td><p>CVE Browse Criteria values : Browse, CVE Vendor</p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: CVE Search</p></td>
+<td class="text-center"><p>Incident</p></td>
+<td><p>Example: CVE Search</p></td>
+<td><p>CVE Search Criteria</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>CVE functions perform data searches as follows</strong></p>
+<ol class="arabic simple">
+<li><p>Browse:</p>
+<ul class="simple">
+<li><p>If all other inputs are empty, all the vendors in the database are returned.</p></li>
+<li><p>If a vendor name is supplied, all the products associated with the vendor are returned.</p></li>
+</ul>
+</li>
+<li><p>Search:</p>
+<ul class="simple">
+<li><p>If a CVE ID is supplied, data related to specific CVE ID is returned.</p></li>
+<li><p>If no parameters are supplied, the last 30 latest vulnerabilities from the database are returned up to the <code class="docutils literal notranslate"><span class="pre">max_results_display</span></code> flag.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_darktrace/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Darktrace <!-- omit in toc --></div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_create_zoom_meeting/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Zoom Functions for SOAR</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">CVE Search Function for IBM Resilient</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#change-log">Change Log</a></li>
+<li><a class="reference internal" href="#about-this-package">About This Package:</a><ul>
+<li><a class="reference internal" href="#cve-search-function-layout">CVE Search Function Layout:</a></li>
+<li><a class="reference internal" href="#cve-search-pre-process-script">CVE Search Pre-Process Script</a></li>
+<li><a class="reference internal" href="#cve-search-post-process-script">CVE Search Post-Process Script</a></li>
+<li><a class="reference internal" href="#cve-browse-function-layout">CVE Browse Function Layout:</a></li>
+<li><a class="reference internal" href="#cve-browse-pre-process-script">CVE Browse Pre-Process Script</a></li>
+<li><a class="reference internal" href="#cve-browse-post-process-script">CVE Browse Post-Process Script</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites:</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#data-table">Data Table</a><ul>
+<li><a class="reference internal" href="#data-table-utils-cve-searched-data">Data Table Utils: CVE Searched Data</a><ul>
+<li><a class="reference internal" href="#display-the-data-table-in-an-incident">Display the Data Table in an incident</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-inputs">Function Inputs</a><ul>
+<li><a class="reference internal" href="#cve-search-function">CVE Search Function</a></li>
+<li><a class="reference internal" href="#cve-browse-function">CVE Browse Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-output">Function Output</a></li>
+<li><a class="reference internal" href="#pre-process-script">Pre-Process Script</a></li>
+<li><a class="reference internal" href="#post-process-script">Post-Process Script</a><ul>
+<li><a class="reference internal" href="#cve-search">CVE Search</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

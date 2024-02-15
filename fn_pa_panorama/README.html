@@ -1,0 +1,1724 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="PagerDuty App" href="../fn_pagerduty/README.html" /><link rel="prev" title="Outbound Email" href="../fn_outbound_email/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>fn_pa_panorama - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="fn-pa-panorama">
+<h1>fn_pa_panorama<a class="headerlink" href="#fn-pa-panorama" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---panorama-create-address"><span class="xref myst">Function - Panorama Create Address</span></a></p></li>
+<li><p><a class="reference internal" href="#function---panorama-edit-address-group"><span class="xref myst">Function - Panorama Edit Address Group</span></a></p></li>
+<li><p><a class="reference internal" href="#function---panorama-edit-users-in-a-group"><span class="xref myst">Function - Panorama Edit Users in a Group</span></a></p></li>
+<li><p><a class="reference internal" href="#function---panorama-get-address-groups"><span class="xref myst">Function - Panorama Get Address Groups</span></a></p></li>
+<li><p><a class="reference internal" href="#function---panorama-get-addresses"><span class="xref myst">Function - Panorama Get Addresses</span></a></p></li>
+<li><p><a class="reference internal" href="#function---panorama-get-users-in-a-group"><span class="xref myst">Function - Panorama Get Users in a Group</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
+<li><p><a class="reference internal" href="#How-to-configure-to-use-a-single-Panorama-Server"><span class="xref myst">How to configure to use a single Panorama Server</span></a></p></li>
+<li><p><a class="reference internal" href="#Creating-playbooks-when-server/servers-in-app.config-are-labeled"><span class="xref myst">Creating playbooks when server/servers in app.config are labeled</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.3.0</p></td>
+<td><p>04/2023</p></td>
+<td><p>Convert from rules/workflows to playbooks and update Panorama api version to v9.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.2.0</p></td>
+<td><p>10/2022</p></td>
+<td><p>Multi-tenancy support added</p></td>
+</tr>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>04/2021</p></td>
+<td><p>Support for different API versions. See app.config <code class="docutils literal notranslate"><span class="pre">api_version</span></code> setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>07/2019</p></td>
+<td><p>App Host support</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>10/2020</p></td>
+<td><p>Initial release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See <a class="reference internal" href="#1.2.0-changes"><span class="xref myst">1.2.0 Changes</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="changes">
+<h2>1.3.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h2>
+<p>In v1.3, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
+<p>If upgrading from a previous release, you’ll noticed that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it’s corresponding rule, but with “(PB)” added at the end. For automatic actions, the playbooks will be disabled by default.</p>
+<p>You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.</p>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p><strong>SOAR Components to Integrate with the Panorama Platform</strong></p>
+<p><img alt="screenshot: main" src="../_images/main35.png" /></p>
+<p>This integration contains Functions to interact with address groups, addresses, and user groups within Palo Alto Panorama. This integration can be configured to work with one or multiple Panorama instances.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Edit address groups in Panorama</p></li>
+<li><p>Edit user groups in Panorama</p></li>
+<li><p>Get addresses and users from Panorama</p></li>
+<li><p>Create a new address in Panorama</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=49.0.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app does support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<p>Python 3.6 and Python 3.9 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>resilient-lib&gt;=49.0.0</p></li>
+<li><p>resilient_circuits&gt;=49.0.0</p></li>
+<li><p>xmltodict&gt;=0.12.0</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>panorama_host</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;https://0.0.0.0&gt;</span></code></p></td>
+<td><p><em>IP or hostname of the panorama server.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>api_version</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">v9.1</span></code></p></td>
+<td><p><em>Specify the api version to use. ‘v9.1’ is the default.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>api_key</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;Panorama_api_key&gt;</span></code></p></td>
+<td><p><em>API key generated with permissions to query the Panorama API. Get the API key via: curl -k -X GET ‘https://<panoramaIP>/api/?type=keygen&amp;user=<username>&amp;password=<password>’</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>cert</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code>[True | False]</code></p></td>
+<td><p><em>Validate certificates (True) or allow insecure connections (False).</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>http_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;http://proxy.server:3128&gt;</span></code></p></td>
+<td><p><em>Optional http proxy server.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>https_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;https://proxy.server:3128&gt;</span></code></p></td>
+<td><p><em>Optional https proxy server.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id1">
+<h4>1.2.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>Starting in version 1.2.0, more than one Panorama instance can be configured for SOAR case data synchronization. For enterprises with only one Panorama instance, your app.config file will continue to define the Panorama instance under the <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama]</span></code> section header.</p>
+<p>For enterprises with more than one Panorama instance, each instance will have it’s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama:panorama_label1]</span></code> where <code class="docutils literal notranslate"><span class="pre">panorama_label1</span></code> represents any label helpful to define your Panorama environment.</p>
+<p>Be aware that modifications to the workflows will be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field if the Panorama server/servers in the app.config have labels.</p>
+<p>If you have existing custom workflows, see <a class="reference internal" href="#creating-workflows-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating workflows when server/servers in app.config are labeled</span></a> for more information about changing them to reference the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-panorama-create-address">
+<h2>Function - Panorama Create Address<a class="headerlink" href="#function-panorama-create-address" title="Link to this heading">#</a></h2>
+<p>Creates a new address object in Panorama.</p>
+<p><img alt="screenshot: fn-panorama-create-address " src="../_images/fn-panorama-create-address.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Label of the server to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_location</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The location of the entry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_name_parameter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Useful to return back one item, ie: 1 Address Group</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_request_body</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_vsys</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;command succeeded&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_name_parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;5.6.7.4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_request_body&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">entry</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">@name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">5.6.7.4</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">5.6.7.4</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">ip-netmask</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">5.6.7.4</span><span class="se">\&quot;\n</span><span class="s2">  }</span><span class="se">\n</span><span class="s2">}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">514</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 08:59:01&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_name_parameter</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+
+<span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_request_body</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-panorama-edit-address-group">
+<h2>Function - Panorama Edit Address Group<a class="headerlink" href="#function-panorama-edit-address-group" title="Link to this heading">#</a></h2>
+<p>Edits an address group in Panorama.</p>
+<p><img alt="screenshot: fn-panorama-edit-address-group " src="../_images/fn-panorama-edit-address-group.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Label of the server to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_location</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The location of the entry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_name_parameter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Useful to return back one item, ie: 1 Address Group</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_request_body</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_vsys</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;command succeeded&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_name_parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked Group&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_request_body&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">entry</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">@name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Blocked Group</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">None</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">static</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">      </span><span class="se">\&quot;</span><span class="s2">member</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">208.113.204.14</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">Test</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">34.73.29.154</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">84.50.148.237</span><span class="se">\&quot;</span><span class="s2">]</span><span class="se">\n</span><span class="s2">    }</span><span class="se">\n</span><span class="s2">  }</span><span class="se">\n</span><span class="s2">}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">522</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 11:04:34&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
+
+<span class="n">ip_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_groups_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entry&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="k">if</span> <span class="n">group</span><span class="p">:</span>
+  <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># If new address was created</span>
+<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_address_results</span><span class="p">:</span>
+  <span class="n">ip_name</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+<span class="c1"># Else find it in the list of addresses</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">addresses</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_addresses_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entry&quot;</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">addresses</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ip-netmask&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+      <span class="n">ip_name</span> <span class="o">=</span> <span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;@name&quot;</span><span class="p">)</span>
+      <span class="k">break</span>
+
+<span class="n">group_name</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;@name&quot;</span><span class="p">)</span>
+<span class="n">des</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+
+<span class="n">member_list</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;member&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="k">if</span> <span class="n">ip_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">member_list</span><span class="p">:</span>
+  <span class="n">member_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ip_name</span><span class="p">)</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_name_parameter</span> <span class="o">=</span> <span class="n">group_name</span>
+
+<span class="c1"># If using api version 9.0 or before uncomment below for the body</span>
+<span class="c1"># body = {</span>
+<span class="c1">#   &quot;entry&quot;: {</span>
+<span class="c1">#     &quot;@name&quot;: group_name,</span>
+<span class="c1">#     &quot;static&quot;: {</span>
+<span class="c1">#       &quot;member&quot;: dumps(member_list)</span>
+<span class="c1">#     }</span>
+<span class="c1">#   }</span>
+<span class="c1"># }</span>
+
+<span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="n">group_name</span><span class="p">,</span>
+    <span class="s2">&quot;static&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;member&quot;</span><span class="p">:</span> <span class="n">member_list</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_request_body</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">edit_groups_results</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama IP Address: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was blocked.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama Block IP failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-panorama-edit-users-in-a-group">
+<h2>Function - Panorama Edit Users in a Group<a class="headerlink" href="#function-panorama-edit-users-in-a-group" title="Link to this heading">#</a></h2>
+<p>Edits users in a group in Panorama.</p>
+<p><img alt="screenshot: fn-panorama-edit-users-in-a-group " src="../_images/fn-panorama-edit-users-in-a-group.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Label of the server to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_location</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The location of the entry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_user_group_xml</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>xml structure indicating which users are members of the group</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_user_group_xpath</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/config/shared/local-user-database/user-group/entry[&#64;name='Blocked_Users']</span></code></p></td>
+<td><p>xpath to the user group you want to use</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_users_list</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[&quot;user1&quot;,</span> <span class="pre">&quot;user2&quot;]</span></code></p></td>
+<td><p>Python list of users</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_user_group_name</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Blocked_Users</span></code></p></td>
+<td><p>Name od user group</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;command succeeded&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;xml_response&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">response status=</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2"> code=</span><span class="se">\&quot;</span><span class="s2">20</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">msg</span><span class="se">\u003e</span><span class="s2">command succeeded</span><span class="se">\u003c</span><span class="s2">/msg</span><span class="se">\u003e\u003c</span><span class="s2">/response</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_user_group_xml&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">entry name=</span><span class="se">\&quot;</span><span class="s2">Blocked_Users</span><span class="se">\&quot;\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">user</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member</span><span class="se">\u003e</span><span class="s2">Blocked_User</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member</span><span class="se">\u003e</span><span class="s2">Blocked_user_2</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">/user</span><span class="se">\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">/entry</span><span class="se">\u003e\n</span><span class="s2">  &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_user_group_xpath&quot;</span><span class="p">:</span> <span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=</span><span class="se">\u0027</span><span class="s2">Blocked_Users</span><span class="se">\u0027</span><span class="s2">]&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">514</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 11:12:20&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="c1"># Set this to the name of the user group you wish to add a user to</span>
+<span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;Blocked_Users&quot;</span>
+
+<span class="c1"># Set this to the xpath of the group you are interested in</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_xpath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=&#39;</span><span class="si">{</span><span class="n">group_name</span><span class="si">}</span><span class="s2">&#39;]&quot;</span>
+
+<span class="n">users_list</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_users_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_list&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+<span class="n">blocked_users</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+  <span class="c1"># only one user was returned</span>
+  <span class="n">blocked_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">users_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">users_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+  <span class="c1"># multiple users returned</span>
+  <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users_list</span><span class="p">:</span>
+    <span class="n">blocked_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;#text&quot;</span><span class="p">))</span>
+
+<span class="c1"># Add the user to the blocked list if they are not already there</span>
+<span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blocked_users</span><span class="p">:</span>
+  <span class="n">blocked_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+<span class="c1"># Updated function creates the xml request body for you</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_users_list</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">blocked_users</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_name</span> <span class="o">=</span> <span class="n">group_name</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Giving the xml request body as an input still works</span>
+<span class="c1"># # Build xml which the function will send to Panorama</span>
+<span class="c1"># panorama_xml = f&#39;&#39;&#39;</span>
+<span class="c1"># &lt;entry name=&quot;{str(group_name)}&quot;&gt;</span>
+<span class="c1">#     &lt;user&gt;&#39;&#39;&#39;</span>
+
+<span class="c1"># # Add member nodes with the username to the xml string</span>
+<span class="c1"># for user in blocked_users:</span>
+<span class="c1">#   panorama_xml += f&quot;\n      &lt;member&gt;{user}&lt;/member&gt;&quot;</span>
+
+<span class="c1"># # Add the ending of the xml to the string</span>
+<span class="c1"># panorama_xml += &quot;&quot;&quot;</span>
+<span class="c1">#     &lt;/user&gt;</span>
+<span class="c1"># &lt;/entry&gt;</span>
+<span class="c1"># &quot;&quot;&quot;</span>
+<span class="c1"># inputs.panorama_user_group_xml = panorama_xml</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">edit_users_results</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama User account: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was blocked.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama Block User failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-panorama-get-address-groups">
+<h2>Function - Panorama Get Address Groups<a class="headerlink" href="#function-panorama-get-address-groups" title="Link to this heading">#</a></h2>
+<p>List address groups in Panorama.</p>
+<p><img alt="screenshot: fn-panorama-get-address-groups " src="../_images/fn-panorama-get-address-groups.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Label of the server to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_location</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The location of the entry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_name_parameter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Useful to return back one item, ie: 1 Address Group</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_vsys</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;@count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;@total-count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked Group&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;static&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;member&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;208.113.204.14&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;34.73.29.154&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;84.50.148.237&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;5.6.7.4&quot;</span>
+            <span class="p">]</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_name_parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked Group&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">617</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 11:04:31&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_name_parameter</span> <span class="o">=</span> <span class="s2">&quot;Blocked Group&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">address_groups</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Panorama Get Address Groups</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama Get address groups failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-panorama-get-addresses">
+<h2>Function - Panorama Get Addresses<a class="headerlink" href="#function-panorama-get-addresses" title="Link to this heading">#</a></h2>
+<p>List addresses in Panorama.</p>
+<p><img alt="screenshot: fn-panorama-get-addresses " src="../_images/fn-panorama-get-addresses.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Label of the server to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_location</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The location of the entry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_vsys</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;@count&quot;</span><span class="p">:</span> <span class="s2">&quot;14&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;@total-count&quot;</span><span class="p">:</span> <span class="s2">&quot;14&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;9.9.9.9&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;9.9.9.9&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;9.9.9.9&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;8.8.8.8&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;208.113.204.14&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Create from Resilient&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;208.113.204.14&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;member&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;Prod&quot;</span>
+            <span class="p">]</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.4&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.4&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.4&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;11.22.33.44&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;11.22.33.44&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;Google.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Google.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;Google.com&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;3.2.45.2&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;3.2.45.2&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;3.2.45.2&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;12.34.32.123&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;12.34.32.123&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;12.34.32.123&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;34.73.29.154&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;34.73.29.154&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;34.73.29.154&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;5.5.5.5&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;5.5.5.5&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;5.5.5.5&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;84.50.148.237&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;84.50.148.237&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;84.50.148.237&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;5.6.7.4&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;5.6.7.4&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;5.6.7.4&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">609</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 11:04:31&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-panorama-get-users-in-a-group">
+<h2>Function - Panorama Get Users in a Group<a class="headerlink" href="#function-panorama-get-users-in-a-group" title="Link to this heading">#</a></h2>
+<p>Lists users part of a group in Panorama.</p>
+<p><img alt="screenshot: fn-panorama-get-users-in-a-group " src="../_images/fn-panorama-get-users-in-a-group.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Label of the server to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_location</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The location of the entry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_user_group_xpath</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/config/shared/local-user-database/user-group/entry[&#64;name='Blocked_Users']</span></code></p></td>
+<td><p>xpath to the user group you want to use</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;@count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@total-count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_Users&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;member&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_User&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_user_2&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;jeff&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;user_list&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_User&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_user_2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;jeff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;xml_response&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">response status=</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2"> code=</span><span class="se">\&quot;</span><span class="s2">19</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">result total-count=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;</span><span class="s2"> count=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">entry name=</span><span class="se">\&quot;</span><span class="s2">Blocked_Users</span><span class="se">\&quot;</span><span class="s2"> admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e\n</span><span class="s2">    </span><span class="se">\u003c</span><span class="s2">user admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e</span><span class="s2">Blocked_User</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e</span><span class="s2">Blocked_user_2</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e</span><span class="s2">jeff</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">    </span><span class="se">\u003c</span><span class="s2">/user</span><span class="se">\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">/entry</span><span class="se">\u003e\n\u003c</span><span class="s2">/result</span><span class="se">\u003e\u003c</span><span class="s2">/response</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_user_group_xpath&quot;</span><span class="p">:</span> <span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=</span><span class="se">\u0027</span><span class="s2">Blocked_Users</span><span class="se">\u0027</span><span class="s2">]&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">504</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 11:12:19&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set this to the xpath of the group you are interested in</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_xpath</span> <span class="o">=</span> <span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=&#39;Blocked_Users&#39;]&quot;</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Panorama: Block DNS Name - Example (PB)</p></td>
+<td><p>Given a DNS Name artifact, adds the DNS Name to the “Blocked Group” in Panorama.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">DNS</span> <span class="pre">Name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Panorama: Block IP Address - Example (PB)</p></td>
+<td><p>Given an IP Address artifact, adds the IP Address to the “Blocked Group” in Panorama.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">IP</span> <span class="pre">Address</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Panorama: Block User - Example (PB)</p></td>
+<td><p>Given a User Account artifact, adds the user to the “Blocked_Users” group in Panorama.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">User</span> <span class="pre">Account</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Panorama: Get Address Groups - Example (PB)</p></td>
+<td><p>Get address groups on the Panorama server</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Panorama: Unblock DNS Name - Example (PB)</p></td>
+<td><p>Given a DNS Name artifact, removes the DNS Name from the “Blocked Group” in Panorama.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">DNS</span> <span class="pre">Name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Panorama: Unblock IP Address - Example (PB)</p></td>
+<td><p>Given an IP Address artifact, removes the IP Address from the “Blocked Group” in Panorama.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">IP</span> <span class="pre">Address</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Panorama: Unblock User - Example (PB)</p></td>
+<td><p>Given a User Account artifact, removes the user from the “Blocked_Users” group in Panorama.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">User</span> <span class="pre">Account</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="how-to-configure-to-use-a-single-panorama-server">
+<h2>How to configure to use a single Panorama Server<a class="headerlink" href="#how-to-configure-to-use-a-single-panorama-server" title="Link to this heading">#</a></h2>
+<p>To use only a single server there are two ways this can be configured</p>
+<ol class="arabic simple">
+<li><p>Use the configuration used in Panorama Integration versions prior to V1.2.0</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_pa_panorama</span><span class="p">]</span>
+<span class="c1"># URL/IP of Panorama</span>
+<span class="n">panorama_host</span><span class="o">=&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">0.0.0.0</span><span class="o">&gt;</span>
+<span class="c1"># Versions of panorama can be used by changing the api_version to use a different API version</span>
+<span class="n">api_version</span><span class="o">=</span><span class="n">v9</span><span class="mf">.1</span>
+<span class="n">api_key</span><span class="o">=&lt;</span><span class="n">Panorama_api_key</span><span class="o">&gt;</span>
+<span class="n">cert</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="o">|</span><span class="kc">False</span><span class="p">]</span>
+<span class="c1"># optional settings to access Panorama via proxies</span>
+<span class="c1">#http_proxy=http://proxy.domain:3128</span>
+<span class="c1">#https_proxy=https://proxy.domain:3128</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Specify a panorama system label meaningful to our environment. The label has no other significance.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_pa_panorama</span><span class="p">:</span><span class="n">panorama_label1</span><span class="p">]</span>
+<span class="c1"># URL/IP of Panorama</span>
+<span class="n">panorama_host</span><span class="o">=&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">0.0.0.0</span><span class="o">&gt;</span>
+<span class="c1"># Versions of panorama can be used by changing the api_version to use a different API version</span>
+<span class="n">api_version</span><span class="o">=</span><span class="n">v9</span><span class="mf">.1</span>
+<span class="n">api_key</span><span class="o">=&lt;</span><span class="n">Panorama_api_key</span><span class="o">&gt;</span>
+<span class="n">cert</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="o">|</span><span class="kc">False</span><span class="p">]</span>
+<span class="c1"># optional settings to access Panorama via proxies</span>
+<span class="c1">#http_proxy=http://proxy.domain:3128</span>
+<span class="c1">#https_proxy=https://proxy.domain:3128</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="creating-playbooks-when-server-servers-in-app-config-are-labeled">
+<h2>Creating playbooks when server/servers in app.config are labeled<a class="headerlink" href="#creating-playbooks-when-server-servers-in-app-config-are-labeled" title="Link to this heading">#</a></h2>
+<p>The function input field <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> is required when Panorama server/servers in the app.config are labeled. In the example playbook input scripts the
+input field <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> is defined the following way,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span>
+</pre></div>
+</div>
+<p>The activation field <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> is a text field in which the user enters the label of the server they wish to use.</p>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is a IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_pagerduty/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">PagerDuty App</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_outbound_email/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Outbound Email</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">fn_pa_panorama</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#changes">1.3.0 Changes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a><ul>
+<li><a class="reference internal" href="#id1">1.2.0 Changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-panorama-create-address">Function - Panorama Create Address</a></li>
+<li><a class="reference internal" href="#function-panorama-edit-address-group">Function - Panorama Edit Address Group</a></li>
+<li><a class="reference internal" href="#function-panorama-edit-users-in-a-group">Function - Panorama Edit Users in a Group</a></li>
+<li><a class="reference internal" href="#function-panorama-get-address-groups">Function - Panorama Get Address Groups</a></li>
+<li><a class="reference internal" href="#function-panorama-get-addresses">Function - Panorama Get Addresses</a></li>
+<li><a class="reference internal" href="#function-panorama-get-users-in-a-group">Function - Panorama Get Users in a Group</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#how-to-configure-to-use-a-single-panorama-server">How to configure to use a single Panorama Server</a></li>
+<li><a class="reference internal" href="#creating-playbooks-when-server-servers-in-app-config-are-labeled">Creating playbooks when server/servers in app.config are labeled</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

@@ -1,0 +1,1901 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Google Safe Browsing Function for IBM SOAR" href="../fn_googlesafebrowsing/README.html" /><link rel="prev" title="fn_google_cloud_dlp" href="../fn_google_cloud_dlp/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Google Cloud Security Command Center - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <!--
+  This README.md is generated by running:
+  "resilient-sdk docgen -p fn_google_cloud_scc"
+-->
+<section id="google-cloud-security-command-center">
+<h1>Google Cloud Security Command Center<a class="headerlink" href="#google-cloud-security-command-center" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents <!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+<li><p><a class="reference internal" href="#endpoint-developed-with"><span class="xref myst">Endpoint Developed With</span></a></p></li>
+<li><p><a class="reference internal" href="#known-issues"><span class="xref myst">Known Issues</span></a></p></li>
+<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#templates-for-soar-cases"><span class="xref myst">Templates for SOAR Cases</span></a></p></li>
+<li><p><a class="reference internal" href="#filters-and-field-masks"><span class="xref myst">Filters and Field Masks</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#findings-and-assets-filters"><span class="xref myst">Findings and Assets Filters</span></a></p></li>
+<li><p><a class="reference internal" href="#assets-field-masks"><span class="xref myst">Assets Field Masks</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#function---google-cloud-scc-get-findings"><span class="xref myst">Function - Google Cloud SCC: Get Findings</span></a></p></li>
+<li><p><a class="reference internal" href="#function---google-cloud-scc-list-assets"><span class="xref myst">Function - Google Cloud SCC: List Assets</span></a></p></li>
+<li><p><a class="reference internal" href="#function---google-cloud-scc-update-findings"><span class="xref myst">Function - Google Cloud SCC: Update Findings</span></a></p></li>
+<li><p><a class="reference internal" href="#function---google-cloud-scc-update-security-mark"><span class="xref myst">Function - Google Cloud SCC: Update Security Mark</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---finding-source-properties"><span class="xref myst">Data Table - Finding Source Properties</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>08/2023</p></td>
+<td><p>Only Python 3.9 supported</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>02/2023</p></td>
+<td><p>Proxy bug fix</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>08/2022</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+<p><strong>IBM SOAR app with bidirectional synchronization and functions for Google Cloud SCC</strong></p>
+<p><img alt="screenshot: main" src="../_images/main16.png" /></p>
+<p>Bidirectional synchronization of Google Cloud Security Command Center findings. Additional functions are provided for manual synchronization, manually updating findings, and listing cloud assets monitored in Google SCC.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<!--
+  List the Key Features of the Integration
+-->
+<ul class="simple">
+<li><p>Automatic case escalation from Security Command Center findings to cases in SOAR</p></li>
+<li><p>Key actions provided in SOAR to remediate the findings in Google Cloud</p></li>
+<li><p>Manual updates to findings directly from the SOAR interface</p></li>
+<li><p>List cloud assets monitored in the Security Command Center</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<!--
+  List any Requirements 
+--> 
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">43.1.0</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">43.1.0</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">45.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>Incident Notes</p></td>
+<td><p>Edit</p></td>
+</tr>
+<tr class="row-odd"><td><p>Incident Status</p></td>
+<td><p>Edit</p></td>
+</tr>
+<tr class="row-even"><td><p>Incident Fields</p></td>
+<td><p>Edit</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= 1.9.</p></li>
+<li><p>Cloud Pak is configured with an App Host.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app supports a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<p>Python 3.7 or greater is supported for this app.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>resilient-circuits &gt;= 45.0</p></li>
+<li><p>google-cloud-securitycenter ~= 1.12</p></li>
+</ul>
+</section>
+<section id="endpoint-developed-with">
+<h3>Endpoint Developed With<a class="headerlink" href="#endpoint-developed-with" title="Link to this heading">#</a></h3>
+<p>This app has been implemented using:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Product Name</p></th>
+<th class="head"><p>API Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Google Cloud Security Command Center</p></td>
+<td><p>v1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="known-issues">
+<h3>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">#</a></h3>
+<p>NOTE: As of publishing version 1.0.0 of this app, there is a known issue in the Google Cloud Security Command Center user interface where if a finding’s state is manually changed from ACTIVE to INACTIVE, it will not trigger an update time event. These update times are relied on heavily in the app to provided bi-directional synchronization. If you intend to manually update the state in SCC, you will have to subsequently manually refresh the finding details into the case in SOAR to correctly reflect the updated state. There are no other known issues.</p>
+</section>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+<ul class="simple">
+<li><p>A Google Cloud service account with the appropriate IAM permission and its associated private credentials file is required to run this app. <a class="reference external" href="https://cloud.google.com/security-command-center/docs/how-to-programmatic-access">Follow details from Google here</a>.</p></li>
+<li><p>The account private key generated in the link above must be accessible from the App Host or integration server’s file system.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>google_application_credentials_path</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/google-service-acct.json</span></code></p></td>
+<td><p><em>Path to the credentials file created following the directions <a class="reference external" href="https://cloud.google.com/security-command-center/docs/how-to-programmatic-access">here</a>. On App Host this needs to be uploaded as a file through the configuration tab.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>google_cloud_organization_id</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1234567890</span></code></p></td>
+<td><p><em>ID of the organization that has SCC configured. Can be found from the Google Cloud Console.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>add_soar_id_as_security_mark</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p><em>True/False whether or not to create Security Marks in SCC with the IBM SOAR ID when a finding is synced to SOAR. If omitted, defaults to False.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>findings_filter</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">severity</span> <span class="pre">=</span> <span class="pre">&quot;MEDIUM&quot;</span></code></p></td>
+<td><p><em>Filter to use when synchronizing findings from SCC to SOAR. If no filter is provided, all new findings will be synchronized. Information on how to format a finding filter can be found here. <code class="docutils literal notranslate"><span class="pre">AND</span></code> and <code class="docutils literal notranslate"><span class="pre">OR</span></code> can be used to string clauses together. NOTE: string values must be captured in quotation marks.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>soar_create_case_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/create_case.jinja</span></code></p></td>
+<td><p><em>Path to override template for automatic case creation. See <a class="reference internal" href="#templates-for-soar-cases"><span class="xref myst">Templates for SOAR Cases</span></a>.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>soar_update_case_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/update_case.jinja</span></code></p></td>
+<td><p><em>Path to override template for automatic case updating. See <a class="reference internal" href="#templates-for-soar-cases"><span class="xref myst">Templates for SOAR Cases</span></a>.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>soar_close_case_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/var/rescircuits/close_case.jinja</span></code></p></td>
+<td><p><em>Path to override template for automatic case closing. See <a class="reference internal" href="#templates-for-soar-cases"><span class="xref myst">Templates for SOAR Cases</span></a>.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>polling_interval</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p><em>Number of <strong>seconds</strong> between polling queries for new findings. Use value 0 to disable automatic case creation from findings.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>polling_lookback</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">120</span></code></p></td>
+<td><p><em>Number of <strong>minutes</strong> to look back for new findings the first time the app starts or restarts.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="custom-layouts">
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>The app automatically creates a custom “Google SCC” incident tab on first install. But more customization can be made in that tab:</p>
+<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts9.png" /></p>
+</li>
+</ul>
+</section>
+</section>
+<section id="templates-for-soar-cases">
+<h2>Templates for SOAR Cases<a class="headerlink" href="#templates-for-soar-cases" title="Link to this heading">#</a></h2>
+<p>It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.</p>
+<p>This is especially relevant if you have required custom <em>close</em> fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom <code class="docutils literal notranslate"><span class="pre">close_case_template</span></code> and reference those required close fields in the template.</p>
+<p>When overriding the template in App Host, specify the file path for each file as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
+<p>Below are the default templates used which can be copied, modified, and used with app_config’s
+<code class="docutils literal notranslate"><span class="pre">soar_create_case_template</span></code>, <code class="docutils literal notranslate"><span class="pre">soar_update_case_template</span></code>, and <code class="docutils literal notranslate"><span class="pre">soar_close_case_template</span></code> settings to override the default templates.
+To see the fields available, checkout the output of the <code class="docutils literal notranslate"><span class="pre">Get</span> <span class="pre">Findings</span></code> function. There you will find all the fields that
+are made available to the poller when creating, updating, and closing findings.</p>
+<details><summary>soar_create_case_template.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from an endpoint #}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
+<span class="s1">    &quot;CRITICAL&quot;: &quot;High&quot;, </span>
+<span class="s1">    &quot;HIGH&quot;: &quot;High&quot;, </span>
+<span class="s1">    &quot;MEDIUM&quot;: &quot;Medium&quot;, </span>
+<span class="s1">    &quot;LOW&quot;: &quot;Low&quot;, </span>
+<span class="s1">    &quot;DEFAULT&quot;: &quot;Low&quot;</span>
+<span class="s1">  }&#39;&#39;&#39;</span>
+  <span class="cp">%}</span>
+
+<span class="x">  &quot;name&quot;: &quot;Google SCC Finding - </span><span class="cp">{{</span> <span class="nv">category</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# `description` is also available without hyperlinks added #}</span>
+<span class="x">  &quot;description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">linkified_description</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">create_time</span><span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;start_date&quot;: </span><span class="cp">{{</span> <span class="nv">create_time</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
+<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;google_scc_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">finding_id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">name</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_type&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s1">&#39;type_&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_resource_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_resource_display_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s1">&#39;display_name&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_project_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s1">&#39;project_name&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_project_display_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s1">&#39;project_display_name&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_url&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">finding_url</span> <span class="cp">}}</span><span class="x">&#39;&gt;SCC Finding&lt;/a&gt;&quot;,</span>
+
+<span class="x">    </span><span class="c">{# the properties below are checked for updated in the update template #}</span>
+<span class="x">    &quot;google_scc_class&quot;: &quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">finding_class</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">finding_class</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_compliance_standards&quot;: &quot;</span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">standard</span> <span class="k">in</span> <span class="nv">source_properties</span><span class="o">[</span><span class="s1">&#39;compliance_standards&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">standard</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">standard</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span><span class="x"> : </span><span class="cp">{{</span> <span class="nv">source_properties</span><span class="o">[</span><span class="s1">&#39;compliance_standards&#39;</span><span class="o">][</span><span class="nv">standard</span><span class="o">][</span><span class="m">0</span><span class="o">][</span><span class="s1">&#39;ids&#39;</span><span class="o">][</span><span class="m">0</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/span&gt; </span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_next_steps&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">next_steps</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_security_marks&quot;: &quot;</span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">mark_key</span> <span class="k">in</span> <span class="nv">security_marks</span><span class="o">[</span><span class="s1">&#39;marks&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">mark_key</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">mark_key</span> <span class="cp">}}</span><span class="x"> : </span><span class="cp">{{</span> <span class="nv">security_marks</span><span class="o">[</span><span class="s1">&#39;marks&#39;</span><span class="o">][</span><span class="nv">mark_key</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/span&gt; </span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_remediation_link&quot;: &quot;&lt;b&gt;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s1">&#39;display_name&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/b&gt;&lt;br&gt; &lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">external_uri</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_category&quot;: &quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">category</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">category</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_recommendation&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">linkified_recommendation</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_vulnerability&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">vulnerability</span><span class="o">[</span><span class="s1">&#39;cve&#39;</span><span class="o">]</span> <span class="k">if</span> <span class="nv">vulnerability</span><span class="o">[</span><span class="s1">&#39;cve&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_state&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">state</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  },</span>
+<span class="x">  </span><span class="c">{# add comments as necessary #}</span>
+<span class="x">  &quot;comments&quot;: [</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">notes</span> <span class="cp">%}</span>
+<span class="x">    {</span>
+<span class="x">      &quot;text&quot;: {</span>
+<span class="x">        &quot;format&quot;: &quot;html&quot;,</span>
+<span class="x">        &quot;content&quot;: &quot;Created by &lt;b&gt;Google Cloud Security Command Center&lt;/b&gt;&lt;br&gt;&lt;br&gt;</span><span class="cp">{{</span> <span class="nv">notes</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      }</span>
+<span class="x">    }</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">    {</span>
+<span class="x">      &quot;text&quot;: {</span>
+<span class="x">        &quot;format&quot;: &quot;html&quot;,</span>
+<span class="x">        &quot;content&quot;: &quot;Created by &lt;b&gt;Google Cloud Security Command Center&lt;/b&gt;&quot;</span>
+<span class="x">      }</span>
+<span class="x">    }</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  ],</span>
+<span class="x">  </span><span class="c">{# add artifacts as necessary #}</span>
+<span class="x">  &quot;artifacts&quot;: [</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">ip</span> <span class="k">in</span> <span class="nv">indicator</span><span class="o">[</span><span class="s2">&quot;ip_addresses&quot;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">      {</span>
+<span class="x">        &quot;type&quot;: {</span>
+<span class="x">          &quot;name&quot;: &quot;IP Address&quot;</span>
+<span class="x">        },</span>
+<span class="x">        &quot;value&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">ip</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      }</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nb">loop</span><span class="nv">.last</span> <span class="cp">%}</span><span class="x">,</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">indicator</span><span class="o">[</span><span class="s2">&quot;domains&quot;</span><span class="o">]</span><span class="cp">%}</span><span class="x">,</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">domain</span> <span class="k">in</span> <span class="nv">indicator</span><span class="o">[</span><span class="s2">&quot;domains&quot;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">      {</span>
+<span class="x">        &quot;type&quot;: {</span>
+<span class="x">          &quot;name&quot;: &quot;DNS Name&quot;</span>
+<span class="x">        },</span>
+<span class="x">        &quot;value&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">domain</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      }</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nb">loop</span><span class="nv">.last</span> <span class="cp">%}</span><span class="x">,</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="x">  ]</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_update_case_template.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for updating a new SOAR incident from an endpoint #}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
+<span class="s1">    &quot;CRITICAL&quot;: &quot;High&quot;, </span>
+<span class="s1">    &quot;HIGH&quot;: &quot;High&quot;, </span>
+<span class="s1">    &quot;MEDIUM&quot;: &quot;Medium&quot;, </span>
+<span class="s1">    &quot;LOW&quot;: &quot;Low&quot;, </span>
+<span class="s1">    &quot;DEFAULT&quot;: &quot;Low&quot;</span>
+<span class="s1">  }&#39;&#39;&#39;</span>
+  <span class="cp">%}</span>
+<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;google_scc_class&quot;: &quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">finding_class</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">finding_class</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_compliance_standards&quot;: &quot;</span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">standard</span> <span class="k">in</span> <span class="nv">source_properties</span><span class="o">[</span><span class="s1">&#39;compliance_standards&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">standard</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">standard</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span><span class="x"> : </span><span class="cp">{{</span> <span class="nv">source_properties</span><span class="o">[</span><span class="s1">&#39;compliance_standards&#39;</span><span class="o">][</span><span class="nv">standard</span><span class="o">][</span><span class="m">0</span><span class="o">][</span><span class="s1">&#39;ids&#39;</span><span class="o">][</span><span class="m">0</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/span&gt; </span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_security_marks&quot;: &quot;</span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">mark_key</span> <span class="k">in</span> <span class="nv">security_marks</span><span class="o">[</span><span class="s1">&#39;marks&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">mark_key</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">mark_key</span> <span class="cp">}}</span><span class="x"> : </span><span class="cp">{{</span> <span class="nv">security_marks</span><span class="o">[</span><span class="s1">&#39;marks&#39;</span><span class="o">][</span><span class="nv">mark_key</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/span&gt; </span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_remediation_link&quot;: &quot;&lt;b&gt;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s2">&quot;display_name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/b&gt;&lt;br&gt; &lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">external_uri</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_category&quot;: &quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">category</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">category</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_recommendation&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">linkified_recommendation</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_vulnerability&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">vulnerability</span><span class="o">[</span><span class="s1">&#39;cve&#39;</span><span class="o">]</span> <span class="k">if</span> <span class="nv">vulnerability</span><span class="o">[</span><span class="s1">&#39;cve&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_state&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">state</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_next_steps&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">next_steps</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_close_case_template.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
+<span class="x">  &quot;plan_status&quot;: &quot;C&quot;,</span>
+<span class="x">  &quot;resolution_id&quot;: &quot;Resolved&quot;,</span>
+<span class="x">  &quot;resolution_summary&quot;: &quot;Closed by Google Cloud SCC. </span><span class="cp">{{</span> <span class="nv">source_properties</span><span class="o">[</span><span class="s1">&#39;DeactivationReason&#39;</span><span class="o">]</span> <span class="k">if</span> <span class="s1">&#39;DeactivationReason&#39;</span> <span class="k">in</span> <span class="nv">source_properties</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+
+<span class="x">  </span><span class="c">{# add additional fields based on your &#39;on close&#39; field requirements #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;google_scc_class&quot;: &quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">finding_class</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">finding_class</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_compliance_standards&quot;: &quot;</span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">standard</span> <span class="k">in</span> <span class="nv">source_properties</span><span class="o">[</span><span class="s1">&#39;compliance_standards&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">standard</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">standard</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span><span class="x"> : </span><span class="cp">{{</span> <span class="nv">source_properties</span><span class="o">[</span><span class="s1">&#39;compliance_standards&#39;</span><span class="o">][</span><span class="nv">standard</span><span class="o">][</span><span class="m">0</span><span class="o">][</span><span class="s1">&#39;ids&#39;</span><span class="o">][</span><span class="m">0</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/span&gt; </span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_security_marks&quot;: &quot;</span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">mark_key</span> <span class="k">in</span> <span class="nv">security_marks</span><span class="o">[</span><span class="s1">&#39;marks&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">mark_key</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">mark_key</span> <span class="cp">}}</span><span class="x"> : </span><span class="cp">{{</span> <span class="nv">security_marks</span><span class="o">[</span><span class="s1">&#39;marks&#39;</span><span class="o">][</span><span class="nv">mark_key</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/span&gt; </span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_remediation_link&quot;: &quot;&lt;b&gt;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s2">&quot;display_name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/b&gt;&lt;br&gt; &lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">external_uri</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">resource</span><span class="o">[</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_category&quot;: &quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="cp">{{</span> <span class="nv">category</span> <span class="cp">}}</span><span class="x">&#39;&gt;</span><span class="cp">{{</span> <span class="nv">category</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&quot;,</span>
+<span class="x">    &quot;google_scc_recommendation&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">linkified_recommendation</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_vulnerability&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">vulnerability</span><span class="o">[</span><span class="s1">&#39;cve&#39;</span><span class="o">]</span> <span class="k">if</span> <span class="s1">&#39;cve&#39;</span> <span class="k">in</span> <span class="nv">vulnerability</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;google_scc_state&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">state</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+</section>
+<section id="filters-and-field-masks">
+<h2>Filters and Field Masks<a class="headerlink" href="#filters-and-field-masks" title="Link to this heading">#</a></h2>
+<section id="findings-and-assets-filters">
+<h3>Findings and Assets Filters<a class="headerlink" href="#findings-and-assets-filters" title="Link to this heading">#</a></h3>
+<p>To use filters when gathering findings or assets, they must follow strict format restrictions set out by Google SCC. Below are a few examples of properly formatted filters. These can be used in workflows that call the <code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">Assets</span></code> function or the <code class="docutils literal notranslate"><span class="pre">Get</span> <span class="pre">Findings</span></code> function, or in the app.config value for <code class="docutils literal notranslate"><span class="pre">findings_filter</span></code> (which is used as a default for auto-sync and for <code class="docutils literal notranslate"><span class="pre">Get</span> <span class="pre">Findings</span></code> if no other filter is provided). Filters can be strung together with AND and OR logical operators, and parentheses are supported. OR has higher precendence than AND.</p>
+<p>Example filters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">securityMarks</span><span class="o">.</span><span class="n">marks</span><span class="o">.</span><span class="n">IBM_SOAR_ID</span> <span class="o">=</span> <span class="s2">&quot;1001&quot;</span> <span class="n">AND</span> <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;MEDIUM</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">securityCenterProperties</span><span class="o">.</span><span class="n">resourceType</span><span class="o">=</span><span class="s2">&quot;google.cloud.billing.BillingAccount&quot;</span>
+</pre></div>
+</div>
+<p>More details on <a class="reference external" href="https://cloud.google.com/security-command-center/docs/reference/rest/v1/organizations.sources.findings/list#query-parameters">findings filters</a> and <a class="reference external" href="https://cloud.google.com/security-command-center/docs/reference/rest/v1/organizations.assets/list#query-parameters">assets filters</a>.</p>
+</section>
+<section id="assets-field-masks">
+<h3>Assets Field Masks<a class="headerlink" href="#assets-field-masks" title="Link to this heading">#</a></h3>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">Assets</span></code> function, a field mask may be applied to restrict the values that are returned from the query. Field masks follow the format <code class="docutils literal notranslate"><span class="pre">asset.&lt;section&gt;.&lt;value&gt;</span></code> and can be strung together in a comma-separated list.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asset</span><span class="o">.</span><span class="n">resource_properties</span><span class="p">,</span> <span class="n">asset</span><span class="o">.</span><span class="n">security_center_properties</span><span class="o">.</span><span class="n">resource_type</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SCC: Add Source Property</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_add_finding_source_property_in_scc</span></code></p></td>
+<td><p>Add a source property key-value pair to a finding in SCC</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCC: Close Finding</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_close_finding_in_scc</span></code></p></td>
+<td><p>Move a finding from <code class="docutils literal notranslate"><span class="pre">ACTIVE</span></code> to <code class="docutils literal notranslate"><span class="pre">INACTIVE</span></code> in SCC</p></td>
+</tr>
+<tr class="row-even"><td><p>SCC: Delete Security Mark</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_delete_security_mark</span></code></p></td>
+<td><p>Completely remove a security mark from a finding in SCC</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCC: List Assets</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_list_assets</span></code></p></td>
+<td><p>Runs a query to list the assets in SCC and post them to a note; should be used with the provided filters and optional field mask</p></td>
+</tr>
+<tr class="row-even"><td><p>SCC: Refresh Finding</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_refresh_finding</span></code></p></td>
+<td><p>Manually refresh the values of a finding to update in SOAR</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCC: Update Next Steps</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_next_steps_in_scc</span></code></p></td>
+<td><p>Set the value of the <code class="docutils literal notranslate"><span class="pre">next_steps</span></code> field of a finding in SCC</p></td>
+</tr>
+<tr class="row-even"><td><p>SCC: Update Security Marks</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_security_mark</span></code></p></td>
+<td><p>Change the value or set a new security mark in SCC</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCC: Update Severity</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_severity_in_scc</span></code></p></td>
+<td><p>Change the severity of a finding in SCC</p></td>
+</tr>
+<tr class="row-even"><td><p>SCC: Update Severity on Change</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_auto_update_severity_in_scc</span></code></p></td>
+<td><p>Automatically changes the severity of a finding based on severity changes of the SOAR incident</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCC: Update Source Property</p></td>
+<td><p>datatable</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_finding_source_property_in_scc_from_dt</span></code></p></td>
+<td><p>Change the value of a source property of a finding in SCC from rows of the source properties datatable in SOAR</p></td>
+</tr>
+<tr class="row-even"><td><p>SCC: Update State</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_state_in_scc</span></code></p></td>
+<td><p>Update the state of a finding to either <code class="docutils literal notranslate"><span class="pre">ACTIVE</span></code> or <code class="docutils literal notranslate"><span class="pre">INACTIVE</span></code> in SCC</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="function-google-cloud-scc-get-findings">
+<h2>Function - Google Cloud SCC: Get Findings<a class="headerlink" href="#function-google-cloud-scc-get-findings" title="Link to this heading">#</a></h2>
+<p>Function to get findings from Google Cloud Security Command Center. Optional filter is available. This function is used in the given workflow for refreshing a finding, but with specific filter given for the one finding that is intended to be refreshed. You can design your own workflows and playbooks to take advantage of this function with custom filters for other purposes. See the example pre and post processing scripts and the output section for details on how the function can be used.</p>
+<p><img alt="screenshot: fn-google-cloud-scc-get-findings " src="../_images/fn-google-cloud-scc-get-findings.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_close_case_on_change</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>A boolean — if true, the case will be closed on update when INACTIVE in SCC</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_filter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">name=&quot;&lt;full_finding_name&gt;&quot;</span></code></p></td>
+<td><p>A filter for SCC findings query. If none is given the optional default finding filter from the app.config will be used</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;cases_closed_from_function&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;findings_list&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;finding&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;projects/&lt;project_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;LEGACY_AUTHORIZATION_ENABLED&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;connections&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;create_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-16T14:46:23.690Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;In Kubernetes, Role-based access control (RBAC) allows you to define roles with rules containing a set of permissions and grant permissions at the cluster and namespace level. This provides better security by ensuring that users only have access to specific resources. It is recommended that you disable legacy Attribute-based access control (ABAC). Learn more about disabling ABAC, as well as other techniques for hardening your Kubernetes clusters at https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-16T17:19:24.097Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;external_systems&quot;</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">&quot;external_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://console.cloud.google.com/&lt;link_to_solution&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;finding_class&quot;</span><span class="p">:</span> <span class="s2">&quot;MISCONFIGURATION&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;finding_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;finding_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://console.cloud.google.com/security/command-center/findings?organizationId=&lt;org_id&gt;&amp;resourceId=organizations</span><span class="si">%2F</span><span class="s2">&lt;org_id&gt;</span><span class="si">%2F</span><span class="s2">sources</span><span class="si">%2F</span><span class="s2">&lt;source_id&gt;</span><span class="si">%2F</span><span class="s2">findings</span><span class="si">%2F</span><span class="s2">&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;iam_bindings&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;indicator&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;domains&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;ip_addresses&quot;</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;linkified_description&quot;</span><span class="p">:</span> <span class="s2">&quot;In Kubernetes, Role-based access control (RBAC) allows you to define roles with rules containing a set of permissions and grant permissions at the cluster and namespace level. This provides better security by ensuring that users only have access to specific resources. It is recommended that you disable legacy Attribute-based access control (ABAC). Learn more about disabling ABAC, as well as other techniques for hardening your Kubernetes clusters at &lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac&lt;/a&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;linkified_recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Go to &lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=&lt;project_display_name&gt;</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=&lt;project_display_name&gt;&lt;/a&gt; click </span><span class="se">\&quot;</span><span class="s2">Edit</span><span class="se">\&quot;</span><span class="s2">, and disable </span><span class="se">\&quot;</span><span class="s2">Legacy Authorization</span><span class="se">\&quot;</span><span class="s2">. Note that a cluster cannot be modified while it is reconfiguring itself.&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;mute&quot;</span><span class="p">:</span> <span class="s2">&quot;UNDEFINED&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;mute_initiator&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;next_steps&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Go to https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=&lt;project_display_name&gt; click </span><span class="se">\&quot;</span><span class="s2">Edit</span><span class="se">\&quot;</span><span class="s2">, and disable </span><span class="se">\&quot;</span><span class="s2">Legacy Authorization</span><span class="se">\&quot;</span><span class="s2">. Note that a cluster cannot be modified while it is reconfiguring itself.&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;resource_name&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;folders&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;//container.googleapis.com/&lt;resource_name&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parent_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project_display_name&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/&lt;project_id&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;project_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project_display_name&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;project_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/&lt;project_id&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type_&quot;</span><span class="p">:</span> <span class="s2">&quot;google.container.Cluster&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;resource_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//container.googleapis.com/&lt;resource_path&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;security_marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;IBM_SOAR_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;2190&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;UP&quot;</span><span class="p">:</span> <span class="s2">&quot;DATE&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;/securityMarks&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;HIGH&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;source_properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;DeactivationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;The issue has been remediated.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ExceptionInstructions&quot;</span><span class="p">:</span> <span class="s2">&quot;Add the security mark </span><span class="se">\&quot;</span><span class="s2">allow_legacy_authorization_enabled</span><span class="se">\&quot;</span><span class="s2"> to the asset with a value of </span><span class="se">\&quot;</span><span class="s2">true</span><span class="se">\&quot;</span><span class="s2"> to prevent this finding from being activated again.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Explanation&quot;</span><span class="p">:</span> <span class="s2">&quot;In Kubernetes, Role-based access control (RBAC) allows you to define roles with rules containing a set of permissions and grant permissions at the cluster and namespace level. This provides better security by ensuring that users only have access to specific resources. It is recommended that you disable legacy Attribute-based access control (ABAC). Learn more about disabling ABAC, as well as other techniques for hardening your Kubernetes clusters at https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ReactivationCount&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">&quot;Recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Go to &lt;insert_link&gt; click </span><span class="se">\&quot;</span><span class="s2">Edit</span><span class="se">\&quot;</span><span class="s2">, and disable </span><span class="se">\&quot;</span><span class="s2">Legacy Authorization</span><span class="se">\&quot;</span><span class="s2">. Note that a cluster cannot be modified while it is reconfiguring itself.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ResourcePath&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;projects/&lt;project_name&gt;/&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;organizations/&lt;org_id&gt;/&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;ScannerName&quot;</span><span class="p">:</span> <span class="s2">&quot;CONTAINER_SCANNER&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;compliance_standards&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;cis&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;7.3&quot;</span>
+                  <span class="p">],</span>
+                  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;6.8.3&quot;</span>
+                  <span class="p">],</span>
+                  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+                <span class="p">}</span>
+              <span class="p">],</span>
+              <span class="s2">&quot;pci&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;4.1&quot;</span>
+                  <span class="p">]</span>
+                <span class="p">}</span>
+              <span class="p">]</span>
+            <span class="p">}</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;INACTIVE&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;vulnerability&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;cve&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;resource_name&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;folders&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;//container.googleapis.com/&lt;resource-path&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;parent_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project_display_name&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/&lt;project_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;project_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project_display_name&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;project_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/&lt;project_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type_&quot;</span><span class="p">:</span> <span class="s2">&quot;google.container.Cluster&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;state_change&quot;</span><span class="p">:</span> <span class="s2">&quot;UNUSED&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;google_scc_close_case_on_change&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;google_scc_filter&quot;</span><span class="p">:</span> <span class="s2">&quot;name = </span><span class="se">\&quot;</span><span class="s2">organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">5565</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-google-cloud-scc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-17 10:14:43&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">finding_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">finding_name</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_filter</span> <span class="o">=</span> <span class="s2">&quot;name = </span><span class="se">\&quot;</span><span class="si">{0}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">finding_name</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">log</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Could not find value for finding_name in Incident&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SPAN_FORMATTER</span> <span class="o">=</span> <span class="s2">&quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/span&gt;&quot;</span>
+<span class="n">LINK_FORMATTER</span> <span class="o">=</span> <span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;&quot;</span>
+
+<span class="n">findings_list</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;findings_list&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">findings_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+  <span class="n">finding</span> <span class="o">=</span> <span class="n">findings_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;finding&quot;</span><span class="p">)</span>
+  <span class="n">compliance_standards</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source_properties&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compliance_standards&quot;</span><span class="p">)</span>
+  <span class="n">security_marks</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;security_marks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;marks&quot;</span><span class="p">)</span>
+
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_class</span> <span class="o">=</span> <span class="n">SPAN_FORMATTER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;finding_class&quot;</span><span class="p">),</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;finding_class&quot;</span><span class="p">))</span>
+  <span class="n">standards_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">SPAN_FORMATTER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standard</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> : </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standard</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">compliance_standards</span><span class="p">[</span><span class="n">standard</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;ids&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span> <span class="k">for</span> <span class="n">standard</span> <span class="ow">in</span> <span class="n">compliance_standards</span><span class="p">]</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_compliance_standards</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">standards_list</span><span class="p">)</span>
+  <span class="n">marks_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">SPAN_FORMATTER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mark_key</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> : </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mark_key</span><span class="p">,</span> <span class="n">security_marks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mark_key</span><span class="p">)))</span> <span class="k">for</span> <span class="n">mark_key</span> <span class="ow">in</span> <span class="n">security_marks</span><span class="p">]</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_security_marks</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">marks_list</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_remediation_link</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resource&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;display_name&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="n">LINK_FORMATTER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;external_uri&quot;</span><span class="p">),</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resource&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_category</span> <span class="o">=</span> <span class="n">SPAN_FORMATTER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">),</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_recommendation</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;linkified_recommendation&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_vulnerability</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vulnerability&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cve&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_state</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_next_steps</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;next_steps&quot;</span><span class="p">)</span>
+  
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-google-cloud-scc-list-assets">
+<h2>Function - Google Cloud SCC: List Assets<a class="headerlink" href="#function-google-cloud-scc-list-assets" title="Link to this heading">#</a></h2>
+<p>List the assets of a Google Cloud organization that is being monitored in SCC. This function returns two objects (see the output for more details). The one that is used in the example post-processing script (the value <code class="docutils literal notranslate"><span class="pre">assets_formatted</span></code> that is returned from the function) is a neatly formatted HTML string and can be directly posted as a note, as it is in the example. If your use case requires parsing the results in a different way, you can use the <code class="docutils literal notranslate"><span class="pre">assets_raw</span></code> value returned from the function and parse them as you desire.</p>
+<p><img alt="screenshot: fn-google-cloud-scc-list-assets " src="../_images/fn-google-cloud-scc-list-assets.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_filter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">securityMarks.marks.test=&quot;1&quot;</span></code></p></td>
+<td><p>A filter for SCC assets query. If none, all assets will be listed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_field_mask</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">asset.resource_properties,</span> <span class="pre">asset.security_center_properties.resource_type</span></code></p></td>
+<td><p>Field mask to specify which fields to return from asset query.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;assets_formatted&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;nicely formatted string version of assets...&gt;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;assets_raw&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;projects/216150104097/assets/11712294571846742175&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;create_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-24T16:36:54.136Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;iam_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;policy_blob&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;policy_blob&gt;&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://console.cloud.google.com/security/command-center/assets?organizationId=&lt;org_id&gt;&amp;resourceId=&lt;resource_name&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/259357470209/assets/11712294571846742175&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;resource_properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;createTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-24T16:13:28.44Z&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lifecycleState&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">259357470209</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">type</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">organization</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;projectId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;projectNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;216150104097&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;security_center_properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;folders&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;resource_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/216150104097&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_owners&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;user:&lt;user&gt;&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;resource_parent&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/organizations/259357470209&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_parent_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;name&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_project&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/216150104097&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_project_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_type&quot;</span><span class="p">:</span> <span class="s2">&quot;google.cloud.resourcemanager.Project&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;security_marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;marks&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/259357470209/assets/11712294571846742175/securityMarks&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;update_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-15T15:04:11.754Z&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;state_change&quot;</span><span class="p">:</span> <span class="s2">&quot;UNUSED&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;projects/216150104097/assets/3331741957707965158&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;create_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-15T14:54:38.794Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;iam_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;policy_blob&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://console.cloud.google.com/security/command-center/assets?organizationId=&lt;org_id&gt;&amp;resourceId=&lt;resource_name&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/259357470209/assets/3331741957707965158&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;resource_properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;creationTimestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-15T07:54:37.897-07:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;defaultNetworkTier&quot;</span><span class="p">:</span> <span class="s2">&quot;PREMIUM&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;defaultServiceAccount&quot;</span><span class="p">:</span> <span class="s2">&quot;216150104097-compute@developer.gserviceaccount.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;9048930534532860994&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;compute#project&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;selfLink&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.googleapis.com/compute/v1/projects/&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;xpnProjectStatus&quot;</span><span class="p">:</span> <span class="s2">&quot;UNSPECIFIED_XPN_PROJECT_STATUS&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;security_center_properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;folders&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;resource_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//compute.googleapis.com/projects/9048930534532860994&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_owners&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;user:&lt;user&gt;&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;resource_parent&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/216150104097&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_parent_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;name&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_project&quot;</span><span class="p">:</span> <span class="s2">&quot;//cloudresourcemanager.googleapis.com/projects/216150104097&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_project_display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;project&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resource_type&quot;</span><span class="p">:</span> <span class="s2">&quot;google.compute.Project&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;security_marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;marks&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/259357470209/assets/3331741957707965158/securityMarks&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;update_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-15T14:54:38.794Z&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;state_change&quot;</span><span class="p">:</span> <span class="s2">&quot;UNUSED&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;google_scc_field_mask&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;google_scc_filter&quot;</span><span class="p">:</span> <span class="s2">&quot;securityCenterProperties.resourceDisplayName=</span><span class="se">\&quot;</span><span class="s2">&lt;project&gt;</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">6014</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-google-cloud-scc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-03 13:25:15&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">finding_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">finding_name</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_filter</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_search_filter</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_search_filter</span> <span class="k">else</span> <span class="kc">None</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_field_mask</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_field_mask</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_field_mask</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">log</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Could not find value for finding_name in Incident&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## This post-processing script is designed to use the</span>
+<span class="c1"># pre-formatted assets that are returned in `results.content.assets_formatted`. </span>
+<span class="c1"># There is, however, another return value `assets_raw` that contains</span>
+<span class="c1"># more information. Any effort to make the assets displayed in a</span>
+<span class="c1"># different way should use the assets_raw values.</span>
+<span class="c1"># NOTE: while the SCC UI will show associated findings</span>
+<span class="c1"># for an asset, the API exposes no such functionality directly</span>
+<span class="c1"># when querying assets. In order to acheive a similar result,</span>
+<span class="c1"># make use of the list_findings function and a well-designed asset filter</span>
+
+<span class="n">pre_msg</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Google SCC List Assets results:&lt;/b&gt;&quot;</span>
+<span class="n">post_msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">given_filter</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;google_scc_filter&quot;</span><span class="p">)</span>
+<span class="n">field_mask</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;google_scc_field_mask&quot;</span><span class="p">)</span>
+
+<span class="c1"># List the filter and field mask at the beginning if they are given</span>
+<span class="k">if</span> <span class="n">given_filter</span><span class="p">:</span>
+  <span class="n">pre_msg</span> <span class="o">+=</span> <span class="s2">&quot;&lt;br&gt;&lt;i&gt;Filter: </span><span class="se">\t\t\t</span><span class="s2">&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;/i&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">given_filter</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">field_mask</span><span class="p">:</span>
+  <span class="n">pre_msg</span> <span class="o">+=</span> <span class="s2">&quot;&lt;br&gt;&lt;i&gt;Field Mask: </span><span class="se">\t</span><span class="s2">&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;/i&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">field_mask</span><span class="p">)</span>
+  
+  <span class="c1"># add a note about using field masks if they were given as they are tricky to get right</span>
+  <span class="n">post_msg</span> <span class="o">=</span> <span class="s2">&quot;&lt;i&gt;Note: When using a Field Mask, &lt;b&gt;only&lt;/b&gt; the fields given (and a few other required default fields) will return values, however, other fields may be present as empty values. Be sure to use a properly formatted Field Mask.&lt;/i&gt;&quot;</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">pre_msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;br&gt;&quot;</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;assets_formatted&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;br&gt;&quot;</span> <span class="o">+</span> <span class="n">post_msg</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">pre_msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;br&gt;Failed to retreive assets. Reason: </span><span class="si">{0}</span><span class="s2">&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">,</span> <span class="s2">&quot;UNKNOWN&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="n">post_msg</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-google-cloud-scc-update-findings">
+<h2>Function - Google Cloud SCC: Update Findings<a class="headerlink" href="#function-google-cloud-scc-update-findings" title="Link to this heading">#</a></h2>
+<p>Function to update the value of a given finding property for finding(s) from Google Cloud Security Command Center. Filter is optional, but highly recommended and should be well formed to avoid unexpected updates to multiple findings at once.</p>
+<p><img alt="screenshot: fn-google-cloud-scc-update-findings " src="../_images/fn-google-cloud-scc-update-findings.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_filter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">severity=&quot;MEDIUM&quot;</span></code></p></td>
+<td><p>A filter for SCC findings query. If none is given the optional default filter from the app.config will be used</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_key</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">state</span></code></p></td>
+<td><p>Field to update</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_value</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INACTIVE</span></code></p></td>
+<td><p>Value to update field to in SCC</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;findings_list&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;finding&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN_SSH_PORT&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;connections&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;create_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-15T14:55:13.751Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers.&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-23T17:00:31.447393Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;external_systems&quot;</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">&quot;external_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://console.cloud.google.com/&lt;link_to_solution&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;finding_class&quot;</span><span class="p">:</span> <span class="s2">&quot;MISCONFIGURATION&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;finding_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://console.cloud.google.com/security/command-center/findings?organizationId=&lt;org_id&gt;&amp;resourceId=&lt;finding_name&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;iam_bindings&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;indicator&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;domains&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;ip_addresses&quot;</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;linkified_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers.&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;linkified_recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Restrict the firewall rules at: &lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://console.cloud.google.com/&lt;link_to_solution&gt;</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;https://console.cloud.google.com/&lt;link_to_solution&gt;&lt;/a&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;mute&quot;</span><span class="p">:</span> <span class="s2">&quot;UNDEFINED&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;mute_initiator&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;next_steps&quot;</span><span class="p">:</span> <span class="s2">&quot;These are the next steps&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Restrict the firewall rules at: https://console.cloud.google.com/&lt;link_to_solution&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;resource_name&quot;</span><span class="p">:</span> <span class="s2">&quot;//container.googleapis.com/&lt;resource_path&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;security_marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;FAKE&quot;</span><span class="p">:</span> <span class="s2">&quot;Security Mark&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;IBM_SOAR_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;2248&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;/securityMarks&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;MEDIUM&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;source_properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;DeactivationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;The issue has been remediated.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ExceptionInstructions&quot;</span><span class="p">:</span> <span class="s2">&quot;Add the security mark </span><span class="se">\&quot;</span><span class="s2">allow_open_ssh_port</span><span class="se">\&quot;</span><span class="s2"> to the asset with a value of </span><span class="se">\&quot;</span><span class="s2">true</span><span class="se">\&quot;</span><span class="s2"> to prevent this finding from being activated again.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Explanation&quot;</span><span class="p">:</span> <span class="s2">&quot;Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ExposedService&quot;</span><span class="p">:</span> <span class="s2">&quot;SSH&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;OpenPorts&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;SCTP&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mf">22.0</span>
+              <span class="p">],</span>
+              <span class="s2">&quot;TCP&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mf">22.0</span>
+              <span class="p">]</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;ReactivationCount&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">&quot;Recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Restrict the firewall rules at: https://console.cloud.google.com/&lt;link_to_solution&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ResourcePath&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;projects/&lt;project_name&gt;/&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;organizations/&lt;org_id&gt;/&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;ScannerName&quot;</span><span class="p">:</span> <span class="s2">&quot;FIREWALL_SCANNER&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;compliance_standards&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;cis&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;3.6&quot;</span>
+                  <span class="p">],</span>
+                  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;3.6&quot;</span>
+                  <span class="p">],</span>
+                  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;3.6&quot;</span>
+                  <span class="p">],</span>
+                  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2&quot;</span>
+                <span class="p">}</span>
+              <span class="p">],</span>
+              <span class="s2">&quot;iso&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;A.13.1.1&quot;</span>
+                  <span class="p">]</span>
+                <span class="p">}</span>
+              <span class="p">],</span>
+              <span class="s2">&quot;nist&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;SC-7&quot;</span>
+                  <span class="p">]</span>
+                <span class="p">}</span>
+              <span class="p">],</span>
+              <span class="s2">&quot;pci&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;1.2.1&quot;</span>
+                  <span class="p">]</span>
+                <span class="p">}</span>
+              <span class="p">]</span>
+            <span class="p">}</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;INACTIVE&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;vulnerability&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;cve&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;updated_key&quot;</span><span class="p">:</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated_value&quot;</span><span class="p">:</span> <span class="s2">&quot;INACTIVE&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;google_scc_filter&quot;</span><span class="p">:</span> <span class="s2">&quot;name = </span><span class="se">\&quot;</span><span class="s2">organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;google_scc_update_key&quot;</span><span class="p">:</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;google_scc_update_value&quot;</span><span class="p">:</span> <span class="s2">&quot;INACTIVE&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">5963</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-google-cloud-scc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-23 13:00:32&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SEVERITY_MAP</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="s2">&quot;HIGH&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="s2">&quot;MEDIUM&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="s2">&quot;LOW&quot;</span>
+<span class="p">}</span>
+
+<span class="n">finding_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">finding_name</span><span class="p">:</span>
+  <span class="c1"># for this specific workflow, we want to only update the finding that</span>
+  <span class="c1"># is associated with this incident so we pass in the finding name as the filter</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_filter</span> <span class="o">=</span> <span class="s2">&quot;name = </span><span class="se">\&quot;</span><span class="si">{0}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">finding_name</span><span class="p">)</span>
+  
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_update_key</span> <span class="o">=</span> <span class="s2">&quot;severity&quot;</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_update_value</span> <span class="o">=</span> <span class="n">SEVERITY_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">,</span> <span class="s2">&quot;LOW&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">log</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Could not find value for finding_name in Incident&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">row</span><span class="o">.</span><span class="n">google_scc_source_property_value</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;google_scc_update_value&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-google-cloud-scc-update-security-mark">
+<h2>Function - Google Cloud SCC: Update Security Mark<a class="headerlink" href="#function-google-cloud-scc-update-security-mark" title="Link to this heading">#</a></h2>
+<p>Update/add a security mark of/to a given SCC finding.</p>
+<p><img alt="screenshot: fn-google-cloud-scc-update-security-mark " src="../_images/fn-google-cloud-scc-update-security-mark.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_finding_name</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_key</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">google_scc_update_value</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;updated_key&quot;</span><span class="p">:</span> <span class="s2">&quot;UPDATE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated_marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;canonical_name&quot;</span><span class="p">:</span> <span class="s2">&quot;projects/&lt;project_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;marks&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;IBM_SOAR_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;2248&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UPDATE&quot;</span><span class="p">:</span> <span class="s2">&quot;Security Mark&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;/securityMarks&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;updated_value&quot;</span><span class="p">:</span> <span class="s2">&quot;Security Mark&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;google_scc_finding_name&quot;</span><span class="p">:</span> <span class="s2">&quot;organizations/&lt;org_id&gt;/sources/&lt;source_id&gt;/findings/&lt;finding_id&gt;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;google_scc_update_key&quot;</span><span class="p">:</span> <span class="s2">&quot;UPDATE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;google_scc_update_value&quot;</span><span class="p">:</span> <span class="s2">&quot;Security Mark&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">809</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-google-cloud-scc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-23 12:59:14&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">finding_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">finding_name</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_finding_name</span> <span class="o">=</span> <span class="n">finding_name</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">google_scc_update_key</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_security_mark_key</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">log</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Could not find value for finding_name in Incident&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SPAN_FORMATTER</span> <span class="o">=</span> <span class="s2">&quot;&lt;span class=&#39;label&#39; rel=&#39;tooltip&#39; title=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/span&gt;&quot;</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;Removed security mark &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; in SCC&quot;</span>
+  
+  <span class="n">update_key</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;updated_key&quot;</span><span class="p">)</span>
+  
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">update_key</span><span class="p">))</span>
+  
+  <span class="n">security_marks</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;updated_marks&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;marks&quot;</span><span class="p">)</span>
+  <span class="n">marks_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">SPAN_FORMATTER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mark_key</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> : </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mark_key</span><span class="p">,</span> <span class="n">security_marks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mark_key</span><span class="p">)))</span> <span class="k">for</span> <span class="n">mark_key</span> <span class="ow">in</span> <span class="n">security_marks</span><span class="p">]</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">google_scc_security_marks</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">marks_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="data-table-finding-source-properties">
+<h2>Data Table - Finding Source Properties<a class="headerlink" href="#data-table-finding-source-properties" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-finding-source-properties" src="../_images/dt-finding-source-properties.png" /></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p>google_scc_finding_source_properties_dt</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Property</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_source_property</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_source_property_value</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Finding Category</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_category</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Finding Class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_class</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Associated Standards</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_compliance_standards</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Finding ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Finding Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Next Steps</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_next_steps</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Project Display Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_project_display_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Project Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_project_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Recommendation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_recommendation</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Asset Affected</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_remediation_link</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Resource Display Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_resource_display_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Resource Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_resource_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Security Marks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_security_marks</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>State in SCC</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_state</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Finding Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Finding Link</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_url</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Associated Vulnerability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">google_scc_vulnerability</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_googlesafebrowsing/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Google Safe Browsing Function for IBM SOAR</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_google_cloud_dlp/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">fn_google_cloud_dlp</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Google Cloud Security Command Center</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents <!-- omit in toc --></a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+<li><a class="reference internal" href="#endpoint-developed-with">Endpoint Developed With</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
+<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#templates-for-soar-cases">Templates for SOAR Cases</a></li>
+<li><a class="reference internal" href="#filters-and-field-masks">Filters and Field Masks</a><ul>
+<li><a class="reference internal" href="#findings-and-assets-filters">Findings and Assets Filters</a></li>
+<li><a class="reference internal" href="#assets-field-masks">Assets Field Masks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#function-google-cloud-scc-get-findings">Function - Google Cloud SCC: Get Findings</a></li>
+<li><a class="reference internal" href="#function-google-cloud-scc-list-assets">Function - Google Cloud SCC: List Assets</a></li>
+<li><a class="reference internal" href="#function-google-cloud-scc-update-findings">Function - Google Cloud SCC: Update Findings</a></li>
+<li><a class="reference internal" href="#function-google-cloud-scc-update-security-mark">Function - Google Cloud SCC: Update Security Mark</a></li>
+<li><a class="reference internal" href="#data-table-finding-source-properties">Data Table - Finding Source Properties</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

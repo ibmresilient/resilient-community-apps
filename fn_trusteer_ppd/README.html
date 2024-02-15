@@ -1,0 +1,1942 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Resilient Function - Twilio Send SMS" href="../fn_twilio/README.html" /><link rel="prev" title="Timer Function for SOAR" href="../fn_timer/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Trusteer Pinpoint Detect - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <!--
+  This README.md is generated by running:
+  "resilient-sdk docgen -p fn_trusteer_ppd"
+
+  This file was generated with resilient-sdk v48.1.0
+
+  It is best edited using a Text Editor with a Markdown Previewer. VS Code
+  is a good example. Checkout https://guides.github.com/features/mastering-markdown/
+  for tips on writing with Markdown
+
+  All fields followed by "::CHANGE_ME::"" should be manually edited
+
+  If you make manual edits and run docgen again, a .bak file will be created
+
+  Store any screenshots in the "doc/screenshots" directory and reference them like:
+  ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
+
+  NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
+-->
+<section id="trusteer-pinpoint-detect">
+<h1>Trusteer Pinpoint Detect<a class="headerlink" href="#trusteer-pinpoint-detect" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---trusteer-ppd-get-url-links-to-trusteer"><span class="xref myst">Function - Trusteer PPD: Get URL Links to Trusteer</span></a></p></li>
+<li><p><a class="reference internal" href="#function---trusteer-ppd-update-alert-classification"><span class="xref myst">Function - Trusteer PPD: Update Alert Classification</span></a></p></li>
+<li><p><a class="reference internal" href="#function---trusteer-ppd-update-classification-in-alert-datatable"><span class="xref myst">Function - Trusteer PPD: Update Classification in Alert Datatable</span></a></p></li>
+<li><p><a class="reference internal" href="#script---trusteer-ppd-create-artifacts"><span class="xref myst">Script - Trusteer PPD: Create Artifacts</span></a></p></li>
+<li><p><a class="reference internal" href="#script---trusteer-ppd-create-case-from-email"><span class="xref myst">Script - Trusteer PPD: Create Case from Email</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---trusteer-alerts"><span class="xref myst">Data Table - Trusteer Alerts</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-artifact-types"><span class="xref myst">Custom Artifact Types</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>03/2023</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+<p><strong>IBM SOAR app for Trusteer Pinpoint Detect</strong></p>
+<p>IBM Security® Trusteer® Pinpoint Detect helps organizations quickly and transparently establish digital identity trust throughout a seamless customer experience without compromising on security.</p>
+<p>IBM Security® Trusteer® Pinpoint Detect is real-time, cloud-based risk assessment software that analyzes online identities to differentiate between malicious users and true customers. Trusteer® Pinpoint Detect uses artificial intelligence and machine learning to protect digital channels against account takeover and fraudulent transactions and detect end user devices infected with high-risk malware.</p>
+<p><img alt="screenshot: main" src="../_images/main61.png" /></p>
+<p>Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinpoint Detect and create cases in SOAR and sends classification information back to Trusteer.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<!--
+  List the Key Features of the Integration
+-->
+<ul class="simple">
+<li><p>Create cases in SOAR from Trusteer Pinpoint Detect Criminal email alert feeds via email parsing script in SOAR.</p></li>
+<li><p>A Trusteer account (PUID - Permanent User ID) maps to a case in SOAR and subsequent new alerts on the account are added to the Trusteer Alerts data table.</p></li>
+<li><p>Send alert Classification feedback to Trusteer on a session from the Trusteer Alerts data table. Classification options are:</p>
+<ul>
+<li><p>Pending</p></li>
+<li><p>Confirmed legitimate</p></li>
+<li><p>Undetermined</p></li>
+<li><p>Confirmed fraud</p></li>
+<li><p>Confirmed fraud (Account takeover)</p></li>
+<li><p>Confirmed fraud (First-party)</p></li>
+<li><p>Confirmed fraud (Mule account)</p></li>
+<li><p>Confirmed fraud (Remote access tool)</p></li>
+<li><p>Confirmed fraud (Social engineering)</p></li>
+</ul>
+</li>
+<li><p>Add artifacts to the Trusteer case via email parsing script</p></li>
+<li><p>Add artifacts to the Trusteer case via Trusteer Alerts data table script.</p></li>
+<li><p>Navigate links back to the Trusteer account and devices from the case.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<!--
+  List any Requirements 
+--> 
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=47.1.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>Incidents</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Edit Incidents</p></td>
+<td><p>Fields</p></td>
+</tr>
+<tr class="row-even"><td><p>Layouts</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app <strong>does</strong> support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<p>Python 3.6 and Python 3.9 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>resilient-circuits&gt;=48.0.0</p></li>
+</ul>
+</section>
+<section id="ibm-trusteer-development-version">
+<h3>IBM Trusteer Development Version<a class="headerlink" href="#ibm-trusteer-development-version" title="Link to this heading">#</a></h3>
+<p>This app has been implemented using:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Product Name</p></th>
+<th class="head"><p>Product Version</p></th>
+<th class="head"><p>API URL</p></th>
+<th class="head"><p>API Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IBM Trusteer</p></td>
+<td><p>11.7</p></td>
+<td><p>https://customer_name-api.trusteer.com/api/v1/ (Feedback Loop API)</p></td>
+<td><p>v1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="prerequisites">
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+<ul class="simple">
+<li><p>An email address configured in Trusteer Management Application (TMA/Trustboard) to which Trusteer sends <strong>Pinpoint Detection suspicious access detected</strong> alerts.</p></li>
+<li><p>The same email address configured in Trusteer is also configured in SOAR inbound email connection.</p></li>
+<li><p>A Trusteer API token.</p></li>
+<li><p>Trusteer client authorization certificate and key files to perform REST API calls.</p></li>
+</ul>
+</section>
+<section id="configure-trusteer-email-feeds">
+<h4>Configure Trusteer Email Feeds<a class="headerlink" href="#configure-trusteer-email-feeds" title="Link to this heading">#</a></h4>
+<!--
+List any steps that are needed to configure the endpoint to use this app.
+-->
+<p>Use the Trusteer Management Application (TMA/Trustboard) to configure the email address to receive Trusteer alert emails.</p>
+<ul class="simple">
+<li><p>Select <strong>Setup and Administration</strong> on the left menu and click on <strong>Feeds Configuration</strong>.</p></li>
+<li><p>Click on the <strong>+ Add</strong> button at the top of the page:</p></li>
+</ul>
+<p><img alt="screenshot: fn-trusteer-ppd-tma-feed-config " src="../_images/fn-trusteer-ppd-tma-feed-config.png" /></p>
+<ul class="simple">
+<li><p>Fill out the pop-up form.</p></li>
+<li><p>The <strong>Product</strong> selection must be <strong>Pinpoint Detection</strong> and the  <strong>Feed Name</strong> selection must be <strong>Pinpoint Criminal Detection suspicious access detected</strong> as this is the only feed supported by the SOAR app. Hit Save.</p></li>
+</ul>
+<p><img alt="screenshot: fn-trusteer-ppd-tma-form " src="../_images/fn-trusteer-ppd-tma-form.png" /></p>
+<p>The email address to send Trusteer alerts appears in the list.
+<img alt="screenshot: fn-trusteer-ppd-tma-config " src="../_images/fn-trusteer-ppd-tma-config.png" /></p>
+</section>
+<section id="configure-soar-inbound-email-connection">
+<h4>Configure SOAR Inbound Email Connection<a class="headerlink" href="#configure-soar-inbound-email-connection" title="Link to this heading">#</a></h4>
+<p>Create and configure a SOAR inbound email connection with the same email address configured in Trusteer:</p>
+<p><img alt="screenshot: fn-trusteer-ppd-tma-config " src="../_images/fn-trusteer-ppd-inbound-email.png" /></p>
+</section>
+<section id="the-case-incident-owner">
+<h4>The Case/incident Owner<a class="headerlink" href="#the-case-incident-owner" title="Link to this heading">#</a></h4>
+<p>New cases/incidents need an owner, either an individual identified by their email address or a group name. Prior to running the app, the provided script <strong>Trusteer PPD: Create Case from Email v1.0.0</strong>, should be changed to reflect the new incident owner in your IBM SOAR platform. For example, to change the owner to l1&#64;businessname.com, locate line 9 of the script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new incident owner - the email address of a user or the name of a group and cannot be blank.</span>
+<span class="c1"># Change this value to reflect who will be the owner of the incident before running the script.</span>
+<span class="n">new_case_owner</span> <span class="o">=</span> <span class="s2">&quot;Trusteer Pinpoint Detect case owner&quot;</span>
+</pre></div>
+</div>
+<p>Edit the line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new incident owner - the email address of a user or the name of a group and cannot be blank.</span>
+<span class="c1"># Change this value to reflect who will be the owner of the incident before running the script.</span>
+<span class="n">newIncidentOwner</span> <span class="o">=</span> <span class="s2">&quot;l1@businessname.com&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="enable-the-rule-trusteer-ppd-parse-trusteer-email-v1-0-0">
+<h4>Enable the Rule: Trusteer PPD: Parse Trusteer Email v1.0.0<a class="headerlink" href="#enable-the-rule-trusteer-ppd-parse-trusteer-email-v1-0-0" title="Link to this heading">#</a></h4>
+<p>Once the new case owner is defined in the <strong>Trusteer PPD: Create Case from Email v1.0.0</strong> script, enable the included rule: <strong>Trusteer PPD: Parse Trusteer Email v1.0.0</strong></p>
+<p><img alt="screenshot: fn-trusteer-ppd-rule " src="../_images/fn-trusteer-ppd-rule.png" /></p>
+</section>
+<section id="permissions">
+<h4>Permissions<a class="headerlink" href="#permissions" title="Link to this heading">#</a></h4>
+<!--
+List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
+-->
+<ul class="simple">
+<li><p>Trusteer account</p></li>
+<li><p>Trusteer API Token</p></li>
+<li><p>Trusteer client authorization certificate and key files</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>api_token</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
+<td><p><em>Trusteer token used to make REST API call.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>api_version</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">v1</span></code></p></td>
+<td><p><em>Trusteer REST API version.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>client_auth_cert</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;path_to_cert.pem&gt;</span></code></p></td>
+<td><p><em>Path to client authorization certificate file used to make REST API call.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>client_auth_key</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;path_to_key.pem&gt;</span></code></p></td>
+<td><p><em>Path to client authorization key file used to make REST API call.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>customer_name</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>``</p></td>
+<td><p><em>Trusteer customer name. Used to form URL for links back to Trusteer and to call feedback REST API endpoint.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="custom-layouts">
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+<p>The following Trusteer Tab custom layout is included in the app:</p>
+<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts29.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-trusteer-ppd-get-url-links-to-trusteer">
+<h2>Function - Trusteer PPD: Get URL Links to Trusteer<a class="headerlink" href="#function-trusteer-ppd-get-url-links-to-trusteer" title="Link to this heading">#</a></h2>
+<p>Return the URL links to the Trusteer PUID and/or the device, depending on the input parameters.</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_device_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_puid</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;link_url_device_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;link_url_puid&quot;</span><span class="p">:</span> <span class="s2">&quot;https://customer-name.trusteer.com/search-results?puid=PUID-808949021a04d66f9e54192028693507&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;trusteer_ppd_puid&quot;</span><span class="p">:</span> <span class="s2">&quot;PUID-808949021a04d66f9e54192028693507&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;laptop.local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-trusteer-ppd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-02-27 14:24:00&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_device_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_device_id_and_link</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Scrip to Create Link to Device:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">trusteer_ppd_result</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Trusteer PPD: Function to get URL links was not successful.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+  <span class="n">link_url_device_id</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;link_url_device_id&quot;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="k">if</span> <span class="n">link_url_device_id</span><span class="p">:</span>
+    <span class="n">ref_html</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link_url_device_id</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_device_id</span><span class="p">)</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_device_id_and_link</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Trusteer PPD: Function to get URL links has no content.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-trusteer-ppd-update-alert-classification">
+<h2>Function - Trusteer PPD: Update Alert Classification<a class="headerlink" href="#function-trusteer-ppd-update-alert-classification" title="Link to this heading">#</a></h2>
+<p>Update the alert classification in Trusteer to one of:</p>
+<ul class="simple">
+<li><p>confirmed_fraud</p></li>
+<li><p>confirmed_legitimate</p></li>
+<li><p>undetermined</p></li>
+<li><p>pending_confirmation</p></li>
+</ul>
+<p>If the feedback is confirmed_fraud, then the optional fraud_mo parameter can provide more information:</p>
+<ul class="simple">
+<li><p>account_takeover</p></li>
+<li><p>remote_access_tool</p></li>
+<li><p>first_party</p></li>
+<li><p>social_engineering</p></li>
+<li><p>stolen_device</p></li>
+<li><p>mule_account</p></li>
+</ul>
+<p><img alt="screenshot: fn-trusteer-ppd-update-alert-classification " src="../_images/fn-trusteer-ppd-update-alert-classification.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_application_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_feedback</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_fraud_mo</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>If you set feedback to confirmed_fraud and confirm that the session was fraudulent, you can also set the specific type of fraud that occurred. If you are not sure of the type of fraud, do not set the fraud_mo field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_session_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;api_request_id&quot;</span><span class="p">:</span> <span class="s2">&quot;82825B58-70CA-4B04-9BD2-E65E112AA417&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;trusteer_ppd_application_id&quot;</span><span class="p">:</span> <span class="s2">&quot;demo_app&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;trusteer_ppd_feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;pending_confirmation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;trusteer_ppd_fraud_mo&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;trusteer_ppd_session_id&quot;</span><span class="p">:</span> <span class="s2">&quot;eaa3aef168e8aeadfb606bf2637c21f&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3517</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;laptop.local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-trusteer-ppd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-02-28 16:57:36&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">classification_map</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="s2">&quot;Pending&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;pending_confirmation&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed legitimate&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed_legitimate&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+  <span class="s2">&quot;Undetermined&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;undetermined&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed fraud&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed_fraud&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed fraud (Account takeover)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;pending_confirmation&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="s2">&quot;account_takeover&quot;</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed fraud (First-party)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed_fraud&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="s2">&quot;first_party&quot;</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed fraud (Mule account)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed_fraud&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="s2">&quot;mule_account&quot;</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed fraud (Remote access tool)&quot;</span><span class="p">:{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed_fraud&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="s2">&quot;remote_access_tool&quot;</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed fraud (Social engineering)&quot;</span><span class="p">:{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed_fraud&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="s2">&quot;social_engineering&quot;</span><span class="p">},</span>
+  <span class="s2">&quot;Confirmed fraud (Stolen device)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed_fraud&quot;</span><span class="p">,</span> <span class="s2">&quot;fraud_mo&quot;</span><span class="p">:</span> <span class="s2">&quot;stolen_device&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="n">mapped_classification</span> <span class="o">=</span> <span class="n">classification_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_classification</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_feedback</span> <span class="o">=</span> <span class="n">mapped_classification</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback&quot;</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_fraud_mo</span> <span class="o">=</span> <span class="n">mapped_classification</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fraud_mo&quot;</span><span class="p">)</span>
+        
+<span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_application_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">trusteer_ppd_application_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_session_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_session_id</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">alert_classification</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Trusteer PPD: Updated Alert Classification to &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_classification</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Trusteer PPD: ERROR: Unable to Update Alert Classification to &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; in Trusteer&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_classification</span><span class="p">))</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-trusteer-ppd-update-classification-in-alert-datatable">
+<h2>Function - Trusteer PPD: Update Classification in Alert Datatable<a class="headerlink" href="#function-trusteer-ppd-update-classification-in-alert-datatable" title="Link to this heading">#</a></h2>
+<p>Update the Trusteer Alert data table Classification column for all rows with the same session ID.</p>
+<p><img alt="screenshot: fn-trusteer-ppd-update-classification-in-alert-datatable " src="../_images/fn-trusteer-ppd-update-classification-in-alert-datatable.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_classification</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_session_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;num_rows_updated&quot;</span><span class="p">:</span> <span class="mi">5</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">3326</span><span class="p">,</span>
+    <span class="s2">&quot;trusteer_ppd_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Confirmed fraud (Stolen device)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;trusteer_ppd_session_id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxx3aef168e8aeadfb606bf2637cxxx&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">5647</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;laptop.local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-trusteer-ppd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-01 10:23:36&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_session_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_session_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_classification</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_classification</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">alert_datatable_update</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Trusteer PPD: ERROR: Unable to update Trusteer Alerts data table to classification &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_classification</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Trusteer PPD: Updated Trusteer PPD Alerts data table sessions: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; to classification:&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_session_id</span><span class="p">,</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">trusteer_ppd_classification</span><span class="p">))</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-trusteer-ppd-create-artifacts">
+<h2>Script - Trusteer PPD: Create Artifacts<a class="headerlink" href="#script-trusteer-ppd-create-artifacts" title="Link to this heading">#</a></h2>
+<p>This script will create artifacts from the items in a row of the Trusteer Alerts data table.</p>
+<p><strong>Object:</strong> incident</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">artifact_value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_user_ip_address</span>
+<span class="k">if</span> <span class="n">artifact_value</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="s2">&quot;Created by Trusteer PPD.&quot;</span><span class="p">)</span>
+  
+<span class="n">device_link</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_device_id_and_link</span><span class="o">.</span><span class="n">content</span>
+<span class="k">if</span> <span class="n">device_link</span><span class="p">:</span>
+  <span class="c1"># Parse the device ID out of the HTML text link</span>
+  <span class="n">parsed_device_id</span> <span class="o">=</span> <span class="n">device_link</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">parsed_device_id</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="n">device_id</span> <span class="o">=</span> <span class="n">parsed_device_id</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&lt;/a&gt;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">device_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;trusteer_ppd_device_id&quot;</span><span class="p">,</span> <span class="n">device_id</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Created by Trusteer PPD.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-trusteer-ppd-create-case-from-email-v1-0-0">
+<h2>Script - Trusteer PPD: Create Case from Email v1.0.0<a class="headerlink" href="#script-trusteer-ppd-create-case-from-email-v1-0-0" title="Link to this heading">#</a></h2>
+<p>Parse an email from Trusteer Pinpoint Detect and create a case if there is not an Active case with the PUID already in SOAR.  Otherwise, add a new row to Trusteer Alerts data table in the case with the associated PUID and populate with information from the current email.</p>
+<p><strong>Object:</strong> __emailmessage</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">calendar</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># The new incident owner - the email address of a user or the name of a group and cannot be blank.</span>
+<span class="c1"># Change this value to reflect who will be the owner of the incident before running the script.</span>
+<span class="n">new_case_owner</span> <span class="o">=</span> <span class="s2">&quot;admin@example.com&quot;</span>
+
+<span class="c1"># Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation </span>
+<span class="n">SAVE_CONVERSATION</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># pattern used to find and extract the email message-id</span>
+<span class="n">MESSAGE_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([^&lt;&gt;]+)&quot;</span><span class="p">)</span>
+<span class="c1"># check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability</span>
+<span class="n">DEFANG_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(https|http|ftps|ftp|mailto|news|file|mailto):&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="c1"># possible message-id names</span>
+<span class="n">MESSAGE_ID_LIST</span> <span class="o">=</span>  <span class="p">[</span><span class="s2">&quot;message-id&quot;</span><span class="p">,</span> <span class="s2">&quot;x-original-message-id&quot;</span><span class="p">,</span> <span class="s2">&quot;x-microsoft-original-message-id&quot;</span><span class="p">,</span> <span class="s2">&quot;x-google-original-message-id&quot;</span><span class="p">]</span>
+<span class="c1"># Supported Feed type from Trusteer</span>
+<span class="n">TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED</span> <span class="o">=</span> <span class="s2">&quot;Pinpoint Criminal Detection suspicious access detected&quot;</span>
+
+<span class="c1"># Trusteer PPD email key names</span>
+<span class="n">ACTIVITY</span> <span class="o">=</span> <span class="s2">&quot;Activity&quot;</span>
+<span class="n">APPLICATION_ID</span> <span class="o">=</span> <span class="s2">&quot;Application ID&quot;</span>
+<span class="n">EVENT_RECEIVED_AT</span> <span class="o">=</span> <span class="s2">&quot;Event received at&quot;</span>
+<span class="n">FEED_ITEM_TYPE</span> <span class="o">=</span> <span class="s2">&quot;Feed item type&quot;</span>
+<span class="n">CITY_NAME</span> <span class="o">=</span> <span class="s2">&quot;City name&quot;</span>
+<span class="n">COUNTRY_NAME</span> <span class="o">=</span> <span class="s2">&quot;Country name&quot;</span>
+<span class="n">DETECTED_AT</span> <span class="o">=</span> <span class="s2">&quot;Detected at&quot;</span>
+<span class="n">GLOBAL_DEVICE_ID</span> <span class="o">=</span> <span class="s2">&quot;Global Device ID&quot;</span>
+<span class="n">IS_TARGETED</span> <span class="o">=</span> <span class="s2">&quot;Is Targeted&quot;</span>
+<span class="n">MALWARE</span> <span class="o">=</span> <span class="s2">&quot;Malware&quot;</span>
+<span class="n">NEW_DEVICE_INDICATION</span> <span class="o">=</span> <span class="s2">&quot;New Device Indication&quot;</span>
+<span class="n">ORGANIZATION</span> <span class="o">=</span> <span class="s2">&quot;Organization&quot;</span>
+<span class="n">PERMANENT_USER_ID</span> <span class="o">=</span> <span class="s2">&quot;Permanent User ID&quot;</span>
+<span class="n">REASON</span> <span class="o">=</span> <span class="s2">&quot;Reason&quot;</span>
+<span class="n">REASON_ID</span> <span class="o">=</span> <span class="s2">&quot;Reason ID&quot;</span>
+<span class="n">RECOMMENDATION</span> <span class="o">=</span> <span class="s2">&quot;Recommendation&quot;</span>
+<span class="n">RESOLUTION_ID</span> <span class="o">=</span> <span class="s2">&quot;Resolution ID&quot;</span>
+<span class="n">RISK_SCORE</span> <span class="o">=</span> <span class="s2">&quot;Risk Score&quot;</span>
+<span class="n">SESSION_ID</span> <span class="o">=</span> <span class="s2">&quot;Session ID&quot;</span>
+<span class="n">TRUSTEER_ENDPOINT_PROTECTION_DEVICE_ID</span> <span class="o">=</span> <span class="s2">&quot;Trusteer Endpoint Protection Device ID&quot;</span>
+<span class="n">USER_IP_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;User IP Address&quot;</span>
+<span class="n">USER_AGENT_STRING</span> <span class="o">=</span> <span class="s2">&quot;User Agent String&quot;</span>
+
+<span class="n">COUNTRY_NAMES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;N/A&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AFG&quot;</span><span class="p">:</span> <span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ALA&quot;</span><span class="p">:</span> <span class="s2">&quot;Åland Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ALB&quot;</span><span class="p">:</span> <span class="s2">&quot;Albania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DZA&quot;</span><span class="p">:</span> <span class="s2">&quot;Algeria&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ASM&quot;</span><span class="p">:</span> <span class="s2">&quot;American Samoa&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AND&quot;</span><span class="p">:</span> <span class="s2">&quot;Andorra&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AGO&quot;</span><span class="p">:</span> <span class="s2">&quot;Angola&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AIA&quot;</span><span class="p">:</span> <span class="s2">&quot;Anguilla&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ATA&quot;</span><span class="p">:</span> <span class="s2">&quot;Antarctica&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ATG&quot;</span><span class="p">:</span> <span class="s2">&quot;Antigua and Barbuda&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ARG&quot;</span><span class="p">:</span> <span class="s2">&quot;Argentina&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ARM&quot;</span><span class="p">:</span> <span class="s2">&quot;Armenia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ABW&quot;</span><span class="p">:</span> <span class="s2">&quot;Aruba&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AUS&quot;</span><span class="p">:</span> <span class="s2">&quot;Australia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AUT&quot;</span><span class="p">:</span> <span class="s2">&quot;Austria&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AZE&quot;</span><span class="p">:</span> <span class="s2">&quot;Azerbaijan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BHS&quot;</span><span class="p">:</span> <span class="s2">&quot;Bahamas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BHR&quot;</span><span class="p">:</span> <span class="s2">&quot;Bahrain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BGD&quot;</span><span class="p">:</span> <span class="s2">&quot;Bangladesh&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BRB&quot;</span><span class="p">:</span> <span class="s2">&quot;Barbados&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BLR&quot;</span><span class="p">:</span> <span class="s2">&quot;Belarus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BEL&quot;</span><span class="p">:</span> <span class="s2">&quot;Belgium&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BLZ&quot;</span><span class="p">:</span> <span class="s2">&quot;Belize&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BEN&quot;</span><span class="p">:</span> <span class="s2">&quot;Benin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BMU&quot;</span><span class="p">:</span> <span class="s2">&quot;Bermuda&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BTN&quot;</span><span class="p">:</span> <span class="s2">&quot;Bhutan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BOL&quot;</span><span class="p">:</span> <span class="s2">&quot;Plurinational State of Bolivia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BES&quot;</span><span class="p">:</span> <span class="s2">&quot;Sint Eustatius and Saba Bonaire&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BIH&quot;</span><span class="p">:</span> <span class="s2">&quot;Bosnia and Herzegovina&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BWA&quot;</span><span class="p">:</span> <span class="s2">&quot;Botswana&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BVT&quot;</span><span class="p">:</span> <span class="s2">&quot;Bouvet Island&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BRA&quot;</span><span class="p">:</span> <span class="s2">&quot;Brazil&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IOT&quot;</span><span class="p">:</span> <span class="s2">&quot;British Indian Ocean Territory&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VGB&quot;</span><span class="p">:</span> <span class="s2">&quot;British Virgin Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BRN&quot;</span><span class="p">:</span> <span class="s2">&quot;Brunei Darussalam&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BGR&quot;</span><span class="p">:</span> <span class="s2">&quot;Bulgaria&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BFA&quot;</span><span class="p">:</span> <span class="s2">&quot;Burkina Faso&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BDI&quot;</span><span class="p">:</span> <span class="s2">&quot;Burundi&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KHM&quot;</span><span class="p">:</span> <span class="s2">&quot;Cambodia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CMR&quot;</span><span class="p">:</span> <span class="s2">&quot;Cameroon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CAN&quot;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CPV&quot;</span><span class="p">:</span> <span class="s2">&quot;Cape Verde&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CYM&quot;</span><span class="p">:</span> <span class="s2">&quot;Cayman Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CAF&quot;</span><span class="p">:</span> <span class="s2">&quot;Central African Republic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TCD&quot;</span><span class="p">:</span> <span class="s2">&quot;Chad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CHL&quot;</span><span class="p">:</span> <span class="s2">&quot;Chile&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CHN&quot;</span><span class="p">:</span> <span class="s2">&quot;China&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CXR&quot;</span><span class="p">:</span> <span class="s2">&quot;Christmas Island&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CCK&quot;</span><span class="p">:</span> <span class="s2">&quot;Cocos (Keeling) Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;COL&quot;</span><span class="p">:</span> <span class="s2">&quot;Colombia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;COM&quot;</span><span class="p">:</span> <span class="s2">&quot;Comoros&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;COK&quot;</span><span class="p">:</span> <span class="s2">&quot;Cook Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CRI&quot;</span><span class="p">:</span> <span class="s2">&quot;Costa Rica&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HRV&quot;</span><span class="p">:</span> <span class="s2">&quot;Croatia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CUB&quot;</span><span class="p">:</span> <span class="s2">&quot;Cuba&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CUW&quot;</span><span class="p">:</span> <span class="s2">&quot;Curaçao&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CYP&quot;</span><span class="p">:</span> <span class="s2">&quot;Cyprus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CZE&quot;</span><span class="p">:</span> <span class="s2">&quot;Czech Republic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;COD&quot;</span><span class="p">:</span> <span class="s2">&quot;The Democratic Republic of the Congo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DNK&quot;</span><span class="p">:</span> <span class="s2">&quot;Denmark&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DJI&quot;</span><span class="p">:</span> <span class="s2">&quot;Djibouti&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DMA&quot;</span><span class="p">:</span> <span class="s2">&quot;Dominica&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DOM&quot;</span><span class="p">:</span> <span class="s2">&quot;Dominican Republic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TLS&quot;</span><span class="p">:</span> <span class="s2">&quot;Timor-Leste&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ECU&quot;</span><span class="p">:</span> <span class="s2">&quot;Ecuador&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EGY&quot;</span><span class="p">:</span> <span class="s2">&quot;Egypt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SLV&quot;</span><span class="p">:</span> <span class="s2">&quot;El Salvador&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GNQ&quot;</span><span class="p">:</span> <span class="s2">&quot;Equatorial Guinea&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ERI&quot;</span><span class="p">:</span> <span class="s2">&quot;Eritrea&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EST&quot;</span><span class="p">:</span> <span class="s2">&quot;Estonia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ETH&quot;</span><span class="p">:</span> <span class="s2">&quot;Ethiopia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FLK&quot;</span><span class="p">:</span> <span class="s2">&quot;Falkland Islands (Malvinas)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRO&quot;</span><span class="p">:</span> <span class="s2">&quot;Faroe Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FJI&quot;</span><span class="p">:</span> <span class="s2">&quot;Fiji&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FIN&quot;</span><span class="p">:</span> <span class="s2">&quot;Finland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRA&quot;</span><span class="p">:</span> <span class="s2">&quot;France&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GUF&quot;</span><span class="p">:</span> <span class="s2">&quot;French Guiana&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PYF&quot;</span><span class="p">:</span> <span class="s2">&quot;French Polynesia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ATF&quot;</span><span class="p">:</span> <span class="s2">&quot;French Southern Territories&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GAB&quot;</span><span class="p">:</span> <span class="s2">&quot;Gabon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GMB&quot;</span><span class="p">:</span> <span class="s2">&quot;Gambia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GEO&quot;</span><span class="p">:</span> <span class="s2">&quot;Georgia (Country)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DEU&quot;</span><span class="p">:</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GHA&quot;</span><span class="p">:</span> <span class="s2">&quot;Ghana&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GIB&quot;</span><span class="p">:</span> <span class="s2">&quot;Gibraltar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GRC&quot;</span><span class="p">:</span> <span class="s2">&quot;Greece&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GRL&quot;</span><span class="p">:</span> <span class="s2">&quot;Greenland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GRD&quot;</span><span class="p">:</span> <span class="s2">&quot;Grenada&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GLP&quot;</span><span class="p">:</span> <span class="s2">&quot;Guadeloupe&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GUM&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GTM&quot;</span><span class="p">:</span> <span class="s2">&quot;Guatemala&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GGY&quot;</span><span class="p">:</span> <span class="s2">&quot;Guernsey&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GIN&quot;</span><span class="p">:</span> <span class="s2">&quot;Guinea&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GNB&quot;</span><span class="p">:</span> <span class="s2">&quot;Guinea-Bissau&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GUY&quot;</span><span class="p">:</span> <span class="s2">&quot;Guyana&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HTI&quot;</span><span class="p">:</span> <span class="s2">&quot;Haiti&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HMD&quot;</span><span class="p">:</span> <span class="s2">&quot;Heard Island and McDonald Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HND&quot;</span><span class="p">:</span> <span class="s2">&quot;Honduras&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HKG&quot;</span><span class="p">:</span> <span class="s2">&quot;Hong Kong S.A.R. of the PRC&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HUN&quot;</span><span class="p">:</span> <span class="s2">&quot;Hungary&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ISL&quot;</span><span class="p">:</span> <span class="s2">&quot;Iceland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IND&quot;</span><span class="p">:</span> <span class="s2">&quot;India&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IDN&quot;</span><span class="p">:</span> <span class="s2">&quot;Indonesia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IRN&quot;</span><span class="p">:</span> <span class="s2">&quot;Iran&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IRQ&quot;</span><span class="p">:</span> <span class="s2">&quot;Iraq&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IRL&quot;</span><span class="p">:</span> <span class="s2">&quot;Ireland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IMN&quot;</span><span class="p">:</span> <span class="s2">&quot;Isle of Man&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ISR&quot;</span><span class="p">:</span> <span class="s2">&quot;Israel&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ITA&quot;</span><span class="p">:</span> <span class="s2">&quot;Italy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CIV&quot;</span><span class="p">:</span> <span class="s2">&quot;The Republic of Côte d&#39;Ivoire,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JAM&quot;</span><span class="p">:</span> <span class="s2">&quot;Jamaica&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JPN&quot;</span><span class="p">:</span> <span class="s2">&quot;Japan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JEY&quot;</span><span class="p">:</span> <span class="s2">&quot;Jersey&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JOR&quot;</span><span class="p">:</span> <span class="s2">&quot;Jordan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KAZ&quot;</span><span class="p">:</span> <span class="s2">&quot;Kazakhstan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KEN&quot;</span><span class="p">:</span> <span class="s2">&quot;Kenya&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KIR&quot;</span><span class="p">:</span> <span class="s2">&quot;Kiribati&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;XXK&quot;</span><span class="p">:</span> <span class="s2">&quot;Kosovo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KWT&quot;</span><span class="p">:</span> <span class="s2">&quot;Kuwait&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KGZ&quot;</span><span class="p">:</span> <span class="s2">&quot;Kyrgyzstan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LAO&quot;</span><span class="p">:</span> <span class="s2">&quot;Laos People&#39;s Democratic Republic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LVA&quot;</span><span class="p">:</span> <span class="s2">&quot;Latvia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LBN&quot;</span><span class="p">:</span> <span class="s2">&quot;Lebanon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LSO&quot;</span><span class="p">:</span> <span class="s2">&quot;Lesotho&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LBR&quot;</span><span class="p">:</span> <span class="s2">&quot;Liberia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LBY&quot;</span><span class="p">:</span> <span class="s2">&quot;Libya&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LIE&quot;</span><span class="p">:</span> <span class="s2">&quot;Liechtenstein&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LTU&quot;</span><span class="p">:</span> <span class="s2">&quot;Lithuania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LUX&quot;</span><span class="p">:</span> <span class="s2">&quot;Luxembourg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MAC&quot;</span><span class="p">:</span> <span class="s2">&quot;Macao S.A.R. of the PRC&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MKD&quot;</span><span class="p">:</span> <span class="s2">&quot;Republic of Macedonia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MDG&quot;</span><span class="p">:</span> <span class="s2">&quot;Madagascar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MWI&quot;</span><span class="p">:</span> <span class="s2">&quot;Malawi&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MYS&quot;</span><span class="p">:</span> <span class="s2">&quot;Malaysia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MDV&quot;</span><span class="p">:</span> <span class="s2">&quot;Maldives&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MLI&quot;</span><span class="p">:</span> <span class="s2">&quot;Mali&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MLT&quot;</span><span class="p">:</span> <span class="s2">&quot;Malta&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MHL&quot;</span><span class="p">:</span> <span class="s2">&quot;Marshall Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MTQ&quot;</span><span class="p">:</span> <span class="s2">&quot;Martinique&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MRT&quot;</span><span class="p">:</span> <span class="s2">&quot;Mauritania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MUS&quot;</span><span class="p">:</span> <span class="s2">&quot;Mauritius&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MYT&quot;</span><span class="p">:</span> <span class="s2">&quot;Mayotte&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MEX&quot;</span><span class="p">:</span> <span class="s2">&quot;Mexico&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FSM&quot;</span><span class="p">:</span> <span class="s2">&quot;Federated States of Micronesia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MDA&quot;</span><span class="p">:</span> <span class="s2">&quot;Republic of Moldova&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MCO&quot;</span><span class="p">:</span> <span class="s2">&quot;Monaco&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MNG&quot;</span><span class="p">:</span> <span class="s2">&quot;Mongolia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MNE&quot;</span><span class="p">:</span> <span class="s2">&quot;Montenegro&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MSR&quot;</span><span class="p">:</span> <span class="s2">&quot;Montserrat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MAR&quot;</span><span class="p">:</span> <span class="s2">&quot;Morocco&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MOZ&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozambique&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MMR&quot;</span><span class="p">:</span> <span class="s2">&quot;Myanmar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NAM&quot;</span><span class="p">:</span> <span class="s2">&quot;Namibia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NRU&quot;</span><span class="p">:</span> <span class="s2">&quot;Nauru&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NPL&quot;</span><span class="p">:</span> <span class="s2">&quot;Nepal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NLD&quot;</span><span class="p">:</span> <span class="s2">&quot;Netherlands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NCL&quot;</span><span class="p">:</span> <span class="s2">&quot;New Caledonia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NZL&quot;</span><span class="p">:</span> <span class="s2">&quot;New Zealand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NIC&quot;</span><span class="p">:</span> <span class="s2">&quot;Nicaragua&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NER&quot;</span><span class="p">:</span> <span class="s2">&quot;Niger&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NGA&quot;</span><span class="p">:</span> <span class="s2">&quot;Nigeria&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NIU&quot;</span><span class="p">:</span> <span class="s2">&quot;Niue&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NFK&quot;</span><span class="p">:</span> <span class="s2">&quot;Norfolk Island&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PRK&quot;</span><span class="p">:</span> <span class="s2">&quot;Democratic People&#39;s Republic of Korea&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MNP&quot;</span><span class="p">:</span> <span class="s2">&quot;Northern Mariana Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NOR&quot;</span><span class="p">:</span> <span class="s2">&quot;Norway&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OMN&quot;</span><span class="p">:</span> <span class="s2">&quot;Oman&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PAK&quot;</span><span class="p">:</span> <span class="s2">&quot;Pakistan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PLW&quot;</span><span class="p">:</span> <span class="s2">&quot;Palau&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PSE&quot;</span><span class="p">:</span> <span class="s2">&quot;State of Palestine&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PAN&quot;</span><span class="p">:</span> <span class="s2">&quot;Panama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PNG&quot;</span><span class="p">:</span> <span class="s2">&quot;Papua New Guinea&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PRY&quot;</span><span class="p">:</span> <span class="s2">&quot;Paraguay&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PER&quot;</span><span class="p">:</span> <span class="s2">&quot;Peru&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PHL&quot;</span><span class="p">:</span> <span class="s2">&quot;Philippines&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PCN&quot;</span><span class="p">:</span> <span class="s2">&quot;Pitcairn&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;POL&quot;</span><span class="p">:</span> <span class="s2">&quot;Poland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PRT&quot;</span><span class="p">:</span> <span class="s2">&quot;Portugal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PRI&quot;</span><span class="p">:</span> <span class="s2">&quot;Puerto Rico&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;QAT&quot;</span><span class="p">:</span> <span class="s2">&quot;Qatar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;COG&quot;</span><span class="p">:</span> <span class="s2">&quot;Congo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;REU&quot;</span><span class="p">:</span> <span class="s2">&quot;Réunion&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ROU&quot;</span><span class="p">:</span> <span class="s2">&quot;Romania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RUS&quot;</span><span class="p">:</span> <span class="s2">&quot;Russia Federation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RWA&quot;</span><span class="p">:</span> <span class="s2">&quot;Rwanda&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BLM&quot;</span><span class="p">:</span> <span class="s2">&quot;Saint Barthélemy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SHN&quot;</span><span class="p">:</span> <span class="s2">&quot;Ascension and Tristan Da Cunha Saint Helena&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KNA&quot;</span><span class="p">:</span> <span class="s2">&quot;Saint Kitts and Nevis&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LCA&quot;</span><span class="p">:</span> <span class="s2">&quot;Saint Lucia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MAF&quot;</span><span class="p">:</span> <span class="s2">&quot;Saint Martin (French Part)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SPM&quot;</span><span class="p">:</span> <span class="s2">&quot;Saint Pierre and Miquelon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VCT&quot;</span><span class="p">:</span> <span class="s2">&quot;Saint Vincent and the Grenadines&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WSM&quot;</span><span class="p">:</span> <span class="s2">&quot;Samoa&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SMR&quot;</span><span class="p">:</span> <span class="s2">&quot;San Marino&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;STP&quot;</span><span class="p">:</span> <span class="s2">&quot;Sao Tome and Principe&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SAU&quot;</span><span class="p">:</span> <span class="s2">&quot;Saudi Arabia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SEN&quot;</span><span class="p">:</span> <span class="s2">&quot;Senegal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SRB&quot;</span><span class="p">:</span> <span class="s2">&quot;Serbia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SCG&quot;</span><span class="p">:</span> <span class="s2">&quot;Serbia and Montenegro&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SYC&quot;</span><span class="p">:</span> <span class="s2">&quot;Seychelles&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SLE&quot;</span><span class="p">:</span> <span class="s2">&quot;Sierra Leone&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SGP&quot;</span><span class="p">:</span> <span class="s2">&quot;Singapore&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SXM&quot;</span><span class="p">:</span> <span class="s2">&quot;Sint Maarten (Dutch Part)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SVK&quot;</span><span class="p">:</span> <span class="s2">&quot;Slovakia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SVN&quot;</span><span class="p">:</span> <span class="s2">&quot;Slovenia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SLB&quot;</span><span class="p">:</span> <span class="s2">&quot;Solomon Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SOM&quot;</span><span class="p">:</span> <span class="s2">&quot;Somalia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ZAF&quot;</span><span class="p">:</span> <span class="s2">&quot;South Africa&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SGS&quot;</span><span class="p">:</span> <span class="s2">&quot;South Georgia and the South Sandwich Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KOR&quot;</span><span class="p">:</span> <span class="s2">&quot;Republic of Korea&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SSD&quot;</span><span class="p">:</span> <span class="s2">&quot;South Sudan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ESP&quot;</span><span class="p">:</span> <span class="s2">&quot;Spain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LKA&quot;</span><span class="p">:</span> <span class="s2">&quot;Sri Lanka&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SDN&quot;</span><span class="p">:</span> <span class="s2">&quot;Sudan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SUR&quot;</span><span class="p">:</span> <span class="s2">&quot;Suriname&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SJM&quot;</span><span class="p">:</span> <span class="s2">&quot;Svalbard and Jan Mayen&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SWZ&quot;</span><span class="p">:</span> <span class="s2">&quot;Swaziland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SWE&quot;</span><span class="p">:</span> <span class="s2">&quot;Sweden&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CHE&quot;</span><span class="p">:</span> <span class="s2">&quot;Switzerland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SYR&quot;</span><span class="p">:</span> <span class="s2">&quot;Syrian Arab Republic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TWN&quot;</span><span class="p">:</span> <span class="s2">&quot;Taiwan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TJK&quot;</span><span class="p">:</span> <span class="s2">&quot;Tajikistan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TZA&quot;</span><span class="p">:</span> <span class="s2">&quot;Tanzania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;THA&quot;</span><span class="p">:</span> <span class="s2">&quot;Thailand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TGO&quot;</span><span class="p">:</span> <span class="s2">&quot;Togo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TKL&quot;</span><span class="p">:</span> <span class="s2">&quot;Tokelau&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TON&quot;</span><span class="p">:</span> <span class="s2">&quot;Tonga&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TTO&quot;</span><span class="p">:</span> <span class="s2">&quot;Trinidad and Tobago&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TUN&quot;</span><span class="p">:</span> <span class="s2">&quot;Tunisia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TUR&quot;</span><span class="p">:</span> <span class="s2">&quot;Turkey&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TKM&quot;</span><span class="p">:</span> <span class="s2">&quot;Turkmenistan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TCA&quot;</span><span class="p">:</span> <span class="s2">&quot;Turks and Caicos Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TUV&quot;</span><span class="p">:</span> <span class="s2">&quot;Tuvalu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VIR&quot;</span><span class="p">:</span> <span class="s2">&quot;U.S. Virgin Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UGA&quot;</span><span class="p">:</span> <span class="s2">&quot;Uganda&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UKR&quot;</span><span class="p">:</span> <span class="s2">&quot;Ukraine&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ARE&quot;</span><span class="p">:</span> <span class="s2">&quot;United Arab Emirates&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GBR&quot;</span><span class="p">:</span> <span class="s2">&quot;United Kingdom&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;USA&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UMI&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Minor Outlying Islands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;URY&quot;</span><span class="p">:</span> <span class="s2">&quot;Uruguay&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UZB&quot;</span><span class="p">:</span> <span class="s2">&quot;Uzbekistan&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VUT&quot;</span><span class="p">:</span> <span class="s2">&quot;Vanuatu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VAT&quot;</span><span class="p">:</span> <span class="s2">&quot;Holy See (Vatican City State)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VEN&quot;</span><span class="p">:</span> <span class="s2">&quot;Bolivarian Republic of Venezuela&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VNM&quot;</span><span class="p">:</span> <span class="s2">&quot;Viet Nam&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WLF&quot;</span><span class="p">:</span> <span class="s2">&quot;Wallis and Futuna&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ESH&quot;</span><span class="p">:</span> <span class="s2">&quot;Western Sahara&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;YEM&quot;</span><span class="p">:</span> <span class="s2">&quot;Yemen&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ZMB&quot;</span><span class="p">:</span> <span class="s2">&quot;Zambia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ZWE&quot;</span><span class="p">:</span> <span class="s2">&quot;Zimbabwe&quot;</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">EmailProcessor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A class that facilitates processing the body contents of an email message.</span>
+<span class="sd">    Once the EmailProcessor class has been instantiated, the other methods can be used to add artifacts to the</span>
+<span class="sd">    incident.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># The body of the email - the plaintext and html versions of the same email, if present</span>
+    <span class="n">email_contents</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">email_contents_json</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The EmailProcessor constructor.</span>
+<span class="sd">        As initialization it retrieves the email body as both text and HTML.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">email_contents</span> <span class="o">=</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Email message has no contents!&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_info_to_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Make sure the feed type is correct.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FEED_ITEM_TYPE</span><span class="p">)</span> <span class="o">!=</span> <span class="n">TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Only Feed item type: </span><span class="si">%s</span><span class="s2"> is supported!&quot;</span><span class="p">,</span> <span class="n">TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED</span><span class="p">)</span>
+
+        <span class="c1"># Fill in case fields with info from the Trusteer Pinpoint Detect email</span>
+        <span class="n">newReporterInfo</span> <span class="o">=</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">sender</span><span class="o">.</span><span class="n">address</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">sender</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">newReporterInfo</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> &lt;</span><span class="si">{1}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">emailmessage</span><span class="o">.</span><span class="n">sender</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">sender</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Adding reporter field </span><span class="se">\&quot;</span><span class="si">{0}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">newReporterInfo</span><span class="p">))</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">reporter</span> <span class="o">=</span> <span class="n">newReporterInfo</span>
+
+        <span class="c1"># Fill in incident data</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Trusteer Pinpoint Detect Alert&quot;</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">discovered_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soar_datetimeformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">EVENT_RECEIVED_AT</span><span class="p">))</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">start_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soar_datetimeformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">EVENT_RECEIVED_AT</span><span class="p">))</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soar_severity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RISK_SCORE</span><span class="p">))</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">trusteer_ppd_puid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PERMANENT_USER_ID</span><span class="p">)</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">trusteer_ppd_application_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">APPLICATION_ID</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update_alert_data_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Add a new row to the Trusteer Alert data table</span>
+        <span class="n">alert_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">&#39;trusteer_ppd_dt_trusteer_alerts&#39;</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_date_added</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> 
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_session_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_activity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ACTIVITY</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_event_received_at</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soar_datetimeformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">EVENT_RECEIVED_AT</span><span class="p">))</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_user_ip_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">USER_IP_ADDRESS</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_device_id_and_link</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;format&#39;</span><span class="p">:</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GLOBAL_DEVICE_ID</span><span class="p">)}</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_new_device_indication</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">NEW_DEVICE_INDICATION</span><span class="p">))</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_organization</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ORGANIZATION</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_reason</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">REASON</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_recommendation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RECOMMENDATION</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">COUNTRY_NAME</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">:</span>
+            <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_country</span> <span class="o">=</span> <span class="n">COUNTRY_NAMES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">COUNTRY_NAME</span><span class="p">),</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_city</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CITY_NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RISK_SCORE</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">:</span>
+            <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_risk_score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RISK_SCORE</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Add any Trusteer information (not in the data table) as artifacts here.</span>
+        <span class="n">artifact_description</span> <span class="o">=</span> <span class="s2">&quot;Trusteer PPD created artifact.&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">USER_AGENT_STRING</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">USER_AGENT_STRING</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">):</span>
+            <span class="n">artifact_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">USER_AGENT_STRING</span><span class="p">)</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;User Agent&quot;</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">MALWARE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">MALWARE</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">):</span>
+            <span class="n">artifact_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">MALWARE</span><span class="p">)</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;Malware Family/Variant&quot;</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DETECTED_AT</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DETECTED_AT</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">):</span>
+            <span class="n">artifact_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DETECTED_AT</span><span class="p">)</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;URL&quot;</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="nf">add_incident_note</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Add a note containing the email contents</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Email from Trusteer Pinpoint Detect:&lt;br&gt; </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_trusteer_ppd_puid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">trusteer_ppd_puid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PERMANENT_USER_ID</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">trusteer_ppd_puid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Email message has no  Pinpoint Detect Permanent User ID!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">trusteer_ppd_puid</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">build_dict</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Builds a dictionary from either the key, value pairs in the email</span>
+<span class="sd">        One key, value pair per line, so split on end of line character.</span>
+<span class="sd">        :param content: email plain text content</span>
+<span class="sd">        :return: Dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                <span class="n">keyval</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyval</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">temp_dict</span><span class="p">[</span><span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">keyval</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">temp_dict</span>
+
+    <span class="k">def</span> <span class="nf">processAttachments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; A method to process the email attachments, if present. Each non-inline email attachment is added as an</span>
+<span class="sd">        attachment to the incident, and its name is added as an artifact. Inline attachments are assumed to be unimportant.</span>
+<span class="sd">        No return value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">attachments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">attachment</span><span class="o">.</span><span class="n">inline</span><span class="p">:</span>
+                <span class="n">incident</span><span class="o">.</span><span class="n">addEmailAttachment</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span>
+                    <span class="s2">&quot;Email Attachment Name&quot;</span><span class="p">,</span> <span class="n">attachment</span><span class="o">.</span><span class="n">suggested_filename</span><span class="p">,</span> <span class="s2">&quot;Trusteer PPD created artifact.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">soar_severity</span><span class="p">(</span><span class="n">risk_score</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">risk_score</span> <span class="ow">and</span> <span class="n">risk_score</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">:</span>
+            <span class="n">risk_score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">risk_score</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">risk_score</span> <span class="o">&lt;=</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;Low&#39;</span>
+            <span class="k">elif</span> <span class="n">risk_score</span> <span class="o">&gt;=</span> <span class="mi">201</span> <span class="ow">and</span> <span class="n">risk_score</span> <span class="o">&lt;=</span> <span class="mi">499</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;Medium&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;High&#39;</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">soar_datetimeformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S UTC&quot;</span><span class="p">,</span> <span class="n">split_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+        <span class="k">if</span> <span class="n">split_at</span><span class="p">:</span>
+            <span class="n">utc_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">value</span><span class="p">[:</span><span class="n">value</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">split_at</span><span class="p">)],</span> <span class="n">date_format</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">utc_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">calendar</span><span class="o">.</span><span class="n">timegm</span><span class="p">(</span><span class="n">utc_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+        <span class="n">msg_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1">#represent the header keys as lower case for matching</span>
+        <span class="n">header_keys</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+
+        <span class="c1"># looks for the headers in order of importance</span>
+        <span class="k">for</span> <span class="n">msg_hdr</span> <span class="ow">in</span> <span class="n">MESSAGE_ID_LIST</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">msg_hdr</span> <span class="ow">in</span> <span class="n">header_keys</span><span class="p">:</span>
+                <span class="n">msg_id</span> <span class="o">=</span> <span class="n">headers</span><span class="p">[</span><span class="n">header_keys</span><span class="p">[</span><span class="n">msg_hdr</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">break</span>
+
+        <span class="c1"># remove brackets &lt;&gt;</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">MESSAGE_PATTERN</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">msg_id</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">if</span> <span class="n">msg_id</span> <span class="k">else</span> <span class="kc">None</span> 
+        <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">save_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+        <span class="c1"># extract the message ID and retain</span>
+        <span class="n">msg_id</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">msg_id</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="p">,</span> <span class="s1">&#39;email_message_id&#39;</span><span class="p">):</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">email_message_id</span> <span class="o">=</span> <span class="n">msg_id</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_email_conversation</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">msg_body</span><span class="p">,</span> <span class="n">msg_attachments</span><span class="p">):</span>
+        <span class="c1"># attempt to add to incident datatable, if present</span>
+      
+        <span class="k">def</span> <span class="nf">handle_list</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="c1"># convert a list to comma separate list, if neccessary</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        
+            <span class="k">return</span> <span class="n">value</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">&#39;email_conversations&#39;</span><span class="p">)</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date_sent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;inbound&quot;</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;inbound_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;recipients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="s2">&quot;To: </span><span class="si">{}</span><span class="s2">&lt;br&gt;Cc: </span><span class="si">{}</span><span class="s2">&lt;br&gt;Bcc: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">handle_list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;To&quot;</span><span class="p">)),</span> <span class="n">handle_list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;CC&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)),</span> <span class="n">handle_list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BCC&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))))</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">handle_list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;From&quot;</span><span class="p">))</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">handle_list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Subject&quot;</span><span class="p">))</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFANG_PATTERN</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;x_\1_x:&quot;</span><span class="p">,</span> <span class="n">msg_body</span><span class="p">)</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;attachments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">msg_attachments</span><span class="p">)</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;in_reply_to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">handle_list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;References&quot;</span><span class="p">))</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">handle_list</span><span class="p">((</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Importance&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{</span><span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;X-Priority&quot;</span><span class="p">),</span> <span class="s2">&quot;normal&quot;</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+
+<span class="c1">###</span>
+<span class="c1"># Mainline starts here</span>
+<span class="c1">###</span>
+
+<span class="c1"># Create the email processor object, loading it with the email message body content.</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">EmailProcessor</span><span class="p">()</span>
+
+<span class="c1"># Check to see if a similar incident already exists</span>
+<span class="c1"># We will search for an incident which has the same name as we would give a new incident</span>
+<span class="n">trusteer_ppd_puid</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_trusteer_ppd_puid</span><span class="p">()</span>
+<span class="n">query_builder</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="n">query_builder</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">incident</span><span class="o">.</span><span class="n">trusteer_ppd_puid</span><span class="p">,</span> <span class="n">trusteer_ppd_puid</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">query_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="n">cases</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">findIncidents</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cases</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="c1"># Create a suitable title for an incident based on the email</span>
+    <span class="n">new_case_title</span> <span class="o">=</span> <span class="s2">&quot;Trusteer PUID </span><span class="si">{0}</span><span class="s2"> via mailbox </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">trusteer_ppd_puid</span><span class="p">,</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">inbound_mailbox</span><span class="p">)</span>
+    
+    <span class="c1"># A similar case does not already exist. Create a new case and associate the email with it.</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Creating new case </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_case_title</span><span class="p">))</span>
+
+    <span class="c1"># Create an incident with a title based on the email subject, owned identified by variable newIncidentOwner</span>
+    <span class="n">emailmessage</span><span class="o">.</span><span class="n">createAssociatedIncident</span><span class="p">(</span><span class="n">new_case_title</span><span class="p">,</span> <span class="n">new_case_owner</span><span class="p">)</span>
+
+    <span class="c1"># Add PUID as aa User Account artifact</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;User Account&quot;</span><span class="p">,</span> <span class="n">trusteer_ppd_puid</span><span class="p">,</span> <span class="s2">&quot;Permanent User ID from Trusteer&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Update custom fields of the new case</span>
+    <span class="n">processor</span><span class="o">.</span><span class="n">add_info_to_case</span><span class="p">()</span>
+
+    <span class="c1"># add message-id for easy tracking</span>
+    <span class="n">processor</span><span class="o">.</span><span class="n">save_message_id</span><span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># A similar case already exists. Associate the email with this preexisting case.</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Associating with existing case </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+    <span class="n">emailmessage</span><span class="o">.</span><span class="n">associateWithIncident</span><span class="p">(</span><span class="n">cases</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Update the alert data table</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">update_alert_data_table</span><span class="p">()</span>
+
+<span class="c1"># Add any artifacts from the email</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">add_artifacts</span><span class="p">()</span>
+
+<span class="c1"># Add incident note with contents of the email</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">add_incident_note</span><span class="p">()</span>
+
+<span class="c1"># Add email message attachments to incident</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">processAttachments</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">SAVE_CONVERSATION</span><span class="p">:</span>
+    <span class="n">processor</span><span class="o">.</span><span class="n">add_email_conversation</span><span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> 
+        <span class="n">emailmessage</span><span class="o">.</span><span class="n">getBodyHtmlRaw</span><span class="p">()</span> <span class="k">if</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">getBodyHtmlRaw</span><span class="p">()</span> <span class="k">else</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> 
+        <span class="p">[</span><span class="n">attachment</span><span class="o">.</span><span class="n">suggested_filename</span> <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">attachments</span><span class="p">])</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="data-table-trusteer-alerts">
+<h2>Data Table - Trusteer Alerts<a class="headerlink" href="#data-table-trusteer-alerts" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-trusteer-alerts" src="../_images/dt-trusteer-alerts.png" /></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p>trusteer_ppd_dt_trusteer_alerts</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Activity</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_activity</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>City</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_city</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Classification</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_classification</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Country</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_country</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>SOAR Added</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_date_added</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Device ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_device_id_and_link</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Event Received At</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_event_received_at</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>IP Address</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_user_ip_address</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>New Device Indication</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_new_device_indication</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Organization</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_organization</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Reason</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_reason</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Recommendation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_recommendation</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Risk Score</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_risk_score</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Session ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_dt_session_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+<th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_application_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Link to PUID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_link_to_puid</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>PUID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_puid</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Permanent User ID</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="custom-artifact-types">
+<h2>Custom Artifact Types<a class="headerlink" href="#custom-artifact-types" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Display Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Trusteer Device ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trusteer_ppd_device_id</span></code></p></td>
+<td><p>Device ID from Trusteer Pinpoint Detect Alert</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Script Triggered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Trusteer PPD: Parse Trusteer Email v1.0.0</p></td>
+<td><p>__emailmessage</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Trusteer</span> <span class="pre">PPD:</span> <span class="pre">Create</span> <span class="pre">Case</span> <span class="pre">from</span> <span class="pre">Email</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Trusteer PPD: Create Artifacts</p></td>
+<td><p>Manual playbook that runs off a row of the Trusteer Alerts data table. Create artifacts from the columns of the Trusteer Alerts data table.</p></td>
+<td><p>trusteer_ppd_dt_trusteer_alerts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Trusteer PPD: Update Classification in Trusteer</p></td>
+<td><p>Send classification feedback to Trusteer on the  session alert.  Update the Classification column in the Trusteer Alerts data table for each alert with the same session ID as the playbook row from which the playbook is executed.</p></td>
+<td><p>trusteer_ppd_dt_trusteer_alerts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Trusteer PPD: Update Device URL Link</p></td>
+<td><p>Automatic playbook that is executed when an alert is added to the Trusteer Alerts data table and update the Device ID cell with a link back to the device in Trusteer.</p></td>
+<td><p>trusteer_ppd_dt_trusteer_alerts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Trusteer PPD: Update PUID URL Link</p></td>
+<td><p>Automatic playbook that is executed when a Trusteer case is created. Update the PUID link custom field with a URL link to the customer account in Trusteer.</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_twilio/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Resilient Function - Twilio Send SMS</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_timer/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Timer Function for SOAR</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Trusteer Pinpoint Detect</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+<li><a class="reference internal" href="#ibm-trusteer-development-version">IBM Trusteer Development Version</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#configure-trusteer-email-feeds">Configure Trusteer Email Feeds</a></li>
+<li><a class="reference internal" href="#configure-soar-inbound-email-connection">Configure SOAR Inbound Email Connection</a></li>
+<li><a class="reference internal" href="#the-case-incident-owner">The Case/incident Owner</a></li>
+<li><a class="reference internal" href="#enable-the-rule-trusteer-ppd-parse-trusteer-email-v1-0-0">Enable the Rule: Trusteer PPD: Parse Trusteer Email v1.0.0</a></li>
+<li><a class="reference internal" href="#permissions">Permissions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
+<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-trusteer-ppd-get-url-links-to-trusteer">Function - Trusteer PPD: Get URL Links to Trusteer</a></li>
+<li><a class="reference internal" href="#function-trusteer-ppd-update-alert-classification">Function - Trusteer PPD: Update Alert Classification</a></li>
+<li><a class="reference internal" href="#function-trusteer-ppd-update-classification-in-alert-datatable">Function - Trusteer PPD: Update Classification in Alert Datatable</a></li>
+<li><a class="reference internal" href="#script-trusteer-ppd-create-artifacts">Script - Trusteer PPD: Create Artifacts</a></li>
+<li><a class="reference internal" href="#script-trusteer-ppd-create-case-from-email-v1-0-0">Script - Trusteer PPD: Create Case from Email v1.0.0</a></li>
+<li><a class="reference internal" href="#data-table-trusteer-alerts">Data Table - Trusteer Alerts</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
+<li><a class="reference internal" href="#custom-artifact-types">Custom Artifact Types</a></li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

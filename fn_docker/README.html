@@ -1,0 +1,965 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>IBM Resilient Integration with Docker - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="ibm-resilient-integration-with-docker">
+<h1>IBM Resilient Integration with Docker<a class="headerlink" href="#ibm-resilient-integration-with-docker" title="Link to this heading">#</a></h1>
+<p>The Resilient Integration with Docker provides tools to integrate Docker into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for Dockerised tools that can be used for Malware Research and Incident Response.</p>
+<p><strong>This package contains 1 Function, 3 Workflows, 3 Rules and 1 Data Table that help you integrate with Docker</strong></p>
+<p><img alt="screenshot" src="../_images/15.png" /></p>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#integration-appconfig-settings"><span class="xref myst">Integration app.config settings:</span></a></p></li>
+<li><p><a class="reference internal" href="#image-specific-appconfig-sections"><span class="xref myst">Image specific app.config sections</span></a></p></li>
+<li><p><a class="reference internal" href="#1-run-docker-container"><span class="xref myst">Function: Run Docker Container</span></a></p></li>
+<li><p><a class="reference internal" href="#1-send-artifact-to-docker-container"><span class="xref myst">Workflow: Send Artifact To Docker Container</span></a></p></li>
+<li><p><a class="reference internal" href="#2-send-attachment-to-docker-container"><span class="xref myst">Workflow: Send Attachment To Docker Container</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules:</span></a></p></li>
+<li><p><a class="reference internal" href="#datatable"><span class="xref myst">Datatable:</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#docker-external-ticket-status-datatable"><span class="xref myst">Docker External Ticket Status Datatable</span></a></p></li>
+<li><p><a class="reference internal" href="#api-name"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns"><span class="xref myst">Columns:</span></a></p></li>
+<li><p><a class="reference internal" href="#display-the-datatable-in-an-incident"><span class="xref myst">Display the Datatable in an Incident</span></a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="pre-requisite-steps-and-info">
+<h1>Pre-Requisite Steps and Info:<a class="headerlink" href="#pre-requisite-steps-and-info" title="Link to this heading">#</a></h1>
+<section id="install-docker">
+<h2>Install Docker<a class="headerlink" href="#install-docker" title="Link to this heading">#</a></h2>
+<p>This integration requires access to a Docker daemon, in order to run containers and get output. Typically the Docker daemon would be on the same machine that you intend to run the containers from so this would mean installing Docker on your integration server itself.
+To install Docker on your Integration Server see <a class="reference external" href="https://docs.docker.com/install/linux/docker-ee/rhel/">this link</a> for RHEL, <a class="reference external" href="https://docs.docker.com/docker-for-mac/install/">this one</a> for MacOS or <a class="reference external" href="https://docs.docker.com/install/">this one</a> for everything else.</p>
+</section>
+<section id="pulling-images">
+<h2>Pulling Images<a class="headerlink" href="#pulling-images" title="Link to this heading">#</a></h2>
+<p>This integration package does not pull docker images for you. This is intentional to reduce the chance of downloading an unintended image for use in your organisation.
+Images you wish to use with the integration will need to be pulled separately either from a registry or a Github repo using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span></code> command.</p>
+<p>Git Repo Example: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">-t</span> <span class="pre">amass</span> <span class="pre">https://github.com/OWASP/Amass.git</span></code>
+Dockerhub Example: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">blacktop/nsrl</span></code></p>
+</section>
+<section id="connection-options-and-installation">
+<h2>Connection options and installation:<a class="headerlink" href="#connection-options-and-installation" title="Link to this heading">#</a></h2>
+<p>There are a number of connection options for this integration. The easiest to setup and maintain is using a local Docker connection by installing Docker on the Integration Server.
+Alternatively, if you already have an Docker daemon exposed on a port that you can connect to and use, you may instead opt to connect to and run containers using this daemon instead of installing Docker on your integration server.
+This is done by specifying the <code class="docutils literal notranslate"><span class="pre">docker_remote_url</span></code> value in the app.config section which will specify the location of the Docker daemon and also which remote connection option to use, of which there are two: TCP and SSH.</p>
+</section>
+<section id="ssh-connection-setup">
+<h2>SSH Connection Setup<a class="headerlink" href="#ssh-connection-setup" title="Link to this heading">#</a></h2>
+<p>SSH as a connection option is a relatively new connection option, first announced in <a class="reference external" href="https://blog.docker.com/2018/09/join-the-beta-for-docker-engine-18-09/">2018</a>
+is also provided to enable secure connections to a Docker daemon without the need to modify existing Docker setup.
+Docker SSH support requires Docker version 18.09 or higher.</p>
+<p>Docker SSH requires using SSH Keys rather than a username and password and use the Paramiko library to do it.</p>
+<p>A good tutorial on generating SSH Keys can be found <a class="reference external" href="https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">here</a></p>
+<p>After you have generated your SSH Key, you will need to ensure it is an authorized key on the machine you intend to connect to.
+For information on copying SSH keys to another machine as an authorized key, <a class="reference external" href="https://www.ssh.com/ssh/copy-id">see here</a></p>
+</section>
+<section id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">#</a></h2>
+<p>Currently there is limited support for Attachment Workflows when using remote connections.
+This is due to how the remote volume bindings are established, where if the source directory does not exist on the destination host, it will attempt to create it.
+For this reason when using remote connections it is advised your source volume directory is in a common directory such as <code class="docutils literal notranslate"><span class="pre">/tmp/</span></code>.</p>
+<p>Additionally, for images which do not run as root, you will need to ensure the attachments have the right permissions on the destination source to be accessible from a remote source. e.g <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">a+xwr</span> <span class="pre">~/&lt;dest_dir&gt;</span></code></p>
+</section>
+</section>
+<section id="about-the-provided-usecases">
+<h1>About the provided UseCases<a class="headerlink" href="#about-the-provided-usecases" title="Link to this heading">#</a></h1>
+<section id="volatility">
+<h2>Volatility<a class="headerlink" href="#volatility" title="Link to this heading">#</a></h2>
+<p>The Volatility Framework is a completely open collection of tools,
+implemented in Python, <a class="reference external" href="https://github.com/volatilityfoundation/volatility">[source]</a> used to analyze volatile memory (RAM) samples.</p>
+<p><a class="reference external" href="https://hub.docker.com/r/remnux/volatility">View this image on DockerHub</a></p>
+</section>
+<section id="nsrl-whitelist">
+<h2>NSRL Whitelist<a class="headerlink" href="#nsrl-whitelist" title="Link to this heading">#</a></h2>
+<p>The National Software Reference Library (NSRL) is designed to collect software from various sources and incorporate file profiles computed from this software into a Reference Data Set (RDS) of information.
+The RDS is a collection of digital signatures of known, traceable software applications.<a class="reference external" href="https://www.nist.gov/software-quality-group/about-nsrl">Source</a></p>
+<p><a class="reference external" href="https://hub.docker.com/r/blacktop/nsrl">View this image on DockerHub</a></p>
+</section>
+<section id="amass">
+<h2>Amass<a class="headerlink" href="#amass" title="Link to this heading">#</a></h2>
+<p>The OWASP Amass tool suite obtains subdomain names by scraping data sources, recursive brute forcing, crawling web archives, permuting/altering names and reverse DNS sweeping.<a class="reference external" href="https://github.com/OWASP/Amass">Source</a></p>
+<p><a class="reference external" href="https://github.com/OWASP/Amass">View this image on Github</a></p>
+</section>
+</section>
+<section id="app-config-settings">
+<h1>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h1>
+<p>There are two ways to configure settings for this Integration. You can choose to configure general settings for the Integration itself such as which method to use for connections.
+Additionally, each image you intend to create containers from can have its own app.config section.</p>
+<section id="integration-app-config-settings">
+<h2>Integration app.config settings:<a class="headerlink" href="#integration-app-config-settings" title="Link to this heading">#</a></h2>
+<p>The Integration has a number of app.config settings which manage how a connection to a Docker daemon is performed and also which images are approved to be run by the integration. The approved images list includes only the shortname of the docker image e.g remnux/volatility -&gt; volatility is the shortname.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">docker_approved_images</span><span class="o">=</span>&lt;imagename&gt;,&lt;imagename&gt;<span class="w"> </span><span class="c1"># Which images are approved to be run e.g volatility,nsrl</span>
+<span class="nv">docker_use_remote_conn</span><span class="o">=</span>&lt;True/False&gt;
+<span class="nv">docker_remote_url</span><span class="o">=</span>&lt;URL&gt;
+</pre></div>
+</div>
+</section>
+<section id="image-specific-app-config-sections">
+<h2>Image specific app.config sections<a class="headerlink" href="#image-specific-app-config-sections" title="Link to this heading">#</a></h2>
+<p>Each Docker image has the opportunity to use its own app.config section for getting options which are specific to that image only. This includes the images full name, volume bindings if that container requires volumes and the command which will be sent to the built container.</p>
+<p>Image specific app.config sections are found by searching for the image shortname postfixed to <code class="docutils literal notranslate"><span class="pre">fn_docker_</span></code>. This means that to enable image specific options that you need your section should be named this way e.g <code class="docutils literal notranslate"><span class="pre">fn_docker_volatility</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>fn_docker_volatility<span class="o">]</span>
+<span class="nv">docker_image</span><span class="o">=</span>remnux/volatility
+<span class="nv">primary_output_dir</span><span class="o">=</span>/tmp/bind_folder
+<span class="nv">primary_internal_dir</span><span class="o">=</span>/home/nonroot/memdumps
+docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="w"> </span><span class="c1"># Allows you to pass an extra argument used for docker container creation. See documentation</span>
+<span class="nv">cmd_operation</span><span class="o">=</span>pslist
+<span class="nv">cmd</span><span class="o">=</span>vol.py<span class="w"> </span>-f<span class="w"> </span><span class="o">{{</span>internal_vol<span class="o">}}</span>/<span class="o">{{</span>attachment_input<span class="o">}}</span><span class="w"> </span><span class="o">{{</span>operation<span class="o">}}</span>
+</pre></div>
+</div>
+<p>Each image app.config section has the opportunity to include a number of extra arguments which will be used during container creation/invocation. This brings you, the designer, flexibility to configure different aspects of how the container will be run. For a list of which arguments you can modify this way <a class="reference internal" href="#"><span class="xref myst">see here</span></a>.</p>
+<p>There are a number of arguments which you cannot modify as they are explicity set by the integration, these are :</p>
+<ul class="simple">
+<li><p>Image – The image is set in the app.config</p></li>
+<li><p>Command – The command is set in the app.config</p></li>
+<li><p>Detach – This is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p>Remove – This is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the container is removed after logs and stats are gathered.</p></li>
+</ul>
+</section>
+<section id="functions">
+<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+</section>
+<section id="run-docker-container">
+<h2><strong>1: Run Docker Container</strong><a class="headerlink" href="#run-docker-container" title="Link to this heading">#</a></h2>
+<section id="function-inputs">
+<h3>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2105</span></code></p></td>
+<td><p>——-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>——-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">artifact_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>——-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>——-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker_image</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nsrl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Which</span> <span class="pre">image</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">used</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">function</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker_input</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60B7C0FEAD45F2066E5B805A91F4F0FC</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">input</span> <span class="pre">being</span> <span class="pre">fed</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">container,</span> <span class="pre">only</span> <span class="pre">used</span> <span class="pre">for</span> <span class="pre">artifact</span> <span class="pre">level</span> <span class="pre">workflows</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker_artifact_type</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Malware</span> <span class="pre">MD5</span> <span class="pre">Hash</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">type</span> <span class="pre">of</span> <span class="pre">artifact</span> <span class="pre">that</span> <span class="pre">this</span> <span class="pre">integration</span> <span class="pre">was</span> <span class="pre">ran</span> <span class="pre">against.</span> <span class="pre">Not</span> <span class="pre">used</span> <span class="pre">for</span> <span class="pre">attachment</span> <span class="pre">workflows.</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker_operation</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pslist</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">param</span> <span class="pre">value</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">fed</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">container's</span> <span class="pre">run</span> <span class="pre">command</span> <span class="pre">specifying</span> <span class="pre">a</span> <span class="pre">particular</span> <span class="pre">entrypoint</span> <span class="pre">or</span> <span class="pre">function</span> <span class="pre">for</span> <span class="pre">that</span> <span class="pre">image.</span> <span class="pre">Used</span> <span class="pre">for</span> <span class="pre">containers</span> <span class="pre">which</span> <span class="pre">have</span> <span class="pre">multiple</span> <span class="pre">possible</span> <span class="pre">operations</span> <span class="pre">you</span> <span class="pre">can</span> <span class="pre">perform</span> <span class="pre">in</span> <span class="pre">them</span> <span class="pre">such</span> <span class="pre">as</span> <span class="pre">Volatility</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="function-output">
+<h3>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;attachment_name&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="s1">&#39;container_exit_status&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Error&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;StatusCode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+             <span class="s1">&#39;container_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;container_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;blkio_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;io_merged_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">&#39;io_queue_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">&#39;io_service_bytes_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">&#39;io_service_time_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">&#39;io_serviced_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">&#39;io_time_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">&#39;io_wait_time_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">&#39;sectors_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+                                 <span class="s1">&#39;cpu_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;total_usage&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                             <span class="s1">&#39;usage_in_kernelmode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                             <span class="s1">&#39;usage_in_usermode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                                               <span class="s1">&#39;throttling_data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                   <span class="s1">&#39;throttled_periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                   <span class="s1">&#39;throttled_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
+                                 <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;memory_stats&#39;</span><span class="p">:</span> <span class="p">{},</span>
+                                 <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;/zealous_chaplygin&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;num_procs&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                 <span class="s1">&#39;pids_stats&#39;</span><span class="p">:</span> <span class="p">{},</span>
+                                 <span class="s1">&#39;precpu_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;total_usage&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                <span class="s1">&#39;usage_in_kernelmode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                <span class="s1">&#39;usage_in_usermode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                                                  <span class="s1">&#39;throttling_data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                      <span class="s1">&#39;throttled_periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                      <span class="s1">&#39;throttled_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
+                                 <span class="s1">&#39;preread&#39;</span><span class="p">:</span> <span class="s1">&#39;0001-01-01T00:00:00Z&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;read&#39;</span><span class="p">:</span> <span class="s1">&#39;0001-01-01T00:00:00Z&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;storage_stats&#39;</span><span class="p">:</span> <span class="p">{}},</span>
+             <span class="s1">&#39;logs&#39;</span><span class="p">:</span> <span class="s1">&#39;Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL &#39;</span>
+                     <span class="s1">&#39;Database.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;res_links&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;res_object&#39;</span><span class="p">:</span> <span class="s1">&#39;https://192.168.57.101/#incidents/2097&#39;</span><span class="p">}},</span>
+ <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;docker_artifact_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Malware MD5 Hash&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;docker_image&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1851</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;nsrl&#39;</span><span class="p">},</span>
+            <span class="s1">&#39;docker_input&#39;</span><span class="p">:</span> <span class="s1">&#39;60B7C0FEAD45F2066E5B805A91F4F0FC&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;docker_operation&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;incident_id&#39;</span><span class="p">:</span> <span class="mi">2097</span><span class="p">},</span>
+ <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">2844</span><span class="p">,</span>
+             <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;RyanG-MBP-18.local&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-docker&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-03-05 11:40:34&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;timestamp_epoch&#39;</span><span class="p">:</span> <span class="mi">1551786034614</span><span class="p">,</span>
+             <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">},</span>
+ <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;logs&quot;: &quot;Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL &#39;</span>
+        <span class="s1">&#39;Database.</span><span class="se">\\</span><span class="s1">n&quot;, &quot;container_exit_status&quot;: {&quot;Error&quot;: null, &quot;StatusCode&quot;: &#39;</span>
+        <span class="s1">&#39;0}, &quot;container_stats&quot;: {&quot;read&quot;: &quot;0001-01-01T00:00:00Z&quot;, &quot;preread&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;0001-01-01T00:00:00Z&quot;, &quot;pids_stats&quot;: </span><span class="si">{}</span><span class="s1">, &quot;blkio_stats&quot;: &#39;</span>
+        <span class="s1">&#39;{&quot;io_service_bytes_recursive&quot;: null, &quot;io_serviced_recursive&quot;: null, &#39;</span>
+        <span class="s1">&#39;&quot;io_queue_recursive&quot;: null, &quot;io_service_time_recursive&quot;: null, &#39;</span>
+        <span class="s1">&#39;&quot;io_wait_time_recursive&quot;: null, &quot;io_merged_recursive&quot;: null, &#39;</span>
+        <span class="s1">&#39;&quot;io_time_recursive&quot;: null, &quot;sectors_recursive&quot;: null}, &quot;num_procs&quot;: &#39;</span>
+        <span class="s1">&#39;0, &quot;storage_stats&quot;: </span><span class="si">{}</span><span class="s1">, &quot;cpu_stats&quot;: {&quot;cpu_usage&quot;: {&quot;total_usage&quot;: 0, &#39;</span>
+        <span class="s1">&#39;&quot;usage_in_kernelmode&quot;: 0, &quot;usage_in_usermode&quot;: 0}, &quot;throttling_data&quot;: &#39;</span>
+        <span class="s1">&#39;{&quot;periods&quot;: 0, &quot;throttled_periods&quot;: 0, &quot;throttled_time&quot;: 0}}, &#39;</span>
+        <span class="s1">&#39;&quot;precpu_stats&quot;: {&quot;cpu_usage&quot;: {&quot;total_usage&quot;: 0, &#39;</span>
+        <span class="s1">&#39;&quot;usage_in_kernelmode&quot;: 0, &quot;usage_in_usermode&quot;: 0}, &quot;throttling_data&quot;: &#39;</span>
+        <span class="s1">&#39;{&quot;periods&quot;: 0, &quot;throttled_periods&quot;: 0, &quot;throttled_time&quot;: 0}}, &#39;</span>
+        <span class="s1">&#39;&quot;memory_stats&quot;: </span><span class="si">{}</span><span class="s1">, &quot;name&quot;: &quot;/zealous_chaplygin&quot;, &quot;id&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&quot;}, &#39;</span>
+        <span class="s1">&#39;&quot;container_id&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;res_links&quot;: {&quot;res_object&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;https://192.168.57.101/#incidents/2097&quot;}, &quot;attachment_name&quot;: null}&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+ <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+ <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span>
+    <span class="p">}</span>
+
+</pre></div>
+</div>
+</section>
+</section>
+<section id="workflows">
+<h2>Workflows<a class="headerlink" href="#workflows" title="Link to this heading">#</a></h2>
+<section id="send-artifact-to-docker-container">
+<h3><strong>1: Send Artifact To Docker Container</strong><a class="headerlink" href="#send-artifact-to-docker-container" title="Link to this heading">#</a></h3>
+<p>An example workflow scoped for Artifacts which will, when invoked, send the artifact to a Docker container, perform some operation on the input and returns information to Resilient.</p>
+<p>There are two provided use cases which each have their own Send Artifact To Docker Container workflow, showing how you can customize your own workflow to target a different image and usecase</p>
+</section>
+<section id="pre-process-script">
+<h3>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">docker_input</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span> 
+<span class="n">inputs</span><span class="o">.</span><span class="n">docker_artifact_type</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+</div>
+</section>
+<section id="post-process-script">
+<h3>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+              
+<span class="c1"># If the Attachment attribute of the content payload is set; we are dealing with an attachment</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">note_text_attachment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Attachment with name </span><span class="si">{0}</span><span class="s2"> &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">])</span>
+  <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_attachment</span>
+
+<span class="c1"># Otherwise we are dealing with an artifact</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">note_text_artifact</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Artifact of Type: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">                          &lt;br&gt; Artifact Value: &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_input&quot;</span><span class="p">])</span>
+  <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_artifact</span>
+              
+<span class="n">note_text_end</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Container ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;Container exit code : &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;br&gt; Container Logs have been saved as an attachment.</span>
+<span class="s2">              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_exit_status&quot;</span><span class="p">])</span>
+
+<span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text_start</span><span class="o">+</span><span class="n">note_text_end</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">des</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+  <span class="n">des</span> <span class="o">=</span> <span class="kc">None</span>
+  
+<span class="k">if</span> <span class="n">des</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+  
+  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image </span><span class="si">{0}</span><span class="s2">  </span><span class="se">\n</span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;logs&quot;</span><span class="p">])</span>
+  <span class="c1"># Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact</span>
+  <span class="c1">#artifact.description = u&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image {0}&quot;&quot;&quot;.format(results.inputs[&quot;docker_image&quot;][&quot;name&quot;])</span>
+<span class="k">else</span><span class="p">:</span>
+  
+  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">des</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image </span><span class="si">{0}</span><span class="s2">  </span><span class="se">\n</span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;logs&quot;</span><span class="p">])</span>
+  
+  <span class="c1"># Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact</span>
+  <span class="c1">#artifact.description = des + u&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image {0}&quot;&quot;&quot;.format(results.inputs[&quot;docker_image&quot;][&quot;name&quot;])</span>
+  
+  
+<span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;docker_integration_invocations&quot;</span><span class="p">)</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp_epoch&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_container_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_artifact_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_input&quot;</span><span class="p">]</span>
+
+</pre></div>
+</div>
+</section>
+<section id="send-attachment-to-docker-container">
+<h3><strong>2: Send Attachment To Docker Container</strong><a class="headerlink" href="#send-attachment-to-docker-container" title="Link to this heading">#</a></h3>
+<p>An example workflow scoped for Attachments which will, when invoked, send the attachment to a Docker container, perform some operation on the input and returns information to Resilient.</p>
+</section>
+<section id="id1">
+<h3>2: Pre-Process Script:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span> 
+
+<span class="c1"># If this workflow has the task_id available, gather it incase we need it.</span>
+<span class="k">if</span> <span class="n">task</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
+<span class="c1"># If this workflow has the attachment_id available, gather it incase we need it.</span>
+<span class="k">if</span> <span class="n">attachment</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span> <span class="o">=</span> <span class="n">attachment</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># If this workflow has the artifact_id available, gather it incase we need it.</span>
+<span class="k">try</span><span class="p">:</span> 
+  <span class="k">if</span> <span class="n">artifact</span><span class="p">:</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">id</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>2: Post-Process Script:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+              
+<span class="c1"># If the Attachment attribute of the content payload is set; we are dealing with an attachment</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">note_text_attachment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Attachment with name </span><span class="si">{0}</span><span class="s2"> &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">])</span>
+  <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_attachment</span>
+
+<span class="c1"># Otherwise we are dealing with an artifact</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">note_text_artifact</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Artifact of Type: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">                          &lt;br&gt; Artifact Value: &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_input&quot;</span><span class="p">])</span>
+  <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_artifact</span>
+              
+<span class="n">note_text_end</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Container ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;Container exit code : &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;br&gt; Container Logs have been saved as an attachment.</span>
+<span class="s2">              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_exit_status&quot;</span><span class="p">])</span>
+
+<span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text_start</span><span class="o">+</span><span class="n">note_text_end</span>
+
+<span class="c1"># If we are dealing with a task level attachment, then add a note to the task not the incident</span>
+<span class="k">if</span> <span class="n">task</span><span class="p">:</span>
+  <span class="n">task</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
+
+<span class="c1"># Add an entry to the docker_integration_invocations Datatable</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;docker_integration_invocations&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="s2">&quot;task&quot;</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;res_links&quot;</span><span class="p">][</span><span class="s2">&quot;res_object&quot;</span><span class="p">]:</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_links&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;a href=&quot;</span><span class="si">{}</span><span class="s2">&quot;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;res_links&quot;</span><span class="p">][</span><span class="s2">&quot;res_object&quot;</span><span class="p">],</span> <span class="s2">&quot;Task Link&quot;</span><span class="p">)</span>
+
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp_epoch&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_container_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_operation&quot;</span><span class="p">]])</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_attachment_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">]</span>
+
+</pre></div>
+</div>
+</section>
+</section>
+<section id="rules">
+<h2>Rules:<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head text-center"><p>Object Type</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+<th class="head"><p>Conditions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Docker: Volatility: Analyze Memory Sample</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Attachment</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">Docker:</span> <span class="pre">Send</span> <span class="pre">Attachment</span> <span class="pre">To</span> <span class="pre">Docker</span> <span class="pre">Container</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Attachment</span> <span class="pre">Name</span> <span class="pre">contains</span> <span class="pre">'.vmem'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Docker: NSRL: Validate MD5 from Whitelist</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Artifact</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">Docker:</span> <span class="pre">Send</span> <span class="pre">Artifact</span> <span class="pre">To</span> <span class="pre">Docker</span> <span class="pre">Container</span> <span class="pre">(NSRL)</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>Docker: Amass: Search for Subdomains</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Artifact</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">Docker:</span> <span class="pre">Send</span> <span class="pre">Artifact</span> <span class="pre">To</span> <span class="pre">Docker</span> <span class="pre">Container</span> <span class="pre">(Amass)</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="datatable">
+<h2>Datatable:<a class="headerlink" href="#datatable" title="Link to this heading">#</a></h2>
+<section id="docker-integration-invocations">
+<h3><strong>Docker Integration Invocations</strong><a class="headerlink" href="#docker-integration-invocations" title="Link to this heading">#</a></h3>
+<p><img alt="screenshot" src="../_images/dtdocker.png" /></p>
+</section>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p>docker_integration_invocations</p>
+<section id="columns">
+<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Integration Run Time</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">docker_timestamp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DateTime</span> <span class="pre">Picker</span></code></p></td>
+<td><p>The time that the function finished.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Artifact Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">docker_artifact_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+<td><p>The type of artifact that was used as an input. Will be blank if ran at an attachment level.</p></td>
+</tr>
+<tr class="row-even"><td><p>Artifact Value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">docker_artifact_value</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+<td><p>The artifact that was sent to the Docker container. Will be blank if ran at an attachment level.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Attachment Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">docker_attachment_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+<td><p>The name of the attachment that was sent to the Docker container. Will be blank if ran at an artifact level.</p></td>
+</tr>
+<tr class="row-even"><td><p>Docker Container ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">docker_container_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+<td><p>The ID of the container that was used.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Docker Image &amp; Operation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">docker_image</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
+<td><p>The name of the image that was used. In some cases a specified operation will be sent to the container in cases where there are multiple possible entrypoints.</p></td>
+</tr>
+<tr class="row-even"><td><p>Links</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">docker_links</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span> <span class="pre">Area:</span> <span class="pre">RichText</span></code></p></td>
+<td><p>Relevant links back to the task, if task based</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="display-a-data-table-in-an-incident">
+<h3>Display a Data Table in an Incident<a class="headerlink" href="#display-a-data-table-in-an-incident" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In order to <strong>display</strong> the Test Data Table in your Incident, you must <strong>modify your Layout Settings</strong></p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Go to <strong>Customization Settings</strong> &gt; <strong>Layouts</strong> &gt; <strong>Incident Tabs</strong> &gt; <strong>+ Add Tab</strong></p></li>
+</ol>
+<p><img alt="screenshot" src="../_images/dt_12.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>Enter <strong>Tab Text</strong>: <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Test</span> <span class="pre">Tab</span></code> and click <strong>Add</strong></p></li>
+</ol>
+<p><img alt="screenshot" src="../_images/dt_21.png" /></p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Drag</strong> the Data table into the middle and click <strong>Save</strong></p></li>
+</ol>
+<p><img alt="screenshot" src="../_images/dt_32.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Create a new Incident and you will now see the <strong>My Test Tab</strong> with the <strong>Test Data Table</strong></p></li>
+</ol>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">IBM Resilient Integration with Docker</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pre-requisite-steps-and-info">Pre-Requisite Steps and Info:</a><ul>
+<li><a class="reference internal" href="#install-docker">Install Docker</a></li>
+<li><a class="reference internal" href="#pulling-images">Pulling Images</a></li>
+<li><a class="reference internal" href="#connection-options-and-installation">Connection options and installation:</a></li>
+<li><a class="reference internal" href="#ssh-connection-setup">SSH Connection Setup</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#about-the-provided-usecases">About the provided UseCases</a><ul>
+<li><a class="reference internal" href="#volatility">Volatility</a></li>
+<li><a class="reference internal" href="#nsrl-whitelist">NSRL Whitelist</a></li>
+<li><a class="reference internal" href="#amass">Amass</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#app-config-settings">app.config settings:</a><ul>
+<li><a class="reference internal" href="#integration-app-config-settings">Integration app.config settings:</a></li>
+<li><a class="reference internal" href="#image-specific-app-config-sections">Image specific app.config sections</a></li>
+<li><a class="reference internal" href="#functions">Functions:</a></li>
+<li><a class="reference internal" href="#run-docker-container"><strong>1: Run Docker Container</strong></a><ul>
+<li><a class="reference internal" href="#function-inputs">Function Inputs:</a></li>
+<li><a class="reference internal" href="#function-output">Function Output:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#workflows">Workflows</a><ul>
+<li><a class="reference internal" href="#send-artifact-to-docker-container"><strong>1: Send Artifact To Docker Container</strong></a></li>
+<li><a class="reference internal" href="#pre-process-script">Pre-Process Script:</a></li>
+<li><a class="reference internal" href="#post-process-script">Post-Process Script:</a></li>
+<li><a class="reference internal" href="#send-attachment-to-docker-container"><strong>2: Send Attachment To Docker Container</strong></a></li>
+<li><a class="reference internal" href="#id1">2: Pre-Process Script:</a></li>
+<li><a class="reference internal" href="#id2">2: Post-Process Script:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules:</a></li>
+<li><a class="reference internal" href="#datatable">Datatable:</a><ul>
+<li><a class="reference internal" href="#docker-integration-invocations"><strong>Docker Integration Invocations</strong></a></li>
+<li><a class="reference internal" href="#api-name">API Name:</a><ul>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#display-a-data-table-in-an-incident">Display a Data Table in an Incident</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

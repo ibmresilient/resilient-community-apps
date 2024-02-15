@@ -1,0 +1,1720 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="fn-aws-iam Functions for IBM SOAR" href="../fn_aws_iam/README.html" /><link rel="prev" title="APIVoid Threat Analysis APIs" href="../fn_api_void/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Amazon AWS GuardDuty Integration for Resilient - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <!--
+  This README.md is generated by running:
+  "resilient-sdk docgen -p fn_aws_guardduty"
+
+  It is best edited using a Text Editor with a Markdown Previewer. VS Code
+  is a good example. Checkout https://guides.github.com/features/mastering-markdown/
+  for tips on writing with Markdown
+
+  If you make manual edits and run docgen again, a .bak file will be created
+
+  Store any screenshots in the "doc/screenshots" directory and reference them like:
+  ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
+
+  NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
+-->
+<section id="amazon-aws-guardduty-integration-for-resilient">
+<h1>Amazon AWS GuardDuty Integration for Resilient<a class="headerlink" href="#amazon-aws-guardduty-integration-for-resilient" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#resilient-platform"><span class="xref myst">Resilient platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#poller---aws-guardduty-escalate-findings"><span class="xref myst">Poller - AWS GuardDuty: Escalate Findings</span></a></p></li>
+<li><p><a class="reference internal" href="#function---aws-guardduty-refresh-finding"><span class="xref myst">Function - AWS GuardDuty: Refresh Finding</span></a></p></li>
+<li><p><a class="reference internal" href="#function---aws-guardduty-archive-finding"><span class="xref myst">Function - AWS GuardDuty: Archive finding</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-finding-overview"><span class="xref myst">Data Table - GuardDuty Finding Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource-affected"><span class="xref myst">Data Table - GuardDuty Resource Affected</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource---instance-details"><span class="xref myst">Data Table - GuardDuty Resource - Instance Details</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource---access-key-details"><span class="xref myst">Data Table - GuardDuty Resource - Access Key Details</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource---s3-bucket-details"><span class="xref myst">Data Table - GuardDuty Resource - S3 Bucket Details</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-actionactor-details"><span class="xref myst">Data Table - GuardDuty Action/Actor Details</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-artifact-types"><span class="xref myst">Custom Artifact Types</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>03/2021</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+<p><strong>Amazon AWS GuardDuty Integration for Resilient.</strong></p>
+<p><img alt="screenshot: main" src="../_images/main3.png" /></p>
+<p>Amazon AWS GuardDuty is a continuous security monitoring service that identifies unexpected and potentially unauthorized and malicious activity within an AWS environment.
+GuardDuty informs the user of the status of their AWS environment by producing security findings that can be viewed in the GuardDuty console.
+A finding is a potential security issue discovered by GuardDuty.</p>
+<p>The Amazon AWS GuardDuty Integration for Resilient allows you to process and respond to GuardDuty findings within the IBM Resilient Platform.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<!--
+  List the Key Features of the Integration
+-->
+<p>The GuardDuty Integration provides the following functionality:</p>
+<ul class="simple">
+<li><p>A poller which gathers current findings from GuardDuty and escalates to the Resilient platform as incidents.</p></li>
+<li><p>A function to archive a GuardDuty finding when the corresponding Resilient incident is closed.</p></li>
+<li><p>A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.</p></li>
+<li><p>Close Resilient incidents if the corresponding GuardDuty findings are archived.</p></li>
+<li><p>Archive GuardDuty findings if the corresponding Resilient incidents are closed.</p></li>
+<li><p>Trigger a refresh for a Resilient incident if the corresponding GuardDuty finding gets updated.</p></li>
+<li><p>A refresh of Resilient incidents can be executed manually.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<!--
+  List any Requirements 
+-->
+<p>This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.</p>
+<section id="resilient-platform">
+<h3>Resilient platform<a class="headerlink" href="#resilient-platform" title="Link to this heading">#</a></h3>
+<p>The Resilient platform supports two app deployment mechanisms, App Host and integration server.</p>
+<p>If deploying to a Resilient platform with an App Host, the requirements are:</p>
+<ul class="simple">
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">39.0.6328</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a Resilient platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">39.0.6328</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=35.0.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>incident</p></td>
+<td><p>create</p></td>
+</tr>
+<tr class="row-odd"><td><p>all_incidents</p></td>
+<td><p>Read</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following Resilient platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>. On this web page, select your Resilient platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Resilient Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= 1.4.</p></li>
+<li><p>Cloud Pak is configured with an App Host.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app <strong>does</strong> support a proxy server.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>Resilient platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>aws_gd_access_key_id</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ABCD1EFGHI2JK3L4MNOP</span></code></p></td>
+<td><p><em>AWS access key id of user with programmatic (API) access to AWS GuardDuty services for an AWS account. Note: User must have sufficent permissions to be able to manage GuardDuty resources for the AWS account.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>aws_gd_secret_access_key</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aBcdeFGH/iJkl1MNo2P3Q4rs5tuV6wXYZAbc+Def</span></code></p></td>
+<td><p><em>AWS secret access key used for programmatic (API) access to AWS services.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>aws_gd_master_region</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">us-west-1</span></code></p></td>
+<td><p><em>Default or master region for the integration.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>aws_gd_regions</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;^us.*&quot;</span></code></p></td>
+<td><p><em>Filter by GuardDuty region names. Can be a string or regular expression.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>aws_gd_regions_interval</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p><em>Interval to refresh regions information (in minutes).</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>aws_gd_polling_interval</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">15</span></code></p></td>
+<td><p><em>Interval to poll GuardDuty for findings (in minutes).</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>aws_gd_severity_threshold</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span></code></p></td>
+<td><p><em>Severity threshold (int) to use in criterion to filter findings .</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>aws_gd_lookback_interval</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p><em>How long, (in minutes) to check back for previous findings at startup. Filter to process only more recent findings.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>aws_gd_close_incident_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>``</p></td>
+<td><p><em>User defined JSON template file to use for closing Resilient incidents.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>http_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">http://proxy:80</span></code></p></td>
+<td><p><em>Optional setting for an http proxy if required.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>https_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://proxy:443</span></code></p></td>
+<td><p><em>Optional setting for an https proxy if required.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="custom-layouts">
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+<p>Import the Data Tables and Custom Fields as shown in the screenshot below.</p>
+<p>Configure the Incident Details tab layout to display the AWS GuardDuty information as follows:</p>
+<ol class="arabic simple">
+<li><p>Navigate to the ‘Customization Settings’ and select the Layouts tab.</p></li>
+<li><p>Click on ‘Incident Tabs’.</p></li>
+<li><p>Create new heading ‘AWS GuardDuty Properties’ in the Details tab.</p></li>
+<li><p>Drag and Drop the GuardDuty custom properties under the new heading.</p></li>
+</ol>
+<p>The following screenshot shows the GuardDuty fields added to the Details tab.</p>
+<p><img alt="screenshot: custom_layouts_fields" src="../_images/custom_layouts_fields.png" /></p>
+<ol class="arabic simple" start="5">
+<li><p>Add a new incident tab named ‘AWS GuardDuty Details’.</p></li>
+<li><p>Drag and drop the GuardDuty data tables under the new tab.</p></li>
+<li><p>Click Save.</p></li>
+</ol>
+<p>The following screenshot shows the GuardDuty data tables added to the GuardDuty tab:</p>
+<p><img alt="screenshot: custom_layouts_datatables" src="../_images/custom_layouts_datatables.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="poller-aws-guardduty-escalate-findings">
+<h2>Poller - AWS GuardDuty: Escalate Findings<a class="headerlink" href="#poller-aws-guardduty-escalate-findings" title="Link to this heading">#</a></h2>
+<p>The GuardDuty integration poller starts querying GuardDuty for findings as soon as the app begins running.</p>
+<p>The poller provide the following functionality.</p>
+<ul class="simple">
+<li><p>For any new findings discovered, creates a  matching incident in the Resilient platform.</p></li>
+<li><p>Enhances the incidents by adding artifacts, data tables and a note with data from the findings. The note includes the JSON content of the finding.</p></li>
+<li><p>Can be configured to filter the findings, which are escalated to the Resilient incidents.</p></li>
+<li><p>Closes Resilient incidents if the corresponding GuardDuty findings are archived.</p></li>
+<li><p>Archives GuardDuty findings if the corresponding Resilient incidents are closed.</p></li>
+<li><p>Triggers a refresh of GuardDuty information for a Resilient incident if the corresponding GuardDuty finding is updated.</p></li>
+</ul>
+<p>The following screenshot shows examples of Resilient incidents created by the poller from GuardDuty findings:</p>
+<p><img alt="screenshot: fn-aws-guardduty-incidents" src="../_images/fn-aws-guardduty-incidents.png" /></p>
+<p>The following screenshot shows an example of a Resilient incident Details tab created by the poller:</p>
+<p><img alt="screenshot: fn-aws-guardduty-incident-details" src="../_images/fn-aws-guardduty-incident-details.png" /></p>
+<p>The following screenshot shows an example of GuardDuty finding custom properties in the Details tab of a Resilient incident created by the poller:</p>
+<p><img alt="screenshot: fn-aws-guardduty-incident-properties" src="../_images/fn-aws-guardduty-incident-properties.png" /></p>
+<p>The following screenshot shows examples of artifacts added to a Resilient incident created by the poller:</p>
+<p><img alt="screenshot: fn-aws-guardduty-incident-artifacts" src="../_images/fn-aws-guardduty-incident-artifacts.png" /></p>
+<p>The following screenshot shows an example of a note added to a Resilient incident created by the poller:</p>
+<p><img alt="screenshot: fn-aws-guardduty-incident-note" src="../_images/fn-aws-guardduty-incident-note.png" /></p>
+<p>Note: See the data tables section for examples of data tables added by the poller.</p>
+</section>
+<hr class="docutils" />
+<section id="function-aws-guardduty-refresh-finding">
+<h2>Function - AWS GuardDuty: Refresh Finding<a class="headerlink" href="#function-aws-guardduty-refresh-finding" title="Link to this heading">#</a></h2>
+<p>Resilient function to refresh AWS GuardDuty finding details in an incident.</p>
+<p><img alt="screenshot: fn-aws-guardduty-refresh-finding" src="../_images/fn-aws-guardduty-refresh-finding.png" /></p>
+<p>The function provides the following functionality.</p>
+<ul class="simple">
+<li><p>Updates incident fields such as the <code class="docutils literal notranslate"><span class="pre">aws_guardduty_count</span></code> , <code class="docutils literal notranslate"><span class="pre">aws_guardduty_finding_updated_at</span></code> and  <code class="docutils literal notranslate"><span class="pre">aws_guardduty_severity</span></code>.</p></li>
+<li><p>Refreshes all related data tables of the Resilient incident.</p></li>
+<li><p>Adds new or missing artifacts discovered in the GuardDuty finding.</p></li>
+<li><p>Adds two notes to the Resilient incident. One of the notes includes the JSON refreshed content of the finding.</p></li>
+</ul>
+<p>An Example workflow that uses this Resilient function is <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Refresh</span> <span class="pre">Finding</span></code>.</p>
+<p>The workflow is initiated by the incident rules <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Update</span> <span class="pre">Finding</span> <span class="pre">Details</span></code> and <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Refresh</span> <span class="pre">Finding</span> <span class="pre">Details</span></code>.</p>
+<p>The rule <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Update</span> <span class="pre">Finding</span> <span class="pre">Details</span></code> is an automatic rule which is triggered by the poller if a GuardDuty finding with a corresponding Resilient incident is updated.</p>
+<p>The rule <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Refresh</span> <span class="pre">Finding</span></code> is a manual incident rule which can be invoked by a user to refresh GuardDuty finding information for an incident.</p>
+<p>The following screenshot shows an example of data tables updated by the function:</p>
+<p><img alt="screenshot: fn-aws-guardduty-refresh-datatables" src="../_images/fn-aws-guardduty-refresh-datatables.png" /></p>
+<p>The following screenshot shows an example of notes added to a Resilient incident created by the poller:</p>
+<p><img alt="screenshot: fn-aws-guardduty-refresh-notes" src="../_images/fn-aws-guardduty-refresh-notes.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">aws_gd_detector_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>AWS GuardDuty detector ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">aws_gd_finding_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>AWS GuardDuty finding ID.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">aws_gd_region</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>AWS GuardDuty region.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Resilient incident ID.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># TODO: Copy and paste an example of the Function Output within this code block.</span>
+    <span class="c1"># To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. </span>
+    <span class="c1"># The Function results will be printed in the logs: &quot;resilient-circuits run --loglevel=DEBUG&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">aws_gd_region</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_region</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">aws_gd_detector_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_detector_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">aws_gd_finding_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_finding_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  wf_aws_guardduty_refresh_finding ##</span>
+<span class="c1"># Example result:</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Result: { &#39;version&#39;: &#39;1.0&#39;,</span>
+<span class="sd">          &#39;success&#39;: True,</span>
+<span class="sd">          &#39;reason&#39;: None,</span>
+<span class="sd">          &#39;content&#39;: {&#39;payload&#39;: {&#39;name&#39;: &#39;AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.&#39;,</span>
+<span class="sd">                                  &#39;description&#39;: {&#39;format&#39;: &#39;text&#39;, &#39;content&#39;: &#39;An API was used to access a bucket from an IP address on a custom threat list.&#39;},</span>
+<span class="sd">                                  &#39;discovered_date&#39;: &#39;2020-11-25T13:46:37.960Z&#39;,</span>
+<span class="sd">                                  &#39;severity_code&#39;: &#39;Low&#39;,</span>
+<span class="sd">                                  &#39;properties&#39;: {&#39;aws_guardduty_finding_id&#39;: &#39;60baffd3f9042e38640f2300d5c5a631&#39;,</span>
+<span class="sd">                                                 &#39;aws_guardduty_finding_arn&#39;: &#39;arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631&#39;,</span>
+<span class="sd">                                                 &#39;aws_guardduty_finding_type&#39;: &#39;UnauthorizedAccess:S3/MaliciousIPCaller.Custom&#39;,</span>
+<span class="sd">                                                 &#39;aws_guardduty_finding_updated_at&#39;: &#39;2020-11-26T15:18:12.620Z&#39;, &#39;aws_guardduty_region&#39;: &#39;us-west-2&#39;,</span>
+<span class="sd">                                                 &#39;aws_guardduty_resource_type&#39;: &#39;S3Bucket&#39;, &#39;aws_guardduty_count&#39;: 4,</span>
+<span class="sd">                                                 &#39;aws_guardduty_detector_id&#39;: &#39;f2baedb0ac74f8f42fc929e15f56da6a&#39;},</span>
+<span class="sd">                                  &#39;artifacts&#39;: [],</span>
+<span class="sd">                                  &#39;comments&#39;: [{&#39;text&#39;: {&#39;format&#39;: &#39;text&#39;, &#39;content&#39;: &quot;AWS GuardDuty finding Payload:\n&lt;FINDING_PAYLOAD_AS_STRING&gt;&quot;}}]</span>
+
+<span class="sd">                                 },</span>
+<span class="sd">                      &quot;data_tables&quot;: {&quot;gd_action_details&quot;: [{&quot;cells&quot;: {&quot;action_type&quot;: {&quot;value&quot;: &quot;AWS_API_CALL&quot;},</span>
+<span class="sd">                                                             &quot;action_api&quot;: {&quot;value&quot;: &quot;GeneratedFindingAPIName&quot;},</span>
+<span class="sd">                                                             &quot;event_first_seen&quot;: {&quot;value&quot;: &quot;2020-11-25T13:46:37.960Z&quot;},</span>
+<span class="sd">                                                             &quot;event_last_seen&quot;: {&quot;value&quot;: &quot;2020-11-26T15:18:12.620Z&quot;},</span>
+<span class="sd">                                                            &quot;actor_caller_type&quot;: {&quot;value&quot;: &quot;Remote IP&quot;}, &quot;city_name&quot;: {&quot;value&quot;: &quot;GeneratedFindingCityName&quot;}, &quot;country_name&quot;: {&quot;value&quot;: &quot;GeneratedFindingCountryName&quot;}, &quot;asn&quot;: {&quot;value&quot;: &quot;-1&quot;}, &quot;asn_org&quot;: {&quot;value&quot;: &quot;GeneratedFindingASNOrg&quot;}, &quot;isp&quot;: {&quot;value&quot;: &quot;GeneratedFindingISP&quot;}, &quot;org&quot;: {&quot;value&quot;: &quot;GeneratedFindingORG&quot;}, &quot;action_service_name&quot;: {&quot;value&quot;: &quot;GeneratedFindingAPIServiceName&quot;}, &quot;remote_ip&quot;: {&quot;value&quot;: &quot;198.51.100.0&quot;}}}],</span>
+<span class="sd">                                     &quot;gd_resource_affected&quot;: [{&quot;cells&quot;: {&quot;resource_type&quot;: {&quot;value&quot;: &quot;S3Bucket&quot;}, &quot;instance_id&quot;: {&quot;value&quot;: &quot;i-99999999&quot;}, &quot;instance_type&quot;: {&quot;value&quot;: &quot;m3.xlarge&quot;}, &quot;instance_state&quot;: {&quot;value&quot;: &quot;running&quot;}, &quot;resource_role&quot;: {&quot;value&quot;: &quot;TARGET&quot;}, &quot;instance_private_ip&quot;: {&quot;value&quot;: &quot;10.0.0.1&quot;}, &quot;instance_private_dns&quot;: {&quot;value&quot;: &quot;GeneratedFindingPrivateName&quot;}, &quot;instance_public_ip&quot;: {&quot;value&quot;: &quot;198.51.100.0&quot;}, &quot;instance_public_dns&quot;: {&quot;value&quot;: &quot;GeneratedFindingPublicDNSName&quot;}, &quot;s3bucket_name&quot;: {&quot;value&quot;: &quot;bucketName&quot;}, &quot;s3bucket_owner&quot;: {&quot;value&quot;: &quot;CanonicalId of Owner&quot;}}}]</span>
+
+<span class="sd">                      }}&#39;,</span>
+<span class="sd">            &#39;inputs&#39;: {&#39;incident_id&#39;: 2168, &#39;aws_gd_finding_id&#39;: &#39;60baffd3f9042e38640f2300d5c5a631&#39;,</span>
+<span class="sd">                       &#39;aws_gd_region&#39;: &#39;us-west-2&#39;, &#39;aws_gd_detector_id&#39;: &#39;f2baedb0ac74f8f42fc929e15f56da6a&#39;},</span>
+<span class="sd">            &#39;metrics&#39;: {&#39;version&#39;: &#39;1.0&#39;, &#39;package&#39;: &#39;fn-aws-guardduty&#39;, &#39;package_version&#39;: &#39;1.0.0&#39;,</span>
+<span class="sd">                        &#39;host&#39;: &#39;Johnp-MacBook-Pro-2.galway.ie.ibm.com&#39;, &#39;execution_time_ms&#39;: 10739,</span>
+<span class="sd">                        &#39;timestamp&#39;: &#39;2021-01-18 16:51:10&#39;}</span>
+<span class="sd">}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#  Globals</span>
+<span class="c1"># List of fields in datatable for wf_aws_guardduty_refresh_finding script</span>
+<span class="n">DATA_TABLES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gd_action_details&quot;</span><span class="p">,</span> <span class="s2">&quot;gd_resource_affected&quot;</span><span class="p">]</span>
+<span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;func_aws_guardduty_refresh_finding&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;Example: AWS GuardDuty: Refresh Finding&quot;</span>
+<span class="c1"># Resilient artifact names to api names.</span>
+<span class="n">ARTIFACT_API_TO_TYPE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;aws_iam_access_key_id&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS IAM Access Key ID&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws_iam_user_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS IAM User Name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws_s3_bucket_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS S3 Bucket Name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IP Address&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DNS Name&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Port&quot;</span><span class="p">:</span> <span class="s2">&quot;Port&quot;</span>
+<span class="p">}</span>
+<span class="n">CONTENT</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
+<span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
+    <span class="n">FINDING</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">finding</span>
+    <span class="n">PAYLOAD</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">payload</span>
+    <span class="n">ARTIFACTS</span> <span class="o">=</span> <span class="n">PAYLOAD</span><span class="o">.</span><span class="n">artifacts</span>
+    <span class="n">DATA_TABLES</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">data_tables</span>
+
+<span class="c1"># Processing</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
+        <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS GuardDuty Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: Finding data returned for Resilient function &quot;</span> \
+                    <span class="s2">&quot;&lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WF_NAME</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">CONTENT</span><span class="p">),</span> <span class="n">FN_NAME</span><span class="p">)</span>
+
+        <span class="n">update_fields</span><span class="p">()</span>
+        <span class="n">update_datatables</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ARTIFACTS</span><span class="p">:</span>
+            <span class="n">add_artifacts</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS GuardDuty Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: No finding data returned for Resilient function &quot;</span> \
+                    <span class="s2">&quot;&lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WF_NAME</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">CONTENT</span><span class="p">),</span> <span class="n">FN_NAME</span><span class="p">)</span>
+
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">update_fields</span><span class="p">():</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span> <span class="o">=</span> <span class="n">PAYLOAD</span><span class="p">[</span><span class="s2">&quot;severity_code&quot;</span><span class="p">]</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_finding_updated_at</span> <span class="o">=</span> <span class="n">PAYLOAD</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="s2">&quot;aws_guardduty_finding_updated_at&quot;</span><span class="p">]</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_count</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PAYLOAD</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="s2">&quot;aws_guardduty_count&quot;</span><span class="p">])</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_archived</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PAYLOAD</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="s2">&quot;aws_guardduty_archived&quot;</span><span class="p">])</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_severity</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PAYLOAD</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="s2">&quot;aws_guardduty_severity&quot;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">update_datatables</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">data_table</span> <span class="ow">in</span> <span class="n">DATA_TABLES</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">DATA_TABLES</span><span class="p">[</span><span class="n">data_table</span><span class="p">]:</span>
+            <span class="n">newrow</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="n">data_table</span><span class="p">)</span>
+            <span class="n">newrow</span><span class="o">.</span><span class="n">query_execution_date</span> <span class="o">=</span> <span class="n">QUERY_EXECUTION_DATE</span>
+            <span class="n">data_table_fields</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;cells&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">v_info</span> <span class="ow">in</span> <span class="n">data_table_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">newrow</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_info</span><span class="o">.</span><span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">add_artifacts</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">ARTIFACTS</span><span class="p">:</span>
+        <span class="n">artifact_type</span> <span class="o">=</span> <span class="n">ARTIFACT_API_TO_TYPE</span><span class="p">[</span><span class="n">artifact</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span>
+        <span class="n">artifact_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">artifact</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-aws-guardduty-archive-finding">
+<h2>Function - AWS GuardDuty: Archive finding<a class="headerlink" href="#function-aws-guardduty-archive-finding" title="Link to this heading">#</a></h2>
+<p>Resilient function to archive an AWS GuardDuty finding when the corresponding incident is closed.</p>
+<p><img alt="screenshot: fn-aws-guardduty-archive-finding" src="../_images/fn-aws-guardduty-archive-finding.png" /></p>
+<p>The function provides the following functionality.</p>
+<ul class="simple">
+<li><p>When a Resilient incident corresponding to a GuardDuty find is closed, an automatic rule <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Archive</span> <span class="pre">Finding</span></code> is triggered which executes the function.</p></li>
+<li><p>Archives the related GuardDuty finding.</p></li>
+<li><p>Adds a note to the Resilient incident.</p></li>
+</ul>
+<p>An Example workflow that uses this Resilient function is <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Archive</span> <span class="pre">Finding</span></code>.</p>
+<p>The workflow is initiated by the incident rule <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Archive</span> <span class="pre">Finding</span></code>.</p>
+<p>The rule <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">AWS</span> <span class="pre">GuardDuty:</span> <span class="pre">Archive</span> <span class="pre">Finding</span></code> is an automatic rule which is triggered when a Resilient incident corresponding to a GuardDuty finding is closed.</p>
+<p>The following screenshot shows an example of a note added to a Resilient incident created by the function:</p>
+<p><img alt="screenshot: fn-aws-guardduty-archive-note " src="../_images/fn-aws-guardduty-archive-note.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">aws_gd_detector_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>AWS GuardDuty detector ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">aws_gd_finding_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>AWS GuardDuty finding ID.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">aws_gd_region</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>AWS GuardDuty region.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># TODO: Copy and paste an example of the Function Output within this code block.</span>
+    <span class="c1"># To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. </span>
+    <span class="c1"># The Function results will be printed in the logs: &quot;resilient-circuits run --loglevel=DEBUG&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">aws_gd_region</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_region</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">aws_gd_detector_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_detector_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">aws_gd_finding_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_finding_id</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  wf_aws_guardduty_refresh_finding ##</span>
+<span class="c1"># Example result:</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Good</span>
+<span class="sd">====</span>
+<span class="sd">Result: {&#39;version&#39;: &#39;1.0&#39;, &#39;success&#39;: True, &#39;reason&#39;: None,</span>
+<span class="sd">         &#39;content&#39;: {&#39;status&#39;: &#39;ok&#39;},</span>
+<span class="sd">         &#39;raw&#39;: &#39;{&quot;status&quot;: &quot;ok&quot;}&#39;,</span>
+<span class="sd">         &#39;inputs&#39;: {&#39;aws_gd_finding_id&#39;: &#39;c2bb95a17b879bffc96c58f8a1689785&#39;, &#39;aws_gd_region&#39;: &#39;us-east-2&#39;,</span>
+<span class="sd">                    &#39;aws_gd_detector_id&#39;: &#39;32b7017d2019dfe922abc4e07c3fdded&#39;</span>
+<span class="sd">                    },</span>
+<span class="sd">         &#39;metrics&#39;: {&#39;version&#39;: &#39;1.0&#39;, &#39;package&#39;: &#39;fn-aws-guardduty&#39;, &#39;package_version&#39;: &#39;1.0.0&#39;,</span>
+<span class="sd">         &#39;host&#39;: &#39;myhost.ibm.com&#39;, &#39;execution_time_ms&#39;: 1310, &#39;timestamp&#39;: &#39;2021-01-28 11:31:30&#39;</span>
+<span class="sd">        }</span>
+<span class="sd">}</span>
+<span class="sd">Error:</span>
+<span class="sd">Result: {&#39;version&#39;: &#39;1.0&#39;, &#39;success&#39;: True, &#39;reason&#39;: None,</span>
+<span class="sd">         &#39;content&#39;: {&#39;status&#39;: &#39;error&#39;,</span>
+<span class="sd">                     &#39;msg&#39;: &#39;An error occurred (BadRequestException) when calling the ArchiveFindings operation:</span>
+<span class="sd">                     The request is rejected because the input detectorId is not owned by the current account.&#39;},</span>
+<span class="sd">                     &#39;raw&#39;: &#39;&lt;content_as_string&gt;&#39;,</span>
+<span class="sd">         &#39;inputs&#39;: {&#39;aws_gd_finding_id&#39;: &#39;c2bb95a17b879bffc96c58f8a1689784&#39;, &#39;aws_gd_region&#39;: &#39;us-east-2&#39;,</span>
+<span class="sd">                    &#39;aws_gd_detector_id&#39;: &#39;32b7017d2019dfe922abc4e07c3fdfff&#39;</span>
+<span class="sd">                    },</span>
+<span class="sd">         &#39;metrics&#39;: {&#39;version&#39;: &#39;1.0&#39;, &#39;package&#39;: &#39;fn-aws-guardduty&#39;, &#39;package_version&#39;: &#39;1.0.0&#39;,</span>
+<span class="sd">         &#39;host&#39;: &#39;myhost.ibm.com&#39;, &#39;execution_time_ms&#39;: 1446, &#39;timestamp&#39;: &#39;2021-01-28 11:34:53&#39;</span>
+<span class="sd">         }</span>
+<span class="sd">}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#  Globals</span>
+<span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;func_aws_guardduty_archive_finding&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;Example: AWS GuardDuty: Archive Finding&quot;</span>
+<span class="c1"># Resilient artifact names to api names.</span>
+<span class="c1"># Processing</span>
+<span class="c1"># Processing</span>
+<span class="n">CONTENT</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
+<span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
+<span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
+
+
+<span class="c1"># Processing</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">CONTENT</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ok&quot;</span><span class="p">:</span>
+            <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: The finding with id &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; and detector id &quot;</span> \
+                        <span class="s2">&quot;&lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt; in region &lt;b&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt; was successfully archived for Resilient function &lt;b&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&quot;</span>\
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WF_NAME</span><span class="p">,</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_finding_id&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_detector_id&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_region&quot;</span><span class="p">],</span> <span class="n">FN_NAME</span><span class="p">)</span>
+            <span class="c1"># Update archived property.</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_guardduty_archived</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span>  
+            
+
+        <span class="k">elif</span> <span class="n">CONTENT</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
+            <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: The finding with id &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; and detector id &quot;</span> \
+                        <span class="s2">&quot;&lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt; in region &lt;b&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt; failed archive with error &lt;b&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt; for Resilient function &lt;b&gt;</span><span class="si">{5}</span><span class="s2">&lt;/b&gt;&quot;</span>\
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WF_NAME</span><span class="p">,</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_finding_id&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_detector_id&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_region&quot;</span><span class="p">],</span>
+                        <span class="n">CONTENT</span><span class="p">[</span><span class="s2">&quot;msg&quot;</span><span class="p">],</span> <span class="n">FN_NAME</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: The finding with id &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; and detector id &quot;</span> \
+                        <span class="s2">&quot;&lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt; in region &lt;b&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt; got unexpected status &lt;b&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt; for Resilient function &lt;b&gt;</span><span class="si">{5}</span><span class="s2">&lt;/b&gt;&quot;</span> \
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WF_NAME</span><span class="p">,</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_finding_id&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_detector_id&quot;</span><span class="p">],</span> <span class="n">CONTENT</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_gd_region&quot;</span><span class="p">],</span>
+                        <span class="n">FN_NAME</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">note_text</span> <span class="o">+=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: There was no result returned for Resilient function &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;</span>\
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WF_NAME</span><span class="p">,</span> <span class="n">FN_NAME</span><span class="p">)</span>
+
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="data-table-guardduty-finding-overview">
+<h2>Data Table - GuardDuty Finding Overview<a class="headerlink" href="#data-table-guardduty-finding-overview" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-guardduty-finding-overview" src="../_images/dt-guardduty-finding-overview.png" /></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p>gd_finding_overview</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Account ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">account_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Count</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">count</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Created at</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">created_at</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Query Execution date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">query_execution_date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Region</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">region</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Resource ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">resource_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Severity</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">severity</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Updated at</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">updated_at</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-table-guardduty-resource-affected">
+<h2>Data Table - GuardDuty Resource Affected<a class="headerlink" href="#data-table-guardduty-resource-affected" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-guardduty-resource-affected" src="../_images/dt-guardduty-resource-affected.png" /></p>
+<section id="id1">
+<h3>API Name:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>gd_resource_affected</p>
+</section>
+<section id="id2">
+<h3>Columns:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Instance ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Instance type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Query execution date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">query_execution_date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Resource role</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">resource_role</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Resource type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">resource_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-table-guardduty-resource-instance-details">
+<h2>Data Table - GuardDuty Resource - Instance Details<a class="headerlink" href="#data-table-guardduty-resource-instance-details" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-guardduty-instance-details" src="../_images/dt-guardduty-instance-details.png" /></p>
+<section id="id3">
+<h3>API Name:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>gd_instance_details</p>
+</section>
+<section id="id4">
+<h3>Columns:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>State</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_state</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Private dns name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">private_dns_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Private ip address</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">private_ip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Public dns name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">public_dns_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Public ip address</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">public_ip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Query execution date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">query_execution_date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-table-guardduty-resource-access-key-details">
+<h2>Data Table - GuardDuty Resource - Access Key Details<a class="headerlink" href="#data-table-guardduty-resource-access-key-details" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-guardduty-access-key-details" src="../_images/dt-guardduty-access-key-details.png" /></p>
+<section id="id5">
+<h3>API Name:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>gd_access_key_details</p>
+</section>
+<section id="id6">
+<h3>Columns:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Access key ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">access_key_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Principal ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">principal_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Query Execution date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">query_execution_date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>User name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">user_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>User type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">user_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-table-guardduty-resource-s3-bucket-details">
+<h2>Data Table - GuardDuty Resource - S3 Bucket Details<a class="headerlink" href="#data-table-guardduty-resource-s3-bucket-details" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-guardduty-s3-bucket-details" src="../_images/dt-guardduty-s3-bucket-details.png" /></p>
+<section id="id7">
+<h3>API Name:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>gd_s3_bucket_details</p>
+</section>
+<section id="id8">
+<h3>Columns:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bucket Arn</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bucket_arn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bucket name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bucket_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Bucket owner</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bucket_owner</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bucket Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bucket_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Effective Permission</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">effective_permissions</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Encryption type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">encryption_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Kms master key ARN</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">kms_master_key_arn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Query execution date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">query_execution_date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-table-guardduty-action-actor-details">
+<h2>Data Table - GuardDuty Action/Actor Details<a class="headerlink" href="#data-table-guardduty-action-actor-details" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-guardduty-action-details_1" src="../_images/dt-guardduty-action-details_1.png" />
+<img alt="screenshot: dt-guardduty-action-details_2" src="../_images/dt-guardduty-action-details_2.png" /></p>
+<section id="id9">
+<h3>API Name:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>gd_action_details</p>
+</section>
+<section id="id10">
+<h3>Columns:<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Action api</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">action_api</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Action type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">action_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Actor caller type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">actor_caller_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Asn</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">asn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Finding asn org</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">asn_org</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>City name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">city_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Connection direction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">connection_direction</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Country</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">country_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>DNS request blocked</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dns_blocked</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>DNS domain name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dns_domain_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Event first Seen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">event_first_seen</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Event Last Seen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">event_last_seen</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Finding isp</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Local IP address</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">local_ip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Local port</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">local_port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Finding org</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">org</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Protocol</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Query Execution date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">query_execution_date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Remote IP address</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remote_ip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Remote port</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remote_port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Service name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">service_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+<th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AWS GuardDuty Finding Arn</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_finding_arn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Arn of the GuardDuty finding.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AWS GuardDuty Resource Updated At</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_finding_updated_at</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The last time this finding was updated with new activity matching the pattern that prompted GuardDuty to generate this finding.</p></td>
+</tr>
+<tr class="row-even"><td><p>AWS GuardDuty Resource Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_resource_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The type of the affected resource of the GuardDuty finding. This value is either AccessKey, S3 bucket or Instance.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AWS GuardDuty Finding Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_finding_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>A unique Finding ID for this GuardDuty finding type and set of parameters. New occurrences of activity matching this pattern will be aggregated to the same ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>AWS GuardDuty Region</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_region</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The AWS Region in which the GuardDuty finding was generated.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AWS GuardDuty Archived</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_archived</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>A true or false value that indicates whether this is GuardDuty finding has been archived.</p></td>
+</tr>
+<tr class="row-even"><td><p>AWS GuardDuty Detector Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_detector_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The detector ID where the GuardDuty finding was detected.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AWS GuardDuty Count</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_count</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The number of times GuardDuty has aggregated an activity matching this pattern to this finding ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>AWS GuardDuty Trigger Refresh</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_trigger_refresh</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>False</p></td>
+<td><p>Used by integration to trigger an refresh of GuardDuty incidents.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AWS GuardDuty Finding Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_guardduty_finding_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>The type of activity that triggered the GuardDuty finding.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="custom-artifact-types">
+<h2>Custom Artifact Types<a class="headerlink" href="#custom-artifact-types" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Display Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AWS S3 Bucket Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_s3_bucket_name</span></code></p></td>
+<td><p>Amazon Web Services (AWS) S3 bucket name.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AWS IAM Access Key ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_iam_access_key_id</span></code></p></td>
+<td><p>Amazon Web Services (AWS) IAM access key id.</p></td>
+</tr>
+<tr class="row-even"><td><p>AWS IAM User Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aws_iam_user_name</span></code></p></td>
+<td><p>Amazon Web Services (AWS) IAM user name.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Example: AWS GuardDuty: Refresh Finding Details</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">wf_aws_guardduty_refresh_finding</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: AWS GuardDuty: Archive Finding</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">wf_aws_guardduty_archive_finding</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: AWS GuardDuty: Update Finding Details</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">wf_aws_guardduty_refresh_finding</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is an IBM supported app. Please search https://ibm.com/mysupport for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_aws_iam/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">fn-aws-iam Functions for IBM SOAR</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_api_void/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">APIVoid Threat Analysis APIs</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Amazon AWS GuardDuty Integration for Resilient</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#resilient-platform">Resilient platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
+<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#poller-aws-guardduty-escalate-findings">Poller - AWS GuardDuty: Escalate Findings</a></li>
+<li><a class="reference internal" href="#function-aws-guardduty-refresh-finding">Function - AWS GuardDuty: Refresh Finding</a></li>
+<li><a class="reference internal" href="#function-aws-guardduty-archive-finding">Function - AWS GuardDuty: Archive finding</a></li>
+<li><a class="reference internal" href="#data-table-guardduty-finding-overview">Data Table - GuardDuty Finding Overview</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-table-guardduty-resource-affected">Data Table - GuardDuty Resource Affected</a><ul>
+<li><a class="reference internal" href="#id1">API Name:</a></li>
+<li><a class="reference internal" href="#id2">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-table-guardduty-resource-instance-details">Data Table - GuardDuty Resource - Instance Details</a><ul>
+<li><a class="reference internal" href="#id3">API Name:</a></li>
+<li><a class="reference internal" href="#id4">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-table-guardduty-resource-access-key-details">Data Table - GuardDuty Resource - Access Key Details</a><ul>
+<li><a class="reference internal" href="#id5">API Name:</a></li>
+<li><a class="reference internal" href="#id6">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-table-guardduty-resource-s3-bucket-details">Data Table - GuardDuty Resource - S3 Bucket Details</a><ul>
+<li><a class="reference internal" href="#id7">API Name:</a></li>
+<li><a class="reference internal" href="#id8">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-table-guardduty-action-actor-details">Data Table - GuardDuty Action/Actor Details</a><ul>
+<li><a class="reference internal" href="#id9">API Name:</a></li>
+<li><a class="reference internal" href="#id10">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
+<li><a class="reference internal" href="#custom-artifact-types">Custom Artifact Types</a></li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

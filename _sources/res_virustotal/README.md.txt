@@ -1,0 +1,828 @@
+# SOAR Content Package for VirusTotal v1.1
+
+## Description
+
+This content package contains a single resource file with the following playbooks:
+
+1. Automatic playbook: `VirusTotal: Scan for Hits Automatic (PB)`
+2. Manual playbook: `VirusTotal: Scan for Hits (PB)`
+
+Both playbooks:
+- Perform VirusTotal analysis on the following artifact types:
+ IP address, hash, domain, and URL. 
+- Create a hit for an artifact if it is deemed potentially malicious by VirusTotal.
+- Use the `VirusTotal` function from the VirusTotal app for SOAR.
+
+NOTE: Automatic playbook `VirusTotal: Scan for Hits Automatic (PB)` replaces the rule `VirusTotal: Scan` and the workflow 
+`VirusTotal: Scan Hits` in the VirusTotal content package v1.0.0.  Once the 1.1 VirusTotal content package is installed, the old rule and workflow can be deleted or disabled.  The manual playbook `VirusTotal: Scan for Hits (PB)` is new with the v1.1 release of the content package.
+
+Here is an example of a hit created by the `VirusTotal: Scan for Hits Automatic (PB)` playbook:
+![Hits](./screenshots/vt-artifact-hit.png)
+
+![Hits](./screenshots/vt-artifact-hit-2.png)
+
+## Package Dependencies
+The playbooks in this package depend on the following:
+- SOAR v45.2.0
+- fn_virustotal v1.1.0
+
+
+## Prerequisite
+This package requires the VirusTotal integration to be downloaded from the [app exchange](https://exchange.xforce.ibmcloud.com/hub/extension/9b9e32c2159332df425006e6d38effb0) and installed.
+
+### Install
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
+
+
+## Import
+Ensure that the above package has been installed.
+Download the VirusTotal Content package and unzip it. 
+In SOAR server, go to Administrator Settings->Organization->Migrate Settings->Import->Import Settings 
+and select the `virustotal.res` file downloaded above.
+
+## Usage
+Once the resource file is successfully imported, the playbooks included in the file is ready for use.
+
+
+### VirusTotal: Scan for Hits Automatic (PB) Playbook
+This playbook automatically invokes a function from the fn_virustotal integration package and uses the results to create hits on artifacts based on the results from VirusTotal.
+
+![Playbook](./screenshots/main.png)
+
+
+## Function - VirusTotal
+Perform VirusTotal scans and return reports on ip addresses, urls, domains, hashes and files.
+
+ ![screenshot: fn-virustotal ](./screenshots/fn-virustotal.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `--` | - |
+| `artifact_id` | `number` | No | `--` | - |
+| `attachment_id` | `number` | No | `--` | - |
+| `task_id` | `number` | No | `--` | - |
+| `vt_type` | `text` | No | `hash` | descriptor for the type of virusTotal lookup to perform |
+| `vt_data` | `text` | No | `0.0.0.0` | data field for virusTotal lookup |
+
+
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "scan": {
+    "data": {
+      "attributes": {
+        "regional_internet_registry": "ARIN",
+        "jarm": "29d3fd00029d29d00042d43d00041d598ac0c1012db967bb1ad0ff2491b3ae",
+        "network": "8.8.8.0/24",
+        "last_https_certificate_date": 1685642188,
+        "tags": [],
+        "country": "US",
+        "last_analysis_date": 1685641888,
+        "as_owner": "GOOGLE",
+        "last_analysis_stats": {
+          "harmless": 68,
+          "malicious": 1,
+          "suspicious": 0,
+          "undetected": 18,
+          "timeout": 0
+        },
+        "asn": 15169,
+        "whois_date": 1684173785,
+        "last_analysis_results": {
+          "Bkav": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "Bkav"
+          },
+          "CMC Threat Intelligence": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "CMC Threat Intelligence"
+          },
+          "Snort IP sample list": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Snort IP sample list"
+          },
+          "0xSI_f33d": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "0xSI_f33d"
+          },
+          "ViriBack": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "ViriBack"
+          },
+          "PhishLabs": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "PhishLabs"
+          },
+          "K7AntiVirus": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "K7AntiVirus"
+          },
+          "CINS Army": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "CINS Army"
+          },
+          "Quttera": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Quttera"
+          },
+          "PrecisionSec": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "PrecisionSec"
+          },
+          "OpenPhish": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "OpenPhish"
+          },
+          "VX Vault": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "VX Vault"
+          },
+          "ArcSight Threat Intelligence": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "ArcSight Threat Intelligence"
+          },
+          "Scantitan": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Scantitan"
+          },
+          "AlienVault": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "AlienVault"
+          },
+          "Sophos": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Sophos"
+          },
+          "Phishtank": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Phishtank"
+          },
+          "Cyan": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "Cyan"
+          },
+          "Spam404": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Spam404"
+          },
+          "SecureBrain": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "SecureBrain"
+          },
+          "CRDF": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "CRDF"
+          },
+          "Fortinet": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Fortinet"
+          },
+          "alphaMountain.ai": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "alphaMountain.ai"
+          },
+          "Lionic": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Lionic"
+          },
+          "Cyble": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Cyble"
+          },
+          "Seclookup": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Seclookup"
+          },
+          "Xcitium Verdict Cloud": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "Xcitium Verdict Cloud"
+          },
+          "Google Safebrowsing": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Google Safebrowsing"
+          },
+          "SafeToOpen": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "SafeToOpen"
+          },
+          "ADMINUSLabs": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "ADMINUSLabs"
+          },
+          "ESTsecurity": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "ESTsecurity"
+          },
+          "Juniper Networks": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Juniper Networks"
+          },
+          "Heimdal Security": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Heimdal Security"
+          },
+          "AutoShun": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "AutoShun"
+          },
+          "Trustwave": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Trustwave"
+          },
+          "AICC (MONITORAPP)": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "AICC (MONITORAPP)"
+          },
+          "CyRadar": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "CyRadar"
+          },
+          "Dr.Web": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Dr.Web"
+          },
+          "Emsisoft": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Emsisoft"
+          },
+          "Abusix": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Abusix"
+          },
+          "Webroot": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Webroot"
+          },
+          "Avira": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Avira"
+          },
+          "securolytics": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "securolytics"
+          },
+          "Antiy-AVL": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Antiy-AVL"
+          },
+          "AlphaSOC": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "AlphaSOC"
+          },
+          "Acronis": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Acronis"
+          },
+          "Quick Heal": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Quick Heal"
+          },
+          "URLQuery": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "URLQuery"
+          },
+          "Viettel Threat Intelligence": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Viettel Threat Intelligence"
+          },
+          "DNS8": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "DNS8"
+          },
+          "benkow.cc": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "benkow.cc"
+          },
+          "EmergingThreats": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "EmergingThreats"
+          },
+          "Chong Lua Dao": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Chong Lua Dao"
+          },
+          "Yandex Safebrowsing": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Yandex Safebrowsing"
+          },
+          "Lumu": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "Lumu"
+          },
+          "zvelo": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "zvelo"
+          },
+          "Kaspersky": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "Kaspersky"
+          },
+          "Segasec": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "Segasec"
+          },
+          "Sucuri SiteCheck": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Sucuri SiteCheck"
+          },
+          "desenmascara.me": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "desenmascara.me"
+          },
+          "CrowdSec": {
+            "category": "malicious",
+            "result": "malicious",
+            "method": "blacklist",
+            "engine_name": "CrowdSec"
+          },
+          "Cluster25": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Cluster25"
+          },
+          "URLhaus": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "URLhaus"
+          },
+          "PREBYTES": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "PREBYTES"
+          },
+          "StopForumSpam": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "StopForumSpam"
+          },
+          "Blueliv": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Blueliv"
+          },
+          "Netcraft": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "Netcraft"
+          },
+          "ZeroCERT": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "ZeroCERT"
+          },
+          "Phishing Database": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Phishing Database"
+          },
+          "MalwarePatrol": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "MalwarePatrol"
+          },
+          "IPsum": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "IPsum"
+          },
+          "Malwared": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Malwared"
+          },
+          "BitDefender": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "BitDefender"
+          },
+          "GreenSnow": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "GreenSnow"
+          },
+          "G-Data": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "G-Data"
+          },
+          "VIPRE": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "VIPRE"
+          },
+          "SCUMWARE.org": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "SCUMWARE.org"
+          },
+          "PhishFort": {
+            "category": "undetected",
+            "result": "unrated",
+            "method": "blacklist",
+            "engine_name": "PhishFort"
+          },
+          "malwares.com URL checker": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "malwares.com URL checker"
+          },
+          "Forcepoint ThreatSeeker": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Forcepoint ThreatSeeker"
+          },
+          "Criminal IP": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Criminal IP"
+          },
+          "Certego": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Certego"
+          },
+          "ESET": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "ESET"
+          },
+          "Threatsourcing": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Threatsourcing"
+          },
+          "ThreatHive": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "ThreatHive"
+          },
+          "Bfore.Ai PreCrime": {
+            "category": "harmless",
+            "result": "clean",
+            "method": "blacklist",
+            "engine_name": "Bfore.Ai PreCrime"
+          }
+        },
+        "reputation": 516,
+        "last_modification_date": 1685653164,
+        "total_votes": {
+          "harmless": 156,
+          "malicious": 22
+        },
+        "last_https_certificate": {
+          "size": 1510,
+          "public_key": {
+            "rsa": {
+              "key_size": 2048,
+              "modulus": "b5399550db67cad2b136d83fa4895b4a040ac865e3eaa5fb55870ddd4d227eb54313ce15d30a8716c25fb0fe0364fbf87ac82610cc0eecfacc7891eedb5dee35b7634002900fe9d8d89ad5a182a5d3e65d14060ef1a1322799b1656f61a75e4407fecb7938f7e0cf96fbb73917f8635447ee9a5814d4a842fabc6e3dc2487d93e5746beff941b544e7233db8ebcb78384ffc0fb47c67cdcbdd333a4633f3610c02d0b4f9ab08e6878e4aa436f31008c42505a3c7b1b701609a9a7026d220eb47005fc263d3422121d0214994f9c53c025d3a3a01fc6381344a422dd018a20893d94cdbcef4bf53a54fac15372e13048673be1b250fe172215e404b8ef45dc569",
+              "exponent": "10001"
+            },
+            "algorithm": "RSA"
+          },
+          "thumbprint_sha256": "a47778e8373dc356e9726f2ebe9b210455a32e76b6fd893a8b691bd99436509c",
+          "cert_signature": {
+            "signature": "9acef57500d9b89f82cc91e2fd336a7d91a9b9b7aba2142926c7ec0200add67837547c1edfad047efe447f2db1882b2d7955f413426997e0adb17b80d8d6436a2bf36050fe9a45dd102316a8fa2a848e9a31ef4e9ff17d17759b199c38a5266578b47b9c0820d9016281a9270996615441438e1aba839683171f085e8b05d3cd492213361fbb27c761184de071bdc67baaaee09a448a3f25829b29ef37d57dcffe10df94faca02e01536f62fcd67285d1e504d56b6a639ef0531a7dcd3ef39fa9e34409a32be16ddcf530b787d0e5739a0e4bc60dc676a50894ee532a10f421acd621f3bded71c427881357ef20b5f8918eaad29e337a11981cfb97533ec3941",
+            "signature_algorithm": "sha256RSA"
+          },
+          "validity": {
+            "not_after": "2023-07-31 08:25:20",
+            "not_before": "2023-05-08 08:25:21"
+          },
+          "version": "V3",
+          "extensions": {
+            "certificate_policies": [
+              "2.23.140.1.2.1",
+              "1.3.6.1.4.1.11129.2.5.3"
+            ],
+            "extended_key_usage": [
+              "serverAuth"
+            ],
+            "authority_key_identifier": {
+              "keyid": "8a747faf85cdee95cd3d9cd0e24614f371351d27"
+            },
+            "subject_alternative_name": [
+              "dns.google",
+              "dns.google.com",
+              "*.dns.google.com",
+              "8888.google",
+              "dns64.dns.google",
+              "8.8.8.8",
+              "8.8.4.4",
+              "2001:4860:4860::8888",
+              "2001:4860:4860::8844",
+              "2001:4860:4860::6464",
+              "2001:4860:4860::64"
+            ],
+            "subject_key_identifier": "179673524cd05b5021791a86e71b83bd2af51ea7",
+            "crl_distribution_points": [
+              "http://crls.pki.goog/gts1c3/fVJxbV-Ktmk.crl"
+            ],
+            "key_usage": [
+              "digitalSignature",
+              "keyEncipherment"
+            ],
+            "1.3.6.1.4.1.11129.2.4.2": "0481f100ef0076007a328c54d8b72db620ea38e0521ee98416703213854d3bd2",
+            "CA": false,
+            "ca_information_access": {
+              "CA Issuers": "http://pki.goog/repo/certs/gts1c3.der",
+              "OCSP": "http://ocsp.pki.goog/gts1c3"
+            }
+          },
+          "thumbprint": "2ece976216382893410d61dbe2e7c28e95e01556",
+          "serial_number": "e3714538d4ad50580a5308c05fac0ccc",
+          "issuer": {
+            "C": "US",
+            "CN": "GTS CA 1C3",
+            "O": "Google Trust Services LLC"
+          },
+          "subject": {
+            "CN": "dns.google"
+          }
+        },
+        "continent": "NA",
+        "whois": "Domain Name: dns.google\r\nRegistry Domain ID: 2C7E70B08-GOOGLE\r\nRegistrar WHOIS Server: whois.nic.google\r\nRegistrar URL: http://www.markmonitor.com\r\nUpdated Date: 2023-03-20T10:21:29Z\r\nCreation Date: 2018-04-16T22:57:01Z\r\nRegistry Expiry Date: 2024-04-16T22:57:01Z\r\nRegistrar: MarkMonitor Inc.\r\nRegistrar IANA ID: 292\r\nRegistrar Abuse Contact Email: abusecomplaints@markmonitor.com\r\nRegistrar Abuse Contact Phone: +1.2083895740\r\nDomain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\nDomain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r\nRegistry Registrant ID: REDACTED FOR PRIVACY\r\nRegistrant Name: REDACTED FOR PRIVACY\r\nRegistrant Organization: Charleston Road Registry, Inc.\r\nRegistrant Street: REDACTED FOR PRIVACY\r\nRegistrant Street:\r\nRegistrant City: REDACTED FOR PRIVACY\r\nRegistrant State/Province: CA\r\nRegistrant Postal Code: REDACTED FOR PRIVACY\r\nRegistrant Country: US\r\nRegistrant Phone: REDACTED FOR PRIVACY\r\nRegistrant Fax: REDACTED FOR PRIVACY\r\nRegistrant Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Admin ID: REDACTED FOR PRIVACY\r\nAdmin Name: REDACTED FOR PRIVACY\r\nAdmin Organization: REDACTED FOR PRIVACY\r\nAdmin Street: REDACTED FOR PRIVACY\r\nAdmin Street:\r\nAdmin City: REDACTED FOR PRIVACY\r\nAdmin State/Province: REDACTED FOR PRIVACY\r\nAdmin Postal Code: REDACTED FOR PRIVACY\r\nAdmin Country: REDACTED FOR PRIVACY\r\nAdmin Phone: REDACTED FOR PRIVACY\r\nAdmin Fax: REDACTED FOR PRIVACY\r\nAdmin Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Tech ID: REDACTED FOR PRIVACY\r\nTech Name: REDACTED FOR PRIVACY\r\nTech Organization: REDACTED FOR PRIVACY\r\nTech Street: REDACTED FOR PRIVACY\r\nTech Street:\r\nTech City: REDACTED FOR PRIVACY\r\nTech State/Province: REDACTED FOR PRIVACY\r\nTech Postal Code: REDACTED FOR PRIVACY\r\nTech Country: REDACTED FOR PRIVACY\r\nTech Phone: REDACTED FOR PRIVACY\r\nTech Fax: REDACTED FOR PRIVACY\r\nTech Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Billing ID: REDACTED FOR PRIVACY\r\nBilling Name: REDACTED FOR PRIVACY\r\nBilling Organization: REDACTED FOR PRIVACY\r\nBilling Street: REDACTED FOR PRIVACY\r\nBilling Street:\r\nBilling City: REDACTED FOR PRIVACY\r\nBilling State/Province: REDACTED FOR PRIVACY\r\nBilling Postal Code: REDACTED FOR PRIVACY\r\nBilling Country: REDACTED FOR PRIVACY\r\nBilling Phone: REDACTED FOR PRIVACY\r\nBilling Fax: REDACTED FOR PRIVACY\r\nBilling Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nName Server: ns1.zdns.google\r\nName Server: ns2.zdns.google\r\nName Server: ns3.zdns.google\r\nName Server: ns4.zdns.google\r\nDNSSEC: signedDelegation\r\nURL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\r\n>>> Last update of WHOIS database: 2023-05-15T18:03:05Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nPlease query the WHOIS server of the owning registrar identified in this\r\noutput for information on how to contact the Registrant, Admin, or Tech\r\ncontact of the queried domain name.\r\n\r\nWHOIS information is provided by Charleston Road Registry Inc. (CRR) solely\r\nfor query-based, informational purposes. By querying our WHOIS database, you\r\nare agreeing to comply with these terms\r\n(https://www.registry.google/about/whois-disclaimer.html) and acknowledge\r\nthat your information will be used in accordance with CRR's Privacy Policy\r\n(https://www.registry.google/about/privacy.html), so please read those\r\ndocuments carefully. Any information provided is \"as is\" without any\r\nguarantee of accuracy. You may not use such information to (a) allow,\r\nenable, or otherwise support the transmission of mass unsolicited,\r\ncommercial advertising or solicitations; (b) enable high volume, automated,\r\nelectronic processes that access the systems of CRR or any ICANN-Accredited\r\nRegistrar, except as reasonably necessary to register domain names or modify\r\nexisting registrations; or (c) engage in or support unlawful behavior. CRR\r\nreserves the right to restrict or deny your access to the Whois database,\r\nand may modify these terms at any time.\r\nDomain Name: dns.google\r\nRegistry Domain ID: 2C7E70B08-GOOGLE\r\nRegistrar WHOIS Server: whois.nic.google\r\nRegistrar URL: http://www.markmonitor.com\r\nUpdated Date: 2023-03-20T10:21:29Z\r\nCreation Date: 2018-04-16T22:57:01Z\r\nRegistry Expiry Date: 2024-04-16T22:57:01Z\r\nRegistrar: MarkMonitor Inc.\r\nRegistrar IANA ID: 292\r\nRegistrar Abuse Contact Email: abusecomplaints@markmonitor.com\r\nRegistrar Abuse Contact Phone: +1.2083895740\r\nDomain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\nDomain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r\nRegistry Registrant ID: REDACTED FOR PRIVACY\r\nRegistrant Name: REDACTED FOR PRIVACY\r\nRegistrant Organization: Charleston Road Registry, Inc.\r\nRegistrant Street: REDACTED FOR PRIVACY\r\nRegistrant Street:\r\nRegistrant City: REDACTED FOR PRIVACY\r\nRegistrant State/Province: CA\r\nRegistrant Postal Code: REDACTED FOR PRIVACY\r\nRegistrant Country: US\r\nRegistrant Phone: REDACTED FOR PRIVACY\r\nRegistrant Fax: REDACTED FOR PRIVACY\r\nRegistrant Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Admin ID: REDACTED FOR PRIVACY\r\nAdmin Name: REDACTED FOR PRIVACY\r\nAdmin Organization: REDACTED FOR PRIVACY\r\nAdmin Street: REDACTED FOR PRIVACY\r\nAdmin Street:\r\nAdmin City: REDACTED FOR PRIVACY\r\nAdmin State/Province: REDACTED FOR PRIVACY\r\nAdmin Postal Code: REDACTED FOR PRIVACY\r\nAdmin Country: REDACTED FOR PRIVACY\r\nAdmin Phone: REDACTED FOR PRIVACY\r\nAdmin Fax: REDACTED FOR PRIVACY\r\nAdmin Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Tech ID: REDACTED FOR PRIVACY\r\nTech Name: REDACTED FOR PRIVACY\r\nTech Organization: REDACTED FOR PRIVACY\r\nTech Street: REDACTED FOR PRIVACY\r\nTech Street:\r\nTech City: REDACTED FOR PRIVACY\r\nTech State/Province: REDACTED FOR PRIVACY\r\nTech Postal Code: REDACTED FOR PRIVACY\r\nTech Country: REDACTED FOR PRIVACY\r\nTech Phone: REDACTED FOR PRIVACY\r\nTech Fax: REDACTED FOR PRIVACY\r\nTech Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Billing ID: REDACTED FOR PRIVACY\r\nBilling Name: REDACTED FOR PRIVACY\r\nBilling Organization: REDACTED FOR PRIVACY\r\nBilling Street: REDACTED FOR PRIVACY\r\nBilling Street:\r\nBilling City: REDACTED FOR PRIVACY\r\nBilling State/Province: REDACTED FOR PRIVACY\r\nBilling Postal Code: REDACTED FOR PRIVACY\r\nBilling Country: REDACTED FOR PRIVACY\r\nBilling Phone: REDACTED FOR PRIVACY\r\nBilling Fax: REDACTED FOR PRIVACY\r\nBilling Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nName Server: ns1.zdns.google\r\nName Server: ns2.zdns.google\r\nName Server: ns3.zdns.google\r\nName Server: ns4.zdns.google\r\nDNSSEC: signedDelegation\r\nURL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\r\n>>> Last update of WHOIS database: 2023-05-15T18:03:05Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nPlease query the WHOIS server of the owning registrar identified in this\r\noutput for information on how to contact the Registrant, Admin, or Tech\r\ncontact of the queried domain name.\r\n\r\nWHOIS information is provided by Charleston Road Registry Inc. (CRR) solely\r\nfor query-based, informational purposes. By querying our WHOIS database, you\r\nare agreeing to comply with these terms\r\n(https://www.registry.google/about/whois-disclaimer.html) and acknowledge\r\nthat your information will be used in accordance with CRR's Privacy Policy\r\n(https://www.registry.google/about/privacy.html), so please read those\r\ndocuments carefully. Any information provided is \"as is\" without any\r\nguarantee of accuracy. You may not use such information to (a) allow,\r\nenable, or otherwise support the transmission of mass unsolicited,\r\ncommercial advertising or solicitations; (b) enable high volume, automated,\r\nelectronic processes that access the systems of CRR or any ICANN-Accredited\r\nRegistrar, except as reasonably necessary to register domain names or modify\r\nexisting registrations; or (c) engage in or support unlawful behavior. CRR\r\nreserves the right to restrict or deny your access to the Whois database,\r\nand may modify these terms at any time.\r\n"
+      },
+      "type": "ip_address",
+      "id": "8.8.8.8",
+      "links": {
+        "self": "https://virustotal.com/api/v3/ip_addresses/8.8.8.8"
+      }
+    }
+  },
+  "code": "success"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+typeLookup = { 'Email Attachment': 'file', 'Malware Sample': 'file', 'Malware MD5 Hash': 'hash', 'Malware SHA-1 Hash': 'hash', 'Malware SHA-256 Hash': 'hash', 'Other File': 'file', 'RCF 822 Email Message Fife': 'file', 'File Name': 'filename',
+ 'URL': 'url', 'IP Address': 'ip', 'DNS Name':'domain'}
+if artifact.type in typeLookup:
+  inputs.vt_type = typeLookup.get(artifact.type, artifact.type)
+else:
+  inputs.vt_type = artifact.type
+
+inputs.incident_id = incident.id
+inputs.artifact_id = artifact.id
+inputs.vt_data = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results:
+  scan = results.get('scan')
+  
+  if scan.get('positives') is not None:
+    if scan.get('positives') > 0:
+      hit = [
+      {
+        'name': 'Detection Ratio',
+        'type': 'number',
+        'value': '{} / {}'.format(scan.get('positives'), scan.get('total'))
+      },
+      {
+        'name': 'VirusTotal Report',
+        'type': 'uri',
+        'value': '{}'.format(scan.get('permalink'))
+      },
+      {
+        "name": "Scan Date",
+        "type": "string",
+        "value": "{}".format(scan.get('scan_date'))
+      }
+  ]
+  elif artifact.type == 'DNS Name' or 'IP Address':
+    test_for_positive = scan.get('detected_urls')
+    if test_for_positive is not None:
+      sample = test_for_positive[0]
+      if sample.get('positives', -1) > 0:
+        if artifact.type == 'DNS Name':
+          url_fragment = "domain"
+        else:
+          url_fragment = "ip-address"
+        hit = [
+                  {
+                    'name': 'Detected URL\'s Detection Ratio',
+                    'type': 'number',
+                    'value': '{} / {}'.format(sample.get('positives'), sample.get('total'))
+                  },
+                  {
+                    'name': 'VirusTotal Report',
+                    'type': 'uri',
+                    'value': 'https://www.virustotal.com/{}/{}/information/'.format(url_fragment, artifact.value)
+                  },
+                  {
+                    "name": "Detected URL\'s Scan Date",
+                    "type": "string",
+                    "value": "{}".format(sample.get('scan_date'))
+                  }
+                ]
+  else:
+    hit = [
+            {
+              "name": "Artifact Value",
+              "type": "string",
+              "value": "{}".format(artifact.value)
+            },
+            {
+              "name": "Verbose Message",
+              "type": "string",
+              "value": "{}".format(scan['verbose_msg'])
+            },
+            {
+              'name': 'VirusTotal Report',
+              'type': 'uri',
+              'value': '{}'.format(scan.get('permalink'))
+            }
+          ]
+  artifact.addHit("VirusTotal hits added.", hit)
+  
+  if results.scan.get('md5') is not None:
+    incident.addArtifact('Malware MD5 Hash', scan.get('md5'), None)
+  
+  if results.scan.get('sha1') is not None:
+    incident.addArtifact('Malware SHA-1 Hash', scan.get('sha1'), None)
+    
+  if results.scan.get('sha256') is not None:
+    incident.addArtifact('Malware SHA-256 Hash', scan.get('sha256'), None)
+else:
+  incident.addNote('VirusTotal has failed')
+```
+
+</p>
+</details>
+
+---
+
+
+
+## Uninstall
+Manually delete the following:
+1. Playbooks
+- "VirusTotal: Scan for Hits Automatic (PB)"
+- "VirusTotal: Scan for Hits (PB)"

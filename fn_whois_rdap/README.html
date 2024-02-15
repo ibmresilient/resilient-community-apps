@@ -1,0 +1,976 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="fn-wiki for IBM Resilient" href="../fn_wiki/README.html" /><link rel="prev" title="Resilient Integration with WHOIS" href="../fn_whois/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>fn-whois-rdap Functions for IBM Resilient - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="fn-whois-rdap-functions-for-ibm-resilient">
+<h1>fn-whois-rdap Functions for IBM Resilient<a class="headerlink" href="#fn-whois-rdap-functions-for-ibm-resilient" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="#fn-whois-rdap-functions-for-ibm-resilient"><span class="xref myst">fn-whois-rdap Functions for IBM Resilient</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p></li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#function---RDAP:-query"><span class="xref myst">Function - RDAP: Query</span></a></p></li>
+<li><p><a class="reference internal" href="#function---whois:-query"><span class="xref myst">Function - WHOIS: Query</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#resilient-action-status"><span class="xref myst">Resilient Action Status</span></a></p></li>
+<li><p><a class="reference internal" href="#resilient-scripting-log"><span class="xref myst">Resilient Scripting Log</span></a></p></li>
+<li><p><a class="reference internal" href="#resilient-logs"><span class="xref myst">Resilient Logs</span></a></p></li>
+<li><p><a class="reference internal" href="#resilient-circuits"><span class="xref myst">Resilient-Circuits</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#support"><span class="xref myst">Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<section id="history">
+<h3>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>Version</p></th>
+<th class="head text-right"><p>Date</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>1.0.4</p></td>
+<td class="text-right"><p>6/2021</p></td>
+<td><p>Bug fix ipwhois version pin</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1.0.3</p></td>
+<td class="text-right"><p>8/2020</p></td>
+<td><p>Updated examples, proxy support added</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>1.0.2</p></td>
+<td class="text-right"><p>4/2020</p></td>
+<td><p>bug fixes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1.0.1</p></td>
+<td class="text-right"><p>4/2020</p></td>
+<td><p>Support for App Host</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>1.0.0</p></td>
+<td class="text-right"><p>12/2019</p></td>
+<td><p>Initial release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p><strong>Retrieve registry information for IP, URL or DNS Artifacts</strong></p>
+<p><img alt="screenshot: main" src="../_images/main65.png" /></p>
+<p>This integration retrieves registry information (via legacy WHOIS or new RDAP protocol) for IP, URL or DNS Artifacts that provides enrichment and threat intelligence on suspicious address. The information is added directly to artifact description and can include dns-zone, asn and asn description &amp; other useful metadata.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<!--
+  List the Key Features of the Integration
+-->
+<ul class="simple">
+<li><p>Retrieves Registry information for IP’s, DNS or URL’s</p></li>
+<li><p>Either the RDAP or WHOIS format of data can be returned</p></li>
+<li><p>Information is sent directly to the Artifact Description</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>IBM Resilient &gt;= <code class="docutils literal notranslate"><span class="pre">v35.0.5468</span></code></p></li>
+<li><p>An App Host environment or an Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=32.0.0</span></code></p>
+<ul>
+<li><p>To setup an Integration Server see <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html">the Integration Server setup documentation</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="app-host-installation">
+<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">#</a></h3>
+<p>All the components for running Whois in a container already exist when using the App Host app. Once installed, review the app.config file in the Customizations tab.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_whois_rdap</span><span class="p">]</span>
+<span class="c1"># uncomment to include proxy support</span>
+<span class="c1">#http_proxy=https://some_proxy.com</span>
+<span class="c1">#https_proxy=http://some_proxy.com</span>
+</pre></div>
+</div>
+</section>
+<section id="integration-server-installation">
+<h3>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">app-fn_whois_rdap-x.x.x-nnnn.zip</span></code>.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">.zip</span></code> to your Integration Server and SSH into it.</p></li>
+<li><p><strong>Unzip</strong> the package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ unzip app-fn_whois_rdap-x.x.x-nnnn.zip
+</pre></div>
+</div>
+</li>
+<li><p><strong>Install</strong> the package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install fn_whois_rdap-x.x.x.tar.gz
+</pre></div>
+</div>
+</li>
+<li><p>Import the fn_whois_rdap <strong>customizations</strong> into the Resilient platform:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ resilient-circuits customize -y -l fn-whois-rdap
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run</strong> resilient-circuits or restart the Service on Windows/Linux:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ resilient-circuits run
+</pre></div>
+</div>
+</li>
+<li><p><strong>Uninstall</strong> the package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip uninstall fn-whois-rdap
+</pre></div>
+</div>
+</li>
+</ul>
+<hr class="docutils" />
+<p><img alt="screenshot: fn-rdap-query " src="../_images/workflows.png" /></p>
+</section>
+</section>
+<section id="function-rdap-query">
+<h2>Function - RDAP: Query<a class="headerlink" href="#function-rdap-query" title="Link to this heading">#</a></h2>
+<p>Using ipwhois library to make general queries in RDAP format</p>
+<p><img alt="screenshot: fn-rdap-query " src="../_images/fn-rdap-query.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rdap_depth</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>0, 1 or 2</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rdap_query</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ibm.com</span></code></p></td>
+<td><p>IP, URL or DNS</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;asn&#39;</span><span class="p">:</span> <span class="s1">&#39;16807&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_cidr&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.38.0/24&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_country_code&#39;</span><span class="p">:</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_date&#39;</span><span class="p">:</span> <span class="s1">&#39;1987-07-29&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_description&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM-EI - IBM - Events Infrastructure, US&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_registry&#39;</span><span class="p">:</span> <span class="s1">&#39;arin&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;display_content&#39;</span><span class="p">:</span> <span class="s1">&#39;{ &#39;</span>
+                                <span class="s1">&#39;&quot;nir&quot;:false,&quot;asn_registry&quot;:&quot;arin&quot;,&quot;asn&quot;:&quot;16807&quot;,&quot;asn_cidr&quot;:&quot;129.42.38.0/24&quot;,&quot;asn_country_code&quot;:&quot;US&quot;,&quot;asn_date&quot;:&quot;1987-07-29&quot;,&quot;asn_description&quot;:&quot;IBM-EI &#39;</span>
+                                <span class="s1">&#39;- IBM - Events Infrastructure, &#39;</span>
+                                <span class="s1">&#39;US&quot;,&quot;query&quot;:&quot;129.42.38.10&quot;,&quot;network&quot;:{ &#39;</span>
+                                <span class="s1">&#39;&quot;handle&quot;:&quot;NET-129-42-0-0-1&quot;,&quot;remarks&quot;:false,&quot;raw&quot;:false,&quot;start_address&quot;:&quot;129.42.0.0&quot;,&quot;end_address&quot;:&quot;129.42.255.255&quot;,&quot;cidr&quot;:&quot;129.42.0.0/16&quot;,&quot;ip_version&quot;:&quot;v4&quot;,&quot;type&quot;:&quot;DIRECT &#39;</span>
+                                <span class="s1">&#39;ASSIGNMENT&quot;,&quot;name&quot;:&quot;IBM-RSCH-NET2&quot;,&quot;country&quot;:false,&quot;parent_handle&quot;:&quot;NET-129-0-0-0-0&quot; &#39;</span>
+                                <span class="s1">&#39;},&quot;objects&quot;:{ &quot;IBM-1&quot;:{ &#39;</span>
+                                <span class="s1">&#39;&quot;handle&quot;:&quot;IBM-1&quot;,&quot;status&quot;:false,&quot;remarks&quot;:false,&quot;notices&quot;:false,&quot;raw&quot;:false,&quot;contact&quot;:{ &#39;</span>
+                                <span class="s1">&#39;&quot;name&quot;:&quot;IBM&quot;,&quot;kind&quot;:&quot;org&quot;,&quot;phone&quot;:false,&quot;email&quot;:false,&quot;role&quot;:false,&quot;title&quot;:false &#39;</span>
+                                <span class="s1">&#39;},&quot;events_actor&quot;:false } &#39;</span>
+                                <span class="s1">&#39;},&quot;raw&quot;:false,&quot;dns_zone&quot;:&quot;10.38.42.129.origin.asn.cymru.com&quot; &#39;</span>
+                                <span class="s1">&#39;}&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;dns_zone&#39;</span><span class="p">:</span> <span class="s1">&#39;10.38.42.129.origin.asn.cymru.com&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;entities&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;IBM-1&#39;</span><span class="p">],</span>
+             <span class="s1">&#39;network&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;cidr&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.0.0/16&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="s1">&#39;end_address&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.255.255&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;events&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;last changed&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;actor&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                     <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2015-10-20T16:09:08-04:00&#39;</span><span class="p">},</span>
+                                    <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;registration&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;actor&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                     <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;1987-07-28T23:00:00-04:00&#39;</span><span class="p">}],</span>
+                         <span class="s1">&#39;handle&#39;</span><span class="p">:</span> <span class="s1">&#39;NET-129-42-0-0-1&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;ip_version&#39;</span><span class="p">:</span> <span class="s1">&#39;v4&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;links&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;https://rdap.arin.net/registry/ip/129.42.0.0&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;https://whois.arin.net/rest/net/NET-129-42-0-0-1&#39;</span><span class="p">],</span>
+                         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM-RSCH-NET2&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;notices&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;By using the ARIN &#39;</span>
+                                                     <span class="s1">&#39;RDAP/Whois service, you &#39;</span>
+                                                     <span class="s1">&#39;are agreeing to the &#39;</span>
+                                                     <span class="s1">&#39;RDAP/Whois Terms of Use&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;links&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;https://www.arin.net/resources/registry/whois/tou/&#39;</span><span class="p">],</span>
+                                      <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Terms of Service&#39;</span><span class="p">},</span>
+                                     <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;If you see inaccuracies &#39;</span>
+                                                     <span class="s1">&#39;in the results, please &#39;</span>
+                                                     <span class="s1">&#39;visit: &#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;links&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;https://www.arin.net/resources/registry/whois/inaccuracy_reporting/&#39;</span><span class="p">],</span>
+                                      <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Whois Inaccuracy Reporting&#39;</span><span class="p">},</span>
+                                     <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Copyright 1997-2019, &#39;</span>
+                                                     <span class="s1">&#39;American Registry for &#39;</span>
+                                                     <span class="s1">&#39;Internet Numbers, Ltd.&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;links&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                      <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Copyright Notice&#39;</span><span class="p">}],</span>
+                         <span class="s1">&#39;parent_handle&#39;</span><span class="p">:</span> <span class="s1">&#39;NET-129-0-0-0-0&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="s1">&#39;remarks&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="s1">&#39;start_address&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.0.0&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">],</span>
+                         <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;DIRECT ASSIGNMENT&#39;</span><span class="p">},</span>
+             <span class="s1">&#39;nir&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="s1">&#39;objects&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;IBM-1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;contact&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;3039 &#39;</span>
+                                                                     <span class="s1">&#39;Cornwallis &#39;</span>
+                                                                     <span class="s1">&#39;Road</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                                     <span class="s1">&#39;Research &#39;</span>
+                                                                     <span class="s1">&#39;Triangle &#39;</span>
+                                                                     <span class="s1">&#39;Park</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                                     <span class="s1">&#39;NC</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                                     <span class="s1">&#39;27709-2195</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                                     <span class="s1">&#39;United &#39;</span>
+                                                                     <span class="s1">&#39;States&#39;</span><span class="p">}],</span>
+                                               <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                               <span class="s1">&#39;kind&#39;</span><span class="p">:</span> <span class="s1">&#39;org&#39;</span><span class="p">,</span>
+                                               <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span>
+                                               <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                               <span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                               <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+                                   <span class="s1">&#39;entities&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;RAIN-ARIN&#39;</span><span class="p">],</span>
+                                   <span class="s1">&#39;events&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;last changed&#39;</span><span class="p">,</span>
+                                               <span class="s1">&#39;actor&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                               <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2017-11-30T14:46:26-05:00&#39;</span><span class="p">},</span>
+                                              <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;registration&#39;</span><span class="p">,</span>
+                                               <span class="s1">&#39;actor&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                               <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;1992-02-08T00:00:00-05:00&#39;</span><span class="p">}],</span>
+                                   <span class="s1">&#39;events_actor&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                   <span class="s1">&#39;handle&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM-1&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;links&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;https://rdap.arin.net/registry/entity/IBM-1&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;https://whois.arin.net/rest/org/IBM-1&#39;</span><span class="p">],</span>
+                                   <span class="s1">&#39;notices&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                   <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                   <span class="s1">&#39;remarks&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                   <span class="s1">&#39;roles&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;registrant&#39;</span><span class="p">],</span>
+                                   <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}},</span>
+             <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.38.10&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+ <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;rdap_depth&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;rdap_query&#39;</span><span class="p">:</span> <span class="s1">&#39;https://www.ibm.com&#39;</span><span class="p">},</span>
+ <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">337</span><span class="p">,</span>
+             <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;your@hostname.com&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-whois-rdap&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-09-26 15:52:48&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">},</span>
+ <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;nir&quot;: null, &quot;asn_registry&quot;: &quot;arin&quot;, &quot;asn&quot;: &quot;16807&quot;, &quot;asn_cidr&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;129.42.38.0/24&quot;, &quot;asn_country_code&quot;: &quot;US&quot;, &quot;asn_date&quot;: &quot;1987-07-29&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;asn_description&quot;: &quot;IBM-EI - IBM - Events Infrastructure, US&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;query&quot;: &quot;129.42.38.10&quot;, &quot;network&quot;: {&quot;handle&quot;: &quot;NET-129-42-0-0-1&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;status&quot;: [&quot;active&quot;], &quot;remarks&quot;: null, &quot;notices&quot;: [{&quot;title&quot;: &quot;Terms &#39;</span>
+        <span class="s1">&#39;of Service&quot;, &quot;description&quot;: &quot;By using the ARIN RDAP/Whois service, &#39;</span>
+        <span class="s1">&#39;you are agreeing to the RDAP/Whois Terms of Use&quot;, &quot;links&quot;: &#39;</span>
+        <span class="s1">&#39;[&quot;https://www.arin.net/resources/registry/whois/tou/&quot;]}, {&quot;title&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;Whois Inaccuracy Reporting&quot;, &quot;description&quot;: &quot;If you see inaccuracies &#39;</span>
+        <span class="s1">&#39;in the results, please visit: &quot;, &quot;links&quot;: &#39;</span>
+        <span class="s1">&#39;[&quot;https://www.arin.net/resources/registry/whois/inaccuracy_reporting/&quot;]}, &#39;</span>
+        <span class="s1">&#39;{&quot;title&quot;: &quot;Copyright Notice&quot;, &quot;description&quot;: &quot;Copyright 1997-2019, &#39;</span>
+        <span class="s1">&#39;American Registry for Internet Numbers, Ltd.&quot;, &quot;links&quot;: null}], &#39;</span>
+        <span class="s1">&#39;&quot;links&quot;: [&quot;https://rdap.arin.net/registry/ip/129.42.0.0&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;https://whois.arin.net/rest/net/NET-129-42-0-0-1&quot;], &quot;events&quot;: &#39;</span>
+        <span class="s1">&#39;[{&quot;action&quot;: &quot;last changed&quot;, &quot;timestamp&quot;: &quot;2015-10-20T16:09:08-04:00&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;actor&quot;: null}, {&quot;action&quot;: &quot;registration&quot;, &quot;timestamp&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;1987-07-28T23:00:00-04:00&quot;, &quot;actor&quot;: null}], &quot;raw&quot;: null, &#39;</span>
+        <span class="s1">&#39;&quot;start_address&quot;: &quot;129.42.0.0&quot;, &quot;end_address&quot;: &quot;129.42.255.255&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;cidr&quot;: &quot;129.42.0.0/16&quot;, &quot;ip_version&quot;: &quot;v4&quot;, &quot;type&quot;: &quot;DIRECT &#39;</span>
+        <span class="s1">&#39;ASSIGNMENT&quot;, &quot;name&quot;: &quot;IBM-RSCH-NET2&quot;, &quot;country&quot;: null, &#39;</span>
+        <span class="s1">&#39;&quot;parent_handle&quot;: &quot;NET-129-0-0-0-0&quot;}, &quot;entities&quot;: [&quot;IBM-1&quot;], &#39;</span>
+        <span class="s1">&#39;&quot;objects&quot;: {&quot;IBM-1&quot;: {&quot;handle&quot;: &quot;IBM-1&quot;, &quot;status&quot;: null, &quot;remarks&quot;: &#39;</span>
+        <span class="s1">&#39;null, &quot;notices&quot;: null, &quot;links&quot;: &#39;</span>
+        <span class="s1">&#39;[&quot;https://rdap.arin.net/registry/entity/IBM-1&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;https://whois.arin.net/rest/org/IBM-1&quot;], &quot;events&quot;: [{&quot;action&quot;: &quot;last &#39;</span>
+        <span class="s1">&#39;changed&quot;, &quot;timestamp&quot;: &quot;2017-11-30T14:46:26-05:00&quot;, &quot;actor&quot;: null}, &#39;</span>
+        <span class="s1">&#39;{&quot;action&quot;: &quot;registration&quot;, &quot;timestamp&quot;: &quot;1992-02-08T00:00:00-05:00&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;actor&quot;: null}], &quot;raw&quot;: null, &quot;roles&quot;: [&quot;registrant&quot;], &quot;contact&quot;: &#39;</span>
+        <span class="s1">&#39;{&quot;name&quot;: &quot;IBM&quot;, &quot;kind&quot;: &quot;org&quot;, &quot;address&quot;: [{&quot;type&quot;: null, &quot;value&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;3039 Cornwallis Road</span><span class="se">\\</span><span class="s1">nResearch Triangle &#39;</span>
+        <span class="s1">&#39;Park</span><span class="se">\\</span><span class="s1">nNC</span><span class="se">\\</span><span class="s1">n27709-2195</span><span class="se">\\</span><span class="s1">nUnited States&quot;}], &quot;phone&quot;: null, &quot;email&quot;: &#39;</span>
+        <span class="s1">&#39;null, &quot;role&quot;: null, &quot;title&quot;: null}, &quot;events_actor&quot;: null, &quot;entities&quot;: &#39;</span>
+        <span class="s1">&#39;[&quot;RAIN-ARIN&quot;]}}, &quot;raw&quot;: null, &quot;dns_zone&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;10.38.42.129.origin.asn.cymru.com&quot;, &quot;display_content&quot;: &quot;{ &#39;</span>
+        <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;nir</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;asn_registry</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;arin</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;16807</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_cidr</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;129.42.38.0/24</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_country_code</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;US</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_date</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;1987-07-29</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_description</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;IBM-EI &#39;</span>
+        <span class="s1">&#39;- IBM - Events Infrastructure, &#39;</span>
+        <span class="s1">&#39;US</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;query</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;129.42.38.10</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;network</span><span class="se">\\</span><span class="s1">&quot;:{ &#39;</span>
+        <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;handle</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;NET-129-42-0-0-1</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;remarks</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;raw</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;start_address</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;129.42.0.0</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;end_address</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;129.42.255.255</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;cidr</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;129.42.0.0/16</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;ip_version</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;v4</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;type</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;DIRECT &#39;</span>
+        <span class="s1">&#39;ASSIGNMENT</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;name</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;IBM-RSCH-NET2</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;country</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;parent_handle</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;NET-129-0-0-0-0</span><span class="se">\\</span><span class="s1">&quot; &#39;</span>
+        <span class="s1">&#39;},</span><span class="se">\\</span><span class="s1">&quot;objects</span><span class="se">\\</span><span class="s1">&quot;:{ </span><span class="se">\\</span><span class="s1">&quot;IBM-1</span><span class="se">\\</span><span class="s1">&quot;:{ &#39;</span>
+        <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;handle</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;IBM-1</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;status</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;remarks</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;notices</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;raw</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;contact</span><span class="se">\\</span><span class="s1">&quot;:{ &#39;</span>
+        <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;name</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;IBM</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;kind</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;org</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;phone</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;email</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;role</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;title</span><span class="se">\\</span><span class="s1">&quot;:false &#39;</span>
+        <span class="s1">&#39;},</span><span class="se">\\</span><span class="s1">&quot;events_actor</span><span class="se">\\</span><span class="s1">&quot;:false } &#39;</span>
+        <span class="s1">&#39;},</span><span class="se">\\</span><span class="s1">&quot;raw</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;dns_zone</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;10.38.42.129.origin.asn.cymru.com</span><span class="se">\\</span><span class="s1">&quot; &#39;</span>
+        <span class="s1">&#39;}&quot;}&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+ <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+ <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">rdap_query</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rdap_depth</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+  <span class="n">des</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+  <span class="n">des</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
+  <span class="k">if</span> <span class="n">des</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt;RDAP threat intelligence at </span><span class="si">{2}</span><span class="s2">:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&lt;/div&gt;&lt;/p&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt; Possible accessible keys:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;display_content&quot;</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">note</span> <span class="o">=</span><span class="n">des</span> <span class="o">+</span><span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt;RDAP threat intelligence at </span><span class="si">{2}</span><span class="s2">:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&lt;/div&gt;&lt;/p&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt; Possible accessible keys:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;display_content&quot;</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;RDAP threat intelligence at </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n\n</span><span class="s2">  This Artifact has no ans registry information, </span><span class="se">\n\n</span><span class="s2"> so no intelligence was gathered.  </span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
+  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-whois-query">
+<h2>Function - WHOIS: Query<a class="headerlink" href="#function-whois-query" title="Link to this heading">#</a></h2>
+<p>Using ipwhois library to make general queries in whois format</p>
+<p><img alt="screenshot: fn-whois-query " src="../_images/fn-rdap-query.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">whois_query</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ibm.com</span></code></p></td>
+<td><p>IP, URL or DNS value</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;asn&#39;</span><span class="p">:</span> <span class="s1">&#39;16807&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_cidr&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.38.0/24&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_country_code&#39;</span><span class="p">:</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_date&#39;</span><span class="p">:</span> <span class="s1">&#39;1987-07-29&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_description&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM-EI - IBM - Events Infrastructure, US&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;asn_registry&#39;</span><span class="p">:</span> <span class="s1">&#39;arin&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;display_content&#39;</span><span class="p">:</span> <span class="s1">&#39;{ &#39;</span>
+                                <span class="s1">&#39;&quot;nir&quot;:false,&quot;asn_registry&quot;:&quot;arin&quot;,&quot;asn&quot;:&quot;16807&quot;,&quot;asn_cidr&quot;:&quot;129.42.38.0/24&quot;,&quot;asn_country_code&quot;:&quot;US&quot;,&quot;asn_date&quot;:&quot;1987-07-29&quot;,&quot;asn_description&quot;:&quot;IBM-EI &#39;</span>
+                                <span class="s1">&#39;- IBM - Events Infrastructure, &#39;</span>
+                                <span class="s1">&#39;US&quot;,&quot;query&quot;:&quot;129.42.38.10&quot;,&quot;raw&quot;:false,&quot;referral&quot;:false,&quot;raw_referral&quot;:false,&quot;dns_zone&quot;:&quot;10.38.42.129.origin.asn.cymru.com&quot; &#39;</span>
+                                <span class="s1">&#39;}&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;dns_zone&#39;</span><span class="p">:</span> <span class="s1">&#39;10.38.42.129.origin.asn.cymru.com&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;nets&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;3039 Cornwallis Road&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;cidr&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.0.0/16&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Research Triangle Park&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;created&#39;</span><span class="p">:</span> <span class="s1">&#39;1987-07-28&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;emails&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ipreg@us.ibm.com&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;handle&#39;</span><span class="p">:</span> <span class="s1">&#39;NET-129-42-0-0-1&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM-RSCH-NET2&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;postal_code&#39;</span><span class="p">:</span> <span class="s1">&#39;27709-2195&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.0.0 - 129.42.255.255&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;NC&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;updated&#39;</span><span class="p">:</span> <span class="s1">&#39;2015-10-20&#39;</span><span class="p">}],</span>
+             <span class="s1">&#39;nir&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;129.42.38.10&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="s1">&#39;raw_referral&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="s1">&#39;referral&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+ <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;whois_query&#39;</span><span class="p">:</span> <span class="s1">&#39;https://www.ibm.com&#39;</span><span class="p">},</span>
+ <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">2362</span><span class="p">,</span>
+             <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;your@hostname.com&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-whois-rdap&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-09-26 15:57:35&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">},</span>
+ <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;nir&quot;: null, &quot;asn_registry&quot;: &quot;arin&quot;, &quot;asn&quot;: &quot;16807&quot;, &quot;asn_cidr&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;129.42.38.0/24&quot;, &quot;asn_country_code&quot;: &quot;US&quot;, &quot;asn_date&quot;: &quot;1987-07-29&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;asn_description&quot;: &quot;IBM-EI - IBM - Events Infrastructure, US&quot;, &#39;</span>
+        <span class="s1">&#39;&quot;query&quot;: &quot;129.42.38.10&quot;, &quot;nets&quot;: [{&quot;cidr&quot;: &quot;129.42.0.0/16&quot;, &quot;name&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;IBM-RSCH-NET2&quot;, &quot;handle&quot;: &quot;NET-129-42-0-0-1&quot;, &quot;range&quot;: &quot;129.42.0.0 - &#39;</span>
+        <span class="s1">&#39;129.42.255.255&quot;, &quot;description&quot;: &quot;IBM&quot;, &quot;country&quot;: &quot;US&quot;, &quot;state&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;NC&quot;, &quot;city&quot;: &quot;Research Triangle Park&quot;, &quot;address&quot;: &quot;3039 Cornwallis &#39;</span>
+        <span class="s1">&#39;Road&quot;, &quot;postal_code&quot;: &quot;27709-2195&quot;, &quot;emails&quot;: [&quot;ipreg@us.ibm.com&quot;], &#39;</span>
+        <span class="s1">&#39;&quot;created&quot;: &quot;1987-07-28&quot;, &quot;updated&quot;: &quot;2015-10-20&quot;}], &quot;raw&quot;: null, &#39;</span>
+        <span class="s1">&#39;&quot;referral&quot;: null, &quot;raw_referral&quot;: null, &quot;dns_zone&quot;: &#39;</span>
+        <span class="s1">&#39;&quot;10.38.42.129.origin.asn.cymru.com&quot;, &quot;display_content&quot;: &quot;{ &#39;</span>
+        <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;nir</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;asn_registry</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;arin</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;16807</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_cidr</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;129.42.38.0/24</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_country_code</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;US</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_date</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;1987-07-29</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;asn_description</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;IBM-EI &#39;</span>
+        <span class="s1">&#39;- IBM - Events Infrastructure, &#39;</span>
+        <span class="s1">&#39;US</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;query</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;129.42.38.10</span><span class="se">\\</span><span class="s1">&quot;,</span><span class="se">\\</span><span class="s1">&quot;raw</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;referral</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;raw_referral</span><span class="se">\\</span><span class="s1">&quot;:false,</span><span class="se">\\</span><span class="s1">&quot;dns_zone</span><span class="se">\\</span><span class="s1">&quot;:</span><span class="se">\\</span><span class="s1">&quot;10.38.42.129.origin.asn.cymru.com</span><span class="se">\\</span><span class="s1">&quot; &#39;</span>
+        <span class="s1">&#39;}&quot;}&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+ <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+ <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">whois_query</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+  <span class="n">des</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+  <span class="n">des</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
+  <span class="k">if</span> <span class="n">des</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt;WHOIS threat intelligence at </span><span class="si">{2}</span><span class="s2">:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&lt;/div&gt;&lt;/p&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt; Possible accessible keys:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;display_content&quot;</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">note</span> <span class="o">=</span><span class="n">des</span> <span class="o">+</span><span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt;WHOIS threat intelligence at </span><span class="si">{2}</span><span class="s2">:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&lt;/div&gt;&lt;/p&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;div&gt;&lt;p&gt;&lt;br&gt;&lt;b&gt; Possible accessible keys:&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span>
+<span class="s2">    &lt;br&gt;&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;display_content&quot;</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;WHOIS threat intelligence at </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n\n</span><span class="s2">  This Artifact has no ans registry information, </span><span class="se">\n\n</span><span class="s2"> so no intelligence was gathered.  </span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
+  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<p>There are several ways to verify the successful operation of a function.</p>
+<section id="resilient-action-status">
+<h3>Resilient Action Status<a class="headerlink" href="#resilient-action-status" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>When viewing an incident, use the Actions menu to view <strong>Action Status</strong>.</p></li>
+<li><p>By default, pending and errors are displayed.</p></li>
+<li><p>Modify the filter for actions to also show Completed actions.</p></li>
+<li><p>Clicking on an action displays additional information on the progress made or what error occurred.</p></li>
+</ul>
+</section>
+<section id="resilient-scripting-log">
+<h3>Resilient Scripting Log<a class="headerlink" href="#resilient-scripting-log" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A separate log file is available to review scripting errors.</p></li>
+<li><p>This is useful when issues occur in the pre-processing or post-processing scripts.</p></li>
+<li><p>The default location for this log file is: <code class="docutils literal notranslate"><span class="pre">/var/log/resilient-scripting/resilient-scripting.log</span></code>.</p></li>
+</ul>
+</section>
+<section id="resilient-logs">
+<h3>Resilient Logs<a class="headerlink" href="#resilient-logs" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>By default, Resilient logs are retained at <code class="docutils literal notranslate"><span class="pre">/usr/share/co3/logs</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">client.log</span></code> may contain additional information regarding the execution of functions.</p></li>
+</ul>
+</section>
+<section id="resilient-circuits">
+<h3>Resilient-Circuits<a class="headerlink" href="#resilient-circuits" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The log is controlled in the <code class="docutils literal notranslate"><span class="pre">.resilient/app.config</span></code> file under the section [resilient] and the property <code class="docutils literal notranslate"><span class="pre">logdir</span></code>.</p></li>
+<li><p>The default file name is <code class="docutils literal notranslate"><span class="pre">app.log</span></code>.</p></li>
+<li><p>Each function will create progress information.</p></li>
+<li><p>Failures will show up as errors and may contain python trace statements.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Link to this heading">#</a></h2>
+<p>View the <a class="reference external" href="https://ibm.biz/soarcommunity">community forums</a> for help with this app.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_wiki/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">fn-wiki for IBM Resilient</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_whois/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Resilient Integration with WHOIS</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">fn-whois-rdap Functions for IBM Resilient</a><ul>
+<li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#history">History</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#app-host-installation">App Host Installation</a></li>
+<li><a class="reference internal" href="#integration-server-installation">Integration Server Installation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-rdap-query">Function - RDAP: Query</a></li>
+<li><a class="reference internal" href="#function-whois-query">Function - WHOIS: Query</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#resilient-action-status">Resilient Action Status</a></li>
+<li><a class="reference internal" href="#resilient-scripting-log">Resilient Scripting Log</a></li>
+<li><a class="reference internal" href="#resilient-logs">Resilient Logs</a></li>
+<li><a class="reference internal" href="#resilient-circuits">Resilient-Circuits</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#support">Support</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

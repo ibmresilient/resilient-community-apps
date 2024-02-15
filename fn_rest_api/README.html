@@ -1,0 +1,1968 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Resilient Circuits Components for function: fn_rsa_netwitness" href="../fn_rsa_netwitness/README.html" /><link rel="prev" title="fn_remedy" href="../fn_remedy/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>REST API Functions for SOAR - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="rest-api-functions-for-soar">
+<h1>REST API Functions for SOAR<a class="headerlink" href="#rest-api-functions-for-soar" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents  <!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#rest-api-functions-for-soar"><span class="xref myst">REST API Functions for SOAR</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#function---rest-api"><span class="xref myst">Function - REST API</span></a></p></li>
+<li><p><a class="reference internal" href="#input-considerations"><span class="xref myst">Input Considerations</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#sensitive-information-using-app-secrets"><span class="xref myst">Sensitive information using App Secrets</span></a></p></li>
+<li><p><a class="reference internal" href="#format"><span class="xref myst">Format:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#input-format"><span class="xref myst">Input format</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#1-json-format"><span class="xref myst">1. JSON format:</span></a></p></li>
+<li><p><a class="reference internal" href="#2-new-line-separated-legacy-format"><span class="xref myst">2. New-line separated (Legacy) format:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#retry-mechanism"><span class="xref myst">Retry Mechanism</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#1-retry-tries-rest_retry_tries"><span class="xref myst">1. RETRY TRIES (rest_retry_tries)</span></a></p></li>
+<li><p><a class="reference internal" href="#2-retry-delay-rest_retry_delay"><span class="xref myst">2. RETRY DELAY (rest_retry_delay)</span></a></p></li>
+<li><p><a class="reference internal" href="#3-retry-backoff-rest_retry_backoff"><span class="xref myst">3. RETRY BACKOFF (rest_retry_backoff)</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#attachments"><span class="xref myst">Attachments</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#request-format"><span class="xref myst">REQUEST FORMAT</span></a></p></li>
+<li><p><a class="reference internal" href="#1-file-bundled-as-a-multipartform-data"><span class="xref myst">1. file bundled as a multipart/form-data:</span></a></p></li>
+<li><p><a class="reference internal" href="#2-file-bundled-as-request-body"><span class="xref myst">2. file bundled as request body:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#authentication"><span class="xref myst">Authentication</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#oauth-20"><span class="xref myst">OAuth 2.0</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#method-1-using-code"><span class="xref myst">Method 1: Using CODE:</span></a></p></li>
+<li><p><a class="reference internal" href="#method-2-using-refresh_token"><span class="xref myst">Method 2: Using REFRESH_TOKEN</span></a></p></li>
+<li><p><a class="reference internal" href="#method-3-using-access_token"><span class="xref myst">Method 3: Using ACCESS_TOKEN</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#client-side-authentication-with-certificates"><span class="xref myst">Client-side authentication with certificates</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#1-client-authentication-certificate-client_auth_cert"><span class="xref myst">1. Client Authentication Certificate (client_auth_cert)</span></a></p></li>
+<li><p><a class="reference internal" href="#2-client-authentication-private-key-client_auth_key"><span class="xref myst">2. Client Authentication Private Key (client_auth_key)</span></a></p></li>
+<li><p><a class="reference internal" href="#3-client-authentication-pem-client_auth_pem"><span class="xref myst">3. Client Authentication PEM (client_auth_pem)</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#input-formats"><span class="xref myst">Input Formats:</span></a></p></li>
+<li><p><a class="reference internal" href="#json-web-token-authentication"><span class="xref myst">JSON Web Token Authentication</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#1-using-endpoint-provided-token"><span class="xref myst">1. Using Endpoint provided token</span></a></p></li>
+<li><p><a class="reference internal" href="#2-compiling-a-token-using-jwt-parameters"><span class="xref myst">2. Compiling a Token using JWT parameters</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>05/2023</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.0</p></td>
+<td><p>06/2023</p></td>
+<td><p>Added support for OAuth, Client Side Authentication using certificates, JWT</p></td>
+</tr>
+<tr class="row-even"><td><p>1.2.0</p></td>
+<td><p>11/2023</p></td>
+<td><p>Added support for Retry mechanism, attachments, query parameters and json formatted body for content-type/json (case-insensitive)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p align="center">
+<img src="./doc/screenshots/main.png" />
+</p>
+<p><strong>Function to call REST web services in the SOAR Platform</strong></p>
+<p>This application is based on the <code class="docutils literal notranslate"><span class="pre">call_rest_api</span></code> function from the <code class="docutils literal notranslate"><span class="pre">fn_utilities</span></code>, which is expected to be deprecated in the future. It’s purpose is to enable the ability to connect with external web services by sending REST API requests. The function supports commonly used REST methods such as GET, HEAD, POST, PUT, DELETE, OPTIONS, and PATCH. The specific details of the request, such as the type of request, URL, and other options like headers, cookies, and the request body, can be specified through the function parameters. Once a response is received from the service, it is presented in both text and JSON format. Additionally, other details about the response, such as the response status code, reason, cookies, headers, time elapsed, and links, are also provided.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Make REST API requests to external web services.</p></li>
+<li><p>Request body, headers, query parameters and cookies now support complex structures just as nested key-value pairs and lists by JSON format.</p></li>
+<li><p>Response is returned in both JSON and text format.</p></li>
+<li><p>Ability to substitute sensitive information that are specified in the inputs for values that are in the app.config.</p></li>
+<li><p>Make REST API requests to multiple endpoints.</p></li>
+<li><p>Ability to retry requests on failure.</p></li>
+<li><p>Authenticate with endpoints that supports OAuth Authentication.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.2</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.2</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>The application requires <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span></code> version <code class="docutils literal notranslate"><span class="pre">51.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>Incident</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Task</p></td>
+<td><p>Read</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app does support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<p>Python 3.6 and Python 3.9 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>resilient-circuits&gt;=51.0</p></li>
+<li><p>PyJWT</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="function-rest-api">
+<h2>Function - REST API<a class="headerlink" href="#function-rest-api" title="Link to this heading">#</a></h2>
+<p>This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS. The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time. The function can be reused to make multiple requests to an endpoint or even access multiple endpoints.</p>
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-playbook.png" />
+</p>
+</section>
+<section id="input-considerations">
+<h2>Input Considerations<a class="headerlink" href="#input-considerations" title="Link to this heading">#</a></h2>
+<section id="sensitive-information-using-app-secrets">
+<h3>Sensitive information using App Secrets<a class="headerlink" href="#sensitive-information-using-app-secrets" title="Link to this heading">#</a></h3>
+<p>For sensitive information that may be included in the <code class="docutils literal notranslate"><span class="pre">rest_header</span></code>, <code class="docutils literal notranslate"><span class="pre">rest_url</span></code>, <code class="docutils literal notranslate"><span class="pre">rest_body</span></code>, or <code class="docutils literal notranslate"><span class="pre">rest_cookies</span></code>, SECRETS can be directly substituted into input parameters, there by avoiding the need to expose any sensitive information as plain text. This can be done by creating a SECRET under the application’s configuration tab and referencing the same with a <code class="docutils literal notranslate"><span class="pre">$</span></code> sign followed by the SECRET’s name enclosed within curly brace. PAM Credentials can also be referenced it a similar fashion.</p>
+</section>
+<section id="format">
+<h3>Format:<a class="headerlink" href="#format" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>SECRETS : <code class="docutils literal notranslate"><span class="pre">${SECRET_NAME}</span></code></p></li>
+<li><p>PAM     : <code class="docutils literal notranslate"><span class="pre">^{PAM_CREDENTIALS}</span></code></p></li>
+</ul>
+<section id="example">
+<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#example" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">json</span>
+
+    <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+        <span class="s2">&quot;Content-Type&quot;</span>  <span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;X-Frooble&quot;</span>     <span class="p">:</span> <span class="s2">&quot;Baz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Authorization&quot;</span> <span class="p">:</span> <span class="s2">&quot;bearer $</span><span class="si">{API_TOKEN}</span><span class="s2">&quot;</span>
+      <span class="p">})</span>
+</pre></div>
+</div>
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-secrets.png" />
+</p>
+<p>This key can be directly referenced from within a playbook. For instance, a header using the above mentioned value can be constructed in the preprocessing script as follows:</p>
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-secret-example.png" />
+</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="input-format">
+<h2>Input format<a class="headerlink" href="#input-format" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Function inputs can only accept values that are either strings, numbers, or
+booleans, and they cannot accommodate more intricate data structures like lists
+or dictionaries. Nonetheless, specific REST request parameters necessitate input
+in the form of key-value pairs. To address this constraint, you can provide inputs
+for such parameters using one of the methods described below.</p></li>
+</ul>
+<section id="json-format">
+<h3>1. JSON format:<a class="headerlink" href="#json-format" title="Link to this heading">#</a></h3>
+<p>Standard json file format. Supports complex data structures such as lists
+or nested Key-value pairs.</p>
+<section id="id1">
+<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">   &quot;name&quot; : &quot;user1&quot;,</span>
+<span class="s2">   &quot;password&quot; : &quot;p@ssword1&quot;,</span>
+<span class="s2">   &quot;role&quot; : &quot;admin&quot;,</span>
+<span class="s2">   &quot;content&quot; : {</span>
+<span class="s2">    &quot;site_url&quot; : &quot;www.example.com&quot;,</span>
+<span class="s2">    &quot;users&quot; : [&quot;user1&quot;, &quot;user2&quot;] }</span>
+<span class="s2">  &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hint">
+<h3>Hint: <!-- omit in toc --><a class="headerlink" href="#hint" title="Link to this heading">#</a></h3>
+<p>An easier way to feed inputs to the above mentioned fields would be using
+python dictionaries. While the inputs don’t directly support dict, the in-built
+json package can be used to convert a python dict to a json string.</p>
+<section id="id2">
+<h4>Example: <!-- omit in toc --><a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="kn">import</span> <span class="nn">json</span>
+   <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span>     <span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span> <span class="p">:</span> <span class="s2">&quot;p@ssword1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;role&quot;</span>     <span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span>  <span class="p">:</span> <span class="p">{</span> 
+       <span class="s2">&quot;site_url&quot;</span> <span class="p">:</span> <span class="s2">&quot;www.example.com&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;users&quot;</span>    <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;user1&quot;</span><span class="p">,</span> <span class="s2">&quot;user2&quot;</span><span class="p">]</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+  
+  <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)</span> <span class="c1"># this converts the dict to a json string</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="new-line-separated-legacy-format">
+<h3>2. New-line separated (Legacy) format:<a class="headerlink" href="#new-line-separated-legacy-format" title="Link to this heading">#</a></h3>
+<p>This format allows for specifying inputs as key-value pairs, separated
+by a new line. It lets us create quick and easy inputs that is properly
+formatted for the request. The primary purpose of this format is to retain
+backwards compatibility.</p>
+<section id="note">
+<h4>Note:  <!-- omit in toc --><a class="headerlink" href="#note" title="Link to this heading">#</a></h4>
+<p>This format does not support complex data structures such as lists or nested key-value pairs.</p>
+</section>
+<section id="id3">
+<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">   name : user1</span>
+<span class="s2">   password : p@ssword1</span>
+<span class="s2">   role : admin</span>
+<span class="s2">   &quot;&quot;&quot;</span>
+
+   <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">   Content-Type: application/json</span>
+<span class="s2">   X-Frooble: Baz</span>
+<span class="s2">   Authorization: {{auth_header}}</span>
+<span class="s2">   &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="retry-mechanism">
+<h2>Retry Mechanism<a class="headerlink" href="#retry-mechanism" title="Link to this heading">#</a></h2>
+<p>This mechanism ensures the reliable exchange of data by automatically reattempting requests
+that have failed. You can configure the application to do so by modifying the below mentioned
+parameters.</p>
+<section id="retry-tries-rest-retry-tries">
+<h3>1. RETRY TRIES (rest_retry_tries)<a class="headerlink" href="#retry-tries-rest-retry-tries" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This parameter defines the maximum number of retry attempts that will be made for a
+failed request before the system ceases further retry efforts. If the maximum number
+of retry attempts is reached and the request still fails, the system will cease further
+retries and trigger an error notification or follow an alternative error-handling
+process. Setting this value to `-1` results in infinite retries.
+
+Default value : 1 (no retry)
+</pre></div>
+</div>
+</section>
+<section id="retry-delay-rest-retry-delay">
+<h3>2. RETRY DELAY (rest_retry_delay)<a class="headerlink" href="#retry-delay-rest-retry-delay" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This parameter used to define the delay between retry attempts when a request fails and
+the request retry mechanism is invoked. This parameter plays a crucial role in controlling
+the timing of automatic retry attempts.
+
+Default value : 1 second (no delay)
+</pre></div>
+</div>
+</section>
+<section id="retry-backoff-rest-retry-backoff">
+<h3>3. RETRY BACKOFF (rest_retry_backoff)<a class="headerlink" href="#retry-backoff-rest-retry-backoff" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This parameter is used to specify the multiplier applied to delay between attempts.
+The backoff strategy follows the below mentioned algorithm.
+
+Default: 1 (no backoff)
+
+Algorithm:
+
+  `DELAY = RETRY_DELAY * (RETRY_BACKOFF ^ n-1)`
+
+      where `n` is the current attempt count.
+
+Example:
+
+For these values:
+  RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3
+
+The retry mechanism attempts requests in the following manner:
+
+  - attempts request 1. if failed, attempts retry in 2 seconds.
+  - attempts request 2. if failed, attempts retry in 6 seconds.
+  - attempts request 3. if failed, attempts retry in 18 seconds.
+  - attempts request 4. if failed, raises exception or follows an alternative error-handling process.
+</pre></div>
+</div>
+<p>Note: These parameters have default values which are assumed when they are not assigned or left unused.</p>
+<p>You can find more information on this in the link: <a class="reference external" href="https://github.com/eSAMTrade/retry#retry_call">retry2/retry_call</a></p>
+</section>
+</section>
+<section id="attachments">
+<h2>Attachments<a class="headerlink" href="#attachments" title="Link to this heading">#</a></h2>
+<p>Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.
+The following fields can be used to find and locate the file to be sent.</p>
+<p>Note: Only one file can be sent per request. If both attachment_id and artifact_id is provided,
+the application will prioritize attachment over artifact</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#[Required] ID of the incident in which the artifact or attachment is present. dtype : int</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span>   <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># [Optional] ID of the incident in which the artifact or attachment is present. dtype : int</span>
+<span class="n">inputs</span><span class="p">,</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">task</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1"># Used to identify the attachment that is to be sent with the REST request. dtype : int</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Used to identify the artifact **with attachment** that is to be sent with the REST request. dtype : int</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span>   <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<section id="request-format">
+<h3>REQUEST FORMAT<a class="headerlink" href="#request-format" title="Link to this heading">#</a></h3>
+<p>The endpoint has the capability to receive a REST request containing a file attachment in various formats. The selection of the methodology for sending a file depends on the specific requirements of the endpoint.</p>
+</section>
+<section id="file-bundled-as-a-multipart-form-data">
+<h3>1. file bundled as a multipart/form-data:<a class="headerlink" href="#file-bundled-as-a-multipart-form-data" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This methodology sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
+request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
+divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
+Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,
+along with the actual data itself. While the `type` is automatically assigned by the application, the `name`
+is supposed to be provided by the user in the below field.
+
+Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type
+is automatically set by the application, and a disposition name. This disposition name changes with regard to
+the endpoint that is being used and is to be set by the user. Default value : &quot;file&quot;
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">attachment_form_field_name</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+
+<span class="c1"># sends file as multipart/form-data</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">send_file_as_body</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+<section id="file-bundled-as-request-body">
+<h3>2. file bundled as request body:<a class="headerlink" href="#file-bundled-as-request-body" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This methodology sends the binary data of the file as REST request body. Certain endpoints require
+files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">send_file_as_body</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Note: The body of the request has to be empty, i.e. inputs.rest_api_body = None, otherwise the application will raise an error</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">#</a></h2>
+<p>The Call REST API function offers support for various authentication protocols that can be employed alongside the REST
+request. These authentication methods are optional. If the endpoint does not necessitate any form of
+authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication
+process.</p>
+<section id="oauth-2-0">
+<h3>OAuth 2.0<a class="headerlink" href="#oauth-2-0" title="Link to this heading">#</a></h3>
+<p>OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint
+to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different
+flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and
+possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the
+Authentication flow, as mentioned below.</p>
+<p>Note:   The exact implementation details of OAuth2 can vary depending on the
+authorization server and the API you are integrating with. Make sure to consult
+the OAuth2 documentation specific to the service you are working with.</p>
+<section id="method-1-using-code">
+<h4>Method 1: Using CODE:<a class="headerlink" href="#method-1-using-code" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> The authorization server redirects the user back to address specified on the 
+ redirect URI with an authorization CODE. This CODE is a temporary token
+ that represents the user&#39;s authorization and usually can be used only once.
+ This function exchanges the authorization code for an ACCESS_TOKEN (and 
+ possibly also a REFRESH_TOKEN depending on the endpoint). This requires making
+ a request to the authorization server&#39;s token endpoint, providing the 
+ authorization CODE, client ID, client secret, token URL and redirect URI.
+
+ Note: These codes are generally one time use only.
+</pre></div>
+</div>
+</section>
+<section id="method-2-using-refresh-token">
+<h4>Method 2: Using REFRESH_TOKEN<a class="headerlink" href="#method-2-using-refresh-token" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> It is a credential that is used to obtain a new access token from the
+ authorization server when the original access token expires. It is an integral
+ part of the OAuth 2.0 protocol and enables long-lived access to protected 
+ resources without requiring the user to repeatedly authenticate. This can 
+ be used for prolonged authentication as using a REFRESH_TOKEN generally extends
+ the validity of the token. Client ID, Client secret, Redirect URI and token URL
+ might also have to be provided.
+
+ Note: These can be used more than once. The validity of the REFRESH_TOKEN is
+       generally extended on use, making it viable for long lived access.
+</pre></div>
+</div>
+</section>
+<section id="method-3-using-access-token">
+<h4>Method 3: Using ACCESS_TOKEN<a class="headerlink" href="#method-3-using-access-token" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  If an ACCESS_TOKEN is available, it can be directly used without having to 
+  perform authentication. In order to use the ACCESS_TOKEN, all that is required
+  is the ACCESS_TOKEN &amp; the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the
+  DEFAULT_TOKEN_TYPE (bearer) is used.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="client-side-authentication-with-certificates">
+<h3>Client-side authentication with certificates<a class="headerlink" href="#client-side-authentication-with-certificates" title="Link to this heading">#</a></h3>
+<p>Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to
+verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS
+authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).
+However, with client-side authentication, the client also presents a digital certificate to the server for verification.</p>
+<p>Note:   Client-side authentication with certificates provides an extra layer of
+security by ensuring that the client is trusted and authenticated before
+allowing access to sensitive resources or data. And so this can be used
+in tandem with other authentication methods</p>
+<section id="client-authentication-certificate-client-auth-cert">
+<h4>1. Client Authentication Certificate (client_auth_cert)<a class="headerlink" href="#client-authentication-certificate-client-auth-cert" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  A client authentication certificate, also known as a client certificate,
+  is a digital certificate that is issued to the client (user or device) as
+  part of the mutual authentication process. It contains the client&#39;s public
+  key, identifying information (such as the client&#39;s name or ID), and is
+  signed by a trusted Certificate Authority (CA) or a self-signed certificate
+  if it is a closed system.
+</pre></div>
+</div>
+</section>
+<section id="client-authentication-private-key-client-auth-key">
+<h4>2. Client Authentication Private Key (client_auth_key)<a class="headerlink" href="#client-authentication-private-key-client-auth-key" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Private key is a cryptographic key that corresponds to the client&#39;s public
+  key in the client authentication certificate. The private key is securely
+  stored by the client and kept confidential. During the SSL/TLS handshake,
+  when the server sends a challenge to the client, the client uses its 
+  private key to decrypt the challenge and generate a response. 
+  The server then verifies this response to ensure that the client possesses
+  the corresponding private key and is thus authenticated.
+</pre></div>
+</div>
+</section>
+<section id="client-authentication-pem-client-auth-pem">
+<h4>3. Client Authentication PEM (client_auth_pem)<a class="headerlink" href="#client-authentication-pem-client-auth-pem" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  This is simply the file format used to store both the client authentication
+  certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM
+  files are a common format for storing cryptographic objects, such as
+  certificates and private keys, in a human-readable and ASCII-encoded format.
+</pre></div>
+</div>
+<p>Note:   The client authentication certificate and private key are commonly given
+together, whereas the PEM file is typically provided separately as an
+independent file.</p>
+</section>
+</section>
+<section id="input-formats">
+<h3>Input Formats:<a class="headerlink" href="#input-formats" title="Link to this heading">#</a></h3>
+<p>The information within these certificates can be directly copied and pasted as
+plain text into the appropriate certificate type, enclosed within quotation marks.
+When making an API call, the application should automatically generate the
+certificates using the pasted content and will securely discard them upon execution.
+All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the
+same input format, as shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">inputs</span><span class="o">.</span><span class="n">client_auth_cert</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">      -----BEGIN CERTIFICATE-----</span>
+<span class="s2">      MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G</span>
+<span class="s2">      9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E</span>
+<span class="s2">      FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56</span>
+<span class="s2">      OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq</span>
+<span class="s2">      9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+</span>
+<span class="s2">      FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5</span>
+<span class="s2">      SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ</span>
+<span class="s2">      k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ</span>
+<span class="s2">      Y20A9hExGKyHns4hW5KgvA==</span>
+<span class="s2">      -----END CERTIFICATE-----</span>
+<span class="s2">      &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="json-web-token-authentication">
+<h3>JSON Web Token Authentication<a class="headerlink" href="#json-web-token-authentication" title="Link to this heading">#</a></h3>
+<p>JWT is also a supported form of authentication. The application has functionality builtin
+that allows for the creation, compilation, and manipulation of JWTs. It can accept several
+optional parameters to customize the authentication process.
+JWT based authentication can be performed in 2 ways:</p>
+<section id="using-endpoint-provided-token">
+<h4>1. Using Endpoint provided token<a class="headerlink" href="#using-endpoint-provided-token" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  This application can function with a predefined jwt token. A fully generated JWT 
+  token can be directly provided, and the application will automatically form the REST
+  headers required for a request.
+</pre></div>
+</div>
+</section>
+<section id="compiling-a-token-using-jwt-parameters">
+<h4>2. Compiling a Token using JWT parameters<a class="headerlink" href="#compiling-a-token-using-jwt-parameters" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  This application can also generate a jwt token. (Skip if you have already specified 
+  a jwt_token). The application can automatically compile a jwt token using certain 
+  parameters which can be provided in json string or line separated format (similar to
+  REST body/header/cookies). These arguments are usually provided by the endpoint itself.
+  The application should be able to create and sign a JWT and automatically incorporate it
+  into the REST request.
+</pre></div>
+</div>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_method</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GET</span></code></p></td>
+<td><p>REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_url</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">www.example.com</span></code></p></td>
+<td><p>Endpoint URL</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_headers</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Request headers. See <a class="reference internal" href="#input-considerations"><span class="xref myst">Input Considerations</span></a> for format</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_cookies</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Cookies required for the API call. See <a class="reference internal" href="#input-considerations"><span class="xref myst">Input Considerations</span></a> for format</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_body</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Request body. See <a class="reference internal" href="#input-considerations"><span class="xref myst">Input Considerations</span></a> for format</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_verify</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Verify SSL certificate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_timeout</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p>Request timeout in seconds</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_allowed_status_codes</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;305,</span> <span class="pre">404,</span> <span class="pre">500&quot;</span></code></p></td>
+<td><p>Comma separated list. All codes &lt; 300 are allowed by default</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_query_parameters</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p>Request  timeout in seconds</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_tries</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_delay</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>Initial delay in seconds between attempts. Default: 0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_backoff</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>Multiplier applied to delay in seconds between attempts. Default: 1 (no backoff)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_token_url</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://www.example.com/oauth/token</span></code></p></td>
+<td><p>URL for the Authorization server endpoint</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
+<td><p>ID of the incident in which the artifact or attachment is present</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">artifact_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
+<td><p>Used to identify the attachment that is to be sent with the REST request</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
+<td><p>Used to identify file-based artifact that is to be sent with the REST request</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">send_file_as_body</span> </code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>`False``</p></td>
+<td><p>Sends the attachment as request body instead of multipart/form-data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_form_field_name</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file</span></code></p></td>
+<td><p>the content-disposition header name for multipart/form-data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_client_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Identifies the client application</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_client_secret</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Authenticates the client application (required for certain grant types)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_redirect_uri</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://www.example.com/redirect</span></code></p></td>
+<td><p>The redirect URI used during the authorization flow (for authorization code grant)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_scope</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">read</span> <span class="pre">write</span> <span class="pre">delete</span> <span class="pre">offline_access</span></code></p></td>
+<td><p>Set of permissions granted by the resource owner (user) to the client application</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_code</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The authorization code received during the authorization flow (for authorization code grant)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_access_token</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Resultant token of the Authentication process</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_refresh_token</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The refresh token used to obtain a new access token (for refresh token grant)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_token_type</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Bearer</span></code></p></td>
+<td><p>Provides information to the client application about the token’s characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_headers</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>headers of the JWT, contains metadata about the token</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_payload</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Payload to be included in the token</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_key</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>key used for signing the JWT</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_algorithm</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Encryption algorithm used for encoding the JWT. Defaults to “HS256” algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_token</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Fully complied JWT token, at times referenced as the Access_token</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_key</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>.key file contents to be pasted as plain text. To be provided with client_auth_cert</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_cert</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>.csr file contents to be pasted as plain text. Requires client_auth_key to function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_pem</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>.pem file contents to be pasted as plain text. Standalone attribute, does not require the above two attribute</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;apparent_encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;ascii&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cookies&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;sails.sid&quot;</span><span class="p">:</span> <span class="s2">&quot;s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;elapsed&quot;</span><span class="p">:</span> <span class="mi">711</span><span class="p">,</span>
+    <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;close&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Content-Length&quot;</span><span class="p">:</span> <span class="s2">&quot;486&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json; charset=utf-8&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="s2">&quot;Thu, 02 Mar 2023 23:47:12 GMT&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;ETag&quot;</span><span class="p">:</span> <span class="s2">&quot;W/</span><span class="se">\&quot;</span><span class="s2">1e6-/Slr9JmNLSHXgTt5sCvAphvtWyI</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;set-cookie&quot;</span><span class="p">:</span> <span class="s2">&quot;sails.sid=s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54; Path=/; HttpOnly&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;8.8.8.8&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;accept&quot;</span><span class="p">:</span> <span class="s2">&quot;*/*&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;accept-encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip, deflate&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content-length&quot;</span><span class="p">:</span> <span class="s2">&quot;18&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;postman-echo.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;user-agent&quot;</span><span class="p">:</span> <span class="s2">&quot;python-requests/2.28.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;x-amzn-trace-id&quot;</span><span class="p">:</span> <span class="s2">&quot;Root=1-64013580-54708cb41d08344e2a8af58b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;x-forwarded-port&quot;</span><span class="p">:</span> <span class="s2">&quot;443&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;x-forwarded-proto&quot;</span><span class="p">:</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;x-frooble&quot;</span><span class="p">:</span> <span class="s2">&quot;Baz&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://postman-echo.com/get&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;ok&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">args</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">8.8.8.8</span><span class="se">\&quot;\n</span><span class="s2">  },</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">headers</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-forwarded-proto</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-forwarded-port</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">443</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">host</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">postman-echo.com</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-amzn-trace-id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Root=1-64013580-54708cb41d08344e2a8af58b</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">content-length</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">18</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">user-agent</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">python-requests/2.28.1</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">accept-encoding</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gzip, deflate</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">accept</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">*/*</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">content-type</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">application/json</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-frooble</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Baz</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">authorization</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;\&quot;\n</span><span class="s2">  },</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">url</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://postman-echo.com/get</span><span class="se">\&quot;\n</span><span class="s2">}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://postman-echo.com/get&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;rest_api_allowed_status_codes&quot;</span><span class="p">:</span> <span class="s2">&quot; 305,404,500&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rest_api_body&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">8.8.8.8</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rest_api_headers&quot;</span><span class="p">:</span> <span class="s2">&quot;Content-Type: application/json</span><span class="se">\n</span><span class="s2">X-Frooble: Baz</span><span class="se">\n</span><span class="s2">Authorization: {{auth_header}}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rest_api_method&quot;</span><span class="p">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rest_api_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://postman-echo.com/get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rest_api_verify&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">731</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rest-api&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-02 18:47:11&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Function-Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ======================================================================================================================== #</span>
+<span class="c1">#                                                    ===============                                                       #</span>
+<span class="c1">#                                                     CALL REST API                                                        #</span>
+<span class="c1">#                                                    ===============                                                       #</span>
+<span class="c1"># ======================================================================================================================== #</span>
+
+<span class="c1"># This is a tool that can be used in the field of API (Application Programming Interface) development and testing. It</span>
+<span class="c1"># provides a highly customizable interface for making HTTP requests, sending and receiving data, and testing APIs.</span>
+<span class="c1"># With this, developers can easily create and manage API requests using a variety of HTTP methods such as GET, POST, PUT,</span>
+<span class="c1"># DELETE, etc. Users can also specify request headers, parameters, and body content for different types of requests.</span>
+<span class="c1"># It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side </span>
+<span class="c1"># authentication.</span>
+
+<span class="n">method</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="n">url</span>     <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="n">verify</span>  <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">params</span>  <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">header</span>  <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">body</span>    <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">cookie</span>  <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">timeout</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">retry_tries</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">retry_delay</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">retry_backoff</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">allowed_status_code</span> <span class="o">=</span> <span class="s2">&quot;200, 201, 202&quot;</span>
+
+<span class="n">REST_METHODS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="s2">&quot;OPTIONS&quot;</span><span class="p">,</span> <span class="s2">&quot;PATCH&quot;</span><span class="p">]</span>
+
+
+<span class="c1"># Endpoint url</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_url</span>     <span class="o">=</span> <span class="n">url</span>
+
+<span class="c1"># Indicates whether to verify SSL certificates (boolean).</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_verify</span>  <span class="o">=</span> <span class="n">verify</span> <span class="k">if</span> <span class="n">verify</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">True</span>
+
+<span class="c1"># REST methods: &quot;GET&quot;, &quot;HEAD&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot; and &quot;PATCH&quot;. Defaults to GET method</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_method</span>  <span class="o">=</span> <span class="n">method</span> <span class="k">if</span> <span class="n">method</span> <span class="ow">and</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">REST_METHODS</span> <span class="k">else</span> <span class="n">REST_METHODS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+
+<span class="c1"># Time in seconds to wait before timing-out request. Default: 60 seconds.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_timeout</span> <span class="o">=</span> <span class="n">timeout</span> <span class="k">if</span> <span class="n">timeout</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1"># Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="n">header</span> <span class="k">if</span> <span class="n">header</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1"># Cookies for request. Refer to ``DICT/JSON FORMAT`` section for more information.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_cookies</span> <span class="o">=</span> <span class="n">cookie</span> <span class="k">if</span> <span class="n">cookie</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1"># Request body. Refer to ``DICT/JSON FORMAT`` section for more information.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span>    <span class="o">=</span> <span class="n">body</span> <span class="k">if</span> <span class="n">body</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1"># Parameters used for API calls added to the URL. Refer to ``DICT/JSON FORMAT`` section for more information.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_query_parameters</span> <span class="o">=</span> <span class="n">params</span>
+
+
+<span class="c1">#                                                 =====================</span>
+<span class="c1">#                                                  ALLOWED_STATUS_CODE </span>
+<span class="c1">#                                                 =====================</span>
+
+<span class="c1"># Any status code below 300 is allowed by default. If you specify codes above 300, they are</span>
+<span class="c1"># exempted from raising an exception and thereby returns the endpoint response. Multiple</span>
+<span class="c1"># status codes can be specified as a string in a command separated fashion.</span>
+<span class="c1">#</span>
+<span class="c1">#    Example:</span>
+<span class="c1">#    --------</span>
+<span class="c1">#     inputs.rest_api_allowed_status_codes = &quot;305, 400, 404, 500&quot;</span>
+
+
+<span class="c1"># Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_allowed_status_codes</span> <span class="o">=</span> <span class="n">allowed_status_code</span> <span class="k">if</span> <span class="n">allowed_status_code</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1">#                                                       =======</span>
+<span class="c1">#                                                        RETRY</span>
+<span class="c1">#                                                       =======</span>
+
+<span class="c1"># This mechanism ensures the reliable exchange of data by automatically reattempting requests </span>
+<span class="c1"># that have failed.</span>
+
+<span class="c1"># 1. RETRY_TRIES (rest_retry_tries):</span>
+<span class="c1">#</span>
+<span class="c1">#     This parameter defines the maximum number of retry attempts that will be made for a </span>
+<span class="c1">#     failed request before the system ceases further retry efforts.</span>
+<span class="c1">#     Default value : 1 (no retry)</span>
+
+<span class="c1"># 2. RETRY_DELAY (rest_retry_delay):</span>
+<span class="c1">#</span>
+<span class="c1">#     This parameter used to define the delay between retry attempts when a request fails and</span>
+<span class="c1">#     the request retry mechanism is invoked. Default value : 1 (no delay)</span>
+
+<span class="c1"># 3. RETRY_BACKOFF (rest_retry_backoff):</span>
+<span class="c1">#</span>
+<span class="c1">#     This parameter is used to specify the multiplier applied to delay between attempts.</span>
+<span class="c1">#     Default: 1 (no backoff). </span>
+<span class="c1">#</span>
+<span class="c1">#       Example:</span>
+<span class="c1">#</span>
+<span class="c1">#       For these values:</span>
+<span class="c1">#         RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3</span>
+<span class="c1">#</span>
+<span class="c1">#       The retry mechanism attempts requests in the following manner:</span>
+<span class="c1">#</span>
+<span class="c1">#         - attempts request 1. if failed, attempts retry in 2 seconds.</span>
+<span class="c1">#         - attempts request 2. if failed, attempts retry in 6 seconds.</span>
+<span class="c1">#         - attempts request 3. if failed, attempts retry in 18 seconds.</span>
+<span class="c1">#         - attempts request 4. if failed, raises exception or follows an </span>
+<span class="c1">#                               alternative error-handling process.</span>
+
+<span class="c1"># You can find more information on this in the link below. https://github.com/eSAMTrade/retry#retry_call </span>
+
+
+<span class="c1"># The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_retry_tries</span>   <span class="o">=</span> <span class="n">retry_tries</span>
+
+<span class="c1"># Initial delay between attempts. Default: 1</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_retry_delay</span>   <span class="o">=</span> <span class="n">retry_delay</span>
+
+ <span class="c1"># Multiplier applied to delay between attempts. Default: 1 (no backoff)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_retry_backoff</span> <span class="o">=</span> <span class="n">retry_backoff</span>
+
+<span class="c1">#                                                    ================</span>
+<span class="c1">#                                                       Attachment   </span>
+<span class="c1">#                                                    ================</span>
+
+<span class="c1"># Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.</span>
+<span class="c1"># The following fields can be used to find and locate the file to be sent.</span>
+
+<span class="c1"># Note: Only one file can be sent per request. If both attachment_id and artifact_id is provided,</span>
+<span class="c1">#       the application will prioritize attachment over artifact</span>
+
+<span class="c1"># [Required] ID of the incident in which the artifact or attachment is present. dtype : int</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span>   <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># [Optional] ID of the incident in which the artifact or attachment is present. dtype : int</span>
+<span class="n">inputs</span><span class="p">,</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">task</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1"># Used to identify the attachment that is to be sent with the REST request. dtype : int</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Used to identify file-based artifact that is to be sent with the REST request. dtype : int</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span>   <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># REQUEST FORMAT</span>
+<span class="c1"># --------------</span>
+
+<span class="c1"># The endpoint has the capability to receive a REST request containing a file attachment in various formats.</span>
+<span class="c1"># The selection of the methodology for sending a file depends on the specific requirements of the endpoint.</span>
+
+<span class="c1"># 1. file bundled as a multipart/form-data:</span>
+<span class="c1">#</span>
+<span class="c1">#  This methodology sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the</span>
+<span class="c1">#  request is a series of parts, each of which contains files that are base64 encoded. The body of the request is</span>
+<span class="c1">#  divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.</span>
+<span class="c1">#  Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,</span>
+<span class="c1">#  along with the actual data itself. While the `type` is automatically assigned by the application, the `name`</span>
+<span class="c1">#  is supposed to be provided by the user in the below field.</span>
+
+<span class="c1">#  Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type</span>
+<span class="c1">#  is automatically set by the application, and a disposition name. This disposition name changes with regard to</span>
+<span class="c1">#  the endpoint that is being used and is to be set by the user. Default value : &quot;file&quot;</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">attachment_form_field_name</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+
+<span class="c1"># sends file as multipart/form-data</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">send_file_as_body</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="c1"># 2. file bundled as request body:</span>
+<span class="c1">#</span>
+<span class="c1">#   This methodology sends the binary data of the file as REST request body. Certain endpoints require</span>
+<span class="c1">#   files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False</span>
+
+<span class="c1"># Uncomment the following line to send file as REST request body</span>
+<span class="c1"># inputs.send_file_as_body = True</span>
+
+<span class="c1"># Note: The body of the request has to be empty, i.e. inputs.rest_api_body = None, otherwise the application</span>
+<span class="c1">#       will raise an error</span>
+
+
+
+
+<span class="c1">#                                                       =========</span>
+<span class="c1">#                                                        SECRETS</span>
+<span class="c1">#                                                       =========</span>
+
+<span class="c1"># SECRETS can be directly substituted into input parameters, there by avoiding</span>
+<span class="c1"># the need to expose any sensitive information as plain text. This can be done by</span>
+<span class="c1"># creating a SECRET under the application&#39;s configuration tab and referencing the </span>
+<span class="c1"># same with a `$` sign followed by the SECRET&#39;s name enclosed within curly</span>
+<span class="c1"># brace. PAM Credentials can also be referenced it a similar fashion.</span>
+<span class="c1">#</span>
+<span class="c1">#    Format:</span>
+<span class="c1">#    -------</span>
+<span class="c1">#      SECRETS : ${SECRET_NAME}</span>
+<span class="c1">#      PAM     : ^{PAM_CREDENTIALS}</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#    Example:</span>
+<span class="c1">#    --------</span>
+<span class="c1">#      import json</span>
+<span class="c1">#</span>
+<span class="c1">#      inputs.rest_api_headers = json.dumps({</span>
+<span class="c1">#        &quot;Content-Type&quot;  : &quot;application/json&quot;,</span>
+<span class="c1">#        &quot;X-Frooble&quot;     : &quot;Baz&quot;,</span>
+<span class="c1">#        &quot;Authorization&quot; : &quot;bearer ${API_TOKEN}&quot;</span>
+<span class="c1">#      })</span>
+<span class="c1">#</span>
+
+<span class="c1">#                                                  ====================                                                  </span>
+<span class="c1">#                                                   DICT / JSON FORMAT                                                      </span>
+<span class="c1">#                                                  ====================                                                  </span>
+
+<span class="c1"># Function inputs can only accept values that are either strings, numbers, or </span>
+<span class="c1"># booleans, and they cannot accommodate more intricate data structures like lists</span>
+<span class="c1"># or dictionaries. Nonetheless, specific REST request parameters necessitate input</span>
+<span class="c1"># in the form of key-value pairs. To address this constraint, you can provide inputs</span>
+<span class="c1"># for such parameters using one of the methods described below.</span>
+<span class="c1"># </span>
+<span class="c1">#     Supported fields</span>
+<span class="c1">#     ----------------</span>
+<span class="c1">#       - inputs.rest_api_headers</span>
+<span class="c1">#       - inputs.rest_api_cookies</span>
+<span class="c1">#       - inputs.rest_api_body </span>
+<span class="c1">#       - inputs.rest_api_query_parameters</span>
+<span class="c1">#       - inputs.jwt_headers</span>
+<span class="c1">#       - inputs.jwt_payload</span>
+<span class="c1">#</span>
+
+<span class="c1"># 1. JSON format:</span>
+<span class="c1">#    ------------</span>
+<span class="c1">#</span>
+<span class="c1">#    Standard json file format. Supports complex data structures such as lists</span>
+<span class="c1">#    or nested Key-value pairs.</span>
+<span class="c1">#</span>
+<span class="c1">#    Example:</span>
+<span class="c1">#    --------</span>
+<span class="c1">#      inputs.rest_api_body  = &quot;&quot;&quot;</span>
+<span class="c1">#      &quot;name&quot; : &quot;user1&quot;,</span>
+<span class="c1">#      &quot;password&quot; : &quot;p@ssword1&quot;,</span>
+<span class="c1">#      &quot;role&quot; : &quot;admin&quot;,</span>
+<span class="c1">#      &quot;content&quot; : { &quot;site_url&quot; : &quot;www.example.com&quot;, &quot;users&quot; : [&quot;user1&quot;, &quot;user2&quot;] }</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+
+<span class="c1">#    Hint:</span>
+<span class="c1">#    -----</span>
+<span class="c1">#</span>
+<span class="c1">#    An easier way to feed inputs to the above mentioned fields would be using</span>
+<span class="c1">#    python dictionaries. While the inputs don&#39;t directly support dict, the in-built </span>
+<span class="c1">#    json package can be used to convert a python dict to json string.</span>
+<span class="c1">#</span>
+<span class="c1">#    Example:</span>
+<span class="c1">#    --------</span>
+<span class="c1">#      import json</span>
+<span class="c1">#     </span>
+<span class="c1">#      inputs.rest_api_body  = {</span>
+<span class="c1">#       &quot;name&quot;     : &quot;user1&quot;,</span>
+<span class="c1">#       &quot;password&quot; : &quot;p@ssword1&quot;,</span>
+<span class="c1">#       &quot;role&quot;     : &quot;admin&quot;,</span>
+<span class="c1">#       &quot;content&quot;  : { </span>
+<span class="c1">#          &quot;site_url&quot; : &quot;www.example.com&quot;,</span>
+<span class="c1">#          &quot;users&quot;    : [&quot;user1&quot;, &quot;user2&quot;]</span>
+<span class="c1">#          }</span>
+<span class="c1">#      }</span>
+<span class="c1">#</span>
+<span class="c1">#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string</span>
+
+
+<span class="c1"># 2. New-line separated (Legacy)</span>
+<span class="c1">#    ---------------------------</span>
+<span class="c1">#</span>
+<span class="c1">#    This format allows for specifying inputs as key-value pairs, separated</span>
+<span class="c1">#    by a new line. It let&#39;s us create quick and easy inputs that is properly</span>
+<span class="c1">#    formatted for the request. The primary purpose of this format is to retain</span>
+<span class="c1">#    backwards compatibility.</span>
+<span class="c1">#</span>
+<span class="c1">#    Note: This format does not support complex data structures such as lists</span>
+<span class="c1">#          or nested Key-value pairs.</span>
+<span class="c1">#</span>
+<span class="c1">#    Example:</span>
+<span class="c1">#    -------- </span>
+<span class="c1">#      inputs.rest_api_body = &quot;&quot;&quot;</span>
+<span class="c1">#      name : user1</span>
+<span class="c1">#      password : p@ssword1</span>
+<span class="c1">#      role : admin</span>
+<span class="c1">#      &quot;&quot;&quot;             </span>
+<span class="c1"># </span>
+<span class="c1">#      inputs.rest_api_headers = &quot;&quot;&quot;</span>
+<span class="c1">#      Content-Type: application/json</span>
+<span class="c1">#      X-Frooble: Baz</span>
+<span class="c1">#      Authorization: {{auth_header}}</span>
+
+<span class="c1">#                                                     =============</span>
+<span class="c1">#                                                      REUSABILITY</span>
+<span class="c1">#                                                     =============</span>
+
+<span class="c1"># The function can be reused to make multiple requests to an endpoint or even access </span>
+<span class="c1"># multiple endpoints. This can be achieved by simply modifying the pre-processing script</span>
+<span class="c1"># as per the request and the endpoint.</span>
+
+
+
+
+<span class="c1"># ======================================================================================================================== #</span>
+<span class="c1">#                                                    ================                                                      #</span>
+<span class="c1">#                                                     AUTHENTICATION                                                       #</span>
+<span class="c1">#                                                    ================                                                      #</span>
+<span class="c1"># ======================================================================================================================== #</span>
+
+<span class="c1"># The Call REST API function offers support for various authentication protocols that can be employed alongside the REST</span>
+<span class="c1"># request. These authentication methods are entirely voluntary. If the endpoint does not necessitate any form of </span>
+<span class="c1"># authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication</span>
+<span class="c1"># process.</span>
+
+<span class="c1"># Note: All input parameters should either be set to None or must be removed if not being used for authentication.</span>
+
+<span class="c1">#                                                     ============= </span>
+<span class="c1">#                                                       OAuth 2.0   </span>
+<span class="c1">#                                                     ============= </span>
+
+<span class="c1"># OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint</span>
+<span class="c1"># to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different</span>
+<span class="c1"># flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and </span>
+<span class="c1"># possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the </span>
+<span class="c1"># Authentication flow, as mentioned below.</span>
+
+<span class="c1"># Note:   The exact implementation details of OAuth2 can vary depending on the</span>
+<span class="c1">#         authorization server and the API you are integrating with. Make sure</span>
+<span class="c1">#         to consult the OAuth2 documentation specific to the service you are</span>
+<span class="c1">#         working with.</span>
+
+<span class="c1"># Method 1: REFRESH_TOKEN</span>
+<span class="c1">#</span>
+<span class="c1">#     It is a credential that is used to obtain a new access token from the</span>
+<span class="c1">#     authorization server when the original access token expires. It is an integral</span>
+<span class="c1">#     part of the OAuth 2.0 protocol and enables long-lived access to protected </span>
+<span class="c1">#     resources without requiring the user to repeatedly authenticate. This can </span>
+<span class="c1">#     be used for prolonged authentication as using a REFRESH_TOKEN generally extends</span>
+<span class="c1">#     the validity of the token. Client ID, Client secret, Redirect URI and token URL</span>
+<span class="c1">#     might also have to be provided.</span>
+<span class="c1">#</span>
+<span class="c1">#     Note: On successfully completing a `refresh-token` flow, the existing client properties are</span>
+<span class="c1">#           updated with the newly fetched values. This means that this client can be used to fetch</span>
+<span class="c1">#           new tokens and values virtually indefinitely.</span>
+
+<span class="c1"># Method 2: CLIENT-CREDENTIALS</span>
+<span class="c1">#</span>
+<span class="c1">#     Client Credentials Flow doesn&#39;t involve user authentication, and it is suitable</span>
+<span class="c1">#     for scenarios where the client is a confidential client, meaning it can keep it&#39;s</span>
+<span class="c1">#     client credentials (client ID and client secret) secure.</span>
+<span class="c1">#</span>
+<span class="c1">#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,</span>
+<span class="c1">#           the existing client properties are updated with the newly fetched values. This means</span>
+<span class="c1">#           the client goes from `Client-Credentials Flow` to `Refresh-Token flow` moving forward.</span>
+<span class="c1">#           This means that this client can be used to fetch new tokens and values virtually</span>
+<span class="c1">#           indefinitely.</span>
+
+<span class="c1"># Method 3: AUTHORIZATION (CODE):</span>
+<span class="c1">#</span>
+<span class="c1">#     The authorization server redirects the user back to address specified on the </span>
+<span class="c1">#     redirect URI with an authorization CODE. This CODE is a temporary token</span>
+<span class="c1">#     that represents the user&#39;s authorization and usually can be used only once.</span>
+<span class="c1">#     This function exchanges the authorization code for an ACCESS_TOKEN (and </span>
+<span class="c1">#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making</span>
+<span class="c1">#     a request to the authorization server&#39;s token endpoint, providing the </span>
+<span class="c1">#     authorization CODE, client ID, client secret, token URL and redirect URI.</span>
+<span class="c1">#</span>
+<span class="c1">#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,</span>
+<span class="c1">#           the existing client properties are updated with the newly fetched values. This means</span>
+<span class="c1">#           the client goes from `Authorization Flow` to `Refresh-Token flow` moving forward.</span>
+<span class="c1">#           This means that this client can be used to fetch new tokens and values virtually</span>
+<span class="c1">#           indefinitely.</span>
+
+<span class="c1"># Method 4: ACCESS_TOKEN</span>
+<span class="c1">#</span>
+<span class="c1">#      If an ACCESS_TOKEN is available, it can be directly used without having to </span>
+<span class="c1">#      perform authentication. In order to use the ACCESS_TOKEN, all that is required</span>
+<span class="c1">#      is the ACCESS_TOKEN &amp; the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the</span>
+<span class="c1">#      DEFAULT_TOKEN_TYPE (bearer) is used.</span>
+
+<span class="c1"># URL for the Authorization server endpoint</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_token_url</span>     <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Identifies the client application</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_client_id</span>     <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Authenticates the client application (required for certain grant types)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_client_secret</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># The redirect URI used during the authorization flow (for authorization code grant)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_redirect_uri</span>  <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Set of permissions granted by the resource owner (user) to the client application</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_scope</span>         <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Provides information to the client application about the token&#39;s characteristics. </span>
+<span class="c1"># Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_token_type</span>    <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Resultant token of the Authentication process</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_access_token</span>  <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># The authorization code received during the authorization flow (for authorization code grant)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_code</span>          <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># The refresh token used to obtain a new access token (for refresh token grant)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_refresh_token</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Specifies methods through which applications can gain Access Tokens. </span>
+<span class="c1"># Commonly used grant_types are : implicit, authorization_code, client_credentials, password.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">oauth_grant_type</span>    <span class="o">=</span> <span class="kc">None</span>
+
+
+
+<span class="c1">#                                     ==============================================          </span>
+<span class="c1">#                                      Client-side authentication with certificates</span>
+<span class="c1">#                                     ==============================================        </span>
+
+<span class="c1"># Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to</span>
+<span class="c1"># verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS</span>
+<span class="c1"># authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).</span>
+<span class="c1"># However, with client-side authentication, the client also presents a digital certificate to the server for verification.</span>
+
+<span class="c1"># Note:   Client-side authentication with certificates provides an extra layer of</span>
+<span class="c1">#         security by ensuring that the client is trusted and authenticated before</span>
+<span class="c1">#         allowing access to sensitive resources or data. And so this can be used </span>
+<span class="c1">#         in tandem with other authentication methods</span>
+
+<span class="c1"># 1. Client Authentication Certificate (client_auth_cert):</span>
+<span class="c1">#</span>
+<span class="c1">#    A client authentication certificate, also known as a client certificate,</span>
+<span class="c1">#    is a digital certificate that is issued to the client (user or device) as</span>
+<span class="c1">#    part of the mutual authentication process. It contains the client&#39;s public</span>
+<span class="c1">#    key, identifying information (such as the client&#39;s name or ID), and is</span>
+<span class="c1">#    signed by a trusted Certificate Authority (CA) or a self-signed certificate</span>
+<span class="c1">#    if it is a closed system.</span>
+
+<span class="c1"># 2. Client Authentication Private Key (client_auth_key):</span>
+<span class="c1">#</span>
+<span class="c1">#    Private key is a cryptographic key that corresponds to the client&#39;s public</span>
+<span class="c1">#    key in the client authentication certificate. The private key is securely</span>
+<span class="c1">#    stored by the client and kept confidential. During the SSL/TLS handshake,</span>
+<span class="c1">#    when the server sends a challenge to the client, the client uses its </span>
+<span class="c1">#    private key to decrypt the challenge and generate a response. </span>
+<span class="c1">#    The server then verifies this response to ensure that the client possesses</span>
+<span class="c1">#    the corresponding private key and is thus authenticated.</span>
+
+<span class="c1"># 3. Client Authentication PEM (client_auth_pem): </span>
+<span class="c1"># </span>
+<span class="c1">#    This is simply the file format used to store both the client authentication</span>
+<span class="c1">#    certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM</span>
+<span class="c1">#    files are a common format for storing cryptographic objects, such as</span>
+<span class="c1">#    certificates and private keys, in a human-readable and ASCII-encoded format.</span>
+
+<span class="c1"># Note:   The client authentication certificate and private key are commonly given</span>
+<span class="c1">#         together, whereas the PEM file is typically provided separately as an </span>
+<span class="c1">#         independent file.</span>
+
+
+<span class="c1"># INPUT FORMAT:</span>
+<span class="c1"># -------------</span>
+<span class="c1">#</span>
+<span class="c1">#    The information within these certificates can be directly copied and pasted as</span>
+<span class="c1">#    plain text into the appropriate certificate type, enclosed within quotation marks.</span>
+<span class="c1">#    When making an API call, the application should automatically generate the</span>
+<span class="c1">#    certificates using the pasted content and will securely discard them upon execution.</span>
+<span class="c1">#    The contents of the certificate/key must always be unencrypted.</span>
+<span class="c1">#</span>
+<span class="c1">#    All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the</span>
+<span class="c1">#    same input format, as shown below.</span>
+<span class="c1">#</span>
+<span class="c1">#   inputs.client_auth_cert = &quot;&quot;&quot;</span>
+<span class="c1">#       -----BEGIN CERTIFICATE-----</span>
+<span class="c1">#       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G</span>
+<span class="c1">#       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E</span>
+<span class="c1">#       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56</span>
+<span class="c1">#       OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq</span>
+<span class="c1">#       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ</span>
+<span class="c1">#       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ</span>
+<span class="c1">#       Y20A9hExGKyHns4hW5KgvA==</span>
+<span class="c1">#       -----END CERTIFICATE-----</span>
+<span class="c1">#       &quot;&quot;&quot;</span>
+
+<span class="c1"># .CSR file contents to be pasted. Requires client_auth_key to function. Content must be unencrypted.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">client_auth_cert</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># .KEY file contents to be pasted. To be provided with client_auth_cert. Content must be unencrypted.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">client_auth_key</span>  <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># .PEM file contents to be pasted. Standalone attribute, does not require the above two attribute. Content must be unencrypted.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">client_auth_pem</span>  <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1">#                                                         =======             </span>
+<span class="c1">#                                                           JWT               </span>
+<span class="c1">#                                                         =======             </span>
+
+<span class="c1"># JWT is also a supported form of authentication. The application has functionality builtin</span>
+<span class="c1"># that allows for the creation, compilation, and manipulation of JWTs. It can accept several</span>
+<span class="c1"># optional parameters to customize the authentication process.</span>
+
+<span class="c1"># JWT based authentication can be performed in 2 ways:</span>
+
+<span class="c1"># 1. This application can function with a predefined jwt token. A fully generated JWT </span>
+<span class="c1"># token can be directly provided, and the application will automatically form the REST</span>
+<span class="c1"># headers required for a request.</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">jwt_token</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># 2. This application can also generate a jwt token. (Skip if you have already specified </span>
+<span class="c1"># a jwt_token). The application can automatically compile a jwt token using certain </span>
+<span class="c1"># parameters which can be provided in json string or line separated format (similar to</span>
+<span class="c1"># REST body/header/cookies). These arguments are usually provided by the endpoint itself.</span>
+<span class="c1"># The application should be able to create and sign a JWT and automatically incorporate it</span>
+<span class="c1"># into the REST request.</span>
+
+<span class="c1"># headers of the JWT, contains metadata about the token.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jwt_headers</span>   <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Payload to be included in the token. </span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jwt_payload</span>   <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># key used for signing the JWT.</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jwt_key</span>       <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Encryption algorithm used for encoding the JWT. Defaults to &quot;HS256&quot; algorithm</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jwt_algorithm</span> <span class="o">=</span> <span class="kc">None</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>API Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>REST API (PB)</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pb_rest_api</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_rsa_netwitness/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Resilient Circuits Components for function: fn_rsa_netwitness</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_remedy/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">fn_remedy</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">REST API Functions for SOAR</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents  <!-- omit in toc --></a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#function-rest-api">Function - REST API</a></li>
+<li><a class="reference internal" href="#input-considerations">Input Considerations</a><ul>
+<li><a class="reference internal" href="#sensitive-information-using-app-secrets">Sensitive information using App Secrets</a></li>
+<li><a class="reference internal" href="#format">Format:</a><ul>
+<li><a class="reference internal" href="#example">Example:  <!-- omit in toc --></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#input-format">Input format</a><ul>
+<li><a class="reference internal" href="#json-format">1. JSON format:</a><ul>
+<li><a class="reference internal" href="#id1">Example:  <!-- omit in toc --></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hint">Hint: <!-- omit in toc --></a><ul>
+<li><a class="reference internal" href="#id2">Example: <!-- omit in toc --></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#new-line-separated-legacy-format">2. New-line separated (Legacy) format:</a><ul>
+<li><a class="reference internal" href="#note">Note:  <!-- omit in toc --></a></li>
+<li><a class="reference internal" href="#id3">Example:  <!-- omit in toc --></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#retry-mechanism">Retry Mechanism</a><ul>
+<li><a class="reference internal" href="#retry-tries-rest-retry-tries">1. RETRY TRIES (rest_retry_tries)</a></li>
+<li><a class="reference internal" href="#retry-delay-rest-retry-delay">2. RETRY DELAY (rest_retry_delay)</a></li>
+<li><a class="reference internal" href="#retry-backoff-rest-retry-backoff">3. RETRY BACKOFF (rest_retry_backoff)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#attachments">Attachments</a><ul>
+<li><a class="reference internal" href="#request-format">REQUEST FORMAT</a></li>
+<li><a class="reference internal" href="#file-bundled-as-a-multipart-form-data">1. file bundled as a multipart/form-data:</a></li>
+<li><a class="reference internal" href="#file-bundled-as-request-body">2. file bundled as request body:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#authentication">Authentication</a><ul>
+<li><a class="reference internal" href="#oauth-2-0">OAuth 2.0</a><ul>
+<li><a class="reference internal" href="#method-1-using-code">Method 1: Using CODE:</a></li>
+<li><a class="reference internal" href="#method-2-using-refresh-token">Method 2: Using REFRESH_TOKEN</a></li>
+<li><a class="reference internal" href="#method-3-using-access-token">Method 3: Using ACCESS_TOKEN</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#client-side-authentication-with-certificates">Client-side authentication with certificates</a><ul>
+<li><a class="reference internal" href="#client-authentication-certificate-client-auth-cert">1. Client Authentication Certificate (client_auth_cert)</a></li>
+<li><a class="reference internal" href="#client-authentication-private-key-client-auth-key">2. Client Authentication Private Key (client_auth_key)</a></li>
+<li><a class="reference internal" href="#client-authentication-pem-client-auth-pem">3. Client Authentication PEM (client_auth_pem)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#input-formats">Input Formats:</a></li>
+<li><a class="reference internal" href="#json-web-token-authentication">JSON Web Token Authentication</a><ul>
+<li><a class="reference internal" href="#using-endpoint-provided-token">1. Using Endpoint provided token</a></li>
+<li><a class="reference internal" href="#compiling-a-token-using-jwt-parameters">2. Compiling a Token using JWT parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

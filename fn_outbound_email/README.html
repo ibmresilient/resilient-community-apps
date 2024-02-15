@@ -1,0 +1,1763 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="fn_pa_panorama" href="../fn_pa_panorama/README.html" /><link rel="prev" title="fn_odbc_query" href="../fn_odbc_query/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Outbound Email - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="outbound-email">
+<h1>Outbound Email<a class="headerlink" href="#outbound-email" title="Link to this heading">#</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#v2_0-changes"><span class="xref myst">v2.0 Changes</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#2_0-changes"><span class="xref myst">2.0 Changes</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---outbound-email-send-email"><span class="xref myst">Function - Outbound Email: Send Email</span></a></p></li>
+<li><p><a class="reference internal" href="#function---outbound-email-send-email-2"><span class="xref myst">Function - Outbound Email: Send Email 2</span></a></p></li>
+<li><p><a class="reference internal" href="#script---save-outbound-email-results"><span class="xref myst">Script - Save Outbound Email Results</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---email-conversations"><span class="xref myst">Data Table - Email Conversations</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#enhancements-for-multiple-templates-and-attachment--notes-inclusion"><span class="xref myst">Enhancements for Multiple Templates and Attachment &amp; Notes Inclusion</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<!--
+  Specify all changes in this release. Do not remove the release
+  notes of a previous release
+-->
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>v2.1.0</p></td>
+<td><p>5/2023</p></td>
+<td><p>Added message signing and encryption capabilities. Replaced workflows with playbooks</p></td>
+</tr>
+<tr class="row-odd"><td><p>v2.0.2</p></td>
+<td><p>12/2022</p></td>
+<td><p>Bug fix when specifying your own default template</p></td>
+</tr>
+<tr class="row-even"><td><p>v2.0.1</p></td>
+<td><p>10/2022</p></td>
+<td><p>Bug fix</p></td>
+</tr>
+<tr class="row-odd"><td><p>v2.0.0</p></td>
+<td><p>10/2022</p></td>
+<td><p>Added OAuth 2.0 support for SMTP. Multiple out of box changes</p></td>
+</tr>
+<tr class="row-even"><td><p>v1.3.1</p></td>
+<td><p>1/2022</p></td>
+<td><p>Bug fixes for get_datatable function in template_helper.py</p></td>
+</tr>
+<tr class="row-odd"><td><p>v1.3.0</p></td>
+<td><p>7/2021</p></td>
+<td><p>Username in app.config does not need to be an email</p></td>
+</tr>
+<tr class="row-even"><td><p>v1.2.1</p></td>
+<td><p>5/2021</p></td>
+<td><p>Bug fix for python 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>v1.2.0</p></td>
+<td><p>4/2021</p></td>
+<td><p>Added capability for task attachments</p></td>
+</tr>
+<tr class="row-even"><td><p>v1.1.1</p></td>
+<td><p>2/2021</p></td>
+<td><p>Bug fixes associated with sending attachments</p></td>
+</tr>
+<tr class="row-odd"><td><p>v1.1.0</p></td>
+<td><p>10/2020</p></td>
+<td><p>Bug fixes and send all or specific attachments</p></td>
+</tr>
+<tr class="row-even"><td><p>v1.0.9</p></td>
+<td><p>5/2020</p></td>
+<td><p>Edge Gateway (formerly App Host) compatibility</p></td>
+</tr>
+<tr class="row-odd"><td><p>v1.0.8</p></td>
+<td><p>4/2020</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="changes">
+<h3>2.1 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h3>
+<p>In v2.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
+<p>If upgrading from a previous release, you’ll notice that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it’s corresponding rule, but with “(PB)” added at the end.</p>
+<p>You can continue to use the rules/workflows.
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.</p>
+<p>Finally, the following Playbooks use an activation form field <code class="docutils literal notranslate"><span class="pre">Template</span> <span class="pre">(mail_template_select)</span></code> which needs to be modified manually to list the labels used for templates specified in app.config:</p>
+<ul class="simple">
+<li><p>Outbound Email Reply to Message (PB)</p></li>
+<li><p>Send Incident Email HTML2 (PB) Example</p></li>
+<li><p>Send Task Email HTML2 (PB) Example</p></li>
+</ul>
+</section>
+<section id="v2-0-changes">
+<h3>v2.0 Changes<a class="headerlink" href="#v2-0-changes" title="Link to this heading">#</a></h3>
+<p>Version 2.0 represents a comprehensive set of changes to make the use of outbound email more out-the-box
+with inbound mail. This release incorporates many changes which are summarized here:</p>
+<ul class="simple">
+<li><p>Unified display of inbound emails with outbound email through a datatable. See <a class="reference internal" href="#script---outbound-email-results"><span class="xref myst">Script - Outbound Email Results</span></a> and [Datatable - Email Conversations].(#datatable—email-conversations).</p></li>
+<li><p>Auto modification of the Email tab to include email conversations datatable.</p></li>
+<li><p>Multiple template support defined in the app.config file.</p></li>
+<li><p>Expanded template capability supporting notes, artifacts and links back to SOAR. See <a class="reference internal" href="#enhancements-for-multiple-templates-and-attachment--notes-inclusion"><span class="xref myst">Enhancements for Multiple Templates and Attachment &amp; Notes Inclusion</span></a>.</p></li>
+<li><p>Additional header available for outbound email (i.e. message-id, in-reply-to, importance).</p></li>
+<li><p>A new function to preserve the original outbound email capability and allow all the new functionality in
+v2.0 to be added. See <a class="reference internal" href="#function---outbound-email-send-email2"><span class="xref myst">Function - Outbound Email: Send Email2</span></a>.</p></li>
+<li><p>OAuth authentication</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+<p><strong>IBM QRadar SOAR app for Outbound Email</strong></p>
+<p><img alt="screenshot: main" src="../_images/main34.png" /></p>
+<p>The Outbound Email App for IBM SOAR provides a way of sending email from the SOAR platform. The email message contains information about the incident that the email action was performed on.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<!--
+  List the Key Features of the Integration
+-->
+<p>The Outbound Email App provides the following functionality:</p>
+<ul class="simple">
+<li><p>Send email to lists of recipients (to, cc, bcc).</p></li>
+<li><p>Format email using a predefined html template or specify your own template.</p></li>
+<li><p>Send attachments with the email at the incident level or task level.</p></li>
+<li><p>Example rules included at the incident and task levels.</p></li>
+</ul>
+<p>New in version 2.0</p>
+<ul class="simple">
+<li><p>Ability to reference additional email headers: message-id, importance, in-reply-to.</p></li>
+<li><p>Define multiple templates from the app.config file.</p></li>
+<li><p>Capture outbound email conversations including both inbound and outbound messages.</p></li>
+<li><p>Expanded template support to include artifact, notes and SOAR links (case and task).</p></li>
+<li><p>Support for OAuth authentication.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<!--
+  List any Requirements
+-->
+<p>This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.0</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.0</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<ul>
+<li><p>Org Data: Read and Edit</p></li>
+<li><p>Incident: Read</p></li>
+<li><p>Functions: Read</p></li>
+<li><p>Layout: Read, Update</p></li>
+</ul>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= 1.9.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<p>The app <strong>does not</strong> support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<p>Python 2.7, 3.6 and 3.9 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>Jinja2&gt;=2.9.6</p></li>
+<li><p>resilient_circuits&gt;=39.0.0</p></li>
+<li><p>resilient_lib&gt;=32.0.0</p></li>
+<li><p>six</p></li>
+<li><p>BeautifulSoup</p></li>
+<li><p>python-smail</p></li>
+<li><p>cryptography</p></li>
+</ul>
+<section id="prerequisites">
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+<section id="basic-authentication">
+<h5>Basic Authentication<a class="headerlink" href="#basic-authentication" title="Link to this heading">#</a></h5>
+<ul class="simple">
+<li><p>A password is required for the SMTP server.</p></li>
+</ul>
+</section>
+<section id="oauth-2-0-authorization">
+<h5>OAuth 2.0 Authorization<a class="headerlink" href="#oauth-2-0-authorization" title="Link to this heading">#</a></h5>
+<ul class="simple">
+<li><p>You need to setup a web application for an OAuth 2.0 SMTP identity provider service from which you get the required configuration settings to use OAuth 2.0 authorization.</p></li>
+<li><p>The required settings are:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">client_id</span>
+<span class="n">client_secret</span>
+<span class="n">scope</span>
+<span class="n">token_url</span>
+<span class="n">auth_url</span>
+</pre></div>
+</div>
+<p>These values are used to generate a refresh_token which is used by the SOAR app to generate an access token.</p>
+</section>
+<section id="configuration">
+<h5>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h5>
+<!--
+List any steps that are needed to configure the endpoint to use this app.
+-->
+</section>
+<section id="id1">
+<h5>OAuth 2.0 Authorization<a class="headerlink" href="#id1" title="Link to this heading">#</a></h5>
+<ul class="simple">
+<li><p>Setup a web app and note the prerequisite settings above and add them to the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> for the app.</p></li>
+</ul>
+</section>
+<section id="authorize">
+<h5>Authorize<a class="headerlink" href="#authorize" title="Link to this heading">#</a></h5>
+<ul class="simple">
+<li><p>Use the settings to create an authorization code URL similar to the following example:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">https://smtpservice.com/oauth2/auth?state=123456abcde&amp;scope=https%3A%2F%2Fmail.smtpservice.com%2F&amp;client_id=123&amp;response_type=code&amp;response_mode=query&amp;redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Fcallback</span></code></p>
+<ul class="simple">
+<li><p>To authorize a token, copy the URL into a browser login as the app user and follow the directions. After the user gets authorized for the web app you will eventually end up with a redirect or callback URL in the browser location window similar to the following.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">https://localhost:8080/callback?state=123456abcde&amp;code=123456&amp;scope=https://mail.smtpservice.com/</span></code></p>
+<ul class="simple">
+<li><p>The user should verify that the state value matches the one it sent to the authorization server to help prevent any malicious attacks.</p></li>
+</ul>
+</section>
+<section id="fetch-the-tokens">
+<h5>Fetch the tokens<a class="headerlink" href="#fetch-the-tokens" title="Link to this heading">#</a></h5>
+<ul class="simple">
+<li><p>Exchange the authorization code for an access and refresh token.</p></li>
+</ul>
+<p>The user sends an HTTP POST request to the authorization server’s token endpoint with the following values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">.</span><span class="n">authorization</span><span class="o">-</span><span class="n">server</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">token</span>
+  <span class="n">grant_type</span><span class="o">=</span><span class="n">authorization_code</span>
+  <span class="o">&amp;</span><span class="n">code</span><span class="o">=</span><span class="mi">123456</span>
+  <span class="o">&amp;</span><span class="n">redirect_uri</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span><span class="n">callback</span>
+  <span class="o">&amp;</span><span class="n">client_id</span><span class="o">=</span><span class="mi">123</span>
+  <span class="o">&amp;</span><span class="n">client_secret</span><span class="o">=</span><span class="mi">456</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If the authorization code is valid, the authorization generates an access and refresh token and returns them to the client.</p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;abcdefg1234567&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;expires_in&#39;</span><span class="p">:</span> <span class="mi">3599</span><span class="p">,</span>
+  <span class="s1">&#39;refresh_token&#39;</span><span class="p">:</span> <span class="s1">&#39;hijklmn89123456&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;scope&#39;</span><span class="p">:</span> <span class="s1">&#39;https://mail.smtpservice.com/&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;token_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Bearer&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add the refresh token to the app.config for the SOAR app.</p></li>
+</ul>
+</section>
+<section id="using-oauth-utils-package">
+<h5>Using oauth-utils package<a class="headerlink" href="#using-oauth-utils-package" title="Link to this heading">#</a></h5>
+<p>Instead of using the manual steps outlined above, the user can simplify the process by using the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token. The oauth-utils package includes setup examples for some popular email providers.</p>
+</section>
+</section>
+<section id="permissions">
+<h4>Permissions<a class="headerlink" href="#permissions" title="Link to this heading">#</a></h4>
+<!--
+List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
+-->
+<ul class="simple">
+<li><p>The user must have permission or authorization to send messages using the SMTP protocol.</p></li>
+</ul>
+<p><strong><em>NOTE:</em></strong> The SMTP user will use either OAuth 2.0 authorization settings or use a password for basic authentication.</p>
+<p>For Google with OAuth2 see: <a class="reference external" href="https://support.google.com/cloud/answer/6158849?hl=en">Setting up OAuth 2.0 with Google Cloud</a>.</p>
+<p>For Microsoft with OAuth2 see: <a class="reference external" href="https://docs.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth">Using OAuth 2.0 with Microsoft for Office 365 users</a>.</p>
+<p>For the oauth-utils package see <a class="reference external" href="https://github.com/ibmresilient/resilient-community-apps">IBM Resilient Community</a> or <a class="reference external" href="https://exchange.xforce.ibmcloud.com">IBM X-Force App Exchange</a>.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>smtp_server</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xxx.xxx.xxx.xxx</span></code></p></td>
+<td><p><em>IP Address or fully qualified domain name for SMTP server.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>smtp_user</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a&#64;mail.smtpservice.com</span></code></p></td>
+<td><p><em>SMTP authentication user.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>smtp_password</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Abcd1234!</span></code></p></td>
+<td><p><em>SMTP basic authentication user password.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>client_id</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1234567a-abc8-90d1-2efa3-123456789abcd</span></code></p></td>
+<td><p><em>SMTP OAuth 2.0 Authorization client ID</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>client_secret</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ABCDEF-123456789abcd123456789a_aWX4</span></code></p></td>
+<td><p><em>SMTP OAuth 2.0 Authorization client secret.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>scope</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://mail.smtpservice.com/</span></code></p></td>
+<td><p><em>SMTP OAuth 2.0 Authorization scope.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>token_url</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://smtpservice.com/oauth2/token</span></code></p></td>
+<td><p><em>SMTP OAuth 2.0 Authorization token URL.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>auth_url</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://smtpservice.com/oauth2/auth</span></code></p></td>
+<td><p><em>SMTP OAuth 2.0 Authorization authorization URL.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>refresh_token</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>``</p></td>
+<td><p><em>SMTP OAuth 2.0 Authorization refresh token.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>from_email_address</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a&#64;example.com</span></code></p></td>
+<td><p><em>Introduced in 1.3.0. Email address for use as email sender.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>smtp_port</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">25</span></code></p></td>
+<td><p><em>Defaults to unauthenticated, 587/2525 for TLS.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>smtp_conn_timeout</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">20</span></code></p></td>
+<td><p><em>Timeout value in seconds to wait for a connection.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>smtp_ssl_mode</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p><em>Set to ‘starttls’ when using smtp_user and smtp_password.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>smtp_ssl_cafile</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span> <span class="pre">or</span> <span class="pre">/path/to/smtp_certificate.pem</span> <span class="pre">or</span> <span class="pre">crt</span> <span class="pre">file</span></code></p></td>
+<td><p><em>TLS certificate setting. Can be a path to a CA bundle or ‘false’.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>template_file</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data/example_send_email.jinja</span></code></p></td>
+<td><p><em>Path to template.jinja for rendering the email body.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>enable_email_conversations</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true/false</span></code></p></td>
+<td><p>*enhance the ‘email’ tab with email conversation fields and datatable *</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>p12_signing_cert</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/path/to/signing_encrypting_cert.p12</span></code></p></td>
+<td><p>certificate for email signing. In p12 format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>p12_signing_cert_password</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$USE_PRIVATE_SECRET</span></code></p></td>
+<td><p>password, if any, needed to  unlock private key</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="p12-signing-and-unencrypting-certificates">
+<h4>P12 Signing and Unencrypting Certificates<a class="headerlink" href="#p12-signing-and-unencrypting-certificates" title="Link to this heading">#</a></h4>
+<p>The signing and unencrypting certificates are bundled in the pkcs12 format which includes both the email sender’s private key and public certificate needed for signing emails.
+The public certificate needs to have the <code class="docutils literal notranslate"><span class="pre">emailProtection</span></code> trust in order to be used for signing.</p>
+<p>It should be noted that this same pkcs12 bundle should be added to the recipients’ email client app. Adding the certificate allows the email client to verify the sender’s email digital signature. If using a self-signed CA certificate with your email certificate, make sure to also add the CA certificate to each recipient’s CA trust store.</p>
+<p>Each mail client has it’s own way of importing email certificates. Consult your application’s documentation on how to configure those certificates. Below is how  the Thunderbird Email Client imports email certificates used for both email signature verification and for unencrypting recipient emails.</p>
+<p><img alt="screenshot: fn-send-email " src="../_images/p12_certificates.png" /></p>
+<p>When the certificates are properly imported, your emails will have some indication that the digital signature is verified and, if encrypted, that the message was successfully unencrypted.</p>
+<p><img alt="screenshot: fn-send-email " src="../_images/signed_and_encrypted_email.png" /></p>
+</section>
+<section id="notes">
+<h4>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.</p></li>
+<li><p>The auth_url setting is optional and is not used by the SOAR app itself. It can be used by the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.</p></li>
+<li><p>For customers upgrading from a pervious release, the app.config file must be manually edited.</p></li>
+<li><p>For App Host, the file referenced in <code class="docutils literal notranslate"><span class="pre">p12_signing_encrypting_cert</span></code> needs to be in base64 format.</p></li>
+</ul>
+<p>For the oauth-utils package see <a class="reference external" href="https://github.com/ibmresilient/resilient-community-apps">IBM Resilient Community</a>  or <a class="reference external" href="https://exchange.xforce.ibmcloud.com">IBM X-Force App Exchange</a>.</p>
+</section>
+</section>
+<section id="id2">
+<h3>2.0 Changes<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>In v2.0, an additional section, <code class="docutils literal notranslate"><span class="pre">[fn_outbound_email:templates]</span></code>, is added to track the use of multiple templates. These templates are automatically added to the mail_template_select rule activity field used within the example rules. For MSSP environments, this automatic update capability will not work. It’s recommended that your playbook or workflow use a <code class="docutils literal notranslate"><span class="pre">text</span></code> activity field instead for template name input.</p>
+<p>Below is the section and it’s definitions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_outbound_email</span><span class="p">:</span><span class="n">templates</span><span class="p">]</span>
+<span class="c1">## specify templates for email processing. These templates are added to the mail_template_select activity field</span>
+<span class="c1">#   choose a label which will identify the template to use</span>
+<span class="c1">#labelA=/path/to/template.jinja</span>
+<span class="c1">#labelB=/path/to/another_template.jinja</span>
+</pre></div>
+</div>
+<p>When upgrading from previous outbound email app versions, please add this section information to your app.config file manually.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-outbound-email-send-email">
+<h2>Function - Outbound Email: Send Email<a class="headerlink" href="#function-outbound-email-send-email" title="Link to this heading">#</a></h2>
+<p>Send a plain text or HTML-formatted email with SOAR Incident details in the email body as well as incident attachments added to this outgoing email.</p>
+<p><img alt="screenshot: fn-send-email " src="../_images/fn_send_email.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_attachments</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Comma separated list of attachments or ‘*’ for all.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_bcc</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Comma separated list of bcc recipients.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_body_html</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>JINJA template file to use to produce html email content from incident data. This content overrides the use of the <code class="docutils literal notranslate"><span class="pre">template_file</span></code> setting in our app.config file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_body_text</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Already rendered email body content.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_cc</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Comma separated list of cc recipients.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_from</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Email sender.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The SOAR incident_id.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_subject</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Email subject.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_to</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Comma separated list of email recipients.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;aExample@email.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Example@email.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;[2104] example&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&lt;table width=</span><span class="se">\&quot;</span><span class="s2">100%</span><span class="se">\&quot;</span><span class="s2"> &gt;</span><span class="se">\n</span><span class="s2">&lt;tr&gt;</span><span class="se">\n</span><span class="s2">    &lt;td colspan=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">        &lt;h3 style=</span><span class="se">\&quot;</span><span class="s2">color: rgb(68,114,196)</span><span class="se">\&quot;</span><span class="s2">&gt;INCIDENT DETAILS&lt;/h3&gt;</span><span class="se">\n</span><span class="s2">        &lt;hr size=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;</span><span class="s2"> width=</span><span class="se">\&quot;</span><span class="s2">100%</span><span class="se">\&quot;</span><span class="s2"> noshade style=</span><span class="se">\&quot;</span><span class="s2">color:#FFDF57</span><span class="se">\&quot;</span><span class="s2"> align=</span><span class="se">\&quot;</span><span class="s2">center</span><span class="se">\&quot;</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">    &lt;/td&gt;</span><span class="se">\n</span><span class="s2">&lt;/tr&gt;</span><span class="se">\n</span><span class="s2">    </span><span class="se">\n\t\n</span><span class="s2">    </span><span class="se">\n</span><span class="s2">    &lt;tr&gt;</span><span class="se">\n</span><span class="s2">        &lt;td width=</span><span class="se">\&quot;</span><span class="s2">100</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">font-family: Calibri; color: rgb(31,73,125); font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;Severity:&lt;/td&gt;</span><span class="se">\n</span><span class="s2">        &lt;td style=</span><span class="se">\&quot;</span><span class="s2">font-family: Calibri; color: rgb(31,73,125)</span><span class="se">\&quot;</span><span class="s2">&gt;Low&lt;/td&gt;</span><span class="se">\n</span><span class="s2">    &lt;/tr&gt;</span><span class="se">\n</span><span class="s2">    </span><span class="se">\n</span><span class="s2">    </span><span class="se">\n\t\n</span><span class="s2">    </span><span class="se">\n</span><span class="s2">    &lt;tr&gt;</span><span class="se">\n</span><span class="s2">        &lt;td width=</span><span class="se">\&quot;</span><span class="s2">100</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">font-family: Calibri; color: rgb(31,73,125); font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;Status:&lt;/td&gt;</span><span class="se">\n</span><span class="s2">        &lt;td style=</span><span class="se">\&quot;</span><span class="s2">font-family: Calibri; color: rgb(31,73,125)</span><span class="se">\&quot;</span><span class="s2">&gt;A&lt;/td&gt;</span><span class="se">\n</span><span class="s2">    &lt;/tr&gt;</span><span class="se">\n</span><span class="s2">    &lt;br&gt;</span><span class="se">\n</span><span class="s2">    </span><span class="se">\n\t\n</span><span class="s2">    </span><span class="se">\n</span><span class="s2">    &lt;tr&gt;</span><span class="se">\n</span><span class="s2">        &lt;td width=</span><span class="se">\&quot;</span><span class="s2">100</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">font-family: Calibri; color: rgb(31,73,125); font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;Created:&lt;/td&gt;</span><span class="se">\n</span><span class="s2">        &lt;td style=</span><span class="se">\&quot;</span><span class="s2">font-family: Calibri; color: rgb(31,73,125)</span><span class="se">\&quot;</span><span class="s2">&gt;2022-01-25T14:48:32.389000&lt;/td&gt;</span><span class="se">\n</span><span class="s2">    &lt;/tr&gt;</span><span class="se">\n</span><span class="s2">    &lt;br&gt;</span><span class="se">\n</span><span class="s2">    </span><span class="se">\n\t\n</span><span class="s2">    </span><span class="se">\n</span><span class="s2">&lt;tr&gt;</span><span class="se">\n</span><span class="s2">    &lt;td colspan=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">        &lt;br&gt;&lt;h3 style=</span><span class="se">\&quot;</span><span class="s2">color: rgb(68,114,196)</span><span class="se">\&quot;</span><span class="s2">&gt;INCIDENT DESCRIPTION&lt;/h3&gt;</span><span class="se">\n</span><span class="s2">        &lt;hr size=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;</span><span class="s2"> width=</span><span class="se">\&quot;</span><span class="s2">100%</span><span class="se">\&quot;</span><span class="s2"> noshade style=</span><span class="se">\&quot;</span><span class="s2">color:#FFDF57</span><span class="se">\&quot;</span><span class="s2"> align=</span><span class="se">\&quot;</span><span class="s2">center</span><span class="se">\&quot;</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">    &lt;/td&gt;</span><span class="se">\n</span><span class="s2">    </span><span class="se">\n\t\n</span><span class="s2">    </span><span class="se">\n</span><span class="s2">&lt;/tr&gt;</span><span class="se">\n</span><span class="s2">&lt;/table&gt;</span><span class="se">\n</span><span class="s2">&lt;br&gt;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">false</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;mail_to&quot;</span><span class="p">:</span> <span class="s2">&quot;Example@email.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_incident_id&quot;</span><span class="p">:</span> <span class="mi">2104</span><span class="p">,</span>
+    <span class="s2">&quot;mail_attachments&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;mail_subject&quot;</span><span class="p">:</span> <span class="s2">&quot;[2104] example&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_body_html&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="si">% s</span><span class="s2">et NOT_FOUND = [</span><span class="se">\&quot;</span><span class="s2">Not Found!</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">-</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">None</span><span class="se">\&quot;</span><span class="s2">,None] %}</span><span class="se">\n</span><span class="s2">{% macro get_row(label,field_name) -%}</span><span class="se">\n\t</span><span class="s2">{</span><span class="si">% s</span><span class="s2">et value = template_helper.get_incident_value(incident,field_name) %}</span><span class="se">\n\t</span><span class="s2">{</span><span class="si">% s</span><span class="s2">et style = </span><span class="se">\&quot;</span><span class="s2">font-family: Calibri; color: rgb(31,73,125)</span><span class="se">\&quot;</span><span class="s2"> %}</span><span class="se">\n</span><span class="s2">    {</span><span class="si">% i</span><span class="s2">f value and value not in NOT_FOUND and not value.startswith(&#39;-&#39;) %}</span><span class="se">\n</span><span class="s2">    &lt;tr&gt;</span><span class="se">\n</span><span class="s2">        &lt;td width=</span><span class="se">\&quot;</span><span class="s2">100</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">{{style}}; font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;{{ label }}&lt;/td&gt;</span><span class="se">\n</span><span class="s2">        &lt;td style=</span><span class="se">\&quot;</span><span class="s2">{{style}}</span><span class="se">\&quot;</span><span class="s2">&gt;{{ value | striptags }}&lt;/td&gt;</span><span class="se">\n</span><span class="s2">    &lt;/tr&gt;</span><span class="se">\n</span><span class="s2">    {</span><span class="si">% e</span><span class="s2">ndif %}</span><span class="se">\n</span><span class="s2">{</span><span class="si">%- e</span><span class="s2">ndmacro %}</span><span class="se">\n</span><span class="s2">&lt;table width=</span><span class="se">\&quot;</span><span class="s2">100%</span><span class="se">\&quot;</span><span class="s2"> &gt;</span><span class="se">\n</span><span class="s2">&lt;tr&gt;</span><span class="se">\n</span><span class="s2">    &lt;td colspan=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">        &lt;h3 style=</span><span class="se">\&quot;</span><span class="s2">color: rgb(68,114,196)</span><span class="se">\&quot;</span><span class="s2">&gt;INCIDENT DETAILS&lt;/h3&gt;</span><span class="se">\n</span><span class="s2">        &lt;hr size=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;</span><span class="s2"> width=</span><span class="se">\&quot;</span><span class="s2">100%</span><span class="se">\&quot;</span><span class="s2"> noshade style=</span><span class="se">\&quot;</span><span class="s2">color:#FFDF57</span><span class="se">\&quot;</span><span class="s2"> align=</span><span class="se">\&quot;</span><span class="s2">center</span><span class="se">\&quot;</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">    &lt;/td&gt;</span><span class="se">\n</span><span class="s2">&lt;/tr&gt;</span><span class="se">\n</span><span class="s2">    {{ get_row(&#39;Severity:&#39;,&#39;severity_code&#39;) }}</span><span class="se">\n</span><span class="s2">    {{ get_row(&#39;Status:&#39;,&#39;plan_status&#39;) }}&lt;br&gt;</span><span class="se">\n</span><span class="s2">    {{ get_row(&#39;Created:&#39;,&#39;create_date&#39;) }}&lt;br&gt;</span><span class="se">\n</span><span class="s2">    {{ get_row(&#39;Category:&#39;,&#39;incident_type_ids&#39;) }}</span><span class="se">\n</span><span class="s2">&lt;tr&gt;</span><span class="se">\n</span><span class="s2">    &lt;td colspan=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">        &lt;br&gt;&lt;h3 style=</span><span class="se">\&quot;</span><span class="s2">color: rgb(68,114,196)</span><span class="se">\&quot;</span><span class="s2">&gt;INCIDENT DESCRIPTION&lt;/h3&gt;</span><span class="se">\n</span><span class="s2">        &lt;hr size=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;</span><span class="s2"> width=</span><span class="se">\&quot;</span><span class="s2">100%</span><span class="se">\&quot;</span><span class="s2"> noshade style=</span><span class="se">\&quot;</span><span class="s2">color:#FFDF57</span><span class="se">\&quot;</span><span class="s2"> align=</span><span class="se">\&quot;</span><span class="s2">center</span><span class="se">\&quot;</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">    &lt;/td&gt;</span><span class="se">\n</span><span class="s2">    {{ get_row(&#39;Description:&#39;,&#39;description&#39;) }}</span><span class="se">\n</span><span class="s2">&lt;/tr&gt;</span><span class="se">\n</span><span class="s2">&lt;/table&gt;</span><span class="se">\n</span><span class="s2">&lt;br&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_from&quot;</span><span class="p">:</span> <span class="s2">&quot;changeme@resilientsystems.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_cc&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-outbound-email&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1977</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-25 09:48:57&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">mail_to</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_to</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_cc</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_cc</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_attachments</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_attachments</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_from</span> <span class="o">=</span> <span class="s2">&quot;changeme@resilientsystems.com&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_subject</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">] </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_body_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;{</span><span class="si">% s</span><span class="s2">et NOT_FOUND = [&quot;Not Found!&quot;,&quot;-&quot;,&quot;None&quot;,None] %}</span>
+<span class="s2">{% macro get_row(label,field_name) -%}</span>
+<span class="s2">	{</span><span class="si">% s</span><span class="s2">et value = template_helper.get_incident_value(incident,field_name) %}</span>
+<span class="s2">	{</span><span class="si">% s</span><span class="s2">et style = &quot;font-family: Calibri; color: rgb(31,73,125)&quot; %}</span>
+<span class="s2">    {</span><span class="si">% i</span><span class="s2">f value and value not in NOT_FOUND and not value.startswith(&#39;-&#39;) %}</span>
+<span class="s2">    &lt;tr&gt;</span>
+<span class="s2">        &lt;td width=&quot;100&quot; style=&quot;{{style}}; font-weight:bold&quot;&gt;{{ label }}&lt;/td&gt;</span>
+<span class="s2">        &lt;td style=&quot;{{style}}&quot;&gt;{{ value | striptags }}&lt;/td&gt;</span>
+<span class="s2">    &lt;/tr&gt;</span>
+<span class="s2">    {</span><span class="si">% e</span><span class="s2">ndif %}</span>
+<span class="s2">{</span><span class="si">%- e</span><span class="s2">ndmacro %}</span>
+<span class="s2">&lt;table width=&quot;100%&quot; &gt;</span>
+<span class="s2">&lt;tr&gt;</span>
+<span class="s2">    &lt;td colspan=&quot;2&quot;&gt;</span>
+<span class="s2">        &lt;h3 style=&quot;color: rgb(68,114,196)&quot;&gt;INCIDENT DETAILS&lt;/h3&gt;</span>
+<span class="s2">        &lt;hr size=&quot;1&quot; width=&quot;100%&quot; noshade style=&quot;color:#FFDF57&quot; align=&quot;center&quot;/&gt;</span>
+<span class="s2">    &lt;/td&gt;</span>
+<span class="s2">&lt;/tr&gt;</span>
+<span class="s2">    {{ get_row(&#39;Severity:&#39;,&#39;severity_code&#39;) }}</span>
+<span class="s2">    {{ get_row(&#39;Status:&#39;,&#39;plan_status&#39;) }}&lt;br&gt;</span>
+<span class="s2">    {{ get_row(&#39;Created:&#39;,&#39;create_date&#39;) }}&lt;br&gt;</span>
+<span class="s2">    {{ get_row(&#39;Category:&#39;,&#39;incident_type_ids&#39;) }}</span>
+<span class="s2">&lt;tr&gt;</span>
+<span class="s2">    &lt;td colspan=&quot;2&quot;&gt;</span>
+<span class="s2">        &lt;br&gt;&lt;h3 style=&quot;color: rgb(68,114,196)&quot;&gt;INCIDENT DESCRIPTION&lt;/h3&gt;</span>
+<span class="s2">        &lt;hr size=&quot;1&quot; width=&quot;100%&quot; noshade style=&quot;color:#FFDF57&quot; align=&quot;center&quot;/&gt;</span>
+<span class="s2">    &lt;/td&gt;</span>
+<span class="s2">    {{ get_row(&#39;Description:&#39;,&#39;description&#39;) }}</span>
+<span class="s2">&lt;/tr&gt;</span>
+<span class="s2">&lt;/table&gt;</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Email Sent if mail server is valid/authenticated</span><span class="se">\n</span>
+<span class="s2">  &lt;br&gt;From: </span><span class="si">{0}</span><span class="s2">&lt;br&gt; To: </span><span class="si">{1}</span><span class="s2">&lt;br&gt; CC: </span><span class="si">{2}</span><span class="s2">&lt;br&gt; BCC: </span><span class="si">{3}</span><span class="s2">&lt;br&gt; Subject: </span><span class="si">{4}</span><span class="s2"> &lt;br&gt;</span>
+<span class="s2">  Body: </span><span class="si">{5}</span><span class="s2"> &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;u</span><span class="se">\&quot;</span><span class="s2">[]&quot;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;u</span><span class="se">\&quot;</span><span class="s2">[]&quot;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;u</span><span class="se">\&quot;</span><span class="s2">[]&quot;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;u</span><span class="se">\&quot;</span><span class="s2">[]&quot;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;u</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Email NOT Sent</span><span class="se">\n</span><span class="s2"> From: </span><span class="si">{0}</span><span class="se">\n</span><span class="s2"> To: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;u</span><span class="se">\&quot;</span><span class="s2">[]&quot;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;u</span><span class="se">\&quot;</span><span class="s2">[]&quot;</span><span class="p">))</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-outbound-email-send-email-2">
+<h2>Function - Outbound Email: Send Email 2<a class="headerlink" href="#function-outbound-email-send-email-2" title="Link to this heading">#</a></h2>
+<p>Send a plain text or HTML-formatted email with SOAR incident details in the email body. Additional capability exists to refer to pre-defined templates as well as add contextual email headers. This function replaces the send_email function which remains for legacy use.</p>
+<p><img alt="screenshot: fn-outbound-email-send-email-2 " src="../_images/send_email2.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_from</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>email address of the email sender. If null, then the app.config from_email_address is used.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_to</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>comma separated list of recipients</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_cc</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>comma separated list of cc recipients</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_bcc</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>comma separated list of blind cc recipients</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_subject</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_body</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>body of message sent asis</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_attachments</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>comma separated list of incident attachments</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_importance</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>specify Importance (X-Priority) header to use</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_in_reply_to</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>specify in-replay-to header to use: ex: 1638585706.2677204.1655401056967&#64;mail.com</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_inline_template</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jinja</span> <span class="pre">formatted</span> <span class="pre">document</span></code></p></td>
+<td><p>inline template as alternative to app.config mail_template_label</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_message_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>message-id header to use: ex: 1638585706.2677204.1655401056967&#64;mail.com. See pre-processor scripts for auto-generation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_template_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">template_xx</span></code></p></td>
+<td><p>The label of a specific template as defined in app.config.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail_merge_body</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Yes</span></code></p></td>
+<td><p>Flag to merge <code class="docutils literal notranslate"><span class="pre">mail_body</span></code> with either the results from <code class="docutils literal notranslate"><span class="pre">mail_line_template</span></code> or <code class="docutils literal notranslate"><span class="pre">mail_template_label</span></code>. This setting is useful when including the original email message in a reply.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_encryption_recipients</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>—–BEGIN CERTIFICATE—– … —–END CERTIFICATE—–</p></td>
+<td><p>Comma separated list of PEM formated public keys used for encrypting the message for the recipients</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>NOTE:</p>
+<ul class="simple">
+<li><p>When constructing the public certificates for message encryption, ensure to specify it will be used for email signing. Here’s an example of generating that certificate using openssl: <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">x509</span> <span class="pre">-req</span> <span class="pre">-days</span> <span class="pre">3650</span> <span class="pre">-in</span> <span class="pre">smime_user.csr</span> <span class="pre">-CA</span> <span class="pre">ca.crt</span> <span class="pre">-CAkey</span> <span class="pre">ca.key</span> <span class="pre">-set_serial</span> <span class="pre">1</span> <span class="pre">-out</span> <span class="pre">smime_user.crt</span> <span class="pre">-addtrust</span> <span class="pre">emailProtection</span> <span class="pre">-addreject</span> <span class="pre">clientAuth</span> <span class="pre">-addreject</span> <span class="pre">serverAuth</span> <span class="pre">-trustout</span></code>.</p></li>
+<li><p>Some processes for creating public certificates will use headers and trailers such as <code class="docutils literal notranslate"><span class="pre">-----BEGIN</span> <span class="pre">TRUSTED</span> <span class="pre">CERTIFICATE-----</span></code>. These will not be recognized by the software and should be edited to remove the ‘Trusted’ entry.</p></li>
+</ul>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;mail_body&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n\u003c</span><span class="s2">h2</span><span class="se">\u003e</span><span class="s2">Incident Summary</span><span class="se">\u003c</span><span class="s2">/h2</span><span class="se">\u003e\n</span><span class="s2">    Severity Code: Low</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Plan Status: A</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Created: 2022-08-05 14:03:23.441000</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Incident Type: Lost PC / laptop / tablet</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Task: </span><span class="se">\u003c</span><span class="s2">a target=</span><span class="se">\u0027</span><span class="s2">_blank</span><span class="se">\u0027</span><span class="s2"> href=</span><span class="se">\u0027</span><span class="s2">https://9.30.55.116:443/#incidents/2139?orgId=201</span><span class="se">\u0026</span><span class="s2">amp;taskId=994</span><span class="se">\u0026</span><span class="s2">amp;tabName=details</span><span class="se">\u0027\u003e</span><span class="s2">Notify carrier/ISP</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Instructions: </span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">If the lost or stolen device has cellular access, call the device service provider and notify them of the device loss.&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;mail_attachments&quot;</span><span class="p">:</span> <span class="s2">&quot;original_msg,.txt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_cc&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;mail_from&quot;</span><span class="p">:</span> <span class="s2">&quot;userA@example.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_importance&quot;</span><span class="p">:</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_incident_id&quot;</span><span class="p">:</span> <span class="mi">2139</span><span class="p">,</span>
+    <span class="s2">&quot;mail_inline_template&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n\u003c</span><span class="s2">h2</span><span class="se">\u003e</span><span class="s2">Incident Summary</span><span class="se">\u003c</span><span class="s2">/h2</span><span class="se">\u003e\n</span><span class="s2">    Severity Code: Low</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Plan Status: A</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Created: 2022-08-05 14:03:23.441000</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Incident Type: Lost PC / laptop / tablet</span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Task: </span><span class="se">\u003c</span><span class="s2">a target=</span><span class="se">\u0027</span><span class="s2">_blank</span><span class="se">\u0027</span><span class="s2"> href=</span><span class="se">\u0027</span><span class="s2">{{ template_helper.generate_task_url(2139,994) }}</span><span class="se">\u0027\u003e</span><span class="s2">Notify carrier/ISP</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">    Instructions: </span><span class="se">\n\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">If the lost or stolen device has cellular access, call the device service provider and notify them of the device loss.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_subject&quot;</span><span class="p">:</span> <span class="s2">&quot;[2139] Incident generated from email </span><span class="se">\&quot;</span><span class="s2">send -</span><span class="se">\u003e</span><span class="s2"> receive</span><span class="se">\&quot;</span><span class="s2"> via mailbox outlook Task:Notify carrier/ISP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail_to&quot;</span><span class="p">:</span> <span class="s2">&quot;userB@example.com&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3363</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-outbound-email&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-08 15:37:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">MESSAGE_ID_DOMAIN</span> <span class="o">=</span> <span class="s2">&quot;qradarsoar.ibm.com&quot;</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_to</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_to</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_cc</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_cc</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_attachments</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_attachments</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_from</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_from</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mail_subject</span> <span class="o">=</span> <span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">] </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_subject&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_subject</span>
+
+<span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_message_id&#39;</span><span class="p">):</span>
+  <span class="c1"># generate a message-id</span>
+  <span class="n">seed_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">))</span>
+  <span class="n">uuid_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">seed_value</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+  <span class="n">msg_id</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid_hash</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">20</span><span class="p">:])</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mail_message_id</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg_id</span><span class="p">,</span> <span class="n">MESSAGE_ID_DOMAIN</span><span class="p">)</span>
+  
+<span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_in_reply_to&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">email_message_id</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mail_in_reply_to</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">email_message_id</span>
+  
+<span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_importance&#39;</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mail_importance</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_importance</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_importance</span> <span class="k">else</span> <span class="kc">None</span>
+  
+<span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_body&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_body&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mail_body</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_body</span><span class="o">.</span><span class="n">content</span>
+<span class="k">elif</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_template_select</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mail_template_label</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mail_template_select</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mail_inline_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;{</span><span class="si">% s</span><span class="s2">et NOT_FOUND = [&quot;Not Found!&quot;,&quot;-&quot;,&quot;None&quot;,None] %}</span>
+<span class="s2">{</span><span class="si">% s</span><span class="s2">et style = &quot;font-family: Calibri; color: rgb(31,73,125)&quot; %}</span>
+<span class="s2">{% macro get_row(label,field_name) -%}</span>
+<span class="s2">	{</span><span class="si">% s</span><span class="s2">et value = template_helper.get_incident_value(incident,field_name) %}</span>
+<span class="s2">    {</span><span class="si">% i</span><span class="s2">f value and value not in NOT_FOUND and not value.startswith(&#39;-&#39;) %}</span>
+<span class="s2">    &lt;tr&gt;</span>
+<span class="s2">        &lt;td width=&quot;100&quot; style=&quot;{{style}}; font-weight:bold&quot;&gt;{{ label }}&lt;/td&gt;</span>
+<span class="s2">        &lt;td style=&quot;{{style}}&quot;&gt;{{ value | striptags }}&lt;/td&gt;</span>
+<span class="s2">    &lt;/tr&gt;</span>
+<span class="s2">    {</span><span class="si">% e</span><span class="s2">ndif %}</span>
+<span class="s2">{</span><span class="si">%- e</span><span class="s2">ndmacro %}</span>
+<span class="s2">&lt;table width=&quot;100%&quot; &gt;</span>
+<span class="s2">&lt;tr&gt;</span>
+<span class="s2">    &lt;td colspan=&quot;2&quot;&gt;</span>
+<span class="s2">        &lt;h3 style=&quot;color: rgb(68,114,196)&quot;&gt;INCIDENT DETAILS&lt;/h3&gt;</span>
+<span class="s2">        &lt;hr size=&quot;1&quot; width=&quot;100%&quot; noshade style=&quot;color:#FFDF57&quot; align=&quot;center&quot;/&gt;</span>
+<span class="s2">    &lt;/td&gt;</span>
+<span class="s2">&lt;/tr&gt;</span>
+<span class="s2">    {{ get_row(&#39;Incident:&#39;,&#39;severity_code&#39;) }}</span>
+<span class="s2">    {{ get_row(&#39;Severity:&#39;,&#39;severity_code&#39;) }}</span>
+<span class="s2">    {{ get_row(&#39;Status:&#39;,&#39;plan_status&#39;) }}&lt;br&gt;</span>
+<span class="s2">    {{ get_row(&#39;Created:&#39;,&#39;create_date&#39;) }}&lt;br&gt;</span>
+<span class="s2">    {{ get_row(&#39;Category:&#39;,&#39;incident_type_ids&#39;) }}</span>
+<span class="s2">&lt;tr&gt;</span>
+<span class="s2">    &lt;td colspan=&quot;2&quot;&gt;</span>
+<span class="s2">        &lt;br&gt;&lt;h3 style=&quot;color: rgb(68,114,196)&quot;&gt;INCIDENT DESCRIPTION&lt;/h3&gt;</span>
+<span class="s2">        &lt;hr size=&quot;1&quot; width=&quot;100%&quot; noshade style=&quot;color:#FFDF57&quot; align=&quot;center&quot;/&gt;</span>
+<span class="s2">    &lt;/td&gt;</span>
+<span class="s2">&lt;/tr&gt;</span>
+<span class="s2">    {{ get_row(&#39;Description:&#39;,&#39;description&#39;) }}</span>
+<span class="s2">&lt;tr&gt;</span>
+<span class="s2">    &lt;td width=&quot;100&quot; style=&quot;{{style}}; font-weight:bold&quot;&gt;Incident link&lt;/td&gt;</span>
+<span class="s2">    {</span><span class="si">% s</span><span class="s2">et inc_url = template_helper.generate_incident_url(incident.id) %}</span>
+<span class="s2">    &lt;td style=&quot;{{style}}&quot;&gt;&lt;a target=&quot;_blank&quot; href=&quot;{{ inc_url }}&quot;&gt;{{ incident.id }}&lt;/a&gt;&lt;/td&gt;</span>
+<span class="s2">&lt;/tr&gt;</span>
+<span class="s2">&lt;/table&gt;</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results managed through the Outbound Email Results script which uses the workflow property `outbound_email_results`.</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-save-outbound-email-results">
+<h2>Script - Save Outbound Email Results<a class="headerlink" href="#script-save-outbound-email-results" title="Link to this heading">#</a></h2>
+<p>Save outbound email results in the Email Conversations datatable. This script uses the <code class="docutils literal notranslate"><span class="pre">outbound_email_results</span></code> workflow or playbook property.</p>
+<p><strong>Object:</strong> incident</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">e_results</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">outbound_email_results</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">e_results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">outbound_email_results</span>
+  <span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">if</span> <span class="n">e_results</span><span class="p">:</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">&#39;email_conversations&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span> <span class="k">if</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;failure: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">))</span>
+  
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date_sent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;outbound&quot;</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;recipients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;To: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">CC: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">BCC: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_to&#39;</span><span class="p">),</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_cc&#39;</span><span class="p">),</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_bcc&#39;</span><span class="p">))</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_from&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_subject&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mail_body&quot;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;attachments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_attachments&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_importance&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;in_reply_to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_in_reply_to&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_message_id&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;workflow.properties.outbound_email_results not found: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+  
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="data-table-email-conversations">
+<h2>Data Table - Email Conversations<a class="headerlink" href="#data-table-email-conversations" title="Link to this heading">#</a></h2>
+<p><img alt="screenshot: dt-email-conversations" src="../_images/dt_email_conversations.png" /></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<p>email_conversations</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Date Sent</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">date_sent</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>success/failure</p></td>
+</tr>
+<tr class="row-even"><td><p>Source</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">source</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>inbound/outbound</p></td>
+</tr>
+<tr class="row-odd"><td><p>Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">inbound_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>inbound email id</p></td>
+</tr>
+<tr class="row-even"><td><p>From</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">from</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Recipients</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">recipients</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>To/CC/BCC</p></td>
+</tr>
+<tr class="row-even"><td><p>Subject</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">subject</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Body</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">body</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Attachments</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">attachments</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Message Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">message_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>In Reply To</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">in_reply_to</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Importance</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">importance</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>low/normal/high</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+<th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Email Message-ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">email_message_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>message-id associated with the inbound email message</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Example: Send Incident Email HTML</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_send_incident_email_html</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: Send Incident Email HTML2</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_send_incident_email_html2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: Send Incident Email Text</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_send_incident_email_text</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: Send Task Email HTML</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_send_task_email_html</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: Send Task Email HTML2</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">example_send_task_email_html2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Outbound Email: Reply to Message</p></td>
+<td><p>email_conversations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">outbound_email_reply_to_message</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="enhancements-for-multiple-templates-and-attachment-notes-inclusion">
+<h2>Enhancements for Multiple Templates and Attachment &amp; Notes Inclusion<a class="headerlink" href="#enhancements-for-multiple-templates-and-attachment-notes-inclusion" title="Link to this heading">#</a></h2>
+<p>In V2.0, you can defined multiple Jinja templates to support different email messages can be created in the AppHost by navigating to the Outbound Email app &gt; Configuration section. Under App Settings, you can select New File. Copy the file path that you save for this template and set the value for <code class="docutils literal notranslate"><span class="pre">template_file</span></code> in app.config to this path.</p>
+<p>In the default template packaged with this app, <code class="docutils literal notranslate"><span class="pre">data/example_send_email.jinja</span></code>, there is example logic to include artifact and note data. This logic is commented out in the example template and can be used to:</p>
+<details><summary>Include artifact value and description</summary>
+<p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">NOT_FOUND</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Not Found!&quot;</span><span class="p">,</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="s2">&quot;None&quot;</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span> <span class="o">-%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;font-family: Calibri; color: rgb(31,73,125)&quot;</span> <span class="o">-%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">macro</span> <span class="n">get_row</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+	<span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">value</span> <span class="o">=</span> <span class="n">template_helper</span><span class="o">.</span><span class="n">get_incident_value</span><span class="p">(</span><span class="n">incident</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NOT_FOUND</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">td</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;{{style}}; font-weight:bold&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">label</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">td</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;{{style}}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">value</span> <span class="o">|</span> <span class="n">safe</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">-%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endmacro</span> <span class="o">-%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">macro</span> <span class="n">get_artifact</span><span class="p">(</span><span class="n">art</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">values</span> <span class="o">=</span> <span class="n">template_helper</span><span class="o">.</span><span class="n">get_artifacts</span><span class="p">(</span><span class="n">art</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">values</span> <span class="o">-%</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">td</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;200&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;{{style}}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">safe</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">descr</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;-&#39;</span> <span class="o">-%</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="n">td</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;200&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;{{style}}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">descr</span> <span class="o">|</span> <span class="n">safe</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">-%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%-</span> <span class="n">endmacro</span> <span class="o">-%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">macro</span> <span class="n">get_note</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">get_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">values</span> <span class="o">=</span> <span class="n">template_helper</span><span class="o">.</span><span class="n">get_notes</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">get_children</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">values</span> <span class="o">-%</span><span class="p">}</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;{{style}}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">safe</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">-%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">-%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endmacro</span> <span class="o">-%</span><span class="p">}</span>
+
+<span class="o">&lt;</span><span class="n">table</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">h3</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">INCIDENT</span> <span class="n">DETAILS</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">hr</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="n">noshade</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color:#FFDF57&quot;</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">get_row</span><span class="p">(</span><span class="s1">&#39;Severity:&#39;</span><span class="p">,</span> <span class="s1">&#39;severity_code&#39;</span><span class="p">)</span> <span class="p">}}</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">get_row</span><span class="p">(</span><span class="s1">&#39;Status:&#39;</span><span class="p">,</span> <span class="s1">&#39;plan_status&#39;</span><span class="p">)</span> <span class="p">}}</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">get_row</span><span class="p">(</span><span class="s1">&#39;Created:&#39;</span><span class="p">,</span> <span class="s1">&#39;create_date&#39;</span><span class="p">)</span> <span class="p">}}</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">get_row</span><span class="p">(</span><span class="s1">&#39;Category:&#39;</span><span class="p">,</span> <span class="s1">&#39;incident_type_ids&#39;</span><span class="p">)</span> <span class="p">}}</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;&lt;</span><span class="n">h3</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">INCIDENT</span> <span class="n">DESCRIPTION</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">hr</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="n">noshade</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color:#FFDF57&quot;</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+<span class="p">{{</span> <span class="n">get_row</span><span class="p">(</span><span class="s1">&#39;Description:&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">{</span><span class="c1"># UNCOMMENT TO INCLUDE ARTIFACTS #}</span>
+<span class="p">{</span><span class="c1">#</span>
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;&lt;</span><span class="n">h3</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">INCIDENT</span> <span class="n">ARTIFACTS</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">p</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">Note</span><span class="p">:</span> <span class="n">Artifacts</span> <span class="n">are</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">e</span><span class="o">-</span><span class="n">mail</span> <span class="k">if</span> <span class="n">present</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">incident</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">hr</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="n">noshade</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color:#FFDF57&quot;</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+<span class="p">{{</span> <span class="n">get_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span> <span class="p">}}</span>
+<span class="c1">#}</span>
+
+<span class="p">{</span><span class="c1"># UNCOMMENT TO INCLUDE NOTES #}</span>
+<span class="p">{</span><span class="c1">#</span>
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;&lt;</span><span class="n">h3</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">INCIDENT</span> <span class="n">NOTES</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">p</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">Note</span><span class="p">:</span> <span class="n">Notes</span> <span class="n">are</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">e</span><span class="o">-</span><span class="n">mail</span> <span class="k">if</span> <span class="n">present</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">incident</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">hr</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="n">noshade</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color:#FFDF57&quot;</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+<span class="p">{{</span> <span class="n">get_note</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">get_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="p">}}</span>
+<span class="c1">#}</span>
+
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">h3</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">INCIDENT</span> <span class="n">LINK</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">hr</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="n">noshade</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color:#FFDF57&quot;</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">inc_url</span> <span class="o">=</span> <span class="n">template_helper</span><span class="o">.</span><span class="n">generate_incident_url</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="n">a</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;_blank&#39;</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;{{ inc_url }}&#39;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span> <span class="p">}}:</span> <span class="p">{{</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Include note text (by default also includes all child note data; set `get_children = False` if you would like to exclude child note data). </summary>
+<p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="c1"># UNCOMMENT TO INCLUDE NOTES #}</span>
+<span class="p">{</span><span class="c1">#</span>
+ <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;&lt;</span><span class="n">h3</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: rgb(68,114,196)&quot;</span><span class="o">&gt;</span><span class="n">INCIDENT</span> <span class="n">NOTES</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">hr</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="n">noshade</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color:#FFDF57&quot;</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">get_note</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">get_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="p">}}</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span> 
+<span class="c1">#}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<section id="incident-links">
+<h3>Incident Links<a class="headerlink" href="#incident-links" title="Link to this heading">#</a></h3>
+<p>To include a link back to the SOAR incident, add the following information to your template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">inc_url</span> <span class="o">=</span> <span class="n">template_helper</span><span class="o">.</span><span class="n">generate_incident_url</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">a</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;_blank&#39;</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;{ inc_url }&#39;</span><span class="o">&gt;</span><span class="p">{</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span> <span class="p">}:</span> <span class="p">{</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="task-links">
+<h3>Task Links<a class="headerlink" href="#task-links" title="Link to this heading">#</a></h3>
+<p>To include a link back to the SOAR task, add the following information to your inline template. Unfortunately, this cannot be added to a template defined in your app.config file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Task: &lt;a target=&#39;_blank&#39; href=&#39;{{{{ template_helper.generate_task_url(</span><span class="si">{inc_id}</span><span class="s2">, </span><span class="si">{task_id}</span><span class="s2">) }}}}&#39;&gt;</span><span class="si">{task_name}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inc_id</span><span class="o">=</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<section id="common-connection-issues-with-tls-and-troubleshooting">
+<h3>Common connection issues with TLS and TroubleShooting<a class="headerlink" href="#common-connection-issues-with-tls-and-troubleshooting" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">selftest</span> <span class="pre">-l</span> <span class="pre">fn-outbound-email</span></code> to confirm if your connection is successful.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">-</span><span class="n">outbound</span><span class="o">-</span><span class="n">email</span><span class="p">:</span>
+    <span class="n">SMTP</span> <span class="n">AUTH</span> <span class="n">extension</span> <span class="ow">not</span> <span class="n">supported</span> <span class="n">by</span> <span class="n">server</span><span class="o">.</span>
+    <span class="n">selftest</span><span class="p">:</span> <span class="n">failure</span><span class="p">,</span> <span class="n">Elapsed</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.416000</span> <span class="n">seconds</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Email servers are often restrictive on which applications or users are authorized to send emails. For example, if you have 2FA authentication enabled on a gmail account, you must add a specific application password or allow less secure apps. (Not recommended.)</p>
+<p>https://hotter.io/docs/email-accounts/app-password-gmail/</p>
+<p>https://hotter.io/docs/email-accounts/secure-app-gmail/</p>
+</li>
+<li><p>Occasionally, mail servers might indicate that emails have been sent successfully (including a successful note on the the associated incident) but they are blocked by the receiving mail server due to insecure spam filters. This is a limitation of SMTP authentication mechanism.</p></li>
+<li><p>The port for TLS handshakes might also differ between mail servers (587/2525). A short history of port allocation can be found at:
+https://pepipost.com/blog/25-465-587-2525-choose-the-right-smtp-port/</p></li>
+<li><p>More info on SMTP protocol:</p>
+<p>https://pepipost.com/blog/what-is-smtp</p>
+</li>
+<li><p>Some mail servers do not work with this level of authentication/protocol.</p></li>
+</ul>
+</section>
+<section id="message-signing-and-encryption">
+<h3>Message Signing and Encryption<a class="headerlink" href="#message-signing-and-encryption" title="Link to this heading">#</a></h3>
+<p>The following references can be useful if creating your own email signing certificates.</p>
+<ul class="simple">
+<li><p>https://www.dalesandro.net/create-self-signed-smime-certificates/</p></li>
+<li><p>https://access.redhat.com/solutions/28965</p></li>
+</ul>
+<p>The first link refers to the general procedure for creating an email certificate using a self-signed CA certificate. This procedure is sufficient for use with this app.</p>
+<p>The second link refers to a way to designate your email certificate with the correct emailProtection enhanced key usage attribute. My ‘some_extensions.txt` file has the following setting for emailProtection:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">some_ext</span><span class="p">]</span>
+<span class="n">extendedKeyUsage</span> <span class="o">=</span> <span class="mf">1.3.6.1.5.5.7.3.4</span>
+</pre></div>
+</div>
+<p>The modified command to sign the certificate signing request file is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="n">req</span> <span class="o">-</span><span class="n">days</span> <span class="mi">365</span> <span class="o">-</span><span class="ow">in</span> <span class="n">your_smime_user</span><span class="o">.</span><span class="n">csr</span> <span class="o">-</span><span class="n">CA</span> <span class="n">your_ca</span><span class="o">.</span><span class="n">crt</span> <span class="o">-</span><span class="n">CAkey</span> <span class="n">your_ca_private</span><span class="o">.</span><span class="n">key</span> <span class="o">-</span><span class="n">set_serial</span> <span class="mi">1</span> <span class="o">-</span><span class="n">out</span> <span class="n">your_smime_user</span><span class="o">.</span><span class="n">crt</span> <span class="o">-</span><span class="n">addtrust</span> <span class="n">emailProtection</span> <span class="o">-</span><span class="n">addreject</span> <span class="n">clientAuth</span> <span class="o">-</span><span class="n">addreject</span> <span class="n">serverAuth</span> <span class="o">-</span><span class="n">trustout</span> <span class="o">-</span><span class="n">extensions</span> <span class="n">some_ext</span> <span class="o">-</span><span class="n">extfile</span> <span class="n">some_extensions</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>If this extendedKeyUsage attribute is missing, the certificate bundle is still valid, but your logs will show the following warning which can be ignored:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2023</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">05</span> <span class="mi">21</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">55</span><span class="p">,</span><span class="mi">584</span> <span class="n">WARNING</span> <span class="p">[</span><span class="n">smtp_mailer</span><span class="p">]</span> <span class="n">Unable</span> <span class="n">to</span> <span class="n">confirm</span> <span class="n">public</span> <span class="n">certificate</span> <span class="n">has</span> <span class="n">trust</span> <span class="k">for</span> <span class="s1">&#39;emailProtection&#39;</span><span class="o">.</span> <span class="n">Continuing</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<p>This is an IBM supported app. Please search the Community https://ibm.biz/soarcommunity for community assistance and use the <a class="reference external" href="https://ibm.com/mysupport">My Support link</a> to open a support case.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_pa_panorama/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">fn_pa_panorama</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_odbc_query/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">fn_odbc_query</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Outbound Email</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#changes">2.1 Changes</a></li>
+<li><a class="reference internal" href="#v2-0-changes">v2.0 Changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li><a class="reference internal" href="#basic-authentication">Basic Authentication</a></li>
+<li><a class="reference internal" href="#oauth-2-0-authorization">OAuth 2.0 Authorization</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#id1">OAuth 2.0 Authorization</a></li>
+<li><a class="reference internal" href="#authorize">Authorize</a></li>
+<li><a class="reference internal" href="#fetch-the-tokens">Fetch the tokens</a></li>
+<li><a class="reference internal" href="#using-oauth-utils-package">Using oauth-utils package</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#permissions">Permissions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a><ul>
+<li><a class="reference internal" href="#p12-signing-and-unencrypting-certificates">P12 Signing and Unencrypting Certificates</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">2.0 Changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-outbound-email-send-email">Function - Outbound Email: Send Email</a></li>
+<li><a class="reference internal" href="#function-outbound-email-send-email-2">Function - Outbound Email: Send Email 2</a></li>
+<li><a class="reference internal" href="#script-save-outbound-email-results">Script - Save Outbound Email Results</a></li>
+<li><a class="reference internal" href="#data-table-email-conversations">Data Table - Email Conversations</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#enhancements-for-multiple-templates-and-attachment-notes-inclusion">Enhancements for Multiple Templates and Attachment &amp; Notes Inclusion</a><ul>
+<li><a class="reference internal" href="#incident-links">Incident Links</a></li>
+<li><a class="reference internal" href="#task-links">Task Links</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#common-connection-issues-with-tls-and-troubleshooting">Common connection issues with TLS and TroubleShooting</a></li>
+<li><a class="reference internal" href="#message-signing-and-encryption">Message Signing and Encryption</a></li>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

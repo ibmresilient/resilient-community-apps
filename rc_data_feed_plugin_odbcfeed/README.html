@@ -1,0 +1,892 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Data Feed plugin for Splunk HTTP Event Collector" href="../rc_data_feed_plugin_splunkfeed/README.html" /><link rel="prev" title="Data Feed KafkaFeed Plugin" href="../rc_data_feed_plugin_kafkafeed/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Data Feed ODBCFeed Plugin - IBM SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IBM SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">IBM SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Summaries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/all_objects/index.html">All Objects</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of All Objects</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_functions.html">All Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/all_objects/all_playbooks.html">All Playbooks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">Alien Vault OTX Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">fn_anomali_staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible Integration Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">fn-ansible-tower Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">fn-aws-iam Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">fn_cisco_amp4ep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement Function Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Resilient Function - fn_cisco_umbrella_inv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">fn_clamav</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">fn-cloud-foundry Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">Component Files for App Host</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx Functions for IBM Security SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Function Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">fn_exchange_online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding Functions for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">fn_google_cloud_dlp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">fn_grpc_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Resilient Integration with Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">fn_html2pdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser Function v2 for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">Resilient Integration with IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">fn-isitphishing Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira App for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360 Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">Resilient Functions Integration to McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">fn-mcafee-esm Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">fn_misp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">fn_mitre_integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html#remote-windows-commands">Remote Windows commands:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">fn_odbc_query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">fn_pa_panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl Function for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint Targeted Attack Protection (TAP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">fn-proofpoint-trap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">fn-pulsedive Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR (formally IBM ReaQta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">fn_remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">Resilient Circuits Components for function: fn_rsa_netwitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection Integration for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_service_now/README.html">IBM Security QRadar SOAR App for ServiceNow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify App for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk Integration for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">fn-task-utils Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Resilient Function - Twilio Send SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Resilient Integration with Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus Integration for Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utility Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer Function for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">fn_watson_translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex for IBM QRadar SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Resilient Integration with WHOIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn-whois-rdap Functions for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">fn-wiki for IBM Resilient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">fn_xforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access (ZIA) Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Feed ODBCFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk HTTP Event Collector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="data-feed-odbcfeed-plugin">
+<h1>Data Feed ODBCFeed Plugin<a class="headerlink" href="#data-feed-odbcfeed-plugin" title="Link to this heading">#</a></h1>
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>v1.0.8 Allow Data Sync function to continue without failing a workflow/playbook</p></li>
+<li><p>v1.0.7 Fixes for mariaDB and mySQL DB access within App Host</p></li>
+<li><p>v1.0.6 Fixes for removed datatable columns, added caching for db schema updates - improving performance</p></li>
+<li><p>v1.0.5 Support for attachment content</p></li>
+<li><p>v1.0.4 Oracle definitions for AppHost</p></li>
+<li><p>v1.0.3 AppHost configurations for Postgresql, MS SQL Server, MySql, SQLite</p></li>
+<li><p>v1.0.1 Duplication of incident id bug fix</p></li>
+</ul>
+</section>
+<section id="notes">
+<h2>Notes:<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Issues exist deleting attachments and artifact attachments for IBM SOAR v39 and v40. A future release is expected to resolve this issue.</p></li>
+<li><p>Deleting an incident will not also delete the incident artifacts, notes, tasks, datatables, etc.</p></li>
+<li><p>Deleting a task will not also delete the task notes and attachments</p></li>
+<li><p>When connecting to multiple databases from the same database platform, use different user accounts for each database.</p></li>
+</ul>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>This package contains the odbcfeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain “replica” data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.</p>
+<p>This plugin allows this replica data to be maintained in a sql-based database.</p>
+<p>Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<p>Unless otherwise specified, contents of this repository are published under the MIT open-source
+<a class="reference download internal" download="" href="../_downloads/c70543d4fadf91392a1f0c71ca6e8f7e/LICENSE"><span class="xref download myst">LICENSE</span></a>.</p>
+</section>
+<section id="change-log">
+<h2>Change log<a class="headerlink" href="#change-log" title="Link to this heading">#</a></h2>
+<section id="version-1-0-5-changes">
+<h3>Version 1.0.5 changes<a class="headerlink" href="#version-1-0-5-changes" title="Link to this heading">#</a></h3>
+<p>Version 1.0.5 introduces the ability to include attachment content. When <code class="docutils literal notranslate"><span class="pre">include_attachment_data=true</span></code> is added to <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code>, an additional database column is added: <code class="docutils literal notranslate"><span class="pre">content</span></code>. This column is created to the <code class="docutils literal notranslate"><span class="pre">attachment</span></code> table in the equivalent database storage type as a blob:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Database</p></th>
+<th class="head"><p>content field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sqlite</p></td>
+<td><p>blob</p></td>
+</tr>
+<tr class="row-odd"><td><p>Postgres</p></td>
+<td><p>bytea</p></td>
+</tr>
+<tr class="row-even"><td><p>MySQL</p></td>
+<td><p>blob</p></td>
+</tr>
+<tr class="row-odd"><td><p>SQLServer</p></td>
+<td><p>varbinary(max)</p></td>
+</tr>
+<tr class="row-even"><td><p>Oracle</p></td>
+<td><p>blob</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Attachment content can be to up 25mb. Plan your DB storage requirements for the <code class="docutils literal notranslate"><span class="pre">attachment</span></code> table accordingly.</p>
+<p>Refer to the documentation for each database on how to read or process blob data.</p>
+<p>Additionally, the connection string format of the app.config file for Oracle databases has changed. The format is now:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">odbc_connect</span><span class="o">=&lt;</span><span class="n">service_name</span><span class="o">&gt;</span> <span class="ow">or</span> <span class="p">(</span><span class="n">DESCRIPTION</span><span class="o">=</span><span class="p">(</span><span class="n">ADDRESS</span><span class="o">=</span><span class="p">(</span><span class="n">PROTOCOL</span><span class="o">=</span><span class="n">TCP</span><span class="p">)(</span><span class="n">HOST</span><span class="o">=&lt;</span><span class="n">host</span><span class="o">&gt;</span><span class="p">)(</span><span class="n">PORT</span><span class="o">=&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">))(</span><span class="n">CONNECT_DATA</span><span class="o">=</span><span class="p">(</span><span class="n">SID</span><span class="o">=&lt;</span><span class="n">sid</span><span class="o">&gt;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
+You perform these installation procedures at the Resilient integration server.</p>
+<section id="install-the-python-components">
+<h3>Install the Python components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">#</a></h3>
+<p>Complete the following steps to install the Python components:</p>
+<ul class="simple">
+<li><p>Ensure that the environment is up-to-date, as follows:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pip</span>
+  <span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">setuptools</span>
+  <span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">resilient</span><span class="o">-</span><span class="n">circuits</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>| Run the following commands to install the package:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">unzip</span> <span class="n">rc_data_feed</span><span class="o">-</span><span class="n">plugin</span><span class="o">-</span><span class="n">odbcfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">zip</span>
+  <span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">rc_data_feed</span><span class="o">-</span><span class="n">plugin</span><span class="o">-</span><span class="n">odbcfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<ul>
+<li><p>| Configure Resilient-circuits</p>
+<p>The Resilient Circuits process runs as an unprivileged user, typically named integration. If you do not already have an integration user configured on your appliance, create it now.
+Complete the following steps to configure and run the integration:</p>
+</li>
+<li><p>Using sudo, switch to the integration user, as follows:</p></li>
+</ul>
+<p><code class="docutils literal notranslate">&#160; <span class="pre">sudo</span> <span class="pre">su</span> <span class="pre">-</span> <span class="pre">integration</span></code></p>
+<ul class="simple">
+<li><p>Use one of the following commands to create or update the resilient-circuits configuration file. Use –c for new environments or –u for existing environments.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  resilient-circuits config -c
+  or
+  resilient-circuits config –u [-l rc-data-feed-plugin-odbcfeed]
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Edit the resilient-circuits configuration file, as follows:</p>
+<ul>
+<li><p>In the [resilient] section, ensure that you provide all the information required to connect to the Resilient platform.</p></li>
+<li><p>In the [postgres_feed] or similar sections, configure the settings for your database environment.</p></li>
+<li><p>In the [feeds] section, define the feed(s) you intend to use and create separate sections for each feed. For example:</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+  <span class="p">[</span><span class="n">feeds</span><span class="p">]</span>
+  <span class="n">feed_names</span><span class="o">=</span><span class="n">postgres_feed</span>
+  <span class="n">reload</span><span class="o">=</span><span class="kc">True</span>
+  <span class="c1">## feed_data is the default queue that will be listened to</span>
+  <span class="n">queue</span><span class="o">=</span><span class="n">feed_data</span>
+  <span class="c1">## new in v1.0.5 include attachment content. Default is false</span>
+  <span class="n">include_attachment_data</span><span class="o">=</span><span class="n">true</span>
+
+  <span class="p">[</span><span class="n">postgres_feed</span><span class="p">]</span>
+  <span class="n">class</span><span class="o">=</span><span class="n">ODBCFeed</span>
+  <span class="n">odbc_connect</span><span class="o">=</span><span class="n">Driver</span><span class="o">=</span><span class="p">{</span><span class="n">PostresSQL</span><span class="p">};</span><span class="n">Server</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="p">;</span><span class="n">DB</span><span class="o">=&lt;</span><span class="n">db</span><span class="o">&gt;</span><span class="p">;</span><span class="n">Port</span><span class="o">=</span><span class="mi">5432</span><span class="p">;</span><span class="n">connectTimeout</span><span class="o">=</span><span class="mi">0</span>
+  <span class="n">sql_dialect</span><span class="o">=</span><span class="n">PostgreSQL96Dialect</span>
+  <span class="n">uid</span><span class="o">=&lt;</span><span class="n">acct</span><span class="o">&gt;</span>
+  <span class="n">pwd</span><span class="o">=&lt;</span><span class="n">pwd</span><span class="o">&gt;</span>
+
+  <span class="c1">#[oracle_feed]</span>
+  <span class="c1">#class=ODBCFeed</span>
+  <span class="c1">#odbc_connect=&lt;service_name&gt; or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=&lt;host&gt;)(PORT=&lt;port&gt;))(CONNECT_DATA=(SID=&lt;sid&gt;)))</span>
+  <span class="c1">#sql_dialect=OracleDialect</span>
+  <span class="c1">#uid=&lt;acct&gt;</span>
+  <span class="c1">#pwd=&lt;pwd&gt;</span>
+
+  <span class="c1">#[sqlserver_feed]</span>
+  <span class="c1">#class=ODBCFeed</span>
+  <span class="c1">#odbc_connect=DRIVER={FreeTNS};SERVER=127.0.0.1;PORT=1443;DATABASE=&lt;db&gt;</span>
+  <span class="c1">#sql_dialect=SQLServerDialect</span>
+  <span class="c1">#uid=&lt;acct&gt;</span>
+  <span class="c1">#pwd=&lt;pwd&gt;</span>
+
+  <span class="c1">#[mysql_feed]</span>
+  <span class="c1">#class=ODBCFeed</span>
+  <span class="c1">#odbc_connect=Driver={MariaDB};Server=127.0.0.1;DB=&lt;db&gt;;Port=3306;connectTimeout=0</span>
+  <span class="c1">#sql_dialect=MariaDBDialect</span>
+  <span class="c1">#uid=&lt;acct&gt;</span>
+  <span class="c1">#pwd=&lt;pwd&gt;</span>
+
+  <span class="c1">#[my_sqlite_feed]</span>
+  <span class="c1">#class=SQLiteFeed</span>
+  <span class="c1">#file_name=/tmp/feed.sqlite3</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="odbcfeed-class">
+<h2>ODBCFeed Class<a class="headerlink" href="#odbcfeed-class" title="Link to this heading">#</a></h2>
+<p>The ODBCFeed class is probably the most flexible and useful of the feeds. It allows you to write all the incoming data to an ODBC database.
+The following configuration items are supported:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Key</p></th>
+<th class="head text-left"><p>Values</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>class</p></td>
+<td class="text-left"><p>ODBCFeed</p></td>
+<td class="text-left"><p>Indicates that the section is for an ODBCFeed.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>odbc_connect</p></td>
+<td class="text-left"><p>ODBC connect string</p></td>
+<td class="text-left"><p>Example for PostgreSQL:  Driver={PostgreSQL};Server=localhost;Port=5432;Database=feed</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>sql_dialect</p></td>
+<td class="text-left"><p>PostgreSQL96Dialect, MariaDBDialect, SQLServerDialect, OracleDialect</p></td>
+<td class="text-left"><p>Name of the SQL dialect.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>uid</p></td>
+<td class="text-left"><p>DB user name</p></td>
+<td class="text-left"><p>Specify the database user name in this property and not in the connect string. Most DBs support the uid in the connect string but you should specify in this property instead.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>pwd</p></td>
+<td class="text-left"><p>DB password</p></td>
+<td class="text-left"><p>Specify the database user’s password in this property and not in the connect string. Most DBs support the pwd in the connect string but you should specify it in this property instead.  You can use the standard Resilient Circuits mechanism for secure password storage.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When using a data feed database, IBM Resilient strongly recommends that you create and maintain the database on system separate from the Resilient platform, where queries cannot impact your running Resilient instance. Allowing access to the Resilient platform for a database instance can also compromise security of the platform itself.</p>
+<section id="additional-connection-strings">
+<h3>Additional connection strings<a class="headerlink" href="#additional-connection-strings" title="Link to this heading">#</a></h3>
+<p>The following table lists additional database connection strings for the other supported databases.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Database</p></th>
+<th class="head text-left"><p>Connection Strings</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>MariaDB</p></td>
+<td class="text-left"><p>Driver={MariaDB};Server=127.0.0.1;Port=3306; DB=<yourDB>;connectTimeout=0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Oracle</p></td>
+<td class="text-left"><p>&lt;service_name&gt; or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SID=<youSID>)))</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>SQLServer</p></td>
+<td class="text-left"><p>DRIVER={FreeTDS};SERVER=127.0.0.1;PORT=1433;DATABASE=<yourDB>;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Your naming of the database drivers (Ex. <code class="docutils literal notranslate"><span class="pre">MySQL</span></code>) may vary and is specified in your <code class="docutils literal notranslate"><span class="pre">odbcinst.ini</span></code> file.</p>
+<section id="integration-server">
+<h4>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">#</a></h4>
+<p>Oracle has the further requirement of specifying the connection string references in a TNSNAMES.ORA file. Setting up the Oracle client environment will include the following environment variables (and may include others):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">oracle</span><span class="o">/</span><span class="n">libraries</span><span class="o">/</span>
+<span class="n">export</span> <span class="n">TNS_ADMIN</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">tnsnames</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="app-host">
+<h4>App Host<a class="headerlink" href="#app-host" title="Link to this heading">#</a></h4>
+<p>For App Host deployments, the tnsnames.ora file should be added to your app in the configuration section specifying the
+file name as <code class="docutils literal notranslate"><span class="pre">tnsnames.ora</span></code> and path <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>. The contents should contain the definitions for your Oracle database. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OracleODBC</span><span class="o">-</span><span class="mi">12</span><span class="n">c</span><span class="o">=</span><span class="p">(</span><span class="n">DESCRIPTION</span><span class="o">=</span><span class="p">(</span><span class="n">ADDRESS</span><span class="o">=</span><span class="p">(</span><span class="n">PROTOCOL</span><span class="o">=</span><span class="n">TCP</span><span class="p">)(</span><span class="n">HOST</span><span class="o">=</span><span class="mf">9.10.11.12</span><span class="p">)(</span><span class="n">PORT</span><span class="o">=</span><span class="mi">1521</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">CONNECT_DATA</span><span class="o">=</span><span class="p">(</span><span class="n">SERVER</span><span class="o">=</span><span class="n">DEDICATED</span><span class="p">)(</span><span class="n">SERVICE_NAME</span><span class="o">=</span><span class="n">ORCLCDB</span><span class="o">.</span><span class="n">localdomain</span><span class="p">)))</span>
+<span class="n">ORCLCDB</span><span class="o">=</span><span class="p">(</span><span class="n">DESCRIPTION</span><span class="o">=</span><span class="p">(</span><span class="n">ADDRESS</span><span class="o">=</span><span class="p">(</span><span class="n">PROTOCOL</span><span class="o">=</span><span class="n">TCP</span><span class="p">)(</span><span class="n">HOST</span><span class="o">=</span><span class="mf">9.10.11.12</span><span class="p">)(</span><span class="n">PORT</span><span class="o">=</span><span class="mi">1521</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">CONNECT_DATA</span><span class="o">=</span><span class="p">(</span><span class="n">SERVER</span><span class="o">=</span><span class="n">DEDICATED</span><span class="p">)(</span><span class="n">SERVICE_NAME</span><span class="o">=</span><span class="n">ORCLCDB</span><span class="o">.</span><span class="n">localdomain</span><span class="p">)))</span>
+<span class="n">ORCLPDB1</span><span class="o">=</span><span class="p">(</span><span class="n">DESCRIPTION</span><span class="o">=</span><span class="p">(</span><span class="n">ADDRESS</span><span class="o">=</span><span class="p">(</span><span class="n">PROTOCOL</span><span class="o">=</span><span class="n">TCP</span><span class="p">)(</span><span class="n">HOST</span><span class="o">=</span><span class="mf">9.10.11.12</span><span class="p">)(</span><span class="n">PORT</span><span class="o">=</span><span class="mi">1521</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">CONNECT_DATA</span><span class="o">=</span><span class="p">(</span><span class="n">SERVER</span><span class="o">=</span><span class="n">DEDICATED</span><span class="p">)(</span><span class="n">SERVICE_NAME</span><span class="o">=</span><span class="n">ORCLPDB1</span><span class="o">.</span><span class="n">localdomain</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p><img alt="tnsnames.ora" src="../_images/tnsnames.png" /></p>
+</section>
+</section>
+<section id="integration-server-requirements">
+<h3>Integration Server Requirements<a class="headerlink" href="#integration-server-requirements" title="Link to this heading">#</a></h3>
+<p>All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc package, you will either need an environment with the <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">compiler</span></code> to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib).</p>
+<p>Information about pyodbc and installing unixodbc can be found here: https://github.com/mkleehammer/pyodbc/wiki/Install.</p>
+</section>
+</section>
+<section id="sqlitefeed-class">
+<h2>SQLiteFeed Class<a class="headerlink" href="#sqlitefeed-class" title="Link to this heading">#</a></h2>
+<p>The SQLiteFeed class allows you to write all the incoming data to a SQLite DB file. SQLite is very useful for testing and in cases where you want to have the data stored in a single file that you can easily share. Some tools may natively support SQLite as well.</p>
+<p>SQLite supports CSV formatting, so you can easily export the data from the SQLite file into a CSV file, which can then be imported into another tool, such as Excel, for further analysis.</p>
+<p>The following configuration items are supported:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Key</p></th>
+<th class="head text-left"><p>Values</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>class</p></td>
+<td class="text-left"><p>SQLiteFeed</p></td>
+<td class="text-left"><p>Indicates that the section is for an SQLite.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>file_name</p></td>
+<td class="text-left"><p>Path for a local file on the system where the SQLite DB resides.</p></td>
+<td class="text-left"><p>This is created if it does not exist. If it does exist, it must be an SQLite database.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="odbc-database-considerations">
+<h2>ODBC Database Considerations<a class="headerlink" href="#odbc-database-considerations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>All databases require their own set of drivers to be installed. This package does not install the libraries necessary as those operations are specific to the database used, Once the necessary driver(s) and installed, this information is captured in the odbcinst.ini file (for instance, found here: <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/odbcinst.inifile</span></code>) similar to the following:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">PostgreSQL</span><span class="p">]</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">ODBC</span> <span class="k">for</span> <span class="n">PostgreSQL</span>
+<span class="n">Driver</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">psqlodbcw</span><span class="o">.</span><span class="n">la</span>
+
+<span class="p">[</span><span class="n">MariaDB</span><span class="p">]</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">MariaDB</span> <span class="n">Connector</span><span class="o">/</span><span class="n">ODBC</span> <span class="n">v</span><span class="mf">.3.0</span>
+<span class="n">Driver</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libmaodbc</span><span class="o">.</span><span class="n">so</span>
+
+<span class="p">[</span><span class="n">FreeTDS</span><span class="p">]</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">Freetds</span> <span class="n">v</span> <span class="mf">0.95</span>
+<span class="n">Driver</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libtdsodbc</span><span class="o">.</span><span class="n">so</span><span class="mf">.0</span>
+
+<span class="p">[</span><span class="n">Oracle</span> <span class="mi">12</span><span class="n">c</span> <span class="n">ODBC</span> <span class="n">driver</span><span class="p">]</span>
+<span class="n">Description</span>     <span class="o">=</span> <span class="n">Oracle</span> <span class="n">ODBC</span> <span class="n">driver</span> <span class="k">for</span> <span class="n">Oracle</span> <span class="mi">12</span><span class="n">c</span>
+<span class="n">Driver</span>          <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">oracle</span><span class="o">/</span><span class="mf">19.6</span><span class="o">/</span><span class="n">client64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libsqora</span><span class="o">.</span><span class="n">so</span><span class="mf">.19.1</span>
+<span class="n">CharacterSet</span>    <span class="o">=</span> <span class="n">AL32UTF8</span>
+<span class="n">Setup</span>           <span class="o">=</span>
+<span class="n">FileUsage</span>       <span class="o">=</span>
+<span class="n">CPTimeout</span>       <span class="o">=</span>
+<span class="n">CPReuse</span>         <span class="o">=</span>
+</pre></div>
+</div>
+<ul>
+<li><p>All data in Resilient is encoded as UTF-8. When creating the initial database, ensure that a similar encoding is specified.</p></li>
+<li><p>Each database type has limits to the size of data stored. The following table describes the limits for each database.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Database</p></th>
+<th class="head text-left"><p>Field</p></th>
+<th class="head text-left"><p>Limit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Postgres</p></td>
+<td class="text-left"><p>text</p></td>
+<td class="text-left"><p>1GB</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>MySQL/MariaDB</p></td>
+<td class="text-left"><p>text</p></td>
+<td class="text-left"><p>4GB</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>MS SQLServer</p></td>
+<td class="text-left"><p>varchar(max)</p></td>
+<td class="text-left"><p>2GB</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>MS SQLServer</p></td>
+<td class="text-left"><p>varchar(xx)</p></td>
+<td class="text-left"><p>4000</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Oracle</p></td>
+<td class="text-left"><p>nvarchar2(xx)</p></td>
+<td class="text-left"><p>2000</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><p>When creating the database user account which will access the defined database, provide the necessary permissions to allow full access to create tables, alter tables by adding columns, and full capability to insert, update and delete records.</p></li>
+<li><p>These are the permissions granted when creating a user to reference a SQLServer database:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">LOGIN</span> <span class="n">res_db</span> <span class="n">WITH</span> <span class="n">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;*****’;</span>
+<span class="n">CREATE</span> <span class="n">USER</span> <span class="n">res_db</span> <span class="n">FOR</span> <span class="n">LOGIN</span> <span class="n">res_db</span><span class="p">;</span>
+<span class="n">GRANT</span> <span class="n">UPDATE</span><span class="p">,</span><span class="n">INSERT</span><span class="p">,</span><span class="n">DELETE</span><span class="p">,</span><span class="n">SELECT</span><span class="p">,</span><span class="n">ALTER</span><span class="p">,</span><span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">TO</span> <span class="n">res_db</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Some databases have reserve words which cannot be used in tables (such as date and size). If a Resilient custom field is found to be in a database reserve list, the name (for example, the column name) is altered to include a trailing ‘_’.</p></li>
+<li><p>Deleting a custom field in Resilient will not remove it from the Data Feed datastore.</p></li>
+<li><p>A custom field changed between Text and TextArea will have no effect in the Data Feed process.</p></li>
+<li><p>Python 2.7 with pyodbc 4.0.X will lose the millisecond precision on datetime fields. If this value is important to your environment, use Python 3.6.X or greater.</p></li>
+<li><p>A custom field (or custom database column) deleted in Resilient and recreated as a different data type (for instance, a text field recreated as number) will break the feed process. It’s recommended one also delete the existing datastore table column so that it can be automatically recreated when resilient-circuits is restarted.</p></li>
+<li><p>Renaming a custom datatable field’s api_name will create a new column in the database. The original field’s api_name column will remain.</p></li>
+<li><p>No foreign keys are created between tables. However, each table contains the <code class="docutils literal notranslate"><span class="pre">inc_id</span></code> column which can be used to link tables together. Below is a sample SQL query linking an incident with its tasks.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">incident</span>
+<span class="n">INNER</span> <span class="n">JOIN</span> <span class="n">task</span>
+<span class="n">ON</span> <span class="n">incident</span><span class="o">.</span><span class="n">inc_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">inc_id</span>
+<span class="n">WHERE</span> <span class="n">incident</span><span class="o">.</span><span class="n">inc_id</span><span class="o">=</span><span class="mi">2095</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="datetime-fields-and-timezones">
+<h3>Datetime Fields and Timezones<a class="headerlink" href="#datetime-fields-and-timezones" title="Link to this heading">#</a></h3>
+<p>All Resilient datetime fields retain their data in the UTC timezone. When persisting this data to a datastore, the ISO date format is used such as: 2019-04-18T19:07:42+00:00.</p>
+<p>Some databases, such as Postgres, convert query results with datetime fields into the timezone of the server system. To avoid this conversion, sql statements such SET TIMEZONE=’UTC’ should be used prior to any queries run.</p>
+<p>For MySql and MariaDB, sql_mode needs to be set without STRICT_TRANS_TABLE. See the database documentation on this setting: https://mariadb.com/kb/en/library/server-system-variables/#sql_mode.</p>
+</section>
+<section id="modifications">
+<h3>Modifications<a class="headerlink" href="#modifications" title="Link to this heading">#</a></h3>
+<p>For some environments, it may be practical to modify the existing code to match your database environment. The sections below introduce the common aspects of this plugin which can be modified. In all cases, the changes will be made to <code class="docutils literal notranslate"><span class="pre">sqllib/sql_dialect.py</span></code>.</p>
+<section id="modify-dialect-encoding">
+<h4>Modify dialect encoding<a class="headerlink" href="#modify-dialect-encoding" title="Link to this heading">#</a></h4>
+<p>Each SQL dialect modifies the database connection with the encoding used to read and write data. The configure_connection() function makes these changes and in all cases, sets the encoding to UTF-8. In some cases, the format of the encoding parameters may change between python environments and the following logic can be used to account for those different environments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
+    <span class="n">connection</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_WCHAR</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1">## pylint: disable=c-extension-no-member</span>
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c1">## to set encoding on python 2</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="n">unicode</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1">## an issue and try encoding without specifying fromtype</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="modify-data-type-mapping">
+<h4>Modify data type mapping<a class="headerlink" href="#modify-data-type-mapping" title="Link to this heading">#</a></h4>
+<p>Each SQL dialect contains a mapping table to convert Resilient data types to your dialect’s datastore. See the function get_column_type() for how mapping is presently done.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_column_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_type</span><span class="p">):</span>  <span class="c1">## pylint: disable=no-self-use</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets the DB column type for the specified Resilient &#39;input type&#39;</span>
+
+<span class="sd">    :param input_type: The Resilient input type value (e.g. datepicker,</span>
+<span class="sd">        boolean, number, text, text_area, etc.)</span>
+
+<span class="sd">    :returns The DB type to use for this dialect.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">type_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">number</span><span class="o">=</span><span class="s1">&#39;BIGINT&#39;</span><span class="p">,</span>
+        <span class="n">datepicker</span><span class="o">=</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span>
+        <span class="n">datetimepicker</span><span class="o">=</span><span class="s1">&#39;TIMESTAMP&#39;</span><span class="p">,</span>
+        <span class="n">boolean</span><span class="o">=</span><span class="s1">&#39;BOOLEAN&#39;</span><span class="p">,</span>
+        <span class="n">blob</span><span class="o">=</span><span class="s1">&#39;blob&#39;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">input_type</span> <span class="ow">in</span> <span class="n">type_dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">type_dict</span><span class="p">[</span><span class="n">input_type</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="s1">&#39;TEXT&#39;</span>
+</pre></div>
+</div>
+<p>Text data types can be challenging for some databases based on the data length limits. In those cases, use a constant to define the limit and truncate your data using that value. Be aware that character limits do not account for Unicode characters which are double-byte. This means that a data limit of 64k characters actually translates to 32k Unicode characters.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MAX_MARIADB_TEXT</span> <span class="o">=</span> <span class="mi">32000</span>
+
+<span class="k">def</span> <span class="nf">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_names</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="c1">## Need to get a list that contains all the values in the same order as parameter_names.</span>
+    <span class="n">bind_parameters</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">parameter_names</span><span class="p">:</span>
+        <span class="n">bind_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">name</span><span class="p">][:</span><span class="n">MAX_MARIADB_TEXT</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">string_types</span><span class="p">)</span> <span class="k">else</span> <span class="n">parameters</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="modifying-dialect-reserved-words">
+<h4>Modifying dialect reserved words<a class="headerlink" href="#modifying-dialect-reserved-words" title="Link to this heading">#</a></h4>
+<p>Each SQL Dialect contains reserved words which cannot be used in database table and column definitions. To ensure all data fields in Resilient can be stored, a list of reserve words is maintained. When a conflict is found the resulting table or column name has an underscore added to the name. From time to time, new database releases add to this reserved word list. Just add those words to an existing list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>RESERVE_LIST = [&#39;all&#39;, &#39;analyse&#39;, &#39;analyze&#39;, &#39;and&#39;, &#39;any&#39;, &#39;array&#39;, &#39;as&#39;,
+                &#39;asc&#39;, &#39;asymmetric&#39;, &#39;both&#39;, &#39;case&#39;, &#39;cast&#39;,
+                &#39;check&#39;, &#39;collate&#39;, &#39;column&#39;, &#39;constraint&#39;, &#39;create&#39;,
+                &#39;current_date&#39;, &#39;current_role&#39;, &#39;current_time&#39;,
+                &#39;current_timestamp&#39;, &#39;current_user&#39;, &#39;default&#39;,
+                …
+                ]
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../rc_data_feed_plugin_splunkfeed/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Data Feed plugin for Splunk HTTP Event Collector</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../rc_data_feed_plugin_kafkafeed/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Data Feed KafkaFeed Plugin</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, IBM Security QRadar SOAR
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Data Feed ODBCFeed Plugin</a><ul>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#notes">Notes:</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+<li><a class="reference internal" href="#change-log">Change log</a><ul>
+<li><a class="reference internal" href="#version-1-0-5-changes">Version 1.0.5 changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install-the-python-components">Install the Python components</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#odbcfeed-class">ODBCFeed Class</a><ul>
+<li><a class="reference internal" href="#additional-connection-strings">Additional connection strings</a><ul>
+<li><a class="reference internal" href="#integration-server">Integration Server</a></li>
+<li><a class="reference internal" href="#app-host">App Host</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-server-requirements">Integration Server Requirements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sqlitefeed-class">SQLiteFeed Class</a></li>
+<li><a class="reference internal" href="#odbc-database-considerations">ODBC Database Considerations</a><ul>
+<li><a class="reference internal" href="#datetime-fields-and-timezones">Datetime Fields and Timezones</a></li>
+<li><a class="reference internal" href="#modifications">Modifications</a><ul>
+<li><a class="reference internal" href="#modify-dialect-encoding">Modify dialect encoding</a></li>
+<li><a class="reference internal" href="#modify-data-type-mapping">Modify data type mapping</a></li>
+<li><a class="reference internal" href="#modifying-dialect-reserved-words">Modifying dialect reserved words</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
