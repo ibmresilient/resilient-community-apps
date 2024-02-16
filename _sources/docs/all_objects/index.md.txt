@@ -10,6 +10,6 @@ all_functions
 all_playbooks
 ```
 
-[All Functions](./all_functions.md)
+## [All Functions](./all_functions.md)
 
-[All Playbooks](./all_playbooks.md)
+## [All Playbooks](./all_playbooks.md)
