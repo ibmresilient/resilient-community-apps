@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "reason": {},
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "incident_id": {
+              "type": "integer"
+            },
+            "task_id": {
+              "type": "integer"
+            },
+            "sn_init_work_note": {
+              "type": "string"
+            },
+            "sn_optional_fields": {
+              "type": "object",
+              "properties": {
+                "short_description": {
+                  "type": "string"
+                },
+                "assignment_group": {
+                  "type": "string"
+                },
+                "caller_id": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "row_id": {
+          "type": "integer"
+        },
+        "res_id": {
+          "type": "string"
+        },
+        "res_link": {
+          "type": "string"
+        },
+        "sn_ref_id": {
+          "type": "string"
+        },
+        "sn_sys_id": {
+          "type": "string"
+        },
+        "sn_record_state": {
+          "type": "string"
+        },
+        "sn_record_link": {
+          "type": "string"
+        },
+        "sn_time_created": {
+          "type": "integer"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "task_id": {
+          "type": "integer"
+        },
+        "sn_init_work_note": {
+          "type": "string"
+        },
+        "sn_optional_fields": {
+          "type": "object",
+          "properties": {
+            "short_description": {
+              "type": "string"
+            },
+            "assignment_group": {
+              "type": "string"
+            },
+            "caller_id": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "row_id": {
+      "type": "integer"
+    },
+    "res_id": {
+      "type": "string"
+    },
+    "res_link": {
+      "type": "string"
+    },
+    "sn_ref_id": {
+      "type": "string"
+    },
+    "sn_sys_id": {
+      "type": "string"
+    },
+    "sn_record_state": {
+      "type": "string"
+    },
+    "sn_record_link": {
+      "type": "string"
+    },
+    "sn_time_created": {
+      "type": "integer"
+    }
+  }
+}
