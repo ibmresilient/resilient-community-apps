@@ -1,4 +1,4 @@
-# Resilient Functions Integration to McAfee ATD
+# McAfee ATD
 
 This function uploads a file or URL to McAfee to be analyzed and returns the report to the function's post-processer or adding the pdf/html attachment to the incident. The function will work on all artifacts that support an attachment, incident and task attachments, in addition to artifacts which support URLs.
 
@@ -21,7 +21,7 @@ To package for distribution,
 The resulting .tar.gz file can be installed using
 
     pip install dist/<filename>.tar.gz
-    
+
 See the accompanying documentation for how to install to Resilient and configure.
 
 ## Configuration

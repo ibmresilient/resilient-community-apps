@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_cisco_amp4ep
+# Cisco AMP for Endpoints
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -63,7 +63,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -98,8 +98,8 @@ The Cisco AMP for Endpoints integration with the SOAR platform allows for the qu
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 <!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
@@ -114,16 +114,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -133,7 +133,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -241,7 +241,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -335,7 +335,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -450,7 +450,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -585,7 +585,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -788,7 +788,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -926,7 +926,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -1050,7 +1050,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -1242,7 +1242,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -1360,7 +1360,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -1517,7 +1517,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -1658,7 +1658,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -1795,7 +1795,7 @@ results = {
     #   2. Invoke the Function in SOAR
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_cisco_amp4ep --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_cisco_amp4ep
-} 
+}
 ```
 
 </p>
@@ -1922,7 +1922,7 @@ def main():
       artifact_type = ARTIFACT_TYPE.split(' ')[2]
     except:
       artifact_type = ARTIFACT_TYPE
-  
+
     validate_fields(["System Name", artifact_type], PARAMS)
 
     if artifact_type == "System Name":
@@ -2060,9 +2060,9 @@ def validate_fields(fields, params):
 
 def main():
     desc = ''
-    
+
     validate_fields(["System Name", ARTIFACT_TYPE], PARAMS)
-    
+
     if ARTIFACT_TYPE == "Malware SHA-256 Hash":
         desc =  "File sha256 hash was detected on hostname '{0}' by function '{1}' for Cisco AMP for Endpoints."\
             .format(PARAMS["System Name"], FUNCTION_NAME)

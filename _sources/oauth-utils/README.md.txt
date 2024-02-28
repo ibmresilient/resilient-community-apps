@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# OAuth utilities for IBM SOAR apps
+# OAuth Utilities
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -33,7 +33,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -61,7 +61,7 @@ The OAuth Utilities package provides tools and utilities to support OAuth for IB
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 ### Python Environment
 Both Python 3.6 and python 3.9 are supported.
@@ -79,10 +79,10 @@ Additional package dependencies might exist for each of these packages:
 #### Configuration
 * Utility `oauth2_generate_refresh_token`: The following settings must be provided for the OAuth 2.0 service.
 ```
-client_id 
-client_secret 
-scope 
-token_url 
+client_id
+client_secret
+scope
+token_url
 auth_url
 ```
 #### Permission
@@ -104,7 +104,7 @@ pip install --upgrade setuptools
 2. Go to the folder where the downloaded app is located and unzip. For example:
 ```
 unzip oauth-utils-1.0.0-00001.zip
-``` 
+```
 3. The app zip file contains a python package. Install the package using the following command:
 ```
 pip install --upgrade oauth-utils-1.0.0-00001.tar.gz
@@ -149,26 +149,26 @@ The following table provides additional optional command-line arguments which ca
 The OAuth Utilities for SOAR app supplies various subcommands to help with OAuth support for apps in a SOAR environment.
 ```
 $ oauth-utils
-usage: 
+usage:
     $ oauth-utils <subcommand> ...
     $ oauth-utils -v <subcommand> ...
     $ oauth-utils oauth2_generate_refresh_token
     $ oauth-utils oauth2_generate_refresh_token -b
     $ oauth-utils oauth2_generate_refresh_token -c <path_to_config_file>/app.config -a <app_name>
     $ oauth-utils -h
-    
+
 
 Tools to manage OAuth for IBM SOAR apps
 
 optional arguments:
   -h, --help                       show this help message and exit
   -v, --verbose                    Set the log level to DEBUG
-``` 
+```
 
 #### Utility: oauth2_generate_refresh_token
 
 A utility to generate a refresh token for an OAuth 2.0 service (to be used with an IBM SOAR app).
-``` 
+```
 usage: $ oauth-utils <subcommand> ...
     $ oauth-utils -v <subcommand> ...
     $ oauth-utils oauth2_generate_refresh_token
@@ -209,10 +209,10 @@ optional arguments:
 
 To use the `oauth2_generate_refresh_token` utility, set up an app or project for an OAuth 2.0 identity provider service from which you can get the required configuration settings, such as:
 ```
-client_id 
-client_secret 
-scope 
-token_url 
+client_id
+client_secret
+scope
+token_url
 auth_url
 ```
 The setup procedure varies depending on the provider. This document provides examples for 2 well known services `Google Gmail` and                 `Microsoft Outlook 365`. These examples can be used to send email using SMTP.
@@ -252,11 +252,11 @@ token_url=https://accounts.google.com/o/oauth2/token
     ![screenshot: oauth-utils-goog-oc-dev-scopes](./doc/screenshots/oauth-utils-goog-oc-dev-scopes.png)
 
     ![screenshot: oauth-utils-goog-oc-dev-scopes_2](./doc/screenshots/oauth-utils-goog-oc-dev-scopes_2.png)
- 
+
 *  Since a User Type of `External` is used, you need to add a user who has access to the app. In this example, the test user is the same as the app user. Click `Add Users`, and  add the user. Click `Save` and `Continue`.
 
     ![screenshot: oauth-utils-goog-oc-dev-test-user](./doc/screenshots/oauth-utils-goog-oc-dev-test-user.png)
-   
+
 #### Configure Credentials.
 
 * In the APIs & Services section, click `Credentials` and then click `Create credentials`.
@@ -266,11 +266,11 @@ token_url=https://accounts.google.com/o/oauth2/token
 * Select `OAuth Client ID` to create a new client ID then select `Desktop app`. The client ID is used to verify application identify to Google’s OAuth servers.
 
     ![screenshot: oauth-utils-goog-creds-desktop](./doc/screenshots/oauth-utils-goog-creds-desktop.png)
-    ![screenshot: oauth-utils-goog-creds-desktop_2](./doc/screenshots/oauth-utils-goog-creds-desktop_2.png)  
+    ![screenshot: oauth-utils-goog-creds-desktop_2](./doc/screenshots/oauth-utils-goog-creds-desktop_2.png)
 
 * When the OAuth client is created you are presented with a screen showing your client ID and secret.
 
-  ![screenshot: oauth-utils-goog-creds-created](./doc/screenshots/oauth-utils-goog-creds-created.png)  
+  ![screenshot: oauth-utils-goog-creds-created](./doc/screenshots/oauth-utils-goog-creds-created.png)
 
 You can now add these credentials and scope to an app.config file or alternatively use as command-line arguments for the `oauth2_generate_refresh_token` utility.
 ```
@@ -291,17 +291,17 @@ To authorize a token, copy the following URL into a browser and follow the direc
 
 https://accounts.google.com/o/oauth2/auth?state=6a3290f368de76e0dc83d7a380ca91e8950a57ff2aabc94c706b3418743e2743&scope=https%3A%2F%2Fmail.google.com%2F&client_id=337895628616-h4epvvbqv5946aun1u9qg7kqp6tu5c1j.apps.googleusercontent.com&response_type=code&response_mode=query&redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Fcallback
 
-Enter callback URL: 
+Enter callback URL:
 ```
 * Enter the URL in a browser, log in as the SMTP email user, and follow the directions by clicking `Continue` in each presented screen.
 
   ![screenshot: oauth-utils-goog-web ](./doc/screenshots/oauth-utils-goog-web.png)
-  
-  ![screenshot: oauth-utils-goog-web_2 ](./doc/screenshots/oauth-utils-goog-web_2.png) 
+
+  ![screenshot: oauth-utils-goog-web_2 ](./doc/screenshots/oauth-utils-goog-web_2.png)
 
 * Eventually the user is presented with an `Unable to connect` message in the browser and a callback URL in the browser location window.
 
-  ![screenshot: oauth-utils-goog-web-callback ](./doc/screenshots/oauth-utils-goog-web-callback.png) 
+  ![screenshot: oauth-utils-goog-web-callback ](./doc/screenshots/oauth-utils-goog-web-callback.png)
 
 * Enter the callback address from the browser location window on the command line.
 ```
@@ -330,7 +330,7 @@ token_url=https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
 #### App Registration
 * As the SMTP email user, log in to the [Microsoft Azure Portal](https://portal.azure.com/) and authenticate.
 * Under `Azure services`, click  on `Azure Active Directory`.
-  
+
   ![screenshot: oauth-utils-ms-azure ](./doc/screenshots/oauth-utils-ms-azure.png)
 
 * Click on `App Registrations` >`New Registration`.
@@ -348,43 +348,43 @@ token_url=https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
 #### Authentication
 * Under `Manage` on the left menu, select `Authentication`.
 
-   ![screenshot: oauth-utils-ms-auth ](./doc/screenshots/oauth-utils-ms-auth.png) 
-  
+   ![screenshot: oauth-utils-ms-auth ](./doc/screenshots/oauth-utils-ms-auth.png)
+
 * Select `Yes` for `Enable the following mobile and desktop flows` then click `Save`.
-  
-   ![screenshot: oauth-utils-ms-auth_2 ](./doc/screenshots/oauth-utils-ms-auth_2.png) 
+
+   ![screenshot: oauth-utils-ms-auth_2 ](./doc/screenshots/oauth-utils-ms-auth_2.png)
 
 #### API Permissions
 * On the left side under `Manage`, select `API Permissions`.
 * Click `Add a permission`.
-  
-  ![screenshot: oauth-utils-ms-perms ](./doc/screenshots/oauth-utils-ms-perms.png) 
-  
+
+  ![screenshot: oauth-utils-ms-perms ](./doc/screenshots/oauth-utils-ms-perms.png)
+
 * On the Request API permission screen, select Microsoft Graph.
 * In Graph API, choose Delegated permissions.
 * Add the following permissions.
 ```
 offline_access
 SMTP.Send
-``` 
+```
 
-  ![screenshot: oauth-utils-ms-perms_2 ](./doc/screenshots/oauth-utils-ms-perms_2.png) 
-  
+  ![screenshot: oauth-utils-ms-perms_2 ](./doc/screenshots/oauth-utils-ms-perms_2.png)
+
 * You need an admin user account to `Grant admin consent for <user>` to enable these permissions.
 
-  ![screenshot: oauth-utils-ms-grant ](./doc/screenshots/oauth-utils-ms-grant.png) 
-  
-  ![screenshot: oauth-utils-ms-grant_2 ](./doc/screenshots/oauth-utils-ms-grant_2.png) 
+  ![screenshot: oauth-utils-ms-grant ](./doc/screenshots/oauth-utils-ms-grant.png)
+
+  ![screenshot: oauth-utils-ms-grant_2 ](./doc/screenshots/oauth-utils-ms-grant_2.png)
 
 #### Create client secret
 * On the left side under `Manage`, select `Certificate and secrets`.
 * Click `New client secret`.
 * Enter a name for the client secret.
-  ![screenshot: oauth-utils-ms-sec ](./doc/screenshots/oauth-utils-ms-sec.png) 
-  
-  ![screenshot: oauth-utils-ms-sec_2 ](./doc/screenshots/oauth-utils-ms-sec_2.png) 
+  ![screenshot: oauth-utils-ms-sec ](./doc/screenshots/oauth-utils-ms-sec.png)
 
-  ![screenshot: oauth-utils-ms-sec_3 ](./doc/screenshots/oauth-utils-ms-sec_3.png) 
+  ![screenshot: oauth-utils-ms-sec_2 ](./doc/screenshots/oauth-utils-ms-sec_2.png)
+
+  ![screenshot: oauth-utils-ms-sec_3 ](./doc/screenshots/oauth-utils-ms-sec_3.png)
 
 * Save the secret `Value` locally. This is be used as the value for the `client_secret` setting/argument.
 
@@ -394,7 +394,7 @@ SMTP.Send
 * In the Email apps section, click Manage email apps.
 * Verify the `Authenticated SMTP` setting is checked.
 * Click `Save changes`.
-  
+
   ![screenshot: oauth-utils-ms-admin-smtp ](./doc/screenshots/oauth-utils-ms-admin-smtp.png)
 
 You can now add credentials and scope obtained above to an app.config file or alternatively use as command line arguments for the `oauth2_generate_refresh_token` utility.

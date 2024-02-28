@@ -1,4 +1,4 @@
-# fn-res-to-icd: ICD Ticket Escalation from IBM Resilient
+# SOAR to ICD
 
 - [fn-res-to-icd: ICD Ticket Escalation from IBM Resilient](#fn-res-to-icd-ICD-Ticket-Escalation-from-IBM-Resilient)
   - [Release Notes](#Release-Notes)
@@ -18,7 +18,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.0
@@ -32,7 +32,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This integration allows a SOC Analyst to escalate a Resilient incident to the ICD dashboard. 
+This integration allows a SOC Analyst to escalate a Resilient incident to the ICD dashboard.
 If the icd_priority parameter is not defined in app.config file, the INTERNAL PRIORITY on the ICD platform (4) will be set on the escalated ticket corresponding to that Resilient incident.
 IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_field_severity is not None (or a negative number) in the app.config file.
 

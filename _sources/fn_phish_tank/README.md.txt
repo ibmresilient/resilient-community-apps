@@ -1,4 +1,4 @@
-# PhishTank Lookup Function for IBM Resilient
+# PhishTank Lookup
 
 - [Overview](#overview)
 - [Note on Partial URL Support](#note-on-partial-url-support)
@@ -30,7 +30,7 @@ Partial URLs are not supported with this integration since the PhishTank API sup
 ---
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * IBM Resilient >= `v31.0.4254`
 * An Integration Server running `resilient_circuits>=30.0.0`
@@ -119,7 +119,7 @@ There are several ways to verify the successful operation of a function.
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.0

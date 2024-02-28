@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# IOC Parser Function v2 for IBM Resilient
+# IOC Parser
 
 - [Release Notes](#release-notes)
 - [App Host Setup](#app-host-setup)
@@ -24,7 +24,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 
@@ -50,17 +50,17 @@ Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and
 
 ---
 ## App Host Setup
-All the components for running IOC_Parser_v2 in a container already exist when using the App Host app. 
-To install, 
-* navigate to Administrative Settings and then the Apps tab. 
-* Click the `Install` button and select the downloaded file: app-fn_ioc_parser_v2-x.x.x.zip. 
-* No additional changes are needed to the app.config file in the Configuration section of the App. 
+All the components for running IOC_Parser_v2 in a container already exist when using the App Host app.
+To install,
+* navigate to Administrative Settings and then the Apps tab.
+* Click the `Install` button and select the downloaded file: app-fn_ioc_parser_v2-x.x.x.zip.
+* No additional changes are needed to the app.config file in the Configuration section of the App.
 
 ## Integration Server Setup
 
 ### Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.2.32`
 * An Integration Server running `resilient_circuits>=30.0.0`

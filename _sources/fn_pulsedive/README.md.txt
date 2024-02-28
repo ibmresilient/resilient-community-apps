@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# fn-pulsedive Functions for IBM Resilient
+# Pulsedive
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -26,7 +26,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.1
@@ -51,7 +51,7 @@ Resilient Circuits Components for 'fn_pulsedive'
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.0.5343`
 * An Integration Server running `resilient_circuits>=30.0.0`
@@ -156,7 +156,7 @@ to increase the timeout setting to 60 seconds. For example:
 ```
 [integrations]
 timeout=60
-```  
+```
 
 ---
 

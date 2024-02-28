@@ -1,15 +1,15 @@
-# Resilient Function Floss
+# Floss
 
 This Resilient Function package provides a function fn_floss that
 takes a binary file as input and returns a list of decoded obfuscated
 strings from the file.
 
-Also included in the package are two example workflows: 
+Also included in the package are two example workflows:
 - Artifact file input
 - Attachment file input
 
 Both workflows create a task or incident note containing the list of
-decoded string extracted from the file. 
+decoded string extracted from the file.
 
 
 ## Package Dependences
@@ -32,21 +32,21 @@ decoded string extracted from the file.
 	$ pip install -e  ./fn_floss/
     ```
    or the distribution file can be installed using:
-   
+
     ```
 	$ pip install fn_floss-<version>.tar.gz
 	```
 
 ## Setup
 
-To configure the fn_floss parameters, run `resilient-circuits config [-u | -c]`. 
+To configure the fn_floss parameters, run `resilient-circuits config [-u | -c]`.
 Then edit the [fn_floss] section to define the parameters to floss:
 
 ```
 [fn_floss]
 # Floss Function
-# Use the following floss_options variable to specify the commandline options to be used by 
-# the floss package to define the behavior for extracting strings. 
+# Use the following floss_options variable to specify the commandline options to be used by
+# the floss package to define the behavior for extracting strings.
 # Each commandline parameter should be separated by a comma.
 # The defaults here are: -q quiet mode, -s shellcode, -n minimum string length
 # See https://github.com/fireeye/flare-floss/blob/master/doc/usage.md for all possible commandline options.
@@ -56,7 +56,7 @@ floss_options=-q,-s,-n 5
 To install function definition, message destination, sample workflows, and rules to the Resilient server:
 
 	$ resilient-circuits customize
-	
+
 This package includes the followings:
 
 	Functions:
@@ -69,7 +69,7 @@ This package includes the followings:
 	Sample rules that call the sample Workflows
 
 ## Start
-To start this function: 
+To start this function:
 
 	$ resilient-circuits run
 
@@ -78,4 +78,4 @@ To start this function:
 To uninstall this function:
 
 	$ pip uninstall fn_floss
-  
+

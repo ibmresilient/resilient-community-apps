@@ -1,4 +1,4 @@
-# IBM Resilient Integration with Docker
+# Docker
 
 The Resilient Integration with Docker provides tools to integrate Docker into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for Dockerised tools that can be used for Malware Research and Incident Response.
 
@@ -18,46 +18,46 @@ The Resilient Integration with Docker provides tools to integrate Docker into yo
     - [Columns:](#columns)
     - [Display the Datatable in an Incident](#display-the-datatable-in-an-incident)
 
-# Pre-Requisite Steps and Info: 
+# Pre-Requisite Steps and Info:
 
-### Install Docker 
+### Install Docker
 This integration requires access to a Docker daemon, in order to run containers and get output. Typically the Docker daemon would be on the same machine that you intend to run the containers from so this would mean installing Docker on your integration server itself.
-To install Docker on your Integration Server see [this link](https://docs.docker.com/install/linux/docker-ee/rhel/) for RHEL, [this one](https://docs.docker.com/docker-for-mac/install/) for MacOS or [this one](https://docs.docker.com/install/) for everything else. 
+To install Docker on your Integration Server see [this link](https://docs.docker.com/install/linux/docker-ee/rhel/) for RHEL, [this one](https://docs.docker.com/docker-for-mac/install/) for MacOS or [this one](https://docs.docker.com/install/) for everything else.
 
 
 ### Pulling Images
-This integration package does not pull docker images for you. This is intentional to reduce the chance of downloading an unintended image for use in your organisation. 
+This integration package does not pull docker images for you. This is intentional to reduce the chance of downloading an unintended image for use in your organisation.
 Images you wish to use with the integration will need to be pulled separately either from a registry or a Github repo using the `docker pull` command.
 
-Git Repo Example: `docker build -t amass https://github.com/OWASP/Amass.git` 
-Dockerhub Example: `docker pull blacktop/nsrl`  
-### Connection options and installation:  
+Git Repo Example: `docker build -t amass https://github.com/OWASP/Amass.git`
+Dockerhub Example: `docker pull blacktop/nsrl`
+### Connection options and installation:
 There are a number of connection options for this integration. The easiest to setup and maintain is using a local Docker connection by installing Docker on the Integration Server.
-Alternatively, if you already have an Docker daemon exposed on a port that you can connect to and use, you may instead opt to connect to and run containers using this daemon instead of installing Docker on your integration server. 
+Alternatively, if you already have an Docker daemon exposed on a port that you can connect to and use, you may instead opt to connect to and run containers using this daemon instead of installing Docker on your integration server.
 This is done by specifying the `docker_remote_url` value in the app.config section which will specify the location of the Docker daemon and also which remote connection option to use, of which there are two: TCP and SSH.
 
-### SSH Connection Setup 
-SSH as a connection option is a relatively new connection option, first announced in [2018](https://blog.docker.com/2018/09/join-the-beta-for-docker-engine-18-09/) 
+### SSH Connection Setup
+SSH as a connection option is a relatively new connection option, first announced in [2018](https://blog.docker.com/2018/09/join-the-beta-for-docker-engine-18-09/)
  is also provided to enable secure connections to a Docker daemon without the need to modify existing Docker setup.
-Docker SSH support requires Docker version 18.09 or higher. 
+Docker SSH support requires Docker version 18.09 or higher.
 
 Docker SSH requires using SSH Keys rather than a username and password and use the Paramiko library to do it.
 
-A good tutorial on generating SSH Keys can be found [here](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
+A good tutorial on generating SSH Keys can be found [here](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
-After you have generated your SSH Key, you will need to ensure it is an authorized key on the machine you intend to connect to. 
+After you have generated your SSH Key, you will need to ensure it is an authorized key on the machine you intend to connect to.
 For information on copying SSH keys to another machine as an authorized key, [see here](https://www.ssh.com/ssh/copy-id)
 
-### Known Issues 
-Currently there is limited support for Attachment Workflows when using remote connections. 
+### Known Issues
+Currently there is limited support for Attachment Workflows when using remote connections.
 This is due to how the remote volume bindings are established, where if the source directory does not exist on the destination host, it will attempt to create it.
 For this reason when using remote connections it is advised your source volume directory is in a common directory such as `/tmp/`.
 
 Additionally, for images which do not run as root, you will need to ensure the attachments have the right permissions on the destination source to be accessible from a remote source. e.g `chmod a+xwr ~/<dest_dir>`
 
-# About the provided UseCases 
+# About the provided UseCases
 
-## Volatility 
+## Volatility
 The Volatility Framework is a completely open collection of tools,
 implemented in Python, [[source]](https://github.com/volatilityfoundation/volatility) used to analyze volatile memory (RAM) samples.
 
@@ -69,13 +69,13 @@ The RDS is a collection of digital signatures of known, traceable software appli
 
 [View this image on DockerHub](https://hub.docker.com/r/blacktop/nsrl)
 
-## Amass 
-The OWASP Amass tool suite obtains subdomain names by scraping data sources, recursive brute forcing, crawling web archives, permuting/altering names and reverse DNS sweeping.[Source](https://github.com/OWASP/Amass) 
+## Amass
+The OWASP Amass tool suite obtains subdomain names by scraping data sources, recursive brute forcing, crawling web archives, permuting/altering names and reverse DNS sweeping.[Source](https://github.com/OWASP/Amass)
 
 [View this image on Github](https://github.com/OWASP/Amass)
 
 # app.config settings:
-There are two ways to configure settings for this Integration. You can choose to configure general settings for the Integration itself such as which method to use for connections. 
+There are two ways to configure settings for this Integration. You can choose to configure general settings for the Integration itself such as which method to use for connections.
 Additionally, each image you intend to create containers from can have its own app.config section.
 
 ## Integration app.config settings:
@@ -87,10 +87,10 @@ docker_use_remote_conn=<True/False>
 docker_remote_url=<URL>
 ```
 
-## Image specific app.config sections 
+## Image specific app.config sections
 Each Docker image has the opportunity to use its own app.config section for getting options which are specific to that image only. This includes the images full name, volume bindings if that container requires volumes and the command which will be sent to the built container.
 
-Image specific app.config sections are found by searching for the image shortname postfixed to `fn_docker_`. This means that to enable image specific options that you need your section should be named this way e.g `fn_docker_volatility`. 
+Image specific app.config sections are found by searching for the image shortname postfixed to `fn_docker_`. This means that to enable image specific options that you need your section should be named this way e.g `fn_docker_volatility`.
 ```bash
 [fn_docker_volatility]
 docker_image=remnux/volatility
@@ -102,13 +102,13 @@ cmd=vol.py -f {{internal_vol}}/{{attachment_input}} {{operation}}
 
 ```
 
-Each image app.config section has the opportunity to include a number of extra arguments which will be used during container creation/invocation. This brings you, the designer, flexibility to configure different aspects of how the container will be run. For a list of which arguments you can modify this way [see here](). 
+Each image app.config section has the opportunity to include a number of extra arguments which will be used during container creation/invocation. This brings you, the designer, flexibility to configure different aspects of how the container will be run. For a list of which arguments you can modify this way [see here]().
 
 There are a number of arguments which you cannot modify as they are explicity set by the integration, these are :
 
 + Image -- The image is set in the app.config
 + Command -- The command is set in the app.config
-+ Detach -- This is set to `True`. 
++ Detach -- This is set to `True`.
 + Remove -- This is set to `False`, the container is removed after logs and stats are gathered.
 
 ## Functions:
@@ -217,7 +217,7 @@ There are two provided use cases which each have their own Send Artifact To Dock
 
 ```python
 inputs.docker_input = artifact.value
-inputs.incident_id = incident.id 
+inputs.incident_id = incident.id
 inputs.docker_artifact_type = artifact.type
 ```
 
@@ -226,7 +226,7 @@ inputs.docker_artifact_type = artifact.type
 ```python
 note_text_start = u"""<b>Docker Integration</b>
               <br><br>A container was ran using the image <b>{0}</b>""".format(results.inputs["docker_image"]["name"])
-              
+
 # If the Attachment attribute of the content payload is set; we are dealing with an attachment
 if results.content["attachment_name"] != None:
   note_text_attachment = u"""<br> On an Attachment with name {0} """.format(results.content["attachment_name"])
@@ -237,7 +237,7 @@ else:
   note_text_artifact = u"""<br> On an Artifact of Type: <b>{0}</b>
                           <br> Artifact Value: <b>{1}</b>""".format(results.inputs["docker_artifact_type"], results.inputs["docker_input"])
   note_text_start += note_text_artifact
-              
+
 note_text_end = """<br>Container ID : <b>{0}</b>
               <br>Container exit code : <b>{1}</b>
               <br><br> Container Logs have been saved as an attachment.
@@ -251,20 +251,20 @@ try:
     des = artifact.description.content
 except Exception:
   des = None
-  
+
 if des is None:
-  
+
   artifact.description = u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}  \n{1}""".format(results.inputs["docker_image"]["name"],results.content["logs"])
   # Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact
   #artifact.description = u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}""".format(results.inputs["docker_image"]["name"])
 else:
-  
+
   artifact.description = des + u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}  \n{1}""".format(results.inputs["docker_image"]["name"],results.content["logs"])
-  
+
   # Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact
   #artifact.description = des + u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}""".format(results.inputs["docker_image"]["name"])
-  
-  
+
+
 row = incident.addRow("docker_integration_invocations")
 row["docker_timestamp"] = results["metrics"]["timestamp_epoch"] or 0
 row["docker_container_id"] = results.content["container_id"]
@@ -283,7 +283,7 @@ An example workflow scoped for Attachments which will, when invoked, send the at
 ### 2: Pre-Process Script:
 
 ```python
-inputs.incident_id = incident.id 
+inputs.incident_id = incident.id
 
 # If this workflow has the task_id available, gather it incase we need it.
 if task:
@@ -293,7 +293,7 @@ if attachment:
   inputs.attachment_id = attachment.id
 
 # If this workflow has the artifact_id available, gather it incase we need it.
-try: 
+try:
   if artifact:
     inputs.artifact_id = artifact.id
 except:
@@ -305,7 +305,7 @@ except:
 ```python
 note_text_start = u"""<b>Docker Integration</b>
               <br><br>A container was ran using the image <b>{0}</b>""".format(results.inputs["docker_image"]["name"])
-              
+
 # If the Attachment attribute of the content payload is set; we are dealing with an attachment
 if results.content["attachment_name"] != None:
   note_text_attachment = u"""<br> On an Attachment with name {0} """.format(results.content["attachment_name"])
@@ -316,7 +316,7 @@ else:
   note_text_artifact = u"""<br> On an Artifact of Type: <b>{0}</b>
                           <br> Artifact Value: <b>{1}</b>""".format(results.inputs["docker_artifact_type"], results.inputs["docker_input"])
   note_text_start += note_text_artifact
-              
+
 note_text_end = """<br>Container ID : <b>{0}</b>
               <br>Container exit code : <b>{1}</b>
               <br><br> Container Logs have been saved as an attachment.
@@ -376,15 +376,15 @@ docker_integration_invocations
 * In order to **display** the Test Data Table in your Incident, you must **modify your Layout Settings**
 
 1. Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **+ Add Tab**
-   
+
  ![screenshot](./screenshots/dt_1.png)
 
 2. Enter **Tab Text**: `My Test Tab` and click **Add**
- 
+
  ![screenshot](./screenshots/dt_2.png)
 
 3. **Drag** the Data table into the middle and click **Save**
- 
+
  ![screenshot](./screenshots/dt_3.png)
 
 4. Create a new Incident and you will now see the **My Test Tab** with the **Test Data Table**

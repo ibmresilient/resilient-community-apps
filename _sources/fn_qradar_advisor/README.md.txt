@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# QRadar Advisor Functions
+# QRadar Advisor
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -47,7 +47,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -85,7 +85,7 @@ QRadar Advisor integration includes four functions:
 * Perform a Watson Search on an indicator and retrieve suspicious observables related to it.
 * Perform a Watson Search with Local Context on an indicator and retrieve a cyber threat intelligence (CTI) report on it in Structured Threat Information eXpression (STIX2) format.
 * Perform an analysis on a QRadar offense, and retrieve CTI data from QRadar Advisor and IBM Watson in STIX format.
-* Map a given QRadar rule to MITRE ATT&CK tactics. 
+* Map a given QRadar rule to MITRE ATT&CK tactics.
 <p>
 The package also includes workflow examples to demonstrate the usage of the above functions.
 
@@ -93,8 +93,8 @@ The package also includes workflow examples to demonstrate the usage of the abov
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -108,17 +108,17 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `44.0.7583`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=46.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -128,7 +128,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -155,7 +155,7 @@ This app has been implemented using:
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
 * QRadar 7.3.0 or later
-* Qradar Advisor with Watson 
+* Qradar Advisor with Watson
 * QRadar Use Case Manager 3.1.0 or greater
 
 ---
@@ -182,7 +182,7 @@ The following table provides the settings you need to configure the app. These s
 | **offense_analysis_period** | No | 5 | *Offense analysis period in seconds.* |
 
 ### Configure IBM QRadar Advisor with Watson
-You need to have IBM QRadar Advisor With Watson installed on a QRadar server, and fully configured, as shown in the following configuration page. 
+You need to have IBM QRadar Advisor With Watson installed on a QRadar server, and fully configured, as shown in the following configuration page.
 
  ![screenshot: qradar-configure](./doc/screenshots/qradar-advisor-configuration.png)
 
@@ -191,13 +191,13 @@ To access the QRadar Advisor REST API, you need to know its app_id, which you ca
 You also need an access token to use the REST API. You can obtain access tokens from the Authorized Service Token section of the Admin page in QRadar.
 
 ### Configure QRadar Use Case MAnager
-You need to have QRadar Use Case Manager installed on a QRadar server and fully configured, as shown in the following configuration page.  
+You need to have QRadar Use Case Manager installed on a QRadar server and fully configured, as shown in the following configuration page.
 
 
  ![screenshot: qradar-ucm-configure](./doc/screenshots/qradar-ucm-configuration.png)
 
 An access token is required to use the REST API. You can obtain access tokens from the Authorized Service Token section of QRadar's Admin page.
-This token can be the same as the authorization token used for QRadar Advisor above. 
+This token can be the same as the authorization token used for QRadar Advisor above.
 
 
 ### Custom Layouts
@@ -418,7 +418,7 @@ results = {
 
 ```python
 #
-# This sample workflow uses the custom field (qradar_id) to perform 
+# This sample workflow uses the custom field (qradar_id) to perform
 # an offense analysis in QRadar Advisor
 #
 inputs.qradar_offense_id = incident.properties.qradar_id
@@ -586,11 +586,11 @@ value = artifact.value
 type = artifact.type
 
 #
-# Watson Search only supports 5 indicator types: IP Address, Hash, Domain, URL, Username. 
+# Watson Search only supports 5 indicator types: IP Address, Hash, Domain, URL, Username.
 # The “user:” prefix needs to be added to a username search
 #
 mapping = {
-  "User Account":"user:"       
+  "User Account":"user:"
 }
 prefix = ""
 if type in mapping:
@@ -625,61 +625,61 @@ if not status_set:
 #
 '''{
       "search": {
-          "search_value_type": "DomainName", 
-          "other_count": 1, 
+          "search_value_type": "DomainName",
+          "other_count": 1,
           "search_results": {
           "suspicious_observables": [
                   {
-                      "reference_count": 1, 
-                      "timestamp": 1529421998, 
-                      "type": "DomainName", 
+                      "reference_count": 1,
+                      "timestamp": 1529421998,
+                      "type": "DomainName",
                       "label": "mydomain.com"
-                  }, 
+                  },
                   {
-                      "reference_count": 1, 
-                      "timestamp": 1462407300, 
-                      "type": "EmailContent", 
+                      "reference_count": 1,
+                      "timestamp": 1462407300,
+                      "type": "EmailContent",
                       "label": "ccf2d5f4ab37650ccbb582f351aa6fdd:"
-                  }, 
+                  },
                   {
-                      "reference_count": 1, 
-                      "timestamp": 1462407300, 
-                      "type": "File", 
+                      "reference_count": 1,
+                      "timestamp": 1462407300,
+                      "type": "File",
                       "label": "ccf2d5f4ab37650ccbb582f351aa6fdd"
-                  }, 
+                  },
                   {
-                      "reference_count": 1, 
-                      "timestamp": 1463566500, 
-                      "type": "IpAddress", 
+                      "reference_count": 1,
+                      "timestamp": 1463566500,
+                      "type": "IpAddress",
                       "label": "190.104.198.116"
                   },
                   {
-                      "reference_count": 1, 
-                      "timestamp": 1463072400, 
-                      "type": "Hash", 
+                      "reference_count": 1,
+                      "timestamp": 1463072400,
+                      "type": "Hash",
                       "label": "51417677b5e7b17542d383f5b25e2b43"
                   }
-          ], 
+          ],
           "other_observables": [
               {
-                  "reference_count": 1, 
-                  "timestamp": 1529421998, 
-                  "type": "DomainName", 
+                  "reference_count": 1,
+                  "timestamp": 1529421998,
+                  "type": "DomainName",
                   "label": "mydomain.com"
               }
           ]
-      }, 
-      "suspicious_count": 5, 
-      "search_value": "mydomain.com", 
-      "reference_count": 1, 
-      "is_toxic": false}, 
+      },
+      "suspicious_count": 5,
+      "search_value": "mydomain.com",
+      "reference_count": 1,
+      "is_toxic": false},
       "whois": {
-          "updated_date": "2015-09-15T23:25:25.000Z", 
-          "contact_country": "Canada", 
-          "registrar_name": "Domain.com, LLC", 
-          "contact_email": "noreply@data-protected.net", 
-          "created_date": "2000-06-22T04:00:00.000Z", 
-          "contact_name": "Data Protected Data Protected", 
+          "updated_date": "2015-09-15T23:25:25.000Z",
+          "contact_country": "Canada",
+          "registrar_name": "Domain.com, LLC",
+          "contact_email": "noreply@data-protected.net",
+          "created_date": "2000-06-22T04:00:00.000Z",
+          "contact_name": "Data Protected Data Protected",
           "contact_type": "registrant", "contact_org": "Data Protected"
       }
       }
@@ -892,11 +892,11 @@ value = artifact.value
 type = artifact.type
 
 #
-# Watson Search with Local Context only supports 5 indicator types: IP Address, Hash, DomainName, URL, Username. 
+# Watson Search with Local Context only supports 5 indicator types: IP Address, Hash, DomainName, URL, Username.
 # The “user:” prefix needs to be added to a username search.
 #
 mapping = {
-  "User Account":"user:"       
+  "User Account":"user:"
 }
 prefix = ""
 if type in mapping:
@@ -929,10 +929,10 @@ else:
 date_str = str(Date())
 for observable in results.observables:
   qradar_obs = incident.addRow("qradar_advisor_observable_for_artifact")
-  qradar_obs.qradar_advisor_toxicity = observable.toxicity 
+  qradar_obs.qradar_advisor_toxicity = observable.toxicity
   qradar_obs.qradar_advisor_relevance = observable.relevance
-  qradar_obs.qradar_advisor_type = observable.type 
-  qradar_obs.qradar_advisor_description = observable.description 
+  qradar_obs.qradar_advisor_type = observable.type
+  qradar_obs.qradar_advisor_description = observable.description
   qradar_obs.artifact_related = artifact.value
   qradar_obs.full_search_time = date_str
 # Our STIX tree or error message
@@ -994,7 +994,7 @@ Note that a full search like this could take up to 15 minutes. Once it is comple
  ![screenshot: watson-search-with-local-context ](./doc/screenshots/watson-search-local-context-note.png)
 
 Please note that the icons shown in the above note use external URL referencing to the official site for STIX2 icons (https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard). Therefore, those icons are shown only if the QRadar SOAR platform can access the above website.
-Also note that some indicators have a link icon at the end. These indicators are basically placeholders for the other (real) indicators with the same value. Think of them as symbolic links in a folder tree. 
+Also note that some indicators have a link icon at the end. These indicators are basically placeholders for the other (real) indicators with the same value. Think of them as symbolic links in a folder tree.
 
 If an observable is found a new task is created and can be viewed in the Tasks tab:
 
@@ -1011,12 +1011,12 @@ Create an artifact for the selected observable.
 
 ```python
 #
-# We create artifacts for those observables according to how they can be mapped to 
+# We create artifacts for those observables according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
-# to map them as well, please modify the following mapping dict. 
+# to map them as well, please modify the following mapping dict.
 #
 # All the other observables without direct mapping, try to make decision depending
-# on the qradar_advisor_description of them. If not decision can be made, then 
+# on the qradar_advisor_description of them. If not decision can be made, then
 # a String type artifact will be created.
 #
 mapping = {

@@ -1,15 +1,16 @@
-# Resilient Integration with WHOIS
+# Whois
+
 **This package contains one function which provides enrichment information about a domains WHOIS information. Takes in an input of an IP address or URL and then queries for WHOIS info related to this input. Results are saved in a rich text note.**
 
 
-## Table of Contents 
+## Table of Contents
   - [app.config settings:](#appconfig-settings)
   - [Function Inputs:](#function-inputs)
   - [Function Output:](#function-output)
   - [Pre-Process Script:](#pre-process-script)
   - [Post-Process Script:](#post-process-script)
   - [Rules](#rules)
-  
+
 ## History
 
 | Version| Comment |
@@ -90,7 +91,7 @@ def expand_list(list_value, separator=", "):
     return list_value
   else:
     return separator.join(list_value)
-    
+
 
 if results["success"]:
   # We have results
@@ -101,7 +102,7 @@ if results["success"]:
       expanded_list = expand_list(keyval[1], separator="<br>")
     else:
       expanded_list = expand_list(keyval[1])
-      
+
     noteText += u"""<br><b> {0}</b> : {1} """.format(keyval[0].capitalize(), expanded_list)
 else:
   noteText = u"""Whois Query ran against input <b>{0}</b><br> No results found""".format(results.inputs["whois_query"])

@@ -1,4 +1,4 @@
-# Resilient Function - ldap_search
+# LDAP Search
 
 This Resilient Function package can be used to execute an an LDAP search/query from a workflow using the Functions feature of the Resilient
 Circuits integration framework.

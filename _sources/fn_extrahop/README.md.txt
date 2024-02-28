@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# ExtraHop for IBM SOAR
+# ExtraHop
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -62,7 +62,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -73,12 +73,12 @@
 ### 1.1 Changes
 In v1.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
 
-You can continue to use the rules/workflows. 
-But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes. 
+You can continue to use the rules/workflows.
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 **NOTE** Starting with version 1.1.0 of the ExtraHop app for SOAR:
 * The poller uses ExtraHop detection `mod_time` field to determine which detections to pull in to SOAR.
@@ -117,7 +117,7 @@ The ExtraHop App provides the following functionality:
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
@@ -132,7 +132,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=42.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -142,10 +142,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | all_incidents_fields | Edit |
   | layouts | Read, Edit|
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -155,7 +155,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -254,17 +254,17 @@ The following table provides the settings you need to configure the app. These s
 When the poller starts running, a new incident tab is created as shown below. If the poller is not configured to run, the custom layout can be configured manually.
 * Import the Data Tables and Custom Fields like the screenshot below:
 * Create a new ExtraHop incident tab in Layouts as follows:
-  
+
 1. Navigate to the ‘Customization Settings’ and select the Layouts tab.
 2. Click on ‘Incident Tabs’.
 3. Add a new incident tab named ‘ExtraHop’.
-4. Drag and Drop the 'ExtraHop Update Notification' custom property onto the ExtraHop tab.  
+4. Drag and Drop the 'ExtraHop Update Notification' custom property onto the ExtraHop tab.
 5. Create new heading 'ExtraHop Properties' in the ExtraHop tab.
 6. Drag and Drop the ExtraHop the remaining custom properties under the new heading as shown below.
 7. Create new heading 'ExtraHop Details' in the ExtraHop tab.
 8. Drag and drop the ExtraHop data tables under the new heading as shown below.
 9. Click Save.
-  
+
  The following screenshot shows the ExtraHop properties and data tables added to the ExtraHop tab:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
@@ -280,7 +280,7 @@ The poller provides the following functionality.
 * The ExtraHop detections Ticket ID is assigned the SOAR case value.
 * The playbook `Extrahop Reveal(x): Update Case (PB)` is triggered automatically to update an incident/case.
 * The automatic playbook enhances the case/incident by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
-* Can be configured to filter the detections which are escalated to the SOAR cases.  
+* Can be configured to filter the detections which are escalated to the SOAR cases.
 * Closes SOAR case if the corresponding ExtraHop detections are closed.
 * Closes ExtraHop detections if the corresponding SOAR cases are closed.
 * Updates a notification property in the ExtraHop custom tab if information for a SOAR case if the corresponding ExtraHop detection is updated.
@@ -294,11 +294,11 @@ The poller provides the following functionality.
 The following screenshot shows examples of SOAR incidents created by the poller from ExtraHop detections:
 
   ![screenshot: fn-extrahop-revealx-incidents](./doc/screenshots/fn-extrahop-revealx-incidents.png)
-    
+
 The following screenshot shows an example of a SOAR incident Details tab created by the poller:
 
   ![screenshot: fn-extrahop-revealx-incident-details](./doc/screenshots/fn-extrahop-revealx-incident-details.png)
-  
+
 The following screenshot shows an example of custom properties in the ExtraHop tab of a SOAR incident created by the poller:
 
    ![screenshot: fn-extrahop-revealx-incident-properties](./doc/screenshots/fn-extrahop-revealx-incident-properties.png)
@@ -331,8 +331,8 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `Extrahop Reveal(x) Update Detection (PB)`.
 
-* A note is added to the ExtraHop detection when a matching SOAR case is closed. 
-  
+* A note is added to the ExtraHop detection when a matching SOAR case is closed.
+
 The automatic data table playbook `Extrahop Reveal(x): Update Detection (PB)` is triggered when a SOAR case is closed.
 
 The following screenshot shows an example of a note added to an ExtraHop detection:
@@ -486,8 +486,8 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `Extrahop Reveal(x): Assign Tag (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
-  
+* A note is added to the SOAR incident with the status of the action.
+
 The playbook is initiated by the manual data table menu item `Extrahop Reveal(x): Assign Tag (PB)` for data table `ExtraGop Devices`.
 
    ![screenshot: fn-extrahop-revealx-assign-tag-action](./doc/screenshots/fn-extrahop-revealx-assign-tag-action.png)
@@ -626,7 +626,7 @@ An example playbook that uses this SOAR function is `Extrahop Reveal(x): Create 
 The playbook is initiated by the menu item `Extrahop Reveal(x): Create Tag (PB)`.
 
    ![screenshot: fn-extrahop-revealx-create-tag-action](./doc/screenshots/fn-extrahop-revealx-create-tag-action.png)
-  
+
    ![screenshot: fn-extrahop-revealx-create-tag-action_2](./doc/screenshots/fn-extrahop-revealx-create-tag-action_2.png)
 
 The following screenshot shows an example of a note added to a SOAR incident:
@@ -740,9 +740,9 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `Extrahop Reveal(x): Get Activitymaps (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * The data table `ExtraHop Activitymaps` is updated.
- 
+
 The playbook is initiated by the incident menu item `Extrahop Reveal(x): Get Activitymaps (PB)`.
 
    ![screenshot: fn-extrahop-revealx-get-activitymaps-action](./doc/screenshots/fn-extrahop-revealx-get-activitymaps-action.png)
@@ -936,13 +936,13 @@ Get a note from an ExtraHop detection. Parameter detection_id.
 The function provides the following functionality.
 
 * Gets the current note from a detection in the ExtraHop environment.
-  
+
 **_NOTE:_** Get detection note will fail if `Detection Tracking` is enabled on ExtraHop.
 
 An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Detection (PB)`.
 
-* The current note is retrieved from the ExtraHop detection when a matching SOAR incident is closed. 
-  
+* The current note is retrieved from the ExtraHop detection when a matching SOAR incident is closed.
+
 The automatic data table playbook `Extrahop Reveal(x): Update Detection (PB)` is initiated when a SOAR case/incident is closed.
 
 <details><summary>Inputs:</summary>
@@ -1056,9 +1056,9 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Case (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * The data table `ExtraHop Detections` is updated.
- 
+
 The playbook is initiated by the automatic `Extrahop Reveal(x): Update Case (PB)`.
 The following screenshots show an example of the data table updated by the function:
 
@@ -1216,7 +1216,7 @@ def make_properties_string(det):
     """_summary_
 
     Args:
-        det (json object): ExtraHop detection object 
+        det (json object): ExtraHop detection object
 
     Returns:
         str : properties json object converted to a formatted string
@@ -1231,14 +1231,14 @@ def make_properties_string(det):
             tbl = '{0}:<div><b>{1}'.format(tbl, ", ".join("{}".format(i) for i in value))
         else:
             tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, i, j)
-        
+
     return tbl
 
 def make_list_string(detection_list):
     """_summary_
 
     Args:
-        det (json object): ExtraHop detection object 
+        det (json object): ExtraHop detection object
 
     Returns:
         str : properties json object converted to a formatted string
@@ -1278,7 +1278,7 @@ def format_input_params(input_params):
             v = datetime.datetime.fromtimestamp(v/1000).strftime('%Y-%m-%d %H:%M:%S')
         input_params_formatted += "{}: {}<br>".format(k, v)
     return input_params_formatted
-    
+
 # Processing
 def main():
     note_text = ''
@@ -1298,7 +1298,7 @@ def main():
                     .format(PB_NAME, FN_NAME, input_params_formatted)
 
     incident.addNote(helper.createRichText(note_text))
-    
+
 # Start execution
 main()
 
@@ -1319,11 +1319,11 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `Extrahop Reveal(x): Search Devices (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * The data table `ExtraHop Devices` is updated.
- 
+
 The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Devices (PB)`.
-   
+
    ![screenshot: fn-extrahop-revealx-get-devices-action](./doc/screenshots/fn-extrahop-revealx-get-devices-action.png)
 
    ![screenshot: fn-extrahop-revealx-search-devices-action_2](./doc/screenshots/fn-extrahop-revealx-search-devices-action_2.png)
@@ -1331,7 +1331,7 @@ The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): 
 The following screenshots show an example of the data table updated by the function:
 
    ![screenshot: fn-extrahop-revealx-get-devices-datatable](./doc/screenshots/fn-extrahop-revealx-get-devices-datatable.png)
-   
+
    ![screenshot: fn-extrahop-revealx-get-devices-datatable_2](./doc/screenshots/fn-extrahop-revealx-get-devices-datatable_2.png)
 
 The following screenshot shows an example of a note added to a SOAR incident:
@@ -1432,7 +1432,7 @@ results = {
 <p>
 
 ```python
-search_filters =  [ 
+search_filters =  [
     "extrahop_device_field",
     "extrahop_device_operand",
     "extrahop_device_operator"
@@ -1440,10 +1440,10 @@ search_filters =  [
 for p in search_filters:
     if hasattr(playbook.inputs, p) and playbook.inputs.get(p):
         raise ValueError("A search filter and Device ID are not allowed at the same time.")
-        
+
 if playbook.inputs.extrahop_device_id:
     inputs.extrahop_device_id = playbook.inputs.extrahop_device_id
-    
+
 if playbook.inputs.extrahop_active_from:
     inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
 if playbook.inputs.extrahop_active_until:
@@ -1494,7 +1494,7 @@ def format_input_params(input_params):
             v = datetime.datetime.fromtimestamp(v/1000).strftime('%Y-%m-%d %H:%M:%S')
         input_params_formatted += "{}: {}<br>".format(k, v)
     return input_params_formatted
-    
+
 def process_devs(dev):
     # Process a device result.
     newrow = incident.addRow(DATA_TABLE)
@@ -1513,7 +1513,7 @@ def process_devs(dev):
     newrow.activity = dev.get("activity", None)
     newrow.on_watchlist = str(dev.get("on_watchlist", None))
     newrow.mod_time = dev.get("mod_time", None)
-    newrow.user_mod_time = dev.get("user_mod_time", None)              
+    newrow.user_mod_time = dev.get("user_mod_time", None)
     newrow.discover_time = dev.get("discover_time", None)
     newrow.last_seen_time = dev.get("last_seen_time", None)
     device_url = make_linkback_url(dev["extrahop_id"])
@@ -1574,9 +1574,9 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Tags (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * The data table `Extrahop Tags` is updated.
- 
+
 The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Tags (PB)`.
 
    ![screenshot: fn-extrahop-revealx-get-tags-action](./doc/screenshots/fn-extrahop-revealx-get-tags-action.png)
@@ -1709,9 +1709,9 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Watchlist (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * The data table `Extrahop Watchlist` is updated.
- 
+
 The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Watchlist (PB)`.
 
    ![screenshot: fn-extrahop-revealx-get-watchlist-action](./doc/screenshots/fn-extrahop-revealx-get-watchlist-action.png)
@@ -1883,9 +1883,9 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Detections (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * The data table `Extrahop Detections` is updated.
- 
+
 The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Detections (PB)`.
 
 The following screenshot shows an example of the action inputs for the playbook:
@@ -2067,7 +2067,7 @@ results = {
 
 ```python
 ##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
-# Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. 
+# Read CATEGORY_MAP and TYPE_MAP from workflow propertyself.
 # Reverse the dict keys and values
 CATEGORY_MAP = {v: k for k, v in playbook.properties.category_map.items()}
 TYPE_MAP = {v: k for k, v in playbook.properties.type_map.items()}
@@ -2198,7 +2198,7 @@ def make_properties_string(det):
     """_summary_
 
     Args:
-        det (json object): ExtraHop detection object 
+        det (json object): ExtraHop detection object
 
     Returns:
         str : properties json object converted to a formatted string
@@ -2213,14 +2213,14 @@ def make_properties_string(det):
             tbl = '{0}:<div><b>{1}'.format(tbl, ", ".join("{}".format(i) for i in value))
         else:
             tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, i, j)
-        
+
     return tbl
 
 def make_list_string(detection_list):
     """_summary_
 
     Args:
-        det (json object): ExtraHop detection object 
+        det (json object): ExtraHop detection object
 
     Returns:
         str : properties json object converted to a formatted string
@@ -2260,7 +2260,7 @@ def format_input_params(input_params):
             v = datetime.datetime.fromtimestamp(v/1000).strftime('%Y-%m-%d %H:%M:%S')
         input_params_formatted += "{}: {}<br>".format(k, v)
     return input_params_formatted
-    
+
 # Processing
 def main():
     note_text = ''
@@ -2280,7 +2280,7 @@ def main():
                     .format(PB_NAME, FN_NAME, input_params_formatted)
 
     incident.addNote(helper.createRichText(note_text))
-    
+
 # Start execution
 main()
 ```
@@ -2301,9 +2301,9 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Devices (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * The data table `Extrahop Devices` is updated.
- 
+
 The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Devices (PB)`.
 
 The following screenshot shows an example of the action inputs for the playbook:
@@ -2315,7 +2315,7 @@ The following screenshot shows an example of the action inputs for the playbook:
 The following screenshot shows an example of the data table updated by the function:
 
    ![screenshot: fn-extrahop-revealx-search-devices-datatable](./doc/screenshots/fn-extrahop-revealx-search-devices-datatable.png)
-   
+
    ![screenshot: fn-extrahop-revealx-search-devices-datatable_2](./doc/screenshots/fn-extrahop-revealx-search-devices-datatable_2.png)
 
 The following screenshot shows an example of a note added to a SOAR incident:
@@ -2416,7 +2416,7 @@ results = {
 <p>
 
 ```python
-search_filters =  [ 
+search_filters =  [
     "extrahop_device_field",
     "extrahop_device_operand",
     "extrahop_device_operator"
@@ -2424,10 +2424,10 @@ search_filters =  [
 for p in search_filters:
     if hasattr(playbook.inputs, p) and playbook.inputs.get(p):
         raise ValueError("A search filter and Device ID are not allowed at the same time.")
-        
+
 if playbook.inputs.extrahop_device_id:
     inputs.extrahop_device_id = playbook.inputs.extrahop_device_id
-    
+
 if playbook.inputs.extrahop_active_from:
     inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
 if playbook.inputs.extrahop_active_until:
@@ -2488,7 +2488,7 @@ def process_devs(dev):
     newrow.activity = dev.get("activity", None)
     newrow.on_watchlist = str(dev.get("on_watchlist", None))
     newrow.mod_time = dev.get("mod_time", None)
-    newrow.user_mod_time = dev.get("user_mod_time", None)              
+    newrow.user_mod_time = dev.get("user_mod_time", None)
     newrow.discover_time = dev.get("discover_time", None)
     newrow.last_seen_time = dev.get("last_seen_time", None)
     device_url = make_linkback_url(dev["extrahop_id"])
@@ -2535,11 +2535,11 @@ The function provides the following functionality.
 
 * Does a packet search and download from an ExtraHop environment. The packet data can be downloaded in pcap, zip and keylog_txt output format.
 
-**_NOTE:_** Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/) 
+**_NOTE:_** Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/)
 
 An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Packets (PB)`.
 
-* A note is added to the SOAR incident with the status of the action. 
+* A note is added to the SOAR incident with the status of the action.
 * An attachment in the select output format is added to the SOAR incident.
 
 The playbook is initiated by the manual incident artifact menu item `ExtraHop Reveal(x): Search Packets`.
@@ -2834,7 +2834,7 @@ An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update 
 * Adds a device or list ExtraHop devices to the watchlist of the target ExtraHop environment.
 * Refreshes the associated row of the data table  `ExtraHop Devices`.
 * A note is added to the SOAR incident with the status of the action.
- 
+
 The playbook is initiated by the manual data table menu item `ExtraHop Reveal(x): Assign Tag (PB)`.
 
 The following screenshot shows an example of the action inputs for the playbook:
@@ -3563,7 +3563,7 @@ extrahop_detections
 ## Data Table - ExtraHop Devices
 
  ![screenshot: dt-extrahop-devices](./doc/screenshots/dt-extrahop-devices.png)
- ![screenshot: dt-extrahop-devices_2](./doc/screenshots/dt-extrahop-devices_2.png) 
+ ![screenshot: dt-extrahop-devices_2](./doc/screenshots/dt-extrahop-devices_2.png)
 
 #### API Name:
 extrahop_devices

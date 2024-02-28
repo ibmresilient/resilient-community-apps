@@ -1,9 +1,9 @@
-# Thug Function
+# Thug
 
 This IBM Resilient Function package can be used to analyze a url for malicious content using thug. It uses a dockerized thug to run analysis in a deatched container then cleans up the output files and container after execution completes.
 
 Please note that thug may expose your IP address to a malicious source, so it is best to run it on the cloud or remotely.
-For more information on thug, the documentation can be found here: 
+For more information on thug, the documentation can be found here:
 https://thug-honeyclient.readthedocs.io/en/latest/index.html
 
 ## To install in *development mode*:
@@ -25,9 +25,9 @@ After installation, the package will be loaded by `resilient-circuits run`.
     pip install <filename>.tar.gz
 
 ## Add Thug configuration details to the config file:
-    
+
     resilient-circuits config -u
-    
+
 Set the following values in the config file (`app.config`) under the `[fn_thug]` section:
 
 ```
@@ -37,22 +37,22 @@ thug_dir=Absolute path to a directory that can be mounted into a docker containe
 ## How to use the function
 
 1. Import the necessary customization data into the Resilient platform:
-                
+
         resilient-circuits customize
-                
+
     This creates the following customization components:
-    * Function inputs: 
+    * Function inputs:
         *   `thug_args`
         *   `thug_url`
     * Message Destination: `fn_thug`
     * Function: `thug_analysis`
     * Workflow: `Example of Thug Analysis`
     * Rule: `Thug Analysis`
-          
+
 2. Update and edit `app.config`:
-                
+
         resilient-circuits config -u
-                
+
 3. Start Resilient Circuits:
 
         resilient-circuits run

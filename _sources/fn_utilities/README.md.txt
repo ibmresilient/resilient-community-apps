@@ -1,4 +1,4 @@
-# Utility Functions for IBM SOAR
+# Utilities (Deprecated)
 
 - [Utility Functions for IBM SOAR](#utility-functions-for-ibm-soar)
   - [Release Notes](#release-notes)
@@ -18,7 +18,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### Release History
@@ -54,7 +54,7 @@ SOAR functions simplify development of integrations by wrapping each external ac
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * SOAR platform >= `v42.0`
 * An Integration Server running `resilient_circuits>=47.1.0`

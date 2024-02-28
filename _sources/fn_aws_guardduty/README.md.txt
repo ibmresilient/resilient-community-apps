@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Amazon AWS GuardDuty Integration for Resilient
+# Amazon AWS GuardDuty
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -45,7 +45,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -63,12 +63,12 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Amazon AWS GuardDuty is a continuous security monitoring service that identifies unexpected and potentially unauthorized and malicious activity within an AWS environment. 
+Amazon AWS GuardDuty is a continuous security monitoring service that identifies unexpected and potentially unauthorized and malicious activity within an AWS environment.
 GuardDuty informs the user of the status of their AWS environment by producing security findings that can be viewed in the GuardDuty console.
 A finding is a potential security issue discovered by GuardDuty.
 
 The Amazon AWS GuardDuty Integration for Resilient allows you to process and respond to GuardDuty findings within the IBM Resilient Platform.
-        
+
 ### Key Features
 <!--
   List the Key Features of the Integration
@@ -79,13 +79,13 @@ The GuardDuty Integration provides the following functionality:
 * A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.
 * Close Resilient incidents if the corresponding GuardDuty findings are archived.
 * Archive GuardDuty findings if the corresponding Resilient incidents are closed.
-* Trigger a refresh for a Resilient incident if the corresponding GuardDuty finding gets updated. 
+* Trigger a refresh for a Resilient incident if the corresponding GuardDuty finding gets updated.
 * A refresh of Resilient incidents can be executed manually.
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -100,7 +100,7 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `39.0.6328`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=35.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -108,10 +108,10 @@ If deploying to a Resilient platform with an integration server, the requirement
   | incident | create |
   | all_incidents | Read |
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -121,7 +121,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -188,9 +188,9 @@ The GuardDuty integration poller starts querying GuardDuty for findings as soon 
 
 The poller provide the following functionality.
 
-* For any new findings discovered, creates a  matching incident in the Resilient platform. 
+* For any new findings discovered, creates a  matching incident in the Resilient platform.
 * Enhances the incidents by adding artifacts, data tables and a note with data from the findings. The note includes the JSON content of the finding.
-* Can be configured to filter the findings, which are escalated to the Resilient incidents.  
+* Can be configured to filter the findings, which are escalated to the Resilient incidents.
 * Closes Resilient incidents if the corresponding GuardDuty findings are archived.
 * Archives GuardDuty findings if the corresponding Resilient incidents are closed.
 * Triggers a refresh of GuardDuty information for a Resilient incident if the corresponding GuardDuty finding is updated.
@@ -198,11 +198,11 @@ The poller provide the following functionality.
 The following screenshot shows examples of Resilient incidents created by the poller from GuardDuty findings:
 
   ![screenshot: fn-aws-guardduty-incidents](./doc/screenshots/fn-aws-guardduty-incidents.png)
-  
+
 The following screenshot shows an example of a Resilient incident Details tab created by the poller:
 
   ![screenshot: fn-aws-guardduty-incident-details](./doc/screenshots/fn-aws-guardduty-incident-details.png)
-  
+
 The following screenshot shows an example of GuardDuty finding custom properties in the Details tab of a Resilient incident created by the poller:
 
    ![screenshot: fn-aws-guardduty-incident-properties](./doc/screenshots/fn-aws-guardduty-incident-properties.png)
@@ -223,7 +223,7 @@ Note: See the data tables section for examples of data tables added by the polle
 Resilient function to refresh AWS GuardDuty finding details in an incident.
 
   ![screenshot: fn-aws-guardduty-refresh-finding](./doc/screenshots/fn-aws-guardduty-refresh-finding.png)
-  
+
 The function provides the following functionality.
 
 * Updates incident fields such as the `aws_guardduty_count` , `aws_guardduty_finding_updated_at` and  `aws_guardduty_severity`.
@@ -267,7 +267,7 @@ The following screenshot shows an example of notes added to a Resilient incident
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -440,7 +440,7 @@ The following screenshot shows an example of a note added to a Resilient inciden
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -514,8 +514,8 @@ def main():
                         "<b>{2}</b> in region <b>{3}</b> was successfully archived for Resilient function <b>{4}</b>"\
                 .format(WF_NAME, INPUTS["aws_gd_finding_id"], INPUTS["aws_gd_detector_id"], INPUTS["aws_gd_region"], FN_NAME)
             # Update archived property.
-            incident.properties.aws_guardduty_archived = "True"  
-            
+            incident.properties.aws_guardduty_archived = "True"
+
 
         elif CONTENT["status"] == "error":
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The finding with id <b>{1}</b> and detector id " \

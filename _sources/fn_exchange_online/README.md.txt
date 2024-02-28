@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_exchange_online
+# Microsoft Exchange Online
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -53,7 +53,7 @@
 <!--
 
 -->
-### 1.4.0 
+### 1.4.0
 
 In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
@@ -76,12 +76,12 @@ The 1.1.0 release addresses performance issues when querying messages of all Exc
   * max_retries_total
   * max_retries_backoff_factor
 
-* Added capability to specify a subset of email addresses to search. When querying messages of <code>all</code> tenant email addresses, the user can specify a subset of all user mailboxes to search.  For example, enter <code>all:r</code> in the <code>Email Address</code> select field of the <code>Example: Exchange Online Query Messages</code> activity popup menu  to specify searching all users with PrincipalUserName starting with the letter "r".  Enter <code>all:mc</code> to search all users starting with "mc".  
+* Added capability to specify a subset of email addresses to search. When querying messages of <code>all</code> tenant email addresses, the user can specify a subset of all user mailboxes to search.  For example, enter <code>all:r</code> in the <code>Email Address</code> select field of the <code>Example: Exchange Online Query Messages</code> activity popup menu  to specify searching all users with PrincipalUserName starting with the letter "r".  Enter <code>all:mc</code> to search all users starting with "mc".
 
-* The <code>Example: Exchange Online Query Messages</code> and <code>Example: Exchange Online Delete Messages from Query Results</code> menu item rules and workflows allow the user to multi-select where query results are displayed: 
+* The <code>Example: Exchange Online Query Messages</code> and <code>Example: Exchange Online Delete Messages from Query Results</code> menu item rules and workflows allow the user to multi-select where query results are displayed:
   * Exchange Online data table
   * Incident note
-  * Incident attachment 
+  * Incident attachment
 
 * Fixed bug in query messages function which resulted in the search not completing when the queried message subject or message body contained single quote, hashtag or ampersand characters.
 
@@ -126,13 +126,13 @@ Microsoft Exchange Online Functions for IBM Resilient provides the capability to
 
 * Send a message from the specified email address to the specified recipients with specified message subject and body text.
 
-* Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria: 
+* Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria:
   * message sender
   * messages from a specific Well-known folder
   * message received date
   * text contained in the message subject or the message body
-  * whether the message has attachments. 
-  
+  * whether the message has attachments.
+
   Detailed results are returned in the Exchange Online Query Message Results data table. Total messages found in each mailbox and the total query time are written to an incident note or attachment.
 
 * Delete a single specified message from a specified email address.
@@ -177,8 +177,8 @@ Resilient Integration with Exchange Online provides the capability to access and
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 <!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
@@ -193,17 +193,17 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `47.0.8304`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=31.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
   <!-- ::CHANGE_ME:: -->
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -213,7 +213,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -273,7 +273,7 @@ The `http_proxy` parameter should be omitted.
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-For the Resilient integration app to access data in Microsoft Graph, an administrator 
+For the Resilient integration app to access data in Microsoft Graph, an administrator
 must grant it the correct permissions via a consent process. Click on "API permissions" on the left menu and then "+ Add a Permission".
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions.png)
@@ -1527,13 +1527,13 @@ artifact_type = "Email Recipient"
 artifact_value = row.exo_dt_email_address
 if artifact_value:
   incident.addArtifact(artifact_type, artifact_value, artifact_description)
-  
+
 artifact_description = u"Created by Exchange Online Query Results for artifact value: {}".format(row.exo_dt_sender_email)
 artifact_type = "Email Sender"
 artifact_value = row.exo_dt_sender_email
 if artifact_value:
   incident.addArtifact(artifact_type, artifact_value, artifact_description)
-  
+
 artifact_description = u"Created by Exchange Online Query Results for artifact value: {}".format(row.exo_dt_message_subject)
 artifact_type = "Email Subject"
 artifact_value = row.exo_dt_message_subject

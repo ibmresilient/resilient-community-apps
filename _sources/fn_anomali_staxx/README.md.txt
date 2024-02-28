@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn_anomali_staxx
+# Anomali Staxx
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)

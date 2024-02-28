@@ -11,6 +11,8 @@
   Store any screenshots in the "doc/screenshots" directory and reference them like:
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
+# Log Capture
+
 This integration allows one to capture log entries from an integrations server for viewing and troubleshooting. This capability avoids the need to manually access and collect the logs.
 
 Key Features
@@ -20,7 +22,6 @@ Key Features
 * filter by minimum log level: DEBUG, INFO, WARNING and ERROR
 * Retain log files as an attachment
 
-# fn-log-capture Functions for IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -34,7 +35,7 @@ Key Features
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.0
@@ -57,7 +58,7 @@ Resilient Circuits Components for fn_log_capture
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v32.0.4502`
 * An Integration Server running `resilient_circuits>=30.0.0`
@@ -108,7 +109,7 @@ Resilient Circuits Components for fn_log_capture
 * The Log Level represents the minimum value matched. For instance, DEBUG will also report INFO, WARNING and ERROR.
 * All filter fields are additive. For instance, using an _after_ compare date with maxlines will return the number of lines specified at the end of the log file (trimming the first set of lines).
 * If the log file name is left blank, a system generated name is created in the format: \<hostname\>\_resilient-circuits\_<date_time>.log
-* If you have more than one active Integration Server, this function cannot be installed on all. Presently there is no easy solution to allow mulitple installations of a function to target a specific integration server. 
+* If you have more than one active Integration Server, this function cannot be installed on all. Presently there is no easy solution to allow mulitple installations of a function to target a specific integration server.
 ---
 
 ## Troubleshooting

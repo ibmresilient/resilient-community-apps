@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Network Utilities Function for SOAR
+# Network Utilities
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -42,7 +42,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -85,8 +85,8 @@ This app contains useful functions that allows your workflows/playbooks to execu
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
@@ -101,16 +101,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=48.0.0` is recommended.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -120,7 +120,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -161,7 +161,7 @@ Settings such as `remote_command_linux`, `remote_command_powershell` and `remote
 | **remote_command_powershell** | Yes | `powershell.exe -file c:\path\to\myscript.ps1 {{shell_param1}}` | `powershell command or path to powershell script`. This is a place holder parameter as any number of scripts can be specified and then used with the Windows Remote Shell function. |
 | **remote_computer** | Yes | `username:password@server` | This is a place holder parameter as any number of remote computers can be specified and then used. |
 | **remote_powershell_extensions** | Yes | `ps1, psm1, etc` | accepted remote powershell extensions in a comma separated list |
-| **allow_ad_hoc_execution** | No | True/False | New to 1.1. Allow any shell cmd to run avoiding **remote_command_linux** and **remote_command_powershell** | 
+| **allow_ad_hoc_execution** | No | True/False | New to 1.1. Allow any shell cmd to run avoiding **remote_command_linux** and **remote_command_powershell** |
 | **shell_escaping** | Yes | `sh` | -- |
 | **traceroute** | Yes | `traceroute -m 15 "{{shell_param1}}"` | -- |
 | **whois** | Yes | `whois "{{shell_param1}}"` | -- |
@@ -310,7 +310,7 @@ if artifact.description:
   artifact.description = "{}\n\n{}".format(artifact.description.content, expansion_list)
 else:
   artifact.description = expansion_list
-  
+
 for url in expansions:
   incident.addArtifact("URL", url, u"expansion from {}".format(artifact.value))
 
@@ -389,25 +389,25 @@ NOTE: The parameter values {{shell_param1}}, {{shell_param2}}, {{shell_param3}} 
   # Remote Linux and Windows servers:
   remote_computer=usr1:password@192.168.1.186
   remote_computer_windows=usr2:password@192.168.1.184
-  
+
   # Remote Windows commands:
   traceroute_windows_ps=\Users\ms\traceroute.ps1
   traceroute_windows_cmd=tracert.exe -h 10 {{shell_param1}}
-  
+
   # Remote Linux command:
   tracepath=tracepath -m 10 '{{shell_param1}}'
 
-  # sudo-base shell 
+  # sudo-base shell
   sudo_shell=sudo -S /path/to/shell.sh
-  
+
   # Local Linux server commands:
   nslookup=nslookup "{{shell_param1}}"
-  dig=dig "{{shell_param1}}" 
+  dig=dig "{{shell_param1}}"
   traceroute=traceroute -m 15 "{{shell_param1}}"
   ```
 
-* The following examples use the Volatility forensics framework. 
-The first parameter is filename of the memory image, assuming $VOLATILITY_LOCATION is set in the environment (such as in the system unit configuration). 
+* The following examples use the Volatility forensics framework.
+The first parameter is filename of the memory image, assuming $VOLATILITY_LOCATION is set in the environment (such as in the system unit configuration).
 The second parameter is the Volatility profile ("Win7SP0x64" etc).
   ```
   imageinfo=python /path/to/vol.py -f "{{shell_param1}}" imageinfo -- output=json
@@ -752,7 +752,7 @@ incident.addNote(helper.createPlainText(note_text))
 ---
 
 ## Playbooks
-| Playbook Name | Object | 
+| Playbook Name | Object |
 | --------- | ------ |
 | Network Utilities Domain Distance (PB) Example | artifact |
 | Network Utilities Expand URL (PB) Example | artifact |

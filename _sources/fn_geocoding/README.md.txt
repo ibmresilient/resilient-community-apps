@@ -1,4 +1,4 @@
-# Google Geocoding Functions for Resilient
+# Google Geocoding
 
 This package is an implementation of Google's Geocoding API set.
 Two function types are available: address and latlng.

@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# Spamhaus Lookup for IBM Resilient
+# Spamhaus Lookup
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -26,7 +26,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.1
@@ -52,7 +52,7 @@ If a given artifact appears in one of Spamhaus Datasets, then the artifact's des
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.0.0`
 * An Integration Server running `resilient_circuits>=33.0.0`

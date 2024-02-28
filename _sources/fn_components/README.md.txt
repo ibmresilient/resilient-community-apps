@@ -1,4 +1,3 @@
-![logo](./icons/company_logo.png)
 # Component Files for App Host
 
 ## Table of Contents

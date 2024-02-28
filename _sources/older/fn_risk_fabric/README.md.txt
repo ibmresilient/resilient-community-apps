@@ -1,4 +1,4 @@
-# Risk Fabric Function Integration
+# Risk Fabric
 
 The Risk Fabric integration with the Resilient platform allows for the querying of risk ratings for artifacts such as IP addresses, computer endpoints, and users. Risk models, event scenarios, and action plans can be pulled into Resilient and created as incidents, and then fully mitigated or classified.
 
@@ -20,7 +20,7 @@ Used by the example Menu Item rule with the same name to run this workflow.
 
 ### RF Example: Get Host Risk
 Example workflow for getting a host risk score. Workflow expects a system name artifact,
-and an adds an incident note based on the artifact value with a risk score. 
+and an adds an incident note based on the artifact value with a risk score.
 Used by the example Menu Item rule with the same name to run this workflow.
 
 ![RF Example: Get Host Risk](./screenshots/rf-example-get-host-risk.png)
@@ -95,7 +95,7 @@ Set the following values in the config file under the `[fn_risk_fabric]` section
 
 ## Example Create Incident Scripts
 
-Resilient Incidents can be created through the Resilient Web Console, via the REST API, or with the Python resilient library. 
+Resilient Incidents can be created through the Resilient Web Console, via the REST API, or with the Python resilient library.
 
 Here we copied the example create_incident.py python script and are using Risk Fabric Action Plans and Risk Models as sources of data.
 
@@ -105,8 +105,8 @@ https://github.com/ibmresilient/resilient-python-examples/tree/master/create-inc
 
 ### Example Create Incidents with Action Plans
 
-The create_incidents_action_plan.py example python script located in the fn_risk_fabric/util directory will create incidents in Resilient with an incident type of "Action Plan" for any Risk Fabric Action Plans assigned to the "resilient" queue. 
- 
+The create_incidents_action_plan.py example python script located in the fn_risk_fabric/util directory will create incidents in Resilient with an incident type of "Action Plan" for any Risk Fabric Action Plans assigned to the "resilient" queue.
+
 To use this script, first make sure that an "RF Action Plan" Incident Type is created in Resilient.  To check this, go to "Customization Settings" and click on "Incident Types" tab and make sure "RF Action Plan" is in the list of Incident Types.  If not, then add it.
 
 Use the following command to add "RF Action Plan" incidents to Resilient:
@@ -118,7 +118,7 @@ When the incident is created, a comment to the Action Plan record in Risk Fabric
 ### Example Create Incidents with Risk Models
 
 The create_incidents_risk_model.py example python script located in the fn_risk_fabric/util directory will create incidents in Resilient with an incident type of "RF Risk Model" for any Risk Fabric Risk Models with a limit of 10 records.
- 
+
 To use this script, first make sure that an "RF Risk Model" Incident Type is created in Resilient.  To check this, go to "Customization Settings" and click on "Incident Types" tab and make sure "RF Risk Model" is in the list of Incident Types.  If not, then add it.
 
 Use the following command to add "RF Risk Model" incidents to Resilient:

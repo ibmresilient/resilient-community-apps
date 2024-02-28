@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Zscaler Internet Access (ZIA) Functions for IBM SOAR
+# Zscaler Internet Access
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -53,7 +53,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -91,7 +91,7 @@ Note: See the following for ZIA URL definitions https://help.zscaler.com/zia/url
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -106,16 +106,16 @@ If deploying to an IBM SOAR platform with an integration server, the requirement
 * IBM SOAR platform >= `39.0.6328`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=35.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following IBM SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following IBM SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your IBM SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -125,7 +125,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -204,7 +204,7 @@ The following table provides the settings you need to configure the app. These s
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 Create a new ZIA incident tab in Layouts as follows:
-  
+
 1. Navigate to the ‘Customization Settings’ and select the Layouts tab.
 2. Click on ‘Incident Tabs’.
 3. Add a new incident tab named ‘ZIA’.
@@ -226,7 +226,7 @@ The function provides the following functionality.
 
 * Query the ZIA sandbox for MD5 values where the associated file has been run through the sandbox.
 * If the report type is `summary`, the data table `Zscaler Internet Access - Sandbox Report Summary` is updated.
-* A note is added to the SOAR incident with the status of the query. 
+* A note is added to the SOAR incident with the status of the query.
 * If the report is a `full` report, the raw JSON is included in the note, the data table will not be updated.
 
 An example workflow that uses this IBM SOAR function is `ZIA: Get Sandbox Report`.
@@ -340,7 +340,7 @@ SUMM_HEADERS = ["Summary", "Classification", "FileProperties"]
 DATA_TBL_FIELDS = {
     "Summary": ["Status", "report_Category"],
     "Classification": ["Type", "Category", "Score", "DetectedMalware"],
-    "FileProperties":  ["FileType", "FileSize", "MD5", "SHA1", "Sha256", "Issuer", "DigitalCerificate", 
+    "FileProperties":  ["FileType", "FileSize", "MD5", "SHA1", "Sha256", "Issuer", "DigitalCerificate",
                         "SSDeep", "RootCA"]
 }
 
@@ -363,15 +363,15 @@ def main():
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was not returned for MD5 <b>{2}</b> " \
                         u"for SOAR function <b>{3}</b>." \
                 .format(WF_NAME, report_type, md5, FN_NAME)
-            note_text += "<br><b>{0}</b>".format(bad_summary)      
+            note_text += "<br><b>{0}</b>".format(bad_summary)
         elif summary:
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was returned for MD5 <b>{2}</b>. " \
                         u"The data table <b>{3}</b> has been updated for SOAR function <b>{4}</b>."\
                 .format(WF_NAME, report_type, md5, "Zscaler Internet Access - Sandbox Report Summary", FN_NAME)
-            
+
             newrow = incident.addRow("zia_sandbox_report_summary")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
-            
+
             for header in SUMM_HEADERS:
                 section = summary.get(header)
                 for field in DATA_TBL_FIELDS[header]:
@@ -545,7 +545,7 @@ def main():
     for query_filter in [URL_FILTER, NAME_FILTER]:
         if query_filter and not is_regex(query_filter):
             raise ValueError("The filter '{}' is not a valid regular expression.".format(unicode(repr(query_filter))))
-    
+
     inputs.zia_url_filter = URL_FILTER
     inputs.zia_name_filter = NAME_FILTER
 
@@ -607,8 +607,8 @@ The function provides the following functionality.
 * A super category must be specified.
 * Set `zia_custom_category` to `true` to indicate this is a custom category.
 * There is an option to activate the configuration change.
-* A note is added to the IBM SOAR incident with the status of the action. 
- 
+* A note is added to the IBM SOAR incident with the status of the action.
+
 An example workflow that uses this IBM SOAR function is `ZIA: Add Custom Category`.
 
 The workflow is initiated by the manual incident rule `ZIA: Add Custom Category`.
@@ -715,7 +715,7 @@ INPUTS = results.inputs
 # Processing
 def main():
     note_text = u''
-    
+
     urls = INPUTS.get("zia_urls")
     configured_name = INPUTS.get("zia_configured_name")
 
@@ -734,7 +734,7 @@ def main():
                         u"<b>{2}</b> and with urls <b>{3}</b> in super category <b>{4}</b> for SOAR function <b>{5}</b>."\
             .format(WF_NAME, configured_name, id, urls, super_cat, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
-        
+
         else:
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Category <b>{1}</b> creation not successfull " \
                         u"with URLs <b>{2}</b>  for SOAR function <b>{3}</b>."\
@@ -1138,7 +1138,7 @@ def main():
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to allowlist " \
                         u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
-        
+
         else:
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all URLss added while attempting " \
                         u"to add URLs <b>{2}</b> to allowlist for SOAR function <b>{2}</b>."\

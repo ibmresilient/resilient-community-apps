@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_grpc_interface
+# gRPC Interface
 
 ## Table of Contents <!-- omit in toc -->
 - [Release Notes](#release-notes)
@@ -35,7 +35,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -48,7 +48,7 @@
 
 _Note: as of v1.1.0 the configurations for grpc_channel can be defined in the app.config. For integration server this will require updating your server's app.config to match the correct format. This is optional and the old functionality of defining these values in the function call remains and takes precedence over the values set in the configuration. grpc_channel is a required configuration setting for selftest._
 ```
-grpc_channel=<<host>>:<<port>> 
+grpc_channel=<<host>>:<<port>>
 grpc_function=<<the name of the package>>:<<the function to call>>
 ```
 
@@ -72,7 +72,7 @@ grpc_function=<<the name of the package>>:<<the function to call>>
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -87,17 +87,17 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=46.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 * Please refer to the release notes above for information on upgrading your configuration to take advantage of new configuration options available in v1.1.0 or greater.
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -107,7 +107,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -230,7 +230,7 @@ def dict_to_json_str(d):
 
     elif isinstance(value, unicode):
       entries.append(json_entry.format(key, value)
-    
+
     elif isinstance(value, bool):
       value = 'true' if value == True else 'false'
       entries.append(json_entry.format(key, value))

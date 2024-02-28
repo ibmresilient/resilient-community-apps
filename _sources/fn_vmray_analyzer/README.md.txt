@@ -1,4 +1,4 @@
-# VMRay Sandbox Analyzer Function for IBM Resilient
+# VMRay Sandbox Analyzer
 
 ## Table of Contents
   - [Overview](#overview)
@@ -8,12 +8,12 @@
   - [Pre-Process Script](#pre-process-script)
   - [Post-Process Script](#post-process-script)
   - [Rules](#rules)
-  
---- 
+
+---
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.1
@@ -35,18 +35,18 @@
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.0.0`
 * An Integration Server running `resilient_circuits>=30.0.0`
- 
+
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 ---
 ## Installation
 
 ### App Format
 
-The app .zip file is in a container format and requires a Resilient platform configured with an App Host. 
+The app .zip file is in a container format and requires a Resilient platform configured with an App Host.
 
 The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
 
@@ -61,14 +61,14 @@ To install,
 * Click the Install button and select the downloaded file: app-fn_vmray_analyzer-x.x.x.zip.
 * Go to the Configuration tab and edit the app.config file, editing the vmray_api_key and making any additional setting changes.
 
----               
+---
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
   | **vmray_api_key** | Yes | `` | *VMRay Analyzer API Key* |
   | **vmray_analyzer_url** | Yes | `https://cloud.vmray.com` | *VMRay Server URL* |
   | **vmray_analyzer_report_request_timeout** | Yes | `60` | *Amount of time in seconds to wait until checking if the report is ready* |
-  
----                                               
+
+---
 ### Integration Server
 
 * Download the `app-fn_vmray_analyzer-x.x.x.zip` file.
@@ -102,7 +102,7 @@ To install,
 * **Change Directory** into the unzipped directory:
   ```
   $ cd fn_vmray_analyzer-x.x.x
- 
+
   ```
 * **Install** the package:
   ```
@@ -152,14 +152,14 @@ To install,
 
 | Function Name | Type | Required | Example  | Info |
 | --------- | :---------: | ------------------ | ------| ----|
-| `incident_id` | `Number` | Yes | `1001` | The ID of the current Incident|            
+| `incident_id` | `Number` | Yes | `1001` | The ID of the current Incident|
 | `attachment_id` | `Number` | No | `5` | The ID of the Attachment to be analyzed|
-| `artifact_id` | `Number` | No | `6` | The ID of the Artifact to be analyzed 
+| `artifact_id` | `Number` | No | `6` | The ID of the Artifact to be analyzed
 | `analyzer_report_status` | `Boolean` | Yes | `No` | Has the analysis report generated successfully. Options are: `Yes` or `No` |
 ---
 
 ## Function Output:
-```python                                    
+```python
 results = {
                 "analysis_report_status": analysis_report_status,
                 "incident_id": incident_id,
@@ -204,10 +204,10 @@ def  font_color(vti_score,sample_severity):
 
 if not results.analysis_report_status:
  noteText = u"""Successful submit <b>{}</b> to VMRay Cloud Analyzer.However it will take time to generate an analysis report, please submit it again later. <br>""".format(attachment.name)
- 
+
 else:
  noteText = u"""Successful submit <b>{}</b> to VMRay Analyzer.Check the results below: <br>""".format(attachment.name)
- 
+
  for sample in results.sample_final_result:
    noteText += u"""-----------------------------------------------------------------------"""
    color = font_color(sample["sample_report"]["sample_score"],sample["sample_report"]["sample_last_reputation_severity"])
@@ -219,9 +219,9 @@ else:
                            color = color,
                            sample_vti_score = sample["sample_report"]["sample_score"],
                            sample_severity = sample["sample_report"]["sample_last_reputation_severity"])
- 
+
    noteText += u"""<br>| analysis_id | analysis_job_started | analysis_vti_score | analysis_severity |<br>"""
-   
+
    for analysis in sample["sample_analysis_report"]:
      color = font_color(analysis["analysis_vti_score"],analysis["analysis_severity"])
      noteText += u"""| <a href={analysis_link}>  {analysis_id} </a> | {analysis_job_started} |  <b style= "color:{color}"> {analysis_vti_score}</b>  | <b style= "color:{color}">{analysis_severity}</b> |<br>
@@ -231,9 +231,9 @@ else:
                            analysis_vti_score=analysis["analysis_vti_score"],
                            analysis_severity=analysis["analysis_severity"],
                            color=color)
- 
+
    reputations = [str(reputation["reputation_lookup_severity"]) for reputation in sample["sample_reputation_report"]]
-   
+
    if "malicious" in reputations:
      color = "red"
      reputation_lookup_severity = "malicious"
@@ -252,9 +252,9 @@ else:
    else:
      color = "green"
      reputation_lookup_severity = "unknown"
-     
+
    noteText += u"""Reputation lookup result:  <b style= "color:{color}">{reputation_lookup_severity} </b> <br>""".format(color=color, reputation_lookup_severity=reputation_lookup_severity)
-   
+
 incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -279,4 +279,3 @@ incident.addNote(helper.createRichText(noteText))
 
 
 ---
-                                                                               

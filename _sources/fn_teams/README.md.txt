@@ -1,4 +1,4 @@
-# Microsoft Teams for IBM QRadar SOAR
+# Microsoft Teams
 
 ## Table of Contents
 - [Microsoft Teams for IBM QRadar SOAR](#microsoft-teams-for-ibm-qradar-soar)
@@ -60,12 +60,10 @@ But migrating to playbooks provides greater functionality along with future app 
 ---
 
 
-<p align="center">
-<img src="./doc/screenshots/main.png" />
-</p>
+![screenshot: main.png](./doc/screenshots/main.png)
 
 ## Overview
-This IBM Security QRadar SOAR application extends the meeting and collaboration functionality of Microsoft Teams. It includes the ability to create MS Teams Groups, Teams and Channels. Functionality also exists to post SOAR Incident or task information to a MS Teams Channel. 
+This IBM Security QRadar SOAR application extends the meeting and collaboration functionality of Microsoft Teams. It includes the ability to create MS Teams Groups, Teams and Channels. Functionality also exists to post SOAR Incident or task information to a MS Teams Channel.
 
 Microsoft 365 Groups are created with resources that members of the group share, including:
 
@@ -79,7 +77,7 @@ Microsoft 365 Groups are created with resources that members of the group share,
 
 ### Key Features
 * Create or delete Groups, Channels, and Teams, as well as archive or un-archive Teams. Incident and task members can be assigned to a Team.
-* It is now possible to create Groups, Teams, and Channels with members who are not a part of an incident or task but who have a functioning MS account that is a part of the same organization. 
+* It is now possible to create Groups, Teams, and Channels with members who are not a part of an incident or task but who have a functioning MS account that is a part of the same organization.
 * Post information about the Incident or task directly to a MS Channel.
 * Example rules/workflows are included that perform the aforementioned operations and store related information as a incident or a task note.
 
@@ -100,7 +98,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -109,10 +107,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Group | Read |
   | Users | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -123,7 +121,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -166,10 +164,8 @@ The access token includes details about the application and the permission it ha
     * `Name` - Enter a meaningful application name that will be displayed to users of the app.
     * `Supported account types` - Select which accounts you would like your application to support.
     * `Redirect URI` - Enter the redirect URI (or reply URL) for this application, i.e : `https://localhost:8080/callback`
-  
-<p align="center">
-<img src="./doc/screenshots/app_registration_overview.png" />
-</p>
+
+![screenshot: app_registration_overview.png](./doc/screenshots/app_registration_overview.png)
 
 * Note this information as this would be required later while setting up the application in the **SOAR platform**.
 * When finished, select Register.
@@ -227,9 +223,7 @@ This type of permission is optional and is only required for the **Read Channel 
 | offline_access | `--` | Delegated | Maintain access to data you have given it access to |
 
 
-<p align="center">
-<img src="./doc/screenshots/app_scopes_permissions.png" />
-</p>
+![screenshot: app_scopes_permissions.png](./doc/screenshots/app_scopes_permissions.png)
 
 
 ### Create a client Secret Value (Both Permissions)
@@ -238,9 +232,7 @@ This type of permission is optional and is only required for the **Read Channel 
 * Enter a name for the client secret and click on the `Add` button.
 * Note this information as this would be required later while setting up the application in the **SOAR platform**.
 
-<p align="center">
-<img src="./doc/screenshots/app_certificate_secrets.png" />
-</p>
+![screenshot: app_certificate_secrets.png](./doc/screenshots/app_certificate_secrets.png)
 
 ### Setting up Incoming Webhooks (Both Permissions)
 
@@ -250,7 +242,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 
 ### Setting up Delegated permissions (Delegated permissions)
 
-This setup process is to provide the application with delegated permissions which is required only for **Read channel message** feature. If you wish to use the application without this feature, you can do so by skipping this process. 
+This setup process is to provide the application with delegated permissions which is required only for **Read channel message** feature. If you wish to use the application without this feature, you can do so by skipping this process.
 
 To provide the application with the necessary permission, the [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf) is to be used.
 
@@ -298,13 +290,9 @@ This function allows for archiving or unarchiving a Microsoft Team. The `archive
 
 **<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over `ms_groupteam_name`, and the `ms_groupteam_id` parameter will take precedence over the other two options.
 
-<p align="center">
-<img src="./doc/screenshots/action_archive_team.png" />
-</p>
+![screenshot: action_archive_team.png](./doc/screenshots/action_archive_team.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_archive_team.png" />
-</p>
+![screenshot: wf_archive_team.png](./doc/screenshots/wf_archive_team.png)
 
 
 
@@ -463,7 +451,7 @@ incident.addNote(note)
 
 ---
 ## Function - MS Teams: Create Channel
-This function creates a Microsoft Channel for a MS Team. A MS Team can have multiple channels. 
+This function creates a Microsoft Channel for a MS Team. A MS Team can have multiple channels.
 
 To create a Channel for an MS Team, 3 key attributes are required, namely: teamId, displayName, and description. Out of these attributes, teamId is crucial as the MS Team must be properly identified before channel addition operation can take place. This function has the ability to find the required teamId using anyone of the below mentioned options:
 
@@ -473,13 +461,9 @@ To create a Channel for an MS Team, 3 key attributes are required, namely: teamI
 
 **<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over `ms_groupteam_name`, and the `ms_groupteam_id` parameter will take precedence over the other two parameters.
 
-<p align="center">
-<img src="./doc/screenshots/action_create_channel.png" />
-</p>
+![screenshot: action_create_channel.png](./doc/screenshots/action_create_channel.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_create_channel.png" />
-</p>
+![screenshot: wf_create_channel.png](./doc/screenshots/wf_create_channel.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -596,17 +580,13 @@ incident.addNote(note)
 
 ---
 ## Function - MS Teams: Create group
-This function creates a Microsoft Group with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation. 
+This function creates a Microsoft Group with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation.
 
 The function is developed to automatically add all members of an incident or a task to the MS Group. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.
 
-<p align="center">
-<img src="./doc/screenshots/action_create_group.png" />
-</p>
+![screenshot: action_create_group.png](./doc/screenshots/action_create_group.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_create_group.png" />
-</p>
+![screenshot: wf_create_group.png](./doc/screenshots/wf_create_group.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -772,17 +752,13 @@ incident.addNote(note)
 ---
 ## Function - MS Teams: Create team
 
-This function creates a Microsoft Team with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation. 
+This function creates a Microsoft Team with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation.
 
 The function is developed to automatically add all members of an incident or a task to the MS Team. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.
 
-<p align="center">
-<img src="./doc/screenshots/action_create_team.png" />
-</p>
+![screenshot: action_create_team.png](./doc/screenshots/action_create_team.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_create_team.png" />
-</p>
+![screenshot: wf_create_team.png](./doc/screenshots/wf_create_team.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -962,13 +938,9 @@ This function deletes a MS Channel. A MS Team can be assigned to multiple channe
 
 **<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over `ms_groupteam_name`, and the `ms_groupteam_id` parameter will take precedence over the other two.
 
-<p align="center">
-<img src="./doc/screenshots/action_delete_channel.png" />
-</p>
+![screenshot: action_delete_channel.png](./doc/screenshots/action_delete_channel.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_delete_channel.png" />
-</p>
+![screenshot: wf_delete_channel.png](./doc/screenshots/wf_delete_channel.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1070,13 +1042,9 @@ This function deletes a MS Group. To identify this Group, one of the following i
 
 **<ins>Note</ins>**: When multiple parameters are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over the `ms_group_name`, and the `ms_group_id` parameter will take precedence over the other two.
 
-<p align="center">
-<img src="./doc/screenshots/action_delete_group.png" />
-</p>
+![screenshot: action_delete_group.png](./doc/screenshots/action_delete_group.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_delete_group.png" />
-</p>
+![screenshot: wf_delete_group.png](./doc/screenshots/wf_delete_group.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1169,7 +1137,7 @@ incident.addNote(note)
 ---
 ## Function - MS Teams: Enable Team
 
-This function enables an MS Team for a MS Group. When an MS Group is created, the teams' functionality is not enabled by default. Use this function to enable this for an MS Group that was recently created or for an existing Group. 
+This function enables an MS Team for a MS Group. When an MS Group is created, the teams' functionality is not enabled by default. Use this function to enable this for an MS Group that was recently created or for an existing Group.
 
 To identify the Group, one of the following inputs can be used:
 
@@ -1179,13 +1147,9 @@ To identify the Group, one of the following inputs can be used:
 
 **<ins>Note</ins>**: When multiple parameters are provided to locate the Graph Group, the `ms_group_mail_nickname` parameter will take precedence over `ms_group_name` and the `ms_group_id` parameter will take precedence over the other two.
 
-<p align="center">
-<img src="./doc/screenshots/action_enable_teams.png" />
-</p>
+![screenshot: action_enable_teams.png](./doc/screenshots/action_enable_teams.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_enable_team.png" />
-</p>
+![screenshot: wf_enable_team.png](./doc/screenshots/wf_enable_team.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1324,13 +1288,9 @@ incident.addNote(note)
 
 This application posts Incident or Task details to a MS Teams channel.  The channel name, specified by the `teams_channel` parameter, is used to lookup the appropriate channel webhook url maintained in app.config.
 
-<p align="center">
-<img src="./doc/screenshots/output_post_teams.png" />
-</p>
+![screenshot: output_post_teams.png](./doc/screenshots/output_post_teams.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_post_message.png" />
-</p>
+![screenshot: wf_post_message.png](./doc/screenshots/wf_post_message.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1388,31 +1348,31 @@ inputs.incident_id = incident.id
 
 """
 format of a payload. * = optional
-{ "title"*: xx, 
-  "summary": xx, 
-  "sections": [{ "title"*: yy, "text"*: yy, 
+{ "title"*: xx,
+  "summary": xx,
+  "sections": [{ "title"*: yy, "text"*: yy,
                         "facts"*: [{"name": zz, "value": zz}]
               }]
 }
 """
 
-payload = '''{{ "summary": "SOAR Incident", "sections": [ 
-  {{ "facts": [ 
-    {{ "name": "Name", "value": "{}" }}, 
-    {{ "name": "Description", "value": "{}" }}, 
-    {{ "name": "Id", "value": "{}" }}, 
-    {{ "name": "Owner", "value": "{}" }}, 
-    {{ "name": "Types", "value": "{}" }}, 
-    {{ "name": "NIST Attack Vectors", "value": "{}" }}, 
-    {{ "name": "Create Date", "value": "{}" }}, 
-    {{ "name": "Date Occurred", "value": "{}" }}, 
-    {{ "name": "Discovered Date", "value": "{}" }}, 
-    {{ "name": "Confirmed", "value": "{}" }}, 
-    {{ "name": "Severity", "value": "{}" }} 
+payload = '''{{ "summary": "SOAR Incident", "sections": [
+  {{ "facts": [
+    {{ "name": "Name", "value": "{}" }},
+    {{ "name": "Description", "value": "{}" }},
+    {{ "name": "Id", "value": "{}" }},
+    {{ "name": "Owner", "value": "{}" }},
+    {{ "name": "Types", "value": "{}" }},
+    {{ "name": "NIST Attack Vectors", "value": "{}" }},
+    {{ "name": "Create Date", "value": "{}" }},
+    {{ "name": "Date Occurred", "value": "{}" }},
+    {{ "name": "Discovered Date", "value": "{}" }},
+    {{ "name": "Confirmed", "value": "{}" }},
+    {{ "name": "Severity", "value": "{}" }}
    ]
   }}
- ] 
-}} 
+ ]
+}}
 '''.format(incident.name, incident.description.content.replace('"', '\\"') if incident.description else "-", incident.id,
   incident.owner_id if incident.owner_id else "-",
   ", ".join(str(x) for x in incident.incident_type_ids), ", ".join(str(x) for x in incident.nist_attack_vectors),
@@ -1451,13 +1411,9 @@ if not results.get("success"):
 ## Function - MS Teams: Read Message
 Read messages from a Teams Channel
 
-<p align="center">
-<img src="./doc/screenshots/action_read_message.png" />
-</p>
+![screenshot: action_read_message.png](./doc/screenshots/action_read_message.png)
 
-<p align="center">
-<img src="./doc/screenshots/wf_read_message.png" />
-</p>
+![screenshot: wf_read_message.png](./doc/screenshots/wf_read_message.png)
 
 <details><summary>Inputs:</summary>
 <p>

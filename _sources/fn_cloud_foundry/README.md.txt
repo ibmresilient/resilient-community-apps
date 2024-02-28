@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-cloud-foundry Functions for IBM Resilient
+# Cloud Foundry
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -26,7 +26,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.1
@@ -51,7 +51,7 @@ This Resilient function interacts with Cloud Foundry platforms to allow the a Re
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v36.2.76`
 * An Integration Server running `resilient_circuits>=34.0.0`

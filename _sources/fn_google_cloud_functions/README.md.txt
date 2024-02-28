@@ -1,9 +1,9 @@
-# Resilient Integration with Google Cloud Functions
-**This package contains functions which invoke or interact with Google Cloud Functions.**  
- 
+# Google Cloud Functions
+**This package contains functions which invoke or interact with Google Cloud Functions.**
+
  ![screenshot](./screenshots/1.png)
 
-Do you have a use-case or a need to get data / perform an operation from a service without exposing your IP? 
+Do you have a use-case or a need to get data / perform an operation from a service without exposing your IP?
 Why not build out a cloud function which does that work for you under a different network configuration and target that instead.
 
 The cloud function used by this example workflow leverages a headless chrome instance to consume a URL and screenshot the result. For information on how to set this up see [this post](https://cloud.google.com/blog/products/gcp/introducing-headless-chrome-support-in-cloud-functions-and-app-engine)
@@ -27,7 +27,7 @@ gcp_https_proxy = None
 
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `gcp_url` | `String` | Yes | `'https://google.com'` |  
+| `gcp_url` | `String` | Yes | `'https://google.com'` |
 
 
 ### Function Inputs: Base64 to Attachment:
@@ -36,12 +36,12 @@ gcp_https_proxy = None
 
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `base64content` | `String` | Yes | `'cmFuZG9t......'` |  
-| `incident_id` | `Number` | Yes | `2011` |  
-| `file_name` | `String` | Yes | `'GCP Screenshot of ibm.com.png'` | 
+| `base64content` | `String` | Yes | `'cmFuZG9t......'` |
+| `incident_id` | `Number` | Yes | `2011` |
+| `file_name` | `String` | Yes | `'GCP Screenshot of ibm.com.png'` |
 
 
-## Pre-Processing Scripts 
+## Pre-Processing Scripts
 The workflow `Example: GCP Cloud Functions: Sandbox and Screenshot Webpage` includes 2 functions.
 
 ### Function: GCP Cloud Functions: Sandbox and Screenshot Webpage
@@ -54,7 +54,7 @@ inputs.gcp_url = artifact.value
 url = workflow.properties.sandbox_screenshot["input_url"]
 attachment_desc = "GCP Sandbox Screenshot of {0}".format(url)
 
-inputs.incident_id = incident.id 
+inputs.incident_id = incident.id
 inputs.file_name = attachment_desc
 inputs.base64content = workflow.properties.sandbox_screenshot["base64Screenshot"]
 ```
@@ -64,7 +64,7 @@ inputs.base64content = workflow.properties.sandbox_screenshot["base64Screenshot"
 The function returns the results as a Python Dictionary. Here is an example ouput:
 ```
 results : {
-  success: True  
+  success: True
   inputs: {
    "input_url": google.com,
    "input_full_url": https://google.com

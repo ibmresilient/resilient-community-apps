@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Slack Integration for SOAR
+# Slack
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -42,7 +42,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Notes |
@@ -60,7 +60,7 @@ Each playbook has the same functionality as the previous, corresponding rule/wor
 If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
 For automatic actions, the playbooks will be disabled by default.
 
-You can continue to use the rules/workflows. 
+You can continue to use the rules/workflows.
 But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 ---
@@ -96,8 +96,8 @@ Function creates a Slack message based on a SOAR Incident, it's Tasks, Notes, Ar
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 * slackclient~=2.9.4
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
@@ -113,16 +113,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `43.1.49`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -132,7 +132,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -179,7 +179,7 @@ The following table provides the settings you need to configure the app. These s
 The remainder of this section details the Slack configuration file changes.
 
 
-It's possible to override the template used for archiving a channel. 
+It's possible to override the template used for archiving a channel.
 Use the app.config setting: `template_file=/var/rescircuits/slack_template.jinja2` to reference the template file named `slack_template.jinja2` at location
 `/var/rescircuits`. See the default template referenced [in the Template file section](#template_file).
 
@@ -188,7 +188,7 @@ Use the app.config setting: `template_file=/var/rescircuits/slack_template.jinja
 ## Function - Archive Slack Channel
 Function exports conversation history from Slack channel to a text file, saves the text file as an Attachment and archives the Slack channel.
 
- ![screenshot: fn-archive-slack-channel ](./doc/screenshots/fn-archive-slack-channel.png) 
+ ![screenshot: fn-archive-slack-channel ](./doc/screenshots/fn-archive-slack-channel.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -292,9 +292,9 @@ inputs.incident_id = incident.id
 inputs.artifact_id = artifact.id
 
 # Slack channel name
-# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. 
-# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. 
-# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. 
+# Name of the existing Slack Workspace channel or a new Slack channel you are posting to.
+# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less.
+# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable.
 # If there isn’t one defined, the workflow will terminate.
 inputs.slack_channel = rule.properties.rule_slack_channel if rule.properties.rule_slack_channel is not None else inputs.slack_channel
 
@@ -337,7 +337,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - Post message to Slack
 Function sends a message from an Incident, Task, Note or an Artifact to a Slack channel.
 
- ![screenshot: fn-post-message-to-slack ](./doc/screenshots/fn-post-message-to-slack.png) 
+ ![screenshot: fn-post-message-to-slack ](./doc/screenshots/fn-post-message-to-slack.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -397,7 +397,7 @@ incident_id_str = str(incident.id)
 # "label": {{ "type": "[string|richtext|boolean|datetime", "data": "resilient field data" }}
 #
 # Make sure to send "datetime" types as integers and not strings:
-# without double quotes: { "type": "datetime", "data": resilient datetime data}  
+# without double quotes: { "type": "datetime", "data": resilient datetime data}
 #
 # Text fields like 'artifact.value', or 'Slack additional text message' can include double quotes.
 # Watch out for embedded double quotes in these text fields and escape with field.replace(u'"', u'\\"') otherwise json.loads will fail.
@@ -424,9 +424,9 @@ slack_text = u"""{{
 inputs.incident_id = incident.id
 
 # Slack channel name
-# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. 
-# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. 
-# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. 
+# Name of the existing Slack Workspace channel or a new Slack channel you are posting to.
+# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less.
+# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable.
 # If there isn’t one defined, the workflow will terminate.
 inputs.slack_channel = rule.properties.rule_slack_channel if rule.properties.rule_slack_channel is not None else inputs.slack_channel
 

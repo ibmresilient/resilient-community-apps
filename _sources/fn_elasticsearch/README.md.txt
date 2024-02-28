@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# ElasticSearch Functions for IBM SOAR
+# ElasticSearch
 
 ## Table of Contents
 - [ElasticSearch Functions for IBM SOAR](#elasticsearch-functions-for-ibm-soar)
@@ -60,7 +60,7 @@
 
 Allows users of the SOAR to connect to and query an ElasticSearch database. Users can specify the location of a remote ElasticSearch instance and query this instance for data within SOAR.
 
-Queries provided to the function must be properly formed to work. Please review the [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html) for examples on how to form your query. A number of example queries are available when setting up the function in a workflow. 
+Queries provided to the function must be properly formed to work. Please review the [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html) for examples on how to form your query. A number of example queries are available when setting up the function in a workflow.
 
 **Important caveat: Your ElasticSearch library version must match the major ElasticSearch version since changes might be introduced with each release. This app supports the recent version changes.**
 
@@ -87,17 +87,17 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `43.0.7660`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=43.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -107,7 +107,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -326,7 +326,7 @@ results = {
 
   ```python
   """
-  # An Example of the result object 
+  # An Example of the result object
       results = {
           "inputs": {
             "es_query": { "query": { "match_all": {} } },
@@ -346,7 +346,7 @@ results = {
     noteText = """<b>ElasticSearch Query status</b>
                   <br> Query supplied: <b>{0}</b>
                   <br> Total matched records :<b>{1}</b>""".format(results.inputs["es_query"], results.matched_records)
-    
+
     if results.returned_records != 0:
       noteText += """<br> Total returned records : <b>{0}</b>""".format(results.returned_records)
     incident.addNote(helper.createRichText(noteText))

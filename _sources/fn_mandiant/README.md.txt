@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc -->
+# Mandiant Threat Intelligence
 
 ## Table of Contents <!-- omit in toc -->
 - [Release Notes](#release-notes)
@@ -52,9 +52,7 @@
 
 ## Overview
 
-<p align="center">
-<img src="./doc/screenshots/main.png" />
-</p>
+![screenshot: main.png](./doc/screenshots/main.png)
 
 **Automatically search Mandiant for information on artifacts** \
 Investigate publicly known threats with insights from Mandiant. Upon artifact creation, the application is shipped with a disabled playbook which when activated, automatically scans Mandiant for any related information.
@@ -72,9 +70,7 @@ Investigate publicly known threats with insights from Mandiant. Upon artifact cr
 * Identifies other sources or similar candidates.
 * Generates a verdict by gathering information on various analysis performed on the artifact.
 
-<p align="center">
-<img src="./doc/screenshots/mandiant-hits.png" />
-</p>
+![screenshot: mandiant-hits.png](./doc/screenshots/mandiant-hits.png)
 
 ---
 
@@ -92,16 +88,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `48.2`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=49.1.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -111,7 +107,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -157,9 +153,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Mandiant: Threat Intelligence
 Provides customers with intelligence on who is most likely going to attack them, how they are going to attack, and what tools they will use.  This allows customers to prepare their defenses against an imminent attack.
 
-<p align="center">
-<img src="./doc/screenshots/fn-mandiant-threat-intelligence.png" />
-</p>
+![screenshot: fn-mandiant-threat-intelligence.png](./doc/screenshots/fn-mandiant-threat-intelligence.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -716,7 +710,7 @@ def compile_section_by_dtype(value, name):
 def dedup_section(section):
     """
     An HIT card exclusively accommodates distinct entries and cannot exhibit information in a nested
-    structure. Consequently, data is condensed and organized within the HIT card. To prevent 
+    structure. Consequently, data is condensed and organized within the HIT card. To prevent
     redundancies, this function is employed to attach an index number to the names of recurring
     entries, ensuring their uniqueness
 
@@ -744,7 +738,7 @@ def dedup_verdict_section(section):
     its own "name", "response_count", "source_count", "benign_count", "confidence", and "malicious_count".
     As these values are being repeated, this function finds the appropriate analysis being performed using
     the name parameter, and appends that to the appropriate fields, there by eliminating duplicates.
-    
+
     Example:
     -------
         Input : Bulletproof Hosting, response_count, source_count, benign_count, malicious_count
@@ -772,7 +766,7 @@ def dedup_verdict_section(section):
 
 
 def compile_hits_section(gathered_info, compiled_section:list) -> list:
-    """ 
+    """
     The purpose of this function is to flatten and organize data from the `gathered_info`
     dictionary and append it to the `compiled_section` list. The function can also handle
     recursive calls when it encounters nested dictionaries or lists.
@@ -805,7 +799,7 @@ def compile_hits_section(gathered_info, compiled_section:list) -> list:
     for each_key in gathered_info:
 
         # This function has been designed with recursion in mind. This means that
-        # gathered_info can be a dict and at times even a list. And therefore 
+        # gathered_info can be a dict and at times even a list. And therefore
 
         # If gathered_info is a list and each_key is a dict is found within the section,
         # this function is recursively called with the newly found dict while passing
@@ -868,13 +862,13 @@ def add_response_as_hits(response):
             section = dedup_verdict_section(section)
         section = dedup_section(section)
         artifact.addHit(f"Mandiant Threat intelligence: {each_section.title()}", section)
-    
+
     section = compile_hits_section(main_section, [])
     section = dedup_section(section)
     artifact.addHit("Mandiant Threat intelligence: MScore", section)
-    
-    
-    
+
+
+
 result = playbook.functions.results.mandiant_results
 if not result.success:
     incident.addNote(helper.createRichText(result.reason))

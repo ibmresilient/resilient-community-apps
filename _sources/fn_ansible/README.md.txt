@@ -1,4 +1,4 @@
-# Ansible Integration Function for IBM Resilient
+# Ansible
 ## Table of Contents
   - [About This Package](#about-this-package)
   - [Features](#features)
@@ -55,25 +55,25 @@ artifact_dir=/tmp
 ```
 
 ### Playbooks
-When adding playbooks through the Configuration tab of an App, ensure the File Path is `/var/rescircuits/ansible/project`. 
+When adding playbooks through the Configuration tab of an App, ensure the File Path is `/var/rescircuits/ansible/project`.
 
-Note: Playbooks and modules cannot be run within the container environment. 
+Note: Playbooks and modules cannot be run within the container environment.
 
-The minimum Ansible files needed are: 
-* hosts, and 
+The minimum Ansible files needed are:
+* hosts, and
 * playbooks
 
-Your environment may require more configuration files, such as ssh_key and envvars. 
+Your environment may require more configuration files, such as ssh_key and envvars.
 
-This is an example of the configuration files used including 
+This is an example of the configuration files used including
 several yaml files.
 ![screenshot](./screenshots/ansible_config_files.png)
 
 If you require additional ansible modules, additional effort is needed to include them as files in the Configuration tab.
 
 ### Limitations
-Presently, there are limitations in the use of containers when playbook parameters sent from Resilient 
-are used with any file defined in `/var/rescircuits/ansible/env`. 
+Presently, there are limitations in the use of containers when playbook parameters sent from Resilient
+are used with any file defined in `/var/rescircuits/ansible/env`.
 
 ## Integration Server Installation
 ### Prerequisites:
@@ -87,9 +87,9 @@ This integration relies on the installation of the ansible solution on the integ
 
 * Ansible relies on a system library `sshpass`. Depending on your Integration Server operation system, different procedures are required to install this system library.
 
-* For RHEL servers, the [Red Hat Developer Toolset](https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/8/html/user_guide/chap-red_hat_developer_toolset) is needed to build the ansible runtime environment. This may also require a registered subscription manager to install. 
+* For RHEL servers, the [Red Hat Developer Toolset](https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/8/html/user_guide/chap-red_hat_developer_toolset) is needed to build the ansible runtime environment. This may also require a registered subscription manager to install.
 
-This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework. 
+This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework.
 
 * Unzip the package downloaded from the IBM App Exchange
 ```
@@ -100,7 +100,7 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
     ```
     $ [sudo] pip install fn_ansible-<version>.tar.gz
     ```
-   
+
 * To import the function, example rules and workflows into your Resilient platform, run:
 
     ```
@@ -195,7 +195,7 @@ else:
 incident.addNote(helper.createPlainText(note))
 ```
 
-For very large data results, it may not be practical to save the results as a Note. Instead, the fn_utilities function `Utilities: String to Attachment` can be added to your workflow to send your Ansible results to an attachment. In this case, workflow properties are used to retain the results of this function for use by downstream functions. 
+For very large data results, it may not be practical to save the results as a Note. Instead, the fn_utilities function `Utilities: String to Attachment` can be added to your workflow to send your Ansible results to an attachment. In this case, workflow properties are used to retain the results of this function for use by downstream functions.
 
 ## Considerations
 * Only the ansible-runner `synchronous` capability is supported.
@@ -222,11 +222,11 @@ For very large data results, it may not be practical to save the results as a No
 ```
 
 ## App Host sshPass Support
-You may find that you require the sshPass package for your use of Ansible. This package uses the [GPLv2 license](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) and 
+You may find that you require the sshPass package for your use of Ansible. This package uses the [GPLv2 license](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) and
 this license restricts IBM from building and distributing a container under our [International License Agreement](https://www-03.ibm.com/software/sla/sladb.nsf/pdf/ilan/$file/ilan_en.pdf).
 
 If you require sshPass, you can build your own container by modifying the `Dockerfile` in the fn_ansible-x.x.x.tar.gz archive and uncomment the following
-RUN command. See the documentation on [hosting your own container registry for App Host](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html) 
+RUN command. See the documentation on [hosting your own container registry for App Host](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html)
 for the use of a private registry with App Host.
 
 ```

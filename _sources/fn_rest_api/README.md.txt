@@ -1,4 +1,4 @@
-# REST API Functions for SOAR
+# REST API
 
 ## Table of Contents  <!-- omit in toc -->
 - [Release Notes](#release-notes)
@@ -54,9 +54,6 @@
 ---
 
 ## Overview
-<!-- <p align="center">
-<img src="./doc/screenshots/main.png" />
-</p> -->
 ![main](./doc/screenshots/main.png)
 
 **Function to call REST web services in the SOAR Platform**
@@ -140,9 +137,6 @@ Additional package dependencies may exist for each of these packages:
 
 This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS. The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time. The function can be reused to make multiple requests to an endpoint or even access multiple endpoints.
 
-<!-- <p align="center">
-<img src="./doc/screenshots/fn-rest-api-playbook.png" />
-</p> -->
 ![fn-rest-api-playbook.png](./doc/screenshots/fn-rest-api-playbook.png)
 
 ## Input Considerations
@@ -166,16 +160,10 @@ For sensitive information that may be included in the `rest_header`, `rest_url`,
         })
   ```
 
-<!-- <p align="center">
-<img src="./doc/screenshots/fn-rest-api-secrets.png" />
-</p> -->
 ![fn-rest-api-secrets.png](./doc/screenshots/fn-rest-api-secrets.png)
 
 This key can be directly referenced from within a playbook. For instance, a header using the above mentioned value can be constructed in the preprocessing script as follows:
 
-<!-- <p align="center">
-<img src="./doc/screenshots/fn-rest-api-secret-example.png" />
-</p> -->
 ![fn-rest-api-secret-example.png](./doc/screenshots/fn-rest-api-secret-example.png)
 
 ---

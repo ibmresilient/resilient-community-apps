@@ -1,4 +1,4 @@
-# Microsoft Security Graph Integration for SOAR
+# Microsoft Security Graph
 
 ## Table of Contents
 - [Microsoft Security Graph Integration for SOAR](#microsoft-security-graph-integration-for-soar)
@@ -28,7 +28,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -74,16 +74,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `41.0.6783`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=40.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -93,7 +93,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -568,10 +568,10 @@ Typically, a function will create workflow property and this script will run aft
     * Display the hierarchical nature of json, presenting the json keys as bold labels
     * Provide links to found URLs
     * Create either an incident note or add results to an incident (custom) rich text field.
-  
+
   In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
   Workflow properties can be added using a command similar to this:
-  workflow.addProperty('convert_json_to_rich_text', { 
+  workflow.addProperty('convert_json_to_rich_text', {
     "version": 1.0,
     "header": "Artifact scan results for 12.34.221.1",
     "padding": 10,
@@ -581,9 +581,9 @@ Typically, a function will create workflow property and this script will run aft
     "json_omit_list": ["omit"],
     "incident_field": None
   })
-  
+
   Format of workflow.property.convert_json_to_rich_text:
-  { 
+  {
     "version": 1.0, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
@@ -591,7 +591,7 @@ Typically, a function will create workflow property and this script will run aft
     "sort": True|False, [sort the json keys at each level when displayed]
     "json": json, [required json to convert]
     "json_omit_list": [list of json keys to exclude or None]
-    "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description' 
+    "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description'
                                           or a custom rich text field in the format: 'properties.<field>'. default: create an incident note]
   }
 """
@@ -603,7 +603,7 @@ rc = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|(?:%[0-9a-fA-
 
 class ConvertJson:
   """Class to hold the conversion parameters and perform the conversion"""
-  
+
   def __init__(self, omit_keys=[], padding=10, separator=u"<br>", sort_keys=False):
     self.omit_keys = omit_keys
     self.padding = padding
@@ -680,7 +680,7 @@ class ConvertJson:
           notes.append(u"{}<b>{}</b>: <div style='padding:{}px'>{}</div>".format(loop_separator, key, self.padding, result))
         else:
           notes.append(u"{}<b>{}</b>: {}".format(loop_separator, key, self.expand_list(value, is_list=isinstance(value, list))))
-          
+
       loop_separator = self.separator # subsequent times, add in separator
 
     result = u"".join(notes)

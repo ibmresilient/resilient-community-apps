@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Parse Utilities Function for SOAR
+# Parse Utilities
 
 
 ## Table of Contents
@@ -45,18 +45,18 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### 1.1.0 Changes
 In v1.1.0, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
 
-You can continue to use the rules/workflows. 
-But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes. 
+You can continue to use the rules/workflows.
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
@@ -101,7 +101,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `48.2.16`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -109,10 +109,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | All Incidents | Read |
   | All Incident Notes | Edit |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -122,7 +122,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -343,12 +343,12 @@ results = playbook.functions.results.email_parse
 if not results.success:
   note_text = u"""Playbook 'Parse Utilities: Email Parsing (Artifact) - Example (PB)' Failed<br>
                   <b>Reason:</b> {0}""".format(str(results.reason))
-  
+
   incident.addNote(helper.createRichText(note_text))
 
 else:
   email = results.content
-  
+
   # Get Email Subject
   eml_subject = email.get("subject", "BLANK SUBJECT LINE")
 
@@ -358,14 +358,14 @@ else:
   for eml_addr in email.get("to", []):
     if len(eml_addr) >= 2:
       incident.addArtifact("Email Recipient", eml_addr[1], eml_addr[0])
-  
+
   #########################################
   # Add Artifacts for Email Recipient: cc #
   #########################################
   for eml_addr in email.get("cc", []):
     if len(eml_addr) >= 2:
       incident.addArtifact("Email Recipient", eml_addr[1], eml_addr[0])
-  
+
   ########################################
   # Add Artifacts for Email Sender: from #
   ########################################
@@ -377,13 +377,13 @@ else:
   # Add Artifacts for IPs found in Email Headers #
   ################################################
   for eml_header in email.get("received", []):
-    
+
     the_header = eml_header.get("from", None)
-    
+
     if the_header:
       ips = re.findall('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)', the_header)
       unique_ips = set(ips)
-  
+
       for an_ip in unique_ips:
         if an_ip:
           incident.addArtifact("IP Address", an_ip, u"Hop {0} at {1}\n\nHeader: {2}".format(eml_header.get("hop", ""), eml_header.get("date_utc", ""), the_header))
@@ -402,7 +402,7 @@ else:
     a_url = a_url.replace('\\',"")
     if a_url:
       incident.addArtifact("URL", a_url, "Found in parsed Email")
-  
+
   ################################################
   # Add the Email Body as a Note to the Incident #
   ################################################
@@ -413,11 +413,11 @@ else:
                     <b>To:</b><br>{2}<br>
                     <b>Body:</b><br>{3}""".format(str(eml_subject),
                                   str(email.get("from", "N/A")),
-                                  str(email.get("to", "N/A")), 
+                                  str(email.get("to", "N/A")),
                                   str(email.get("body", "N/A")))
 
     incident.addNote(helper.createRichText(note_text))
-  
+
   '''Uncomment this if you would like to add a (safer) plain_text only Note
   if email.get("plain_body"):
     note_text = u"""Parsed Email::\n\nSubject:\n{0}\n\nFrom:\n{1}\n\nTo:\n{2}\n\nBody:\n{3}""".format(str(eml_subject),
@@ -503,7 +503,7 @@ noteText = """<br>Certificate Subject :<b>{0}</b>
 
 incident.addNote(helper.createRichText(noteText))
 
-playbook.addProperty('convert_json_to_rich_text', { 
+playbook.addProperty('convert_json_to_rich_text', {
     "version": 1.0,
     "header": None,
     "padding": 10,
@@ -522,7 +522,7 @@ playbook.addProperty('convert_json_to_rich_text', {
 Produces summary information about the structure of a PDF file, using Didier Stevens' PDFID (https://blog.didierstevens.com/programs/pdf-tools/).
 
 This function is useful in initial triage of suspicious email attachments and other files. It allows you to identify PDF documents that contain (for example) JavaScript or that execute an action when opened. PDFiD also handles name obfuscation. The combination of PDF automatic action and JavaScript makes a document very suspicious.
- 
+
  ![screenshot: fn-parse-utilities-pdfid ](./doc/screenshots/fn-parse-utilities-pdfid.png)
 
 <details><summary>Inputs:</summary>
@@ -621,7 +621,7 @@ else:
 
   text = helper.createPlainText("\n".join(note_data))
   incident.addNote(text)
-  
+
   # Maybe extend this to alert if (/JS or /JavaScript) and (/AA or /OpenAction)
 
 ```
@@ -726,7 +726,7 @@ VERSION = 1.3
     * Display the hierarchical nature of json, presenting the json keys as bold labels
     * Provide links to found URLs
     * Create either an incident note or add results to an incident (custom) rich text field.
-  
+
   In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
   Workflow properties can be added using a command similar to this:
   workflow.addProperty('convert_json_to_rich_text', {
@@ -739,18 +739,18 @@ VERSION = 1.3
     "json_omit_list": ["omit"],
     "incident_field": None
   })
-  
+
   Format of workflow.property.convert_json_to_rich_text:
-  { 
+  {
     "version": 1.3, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
-    "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
+    "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'.
                                                 If a list, then the data is brackets by the pair specified]
     "sort": True|False, [sort the json keys at each level when displayed]
     "json": json, [required json to convert]
     "json_omit_list": [list of json keys to exclude or None]
-    "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description' 
+    "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description'
                                           or a custom rich text field in the format: 'properties.<field>'. default: create an incident note]
   }
 
@@ -948,7 +948,7 @@ def get_properties(property_name):
     if not json_omit_list:
         json_omit_list = []
     incident_field = result_properties.get("incident_field")
-    
+
     # workflow formatted content is 'json'. Standard functions is 'content'
     json = result_properties.get("json") if result_properties.get("json") else result_properties.get("content")
     json_err = None
@@ -956,7 +956,7 @@ def get_properties(property_name):
     if not json and \
         result_properties.get("success") == False and result_properties.get("reason"):
         json_err = result_properties.get("reason")
-    
+
     return padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys
 
 
@@ -991,15 +991,15 @@ else:
 ---
 
 ## Playbooks
-| Playbook Name | Description | Activation Type | Object | Status | Condition | 
-| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
-| Parse Utilities: Email Parsing (Artifact) - Example (PB)  | Example playbook showing how to parse an Email File (.eml or .msg) from an Artifact File. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email, as well as sender and recipient details are added in a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts. | Manual | artifact | `enabled` | `artifact.type in ['RFC 822 Email Message File', 'Email Attachment', 'Other File']` | 
-| Parse Utilities: Email Parsing (Attachment) - Example (PB) | Example playbook showing how to parse an Email File (.eml or .msg) from Incident/Task Attachments. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email, as well as sender and recipient details are added in a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts. | Manual | attachment | `enabled` | `-` | 
-| Parse Utilities: Parse SSL Certificate - Example (PB) | Example playbook that takes a PEM encoded SSL certificate as input and returns structured information about the certificate. | Manual | artifact | `enabled` | `artifact.type equals X509 Certificate File` | 
-| Parse Utilities: PDFiD (Artifact) - Example (PB) | Example playbook to show how to use the PDFiD function to get summary information about a PDF file artifact. | Manual | artifact | `enabled` | `artifact.attachment has_a_value` | 
-| Parse Utilities: PDFiD (Attachment) - Example (PB) | Example playbook to show how to use the PDFiD function to get summary information about a PDF file artifact. | Manual | attachment | `enabled` | `-` | 
-| Parse Utilities: XML Transformation (Artifact) - Example (PB) | Example playbook to transform an XML document artifact using a defined xsl transform file. | Manual | artifact | `enabled` | `artifact.type in ['Email Attachment', 'Malware Sample', 'Log File', 'Other File']` | 
-| Parse Utilities: XML Transformation (Attachment) - Example (PB) | Example playbook to transform an XML document attachment using a defined xsl transform file. | Manual | attachment | `enabled` | `-` | 
+| Playbook Name | Description | Activation Type | Object | Status | Condition |
+| ------------- | ----------- | --------------- | ------ | ------ | --------- |
+| Parse Utilities: Email Parsing (Artifact) - Example (PB)  | Example playbook showing how to parse an Email File (.eml or .msg) from an Artifact File. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email, as well as sender and recipient details are added in a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts. | Manual | artifact | `enabled` | `artifact.type in ['RFC 822 Email Message File', 'Email Attachment', 'Other File']` |
+| Parse Utilities: Email Parsing (Attachment) - Example (PB) | Example playbook showing how to parse an Email File (.eml or .msg) from Incident/Task Attachments. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email, as well as sender and recipient details are added in a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts. | Manual | attachment | `enabled` | `-` |
+| Parse Utilities: Parse SSL Certificate - Example (PB) | Example playbook that takes a PEM encoded SSL certificate as input and returns structured information about the certificate. | Manual | artifact | `enabled` | `artifact.type equals X509 Certificate File` |
+| Parse Utilities: PDFiD (Artifact) - Example (PB) | Example playbook to show how to use the PDFiD function to get summary information about a PDF file artifact. | Manual | artifact | `enabled` | `artifact.attachment has_a_value` |
+| Parse Utilities: PDFiD (Attachment) - Example (PB) | Example playbook to show how to use the PDFiD function to get summary information about a PDF file artifact. | Manual | attachment | `enabled` | `-` |
+| Parse Utilities: XML Transformation (Artifact) - Example (PB) | Example playbook to transform an XML document artifact using a defined xsl transform file. | Manual | artifact | `enabled` | `artifact.type in ['Email Attachment', 'Malware Sample', 'Log File', 'Other File']` |
+| Parse Utilities: XML Transformation (Attachment) - Example (PB) | Example playbook to transform an XML document attachment using a defined xsl transform file. | Manual | attachment | `enabled` | `-` |
 
 ---
 
@@ -1008,6 +1008,6 @@ else:
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
- 
+
 ### For Support
 This is an IBM supported app. Please search [ibm.com/mysupport](https://ibm.com/mysupport) for assistance.

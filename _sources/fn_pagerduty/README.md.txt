@@ -1,4 +1,4 @@
-# PagerDuty App 
+# PagerDuty
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -30,7 +30,7 @@
 | 1.0.0 | 09/2018 | Initial Release |
 | 1.0.1 | 05/2020 | Support added for App Host |
 | 1.0.2 | 07/2022 | Updated documentation to new format |
-| 1.1.0 | 10/2023 | Add Playbooks and implement Create Service, List Services, and List Incidents functions| 
+| 1.1.0 | 10/2023 | Add Playbooks and implement Create Service, List Services, and List Incidents functions|
 ---
 ### PagerDuty App  2.1.0 Changes
 In v1.1.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
@@ -70,16 +70,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -89,7 +89,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -145,9 +145,9 @@ The following table provides the settings you need to configure the app. These s
 ## Function - PagerDuty Create Incident
 Create a PagerDuty Incident based on a Resilient Incident
 
- ![screenshot: create_incident ](./doc/screenshots/create_incident.png) 
+ ![screenshot: create_incident ](./doc/screenshots/create_incident.png)
 
-  ![screenshot: create_incident_pb ](./doc/screenshots/create_incident_pb.png) 
+  ![screenshot: create_incident_pb ](./doc/screenshots/create_incident_pb.png)
 
 
 <details><summary>Inputs:</summary>
@@ -270,13 +270,13 @@ results = {
 inputs.incidentID = incident.id
 inputs.pd_title = "Resilient: {}".format(incident.name)
 inputs.pd_incident_key = 'RES-'+str(incident.id)
-    
+
 priority = { 'Low': 'p3', 'Medium': 'p2', 'High': 'p1' }
 if incident.severity_code in priority:
   inputs.pd_priority = priority.get(incident.severity_code)
 else:
   inputs.pd_priority = 'p4' # lowest
-    
+
 if not incident.description is None:
   inputs.pd_description = incident.description.content
 
@@ -299,7 +299,7 @@ incident.properties.pd_incident_url = "<a href='{}' target='blank'>Link</a>".for
 ---
 ## Function - PagerDuty Create Note
 Create a PagerDuty Note based on a Resilient Incident's Note
- ![screenshot: create_pagerduty_note ](./doc/screenshots/create_pagerduty_note.png) 
+ ![screenshot: create_pagerduty_note ](./doc/screenshots/create_pagerduty_note.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -365,9 +365,9 @@ None
 ## Function - PagerDuty Transition Incident
 Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)
 
- ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/resolve_pagerduty_incident.png) 
- 
-  ![screenshot: update_pagerduty_incident_severity.png ](./doc/screenshots/update_pagerduty_incident_severity.png) 
+ ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/resolve_pagerduty_incident.png)
+
+  ![screenshot: update_pagerduty_incident_severity.png ](./doc/screenshots/update_pagerduty_incident_severity.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -474,7 +474,7 @@ if incident.resolution_id:
   inputs.pd_description = incident.resolution_summary.content
 #else:
 #  inputs.pd_status = 'acknowledged'
-  
+
 priority = { 'Low': 'p3', 'Medium': 'p2', 'High': 'p1' }
 if incident.severity_code in priority:
   inputs.pd_priority = priority.get(incident.severity_code)
@@ -497,8 +497,8 @@ None
 ## Function - PagerDuty Create Service
 Create a PagerDuty Service
 
- ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/create_sevice.png) 
- 
+ ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/create_sevice.png)
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -546,8 +546,8 @@ else:
 ## Function - PagerDuty List Incidents
 List all incidents on PagerDuty
 
- ![screenshot: list_incidents.png ](./doc/screenshots/list_incidents.png) 
- 
+ ![screenshot: list_incidents.png ](./doc/screenshots/list_incidents.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -694,7 +694,7 @@ else:
 ## Function - PagerDuty List Services
 List all services on PagerDuty
 
- ![screenshot: list_services.png ](./doc/screenshots/list_services.png) 
+ ![screenshot: list_services.png ](./doc/screenshots/list_services.png)
 
 <details><summary>Inputs:</summary>
 <p>
