@@ -13,7 +13,7 @@ Automatically retrieve enrichment data for IP addresses from ISC SANS database.
 ## Requirements
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
- ## Export Description
+## Export Description
 
 Minimum SOAR version required for this export: `49.0` (NOTE: this may be higher than each app's minimum required version).
 
@@ -78,8 +78,6 @@ Additional package dependencies may exist for each of these packages:
 * Unzip the file downloaded from IBM AppExchange (`ISC_SANS_Get_Enrichment_Data_for_an_IP_Address.zip`)
 * Upload it's contents to QRadar SOAR using the `Import Playbooks` functionality.
 * This should automatically install the playbook, sub-playbooks and associated `REST API Functions for SOAR` application required for proper execution.
-
-# ISC_SANS_Get_Enrichment_Data_for_IP_Address
 
 ## Function - Call REST API
 This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS.
