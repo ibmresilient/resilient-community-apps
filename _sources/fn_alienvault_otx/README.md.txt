@@ -1,4 +1,4 @@
-# Alien Vault OTX Search
+# AlienVault OTX
 
 ## Table of Contents
  - [About This Package](#about-this-package)

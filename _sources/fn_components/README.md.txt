@@ -1,4 +1,4 @@
-# Component Files for App Host
+# App Host Components
 
 ## Table of Contents
 

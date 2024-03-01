@@ -629,7 +629,6 @@ For local and remote Windows environments:
 * For remote powershell scripts, the `shell_param1`, `shell_param2` and `shell_param3` values map to `$args[0]`, `$args[1]`, and `$args[2]` respectively in the Powershell script.
 
 ### app.config examples:
-  # Remote Windows commands:
   ```
   traceroute_windows_ps=\Users\ms\traceroute.ps1
   traceroute_windows_cmd=[tracert.exe -h 10 {{shell_param1}}]

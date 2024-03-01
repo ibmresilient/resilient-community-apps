@@ -1,4 +1,4 @@
-# Twilio Send SMS
+# Twilio SMS
 
 ## Table of Contents
   - [Prerequisites](#prerequisites)

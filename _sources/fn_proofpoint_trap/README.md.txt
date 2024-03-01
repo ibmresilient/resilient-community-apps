@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# Proofpoint Threat Response Auto-Pull
+# Proofpoint TRAP
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)

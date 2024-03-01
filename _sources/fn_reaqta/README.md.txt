@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# QRadar EDR (formally IBM ReaQta)
+# QRadar EDR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -54,12 +54,12 @@
 
 ## History
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 03/2022 | Initial Release | 
+| 1.0.0 | 03/2022 | Initial Release |
 | 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |
 | 1.2.0 | 09/2023 | Added support to deisolate a previously isolated endpoint and renamed application to  QRadar EDR |
 | 1.3.0 | 10/2023 | Rename Reaqta Functions and Playbooks to QRadar EDR |
@@ -85,7 +85,7 @@ You can continue to use the rules/workflows. But migrating to playbooks provides
 -->
 **IBM SOAR app bidirectional synchronization and functions for QRadar EDR**
 
- ![screenshot: main](./doc/screenshots/main.png) 
+ ![screenshot: main](./doc/screenshots/main.png)
 
 Bidirectional synchronization of QRadar EDR (formally known as ReaQta) Alerts to IBM SOAR.
 
@@ -125,17 +125,17 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=46.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
   <!-- ::CHANGE_ME:: -->
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -145,7 +145,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -230,7 +230,7 @@ Repeat this section for each ReaQta hive. Add the `hive_label` used in the `poll
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
 
@@ -885,7 +885,7 @@ results = playbook.functions.results.reaqta_create_policy_result
 if results.success:
   policies = []
   policies.append("<br>Policy Parameters:<br>Hives: {}<br>Title: {}<br>Description: {}<br>Included Groups: {}<br>Excluded Groups: {}<br>Enabled: {}<br>Block when Triggered: {}<br>".\
-                         format(incident.properties.reaqta_hive, 
+                         format(incident.properties.reaqta_hive,
                                 playbook.inputs.reaqta_policy_title,
                                 playbook.inputs.reaqta_policy_description,
                                 playbook.inputs.reaqta_policy_included_groups,
@@ -1285,8 +1285,8 @@ TRIGGERCONDITION_LOOKUP = {
     12: "Detection Strategy",
     13: "Antimalware Detection"
   }
-  
-results = playbook.functions.results.reaqta_get_alert_information_result  
+
+results = playbook.functions.results.reaqta_get_alert_information_result
 
 if not results.success:
   incident.addNote("ReaQta: Get Alert Information failed: {}".format(results.reason))
@@ -1296,13 +1296,13 @@ else:
   impact_sv = incident.properties.reaqta_impact
   incident.severity_code = "Low" if content.get('severity') in ['safe', 'low'] else content.get('severity', 'low').title()
   incident.properties.reaqta_impact = content.get("impact")
-  
+
   if (impact_sv and impact_sv != incident.properties.reaqta_impact):
     incident.addNote("ReaQta impact changed from '{}' to '{}'. Case severity: {}".format(impact_sv, incident.properties.reaqta_impact, incident.severity_code))
-  
+
   incident.properties.reaqta_endpoint_id = content.get("endpointId")
   incident.properties.reaqta_trigger_condition = TRIGGERCONDITION_LOOKUP.get(content.get("triggerCondition"))
-  
+
   endpoint = content.get("endpoint", {})
   incident.properties.reaqta_tags = ", ".join(content.get("tags", []))
   incident.properties.reaqta_groups = ", ".join([ group.get("name") for group in endpoint.get("groups", []) ])
@@ -1311,7 +1311,7 @@ else:
                                   endpoint.get('os'),
                                   endpoint.get('domain'),
                                   endpoint.get('cpuDescr'))
-                                  
+
   # populate datatable with trigger events
   for event in content.get('triggerEvents', []):
     row = incident.addRow('reaqta_trigger_events')
@@ -1319,26 +1319,26 @@ else:
     row['category'] = event.get('category')
     row['relevance'] = event.get('relevance')
     row['severity'] = event.get('severity')
-    
+
     process = event.get('process', {})
     program = process.get('program', {})
     if program:
       row['process_pid'] = process.get('pid')
       row['program_path'] = program.get('path')
       row['sha256_hash'] = program.get('sha256')
-    
+
     if event.get('category') == "etw" and event.get('data'):
       data = event.get('data')
       row['windows_event_account'] = "{}\\{}".format(data.get('etwTargetDomainName'), data.get('etwTargetUserName'))
       row['windows_event_workstation'] = data.get('etwWorkstationName')
       row['windows_event_description'] = data.get('etwEventDescription')
       row['windows_event_ipport'] = "{}/{}".format(data.get('etwIpAddress'), data.get('etwIpPort'))
-      
+
     if event.get('category') == "policies" and event.get('data'):
       data = event.get('data')
       row['policy_match'] = data.get('matched', [])[0]['policyTitle']
-      
-    
+
+
     # create artifacts from the trigger event
     if program:
       incident.addArtifact("Malware SHA-256 Hash", program.get('sha256'), "")
@@ -1346,7 +1346,7 @@ else:
       incident.addArtifact("File Name", program.get('filename'), "")
     if process:
       incident.addArtifact("User Account", process.get('user'), "")
-    
+
   # create artifacts from endpoint
   endpoint_name = endpoint.get("name")
   incident.addArtifact("IP Address", endpoint.get("localAddr"), "Endpoint: {}".format(endpoint_name))
@@ -1513,7 +1513,7 @@ Disconnection Reason: {}
 Tags: {}
 Groups: {}
 """.format(endpoint.get("id"),
-           endpoint.get("name"), 
+           endpoint.get("name"),
            endpoint.get("agentVersion"),
            endpoint.get("lastSeenAt"),
            endpoint.get("connected"),
@@ -2509,7 +2509,7 @@ if results.success:
     if results.content:
       for process in results.content:
         row = incident.addRow("reaqta_process_list")
-        
+
         row['report_date'] = now
         row["pid"] = process.get("pid")
         row["process_name"] = process.get("processName")
@@ -2519,10 +2519,10 @@ if results.success:
         row["has_incident"] = process.get("hasIncident")
         row["suspended"] = process.get("suspended")
         row["start_time"] = process.get("startTime")
-      
+
       process_num = len(results.content)
       incident.addNote("Number of processes queried: {}\nQuery Inputs: \nReaQta End Point id: {}, Has Incident: {}, Suspended: {}, ReaQta Hive: {}\nReaQta Process List Data table updated!\n".format(process_num,incident.properties.reaqta_endpoint_id, playbook.inputs.reaqta_has_incident, playbook.inputs.reaqta_suspended, incident.properties.reaqta_hive))
-        
+
     else:
         incident.addNote(u"ReaQta Get Processes - no processes found for input parameters: Has Incident: {}, Suspended: {}".\
             format(bool_to_str(results.inputs.get("reaqta_has_incident")), bool_to_str(results.inputs.get("reaqta_suspended"))))

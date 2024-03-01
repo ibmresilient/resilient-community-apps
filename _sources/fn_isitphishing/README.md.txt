@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# IsItPhishing Threat Detection
+# IsItPhishing
 
 ## Table of Contents
 - [Release Notes](#release-notes)

@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Proofpoint Targeted Attack Protection (TAP)
+# Proofpoint TAP
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -46,7 +46,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date    | Notes                                                                                                            |
@@ -62,12 +62,12 @@
 ## Playbooks
 In v1.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
 
-You can continue to use the rules/workflows. 
-But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes. 
+You can continue to use the rules/workflows.
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 ## User specified SIEM endpoints
 A new app.config setting `siem_event_types` is provided to allow the user to specify which Proofpoint /siem endpoints to query when converting TAP threats into SOAR incident/cases.  The parameter `siem_event_types` is a comma-separated list with the following possible values:
@@ -107,8 +107,8 @@ The Proofpoint TAP function package provides the following features:
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -122,7 +122,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45.2.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=49.0.4423`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -130,10 +130,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Incidents | Read, Create |
 
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -143,7 +143,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -339,7 +339,7 @@ def add_row_to_campaign_object_dt(object_type, object_id, object_name=None, thre
   object_dt.proofpoint_tap_object_type_of_threat = type_of_threat
   object_dt.proofpoint_tap_object_subtype_of_threat = subtype_of_threat
   object_dt.proofpoint_tap_object_threat_time = threat_time
-  
+
 ########################
 # Mainline starts here #
 ########################
@@ -349,50 +349,50 @@ MAX_DATA_TABLE_ROWS = 25
 # results and results.data are both a Dictionary
 if results is not None:
   noteText = "<b>Proofpoint TAP - Get Campaign Information by Campaign ID:</b>"
-  
+
   if results.get("success") is True and results.get("data", None) is not None:
     data = results.get("data")
     campaign_name = data.get("name", None)
     campaign_description = data.get("description", None)
     campaign_start_date = data.get("startDate", None)
-    
+
     noteText = u"""{}<br>Campaign was found:
     <br>- Campaign ID '{}'
     <br>- Name '{}'
     <br>- Description '{}'
     <br>- Campaign's first threat variants were first observed on '{}'
     <br>Campaign objects are saved in the Proofpoint TAP Campaign Object Details Data Table.""".format(noteText, artifact.value, campaign_name, campaign_description, campaign_start_date)
-    
+
     campaign_members_list = data.get("campaignMembers", None)
     if len(campaign_members_list) > MAX_DATA_TABLE_ROWS:
       noteText = noteText + "<br>Too many campaignMembers found to add to the Campaign Object data table {0}<br>".format(len(campaign_members_list))
     else:
       for member in campaign_members_list:
         add_row_to_campaign_object_dt("CampaignMembers", member.get("id", None), threat=member.get("threat", None), type_of_threat=member.get("type", None), subtype_of_threat=member.get("subType", None), threat_time=member.get("threatTime", None))
-    
+
     families_list = data.get("families", [])
     for family in families_list:
       add_row_to_campaign_object_dt("CampaignFamily", family.get("id"), family.get("name"))
-    
+
     actors_list = data.get("actors", [])
     for actor in actors_list:
       add_row_to_campaign_object_dt("Actor", actor.get("id"), object_name=actor.get("name"))
-    
+
     malware_list = data.get("malware", [])
     for malware in malware_list:
       add_row_to_campaign_object_dt("Malware", malware.get("id"), object_name=malware.get("name"))
-    
+
     techniques_list = data.get("techniques", [])
     for technique in techniques_list:
       add_row_to_campaign_object_dt("Technique", technique.get("id"), object_name=technique.get("name"))
 
   elif results.get("success") is False and results.get("note_err_text", None) is not None:
-    noteText = u"""{} 
-    <br>No Campaign information found for campaign ID '{}'. 
+    noteText = u"""{}
+    <br>No Campaign information found for campaign ID '{}'.
     <br>Error: {}.""".format(noteText, artifact.value, results.get("note_err_text"))
   else:
     noteText = u"""{} <br>No Campaign information found for campaign ID '{}'.""".format(noteText, artifact.value)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -486,8 +486,8 @@ artifact_type = "String"
 object_name = row.proofpoint_tap_object_name
 object_threat = row.proofpoint_tap_object_threat
 if object_name is not None:
-  artifact_value = object_name 
-else: 
+  artifact_value = object_name
+else:
   artifact_value = object_threat
 
 # Create an Artifact
