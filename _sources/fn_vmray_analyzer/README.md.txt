@@ -277,5 +277,3 @@ incident.addNote(helper.createRichText(noteText))
 
 ![screenshot](./screenshots/rule_attachment.jpeg)
 
-
----

@@ -9,9 +9,8 @@
 IBM Security QRadar SOAR Apps
 =============================
 
-Welcome to the IBM SOAR Apps documentation page.
+Welcome to the QRadar SOAR Apps documentation page.
 
-Below you'll find the documentation for each app that IBM
-develops and publishes on the Security App Exchange.
-There are also details of the objects that these apps export
-for convenient searching and cataloging.
+Below you'll find the documentation for each app that IBM develops and publishes on the IBM Security App Exchange.
+Included below are details of the objects that each of these QRadar SOAR apps export, for convenient searching and cataloging.
+We also include the latest release notes as well as an Overview section outlining key features, requirements, and additional context on the supported rules, functions and playbooks (if applicable).

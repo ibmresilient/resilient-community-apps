@@ -119,4 +119,3 @@ The default configuration satisfies the requirements for a number of use cases. 
 ## Documentation
 * See [ibm.biz/res-snow-docs](http://ibm.biz/res-snow-docs) for our latest documentation
 
----

@@ -1,0 +1,20 @@
+/* This custom CSS is just for the "click to download" button which is added in using the custom.js file */
+.floating-button-div {
+    position: fixed;
+    padding: 2em;
+    left: 65%;
+    top: 10%;
+    transform: translateX(-50%);
+}
+
+
+.fb {
+    background-color: #0080ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}

@@ -1,4 +1,4 @@
-# ISC SANS: Get Enrichment Data for an IP Address
+# ISC SANS
 
  ## Release Notes
 | Version | Date | Notes |
