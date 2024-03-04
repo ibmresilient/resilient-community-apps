@@ -1,20 +1,19 @@
-/* This custom CSS is just for the "click to download" button which is added in using the custom.js file */
-.floating-button-div {
-    position: fixed;
-    padding: 2em;
-    left: 65%;
-    top: 10%;
-    transform: translateX(-50%);
+/* This allows the "TOC" list on the landing page to be multi-column so that it isn't so crazy long */
+div .toctree-wrapper {
+    column-count: 2;
+    margin: 10px;
 }
-
-
-.fb {
-    background-color: #0080ff;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+div .toctree-wrapper > ul { margin: 0; }
+ul .toctree-l1 {
+    margin: 0;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+}
+section#ibm-security-qradar-soar-apps .caption {
+    line-height: 0px;
+    margin-top: 0px;
+}
+section#ibm-security-qradar-soar-apps span.caption-text {
+    display: none;
 }

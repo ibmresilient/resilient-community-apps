@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=11eca18f" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=afe95b24" />
     
     
 
@@ -447,7 +447,7 @@
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 <div class="table-wrapper colwidths-auto docutils container">
@@ -478,7 +478,7 @@
 <p><img alt="screenshot: main" src="../_images/main48.png" /></p>
 <p>Bi-directional App for Rapid7 InsightIDR. Query Rapid7 InsightIDR for Investigations based on user-defined query parameters and create and update cases in SOAR. The app polls Rapid7 InsightIDR for new or updated investigations.  Information on alerts that triggered an investigation are displayed in the Rapid7 InsightIDR Alerts data table in SOAR, including the alert evidence.</p>
 <p>
-Rapid7’s InsightIDR is your security center for incident detection and response, authentication monitoring, and endpoint visibility. Together, these form Extended Detection and Response (XDR). InsightIDR identifies unauthorized access from external and internal threats and highlights suspicious activity so you don’t have to weed through thousands of data streams. XDR accelerates more comprehensive threat detection and response. This cloud-native, cloud-scalable security solution can unify and transform multiple telemetry sources. 
+Rapid7’s InsightIDR is your security center for incident detection and response, authentication monitoring, and endpoint visibility. Together, these form Extended Detection and Response (XDR). InsightIDR identifies unauthorized access from external and internal threats and highlights suspicious activity so you don’t have to weed through thousands of data streams. XDR accelerates more comprehensive threat detection and response. This cloud-native, cloud-scalable security solution can unify and transform multiple telemetry sources.
 <p>
 InsightIDR combines the full power of endpoint forensics, log search, and sophisticated dashboards into a single solution. It is a Software as a Service (SaaS) tool that collects data from your existing network security tools, authentication logs, and endpoint devices. InsightIDR then aggregates the data at an on-premises Collector or a dedicated host machine that centralizes your data.
 <section id="key-features">
@@ -509,8 +509,8 @@ InsightIDR combines the full power of endpoint forensics, log search, and sophis
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
@@ -965,7 +965,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span>
 
-<span class="c1"># The &quot;User Behavior Analytics&quot; alert source uses the &quot;restricted&quot; InsightIDR endpoint </span>
+<span class="c1"># The &quot;User Behavior Analytics&quot; alert source uses the &quot;restricted&quot; InsightIDR endpoint</span>
 <span class="c1"># that uses the rrn of the investigation to get the alert evidence.  It does not have</span>
 <span class="c1"># an alert_rrn.</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_alert_rrn</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">r7_alert_source</span> <span class="o">==</span> <span class="s2">&quot;User Behavior Analytics&quot;</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">r7_alert_id</span>
@@ -984,7 +984,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
   <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
   <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="k">if</span> <span class="n">content</span><span class="p">:</span> 
+  <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
     <span class="n">alert_data</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
     <span class="k">if</span> <span class="n">alert_data</span><span class="p">:</span>
       <span class="c1"># evidences is defined only in the case of non-restricted endpoint</span>
@@ -996,7 +996,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
         <span class="k">if</span> <span class="n">data_string</span><span class="p">:</span>
           <span class="n">evidence_data</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">data_string</span><span class="p">)</span>
       <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># restricted endpoint results </span>
+        <span class="c1"># restricted endpoint results</span>
         <span class="n">indicator_occurrences</span> <span class="o">=</span> <span class="n">alert_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;indicator_occurrences&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">indicator_occurrences</span><span class="p">:</span>
           <span class="n">evidence</span> <span class="o">=</span> <span class="n">indicator_occurrences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;evidence&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -1009,7 +1009,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
     <span class="k">if</span> <span class="n">evidence_data</span><span class="p">:</span>
       <span class="c1"># Update the Evidence DT column with JSON evidence</span>
       <span class="n">row</span><span class="o">.</span><span class="n">r7_evidence</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">evidence_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-      
+
       <span class="c1"># Create artifacts from the evidence</span>
       <span class="n">hostname</span> <span class="o">=</span> <span class="n">evidence_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">hostname</span><span class="p">:</span>
@@ -1135,12 +1135,12 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
           <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_detection_rule</span> <span class="o">=</span> <span class="n">detection_rule_rrn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rule_name&quot;</span><span class="p">)</span>
       <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; Added </span><span class="si">{0}</span><span class="s2"> alerts to the Alerts data table&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alert_list</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-     <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; No alerts found.&quot;</span>     
+     <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; No alerts found.&quot;</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; No alerts found (no content).&quot;</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; Failed function to get alerts. Reason = </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">))</span>
-  
+
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1232,7 +1232,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
     <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; function failed to get notes from Rapid7 InsightIDR&quot;</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; function failed to get notes from Rapid7 InsightIDR&quot;</span>
-  
+
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1350,7 +1350,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
             <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_link</span> <span class="o">=</span> <span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;Investigation&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entity_url</span><span class="p">)</span>
 
         <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; update of custom fields complete.&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span> 
+    <span class="k">else</span><span class="p">:</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; update of custom fields did NOT complete.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1460,7 +1460,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 
 <span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span>
               <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span> 
+              <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span>
               <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
               <span class="s2">&quot;sort&quot;</span><span class="p">:</span> <span class="kc">False</span>
             <span class="p">}</span>
@@ -1675,7 +1675,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
   <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Priority&lt;/b&gt; Automatic Playbook set:&lt;br&gt;   Priority: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">priority</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Priority&lt;/b&gt; Automatic Playbook failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
-  
+
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1814,12 +1814,12 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 
     <span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">input_status</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span>
-        
+
     <span class="n">disposition</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;disposition&quot;</span><span class="p">,</span> <span class="p">{})</span>
     <span class="n">input_disposition</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span>
     <span class="k">if</span> <span class="n">disposition</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">input_disposition</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span>
-        
+
     <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;closed&quot;</span><span class="p">:</span>
       <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
       <span class="n">incident</span><span class="o">.</span><span class="n">resolution_id</span> <span class="o">=</span> <span class="n">MAPPING_DISPOSITON_ON_CLOSE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span><span class="p">)</span>
@@ -1830,7 +1830,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
     <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
-  
+
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2097,87 +2097,87 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <section id="soar-create-case-jinja">
 <h3>soar_create_case.jinja<a class="headerlink" href="#soar-create-case-jinja" title="Link to this heading">#</a></h3>
 <p>When overriding the template in App Host, specify the file path as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{
-  {# JINJA template for creating a new SOAR incident from an endpoint #}
-  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
-     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
-  #}
-  {# modify to specify your specific **data** fields #}
-  &quot;name&quot;: &quot;{{ title }} - Rapid7 InsightIDR Investigation&quot;,
-  &quot;description&quot;: &quot;{{ title | replace(&#39;&quot;&#39;, &#39;\\&quot;&#39;) }}&quot;,
-  {# start_date cannot be after discovered_date #}
-  {# {% set start_date = first_alert_time if **happenedAt** &lt;= **receivedAt** else **receivedAt** %} #}
-  &quot;discovered_date&quot;: {{ created_time | soar_datetimeformat(split_at=&#39;.&#39;) }},
-  &quot;start_date&quot;: {{ created_time | soar_datetimeformat(split_at=&#39;.&#39;) }},
-  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
-  {# &quot;owner_id&quot;: &quot;{{ **assignedTo** |soar_substitute(&#39;{&quot;Automation&quot;: &quot;soar_user1@example.com&quot;, &quot;default_user@example.com&quot;: &quot;soar_user2@example.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@example.com&quot; }&#39;) }}&quot;, #}
-  &quot;plan_status&quot;: &quot;A&quot;,
-  {#&quot;plan_status&quot;: &quot;{{ status|soar_substitute(&#39;{&quot;CLOSED&quot;: &quot;C&quot;, &quot;INVESTIGATING&quot;: &quot;A&quot;, &quot;OPEN&quot;: &quot;A&quot;, &quot;WAITING&quot;: &quot;A&quot;}&#39;) }}&quot;,#}
-  {% if priority|lower == &quot;critical&quot; %}
-    &quot;severity_code&quot;: &quot;High&quot;,
-    {% elif priority|lower == &quot;high&quot; %}
-    &quot;severity_code&quot;: &quot;High&quot;,
-    {% elif priority|lower == &quot;medium&quot; %}
-    &quot;severity_code&quot;: &quot;Medium&quot;,
-    {% elif priority|lower == &quot;low&quot; %}
-    &quot;severity_code&quot;: &quot;Low&quot;,
-    {% else %}
-    &quot;severity_code&quot;: &quot;High&quot;,
-  {% endif %}
-  {# specify your custom fields for your endpoint solution #}
-  &quot;properties&quot;: {
-    &quot;rapid7_insight_idr_rrn&quot;: &quot;{{ rrn }}&quot;
-  }
-}
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from an endpoint #}</span>
+<span class="x">  </span><span class="c">{# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common</span>
+<span class="c">     for details on available jinja methods. Examples for `soar_substitute` and more are included below.</span>
+<span class="c">  #}</span>
+<span class="x">  </span><span class="c">{# modify to specify your specific **data** fields #}</span>
+<span class="x">  &quot;name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span><span class="x"> - Rapid7 InsightIDR Investigation&quot;,</span>
+<span class="x">  &quot;description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# start_date cannot be after discovered_date #}</span>
+<span class="x">  </span><span class="c">{# {% set start_date = first_alert_time if **happenedAt** &lt;= **receivedAt** else **receivedAt** %} #}</span>
+<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_time</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;start_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_time</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  </span><span class="c">{# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
+<span class="x">  </span><span class="c">{# &quot;owner_id&quot;: &quot;{{ **assignedTo** |soar_substitute(&#39;{&quot;Automation&quot;: &quot;soar_user1@example.com&quot;, &quot;default_user@example.com&quot;: &quot;soar_user2@example.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@example.com&quot; }&#39;) }}&quot;, #}</span>
+<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
+<span class="x">  </span><span class="c">{#&quot;plan_status&quot;: &quot;{{ status|soar_substitute(&#39;{&quot;CLOSED&quot;: &quot;C&quot;, &quot;INVESTIGATING&quot;: &quot;A&quot;, &quot;OPEN&quot;: &quot;A&quot;, &quot;WAITING&quot;: &quot;A&quot;}&#39;) }}&quot;,#}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;critical&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;medium&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;Medium&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;Low&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;rapid7_insight_idr_rrn&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">rrn</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  }</span>
+<span class="x">}</span>
 </pre></div>
 </div>
 </section>
 <section id="soar-close-case-jinja">
 <h3>soar_close_case.jinja<a class="headerlink" href="#soar-close-case-jinja" title="Link to this heading">#</a></h3>
 <p>When overriding the template in App Host, specify the file path as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="p">{</span><span class="c1"># JINJA template for closing a SOAR incident using endpoint data #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ disposition | soar_substitute(&#39;{&quot;</span><span class="n">BENIGN</span><span class="s2">&quot;: &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;, &quot;</span><span class="n">MALICIOUS</span><span class="s2">&quot;: &quot;</span><span class="n">Resolved</span><span class="s2">&quot;, &quot;</span><span class="n">UNDECIDED</span><span class="s2">&quot;: &quot;</span><span class="n">Unresolved</span><span class="s2">&quot;, &quot;</span><span class="n">UNKNOWN</span><span class="s2">&quot;: &quot;</span><span class="n">Unresolved</span><span class="s2">&quot;, &quot;</span><span class="n">NOT</span> <span class="n">APPLICABLE</span><span class="s2">&quot;: &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Rapid7 InsightIDR, Disposition: {{ disposition.replace(&#39;_&#39;, &#39; &#39;)|lower|capitalize }}&quot;</span><span class="p">,</span>
-  <span class="p">{</span><span class="c1"># add additional fields based on your &#39;on close&#39; field requirements #}</span>
-  <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status|lower|capitalize }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_disposition&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ disposition.replace(&#39;_&#39;, &#39; &#39;)|title }}&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
+<span class="x">  &quot;plan_status&quot;: &quot;C&quot;,</span>
+<span class="x">  &quot;resolution_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">disposition</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;BENIGN&quot;: &quot;Not an Issue&quot;, &quot;MALICIOUS&quot;: &quot;Resolved&quot;, &quot;UNDECIDED&quot;: &quot;Unresolved&quot;, &quot;UNKNOWN&quot;: &quot;Unresolved&quot;, &quot;NOT APPLICABLE&quot;: &quot;Not an Issue&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;resolution_summary&quot;: &quot;Closed by Rapid7 InsightIDR, Disposition: </span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span> <span class="s1">&#39; &#39;</span><span class="o">)|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# add additional fields based on your &#39;on close&#39; field requirements #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;rapid7_insight_idr_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;rapid7_insight_idr_disposition&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span> <span class="s1">&#39; &#39;</span><span class="o">)|</span><span class="nf">title</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  }</span>
+<span class="x">}</span>
 </pre></div>
 </div>
 </section>
 <section id="soar-update-case-jinja">
 <h3>soar_update_case.jinja<a class="headerlink" href="#soar-update-case-jinja" title="Link to this heading">#</a></h3>
 <p>When overriding the template in App Host, specify the file path as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="p">{</span><span class="c1"># JINJA template for updating a new SOAR incident from an endpoint #}</span>
-  <span class="p">{</span><span class="c1"># modify to specify your specific **data** fields #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status|soar_substitute(&#39;{&quot;</span><span class="n">CLOSED</span><span class="s2">&quot;: &quot;</span><span class="n">C</span><span class="s2">&quot;, &quot;</span><span class="n">INVESTIGATING</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">OPEN</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">WAITING</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">priority</span><span class="o">|</span><span class="n">lower</span> <span class="o">==</span> <span class="s2">&quot;critical&quot;</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">elif</span> <span class="n">priority</span><span class="o">|</span><span class="n">lower</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">elif</span> <span class="n">priority</span><span class="o">|</span><span class="n">lower</span> <span class="o">==</span> <span class="s2">&quot;medium&quot;</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">elif</span> <span class="n">priority</span><span class="o">|</span><span class="n">lower</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
-  <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-  <span class="p">{</span><span class="c1"># specify your custom fields for your endpoint solution #}</span>
-  <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_source&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ source|lower|capitalize }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status|lower|capitalize }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_assignee&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ assignee.name }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_assignee_email&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ assignee.email }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_disposition&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ disposition.replace(&#39;_&#39;, &#39; &#39;)|title }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_responsibility&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ responsibility }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_link&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;{{ entity_url }}&#39;&gt;Investigation&lt;/a&gt;&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for updating a new SOAR incident from an endpoint #}</span>
+<span class="x">  </span><span class="c">{# modify to specify your specific **data** fields #}</span>
+<span class="x">  &quot;plan_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;CLOSED&quot;: &quot;C&quot;, &quot;INVESTIGATING&quot;: &quot;A&quot;, &quot;OPEN&quot;: &quot;A&quot;, &quot;WAITING&quot;: &quot;A&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;critical&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;medium&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;Medium&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;Low&quot;,</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;rapid7_insight_idr_source&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">source</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;rapid7_insight_idr_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;rapid7_insight_idr_assignee&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">assignee.name</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;rapid7_insight_idr_assignee_email&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">assignee.email</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;rapid7_insight_idr_disposition&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span> <span class="s1">&#39; &#39;</span><span class="o">)|</span><span class="nf">title</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;rapid7_insight_idr_responsibility&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">responsibility</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;rapid7_insight_idr_link&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">entity_url</span> <span class="cp">}}</span><span class="x">&#39;&gt;Investigation&lt;/a&gt;&quot;</span>
+<span class="x">  }</span>
+<span class="x">}</span>
 </pre></div>
 </div>
 </section>

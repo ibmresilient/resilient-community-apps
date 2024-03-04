@@ -70,7 +70,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -88,10 +88,10 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Bi-directional App for Rapid7 InsightIDR. Query Rapid7 InsightIDR for Investigations based on user-defined query parameters and create and update cases in SOAR. The app polls Rapid7 InsightIDR for new or updated investigations.  Information on alerts that triggered an investigation are displayed in the Rapid7 InsightIDR Alerts data table in SOAR, including the alert evidence. 
+Bi-directional App for Rapid7 InsightIDR. Query Rapid7 InsightIDR for Investigations based on user-defined query parameters and create and update cases in SOAR. The app polls Rapid7 InsightIDR for new or updated investigations.  Information on alerts that triggered an investigation are displayed in the Rapid7 InsightIDR Alerts data table in SOAR, including the alert evidence.
 
 <p>
-Rapid7’s InsightIDR is your security center for incident detection and response, authentication monitoring, and endpoint visibility. Together, these form Extended Detection and Response (XDR). InsightIDR identifies unauthorized access from external and internal threats and highlights suspicious activity so you don’t have to weed through thousands of data streams. XDR accelerates more comprehensive threat detection and response. This cloud-native, cloud-scalable security solution can unify and transform multiple telemetry sources. 
+Rapid7’s InsightIDR is your security center for incident detection and response, authentication monitoring, and endpoint visibility. Together, these form Extended Detection and Response (XDR). InsightIDR identifies unauthorized access from external and internal threats and highlights suspicious activity so you don’t have to weed through thousands of data streams. XDR accelerates more comprehensive threat detection and response. This cloud-native, cloud-scalable security solution can unify and transform multiple telemetry sources.
 <p>
 InsightIDR combines the full power of endpoint forensics, log search, and sophisticated dashboards into a single solution. It is a Software as a Service (SaaS) tool that collects data from your existing network security tools, authentication logs, and endpoint devices. InsightIDR then aggregates the data at an on-premises Collector or a dedicated host machine that centralizes your data.
 
@@ -101,7 +101,7 @@ InsightIDR combines the full power of endpoint forensics, log search, and sophis
 -->
 * Poll Rapid7 InsightIDR investigations and create and update corresponding cases in SOAR
 * Create cases in SOAR based on user defined investigation field values:
-  - "priorities" 
+  - "priorities"
   - "statuses"
   - "sources"
   - "tags"
@@ -115,8 +115,8 @@ InsightIDR combines the full power of endpoint forensics, log search, and sophis
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -130,7 +130,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `49.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=51.0.0.2`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -139,10 +139,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Edit Incidents | Fields, Status |
   | Layouts | Read, Edit |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -152,7 +152,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -179,17 +179,17 @@ This app has been implemented using:
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
 * A Rapid7 InsightIDR user account with an Organization API key.
-* Enable Rapid7 InsightIDR restricted evidence endpoint if **User Behavior Analytics** detections rules trigger alerts in your Rapid7 InsightIDR platform and you require the alert evidence in the SOAR app. You must reach out to Rapid7 support on a per-organization basis to enable the **restricted evidence API**. 
-  
+* Enable Rapid7 InsightIDR restricted evidence endpoint if **User Behavior Analytics** detections rules trigger alerts in your Rapid7 InsightIDR platform and you require the alert evidence in the SOAR app. You must reach out to Rapid7 support on a per-organization basis to enable the **restricted evidence API**.
+
 #### Configuration
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
 
-### Generate an Organization API Key in Rapid7 InsightIDR 
+### Generate an Organization API Key in Rapid7 InsightIDR
 Click on the `Settings->API Keys` menu item:
-  
- ![screenshot: fn-rapid7-insightidr-settings-api-keys ](./doc/screenshots/fn-rapid7-insightidr-settings-api-keys.png) 
+
+ ![screenshot: fn-rapid7-insightidr-settings-api-keys ](./doc/screenshots/fn-rapid7-insightidr-settings-api-keys.png)
 
  Click on the `Generate New Organization Key` button:
 
@@ -201,7 +201,7 @@ Click on the `Settings->API Keys` menu item:
 ### Determine the Rapid7 Data Storage Region
 Navigate to the `Settings` panel and then the `Organization Settings` tab to find the `Data Storage Region`. The region should map to one of these codes: us, us2, us3, ca, eu, ap, au.  You can also find the code at the starting fragment of the URL used to access the InsightIDR platform in a browser.  For example, in this URL `https://us2.idr.insight.rapid7.com` , the region code is `us2`.
 
-![screenshot: fn-rapid7-insightidr-data-storage-region ](./doc/screenshots/fn-rapid7-insightidr-data-storage-region.png) 
+![screenshot: fn-rapid7-insightidr-data-storage-region ](./doc/screenshots/fn-rapid7-insightidr-data-storage-region.png)
 
 ---
 
@@ -232,8 +232,8 @@ The following table provides the settings you need to configure the app. These s
 
 The app automatically creates a custom `Rapid7 InsightIDR` tab on first run after installation:
 
-![screenshot: custom-layouts ](./doc/screenshots/custom-layouts.png) 
- 
+![screenshot: custom-layouts ](./doc/screenshots/custom-layouts.png)
+
 
 ### Poller Considerations
 The poller is just one way to escalate Rapid7 InsightIDR investigations to SOAR cases. It's also possible to send Rapid7 InsightIDR investigation information to another SIEM, such as IBM QRadar, which would then correlate cases into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Rapid7 Insight investigation RRN (Rapid7 Resource Name) is preserved in the custom case field `rapid7_insight_idr_rrn`, then all the remaining details about the case synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Salesforce Case ID.
@@ -250,11 +250,11 @@ When overriding the template in App Host, specify the file path for each file as
 Below are the default templates used which can be copied, modified, and used with app_config's
 `soar_create_case_template`, `soar_update_case_template`, and `soar_close_case_template` settings to override the default templates.
 
-### Investigation Filtering 
+### Investigation Filtering
 To limit the number of investigations escalated to SOAR, consider using the optional `polling_filters` parameter in the app configuration file. Each filter is a tuple in the following format: ("field","values"),
 Where:
 * "field" is the Rapid7 InsightIDR investigation field to be queried
-* "values" is a comma separated string of values to include in the query results returned 
+* "values" is a comma separated string of values to include in the query results returned
 <p>
 If more than one filter is needed, separate each tuple with a comma.
 <p>
@@ -273,14 +273,14 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 
 `polling_filters = ("priorities","HIGH,CRITICAL"),("statuses","OPEN,INVESTIGATING,WAITING")`
 
-NOTE: Each individual filter is first constructed by joining together the field and the desired values using OR statements. Each individual filter is then combined using AND.  In the example above, only investigations with priority HIGH or CRITICAL AND those with statuses OPEN, INVESTIGATING, or WAITING are pulled into SOAR as cases.  MEDIUM, OPEN investigations are not created as cases in SOAR in the example.  
+NOTE: Each individual filter is first constructed by joining together the field and the desired values using OR statements. Each individual filter is then combined using AND.  In the example above, only investigations with priority HIGH or CRITICAL AND those with statuses OPEN, INVESTIGATING, or WAITING are pulled into SOAR as cases.  MEDIUM, OPEN investigations are not created as cases in SOAR in the example.
 
 ---
 
 ## Function - Rapid7 InsightIDR: Add Attachments to SOAR Case
 Manual playbook to get the attachments from a Rapid7 InsightIDR investigation and add them to the associated SOAR case.
 
- ![screenshot: fn-rapid7-insightidr-add-attachments-to-soar-case ](./doc/screenshots/fn-rapid7-insightidr-add-attachments-to-soar-case.png) 
+ ![screenshot: fn-rapid7-insightidr-add-attachments-to-soar-case ](./doc/screenshots/fn-rapid7-insightidr-add-attachments-to-soar-case.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -437,7 +437,7 @@ results = {
 ```python
 inputs.rapid7_insight_idr_rrn = incident.properties.rapid7_insight_idr_rrn
 
-# The "User Behavior Analytics" alert source uses the "restricted" InsightIDR endpoint 
+# The "User Behavior Analytics" alert source uses the "restricted" InsightIDR endpoint
 # that uses the rrn of the investigation to get the alert evidence.  It does not have
 # an alert_rrn.
 inputs.rapid7_insight_idr_alert_rrn = None if row.r7_alert_source == "User Behavior Analytics" else row.r7_alert_id
@@ -459,7 +459,7 @@ evidence_data = {}
 if results.get("success", False):
   content = results.get("content", {})
   inputs = results.get("inputs", {})
-  if content: 
+  if content:
     alert_data = content.get("data", {})
     if alert_data:
       # evidences is defined only in the case of non-restricted endpoint
@@ -471,7 +471,7 @@ if results.get("success", False):
         if data_string:
           evidence_data = loads(data_string)
       else:
-        # restricted endpoint results 
+        # restricted endpoint results
         indicator_occurrences = alert_data.get("indicator_occurrences", None)
         if indicator_occurrences:
           evidence = indicator_occurrences[0].get("evidence", None)
@@ -484,7 +484,7 @@ if results.get("success", False):
     if evidence_data:
       # Update the Evidence DT column with JSON evidence
       row.r7_evidence = dumps(evidence_data, indent=4)
-      
+
       # Create artifacts from the evidence
       hostname = evidence_data.get("hostname",None)
       if hostname:
@@ -604,12 +604,12 @@ if results.get("success"):
           alert_row.r7_detection_rule = detection_rule_rrn.get("rule_name")
       note_text = "<b>Rapid7 InsightIDR Get Alerts:</b> Added {0} alerts to the Alerts data table".format(len(alert_list))
     else:
-     note_text = "<b>Rapid7 InsightIDR Get Alerts:</b> No alerts found."     
+     note_text = "<b>Rapid7 InsightIDR Get Alerts:</b> No alerts found."
   else:
     note_text = "<b>Rapid7 InsightIDR Get Alerts:</b> No alerts found (no content)."
 else:
   note_text = "<b>Rapid7 InsightIDR Get Alerts:</b> Failed function to get alerts. Reason = {0}".format(results.get("reason"))
-  
+
 incident.addNote(note_text)
 ```
 
@@ -620,7 +620,7 @@ incident.addNote(note_text)
 ## Function - Rapid7 InsightIDR: Get Comments from Rapid7 Investigation
 Get the comments from a Rapid7 InsightIDR investigation and add any new ones as notes to the corresponding SOAR case.
 
- ![screenshot: fn-rapid7-insightidr-get-comments-from-rapid7-investigation ](./doc/screenshots/fn-rapid7-insightidr-get-comments-from-rapid7-investigation.png) 
+ ![screenshot: fn-rapid7-insightidr-get-comments-from-rapid7-investigation ](./doc/screenshots/fn-rapid7-insightidr-get-comments-from-rapid7-investigation.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -690,7 +690,7 @@ if results.get("success"):
     note_text = "<b>Rapid7 InsightIDR: Get Comments</b> function failed to get notes from Rapid7 InsightIDR"
 else:
   note_text = "<b>Rapid7 InsightIDR: Get Comments</b> function failed to get notes from Rapid7 InsightIDR"
-  
+
 incident.addNote(note_text)
 ```
 
@@ -802,7 +802,7 @@ else:
             incident.properties.rapid7_insight_idr_link = "<a target='_blank' href='{0}'>Investigation</a>".format(entity_url)
 
         incident.addNote("<b>Rapid7 InsightIDR: Update Case Automatic:</b> update of custom fields complete.")
-    else: 
+    else:
         incident.addNote("<b>Rapid7 InsightIDR: Update Case Automatic:</b> update of custom fields did NOT complete.")
 ```
 
@@ -813,7 +813,7 @@ else:
 ## Function - Rapid7 InsightIDR: List Attachments
 Get list of the attachments of a Rapid7 InsightIDR investigation.
 
- ![screenshot: fn-rapid7-insightidr-list-attachments ](./doc/screenshots/fn-rapid7-insightidr-list-attachments.png) 
+ ![screenshot: fn-rapid7-insightidr-list-attachments ](./doc/screenshots/fn-rapid7-insightidr-list-attachments.png)
 <details><summary>Inputs:</summary>
 <p>
 
@@ -900,7 +900,7 @@ if results.get("success"):
 
 json_note = {
               "version": "1.3",
-              "header": header, 
+              "header": header,
               "json": data,
               "sort": False
             }
@@ -1088,7 +1088,7 @@ if results.get("success"):
   note_text = "<b>Rapid7 InsightIDR: Set Priority</b> Automatic Playbook set:<br>   Priority: {0}".format(priority)
 else:
   note_text = "<b>Rapid7 InsightIDR: Set Priority</b> Automatic Playbook failed:<br>  {0}".results.get("reason")
-  
+
 incident.addNote(note_text)
 ```
 
@@ -1206,12 +1206,12 @@ if results.get("success"):
 
     if status.lower() == input_status.lower():
         incident.properties.rapid7_insight_idr_status = playbook.inputs.rapid7_insight_idr_status
-        
+
     disposition = content.get("disposition", {})
     input_disposition = playbook.inputs.rapid7_insight_idr_disposition
     if disposition.lower() == input_disposition.lower():
         incident.properties.rapid7_insight_idr_disposition = playbook.inputs.rapid7_insight_idr_disposition
-        
+
     if incident.properties.rapid7_insight_idr_status.lower() == "closed":
       incident.plan_status = "C"
       incident.resolution_id = MAPPING_DISPOSITON_ON_CLOSE.get(incident.properties.rapid7_insight_idr_disposition)
@@ -1222,7 +1222,7 @@ if results.get("success"):
     note_text = "<b>Rapid7 InsightIDR: Set Status and Disposition</b> failed:<br>  {0}".results.get("reason")
 else:
   note_text = "<b>Rapid7 InsightIDR: Set Status and Disposition</b> failed:<br>  {0}".results.get("reason")
-  
+
 incident.addNote(note_text)
 ```
 
@@ -1232,19 +1232,19 @@ incident.addNote(note_text)
 ---
 
 ## Playbooks
-| Playbook Name | Description | Activation Type | Object | Status | Condition | 
-| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
-| Rapid7 InsightIDR: Close Investigation On Case Close | Automatic playbook that updates the Status and disposition of the associated investigation in Rapid7 InsightIDR when the cases is closed in SOAR.  The SOAR case resolution summary is written as a comment to the Rapid7 InsightIDR investigation. | Automatic | incident | `enabled` | `incident.plan_status changed_to Closed AND incident.properties.rapid7_insight_idr_rrn has_a_value` | 
-| Rapid7 InsightIDR: Closed by Rapid7 InsightIDR | Write a note to SOAR when Rapid7 InsightIDR closes an investigation. | Automatic | incident | `enabled` | `incident.properties.rapid7_insight_idr_rrn has_a_value AND incident.resolution_summary changed AND incident.resolution_summary contains Closed by Rapid7 InsightIDR` | 
-| Rapid7 InsightIDR: Get Alert Evidence | Get the alert evidence of the alert in the data table row and write the JSON results to the Evidence column of the Alerts data table.  Create artifacts from the evidence. | Manual | rapid7_insight_idr_alerts_dt | `enabled` | `-` | 
-| Rapid7 InsightIDR: Get Alerts | Get the alerts associated with a Rapid7 Insight IDR investigation. | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` | 
-| Rapid7 InsightIDR: Get Attachments from Investigation | Manual playbook to get the attachments associated with the Rapid7 InsightIDR investigation and add them ass attachments to the SOAR case. | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` | 
-| Rapid7 InsightIDR: Get Comments from Investigation | Get the comments from Rapid7 InsightIDR investigation and add as a note in SOAR. | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` | 
-| Rapid7 InsightIDR: Send Note to Rapid7 Investigation | Manual playbook that sends a note in SOAR to an investigation in Rapid7 InsightIDR as a comment. | Manual | note | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value AND note.text not_contains Sent to Rapid7 InsightIDR at` | 
-| Rapid7 insightIDR: Set Priority Automatically | Playbook to automatically update the priority of a Rapid7 InsightIDR investigation if the priority is changed in SOAR. | Automatic | incident | `enabled` | `incident.plan_status equals Active AND incident.severity_code changed` | 
-| Rapid7 InsightIDR: Set Status and Disposition | Manual playbook to set the Status and Disposition of the Rapid7 InsightIDR investigation in Rapid7 InsightIDR | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` | 
-| Rapid7 InsightIDR: Update Case | Manual playbook to update a Rapid7 InsightIDR case. Custom fields and comments are updated in SOAR.| Manual | incident | `enabled` | `incident.properties.rapid7_insight_idr_rrn has_a_value` | 
-| Rapid7 InsightIDR: Update Created Rapid7 InsightIDR Case | Automatic playbook to update a newly created Rapid7 InsightIDR case. | Automatic | incident | `enabled` | `incident.properties.rapid7_insight_idr_rrn has_a_value AND object_added` | 
+| Playbook Name | Description | Activation Type | Object | Status | Condition |
+| ------------- | ----------- | --------------- | ------ | ------ | --------- |
+| Rapid7 InsightIDR: Close Investigation On Case Close | Automatic playbook that updates the Status and disposition of the associated investigation in Rapid7 InsightIDR when the cases is closed in SOAR.  The SOAR case resolution summary is written as a comment to the Rapid7 InsightIDR investigation. | Automatic | incident | `enabled` | `incident.plan_status changed_to Closed AND incident.properties.rapid7_insight_idr_rrn has_a_value` |
+| Rapid7 InsightIDR: Closed by Rapid7 InsightIDR | Write a note to SOAR when Rapid7 InsightIDR closes an investigation. | Automatic | incident | `enabled` | `incident.properties.rapid7_insight_idr_rrn has_a_value AND incident.resolution_summary changed AND incident.resolution_summary contains Closed by Rapid7 InsightIDR` |
+| Rapid7 InsightIDR: Get Alert Evidence | Get the alert evidence of the alert in the data table row and write the JSON results to the Evidence column of the Alerts data table.  Create artifacts from the evidence. | Manual | rapid7_insight_idr_alerts_dt | `enabled` | `-` |
+| Rapid7 InsightIDR: Get Alerts | Get the alerts associated with a Rapid7 Insight IDR investigation. | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` |
+| Rapid7 InsightIDR: Get Attachments from Investigation | Manual playbook to get the attachments associated with the Rapid7 InsightIDR investigation and add them ass attachments to the SOAR case. | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` |
+| Rapid7 InsightIDR: Get Comments from Investigation | Get the comments from Rapid7 InsightIDR investigation and add as a note in SOAR. | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` |
+| Rapid7 InsightIDR: Send Note to Rapid7 Investigation | Manual playbook that sends a note in SOAR to an investigation in Rapid7 InsightIDR as a comment. | Manual | note | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value AND note.text not_contains Sent to Rapid7 InsightIDR at` |
+| Rapid7 insightIDR: Set Priority Automatically | Playbook to automatically update the priority of a Rapid7 InsightIDR investigation if the priority is changed in SOAR. | Automatic | incident | `enabled` | `incident.plan_status equals Active AND incident.severity_code changed` |
+| Rapid7 InsightIDR: Set Status and Disposition | Manual playbook to set the Status and Disposition of the Rapid7 InsightIDR investigation in Rapid7 InsightIDR | Manual | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.rapid7_insight_idr_rrn has_a_value` |
+| Rapid7 InsightIDR: Update Case | Manual playbook to update a Rapid7 InsightIDR case. Custom fields and comments are updated in SOAR.| Manual | incident | `enabled` | `incident.properties.rapid7_insight_idr_rrn has_a_value` |
+| Rapid7 InsightIDR: Update Created Rapid7 InsightIDR Case | Automatic playbook to update a newly created Rapid7 InsightIDR case. | Automatic | incident | `enabled` | `incident.properties.rapid7_insight_idr_rrn has_a_value AND object_added` |
 
 ---
 
@@ -1304,7 +1304,7 @@ It may necessary to modify the templates used to create or close SOAR cases base
 ### soar_create_case.jinja
 When overriding the template in App Host, specify the file path as `/var/rescircuits`.
 
-```
+```jinja
 {
   {# JINJA template for creating a new SOAR incident from an endpoint #}
   {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
@@ -1341,7 +1341,8 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
 
 ### soar_close_case.jinja
 When overriding the template in App Host, specify the file path as `/var/rescircuits`.
-```
+
+```jinja
 {
   {# JINJA template for closing a SOAR incident using endpoint data #}
   "plan_status": "C",
@@ -1357,7 +1358,8 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
 
 ### soar_update_case.jinja
 When overriding the template in App Host, specify the file path as `/var/rescircuits`.
-```
+
+```jinja
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   {# modify to specify your specific **data** fields #}
@@ -1391,6 +1393,6 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
- 
+
 ### For Support
 This is an IBM supported app. Please search [ibm.com/mysupport](https://ibm.com/mysupport) for assistance.
