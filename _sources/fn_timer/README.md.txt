@@ -45,6 +45,8 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 09/2022 | Initial Release |
 
+Please note that this document was updated in March 2024 to clarify the use of `num_workers` and `stomp_prefetch_limit` in this app. See [resilient Section Configurations](#resilient-section-configurations) for details.
+
 ---
 
 ## Overview
@@ -116,7 +118,13 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **max_timer** | Yes | `30d` | Max Timer sleep time. The input string is of format “time value” concatenated with a “time unit” character, where character is: ‘s’ for seconds, ‘m’ for minutes, ‘h’ for hours ‘d’ for days.  For example: '30s' = 30 seconds; '40m' = 40 minutes; |
+| **max_timer** | Yes | `30d` | Max Timer sleep time. The input string is of format "time value" concatenated with a "time unit" character, where character is: 's' for seconds, 'm' for minutes, 'h' for hours 'd' for days.  For example: '30s' = 30 seconds; '40m' = 40 minutes; |
+
+#### `[resilient]` Section Configurations
+The `[resilient]` section allows you to configure app wide settings. For the Timer function, there are two settings that are relevant and should be paid significant attention to get proper function from the app.
+The setting `num_workers` determines the maximum number of threads that the app will dispatch at the same time. This allows for concurrent timers to run.
+Importantly, however, the setting `stomp_prefetch_limit` must also be set a number greater than or equal to the value set for `num_workers`. Without this addition, you may experience timer delays
+in the function.
 
 
 ---
@@ -138,6 +146,26 @@ One of these two parameters are required to be set in order to use this function
 
 </p>
 </details>
+
+### Setting `timer_epoch` programmatically
+Notice in the **Inputs** section above that one option is to use `timer_epoch`. This setting is useful for setting a timer that will expire at a specific date and time in the future. The example workflow included with this app gives a very useful way to use this with playbook or rule activation forms where the SOAR built-in type datetimepicker is used to visually select a time on a calendar at which the timer will expire. This, along with `timer_time` will fit most use cases for this function.
+
+There may be times, however, where you may want to describe a timer that will expire at a set time from when the playbook is executed with more precision than is permitted using `timer_time`. In busy timer environments, the function itself may take a few seconds to start in the app, thus losing precision from the `timer_time` input. In these cases, it is recommended to use an approach like the one below which marks the time at the point that the input script is run and uses the `datetime` module in Python to create a "time delta" to describe a time in the future relative to input script runtime that can be used for the `timer_epoch` function input value. (Note that this requires some conversion to fit the expected datetimepicker format.)
+
+**Example**: set a timer to expire in *2 days, 4 minutes, and 5 seconds* after the input script is run using `timer_epoch`
+
+```python
+import datetime
+
+# Get current time
+current_time = datetime.datetime.now()
+# Use timedelta to add time
+# Options are:
+#   (days, seconds, microseconds, milliseconds, minutes, hours, weeks)
+target_time = current_time + datetime.timedelta(days=2, minutes=4, seconds=5)
+# Set timer_epoch by converting to epoch time and casting to an int to match datetimepicker format
+inputs.timer_epoch = int(target_time.timestamp()*1000)
+```
 
 <details><summary>Outputs:</summary>
 <p>

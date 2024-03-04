@@ -418,6 +418,7 @@
 </tbody>
 </table>
 </div>
+<p>Please note that this document was updated in March 2024 to clarify the use of <code class="docutils literal notranslate"><span class="pre">num_workers</span></code> and <code class="docutils literal notranslate"><span class="pre">stomp_prefetch_limit</span></code> in this app. See <a class="reference internal" href="#resilient-section-configurations"><span class="xref myst">resilient Section Configurations</span></a> for details.</p>
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -529,6 +530,13 @@ Additional package dependencies may exist for each of these packages:</p>
 </tbody>
 </table>
 </div>
+<section id="resilient-section-configurations">
+<h4><code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> Section Configurations<a class="headerlink" href="#resilient-section-configurations" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section allows you to configure app wide settings. For the Timer function, there are two settings that are relevant and should be paid significant attention to get proper function from the app.
+The setting <code class="docutils literal notranslate"><span class="pre">num_workers</span></code> determines the maximum number of threads that the app will dispatch at the same time. This allows for concurrent timers to run.
+Importantly, however, the setting <code class="docutils literal notranslate"><span class="pre">stomp_prefetch_limit</span></code> must also be set a number greater than or equal to the value set for <code class="docutils literal notranslate"><span class="pre">num_workers</span></code>. Without this addition, you may experience timer delays
+in the function.</p>
+</section>
 </section>
 </section>
 <hr class="docutils" />
@@ -567,6 +575,23 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>One of these two parameters are required to be set in order to use this function.</p>
 </p>
 </details>
+<section id="setting-timer-epoch-programmatically">
+<h3>Setting <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code> programmatically<a class="headerlink" href="#setting-timer-epoch-programmatically" title="Link to this heading">#</a></h3>
+<p>Notice in the <strong>Inputs</strong> section above that one option is to use <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code>. This setting is useful for setting a timer that will expire at a specific date and time in the future. The example workflow included with this app gives a very useful way to use this with playbook or rule activation forms where the SOAR built-in type datetimepicker is used to visually select a time on a calendar at which the timer will expire. This, along with <code class="docutils literal notranslate"><span class="pre">timer_time</span></code> will fit most use cases for this function.</p>
+<p>There may be times, however, where you may want to describe a timer that will expire at a set time from when the playbook is executed with more precision than is permitted using <code class="docutils literal notranslate"><span class="pre">timer_time</span></code>. In busy timer environments, the function itself may take a few seconds to start in the app, thus losing precision from the <code class="docutils literal notranslate"><span class="pre">timer_time</span></code> input. In these cases, it is recommended to use an approach like the one below which marks the time at the point that the input script is run and uses the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module in Python to create a “time delta” to describe a time in the future relative to input script runtime that can be used for the <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code> function input value. (Note that this requires some conversion to fit the expected datetimepicker format.)</p>
+<p><strong>Example</strong>: set a timer to expire in <em>2 days, 4 minutes, and 5 seconds</em> after the input script is run using <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="c1"># Get current time</span>
+<span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="c1"># Use timedelta to add time</span>
+<span class="c1"># Options are:</span>
+<span class="c1">#   (days, seconds, microseconds, milliseconds, minutes, hours, weeks)</span>
+<span class="n">target_time</span> <span class="o">=</span> <span class="n">current_time</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># Set timer_epoch by converting to epoch time and casting to an int to match datetimepicker format</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">timer_epoch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">target_time</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
 <details><summary>Outputs:</summary>
 <p>
 <blockquote>
@@ -624,6 +649,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
+</section>
 </section>
 <hr class="docutils" />
 <section id="rules">
@@ -727,10 +753,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#install">Install</a></li>
-<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a><ul>
+<li><a class="reference internal" href="#resilient-section-configurations"><code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> Section Configurations</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#function-timer">Function - Timer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-timer">Function - Timer</a><ul>
+<li><a class="reference internal" href="#setting-timer-epoch-programmatically">Setting <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code> programmatically</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#rules">Rules</a></li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
