@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# MaaS360 Functions for IBM Resilient
+# MaaS360
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -37,7 +37,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.2
@@ -86,7 +86,7 @@ The MaaS360 function package enables users to perform the following Mobile Devic
 
 ### Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.0.0`
 * App Host >= `v1.2.132` (if using App Host)
@@ -287,8 +287,8 @@ def string_value(value):
   return value if value is not None else ""
 
 def add_results_note(inputs, number_devices_found):
-  noteText = u"""{} device/s found in MaaS360 database with search parameters: 
-    - partialDeviceName: '{}' 
+  noteText = u"""{} device/s found in MaaS360 database with search parameters:
+    - partialDeviceName: '{}'
     - partialUsername: '{}'
     - partialPhoneNumber: '{}'
     - imeiMeid: '{}'
@@ -296,9 +296,9 @@ def add_results_note(inputs, number_devices_found):
     - maas360DeviceId: '{}'
     - email: '{}'""".format(
       number_devices_found,
-      string_value(inputs.get("maas360_partial_device_name")), 
-      string_value(inputs.get("maas360_partial_username")), 
-      string_value(inputs.get("maas360_partial_phone_no")), 
+      string_value(inputs.get("maas360_partial_device_name")),
+      string_value(inputs.get("maas360_partial_username")),
+      string_value(inputs.get("maas360_partial_phone_no")),
       string_value(inputs.get("maas360_imei_meid")),
       string_value(inputs.get("maas360_platform_name").get("name")) if inputs.get("maas360_platform_name") else "",
       string_value(inputs.get("maas360_device_id")),
@@ -319,7 +319,7 @@ if results and results.get("success"):
       # Add a row for each Device found
       devices_list = [content.get("device")] if count == 1 else content.get("device")
       map(lambda device: add_row(device), devices_list)
-  
+
   # Write results to a Note
   inputs = results.get("inputs")
   add_results_note(inputs, count)
@@ -335,11 +335,11 @@ if results and results.get("success"):
 ## Function - MaaS360 Action
 MaaS360 Function performs different actions based on the chosen Menu Item Rule.
 
-Available actions are: 
+Available actions are:
 - Locate Device
 - Get Software Installed
-- Lock Device 
-- Wipe Device 
+- Lock Device
+- Wipe Device
 - Cancel Pending Wipe
 
  ![screenshot: fn-maas360-action ](./doc/screenshots/fn-maas360-action.png)
@@ -419,7 +419,7 @@ if results and results.get("success"):
     latitude = content.get("latitude")
     longitude = content.get("longitude")
     device_id = content.get("maas360DeviceID")
-    
+
     if latitude and longitude:
       noteText = u"Current or last know location for Device ID {} is {} latitude, {} longitude.".format(device_id, latitude, longitude)
       incident.addNote(noteText)
@@ -553,7 +553,7 @@ def add_row(device_id, app_Name, app_version, app_id, refresh_date):
   app_dt.maas360_app_app_version = app_version
   app_dt.maas360_app_app_id = app_id
   app_dt.maas360_app_lastSoftwareDataRefreshDate = refresh_date
-  
+
 ########################
 # Mainline starts here #
 ########################
@@ -563,7 +563,7 @@ if results and results.get("success"):
   if content:
     device_id = content.get("maas360DeviceID")
     refresh_date = content.get("lastSoftwareDataRefreshDate")
-    
+
     found_apps = False
     apps = content.get("deviceSw")
     if apps:
@@ -574,16 +574,16 @@ if results and results.get("success"):
           if app_Name and app_attrs:
             app_version_attr = filter(lambda att: att["key"] == 'Version', app_attrs)
             # filter returns a list [{u'type': u'string', u'key': u'Version', u'value': u'3.70.111'}]
-            app_version = str(app_version_attr[0].get("value")) if app_version_attr else "N/A" 
-            
+            app_version = str(app_version_attr[0].get("value")) if app_version_attr else "N/A"
+
             app_app_id_attr = filter(lambda att: att["key"] == 'Application ID', app_attrs)
             # filter returns a list [{u'type': u'string', u'key': u'Application ID', u'value': u'com.fiberlink.maas360forios'}]
-            app_id = app_app_id_attr[0].get("value") if app_app_id_attr else "N/A" 
-              
+            app_id = app_app_id_attr[0].get("value") if app_app_id_attr else "N/A"
+
             # write results in the app datatable
             add_row(device_id, app_Name, app_version, app_id, refresh_date)
             found_apps = True
-            
+
   if found_apps:
     noteText = u"Installed software was found for the Device ID {} and saved in the MaaS360 Installed Software datatable".format(device_id)
     incident.addNote(noteText)
@@ -810,23 +810,23 @@ inputs.maas360_device_group_id = rule.properties.maas360_device_group_id if rule
   # Print empty string instead of None
 def string_value(value):
   return value if value is not None else ""
-  
+
 def add_results_note(inputs, response_desc):
-  noteText = u"""Stop App Distribution - {} for input params: 
-    - appId: '{}' 
+  noteText = u"""Stop App Distribution - {} for input params:
+    - appId: '{}'
     - appType: '{}'
     - targetDevices: '{}'
     - deviceId: '{}'
     - deviceGroupId: '{}'.""".format(
       response_desc,
-      inputs.get("maas360_app_id"), 
-      inputs.get("maas360_app_type").name, 
-      inputs.get("maas360_target_devices").name, 
+      inputs.get("maas360_app_id"),
+      inputs.get("maas360_app_type").name,
+      inputs.get("maas360_target_devices").name,
       string_value(inputs.get("maas360_device_id")),
       string_value(inputs.get("maas360_device_group_id"))
       )
   incident.addNote(noteText)
-  
+
 ########################
 # Mainline starts here #
 ########################
@@ -916,17 +916,17 @@ inputs.maas360_app_id = artifact.value
   # Print empty string instead of None
 def string_value(value):
   return value if value is not None else ""
-  
+
 def add_results_note(inputs, response_desc):
-  noteText = u"""Delete App - {} for input params: 
-    - appId: '{}' 
+  noteText = u"""Delete App - {} for input params:
+    - appId: '{}'
     - appType: '{}'""".format(
       response_desc,
-      inputs.get("maas360_app_id"), 
+      inputs.get("maas360_app_id"),
       inputs.get("maas360_app_type").name
       )
   incident.addNote(noteText)
-  
+
 ########################
 # Mainline starts here #
 ########################

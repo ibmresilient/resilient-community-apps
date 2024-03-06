@@ -1,19 +1,24 @@
-# Installation Guide for ServiceNow App
+# ServiceNow Installation Guide
 
 ## Table of Contents
-  - [Prerequisites](#prerequisites)
-  - [Step 1: *Install ServiceNow IBM SOAR App*](#step-1-install-servicenow-ibm-soar-app)
-  - [Step 2: *Create a User in ServiceNow and assign it the correct Role*](#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role)
-  - [Step 3: *Create a User on the SOAR Platform*](#step-3-create-an-api-key-on-the-soar-platform)
-  - [Step 4: *Enter IBM SOAR Configurations in ServiceNow*](#step-4-enter-ibm-soar-configurations)
-  - [Step 5: *Download & Install fn_service_now App*](#step-5-download--install-fn_service_now-app)
-  - [Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
-  - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
-  - [Step 8: Security Incident Response (SIR) Configurations](#step-8-security-incident-response-sir-configurations)
-    - [Configure `ServiceNowAllowedTableNames` (SIR only)](#configure-servicenowallowedtablenames-sir-only)
-    - [Add IBM SOAR tab to Security Incident UI (SIR only)](#add-ibm-soar-tab-to-security-incident-ui-sir-only)
-    - [Automatic escalation on group assignment (SIR only)](#sync-to-soar-automatically-on-group-assignment-sir-only)
-  - [Step 9: *Test*](#step-9-test)
+- [Table of Contents](#table-of-contents)
+- [Prerequisites](#prerequisites)
+- [Step 1: *Install ServiceNow IBM SOAR App*](#step-1-install-servicenow-ibm-soar-app)
+- [Step 2: *Create a User in ServiceNow and assign it the correct Role*](#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role)
+- [Step 3: *Create an API Key on the SOAR Platform*](#step-3-create-an-api-key-on-the-soar-platform)
+- [Step 4: *Enter IBM SOAR Configurations*](#step-4-enter-ibm-soar-configurations)
+- [Step 5: *Download \& Install fn\_service\_now App*](#step-5-download--install-fn_service_now-app)
+  - [Download \& Install on App Host](#download--install-on-app-host)
+  - [Download \& Install on Integration Server](#download--install-on-integration-server)
+  - [App Configuration:](#app-configuration)
+  - [Custom Layouts](#custom-layouts)
+- [Step 6: *Install and Configure ServiceNow MID Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
+- [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
+- [Step 8: Security Incident Response (SIR) Configurations](#step-8-security-incident-response-sir-configurations)
+  - [Configure `ServiceNowAllowedTableNames` (SIR only)](#configure-servicenowallowedtablenames-sir-only)
+  - [Add IBM SOAR tab to Security Incident UI (SIR only)](#add-ibm-soar-tab-to-security-incident-ui-sir-only)
+- [Sync to SOAR automatically on group assignment (SIR only)](#sync-to-soar-automatically-on-group-assignment-sir-only)
+- [Step 9: *Test*](#step-9-test)
 ---
 
 ## Prerequisites
@@ -40,6 +45,7 @@
 * Look for the **IBM SOAR** menu in the navigation panel.
  ![screenshot](./screenshots/8.png)
 * If you see it, the app installed successfully.
+
 ---
 
 ## Step 2: *Create a User in ServiceNow and assign it the correct Role*
@@ -61,6 +67,7 @@
  ![screenshot](./screenshots/12.png)
 * **(SIR ONLY)** If integrating with ServiceNow Security Incident Response (SIR) tables, you need to add the `sn_si.integration_user` role to the user as well.
 * Click **Save.**
+
 ---
 
 ## Step 3: *Create an API Key on the SOAR Platform*
@@ -82,7 +89,8 @@
 >   * **First Name:** SNOW
 >   * **Last Name:** Integration
 >   * **Email:** `snow_integration@example.com`
---- 
+
+---
 
 ## Step 4: *Enter IBM SOAR Configurations*
 * In ServiceNow, look for the **IBM Security QRadar SOAR** menu in the navigation panel.
@@ -110,10 +118,11 @@
 
 * Click **Save.** You should see a **Properties updated** banner at the top of the page if the save was successful.
 * **Close** the tab.
+
 ---
 
 ## Step 5: *Download & Install fn_service_now App*
-You can run this app on either App Host (recommended) or an Integration Server. 
+You can run this app on either App Host (recommended) or an Integration Server.
 
 ### Download & Install on App Host
 * To install or uninstall an App or Integration on the _IBM SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
@@ -175,7 +184,8 @@ Once the App is installed, you need to import the custom layouts. To do this:
 * In the popup modal, enter **ServiceNow** and click **Add**.
 * Click the new **ServiceNow** tab, drag in the **ServiceNow Records** Data Table and click **Save**:
   ![screenshot](./screenshots/33.png)
---- 
+
+---
 
 ## Step 6: *Install and Configure ServiceNow MID Server (if needed)*
 A ServiceNow MID Server is needed if your SOAR instance is not directly accessible from your ServiceNow instance. If using a MID Server, verify the following:
@@ -200,7 +210,8 @@ Once **installed** and **validated:**
   ![screenshot](./screenshots/8.png)
 * Paste the name into the **ServiceNow MID Server Name** field.
 * Click **Save.**
---- 
+
+---
 
 ## Step 7: *Give your ServiceNow users the correct Role*
 * For a ServiceNow user to have the permission to escalate an Incident to IBM SOAR, they must be explicitly given the correct role.
@@ -210,6 +221,7 @@ Once **installed** and **validated:**
 * Give the user the `x_ibmrt_resilient.user` role:
  ![screenshot](./screenshots/35.png)
 * Click **Save**.
+
 ---
 
 ## Step 8: Security Incident Response (SIR) Configurations
@@ -233,6 +245,7 @@ If integrating with SIR related tables, you need to configure the Security Incid
 * Drag the three IBM SOAR properties from the **Fields** section on the left to the new section.
   ![screenshot](./screenshots/40.jpg)
 * Click **Save**.
+
 ---
 
 ## Sync to SOAR automatically on group assignment (SIR only)
@@ -247,6 +260,7 @@ By default, this app includes the "IBM SOAR Response Group" but that needs to be
   ![screenshot](./screenshots/37.jpg)
 * Click **Submit**.
 * Similarly to as in [Step 7](#step-7-give-your-servicenow-users-the-correct-role), give any user except the user that was created in Step 7 the role `sn_si.analyst` and add them to the response group you created above.
+
 ---
 
 ## Step 9: *Test*
@@ -266,7 +280,7 @@ By default, this app includes the "IBM SOAR Response Group" but that needs to be
   ![screenshot](./screenshots/22.png)
 * Once the incident has been created in SOAR, these fields will be populated
   >**NOTE:** This can take up to 20 seconds. If nothing appears after that time, **view the logs**
-  > 
+  >
   > To view the Application Logs in ServiceNow:
   > * In the navigation panel, go to **System Logs > System Log > Application Logs**
 
@@ -278,4 +292,5 @@ By default, this app includes the "IBM SOAR Response Group" but that needs to be
   ![screenshot](./screenshots/24.png)
 * If successful, open the ServiceNow tab on the incident and make sure the new task is in the table
   ![screenshot](./screenshots/25.png)
+
 ---

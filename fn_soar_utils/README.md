@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# SOAR Function Utilities for SOAR
+# SOAR Utilities
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -51,7 +51,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -87,16 +87,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=46.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -106,7 +106,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -294,7 +294,7 @@ if results.get('md5', None):
 ## Function - SOAR Utilities: Attachment to Base64
 Reads a file attachment in the incident, and produces a base64-encoded string with the file attachment content. This content can then be used in combination with other workflow functions to create an artifact, a new file attachment, or to analyze the contents using various tools.
 
- ![screenshot: fn-soar-utilities-attachment-to-base64 ](./doc/screenshots/fn-soar-utilities-attachment-to-base64.png) 
+ ![screenshot: fn-soar-utilities-attachment-to-base64 ](./doc/screenshots/fn-soar-utilities-attachment-to-base64.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -344,7 +344,7 @@ inputs.artifact_id = artifact.id
 
 ```python
 if results.get("content", None) is not None:
-  
+
   file_name = str(results.get("filename", ""))
   note_text = u"File {0} converted to base64 format: {1}...".format(file_name, results.get("content", "")[1:20] )
 
@@ -423,7 +423,7 @@ if task is not None:
 inputs.soar_utils_file_path = rule.properties.soar_utils_extract_file_path
 
 # If the zipfile is password protected, specify here
-# inputs.zipfile_password = 
+# inputs.zipfile_password =
 if rule.properties.soar_utils_zip_password:
   inputs.soar_utils_zipfile_password = rule.properties.soar_utils_zip_password
 ```
@@ -1041,7 +1041,7 @@ incident.addNote(helper.createRichText(note_text))
 ## Function - SOAR Utilities: Create Incident
 Create an incident from a function
 
- ![screenshot: fn-soar-utilities-create-incident ](./doc/screenshots/fn-soar-utilities-create-incident.png) 
+ ![screenshot: fn-soar-utilities-create-incident ](./doc/screenshots/fn-soar-utilities-create-incident.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3960,9 +3960,9 @@ if results.success:
   incident.addNote(helper.createRichText(u"Found {} incidents<br>{}".format(results.content['recordsTotal'], '<br>'.join(msgs))))
 
 else:
-  incident.addNote(u"Search error found: {}<br>Filter conditions: {}<br>Sort Fields conditions: {}".format(results.reason, 
+  incident.addNote(u"Search error found: {}<br>Filter conditions: {}<br>Sort Fields conditions: {}".format(results.reason,
       results.inputs.get("soar_utils_filter_conditions"), results.inputs.get("soar_utils_sort_fields")))
-  
+
 ```
 
 </p>
@@ -4088,7 +4088,7 @@ result_info = []
 for result in results.results:
   link = u'<a href="#incidents/{}">{}</a>'.format(result['result']['inc_id'], result['result']['inc_name'])
   result_info.append(u"<p>{} - {}</p>".format(link, result['obj_name']))
-  
+
 if len(result_info)==0:
   html = "<div>No results</div>"
 else:

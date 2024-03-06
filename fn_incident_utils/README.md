@@ -14,9 +14,10 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# None
+# Incident Utilities
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
@@ -32,7 +33,8 @@
 - [Function - Search Incidents](#function---search-incidents)
 - [Function - Incident Utils: Close Incident](#function---incident-utils-close-incident)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 - [Appendix - Create Incident Data Model](#appendix---create-incident-data-model)
 ---
 

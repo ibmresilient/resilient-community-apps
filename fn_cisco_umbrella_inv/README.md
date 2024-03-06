@@ -1,10 +1,10 @@
-# Resilient Function - fn_cisco_umbrella_inv
+# Cisco Umbrella Investigate
 
 This Resilient Function package can be used to execute a Cisco Umbrella Investigate query from a workflow using the Functions feature of the Resilient
 Circuits integration framework.
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |

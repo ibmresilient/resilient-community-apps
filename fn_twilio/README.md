@@ -1,4 +1,4 @@
-# Resilient Function - Twilio Send SMS
+# Twilio SMS
 
 ## Table of Contents
   - [Prerequisites](#prerequisites)
@@ -13,7 +13,7 @@
 **This Resilient Function package can be used to send an SMS via Twilio from a workflow using the Functions feature of the Resilient Circuits integration framework.**
 
  ![screenshot](./screenshots/1.png)
- 
+
  ![screenshot](./screenshots/sms_activity_log.png)
 
 ## Prerequisites:
@@ -28,9 +28,9 @@ After downloading the package from the IBM AppExchange,
 unzip to retrive the tar.gz file:
 
     unzip fn_twilio-<version>.zip
-    
+
 Install the package to your python library
-    
+
     pip install fn_twilio-<version>.tar.gz
 
 Note: for python 2 environments, following the installation instructions [here](https://github.com/gmd393/twilio/blob/master/lib/python3.5/site-packages/urllib3/contrib/pyopenssl.py)
@@ -44,7 +44,7 @@ Add the configuration settings to your app.config file:
 
     resilient-circuits config -u -l fn-twilio
 
-Edit the app.config file, supplying the `twilio_account_sid1` and `twilio_auth_token` 
+Edit the app.config file, supplying the `twilio_account_sid1` and `twilio_auth_token`
 settings as well as your `twilio_src_address`.
 
 After installation, the package will be loaded by `resilient-circuits run`.
@@ -62,7 +62,7 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 [fn_twilio_send_sms]
 twilio_account_sid=
 twilio_auth_token=
-# This is the number that will originate the SMS and must be an active SMS phone number on your Twilio Account 
+# This is the number that will originate the SMS and must be an active SMS phone number on your Twilio Account
 # The format should be as per the Twilio console properties for your number, e.g. +1234567890
 twilio_src_address=
 ```
@@ -81,16 +81,16 @@ Run with: `resilient-circuits run`.
 {
   'twilio_status': [
   {
-    'phone_number': u'+1234', 
-    'error_message': "Unable to create record: The 'To' number  is not a valid phone number.", 
-    'success': False 
+    'phone_number': u'+1234',
+    'error_message': "Unable to create record: The 'To' number  is not a valid phone number.",
+    'success': False
     },{
-    'phone_number': u'+353834463164', 
+    'phone_number': u'+353834463164',
     'success': True
     }
-  ], 
+  ],
   'inputs': {
-    'twilio_sms_message': u'An incident test (2096) with Low priority may require your attention', 
+    'twilio_sms_message': u'An incident test (2096) with Low priority may require your attention',
     'twilio_sms_destination': u'1234,353834463164'
     }
   , 'success': True
@@ -116,15 +116,15 @@ for entry in results["twilio_status"]:
     note_text = u"""<b>Twilio SMS Message:</b> {0}
               </br><b>sent to:</b> {1}""".format(results.inputs.twilio_sms_message,
                                             entry.phone_number)
-                                          
+
     incident.addNote(helper.createRichText(note_text))
-  else: 
+  else:
     note_text = u"""<b>Unable to send Twilio SMS Message:</b> {0}
               </br><b> to:</b> {1} ({2})""".format(results.inputs.twilio_sms_message,
                                             entry.phone_number, entry.error_message)
-                                          
+
     incident.addNote(helper.createRichText(note_text))
-    
+
   row = incident.addRow("twilio_sms_log")
   row['row_created'] = str(Date())
   row['status'] = entry.get("status") or "Failed"
@@ -135,7 +135,7 @@ for entry in results["twilio_status"]:
   row["direction"] = entry.get("direction")
 ```
 
-## Twilio: Get Responses 
+## Twilio: Get Responses
 ### Function Inputs
 | Function Name | Type | Required | Example | Info |
 | ------------- | :--: | :-------:| ------- | ---- |

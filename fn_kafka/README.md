@@ -14,10 +14,12 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# None
+# Kafka
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Release Notes](#release-notes)
+  - [Notes](#notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
@@ -27,15 +29,21 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [fn\_kafka](#fn_kafka)
+  - [fn\_kafka:`broker label`](#fn_kafkabroker-label)
 - [Function - Kafka Send](#function---kafka-send)
 - [Kafka Listener](#kafka-listener)
+  - [Templates](#templates)
+    - [Closing Incidents](#closing-incidents)
+- [](#)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date    | Notes                        |
@@ -46,7 +54,7 @@
 ### Notes
 
 This app replaces the Send to Kafka publication. Importantly, it adds the ability to listen on a Kafka broker
-and for select topic(s), create and update incidents based on Kafka message content. See the [Key Features Section](#key-features) for more information. 
+and for select topic(s), create and update incidents based on Kafka message content. See the [Key Features Section](#key-features) for more information.
 
 ---
 
@@ -74,7 +82,7 @@ Resilient Circuits Components for 'fn_kafka'
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM IBM SOAR SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -89,7 +97,7 @@ If deploying to a IBM SOAR platform with an integration server, the requirements
 * IBM SOAR platform >= `38.0.6006`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
 
   | Name | Permissions |
   | ---- | ----------- |
@@ -99,10 +107,10 @@ If deploying to a IBM SOAR platform with an integration server, the requirements
   | Edit Incidents | Fields |
 
 
-The following IBM SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following IBM SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your IBM SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -112,7 +120,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -185,7 +193,7 @@ Send messages through Kafka based on a named topic.
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -219,12 +227,12 @@ None
 ---
 ## Kafka Listener
 
-It's possible to listen for messages on Kakfa topics. When consumed, the json formatted message retrieved can be used to create and update incidents. Existing incidents are identified by their incident id as the Kafka message key. 
+It's possible to listen for messages on Kakfa topics. When consumed, the json formatted message retrieved can be used to create and update incidents. Existing incidents are identified by their incident id as the Kafka message key.
 To use this feature, reference to the broker label(s) with the app.config `listener_brokers` setting and specify the `topics` settings to consume messages.
 
 ### Templates
 Two different templates types are available to convert json messages into the format needed to create or update an incident.
-See the `template_dir` app.config setting for the directory used to retain templates. Each template contains the mapping information from a Kafka message to the correct create or update IBM Soar API call. 
+See the `template_dir` app.config setting for the directory used to retain templates. Each template contains the mapping information from a Kafka message to the correct create or update IBM Soar API call.
 
 Name templates using the following format:
 

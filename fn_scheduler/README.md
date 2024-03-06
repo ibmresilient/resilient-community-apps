@@ -71,12 +71,12 @@ This is necessary in an App Host environment to retain your schedules outside th
 
 In v2.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
 
-You can continue to use the rules/workflows. 
-But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes. 
+You can continue to use the rules/workflows.
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 
 | SOAR Version | Capability |
@@ -87,9 +87,7 @@ But migrating to playbooks provides greater functionality along with future app 
 
 ## Overview
 
-<p align="center">
-<img src="./doc/screenshots/app_info.png" />
-</p>
+![screenshot: app_info.png](./doc/screenshots/app_info.png)
 
 **Functions to allow Playbooks/Rules to be scheduled**
 
@@ -109,9 +107,7 @@ Functions available include:
 3) Pause and resume scheduled Playbooks/Rules
 5) Removing a scheduled Playbook/Rule
 
-<p align="center">
-<img src="./doc/screenshots/main.png" />
-</p>
+![screenshot: main.png](./doc/screenshots/main.png)
 
 ---
 
@@ -235,9 +231,7 @@ inputs.scheduler_is_playbook = getattr(playbook.inputs, "schedule_is_playbook", 
 ## Function - Scheduled Rule Create
 Schedule a rule or playbook to run on a schedule. This rule/playbook will be executed for a given incident, artifact, task, etc.
 
-<p align="center">
-<img src="./doc/screenshots/create_scheduled_job.png" />
-</p>
+![screenshot: create_scheduled_job.png](./doc/screenshots/create_scheduled_job.png)
 
 
 <details><summary>Inputs:</summary>
@@ -357,9 +351,7 @@ else:
 ## Function - Scheduled Rule Modify
 Modify a Scheduled job associated with a rule or playbook. Settings which can be modified include the trigger criteria (cron, delta, date or interval) and the parameters passed to the rule or playbook.
 
-<p align="center">
-<img src="./doc/screenshots/modify_scheduled_job.png" />
-</p>
+![screenshot: modify_scheduled_job.png](./doc/screenshots/modify_scheduled_job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -453,9 +445,7 @@ else:
 ## Function - Scheduled Rule List
 List the schedules presently defined
 
-<p align="center">
-<img src="./doc/screenshots/list_scheduled_jobs.png" />
-</p>
+![screenshot: list_scheduled_jobs.png](./doc/screenshots/list_scheduled_jobs.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -554,9 +544,7 @@ else:
 ## Function - Scheduled Rule Pause
 Pause a scheduled rule
 
-<p align="center">
-<img src="./doc/screenshots/scheduled_job_actions.png" />
-</p>
+![screenshot: scheduled_job_actions.png](./doc/screenshots/scheduled_job_actions.png)
 
 <details><summary>Inputs:</summary>
 <p>

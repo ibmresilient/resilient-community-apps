@@ -12,20 +12,29 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_anomali_staxx
+# Anomali Staxx
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Release Notes](#release-notes)
+  - [v1.0.1](#v101)
+  - [v1.0.0](#v100)
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [Requirements](#requirements)
 - [Installation](#installation)
+  - [App Host](#app-host)
+  - [Integration Server](#integration-server)
 - [Uninstall](#uninstall)
-- [Upgrades to v1.0.1](#upgrades-to-v1.0.1)
+- [Upgrades to v1.0.1](#upgrades-to-v101)
 - [Function - Staxx Query](#function---staxx-query)
 - [Function - Staxx Import](#function---staxx-import)
 - [Rules](#rules)
 - [Troubleshooting](#troubleshooting)
+  - [Resilient Action Status](#resilient-action-status)
+  - [Resilient Scripting Log](#resilient-scripting-log)
+  - [Resilient Logs](#resilient-logs)
+  - [Resilient-Circuits](#resilient-circuits)
 - [Anomali Staxx Notes](#anomali-staxx-notes)
 - [Support](#support)
 
@@ -33,7 +42,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.1
@@ -60,13 +69,13 @@
 <!--
   List the Key Features of the Integration
 -->
-* Add artifact values as indicators to Anomali Staxx 
+* Add artifact values as indicators to Anomali Staxx
 * Search Anomali Staxx for indicators matching an artifact value
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.2.32`
 * An Integration Server running `resilient_circuits>=30.0.0`
@@ -151,7 +160,7 @@ To install,
 
 ## Upgrades to v1.0.1
 
-If you're upgrading from v1.0.0, please uninstall the original app (fn_send_to_staxx) and reinstall as a new integration, 
+If you're upgrading from v1.0.0, please uninstall the original app (fn_send_to_staxx) and reinstall as a new integration,
 including rerunning `resilient-circuits config -u -l fn-anomali-staxx` and `resilient-circuits customize -l fn-anomali-staxx`.
 
 The app.config settings `[staxx]` will now become `[fn_anomali_staxx]` and the `[staxx]` settings can then be removed.
@@ -261,7 +270,7 @@ incident.addNote(note + "\n".join(indicators))
 
 ---
 ## Function - Staxx Import
-Send an observable to Anomali Staxx including categorization settings. 
+Send an observable to Anomali Staxx including categorization settings.
 A confirming note is added to the incident.
 
  ![screenshot: fn-staxx-import ](./doc/screenshots/staxx_import.png)
@@ -352,7 +361,7 @@ if not results.success:
   note = u"Artifact: {} import to Anomali Staxx failed: {}".format(artifact.value, results.reason)
 else:
   note = u"""Artifact: {} added to Anomali Staxx:
-  
+
 Confidence: {}
 Indicator Type: {}
 TLP: {}
@@ -378,7 +387,7 @@ incident.addNote(note)
 
 <!--
 ## Inform Resilient Users
-  Use this section to optionally provide additional information so that Resilient playbook 
+  Use this section to optionally provide additional information so that Resilient playbook
   designer can get the maximum benefit of your integration.
 -->
 
@@ -416,7 +425,7 @@ A few notes on the use of Anomali Staxx and Resilient Artifacts
   - MAC addresses
 * Windows file paths, such as: `c:\path\file.exe` are changed to `file.exe`
 * Linux file paths appear to be unsupported
-  
+
 When in question, review the Action Status to ensure the import process succeeded correctly.
 
 ---

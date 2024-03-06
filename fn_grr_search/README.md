@@ -1,4 +1,4 @@
-# Resilient Integration with GRR
+# GRR
 **This package contains one function that allows you to search for your GRR Agents using IP, Host or User.**
 
  ![screenshot](./screenshots/fn_grr_snap_1.png)
@@ -59,7 +59,7 @@ results = {
                 u'osMajorVersion': 7,
                 u'osMinorVersion': 5,
                 u'osRelease': u'RedHat'
-            }, 
+            },
             u'lastBootedAt': u'1538996573000000',
             u'lastClock': u'1539009155388036',
             u'lastSeenAt': u'1539009155394278',

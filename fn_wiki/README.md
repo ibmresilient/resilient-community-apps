@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# fn-wiki for IBM Resilient
+# SOAR Wiki
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -31,12 +31,12 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### Release History
@@ -72,7 +72,7 @@ Perform operations against the Resilient wiki: create or update pages, read wiki
 
 ### Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v36.0.5634`
 * An App Host or an Integration Server:
@@ -121,7 +121,7 @@ Return the contents of a wiki page based on the page's title or id. Optionally c
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -150,7 +150,7 @@ if results.content:
         note = u"{} \nJSON contents:\n\n{}".format(note, results.content['json'])
 else:
     note = u"{} not found".format(note)
-    
+
 incident.addNote(note)
 ```
 
@@ -180,7 +180,7 @@ Create or update a wiki page in Resilient based on the page's title or id. Optio
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -232,7 +232,7 @@ Search a wiki page based on a search term and return the matching lines. The sea
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -267,7 +267,7 @@ else:
 ---
 
 ## Rules
-Use the example rules and workflows to understand how to use the inputs and parse the resulting content. Design your own rules and workflows based on your business requirements. 
+Use the example rules and workflows to understand how to use the inputs and parse the resulting content. Design your own rules and workflows based on your business requirements.
 
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |

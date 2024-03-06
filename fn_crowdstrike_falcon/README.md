@@ -1,4 +1,4 @@
-# CrowdStrike Falcon Functions for IBM Resilient
+# CrowdStrike Falcon
 
 ## Table of Contents
   - [Function - CS Falcon: Search](#function---cs-falcon-search)
@@ -166,10 +166,10 @@ from java.util import Date
 
 # If the function found some devices
 if results.success:
-  
+
   # Get the current time
   dt_now = Date()
-  
+
   # For each device, add a row to the cs_falcon_devices_dt
   for device in results.content:
     new_row = incident.addRow("cs_falcon_devices_dt")
@@ -197,7 +197,7 @@ else:
 **Contain Device:**
 
  ![screenshot](./screenshots/2.png)
- 
+
 **Lift Containment:**
 
  ![screenshot](./screenshots/3.png)
@@ -264,19 +264,19 @@ def get_formatted_timestamp():
 
 # If the function successfully sent a "contain device" request to CrowdStrike, updated the Data Table and add a Note to the Incident
 if results.success:
-  
+
   # Get the current time in the format 'mm/dd/yyyy hh:mm:ss'
   formatted_date = get_formatted_timestamp()
-  
+
   # Generate the value we want to update the cell to
   latest_action_text = u"Action: {0}. Time: {1}".format(unicode(workflow.properties.cs_action.inputs.cs_action_name), formatted_date)
 
   # Update the latest_action Data Table cell
   row.latest_action = latest_action_text
-  
+
   # Update the device_status Data Table cell
   row.status = results.content.device_status
-  
+
   note_text = """<br><b>device-action request sent to CrowdStrike</b>
                  <br><b>Action:</b> {0}
                  <br><b>Device ID:</b> {1}
@@ -360,10 +360,10 @@ from java.util import Date
 
 # If the function found some devices
 if results.success:
-  
+
   # Get the current time
   dt_now = Date()
-  
+
   # For each device, add a row to the cs_falcon_devices_dt
   for device_id in results.content.device_ids:
     new_row = incident.addRow("cs_falcon_devices_ioc_ran_on_results_dt")
@@ -426,15 +426,15 @@ cs_falcon_devices_ioc_ran_on_results_dt
 * In order to **display** the Test Data Table in your Incident, you must **modify your Layout Settings**
 
 1. Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **+ Add Tab**
-   
+
  ![screenshot](./screenshots/dt_1.png)
 
 2. Enter **Tab Text**: `My Test Tab` and click **Add**
- 
+
  ![screenshot](./screenshots/dt_2.png)
 
 3. **Drag** the Data table into the middle and click **Save**
- 
+
  ![screenshot](./screenshots/dt_3.png)
 
 4. Create a new Incident and you will now see the **My Test Tab** with the **Test Data Table**

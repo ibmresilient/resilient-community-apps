@@ -55,7 +55,7 @@
 **Integrate with Microsoft Exchange email and meeting functionality**
 
 
- ![screenshot: main](./doc/screenshots/main.png) 
+ ![screenshot: main](./doc/screenshots/main.png)
 
 This application extends the capabilities of the SOAR platform with Microsoft Exchange On-prem services and functionality. Emails from an exchange mailbox can now be read, written, sent, queried, deleted, and moved from within the platform. Both Online and in-person meetings can be scheduled and invites can be sent using this application. All extracted information is now tabulated and neatly displayed in a separate incident tab. <br>
 
@@ -98,16 +98,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `46.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=48.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -117,7 +117,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -159,7 +159,7 @@ Please pay attention to the below mentioned pointers as the application can be s
 
 #### Folder Paths
 
-* When the `Source location` or the `exchange_folder_path` fields are left empty, they are substituted with the value specified for `default_folder_path` in app.conf 
+* When the `Source location` or the `exchange_folder_path` fields are left empty, they are substituted with the value specified for `default_folder_path` in app.conf
 
 * The path related fields might be slightly complicated to configure as they tend to vary with the Exchange environment. Upon entering an invalid folder path, a tree structure of the folder hierarchy will be printed. Here is an example:
 
@@ -184,7 +184,7 @@ could be any path following the root path:
   - Example/"One/with, both"/Folder
 
 * Multiple folder paths can be specified by separating them with commas and following the above rules.
-  
+
 #### Information as Data-tables or Artifacts
 * Information extracted from emails and meetings can now be either added as artifacts (legacy) or to data-tables present in the Exchange tab of an Incident. This behavior can be changed by toggling the `enable_write_to_datatables` option found in the Post processing scripts of the workflows.
 
@@ -215,26 +215,18 @@ The following table provides the settings you need to configure the app. These s
 
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-<p align="center">
-<img src="./doc/screenshots/layout_tab.png" />
-</p>
+![screenshot: layout_tab.png](./doc/screenshots/layout_tab.png)
 
-<p align="center">
-<img src="./doc/screenshots/layout_datatables.png" />
-</p>
+![screenshot: layout_datatables.png](./doc/screenshots/layout_datatables.png)
 
 ---
 
 ## Function - Exchange Create Meeting
 Creates a meeting and sends out invitation to attendees. The user is provided with the option to choose required and optional attendees. If its a virtual meeting, the user now has the ability to specify the URL to the meeting room and mark the invite as an online meeting.
 
-<p align="center">
-<img src="./doc/screenshots/popup_create_meeting.png" />
-</p>
+![screenshot: popup_create_meeting.png](./doc/screenshots/popup_create_meeting.png)
 
-<p align="center">
-<img src="./doc/screenshots/workflow_create_meeting.png" />
-</p>
+![screenshot: workflow_create_meeting.png](./doc/screenshots/workflow_create_meeting.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -372,7 +364,7 @@ if not success:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
   noteText = helper.createRichText(text)
   incident.addNote(noteText)
-    
+
 else:
   required_attendees = ",".join(content.get('required_attendees')) if content.get('required_attendees') else ""
   optional_attendees = ",".join(content.get('optional_attendees')) if content.get('optional_attendees') else ""
@@ -397,8 +389,8 @@ else:
     text += f"<br />Start time: {content.get('start_time')}"
     text += f"<br />End time: {content.get('end_time')}"
     text += f"<br />Timezone: {content.get('timezone')}"
-    text += f"<br />Required Attendees: {required_attendees}" 
-    text += f"<br />Optional Attendees: {optional_attendees}" 
+    text += f"<br />Required Attendees: {required_attendees}"
+    text += f"<br />Optional Attendees: {optional_attendees}"
     text += f"<br />Body: {content.get('body')}"
     text += f"<br />Location: {location}"
     text += f"<br />Online Meeting: {content.get('online_meeting')}"
@@ -413,13 +405,9 @@ else:
 ## Function - Exchange Delete Emails
 Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A thorough search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. Once these emails are selected, the user has an option to either permanently delete the emails or move them to the Trash folder. The email information retrieved form the mailbox is now stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the `Push Emails to DataTables` of this Playbook.
 
-<p align="center">
-<img src="./doc/screenshots/popup_delete_email.png" />
-</p>
+![screenshot: popup_delete_email.png](./doc/screenshots/popup_delete_email.png)
 
-<p align="center">
-<img src="./doc/screenshots/workflow_delete_email.png" />
-</p>
+![screenshot: workflow_delete_email.png](./doc/screenshots/workflow_delete_email.png)
 
 
 <details><summary>Inputs:</summary>
@@ -583,15 +571,15 @@ else:
   for email_id in email_ids:
     email = emails.get(email_id)
     attachment_ids = email.get('attachment_ids')
-    
+
     if enable_write_to_datatables:
-      
+
       email_status = results.get("inputs").get("inputs").get("exchange_email_operation")
       email_status = u"""<p style= "color:{color}">{status} </p>""".format(color=status_colour_map[email_status], status=email_status)
-        
+
       message_row = incident.addRow("exchange_email_information_dt")
       message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
-      message_row.exchange_dt_message_id = email_id 
+      message_row.exchange_dt_message_id = email_id
       message_row.exchange_dt_recipient_email = email.get("sender_email", "-")
       message_row.exchange_dt_sender_email = playbook.inputs.exchange_email
       message_row.exchange_dt_email_status = helper.createRichText(email_status)
@@ -624,13 +612,9 @@ else:
 ## Function - Exchange Find Emails
 Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A thorough search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. The email retrieved form the mailbox can now be stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the `Push Emails to DataTables Script` of this playbook.
 
-<p align="center">
-<img src="./doc/screenshots/popup_find_email.png" />
-</p>
+![screenshot: popup_find_email.png](./doc/screenshots/popup_find_email.png)
 
-<p align="center">
-<img src="./doc/screenshots/workflow_find_email.png" />
-</p>
+![screenshot: workflow_find_email.png](./doc/screenshots/workflow_find_email.png)
 
 
 <details><summary>Inputs:</summary>
@@ -828,15 +812,15 @@ else:
   for email_id in email_ids:
     email = emails.get(email_id)
     attachment_ids = email.get('attachment_ids')
-    
+
     if enable_write_to_datatables:
-      
+
       email_status = results.get("inputs").get("inputs").get("exchange_email_operation")
       email_status = u"""<p style= "color:{color}">{status} </p>""".format(color=status_colour_map[email_status], status=email_status)
-        
+
       message_row = incident.addRow("exchange_email_information_dt")
       message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
-      message_row.exchange_dt_message_id = email_id 
+      message_row.exchange_dt_message_id = email_id
       message_row.exchange_dt_recipient_email = email.get("sender_email", "-")
       message_row.exchange_dt_sender_email = playbook.inputs.exchange_email
       message_row.exchange_dt_email_status = helper.createRichText(email_status)
@@ -869,13 +853,9 @@ else:
 ## Function - Exchange Get Mailbox Info
 Get mailbox info for specified email. The information retrieved from the server is saved as a incident note.
 
- <p align="center">
-<img src="./doc/screenshots/popup_retrieve_info.png" />
-</p>
+ ![screenshot: popup_retrieve_info.png](./doc/screenshots/popup_retrieve_info.png)
 
-<p align="center">
-<img src="./doc/screenshots/workflow_get-mailbox_info.png" />
-</p>
+![screenshot: workflow_get-mailbox_info.png](./doc/screenshots/workflow_get-mailbox_info.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -959,12 +939,12 @@ if not results.get("success"):
   fail_reason = results.get("reason")
   if fail_reason:
     text += u"Failure reason: {}".format(fail_reason)
-    
+
 else:
   if write_to_artifact:
     incident.addArtifact('Email Sender', content.get('email_address'), 'Email address from Exchange Get Mailbox Info')
     incident.addArtifact('Email Sender Name', content.get('name'), 'Email sender name from Exchange Get Mailbox Info')
-  
+
   text  =  "<b>Microsoft Exchange Mailbox Information:</b><br />"
   text += f"<br />Name: {content.get('name')}"
   text += f"<br />Email Address: {content.get('email_address')}"
@@ -982,13 +962,9 @@ incident.addNote(noteText)
 ## Function - Exchange Move Emails
 Move queried emails from a specified folder to another specified folder. The `exchange_destination_folder_path` must be specified to perform this action. If the user decides to migrate all contents form one folder to another and delete the source, `exchange_delete_source_folder ` must be enabled. Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A thorough search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. The email retrieved form the mailbox can now be stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the `Push Emails to DataTables` script of this playbook.
 
- <p align="center">
-<img src="./doc/screenshots/popup_move_email.png" />
-</p>
+ ![screenshot: popup_move_email.png](./doc/screenshots/popup_move_email.png)
 
-<p align="center">
-<img src="./doc/screenshots/workflow_move_email.png" />
-</p>
+![screenshot: workflow_move_email.png](./doc/screenshots/workflow_move_email.png)
 
 
 <details><summary>Inputs:</summary>
@@ -1011,7 +987,7 @@ Move queried emails from a specified folder to another specified folder. The `ex
 | `exchange_order_by_recency` | `boolean` | No | `True` | Yes to get newest emails first, No to get oldest emails first, leave empty to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `False` | Yes to search subfolders, No or leave empty to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
- 
+
 </p>
 </details>
 
@@ -1196,15 +1172,15 @@ else:
   for email_id in email_ids:
     email = emails.get(email_id)
     attachment_ids = email.get('attachment_ids')
-    
+
     if enable_write_to_datatables:
-      
+
       email_status = results.get("inputs").get("inputs").get("exchange_email_operation")
       email_status = u"""<p style= "color:{color}">{status} </p>""".format(color=status_colour_map[email_status], status=email_status)
-        
+
       message_row = incident.addRow("exchange_email_information_dt")
       message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
-      message_row.exchange_dt_message_id = email_id 
+      message_row.exchange_dt_message_id = email_id
       message_row.exchange_dt_recipient_email = email.get("sender_email", "-")
       message_row.exchange_dt_sender_email = playbook.inputs.exchange_email
       message_row.exchange_dt_email_status = helper.createRichText(email_status)
@@ -1237,13 +1213,9 @@ else:
 ## Function - Exchange Send Email
 Send an email to a list of recipients. Multiple recipients can be specified in a comma seperated fashion. The email being sent can now be stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the `Process Sent Email` script of this playbook.
 
- <p align="center">
-<img src="./doc/screenshots/popup_send_email.png" />
-</p>
+ ![screenshot: popup_send_email.png](./doc/screenshots/popup_send_email.png)
 
-<p align="center">
-<img src="./doc/screenshots/workflow_send_email.png" />
-</p>
+![screenshot: workflow_send_email.png](./doc/screenshots/workflow_send_email.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1378,9 +1350,7 @@ else:
 
 ## Data Table - Email Information
 
-<p align="center">
-<img src="./doc/screenshots/datatable_email_information.png" />
-</p>
+![screenshot: datatable_email_information.png](./doc/screenshots/datatable_email_information.png)
 
 #### API Name:
 exchange_email_information_dt
@@ -1399,9 +1369,7 @@ exchange_email_information_dt
 ---
 ## Data Table - Meeting Information
 
-<p align="center">
-<img src="./doc/screenshots/datatable_meeting_information.png" />
-</p>
+![screenshot: datatable_meeting_information.png](./doc/screenshots/datatable_meeting_information.png)
 
 #### API Name:
 exchange_dt_meeting_information

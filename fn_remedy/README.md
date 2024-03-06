@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_remedy
+# Remedy
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -36,7 +36,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -68,7 +68,7 @@ Remedy for IBM SOAR. This integration provides the capability to create new inci
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -83,7 +83,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `39.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=30.0.0` and `resilient-lib>=39.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -97,10 +97,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Write |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -110,7 +110,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -538,7 +538,7 @@ payload = u"""{{ "ApplyTemplate": {},
 )
 
 # set inputs
-inputs.task_id = task.id 
+inputs.task_id = task.id
 inputs.incident_id = incident.id
 inputs.remedy_incident_name = task.name
 inputs.remedy_payload = payload
@@ -914,8 +914,8 @@ The Remedy Linked Incidents Reference Table will be updated when either the `Rem
 function completes.
 
 #### Remedy: Create Incident
-Once an incident is posted to Remedy, the auto-routing feature has the potential to further alter the values of some of the fields within the Remedy incident 
-(see [Activity Fields](#activity-fields) for more information on this). Due to this potential, the integration will fetch the incident back from the 
+Once an incident is posted to Remedy, the auto-routing feature has the potential to further alter the values of some of the fields within the Remedy incident
+(see [Activity Fields](#activity-fields) for more information on this). Due to this potential, the integration will fetch the incident back from the
 Remedy server after it has been created to ensure the datatable is updated with accurate information. Once the incident data is received from Remedy, relevant
 fields are recorded in the datatable.
 

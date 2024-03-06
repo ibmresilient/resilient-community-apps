@@ -27,5 +27,5 @@ resilient_circuits_lockfile
 */dist
 .env
 app.config
-
+_build
 !.drivers/**

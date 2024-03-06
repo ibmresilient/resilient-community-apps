@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# AbuseIPDB Function for IBM SOAR
+# AbuseIPDB
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
@@ -41,7 +41,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -73,8 +73,8 @@ This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artif
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 * resilient-circuits>=50.1.0
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
@@ -90,16 +90,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `43.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=43.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -109,7 +109,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -288,9 +288,9 @@ if results.success:
     country_name = resp_data['countryName']
     most_recent_report = resp_data['lastReportedAt']
     confidence_score = resp_data.get("abuseConfidenceScore", 0)
-    
+
     hit = []
-    
+
     # get clean list of de-duped categories
     categories_names = ""
     if resp_data.get('reports'):
@@ -299,8 +299,8 @@ if results.success:
             categories_list.extend(report["categories"])
         categories_set = set(categories_list)  # dedup list
         categories_names = u', '.join(CATEGORIES.get(item, 'unknown') for item in categories_set)
-  
-    
+
+
     # only return data if there's anything useful
     if number_of_reports or confidence_score:
       hit = [
@@ -308,12 +308,12 @@ if results.success:
           "name": "Confidence Score",
           "type": "number",
           "value": "{}".format(confidence_score)
-        }, 
+        },
         {
           "name": "Number of Reports",
           "type": "number",
           "value": "{}".format(number_of_reports)
-        }, 
+        },
         {
           "name": "Country",
           "type": "string",

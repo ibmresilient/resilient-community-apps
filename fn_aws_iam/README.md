@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-aws-iam Functions for IBM SOAR
+# AWS IAM
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -26,7 +26,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.2
@@ -47,7 +47,7 @@
 -->
 **Amazon AWS IAM Integration for Resilient**
 
-Amazon Web Services Identity and Access Management (AWS IAM) allows management of access to AWS services and resources securely. You can use IAM to create and manage AWS users and groups, and use permissions to allow or deny access to AWS resources. 
+Amazon Web Services Identity and Access Management (AWS IAM) allows management of access to AWS services and resources securely. You can use IAM to create and manage AWS users and groups, and use permissions to allow or deny access to AWS resources.
 The AWS IAM integration with the SOAR platform allows you to query and update users or access keys for an AWS account.
 
 You can execute the following types of queries:
@@ -61,7 +61,7 @@ You can execute the following types of queries:
    * Service-specific credentials.
    * Signing certificates.
    * Active MFA devices (Virtual devices flagged).
-   
+
 You can also use the integration to make the following changes to an AWS IAM environment:
 * Delete a user and delete or remove items associated with the user.
 * Attach a user policy.
@@ -85,13 +85,13 @@ The integration contains the following functions:
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * SOAR platform >= `v48.2.16`
 * An Integration Server running:
   *  `resilient_circuits>=35.0.0`
   *  `resilient_lib>=35.0.0`
- 
+
   * The minimum set of SOAR API permissions for this integration if using an API key account:
     * Edit Org Data
     * Incidents.Edit.Fields
@@ -103,10 +103,10 @@ The integration contains the following functions:
     * Scripts.Edit
     * Workflows.Create
     * Workflow.Edit
-    
+
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
-* An AWS IAM user dedicated for this integration with the following configuration: 
+* An AWS IAM user dedicated for this integration with the following configuration:
   * User account is not the AWS IAM root account user.
   * User is added to an "Administrators" group to which is attached the `AdministratorAccess` policy.
   * An access key created for the user. The user access key ID and secret access key are used by the integration.
@@ -130,7 +130,7 @@ aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
 * [Optional]: Test the configuration.
 * Deploy the app.
 
-## Installation - Integration server 
+## Installation - Integration server
 * Download the app  `app-fn_aws_iam-x.x.x.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the app:
@@ -159,7 +159,7 @@ aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
   | **aws_iam_secret_access_key** | Yes | `aBcdeFGH/ABCDEFG12345` | *AWS secret access key used for programmatic (API) access to AWS services.* |
   | **http_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
   | **https_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
-  
+
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
   ```

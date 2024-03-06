@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Zoom Functions for SOAR
+# Zoom
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -40,7 +40,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -69,7 +69,7 @@
 This SOAR Function package can be used to create a Zoom meeting from a workflow/playbook using the Functions feature of the SOAR Circuits integration framework.
 
 ---
- 
+
 
 ## Requirements
 * A Zoom developers account and a Server-to-Server OAuth app.
@@ -87,16 +87,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=42.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -106,7 +106,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -135,7 +135,7 @@ List any steps that are needed to configure the endpoint to use this app.
 -->
 * Go to [https://marketplace.zoom.us/](https://marketplace.zoom.us/)
 * Click the develop drop down menu and select build app
-* Choose the Server-to-Server app type 
+* Choose the Server-to-Server app type
 * Use the Account ID, Client ID, and Client Secret to fill out the variables in the app.config. The email variable in the app.config will be the email used for the app marketplace account.
 * Fill in Information page
 * Add **View and manage all user meetings** and **View all user information** scopes
@@ -229,21 +229,21 @@ inputs.zoom_record_meeting = hasattr(inputs, 'zoom_record_meeting') if rule.prop
 ```python
 # results:
 # {
-#   "host_url": "https://zoom.us/s/x?zak=x", 
-#   "attendee_url": "https://zoom.us/j/x", 
+#   "host_url": "https://zoom.us/s/x?zak=x",
+#   "attendee_url": "https://zoom.us/j/x",
 #   "date_created": "01/01/1971 12:00:00",
 #   "attendee_url_with_pass": 'https://us05web.zoom.us/j/89922216709?pwd=UTlEYWRrbUV4SHBacStvQUkvcHVPQT09'
 # }
 if results.host_url is not None and results.attendee_url is not None:
   host_url = results.host_url
   attendee_url = results.attendee_url
-  
+
   if host_url is None:
     host_url = ""
-  
+
   if attendee_url is None:
     attendee_url = ""
-  
+
 text = """<b>Zoom Meeting:</b>
           <b>Host URL:</b> <a href='{0}'>{0}</a>
           <b>Attendee URL:</b> <a href='{1}'>{1}</a>""".format(results.host_url, results.attendee_url)

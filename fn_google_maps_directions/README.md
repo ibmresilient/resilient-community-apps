@@ -1,4 +1,4 @@
-# Resilient Integration with Google Maps
+# Google Maps
 **This package contains one function that generates a link to Google Maps which shows directions from the given origin to the destination.**
 
  ![screenshot](./screenshots/1.png)
@@ -25,7 +25,7 @@ results = {
   directions_link: "https://www.google.com/maps/dir/?api=1&origin=xxx&destination=xxx",s
 
   inputs: {
-    google_maps_origin: "IBM, Armonk, New York", 
+    google_maps_origin: "IBM, Armonk, New York",
     google_maps_destination: "IBM Resilient, Cambridge, Boston, MA"
   }
 }
@@ -49,10 +49,10 @@ inputs.google_maps_destination = destination
 This example **adds a Note to the Incident.**
 ```python
 if (results.success):
-  
+
   noteText = """<br><b>Example: Google Maps Directions Wokflow has complete</b>
                 <b>Directions Link:</b> <a href='{0}'>{0}</a>""".format(results.directions_link)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 

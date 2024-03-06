@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-mcafee-esm Functions for IBM Resilient
+# McAfee ESM
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -25,7 +25,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.2
@@ -33,7 +33,7 @@
 - Support added for proxies.
 
 ### v1.0.1
-* Fixed bug when retrieving case details. 
+* Fixed bug when retrieving case details.
 
 ### v1.0.0
 * Initial Release
@@ -49,7 +49,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-The McAfee ESM integration with the Resilient platform allows for the escalation and enrichment 
+The McAfee ESM integration with the Resilient platform allows for the escalation and enrichment
 of cases from McAfee ESM to the Resilient platform.
 ### Key Features
 <!--
@@ -62,12 +62,12 @@ The McAfee ESM package provides the following features:
 * Get a case details.
 * Get a case events details.
 * Get triggered events.
-* Update a case.  
+* Update a case.
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v31.0.4254`
 * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)

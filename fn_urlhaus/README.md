@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# URLhaus Integration for Resilient
+# URLhaus
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -27,7 +27,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.2
@@ -56,7 +56,7 @@ Look up supported artifacts in URLhaus to get more enrichment information and su
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.0.0`
 * An Integration Server running `resilient_circuits>=33.0.0`

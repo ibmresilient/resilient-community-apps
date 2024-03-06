@@ -1,4 +1,4 @@
-## About MxToolBox
+# About MxToolBox
 
 The MxToolBox API is a RESTful Web Service allowing MxToolbox customers to query the status of their monitors and run lookups (blacklist, smtp, mx, etc.).
 
@@ -31,21 +31,21 @@ Additional workflows and rules are required in order to implement different type
 
 
 ## Environment
-To install in "development mode", run 
+To install in "development mode", run
     `pip install -e ./fn_mxtoolbox/`
-    
+
 The distribution file can be installed using
     `pip install fn_mxtoolbox-<version>.tar.gz`
-    
+
 Import the package into Resilient by running `resilient-circuits customize`
 
-To configure the MXToolbox parameters, run `resilient-circuits config [-u | -c]`. 
+To configure the MXToolbox parameters, run `resilient-circuits config [-u | -c]`.
 Then edit the `[fn_mxtoolbox]` template with the URL and basic authentication settings.
 
 Run with: `resilient-circuits run`.
 
 To uninstall, run: `pip uninstall fn_mxtoolbox`
-    
+
 ## Resilient Configuration
 Follow the steps to add a fn_mxtoolbox section to your `app.config` file by running `resilient-circuits config [-u | -c]` and updating the fields:
 

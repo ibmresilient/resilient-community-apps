@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# URL to DNS Function for IBM Resilient
+# URL to DNS
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -29,7 +29,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.1.0
@@ -55,7 +55,7 @@ Resilient Circuits Components for 'fn_url_to_dns'
   List the Key Features of the Integration
 -->
 * Function parses a URL string and returns the DNS component of the string.
-* Workflow and rule are triggered off an URL artifact and a DNS artifact is created. 
+* Workflow and rule are triggered off an URL artifact and a DNS artifact is created.
 
 ---
 
@@ -63,7 +63,7 @@ Resilient Circuits Components for 'fn_url_to_dns'
 
 ### Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v36.0.5634`
 * An App Host or an Integration Server:
@@ -112,7 +112,7 @@ None
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```

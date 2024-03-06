@@ -1,4 +1,6 @@
-## Release Notes
+# Data Feed ODBCFeed Plugin
+
+### Release Notes
 
 * v1.0.8 Allow Data Sync function to continue without failing a workflow/playbook
 * v1.0.7 Fixes for mariaDB and mySQL DB access within App Host
@@ -8,26 +10,26 @@
 * v1.0.3 AppHost configurations for Postgresql, MS SQL Server, MySql, SQLite
 * v1.0.1 Duplication of incident id bug fix
 
-## Notes:
+### Notes:
 * Issues exist deleting attachments and artifact attachments for IBM SOAR v39 and v40. A future release is expected to resolve this issue.
 * Deleting an incident will not also delete the incident artifacts, notes, tasks, datatables, etc.
 * Deleting a task will not also delete the task notes and attachments
 * When connecting to multiple databases from the same database platform, use different user accounts for each database.
 
-# Introduction
+## Introduction
 This package contains the odbcfeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
 
 This plugin allows this replica data to be maintained in a sql-based database.
 
 Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
 
-# License
+## License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
 [LICENSE](LICENSE).
 
-# Change log
-## Version 1.0.5 changes
+## Change log
+### Version 1.0.5 changes
 Version 1.0.5 introduces the ability to include attachment content. When `include_attachment_data=true` is added to `[feeds]`, an additional database column is added: `content`. This column is created to the `attachment` table in the equivalent database storage type as a blob:
 
 | Database | content field |
@@ -47,11 +49,11 @@ Additionally, the connection string format of the app.config file for Oracle dat
 odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)(PORT=<port>))(CONNECT_DATA=(SID=<sid>)))
 ```
 
-# Installation
+## Installation
   The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
   You perform these installation procedures at the Resilient integration server.
 
-## Install the Python components
+### Install the Python components
   Complete the following steps to install the Python components:
 * Ensure that the environment is up-to-date, as follows:
 ```
@@ -87,9 +89,9 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   [feeds]
   feed_names=postgres_feed
   reload=True
-  # feed_data is the default queue that will be listened to
+  ## feed_data is the default queue that will be listened to
   queue=feed_data
-  # new in v1.0.5 include attachment content. Default is false
+  ## new in v1.0.5 include attachment content. Default is false
   include_attachment_data=true
 
   [postgres_feed]
@@ -125,7 +127,7 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   #file_name=/tmp/feed.sqlite3
 ```
 
-# ODBCFeed Class
+## ODBCFeed Class
 The ODBCFeed class is probably the most flexible and useful of the feeds. It allows you to write all the incoming data to an ODBC database.
 The following configuration items are supported:
 
@@ -139,7 +141,7 @@ The following configuration items are supported:
 
 When using a data feed database, IBM Resilient strongly recommends that you create and maintain the database on system separate from the Resilient platform, where queries cannot impact your running Resilient instance. Allowing access to the Resilient platform for a database instance can also compromise security of the platform itself.
 
-## Additional connection strings
+### Additional connection strings
 The following table lists additional database connection strings for the other supported databases.
 
 | Database | Connection Strings |
@@ -150,7 +152,7 @@ The following table lists additional database connection strings for the other s
 
 Your naming of the database drivers (Ex. `MySQL`) may vary and is specified in your `odbcinst.ini` file.
 
-### Integration Server
+#### Integration Server
 Oracle has the further requirement of specifying the connection string references in a TNSNAMES.ORA file. Setting up the Oracle client environment will include the following environment variables (and may include others):
 
 ```
@@ -158,7 +160,7 @@ export LD_LIBRARY_PATH=/path/to/oracle/libraries/
 export TNS_ADMIN=/path/to/tnsnames/
 ```
 
-### App Host
+#### App Host
 For App Host deployments, the tnsnames.ora file should be added to your app in the configuration section specifying the
 file name as `tnsnames.ora` and path `/var/rescircuits`. The contents should contain the definitions for your Oracle database. For example:
 
@@ -173,13 +175,13 @@ ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=9.10.11.12)(PORT=1521))
 
 ![tnsnames.ora](screenshots/tnsnames.png)
 
-## Integration Server Requirements
+### Integration Server Requirements
 All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc package, you will either need an environment with the `gcc compiler` to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib).
 
 Information about pyodbc and installing unixodbc can be found here: https://github.com/mkleehammer/pyodbc/wiki/Install.
 
 
-# SQLiteFeed Class
+## SQLiteFeed Class
 The SQLiteFeed class allows you to write all the incoming data to a SQLite DB file. SQLite is very useful for testing and in cases where you want to have the data stored in a single file that you can easily share. Some tools may natively support SQLite as well.
 
 SQLite supports CSV formatting, so you can easily export the data from the SQLite file into a CSV file, which can then be imported into another tool, such as Excel, for further analysis.
@@ -190,7 +192,7 @@ The following configuration items are supported:
 | class | SQLiteFeed | Indicates that the section is for an SQLite.
 | file_name | Path for a local file on the system where the SQLite DB resides. | This is created if it does not exist. If it does exist, it must be an SQLite database. |
 
-# ODBC Database Considerations
+## ODBC Database Considerations
 *	All databases require their own set of drivers to be installed. This package does not install the libraries necessary as those operations are specific to the database used, Once the necessary driver(s) and installed, this information is captured in the odbcinst.ini file (for instance, found here: `/usr/local/etc/odbcinst.inifile`) similar to the following:
 ```
 [PostgreSQL]
@@ -258,34 +260,34 @@ ON incident.inc_id = task.inc_id
 WHERE incident.inc_id=2095;
 ```
 
-### Datetime Fields and Timezones
+#### Datetime Fields and Timezones
 All Resilient datetime fields retain their data in the UTC timezone. When persisting this data to a datastore, the ISO date format is used such as: 2019-04-18T19:07:42+00:00.
 
 Some databases, such as Postgres, convert query results with datetime fields into the timezone of the server system. To avoid this conversion, sql statements such SET TIMEZONE='UTC' should be used prior to any queries run.
 
 For MySql and MariaDB, sql_mode needs to be set without STRICT_TRANS_TABLE. See the database documentation on this setting: https://mariadb.com/kb/en/library/server-system-variables/#sql_mode.
 
-## Modifications
+### Modifications
 For some environments, it may be practical to modify the existing code to match your database environment. The sections below introduce the common aspects of this plugin which can be modified. In all cases, the changes will be made to `sqllib/sql_dialect.py`.
 
-### Modify dialect encoding
+#### Modify dialect encoding
 Each SQL dialect modifies the database connection with the encoding used to read and write data. The configure_connection() function makes these changes and in all cases, sets the encoding to UTF-8. In some cases, the format of the encoding parameters may change between python environments and the following logic can be used to account for those different environments:
 
 ```
 def configure_connection(self, connection):
-    connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-    if sys.version_info.major == 2: # to set encoding on python 2
+    connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  ## pylint: disable=c-extension-no-member
+    if sys.version_info.major == 2: ## to set encoding on python 2
         connection.setencoding(str, encoding='utf-8')
         connection.setencoding(unicode, encoding='utf-8')
-    else: # an issue and try encoding without specifying fromtype
+    else: ## an issue and try encoding without specifying fromtype
         connection.setencoding(encoding='utf-8')
 ```
 
-### Modify data type mapping
+#### Modify data type mapping
 Each SQL dialect contains a mapping table to convert Resilient data types to your dialect’s datastore. See the function get_column_type() for how mapping is presently done.
 
 ```
-def get_column_type(self, input_type):  # pylint: disable=no-self-use
+def get_column_type(self, input_type):  ## pylint: disable=no-self-use
     """
     Gets the DB column type for the specified Resilient 'input type'
 
@@ -314,14 +316,14 @@ Text data types can be challenging for some databases based on the data length l
 MAX_MARIADB_TEXT = 32000
 
 def get_parameters(self, parameter_names, parameters):
-    # Need to get a list that contains all the values in the same order as parameter_names.
+    ## Need to get a list that contains all the values in the same order as parameter_names.
     bind_parameters = list()
 
     for name in parameter_names:
         bind_parameters.append(parameters[name][:MAX_MARIADB_TEXT] if isinstance(parameters[name], string_types) else parameters[name])
 ```
 
-### Modifying dialect reserved words
+#### Modifying dialect reserved words
 Each SQL Dialect contains reserved words which cannot be used in database table and column definitions. To ensure all data fields in Resilient can be stored, a list of reserve words is maintained. When a conflict is found the resulting table or column name has an underscore added to the name. From time to time, new database releases add to this reserved word list. Just add those words to an existing list:
 ```
 RESERVE_LIST = ['all', 'analyse', 'analyze', 'and', 'any', 'array', 'as',

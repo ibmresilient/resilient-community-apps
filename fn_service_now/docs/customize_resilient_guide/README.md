@@ -1,23 +1,28 @@
-# IBM Security QRadar SOAR Platform App for ServiceNow
+# SOAR Customization Guide
 
 ## Table of Contents
-- [App Config Settings](#app-config-settings-appconfig)
-- [Functions](#functions)
+- [Table of Contents](#table-of-contents)
+- [Overview:](#overview)
+- [App Config Settings (app.config):](#app-config-settings-appconfig)
+- [Functions:](#functions)
   - [Function - SNOW: Create Record](#function---snow-create-record)
   - [Function - SNOW: Update Record](#function---snow-update-record)
     - [Sending SOAR artifacts to SNOW](#sending-soar-artifacts-to-snow)
   - [Function - SNOW: Close Record](#function---snow-close-record)
   - [Function - SNOW: Add Note to Record](#function---snow-add-note-to-record)
   - [Function - SNOW: Add Attachment to Record](#function---snow-add-attachment-to-record)
-  - [Function - SNOW: Lookup sys_id](#function---snow-lookup-sys_id)
+  - [Function - SNOW: Lookup sys\_id](#function---snow-lookup-sys_id)
   - [Function - SNOW Helper: Update Data Table](#function---snow-helper-update-data-table)
-- [Rules](#rules)
-- [ServiceNow Records Data Table](#servicenow-records)
+- [Rules:](#rules)
+- [Data Tables:](#data-tables)
+  - [ServiceNow Records](#servicenow-records)
+    - [API Name:](#api-name)
+    - [Columns:](#columns)
 - [Security Incident Response Specific Customizations](#security-incident-response-specific-customizations)
 
 ---
 
-# Overview:
+## Overview:
 This package contains 8 Functions, 12 playbooks, and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.
 
 * [SNOW: Create Record](#function---snow-create-record) gives you the ability to create a Record in ServiceNow from a SOAR Case/Incident or Task.
@@ -30,7 +35,7 @@ This package contains 8 Functions, 12 playbooks, and 1 Data Table that, when use
 
 ---
 
-# App Config Settings (app.config):
+## App Config Settings (app.config):
 ```
 [fn_service_now]
 # Link to your ServiceNow Instance
@@ -50,11 +55,11 @@ sn_password=MyPassword
 
 ---
 
-# Functions:
+## Functions:
 
  ![screenshot](./screenshots/1.png)
 
-## Function - SNOW: Create Record
+### Function - SNOW: Create Record
 Uses the `/create` custom endpoint in ServiceNow to create a ServiceNow Record from an IBM SOAR Case/Incident or Task.
 
  ![screenshot](./screenshots/2.png)
@@ -149,8 +154,8 @@ results = {
 <details><summary>Example input Script:</summary>
 
 * We also make use of user inputs from **Rule Activity Fields** by using: `playbook.inputs.sn_initial_note`.
-* In the supplied example playbook, there are 3 Functions chained together, with this Function being the third. 
-  * We use the output of the first and second functions here: 
+* In the supplied example playbook, there are 3 Functions chained together, with this Function being the third.
+  * We use the output of the first and second functions here:
     ```python
         "assignment_group": playbooks.functions.results.assignment_group.sys_id,
         "caller_id": playbooks.functions.results.caller_id.sys_id
@@ -204,7 +209,7 @@ if results.get("success"):
   # Set incident fields sn_snow_record_id and sn_snow_record_link
   incident.sn_snow_record_id = results.get("sn_ref_id")
   incident.sn_snow_record_link = f"""<a href='{results.get('sn_record_link')}'>Link</a>"""
-  
+
   noteText = f"""<br>This Incident has been created in <b>ServiceNow</b>
               <br><b>ServiceNow ID:</b>  {results.get('sn_ref_id')}
               <br><b>ServiceNow Link:</b> <a href='{results.get('sn_record_link')}'>{results.get('sn_record_link')}</a>"""
@@ -216,7 +221,7 @@ if results.get("success"):
 
 ---
 
-## Function - SNOW: Update Record
+### Function - SNOW: Update Record
 Uses the `/update` custom endpoint in ServiceNow to update a ServiceNow Record with a given dictionary of field name/value pairs.
 
  ![screenshot](./screenshots/8.png)
@@ -308,7 +313,7 @@ incident.addNote(f"The Severity of this Incident was updated to {incident.severi
 
 </details>
 
-### Sending SOAR artifacts to SNOW
+#### Sending SOAR artifacts to SNOW
 You can utilize the SNOW: Update Record function to send artifact values to SNOW records. The previous example for update is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:
 
 1. Using the resilient-sdk, `clone` the example playbook into a new playbook with `changetype` artifact.
@@ -326,7 +331,7 @@ You can utilize the SNOW: Update Record function to send artifact values to SNOW
 
 ---
 
-## Function - SNOW: Close Record
+### Function - SNOW: Close Record
 Uses the `/close_record` custom endpoint in ServiceNow to change the state of a ServiceNow Record and add Close Notes and a Close Code to the Record.
 
  ![screenshot](./screenshots/3.png)
@@ -342,7 +347,7 @@ Uses the `/close_record` custom endpoint in ServiceNow to change the state of a 
 | `sn_close_code` | `String` | Yes | `"Solved (Work Around)"` | These are defined in ServiceNow (See Note below). We use an Activity Field in the Rule to define a Select field, where we list all the possible close_codes |
 | `sn_close_work_note` | `String` | Yes | `"This record's state has be changed to 'Resolved' by IBM SOAR"`  | If defined this text is added as a Work Note to the ServiceNow Record |
 
->**NOTE:** 
+>**NOTE:**
 > * If using the **Security Incident Response** table, the initial state of the created ServiceNow record is the ``Analysis`` state. This state must be changed to the ``Contain`` or other state to allow the ServiceNow Record to be closed otherwise this ``Close`` action will be ignored.
 > * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **Incident** > **Column Name** > **incident state/close_code** and see their label and values.
 > * It is the value that we send from SOAR to ServiceNow.
@@ -469,7 +474,7 @@ incident.addNote(helper.createRichText(note_text))
 
 ---
 
-## Function - SNOW: Add Note to Record
+### Function - SNOW: Add Note to Record
 Uses the `/add` custom endpoint in ServiceNow to add a SOAR Note to a ServiceNow Record as a "Work Note" or "Additional Comment".
 
  ![screenshot](./screenshots/6.png)
@@ -555,7 +560,7 @@ note.text = f"<b>Sent to ServiceNow at {datetime.now()}</b><br>{note.text.conten
 
 ---
 
-## Function - SNOW: Add Attachment to Record
+### Function - SNOW: Add Attachment to Record
 Uses the `/add` custom endpoint in ServiceNow to add a SOAR Attachment to a ServiceNow Record.
 
  ![screenshot](./screenshots/7.png)
@@ -651,7 +656,7 @@ if results.get("success"):
 
 ---
 
-## Function - SNOW: Lookup sys_id
+### Function - SNOW: Lookup sys_id
 * Gets the `sys_id` of a ServiceNow Record.
 * Used when creating a ServiceNow Record to get the `sys_id` of the `assignment_group` to assign the new Record to.
 
@@ -730,7 +735,7 @@ inputs.sn_query_value = playbook.inputs.sn_assignment_group
 
 ---
 
-## Function - SNOW Helper: Update Data Table
+### Function - SNOW Helper: Update Data Table
 
  ![screenshot](./screenshots/10.png)
 
@@ -802,7 +807,7 @@ inputs.sn_resilient_status = incident.plan_status
 
 ---
 
-# Rules:
+## Rules:
 | Rule Name | Object Type | Activity Fields | Workflow Triggered | Conditions |
 | --------- | :---------: | --------------- | ------------------ | ---------- |
 | SNOW: Create Record [Incident] | `Incident` | `SN Assignment Group`, `SN Initial Note` | `Example: SNOW: Create Record [Incident]` | `SNOW Record ID` does not have a value |
@@ -820,15 +825,15 @@ inputs.sn_resilient_status = incident.plan_status
 
 ---
 
-# Data Table:
+## Data Tables:
 
-## ServiceNow Records
+### ServiceNow Records
  ![screenshot](./screenshots/9.png)
 
-### API Name:
+#### API Name:
 `sn_records_dt`
 
-### Columns:
+#### Columns:
 | Column Name | API Access Name | Type |
 | ----------- | --------------- | -----|
 | Last Updated | `sn_records_dt_time` | `DateTimePicker` |
@@ -840,9 +845,9 @@ inputs.sn_resilient_status = incident.plan_status
 | SNOW Status | `sn_records_dt_snow_status` | `Rich Text` |
 | Links | `sn_records_dt_links` | `Rich Text` |
 
-# Security Incident Response Specific Customizations
-By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow. 
-This field is available in both the `incident` and `sn_si_incident` tables, however, Security Incident (SIR) tables have another field labeled `business_criticality`. 
-It is recommend after the install to customize your playbooks in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. 
-Customize the "\[SIR\] SNOW Update Record on Severity Change" playbook and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" playbook on SNOW should be customized as well. 
+## Security Incident Response Specific Customizations
+By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow.
+This field is available in both the `incident` and `sn_si_incident` tables, however, Security Incident (SIR) tables have another field labeled `business_criticality`.
+It is recommend after the install to customize your playbooks in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW.
+Customize the "\[SIR\] SNOW Update Record on Severity Change" playbook and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" playbook on SNOW should be customized as well.
 See the [Customize ServiceNow App Guide](../customize_snow_guide) for more details.

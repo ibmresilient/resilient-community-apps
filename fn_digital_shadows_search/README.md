@@ -1,4 +1,4 @@
-# Digital Shadows Search Function for IBM Resilient
+# Digital Shadows Search
 
 ## Table of Contents
   - [app.config settings](#appconfig-settings)
@@ -315,31 +315,31 @@ This example loops results.data and gets a count of each 'type' of results. Then
 ```python
 # If function succeeds
 if results.success:
-  
+
   DS_DATATABLE_API_NAME = "ds_search_results"
 
   # Initialise num_of_each_type dict
   num_of_each_type = {}
-  
+
   # Loop search results
   for result in results.data:
-    
+
     # If this type has already been found, increment num
     if result.type in num_of_each_type:
       num_of_each_type[result.type] = num_of_each_type[result.type] + 1
-    
+
     # Else, first time found, set to 1
     else:
       num_of_each_type[result.type] = 1
-  
+
   # Now loop the num_of_each_type and add a row to the datatable
   for entry in num_of_each_type:
     # Get datatable row
     row = incident.addRow(DS_DATATABLE_API_NAME)
-    
+
     row_type = entry
     row_count = num_of_each_type[entry]
-    
+
     # Set values of row cells
     row["search_query"] = results.inputs.ds_search_value
     row["type"] = row_type

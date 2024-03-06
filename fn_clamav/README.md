@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_clamav
+# ClamAV
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -35,7 +35,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -73,7 +73,7 @@ Resilient Circuits Components for 'fn_clamav'
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * resilient_circuits version 30 or later
 * Python package [pyclamd](https://xael.org/pages/pyclamd-en.html) >=0.4.
@@ -91,16 +91,16 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `41.0.6783`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -110,7 +110,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -169,7 +169,7 @@ Function to send the contents of an attachment as a data-stream to a ClamAV serv
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -238,7 +238,7 @@ if response is not None and response.stream[0] != "ERROR":
         color = "#ff402b"
 
     if inputs.incident_id is not None and inputs.artifact_id is not None:
-        noteText = u"""<br>ClamAV scan complete          
+        noteText = u"""<br>ClamAV scan complete
                         <br><b>Incident ID:</b></br> '{0}'
                         <br><b>Artifact ID:</b></br> '{1}'
                         <br><b>Attachment Name:</b></br> '{2}'
@@ -247,7 +247,7 @@ if response is not None and response.stream[0] != "ERROR":
                                                                                     file_name, color, response.stream[1])
     elif inputs.attachment_id is not None:
         if inputs.task_id is not None:
-            noteText = u"""<br>ClamAV scan complete           
+            noteText = u"""<br>ClamAV scan complete
                           <br><b>Task ID:</b></br> '{0}'
                           <br><b>Attachment ID:</b></br> '{1}'
                           <br><b>Attachment Name:</b></br> '{2}'
@@ -255,7 +255,7 @@ if response is not None and response.stream[0] != "ERROR":
                                                                                       inputs.attachment_id,
                                                                                       file_name, color, response.stream[1])
         elif inputs.incident_id is not None:
-            noteText = u"""<br>ClamAV scan complete          
+            noteText = u"""<br>ClamAV scan complete
                           <br><b>Incident ID:</b></br> '{0}'
                           <br><b>Attachment ID:</b></br>'{1}'
                           <br><b>Attachment Name:</b></br> '{2}'

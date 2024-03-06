@@ -1,4 +1,5 @@
-# Resilient Integration with IPInfo
+# IPInfo
+
 **This package contains one function which provides enrichment information for an IP Address Artifact by querying that artifact in the IPInfo Database. Takes in an input of an IP address and then queries for information such as the location, ASN and hostname of the IP if any. Results are saved in a rich text note.**
 
 ![screenshot](./screenshots/1.png)
@@ -33,22 +34,22 @@ if results.success:
 ## Output :
 ```python
 results = {
-    'success': True, 
-    'inputs': 
-        {'ipinfo_query_ip': '8.8.8.8'}, 
-    'query_result': 
-        {'ip': '8.8.8.8', 
-        'hostname': 
-        'google-public-dns-a.google.com', 
-        'city': 'Mountain View', 
-        'region': 'California', 
-        'country': 'US', 
-        'loc': '37.3860,-122.0840', 
-        'postal': '94035', 
-        'phone': '650', 
-        'org': 'AS15169 Google LLC', 
-        'country_name': 'United States', 
-        'latitude': '37.3860', 
+    'success': True,
+    'inputs':
+        {'ipinfo_query_ip': '8.8.8.8'},
+    'query_result':
+        {'ip': '8.8.8.8',
+        'hostname':
+        'google-public-dns-a.google.com',
+        'city': 'Mountain View',
+        'region': 'California',
+        'country': 'US',
+        'loc': '37.3860,-122.0840',
+        'postal': '94035',
+        'phone': '650',
+        'org': 'AS15169 Google LLC',
+        'country_name': 'United States',
+        'latitude': '37.3860',
         'longitude': '-122.0840'}
         }
 

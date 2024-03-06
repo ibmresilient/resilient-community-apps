@@ -1,4 +1,5 @@
-# Resilient Integration with Twitter Search API
+# Twitter Search API
+
 **This package contains one function which targets the Twitter Search API. Takes in an input of multiple possible hashtags and a number of Tweets to be returned and contacts the Twitter Search API to return the results. Requires Twitter Access Key and Secret to obtain a OAuth2 read-only token.**
  ![screenshot](./screenshots/1.png)
 
@@ -58,7 +59,7 @@ This example **adds a Note to the Incident.**
 ```python
 
 #Prepare the start of the note text
-noteText = u"""<br>Twitter search: 
+noteText = u"""<br>Twitter search:
               Successful : {0}
               <b>Searched Tags:<b>{1}</b>""".format("True" if results["success"] is True else False, results["inputs"]["twitter_search_tweet_string"])
 
@@ -66,7 +67,7 @@ if (results.success):
   # For each returned tweet add the text and URL of the tweet to the noteText
   for tweet in results.tweets["statuses"]:
     noteText += u"""<br><br>Tweet Text: <br><b>{0}</b>
-    <b>Tweet URL</b> :<a>{1}</a>""".format(tweet["text"],tweet["entities"]["urls"][0]["url"]) 
+    <b>Tweet URL</b> :<a>{1}</a>""".format(tweet["text"],tweet["entities"]["urls"][0]["url"])
 else:
   noteText += u"""<b>No Results found</b>"""
 # Now add the note to our incident

@@ -1,18 +1,30 @@
-# IBM Security QRadar SOAR Platform App for ServiceNow - Customization Guide
+# ServiceNow Customization Guide
 
-*This guide shows how to adapt the App installed on your ServiceNow instance to suit your Incident Response Workflow*
-
+## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Architectural Diagram](#architectural-diagram)
 - [Overview](#overview)
 - [Pre-Defined ServiceNow Workflows](#pre-defined-servicenow-workflows)
 - [ResilientHelper API](#resilienthelper-api)
-  - [`create()`](#creategliderecord-record-string-snrecordid-string-casename-object-options)
-  - [`addNote()`](#addnotestring-res_reference_id-string-notetext-string-noteformat)
-  - [`updateStateInResilient()`](#updatestateinresilientstring-res_reference_id-string-snticketstate-string-snticketstatecolor)
-  - [`getResilientReferenceId()`](#getresilientreferenceidgliderecord-record)
-  - [`getResilientReferenceLink()`](#getresilientreferencelinkgliderecord-record)
-  - [`getResilientType()`](#getresilienttypegliderecord-record)
+  - [`create(GlideRecord record, String snRecordId, String caseName, Object options)`](#creategliderecord-record-string-snrecordid-string-casename-object-options)
+    - [Parameters:](#parameters)
+    - [Return:](#return)
+  - [`addNote(String res_reference_id, String noteText, String noteFormat)`](#addnotestring-res_reference_id-string-notetext-string-noteformat)
+    - [Parameters:](#parameters-1)
+    - [Return:](#return-1)
+  - [`updateStateInResilient(String res_reference_id, String snTicketState, String snTicketStateColor)`](#updatestateinresilientstring-res_reference_id-string-snticketstate-string-snticketstatecolor)
+    - [Parameters:](#parameters-2)
+    - [Return:](#return-2)
+  - [`getResilientReferenceId(GlideRecord record)`](#getresilientreferenceidgliderecord-record)
+    - [Parameters:](#parameters-3)
+    - [Returns:](#returns)
+  - [`getResilientReferenceLink(GlideRecord record)`](#getresilientreferencelinkgliderecord-record)
+    - [Parameters:](#parameters-4)
+    - [Returns:](#returns-1)
+  - [`getResilientType(GlideRecord record)`](#getresilienttypegliderecord-record)
+    - [Parameters:](#parameters-5)
+    - [Returns:](#returns-2)
 - [Create Own Custom ServiceNow Workflow](#create-own-custom-servicenow-workflow)
   - [Step 1: *Use Correct Application Scope*](#step-1-use-correct-application-scope)
   - [Step 2: *Create a Copy of Existing RES Workflow*](#step-2-create-a-copy-of-existing-res-workflow)
@@ -20,7 +32,10 @@
 
 ---
 
-## Prerequisites 
+*This guide shows how to adapt the App installed on your ServiceNow instance to suit your Incident Response Workflow*
+
+
+## Prerequisites
 * SOAR Platform updated to at least `v31.0.0` or Cloud Pak for Security running at least `v1.9.0`.
 * App Host `>= 1.6.0` or an Integration Server setup with `resilient-circuits >= 31.0.0` installed.
 * All steps in the **[Installation Guide](../install_guide)** complete.
@@ -60,13 +75,13 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 
 ```javascript
 (function RES_WF_CreateIncident(){
-	
+
 	var resHelper, record, snRecordId, caseName, options, resSeverityMap, res, noteText, workNotes, workNotesSplit, severityMapped = null;
-	
+
 	try {
 		//Instantiate new ResilientHelper
 		resHelper = new ResilientHelper();
-		
+
 		//Get the required parameters to create an Incident
 		record = current;
 		snRecordId = record.getValue("number");
@@ -101,7 +116,7 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 			noteText += "<br><b>ServiceNow ID:</b> " + snRecordId;
 			noteText += '<br><b>ServiceNow Link:</b> <a href="'+res.snLink+'">'+res.snLink+'</a></div>';
 			resHelper.addNote(res.res_reference_id, noteText, "html");
-			
+
 			// Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'
 			workNotes = current.work_notes.getJournalEntry(-1);
 
@@ -130,19 +145,19 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 
 ```javascript
 (function RES_WF_CreateTask(){
-	
+
 	var resHelper, record, snRecordId, caseName, incidentId, options, res, noteText, workNotes, workNotesSplit = null;
 
 	try{
 		//Instantiate new ResilientHelper
 		resHelper = new ResilientHelper();
-		
+
 		//Get the required parameters to create a Task
 		record = current;
 		snRecordId = record.getValue("number");
 		caseName = "SN: " + record.getValue("short_description") + " [" + snRecordId + "]";
 		incidentId = workflow.variables.u_ibm_resilient_incident_id;
-		
+
 		//Initialize options
 		options = {
 			initSnNote: "Task created in IBM SOAR",
@@ -151,17 +166,17 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 				"instr_text": record.getValue("description")
 			}
 		};
-			
+
 		// Call helper to create the Incident in Resilient
 		res = resHelper.create(record, snRecordId, caseName, options);
-		
+
 		if (res){
 			// Create the initial RES Note
 			noteText = "<br>This " + res.res_reference_type + " has been sent from <b>ServiceNow</b>";
 			noteText += "<br><b>ServiceNow ID:</b> " + snRecordId;
 			noteText += '<br><b>ServiceNow Link:</b> <a href="'+res.snLink+'">'+res.snLink+'</a></div>';
 			resHelper.addNote(res.res_reference_id, noteText, "html");
-			
+
 			// Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'
 			workNotes = current.work_notes.getJournalEntry(-1);
 
@@ -190,19 +205,19 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 
 ```javascript
 (function RES_WF_AddComment(){
-	
+
 	var resHelper, res_reference_id, noteText = null;
-	
+
 	try{
 		//Instantiate new ResilientHelper
 		resHelper = new ResilientHelper();
-	
+
 		//Get resilient_reference_id depending on what Table the record is in
 		res_reference_id = resHelper.getResilientReferenceId(current);
-		
+
 		//Set noteText to last additional comment added
 		noteText = current.comments.getJournalEntry(1);
-		
+
 		//Add a note in Resilient
 		resHelper.addNote(res_reference_id, noteText);
 	}
@@ -219,19 +234,19 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 
 ```javascript
 (function RES_WF_AddWorkNote(){
-	
+
 	var resHelper, res_reference_id, noteText = null;
-	
+
 	try{
 		//Instantiate new ResilientHelper
 		resHelper = new ResilientHelper();
-	
+
 		//Get resilient_reference_id depending on what Table the record is in
 		res_reference_id = resHelper.getResilientReferenceId(current);
-		
+
 		//Set noteText to last additional comment added
 		noteText = current.work_notes.getJournalEntry(1);
-		
+
 		//Add a note in Resilient
 		resHelper.addNote(res_reference_id, noteText);
 	}
@@ -248,13 +263,13 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 
 ```javascript
 (function RES_WF_UpdateState(){
-	
+
 	var resHelper, stateToColorMap, res_reference_id, snTicketState, snTicketStateColor, resolutionNotes = null;
 
 	try{
 		//Instantiate new resHelper
 		resHelper = new ResilientHelper();
-		
+
 		//Map ServiceNow state to a color
 		//Colors accepted by resHelper.updateStateInResilient() = green/orange/yellow/red
 		stateToColorMap = {
@@ -273,11 +288,11 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 			"Recover": "yellow",
 			"Review": "red"
 		};
-		
+
 		//Get resilient_reference_id depending on what Table the record is in
 		res_reference_id = resHelper.getResilientReferenceId(current);
 		snTicketState = current.state.getChoiceValue();
-		
+
 		// Try get the snTicketStateColor that matches the snTicketState
 		try{
 			snTicketStateColor = stateToColorMap[snTicketState];
@@ -286,16 +301,16 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 		catch(errMsg){
 			snTicketStateColor = "green";
 		}
-		
+
 		//Update that status in the res datatable
 		resHelper.updateStateInResilient(res_reference_id, snTicketState, snTicketStateColor);
-		
+
 		//Add a note to the resilient incident/task stating the change
 		resHelper.addNote(res_reference_id, "ServiceNow Record state changed to: " + snTicketState);
-		
+
 		//Get resolution notes if there are any
 		resolutionNotes = current.getValue("close_notes");
-		
+
 		//Add a note to the resilient incident/task if there are resolution notes
 		if(resolutionNotes){
 			resHelper.addNote(res_reference_id, resolutionNotes);
@@ -454,11 +469,11 @@ Returns an object with the following keys:
     (function RES_WF_CreateIncident(){
 
         var resHelper, record, snRecordId, caseName, options, resSeverityMap, res, noteText, workNotes, workNotesSplit, severityMapped = null;
-        
+
         try {
             //Instantiate new ResilientHelper
             resHelper = new ResilientHelper();
-            
+
             //Get the required parameters to create an Incident
             record = current;
             snRecordId = record.getValue("number");
@@ -493,7 +508,7 @@ Returns an object with the following keys:
                 noteText += "<br><b>ServiceNow ID:</b> " + snRecordId;
                 noteText += '<br><b>ServiceNow Link:</b> <a href="'+res.snLink+'">'+res.snLink+'</a></div>';
                 resHelper.addNote(res.res_reference_id, noteText, "html");
-                
+
                 // Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'
                 workNotes = current.work_notes.getJournalEntry(-1);
 

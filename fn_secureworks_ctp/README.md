@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# Secureworks CTP Functions for IBM Resilient
+# Secureworks CTP
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -26,7 +26,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.0
@@ -42,7 +42,7 @@
 <p>
 The Secureworks Counter Threat Platform (CTP) uses the global visibility gained from gathering and analyzing data from clients all over the world to more accurately identify, contain and eradicate cybersecurity threats. By combining up-to-the-minute threat intelligence with the CTP's machine learning and analytics capabilities, organizations can make faster, more informed decisions about how to predict, prevent, detect, and respond to threat activity.
 <p>
-CTP is used with the Secureworks SOC team when they find a security issue that needs to be communicated to the customer. The issues can be informational, research-based or require proscriptive actions by the customer. Secureworks CTP provides a “ticket-like” interface that allows you acknowledge, add files and notes, and provide ability to close tickets.   
+CTP is used with the Secureworks SOC team when they find a security issue that needs to be communicated to the customer. The issues can be informational, research-based or require proscriptive actions by the customer. Secureworks CTP provides a “ticket-like” interface that allows you acknowledge, add files and notes, and provide ability to close tickets.
 <p>
  The Secureworks CTP integration implements the following functionality in Resilient:
 
@@ -59,7 +59,7 @@ CTP is used with the Secureworks SOC team when they find a security issue that n
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v35.0.5445`
 * An Integration Server running `resilient_circuits>=30.0.0`
@@ -98,7 +98,7 @@ To install,
   | **cafile** | No | `` | *Path to certificate file* |
 
 
-### Integration Server 
+### Integration Server
 * Download the `fn_secureworks_ctp.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
@@ -171,11 +171,11 @@ To install,
 Customize Secureworks CTP and Close Incident Layouts to provide Secureworks specific information in the Resilient UI.
 
 #### Secureworks CTP Layout Tab
-Create a Secureworks CTP custom incident tab so that you can view Secureworks CTP ticket information in one place. 
+Create a Secureworks CTP custom incident tab so that you can view Secureworks CTP ticket information in one place.
 
 * Go to the Customizations Settings -> Layouts tab.
-* Click the Incident Tabs menu item on the left. 
-* Click the Add Tab button.  
+* Click the Incident Tabs menu item on the left.
+* Click the Add Tab button.
 * Enter Secureworks CTP in Add a Tab popup and click Add.
 
    ![screenshot: custom_layouts](./doc/screenshots/scwx_layout_tab_create_scwx.png)
@@ -188,7 +188,7 @@ Create a Secureworks CTP custom incident tab so that you can view Secureworks CT
    ![screenshot: custom_layouts_fields](./doc/screenshots/scwx_layout_tab_fields.png)
 ---
 #### Close Incident Layout Tab
-Modify the Close Incident tab so the the Secureworks close code can be selected from the Close Incident popup from Resilient. 
+Modify the Close Incident tab so the the Secureworks close code can be selected from the Close Incident popup from Resilient.
 * Go to the Customizations Settings -> Layouts tab.
 * Click the Close Incident menu item on the left as shown in the screenshot below.
   ![screenshot: custom_layouts](./doc/screenshots/scwx_layout_tab_create_close.png)

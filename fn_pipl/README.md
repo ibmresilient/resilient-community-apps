@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Pipl Function for IBM SOAR
+# Pipl
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
@@ -865,18 +865,18 @@ if results.get("success"):
   # Create a datatable from pipl response
   possible_person_counter = 0
   for person in results.get("person_list", []):
-    
+
     # generate result_id and timestamp
     possible_person_counter += 1
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
+
     # 0-1. The level of confidence we have that this is the person you’re looking for.
     match = str(person.get("@match", ""))
-    
-    # Whether this person is made up solely from data inferred by statistical analysis from your search query. 
+
+    # Whether this person is made up solely from data inferred by statistical analysis from your search query.
     # You can control inference using the minimum_probability parameter, and inference of persons using the infer_persons parameter.
     inferred = str(person.get("@inferred", ""))
-    
+
 
 PERSON_ATTRIBUTE_TO_NAME_MAP = {
   "names"      : "display",
@@ -901,7 +901,7 @@ for each_attribute in PERSON_ATTRIBUTE_TO_NAME_MAP:
     else:
       _attribute_value = _attribute.get(PERSON_ATTRIBUTE_TO_NAME_MAP[each_attribute], "")
     add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, each_attribute, _attribute_value, match, inferred)
-      
+
   # Save the json result as an Note
   raw_data = results.raw_data if results.raw_data else ""
   counter = possible_person_counter if possible_person_counter > 0 else ""

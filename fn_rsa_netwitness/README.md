@@ -1,4 +1,4 @@
-## Resilient Circuits Components for function: fn_rsa_netwitness
+# RSA NetWitness
 
 
 Resilient Functions simplify development of integrations by wrapping each activity into an individual workflow component. These components can be easily installed, then used and combined in Resilient workflows. The Resilient platform sends data to the function component that performs an activity then returns the results to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate the security incident response activities.
@@ -7,7 +7,7 @@ The RSA NetWitness functions query for metadata and return pcap and log files fo
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### Release History
@@ -19,25 +19,25 @@ The RSA NetWitness functions query for metadata and return pcap and log files fo
 | 1.1.0   | 3/2020  | Initial commit                                                                                                                                     |
 
 ---
- 
+
 ### Contents:
-#### Message Destinations: 
+#### Message Destinations:
   * RSA NetWitness Message Destination
 
-### Functions: 
+### Functions:
   * NetWitness Get Meta ID Ranges
   * NetWitness Get Meta Values
   * NetWitness Query
   * NetWitness Retrieve Log Data
-  * NetWitness Retrieve PCAP Data  
+  * NetWitness Retrieve PCAP Data
 
-### Workflows: 
+### Workflows:
   * (Example) NetWitness Get Meta Values
   * (Example) NetWitness Retrieve Log File
   * (Example) NetWitness Retrieve PCAP File
   * (Example) NetWitness Retrieve PCAP File (Time)
 
-### Rules: 
+### Rules:
   * (Example) NetWitness Get Meta Values
   * (Example) NetWitness Retrieve Log File
   * (Example) NetWitness Retrieve PCAP File
@@ -57,7 +57,7 @@ To uninstall,
     pip uninstall fn-rsa-netwitness
 
 ### Requirements:
-* resilient-circuits 
+* resilient-circuits
 
 ### Installation:
 Run the following command to import this function into IBM resilient
@@ -74,16 +74,16 @@ Then edit the app.config file and provide the following NetWitness configuration
     nw_packet_server_user=<nw_packet_server_username>
     nw_packet_server_password=<nw_packet_server_password>
     nw_packet_server_verify=[true|false]
-    
+
     nw_log_server_url=<http://test.nw_log_server.com:50102>
     nw_log_server_user=<nw_log_server_username>
     nw_log_server_password=<nw_log_server_password>
     nw_log_server_verify=[true|false]
- 
+
  Optionally, run selftest to test the integration you configured with the following command
- 
+
     resilient-circuits selftest -l fn-rsa-netwitness
- 
+
  Run Resilient Circuits
- 
+
     resilient-circuits run

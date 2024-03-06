@@ -1,4 +1,4 @@
-# Cisco Webex for IBM QRadar SOAR
+# Cisco Webex
 
 ## Table of Contents
 - [Cisco Webex for IBM QRadar SOAR](#cisco-webex-for-ibm-qradar-soar)
@@ -66,17 +66,17 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `43.1`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=45.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
-  
+* If using an API key account, make sure the account provides the following minimum permissions:
+
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -86,7 +86,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -121,7 +121,7 @@ The following steps can be followed to create an app integration:
  ![screenshot: webex-app-integration ](./doc/screenshots/webex-app-integration-scope.png)
 
 ### OAuth Authentication
-To establish a secure connection between the Webex integration and  _SOAR platform_, the [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf) is to be used. 
+To establish a secure connection between the Webex integration and  _SOAR platform_, the [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf) is to be used.
 
 * The tool is used to generate a unique *Refresh token*, which is then used by the app.
 * There are several ways to generate this *Refresh token* using the OAuth Utilities tool, please refer to the documentation [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf)
@@ -160,9 +160,7 @@ the duration of the meeting cannot be set to a value more than 24 hours (1440 mi
 
 ![screenshot: workflow-create-webex-meeting ](./doc/screenshots/workflow_create_meetings.png)
 
-<p align="center">
-<img src="./doc/screenshots/popup_create_meeting.png" />
-</p>
+![screenshot: popup_create_meeting.png](./doc/screenshots/popup_create_meeting.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -297,7 +295,7 @@ else:
   text += u"<br />End Time: {}".format(content.get("end"))
   text += u"<br />Timezone: {}".format(content.get("timezone"))
   text += u"<br />Meeting Id: {}".format(content.get("id"))
-  
+
 note = helper.createRichText(text)
 incident.addNote(note)
 ```
@@ -307,16 +305,14 @@ incident.addNote(note)
 
 ---
 ## Function - Webex: Create Room
-A function to create a Webex Room from an incident or a task. If no participants are added, Webex will create a blank Room. 
+A function to create a Webex Room from an incident or a task. If no participants are added, Webex will create a blank Room.
 If a team has already been created and needs to be assigned to this room, it can be added by specifying the team ID in the team ID field.
-It also has the ability to include all incident or task members and add additonal members to the team or room using the additional 
+It also has the ability to include all incident or task members and add additonal members to the team or room using the additional
 attendees field.
 
 ![screenshot: workflow-create-webex-room ](./doc/screenshots/workflow_create_rooms.png)
 
-<p align="center">
-<img src="./doc/screenshots/popup_create_room.png" />
-</p>
+![screenshot: popup_create_room.png](./doc/screenshots/popup_create_room.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -384,10 +380,10 @@ inputs.webex_room_name = "Incident {}: {}".format(str(incident.id),  incident.na
 
 if rule.properties.webex_team_id is not None:
     inputs.webex_team_id = rule.properties.webex_team_id
-    
+
 if rule.properties.webex_meeting_attendees.content is not None:
     inputs.webex_meeting_attendees = rule.properties.webex_meeting_attendees.content
-    
+
 if rule.properties.webex_add_all_members is not None:
     inputs.webex_add_all_members = rule.properties.webex_add_all_members
 ```
@@ -406,7 +402,7 @@ if not results.success:
   fail_reason = content.get("fail_reason")
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
-    
+
 else:
   ref_html_room = u"""<a href='{0}'>Link</a>""".format(content.get("meetingLink"))
   text  = u"<b>Cisco Webex Room Details:</b><br />"
@@ -429,14 +425,12 @@ incident.addNote(note)
 ---
 ## Function - Webex: Create Team
 A function to create a Webex Team from an incident or a task. The Team that is created using this function is automatically
-assigned with a room. It also has the ability to include all incident or task members and add additonal members to the team 
+assigned with a room. It also has the ability to include all incident or task members and add additonal members to the team
 or room using the additional attendees field.
 
 ![screenshot: workflow-create-webex-team ](./doc/screenshots/workflow_create_teams.png)
 
-<p align="center">
-<img src="./doc/screenshots/popup_create_team.png" />
-</p>
+![screenshot: popup_create_team.png](./doc/screenshots/popup_create_team.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -501,7 +495,7 @@ inputs.webex_team_name = "Incident {}: {}".format(str(incident.id),  incident.na
 
 if rule.properties.webex_meeting_attendees.content is not None:
     inputs.webex_meeting_attendees = rule.properties.webex_meeting_attendees.content
-    
+
 if rule.properties.webex_add_all_members is not None:
     inputs.webex_add_all_members = rule.properties.webex_add_all_members
 ```
@@ -521,8 +515,8 @@ if not results.success:
   fail_reason = content.get("fail_reason")
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
-    
-    
+
+
 else:
 
   text  = u"<b>Cisco Webex Team Details:</b><br />"
@@ -543,14 +537,12 @@ incident.addNote(note)
 ---
 ## Function - Webex: Delete Room
 Function to delete a Webex Room from an incident or task. For this function to work,
-either the Room ID or Room Name must be provided. In order to avoid any accidental 
+either the Room ID or Room Name must be provided. In order to avoid any accidental
 deletion, it is strongly recommended to use the Room  ID to delete a Room.
 
 ![screenshot: workflow-delete-webex-rooms ](./doc/screenshots/workflow_delete_rooms.png)
 
-<p align="center">
-<img src="./doc/screenshots/popup_delete_room.png" />
-</p>
+![screenshot: popup_delete_room.png](./doc/screenshots/popup_delete_room.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -620,7 +612,7 @@ if not results.success:
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
-    
+
 else:
   text  = u"<b>Cisco Webex:</b><br />"
   text += content.get("message")
@@ -635,14 +627,12 @@ incident.addNote(note)
 ---
 ## Function - Webex: Delete Team
 Function to delete a Webex team from an incident or task. For this function to work,
-either the Team ID or Team Name must be provided. In order to avoid any accidental 
+either the Team ID or Team Name must be provided. In order to avoid any accidental
 deletion, it is strongly recommended to use the Team ID to delete a Team.
 
 ![screenshot: workflow-delete-webex-teams ](./doc/screenshots/workflow_delete_teams.png)
 
-<p align="center">
-<img src="./doc/screenshots/popup_delete_team.png" />
-</p>
+![screenshot: popup_delete_team.png](./doc/screenshots/popup_delete_team.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -712,7 +702,7 @@ if not results.success:
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
-    
+
 else:
   text  = u"<b>Cisco Webex:</b><br />"
   text += content.get("message")

@@ -1,9 +1,9 @@
-###Google Geocoding Functions for Resilient
+# Google Geocoding
 
-This package is an implementation of Google's Geocoding API set. 
-Two function types are available: address and latlng. 
+This package is an implementation of Google's Geocoding API set.
+Two function types are available: address and latlng.
 
-For an address, return coordinate information. 
+For an address, return coordinate information.
 For coordinates, return an address.
 
 See https://developers.google.com/maps/documentation/geocoding/start
@@ -12,27 +12,27 @@ This package contains:
 
 Functions:
 - geocoding
-     
+
 Workflows:
 - Example: Geocoding Get Address
 - Example: Geocoding Get Coordinates
-     
+
 Rules:
 - Example: Geocoding Get Address
 - Example: Geocoding Get Coordinates
 
-###Components
+### Components
 
  Message Destinations:
    - fn_geocoding
-   
+
  Functions:
    - geocoding
-   
+
  Workflows:
    - example_geocoding_get_address
    - example_geocoding_get_coordinates
-   
+
  Rules:
    - Example: Geocode Get Address
    - Example: Geocoding Get Coordinates
@@ -117,9 +117,9 @@ section with the optional proxy settings:
 * Open the config file, scroll to the [fn_geocoding] section and remove the section or prefix `#` to comment out the section.
 * **Save** and **Close** the app.config file.
 
-# History
+## History
 | Version | Date | Notes |
 | ------: | ---: | ----: |
 | 1.0.2   | Sept. 2020 | App Host support |
-| 1.0.1   | Nov. 2018 | Rule and workflow fixes | 
+| 1.0.1   | Nov. 2018 | Rule and workflow fixes |
 | 1.0.0   | Nov. 2018 | Initial Release |

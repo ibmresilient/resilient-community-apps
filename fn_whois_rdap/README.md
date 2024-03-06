@@ -1,4 +1,4 @@
-# fn-whois-rdap Functions for IBM Resilient
+# Whois RDAP
 
 - [fn-whois-rdap Functions for IBM Resilient](#fn-whois-rdap-functions-for-ibm-resilient)
   - [Release Notes](#release-notes)

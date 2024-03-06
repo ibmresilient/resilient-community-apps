@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# GitHub Functions for IBM SOAR
+# GitHub
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -53,7 +53,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -106,16 +106,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=46.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -125,7 +125,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -150,7 +150,7 @@ This app has been implemented using:
 
 #### Prerequisites
 
-This app works best using an API token. Create one within the GitHub UI under your Account: Settings and Developer settings. The API will be specified in your app.config file using the `api_token` setting. 
+This app works best using an API token. Create one within the GitHub UI under your Account: Settings and Developer settings. The API will be specified in your app.config file using the `api_token` setting.
 
  ![screenshot: main](./doc/screenshots/api_tokens.png)
 
@@ -1580,7 +1580,7 @@ VERSION = 1.3
     * Display the hierarchical nature of json, presenting the json keys as bold labels
     * Provide links to found URLs
     * Create either an incident note or add results to an incident (custom) rich text field.
-  
+
   In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
   Workflow properties can be added using a command similar to this:
   workflow.addProperty('convert_json_to_rich_text', {
@@ -1593,18 +1593,18 @@ VERSION = 1.3
     "json_omit_list": ["omit"],
     "incident_field": None
   })
-  
+
   Format of workflow.property.convert_json_to_rich_text:
-  { 
+  {
     "version": 1.3, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
-    "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
+    "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'.
                                                 If a list, then the data is brackets by the pair specified]
     "sort": True|False, [sort the json keys at each level when displayed]
     "json": json, [required json to convert]
     "json_omit_list": [list of json keys to exclude or None]
-    "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description' 
+    "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description'
                                           or a custom rich text field in the format: 'properties.<field>'. default: create an incident note]
   }
   NOTE: if 'json' element is missing, then results.content is used, if it exists.
@@ -1795,12 +1795,12 @@ def get_properties(property_name):
     if not json_omit_list:
         json_omit_list = []
     incident_field = result_properties.get("incident_field")
-    
+
     json = result_properties.get("json")
     # determine if results.content shuold be used
     if not json and getattr(result_properties, "content", None):
       json = result_properties['content']
-      
+
     if not isinstance(json, dict) and not isinstance(json, list):
         helper.fail("json element is not formatted correctly: {}".format(json))
     sort_keys = bool(result_properties.get("sort", False))

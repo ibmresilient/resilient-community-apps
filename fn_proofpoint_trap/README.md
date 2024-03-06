@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-proofpoint-trap Functions for IBM Resilient
+# Proofpoint TRAP
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -26,7 +26,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.0.3
@@ -58,14 +58,14 @@ The ProofPoint TRAP function package provides the following features:
 * Get Proofpoint TRAP incident details.
 * Get a Proofpoint TRAP list member or members.
 * Add a member to a Proofpoint TRAP list for artifacts of type host, IP address, or URL.
-* Update a member of a Proofpoint TRAP list. 
-* Delete a member from a Proofpoint TRAP list.  
+* Update a member of a Proofpoint TRAP list.
+* Delete a member from a Proofpoint TRAP list.
 
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v32`
 * An Integration Server running `resilient_circuits>=33.0.192`
@@ -120,7 +120,7 @@ The ProofPoint TRAP function package provides the following features:
   ```
   $ resilient-circuits run --loglevel=DEBUG
   ```
- 
+
 ### Custom Layouts
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
@@ -129,11 +129,11 @@ The ProofPoint TRAP function package provides the following features:
 -->
 * The package customizations includes the following custom field and data tables:
   ![screenshot: custom_layouts](./screenshots/custom_layouts.png)
- 
+
 * In the Layouts tab, add the data table to the Artifacts tab and save:
-   ![screenshot: custom_layouts](./screenshots/custom_layout_datatable.png)  
-   
-* In the Layouts tab, add the custom field to the Details tab and save: 
+   ![screenshot: custom_layouts](./screenshots/custom_layout_datatable.png)
+
+* In the Layouts tab, add the custom field to the Details tab and save:
    ![screenshot: custom_layouts](./screenshots/custom_layout_field.png)
 ---
 
@@ -157,7 +157,7 @@ There are several ways to verify the successful operation of a function.
 
 ### Resilient Scripting Log
 * A separate log file is available to review scripting errors. This is useful when issues occur in the pre-processing or post-processing scripts.
-* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`. 
+* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
 
 ### Resilient Logs
 * By default, Resilient logs are retained at `/usr/share/co3/logs`.

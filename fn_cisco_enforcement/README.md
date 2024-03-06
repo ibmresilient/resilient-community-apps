@@ -1,4 +1,4 @@
-# Cisco Umbrella Enforcement Function Integration
+# Cisco Umbrella Enforcement
 
 This package provides three functional integrations with Resilient:
 * Get a list of domains added to the customer list

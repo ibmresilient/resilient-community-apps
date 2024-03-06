@@ -1,4 +1,4 @@
-# URLScan.io Function 
+# URLScan.io
 
 [https://urlscan.io](urlscan.io) is a service to scan and analyse websites. When a URL is submitted to urlscan.io,
 an automated process will browse to the URL like a regular user and record the activity that this page navigation
@@ -48,7 +48,7 @@ After installation, before running, you must import the customizations into your
 
 ## app.config settings
 
-The following block is automatically added to your app.config file when running `resilient-circuits config -u -l fn-urlscanio`. 
+The following block is automatically added to your app.config file when running `resilient-circuits config -u -l fn-urlscanio`.
 You will need to add your API key and have the flexibility to adjust the URL parameters if required.
 
 ```
@@ -68,7 +68,7 @@ urlscanio_api_key=xxx
 ## Pre-Processing Script
 
 ```
-# This is an artifact workflow; 
+# This is an artifact workflow;
 # The URL to scan is the artifact value
 inputs.urlscanio_url = artifact.value
 
@@ -90,7 +90,7 @@ No action is performed after the workflow is complete, so we simply outline the 
 # }
 #
 # In this case, the file is already attached to the incident.  Nothing to do here.
-workflow.addProperty('convert_json_to_rich_text', { 
+workflow.addProperty('convert_json_to_rich_text', {
     "version": 1.0,
     "header": "Artifact scan results for {}".format(artifact.value),
     "padding": 10,

@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# fn-isitphishing Functions for IBM Resilient
+# IsItPhishing
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -30,7 +30,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 ### v1.1.0
@@ -58,13 +58,13 @@ NOTE Prior Installs: Edit your app.config file to change ```[fn_isitPhishing]```
 <!--
   List the Key Features of the Integration
 -->
-* This package contains two functions that call the Vade Secure IsItPhishing Webservice API to analyze a URL or to analyze an HTML document. 
+* This package contains two functions that call the Vade Secure IsItPhishing Webservice API to analyze a URL or to analyze an HTML document.
 * 3 example workflows and rules to demonstrate how to invoke and use the functions.
 
 ---
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -79,7 +79,7 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `31.0.4035`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=31.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Incidents  | Read |
@@ -88,10 +88,10 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Functions | Read |
 
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -101,7 +101,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -152,16 +152,16 @@ Analyze an HTML document using the Vade Secure IsItPhishing Webservice API.
 <p>
 
 ```python
-results = {'version': '1.0', 
-           'success': True, 
-           'reason': None, 
-           'content': {'result': 'unknown'}, 
-           'raw': '{"result": "unknown"}', 
-           'inputs': {'incident_id': 2147, 
-                      'attachment_id': 259, 
-                      'filename': 'sample.html'}, 
-           'metrics': {'version': '1.0', 'package': 'fn-isitphishing', 
-                       'package_version': '1.1.0', 'host': 'MacBook-Pro.local', 
+results = {'version': '1.0',
+           'success': True,
+           'reason': None,
+           'content': {'result': 'unknown'},
+           'raw': '{"result": "unknown"}',
+           'inputs': {'incident_id': 2147,
+                      'attachment_id': 259,
+                      'filename': 'sample.html'},
+           'metrics': {'version': '1.0', 'package': 'fn-isitphishing',
+                       'package_version': '1.1.0', 'host': 'MacBook-Pro.local',
                        'execution_time_ms': 2800, 'timestamp': '2020-11-04 16:29:44'}}
 ```
 
@@ -188,7 +188,7 @@ if results.success:
   content = u"IsItPhishing analysis of artifact document {0} : {1}".format(results["inputs"]["filename"],results['content']['result'])
 else:
   content = u"IsItPhishing analysis of artifact document {0} : ERROR".format(results["inputs"]["filename"])
-  
+
 # Create a note
 note = helper.createPlainText(content)
 
@@ -222,17 +222,17 @@ Analyze a URL using the Vade Secure IsItPhishing Webservice API.
 <p>
 
 ```python
-results = {'version': '1.0', 
-           'success': True, 
-           'reason': None, 
-           'content': {'status': 'PHISHING'}, 
-           'raw': '{"status": "PHISHING"}', 
-           'inputs': {'isitphishing_url': 'https://www.bill-netflix.com/index.php'}, 
-           'metrics': {'version': '1.0', 
-                       'package': 'fn-isitphishing', 
-                       'package_version': '1.1.0', 
-                       'host': 'MacBook-Pro.local', 
-                       'execution_time_ms': 5394, 
+results = {'version': '1.0',
+           'success': True,
+           'reason': None,
+           'content': {'status': 'PHISHING'},
+           'raw': '{"status": "PHISHING"}',
+           'inputs': {'isitphishing_url': 'https://www.bill-netflix.com/index.php'},
+           'metrics': {'version': '1.0',
+                       'package': 'fn-isitphishing',
+                       'package_version': '1.1.0',
+                       'host': 'MacBook-Pro.local',
+                       'execution_time_ms': 5394,
                        'timestamp': '2020-11-12 17:33:23'}}
 
 }

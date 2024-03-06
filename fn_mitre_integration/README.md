@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_mitre_integration for SOAR
+# MITRE ATT&CK
 
 
 ## Table of Contents
@@ -51,7 +51,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -71,10 +71,10 @@
 -->
 **Resilient Circuits Components for 'fn_mitre_integration'**
 
-MITRE’s TAXII<sup>TM</sup> 2.0 Server provides Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK or ATTACK) content. 
-This content is critical for cyber security industry in order to make a holistic approach to detection and mitigation of Advanced Persistent Threats (APTs). 
-MITRE Integration Function enables Resilient users to gather ATT&CK information on cyber intrusion once a 
-tactic or technique has been identified. This information can help security analysts respond quickly to a (potential) breach. 
+MITRE’s TAXII<sup>TM</sup> 2.0 Server provides Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK or ATTACK) content.
+This content is critical for cyber security industry in order to make a holistic approach to detection and mitigation of Advanced Persistent Threats (APTs).
+MITRE Integration Function enables Resilient users to gather ATT&CK information on cyber intrusion once a
+tactic or technique has been identified. This information can help security analysts respond quickly to a (potential) breach.
 
 ### Key Features
 
@@ -90,8 +90,8 @@ It comes with a set of customizations that query MITRE ATT&CK for the following:
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -105,16 +105,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `32.3.12`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=32.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -124,7 +124,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -147,7 +147,7 @@ List any steps that are needed to configure the endpoint to use this app.
 -->
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **http_proxy** or **https_proxy** | No | https://proxyhost:8080 | *Optional settings for access to Mitre via a proxy.* |   
+  | **http_proxy** or **https_proxy** | No | https://proxyhost:8080 | *Optional settings for access to Mitre via a proxy.* |
 ---
 
 ## Installation
@@ -161,7 +161,7 @@ For given Techniques, return the Groups that are known to use all of them.
 Techniques can be specified with a comma separated strings of IDs or Names.
 In case both are provided, the ID values take precedence as names are not guaranteed to be unique.
 
- ![screenshot: fn-mitre-get-groups-using-all-given-techniques ](./doc/screenshots/fn-mitre-get-groups-using-all-given-techniques.png) 
+ ![screenshot: fn-mitre-get-groups-using-all-given-techniques ](./doc/screenshots/fn-mitre-get-groups-using-all-given-techniques.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -189,7 +189,7 @@ results = {
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_mitre_integration --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_mitre_integration
     # Or simply paste example outputs manually here. Be sure to remove any personal information
-} 
+}
 ```
 
 </p>
@@ -238,11 +238,11 @@ groups_mitre = results.content["mitre_groups"]
 for group in groups_mitre:
   group_row = incident.addRow("mitre_attack_groups")
   group_row["groups_technique"] = group["technique"]
-  
+
   ref = '<a href="{}">'.format(group["ref"]) +'{}</a> '
   group_row["groups_name"] = helper.createRichText(ref.format(group["name"]))
   group_row["groups_id"]   = helper.createRichText(ref.format(group["id"]))
-  
+
   group_row["groups_aliases"] = ",".join(group["aliases"])
   group_row["groups_description"] = helper.createRichText(group["description"])
 ```
@@ -284,7 +284,7 @@ results = {
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_mitre_integration --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_mitre_integration
     # Or simply paste example outputs manually here. Be sure to remove any personal information
-} 
+}
 ```
 
 </p>
@@ -333,11 +333,11 @@ groups_mitre = results.content["mitre_groups"]
 for group in groups_mitre:
   group_row = incident.addRow("mitre_attack_groups")
   group_row["groups_technique"] = group["technique"]
-  
+
   ref = '<a href="{}">'.format(group["ref"]) +'{}</a> '
   group_row["groups_name"] = helper.createRichText(ref.format(group["name"]))
   group_row["groups_id"]   = helper.createRichText(ref.format(group["id"]))
-  
+
   group_row["groups_aliases"] = ",".join(group["aliases"])
   group_row["groups_description"] = helper.createRichText(group["description"])
 ```
@@ -378,7 +378,7 @@ results = {
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_mitre_integration --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_mitre_integration
     # Or simply paste example outputs manually here. Be sure to remove any personal information
-} 
+}
 ```
 
 </p>
@@ -415,14 +415,14 @@ elif incident_propery_given:
 {
   "mitre_tactics": [
     {
-      
+
       "name": String,
       "id": String,
       "ref": "String",
-      "collection": "String", 
+      "collection": "String",
       "mitre_techniques": [
         {
-          "name": "String", 
+          "name": "String",
           "description": "String",
           "external_references": [{"url": "String"}],
           "x_mitre_detection": "String",
@@ -463,7 +463,7 @@ for tactic in tactics:
     ref_html = ""
     for ref in refs:
       url = ref["url"]
-      
+
       https_str = "https://"
       http_str = "http://"
 
@@ -477,7 +477,7 @@ for tactic in tactics:
         if start_pos != -1:
           start_pos = start_pos + len(http_str)
         else:
-          start_pos = 0 
+          start_pos = 0
 
       end_pos = url.find('/', start_pos)
       if end_pos == 0:
@@ -487,7 +487,7 @@ for tactic in tactics:
         display_str = url[start_pos:]
       else:
         display_str = url[start_pos:end_pos]
-      
+
       ref_html = ref_html + '<a href="' + ref["url"] + '">' + display_str + '</a><br>'
     tech_row["references"] = helper.createRichText(ref_html)
     tech_row["detection"] = helper.createRichText(att_tech["x_mitre_detection"])
@@ -532,7 +532,7 @@ results = {
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_mitre_integration --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_mitre_integration
     # Or simply paste example outputs manually here. Be sure to remove any personal information
-} 
+}
 ```
 
 </p>
@@ -557,7 +557,7 @@ inputs.mitre_technique_name = row.technique_name
 {
   "mitre_techniques": [
     {
-      "name": "String", 
+      "name": "String",
       "description": "String",
       "external_references": [{"url": "String"}],
       "x_mitre_detection": "String",
@@ -584,7 +584,7 @@ if not isinstance(techniques, list):
 
 for technique in techniques:
   task_title = "MITRE ATT&CK Technique: " + technique["name"]
-  
+
   mitigations = technique.get("mitre_mitigations", None)
   if not mitigations:
     mitigation_text = "No mitigations found"
@@ -596,7 +596,7 @@ for technique in techniques:
       <p>{1}</p>
       """.format(mitigation["name"], mitigation["description"]))
     mitigation_text = "".join(mitigation_text)
-  
+
   task_summary=u"""
   <h1> Description </h1>
   {des}
@@ -617,7 +617,7 @@ Gets a list of Software used by each of the Techniques queried.
 Techniques can be specified with comma separated strings of IDs or Names.
 In case both are provided, the ID values take precedence as names are not guaranteed to be unique.
 
- ![screenshot: fn-mitre-techniques-software ](./doc/screenshots/fn-mitre-techniques-software.png) 
+ ![screenshot: fn-mitre-techniques-software ](./doc/screenshots/fn-mitre-techniques-software.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -644,7 +644,7 @@ results = {
     #   3. Gather the results using: $ resilient-sdk codegen -p fn_mitre_integration --gather-results
     #   4. Run docgen again: $ resilient-sdk docgen -p fn_mitre_integration
     # Or simply paste example outputs manually here. Be sure to remove any personal information
-} 
+}
 ```
 
 </p>
@@ -694,11 +694,11 @@ software = results.content["mitre_software"]
 for soft in software:
   soft_row = incident.addRow("mitre_attack_software")
   soft_row["software_technique"] = soft["technique"]
-  
+
   ref = '<a href="{}">'.format(soft["ref"]) +'{}</a> '
   soft_row["software_name"] = helper.createRichText(ref.format(soft["name"]))
   soft_row["software_id"]   = helper.createRichText(ref.format(soft["id"]))
-  
+
   soft_row["software_description"] = helper.createRichText(soft["description"])
   soft_row["software_type"] = soft["type"]
   soft_row["software_platform"] = ",".join(soft["platforms"])
@@ -720,12 +720,12 @@ for soft in software:
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 
 ## Data Table - MITRE ATT&CK Groups
 
- ![screenshot: dt-mitre-attck-groups](./doc/screenshots/dt-mitre-attck-groups.png) 
+ ![screenshot: dt-mitre-attck-groups](./doc/screenshots/dt-mitre-attck-groups.png)
 
 #### API Name:
 mitre_attack_groups
@@ -742,7 +742,7 @@ mitre_attack_groups
 ---
 ## Data Table - MITRE ATT&CK Software
 
- ![screenshot: dt-mitre-attck-software](./doc/screenshots/dt-mitre-attck-software.png) 
+ ![screenshot: dt-mitre-attck-software](./doc/screenshots/dt-mitre-attck-software.png)
 
 #### API Name:
 mitre_attack_software
@@ -760,7 +760,7 @@ mitre_attack_software
 ---
 ## Data Table - MITRE ATT&CK Tactics
 
- ![screenshot: dt-mitre-attck-tactics](./doc/screenshots/dt-mitre-attck-tactics.png) 
+ ![screenshot: dt-mitre-attck-tactics](./doc/screenshots/dt-mitre-attck-tactics.png)
 
 #### API Name:
 mitre_attack_of_incident
@@ -777,7 +777,7 @@ mitre_attack_of_incident
 ---
 ## Data Table - MITRE ATT&CK Techniques
 
- ![screenshot: dt-mitre-attck-techniques](./doc/screenshots/dt-mitre-attck-techniques.png) 
+ ![screenshot: dt-mitre-attck-techniques](./doc/screenshots/dt-mitre-attck-techniques.png)
 
 #### API Name:
 mitre_attack_techniques
@@ -821,6 +821,6 @@ mitre_attack_techniques
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
- 
+
 ### For Support
 This is an IBM supported app. Please search [ibm.com/mysupport](https://ibm.com/mysupport) for assistance.

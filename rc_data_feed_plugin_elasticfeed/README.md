@@ -1,11 +1,13 @@
-# Introduction
+# Data Feed Elasticsearch Plugin
+
+## Introduction
 This package contains the Elasticsearch Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for IBM QRadar SOAR incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
 
 This plugin allows this replica data to be maintained in Elasticsearch.
 
 Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
 
-# History
+## History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.1.1   | 01/2024 | Updated base image rc_data_feed to 3.0.0 |
@@ -13,7 +15,7 @@ Refer to the documentation on the Data Feed extension for uses cases support and
 | 1.0.1   | 08/2020 | App Host support |
 | 1.0.0   | 12/2019 | Initial release |
 
-## 1.1.0 Changes
+### 1.1.0 Changes
 
 This release modified the base portion of the Data Feeder which is controlled by the `[feed]` section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:
 
@@ -23,30 +25,30 @@ This release modified the base portion of the Data Feeder which is controlled by
 | workspaces | "Default Workspace": ["sqlserver_feed"], "workspace A": ["kafka_feed", "resilient_feed"] | This setting allows for the partitioning of Data Feeder execution among different workspaces. The format is to specify the workspace name with the data feeder components to associated with it: "workspace": ["app.config section_name"]. If unused, data from all workspaces is accessed. |
 | include_attachment_data | true/false | set to true if attachment data should be part of the sent payload. When 'true', the attachment's byte data is saved in base64 format. |
 
-# Compatibility
+## Compatibility
 
 SOAR Compatibilty: 30.0 or higher
 
 CP4S Compatibility: 1.4 or higher
 
 
-# License
+## License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
 [LICENSE](LICENSE).
 
-# Installation
+## Installation
   The integration package contains Python components that are called by the IBM SOAR platform. These components run in the Resilient Circuits integration framework. The package also includes IBM SOAR customizations that will be imported into the platform.
 
-## App Host Installation
+### App Host Installation
 With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
 1. Within IBM SOAR, navigate Administrative Settings and then Apps.
 2. Click on the Install button and select the downloaded app-rc_data_feed_plugin_elasticfeed-x.x.x.zip file. This step will install the associated rules and message destination.
 3. Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]`
 section as necessary and updating the `[elastic_feed]` section to reflect the location and authentication settings for your instance of Elasticsearch.
 
-## Integration Server Installation
-### Install the Python components
+### Integration Server Installation
+#### Install the Python components
   Complete the following steps to install the Python components:
 * Ensure that the environment is up-to-date, as follows:
 ```
@@ -80,40 +82,40 @@ section as necessary and updating the `[elastic_feed]` section to reflect the lo
      - In the [elastic_feed] section, configure the settings for your elasticsearch environment.
     ```
     [feeds]
-    # comma separated section names. ex. sqlserver_feed,file_feed
+    ## comma separated section names. ex. sqlserver_feed,file_feed
     feed_names=elastic_feed
     reload=false
-    # use reload_types to limit the types of objects when reload=true.
-    # Ex: incident,task,note,artifact,attachment,<data_table_api_name>
+    ## use reload_types to limit the types of objects when reload=true.
+    ## Ex: incident,task,note,artifact,attachment,<data_table_api_name>
     reload_types=
-    # set to true if ElasticSearch errors occur during reload=true
+    ## set to true if ElasticSearch errors occur during reload=true
     reload_query_api_method=false
 
-    # feed_data is the default message destination that will be listened to
+    ## feed_data is the default message destination that will be listened to
     queue=feed_data
 
-    # set to true if attachment data should be part of payload send to plugins
-    # attachment data sent to elastic will be base64 encoded
+    ## set to true if attachment data should be part of payload send to plugins
+    ## attachment data sent to elastic will be base64 encoded
     include_attachment_data=false
-    # if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
-    # ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
+    ## if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
+    ## ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
     workspaces=
-    # support for parallel execution. Default is False
+    ## support for parallel execution. Default is False
     parallel_execution = False
 
     [elastic_feed]
     class=ElasticFeed
     url=http://localhost
     port=9200
-    # if using multiple organizations, consider indexes such as resilient_<org_ID>
-    # each document type will append to this index as elastic 6.0 only supports one document type per index
+    ## if using multiple organizations, consider indexes such as resilient_<org_ID>
+    ## each document type will append to this index as elastic 6.0 only supports one document type per index
     index_prefix=resilient_
     #auth_user=
     #auth_password=
     cafile=false
     ```
 
-# ElasticFeed Class
+## ElasticFeed Class
 This class allows you to write all incoming data to ElasticSearch. The data representation within Elastic is referenced by index, document type (incident, note, task, artifact, etc.) and document_id (incident_id, note_id, task_id, etc.).
 The following configuration items are supported:
 
@@ -127,6 +129,6 @@ The following configuration items are supported:
 | auth_password	| | User and password to authenticate to ElasticSearch. |
 | cafile | True | False	Specify  ‘false’ to bypass certification authentication |
 
-## Considerations
+### Considerations
 ElasticSearch allows for the updating to and deleting of individual documents. No data duplication occurs. A recently deleted custom datatable column may also not update until circuits is re-run or until the datatable is edited in the UI.
 Consult section 7.2 of the rc-data-feed documentation for datatable limitations in general.

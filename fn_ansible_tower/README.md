@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-ansible-tower Functions for IBM Resilient
+# Ansible Tower
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)

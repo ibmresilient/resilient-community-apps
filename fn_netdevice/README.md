@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# netMiko for SOAR
+# netMiko
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -36,7 +36,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -54,11 +54,11 @@
 **Resilient Circuits Components for 'fn_netdevice'**
 
 
-This integration uses netMiko to access network devices, such as firewalls, to run command-line queries and execute firewall configuration settings. SSH is used to access the hosts and results from the operations are returned as a Resilient incident note. 
-        
+This integration uses netMiko to access network devices, such as firewalls, to run command-line queries and execute firewall configuration settings. SSH is used to access the hosts and results from the operations are returned as a Resilient incident note.
+
 For more information on netMiko, refer to the documentation [here](https://netmiko.readthedocs.io/en/latest/)
 
-    
+
 
 ### Key Features
 <!--
@@ -74,7 +74,7 @@ This implementation utilizes all the functionality of netMiko including:
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * resilient_circuits>=30.0.0
 <br>
@@ -95,16 +95,16 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `40.0.6554`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -114,7 +114,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -210,12 +210,12 @@ note = u""
 for host in results['content']:
   note = note + u"Host: {}\n".format(host)
   note = note + u"Config Cmd: {}\nResult: {}\n".format(results['content'][host]['config_command'], re.sub(pp, '', results['content'][host].get('config_result', '')))
-  
+
   if results['content'][host]['status'] == 'failure':
     note = note + u"Failure: {}\n".format(results['content'][host]['reason'])
-    
+
   note = note + "\n"
-    
+
 note_text = helper.createPlainText(note)
 incident.addNote(note_text)
 ```
@@ -280,12 +280,12 @@ for host in results['content']:
     note = note + u"Cmd: {}\nResult: {}\n".format(results['content'][host]['send_command'], results['content'][host]['send_result'])
   else:
     note = note + u"Cmd: {}\nResult: {}\n".format(results['content'][host]['send_command'], re.sub(pp, '', results['content'][host].get('send_result', '')))
-  
+
   if results['content'][host]['status'] == 'failure':
     note = note + u"Failure: {}\n".format(results['content'][host]['reason'])
-    
+
   note = note + "\n"
-    
+
 note_text = helper.createPlainText(note)
 incident.addNote(note_text)
 ```

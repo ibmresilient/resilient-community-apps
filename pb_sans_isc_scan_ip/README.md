@@ -1,4 +1,4 @@
-# ISC SANS: Get Enrichment Data for an IP Address
+# ISC SANS
 
  ## Release Notes
 | Version | Date | Notes |
@@ -8,14 +8,12 @@
 ## Overview
 Automatically retrieve enrichment data for IP addresses from ISC SANS database.
 
-<p align="center">
-<img src="./doc/screenshots/pb_sans_isc_scan_ip.png" />
-</p>
+![screenshot: pb_sans_isc_scan_ip.png](./doc/screenshots/pb_sans_isc_scan_ip.png)
 
 ## Requirements
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
- ## Export Description
+## Export Description
 
 Minimum SOAR version required for this export: `49.0` (NOTE: this may be higher than each app's minimum required version).
 
@@ -23,7 +21,7 @@ Minimum SOAR version required for this export: `49.0` (NOTE: this may be higher 
 | App | Version | Minimum SOAR Version |
 | --- | ------- | -------------------- |
 | REST API Functions for SOAR | 1.2.0 | 49.0 |
- 
+
  ---
 
 ### SOAR platform
@@ -37,16 +35,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `49.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * The application requires `resilient-circuits` version `51.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
+The following SOAR platform guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -56,7 +54,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -75,24 +73,18 @@ Additional package dependencies may exist for each of these packages:
 
 ## Installation
 
-<p align="center">
-<img src="./doc/screenshots/pb_installation.png" />
-</p>
+![screenshot: pb_installation.png](./doc/screenshots/pb_installation.png)
 
-* Unzip the file downloaded from IBM AppExchange (`ISC_SANS_Get_Enrichment_Data_for_an_IP_Address.zip`) 
+* Unzip the file downloaded from IBM AppExchange (`ISC_SANS_Get_Enrichment_Data_for_an_IP_Address.zip`)
 * Upload it's contents to QRadar SOAR using the `Import Playbooks` functionality.
 * This should automatically install the playbook, sub-playbooks and associated `REST API Functions for SOAR` application required for proper execution.
-
-# ISC_SANS_Get_Enrichment_Data_for_IP_Address
 
 ## Function - Call REST API
 This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS.
 
 The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 
-<p align="center">
-<img src="./doc/screenshots/fn_rest_api.png" />
-</p>
+![screenshot: fn_rest_api.png](./doc/screenshots/fn_rest_api.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -156,7 +148,7 @@ inputs.rest_api_method  = "GET"
 # Endpoint url
 inputs.rest_api_url     =  f"http://isc.sans.edu/api/ip/{playbook.inputs.ip_address}"
 
-# Verify 
+# Verify
 inputs.rest_api_verify  = True
 
 # Request timeout
@@ -203,7 +195,7 @@ raw_response = playbook.functions.results.ip_information.content.text
 
 # Converting response from XML to JSON
 for each_tag in ET.fromstring(raw_response):
-    
+
     # Skipping process if the number tag has no value
     if each_tag.tag == "number" and not each_tag.text:
         success = False
@@ -240,9 +232,7 @@ playbook.results = {
 
 ---
 
-<p align="center">
-<img src="./doc/screenshots/pb_sans_isc_scan_ip.png" />
-</p>
+![screenshot: pb_sans_isc_scan_ip.png](./doc/screenshots/pb_sans_isc_scan_ip.png)
 
 
 ## Script - Convert JSON information to HITS
@@ -299,7 +289,7 @@ def compile_section_by_dtype(value, name):
 def dedup_section(section):
     """
     An HIT card exclusively accommodates distinct entries and cannot exhibit information in a nested
-    structure. Consequently, data is condensed and organized within the HIT card. To prevent 
+    structure. Consequently, data is condensed and organized within the HIT card. To prevent
     redundancies, this function is employed to attach an index number to the names of recurring
     entries, ensuring their uniqueness
 
@@ -326,12 +316,12 @@ def create_hits(success, response):
   Wrapper function that creates a HIT. Dpendin on the result being returned from the sub-playbook
   this function uses `dedup_section` and `compile_section_by_dtype` functions to format the json results
   in the format required for HIT creation
-  
+
   Args:
   -----
       success  (bool): Valid response returned
       response (dict): Response returned from the sub-playbook
-  
+
   Returns:
   -------
       None
@@ -352,15 +342,15 @@ create_hits(playbook.subplaybooks.results.ip_information.success, playbook.subpl
 ---
 
 ## Playbooks
-| Playbook Name | Description | Activation Type | Object | Status | Condition |  Revision | 
-| ------------- | ----------- | --------------- | ------ | ------ | --------- |  -------- | 
-| ISC SANS: Get Enrichment Data for IP Address | Perform an IP address scan and gather all associated data from the Internet Storm Center database. | Automatic | artifact | `enabled` | `artifact.type equals IP Address AND object_added` |  #55 | 
-| ISC SANS: Scan IP Address | Gather enrichment data on IP address from ISC SANS Database | Sub-playbook | incident | `enabled` | `-` |  #39 | 
+| Playbook Name | Description | Activation Type | Object | Status | Condition |  Revision |
+| ------------- | ----------- | --------------- | ------ | ------ | --------- |  -------- |
+| ISC SANS: Get Enrichment Data for IP Address | Perform an IP address scan and gather all associated data from the Internet Storm Center database. | Automatic | artifact | `enabled` | `artifact.type equals IP Address AND object_added` |  #55 |
+| ISC SANS: Scan IP Address | Gather enrichment data on IP address from ISC SANS Database | Sub-playbook | incident | `enabled` | `-` |  #39 |
 
 ---
 
 
 
- 
+
 ### For Support
 This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

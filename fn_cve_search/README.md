@@ -1,7 +1,7 @@
-# CVE Search Function for IBM Resilient
+# CVE Search
 
-## Table of Contents  
- 
+## Table of Contents
+
  - [About This Package](#about-this-package)
  - [Prerequisites](#prerequisites)
  - [Installation](#installation)
@@ -12,9 +12,9 @@
  - [Post-Process Script](#post-process-script)
  - [Rules](#rules)
  - [CVE Search Function Usage](#using-the-cve-function)
- 
+
  ---
- 
+
 ## Change Log
 | Date | Version | Change|
 |---|---|---|
@@ -23,19 +23,19 @@
 ## About This Package:
 **This package contains Resilient functions that allows one to search for Common Vulnerability Exposures (CVE).**
 
-* This package implements different ways to search the CVE database such as:  
+* This package implements different ways to search the CVE database such as:
 	* Browse product and vendor categories
-	* Search by specific CVE ID  
-	* Retrieve last 30 CVE's  
-	
-* This package makes use of the following CVE API call to get information on a given query 
-`https://cve.circl.lu/api/{search param}/{vendor name}/{product name}`  
+	* Search by specific CVE ID
+	* Retrieve last 30 CVE's
+
+* This package makes use of the following CVE API call to get information on a given query
+`https://cve.circl.lu/api/{search param}/{vendor name}/{product name}`
 * For more information, see [the circl website](https://www.circl.lu/services/cve-search/)
 
 ![screenshot](./screenshots/1.png)
 ### CVE Search Function Layout:
 ![screenshot](./screenshots/2.png)
-### CVE Search Pre-Process Script 
+### CVE Search Pre-Process Script
 ![screenshot](./screenshots/2_1.png)
 ### CVE Search Post-Process Script
 ![screenshot](./screenshots/2_2.png)
@@ -45,14 +45,14 @@
 ![screenshot](./screenshots/3_1.png)
 ### CVE Browse Post-Process Script
 ![screenshot](./screenshots/3_2.png)
-## Prerequisites:  
-  
+## Prerequisites:
+
 * Resilient Appliance >= v31.0.0
 * Integrations Server running resilient_circuits >= v30.0.0
-      
-## Installation  
-  
-This package requires that it be installed on a RHEL or CentOS platform using the resilient-circuits framework.  
+
+## Installation
+
+This package requires that it be installed on a RHEL or CentOS platform using the resilient-circuits framework.
 
 * Download the `.zip` file from the XForce App Exchange and extract it. You will find a file called: `fn_cve_search-<version>.tar.gz`
 * Copy this file to your Integrations Server
@@ -63,7 +63,7 @@ This package requires that it be installed on a RHEL or CentOS platform using th
 * To import the function, example rules, data tables and workflows into your Resilient Appliance, run:
     ```
     $ resilient-circuits customize -l fn-cve-search
-    ``` 
+    ```
 * To update your `app.config` file with the required CVE Search configurations, run:
     ```
     $ resilient-circuits config -u
@@ -79,13 +79,13 @@ This package requires that it be installed on a RHEL or CentOS platform using th
     # add proxies here or use [integrations] (see resilient-lib)
     #http_proxy=
     #https_proxy=
-	```  
-	
+	```
+
 *  To uninstall CVE Function from Resilient, run:
 
     ```
     $ pip uninstall fn_cve_search
-    ``` 
+    ```
 
 ## Data Table
 ### Data Table Utils: CVE Searched Data
@@ -97,17 +97,17 @@ This table will contain the results of the CVE searches.
 
 1. Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **+ Add Tab**
 	![screenshot](./screenshots/5.png)
-      
+
 2. Enter `CVE SEARCH DATA` and click **Add**
  ![screenshot](./screenshots/6.png)
 3. **Drag** the Data table into the middle and click **Save**
  ![screenshot](./screenshots/7.png)
 4. Within an incident, the **CVE Search Data** tab contains the CVE Searched Data Table
-  
+
 ## Function Inputs
- 
+
 ### CVE Search Function
- 
+
 |Input Name |Type  |Example|Info|
 |---|---|---|---|---|
 |cve_id|String  |CVE-2008-3949 |Specific vulnerability ID |
@@ -123,7 +123,7 @@ This table will contain the results of the CVE searches.
 |cve_browse_criteria |select |Browse | CVE Browse Criteria i.e Browse (for vendors & product information)|
 |cve_vendor|text|apple|a vendor name to browse for cve |
 
-## Function Output  
+## Function Output
 * The payload from the function will contain the JSON from the CVE API Call and the name of the API Call
 
     ```
@@ -147,14 +147,14 @@ inputs.cve_browse_criteria = 'browse'
 inputs.cve_vendor = rule.properties.cve_vendor
 ```
 
-* CVE Search  
+* CVE Search
 
 This example sets the `cve_id`, `cve_vendor`, `cve_product`, `cve_published_date_from`, `cve_published_date_to` inputs to search selections entered on the rule dialog box. See below for the combinations used in searches.
 
 ```python
 # Specific CVE ID
 inputs.cve_id = rule.properties.cve_id
-# Name of the Vendor 
+# Name of the Vendor
 inputs.cve_vendor = rule.properties.vendor
 # Name of the product
 inputs.cve_product = rule.properties.product
@@ -166,9 +166,9 @@ inputs.cve_published_date_to = rule.properties.cve_published_date_to
 
 ## Post-Process Script
 Returned results are parsed within the post-process script as `results.get("content")`. Based on the api_call type, the data is represented as follows:
- 
-* `Example: CVE Browse` function data is displayed on incident notes,   
-    and 
+
+* `Example: CVE Browse` function data is displayed on incident notes,
+    and
 * `Example: CVE Search` function data displayed on the `CVE Searched Data` table.
 
 ### CVE Search
@@ -212,7 +212,7 @@ if output_data:
                          for vc_collection in value_data:
                               if isinstance(vc_collection,dict):
                                    for key_data,value_data in vc_collection.items():
-                                        text = browse_rich_text.format(key_data,value_data)     
+                                        text = browse_rich_text.format(key_data,value_data)
                                         rich_text_tmp += text
                               else:
                                    rich_text_tmp += "<p>{}</p>".format(vc_collection)
@@ -231,7 +231,7 @@ else:
      incident.addNote(u"No data returned from CVE Search\n\nCVE-ID: {}\nVendor: {}\nProduct: {}".format(rule.properties.cve_id, rule.properties.cve_vendor, rule.properties.cve_product))
 ```
 
-* CVE Browse 
+* CVE Browse
 
 ```python
 api_call_type = results['api_call']
@@ -253,19 +253,19 @@ else:
      browse_rich_text_final = 'No searched data returned'
 incident.addNote(browse_rich_text_final)
 ```
-## Rules  
-  
-| Rule Name | Object Type | Workflow Triggered |Activity Fields|  
-| --------- | :---------: | ------------------ |---------------|  
+## Rules
+
+| Rule Name | Object Type | Workflow Triggered |Activity Fields|
+| --------- | :---------: | ------------------ |---------------|
 | Example: CVE Browse | Incident | Example: CVE Browse |CVE Browse Criteria values : Browse, CVE Vendor|
 | Example: CVE Search | Incident | Example: CVE Search |CVE Search Criteria |values : `Search`, `Specific CVE ID`, `Last 30 CVES`, `CVE ID`|
 
- **CVE functions perform data searches as follows**  
-   
+ **CVE functions perform data searches as follows**
+
  1. Browse:
     * If all other inputs are empty, all the vendors in the database are returned.
     * If a vendor name is supplied, all the products associated with the vendor are returned.
-      
- 2. Search: 
-    * If a CVE ID is supplied, data related to specific CVE ID is returned.   
-    * If no parameters are supplied, the last 30 latest vulnerabilities from the database are returned up to the `max_results_display` flag.  
+
+ 2. Search:
+    * If a CVE ID is supplied, data related to specific CVE ID is returned.
+    * If no parameters are supplied, the last 30 latest vulnerabilities from the database are returned up to the `max_results_display` flag.

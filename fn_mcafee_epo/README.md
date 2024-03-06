@@ -1,4 +1,4 @@
-# McAfee ePO Integration for SOAR
+# McAfee ePO
 
 ## Table of Contents
 - [Release Notes](#release-notes)

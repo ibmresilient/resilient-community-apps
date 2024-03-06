@@ -1,4 +1,4 @@
-# Resilient Function for Machine Learning v1.1.1
+# Machine Learning
 
 ## Description
 
@@ -130,13 +130,13 @@ Note that the [resilient] section needs to be filled out and the `features` fiel
 building the model also needs to be filled out.
 
 ### Download incidents
-Enter desired values into ml.config, and download incidents and save them into a CSV file. 
+Enter desired values into ml.config, and download incidents and save them into a CSV file.
 ```
 res-ml download -o resilient_incidents.csv
 ```
 
 ### Build a model
-Using the setings in ml.config to build a machine learning model. 
+Using the setings in ml.config to build a machine learning model.
 ```
 res-ml build -c resilient_incidents.csv -o incident_prediction.ml
 ```

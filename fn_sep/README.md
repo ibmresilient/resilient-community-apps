@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Symantec Endpoint Protection Integration for IBM SOAR
+# Symantec Endpoint Protection
 
 ## Table of Contents
 
@@ -68,7 +68,7 @@
 ## Release Notes
 
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 
@@ -89,7 +89,7 @@
 **Symantec Endpoint Protection Integration for IBM SOAR**
 
 
- ![screenshot: main](./doc/screenshots/main.png) 
+ ![screenshot: main](./doc/screenshots/main.png)
 Integration with Symantec Endpoint Protection to facilitate manual enrichment and targeted remediation actions. Teams can investigate an attack by hunting for IOCs or suspect Endpoints across an enterprise, and quickly respond to attacks by executing endpoint remediation actions, such as deleting or blacklisting suspicious files from within the IBM SOAR platform.
 
 ### Key Features
@@ -116,8 +116,8 @@ Integration with Symantec Endpoint Protection to facilitate manual enrichment an
 ## Requirements
 
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
@@ -132,16 +132,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=47.1.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -151,7 +151,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -217,7 +217,7 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - SEP - Add Fingerprint List
-Add an MD5 hash to a new fingerprint list. 
+Add an MD5 hash to a new fingerprint list.
 Note: Currently only supports MD5 hash type.
 
 <details><summary>Inputs:</summary>
@@ -292,18 +292,18 @@ inputs.sep_description = "Fingerprint list '{}'".format(inputs.get("sep_fingerpr
 ##  Symantec Endpoint Protection  - fn_sep_add_fingerprint_list script ##
 # Example result:
 """
-Result: {'inputs': {u'sep_description': u'Hash of type Malware MD5 Hash', 
-                   u'sep_fingerprintlist_name': u'Blacklist', 
-                   u'sep_hash_value': u'482F9B6E0CC4C1DBBD772AAAF088CB3A', 
+Result: {'inputs': {u'sep_description': u'Hash of type Malware MD5 Hash',
+                   u'sep_fingerprintlist_name': u'Blacklist',
+                   u'sep_hash_value': u'482F9B6E0CC4C1DBBD772AAAF088CB3A',
                    u'sep_domainid': u'A9B4B7160946C25D24B6AA458EF5557F'
-                   }, 
-        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 12:02:37', 'package_version': '1.0.0', 
+                   },
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 12:02:37', 'package_version': '1.0.0',
                     'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 1417
-                    }, 
-        'success': True, 
-        'content': {u'id': u'AB29BEA5333C488694B9533E65858BF2'}, 
+                    },
+        'success': True,
+        'content': {u'id': u'AB29BEA5333C488694B9533E65858BF2'},
         'raw': '{"id": "AB29BEA5333C488694B9533E65858BF2"}',
-        'reason': None, 
+        'reason': None,
         'version': '1.0'
 }
 """
@@ -317,11 +317,11 @@ def main():
         # If we got here we assume we are successsful.
         note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: Successfully added MD5 hash <b>{1}</b> to new fingerprint list <b>{2}</b> for Resilient function " \
                    "<b>{3}</b>".format(WF_NAME, artifact.value, INPUTS["sep_fingerprintlist_name"], FN_NAME)
-    
+
     else:
         note_text += "Symantec SEP Integration: Workflow <b>{0}</b>: There was <b>no</b> results returned for Resilient " \
                      "function <b>{1}</b>".format(WF_NAME, FN_NAME)
-    
+
     incident.addNote(helper.createRichText(note_text))
 
 if __name__ == "__main__":
@@ -331,7 +331,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_domainid": </summary>    
+<details><summary>Steps to Fetch "sep_domainid": </summary>
 <p>
 
 Value of `sep_domainid` field can be refered from [Function - SEP - Get Domains](#function---sep---get-domains) function's output. <br>
@@ -452,7 +452,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_groupid": </summary>    
+<details><summary>Steps to Fetch "sep_groupid": </summary>
 <p>
 
 Value of `sep_groupid` field can be refered from [Function - SEP - Get Groups](#function---sep---get-groups) function's output. <br>
@@ -461,7 +461,7 @@ Ex. `id` attribute from following path `content-->content-->id`.
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>    
+<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>
 <p>
 
 Value of `sep_fingerprintlist_id` field can be refered from [Function - SEP - Add Fingerprint List](#function---sep---add-fingerprint-list) function's output. <br>
@@ -577,7 +577,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>    
+<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>
 <p>
 
 Value of `sep_fingerprintlist_id` field can be refered from [Function - SEP - Add Fingerprint List](#function---sep---add-fingerprint-list) function's output. <br>
@@ -760,7 +760,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_commandid": </summary>    
+<details><summary>Steps to Fetch "sep_commandid": </summary>
 <p>
 
 Value of `sep_commandid` field can be refered from the output of some of the functions like [Function - SEP - Scan Endpoints](#function---sep---scan-endpoints),  [Function - SEP - Upload File to SEPM](#function---sep---upload-file-to-sepm) etc. <br>
@@ -1038,59 +1038,59 @@ inputs.sep_computername = row.computer_name
 ##  Symantec Endpoint Protection  - fn_sep_get_computers script ##
 # Example result:
 """
-Result: {'inputs': {u'sep_computername': u'WIN-4OA0GKJN830'}, 
-         'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-23 18:40:17', 'package_version': '1.0.0', 
-         'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1966}, 
-         'success': True, 
-         'content': {u'sort': [{u'direction': u'ASC', u'property': u'COMPUTER_NAME', u'ascending': True}], u'number': 0, 
-                     u'firstPage': True, u'content': [{u'profileVersion': u'14.2.1031', u'elamOnOff': 1, 
-                     u'avEngineOnOff': 1, u'profileChecksum': None, u'atpDeviceId': None, 
-                     u'processorType': u'Intel64 Family 6 Model 15 Stepping 1', u'oslanguage': u'en-US', 
-                     u'licenseId': None, u'licenseStatus': -1, 
-                     u'group': {u'domain': {u'id': u'908090000946C25D330E919313D23887', u'name': u'Default'}, u'name': u'My Company\\JP_TEST_GROUP_1', u'fullPathName': None, u'externalReferenceId': None, u'source': None, u'id': u'8E20F39B0946C25D118925C2E28C2D59'}, 
-                     u'uuid': u'EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1', 
-                     u'groupUpdateProvider': False, 
-                     u'edrStatus': 2, u'freeDisk': 40542507008, u'diskDrive': u'C:\\', u'osFunction': u'Server', u'processorClock': 2394, 
-                     u'mobilePhone': u'', u'jobTitle': u'', u'lastáHeuristicThreatTime': 0, u'osname': u'Windows Server 2012', 
-                     u'winServers': [u'0.0.0.0', u'0.0.0.0'], u'deploymentMessage': u'', u'idsSerialNo': u'', 
-                     u'employeeNumber': u'', u'snacLicenseId': None, u'lastSiteId': u'EE75B0850946C25D5287B58B5173A37C', 
-                     u'uwf': 2, u'currentClientId': u'256B2B130946C25D40C83823AA2E5D4C', u'osbitness': u'x64', 
-                     u'lastScanTime': 1558613245000, u'email': u'', u'securityVirtualAppliance': None, 
-                     u'worstInfectionIdx': u'0', u'encryptedDevicePassword': None, u'lastServerId': u'7D6AAA6F0946C25D170B3A2D442500B6', 
-                     u'kernel': None, u'lastUpdateTime': 1558632769514, u'ptpOnOff': 1, u'majorVersion': 14, 
-                     u'lastConnectedIpAddr': u'9.70.194.93', u'agentVersion': u'14.2.1031.0100', u'deploymentRunningVersion': u'14.2.1031.0100', 
-                     u'agentTimeStamp': 1558632769514, u'osminor': 2, u'osMajor': 6, u'deploymentTargetVersion': u'14.2.1031.0100', 
-                     u'osMinor': 2, u'osFlavorNumber': 79, u'logicalCpus': 0, u'deploymentPreVersion': u'', u'hypervisorVendorId': u'0', 
-                     u'fbwf': 2, u'osversion': u'6.2', u'dnsServers': [u'9.70.192.29', u'FEC0:0000:0000:FFFF:0000:0000:0000:0001'], 
-                     u'vsicStatus': 3, u'deleted': 0, u'deploymentStatus': u'302456832', u'computerTimeStamp': 1558622386922, u'bwf': 2, 
-                     u'totalDiskSpace': 81567, u'homePhone': u'', u'daOnOff': 1, u'computerDescription': u'', u'pepOnOff': 1, 
-                     'timediffLastUpdateTime': 448.98237204551697, u'bashStatus': 1, u'agentUsn': 2545799, u'osName': u'Windows Server 2012', 
-                     'readableLastUpdateTime': '2019-05-23 18:32:49', u'patternIdx': u'4A80266952462523E3E5AC3B816032AE', 
-                     u'employeeStatus': u'', u'tmpDevice': None, u'rebootRequired': 0, u'subnetMasks': [u'255.255.255.0', u'64'], 
-                     u'minorVersion': 2, u'osservicePack': u'', 'timediffLastVirusTime': 5638590.9823720455, u'lastSiteName': u'My Site', 
-                     u'cidsEngineVersion': u'0.0.0.0', u'lastDeploymentTime': 1550585147000, u'isGrace': 0, u'computerUsn': 2544267, 
-                     u'agentId': u'6E5AA5CB0946C25D40C83823BB5107E6', u'cidsBrowserFfOnOff': 1, u'domainOrWorkgroup': u'WORKGROUP', 
-                     u'svaId': None, u'loginDomain': u'LocalComputer', u'lastServerName': u'WIN-4OA0GKJN830', u'contentUpdate': 1, 
-                     u'writeFiltersStatus': None, u'infected': 0, 'timediffLastScanTime': 19972.982372045517, u'memory': 6441979904, 
+Result: {'inputs': {u'sep_computername': u'WIN-4OA0GKJN830'},
+         'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-23 18:40:17', 'package_version': '1.0.0',
+         'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1966},
+         'success': True,
+         'content': {u'sort': [{u'direction': u'ASC', u'property': u'COMPUTER_NAME', u'ascending': True}], u'number': 0,
+                     u'firstPage': True, u'content': [{u'profileVersion': u'14.2.1031', u'elamOnOff': 1,
+                     u'avEngineOnOff': 1, u'profileChecksum': None, u'atpDeviceId': None,
+                     u'processorType': u'Intel64 Family 6 Model 15 Stepping 1', u'oslanguage': u'en-US',
+                     u'licenseId': None, u'licenseStatus': -1,
+                     u'group': {u'domain': {u'id': u'908090000946C25D330E919313D23887', u'name': u'Default'}, u'name': u'My Company\\JP_TEST_GROUP_1', u'fullPathName': None, u'externalReferenceId': None, u'source': None, u'id': u'8E20F39B0946C25D118925C2E28C2D59'},
+                     u'uuid': u'EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1',
+                     u'groupUpdateProvider': False,
+                     u'edrStatus': 2, u'freeDisk': 40542507008, u'diskDrive': u'C:\\', u'osFunction': u'Server', u'processorClock': 2394,
+                     u'mobilePhone': u'', u'jobTitle': u'', u'lastáHeuristicThreatTime': 0, u'osname': u'Windows Server 2012',
+                     u'winServers': [u'0.0.0.0', u'0.0.0.0'], u'deploymentMessage': u'', u'idsSerialNo': u'',
+                     u'employeeNumber': u'', u'snacLicenseId': None, u'lastSiteId': u'EE75B0850946C25D5287B58B5173A37C',
+                     u'uwf': 2, u'currentClientId': u'256B2B130946C25D40C83823AA2E5D4C', u'osbitness': u'x64',
+                     u'lastScanTime': 1558613245000, u'email': u'', u'securityVirtualAppliance': None,
+                     u'worstInfectionIdx': u'0', u'encryptedDevicePassword': None, u'lastServerId': u'7D6AAA6F0946C25D170B3A2D442500B6',
+                     u'kernel': None, u'lastUpdateTime': 1558632769514, u'ptpOnOff': 1, u'majorVersion': 14,
+                     u'lastConnectedIpAddr': u'9.70.194.93', u'agentVersion': u'14.2.1031.0100', u'deploymentRunningVersion': u'14.2.1031.0100',
+                     u'agentTimeStamp': 1558632769514, u'osminor': 2, u'osMajor': 6, u'deploymentTargetVersion': u'14.2.1031.0100',
+                     u'osMinor': 2, u'osFlavorNumber': 79, u'logicalCpus': 0, u'deploymentPreVersion': u'', u'hypervisorVendorId': u'0',
+                     u'fbwf': 2, u'osversion': u'6.2', u'dnsServers': [u'9.70.192.29', u'FEC0:0000:0000:FFFF:0000:0000:0000:0001'],
+                     u'vsicStatus': 3, u'deleted': 0, u'deploymentStatus': u'302456832', u'computerTimeStamp': 1558622386922, u'bwf': 2,
+                     u'totalDiskSpace': 81567, u'homePhone': u'', u'daOnOff': 1, u'computerDescription': u'', u'pepOnOff': 1,
+                     'timediffLastUpdateTime': 448.98237204551697, u'bashStatus': 1, u'agentUsn': 2545799, u'osName': u'Windows Server 2012',
+                     'readableLastUpdateTime': '2019-05-23 18:32:49', u'patternIdx': u'4A80266952462523E3E5AC3B816032AE',
+                     u'employeeStatus': u'', u'tmpDevice': None, u'rebootRequired': 0, u'subnetMasks': [u'255.255.255.0', u'64'],
+                     u'minorVersion': 2, u'osservicePack': u'', 'timediffLastVirusTime': 5638590.9823720455, u'lastSiteName': u'My Site',
+                     u'cidsEngineVersion': u'0.0.0.0', u'lastDeploymentTime': 1550585147000, u'isGrace': 0, u'computerUsn': 2544267,
+                     u'agentId': u'6E5AA5CB0946C25D40C83823BB5107E6', u'cidsBrowserFfOnOff': 1, u'domainOrWorkgroup': u'WORKGROUP',
+                     u'svaId': None, u'loginDomain': u'LocalComputer', u'lastServerName': u'WIN-4OA0GKJN830', u'contentUpdate': 1,
+                     u'writeFiltersStatus': None, u'infected': 0, 'timediffLastScanTime': 19972.982372045517, u'memory': 6441979904,
                      u'freeMem': 3117060096, u'officePhone': u'', u'lastVirusTime': 1552994627000, u'telemetryMid': u'890E283B-41D3-4340-A397-66F6AFCAF33E',
-                     u'idsVersion': u'', u'cidsBrowserIeOnOff': 1, u'publicKey': u'BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1', 
-                     u'quarantineDesc': u'Host Integrity check passed\n', u'cidsDrvMulfCode': 0, u'biosVersion': u'INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0', 
-                     u'rebootReason': u'', u'telemetryHwid': u'A942D8EB-32C3-E42F-FE83-723FDC431F32', 'readableLastVirusTime': '2019-03-19 11:23:47', 
-                     u'cidsSilentMode': 0, u'creationTime': 1550585043812, u'macAddresses': [u'00-50-56-8B-A6-C3', u'00-50-56-8B-A6-C3'], 
-                     u'idsChecksum': None, u'operatingSystem': u'Windows Server 2012 ', u'osmajor': 6, u'virtualizationPlatform': u'Unknown', 
-                     u'ipAddresses': [u'9.70.194.93', u'FE80:0000:0000:0000:FC67:074E:CD22:0188'], u'physicalCpus': 1, u'osBitness': u'x64', 
-                     u'cidsDefsetVersion': u'190522063', u'cidsDrvOnOff': 1, u'computerName': u'WIN-4OA0GKJN830', u'logonUserName': u'Administrator', 
-                     u'licenseExpiry': 0, u'osLanguage': u'en-US', u'gateways': [u'9.70.194.1', u'9.70.194.1', u'0.0.0.0', u'0.0.0.0'], 
-                     u'uniqueId': u'D31AA16E0946C25D40C83823C500518B', u'department': u'', u'isNpvdiClient': 0, u'dhcpServer': u'0.0.0.0', 
-                     u'readableLastScanTime': '2019-05-23 13:07:25', u'osfunction': u'Server', u'description': u'', u'osflavorNumber': 79, 
-                     u'tpmDevice': u'0', u'onlineStatus': 1, u'lastDownloadTime': 1558356063096, u'apOnOff': 1, u'timeZone': 480, u'fullName': u'', 
-                     u'osVersion': u'6.2', u'attributeExtension': u'', u'atpServer': u'https://9.70.194.99:443', u'tamperOnOff': 1, u'osServicePack': u'', 
-                     u'agentType': u'105', u'serialNumber': u'VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1', u'osElamStatus': 0, u'installType': u'0', 
-                     u'profileSerialNo': u'8E20-05/08/2019 07:00:23 015', u'hardwareKey': u'1771D79454E53469DF4B290C06C104C9', u'firewallOnOff': 1}], 
-                     u'lastPage': True, u'totalPages': 1, u'numberOfElements': 1, u'totalElements': 1, u'size': 20}, 
+                     u'idsVersion': u'', u'cidsBrowserIeOnOff': 1, u'publicKey': u'BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1',
+                     u'quarantineDesc': u'Host Integrity check passed\n', u'cidsDrvMulfCode': 0, u'biosVersion': u'INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0',
+                     u'rebootReason': u'', u'telemetryHwid': u'A942D8EB-32C3-E42F-FE83-723FDC431F32', 'readableLastVirusTime': '2019-03-19 11:23:47',
+                     u'cidsSilentMode': 0, u'creationTime': 1550585043812, u'macAddresses': [u'00-50-56-8B-A6-C3', u'00-50-56-8B-A6-C3'],
+                     u'idsChecksum': None, u'operatingSystem': u'Windows Server 2012 ', u'osmajor': 6, u'virtualizationPlatform': u'Unknown',
+                     u'ipAddresses': [u'9.70.194.93', u'FE80:0000:0000:0000:FC67:074E:CD22:0188'], u'physicalCpus': 1, u'osBitness': u'x64',
+                     u'cidsDefsetVersion': u'190522063', u'cidsDrvOnOff': 1, u'computerName': u'WIN-4OA0GKJN830', u'logonUserName': u'Administrator',
+                     u'licenseExpiry': 0, u'osLanguage': u'en-US', u'gateways': [u'9.70.194.1', u'9.70.194.1', u'0.0.0.0', u'0.0.0.0'],
+                     u'uniqueId': u'D31AA16E0946C25D40C83823C500518B', u'department': u'', u'isNpvdiClient': 0, u'dhcpServer': u'0.0.0.0',
+                     u'readableLastScanTime': '2019-05-23 13:07:25', u'osfunction': u'Server', u'description': u'', u'osflavorNumber': 79,
+                     u'tpmDevice': u'0', u'onlineStatus': 1, u'lastDownloadTime': 1558356063096, u'apOnOff': 1, u'timeZone': 480, u'fullName': u'',
+                     u'osVersion': u'6.2', u'attributeExtension': u'', u'atpServer': u'https://9.70.194.99:443', u'tamperOnOff': 1, u'osServicePack': u'',
+                     u'agentType': u'105', u'serialNumber': u'VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1', u'osElamStatus': 0, u'installType': u'0',
+                     u'profileSerialNo': u'8E20-05/08/2019 07:00:23 015', u'hardwareKey': u'1771D79454E53469DF4B290C06C104C9', u'firewallOnOff': 1}],
+                     u'lastPage': True, u'totalPages': 1, u'numberOfElements': 1, u'totalElements': 1, u'size': 20},
 
          'raw': '<content_as_string>'
-         'reason': None, 
+         'reason': None,
          'version': '1.0'}
 """
 #  Globals
@@ -1175,7 +1175,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_domain": </summary>    
+<details><summary>Steps to Fetch "sep_domain": </summary>
 <p>
 
 Value of `sep_domain` field can be refered from [Function - SEP - Get Domains](#function---sep---get-domains) function's output. <br>
@@ -1345,7 +1345,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_file_id": </summary>    
+<details><summary>Steps to Fetch "sep_file_id": </summary>
 <p>
 
 Value of `sep_file_id` field can be refered from [Function - SEP - Get Command Status](#function---sep---get-command-status) function's output while checking status of the returned command id after performing a file upload using the function [Function - SEP - Upload File to SEPM](#function---sep---upload-file-to-sepm). <br>
@@ -1491,7 +1491,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_domainid": </summary>    
+<details><summary>Steps to Fetch "sep_domainid": </summary>
 <p>
 
 Value of `sep_domainid` field can be refered from [Function - SEP - Get Domains](#function---sep---get-domains) function's output. <br>
@@ -1500,7 +1500,7 @@ Ex. `id` attribute from following path `content-->id`.
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>    
+<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>
 <p>
 
 Value of `sep_fingerprintlist_id` field can be refered from [Function - SEP - Add Fingerprint List](#function---sep---add-fingerprint-list) function's output. <br>
@@ -1764,7 +1764,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_domain": </summary>    
+<details><summary>Steps to Fetch "sep_domain": </summary>
 <p>
 
 Value of `sep_domain` field can be refered from [Function - SEP - Get Domains](#function---sep---get-domains) function's output. <br>
@@ -1844,13 +1844,13 @@ inputs.sep_groupid = content["content"][0]["id"]
 ##  Symantec Endpoint Protection  - fn_sep_move_client script ##
 # Example result:
 """
-Result: {'inputs': {u'sep_hardwarekey': u'B791D1DF2BB8AA77D19B10E3BB395B81', u'sep_groupid': u'CC00A6170946C25D35BD115E41F2F92C'}, 
-         'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-29 12:17:17', 'package_version': '1.0.0', 'host': 'myhost', 
-                     'version': '1.0', 'execution_time_ms': 1782}, 
-         'success': True, 
-         'content': [{u'responseMessage': u'OK', u'responseCode': u'200'}], 
-         'raw': '[{"responseMessage": "OK", "responseCode": "200"}]', 
-         'reason': None, 
+Result: {'inputs': {u'sep_hardwarekey': u'B791D1DF2BB8AA77D19B10E3BB395B81', u'sep_groupid': u'CC00A6170946C25D35BD115E41F2F92C'},
+         'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-29 12:17:17', 'package_version': '1.0.0', 'host': 'myhost',
+                     'version': '1.0', 'execution_time_ms': 1782},
+         'success': True,
+         'content': [{u'responseMessage': u'OK', u'responseCode': u'200'}],
+         'raw': '[{"responseMessage": "OK", "responseCode": "200"}]',
+         'reason': None,
          'version': '1.0'
  }
 """
@@ -1885,7 +1885,7 @@ def main():
       noteText = "Symantec SEP Integration: Workflow: <b>{0}</b> : Move unsuccessful for computer with hardware id <b>{1}</b> " \
                  "to group with id <b>{2}</b> for Resilient function <b>{3}</b>."\
           .format(WF_NAME, HW_KEY, GROUP_ID, FN_NAME)
-    
+
     incident.addNote(helper.createRichText(note_text))
 
 if __name__ == "__main__":
@@ -1895,7 +1895,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_groupid": </summary>    
+<details><summary>Steps to Fetch "sep_groupid": </summary>
 <p>
 
 Value of `sep_groupid` field can be refered from [Function - SEP - Get Groups](#function---sep---get-groups) function's output. <br>
@@ -1904,7 +1904,7 @@ Ex. `id` attribute from following path `content-->content-->id`.
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_hardwarekey": </summary>    
+<details><summary>Steps to Fetch "sep_hardwarekey": </summary>
 <p>
 
 Value of `sep_hardwarekey` field can be refered from [Function - SEP - Get Computers](#function---sep---get-computers) function's output. <br>
@@ -2024,7 +2024,7 @@ incident.addNote(helper.createRichText(note_text))
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_group_ids": </summary>    
+<details><summary>Steps to Fetch "sep_group_ids": </summary>
 <p>
 
 Value of `sep_group_ids` field can be refered from [Function - SEP - Get Groups](#function---sep---get-groups) function's output. <br>
@@ -2033,7 +2033,7 @@ Ex. `id` attribute from following path `content-->content-->id`.
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_computer_ids": </summary>    
+<details><summary>Steps to Fetch "sep_computer_ids": </summary>
 <p>
 
 Value of `sep_computer_ids` field can be refered from [Function - SEP - Get Computers](#function---sep---get-computers) function's output. <br>
@@ -2046,12 +2046,12 @@ Ex. `uniqueId` attribute from following path `content-->content-->uniqueId`.
 ## Function - SEP - Scan Endpoints
 Initiates an Evidence of Compromise (EOC) scan  of an artifact value  against  a list of endpoints or groups. The function can also be used to complete a remediation (quarantine) scan action  for hash value (MD5, SHA1 or SHA256).
 
-The provided **SEP - Scan Endpoints** function with the **Initiate EOC Scan for Artifact** workflow initiates an Evidence of Compromise (EOC) scan of an artifact value against a list of endpoints or groups. 
- 
+The provided **SEP - Scan Endpoints** function with the **Initiate EOC Scan for Artifact** workflow initiates an Evidence of Compromise (EOC) scan of an artifact value against a list of endpoints or groups.
+
  ![screenshot: fn-sep-scan-endpoints ](./doc/screenshots/wf-sep-initiate-eoc-scan-for-artifact.png)
 
 The function can also be used to complete a remediation delete action on a SHA256 hash value in conjunction with a scan.
- 
+
  ![screenshot: fn-sep-scan-endpoints ](./doc/screenshots/fn-sep-scan-endpoints.png)
 
 
@@ -2209,7 +2209,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_group_ids": </summary>    
+<details><summary>Steps to Fetch "sep_group_ids": </summary>
 <p>
 
 Value of `sep_group_ids` field can be refered from [Function - SEP - Get Groups](#function---sep---get-groups) function's output. <br>
@@ -2218,7 +2218,7 @@ Ex. `id` attribute from following path `content-->content-->id`.
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_computer_ids": </summary>    
+<details><summary>Steps to Fetch "sep_computer_ids": </summary>
 <p>
 
 Value of `sep_computer_ids` field can be refered from [Function - SEP - Get Computers](#function---sep---get-computers) function's output. <br>
@@ -2229,7 +2229,7 @@ Ex. `uniqueId` attribute from following path `content-->content-->uniqueId`.
 
 ---
 ## Function - SEP - Update Fingerprint List
-Updates an existing fingerprint list with a set of hash values. 
+Updates an existing fingerprint list with a set of hash values.
 Note: Currently only supports MD5 hash type.
 
 <details><summary>Inputs:</summary>
@@ -2292,7 +2292,7 @@ for i in range(len(domain_content)):
   if domain_content[i]["name"] ==  rule.properties.sep_domain_name:
     inputs.sep_domainid = domain_content[i]["id"]
     break
-    
+
 if fpl_content["name"] ==  rule.properties.sep_fingerprintlist_name:
     inputs.sep_fingerprintlist_id = fpl_content["id"]
     inputs.sep_fingerprintlist_name = fpl_content["name"]
@@ -2342,11 +2342,11 @@ def main():
                     "list <b>{2}</b> for Resilient function <b>{3}</b>"\
             .format(WF_NAME, artifact.value, INPUTS["sep_fingerprintlist_name"],
                     FN_NAME)
-    
+
     else:
         note_text += "Symantec SEP Integration: Workflow <b>{0}</b>: There was <b>no</b> results returned for Resilient " \
                      "function <b>{1}</b>".format(WF_NAME, FN_NAME)
-    
+
     incident.addNote(helper.createRichText(note_text))
 
 if __name__ == "__main__":
@@ -2356,7 +2356,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_domainid": </summary>    
+<details><summary>Steps to Fetch "sep_domainid": </summary>
 <p>
 
 Value of `sep_domainid` field can be refered from [Function - SEP - Get Domains](#function---sep---get-domains) function's output. <br>
@@ -2365,7 +2365,7 @@ Ex. `id` attribute from following path `content-->id`.
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>    
+<details><summary>Steps to Fetch "sep_fingerprintlist_id": </summary>
 <p>
 
 Value of `sep_fingerprintlist_id` field can be refered from [Function - SEP - Add Fingerprint List](#function---sep---add-fingerprint-list) function's output. <br>
@@ -2376,7 +2376,7 @@ Ex. `id` attribute from following path `content-->id`.
 
 ---
 ## Function - SEP - Upload File to SEPM
-Upload a file from an endpoint back to the SEPM server.  
+Upload a file from an endpoint back to the SEPM server.
 Note: Only supports executable file types such as binary executable (.exe), batch (.bat), Windows installer package (.msi) etc. File source can be FILESYTEM, QUARANTINE or BOTH
 
 <details><summary>Inputs:</summary>
@@ -2491,7 +2491,7 @@ incident.addNote(helper.createRichText(noteText))
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_computer_ids": </summary>    
+<details><summary>Steps to Fetch "sep_computer_ids": </summary>
 <p>
 
 Value of `sep_computer_ids` field can be refered from [Function - SEP - Get Computers](#function---sep---get-computers) function's output. <br>
@@ -2545,7 +2545,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_command_id": </summary>    
+<details><summary>Steps to Fetch "sep_command_id": </summary>
 <p>
 
 Value of `sep_command_id` field can be refered from [Function - SEP - Scan Endpoints](#function---sep---scan-endpoints) function's output. <br>
@@ -3041,7 +3041,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_exceptions_id": </summary>    
+<details><summary>Steps to Fetch "sep_exceptions_id": </summary>
 <p>
 
 Value of `sep_exceptions_id` field can be refered from [Function - SEP: Get Policy Summary](#function---sep-get-policy-summary) function's output. <br>
@@ -6713,7 +6713,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_firewall_id": </summary>    
+<details><summary>Steps to Fetch "sep_firewall_id": </summary>
 <p>
 
 Value of `sep_firewall_id` field can be refered from [Function - SEP: Get Policy Summary](#function---sep-get-policy-summary) function's output. <br>
@@ -7115,7 +7115,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Steps to Fetch "sep_domainid": </summary>    
+<details><summary>Steps to Fetch "sep_domainid": </summary>
 <p>
 
 Value of `sep_domainid` field can be refered from [Function - SEP - Get Domains](#function---sep---get-domains) function's output. <br>

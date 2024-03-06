@@ -14,9 +14,10 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# None
+# McAfee TIE
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
@@ -27,18 +28,23 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+    - [App Host Configuration](#app-host-configuration)
   - [Custom Layouts](#custom-layouts)
+    - [Custom Artifact Type](#custom-artifact-type)
 - [Function - McAfee TIE: Set File Reputation](#function---mcafee-tie-set-file-reputation)
   - [Support for External Reputations](#support-for-external-reputations)
 - [Function - McAfee TIE search hash](#function---mcafee-tie-search-hash)
 - [Data Table - TIE Results](#data-table---tie-results)
+    - [API Name:](#api-name)
+    - [Columns:](#columns)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -79,7 +85,7 @@ In addition, a system list is returned by the function.
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -94,16 +100,16 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `36.0.5634`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -113,7 +119,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -138,7 +144,7 @@ The following table provides the settings you need to configure the app. These s
 | **dxlclient_config** | Yes | `/var/rescircuits/fn_mcafee_tie/dxlclient.config` | *DXLClient configuration file. See the [OpenDXL documentation](https://opendxl.github.io/opendxl-client-python/pydoc/updatingconfigfromcli.html) for instructions on how to set.* |
 
 #### App Host Configuration
-Since McAfee TIE references it's own configuration file, this file needs to be added to the files available to the container running this app for App Host. This is done by referring to the location of config file as `/var/rescircuits/fn_mcafee_tie/dxlclient.config` within the container and then including that file in the files available to the app. See the snapshot below for an example. 
+Since McAfee TIE references it's own configuration file, this file needs to be added to the files available to the container running this app for App Host. This is done by referring to the location of config file as `/var/rescircuits/fn_mcafee_tie/dxlclient.config` within the container and then including that file in the files available to the app. See the snapshot below for an example.
 
 ![screenshot: app.config](./doc/screenshots/app_config.png)
 
@@ -160,7 +166,7 @@ In addition to the dxlclient.config file, three certificate files need to be add
 #### Custom Artifact Type
 
 A new artifact type is provided, `Certificate SHA-1 Hash`. This can be used to create new artifacts
-which are different than Malware SHA-1 Hash artifacts. The latter are used for getting and 
+which are different than Malware SHA-1 Hash artifacts. The latter are used for getting and
 setting reputations.
 
 ---
@@ -419,28 +425,28 @@ else:
 Data returned will be in the following structure
 
 
-{  
-   "GTI":{  
+{
+   "GTI":{
       "File Provider":"GTI",
-      "Attributes":{  
+      "Attributes":{
 
       },
       "Create Date":"2018-02-21 12:17:10",
       "Trust Level":"Known Malicious"
    },
-   "ATD":{  
+   "ATD":{
       "File Provider":"ATD",
       "Create Date":"2018-03-14 11:53:09",
       "Trust Level":"Most Likely Malicious"
    },
-   "MWG":{  
+   "MWG":{
       "File Provider":"MWG",
       "Create Date":"2018-03-14 11:53:55",
       "Trust Level":"Most Likely Malicious"
    },
-   "Enterprise":{  
+   "Enterprise":{
       "File Provider":"Enterprise",
-      "Attributes":{  
+      "Attributes":{
          "Average Local Rep":"Most Likely Malicious",
          "First Contact":"2018-02-21 12:17:10",
          "Min Local Rep":"Most Likely Malicious",
