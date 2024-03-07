@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
@@ -15,7 +15,7 @@ from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 FN_NAME = "sentinel_get_incident_comments"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements SAOR function 'sentinel_get_incident_comments''"""
+    """Component that implements SOAR function 'sentinel_get_incident_comments''"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -34,7 +34,7 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["sentinel_profile", "sentinel_incident_id"], fn_inputs)
 
         # Get the function parameters:
-        incident_id = fn_inputs.incident_id
+        incident_id = getattr(fn_inputs, "incident_id", None)
         sentinel_incident_id = fn_inputs.sentinel_incident_id
         sentinel_profile = fn_inputs.sentinel_profile
 
@@ -42,10 +42,12 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info(f"sentinel_incident_id: {sentinel_incident_id}")
         self.LOG.info(f"sentinel_profile: {sentinel_profile}")
 
+        # Create connection to Sentinel
         sentinel_api = SentinelAPI(self.opts, self.options)
 
         soar_api = ResilientCommon(self.rest_client())
 
+        # Get the configuration for the selected Sentinel profile from the app.config
         profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
         result, status, reason = sentinel_api.get_comments(profile_data, sentinel_incident_id)
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
@@ -38,8 +38,10 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info(f"sentinel_incident_id: {sentinel_incident_id}")
         self.LOG.info(f"sentinel_profile: {sentinel_profile}")
 
+        # Create connection to Sentinel
         sentinel_api = SentinelAPI(self.opts, self.options)
 
+        # Get the configuration for the selected Sentinel profile from the app.config
         profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
         # Read all entities associated with a Sentinel incident
         result, status, reason = sentinel_api.get_incident_entities(profile_data,

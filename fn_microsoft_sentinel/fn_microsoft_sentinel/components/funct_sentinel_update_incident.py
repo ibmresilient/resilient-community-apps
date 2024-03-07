@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
 from resilient_lib import validate_fields
 
+from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
 from fn_microsoft_sentinel.lib.constants import SENTINEL_INCIDENT_NUMBER
 from fn_microsoft_sentinel.lib.function_common import (
     DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE,
@@ -46,19 +47,21 @@ class FunctionComponent(AppFunctionComponent):
 
         # Log inputs
         self.LOG.info(f"Incident ID: {incident_id}")
-        self.LOG.info(f"Sentinal Incident ID: {sentinel_incident_id}")
+        self.LOG.info(f"Sentinel Incident ID: {sentinel_incident_id}")
         self.LOG.info(f"Sentinel Profile: {sentinel_profile}")
 
         # Get the SOAR incident data
-        soar_incident = self.rest_client().get(f"/incidents/{fn_inputs.incident_id}?handle_format=names")
+        soar_incident = ResilientCommon(self.rest_client()).get_soar_incident(incident_id)
 
         # Confirm that we have custom fields
         for confirm_field in ["sentinel_profile", SENTINEL_INCIDENT_NUMBER]:
             if not soar_incident['properties'].get(confirm_field):
-                raise ValueError(f"Custom field: {confirm_field} and/or value not found")
+                raise ValueError(f"Custom field: {confirm_field} and/or value not found.")
 
+        # Create connection to Sentinel
         sentinel_api = SentinelAPI(self.opts, self.options)
 
+        # Get the configuration for the selected Sentinel profile from the app.config
         profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
 
         # Is this SOAR incident active or closed?

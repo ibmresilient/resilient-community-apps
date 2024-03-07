@@ -1,20 +1,34 @@
 {
   {# JINJA template for updating a new SOAR incident from a Sentinel incident. #}
-  "description": {
-    "format": "text",
-    "content": "{{ properties.description|replace('"', '\\"') }}"
-  },
+  {% if properties.description %}
+    "description": {
+      "format": "text",
+      "content": "{{ properties.description|replace('"', '\\"') }}"
+    },
+  {% endif %}
   {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
   "plan_status": "{{ properties.status|soar_substitute('{"Closed": "A", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|soar_substitute('{"Informational": "Low"}') }}",
   "properties": {
-    "sentinel_incident_status": "{{ properties.status }}",
-    "sentinel_incident_classification": "{{ properties.classification }}",
-    "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
-    "sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\"') }}",
-    "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
-    "sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}",
-    "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    "sentinel_incident_status": "{{ properties.status }}"
+    {% if properties.classification %}
+      ,"sentinel_incident_classification": "{{ properties.classification }}"
+    {% endif %}
+    {% if properties.classificationReason %}
+      ,"sentinel_incident_classification_reason": "{{ properties.classificationReason }}"
+    {% endif %}
+    {% if properties.classificationComment %}
+      ,"sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\\"') }}"
+    {% endif %}
+    {% if properties.owner.assignedTo %}
+      ,"sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}"
+    {% endif %}
+    {% if properties.labels %}
+      ,"sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}"
+    {% endif %}
+    {% if properties.additionalData.tactics %}
+      ,"sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    {% endif %}
   }
 }

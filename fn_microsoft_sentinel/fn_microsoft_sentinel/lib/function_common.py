@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 from resilient_lib import validate_fields
 from os import path
 
@@ -12,6 +12,7 @@ DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE = path.join(TEMPLATE_DIR, "sentinel_clo
 DEFAULT_INCIDENT_CREATION_TEMPLATE = path.join(TEMPLATE_DIR, "incident_creation_template.jinja")
 DEFAULT_INCIDENT_UPDATE_TEMPLATE = path.join(TEMPLATE_DIR, "incident_update_template.jinja")
 DEFAULT_INCIDENT_CLOSE_TEMPLATE = path.join(TEMPLATE_DIR, "incident_close_template.jinja")
+DEFAULT_POLLER_FILTERS_TEMPLATE = path.join(TEMPLATE_DIR, "poller_filters_template.jinja")
 
 REQUIRED_PROFILE_FIELDS = [{"name": "subscription_id", "placeholder": "aaa-bbb-fff"},
                            {"name": "workspace_name", "placeholder": "AzureExampleWorkspace"},
@@ -30,12 +31,14 @@ class SentinelProfiles():
         :raises KeyError: error when a named profile is not found in app.config
         :return: Dictionary of profiles
         """
-        sentinel_profiles = options["sentinel_profiles"]
+        # The 'sentinel_profiles' setting in the app.config is a comma separated list of profile names.
+        sentinel_profiles = options.get("sentinel_profiles", "")
 
         # Confirm all profiles are valid
         profiles = {}
+        # Convert the string list to a python list.
         profile_list = [item.strip() for item in sentinel_profiles.split(",")]
-        for profile in profile_list:
+        for profile in profile_list: # Loop though the profile names in the list.
             profile_name = f"{PACKAGE_NAME}:{profile}"
             profile_data = opts.get(profile_name)
             if not profile_data:

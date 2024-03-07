@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 from logging import getLogger
 from resilient_circuits.app import AppArgumentParser
@@ -11,7 +11,7 @@ LOG = getLogger(__name__)
 
 class IncidentGroupsTab(Tab):
     SECTION = PACKAGE_NAME
-    NAME = "Sentinel Incident"
+    NAME = "Microsoft Sentinel Incident"
     UUID = "6f8c7b82-348d-4e3d-8416-a234304347d6"
 
     CONTAINS = [

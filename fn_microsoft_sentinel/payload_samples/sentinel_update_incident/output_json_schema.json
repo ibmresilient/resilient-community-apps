@@ -73,17 +73,32 @@
                   "type": "integer"
                 },
                 "alertProductNames": {
-                  "type": "array"
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "tactics": {
-                  "type": "array"
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             },
             "relatedAnalyticRuleIds": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "incidentUrl": {
+              "type": "string"
+            },
+            "providerName": {
+              "type": "string"
+            },
+            "providerIncidentId": {
               "type": "string"
             }
           }

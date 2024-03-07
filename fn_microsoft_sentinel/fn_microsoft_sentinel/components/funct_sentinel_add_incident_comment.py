@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
@@ -46,15 +46,18 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info(f"sentinel_incident_id: {sentinel_incident_id}")
         self.LOG.info(f"sentinel_incident_comment: {sentinel_incident_comment}")
 
+        # Create connection to Sentinel
         sentinel_api = SentinelAPI(self.opts, self.options)
+        result = {}
+        reason = ""
+        status = True
 
         # Do not resync comments originating from Sentinel
         if FROM_SENTINEL_COMMENT_HDR in sentinel_incident_comment or SENT_TO_SENTINEL_HDR in sentinel_incident_comment:
             yield self.status_message(f"Bypassing synchronization of note: {sentinel_incident_comment}")
-            result = {}
-            reason = None
             status = False
         else:
+            # Get the configuration for the selected Sentinel profile from the app.config
             profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
             result, status, reason = sentinel_api.create_comment(profile_data,
                                                                 sentinel_incident_id,

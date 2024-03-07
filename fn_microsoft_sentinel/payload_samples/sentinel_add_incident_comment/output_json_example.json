@@ -3,12 +3,14 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/6c98642b-7248-4b4d-994e-32443f100e78/Comments/45cee46a-c1c3-11ed-89ef-fa89897771d7",
-    "name": "45cee46a-c1c3-11ed-89ef-fa89897771d7",
+    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/e5a310d8-a920-428c-ba13-e04300c1d50c/Comments/253d7028-c522-11ee-98a9-fa89897771d7",
+    "name": "253d7028-c522-11ee-98a9-fa89897771d7",
+    "etag": "\"0602009e-0000-0100-0000-65c2820f0000\"",
     "type": "Microsoft.SecurityInsights/Incidents/Comments",
     "properties": {
-      "message": "From IBM SOAR:\nbye",
-      "createdTimeUtc": "2023-03-13T17:19:57.3027524Z",
+      "message": "From IBM SOAR:\nTest comment",
+      "createdTimeUtc": "2024-02-06T19:01:35.2742397Z",
+      "lastModifiedTimeUtc": "2024-02-06T19:01:35.2742397Z",
       "author": {
         "objectId": "fb5360be-0c6a-4260-ae69-9b07dd735441",
         "email": null,
@@ -19,16 +21,16 @@
   },
   "raw": null,
   "inputs": {
-    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_incident_id": "e5a310d8-a920-428c-ba13-e04300c1d50c",
     "sentinel_profile": "profile_a",
-    "sentinel_incident_comment": "bye"
+    "sentinel_incident_comment": "<div class=\"rte\"><div>Test comment</div></div>"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-microsoft-sentinel",
-    "package_version": "1.1.0",
+    "package_version": "2.0.0",
     "host": "local",
-    "execution_time_ms": 2222,
-    "timestamp": "2023-03-13 13:19:57"
+    "execution_time_ms": 1405,
+    "timestamp": "2024-02-06 14:01:35"
   }
 }

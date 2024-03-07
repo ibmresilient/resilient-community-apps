@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 from logging import getLogger
 from resilient_lib import SOARCommon
@@ -34,3 +34,10 @@ class ResilientCommon():
                 if not any([comment['name'] in already_syncd for already_syncd in soar_comment_list])]
 
         return new_comments
+    
+    def get_soar_incident(self, incident_id):
+        """
+        Get a SOAR incident (Added so that this can be mocked for tests)
+        :param incident_id: SOAR incident ID
+        """
+        return self.rest_client.get(f"/incidents/{incident_id}?handle_format=names")

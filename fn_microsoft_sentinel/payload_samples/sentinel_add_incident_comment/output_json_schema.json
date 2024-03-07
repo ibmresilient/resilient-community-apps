@@ -18,6 +18,9 @@
         "name": {
           "type": "string"
         },
+        "etag": {
+          "type": "string"
+        },
         "type": {
           "type": "string"
         },
@@ -28,6 +31,9 @@
               "type": "string"
             },
             "createdTimeUtc": {
+              "type": "string"
+            },
+            "lastModifiedTimeUtc": {
               "type": "string"
             },
             "author": {

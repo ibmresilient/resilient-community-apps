@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.0.4034
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.1.0.695
 
-"""Generate the Resilient customizations required for fn_microsoft_sentinel"""
+"""Generate the SOAR customizations required for fn_microsoft_sentinel"""
 
 import base64
 import os
@@ -21,17 +22,47 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_microsoft_sentinel",
-        "message_destinations": [u"fn_microsoft_sentinel"],
-        "functions": [u"sentinel_add_incident_comment", u"sentinel_get_incident_alerts", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
+        "message_destinations": [
+            u"fn_microsoft_sentinel"
+        ],
+        "functions": [
+            u"sentinel_add_incident_comment",
+            u"sentinel_get_incident_alerts",
+            u"sentinel_get_incident_comments",
+            u"sentinel_get_incident_entities",
+            u"sentinel_update_incident"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"sentinel_incident_assigned_to", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_classification_reason", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_number", u"sentinel_incident_status", u"sentinel_incident_tactics", u"sentinel_incident_url", u"sentinel_profile"],
+        "incident_fields": [
+            u"sentinel_incident_assigned_to",
+            u"sentinel_incident_classification",
+            u"sentinel_incident_classification_comment",
+            u"sentinel_incident_classification_reason",
+            u"sentinel_incident_id",
+            u"sentinel_incident_labels",
+            u"sentinel_incident_number",
+            u"sentinel_incident_status",
+            u"sentinel_incident_tactics",
+            u"sentinel_incident_url",
+            u"sentinel_profile"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"sentinel_incident_alerts", u"sentinel_incident_entities"],
+        "datatables": [
+            u"sentinel_incident_alerts",
+            u"sentinel_incident_entities"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"sentinel_comment_sync", u"sentinel_get_incident_alerts", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_incident_sync", u"sentinel_update_incident"]
+        "playbooks": [
+            u"sentinel_comment_sync",
+            u"sentinel_get_incident_alerts",
+            u"sentinel_get_incident_comments",
+            u"sentinel_get_incident_entities",
+            u"sentinel_incident_sync",
+            u"sentinel_update_incident"
+        ]
     }
 
 
@@ -40,7 +71,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 49.0.8803
 
     Contents:
     - Message Destinations:

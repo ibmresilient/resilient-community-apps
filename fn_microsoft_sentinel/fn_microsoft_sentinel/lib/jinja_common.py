@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 from calendar import timegm
 from json import loads
 from logging import getLogger
@@ -17,18 +17,24 @@ class JinjaEnvironment():
         env = environment()
         env.globals.update({
             "soar_datetimeformat": jinja_resilient_datetimeformat,
+            "resilient_datetimeformat": jinja_resilient_datetimeformat,
             "soar_substitute": jinja_resilient_substitute,
-            "soar_splitpart": jinja_resilient_splitpart
+            "resilient_substitute": jinja_resilient_substitute,
+            "soar_splitpart": jinja_resilient_splitpart,
+            "resilient_splitpart": jinja_resilient_splitpart
             })
         env.filters.update({
             "soar_datetimeformat": jinja_resilient_datetimeformat,
+            "resilient_datetimeformat": jinja_resilient_datetimeformat,
             "soar_substitute": jinja_resilient_substitute,
-            "soar_splitpart": jinja_resilient_splitpart
+            "resilient_substitute": jinja_resilient_substitute,
+            "soar_splitpart": jinja_resilient_splitpart,
+            "resilient_splitpart": jinja_resilient_splitpart
             })
 
     def make_payload_from_template(self, template_override, default_template, payload):
         """
-        Convert a payload into a newformat based on a specified template
+        Convert a payload into a new format based on a specified template
         :param template_override [str]: /path/to/template.jinja
         :param default_template [str]: /path/to/template.jinja
         :param payload [dict]: data to convert

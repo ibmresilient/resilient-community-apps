@@ -65,6 +65,9 @@
                   "productName": {
                     "type": "string"
                   },
+                  "productComponentName": {
+                    "type": "string"
+                  },
                   "alertType": {
                     "type": "string"
                   },
@@ -108,6 +111,9 @@
                         },
                         "workspaceId": {
                           "type": "string"
+                        },
+                        "agentId": {
+                          "type": "string"
                         }
                       }
                     }
@@ -115,6 +121,9 @@
                   "additionalData": {
                     "type": "object",
                     "properties": {
+                      "MTP_Classification": {
+                        "type": "string"
+                      },
                       "StoreAlertPublisher": {
                         "type": "string"
                       },
@@ -124,7 +133,9 @@
                       "OriginalProductName": {
                         "type": "string"
                       },
-                      "OriginalProductComponentName": {},
+                      "OriginalProductComponentName": {
+                        "type": "string"
+                      },
                       "effectiveSubscriptionId": {
                         "type": "string"
                       }

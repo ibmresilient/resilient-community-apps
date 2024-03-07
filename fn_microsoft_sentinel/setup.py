@@ -20,10 +20,10 @@ def snake_to_camel(word):
 setup(
     name="fn_microsoft_sentinel",
     display_name="Microsoft Sentinel",
-    version="1.2.0",
+    version="2.0.0",
     license="MIT",
     author="IBM QRadar SOAR",
-    url="https://github.com/ibmresilient/fn_microsoft_sentinel",
+    url="https://github.com/ibmresilient/resilient-community-apps/tree/main/fn_microsoft_sentinel",
     description="SOAR integration for 'fn_microsoft_sentinel'",
     long_description="""This app allows bi-directional synchronization between IBM SOAR and Microsoft Sentinel.
     <br>Key features:
@@ -33,11 +33,12 @@ setup(
     <br>* Sync comments to and from Sentinel Incidents
     <br>* Support editable templates for field mapping between the two systems""",
     install_requires=[
-        "resilient_circuits>=45.0.0",
-        "jinja2",
-        "simplejson"
+        "resilient_circuits>=49.0.0",
+        "jinja2~=3.1.0",
+        "simplejson~=3.19.0"
     ],
     packages=find_packages(),
+    python_requires='>=3.9',
     include_package_data=True,
     platforms="any",
     classifiers=[

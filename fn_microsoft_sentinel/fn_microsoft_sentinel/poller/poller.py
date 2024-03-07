@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Poller implementation"""
 
 from json import decoder, loads
@@ -12,7 +13,8 @@ from resilient_lib import (SOARCommon, get_last_poller_date, poller,
 
 from fn_microsoft_sentinel.lib.function_common import (
     DEFAULT_INCIDENT_CLOSE_TEMPLATE, DEFAULT_INCIDENT_CREATION_TEMPLATE,
-    DEFAULT_INCIDENT_UPDATE_TEMPLATE, PACKAGE_NAME, SentinelProfiles)
+    DEFAULT_INCIDENT_UPDATE_TEMPLATE, DEFAULT_POLLER_FILTERS_TEMPLATE,
+    PACKAGE_NAME, SentinelProfiles)
 from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
 from fn_microsoft_sentinel.lib.sentinel_common import (
@@ -84,7 +86,7 @@ class PollerComponent(AppFunctionComponent):
     @poller("polling_interval", "last_poller_time")
     def run(self, *args, **kwargs):
         """
-        Process to query for changes in datasource entities and the cooresponding update SOAR case.
+        Process to query for changes in datasource entities and the corresponding update SOAR case.
         The steps taken are:
            1) query SOAR for all open entities associated with the datasource
            2) query datasource entities for changes based on these incidents
@@ -93,12 +95,12 @@ class PollerComponent(AppFunctionComponent):
         :type last_poller_time: int
         """
         for profile_name, profile_data in self.sentinel_profiles.get_profiles().items():
-            result, status, reason = self.sentinel_client.query_incidents(profile_data)
+            result, status, _reason = self.sentinel_client.query_incidents(profile_data)
             if status:
                 self._parse_results(result, profile_name, profile_data)
                 if result.get("nextLink"):
                     LOG.debug("running nextLink")
-                    result, status, reason = self.sentinel_client.query_next_incidents(
+                    result, status, _reason = self.sentinel_client.query_next_incidents(
                         profile_data,
                         result.get("nextLink")
                     )
@@ -112,10 +114,10 @@ class PollerComponent(AppFunctionComponent):
         """
         for sentinel_incident in result.get("value", []):
             # Determine if an incident already exists, used to know if create or update
-            sentinel_incident_id, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
-            soar_incident, _ = self.soar_common.get_soar_case({"sentinel_incident_number": sentinel_incident_id})
+            sentinel_incident_id, _sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
+            soar_incident, _ = self.soar_common.get_soar_case({"sentinel_incident_number": sentinel_incident_id}, open_cases=False)
 
-            new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
+            new_incident_filters = get_profile_filters(profile_data.get('new_incident_filters', None))
             result_soar_incident = self._create_update_incident(
                 profile_name, profile_data,
                 sentinel_incident, soar_incident,
@@ -158,7 +160,7 @@ class PollerComponent(AppFunctionComponent):
         """
         # Check if the close_soar_case setting was configured in the app.config. Default to True
         close_soar_case = str_to_bool(profile_data.get("close_soar_case", "true"))
-        sentinel_incident_id, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
+        _sentinel_incident_name, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
         # SOAR incident found
         updated_soar_incident = None
         if soar_incident:
@@ -185,23 +187,36 @@ class PollerComponent(AppFunctionComponent):
                 updated_soar_incident = self.soar_common.update_soar_case(soar_incident_id, incident_payload)
                 LOG.info(f"Updated incident {soar_incident_id} from Sentinel incident {sentinel_incident_number}")
         else:
-            # Apply filters to only escalate certain incidents
-            if check_incident_filters(sentinel_incident, new_incident_filters):
-                # Add in the profile to track
-                sentinel_incident['soar_profile'] = profile_name
-
-                # Create a new incident
-                incident_payload = self.jinja_env.make_payload_from_template(
-                    profile_data.get("create_incident_template"),
-                    DEFAULT_INCIDENT_CREATION_TEMPLATE,
-                    sentinel_incident
-                )
-                updated_soar_incident = self.soar_common.create_soar_case(incident_payload)
-                LOG.info(f"Created incident {updated_soar_incident['id']} from Sentinel incident {sentinel_incident_number}")
+            # Apply filters to only escalate certain incidents. If `new_incident_filters` is not configured in the app.config
+            #  then use the default jinja poller_filters_template if customer did not specify a custom poller_filters_template.
+            # If `new_incident_filters` is configured in the app.config then use those filters.
+            if (not new_incident_filters and check_incident_template_filters(sentinel_incident, profile_data.get("poller_filters_template"))) \
+            or (new_incident_filters and check_incident_filters(sentinel_incident, new_incident_filters)):
+                updated_soar_incident = self._create_soar_incident(profile_data, profile_name, sentinel_incident)
             else:
-                LOG.info(f"Sentinel incident {sentinel_incident_number} bypassed due to new_incident_filters")
-                updated_soar_incident = None
+                LOG.info(f"Sentinel incident {sentinel_incident_number} bypassed due to configured poller filters.")
 
+        return updated_soar_incident
+
+    def _create_soar_incident(self, profile_data, profile_name, sentinel_incident):
+        """
+        Create a new SOAR incident from a Sentinel incident.
+        :param profile_data [dict]: [profile data]
+        :param profile_name [str]: [incident profile]
+        :param soar_incident [dict]: [existing SOAR or none]
+        """
+        # Add in the profile to track
+        sentinel_incident['soar_profile'] = profile_name
+        sentinel_incident['resilient_profile'] = profile_name
+
+        # Create a new incident
+        incident_payload = self.jinja_env.make_payload_from_template(
+            profile_data.get("create_incident_template"),
+            DEFAULT_INCIDENT_CREATION_TEMPLATE,
+            sentinel_incident
+        )
+        updated_soar_incident = self.soar_common.create_soar_case(incident_payload)
+        LOG.info(f"Created incident {updated_soar_incident['id']} from Sentinel incident {sentinel_incident.get('properties', {}).get('incidentNumber')}")
         return updated_soar_incident
 
 def get_profile_filters(str_filters):
@@ -218,9 +233,25 @@ def get_profile_filters(str_filters):
     except decoder.JSONDecodeError as err:
         LOG.error(f'Incorrect format for new_incident_filters, syntax: "field1": "value", "field2": ["value1", "value2"] :{err}')
 
+def check_incident_template_filters(sentinel_incident, custom_poller_filters_template):
+    """
+    Apply either the customer given or the default `poller_filters_template` filters to determine which incidents to escalate.
+    :param sentinel_incident [dict]: sentinel incident fields
+    :param custom_poller_filters_template [str]: Path to custom poller_filters_template.jinja
+    :return [boolean]: If all the filters are True or not
+    """
+    # Check if the Sentinel incident passes all the filters in the jinja template
+    filtered_results = JinjaEnvironment().make_payload_from_template(
+        custom_poller_filters_template,
+        DEFAULT_POLLER_FILTERS_TEMPLATE,
+        flatten(sentinel_incident)
+    )
+    # Check if the Sentinel incident passed all the filters
+    return all(filtered_results.values())
+
 def check_incident_filters(sentinel_incident, new_incident_filters):
     """
-    Apply the app.config profile filters to determine which incidents to escalate
+    Apply the app.config profile filters to determine which incidents to escalate.
     :param sentinel_incident [dict]: sentinel incident fields
     :param new_incident_filters [dict]: filters to apply
     :return [bool]: True if sentinel incident should be escalated
@@ -238,17 +269,17 @@ def check_incident_filters(sentinel_incident, new_incident_filters):
             if isinstance(filter_value, list):
                 result = False
                 for value in filter_value:
-                    if isinstance(flattened_sentinel_incident[filter_name], list):
-                        result = bool(value in flattened_sentinel_incident[filter_name])
+                    if isinstance(flattened_sentinel_incident.get(filter_name), list):
+                        result = bool(value in flattened_sentinel_incident.get(filter_name))
                     else:
-                        result = bool(value == flattened_sentinel_incident[filter_name])
+                        result = bool(value == flattened_sentinel_incident.get(filter_name))
                     # Just need one to match for one pass
                     if result:
                         break
-            elif isinstance(flattened_sentinel_incident[filter_name], list):
-                result = bool(filter_value in flattened_sentinel_incident[filter_name])
+            elif isinstance(flattened_sentinel_incident.get(filter_name), list):
+                result = bool(filter_value in flattened_sentinel_incident.get(filter_name))
             else:
-                result = bool(filter_value == flattened_sentinel_incident[filter_name])
+                result = bool(filter_value == flattened_sentinel_incident.get(filter_name))
 
         if result != None:
             result_list.append(result)
@@ -265,7 +296,7 @@ def flatten(json_payload):
     for item, item_value in json_payload.items():
         if isinstance(item_value, dict):
             flatten_result = flatten(item_value)
-            # Append the dictionary flattended to the existing dictionary
+            # Append the dictionary flattened to the existing dictionary
             result = {**result, **flatten_result}
         else:
             result[item] = item_value

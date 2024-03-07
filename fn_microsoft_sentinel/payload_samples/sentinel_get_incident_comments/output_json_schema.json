@@ -13,49 +13,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "properties": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  },
-                  "createdTimeUtc": {
-                    "type": "string"
-                  },
-                  "author": {
-                    "type": "object",
-                    "properties": {
-                      "objectId": {
-                        "type": "string"
-                      },
-                      "email": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "userPrincipalName": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+          "type": "array"
         }
       }
     },

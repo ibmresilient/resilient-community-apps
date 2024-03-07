@@ -5,68 +5,76 @@
   "content": {
     "value": [
       {
-        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/8a2fe554-9e4e-8298-cd70-4159a5494b7e",
-        "name": "8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/ec7cd79e-dd28-5e7b-094d-af3574027758",
+        "name": "ec7cd79e-dd28-5e7b-094d-af3574027758",
         "type": "Microsoft.SecurityInsights/Entities",
         "kind": "SecurityAlert",
         "properties": {
-          "systemAlertId": "8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+          "systemAlertId": "ec7cd79e-dd28-5e7b-094d-af3574027758",
           "tactics": [
             "PreAttack"
           ],
-          "alertDisplayName": "Traffic detected from IP addresses recommended for blocking",
-          "description": "Defender for Cloud detected inbound traffic from IP addresses that are recommended to be blocked. This typically occurs when this IP address doesn't communicate regularly with this resource.\r\nAlternatively, the IP address has been flagged as malicious by Microsoft's threat intelligence sources.",
+          "alertDisplayName": "Suspected brute-force attack attempt",
+          "description": "Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.\r\nOnce obtained, an attacker can have full access to the database. While this specific alert doesn't indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.\r\nTo investigate this suspected brute-force attempt, review it's origin (based on the application name and IP/Location), and try to find out whether it's recognized to you, or suspicious.\r\nIf you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.\r\nAlso, consider using only AAD authentication to further enhance your security posture.\r\n",
           "remediationSteps": [
-            "{\"kind\":\"openBlade\",\"displayValue\":\"Enforce rule\",\"extension\":\"Microsoft_Azure_Security_R3\",\"detailBlade\":\"AdaptiveNetworkControlsResourceBlade\",\"detailBladeInputs\":\"protectedResourceId=/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder\"}"
+            "* Apply [workflow automation](https://go.microsoft.com/fwlink/?linkid=2174808) to block future attacks.",
+            "* Consider [blocking the IP address](https://go.microsoft.com/fwlink/?linkid=2099055) of the attacking client and hardening your firewall.",
+            "* When possible, use [Windows authentication](https://go.microsoft.com/fwlink/?linkid=2129121) and disable SQL Server authentication.",
+            "* Use [strong passwords](https://go.microsoft.com/fwlink/?linkid=2099068) and avoid reusing them across multiple databases.",
+            "* If applicable, disable default and well known application/database accounts such as SA."
           ],
           "confidenceLevel": "Unknown",
-          "severity": "Low",
+          "severity": "High",
           "vendorName": "Microsoft",
           "productName": "Azure Security Center",
-          "alertType": "Network_TrafficFromUnrecommendedIP",
-          "processingEndTime": "2023-03-12T20:52:01.0089039Z",
+          "productComponentName": "Databases",
+          "alertType": "SQL.VM_BruteForce",
+          "processingEndTime": "2024-02-06T19:03:15.7566188Z",
           "status": "New",
-          "endTimeUtc": "2023-03-10T00:00:00Z",
-          "startTimeUtc": "2023-03-10T00:00:00Z",
-          "timeGenerated": "2023-03-12T20:52:26.5903077Z",
-          "compromisedEntity": "logforwarder",
-          "providerAlertId": "2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034",
-          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034/subscriptionId/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroup/demoassets/referencedFrom/alertDeepLink/location/centralus",
+          "endTimeUtc": "2024-02-06T19:02:44Z",
+          "startTimeUtc": "2024-02-06T19:02:44Z",
+          "timeGenerated": "2024-02-06T19:03:17.5439712Z",
+          "compromisedEntity": "PAMSqlSv",
+          "providerAlertId": "2516950546359999999_bd8e4a80-5adb-4012-95de-8efeae6973cd",
+          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2516950546359999999_bd8e4a80-5adb-4012-95de-8efeae6973cd/subscriptionId/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroup/DemoAssets/referencedFrom/alertDeepLink/location/centralus",
           "resourceIdentifiers": [
             {
               "type": "AzureResource",
-              "resourceId": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
-              "subscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784"
+              "resourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv",
+              "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
             },
             {
               "type": "LogAnalytics",
-              "workspaceId": "c6c712b0-dc3d-4408-945a-4bde1db6579b"
+              "workspaceId": "c6c712b0-dc3d-4408-945a-4bde1db6579b",
+              "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+              "agentId": "7db452ea-1cae-4079-94a5-85dc76156e96"
             }
           ],
           "additionalData": {
-            "StoreAlertPublisher": "{\"Succeeded\":true,\"Reason\":null,\"PublishTime\":\"2023-03-12T20:52:03.3552179Z\"}",
-            "AlertMessageEnqueueTime": "2023-03-12T20:52:26.593Z",
+            "MTP_Classification": "Unknown",
+            "StoreAlertPublisher": "{\"Succeeded\":true,\"Reason\":null,\"PublishTime\":\"2024-02-06T19:03:16.660682Z\"}",
+            "AlertMessageEnqueueTime": "2024-02-06T19:03:17.588Z",
             "OriginalProductName": "Azure Security Center",
-            "OriginalProductComponentName": null,
-            "effectiveSubscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784"
+            "OriginalProductComponentName": "Databases",
+            "effectiveSubscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
           },
-          "friendlyName": "Traffic detected from IP addresses recommended for blocking",
-          "timeGenerated_ms": 1678654346000
+          "friendlyName": "Suspected brute-force attack attempt",
+          "timeGenerated_ms": 1707246197000
         }
       }
     ]
   },
   "raw": null,
   "inputs": {
-    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_incident_id": "76ae2188-c4bf-42f3-958a-eb2b148a9190",
     "sentinel_profile": "profile_a"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-microsoft-sentinel",
-    "package_version": "1.1.0",
+    "package_version": "2.0.0",
     "host": "local",
-    "execution_time_ms": 1944,
-    "timestamp": "2023-03-13 13:05:04"
+    "execution_time_ms": 442,
+    "timestamp": "2024-02-06 14:03:51"
   }
 }
