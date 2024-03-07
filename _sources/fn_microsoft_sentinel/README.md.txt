@@ -24,22 +24,26 @@
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
 - [Custom Templates](#custom-templates)
+- [Custom poller filter template](#custom-poller-filter-template)
 - [Troubleshooting & Support](#troubleshooting--support)
 
 ---
 
 ## Release Notes
-| 1.2.0 | 7/2023 | Add config setting to not close SOAR case was Sentinel incident is closed |
-| 1.1.0 | 4/2023 | Update function 'Sentinel Update Incident' |
-| 1.0.4 | 6/2022 | Several template fixes for tags (labels) and severity |
-| 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
-| 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 2.0.0 | 01/2024 | <ul><li>Bug fix in jinja template, "incident_update_template.jinja", for escaping double quotation mark when rendering in json.</li><li>Update jinja templates to use values rather than IDs.</li><li>Add new setting in the app.config to set api-version.</li><li>Add the ability to use a jinja template as the poller incident filter.</li></ul> |
+| 1.2.0 | 07/2023 | Add config setting to not close SOAR case was Sentinel incident is closed |
+| 1.1.0 | 04/2023 | Update function 'Sentinel Update Incident' |
+| 1.0.4 | 06/2022 | Several template fixes for tags (labels) and severity |
+| 1.0.3 | 04/2022 | Support for app.config verify and cert parameters |
+| 1.0.2 | 02/2022 | Bug fix in some situations updating Sentinel from SOAR |
 | 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
 
-### v1.0.3
+### v2.0.0
 
-When upgrading from a previous version to v1.0.3, manually update your app.config file to add the `verify` parameter to your `[fn_microsoft_sentinel]` section. The documentation on it's use is in [App Configuration](#app-configuration).
+When upgrading from a previous version to v2.0.0, manually update your app.config file to add the `api_version` parameters to your `[fn_microsoft_sentinel]` section and `poller_filters_template` to the `[fn_microsoft_sentinel:profile_a]` section. The documentation on it's use is in [App Configuration](#app-configuration).
 
 ---
 
@@ -67,31 +71,32 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `49.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `49.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=46.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* Integration server is running `resilient_circuits>=49.0.0`.
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
   | Incident | Read, Edit, Create, Owner, Status |
   | Incident Notes | Edit |
+  | Layout | Read, Edit |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -105,11 +110,11 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
-* jinja2
-* resilient_circuits>=46.0.0
-* simplejson
+* jinja2~=3.1.0
+* resilient_circuits>=49.0.0
+* simplejson~=3.19.0
 
 ---
 
@@ -152,7 +157,8 @@ The following table provides the settings you need to configure the app. These s
 | **app_secret** | Yes | `aaa-bbb-eee` | *Your app secret* |
 | **polling_lookback** | Yes | `120` | *# of minutes to look back for incident changes. This is used only the first time the app starts* |
 | **polling_interval** | Yes | `60` | *# of Seconds to wait until checking for changes in Sentinel. Comment out to disable the poller* |
-| **sentinel_profiles** | Yes | `profile_a` | *Comma separated list of profile(s) to access based on subscription id, resource group name and workspace * |
+| **api_version** | No | `2023-11-01` | *API version to use when making API calls to Microsoft Sentinel. Sentinel API versions can be found https://learn.microsoft.com/en-us/rest/api/securityinsights/api-versions* |
+| **sentinel_profiles** | Yes | `profile_a` | *Comma separated list of profile(s) to access based on subscription id, resource group name and workspace* |
 | **https_proxy**| No | `https:/your.proxy.com` | - |
 | **http_proxy** | No | `http:/your.proxy.com` | - |
 | **verify** | No | `false` | *verify= false or /path/to/client_certificate.pem* |
@@ -163,7 +169,8 @@ For each profile:
 | **subscription_id** | Yes | `aaa-bbb-fff` | *subscription_id for incident access * |
 | **workspace_name** | Yes | `` | *workspace name for incident access.* |
 | **resource_groupname** | Yes | `` | *resource group for incident access.* |
-| **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to SOAR SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
+| **new_incident_filters** | No | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
+| **poller_filters_template** | No | /var/rescircuits/poller_filters_template.jinja | Customer supplied template for filters to apply to new Sentinel incidents found by the poller. |
 | **max_alerts** | Yes | 10 | *limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts* |
 | **close_soar_case** | No | `True` | Whether the SOAR case should be closed when its linked Sentinel incident is closed. If set to False the linked SOAR case will be updated, but not closed. |
 | **create_incident_template** | No | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
@@ -179,7 +186,7 @@ See the section below for examples of the templates.
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
-  The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentintel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.
+  The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentinel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.
 
 ---
 
@@ -852,7 +859,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
     "sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\"') }}",
     "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
-    "sentinel_incident_labels": "{{ properties.labels|join(' ') }}",
+    "sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}",
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}",
     "sentinel_profile": "{{ soar_profile }}"
   }
@@ -874,15 +881,15 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
   },
   {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "plan_status": "{{ properties.status|soar_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
+  "plan_status": "{{ properties.status|soar_substitute('{"Closed": "A", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|soar_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_classification": "{{ properties.classification }}",
     "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
-    "sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\"') }}",
+    "sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\\"') }}",
     "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
-    "sentinel_incident_labels": "{{ properties.labels|join(' ') }}",
+    "sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}",
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
   }
 }
@@ -901,7 +908,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
     "sentinel_incident_classification_comment": "{{ properties.classificationComment|safe }}",
     "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
-    "sentinel_incident_labels": "{{ properties.labels|join(' ') }}",
+    "sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}",
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
   }
 }
@@ -913,12 +920,24 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     {# JINJA template for closing a new Sentinel incident from a SOAR incident. #}
     "properties": {
         "title": "{{ name|soar_splitpart(1)}}",
-        "severity": "{{ severity_code|string|soar_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "severity": "{{ severity_code|soar_substitute('{"Low":"Low", "Medium":"Medium", "High":"High"}') }}",
         "status": "Closed",
-        "classification": "{{ resolution_id|string|soar_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive", "DEFAULT": "Undetermined"}') }}",
+        "classification": "{{ resolution_id|string|soar_substitute('{"Unresolved": "Undetermined", "Duplicate": "Undetermined", "Not an Issue": "BenignPositive", "Resolved": "TruePositive", "DEFAULT": "Undetermined"}') }}",
         "classificationComment": "{{ resolution_summary|striptags|safe }}",
         {# modify as necessary #}
-        "classificationReason": "{{ resolution_id|string|soar_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity", "DEFAULT": ""}') }}"
+        "classificationReason": "{{ resolution_id|soar_substitute('{"Unresolved": "FalsePositive", "Duplicate": "FalsePositive", "Not an Issue": "InaccurateData", "Resolved": "SuspiciousActivity"}') }}",
+        {% set label_list = properties.sentinel_incident_labels.split(',') -%}
+        "labels": [
+        {% for label in label_list %}
+            {% if label %}
+            {
+                "labelName": {{ label | trim | json }},
+                "labelType": "User"
+            }
+            {% endif %}
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
     }
 }
 ```
@@ -929,20 +948,82 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     {# JINJA template for updating a new Sentinel incident from a SOAR incident. #}
     "properties": {
         "title": "{{ name|soar_splitpart(1)}}",
-        "severity": "{{ severity_code|string|soar_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "severity": "{{ severity_code|string|soar_substitute('{"Low":"Low", "Medium":"Medium", "High":"High"}') }}",
         "status": "{{ properties.sentinel_incident_status }}",
         "classification": "{{ properties.sentinel_incident_classification }}",
         "classificationComment": "{{ properties.sentinel_incident_classification_comment|safe }}",
         "classificationReason": "{{ properties.sentinel_incident_classification_reason }}",
         "description": "{{ description|striptags|safe }}",
-        "labels": "{{ properties.sentinel_incident_labels }}"
+        {% set label_list = properties.sentinel_incident_labels.split(',') -%}
+        "labels": [
+        {% for label in label_list %}
+            {% if label %}
+            {
+                "labelName": {{ label | trim | json }},
+                "labelType": "User"
+            }
+            {% endif %}
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
     }
 }
 ```
+---
+
+## Custom poller filter template
+In version 2.0.0 the ability to use a jinja template for the poller filter was added.
+The following is the example template that is provided with this integration. This template also shows other filter examples
+that are commented out. The example template shows all Sentinel incident properties that can be filter for. 
+
+### poller_filters_template.jinja
+```
+{
+  {# JINJA template for filtering Sentinel Incidents. #}
+  {# If the value equals true then it passed the filter. #}
+  {# To add a filter for a property add an if else to that property where it equals true if it passes the filter. #}
+  "title": true,
+  {# Example filter for title that will filter out Sentinel incidents that do not have the string "TEST-" in the title:
+  "title": {% if "TEST-" in title %} true {% else %} false {% endif %}
+  #}
+  "description": true,
+  {# If the severity of the Sentinel incident is High, or, Medium, or Low then the Sentinel incident will pass this filter. #}
+  "severity": {% if severity in ["High", "Medium", "Low"] %} true {% else %} false {% endif %},
+  {# If the status of the Sentinel incident is either New or Active than the Sentinel incident will pass this filter. #}
+  "status": {% if status in ["New", "Active"] %} true {% else %} false {% endif %},
+  "email": true,
+  "assignedTo": true,
+  {# Example filter for assignedTo that will test if the Sentinel incident is assigned to a user in the given list:
+  "assignedTo": {% if assignedTo in ["Test User", "sys admin"] %} true {% else %} false {% endif %}
+  #}
+  "userPrincipalName": true,
+  {# labels are equal to Tags on Sentinel #}
+  "labels": true,
+  {# Example of filtering labels for a specific labelName:
+  "labels": false,
+  {% set present = false %}
+  {% for tag in labels %}
+    {% if tag.labelName == "tech3" %}
+      "labels": true,
+    {% endif %}
+  {% endfor %}
+  #}
+  {# If the alertsCount of the Sentinel incident is 0 or greater then the Sentinel incident will pass this filter. #}
+  "alertsCount": {% if alertsCount >= 0 %} true {% else %} false {% endif %},
+  "bookmarksCount": true,
+  "commentsCount": true,
+  "alertProductNames": true,
+  {# If the tactics property of the Sentinel incident is equal to PreAttack, or InitialAccess or blank then the Sentinel incident will pass this filter. #}
+  "tactics": {% if "PreAttack" in tactics or "InitialAccess" in tactics or tactics == [] %} true {% else %} false {% endif %},
+  "relatedAnalyticRuleIds": true,
+  "providerName": true
+}
+```
+
 ---
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM supported App. For assistance, see [https://ibm.com/mysupport](https://ibm.com/mysupport).

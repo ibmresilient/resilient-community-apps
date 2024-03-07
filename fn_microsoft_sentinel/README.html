@@ -384,22 +384,60 @@
 <li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-templates"><span class="xref myst">Custom Templates</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-poller-filter-template"><span class="xref myst">Custom poller filter template</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
-<p>| 1.2.0 | 7/2023 | Add config setting to not close SOAR case was Sentinel incident is closed |
-| 1.1.0 | 4/2023 | Update function ‘Sentinel Update Incident’ |
-| 1.0.4 | 6/2022 | Several template fixes for tags (labels) and severity |
-| 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
-| 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
-| 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
-| 1.0.0 | 08/2021 | Initial Release |</p>
-<section id="v1-0-3">
-<h3>v1.0.3<a class="headerlink" href="#v1-0-3" title="Link to this heading">#</a></h3>
-<p>When upgrading from a previous version to v1.0.3, manually update your app.config file to add the <code class="docutils literal notranslate"><span class="pre">verify</span></code> parameter to your <code class="docutils literal notranslate"><span class="pre">[fn_microsoft_sentinel]</span></code> section. The documentation on it’s use is in <a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a>.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2.0.0</p></td>
+<td><p>01/2024</p></td>
+<td><p><ul><li>Bug fix in jinja template, “incident_update_template.jinja”, for escaping double quotation mark when rendering in json.</li><li>Update jinja templates to use values rather than IDs.</li><li>Add new setting in the app.config to set api-version.</li><li>Add the ability to use a jinja template as the poller incident filter.</li></ul></p></td>
+</tr>
+<tr class="row-odd"><td><p>1.2.0</p></td>
+<td><p>07/2023</p></td>
+<td><p>Add config setting to not close SOAR case was Sentinel incident is closed</p></td>
+</tr>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>04/2023</p></td>
+<td><p>Update function ‘Sentinel Update Incident’</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.4</p></td>
+<td><p>06/2022</p></td>
+<td><p>Several template fixes for tags (labels) and severity</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.3</p></td>
+<td><p>04/2022</p></td>
+<td><p>Support for app.config verify and cert parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.2</p></td>
+<td><p>02/2022</p></td>
+<td><p>Bug fix in some situations updating Sentinel from SOAR</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.1</p></td>
+<td><p>11/2021</p></td>
+<td><p>Minor bug fixes and datatable improvements</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.0</p></td>
+<td><p>08/2021</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="v2-0-0">
+<h3>v2.0.0<a class="headerlink" href="#v2-0-0" title="Link to this heading">#</a></h3>
+<p>When upgrading from a previous version to v2.0.0, manually update your app.config file to add the <code class="docutils literal notranslate"><span class="pre">api_version</span></code> parameters to your <code class="docutils literal notranslate"><span class="pre">[fn_microsoft_sentinel]</span></code> section and <code class="docutils literal notranslate"><span class="pre">poller_filters_template</span></code> to the <code class="docutils literal notranslate"><span class="pre">[fn_microsoft_sentinel:profile_a]</span></code> section. The documentation on it’s use is in <a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a>.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -429,14 +467,14 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=46.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=49.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -458,6 +496,9 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <tr class="row-odd"><td><p>Incident Notes</p></td>
 <td><p>Edit</p></td>
 </tr>
+<tr class="row-even"><td><p>Layout</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -475,7 +516,7 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
 <li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -492,12 +533,12 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
-<p>Python 3.6 and Python 3.9 are supported.
+<p>Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>jinja2</p></li>
-<li><p>resilient_circuits&gt;=46.0.0</p></li>
-<li><p>simplejson</p></li>
+<li><p>jinja2~=3.1.0</p></li>
+<li><p>resilient_circuits&gt;=49.0.0</p></li>
+<li><p>simplejson~=3.19.0</p></li>
 </ul>
 </section>
 </section>
@@ -577,22 +618,27 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
 <td><p><em># of Seconds to wait until checking for changes in Sentinel. Comment out to disable the poller</em></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>sentinel_profiles</strong></p></td>
+<tr class="row-even"><td><p><strong>api_version</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2023-11-01</span></code></p></td>
+<td><p><em>API version to use when making API calls to Microsoft Sentinel. Sentinel API versions can be found https://learn.microsoft.com/en-us/rest/api/securityinsights/api-versions</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sentinel_profiles</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">profile_a</span></code></p></td>
-<td><p>*Comma separated list of profile(s) to access based on subscription id, resource group name and workspace *</p></td>
+<td><p><em>Comma separated list of profile(s) to access based on subscription id, resource group name and workspace</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>https_proxy</strong></p></td>
+<tr class="row-even"><td><p><strong>https_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https:/your.proxy.com</span></code></p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>http_proxy</strong></p></td>
+<tr class="row-odd"><td><p><strong>http_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">http:/your.proxy.com</span></code></p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>verify</strong></p></td>
+<tr class="row-even"><td><p><strong>verify</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 <td><p><em>verify= false or /path/to/client_certificate.pem</em></p></td>
@@ -602,7 +648,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 <p>For each profile:
 | Config | Required | Example | Description |
-| —— | :——: | ——- | ———– |<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">**subscription_id**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span></code>aaa-bbb-fff<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">*subscription_id</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access</span> <span class="pre">*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**workspace_name**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">*workspace</span> <span class="pre">name</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access.*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**resource_groupname**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">*resource</span> <span class="pre">group</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access.*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**new_incident_filters**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span></code>”status”: [“New”, “Active”],”severity”: [“High”, “Medium”,”Low”]<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">*Set</span> <span class="pre">of</span> <span class="pre">filters</span> <span class="pre">to</span> <span class="pre">apply</span> <span class="pre">when</span> <span class="pre">escalating</span> <span class="pre">incidents</span> <span class="pre">to</span> <span class="pre">SOAR</span> <span class="pre">SOAR.</span> <span class="pre">Incidents</span> <span class="pre">not</span> <span class="pre">matching</span> <span class="pre">the</span> <span class="pre">criteria</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">synchronized.</span> <span class="pre">In</span> <span class="pre">this</span> <span class="pre">example,</span> <span class="pre">both</span> <span class="pre">a</span> <span class="pre">match</span> <span class="pre">of</span> <span class="pre">status</span> <span class="pre">and</span> <span class="pre">severity</span> <span class="pre">would</span> <span class="pre">be</span> <span class="pre">required.</span> <span class="pre">*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**max_alerts**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">10</span> <span class="pre">|</span> <span class="pre">*limit</span> <span class="pre">the</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">alerts</span> <span class="pre">per</span> <span class="pre">sentinel</span> <span class="pre">incident</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">first</span> <span class="pre">n</span> <span class="pre">alerts</span> <span class="pre">or</span> <span class="pre">leave</span> <span class="pre">blank</span> <span class="pre">for</span> <span class="pre">all</span> <span class="pre">alerts*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**close_soar_case**</span> <span class="pre">|</span> <span class="pre">No</span> <span class="pre">|</span></code>True` | Whether the SOAR case should be closed when its linked Sentinel incident is closed. If set to False the linked SOAR case will be updated, but not closed. |
+| —— | :——: | ——- | ———– |<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">**subscription_id**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span></code>aaa-bbb-fff<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">*subscription_id</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access</span> <span class="pre">*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**workspace_name**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">*workspace</span> <span class="pre">name</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access.*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**resource_groupname**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">*resource</span> <span class="pre">group</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access.*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**new_incident_filters**</span> <span class="pre">|</span> <span class="pre">No</span> <span class="pre">|</span></code>”status”: [“New”, “Active”],”severity”: [“High”, “Medium”,”Low”]<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">*Set</span> <span class="pre">of</span> <span class="pre">filters</span> <span class="pre">to</span> <span class="pre">apply</span> <span class="pre">when</span> <span class="pre">escalating</span> <span class="pre">incidents</span> <span class="pre">to</span> <span class="pre">SOAR.</span> <span class="pre">Incidents</span> <span class="pre">not</span> <span class="pre">matching</span> <span class="pre">the</span> <span class="pre">criteria</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">synchronized.</span> <span class="pre">In</span> <span class="pre">this</span> <span class="pre">example,</span> <span class="pre">both</span> <span class="pre">a</span> <span class="pre">match</span> <span class="pre">of</span> <span class="pre">status</span> <span class="pre">and</span> <span class="pre">severity</span> <span class="pre">would</span> <span class="pre">be</span> <span class="pre">required.</span> <span class="pre">*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**poller_filters_template**</span> <span class="pre">|</span> <span class="pre">No</span> <span class="pre">|</span> <span class="pre">/var/rescircuits/poller_filters_template.jinja</span> <span class="pre">|</span> <span class="pre">Customer</span> <span class="pre">supplied</span> <span class="pre">template</span> <span class="pre">for</span> <span class="pre">filters</span> <span class="pre">to</span> <span class="pre">apply</span> <span class="pre">to</span> <span class="pre">new</span> <span class="pre">Sentinel</span> <span class="pre">incidents</span> <span class="pre">found</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">poller.</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**max_alerts**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">10</span> <span class="pre">|</span> <span class="pre">*limit</span> <span class="pre">the</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">alerts</span> <span class="pre">per</span> <span class="pre">sentinel</span> <span class="pre">incident</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">first</span> <span class="pre">n</span> <span class="pre">alerts</span> <span class="pre">or</span> <span class="pre">leave</span> <span class="pre">blank</span> <span class="pre">for</span> <span class="pre">all</span> <span class="pre">alerts*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**close_soar_case**</span> <span class="pre">|</span> <span class="pre">No</span> <span class="pre">|</span></code>True` | Whether the SOAR case should be closed when its linked Sentinel incident is closed. If set to False the linked SOAR case will be updated, but not closed. |
 | <strong>create_incident_template</strong> | No | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
 | <strong>update_incident_template</strong> | No | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
 | <strong>close_incident_template</strong> | No | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
@@ -615,7 +661,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <ul>
 <li><p>Import the Data Tables and Custom Fields like the screenshot below:</p>
 <p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts15.png" /></p>
-<p>The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentintel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.</p>
+<p>The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentinel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.</p>
 </li>
 </ul>
 <hr class="docutils" />
@@ -1572,7 +1618,7 @@ mapping:</p>
     <span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels|join(&#39; &#39;) }}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ soar_profile }}&quot;</span>
   <span class="p">}</span>
@@ -1595,15 +1641,15 @@ mapping:</p>
   <span class="p">},</span>
   <span class="p">{</span><span class="c1"># if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
   <span class="p">{</span><span class="c1"># &quot;owner_id&quot;: &quot;{{ properties.owner.userPrincipalName|soar_substitute(&#39;{&quot;sentinel_user1@co.com&quot;: &quot;soar_user1@ent.com&quot;, &quot;sentinel_user2@co.com&quot;: &quot;soar_user2@ent.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@ent.com&quot; }&#39;) }}&quot;, #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status|soar_substitute(&#39;{&quot;</span><span class="n">Closed</span><span class="s2">&quot;: &quot;</span><span class="n">C</span><span class="s2">&quot;, &quot;</span><span class="n">Active</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">New</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status|soar_substitute(&#39;{&quot;</span><span class="n">Closed</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">Active</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">New</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
   <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.severity|soar_substitute(&#39;{&quot;</span><span class="n">Informational</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
   <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels|join(&#39; &#39;) }}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -1623,7 +1669,7 @@ mapping:</p>
     <span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|safe }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels|join(&#39; &#39;) }}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -1636,12 +1682,24 @@ mapping:</p>
     <span class="p">{</span><span class="c1"># JINJA template for closing a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)}}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="mi">4</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="mi">5</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="mi">6</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;:&quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;:&quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;:&quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="mi">7</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="mi">8</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="mi">9</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="mi">10</span><span class="s2">&quot;: &quot;</span><span class="n">TruePositive</span><span class="s2">&quot;, &quot;</span><span class="n">DEFAULT</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">BenignPositive</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">TruePositive</span><span class="s2">&quot;, &quot;</span><span class="n">DEFAULT</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;classificationComment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_summary|striptags|safe }}&quot;</span><span class="p">,</span>
         <span class="p">{</span><span class="c1"># modify as necessary #}</span>
-        <span class="s2">&quot;classificationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="mi">7</span><span class="s2">&quot;: &quot;&quot;, &quot;</span><span class="mi">8</span><span class="s2">&quot;: &quot;&quot;, &quot;</span><span class="mi">9</span><span class="s2">&quot;: &quot;</span><span class="n">InaccurateData</span><span class="s2">&quot;, &quot;</span><span class="mi">10</span><span class="s2">&quot;: &quot;</span><span class="n">SuspiciousActivity</span><span class="s2">&quot;, &quot;</span><span class="n">DEFAULT</span><span class="s2">&quot;: &quot;&quot;}&#39;) }}&quot;</span>
+        <span class="s2">&quot;classificationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">InaccurateData</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">SuspiciousActivity</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
+                <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+            <span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+        <span class="p">]</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1653,14 +1711,77 @@ mapping:</p>
     <span class="p">{</span><span class="c1"># JINJA template for updating a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)}}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="mi">4</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="mi">5</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="mi">6</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;:&quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;:&quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;:&quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_status }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_classification }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;classificationComment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_classification_comment|safe }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;classificationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_classification_reason }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|striptags|safe }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_labels }}&quot;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
+                <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+            <span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+        <span class="p">]</span>
     <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="custom-poller-filter-template">
+<h2>Custom poller filter template<a class="headerlink" href="#custom-poller-filter-template" title="Link to this heading">#</a></h2>
+<p>In version 2.0.0 the ability to use a jinja template for the poller filter was added.
+The following is the example template that is provided with this integration. This template also shows other filter examples
+that are commented out. The example template shows all Sentinel incident properties that can be filter for.</p>
+<section id="poller-filters-template-jinja">
+<h3>poller_filters_template.jinja<a class="headerlink" href="#poller-filters-template-jinja" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="p">{</span><span class="c1"># JINJA template for filtering Sentinel Incidents. #}</span>
+  <span class="p">{</span><span class="c1"># If the value equals true then it passed the filter. #}</span>
+  <span class="p">{</span><span class="c1"># To add a filter for a property add an if else to that property where it equals true if it passes the filter. #}</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># Example filter for title that will filter out Sentinel incidents that do not have the string &quot;TEST-&quot; in the title:</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s2">&quot;TEST-&quot;</span> <span class="ow">in</span> <span class="n">title</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+  <span class="c1">#}</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># If the severity of the Sentinel incident is High, or, Medium, or Low then the Sentinel incident will pass this filter. #}</span>
+  <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">severity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="p">{</span><span class="c1"># If the status of the Sentinel incident is either New or Active than the Sentinel incident will pass this filter. #}</span>
+  <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;New&quot;</span><span class="p">,</span> <span class="s2">&quot;Active&quot;</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># Example filter for assignedTo that will test if the Sentinel incident is assigned to a user in the given list:</span>
+  <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">assignedTo</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Test User&quot;</span><span class="p">,</span> <span class="s2">&quot;sys admin&quot;</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+  <span class="c1">#}</span>
+  <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># labels are equal to Tags on Sentinel #}</span>
+  <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># Example of filtering labels for a specific labelName:</span>
+  <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">present</span> <span class="o">=</span> <span class="n">false</span> <span class="o">%</span><span class="p">}</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">labelName</span> <span class="o">==</span> <span class="s2">&quot;tech3&quot;</span> <span class="o">%</span><span class="p">}</span>
+      <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+  <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+  <span class="c1">#}</span>
+  <span class="p">{</span><span class="c1"># If the alertsCount of the Sentinel incident is 0 or greater then the Sentinel incident will pass this filter. #}</span>
+  <span class="s2">&quot;alertsCount&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">alertsCount</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">&quot;bookmarksCount&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;commentsCount&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;alertProductNames&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># If the tactics property of the Sentinel incident is equal to PreAttack, or InitialAccess or blank then the Sentinel incident will pass this filter. #}</span>
+  <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s2">&quot;PreAttack&quot;</span> <span class="ow">in</span> <span class="n">tactics</span> <span class="ow">or</span> <span class="s2">&quot;InitialAccess&quot;</span> <span class="ow">in</span> <span class="n">tactics</span> <span class="ow">or</span> <span class="n">tactics</span> <span class="o">==</span> <span class="p">[]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">&quot;relatedAnalyticRuleIds&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;providerName&quot;</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1672,7 +1793,7 @@ mapping:</p>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
 <h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
-<p>This is a IBM Community provided App. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
+<p>This is a IBM supported App. For assistance, see <a class="reference external" href="https://ibm.com/mysupport">https://ibm.com/mysupport</a>.</p>
 </section>
 </section>
 </section>
@@ -1735,7 +1856,7 @@ mapping:</p>
 <li><a class="reference internal" href="#">Microsoft Sentinel</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#v1-0-3">v1.0.3</a></li>
+<li><a class="reference internal" href="#v2-0-0">v2.0.0</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
@@ -1779,6 +1900,10 @@ mapping:</p>
 <li><a class="reference internal" href="#incident-close-template-jinja">incident_close_template.jinja</a></li>
 <li><a class="reference internal" href="#sentinel-close-incident-template-jinja">sentinel_close_incident_template.jinja</a></li>
 <li><a class="reference internal" href="#sentinel-update-incident-template-jinja">sentinel_update_incident_template.jinja</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-poller-filter-template">Custom poller filter template</a><ul>
+<li><a class="reference internal" href="#poller-filters-template-jinja">poller_filters_template.jinja</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
