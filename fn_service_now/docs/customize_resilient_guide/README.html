@@ -567,8 +567,11 @@
 <span class="s2">                          Incident Type(s): </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
 
 <span class="c1"># If the user adds a comment when they invoke the rule, that comment gets concatenated here</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_initial_note</span><span class="o">.</span><span class="n">content</span>
-  <span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{init_snow_note_text}</span><span class="se">\n\n</span><span class="si">{playbook.inputs.sn_initial_note.content}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">initial_note</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_initial_note&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">initial_note</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_initial_note&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+<span class="k">if</span> <span class="n">initial_note</span><span class="p">:</span>
+  <span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">init_snow_note_text</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">initial_note</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="c1"># ID of this incident</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
@@ -577,7 +580,7 @@
 <span class="n">inputs</span><span class="o">.</span><span class="n">sn_init_work_note</span> <span class="o">=</span> <span class="n">init_snow_note_text</span>
 
 <span class="c1"># Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.</span>
-<span class="c1"># ServiceNow Example:: setValue(&#39;assignment_group&#39;, request.body.data.sn_optional_fields.assignment_group)</span>
+<span class="c1"># ServiceNow Example: setValue(&#39;assignment_group&#39;, request.body.data.sn_optional_fields.assignment_group)</span>
 <span class="c1"># For SIR tables it is recommended to map &quot;business_criticality&quot; to sn_severity_map as that is visible in the SNOW query_builder</span>
 <span class="c1"># (see the example commented out below)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sn_optional_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
@@ -890,15 +893,17 @@
 
 <span class="c1"># The state to change the record to</span>
 <span class="c1"># inputs.sn_record_state = map_sn_record_states[&quot;Closed&quot;]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span> <span class="o">=</span> <span class="n">map_sn_record_states</span><span class="p">[</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span><span class="p">]</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span> <span class="o">=</span> <span class="n">map_sn_record_states</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_record_state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
 
 <span class="c1"># The resolution notes that are normally required when you close a ServiceNow record</span>
 <span class="c1"># inputs.sn_close_notes = &quot;This incident has been resolved in IBM SOAR. No further action required&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_notes</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_notes</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_notes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># The ServiceNow &#39;close_code&#39; that you normally select when closing a ServiceNow record</span>
 <span class="c1"># inputs.sn_close_code = &quot;Solved (Permanently)&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_code</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_code</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_code&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_code</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_code&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># Add a Work Note to the Record in ServiceNow</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_work_note</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;This record&#39;s state has been changed to </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span><span class="si">}</span><span class="s2"> by IBM SOAR&quot;</span>
@@ -1226,7 +1231,7 @@
 
 <span class="c1"># The value to equate the cell to</span>
 <span class="c1"># Get the group name from the Rule Activity Field with:</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_value</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_assignment_group</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_assignment_group&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1">## OR Set group name statically with:</span>
 <span class="c1">## inputs.sn_query_value = &quot;IT Securities&quot;</span>

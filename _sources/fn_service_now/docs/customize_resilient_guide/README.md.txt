@@ -176,8 +176,11 @@ init_snow_note_text = f"""Record created from a IBM SOAR Incident ID: {incident.
                           Incident Type(s): {', '.join(incident.incident_type_ids)}"""
 
 # If the user adds a comment when they invoke the rule, that comment gets concatenated here
-if playbook.inputs.sn_initial_note.content
-  init_snow_note_text = "{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}")
+initial_note = None
+if getattr(playbook.inputs, "sn_initial_note", None):
+  initial_note = getattr(playbook.inputs, "sn_initial_note", None).content
+if initial_note:
+  init_snow_note_text = f"{init_snow_note_text}\n\n{initial_note}"
 
 # ID of this incident
 inputs.incident_id = incident.id
@@ -186,7 +189,7 @@ inputs.incident_id = incident.id
 inputs.sn_init_work_note = init_snow_note_text
 
 # Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.
-# ServiceNow Example:: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
+# ServiceNow Example: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
 # For SIR tables it is recommended to map "business_criticality" to sn_severity_map as that is visible in the SNOW query_builder
 # (see the example commented out below)
 inputs.sn_optional_fields = dumps({
@@ -436,15 +439,17 @@ inputs.incident_id = incident.id
 
 # The state to change the record to
 # inputs.sn_record_state = map_sn_record_states["Closed"]
-inputs.sn_record_state = map_sn_record_states[playbook.inputs.sn_record_state]
+inputs.sn_record_state = map_sn_record_states[getattr(playbook.inputs, "sn_record_state", None)]
 
 # The resolution notes that are normally required when you close a ServiceNow record
 # inputs.sn_close_notes = "This incident has been resolved in IBM SOAR. No further action required"
-inputs.sn_close_notes = playbook.inputs.sn_close_notes
+if getattr(playbook.inputs, "sn_close_notes", None):
+  inputs.sn_close_notes = getattr(playbook.inputs, "sn_close_notes", None)
 
 # The ServiceNow 'close_code' that you normally select when closing a ServiceNow record
 # inputs.sn_close_code = "Solved (Permanently)"
-inputs.sn_close_code = playbook.inputs.sn_close_code
+if getattr(playbook.inputs, "sn_close_code", None):
+  inputs.sn_close_code = getattr(playbook.inputs, "sn_close_code", None)
 
 # Add a Work Note to the Record in ServiceNow
 inputs.sn_close_work_note = f"This record's state has been changed to {playbook.inputs.sn_record_state} by IBM SOAR"
@@ -719,7 +724,7 @@ inputs.sn_query_field = "name"
 
 # The value to equate the cell to
 # Get the group name from the Rule Activity Field with:
-inputs.sn_query_value = playbook.inputs.sn_assignment_group
+inputs.sn_query_value = getattr(playbook.inputs, "sn_assignment_group", None)
 
 ## OR Set group name statically with:
 ## inputs.sn_query_value = "IT Securities"
