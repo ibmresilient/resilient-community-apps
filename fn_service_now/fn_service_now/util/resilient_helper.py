@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """ResilientHelper Module"""
 import base64
 from logging import getLogger
@@ -17,7 +17,7 @@ LOG = getLogger(__name__)
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
-    """Class that represents a Resilient Incident. See API notes for more"""
+    """Class that represents a SOAR Incident. See API notes for more"""
     def __init__(self, incident_id, incident_name, incident_description):
         self.type = "res_incident"
         self.incident_id = incident_id
@@ -31,7 +31,7 @@ class Incident(object):
 
 # Define a Task that gets sent to ServiceNow
 class Task(object):
-    """Class that represents a Resilient Task. See API notes for more"""
+    """Class that represents a SOAR Task. See API notes for more"""
     def __init__(self, incident_id, task_id, task_name, task_instructions):
         self.type = "res_task"
         self.incident_id = incident_id
@@ -204,17 +204,17 @@ class ResilientHelper(object):
         elif state == "C":
             return "Closed"
         else:
-            raise ValueError(f"{state} is not a valid Resilient State. O=Open Task, A=Active Incident, C=Closed Incident/Task")
+            raise ValueError(f"{state} is not a valid SOAR State. O=Open Task, A=Active Incident, C=Closed Incident/Task")
 
     @staticmethod
     def get_incident(client, incident_id):
-        """Function that gets the incident from Resilient"""
+        """Function that gets the incident from SOAR"""
         err_msg = None
         get_url = f"/incidents/{incident_id}?text_content_output_format=always_text&handle_format=names"
 
         # Get the incident from resilient api
         try:
-            LOG.debug(f"GET Incident from Resilient: ID {incident_id} URL: {get_url}")
+            LOG.debug(f"GET Incident from SOAR: ID {incident_id} URL: {get_url}")
             incident = client.get(get_url)
             LOG.debug(f"Incident got successfully: {incident}")
         except Exception as err:
@@ -241,11 +241,11 @@ class ResilientHelper(object):
         def change_func(data):
             data["name"] = new_incident_name
 
-        url = f"/incidents/{incident_id}?text_content_output_format=always_text&handle_format=names"
+        url = f"/incidents/{incident_id}?handle_format=names"
 
         # Use the get_put option to GET the data, apply the change, and PUT it back to the server
         try:
-            LOG.debug(f"PUT Incident from Resilient: ID: {incident_id} URL: {url} New Name: {new_incident_name}")
+            LOG.debug(f"PUT Incident from SOAR: ID: {incident_id} URL: {url} New Name: {new_incident_name}")
             client.get_put(url, change_func)
             LOG.info(f"Incident was successfully renamed to '{new_incident_name}'")
         except Exception as err:
@@ -253,13 +253,13 @@ class ResilientHelper(object):
 
     @staticmethod
     def get_task(client, task_id, incident_id):
-        """Function that gets the task from Resilient. Gets the task's instructions too"""
+        """Function that gets the task from SOAR. Gets the task's instructions too"""
         err_msg = None
 
         # Get the task from resilient api
         try:
             get_url = f"/tasks/{task_id}?text_content_output_format=always_text&handle_format=names"
-            LOG.debug(f"GET Task from Resilient: ID {task_id} URL: {get_url}")
+            LOG.debug(f"GET Task from SOAR: ID {task_id} URL: {get_url}")
             task = client.get(get_url)
             LOG.debug(f"Task got successfully: {task}")
         except Exception as err:
@@ -274,7 +274,6 @@ class ResilientHelper(object):
 
             raise ValueError(err_msg)
 
-
         # Get the task_instructions in plaintext
         try:
             get_url = f"/tasks/{task_id}/instructions_ex"
@@ -284,7 +283,7 @@ class ResilientHelper(object):
             soup = soup.get_text()
             # BeautifulSoup decoding of the HTML includes quotation marks and non-breaking spaces
             # so we need to remove those for the instructions text that will go to SNOW
-            task_instructions = soup.replace(u'\xa0', u' ').replace(u'"',u'')
+            task_instructions = soup.replace('\xa0', ' ').replace('"','')
             LOG.debug("task_instructions got successfully")
         except Exception as err:
             err_msg = f"Error trying to get task_instructions for Task {task_id}."
@@ -295,7 +294,6 @@ class ResilientHelper(object):
                 err_msg = f"{err_msg} {err}"
 
             raise ValueError(err_msg)
-
 
         return Task(incident_id, task_id, task["name"], task_instructions)
 
@@ -310,11 +308,11 @@ class ResilientHelper(object):
         def change_func(data):
             data["name"] = new_task_name
 
-        url = f"/tasks/{task_id}?text_content_output_format=always_text&handle_format=names"
+        url = f"/tasks/{task_id}?handle_format=names"
 
         # Use the get_put option to GET the data, apply the change, and PUT it back to the server
         try:
-            LOG.debug(f"PUT Task from Resilient: ID: {task_id} URL: {url} New Name: {new_task_name}")
+            LOG.debug(f"PUT Task from SOAR: ID: {task_id} URL: {url} New Name: {new_task_name}")
             client.get_put(url, change_func)
             LOG.info(f"Task was successfully renamed to '{new_task_name}'", )
         except Exception as err:

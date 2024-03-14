@@ -1,3 +1,25 @@
 {
-    
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "inputs": {
+      "sn_res_id": "RES-2102-10",
+      "sn_note_text": "<br>This Task has been updated in <b>ServiceNow</b>\n              <br><b>ServiceNow ID:</b> INC0010281\n              <br><b>ServiceNow Record State:</b> Resolved\n              <br><b>ServiceNow Closing Notes:</b> something\n              <br><b>ServiceNow Closing Code:</b> Solved (Work Around)"
+    }
+  },
+  "raw": "{\"success\": true, \"inputs\": {\"sn_res_id\": \"RES-2102-10\", \"sn_note_text\": \"<br>This Task has been updated in <b>ServiceNow</b>\\n              <br><b>ServiceNow ID:</b> INC0010281\\n              <br><b>ServiceNow Record State:</b> Resolved\\n              <br><b>ServiceNow Closing Notes:</b> something\\n              <br><b>ServiceNow Closing Code:</b> Solved (Work Around)\"}}",
+  "inputs": {
+    "sn_res_id": "RES-2102-10",
+    "sn_note_text": "<br>This Task has been updated in <b>ServiceNow</b>\n              <br><b>ServiceNow ID:</b> INC0010281\n              <br><b>ServiceNow Record State:</b> Resolved\n              <br><b>ServiceNow Closing Notes:</b> something\n              <br><b>ServiceNow Closing Code:</b> Solved (Work Around)"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-service-now",
+    "package_version": "2.2.1",
+    "host": "myhost",
+    "execution_time_ms": 653,
+    "timestamp": "2024-03-13 10:52:44"
+  }
 }

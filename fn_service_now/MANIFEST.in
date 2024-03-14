@@ -1,7 +1,6 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
 recursive-include fn_service_now/util *
 include fn_service_now/LICENSE
 include doc/*.md

@@ -28,6 +28,9 @@ docs/customize_resilient_guide/README
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
+### v2.2.1
+* Bug fix for breaking html formatted fields on a SOAR incident.
+
 ### v2.2.0
 * Added playbooks
 * Validated on ServiceNow Vancouver release (use v2.1.0 on ServiceNow)

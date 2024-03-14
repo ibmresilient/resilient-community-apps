@@ -53,8 +53,8 @@ edit_task_header
 #download_inbox_emails
 #
 ## other permissions
-#read_layouts
-#edit_layouts
+read_layouts
+edit_layouts
 #delete_layouts
 #create_function
 #read_function

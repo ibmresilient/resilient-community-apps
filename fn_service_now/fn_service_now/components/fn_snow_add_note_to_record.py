@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
         log = getLogger(__name__)
 
         try:
-            # Instantiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets app configs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
@@ -71,8 +71,7 @@ class FunctionComponent(ResilientComponent):
             # this is only going to be supported on systems where `glide.ui.security.allow_codetag` is enabled
             # so it is optional
             if str_to_bool(self.options.get("render_rich_text", "false")):
-                inputs["sn_note_text"] = "[code]" + \
-                    inputs["sn_note_text"] + "[/code]"
+                inputs["sn_note_text"] = f'[code]{inputs["sn_note_text"]}[/code]'
             else:
                 parser = MarkdownParser(
                     bold="", italic="", underline="", strikeout="")

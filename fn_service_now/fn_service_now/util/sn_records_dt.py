@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Class to handle manipulating the ServiceNow Records Data Table"""
 
 class ServiceNowRecordsDataTable(object):

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate a default configuration-file section for fn_service_now"""
@@ -8,7 +8,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
         when called by `resilient-circuits config [-c|-u]`
     """
-    return u"""[fn_service_now]
+    return """[fn_service_now]
 sn_host=https://instance.service-now.com
 sn_api_uri=/api/x_ibmrt_resilient/api
 

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.1.51
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.1.0.695
 
-"""Generate the Resilient customizations required for fn_service_now"""
+"""Generate the SOAR customizations required for fn_service_now"""
 
 import base64
 import os
@@ -21,17 +22,46 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_service_now",
-        "message_destinations": [u"fn_service_now"],
-        "functions": [u"fn_snow_add_attachment_to_record", u"fn_snow_add_note_to_record", u"fn_snow_close_record", u"fn_snow_create_record", u"fn_snow_helper_add_task_note", u"fn_snow_helper_update_datatable", u"fn_snow_lookup_sysid", u"fn_snow_update_record"],
+        "message_destinations": [
+            u"fn_service_now"
+        ],
+        "functions": [
+            u"fn_snow_add_attachment_to_record",
+            u"fn_snow_add_note_to_record",
+            u"fn_snow_close_record",
+            u"fn_snow_create_record",
+            u"fn_snow_helper_add_task_note",
+            u"fn_snow_helper_update_datatable",
+            u"fn_snow_lookup_sysid",
+            u"fn_snow_update_record"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"sn_snow_record_id", u"sn_snow_record_link"],
+        "incident_fields": [
+            u"sn_snow_record_id",
+            u"sn_snow_record_link"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"sn_records_dt"],
+        "datatables": [
+            u"sn_records_dt"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"snow_add_attachment_to_record", u"snow_create_record_incident_pb", u"snow_create_record_task_pb", u"snow_inc_update_record_on_severity_change_pb", u"snow_send_as_additional_comment_pb", u"snow_send_as_work_note_pb", u"snow_sir_update_record_on_severity_change_pb", u"snow_update_data_table_on_status_change_incident_pb", u"snow_update_data_table_on_status_change_task_pb", u"snow_updateclose_record_incident_pb", u"snow_updateclose_record_pb", u"snow_updateclose_record_task_pb"]
+        "playbooks": [
+            u"snow_add_attachment_to_record",
+            u"snow_create_record_incident_pb",
+            u"snow_create_record_task_pb",
+            u"snow_inc_update_record_on_severity_change_pb",
+            u"snow_send_as_additional_comment_pb",
+            u"snow_send_as_work_note_pb",
+            u"snow_sir_update_record_on_severity_change_pb",
+            u"snow_update_data_table_on_status_change_incident_pb",
+            u"snow_update_data_table_on_status_change_task_pb",
+            u"snow_updateclose_record_incident_pb",
+            u"snow_updateclose_record_pb",
+            u"snow_updateclose_record_task_pb"
+        ]
     }
 
 
@@ -40,7 +70,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 49.0.8803
 
     Contents:
     - Message Destinations:

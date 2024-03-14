@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
 
         try:
 
-            # Instantiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets app configs from file)
             res_helper = ResilientHelper(self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
             validate_fields(["sn_res_id", "sn_note_text"], kwargs)

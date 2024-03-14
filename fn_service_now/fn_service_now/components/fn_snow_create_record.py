@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
         log = getLogger(__name__)
 
         try:
-            # Instantiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets app configs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
@@ -124,7 +124,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 request_data = req.get("data")
 
-                yield StatusMessage(u"Creating a new ServiceNow Record for the {0}: {1}".format(
+                yield StatusMessage("Creating a new ServiceNow Record for the {0}: {1}".format(
                     "Incident" if request_data.get("type") == "res_incident" else "Task", res_helper.str_to_unicode(request_data.get("incident_name")) if request_data.get("incident_name") else res_helper.str_to_unicode(request_data.get("task_name"))))
 
                 # Call POST and get response
