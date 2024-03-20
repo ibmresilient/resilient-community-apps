@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 from logging import getLogger
 from urllib.parse import urlparse
 from jira import JIRA
+from pytz import timezone
+from datetime import datetime, timedelta
+from cachetools import TTLCache, cached
 from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description, GLOBAL_SETTINGS
 from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon
 
@@ -51,6 +54,8 @@ class AppCommon():
             self.proxies["https"] = global_settings.get("https_proxy")
         elif app_configs.get("https_proxy"):
             self.proxies["https"] = app_configs.get("https_proxy")
+        else:
+            self.rc.get_proxies()
         if not self.proxies:
             self.proxies = None
 
@@ -119,11 +124,14 @@ class AppCommon():
         :param last_poller_time: Last time the poller ran
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
-
-        LOG.debug(last_poller_time.strftime('%Y/%m/%d %H:%M'))
-
         if last_poller_time:
-            search_filters = f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'"
+            # Get the Jira servers time zone.
+            jira_time_zone = get_jira_timezone(self.jira_client)
+            # Convert the pollers time to that time zone.
+            last_poller = last_poller_time.astimezone(timezone(jira_time_zone)).strftime('%Y/%m/%d %H:%M')
+            LOG.debug(f"Last poller run time converted to Jira server time zone: {last_poller}, {jira_time_zone}")
+            # Add to the search filter to check if Jira issue last updated time is greater than the last poller time.
+            search_filters = f"{search_filters} and updated > '{last_poller}'"
 
         issues_list = self.jira_client.search_issues(
             search_filters,
@@ -171,7 +179,6 @@ class AppCommon():
             issue_description = issue.get("renderedFields").get("description")
             if check_jira_issue_linked_to_task(issue_description):
                 task_id = get_id_from_jira_issue_description(issue_description)
-                LOG.debug(issue_description)
 
                 # Get SOAR incident id from description.
                 if "incidents/" in issue_description:
@@ -188,11 +195,15 @@ class AppCommon():
 
         return issues_list, data_to_get_from_case
 
+@cached(cache=TTLCache(maxsize=10, ttl=timedelta(hours=1), timer=datetime.now))
+def get_jira_timezone(jira_client):
+    """ Returns the time zone that the Jira server is configured to. """
+    return jira_client.myself().get("timeZone")
+
 def _get_verify_ssl(app_configs):
     """
     Get ``verify`` parameter from app config.
     Value can be set in the [fn_my_app] section
-
     :param opts: All of the app.config file as a dict
     :type opts: dict
     :param app_options: App specific configs

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 from resilient_lib import IntegrationError, MarkdownParser, SOARCommon
@@ -55,7 +55,7 @@ class JiraServers():
         elif len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
-            raise IntegrationError("{} did not match labels given in the app.config".format(jira_label))
+            raise IntegrationError(f"{jira_label} did not match labels given in the app.config")
 
         return options
 
@@ -80,15 +80,14 @@ def str_time_to_int_time(str_time):
     :return: Epoch time as integer
     """
     str_time = str_time[:str_time.rindex(".")]
-    return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
+    return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1000)
 
 def to_markdown(html):
-    """Takes a string of html converts it to Markdown and returns it"""
+    """ Takes a string of html converts it to Markdown and returns it """
     return MarkdownParser(strikeout="-", bold="*", underline="+", italic="_").convert(html)
 
 def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
-    """Returns the jira_issue_id and jira_url that relates to the task_id"""
-
+    """ Returns the jira_issue_id and jira_url that relates to the task_id """
     try:
         rows = SOARCommon(res_client)._get_case_info(incident_id, f"table_data/{dt_name}?handle_format=names")["rows"]
     except Exception as err:
@@ -132,4 +131,4 @@ def check_jira_issue_linked_to_task(jira_issue_description):
     """
     # Check if the Jira issue is linked to a SOAR task
     if jira_issue_description and IBM_SOAR_LINK in jira_issue_description and "?task_id=" in jira_issue_description:
-            return True
+        return True

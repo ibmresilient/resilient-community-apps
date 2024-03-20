@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Create an issue in Jira from IBM SOAR"""
 
 from json import loads
@@ -50,7 +50,7 @@ class FunctionComponent(AppFunctionComponent):
         if task_id:
             resilient_url = f"{resilient_url}?task_id={task_id}"
 
-        jira_fields["description"] = u"{}\n\n{}".format(f"IBM SOAR Link: {resilient_url}", to_markdown(jira_fields.get("description", ""))).strip()
+        jira_fields["description"] = "{}\n\n{}".format(f"IBM SOAR Link: {resilient_url}", to_markdown(jira_fields.get("description", ""))).strip()
 
         yield self.status_message("Creating JIRA issue")
 

@@ -1,6 +1,5 @@
 include README.md
 include Dockerfile
-include entrypoint.sh
 recursive-include fn_jira/util *
 recursive-include fn_jira/poller *
 recursive-include fn_jira/poller/data *

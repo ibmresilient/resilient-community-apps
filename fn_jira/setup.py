@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_jira',
     display_name='Jira App for IBM SOAR',
-    version='3.0.5',
+    version='3.1.0',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -29,7 +29,7 @@ setup(
                         It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in SOAR.
                         Example rules and workflows can used used or modified to meet your business processes.""",
     install_requires=[
-        'resilient_circuits>=45.0.0',
+        'resilient_circuits>=49.0.0',
         'jira~=3.2',
         'pyjwt~=2.4'
     ],

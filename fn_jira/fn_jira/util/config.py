@@ -6,15 +6,10 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    return u"""
+    return """
 [fn_jira:global_settings]
 # Maximum time in seconds to wait before timeout.
 timeout=30
-# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
-#  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
-# If timezone_offset under [fn_jira:global_settings] is configured, then timezone_offset
-#  that are configured under the individual Jira servers will be ignored
-#timezone_offset = -4:00
 # Interval to poll Jira for changes (in seconds)
 # When polling_interval equals 0 the poller is off
 polling_interval=0
@@ -63,9 +58,6 @@ verify_cert=True
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
-# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
-#  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
-#timezone_offset = -4:00
 # Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
@@ -98,9 +90,6 @@ verify_cert=True
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
-# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
-#  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
-#timezone_offset = -4:00
 # Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.

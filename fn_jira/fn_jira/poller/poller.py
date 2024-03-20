@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Poller implementation"""
 
 from logging import getLogger
@@ -91,46 +91,6 @@ class PollerComponent(AppFunctionComponent):
 
         return True
 
-    def set_time_offset(self, last_poller_time, offset):
-        """
-        Offset time from UTC time by user given value
-        :param last_poller_time: datetime object of last time the poller ran
-        :param offset: [str] User given time offset
-        :return: Datetime object
-        """
-        last_poller_time = last_poller_time - timedelta(minutes=self.poller_lookback)
-
-        offset_minutes = 0
-        offset_hours = 0
-
-        def make_int(time_offset):
-            """
-            Make string time offset into int
-            :param time_offset: string time offset
-            :return: int time offset
-            """
-            if time_offset.startswith("0"):
-                time_offset = time_offset[1:]
-            return int(time_offset) if time_offset else 0
-
-        # Get minutes to offset if present
-        if ":" in offset:
-            offset_minutes = offset[offset.index(":")+1:].strip()
-            offset_minutes = make_int(offset_minutes)
-            # Remove the minutes offset from offset variable
-            offset = offset[0:offset.index(":")]
-
-        if offset.startswith("-"):
-            offset_hours = offset[offset.index("-")+1:].strip()
-            offset_hours = make_int(offset_hours)
-            last_poller_time = last_poller_time - timedelta(hours=offset_hours, minutes=offset_minutes)
-        elif offset.startswith("+"):
-            offset_hours = offset[offset.index("+")+1:].strip()
-            offset_hours = make_int(offset_hours)
-            last_poller_time = last_poller_time + timedelta(hours=offset_hours, minutes=offset_minutes)
-
-        return last_poller_time
-
     @poller("polling_interval", "last_poller_time")
     def run(self, *args, **kwargs):
         """
@@ -197,22 +157,14 @@ class PollerComponent(AppFunctionComponent):
                 # Get the poller_filters settings from the servers settings
                 poller_filters = options.get("poller_filters")
 
-            last_poller_time = datetime.fromtimestamp(kwargs.get("last_poller_time") / 1e3)
-            last_poller = last_poller_time
-            # Set last_poller_time to correct timezone based off user given offset
-            if self.global_settings.get("timezone_offset"):
-                # If timezone_offset configured in global_settings
-                last_poller = self.set_time_offset(last_poller_time, self.global_settings.get("timezone_offset"))
-            elif options.get("timezone_offset"):
-                # If timezone_offset configured in individual server settings
-                last_poller = self.set_time_offset(last_poller_time, options.get("timezone_offset"))
-
-            # Get a list of Jira issues bases on the given search filters
+            # Convert last_poller_time into a datetime object.
+            last_poller_time = datetime.fromtimestamp(kwargs.get("last_poller_time")/1000)
+            # Search Jira for issue.
             jira_issue_list, data_to_get_from_case = AppCommon(self.opts, options).search_jira_issues(
                 poller_filters,
-                last_poller,
-                max_results,
-                data_to_get_from_case
+                last_poller_time,
+                max_results = max_results,
+                data_to_get_from_case = data_to_get_from_case
             )
 
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
@@ -232,6 +184,7 @@ class PollerComponent(AppFunctionComponent):
         # Get a list of open SOAR cases that contain the field jira_issue_id.
         soar_cases_list = self.res_client.post("/incidents/query?return_level=normal&handle_format=names", query)
 
+        # Process SOAR cases
         soar_cases_list = self.process_soar_cases(soar_cases_list, data_to_get_from_case)
 
         # Process Jira issues returned from search

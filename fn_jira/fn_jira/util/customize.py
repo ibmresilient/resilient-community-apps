@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.1.262
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.1.0.695
 
-"""Generate the Resilient customizations required for fn_jira"""
+"""Generate the SOAR customizations required for fn_jira"""
 
 import base64
 import os
@@ -65,7 +65,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 49.0.8803
 
     Contents:
     - Message Destinations:
