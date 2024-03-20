@@ -33,6 +33,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.1.0 | 03/2024 | Update to poller to automatically account for time zone differences between SOAR and Jira. |
 | 3.0.5 | 10/2023 | Bug fix for poller not closing SOAR incident |
 | 3.0.4 | 10/2023 | Bug fix for transitioning a Jira issue from SOAR |
 | 3.0.3 | 09/2023 | Bug fix for jira_transition_issue function |
@@ -48,6 +49,9 @@
 | 1.0.0 | 12/2018 | Initial Release |
 
 * For customers upgrading from a previous release to 3.0.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [Configuring bidirectional sync](#configuring-bidirectional-sync)
+
+### Version 3.1.0 Changes
+In version 3.1.0 the app.config setting 'timezone_offset' has been deprecated. Time zone differences between SOAR and Jira are now accounted for automatically.
 
 ---
 
@@ -78,14 +82,14 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `49.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `49.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions:
+* Integration server is running `resilient_circuits>=49.0.0`.
+* If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -103,7 +107,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -117,11 +121,11 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.6, 3.9 and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * jira~=3.2
 * pyjwt~=2.4
-* resilient_circuits>=45.0.0
+* resilient_circuits>=49.0.0
 
 ---
 
@@ -147,12 +151,11 @@ The following table provides the settings you need to configure the app. These s
 | **password** | Required for `AUTH` or `BASIC` | `<jira user password>` | The password or API Key for the Jira account to use with this integration. `AUTH` only supports password and `BASIC` supports both password and API Key. |
 | **poller_filters** | Yes | `priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)` | Search filters for Jira issue to sync with SOAR cases. |
 | **polling_interval** | Yes | `0` | Interval to poll Jira for changes (in seconds). |
-| **polling_lookback** | Yes | `60` | Amount of time for poller to look back when syncing Jira issues and SOAR cases. |
-| **timezone_offset** | No | `-4:00` | Timezone off set from UTC time. Timezone off set needs to be set to be the same as the Jira servers timezone. |
+| **polling_lookback** | Yes | `60` | Amount of time for poller to look back when syncing Jira issues and SOAR cases (in minutes). |
 | **timeout** | No | `10` | The number of seconds to timeout after when making a request to the Jira platform. |
 | **url** | Yes | `https://<jira url>` | The URL of your Jira platform. |
 | **user** | Required for `AUTH` or `BASIC` | `<jira user>` | The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions. |
-| **verify_cert** | No | `True` | A boolean value. Set to `True` if you want ti verify SSL certificates on each request. |
+| **verify_cert** | No | `True` | A boolean value. Set to `True` if you want to verify SSL certificates on each request. |
 | **http_proxy** | No | `http://localhost:3128` |  Your HTTP Proxy. |
 | **https_proxy** | No | `https://localhost:3128` |  Your HTTPS Proxy. |
 | **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Poller Considerations](#poller-considerations).* |
@@ -239,6 +242,7 @@ Below are the default templates used which can be copied, modified, and used wit
     "jira_url": "{{ url }}",
     "jira_project_key": "{{ fields["project"]["key"] }}",
     "jira_issue_status": "{{ fields["status"]["name"] }}",
+    "jira_issue_type": "{{ fields["issuetype"]["name"] }}",
     "jira_linked_to_incident": true
   },
   {# add comments as necessary #}
