@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Util functions
 
 from logging import getLogger
-from resilient_lib import IntegrationError, str_to_bool, validate_fields, clean_html
+from resilient_lib import str_to_bool, validate_fields, clean_html
 from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 
@@ -36,7 +36,7 @@ def get_sync_notes(global_settings, options):
     :return: Boolean
     """
     sync_notes = global_settings.get("sync_notes")
-    if sync_notes is None:
+    if not sync_notes:
         sync_notes = options.get("sync_notes", True)
 
     return str_to_bool(sync_notes)
@@ -95,7 +95,7 @@ def get_server_settings(opts, qradar_label):
         validate_fields(["host", "verify_cert"], servers_list[server_name])
 
     # Get configuration for QRadar server specified
-    options = qradar_utils.QRadarServers.qradar_label_test(qradar_label, servers_list)
+    options = qradar_utils.QRadarServers(opts).qradar_label_test(qradar_label, servers_list)
     LOG.debug(f'Connection to {options.get("host")}')
 
     return options
@@ -137,4 +137,3 @@ def clear_table(rest_client, table_name, incident_id, global_settings):
 
             except Exception as err_msg:
                 LOG.error(f"Failed to clear table: {table_name} error: {err_msg}")
-                raise IntegrationError(f"Error while clearing table: {table_name}")

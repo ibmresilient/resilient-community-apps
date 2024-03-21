@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
 """AppFunction implementation"""
 
 from re import IGNORECASE, search, sub
-from time import time, sleep
+from time import time, sleep, time_ns
 from resilient_circuits import (AppFunctionComponent, FunctionResult, app_function)
 from resilient_lib import validate_fields
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
@@ -203,7 +203,7 @@ def make_queries(qradar_fn_type,
     """
 
     # Build temp table name
-    temp_table = f"offense-{qradar_search_param3}-events-{qradar_fn_type}-1000-{str(time())}"
+    temp_table = f"offense-{qradar_search_param3}-events-{qradar_fn_type}-1000-{str(time_ns())}"
 
     qradar_temp_query = sub("FROM\s+{}".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS,qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS),
                                 "FROM {} INTO \"{}\"".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS, qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS, temp_table),

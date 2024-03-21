@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
 # Util classes for qradar
 
@@ -15,6 +15,7 @@ from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_SYSTEMDA
 from fn_qradar_enhanced_data.util.SearchWaitCommand import (SearchFailure, SearchJobFailure, SearchWaitCommand)
 
 LOG = getLogger(__name__)
+REQUEST_TIMEOUT = 30
 
 def quote(input_v, safe=None):
     """
@@ -325,7 +326,7 @@ class QRadarClient(object):
                                            f"{auth_info.api_url.replace('api/', '')}{qradar_constants.GRAPHQL_URL}",
                                            data=dumps({"operationName": "getSystemDate", "variables": {}, "query": GRAPHQL_SYSTEMDATE}),
                                            headers=headers)
-        except Exception as e:
+        except Exception:
             pass
 
         return int(response.status_code/100) == 2
@@ -346,8 +347,15 @@ class QRadarClient(object):
 
         query_name = query_name.replace("  ", "")
         url = f"{auth_info.api_url.replace('api/', '')}{qradar_constants.GRAPHQL_URL}"
-        operationName = query_name[query_name.index(" ")+1: query_name.index("(")]
-        query_call = query_name[query_name.index("\n")+1: query_name.index("(", query_name.index("\n")+2)]
+        # Their are two types of graphql queries, ones that take input and ones that do not.
+        # Check if the query contains `($`. If it does than we know the query takes input, which tells us
+        #  what to look for to separate the different parts of the query.
+        if "($" in query_name:
+            operationName = query_name[query_name.index(" ")+1: query_name.index("(")]
+            query_call = query_name[query_name.index("\n")+1: query_name.index("(", query_name.index("\n")+2)]
+        else: # The query does not take input, so we look for the first instance of `{` to separate the different parts of the query.
+            operationName = query_name[query_name.index(" ")+1: query_name.index("{")]
+            query_call = query_name[query_name.index("\n")+1: query_name.index("{", query_name.index("\n")+2)]
 
         try:
             response = auth_info.make_call("POST", url,
@@ -382,7 +390,8 @@ class QRadarClient(object):
             if not auth_info.username and not auth_info.password:
                 cookies = {"SEC": auth_info.qradar_token}
             else:
-                res = get(f"{host}console/logon.jsp", verify=auth_info.cafile)
+                request_timeout = int(auth_info.rc.function_opts.get("search_timeout", REQUEST_TIMEOUT))
+                res = get(f"{host}console/logon.jsp", verify=auth_info.cafile, timeout=request_timeout)
                 cookies = res.cookies.get_dict()
 
                 res = post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
@@ -391,9 +400,11 @@ class QRadarClient(object):
                                     "LoginCSRF": post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
                                                       data = {"get_csrf": ""},
                                                       headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
-                                                      verify = auth_info.cafile).text},
+                                                      verify = auth_info.cafile,
+                                                      timeout=request_timeout).text},
                             headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
-                            verify = auth_info.cafile)
+                            verify = auth_info.cafile,
+                            timeout=request_timeout)
                 cookies = res.cookies.get_dict()
         except Exception as e:
             LOG.error(str(e))
@@ -404,7 +415,7 @@ class QRadarServers():
     def __init__(self, opts):
         """
         Initialize the odbcDBs class
-        :param opts: Dict of options
+        :param opts: Dict of options    
         """
         self.servers, self.server_name_list = self._load_servers(opts)
 
@@ -427,7 +438,7 @@ class QRadarServers():
 
         return servers, server_name_list
 
-    def qradar_label_test(qradar_label, servers_list):
+    def qradar_label_test(self, qradar_label, servers_list):
         """
         Check if the given qradar_label is in the app.config
         :param qradar_label: User selected server
@@ -461,3 +472,7 @@ class QRadarServers():
     def get_server_name_list(self):
         """Return list of all server names"""
         return self.server_name_list
+    
+    def get_servers_dict(self):
+        """Return a dict of all the configured QRadar servers"""
+        return self.servers

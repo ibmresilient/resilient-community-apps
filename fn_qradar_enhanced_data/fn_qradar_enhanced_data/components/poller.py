@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import functools
 from traceback import format_exc
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from logging import getLogger
 from threading import Thread, Event
 from resilient_circuits import ResilientComponent
@@ -13,7 +13,7 @@ from resilient_lib import IntegrationError, SOARCommon
 from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings,
                                                          get_sync_notes, filter_comments)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
-from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
+from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo, QRadarServers
 from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_POLLERQUERY
 
 LOG = getLogger(__name__)
@@ -40,9 +40,9 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
             exit_event = Event()
 
             while not exit_event.is_set():
+                LOG.info(f"{package_name} polling start.")
+                poller_start = datetime.now(timezone.utc) # Current UTC time
                 try:
-                    LOG.info(f"{package_name} polling start.")
-                    poller_start = datetime.now()
                     # Function execution with the last poller time in ms
                     func(self, last_poller_time = int(last_poller_time.timestamp()*1000))
 
@@ -71,7 +71,7 @@ class PollerComponent(ResilientComponent):
 
         # Collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
-            LOG.info(u"Poller interval is not configured, so the poller will not run.")
+            LOG.info("Poller interval is not configured, so the poller will not run.")
             return
 
         # Create poller thread
@@ -92,51 +92,21 @@ class PollerComponent(ResilientComponent):
 
         LOG.info(f"Poller initiated, polling interval {self.polling_interval}")
         self.poller_lookback = int(self.global_settings.get('polling_lookback', 0))
-        self.last_poller_time = datetime.now() - timedelta(minutes=self.poller_lookback)
+        # Get the current UTC time.
+        self.last_poller_time = datetime.now(timezone.utc)
         LOG.info(f"Minutes for poller to lookback: {self.poller_lookback}")
+        
+        # Look for the setting `timezone_offset` in the app.config and add a warning log that it is deprecated.
+        qradar_servers = QRadarServers(self.opts).get_servers_dict() # Dictionary of all configured QRadar servers and there settings.
+        for qradar_server in qradar_servers.values(): # Loop through the configured QRadar servers
+            if "timezone_offset" in qradar_server:
+                LOG.warning("The setting 'timezone_offset' is deprecated.")
+                break
 
         self.rest_client()
         self.soar_common = SOARCommon(self.rest_client())
 
         return True
-
-    def set_time_offset(self, offset):
-        """
-        Offset time from UTC time by user given value
-        :param offset: [str] User given time offset
-        :return: Datetime object
-        """
-        last_poller_time = self.last_poller_time
-        offset_minutes = 0
-        offset_hours = 0
-
-        def make_int(time_offset):
-            """
-            Make string time offset into int
-            :param time_offset: string time offset
-            :return: int time offset
-            """
-            if time_offset.startswith("0"):
-                time_offset = time_offset[1:]
-            return int(time_offset) if time_offset else 0
-
-        # Get minutes to offset if present
-        if ":" in offset:
-            offset_minutes = offset[offset.index(":")+1:].strip()
-            offset_minutes = make_int(offset_minutes)
-            # Remove the minutes offset from offset variable
-            offset = offset[0:offset.index(":")]
-
-        if offset.startswith("-"):
-            offset_hours = offset[offset.index("-")+1:].strip()
-            offset_hours = make_int(offset_hours)
-            last_poller_time = last_poller_time - timedelta(hours=offset_hours, minutes=offset_minutes)
-        elif offset.startswith("+"):
-            offset_hours = offset[offset.index("+")+1:].strip()
-            offset_hours = make_int(offset_hours)
-            last_poller_time = last_poller_time + timedelta(hours=offset_hours, minutes=offset_minutes)
-
-        return last_poller_time
 
     @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
     def run(self, last_poller_time=None):
@@ -152,7 +122,8 @@ class PollerComponent(ResilientComponent):
         :param last_poller_time: (int) Time in milliseconds when the last poller ran
         :return: None
         """
-        self.last_poller_time = datetime.fromtimestamp(last_poller_time / 1e3) - timedelta(minutes=self.poller_lookback)
+        # last_poller_time minus minutes set in poller_lookback
+        self.last_poller_time = datetime.utcfromtimestamp(last_poller_time / 1000) - timedelta(minutes=self.poller_lookback)
         case_list, error_msg = self.soar_common.get_soar_cases({"qradar_id": True, "qradar_destination": True})
 
         if error_msg:
@@ -251,7 +222,7 @@ class PollerComponent(ResilientComponent):
                     raise IntegrationError(str(response))
 
                 LOG.info(f"Case: {str(updated_cases)} updated field: qr_last_updated_time")
-
+    
     def sync_notes(self, qradar_client, server, filter_notes, case_server_dict):
         """
         Sync QRadar offense notes with SOAR incident
@@ -262,29 +233,26 @@ class PollerComponent(ResilientComponent):
         :return: None
         """
         options = self.opts.get(f"{PACKAGE_NAME}:{server}", {})
-        last_poller_time = self.last_poller_time
-        # Set last_poller_time to correct timezone based off user given offset
-        if self.global_settings.get("timezone_offset"):
-            # If timezone_offset configured in global_settings
-            last_poller_time = self.set_time_offset(self.global_settings.get("timezone_offset"))
-        elif options.get("timezone_offset"):
-            # If timezone_offset configured in individual server settings
-            last_poller_time = self.set_time_offset(options.get("timezone_offset"))
 
-        if get_sync_notes(self.global_settings, options):
+        if get_sync_notes(self.global_settings, options): # Check if the 'sync_notes' setting in the app.config equals True
             # Get notes from all QRadar offenses in filter
-            offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
+            offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content") # QRadar offense notes
+            # Initialize list that will be filled with notes from the QRadar offense that will be added to the SOAR incident.
             notes_to_add = []
 
             # Update offense notes
             if offenses_notes:
-                poller_time = int(last_poller_time.strftime("%s")) * 1e3
                 for notes in offenses_notes:
-                    incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
-                    qradar_notes = [note.get("noteText").replace("\r", "") for note in notes.get("notes") if int(note.get("createTime")) > poller_time\
-                        and AUTO_ESCALATION_NOTE not in note.get("noteText") and MANUAL_ESCALATION not in note.get("noteText") and "\x03" not in note.get("noteText")\
-                            and PLUGIN_ADDED_NOTE not in note.get("noteText") and PLUGIN_ADDED_NOTE[2:] not in note.get("noteText")]
-                    notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes, soar_str_to_remove="\nAdded from QRadar")
-                    if notes_to_add:
-                        for note in notes_to_add:
-                            self.soar_common.create_case_comment(incident_id, f"{note}\nAdded from QRadar")
+                    if notes.get("notes", []): # Check if notes list is empty or not
+                        incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
+                        # Create a list of notes on the QRadar offense if they where created after the last time the poller ran
+                        # and if the following are not present in the notes text: AUTO_ESCALATION_NOTE, MANUAL_ESCALATION,
+                        # \x03, PLUGIN_ADDED_NOTE
+                        qradar_notes = [note.get("noteText").replace("\r", "") for note in notes.get("notes", {})
+                                        if datetime.utcfromtimestamp(int(note.get("createTime"))/1000) > self.last_poller_time # Convert createTime to UTC and check if it is greater than last_poller_time
+                                        and not any(ele in note.get("noteText") for ele in [AUTO_ESCALATION_NOTE, MANUAL_ESCALATION, "\x03", PLUGIN_ADDED_NOTE, PLUGIN_ADDED_NOTE[2:]])]
+                        if qradar_notes: # Check that the list is not empty
+                            notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes, soar_str_to_remove="\nAdded from QRadar")
+                        if notes_to_add: # Check that the list is not empty
+                            for note in notes_to_add:
+                                self.soar_common.create_case_comment(incident_id, f"{note}\nAdded from QRadar")

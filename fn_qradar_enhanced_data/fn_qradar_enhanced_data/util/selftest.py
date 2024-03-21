@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
    test with: resilient-circuits selftest -l fn_qradar_integration
@@ -6,6 +7,7 @@
 
 import logging
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
+from fn_qradar_enhanced_data.util.function_utils import get_server_settings
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 
 log = logging.getLogger(__name__)
@@ -25,7 +27,7 @@ def selftest_function(opts):
             server_list.remove(GLOBAL_SETTINGS)
 
         for server_name in server_list:
-            server = opts.get(server_name, {})
+            server = get_server_settings(opts, server_name.replace(f"{PACKAGE_NAME}:", ""))
 
             log.info(f"Verifying app.config values for {str(server.get('host'))} config section")
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #   QRadar graph queries
 
 # URL from https://qradar_instance/console/graphql
@@ -220,7 +220,7 @@ GRAPHQL_OFFENSEASSETS = '''query assetQuery($ipAddress: String, $domainId: Int) 
                     '''
 
 # Source IP data query for Source IP table.
-GRAPHQL_SOURCEIP='''query assetQuery($ipAddress: String, $domainId: Int) {
+GRAPHQL_SOURCEIP = '''query assetQuery($ipAddress: String, $domainId: Int) {
                         getAsset(ipAddress: $ipAddress, domainId: $domainId) {
                             id
                             domain {
@@ -255,8 +255,8 @@ GRAPHQL_SOURCEIP='''query assetQuery($ipAddress: String, $domainId: Int) {
                     }
                     '''
 
-# Get System Date for GraphQL test
-GRAPHQL_SYSTEMDATE ='''query getSystemDate{
+# Get System Date.
+GRAPHQL_SYSTEMDATE = '''query getSystemDate{
                       getSystemDate{
                         date
                       }

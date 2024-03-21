@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# Generated with resilient-sdk v50.1.262
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.1.0.695
 
-"""Generate the Resilient customizations required for fn_qradar_enhanced_data"""
+"""Generate the SOAR customizations required for fn_qradar_enhanced_data"""
 
 import base64
 import os
@@ -105,7 +105,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 50.0.9097
 
     Contents:
     - Message Destinations:

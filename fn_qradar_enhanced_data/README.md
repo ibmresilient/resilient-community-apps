@@ -49,6 +49,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.4.0 | 02/2024 | Update to poller to automatically account for time zone differences between SOAR and QRadar. Remove '.' from query name. |
 | 2.3.4 | 11/2023 | Bug fix for syncing note between QRadar and SOAR |
 | 2.3.3 | 10/2023 | Bug fix for making an api call to use case manager on the QRadar server to retrieve MITRE mappings for a rule. |
 | 2.3.2 | 08/2023 | Bug fix for MITRE function and poller search |
@@ -95,13 +96,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `49.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `49.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
+* Integration server is running `resilient_circuits>=49.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -119,7 +120,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -133,9 +134,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=45.0.0
+* resilient_circuits>=49.0.0
 
 ### QRadar Requirements
 The app works with QRadar 7.4.0 or higher and requires the QRadar Analyst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
@@ -167,6 +168,9 @@ The following table provides the settings you need to configure the app. These s
 | **empty_query_max** | No | `5` | *New to 2.3. Attempt the AQL queries up to the number of times specified. Default is no retries (1)* |
 | **empty_query_wait_secs** | No | `60` | *New to 2.3. Number of seconds to pause before attempting the next AQL query. Default is 0* |
 | **empty_query_skip_types** | No | `flows` | *New to 2.3. Comma separated list of query types to skip retry: topevents, flows, sourceip, destinationip, categories* |
+
+#### 2.4.0 Changes
+The setting `timezone_offset` has been deprecated. Time zone differences between SOAR and QRadar are now accounted for automatically.
 
 #### 2.3.0 Changes
 See new settings `empty_query_max` and `empty_query_wait_secs`.
