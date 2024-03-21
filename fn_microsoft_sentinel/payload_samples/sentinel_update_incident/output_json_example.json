@@ -1,0 +1,58 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/e5a310d8-a920-428c-ba13-e04300c1d50c",
+    "name": "e5a310d8-a920-428c-ba13-e04300c1d50c",
+    "etag": "\"06022ab4-0000-0100-0000-65c2829b0000\"",
+    "type": "Microsoft.SecurityInsights/Incidents",
+    "properties": {
+      "title": "Suspected brute-force attack attempt",
+      "description": "Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one. Once obtained, an attacker can have full access to the database. While this specific alert doesn't indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack. To investigate this suspected brute-force attempt, review it's origin (based on the application name and IP/Location), and try to find out whether it's recognized to you, or suspicious. If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names. Also, consider using only AAD authentication to further enhance your security posture.",
+      "severity": "Medium",
+      "status": "New",
+      "owner": {
+        "objectId": null,
+        "email": null,
+        "assignedTo": null,
+        "userPrincipalName": null
+      },
+      "labels": [],
+      "lastModifiedTimeUtc": "2024-02-06T19:03:55.9750177Z",
+      "createdTimeUtc": "2024-02-06T18:31:01.9288406Z",
+      "incidentNumber": 3946,
+      "additionalData": {
+        "alertsCount": 1,
+        "bookmarksCount": 0,
+        "commentsCount": 1,
+        "alertProductNames": [
+          "Azure Security Center"
+        ],
+        "tactics": [
+          "PreAttack"
+        ]
+      },
+      "relatedAnalyticRuleIds": [
+        "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/alertRules/14fefa89-3cdd-429f-923b-b524aa8c65c3"
+      ],
+      "incidentUrl": "https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/e5a310d8-a920-428c-ba13-e04300c1d50c",
+      "providerName": "Azure Sentinel",
+      "providerIncidentId": "3946"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2104,
+    "sentinel_incident_id": "e5a310d8-a920-428c-ba13-e04300c1d50c",
+    "sentinel_profile": "profile_a"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 965,
+    "timestamp": "2024-02-06 14:03:56"
+  }
+}
