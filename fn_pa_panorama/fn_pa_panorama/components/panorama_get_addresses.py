@@ -23,6 +23,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.panorama_vsys
             -   fn_inputs.panorama_label
             -   fn_inputs.panorama_location
+            -   fn_inputs.panorama_device_group
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
@@ -31,11 +32,10 @@ class FunctionComponent(AppFunctionComponent):
 
         # Create connection to the user specific Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       get_server_settings(self.opts, getattr(
-                                           fn_inputs, "panorama_label", None)),
-                                       self.get_select_param(
-                                           getattr(fn_inputs, "panorama_location", None)),
-                                       getattr(fn_inputs, "panorama_vsys", None))
+            get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
+            self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
+            getattr(fn_inputs, "panorama_vsys", None),
+            getattr(fn_inputs, "panorama_device_group", None))
 
         # Initialize function result variables
         results = {}

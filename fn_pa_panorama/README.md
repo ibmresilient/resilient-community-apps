@@ -29,6 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.4.0 | 02/2024 | Add ability to use location=device-group |
 | 1.3.0 | 04/2023 | Convert from rules/workflows to playbooks and update Panorama api version to v9.1 |
 | 1.2.0 | 10/2022 | Multi-tenancy support added |
 | 1.1.0 | 04/2021 | Support for different API versions. See app.config `api_version` setting |
@@ -38,6 +39,9 @@
 * For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.2.0 Changes](#1.2.0-changes)
 
 ---
+
+## 1.4.0 Changes
+In v1.4, the setting `sf_device_group` has been added to the app.config settings file. This setting is required to be configured if the setting `sf_location` is configured as `device-group`.
 
 ## 1.3.0 Changes
 In v1.3, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
@@ -55,10 +59,11 @@ You can continue to use the rules/workflows. But migrating to playbooks will pro
 This integration contains Functions to interact with address groups, addresses, and user groups within Palo Alto Panorama. This integration can be configured to work with one or multiple Panorama instances.
 
 ### Key Features
-* Edit address groups in Panorama
+* Edit address groups in Panorama and PanOS
 * Edit user groups in Panorama
-* Get addresses and users from Panorama
-* Create a new address in Panorama
+* Get addresses from Panorama and PanOS
+* Get users from Panorama
+* Create a new address in Panorama and PanOS
 
 ---
 
@@ -105,7 +110,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-lib>=49.0.0
 * resilient_circuits>=49.0.0
@@ -128,6 +133,9 @@ The following table provides the settings you need to configure the app. These s
 | **api_version** | No | `v9.1` | *Specify the api version to use. 'v9.1' is the default.* |
 | **api_key** | Yes | `<Panorama_api_key>` | *API key generated with permissions to query the Panorama API. Get the API key via: curl -k -X GET 'https://<panoramaIP>/api/?type=keygen&user=<username>&password=<password>'* |
 | **cert** | Yes | <code>[True &#124; False]</code> | *Validate certificates (True) or allow insecure connections (False).* |
+| **sf_location** | No | `vsys` | *Set the location on Panorama to run the selftest from. This can be set to any of the following: shared, vsys, panorama-pushed, or device-config.* |
+| **sf_vsys** | No | `vsys1` | *The Panorama vsys to use.* |
+| **sf_device_group** | No | `group1` | *The Panorama device-group to use.* |
 | **http_proxy** | No | `<http://proxy.server:3128>` | *Optional http proxy server.* |
 | **https_proxy** | No | `<https://proxy.server:3128>` | *Optional https proxy server.* |
 
@@ -157,6 +165,7 @@ Creates a new address object in Panorama.
 | `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
 | `panorama_request_body` | `textarea` | No | `-` | - |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -249,6 +258,7 @@ Edits an address group in Panorama.
 | `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
 | `panorama_request_body` | `textarea` | No | `-` | - |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -367,7 +377,7 @@ else:
 
 ---
 ## Function - Panorama Edit Users in a Group
-Edits users in a group in Panorama.
+Edits users in a group in Panorama. This only works with Panorama and does not work with PanOS.
 
  ![screenshot: fn-panorama-edit-users-in-a-group ](./doc/screenshots/fn-panorama-edit-users-in-a-group.png)
 
@@ -508,6 +518,7 @@ List address groups in Panorama.
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
 | `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -612,6 +623,7 @@ List addresses in Panorama.
 | `panorama_label` | `text` | No | `-` | Label of the server to use |
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -782,7 +794,7 @@ None
 
 ---
 ## Function - Panorama Get Users in a Group
-Lists users part of a group in Panorama.
+Lists users part of a group in Panorama. This only works with Panorama and does not work with PanOS.
 
  ![screenshot: fn-panorama-get-users-in-a-group ](./doc/screenshots/fn-panorama-get-users-in-a-group.png)
 

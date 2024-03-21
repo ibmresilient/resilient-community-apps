@@ -24,11 +24,12 @@ panorama_host=<https://0.0.0.0>
 api_version=v9.1
 api_key=<Panorama_api_key>
 cert=[True|False]
-# Selftest options
+# Selftest options. If sf_location equals vsys then sf_vsys needs to be configured.
+# If sf_location equals device-group then sf_device_group needs to be configured.
 sf_location=vsys
 sf_vsys=vsys1
+#sf_device_group=
 # optional settings to access Panorama via proxies
-#http_proxy=http://proxy.domain:3128
 #https_proxy=https://proxy.domain:3128
 
 [fn_pa_panorama:panorama_label2]
@@ -38,10 +39,11 @@ panorama_host=<https://0.0.0.0>
 api_version=v9.1
 api_key=<Panorama_api_key>
 cert=[True|False]
-# Selftest options
+# Selftest options. If sf_location equals vsys then sf_vsys needs to be configured.
+# If sf_location equals device-group then sf_device_group needs to be configured.
 sf_location=vsys
 sf_vsys=vsys1
+#sf_device_group=
 # optional settings to access Panorama via proxies
-#http_proxy=http://proxy.domain:3128
 #https_proxy=https://proxy.domain:3128
 """

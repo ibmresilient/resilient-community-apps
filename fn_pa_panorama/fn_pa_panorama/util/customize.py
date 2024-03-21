@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.0.2.575
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.1.0.695
 
 """Generate the SOAR customizations required for fn_pa_panorama"""
 
@@ -21,17 +21,17 @@ def codegen_reload_data():
     Parameters required reload codegen for the fn_pa_panorama package
     """
     return {
-        "package":"fn_pa_panorama",
+        "package": u"fn_pa_panorama",
         "message_destinations": [
-           "palo_alto_panorama"
+            u"palo_alto_panorama"
         ],
         "functions": [
-           "panorama_create_address",
-           "panorama_edit_address_group",
-           "panorama_edit_users_in_a_group",
-           "panorama_get_address_groups",
-           "panorama_get_addresses",
-           "panorama_get_users_in_a_group"
+            u"panorama_create_address",
+            u"panorama_edit_address_group",
+            u"panorama_edit_users_in_a_group",
+            u"panorama_get_address_groups",
+            u"panorama_get_addresses",
+            u"panorama_get_users_in_a_group"
         ],
         "workflows": [],
         "actions": [],
@@ -42,13 +42,13 @@ def codegen_reload_data():
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
-           "example_panorama_block_dns_name",
-           "example_panorama_block_ip_address",
-           "example_panorama_block_user",
-           "example_panorama_get_address_groups",
-           "example_panorama_unblock_dns_name",
-           "example_panorama_unblock_ip_address",
-           "example_panorama_unblock_user"
+            u"example_panorama_block_dns_name",
+            u"example_panorama_block_ip_address",
+            u"example_panorama_block_user",
+            u"example_panorama_get_address_groups",
+            u"example_panorama_unblock_dns_name",
+            u"example_panorama_unblock_ip_address",
+            u"example_panorama_unblock_user"
         ]
     }
 
@@ -58,7 +58,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 49.0.8803
+    IBM SOAR Platform Version: 50.0.9097
 
     Contents:
     - Message Destinations:

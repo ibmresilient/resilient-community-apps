@@ -19,9 +19,10 @@ def snake_to_camel(word):
 
 setup(
     name='fn_pa_panorama',
-    version='1.3.0',
+    version='1.4.0',
     license='MIT',
     author='IBM QRadar SOAR',
+    display_name="Palo Alto Networks Panorama Integration for SOAR",
     description="SOAR Components to Integrate with the Panorama Platform",
     long_description="""This integration contains Functions to interact with address groups, 
                      addresses, and user groups within Palo Alto Panorama. This integration can be
@@ -32,6 +33,7 @@ setup(
         'xmltodict>=0.12.0'
     ],
     packages=find_packages(),
+    python_requires='>=3.9',
     include_package_data=True,
     platforms='any',
     classifiers=[

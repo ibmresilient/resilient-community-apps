@@ -20,7 +20,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Lists users part of a group in Panorama.
+        Function: Lists users part of a group in Panorama. This only works with Panorama and does not work with PanOS.
         Inputs:
             -   fn_inputs.panorama_user_group_xpath
             -   fn_inputs.panorama_label
@@ -37,11 +37,8 @@ class FunctionComponent(AppFunctionComponent):
 
         # Create connection to the user specific Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       get_server_settings(self.opts, getattr(
-                                           fn_inputs, "panorama_label", None)),
-                                       self.get_select_param(
-                                           getattr(fn_inputs, "panorama_location", None)),
-                                       None)
+            get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
+            self.get_select_param(getattr(fn_inputs, "panorama_location", None)))
 
         # Initialize function result variables
         results = {}

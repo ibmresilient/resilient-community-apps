@@ -27,8 +27,12 @@ def selftest_function(opts):
     try:
         for server_name in server_list:
             options = opts.get(server_name, {})
+            
+            # Set variables based on how sf_location is configured.
+            sf_vsys = options.get("sf_vsys", "vsys1") if options.get("sf_location", "vsys") in ["vsys", "panorama-pushed"] else None
+            sf_device_group = options.get("sf_device_group", None) if options.get("sf_location", "vsys") == "device-group" else None
 
-            panorama_util = PanoramaClient(opts, options, options.get("sf_location", "vsys"), options.get("sf_vsys", "vsys1"))
+            panorama_util = PanoramaClient(opts, options, options.get("sf_location", "vsys"), sf_vsys, sf_device_group)
             panorama_util.get_addresses()
 
             status = True if panorama_util else False
@@ -45,7 +49,8 @@ def selftest_function(opts):
         api_version: {options.get("api_version")}
         cert: {options.get("cert")}
         sf_location: {options.get("sf_location")}
-        sf_vsys: {options.get("sf_vsys")}"""
+        sf_vsys: {options.get("sf_vsys")}
+        sf_device_group: {options.get("sf_device_group")}"""
 
     return {
         "state": "success" if status else "failure",

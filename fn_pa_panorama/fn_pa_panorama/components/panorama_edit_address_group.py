@@ -25,6 +25,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.panorama_request_body
             -   fn_inputs.panorama_vsys
             -   fn_inputs.panorama_location
+            -   fn_inputs.panorama_device_group
             -   fn_inputs.panorama_name_parameter
             -   fn_inputs.panorama_label
         """
@@ -39,11 +40,10 @@ class FunctionComponent(AppFunctionComponent):
 
         # Create connection to the user specific Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       get_server_settings(self.opts, getattr(
-                                           fn_inputs, "panorama_label", None)),
-                                       self.get_select_param(
-                                           fn_inputs.panorama_location),
-                                       getattr(fn_inputs, "panorama_vsys", None))
+            get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
+            self.get_select_param(fn_inputs.panorama_location),
+            getattr(fn_inputs, "panorama_vsys", None),
+            getattr(fn_inputs, "panorama_device_group", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

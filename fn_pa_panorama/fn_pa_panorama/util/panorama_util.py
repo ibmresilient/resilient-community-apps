@@ -16,7 +16,7 @@ PACKAGE_NAME = "fn_pa_panorama"
 class PanoramaClient:
     """Object to handle the communication and authentication between the integration and Panorama"""
 
-    def __init__(self, opts, pan_config, location, vsys=None):
+    def __init__(self, opts, pan_config, location, vsys=None, device_group=None):
         pan_config["location"] = location
 
         # validate config fields
@@ -30,6 +30,7 @@ class PanoramaClient:
         self.verify = str_to_bool(pan_config.get("cert", "True"))
         self.host = pan_config["panorama_host"]
         self.rc = RequestsCommon(opts, pan_config)
+        self.proxies = self.rc.get_proxies()
         self.query_parameters = {"location": location,
                                  "output-format": "json"}
         if api_version == "9.0":
@@ -37,8 +38,13 @@ class PanoramaClient:
         else:
             self.header = {"X-PAN-KEY": self.__key}
 
+        # If location equals vsys or panorama-pushed then vsys is required.
         if location in ["vsys", "panorama-pushed"]:
             self.query_parameters["vsys"] = self.__vsys
+
+        # If location equals device-group then device-group is required.
+        if location == "device-group":
+            self.query_parameters["device-group"] = device_group
 
     def __build_url(self, resource_uri):
         """build url for api calls"""
@@ -50,7 +56,8 @@ class PanoramaClient:
                                    self.__build_url(resource_uri),
                                    params=parameters,
                                    verify=self.verify,
-                                   headers=self.header
+                                   headers=self.header,
+                                   proxies=self.proxies
                                 )
         LOG.debug(f"Response: {response}")
         return response.json()
@@ -62,7 +69,8 @@ class PanoramaClient:
                                    params=params,
                                    json=loads(payload),
                                    verify=self.verify,
-                                   headers=self.header
+                                   headers=self.header,
+                                   proxies=self.proxies
                                 )
         LOG.debug(
             f"Status code: {response.status_code}, Response: {response.content}")
@@ -75,7 +83,8 @@ class PanoramaClient:
                                    params=params,
                                    json=loads(payload),
                                    verify=self.verify,
-                                   headers=self.header
+                                   headers=self.header,
+                                   proxies=self.proxies
                                 )
         LOG.debug(
             f"Status code: {response.status_code}, Response: {response.content}")

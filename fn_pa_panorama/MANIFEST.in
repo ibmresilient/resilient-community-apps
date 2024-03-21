@@ -1,7 +1,6 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
 recursive-include fn_pa_panorama/util *
 include fn_pa_panorama/LICENSE
 include doc/*.md

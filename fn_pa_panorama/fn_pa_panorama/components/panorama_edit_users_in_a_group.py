@@ -21,7 +21,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Edits users in a group in Panorama.
+        Function: Edits users in a group in Panorama. This only works with Panorama and does not work with PanOS.
         Inputs:
             -   fn_inputs.panorama_user_group_xpath
             -   fn_inputs.panorama_user_group_xml
