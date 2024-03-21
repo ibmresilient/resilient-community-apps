@@ -396,23 +396,27 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.3.0</p></td>
+<tr class="row-even"><td><p>1.4.0</p></td>
+<td><p>02/2024</p></td>
+<td><p>Add ability to use location=device-group</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.3.0</p></td>
 <td><p>04/2023</p></td>
 <td><p>Convert from rules/workflows to playbooks and update Panorama api version to v9.1</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>10/2022</p></td>
 <td><p>Multi-tenancy support added</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>04/2021</p></td>
 <td><p>Support for different API versions. See app.config <code class="docutils literal notranslate"><span class="pre">api_version</span></code> setting</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>07/2019</p></td>
 <td><p>App Host support</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>10/2020</p></td>
 <td><p>Initial release</p></td>
 </tr>
@@ -425,7 +429,11 @@
 </section>
 <hr class="docutils" />
 <section id="changes">
-<h2>1.3.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h2>
+<h2>1.4.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h2>
+<p>In v1.4, the setting <code class="docutils literal notranslate"><span class="pre">sf_device_group</span></code> has been added to the app.config settings file. This setting is required to be configured if the setting <code class="docutils literal notranslate"><span class="pre">sf_location</span></code> is configured as <code class="docutils literal notranslate"><span class="pre">device-group</span></code>.</p>
+</section>
+<section id="id1">
+<h2>1.3.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>In v1.3, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
 <p>If upgrading from a previous release, you’ll noticed that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it’s corresponding rule, but with “(PB)” added at the end. For automatic actions, the playbooks will be disabled by default.</p>
 <p>You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.</p>
@@ -438,10 +446,11 @@
 <section id="key-features">
 <h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Edit address groups in Panorama</p></li>
+<li><p>Edit address groups in Panorama and PanOS</p></li>
 <li><p>Edit user groups in Panorama</p></li>
-<li><p>Get addresses and users from Panorama</p></li>
-<li><p>Create a new address in Panorama</p></li>
+<li><p>Get addresses from Panorama and PanOS</p></li>
+<li><p>Get users from Panorama</p></li>
+<li><p>Create a new address in Panorama and PanOS</p></li>
 </ul>
 </section>
 </section>
@@ -511,7 +520,7 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
-<p>Python 3.6 and Python 3.9 are supported.
+<p>Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>resilient-lib&gt;=49.0.0</p></li>
@@ -563,12 +572,27 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p><code>[True | False]</code></p></td>
 <td><p><em>Validate certificates (True) or allow insecure connections (False).</em></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>http_proxy</strong></p></td>
+<tr class="row-even"><td><p><strong>sf_location</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vsys</span></code></p></td>
+<td><p><em>Set the location on Panorama to run the selftest from. This can be set to any of the following: shared, vsys, panorama-pushed, or device-config.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sf_vsys</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vsys1</span></code></p></td>
+<td><p><em>The Panorama vsys to use.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sf_device_group</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">group1</span></code></p></td>
+<td><p><em>The Panorama device-group to use.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>http_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&lt;http://proxy.server:3128&gt;</span></code></p></td>
 <td><p><em>Optional http proxy server.</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>https_proxy</strong></p></td>
+<tr class="row-even"><td><p><strong>https_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&lt;https://proxy.server:3128&gt;</span></code></p></td>
 <td><p><em>Optional https proxy server.</em></p></td>
@@ -576,8 +600,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </tbody>
 </table>
 </div>
-<section id="id1">
-<h4>1.2.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<section id="id2">
+<h4>1.2.0 Changes<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <p>Starting in version 1.2.0, more than one Panorama instance can be configured for SOAR case data synchronization. For enterprises with only one Panorama instance, your app.config file will continue to define the Panorama instance under the <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama]</span></code> section header.</p>
 <p>For enterprises with more than one Panorama instance, each instance will have it’s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama:panorama_label1]</span></code> where <code class="docutils literal notranslate"><span class="pre">panorama_label1</span></code> represents any label helpful to define your Panorama environment.</p>
 <p>Be aware that modifications to the workflows will be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field if the Panorama server/servers in the app.config have labels.</p>
@@ -632,6 +656,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_device_group</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the device-group when location type is ‘device-group’</p></td>
 </tr>
 </tbody>
 </table>
@@ -751,6 +781,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_device_group</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the device-group when location type is ‘device-group’</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -864,7 +900,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="function-panorama-edit-users-in-a-group">
 <h2>Function - Panorama Edit Users in a Group<a class="headerlink" href="#function-panorama-edit-users-in-a-group" title="Link to this heading">#</a></h2>
-<p>Edits users in a group in Panorama.</p>
+<p>Edits users in a group in Panorama. This only works with Panorama and does not work with PanOS.</p>
 <p><img alt="screenshot: fn-panorama-edit-users-in-a-group " src="../_images/fn-panorama-edit-users-in-a-group.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1062,6 +1098,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_device_group</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the device-group when location type is ‘device-group’</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1181,6 +1223,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>The name of the vsys when location type is ‘vsys’ or ‘panorama-pushed’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_device_group</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The name of the device-group when location type is ‘device-group’</p></td>
 </tr>
 </tbody>
 </table>
@@ -1347,7 +1395,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="function-panorama-get-users-in-a-group">
 <h2>Function - Panorama Get Users in a Group<a class="headerlink" href="#function-panorama-get-users-in-a-group" title="Link to this heading">#</a></h2>
-<p>Lists users part of a group in Panorama.</p>
+<p>Lists users part of a group in Panorama. This only works with Panorama and does not work with PanOS.</p>
 <p><img alt="screenshot: fn-panorama-get-users-in-a-group " src="../_images/fn-panorama-get-users-in-a-group.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1676,7 +1724,8 @@ input field <code class="docutils literal notranslate"><span class="pre">panoram
 <li><a class="reference internal" href="#">Palo Alto Panorama</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a></li>
-<li><a class="reference internal" href="#changes">1.3.0 Changes</a></li>
+<li><a class="reference internal" href="#changes">1.4.0 Changes</a></li>
+<li><a class="reference internal" href="#id1">1.3.0 Changes</a></li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
@@ -1691,7 +1740,7 @@ input field <code class="docutils literal notranslate"><span class="pre">panoram
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#install">Install</a></li>
 <li><a class="reference internal" href="#app-configuration">App Configuration</a><ul>
-<li><a class="reference internal" href="#id1">1.2.0 Changes</a></li>
+<li><a class="reference internal" href="#id2">1.2.0 Changes</a></li>
 </ul>
 </li>
 </ul>
