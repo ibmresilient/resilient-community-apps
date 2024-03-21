@@ -420,71 +420,75 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.3.4</p></td>
+<tr class="row-even"><td><p>2.4.0</p></td>
+<td><p>02/2024</p></td>
+<td><p>Update to poller to automatically account for time zone differences between SOAR and QRadar. Remove ‘.’ from query name.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.3.4</p></td>
 <td><p>11/2023</p></td>
 <td><p>Bug fix for syncing note between QRadar and SOAR</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.3.3</p></td>
+<tr class="row-even"><td><p>2.3.3</p></td>
 <td><p>10/2023</p></td>
 <td><p>Bug fix for making an api call to use case manager on the QRadar server to retrieve MITRE mappings for a rule.</p></td>
 </tr>
-<tr class="row-even"><td><p>2.3.2</p></td>
+<tr class="row-odd"><td><p>2.3.2</p></td>
 <td><p>08/2023</p></td>
 <td><p>Bug fix for MITRE function and poller search</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.3.1</p></td>
+<tr class="row-even"><td><p>2.3.1</p></td>
 <td><p>05/2023</p></td>
 <td><p>Bug fix for MITRE playbook</p></td>
 </tr>
-<tr class="row-even"><td><p>2.3.0</p></td>
+<tr class="row-odd"><td><p>2.3.0</p></td>
 <td><p>05/2023</p></td>
 <td><p>Support configurable settings to retry QRadar query</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.2.0</p></td>
+<tr class="row-even"><td><p>2.2.0</p></td>
 <td><p>02/2023</p></td>
 <td><p>Add notes &amp; assigned sync</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>10/2022</p></td>
 <td><p>Add Mitre Info from Offense to case</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.1</p></td>
+<tr class="row-even"><td><p>2.0.1</p></td>
 <td><p>08/2022</p></td>
 <td><p>Update documentation</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.0</p></td>
+<tr class="row-odd"><td><p>2.0.0</p></td>
 <td><p>02/2022</p></td>
 <td><p>Real time update to the Offense Summary</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.2</p></td>
+<tr class="row-even"><td><p>1.2.2</p></td>
 <td><p>04/2022</p></td>
 <td><p>Delete search on time-out</p></td>
 </tr>
-<tr class="row-even"><td><p>1.2.1</p></td>
+<tr class="row-odd"><td><p>1.2.1</p></td>
 <td><p>03/2022</p></td>
 <td><p>Bug fix</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>01/2022</p></td>
 <td><p>Allow multiple QRadar instances</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.3</p></td>
+<tr class="row-odd"><td><p>1.1.3</p></td>
 <td><p>01/2022</p></td>
 <td><p>Support for latest Analyst Workflow versions</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.2</p></td>
+<tr class="row-even"><td><p>1.1.2</p></td>
 <td><p>10/2021</p></td>
 <td><p>Update to use latest resilient-circuits</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.1</p></td>
+<tr class="row-odd"><td><p>1.1.1</p></td>
 <td><p>07/2021</p></td>
 <td><p>Fixed selftest failing when using cafile</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>07/2021</p></td>
 <td><p>Support for Flows and QRoc</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>12/2020</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -521,14 +525,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=49.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -567,7 +571,7 @@
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
 <li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -584,10 +588,10 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
-<p>Python 3.6 and Python 3.9 are supported.
+<p>Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient_circuits&gt;=45.0.0</p></li>
+<li><p>resilient_circuits&gt;=49.0.0</p></li>
 </ul>
 </section>
 <section id="qradar-requirements">
@@ -688,12 +692,16 @@ If the Mitre function is going to be used then the app, QRadar Use Case Manager 
 </table>
 </div>
 <section id="changes">
-<h4>2.3.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h4>
+<h4>2.4.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h4>
+<p>The setting <code class="docutils literal notranslate"><span class="pre">timezone_offset</span></code> has been deprecated. Time zone differences between SOAR and QRadar are now accounted for automatically.</p>
+</section>
+<section id="id1">
+<h4>2.3.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <p>See new settings <code class="docutils literal notranslate"><span class="pre">empty_query_max</span></code> and <code class="docutils literal notranslate"><span class="pre">empty_query_wait_secs</span></code>.
 These settings can be added to the app.config <code class="docutils literal notranslate"><span class="pre">[fn_qradar_integration:edm_global_settings]</span></code> section.</p>
 </section>
-<section id="id1">
-<h4>1.2.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<section id="id2">
+<h4>1.2.0 Changes<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <p>Starting in version 1.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the <code class="docutils literal notranslate"><span class="pre">[fn_qradar_integration]</span></code> section header.</p>
 <p>For enterprises with more than one QRadar instance, each instance will have it’s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_qradar_integration:qradar_instance_label]</span></code> where <code class="docutils literal notranslate"><span class="pre">qradar_instance_label</span></code> represents the message destination when QRadar Enhanced Data Migration (EDM) is paired with our QRadar Plugin for offense escalation. For instance the section header <code class="docutils literal notranslate"><span class="pre">[fn_qradar_integration:qradar_9_21_118_173_1110]</span></code> references the message destination <code class="docutils literal notranslate"><span class="pre">qradar_9_21_118_173_1110</span></code> created when the QRadar Plugin is configured for your IBM SOAR platform.</p>
 <p>For other configurations, <code class="docutils literal notranslate"><span class="pre">qradar_instance_label</span></code> can represent any label helpful to define you QRadar environment. Be aware that modifications to the EDM workflows may be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">qradar_label</span></code> function input field.</p>
@@ -2118,12 +2126,12 @@ When reusing these input fields be aware of these purposes.</p>
 <section id="data-table-qr-categories">
 <h2>Data Table - QR Categories<a class="headerlink" href="#data-table-qr-categories" title="Link to this heading">#</a></h2>
 <p><img alt="screenshot: dt-qr-categories" src="../_images/dt-qr-categories.png" /></p>
-<section id="id2">
-<h3>API Name:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3>API Name:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>qr_categories</p>
 </section>
-<section id="id3">
-<h3>Columns:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>Columns:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2188,12 +2196,12 @@ When reusing these input fields be aware of these purposes.</p>
 <section id="data-table-qr-destination-ips-first-10">
 <h2>Data Table - QR Destination IPs (First 10)<a class="headerlink" href="#data-table-qr-destination-ips-first-10" title="Link to this heading">#</a></h2>
 <p><img alt="screenshot: dt-qr-destination-ips-first-10" src="../_images/dt-qr-destination-ips-first-10-events.png" /></p>
-<section id="id4">
-<h3>API Name:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>API Name:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>qr_top_destination_ips</p>
 </section>
-<section id="id5">
-<h3>Columns:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3>Columns:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2238,12 +2246,12 @@ When reusing these input fields be aware of these purposes.</p>
 <section id="data-table-qr-events-first-10-events">
 <h2>Data Table - QR Events (First 10 Events)<a class="headerlink" href="#data-table-qr-events-first-10-events" title="Link to this heading">#</a></h2>
 <p><img alt="screenshot: dt-qr-events-first-10-events" src="../_images/dt-qr-events-first-10-events.png" /></p>
-<section id="id6">
-<h3>API Name:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h3>API Name:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>qr_offense_top_events</p>
 </section>
-<section id="id7">
-<h3>Columns:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="id8">
+<h3>Columns:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2313,12 +2321,12 @@ When reusing these input fields be aware of these purposes.</p>
 <section id="data-table-qr-flows">
 <h2>Data Table - QR Flows<a class="headerlink" href="#data-table-qr-flows" title="Link to this heading">#</a></h2>
 <p><img alt="screenshot: dt-qr-flows" src="../_images/dt-qr-flows.png" /></p>
-<section id="id8">
-<h3>API Name:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h3>API Name:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>qr_flows</p>
 </section>
-<section id="id9">
-<h3>Columns:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<section id="id10">
+<h3>Columns:<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2398,12 +2406,12 @@ When reusing these input fields be aware of these purposes.</p>
 <section id="data-table-qr-source-ips-first-10">
 <h2>Data Table - QR Source IPs (First 10)<a class="headerlink" href="#data-table-qr-source-ips-first-10" title="Link to this heading">#</a></h2>
 <p><img alt="screenshot: dt-qr-source-ips-first-10" src="../_images/dt-qr-source-ips-first-10-events.png" /></p>
-<section id="id10">
-<h3>API Name:<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<section id="id11">
+<h3>API Name:<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>qr_top_source_ips</p>
 </section>
-<section id="id11">
-<h3>Columns:<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="id12">
+<h3>Columns:<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2473,12 +2481,12 @@ When reusing these input fields be aware of these purposes.</p>
 <section id="data-table-qr-triggered-rules">
 <h2>Data Table - QR Triggered Rules<a class="headerlink" href="#data-table-qr-triggered-rules" title="Link to this heading">#</a></h2>
 <p><img alt="screenshot: dt-qr-triggered-rules" src="../_images/dt-qr-triggered-rules.png" /></p>
-<section id="id12">
-<h3>API Name:<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<section id="id13">
+<h3>API Name:<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>qr_triggered_rules</p>
 </section>
-<section id="id13">
-<h3>Columns:<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<section id="id14">
+<h3>Columns:<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2537,12 +2545,12 @@ When reusing these input fields be aware of these purposes.</p>
 <hr class="docutils" />
 <section id="data-table-qradar-rules-and-mitre-tactics-and-techniques">
 <h2>Data Table - QRadar Rules and MITRE Tactics and Techniques<a class="headerlink" href="#data-table-qradar-rules-and-mitre-tactics-and-techniques" title="Link to this heading">#</a></h2>
-<section id="id14">
-<h3>API Name:<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<section id="id15">
+<h3>API Name:<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
 <p>qradar_rules_and_mitre_tactics_and_techniques</p>
 </section>
-<section id="id15">
-<h3>Columns:<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<section id="id16">
+<h3>Columns:<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2981,8 +2989,9 @@ The max value of num_workers is 500.</p>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#install">Install</a></li>
 <li><a class="reference internal" href="#app-configuration">App Configuration</a><ul>
-<li><a class="reference internal" href="#changes">2.3.0 Changes</a></li>
-<li><a class="reference internal" href="#id1">1.2.0 Changes</a></li>
+<li><a class="reference internal" href="#changes">2.4.0 Changes</a></li>
+<li><a class="reference internal" href="#id1">2.3.0 Changes</a></li>
+<li><a class="reference internal" href="#id2">1.2.0 Changes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#mssp-configuration">MSSP Configuration</a></li>
@@ -3005,38 +3014,38 @@ The max value of num_workers is 500.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-qr-categories">Data Table - QR Categories</a><ul>
-<li><a class="reference internal" href="#id2">API Name:</a></li>
-<li><a class="reference internal" href="#id3">Columns:</a></li>
+<li><a class="reference internal" href="#id3">API Name:</a></li>
+<li><a class="reference internal" href="#id4">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-qr-destination-ips-first-10">Data Table - QR Destination IPs (First 10)</a><ul>
-<li><a class="reference internal" href="#id4">API Name:</a></li>
-<li><a class="reference internal" href="#id5">Columns:</a></li>
+<li><a class="reference internal" href="#id5">API Name:</a></li>
+<li><a class="reference internal" href="#id6">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-qr-events-first-10-events">Data Table - QR Events (First 10 Events)</a><ul>
-<li><a class="reference internal" href="#id6">API Name:</a></li>
-<li><a class="reference internal" href="#id7">Columns:</a></li>
+<li><a class="reference internal" href="#id7">API Name:</a></li>
+<li><a class="reference internal" href="#id8">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-qr-flows">Data Table - QR Flows</a><ul>
-<li><a class="reference internal" href="#id8">API Name:</a></li>
-<li><a class="reference internal" href="#id9">Columns:</a></li>
+<li><a class="reference internal" href="#id9">API Name:</a></li>
+<li><a class="reference internal" href="#id10">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-qr-source-ips-first-10">Data Table - QR Source IPs (First 10)</a><ul>
-<li><a class="reference internal" href="#id10">API Name:</a></li>
-<li><a class="reference internal" href="#id11">Columns:</a></li>
+<li><a class="reference internal" href="#id11">API Name:</a></li>
+<li><a class="reference internal" href="#id12">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-qr-triggered-rules">Data Table - QR Triggered Rules</a><ul>
-<li><a class="reference internal" href="#id12">API Name:</a></li>
-<li><a class="reference internal" href="#id13">Columns:</a></li>
+<li><a class="reference internal" href="#id13">API Name:</a></li>
+<li><a class="reference internal" href="#id14">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-qradar-rules-and-mitre-tactics-and-techniques">Data Table - QRadar Rules and MITRE Tactics and Techniques</a><ul>
-<li><a class="reference internal" href="#id14">API Name:</a></li>
-<li><a class="reference internal" href="#id15">Columns:</a></li>
+<li><a class="reference internal" href="#id15">API Name:</a></li>
+<li><a class="reference internal" href="#id16">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
