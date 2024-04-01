@@ -24,13 +24,10 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.1.1 | 03/2024 | Bug fix for external paths to templates when running on windows integration server |
 | v2.1.0 | 5/2023 | Added message signing and encryption capabilities. Replaced workflows with playbooks |
 | v2.0.2 | 12/2022 | Bug fix when specifying your own default template |
 | v2.0.1 | 10/2022 | Bug fix |
@@ -113,11 +110,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0.0`.
+* SOAR platform >= `50.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0.0`.
+* SOAR platform >= `50.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -135,7 +132,7 @@ The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.9.
+* IBM Cloud Pak for Security >= 1.10.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -149,11 +146,11 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does not** support a proxy server.
 
 ### Python Environment
-Python 2.7, 3.6 and 3.9 are supported.
+Python 3.6, 3.9, and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * Jinja2>=2.9.6
-* resilient_circuits>=39.0.0
-* resilient_lib>=32.0.0
+* resilient_circuits>=50.0.0
+* resilient_lib>=50.0.0
 * six
 * BeautifulSoup
 * python-smail
@@ -462,7 +459,7 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 | `mail_cc` | `text` | No | `-` | comma separated list of cc recipients |
 | `mail_bcc` | `text` | No | `-` | comma separated list of blind cc recipients |
 | `mail_subject` | `text` | No | `-` | - |
-| `mail_body` | `text` | No | `-` | body of message sent asis |
+| `mail_body` | `text` | No | `-` | body of message sent as is |
 | `mail_attachments` | `text` | No | `-` | comma separated list of incident attachments |
 | `mail_importance` | `select` | No | `-` | specify Importance (X-Priority) header to use |
 | `mail_in_reply_to` | `text` | No | `-` | specify in-replay-to header to use: ex: 1638585706.2677204.1655401056967@mail.com |
@@ -471,7 +468,7 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 | `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
 | `mail_template_label` | `text` | No | `template_xx` | The label of a specific template as defined in app.config. |
 | `mail_merge_body` | `bool` | No | `Yes` | Flag to merge `mail_body` with either the results from `mail_line_template` or `mail_template_label`. This setting is useful when including the original email message in a reply. |
-| `mail_encryption_recipients` | `text` | No | -----BEGIN CERTIFICATE----- ... -----END CERTIFICATE----- | Comma separated list of PEM formated public keys used for encrypting the message for the recipients |
+| `mail_encryption_recipients` | `text` | No | -----BEGIN CERTIFICATE----- ... -----END CERTIFICATE----- | Comma separated list of PEM formatted public keys used for encrypting the message for the recipients |
 
 NOTE: 
 *  When constructing the public certificates for message encryption, ensure to specify it will be used for email signing. Here's an example of generating that certificate using openssl: `openssl x509 -req -days 3650 -in smime_user.csr -CA ca.crt -CAkey ca.key -set_serial 1 -out smime_user.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout`.

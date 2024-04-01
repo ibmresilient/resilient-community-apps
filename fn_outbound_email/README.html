@@ -390,10 +390,6 @@
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -403,51 +399,55 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>v2.1.0</p></td>
+<tr class="row-even"><td><p>v2.1.1</p></td>
+<td><p>03/2024</p></td>
+<td><p>Bug fix for external paths to templates when running on windows integration server</p></td>
+</tr>
+<tr class="row-odd"><td><p>v2.1.0</p></td>
 <td><p>5/2023</p></td>
 <td><p>Added message signing and encryption capabilities. Replaced workflows with playbooks</p></td>
 </tr>
-<tr class="row-odd"><td><p>v2.0.2</p></td>
+<tr class="row-even"><td><p>v2.0.2</p></td>
 <td><p>12/2022</p></td>
 <td><p>Bug fix when specifying your own default template</p></td>
 </tr>
-<tr class="row-even"><td><p>v2.0.1</p></td>
+<tr class="row-odd"><td><p>v2.0.1</p></td>
 <td><p>10/2022</p></td>
 <td><p>Bug fix</p></td>
 </tr>
-<tr class="row-odd"><td><p>v2.0.0</p></td>
+<tr class="row-even"><td><p>v2.0.0</p></td>
 <td><p>10/2022</p></td>
 <td><p>Added OAuth 2.0 support for SMTP. Multiple out of box changes</p></td>
 </tr>
-<tr class="row-even"><td><p>v1.3.1</p></td>
+<tr class="row-odd"><td><p>v1.3.1</p></td>
 <td><p>1/2022</p></td>
 <td><p>Bug fixes for get_datatable function in template_helper.py</p></td>
 </tr>
-<tr class="row-odd"><td><p>v1.3.0</p></td>
+<tr class="row-even"><td><p>v1.3.0</p></td>
 <td><p>7/2021</p></td>
 <td><p>Username in app.config does not need to be an email</p></td>
 </tr>
-<tr class="row-even"><td><p>v1.2.1</p></td>
+<tr class="row-odd"><td><p>v1.2.1</p></td>
 <td><p>5/2021</p></td>
 <td><p>Bug fix for python 2</p></td>
 </tr>
-<tr class="row-odd"><td><p>v1.2.0</p></td>
+<tr class="row-even"><td><p>v1.2.0</p></td>
 <td><p>4/2021</p></td>
 <td><p>Added capability for task attachments</p></td>
 </tr>
-<tr class="row-even"><td><p>v1.1.1</p></td>
+<tr class="row-odd"><td><p>v1.1.1</p></td>
 <td><p>2/2021</p></td>
 <td><p>Bug fixes associated with sending attachments</p></td>
 </tr>
-<tr class="row-odd"><td><p>v1.1.0</p></td>
+<tr class="row-even"><td><p>v1.1.0</p></td>
 <td><p>10/2020</p></td>
 <td><p>Bug fixes and send all or specific attachments</p></td>
 </tr>
-<tr class="row-even"><td><p>v1.0.9</p></td>
+<tr class="row-odd"><td><p>v1.0.9</p></td>
 <td><p>5/2020</p></td>
 <td><p>Edge Gateway (formerly App Host) compatibility</p></td>
 </tr>
-<tr class="row-odd"><td><p>v1.0.8</p></td>
+<tr class="row-even"><td><p>v1.0.8</p></td>
 <td><p>4/2020</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -529,12 +529,12 @@ v2.0 to be added. See <a class="reference internal" href="#function---outbound-e
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
 <li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
@@ -558,7 +558,7 @@ v2.0 to be added. See <a class="reference internal" href="#function---outbound-e
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= 1.9.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= 1.10.</p></li>
 <li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -575,12 +575,12 @@ v2.0 to be added. See <a class="reference internal" href="#function---outbound-e
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
-<p>Python 2.7, 3.6 and 3.9 are supported.
+<p>Python 3.6, 3.9, and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>Jinja2&gt;=2.9.6</p></li>
-<li><p>resilient_circuits&gt;=39.0.0</p></li>
-<li><p>resilient_lib&gt;=32.0.0</p></li>
+<li><p>resilient_circuits&gt;=50.0.0</p></li>
+<li><p>resilient_lib&gt;=50.0.0</p></li>
 <li><p>six</p></li>
 <li><p>BeautifulSoup</p></li>
 <li><p>python-smail</p></li>
@@ -1068,7 +1068,7 @@ The public certificate needs to have the <code class="docutils literal notransla
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>body of message sent asis</p></td>
+<td><p>body of message sent as is</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail_attachments</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
@@ -1122,7 +1122,7 @@ The public certificate needs to have the <code class="docutils literal notransla
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>—–BEGIN CERTIFICATE—– … —–END CERTIFICATE—–</p></td>
-<td><p>Comma separated list of PEM formated public keys used for encrypting the message for the recipients</p></td>
+<td><p>Comma separated list of PEM formatted public keys used for encrypting the message for the recipients</p></td>
 </tr>
 </tbody>
 </table>
