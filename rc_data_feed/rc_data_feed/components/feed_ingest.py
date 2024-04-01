@@ -10,7 +10,7 @@ import sys
 import traceback
 
 from resilient_circuits import ResilientComponent, handler, ActionMessage, is_this_a_selftest
-from resilient_lib import str_to_bool
+from resilient_lib import str_to_bool, get_workflow_status
 from resilient import SimpleHTTPException
 
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo, get_incident
@@ -18,6 +18,7 @@ from rc_data_feed.components.threadpool import PluginPool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
 
 LOG = logging.getLogger(__name__)
+MOD_10 = 10
 
 def _get_inc_id(payload):
     if 'incident' in payload:
@@ -152,7 +153,8 @@ class Reload(object):
                  plugin_pool,
                  reload_types,
                  query_api_method=False,
-                 incl_attachment_data=False):
+                 incl_attachment_data=False,
+                 workflow_id=None):
         """
 
         :param plug_pool: pool for multi threading execution of the feed_outputs
@@ -166,6 +168,8 @@ class Reload(object):
         self.type_info_index = {}
         self.search_type_names = []
         self.datatable_search_type_names = {}
+        self.workflow_id = workflow_id
+        self.is_workflow_terminated = False
 
         self.lookup = {
             "attachment": self._query_attachment,
@@ -231,7 +235,7 @@ class Reload(object):
                                                                         self.query_api_method,
                                                                         ('incident' in self.search_type_names))
 
-        if not self.query_api_method:
+        if not self.query_api_method and not self.is_workflow_terminated:
             rng = range(actual_min_inc_id, actual_max_inc_id)
             self._populate_others(rng,
                                   [search_type for search_type in self.search_type_names if search_type != 'incident'],
@@ -254,6 +258,12 @@ class Reload(object):
         try:
             for incident in self._page_incidents(min_inc_id, max_inc_id):
                 inc_id = incident['id']
+
+                # check if workflow is active every 10 incidents
+                if not (inc_id % MOD_10) and self._is_workflow_terminated():
+                    LOG.info("Playbook/workflow terminated")
+                    self.is_workflow_terminated = True
+                    break
 
                 actual_min_inc_id = min(actual_min_inc_id, inc_id)
                 actual_max_inc_id = max(actual_max_inc_id, inc_id)
@@ -278,7 +288,13 @@ class Reload(object):
                          inc_range,
                          search_type_names,
                          type_info_index):
+
         for chunk in range_chunks(inc_range, FeedComponent.SEARCH_PAGE_SIZE):
+            if self._is_workflow_terminated():
+                LOG.info("Playbook/workflow terminated")
+                self.is_workflow_terminated = True
+                break
+
             # Handle all the other built-in types using the search endpoint (except
             # the incident type, which was already handled above.  Make sure we only
             self._populate_others_chunk(chunk, search_type_names, type_info_index)
@@ -320,9 +336,7 @@ class Reload(object):
                                object_type_names,
                                type_info_index):
 
-        # ensure the incident is found
         try:
-            _incident = get_incident(self.plugin_pool.rest_client_helper, inc_id)
             for object_type in object_type_names:
                 if not self.lookup.get(object_type):
                     LOG.error("Method for synchronization not found: %s", object_type)
@@ -414,7 +428,6 @@ class Reload(object):
 
         return len(item_list)
 
-
     def _page_incidents(self, min_inc_id, max_inc_id):
         query = {
             'start': 0,
@@ -457,3 +470,15 @@ class Reload(object):
             query['start'] = len(data) + query['start']
 
             paged_results = self.plugin_pool.rest_client_helper.post(url, query)
+
+    def _is_workflow_terminated(self) -> bool:
+        """determine if the workflow is still active or we should abort
+
+        :return: True if the workflow as been cancelled
+        :rtype: bool
+        """
+        if not self.workflow_id:
+            return False
+
+        workflow_status = get_workflow_status(self.plugin_pool.rest_client_helper, self.workflow_id)
+        return workflow_status.is_terminated

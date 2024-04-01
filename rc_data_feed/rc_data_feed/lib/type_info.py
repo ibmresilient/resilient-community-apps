@@ -8,8 +8,11 @@ import json
 import logging
 import pytz
 import traceback
-from cachetools import cached, TTLCache
+from cachetools import cached, TTLCache, LRUCache
+from cachetools.keys import hashkey
 from datetime import datetime
+from fnmatch import filter
+from functools import reduce
 
 LOG = logging.getLogger(__name__)
 
@@ -227,6 +230,40 @@ class TypeInfo(object):
             values = self._get_field_values(payload, all_fields, translate_func, bypass_error=True)
 
         return values
+    
+    def filter_incident_fields(self, flattened_fields: dict, exclude_list: list) -> dict:
+        """reduce the list of fields for a plugin to transmit to it's datasource
+
+        :param flattened_fields: already flattened fields
+        :type flattened_fields: dict
+        :param exclude_list: list of fields (using fnmatch notation) to exclude
+        :type exclude_list: list
+        :return: flattened list without the excluded fields
+        :rtype: dict
+        """
+        all_incident_fields = flattened_fields.keys() if isinstance(flattened_fields, dict) else []
+        reduced_incident_fields = reduce(self._filter_incident_keys, 
+                                         exclude_list if isinstance(exclude_list, list) else [], 
+                                         all_incident_fields)
+        return {field:flattened_fields[field] for field in reduced_incident_fields}
+
+    # Use all the incident fields as a hash for the cache results
+    #   if the incident fields change (such as new ones), reevaluate the filters
+    #   cache size is based on possible # of incident fields
+    @cached(LRUCache(2000), key=lambda _, flattened_keys, exclude_filter: ''.join(sorted(flattened_keys)))
+    def _filter_incident_keys(self, flattened_keys: list, exclude_filter: str) -> list:
+        """for a given exclude filter pattern, reduce the flatten key list
+
+        :param flattened_keys: list of incident fields to reduce
+        :type flattened_keys: list
+        :param exclude_filter: fnmatch pattern to apply to flattened_keys
+        :type exclude_filter: str
+        :return: excluded list after fnmatch pattern is applied
+        :rtype: list
+        """
+        excl_list = filter(flattened_keys, exclude_filter) # apply the exclude pattern using fnmatch
+        return list(set(flattened_keys) - set(excl_list))
+
 
     def _get_field_values(self, payload, all_fields, translate_func, bypass_error=False):
         """[convert object values based on a supplied conversion method]

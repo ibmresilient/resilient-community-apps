@@ -486,3 +486,17 @@ class TestDataFeederSyncIncidents:
     def test_success(self, typeinfo, field, value, expected_result):
         result_value = TypeInfo.translate_value(typeinfo, field, value)
         assert(result_value == expected_result)
+
+    @pytest.mark.parametrize("flattened_incident, exclude_list, expected_result", [
+        ({'inc_a':'a', 'inc_b':'b', 'inc_c':'c', 'xxx':'xxx'}, ['xxx'], ['inc_a', 'inc_b', 'inc_c']),
+        ({'inc_a1':'a', 'inc_b1':'b', 'inc_c1':'c', 'xxx1':'xxx'}, ['inc*'], ['xxx1']),
+        ({'inc_a2':'a', 'inc_b2':'b', 'inc_c2':'c', 'xxx2':'xxx'}, ['inc_??'], ['xxx2']),
+        ({'inc_a3':'a', 'inc_b3':'b', 'inc_c3':'c', 'xxx3':'xxx'}, [], ['inc_a3', 'inc_b3', 'inc_c3', 'xxx3']),
+        ({'inc_a4':'a', 'inc_b4':'b', 'inc_c4':'c', 'xxx4':'xxx'}, None, ['inc_a4', 'inc_b4', 'inc_c4', 'xxx4']),
+        (None, None, [])
+    ])
+    def test_exclude_incident_fields(self, flattened_incident, exclude_list, expected_result):
+        t = TypeInfo("incident", None)
+        actual_result = t.filter_incident_fields(flattened_incident, exclude_list)
+
+        assert set(actual_result.keys()) == set(expected_result)

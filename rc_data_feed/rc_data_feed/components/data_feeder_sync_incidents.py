@@ -42,6 +42,9 @@ class FunctionComponent(ResilientComponent):
             log.info("df_min_incident_id: %s", df_min_incident_id)
             log.info("df_max_incident_id: %s", df_max_incident_id)
 
+            # collect the workflow/playbook instance id
+            workflow_id = event.message['workflow_instance'].get('workflow_instance_id')
+
             if not df_max_incident_id:
                 df_max_incident_id = df_min_incident_id
 
@@ -71,7 +74,8 @@ class FunctionComponent(ResilientComponent):
                         [ type.strip() for type in self.options.get("reload_types", "").split(",") \
                             if type ],
                         query_api_method=df_query_api_method,
-                        incl_attachment_data=self.incl_attachment_data)
+                        incl_attachment_data=self.incl_attachment_data,
+                        workflow_id=workflow_id)
             reloaded_incidents = df.reload_all(min_inc_id=df_min_incident_id, max_inc_id=df_max_incident_id)
 
             result_payload = result.done(True, {"num_of_sync_incidents": reloaded_incidents})
