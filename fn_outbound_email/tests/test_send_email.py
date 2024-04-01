@@ -3,14 +3,12 @@
 
 from __future__ import print_function
 import pytest
-from .mock_incident import MOCK_TYPE_DEFS 
+from .mock_incident import MOCK_TYPE_DEFS, PACKAGE_NAME
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_outbound_email"
 FUNCTION_NAME = "send_email"
-
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)

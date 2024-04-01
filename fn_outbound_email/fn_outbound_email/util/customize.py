@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.0.151
+# Generated with resilient-sdk v51.0.1.0.695
 
-"""Generate the Resilient customizations required for fn_outbound_email"""
+"""Generate the SOAR customizations required for fn_outbound_email"""
 
 import base64
 import os
@@ -59,7 +59,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 50.0.9097
 
     Contents:
     - Message Destinations:

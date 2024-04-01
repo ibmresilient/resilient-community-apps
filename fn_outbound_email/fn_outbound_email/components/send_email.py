@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #pragma pylint: disable=unused-argument, line-too-long
 """Function implementation"""
 
-from __future__ import print_function
-
-import logging
+from logging import getLogger
 from os import path
 from tempfile import mkdtemp
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, IntegrationError
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
+from fn_outbound_email.lib.template_helper import CONFIG_DATA_SECTION
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
-CONFIG_DATA_SECTION = 'fn_outbound_email'
-SMTP_DEFAULT_CONN_TIMEOUT = 20
 DEFAULT_TLS_SMTP = 'starttls'
 
 class FunctionComponent(ResilientComponent):
@@ -41,13 +38,13 @@ class FunctionComponent(ResilientComponent):
 
         if self.template_file_path: #If a template file path is given in app.config
 
-            #Create path to local template file
+            #Create path to local template file. path.normpath will convert / to \ if running on windows.
             cpath = path.dirname(__file__)
-            local_template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index("/") - 1], self.template_file_path)
+            local_template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index(path.normpath("/")) - 1], path.normpath(self.template_file_path))
 
             #If template_file in app.config does not have a path
             if not path.exists(self.template_file_path) and not path.exists(local_template_file_path):
-                LOG.error(u"Template file '%s' not found.", self.template_file_path)
+                LOG.error("Template file '%s' not found.", self.template_file_path)
                 self.template_file_path = None
             elif path.exists(local_template_file_path):
                 self.template_file_path = local_template_file_path
@@ -158,7 +155,7 @@ class FunctionComponent(ResilientComponent):
                     text = rendered_mail_html.replace('---===newline===---', '<br>')
 
             if error_msg:
-                yield StatusMessage("An error occurred while sending the email: {}".format(error_msg))
+                yield StatusMessage(f"An error occurred while sending the email: {error_msg}")
 
             yield StatusMessage("Done with sending email...")
             results = payload.done(success=True, content={
@@ -196,17 +193,14 @@ class FunctionComponent(ResilientComponent):
         tempdir = mkdtemp()
 
         for incident_attachment in incident_attachment_list:
-            file_name = incident_attachment["name"]
+            file_name = incident_attachment.get("name")
             if file_name in requested_attachments:
                 remaining_attachment_list.remove(file_name)
 
                 if incident_attachment['type'] == 'incident':
-                    file_contents = self.rest_client().get_content("/incidents/{}/attachments/{}/contents".
-                                                                  format(inc_id, incident_attachment["id"]))
+                    file_contents = self.rest_client().get_content(f"/incidents/{inc_id}/attachments/{incident_attachment.get('id')}/contents")
                 else:
-                    file_contents = self.rest_client().get_content("/tasks/{}/attachments/{}/contents".
-                                                                  format(incident_attachment["task_id"],
-                                                                         incident_attachment["id"]))
+                    file_contents = self.rest_client().get_content(f"/tasks/{incident_attachment.get('task_id')}/attachments/{incident_attachment.get('id')}/contents")
                 file_path = path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
@@ -214,12 +208,12 @@ class FunctionComponent(ResilientComponent):
 
         # send warnings when attachments are not found
         if remaining_attachment_list:
-            LOG.warning(u"Unable to find the following attachments: %s", u",".join(remaining_attachment_list))
+            LOG.warning("Unable to find the following attachments: %s", ",".join(remaining_attachment_list))
 
         return set(attachment_path)
 
     def process_attachments(self, inc_id, attachments):
-        """[return a list of filepaths to include as attachments ]
+        """[ return a list of filepaths to include as attachments ]
 
         Args:
             inc_id ([int]): [incident id]
@@ -228,19 +222,18 @@ class FunctionComponent(ResilientComponent):
         Returns:
             [set]: [file paths for attachments]
         """
-        incident_attachment_result = self.rest_client().post("/incidents/{}/attachments/query?include_tasks=true".
-                                                             format(inc_id), None)
+        incident_attachment_result = self.rest_client().post(f"/incidents/{inc_id}/attachments/query?include_tasks=true", None)
         incident_attachment_list = incident_attachment_result['attachments']
         # convert the list of requested attachments
         if attachments and attachments == "*":
             # include all incident attachments
-            attachment_list = [incident_attachment["name"] for incident_attachment in incident_attachment_list]
+            attachment_list = [incident_attachment.get("name") for incident_attachment in incident_attachment_list]
         else:
             attachment_list = [attach.strip() for attach in FunctionComponent.split_string(attachments)] \
                                 if attachments else []
 
         all_attach = self.temp_attach(inc_id, incident_attachment_list, attachment_list)
-        all_attach and LOG.debug(u"Attachments to include: %s", u",".join(all_attach))
+        all_attach and LOG.debug("Attachments to include: %s", ",".join(all_attach))
 
         return all_attach
 

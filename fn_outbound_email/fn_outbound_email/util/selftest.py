@@ -1,16 +1,14 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
 	test with: resilient-circuits selftest -l fn_outbound_email
 """
 
-import smtplib
-import logging
-from resilient_lib.components.resilient_common import validate_fields
+from logging import getLogger
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
 SMTP_DEFAULT_CONN_TIMEOUT = 20
@@ -39,7 +37,7 @@ def selftest_function(opts):
         if error_msg:
             return {
                 "state": "failure",
-                "reason": "Failed to send test email with error:{}".format(error_msg)
+                "reason": f"Failed to send test email with error:{error_msg}"
             }
         else:
 

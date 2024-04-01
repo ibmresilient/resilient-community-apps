@@ -1,12 +1,14 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
 from __future__ import print_function
 import requests_mock
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
-import logging
-LOG = logging.getLogger(__name__)
+from logging import getLogger
+
+PACKAGE_NAME = "fn_outbound_email"
+LOG = getLogger(__name__)
 
 MOCK_TYPE_DEFS = {
   'addr': {
@@ -18,9 +20,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Physical location of the incident, if applicable',
     'input_type': 'text',
     'uuid': '9540d9b0-2cd9-4347-b013-a1c84b6605b7',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'alberta_health_risk_assessment': {
@@ -31,9 +31,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '6dd01276-c322-4095-b33c-15d3b33c3540',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'california_health_risk_assessment': {
@@ -44,9 +42,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '35868ab2-564c-43e1-94bc-a3f5676bc25a',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'city': {
@@ -57,9 +53,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'text',
     'uuid': '488c24db-25a1-4cda-91d1-3865d3639732',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'confirmed': {
@@ -71,9 +65,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Tag an issue as an unconfirmed (event) vs. a confirmed incident.',
     'input_type': 'boolean',
     'uuid': '9b531f7c-d112-4444-8a91-9ea2d5e47162',
-    'values': [
-      
-    ],
+    'values': [],
     'label_False': 'Unconfirmed',
     'label_True': 'Confirmed',
     'rich_text': False
@@ -2304,9 +2296,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'The date the incident was created. This field is read-only.',
     'input_type': 'datetimepicker',
     'uuid': 'b4faf728-881a-4e8b-bf0b-d39b720392a1',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'creator_id': {
@@ -2504,9 +2494,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Determine whether personal information/data was foreseeably involved, disclosed, compromised, accessed, altered, destroyed, damaged, lost or inaccessible.',
     'input_type': 'boolean',
     'uuid': '793e1363-79f5-45af-91e2-0e93356cad82',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'data_contained': {
@@ -2518,9 +2506,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Whether the exposure has been addressed and rectified.',
     'input_type': 'boolean',
     'uuid': 'ac1398bd-350d-4072-9754-7f8262119ec0',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'data_encrypted': {
@@ -2532,9 +2518,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Whether the data in question was encrypted. Data should not be considered encrypted if the encryption keys were also breached.',
     'input_type': 'boolean',
     'uuid': '392851a9-1b28-4913-91cb-2915db7f9d6b',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'data_format': {
@@ -2586,9 +2570,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Original source of the data, such as the name of the database.',
     'input_type': 'multiselect',
     'uuid': 'e4d65b3a-9dca-492b-acb7-d2b33e3d5913',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'dc_impact_likely': {
@@ -2599,9 +2581,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': 'a97ce7c1-a7ec-4efe-822d-e32443392924',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'description': {
@@ -2613,9 +2593,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'A free form text description of the incident.',
     'input_type': 'textarea',
     'uuid': '420d70b1-98f9-4681-a20b-84f36a9e5e48',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'determined_date': {
@@ -2627,9 +2605,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Date you determined whether or not the incident involved a breach of personal information or personal data. Regulatory task timelines will be derived from this date and time.',
     'input_type': 'datetimepicker',
     'uuid': 'aa86ae29-5d3c-4c70-8497-93598a9dc959',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'df_create_date': {
@@ -2642,9 +2618,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'datetimepicker',
     'uuid': '9156b378-efd4-4a53-967a-f57c72562396',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'df_host': {
@@ -2657,9 +2631,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': '6be1b789-913a-4a34-8589-79f8dc9c0efd',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'df_inc_id': {
@@ -2672,9 +2644,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'number',
     'uuid': 'a5f7a637-0d23-463a-b8c2-9a37cab46787',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'df_org_id': {
@@ -2687,9 +2657,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'number',
     'uuid': 'ab62ae7e-7cf2-47b4-8940-f0e1e13a5834',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'discovered_date': {
@@ -2702,9 +2670,7 @@ MOCK_TYPE_DEFS = {
     'input_type': 'datetimepicker',
     'required': 'always',
     'uuid': '26cb8fa6-32e2-410d-b8e5-c23af0d09263',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'due_date': {
@@ -2716,9 +2682,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'The nearest date for the next task due. This field is read-only.',
     'input_type': 'datetimepicker',
     'uuid': 'f549afb8-eb80-4fbf-96f1-63eac60412c8',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'email_message_id': {
@@ -2731,9 +2695,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': '6e7c2c42-88f7-443f-8c0d-0e84b2ba6525',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'employee_involved': {
@@ -2744,9 +2706,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': 'b37923eb-1ade-48d9-a067-c15a313d3264',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'end_date': {
@@ -2758,9 +2718,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'The date the incident was closed. This field is read-only.',
     'input_type': 'datetimepicker',
     'uuid': '719d52c7-42a5-4cd6-8ce5-e8cf9317d2d1',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'exposure_dept_id': {
@@ -2771,9 +2729,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'select',
     'uuid': '15c23dae-1d17-49ff-aae0-8cb457e27867',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'exposure_individual_name': {
@@ -2785,9 +2741,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': 'Employee name',
     'input_type': 'text',
     'uuid': '77618fd8-ecd9-40e5-b86f-b42eee53498f',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'exposure_type_id': {
@@ -2838,9 +2792,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'select',
     'uuid': 'c8f2d2c8-c44b-45c7-b4ff-783a8702b074',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'gdpr_breach_circumstances': {
@@ -2929,9 +2881,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': '7354ee21-c548-44de-b179-2d45f119f228',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'gdpr_consequences': {
@@ -2981,9 +2931,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': '0064f82d-2ccb-4a5f-8f57-27d1ef95193e',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'gdpr_final_assessment': {
@@ -3033,9 +2981,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': 'fa91a9b6-6b12-42d6-bd40-68461d2948af',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'gdpr_harm_risk': {
@@ -3125,9 +3071,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': '519cf3ae-c02a-4197-a6f3-b944fe36052c',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'gdpr_lawful_data_processing_categories': {
@@ -3245,9 +3189,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': '77b2b8cb-ed5c-427f-a9cc-161b13859cbb',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'gdpr_subsequent_notification': {
@@ -3258,9 +3200,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '09f66a71-8c7a-4279-a669-cc6542d124ef',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'hard_liability': {
@@ -3271,9 +3211,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'number',
     'uuid': '72c2c73f-620a-4bb6-900a-705a0bdf912d',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'harmstatus_id': {
@@ -3324,9 +3262,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'number',
     'uuid': '44d6a6ac-886f-46ff-9683-90a13765862a',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'impact_likely': {
@@ -3337,9 +3273,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '4137fbca-9ec7-42e9-9e39-9ef61197cc9b',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'inc_last_modified_date': {
@@ -3351,9 +3285,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'The date the incident was last modified.This field is read only.',
     'input_type': 'datetimepicker',
     'uuid': 'a75e8d1d-d940-4c8a-82f1-8839ab60d583',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'inc_training': {
@@ -3365,9 +3297,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Whether the incident is a simulation or a regular incident. This field is read-only.',
     'input_type': 'boolean',
     'uuid': 'c3f0e3ed-21e1-4d53-affb-fe5ca3308cca',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'incident_type_ids': {
@@ -3572,9 +3502,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'text',
     'uuid': 'bfeec2d4-3770-11e8-ad39-4a0004044aa1',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'jurisdiction_name': {
@@ -3585,9 +3513,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'text',
     'uuid': '658354fe-3bcd-429e-aa08-5998799cc6d2',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'members': {
@@ -3729,9 +3655,7 @@ MOCK_TYPE_DEFS = {
     'input_type': 'text',
     'required': 'always',
     'uuid': 'ad6ed4f2-8d87-4ba2-81fa-03568a9326cc',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'negative_pr_likely': {
@@ -3743,9 +3667,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'If it is foreseeable that the incident might generate any negative public image or publicity for your company or organization.',
     'input_type': 'boolean',
     'uuid': '94dbbd0e-3c82-4650-bd17-bddb3003a7e6',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'new_zealand_risk_assessment': {
@@ -3756,9 +3678,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '19d1232b-f78e-4514-88c6-5133a51bc8b1',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'nist_attack_vectors': {
@@ -3855,9 +3775,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '688a9bc2-cd38-4a45-b7ff-9344b76597fb',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'or_impact_likely': {
@@ -3868,9 +3786,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '2203d24c-b5b4-48cb-811c-d27fac5ef09a',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'org_handle': {
@@ -4139,9 +4055,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': '4b493998-e1a3-447c-aa74-d3fa8b0bcfe3',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'pipeda_overall_assessment': {
@@ -4182,9 +4096,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': '69fca6b3-c00c-496a-a333-123513ef89e6',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'pipeda_probability_of_misuse': {
@@ -4225,9 +4137,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': 'b49e6381-2a11-473e-ac9c-c798805cf039',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'pipeda_sensitivity_of_pi': {
@@ -4268,9 +4178,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'textarea',
     'uuid': '65beb4ea-420e-40e3-b43a-37dee8c1675d',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'plan_status': {
@@ -4313,9 +4221,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': 'cee826b5-5bab-44ba-a177-3458d25199aa',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_credibility': {
@@ -4328,9 +4234,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': 'ea93f610-b018-413e-8ffd-24a710172490',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_destination_ip_count': {
@@ -4343,9 +4247,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': '5be7494c-2776-4df1-8d20-fa994ab11d93',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_event_count': {
@@ -4358,9 +4260,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': '4f7dfb5c-f38d-471b-b7a7-203e5d5790d9',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_flow_count': {
@@ -4373,9 +4273,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': '9bd3220a-33f8-4edc-b007-670cc3aaf59f',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_last_updated_time': {
@@ -4388,9 +4286,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'datetimepicker',
     'uuid': '39b1941a-8e62-4c19-a595-c7ab4ec4ec5f',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_magnitude': {
@@ -4403,9 +4299,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': '73b97697-3400-4bcc-be42-52020a0362a2',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_offense_domain': {
@@ -4418,9 +4312,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': '568fa360-983f-463d-af2d-01bd8c7a0e25',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_offense_index_type': {
@@ -4433,9 +4325,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': 'c34fdc0c-b8e4-4ac8-b149-20f0f30cba01',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_offense_index_value': {
@@ -4448,9 +4338,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': 'f4354ca9-d038-45a5-a91f-b4beaf3f5f18',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_offense_last_updated_time': {
@@ -4463,9 +4351,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'datetimepicker',
     'uuid': '8e612fca-fa1e-448d-9ecd-541ccb158573',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_offense_source': {
@@ -4478,9 +4364,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': '6af22a10-7581-4faf-afc8-c46fb68057f1',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_offense_start_time': {
@@ -4493,9 +4377,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'datetimepicker',
     'uuid': '11e94c0e-62d5-4ef9-8b5d-7073f487b606',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_offense_status': {
@@ -4508,9 +4390,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': '8632d157-312f-49b7-9526-220077ef6131',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qr_relevance': {
@@ -4523,9 +4403,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': 'ef2b94ed-84b9-4388-9e7b-7cafedf6ea4e',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_severity': {
@@ -4538,9 +4416,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': '3659f126-c8df-47cb-bcdb-4dcbab3dbd84',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qr_source_ip_count': {
@@ -4553,9 +4429,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'textarea',
     'uuid': 'd9536f5a-3692-466b-b4c8-1045799d19ba',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'qradar_destination': {
@@ -4568,9 +4442,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': '3b119adb-7585-44b6-b578-7c5d5ee6958d',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'qradar_id': {
@@ -4584,9 +4456,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': '',
     'input_type': 'text',
     'uuid': 'aedb7df6-642a-4438-824d-fe24be34cfc0',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'reporter': {
@@ -4599,9 +4469,7 @@ MOCK_TYPE_DEFS = {
     'placeholder': 'Employee name',
     'input_type': 'text',
     'uuid': '931afc2e-e09d-48e1-8b71-c1cc50e1eba6',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'resolution_id': {
@@ -4664,9 +4532,7 @@ MOCK_TYPE_DEFS = {
     'input_type': 'textarea',
     'required': 'close',
     'uuid': 'f5d18473-03f6-4149-b0d9-1ce9006b4a99',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': True
   },
   'sequence_code': {
@@ -4678,9 +4544,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'The Unique Incident Sequence Code.',
     'input_type': 'text',
     'uuid': '7662e73c-9e92-11e9-bd1f-2745873db71d',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'severity_code': {
@@ -4731,9 +4595,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': 'ea1802d6-008b-4b88-a7d6-fb1fbbd3f839',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'start_date': {
@@ -4745,9 +4607,7 @@ MOCK_TYPE_DEFS = {
     'tooltip': 'Date the incident occurred',
     'input_type': 'datetimepicker',
     'uuid': '90f5a419-e126-48db-888c-80fe09444cfe',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'state': {
@@ -5641,9 +5501,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'boolean',
     'uuid': '7808b829-23a1-4d99-987c-701602a05069',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   },
   'workspace': {
@@ -5676,9 +5534,7 @@ MOCK_TYPE_DEFS = {
     'type_id': 0,
     'input_type': 'text',
     'uuid': 'e486619d-b212-43fd-bb1d-785f4cd312ce',
-    'values': [
-      
-    ],
+    'values': [],
     'rich_text': False
   }
 }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #pragma pylint: disable=line-too-long
 
 """AppFunction implementation"""
@@ -19,12 +19,11 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, CONFIG_DATA_SECTION)
-
+        # Validate app.config
+        validate_fields(["smtp_server"], self.options)
         # configure tab?
-        app_config = opts.get(CONFIG_DATA_SECTION)
-        if str_to_bool(app_config.get("enable_email_conversations", "false")):
+        if str_to_bool(self.options.get("enable_email_conversations", "false")):
             init_email_tab()
-
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -47,12 +46,10 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mail_merge_body
             -   fn_inputs.mail_encryption_recipients
         """
-
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         mail_data = fn_inputs._asdict()
-        # validations
-        validate_fields(["smtp_server"], self.app_configs)
+        # validations required inputs
         validate_fields(["mail_incident_id", "mail_to"], fn_inputs)
 
         if mail_data.get("mail_inline_template") and mail_data.get("mail_template_label"):
@@ -60,7 +57,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # configuration setup
         soar_helper = SoarHelper(self.rest_client())
-        mail_incident_id = fn_inputs.mail_incident_id
+        mail_incident_id = getattr(fn_inputs, "mail_incident_id", None)
 
         mail_data['mail_to'] = split_string(mail_data.get('mail_to'))
         mail_data['mail_cc'] = split_string(mail_data.get('mail_cc'))
@@ -69,7 +66,7 @@ class FunctionComponent(AppFunctionComponent):
                                                                         attachments=mail_data.get('mail_attachments'))
 
         if not mail_data.get('mail_from'):
-            mail_data['mail_from'] = getattr(self.app_configs, "from_email_address")
+            mail_data['mail_from'] = getattr(self.options, "from_email_address", None)
 
         send_smtp_email = SendSMTPEmail(self.opts, mail_data)
 
@@ -106,13 +103,13 @@ class FunctionComponent(AppFunctionComponent):
 
                 error_msg = send_msg(send_smtp_email,
                                      rendered_mail_body,
-                                     encryption_certs=getattr(fn_inputs, 'mail_encryption_recipients'))
+                                     encryption_certs=getattr(fn_inputs, 'mail_encryption_recipients', None))
         elif mail_data.get('mail_body'):
             self.LOG.info("Non-rendered mail_body")
             rendered_mail_body = mail_data.get('mail_body')
             error_msg = send_msg(send_smtp_email,
                                  rendered_mail_body,
-                                 encryption_certs=getattr(fn_inputs, 'mail_encryption_recipients'))
+                                 encryption_certs=getattr(fn_inputs, 'mail_encryption_recipients', None))
         else:
             error_msg = "No email body or template specified"
 

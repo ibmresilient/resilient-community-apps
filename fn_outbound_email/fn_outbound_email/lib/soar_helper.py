@@ -1,12 +1,12 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=line-too-long
 
-import logging
+from logging import getLogger
 from os import path
 from tempfile import mkdtemp
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 UPDATE_FIELD = "/types/actioninvocation/fields/{}"
 GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"
@@ -37,9 +37,9 @@ class SoarHelper():
                 remaining_attachment_list.remove(file_name)
 
                 if incident_attachment['type'] == 'incident':
-                    file_contents = self.rest_client.get_content(f"/incidents/{inc_id}/attachments/{incident_attachment['id']}/contents")
+                    file_contents = self.rest_client.get_content(f"/incidents/{inc_id}/attachments/{incident_attachment.get('id')}/contents")
                 else:
-                    file_contents = self.rest_client.get_content(f"/tasks/{incident_attachment['task_id']}/attachments/{incident_attachment['id']}/contents")
+                    file_contents = self.rest_client.get_content(f"/tasks/{incident_attachment.get('task_id')}/attachments/{incident_attachment.get('id')}/contents")
                 file_path = path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
@@ -69,7 +69,7 @@ class SoarHelper():
         # convert the list of requested attachments
         if attachments and attachments == "*":
             # include all incident attachments
-            attachment_list = [incident_attachment["name"] for incident_attachment in incident_attachment_list]
+            attachment_list = [incident_attachment.get("name") for incident_attachment in incident_attachment_list]
         else:
             attachment_list = [attach.strip() for attach in split_string(attachments)] \
                                 if attachments else []

@@ -1,7 +1,6 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
 recursive-include fn_outbound_email/util *
 recursive-include fn_outbound_email/lib *
 recursive-include fn_outbound_email/bin *

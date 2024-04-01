@@ -1,8 +1,8 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, line-too-long
 import base64
-import logging
+from logging import getLogger
 from errno import ENOENT
 from os import path, strerror
 from smtplib import SMTP, SMTP_SSL
@@ -17,7 +17,7 @@ from fn_outbound_email.lib.template_helper import TemplateHelper, CONFIG_DATA_SE
 from fn_outbound_email.lib.oauth2 import OAuth2
 from .crypto_common import sign_email_message, encrypt_email_message, get_p12_info, isUsageValid
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = '25'

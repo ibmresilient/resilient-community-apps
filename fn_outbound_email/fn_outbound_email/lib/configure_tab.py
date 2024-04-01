@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-#
-# (c) Copyright IBM Corp. 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 from fn_outbound_email.lib.smtp_mailer import CONFIG_DATA_SECTION
 from resilient_lib.ui import View, Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser

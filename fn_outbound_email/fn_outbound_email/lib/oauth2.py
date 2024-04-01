@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """OAuth2 support classes and functions for the Outbound email app"""
 import sys
-import requests
 if sys.version_info[0] == 3:
     from urllib.parse import urlencode
 else:
@@ -71,8 +70,7 @@ class OAuth2:
             self.oauth2_token = r_json["access_token"]
             return
 
-        msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
-            .format(r_json.get("error"), r_json.get("error_description"))
+        msg = f'Unable to authenticate: Error: {r_json.get("error")}\nDescription: {r_json.get("error_description")}'
         raise OAuth2Error(msg)
 
     def generate_oauth2_string(self):
@@ -81,7 +79,7 @@ class OAuth2:
         :return "auth_string": Authentication string for request [str]
 
         """
-        auth_string = "user={0}\x01auth=Bearer {1}\x01\x01".format(self._smtp_user, self.oauth2_token)
+        auth_string = f"user={self._smtp_user}\x01auth=Bearer {self.oauth2_token}\x01\x01"
         self.oauth2_string = auth_string
 
 

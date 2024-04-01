@@ -1,17 +1,14 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Generate a default configuration-file section for fn_outbound_email"""
 
-from __future__ import print_function
-
-
 def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """ 
-    return u"""[fn_outbound_email]
+    return """[fn_outbound_email]
 # enhance the 'email' tab with email conversation fields and datatable
 #enable_email_conversations=true
 # SMTP SERVER (IP ADDRESS or FQDN)

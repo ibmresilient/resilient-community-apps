@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, line-too-long
 
@@ -7,11 +7,11 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
 from cryptography.x509 import Certificate as x509Certificate, ExtensionNotFound, oid
 from email.mime.multipart import MIMEMultipart
-import logging
+from logging import getLogger
 from smail import sign_message, encrypt_message
 from resilient_lib import s_to_b
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 def convert_base64(contents: bytes) -> bytes:
     """determine if data is base64 encoded, and if so, return the decoded content
@@ -72,8 +72,6 @@ def _get_file(file_path: str, mode='r', return_bytes=True) -> bytes:
         with open(file_path, mode) as f:
             result = f.read()
             return s_to_b(result) if return_bytes else result
-
-    return None
 
 def sign_email_message(message: MIMEMultipart,
                        key_signer: RSAPrivateKey,
