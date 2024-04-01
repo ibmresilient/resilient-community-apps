@@ -1,7 +1,7 @@
-# Data Feed ODBCFeed Plugin
+# Data Feeder for ODBC Databases
 
-### Release Notes
-
+## Release Notes
+* v1.1.0 Bug fixes for database re-connections attempts. Sync Incident function is now interruptible if the playbook/workflow is cancelled. Added ability to exclude fields from incident database table.
 * v1.0.8 Allow Data Sync function to continue without failing a workflow/playbook
 * v1.0.7 Fixes for mariaDB and mySQL DB access within App Host
 * v1.0.6 Fixes for removed datatable columns, added caching for db schema updates - improving performance
@@ -17,7 +17,7 @@
 * When connecting to multiple databases from the same database platform, use different user accounts for each database.
 
 ## Introduction
-This package contains the odbcfeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
+This package contains the odbcfeed plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
 
 This plugin allows this replica data to be maintained in a sql-based database.
 
@@ -29,6 +29,14 @@ Unless otherwise specified, contents of this repository are published under the 
 [LICENSE](LICENSE).
 
 ## Change log
+### Version 1.1.0 changes
+Version 1.1.0 introduces the ability to exclude incident fields from the created `incident` database table.  Wildcards can be used to remove fields following a pattern. Ex. gdpr*.
+To use this capability, add the following app.config setting,exclude_incident_fields_file, to the particular database configuration section. 
+
+| Key | Values | Description |
+| :-- | :----- | :---------- |
+| exclude_incident_fields_file | /path/to/exclusion_file.txt | Specify incident fields, one per line, to exclude from the incident database table. Use wildcards such as '*' (multiple characters) or '?' (single character) to exclude patterns of fields. |
+
 ### Version 1.0.5 changes
 Version 1.0.5 introduces the ability to include attachment content. When `include_attachment_data=true` is added to `[feeds]`, an additional database column is added: `content`. This column is created to the `attachment` table in the equivalent database storage type as a blob:
 
@@ -100,6 +108,8 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   sql_dialect=PostgreSQL96Dialect
   uid=<acct>
   pwd=<pwd>
+  # new in v1.1.0 exclude incident fields 
+  exclude_incident_fields_file = /path/to/exclusion_file.txt
 
   #[oracle_feed]
   #class=ODBCFeed
@@ -107,6 +117,8 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   #sql_dialect=OracleDialect
   #uid=<acct>
   #pwd=<pwd>
+  # new in v1.1.0 exclude incident fields 
+  #exclude_incident_fields_file = /path/to/exclusion_file.txt
 
   #[sqlserver_feed]
   #class=ODBCFeed
@@ -114,6 +126,8 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   #sql_dialect=SQLServerDialect
   #uid=<acct>
   #pwd=<pwd>
+  # new in v1.1.0 exclude incident fields 
+  # exclude_incident_fields_file = /path/to/exclusion_file.txt
 
   #[mysql_feed]
   #class=ODBCFeed
@@ -121,6 +135,8 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   #sql_dialect=MariaDBDialect
   #uid=<acct>
   #pwd=<pwd>
+  # new in v1.1.0 exclude incident fields 
+  # exclude_incident_fields_file = /path/to/exclusion_file.txt
 
   #[my_sqlite_feed]
   #class=SQLiteFeed
@@ -138,6 +154,7 @@ The following configuration items are supported:
 | sql_dialect | PostgreSQL96Dialect, MariaDBDialect, SQLServerDialect, OracleDialect | Name of the SQL dialect. |
 | uid | DB user name | Specify the database user name in this property and not in the connect string. Most DBs support the uid in the connect string but you should specify in this property instead. |
 | pwd | DB password | Specify the database user's password in this property and not in the connect string. Most DBs support the pwd in the connect string but you should specify it in this property instead.  You can use the standard Resilient Circuits mechanism for secure password storage. |
+| exclude_incident_fields_file | /path/to/exclusion_file.txt | Specify incident fields, one per line, to exclude from the incident database table. Use wildcards such as '*' (multiple characters) or '?' (single character) to exclude patterns of incident fields. |
 
 When using a data feed database, IBM Resilient strongly recommends that you create and maintain the database on system separate from the Resilient platform, where queries cannot impact your running Resilient instance. Allowing access to the Resilient platform for a database instance can also compromise security of the platform itself.
 

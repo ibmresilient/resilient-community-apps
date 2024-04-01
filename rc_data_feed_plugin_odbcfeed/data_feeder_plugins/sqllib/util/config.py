@@ -14,6 +14,9 @@ odbc_connect=Driver={PostgreSQL};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeo
 sql_dialect=PostgreSQL96Dialect
 uid=<acct>
 pwd=<pwd>
+# specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
+# exclude_incident_fields_file = /path/to/exclusion_file.txt
+
 
 #[oracle_feed]
 #class=ODBCFeed
@@ -21,6 +24,9 @@ pwd=<pwd>
 #sql_dialect=OracleDialect
 #uid=<acct>
 #pwd=<pwd>
+# specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
+# exclude_incident_fields_file = /path/to/exclusion_file.txt
+
 
 #[sqlserver_feed]
 #class=ODBCFeed
@@ -28,6 +34,8 @@ pwd=<pwd>
 #sql_dialect=SQLServerDialect
 #uid=<acct>
 #pwd=<pwd>
+# specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
+# exclude_incident_fields_file = /path/to/exclusion_file.txt
 
 #[mysql_feed]
 #class=ODBCFeed
@@ -35,6 +43,8 @@ pwd=<pwd>
 #sql_dialect=MariaDBDialect
 #uid=<acct>
 #pwd=<pwd>
+# specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
+# exclude_incident_fields_file = /path/to/exclusion_file.txt
 
 #[my_sqlite_feed]
 #class=SQLiteFeed

@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed_plugin_odbcfeed',
     display_name='Data Feeder ODBC Plugin for SOAR',
-    version='1.0.8',
+    version='1.1.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -21,12 +21,12 @@ Supported ODBC databases:
     SQLite file/database
     """,
     install_requires=[
-        'resilient>=45.0',
-        'rc_data_feed>=2.2.1',
-        'cx_Oracle~=8.3; python_version>="3.0"',
+        'resilient>=48.0',
+        'rc_data_feed>=3.1.0',
+        'cx_Oracle>=8.3; python_version>="3.0"',
         'cx_Oracle~=7.3; python_version<"3.0"',
-        'pyodbc~=4.0',
-        'sqlparams~=3.0; python_version>="3.6"',
+        'pyodbc>=4.0',
+        'sqlparams>=3.0; python_version>="3.6"',
         'sqlparams~=1.2; python_version<"3.6"',
         'cachetools',
         'six'
