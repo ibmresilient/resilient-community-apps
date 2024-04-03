@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="search" title="Search" href="../search.html" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Data Feed plugin for Splunk" href="../rc_data_feed_plugin_splunkfeed/README.html" /><link rel="prev" title="Data Feed KafkaFeed Plugin" href="../rc_data_feed_plugin_kafkafeed/README.html" />
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
-        <title>Data Feed ResilientFeed Plugin - QRadar SOAR Apps</title>
+        <title>Data Feeder for SOAR - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -177,7 +177,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/python_api.html">IBM SOAR Python Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
@@ -307,6 +307,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Feeder for SOAR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
@@ -348,89 +349,100 @@
           </label>
         </div>
         <article role="main">
-          <section id="data-feed-resilientfeed-plugin">
-<h1>Data Feed ResilientFeed Plugin<a class="headerlink" href="#data-feed-resilientfeed-plugin" title="Link to this heading">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>This package contains the Resilient plugin to the Data Feed extension. The Data Feed Extension allows you to maintain “replica” data for Resilient incidents artifacts, tasks, notes, and so on, in another Resilient organization in the same or different Resilient platform. The updates are performed in near real-time.</p>
+          <section id="data-feeder-for-soar">
+<h1>Data Feeder for SOAR<a class="headerlink" href="#data-feeder-for-soar" title="Link to this heading">#</a></h1>
+<p>This package contains the QRadar SOAR (Resilient) plugin to the Data Feed extension. The Data Feed Extension allows you to maintain “replica” data for QRadar SOAR incidents, artifacts, tasks, notes, attachments and so on, in another QRadar SOAR organization in the same or different QRadar SOAR platform, as well as another CP4S environment. The updates are performed in near real-time.</p>
 <p>Refer to the documentation on the Data Feed extension for use cases supported and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
 <section id="features">
-<h3>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h3>
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Transfer incident data between two instances of Resilient.</p></li>
-<li><p>Transfer incident data between two Organizations within the same Resilient instance.</p></li>
-<li><p>Transfer incident data to more than one Resilient instance at the same time.</p></li>
+<li><p>Transfer incident data between two instances of QRadar SOAR (or CP4S).</p></li>
+<li><p>Transfer incident data between two Organizations within the same QRadar SOAR instance.</p></li>
+<li><p>Transfer incident data to more than one QRadar SOAR instance at the same time.</p></li>
 <li><p>Synchronized incident data objects include: artifacts, attachments, notes, milestones, tasks and datatables.</p></li>
-<li><p>Choice of databases too retain synchronization information: SQLite or PostreSQL</p></li>
+<li><p>Choice of databases to retain synchronization information: SQLite or PostgreSQL.</p></li>
 </ul>
-</section>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
 <p>Unless otherwise specified, contents of this repository are published under the MIT open-source
-<a class="reference download internal" download="" href="../_downloads/8705fc9f14b42e304bff0c890ff58acb/LICENSE"><span class="xref download myst">LICENSE</span></a>.</p>
+<a class="reference download internal" download="" href="../_downloads/e4ad05dad194f68c6249dc8d774d87be/LICENSE"><span class="xref download myst">LICENSE</span></a>.</p>
+</section>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>Date</p></th>
+<th class="head text-right"><p>Version</p></th>
+<th class="head text-right"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>4/2024</p></td>
+<td class="text-right"><p>1.1.0</p></td>
+<td class="text-right"><p>Enhancements for datatable select/multi-select fields. Fixes for synchronizing task attachments and notes. Threaded updates for better performance.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
-You perform these installation procedures at the Resilient integration server.</p>
-<section id="install-the-python-components">
-<h3>Install the Python Components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">#</a></h3>
+<p>The integration package contains Python components that are called by the QRadar SOAR platform. These components run in the Resilient Circuits integration framework.
+The package also includes QRadar SOAR customizations that will be imported into the platform later.
+You perform these installation procedures at the QRadar SOAR integration server.</p>
+<p>Apps which are installed through the SOAR UI for App Host incorporate the UI components (rules and workflows) and no additional app installation is needed.</p>
+<section id="app-host-installation">
+<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Complete the setup and configuration of your Integration server as detailed in our <a class="reference external" href="https://developer.ibm.com/security/resilient/start/">Integration Server Guide</a>.</p></li>
-<li><p>Run the following commands to install the package:</p></li>
+<li><p>To install or uninstall an App or Integration on the <em>IBM SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">unzip</span> <span class="n">app</span><span class="o">-</span><span class="n">rc_data_feed_plugin_resilientfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">zip</span>
-  <span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">rc_data_feed</span><span class="o">-</span><span class="n">plugin_resilientfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</section>
+<section id="integration-server">
+<h3>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">#</a></h3>
+<p>If adding support for PostgreSQL, upgrade the package as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">rc_data_feed_plugin_resilientfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">[</span><span class="n">postgres</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>If adding support for PostreSQL, upgrade the package as:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">rc_data_feed</span><span class="o">-</span><span class="n">plugin_resilientfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">[</span><span class="n">postgres</span><span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Configure Resilient-circuits</p></li>
-</ul>
-<p>The Resilient Circuits process runs as an unprivileged user, typically named <code class="docutils literal notranslate"><span class="pre">integration</span></code>. If you do not already have an integration user configured on your appliance, create it now.
-Complete the following steps to configure and run the integration:</p>
-<ul class="simple">
-<li><p>Using sudo, switch to the integration user, as follows:</p></li>
-</ul>
-<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">su</span> <span class="pre">-</span> <span class="pre">integration</span></code></p>
-<ul class="simple">
-<li><p>Use one of the following commands to create or update the resilient-circuits configuration file. Use –c for new environments or –u for existing environments.</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  resilient-circuits config -c
-  or
-  resilient-circuits config –u [-l rc-data-feed-plugin-resilientfeed]
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Import custom fields to retain source organization and incident ids:</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">resilient</span><span class="o">-</span><span class="n">circuits</span> <span class="n">customize</span> <span class="o">-</span><span class="n">l</span> <span class="n">rc</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">feed</span><span class="o">-</span><span class="n">plugin</span><span class="o">-</span><span class="n">resilientfeed</span>
-</pre></div>
-</div>
-<p>Note: Perform an export and reimport of these customizations into the target Resilient organization in order to use them. See app.config parameter: <code class="docutils literal notranslate"><span class="pre">sync_reference_fields</span></code>.</p>
+</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Edit the resilient-circuits configuration file, as follows:</p>
 <ul>
-<li><p>In the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section, ensure that you provide all the information required to connect to the Resilient platform.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section, ensure that you provide all the information required to connect to the QRadar SOAR platform.</p></li>
 <li><p>In the <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code> section, define the feed(s) you intend to use and create separate sections for each feed. For example:
 <code class="docutils literal notranslate"><span class="pre">feed_names=resilient_feed</span></code></p></li>
-<li><p>In the [resilient_feed] section, configure the settings for your Resilient environment.</p></li>
+<li><p>In the [resilient_feed] section, configure the settings for your QRadar SOAR environment.</p></li>
 </ul>
 </li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">[</span><span class="n">feeds</span><span class="p">]</span>
+  <span class="c1"># comma separated section names. ex. sqlserver_feed,file_feed</span>
   <span class="n">feed_names</span><span class="o">=</span><span class="n">resilient_feed</span>
-  <span class="n">reload</span><span class="o">=</span><span class="kc">True</span>
-  <span class="c1">## feed_data_resilient is the default queue that will be listened to</span>
+  <span class="n">reload</span><span class="o">=</span><span class="n">false</span>
+  <span class="c1"># use reload_types to limit the types of objects when reload=true.</span>
+  <span class="c1"># Ex: incident,task,note,artifact,attachment,&lt;data_table_api_name&gt;</span>
+  <span class="n">reload_types</span><span class="o">=</span>
+  <span class="c1"># set to true if ElasticSearch errors occur during reload=true</span>
+  <span class="n">reload_query_api_method</span><span class="o">=</span><span class="n">false</span>
+
+  <span class="c1"># feed_data is the default message destination that will be listened to</span>
   <span class="n">queue</span><span class="o">=</span><span class="n">feed_data_resilient</span>
 
+  <span class="c1"># set to true if attachment data should be part of payload send to plugins</span>
+  <span class="n">include_attachment_data</span><span class="o">=</span><span class="n">false</span>
+  <span class="c1"># if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it</span>
+  <span class="c1"># ex: &#39;Default Workspace&#39;: [&#39;resilient_feed&#39;], &#39;workspace A&#39;: [&#39;kafka_feed&#39;, &#39;resilient_feed&#39;]</span>
+  <span class="n">workspaces</span><span class="o">=</span>
+  <span class="c1"># support for parallel execution. Default is False</span>
+  <span class="n">parallel_execution</span> <span class="o">=</span> <span class="kc">False</span>
+  
   <span class="p">[</span><span class="n">resilient_feed</span><span class="p">]</span>
   <span class="n">class</span><span class="o">=</span><span class="n">ResilientFeed</span>
-  <span class="c1">## provide configuration information to the target Resilient and Organization</span>
+  <span class="c1"># provide configuration information to the target QRadar SOAR and Organization</span>
   <span class="n">host</span><span class="o">=</span><span class="n">localhost</span>
   <span class="c1">#proxy_host=</span>
   <span class="n">api_key_id</span><span class="o">=</span>
@@ -440,26 +452,27 @@ Complete the following steps to configure and run the integration:</p>
   <span class="n">port</span><span class="o">=</span><span class="mi">443</span>
   <span class="n">org</span><span class="o">=</span>
   <span class="n">cafile</span><span class="o">=</span><span class="n">false</span>
-  <span class="c1">## identify a sqlite db file to retain mapping between resilient instances.</span>
+  <span class="c1"># identify a sqlite db file to retain mapping between QRadar SOAR instances.</span>
   <span class="n">sqlite_sync_file</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">file</span>
-  <span class="c1">## postgresql db connection if sqlite_sync_file is not used</span>
-  <span class="n">postgresql_connect</span><span class="o">=</span><span class="n">Driver</span><span class="o">=</span><span class="p">{</span><span class="n">PostresSQL</span> <span class="n">Driver</span><span class="p">};</span><span class="n">Server</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="p">;</span><span class="n">DB</span><span class="o">=&lt;</span><span class="n">db</span><span class="o">&gt;</span><span class="p">;</span><span class="n">Port</span><span class="o">=</span><span class="mi">5432</span><span class="p">;</span><span class="n">connectTimeout</span><span class="o">=</span><span class="mi">0</span>
+  <span class="c1"># postgresql db connection if sqlite_sync_file is not used</span>
+  <span class="n">postgresql_connect</span><span class="o">=</span><span class="n">Driver</span><span class="o">=</span><span class="p">{</span><span class="n">PostgresSQL</span> <span class="n">Driver</span><span class="p">};</span><span class="n">Server</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="p">;</span><span class="n">DB</span><span class="o">=&lt;</span><span class="n">db</span><span class="o">&gt;</span><span class="p">;</span><span class="n">Port</span><span class="o">=</span><span class="mi">5432</span><span class="p">;</span><span class="n">connectTimeout</span><span class="o">=</span><span class="mi">0</span>
   <span class="n">postgresql_uid</span><span class="o">=&lt;</span><span class="n">acct</span><span class="o">&gt;</span>
   <span class="n">postgresql_pwd</span><span class="o">=&lt;</span><span class="n">pwd</span><span class="o">&gt;</span>
-  <span class="c1">## optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in [&quot;Phishing&quot;, &quot;Malware&quot;];custom_field = a;description ~ malicious</span>
+  <span class="c1"># optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in [&quot;Phishing&quot;, &quot;Malware&quot;];custom_field = a;description ~ malicious</span>
   <span class="c1">#matching_incident_fields=</span>
-  <span class="c1">## when using matching_incident_fields, specify whether &#39;all&#39; or &#39;any&#39; field needs to match to accept</span>
+  <span class="c1"># when using matching_incident_fields, specify whether &#39;all&#39; or &#39;any&#39; field needs to match to accept</span>
   <span class="c1">#matching_operator=all</span>
-  <span class="c1">## optional semicolon separated list of fields to exclude from an incident. Sections of fields can be used: pii;gdpr;hipaa;cm</span>
+  <span class="c1"># optional semicolon separated list of fields to exclude from an incident. Sections of fields can be used: pii;gdpr;hipaa;cm</span>
   <span class="c1">#exclude_incident_fields=</span>
-  <span class="c1">## optionally include references within the incident to source org_id and incident_id. Values true/false</span>
+  <span class="c1"># optionally include references within the incident to source org_id and incident_id. Values true/false</span>
   <span class="n">sync_reference_fields</span><span class="o">=</span><span class="kc">True</span>
-  <span class="c1">## true|false - specify whether to delete the target incident if the source incident is deleted. Default: false</span>
+  <span class="c1"># true|false - specify whether to delete the target incident if the source incident is deleted. Default: false</span>
   <span class="n">delete_incidents</span><span class="o">=</span><span class="n">false</span>
 </pre></div>
 </div>
+</section>
 <section id="matching-incident-fields">
-<h4>matching_incident_fields<a class="headerlink" href="#matching-incident-fields" title="Link to this heading">#</a></h4>
+<h3>matching_incident_fields<a class="headerlink" href="#matching-incident-fields" title="Link to this heading">#</a></h3>
 <p>Use this capability to filter which incidents and it’s tasks, notes, artifacts, etc. are sent to the target organization. Below are a few examples for how to use this capability.</p>
 <ul class="simple">
 <li><p>Filter on the incident owner.</p></li>
@@ -500,10 +513,9 @@ matching_operator=any</p>
 </div></blockquote>
 </section>
 </section>
-</section>
 <section id="resilientfeed-class">
 <h2>ResilientFeed Class<a class="headerlink" href="#resilientfeed-class" title="Link to this heading">#</a></h2>
-<p>This class allows you to write all incoming data to another Resilient Organization. Incidents, Artifacts, Attachments, Datatables, Notes, Milestones and Tasks (including task notes, and attachments) are copied.
+<p>This class allows you to write all incoming data to another QRadar SOAR Organization. Incidents, Artifacts, Attachments, Datatables, Notes, Milestones and Tasks (including task notes, and attachments) are copied.
 The following configuration items are supported:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -516,26 +528,26 @@ The following configuration items are supported:</p>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>class</p></td>
 <td class="text-left"><p>ResilientFeed</p></td>
-<td class="text-left"><p>Indicates that the section is for an Resilient synchronization.</p></td>
+<td class="text-left"><p>Indicates that the section is for an QRadar SOAR synchronization.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>host, #proxy_host, api_key_id, api_key_secret, #email,  #password, port, org, cafile</p></td>
 <td class="text-left"><p></p></td>
-<td class="text-left"><p>Specify the connection values similar to the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section for connection to the target resilient</p></td>
+<td class="text-left"><p>Specify the connection values similar to the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section for connection to the target SOAR environment</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>sqlite_sync_file</p></td>
 <td class="text-left"><p>/path/to/file</p></td>
-<td class="text-left"><p>Absolute path to a file to retain mapping information between the two Resilient instance. Comment out if using PostgreSQL</p></td>
+<td class="text-left"><p>Absolute path to a file to retain mapping information between the two QRadar SOAR instance. Comment out if using PostgreSQL</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>postgresql_connect</p></td>
-<td class="text-left"><p>Driver={PostresSQL Driver};Server=127.0.0.1; DB=yourDB;Port=5432; connectTimeout=0</p></td>
+<td class="text-left"><p>Driver={PostgresSQL Driver};Server=127.0.0.1; DB=yourDB;Port=5432; connectTimeout=0</p></td>
 <td class="text-left"><p>connection string when using PostgreSQL. Comment out otherwise.</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>postgresql_uid</p></td>
-<td class="text-left"><p>postgeSQL_Acct</p></td>
+<td class="text-left"><p>postgreSQL_Acct</p></td>
 <td class="text-left"><p>Your PostgreSQL account</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>postgresql_pwd</p></td>
-<td class="text-left"><p>postgeSQL_Acct</p></td>
+<td class="text-left"><p>postgreSQL_Acct</p></td>
 <td class="text-left"><p>Your PostgreSQL password</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>matching_incident_fields</p></td>
@@ -561,26 +573,27 @@ The following configuration items are supported:</p>
 </tbody>
 </table>
 </div>
+</section>
 <section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h3>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>This functionality has been tested with Resilient instances &gt;= v35.
-There is presently an issue with v37.0 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use Resilient version &gt;=v37.1.</p></li>
-<li><p>The target Resilient platform must be at the same version or greater than the source Resilient platform.</p></li>
-<li><p>The target Resilient organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under <code class="docutils literal notranslate"><span class="pre">Administrator</span> <span class="pre">Settings</span></code>.</p></li>
-<li><p>The target Resilient organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty.</p></li>
+<li><p>This functionality has been tested with QRadar SOAR instances &gt;= v48.
+There is presently an issue with v37.0 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use QRadar SOAR version &gt;=v37.1.</p></li>
+<li><p>The target QRadar SOAR platform must be at the same version or greater than the source QRadar SOAR platform.</p></li>
+<li><p>The target QRadar SOAR organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under <code class="docutils literal notranslate"><span class="pre">Administrator</span> <span class="pre">Settings</span></code>.</p></li>
+<li><p>The target QRadar SOAR organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty.</p></li>
 <li><p>To synchronize datatables in real time, create rules specifying the <code class="docutils literal notranslate"><span class="pre">feed_data_resilient</span></code> message destination in order to changes.</p></li>
 </ul>
 </section>
 <section id="setup-steps">
-<h3>Setup Steps<a class="headerlink" href="#setup-steps" title="Link to this heading">#</a></h3>
+<h2>Setup Steps<a class="headerlink" href="#setup-steps" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Ensure Resilient version requirements are met for both the source and destination instances.</p></li>
-<li><p>Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the Resilient source organization and importing them to the target Resilient organization.</p></li>
-<li><p>Manually recreate the users and groups needed in the target Resilient organization.</p></li>
-<li><p>Configure the app.config settings with the settings for the target Resilient organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code> to confirm connectivity to both instances of Resilient (with <code class="docutils literal notranslate"><span class="pre">reload=False</span></code>).</p></li>
-<li><p>The best way to test is to set <code class="docutils literal notranslate"><span class="pre">reload=False</span></code> under <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code> in your app.config file, and in the source Resilient organization, run the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> rule to synchronize a small number of incidents. Change the message destination of the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> function to <code class="docutils literal notranslate"><span class="pre">feed_data_resilient</span></code> as it may be used by another Data Feeder plugin.</p></li>
+<li><p>Ensure QRadar SOAR version requirements are met for both the source and destination instances.</p></li>
+<li><p>Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the QRadar SOAR source organization and importing them to the target QRadar SOAR organization.</p></li>
+<li><p>Manually recreate the users and groups needed in the target QRadar SOAR organization.</p></li>
+<li><p>Configure the app.config settings with the settings for the target QRadar SOAR organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code> to confirm connectivity to both instances of QRadar SOAR (with <code class="docutils literal notranslate"><span class="pre">reload=False</span></code>).</p></li>
+<li><p>The best way to test is to set <code class="docutils literal notranslate"><span class="pre">reload=False</span></code> under <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code> in your app.config file, and in the source QRadar SOAR organization, run the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> rule to synchronize a small number of incidents. Change the message destination of the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> function to <code class="docutils literal notranslate"><span class="pre">feed_data_resilient</span></code> as it may be used by another Data Feeder plugin.</p></li>
 </ol>
 <p><img alt="Changing Message Destination" src="../_images/sync_incidents_msg_destination.png" /></p>
 <ol class="arabic simple" start="7">
@@ -589,18 +602,18 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 <p><img alt="Adding Message Destination" src="../_images/rule_msg_destinations.png" /></p>
 </section>
 <section id="considerations">
-<h3>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h3>
+<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>If real-time synchronization remains in place, changes in the source Resilient data will overwrite any changes made in the target Resilient organization data.</p></li>
+<li><p>If real-time synchronization remains in place, changes in the source QRadar SOAR data will overwrite any changes made in the target QRadar SOAR organization data.</p></li>
 <li><p>Deleting a source incident, task, artifact, etc. will also delete the matching target information.</p></li>
 <li><p>Synchronization of incidents may fail if newer required fields were created that were not present on these older incidents. Same is true for newer ‘on close’ created fields. This can be overcome by changing the fields from <code class="docutils literal notranslate"><span class="pre">required</span></code> to <code class="docutils literal notranslate"><span class="pre">optional</span></code>.</p></li>
-<li><p>Unoffical timing tests shows creating incident data can take .3-.5 seconds each data type. Consider the time it will take for all your incident data to synchronize when using <code class="docutils literal notranslate"><span class="pre">reload=True</span></code>.</p></li>
-<li><p>Review the permissions given to target resilient user or api_key. They must have the appropriate values to read and write incidents, artifacts, attachments, comments, milestones, tasks, and datatables. In addition, some incidents have wiki entries associated with them. Finally, older versions of Resilient also intermix simulation incidents. Provide the permission to create those as necessary.</p></li>
+<li><p>Unofficial timing tests shows creating incident data can take .3-.5 seconds each data type. Consider the time it will take for all your incident data to synchronize when using <code class="docutils literal notranslate"><span class="pre">reload=True</span></code>.</p></li>
+<li><p>Review the permissions given to target QRadar SOAR user or api_key. They must have the appropriate values to read and write incidents, artifacts, attachments, comments, milestones, tasks, and datatables. In addition, some incidents have wiki entries associated with them. Finally, older versions of QRadar SOAR also intermix simulation incidents. Provide the permission to create those as necessary.</p></li>
 </ul>
 <p><img alt="Permissions" src="../_images/permissions.png" /></p>
 </section>
 <section id="limitations">
-<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h3>
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>This solution is not intended for bidirectional synchronization.</p></li>
 <li><p>Unfortunately, the create date of the original incident is lost when the target incident is synchronized.</p></li>
@@ -613,7 +626,7 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </ul>
 </section>
 <section id="synchronization-methods">
-<h3>Synchronization Methods<a class="headerlink" href="#synchronization-methods" title="Link to this heading">#</a></h3>
+<h2>Synchronization Methods<a class="headerlink" href="#synchronization-methods" title="Link to this heading">#</a></h2>
 <p>Three methods exist for synchronizing incident data:</p>
 <ul class="simple">
 <li><p>reload=True - This app.config setting will synchronize all incidents (including those closed) each time resilient-circuits is run. Review performance considerations above in [Considerations].</p></li>
@@ -622,16 +635,20 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </ul>
 </section>
 <section id="behavior">
-<h3>Behavior<a class="headerlink" href="#behavior" title="Link to this heading">#</a></h3>
+<h2>Behavior<a class="headerlink" href="#behavior" title="Link to this heading">#</a></h2>
 <p>Unexpected behaviors can occur and are detailed here.</p>
 <ul class="simple">
 <li><p>If an incident is originally filtered via the <code class="docutils literal notranslate"><span class="pre">matching_incident_fields</span></code> setting, all incident data are filtered. If in the future that incident changes so that the matching criteria passes, at the time the incident is changed, only the incident is synchronized. To include all the other data elements such as tasks, artifact, attachments, etc., use the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> function.</p></li>
 <li><p>Attachments cannot be updated.</p></li>
 </ul>
 </section>
+<section id="database-support">
+<h2>Database Support<a class="headerlink" href="#database-support" title="Link to this heading">#</a></h2>
+<p>An external database is used to maintain a mapping of the source incident data to the target incident data. For example, source incident 2100 maps to target incident 2222. The app will look up this relationship in order to update incident 2222 when ongoing changes to incident 2100 are made.
+Either a SQLite database (for integration servers) or a PostgreSQL (for app host or integration servers) can be used.</p>
 <section id="sqlite-database">
 <h3>SQLite Database<a class="headerlink" href="#sqlite-database" title="Link to this heading">#</a></h3>
-<p>A sqlite database can be used to maintain a mapping of incident data between the source and target Resilient instances. Two tables are maintained for this purpose:</p>
+<p>A SQLite database can be used to maintain a mapping of incident data between the source and target QRadar SOAR instances. <strong>This database cannot be used for App Host environments due to the restartability of containers.</strong> Two tables are maintained for data synchronization:</p>
 <ul class="simple">
 <li><p>data_feeder_sync - contains specific ids for source and target instances and status. The fields are as follows:</p></li>
 </ul>
@@ -672,8 +689,9 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </thead>
 </table>
 </div>
+</section>
 <section id="troubleshooting-sqlite-db">
-<h4>Troubleshooting SQLite DB<a class="headerlink" href="#troubleshooting-sqlite-db" title="Link to this heading">#</a></h4>
+<h3>Troubleshooting SQLite DB<a class="headerlink" href="#troubleshooting-sqlite-db" title="Link to this heading">#</a></h3>
 <p>There are many tools to view the db tables, including open-source solutions. DBeaver is one open-source application supporting many different database types including sqlite.</p>
 <p>Use the following SQL statements for problem diagnostics:</p>
 <ul class="simple">
@@ -682,17 +700,17 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </ul>
 <p><img alt="DBeaver" src="../_images/db_view.png" /></p>
 </section>
-</section>
 <section id="postgresql-database">
 <h3>PostgreSQL Database<a class="headerlink" href="#postgresql-database" title="Link to this heading">#</a></h3>
 <p>Like the SQLite database, the same table structures are created and maintained in PostgreSQL.</p>
 <p>Use the SQLite DB if performing a one-time or limited-timeframe synchronization. Use PostgreSQL for continuously synchronization or when using App Host containers.</p>
 </section>
+</section>
 <section id="troubleshooting-tips">
-<h3>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Link to this heading">#</a></h3>
+<h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Link to this heading">#</a></h2>
 <p>Synchronization could fail for the following reasons:</p>
 <ul class="simple">
-<li><p>Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the target Resilient organization. Also check the permissions set on your target Resilient user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.</p></li>
+<li><p>Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the target QRadar SOAR organization. Also check the permissions set on your target QRadar SOAR user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.</p></li>
 <li><p>Artifacts with custom artifact types cannot be synchronized at this time.</p></li>
 <li><p>Older incident fields missing required fields defined at a later point in time. The only remedy is to modify the definition of the fields from <code class="docutils literal notranslate"><span class="pre">required</span></code> to <code class="docutils literal notranslate"><span class="pre">optional</span></code> and then resync the field using the rule <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feed:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code>.</p></li>
 <li><p>Matching criteria filtered the incident. Review the values specified in <code class="docutils literal notranslate"><span class="pre">matching_incident_fields</span></code> and the value specified in <code class="docutils literal notranslate"><span class="pre">matching_operator</span></code>.
@@ -712,15 +730,32 @@ Run the incident action: <code class="docutils literal notranslate"><span class=
 </div>
 </section>
 </section>
-</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="../rc_data_feed_plugin_splunkfeed/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Data Feed plugin for Splunk</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../rc_data_feed_plugin_kafkafeed/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Data Feed KafkaFeed Plugin</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -751,34 +786,31 @@ Run the incident action: <code class="docutils literal notranslate"><span class=
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Data Feed ResilientFeed Plugin</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#">Data Feeder for SOAR</a><ul>
 <li><a class="reference internal" href="#features">Features</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#license">License</a></li>
+<li><a class="reference internal" href="#history">History</a></li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
-<li><a class="reference internal" href="#install-the-python-components">Install the Python Components</a><ul>
+<li><a class="reference internal" href="#app-host-installation">App Host Installation</a></li>
+<li><a class="reference internal" href="#integration-server">Integration Server</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
 <li><a class="reference internal" href="#matching-incident-fields">matching_incident_fields</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="reference internal" href="#resilientfeed-class">ResilientFeed Class</a><ul>
+<li><a class="reference internal" href="#resilientfeed-class">ResilientFeed Class</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#setup-steps">Setup Steps</a></li>
 <li><a class="reference internal" href="#considerations">Considerations</a></li>
 <li><a class="reference internal" href="#limitations">Limitations</a></li>
 <li><a class="reference internal" href="#synchronization-methods">Synchronization Methods</a></li>
 <li><a class="reference internal" href="#behavior">Behavior</a></li>
-<li><a class="reference internal" href="#sqlite-database">SQLite Database</a><ul>
+<li><a class="reference internal" href="#database-support">Database Support</a><ul>
+<li><a class="reference internal" href="#sqlite-database">SQLite Database</a></li>
 <li><a class="reference internal" href="#troubleshooting-sqlite-db">Troubleshooting SQLite DB</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#postgresql-database">PostgreSQL Database</a></li>
-<li><a class="reference internal" href="#troubleshooting-tips">Troubleshooting Tips</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#troubleshooting-tips">Troubleshooting Tips</a></li>
 </ul>
 </li>
 </ul>
