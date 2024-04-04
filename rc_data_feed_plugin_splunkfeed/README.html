@@ -373,19 +373,23 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.1.2</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
+<td><p>04/2024</p></td>
+<td><p>Updated base rc_data_feed to 3.1.0. Added parallel execution. Added ability to exclude selective incident fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.2</p></td>
 <td><p>01/2024</p></td>
 <td><p>Updated base rc_data_feed to 3.0.0</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.1</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
 <td><p>10/2022</p></td>
 <td><p>Fix to handle rare corrupt event.message</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>5/2022</p></td>
 <td><p>Replaced base component, adding attachment content, workspace separation, more control over auto data reload.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.3</p></td>
+<tr class="row-even"><td><p>1.0.3</p></td>
 <td><p>9/2020</p></td>
 <td><p>App Host and Proxy Support</p></td>
 </tr>
@@ -422,7 +426,9 @@
 </section>
 <section id="id1">
 <h3>1.2.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p>This release modified the base portion of the Data Feeder which is controlled by the <code class="docutils literal notranslate"><span class="pre">[feed]</span></code> section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:</p>
+<p>This release modified the base portion of the Data Feeder which is controlled by the <code class="docutils literal notranslate"><span class="pre">[feed]</span></code> section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version.
+Version 1.2.0 also introduces the ability to exclude incident fields from the created <code class="docutils literal notranslate"><span class="pre">incident</span></code> database table.  Wildcards can be used to remove fields following a pattern. Ex. gdpr*.
+To use this capability, add the following app.config setting, exclude_incident_fields_file, to the particular database configuration section.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -435,6 +441,10 @@
 <tr class="row-even"><td><p>parallel_execution</p></td>
 <td><p>True, False</p></td>
 <td><p>parallel execution for faster ingestion to Splunk</p></td>
+</tr>
+<tr class="row-odd"><td><p>exclude_incident_fields_file</p></td>
+<td><p>/path/to/exclusion_file.txt</p></td>
+<td><p>Specify incident fields, one per line, to exclude from the incident data sent to Splunk. Use wildcards such as ‘<em>’ (multiple characters) or ‘?’ (single character) to exclude patterns of fields. Ex. gdpr_</em>, custom_field_int</p></td>
 </tr>
 </tbody>
 </table>
@@ -525,8 +535,28 @@ Complete the following steps to configure and run the integration:</p>
 <span class="c1"># if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it</span>
 <span class="c1"># ex: &#39;Default Workspace&#39;: [&#39;sqlserver_feed&#39;], &#39;workspace A&#39;: [&#39;kafka_feed&#39;, &#39;resilient_feed&#39;]</span>
 <span class="n">workspaces</span><span class="o">=</span>
-<span class="c1"># parallel execution disabled for splunkfeed</span>
+<span class="c1"># parallel execution disabled for splunkfeed.</span>
 <span class="n">parallel_execution</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="p">[</span><span class="n">splunk_hec_feed</span><span class="p">]</span>
+<span class="n">class</span><span class="o">=</span><span class="n">SplunkHECFeed</span>
+<span class="n">token</span><span class="o">=&lt;</span><span class="n">token</span><span class="o">&gt;</span>
+<span class="n">host</span><span class="o">=&lt;</span><span class="n">host</span><span class="o">&gt;</span>
+<span class="n">port</span><span class="o">=</span><span class="mi">8088</span>
+<span class="n">index</span><span class="o">=</span><span class="n">data_feeder</span>
+<span class="c1"># only use event_source_type if using one type. otherwise, the resilient object type (incident, note, artifact, etc.) is used</span>
+<span class="c1">#event_source_type=txt</span>
+<span class="n">event_host</span><span class="o">=&lt;</span><span class="n">resilient</span> <span class="n">host</span><span class="o">&gt;</span>
+<span class="n">event_source</span><span class="o">=</span><span class="n">resilient</span>
+<span class="n">use_ssl</span><span class="o">=</span><span class="n">true</span>
+<span class="c1"># Optional settings for accessing Splunk via a proxy.</span>
+<span class="c1">#http_proxy=http://proxy:8088</span>
+<span class="c1">#https_proxy=http://proxy:8088</span>
+<span class="c1"># these settings are only needed for the unit tests</span>
+<span class="c1">#user=</span>
+<span class="c1">#password=</span>
+<span class="c1"># new in v1.2.0 exclude incident fields. Specify fields to exclude one per line. Wildcards such as * and ? may be used. </span>
+<span class="n">exclude_incident_fields_file</span> <span class="o">=</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">exclusion_file</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 </section>
@@ -578,6 +608,10 @@ Complete the following steps to configure and run the integration:</p>
 <tr class="row-even"><td class="text-left"><p>use_ssl</p></td>
 <td class="text-left"><p>True</p></td>
 <td class="text-left"><p>False</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>exclude_incident_fields_file</p></td>
+<td class="text-left"><p>/path/to/exclusion_file.txt</p></td>
+<td class="text-left"><p>Specify incident fields, one per line, to exclude from the incident send to Splunk. Use wildcards such as ‘*’ (multiple characters) or ‘?’ (single character) to exclude patterns of incident fields.</p></td>
 </tr>
 </tbody>
 </table>
