@@ -16,6 +16,7 @@ Unless otherwise specified, contents of this repository are published under the 
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.2.0   | 04/2024 | Updated base rc_data_feed to 3.1.0. Added parallel execution. Added ability to exclude selective incident fields. |
 | 1.1.2   | 01/2024 | Updated base rc_data_feed to 3.0.0 |
 | 1.1.1   | 10/2022 | Fix to handle rare corrupt event.message |
 | 1.1.0   | 5/2022 | Replaced base component, adding attachment content, workspace separation, more control over auto data reload. |
@@ -32,11 +33,14 @@ This release modified the base portion of the Data Feeder which is controlled by
 | include_attachment_data | true/false | set to true if attachment data should be part of the sent payload. When 'true', the attachment's byte data is saved in base64 format. |
 
 ### 1.2.0 Changes
-This release modified the base portion of the Data Feeder which is controlled by the `[feed]` section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:
+This release modified the base portion of the Data Feeder which is controlled by the `[feed]` section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version.
+Version 1.2.0 also introduces the ability to exclude incident fields from the created `incident` database table.  Wildcards can be used to remove fields following a pattern. Ex. gdpr*.
+To use this capability, add the following app.config setting, exclude_incident_fields_file, to the particular database configuration section. 
 
 | Parameter | Value(s) | Capability |
 | --------- | -------- | ---------- |
 | parallel_execution | True, False | parallel execution for faster ingestion to Splunk |
+| exclude_incident_fields_file | /path/to/exclusion_file.txt | Specify incident fields, one per line, to exclude from the incident data sent to Splunk. Use wildcards such as '*' (multiple characters) or '?' (single character) to exclude patterns of fields. Ex. gdpr_*, custom_field_int |
 
 ## Compatibility
 SOAR: 45.0 or higher
@@ -105,8 +109,28 @@ include_attachment_data=false
 # if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
 # ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
 workspaces=
-# parallel execution disabled for splunkfeed
+# parallel execution disabled for splunkfeed.
 parallel_execution = False
+
+[splunk_hec_feed]
+class=SplunkHECFeed
+token=<token>
+host=<host>
+port=8088
+index=data_feeder
+# only use event_source_type if using one type. otherwise, the resilient object type (incident, note, artifact, etc.) is used
+#event_source_type=txt
+event_host=<resilient host>
+event_source=resilient
+use_ssl=true
+# Optional settings for accessing Splunk via a proxy.
+#http_proxy=http://proxy:8088
+#https_proxy=http://proxy:8088
+# these settings are only needed for the unit tests
+#user=
+#password=
+# new in v1.2.0 exclude incident fields. Specify fields to exclude one per line. Wildcards such as * and ? may be used. 
+exclude_incident_fields_file = /path/to/exclusion_file.txt
 ```
 
 ## SplunkHECFeed Class
@@ -123,6 +147,8 @@ port | Ex. 8088 | The default is 8088 |
 | event_source | Ex. resilient | Optional source name of the events. Specifying a value improves searching
 | event_source_type |  | Optional source_type if one value is used for all events. If unspecified, each object type (incident, task, note, etc.) is used as the source_type
 | use_ssl | True | False | Indicate if connections to the HEC uses encryption (https) |
+| exclude_incident_fields_file | /path/to/exclusion_file.txt | Specify incident fields, one per line, to exclude from the incident send to Splunk. Use wildcards such as '*' (multiple characters) or '?' (single character) to exclude patterns of incident fields. |
+
 
 ### Considerations
 * Enable the HTTP Event Collector within Splunk ES before using this data feed.

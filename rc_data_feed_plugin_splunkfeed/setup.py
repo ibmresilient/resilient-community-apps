@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed_plugin_splunkfeed',
     display_name='Data Feeder for Splunk',
-    version='1.1.2',
+    version='1.2.0',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='',
@@ -17,9 +17,13 @@ setup(
     The updates are performed in near real-time.
     This plugin allows this replica data to be maintained in Splunk.
     Refer to the documentation on the Data Feed extension for uses cases support and configuration options.
-    Also refer to the other Data Feed plugins which can be used in combination.""",
+    Also refer to the other Data Feed plugins which can be used in combination.
+<br>
+    Links:
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'rc_data_feed>=2.2.2',
+        'rc_data_feed>=3.1.0',
         'resilient'
     ],
     packages=find_packages(),

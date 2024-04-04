@@ -46,7 +46,29 @@ class SplunkHECFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         if self.event_source_type:
             self.hec_event.sourcetype = self.event_source_type
 
+        self.exclude_fields = self._get_exclude_incident_fields(options)
+        LOG.info("Excluding incident fields: %s", self.exclude_fields)
 
+    def _get_exclude_incident_fields(self, options: dict) -> list:
+        """read file of excluded fields for db column filtering
+
+        :param options: app.config settings
+        :type options: dict
+        :return: excluded fields or [] when no file is specified
+        :rtype: list
+        """
+
+        file_path = options.get("exclude_incident_fields_file")
+        exclude_fields = []
+        if file_path:
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    # remove any blank lines
+                    exclude_fields = [line.strip() for line in f.read().splitlines() if line]
+            except FileNotFoundError:
+                LOG.error("Unable to read exclude_incident_fields_file: %s", file_path)
+
+        return exclude_fields
 
     def send_data(self, context, payload):
         """
@@ -57,11 +79,16 @@ class SplunkHECFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         # add the incident_id and object id to all payloads, if needed
         flat_payload = context.type_info.flatten(payload, TypeInfo.translate_value)
-        flat_payload['inc_id'] = context.inc_id
-        if payload.get('id'):
-            flat_payload['id'] = payload['id']
 
-        elastic_payload = { "event": flat_payload }
+        # remove customer specified fields
+        flat_payload_filtered = context.type_info.filter_incident_fields(flat_payload, 
+                                                                         self.exclude_fields)
+
+        flat_payload_filtered['inc_id'] = context.inc_id
+        if payload.get('id'):
+            flat_payload_filtered['id'] = payload['id']
+
+        elastic_payload = { "event": flat_payload_filtered }
 
         if context.is_deleted:
             LOG.warn('NOT IMPLEMENTED deleting %s(%s) on index %s', name, payload['id'], self.index)

@@ -25,6 +25,8 @@ use_ssl=true
 # these settings are only needed for the unit tests
 #user=
 #password=
+# new in v1.2.0 exclude incident fields. Specify fields to exclude one per line. Wildcards such as * and ? may be used. 
+#exclude_incident_fields_file = /path/to/exclusion_file.txt
 """
 
     return config_data
