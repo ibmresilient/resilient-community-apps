@@ -363,39 +363,43 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-right"><p>2.3.2</p></td>
+<tr class="row-even"><td class="text-right"><p>2.3.3</p></td>
+<td class="text-right"><p>4/2023</p></td>
+<td class="text-right"><p>Fix for 31 character MD5 values</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>2.3.2</p></td>
 <td class="text-right"><p>2/2023</p></td>
 <td class="text-right"><p>Fix index error</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>2.3.1</p></td>
+<tr class="row-even"><td class="text-right"><p>2.3.1</p></td>
 <td class="text-right"><p>10/2022</p></td>
 <td class="text-right"><p>Fix for defanging logic</p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>2.3.0</p></td>
+<tr class="row-odd"><td class="text-right"><p>2.3.0</p></td>
 <td class="text-right"><p>9/2022</p></td>
 <td class="text-right"><p>Support for Outbound Email 2.0 conversations</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>2.2.0</p></td>
+<tr class="row-even"><td class="text-right"><p>2.2.0</p></td>
 <td class="text-right"><p>7/2021</p></td>
 <td class="text-right"><p>Support for Python 3</p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>2.0.2</p></td>
+<tr class="row-odd"><td class="text-right"><p>2.0.2</p></td>
 <td class="text-right"><p>4/2020</p></td>
 <td class="text-right"><p>Bug fixes for phishing incident type</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>2.0.1</p></td>
+<tr class="row-even"><td class="text-right"><p>2.0.1</p></td>
 <td class="text-right"><p>10/2019</p></td>
 <td class="text-right"><p>Fix when email address contains unicode characters</p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>2.0.0</p></td>
+<tr class="row-odd"><td class="text-right"><p>2.0.0</p></td>
 <td class="text-right"><p>7/2019</p></td>
 <td class="text-right"><p>Unicode bug fixes</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>1.0.1</p></td>
+<tr class="row-even"><td class="text-right"><p>1.0.1</p></td>
 <td class="text-right"><p>2/2019</p></td>
 <td class="text-right"><p>Added automatic rule for script execution</p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>1.0.0</p></td>
+<tr class="row-odd"><td class="text-right"><p>1.0.0</p></td>
 <td class="text-right"><p>1/2019</p></td>
 <td class="text-right"><p>Initial release</p></td>
 </tr>
@@ -439,7 +443,7 @@ The below images show the creation of the <code class="docutils literal notransl
 <h2>Installation instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading">#</a></h2>
 <p>Before installing, verify that your environment meets the following prerequisites:</p>
 <ul class="simple">
-<li><p>IBM SOAR platform is version 39 or later.</p></li>
+<li><p>IBM SOAR platform is version 50 or later.</p></li>
 <li><p>You have a IBM SOAR account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.</p></li>
 </ul>
 <section id="procedure">
@@ -458,13 +462,13 @@ The below images show the creation of the <code class="docutils literal notransl
 </section>
 <section id="result">
 <h3>Result<a class="headerlink" href="#result" title="Link to this heading">#</a></h3>
-<p>After installing from <strong>RuleAndScript.res</strong>, the IBM SOAR platform will have a new Python script called “Generic email script v2.3.0” and a new rule called “Process email message v2.3.0”. The rule runs the script when it is triggered by a new email message being received by the IBM SOAR platform. If instead you imported <strong>ScriptAlone.res</strong> then you will only have the new script and not the rule.</p>
+<p>After installing from <strong>RuleAndScript.res</strong>, the IBM SOAR platform will have a new Python script called “Generic email script v2.3.3” and a new rule called “Process email message v2.3.3”. The rule runs the script when it is triggered by a new email message being received by the IBM SOAR platform. If instead you imported <strong>ScriptAlone.res</strong> then you will only have the new script and not the rule.</p>
 <p><strong>Note</strong>: This new rule is disabled by default. To enable:</p>
 <ol class="arabic simple">
 <li><p>Navigate to <strong>Customization Settings</strong>.</p></li>
 <li><p>Select the “Rules” tab.</p></li>
-<li><p>Modify the “Generic email script v2.3.0” with any custom Allowlist IP address changes</p></li>
-<li><p>Enable the rule “Process email message v2.3.0”.
+<li><p>Modify the “Generic email script v2.3.3” with any custom Allowlist IP address changes</p></li>
+<li><p>Enable the rule “Process email message v2.3.3”.
 If you are using an older email script:</p></li>
 <li><p>Disable any previous email rule this new script is replacing.</p></li>
 </ol>

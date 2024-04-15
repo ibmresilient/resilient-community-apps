@@ -4,6 +4,7 @@ This package consists of the **RuleAndScript.res** and **ScriptAlone.res** IBM S
 ## History
 | Version | Date | Comments |
 | ------: | ---: | -------: |
+| 2.3.3 | 4/2023 | Fix for 31 character MD5 values |
 | 2.3.2 | 2/2023 | Fix index error |
 | 2.3.1 | 10/2022 | Fix for defanging logic |
 | 2.3.0 | 9/2022 | Support for Outbound Email 2.0 conversations |
@@ -47,7 +48,7 @@ Be aware that any url, mailto email address, url etc. is modified so that it is 
 ## Installation instructions
 
 Before installing, verify that your environment meets the following prerequisites:
-* IBM SOAR platform is version 39 or later.
+* IBM SOAR platform is version 50 or later.
 * You have a IBM SOAR account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.
 
 ### Procedure
@@ -64,14 +65,14 @@ Before installing, verify that your environment meets the following prerequisite
 8. Select **Proceed**.
 
 ### Result
-After installing from **RuleAndScript.res**, the IBM SOAR platform will have a new Python script called "Generic email script v2.3.0" and a new rule called "Process email message v2.3.0". The rule runs the script when it is triggered by a new email message being received by the IBM SOAR platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
+After installing from **RuleAndScript.res**, the IBM SOAR platform will have a new Python script called "Generic email script v2.3.3" and a new rule called "Process email message v2.3.3". The rule runs the script when it is triggered by a new email message being received by the IBM SOAR platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
 
 **Note**: This new rule is disabled by default. To enable:
 
 1. Navigate to **Customization Settings**.
 2. Select the "Rules" tab.
-3. Modify the "Generic email script v2.3.0" with any custom Allowlist IP address changes
-4. Enable the rule "Process email message v2.3.0".
+3. Modify the "Generic email script v2.3.3" with any custom Allowlist IP address changes
+4. Enable the rule "Process email message v2.3.3".
 If you are using an older email script:
 5. Disable any previous email rule this new script is replacing.
 
