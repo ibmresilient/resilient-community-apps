@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.1.1.824
 
-"""Generate the Resilient customizations required for fn_exchange_online"""
+"""Generate the SOAR customizations required for fn_exchange_online"""
 
 import base64
 import os
@@ -21,17 +22,43 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_exchange_online",
-        "message_destinations": [u"fn_exchange_online"],
-        "functions": [u"exchange_online_create_meeting", u"exchange_online_delete_email", u"exchange_online_delete_messages_from_query_results", u"exchange_online_get_email_user_profile", u"exchange_online_get_message", u"exchange_online_move_message_to_folder", u"exchange_online_query_emails", u"exchange_online_send_message", u"exchange_online_write_message_as_attachment"],
+        "message_destinations": [
+            u"fn_exchange_online"
+        ],
+        "functions": [
+            u"exchange_online_create_meeting",
+            u"exchange_online_delete_email",
+            u"exchange_online_delete_messages_from_query_results",
+            u"exchange_online_get_email_user_profile",
+            u"exchange_online_get_message",
+            u"exchange_online_move_message_to_folder",
+            u"exchange_online_query_emails",
+            u"exchange_online_send_message",
+            u"exchange_online_write_message_as_attachment"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"exo_message_query_results_dt"],
+        "datatables": [
+            u"exo_message_query_results_dt"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"Exchange Online Create Artifacts from Message"],
-        "playbooks": [u"example_exchange_online_create_artifacts", u"example_exchange_online_create_meeting", u"example_exchange_online_delete_message", u"example_exchange_online_delete_messages_from_query_results", u"example_exchange_online_get_user_profile", u"example_exchange_online_move_message_to_folder", u"example_exchange_online_query_messages", u"example_exchange_online_query_messages_on_artifact", u"example_exchange_online_send_message", u"example_exchange_online_write_message_eml_as_attachment", u"example_exchange_online_write_message_json_as_note"]
+        "scripts": [],
+        "playbooks": [
+            u"example_exchange_online_create_artifacts",
+            u"example_exchange_online_create_meeting",
+            u"example_exchange_online_delete_message",
+            u"example_exchange_online_delete_messages_from_query_results",
+            u"example_exchange_online_get_user_profile",
+            u"example_exchange_online_move_message_to_folder",
+            u"example_exchange_online_query_messages",
+            u"example_exchange_online_query_messages_on_artifact",
+            u"example_exchange_online_send_message",
+            u"example_exchange_online_write_message_eml_as_attachment",
+            u"example_exchange_online_write_message_json_as_note"
+        ]
     }
 
 
@@ -40,7 +67,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 47.0.8304
+    IBM SOAR Platform Version: 50.2.42
 
     Contents:
     - Message Destinations:
@@ -69,8 +96,6 @@ def customization_data(client=None):
         - example_exchange_online_write_message_json_as_note
     - Data Tables:
         - exo_message_query_results_dt
-    - Scripts:
-        - Exchange Online Create Artifacts from Message
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
