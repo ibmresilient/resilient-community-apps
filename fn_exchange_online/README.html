@@ -416,7 +416,11 @@
 
 -->
 <section id="id1">
-<h3>1.4.0<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>1.4.1<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Moved a global Python2 script to a local playbook Python3 script</p>
+</section>
+<section id="id2">
+<h3>1.4.0<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
 <p>If upgrading from a previous release, you’ll notice that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it’s corresponding rule, but with “(PB)” added at the end.</p>
 <p>You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.</p>
@@ -480,30 +484,33 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.4.0</p></td>
+<tr class="row-even"><td><p>1.4.1</p></td>
+<td><p>4/2024</p></td>
+<td><p>Moved a global Python2 script to a local playbook Python3 script</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.4.0</p></td>
 <td><p>7/2023</p></td>
 <td><p>Convert rules and workflows to playbooks</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.3.0</p></td>
+<tr class="row-even"><td><p>1.3.0</p></td>
 <td><p>2/2021</p></td>
 <td><p>Added attachments to send message</p></td>
 </tr>
-<tr class="row-even"><td><p>1.2.0</p></td>
+<tr class="row-odd"><td><p>1.2.0</p></td>
 <td><p>12/2020</p></td>
 <td><p>Performance improvement when querying a large tenant using the “all” query parameter</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>9/2020</p></td>
 <td><p>Numerous performance and functional improvements around querying mailboxes</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>2/2020</p></td>
 <td><p>Initial publication</p></td>
 </tr>
 </tbody>
 </table>
 </div>
- <!-- ::CHANGE_ME:: -->
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -512,7 +519,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-<p>Microsoft Exchange Online Functions for IBM Resilient provides the capability to access and manipulate Microsoft Exchange Online messages from the IBM Resilient SOAR Platform.  The integration uses Microsoft Graph API to access the data in Microsoft 365.  Included in the integration are the following capabilities:</p>
+<p>Microsoft Exchange Online Functions for IBM Qradar SOAR provides the capability to access and manipulate Microsoft Exchange Online messages from the IBM QRadar SOAR Platform.  The integration uses Microsoft Graph API to access the data in Microsoft 365.  Included in the integration are the following capabilities:</p>
 <ul>
 <li><p>Get the user profile of the specified email address in JSON format.</p></li>
 <li><p>Get a specified message and return the results in JSON format.</p></li>
@@ -536,14 +543,14 @@
 <p>The integration contains the following functions:
 <img alt="screenshot: main" src="../_images/EXO-functions.png" />
 <strong>Resilient Circuits Components for ‘fn_exchange_online’</strong></p>
-<p><img alt="screenshot: main" src="../_images/main13.png" /> <!-- ::CHANGE_ME:: --></p>
-<p>Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient.</p>
+<p><img alt="screenshot: main" src="../_images/main13.png" /></p>
+<p>QRadar SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from QRadar SOAR.</p>
 <section id="key-features">
 <h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
 <!--
   List the Key Features of the Integration
 -->
-<p>Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient Soar Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:</p>
+<p>QRadar SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM QRadar SOAR Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:</p>
 <ul class="simple">
 <li><p>Get the user profile of the specified email address in JSON format.</p></li>
 <li><p>Get a specified message and and return the results in JSON format.</p></li>
@@ -563,7 +570,6 @@
 <!--
   List any Requirements
 -->
-<!-- ::CHANGE_ME:: -->
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
@@ -596,7 +602,6 @@
 </tbody>
 </table>
 </div>
-<!-- ::CHANGE_ME:: -->
 </li>
 </ul>
 <p>The following SOAR platform guides provide additional information:</p>
@@ -638,28 +643,6 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>resilient_lib&gt;=40.0.1rc0</p></li>
 <li><p>tzlocal&gt;=2.0.0</p></li>
 </ul>
-</section>
-<section id="development-version">
-<h3><!-- ::CHANGE_ME:: --> Development Version<a class="headerlink" href="#development-version" title="Link to this heading">#</a></h3>
-<p>This app has been implemented using:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Product Name</p></th>
-<th class="head"><p>Product Version</p></th>
-<th class="head"><p>API URL</p></th>
-<th class="head"><p>API Version</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><!-- ::CHANGE_ME:: --></p></td>
-<td><p><!-- ::CHANGE_ME:: --></p></td>
-<td><p><!-- ::CHANGE_ME:: --></p></td>
-<td><p><!-- ::CHANGE_ME:: --></p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <section id="prerequisites">
 <h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
 <!--
@@ -671,7 +654,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-<p>The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.</p>
+<p>The following table describes the settings you need to configure in the app.config file. If using App Host, see the QRadar SOAR System Administrator Guide. If using the integration server, see the Integration Server Guide.</p>
 <p><em>Note:</em> if configuring fn_exchange_online with a proxy server, setting both the <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> and <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> can lead to connection issues.
 Microsoft only supports a secure HTTPS proxy and we recommend only using the <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> parameter.
 The <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> parameter should be omitted.</p>
@@ -744,7 +727,7 @@ The <code class="docutils literal notranslate"><span class="pre">http_proxy</spa
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-<p>For the Resilient integration app to access data in Microsoft Graph, an administrator
+<p>For the QRadar SOAR integration app to access data in Microsoft Graph, an administrator
 must grant it the correct permissions via a consent process. Click on “API permissions” on the left menu and then “+ Add a Permission”.</p>
 <p><img alt="screenshot: custom_layouts" src="../_images/MS-Azure-API-permissions.png" /></p>
 <p>Click on Microsoft Graph:</p>
@@ -778,73 +761,6 @@ for your domain:</p>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
-<section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
-<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Config</p></th>
-<th class="head text-center"><p>Required</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>client_id</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>client_secret</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>max_batched_requests</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">20</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>max_messages</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">100</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>max_retries_backoff_factor</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>max_retries_total</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>max_users</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2000</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>microsoft_graph_token_url</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>microsoft_graph_url</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">https://graph.microsoft.com/v1.0</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>tenant_id</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
-<td><p><em>Enter a description of the config here.</em> <!-- ::CHANGE_ME:: --></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
 <section id="custom-layouts">
 <h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
 <!--
@@ -854,7 +770,7 @@ for your domain:</p>
 -->
 <ul>
 <li><p>Import the Data Tables and Custom Fields like the screenshot below:</p>
-<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts8.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts8.png" /></p>
 </li>
 </ul>
 </section>
@@ -863,7 +779,7 @@ for your domain:</p>
 <section id="function-exchange-online-create-meeting">
 <h2>Function - Exchange Online: Create Meeting<a class="headerlink" href="#function-exchange-online-create-meeting" title="Link to this heading">#</a></h2>
 <p>This function creates a meeting event in the organizer’s Outlook calendar and sends a calendar event mail message to the meeting participants inviting them to the meeting.</p>
-<p><img alt="screenshot: fn-exchange-online-create-meeting " src="../_images/fn-exchange-online-create-meeting.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-create-meeting " src="../_images/fn-exchange-online-create-meeting.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1060,7 +976,7 @@ for your domain:</p>
 <section id="function-exchange-online-delete-message">
 <h2>Function - Exchange Online: Delete Message<a class="headerlink" href="#function-exchange-online-delete-message" title="Link to this heading">#</a></h2>
 <p>Delete a message in the specified user’s email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.</p>
-<p><img alt="screenshot: fn-exchange-online-delete-message " src="../_images/fn-exchange-online-delete-message.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-delete-message " src="../_images/fn-exchange-online-delete-message.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1147,7 +1063,7 @@ for your domain:</p>
 <section id="function-exchange-online-delete-messages-from-query-results">
 <h2>Function - Exchange Online: Delete Messages From Query Results<a class="headerlink" href="#function-exchange-online-delete-messages-from-query-results" title="Link to this heading">#</a></h2>
 <p>This Exchange Online function deletes a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.</p>
-<p><img alt="screenshot: fn-exchange-online-delete-messages-from-query-results " src="../_images/fn-exchange-online-delete-messages-from-query-results.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-delete-messages-from-query-results " src="../_images/fn-exchange-online-delete-messages-from-query-results.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1246,7 +1162,7 @@ for your domain:</p>
 <section id="function-exchange-online-get-message">
 <h2>Function - Exchange Online: Get Message<a class="headerlink" href="#function-exchange-online-get-message" title="Link to this heading">#</a></h2>
 <p>This function returns the contents of an Exchange Online message in JSON format.</p>
-<p><img alt="screenshot: fn-exchange-online-get-message " src="../_images/fn-exchange-online-get-message.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-get-message " src="../_images/fn-exchange-online-get-message.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1379,7 +1295,7 @@ for your domain:</p>
 <section id="function-exchange-online-get-user-profile">
 <h2>Function - Exchange Online: Get User Profile<a class="headerlink" href="#function-exchange-online-get-user-profile" title="Link to this heading">#</a></h2>
 <p>This function gets Exchange Online user profile for a given email address.</p>
-<p><img alt="screenshot: fn-exchange-online-get-user-profile " src="../_images/fn-exchange-online-get-user-profile.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-get-user-profile " src="../_images/fn-exchange-online-get-user-profile.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1461,7 +1377,7 @@ for your domain:</p>
 <section id="function-exchange-online-move-message-to-folder">
 <h2>Function - Exchange Online: Move Message to Folder<a class="headerlink" href="#function-exchange-online-move-message-to-folder" title="Link to this heading">#</a></h2>
 <p>This function moves an Exchange Online message to the specified folder in the users mailbox.</p>
-<p><img alt="screenshot: fn-exchange-online-move-message-to-folder " src="../_images/fn-exchange-online-move-message-to-folder.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-move-message-to-folder " src="../_images/fn-exchange-online-move-message-to-folder.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1559,7 +1475,7 @@ for your domain:</p>
 <section id="function-exchange-online-query-messages">
 <h2>Function - Exchange Online: Query Messages<a class="headerlink" href="#function-exchange-online-query-messages" title="Link to this heading">#</a></h2>
 <p>This function queries Exchange Online to find messages matching the specified input parameters.  A list of messages is returned from the function.</p>
-<p><img alt="screenshot: fn-exchange-online-query-messages " src="../_images/fn-exchange-online-query-messages.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-query-messages " src="../_images/fn-exchange-online-query-messages.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -2033,7 +1949,7 @@ for your domain:</p>
 <section id="function-exchange-online-send-message">
 <h2>Function - Exchange Online: Send Message<a class="headerlink" href="#function-exchange-online-send-message" title="Link to this heading">#</a></h2>
 <p>This function creates a message and sends it to the specified recipients.</p>
-<p><img alt="screenshot: fn-exchange-online-send-message " src="../_images/fn-exchange-online-send-message.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-send-message " src="../_images/fn-exchange-online-send-message.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -2142,7 +2058,7 @@ for your domain:</p>
 <section id="function-exchange-online-write-message-as-attachment">
 <h2>Function - Exchange Online: Write Message as Attachment<a class="headerlink" href="#function-exchange-online-write-message-as-attachment" title="Link to this heading">#</a></h2>
 <p>This function gets the mime content of an Exchange Online message and writes it as an incident attachment.</p>
-<p><img alt="screenshot: fn-exchange-online-write-message-as-attachment " src="../_images/fn-exchange-online-write-message-as-attachment.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: fn-exchange-online-write-message-as-attachment " src="../_images/fn-exchange-online-write-message-as-attachment.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -2272,7 +2188,7 @@ for your domain:</p>
 <hr class="docutils" />
 <section id="data-table-exchange-online-message-query-results">
 <h2>Data Table - Exchange Online Message Query Results<a class="headerlink" href="#data-table-exchange-online-message-query-results" title="Link to this heading">#</a></h2>
-<p><img alt="screenshot: dt-exchange-online-message-query-results" src="../_images/dt-exchange-online-message-query-results.png" /> <!-- ::CHANGE_ME:: --></p>
+<p><img alt="screenshot: dt-exchange-online-message-query-results" src="../_images/dt-exchange-online-message-query-results.png" /></p>
 <section id="api-name">
 <h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
 <p>exo_message_query_results_dt</p>
@@ -2485,7 +2401,8 @@ for your domain:</p>
 <li><a class="reference internal" href="#">Microsoft Exchange Online</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#id1">1.4.0</a></li>
+<li><a class="reference internal" href="#id1">1.4.1</a></li>
+<li><a class="reference internal" href="#id2">1.4.0</a></li>
 <li><a class="reference internal" href="#v1-3-0">v1.3.0</a></li>
 <li><a class="reference internal" href="#v1-2-0">v1.2.0</a></li>
 <li><a class="reference internal" href="#v1-1-0">v1.1.0</a></li>
@@ -2501,8 +2418,7 @@ for your domain:</p>
 <li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
 <li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
 <li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
-<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
-<li><a class="reference internal" href="#development-version"><!-- ::CHANGE_ME:: --> Development Version</a><ul>
+<li><a class="reference internal" href="#python-environment">Python Environment</a><ul>
 <li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li><a class="reference internal" href="#configuration">Configuration</a></li>
 <li><a class="reference internal" href="#permissions">Permissions</a></li>
@@ -2512,7 +2428,6 @@ for your domain:</p>
 </li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#install">Install</a></li>
-<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
 <li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
 </ul>
 </li>

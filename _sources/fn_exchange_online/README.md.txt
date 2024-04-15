@@ -53,6 +53,10 @@
 <!--
 
 -->
+### 1.4.1
+
+Moved a global Python2 script to a local playbook Python3 script
+
 ### 1.4.0
 
 In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
@@ -100,12 +104,13 @@ Edit the required configuration setting as described in the [Integration Server]
 ## History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.4.1 | 4/2024 | Moved a global Python2 script to a local playbook Python3 script |
 | 1.4.0 | 7/2023 | Convert rules and workflows to playbooks |
 | 1.3.0 | 2/2021 | Added attachments to send message |
 | 1.2.0 | 12/2020 | Performance improvement when querying a large tenant using the "all" query parameter |
 | 1.1.0 | 9/2020 | Numerous performance and functional improvements around querying mailboxes  |
 | 1.0.0 | 2/2020 | Initial publication |
- <!-- ::CHANGE_ME:: -->
+
 
 ---
 
@@ -114,7 +119,7 @@ Edit the required configuration setting as described in the [Integration Server]
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-Microsoft Exchange Online Functions for IBM Resilient provides the capability to access and manipulate Microsoft Exchange Online messages from the IBM Resilient SOAR Platform.  The integration uses Microsoft Graph API to access the data in Microsoft 365.  Included in the integration are the following capabilities:
+Microsoft Exchange Online Functions for IBM Qradar SOAR provides the capability to access and manipulate Microsoft Exchange Online messages from the IBM QRadar SOAR Platform.  The integration uses Microsoft Graph API to access the data in Microsoft 365.  Included in the integration are the following capabilities:
 
 * Get the user profile of the specified email address in JSON format.
 
@@ -145,15 +150,15 @@ The integration contains the following functions:
  ![screenshot: main](./doc/screenshots/EXO-functions.png)
 **Resilient Circuits Components for 'fn_exchange_online'**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png) 
 
-Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient.
+QRadar SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from QRadar SOAR.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient Soar Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
+QRadar SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM QRadar SOAR Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
 
 * Get the user profile of the specified email address in JSON format.
 
@@ -179,7 +184,7 @@ Resilient Integration with Exchange Online provides the capability to access and
 <!--
   List any Requirements
 -->
-<!-- ::CHANGE_ME:: -->
+
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -198,7 +203,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  <!-- ::CHANGE_ME:: -->
+
 
 The following SOAR platform guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -232,13 +237,6 @@ Additional package dependencies may exist for each of these packages:
 * resilient_lib>=40.0.1rc0
 * tzlocal>=2.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
-
-This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
-
 #### Prerequisites
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
@@ -249,7 +247,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
+The following table describes the settings you need to configure in the app.config file. If using App Host, see the QRadar SOAR System Administrator Guide. If using the integration server, see the Integration Server Guide.
 
 *Note:* if configuring fn_exchange_online with a proxy server, setting both the `http_proxy` and `https_proxy` can lead to connection issues.
 Microsoft only supports a secure HTTPS proxy and we recommend only using the `https_proxy` parameter.
@@ -273,7 +271,7 @@ The `http_proxy` parameter should be omitted.
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-For the Resilient integration app to access data in Microsoft Graph, an administrator
+For the QRadar SOAR integration app to access data in Microsoft Graph, an administrator
 must grant it the correct permissions via a consent process. Click on "API permissions" on the left menu and then "+ Add a Permission".
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions.png)
@@ -313,21 +311,6 @@ You may need to log in to an admin account to accept the permissions requested o
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
-### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
-
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
-| **client_id** | Yes | `xxx` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **client_secret** | Yes | `xxx` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **max_batched_requests** | Yes | `20` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **max_messages** | Yes | `100` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **max_retries_backoff_factor** | Yes | `5` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **max_retries_total** | Yes | `10` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **max_users** | Yes | `2000` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **tenant_id** | Yes | `xxx` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
 
 ### Custom Layouts
 <!--
@@ -337,7 +320,7 @@ The following table provides the settings you need to configure the app. These s
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
 
 ---
@@ -345,7 +328,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Exchange Online: Create Meeting
 This function creates a meeting event in the organizer's Outlook calendar and sends a calendar event mail message to the meeting participants inviting them to the meeting.
 
- ![screenshot: fn-exchange-online-create-meeting ](./doc/screenshots/fn-exchange-online-create-meeting.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-create-meeting ](./doc/screenshots/fn-exchange-online-create-meeting.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -501,7 +484,7 @@ None
 ## Function - Exchange Online: Delete Message
 Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.
 
- ![screenshot: fn-exchange-online-delete-message ](./doc/screenshots/fn-exchange-online-delete-message.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-delete-message ](./doc/screenshots/fn-exchange-online-delete-message.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -572,7 +555,7 @@ None
 ## Function - Exchange Online: Delete Messages From Query Results
 This Exchange Online function deletes a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
 
- ![screenshot: fn-exchange-online-delete-messages-from-query-results ](./doc/screenshots/fn-exchange-online-delete-messages-from-query-results.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-delete-messages-from-query-results ](./doc/screenshots/fn-exchange-online-delete-messages-from-query-results.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -665,7 +648,7 @@ None
 ## Function - Exchange Online: Get Message
 This function returns the contents of an Exchange Online message in JSON format.
 
- ![screenshot: fn-exchange-online-get-message ](./doc/screenshots/fn-exchange-online-get-message.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-get-message ](./doc/screenshots/fn-exchange-online-get-message.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -787,7 +770,7 @@ None
 ## Function - Exchange Online: Get User Profile
 This function gets Exchange Online user profile for a given email address.
 
- ![screenshot: fn-exchange-online-get-user-profile ](./doc/screenshots/fn-exchange-online-get-user-profile.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-get-user-profile ](./doc/screenshots/fn-exchange-online-get-user-profile.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -863,7 +846,7 @@ None
 ## Function - Exchange Online: Move Message to Folder
 This function moves an Exchange Online message to the specified folder in the users mailbox.
 
- ![screenshot: fn-exchange-online-move-message-to-folder ](./doc/screenshots/fn-exchange-online-move-message-to-folder.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-move-message-to-folder ](./doc/screenshots/fn-exchange-online-move-message-to-folder.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -940,7 +923,7 @@ None
 ## Function - Exchange Online: Query Messages
 This function queries Exchange Online to find messages matching the specified input parameters.  A list of messages is returned from the function.
 
- ![screenshot: fn-exchange-online-query-messages ](./doc/screenshots/fn-exchange-online-query-messages.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-query-messages ](./doc/screenshots/fn-exchange-online-query-messages.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1363,7 +1346,7 @@ None
 ## Function - Exchange Online: Send Message
 This function creates a message and sends it to the specified recipients.
 
- ![screenshot: fn-exchange-online-send-message ](./doc/screenshots/fn-exchange-online-send-message.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-send-message ](./doc/screenshots/fn-exchange-online-send-message.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1441,7 +1424,7 @@ None
 ## Function - Exchange Online: Write Message as Attachment
 This function gets the mime content of an Exchange Online message and writes it as an incident attachment.
 
- ![screenshot: fn-exchange-online-write-message-as-attachment ](./doc/screenshots/fn-exchange-online-write-message-as-attachment.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-exchange-online-write-message-as-attachment ](./doc/screenshots/fn-exchange-online-write-message-as-attachment.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1550,7 +1533,7 @@ if artifact_value:
 
 ## Data Table - Exchange Online Message Query Results
 
- ![screenshot: dt-exchange-online-message-query-results](./doc/screenshots/dt-exchange-online-message-query-results.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-exchange-online-message-query-results](./doc/screenshots/dt-exchange-online-message-query-results.png) 
 
 #### API Name:
 exo_message_query_results_dt
