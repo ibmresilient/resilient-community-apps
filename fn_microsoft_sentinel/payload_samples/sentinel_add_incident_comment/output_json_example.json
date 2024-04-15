@@ -1,0 +1,36 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/e5a310d8-a920-428c-ba13-e04300c1d50c/Comments/253d7028-c522-11ee-98a9-fa89897771d7",
+    "name": "253d7028-c522-11ee-98a9-fa89897771d7",
+    "etag": "\"0602009e-0000-0100-0000-65c2820f0000\"",
+    "type": "Microsoft.SecurityInsights/Incidents/Comments",
+    "properties": {
+      "message": "From IBM SOAR:\nTest comment",
+      "createdTimeUtc": "2024-02-06T19:01:35.2742397Z",
+      "lastModifiedTimeUtc": "2024-02-06T19:01:35.2742397Z",
+      "author": {
+        "objectId": "fb5360be-0c6a-4260-ae69-9b07dd735441",
+        "email": null,
+        "name": "Comment created from external application - MS Sentinel",
+        "userPrincipalName": null
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "sentinel_incident_id": "e5a310d8-a920-428c-ba13-e04300c1d50c",
+    "sentinel_profile": "profile_a",
+    "sentinel_incident_comment": "<div class=\"rte\"><div>Test comment</div></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 1405,
+    "timestamp": "2024-02-06 14:01:35"
+  }
+}

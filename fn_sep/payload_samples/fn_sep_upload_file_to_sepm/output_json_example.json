@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandID": "commandID"
+  },
+  "raw": "{\"commandID\": \"commandID\"}",
+  "inputs": {
+    "sep_md5": "sep_md5",
+    "sep_file_path": "C:/Users/Public/Documents/sample.exe",
+    "sep_source": "FILESYSTEM",
+    "sep_computer_ids": "sep_computer_ids"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.0.1",
+    "host": "host",
+    "execution_time_ms": 2270,
+    "timestamp": "2023-01-06 09:50:57"
+  }
+}
