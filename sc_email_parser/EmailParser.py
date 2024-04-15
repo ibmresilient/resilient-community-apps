@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 import re
 import time
 
@@ -6,7 +6,7 @@ import time
 # Change this value to reflect who will be the owner of the incident before running the script.
 newIncidentOwner = ""
 
-# Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation 
+# Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation
 SAVE_CONVERSATION = False
 
 # This is the Python 3 version of the email sample script.
@@ -109,7 +109,7 @@ class Utils:
                 addressAsBinary = addressAsBinary + (hextetAsInt << lpos)
                 lpos = lpos - 16
             # If the previous loop has exited without covering all the hextets then it means there is a "::" present,
-            # so we have to process the reamining hextets from the right
+            # so we have to process the remaining hextets from the right
             if lpos > 0:
                 rpos = 0
                 for hextet in hextets[::-1]:
@@ -265,7 +265,7 @@ class Domain(AllowListElement):
         # Match regex of this Domain object against extracted domain string
         matches = re.findall(self.processedRegEx, domain,
                              re.IGNORECASE | re.UNICODE)
-        return (matches != None) and (len(matches) > 0)
+        return matches and (len(matches) > 0)
 
     def __str__(self):
         """Method to return the text representation of the object."""
@@ -320,7 +320,7 @@ class AllowList(list):
 
 class EmailProcessor(object):
     """ A class that facilitates processing the body contents of an email message.
-    Once the EmailProcessor class has been instanciated, the other methods can be used to add artifacts to the
+    Once the EmailProcessor class has been instantiated, the other methods can be used to add artifacts to the
     incident.
     """
 
@@ -344,7 +344,7 @@ class EmailProcessor(object):
 
     def __init__(self):
         """The EmailProcessor constructor.
-        As initilization it retrieves the email body as both text and HTML.
+        As initialization it retrieves the email body as both text and HTML.
         """
         if (emailmessage.body.content is not None):
             self.emailContents.append(emailmessage.body.content)
@@ -395,7 +395,7 @@ class EmailProcessor(object):
     @staticmethod
     def fixURL(theURL):
         """Method to fix a list of bowdlerized URLs. Many systems attempts to make potentially dangerous URLs into
-        unopenable but human-readible strings. Resilient will reject URL artifacts that do not conform to spec.
+        unopenable but human-readable strings. Resilient will reject URL artifacts that do not conform to spec.
         In this case we are converting "www[.]dangerous[.]nasty" to "www.dangerous.nasty".
         If a URL is discovered in HTML anchor it will have href=" before it.
         If the URL does not contain :// then http:// is presumed.
@@ -505,20 +505,20 @@ class EmailProcessor(object):
                     artifactType, regex))
 
     def checkIPAllowList(self, anAddress):
-        """ A method to check a list of IP Addresses aginst the allowlist. """
+        """ A method to check a list of IP Addresses against the allowlist. """
         allowList = self.ipV4AllowListConverted if "." in anAddress.addressAsString else self.ipV6AllowListConverted
         log.debug(u"Going to filter {0} against allowlist {1}".format(
             anAddress, allowList))
         return allowList.checkIsItemNotOnAllowList(anAddress)
 
     def checkDomainAllowList(self, aURL):
-        """ A method to check a list of URLs aginst a allowlist. """
+        """ A method to check a list of URLs against a allowlist. """
         log.debug(u"Going to filter {0} against allowlist {1}".format(
             aURL, self.domainAllowListConverted))
         return self.domainAllowListConverted.checkIsItemNotOnAllowList(aURL)
 
     def processIPFully(self, theAddressAsString):
-        """ A method to filter inadvertantly matched IP strings and then filter out IP addresses that appear on the allowlist.
+        """ A method to filter inadvertently matched IP strings and then filter out IP addresses that appear on the allowlist.
         Parameter "theAddressAsString" - The address in question as a string
         Return value - if the address passes the tests then it is returned, otherwise None.
         """
@@ -533,6 +533,9 @@ class EmailProcessor(object):
                 if theAddressAsObj is not None:
                     return theAddressAsObj.addressAsString         # Convert back to String
         return None                          # The address was filtered out
+
+    def convert31toMD5(self, a31charMD5):
+        return "0{}".format(a31charMD5)
 
     def processAttachments(self):
         """ A method to process the email attachments, if present. Each non-inline email attachment is added as an
@@ -561,7 +564,7 @@ class EmailProcessor(object):
             if subject is not None:
                 self.addUniqueArtifact(u"{0}".format(
                     subject), "Email Subject", "Suspicious email subject")
-      
+
     @staticmethod
     def get_message_id(headers):
         msg_id = None
@@ -575,7 +578,7 @@ class EmailProcessor(object):
                 break
 
         # remove brackets <>
-        match = MESSAGE_PATTERN.findall(msg_id.strip()) if msg_id else None 
+        match = MESSAGE_PATTERN.findall(msg_id.strip()) if msg_id else None
         if match:
             return match[0]
 
@@ -585,18 +588,18 @@ class EmailProcessor(object):
         msg_id = processor.get_message_id(headers)
         if msg_id and hasattr(incident.properties, 'email_message_id'):
             incident.properties.email_message_id = msg_id
-    
+
     @staticmethod
     def add_email_conversation(headers, msg_body, msg_attachments):
         # attempt to add to incident datatable, if present
-      
+
         def handle_list(value):
-            # convert a list to comma separate list, if neccessary
+            # convert a list to comma separate list, if necessary
             if value and isinstance(value, list):
                 return ", ".join(value)
-        
+
             return value
-        
+
         try:
             row = incident.addRow('email_conversations')
             row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
@@ -654,33 +657,38 @@ else:
     emailmessage.associateWithIncident(incidents[0])
 
 # Capture any URLs present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeUrlPattern(), 
+processor.processArtifactCategory(processor.makeUrlPattern(),
     "URL", "Suspicious URL", processor.fixURL, processor.checkDomainAllowList)
 
 # Capture any IPv4 addresses present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeIPv4Pattern(), 
+processor.processArtifactCategory(processor.makeIPv4Pattern(),
     "IP Address", "Suspicious IP Address", processor.processIPFully)
 
 # Capture any IPv6 addresses present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeIPv6Pattern(), 
+processor.processArtifactCategory(processor.makeIPv6Pattern(),
     "IP Address", "Suspicious IP Address", processor.processIPFully)
 
 # Capture 32-character hexadecimal substrings in the email body text and add them as MD5 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(32), 
+processor.processArtifactCategory(processor.makeHexPattern(32),
     "Malware MD5 Hash", "MD5 hash of potential malware file")
 
+# Capture 31-character hexadecimal substrings in the email body text and add them as MD5 hash artifacts
+# logic is used to convert to 32 characters
+processor.processArtifactCategory(processor.makeHexPattern(31),
+    "Malware MD5 Hash", "MD5 hash of potential malware file", processor.convert31toMD5)
+
 # Capture 40-character hexadecimal substrings in the email body text and add them as SHA-1 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(40), 
+processor.processArtifactCategory(processor.makeHexPattern(40),
     "Malware SHA-1 Hash", "SHA-1 hash of potential malware file")
 
 # Capture 64-character hexadecimal substrings in the email body text and add them as SHA-256 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(64), 
+processor.processArtifactCategory(processor.makeHexPattern(64),
     "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
 
 # Add email message attachments to incident
 processor.processAttachments()
 
 if SAVE_CONVERSATION:
-    processor.add_email_conversation(emailmessage.headers, 
-        emailmessage.getBodyHtmlRaw() if emailmessage.getBodyHtmlRaw() else emailmessage.body.content, 
+    processor.add_email_conversation(emailmessage.headers,
+        emailmessage.getBodyHtmlRaw() if emailmessage.getBodyHtmlRaw() else emailmessage.body.content,
         [attachment.suggested_filename for attachment in emailmessage.attachments])

@@ -27,7 +27,7 @@
 **This package contains a function that executes a VMRay Malware Sandbox Analysis using VMRay Cloud API. Also included are two example workflows and two example rules that demonstrate how to use this function.**
 
 
- ![screenshot](./screenshots/workflow_attachment.jpeg)
+ ![screenshot](./screenshots/workflow_attachment.jpg)
 
 * The attachment or artifact to be analyzed must be a file.
 * The report only supports JSON format. HTML and PDF are not supported.
@@ -267,7 +267,7 @@ incident.addNote(helper.createRichText(noteText))
 | --------- | :---------: | ------------------ |
 | Example: VMRay Sandbox Analysis [Artifact]| `Artifact` | `Example: VMRay Sandbox Analyzer [Artifact]` |
 
-![screenshot](./screenshots/rule_artifact.jpeg)
+![screenshot](./screenshots/rule_artifact.jpg)
 
 ---
 | Rule Name | Object Type | Workflow Triggered |
@@ -275,5 +275,5 @@ incident.addNote(helper.createRichText(noteText))
 | Example: VMRay Sandbox Analyzer [Attachment]| `Attachment` | `Example: VMRay Sandbox Analyzer [Attachment]` |
 
 
-![screenshot](./screenshots/rule_attachment.jpeg)
+![screenshot](./screenshots/rule_attachment.jpg)
 

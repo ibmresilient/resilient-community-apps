@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "(Example) NetWitness Get Meta Values",
-      "id": 115,
+      "id": 176,
       "logic_type": "all",
       "message_destinations": [],
       "name": "(Example) NetWitness Get Meta Values",
@@ -34,7 +34,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "(Example) NetWitness Retrieve Log File",
-      "id": 116,
+      "id": 177,
       "logic_type": "all",
       "message_destinations": [],
       "name": "(Example) NetWitness Retrieve Log File",
@@ -78,7 +78,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "(Example) NetWitness Retrieve PCAP File",
-      "id": 117,
+      "id": 178,
       "logic_type": "all",
       "message_destinations": [],
       "name": "(Example) NetWitness Retrieve PCAP File",
@@ -106,7 +106,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "(Example) NetWitness Retrieve PCAP File (Time)",
-      "id": 118,
+      "id": 179,
       "logic_type": "all",
       "message_destinations": [],
       "name": "(Example) NetWitness Retrieve PCAP File (Time)",
@@ -140,7 +140,8 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1702385092783,
+  "case_matching_profiles": [],
+  "export_date": 1712818123008,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -683,7 +684,7 @@
   ],
   "functions": [
     {
-      "created_date": 1698996459932,
+      "created_date": 1712817707705,
       "description": {
         "content": "Returns the meta ID ranges given the start and end session IDs.",
         "format": "text"
@@ -691,18 +692,22 @@
       "destination_handle": "rsa_netwitness_message_destination",
       "display_name": "NetWitness Get Meta ID ranges",
       "export_key": "netwitness_get_meta_id_ranges",
-      "id": 39,
+      "id": 81,
       "last_modified_by": {
         "display_name": "SOAR_Apps_Dev",
         "id": 9,
         "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
         "type": "apikey"
       },
-      "last_modified_time": 1698996460034,
+      "last_modified_time": 1712817707705,
       "name": "netwitness_get_meta_id_ranges",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "9517f6a9-b873-4016-a5f3-a7aba5332974",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "230a70a3-4886-4ba9-a04b-d4c50c81d834",
@@ -738,12 +743,12 @@
           "programmatic_name": "example_netwitness_get_meta_values",
           "tags": [],
           "uuid": null,
-          "workflow_id": 103
+          "workflow_id": 182
         }
       ]
     },
     {
-      "created_date": 1698996460114,
+      "created_date": 1712817707867,
       "description": {
         "content": "Returns the meta values given the start and end meta IDs.",
         "format": "text"
@@ -751,18 +756,22 @@
       "destination_handle": "rsa_netwitness_message_destination",
       "display_name": "NetWitness Get Meta Values",
       "export_key": "netwitness_get_meta_values",
-      "id": 40,
+      "id": 82,
       "last_modified_by": {
         "display_name": "SOAR_Apps_Dev",
         "id": 9,
         "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
         "type": "apikey"
       },
-      "last_modified_time": 1698996460212,
+      "last_modified_time": 1712817707867,
       "name": "netwitness_get_meta_values",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "1535d518-222b-447b-99b4-0caf0200d6eb",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "4f88c6fa-8a7e-4adc-ac62-79e48c048fc5",
@@ -798,12 +807,12 @@
           "programmatic_name": "example_netwitness_get_meta_values",
           "tags": [],
           "uuid": null,
-          "workflow_id": 103
+          "workflow_id": 182
         }
       ]
     },
     {
-      "created_date": 1698996460290,
+      "created_date": 1712817708016,
       "description": {
         "content": "Queries NetWitness and returns metadata related to the query.",
         "format": "text"
@@ -811,18 +820,22 @@
       "destination_handle": "rsa_netwitness_message_destination",
       "display_name": "NetWitness Query",
       "export_key": "netwitness_query",
-      "id": 41,
+      "id": 83,
       "last_modified_by": {
         "display_name": "SOAR_Apps_Dev",
         "id": 9,
         "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
         "type": "apikey"
       },
-      "last_modified_time": 1698996460388,
+      "last_modified_time": 1712817708016,
       "name": "netwitness_query",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "01daa61c-dc22-4b1a-9c00-24836f61e687",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "0f3351c8-acd1-4ae4-9840-b7e93192d566",
@@ -850,7 +863,7 @@
           "programmatic_name": "example_netwitness_get_meta_values",
           "tags": [],
           "uuid": null,
-          "workflow_id": 103
+          "workflow_id": 182
         },
         {
           "actions": [],
@@ -860,12 +873,12 @@
           "programmatic_name": "example_netwitness_retrieve_pcap_file",
           "tags": [],
           "uuid": null,
-          "workflow_id": 105
+          "workflow_id": 183
         }
       ]
     },
     {
-      "created_date": 1698996460462,
+      "created_date": 1712817708163,
       "description": {
         "content": "Returns log file from NetWitness in the specified format based on the given time frame.",
         "format": "text"
@@ -873,18 +886,22 @@
       "destination_handle": "rsa_netwitness_message_destination",
       "display_name": "NetWitness Retrieve Log Data",
       "export_key": "netwitness_retrieve_log_data",
-      "id": 42,
+      "id": 84,
       "last_modified_by": {
         "display_name": "SOAR_Apps_Dev",
         "id": 9,
         "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
         "type": "apikey"
       },
-      "last_modified_time": 1698996460557,
+      "last_modified_time": 1712817708163,
       "name": "netwitness_retrieve_log_data",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "410c00e1-d0ee-4f13-9ef6-53c9e95dd114",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "cbdcde0a-c099-4e37-83ac-c4bdbbf3cdde",
@@ -928,12 +945,12 @@
           "programmatic_name": "example_netwitness_retrieve_log_file",
           "tags": [],
           "uuid": null,
-          "workflow_id": 104
+          "workflow_id": 181
         }
       ]
     },
     {
-      "created_date": 1698996460627,
+      "created_date": 1712817708310,
       "description": {
         "content": "Returns a PCAP file from NetWitness based on session IDs or a time frame and attaches to an incident.",
         "format": "text"
@@ -941,18 +958,22 @@
       "destination_handle": "rsa_netwitness_message_destination",
       "display_name": "NetWitness Retrieve PCAP Data",
       "export_key": "netwitness_retrieve_pcap_data",
-      "id": 43,
+      "id": 85,
       "last_modified_by": {
         "display_name": "SOAR_Apps_Dev",
         "id": 9,
         "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
         "type": "apikey"
       },
-      "last_modified_time": 1698996460720,
+      "last_modified_time": 1712817708310,
       "name": "netwitness_retrieve_pcap_data",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "1e6619f5-ca89-4a43-8741-cccfc6c78299",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "e5dd0ab1-8e62-4a03-96d2-bb207033800b",
@@ -996,7 +1017,7 @@
           "programmatic_name": "example_netwitness_retrieve_pcap_file",
           "tags": [],
           "uuid": null,
-          "workflow_id": 105
+          "workflow_id": 183
         },
         {
           "actions": [],
@@ -1006,20 +1027,20 @@
           "programmatic_name": "example_netwitness_retrieve_pcap_file_time",
           "tags": [],
           "uuid": null,
-          "workflow_id": 106
+          "workflow_id": 180
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 408,
+  "id": 708,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1702385089621,
+      "create_date": 1712818119971,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1028,11 +1049,10 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1702385089621,
+      "update_date": 1712818119971,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
@@ -1058,10 +1078,10 @@
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
-    "minor": 0,
-    "version": "46.0.8131"
+    "build_number": 42,
+    "major": 50,
+    "minor": 2,
+    "version": "50.2.42"
   },
   "tags": [],
   "task_order": [],
@@ -1071,78 +1091,78 @@
     {
       "actions": [],
       "content": {
-        "version": 3,
-        "workflow_id": "example_netwitness_retrieve_pcap_file_time",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_retrieve_pcap_file_time\" isExecutable=\"true\" name=\"(Example) NetWitness Retrieve PCAP File (Time)\"\u003e\u003cdocumentation\u003eAn example that returns a PCAP file of packet data within the given time frame and attaches it to the incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15hno8i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kf710n\" name=\"NetWitness Retrieve PCAP Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1e6619f5-ca89-4a43-8741-cccfc6c78299\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_start_time = rule.properties.netwitness_start_time\\ninputs.nw_end_time = rule.properties.netwitness_end_time\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15hno8i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1m0vuvj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15hno8i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kf710n\"/\u003e\u003cendEvent id=\"EndEvent_10r7m9m\"\u003e\u003cincoming\u003eSequenceFlow_1m0vuvj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1m0vuvj\" sourceRef=\"ServiceTask_0kf710n\" targetRef=\"EndEvent_10r7m9m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kf710n\" id=\"ServiceTask_0kf710n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15hno8i\" id=\"SequenceFlow_15hno8i_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10r7m9m\" id=\"EndEvent_10r7m9m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"545\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"563\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1m0vuvj\" id=\"SequenceFlow_1m0vuvj_di\"\u003e\u003comgdi:waypoint x=\"386\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"545\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"465.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "An example that returns a PCAP file of packet data within the given time frame and attaches it to the incident.",
-      "export_key": "example_netwitness_retrieve_pcap_file_time",
-      "last_modified_by": "soar_apps_dev@ibm.com",
-      "last_modified_time": 1698997553328,
-      "name": "(Example) NetWitness Retrieve PCAP File (Time)",
-      "object_type": "incident",
-      "programmatic_name": "example_netwitness_retrieve_pcap_file_time",
-      "tags": [],
-      "uuid": "e80d41a8-bbd8-46c0-9b7b-332b22d75268",
-      "workflow_id": 106
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "example_netwitness_retrieve_log_file",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_retrieve_log_file\" isExecutable=\"true\" name=\"(Example) NetWitness Retrieve Log File\"\u003e\u003cdocumentation\u003eAn example that uses NetWitness Retrieve Log Data function to return log data during a specific time frame and attaches it to the incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_063tqs9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1e0ceur\" name=\"NetWitness Retrieve Log Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"410c00e1-d0ee-4f13-9ef6-53c9e95dd114\"\u003e{\"inputs\":{\"e1123711-9103-48d1-84d7-36733ff79ded\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"6595d51c-128e-4597-83c8-bcde7e17ed8f\"}}},\"post_processing_script\":\"# Empty log_file has been retrieved\\nif not workflow.properties.nw_log_file.content:\\n  incident.addNote(\\\"Log file for requested dates is empty\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.nw_start_time = rule.properties.netwitness_start_time\\ninputs.nw_end_time = rule.properties.netwitness_end_time\\ninputs.nw_data_format = rule.properties.netwitness_data_format\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_log_file\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_063tqs9\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vk0f44\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_063tqs9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1e0ceur\"/\u003e\u003cendEvent id=\"EndEvent_0n5s5yq\"\u003e\u003cincoming\u003eSequenceFlow_1vk0f44\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1vk0f44\" sourceRef=\"ServiceTask_1e0ceur\" targetRef=\"EndEvent_0n5s5yq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1e0ceur\" id=\"ServiceTask_1e0ceur_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"296\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_063tqs9\" id=\"SequenceFlow_063tqs9_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"296\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"247\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0n5s5yq\" id=\"EndEvent_0n5s5yq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"505\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"478\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vk0f44\" id=\"SequenceFlow_1vk0f44_di\"\u003e\u003comgdi:waypoint x=\"396\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"505\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "description": "An example that uses NetWitness Retrieve Log Data function to return log data during a specific time frame and attaches it to the incident.",
-      "export_key": "example_netwitness_retrieve_log_file",
-      "last_modified_by": "soar_apps_dev@ibm.com",
-      "last_modified_time": 1698997420591,
-      "name": "(Example) NetWitness Retrieve Log File",
-      "object_type": "incident",
-      "programmatic_name": "example_netwitness_retrieve_log_file",
-      "tags": [],
-      "uuid": "a7caaba7-5f5b-49f7-8534-defc7fce9fa6",
-      "workflow_id": 104
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 13,
-        "workflow_id": "example_netwitness_get_meta_values",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_get_meta_values\" isExecutable=\"true\" name=\"(Example) NetWitness Get Meta Values\"\u003e\u003cdocumentation\u003eAn example that returns the meta values based on session meta ID ranges.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ztc54j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0skjobb\" name=\"NetWitness Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"01daa61c-dc22-4b1a-9c00-24836f61e687\"\u003e{\"inputs\":{\"bd4dc898-2b7e-49b2-8851-fd10359951ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":50}}},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_query = rule.properties.netwitness_query\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ztc54j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ebl4uj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0nneig5\"\u003e\u003cincoming\u003eSequenceFlow_0jv3l16\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1ajztsj\" name=\"NetWitness Get Meta ID ranges\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9517f6a9-b873-4016-a5f3-a7aba5332974\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_session_id1 = workflow.properties.nw_query.content.results.id1\\ninputs.nw_session_id2 = workflow.properties.nw_query.content.results.id2\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_meta_id_ranges\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ebl4uj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jfhn4l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ebl4uj\" sourceRef=\"ServiceTask_0skjobb\" targetRef=\"ServiceTask_1ajztsj\"/\u003e\u003cserviceTask id=\"ServiceTask_1c07xg0\" name=\"NetWitness Get Meta Values\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1535d518-222b-447b-99b4-0caf0200d6eb\"\u003e{\"inputs\":{\"bd4dc898-2b7e-49b2-8851-fd10359951ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":10}}},\"post_processing_script\":\"incident.addNote(helper.createRichText(\\\"Meta values between {} and {} are listed below.\u0026lt;br/\u0026gt; {}\\\".format(results.get(\\\"inputs\\\", {}).get(\\\"nw_meta_id1\\\"), results.get(\\\"inputs\\\", {}).get(\\\"nw_meta_id2\\\"), str(results.get(\\\"content\\\", {}).get(\\\"results\\\")))))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_meta_id1 = workflow.properties.nw_meta_id_ranges.content.params.field1\\ninputs.nw_meta_id2 = workflow.properties.nw_meta_id_ranges.content.params.field2\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jfhn4l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jv3l16\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0jfhn4l\" sourceRef=\"ServiceTask_1ajztsj\" targetRef=\"ServiceTask_1c07xg0\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0jv3l16\" sourceRef=\"ServiceTask_1c07xg0\" targetRef=\"EndEvent_0nneig5\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0ztc54j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0skjobb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0skjobb\" id=\"ServiceTask_0skjobb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nneig5\" id=\"EndEvent_0nneig5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"842\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"860\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ajztsj\" id=\"ServiceTask_1ajztsj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"467\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ebl4uj\" id=\"SequenceFlow_0ebl4uj_di\"\u003e\u003comgdi:waypoint x=\"379\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"467\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"423\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1c07xg0\" id=\"ServiceTask_1c07xg0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"650.503345724907\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jfhn4l\" id=\"SequenceFlow_0jfhn4l_di\"\u003e\u003comgdi:waypoint x=\"567\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"651\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"609\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jv3l16\" id=\"SequenceFlow_0jv3l16_di\"\u003e\u003comgdi:waypoint x=\"751\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"842\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"796.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ztc54j\" id=\"SequenceFlow_0ztc54j_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 13,
-      "description": "An example that returns the meta values based on session meta ID ranges.",
-      "export_key": "example_netwitness_get_meta_values",
-      "last_modified_by": "soar_apps_dev@ibm.com",
-      "last_modified_time": 1702385072931,
-      "name": "(Example) NetWitness Get Meta Values",
-      "object_type": "incident",
-      "programmatic_name": "example_netwitness_get_meta_values",
-      "tags": [],
-      "uuid": "9cd6544d-aacc-458d-9329-f71795500185",
-      "workflow_id": 103
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 6,
+        "version": 1,
         "workflow_id": "example_netwitness_retrieve_pcap_file",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_retrieve_pcap_file\" isExecutable=\"true\" name=\"(Example) NetWitness Retrieve PCAP File\"\u003e\u003cdocumentation\u003eAn example that returns a PCAP file of packet data within the given session ID range and attaches it to the incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14sx7sp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_04lg0w0\" name=\"NetWitness Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"01daa61c-dc22-4b1a-9c00-24836f61e687\"\u003e{\"inputs\":{\"bd4dc898-2b7e-49b2-8851-fd10359951ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":100}}},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_query = rule.properties.netwitness_query\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14sx7sp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1kagcyq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14sx7sp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_04lg0w0\"/\u003e\u003cserviceTask id=\"ServiceTask_0gvbjpd\" name=\"NetWitness Retrieve PCAP Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1e6619f5-ca89-4a43-8741-cccfc6c78299\"\u003e{\"inputs\":{},\"post_processing_script\":\"incident.addNote(\\\"Added PCAP file for sessions {} as an attachment to the Incident.\\\".format(results.inputs.nw_event_session_ids))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"session_id1 = workflow.properties.nw_query.content.results.id1\\nsession_id2 = workflow.properties.nw_query.content.results.id2\\n\\ninputs.nw_event_session_ids = str(session_id1)+\\\", \\\"+str(session_id2)\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1kagcyq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0bfsqfj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1kagcyq\" sourceRef=\"ServiceTask_04lg0w0\" targetRef=\"ServiceTask_0gvbjpd\"/\u003e\u003cendEvent id=\"EndEvent_05hj1gu\"\u003e\u003cincoming\u003eSequenceFlow_0bfsqfj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0bfsqfj\" sourceRef=\"ServiceTask_0gvbjpd\" targetRef=\"EndEvent_05hj1gu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_04lg0w0\" id=\"ServiceTask_04lg0w0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14sx7sp\" id=\"SequenceFlow_14sx7sp_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"241.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gvbjpd\" id=\"ServiceTask_0gvbjpd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"516\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1kagcyq\" id=\"SequenceFlow_1kagcyq_di\"\u003e\u003comgdi:waypoint x=\"385\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"516\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05hj1gu\" id=\"EndEvent_05hj1gu_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"762\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"780\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bfsqfj\" id=\"SequenceFlow_0bfsqfj_di\"\u003e\u003comgdi:waypoint x=\"616\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"762\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"689\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_retrieve_pcap_file\" isExecutable=\"true\" name=\"(Example) NetWitness Retrieve PCAP File\"\u003e\u003cdocumentation\u003eAn example that returns a PCAP file of packet data within the given session ID range and attaches it to the incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14sx7sp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_04lg0w0\" name=\"NetWitness Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"01daa61c-dc22-4b1a-9c00-24836f61e687\"\u003e{\"inputs\":{\"bd4dc898-2b7e-49b2-8851-fd10359951ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":100}}},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_query = rule.properties.netwitness_query\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14sx7sp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1kagcyq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14sx7sp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_04lg0w0\"/\u003e\u003cserviceTask id=\"ServiceTask_0gvbjpd\" name=\"NetWitness Retrieve PCAP Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1e6619f5-ca89-4a43-8741-cccfc6c78299\"\u003e{\"inputs\":{},\"post_processing_script\":\"incident.addNote(\\\"Added PCAP file for sessions {} as an attachment to the Incident.\\\".format(results.inputs.nw_event_session_ids))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"session_id1 = workflow.properties.nw_query.content.results.id1\\nsession_id2 = workflow.properties.nw_query.content.results.id2\\n\\ninputs.nw_event_session_ids = str(session_id1)+\\\", \\\"+str(session_id2)\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1kagcyq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0bfsqfj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1kagcyq\" sourceRef=\"ServiceTask_04lg0w0\" targetRef=\"ServiceTask_0gvbjpd\"/\u003e\u003cendEvent id=\"EndEvent_05hj1gu\"\u003e\u003cincoming\u003eSequenceFlow_0bfsqfj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0bfsqfj\" sourceRef=\"ServiceTask_0gvbjpd\" targetRef=\"EndEvent_05hj1gu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_04lg0w0\" id=\"ServiceTask_04lg0w0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14sx7sp\" id=\"SequenceFlow_14sx7sp_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"241.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gvbjpd\" id=\"ServiceTask_0gvbjpd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"516\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1kagcyq\" id=\"SequenceFlow_1kagcyq_di\"\u003e\u003comgdi:waypoint x=\"385\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"516\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05hj1gu\" id=\"EndEvent_05hj1gu_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"762\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"780\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bfsqfj\" id=\"SequenceFlow_0bfsqfj_di\"\u003e\u003comgdi:waypoint x=\"616\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"762\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"689\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 6,
+      "content_version": 1,
       "description": "An example that returns a PCAP file of packet data within the given session ID range and attaches it to the incident.",
       "export_key": "example_netwitness_retrieve_pcap_file",
-      "last_modified_by": "soar_apps_dev@ibm.com",
-      "last_modified_time": 1698997509760,
+      "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+      "last_modified_time": 1712817709511,
       "name": "(Example) NetWitness Retrieve PCAP File",
       "object_type": "incident",
       "programmatic_name": "example_netwitness_retrieve_pcap_file",
       "tags": [],
       "uuid": "a3fcd091-5559-44d9-adba-869e2c1cdb04",
-      "workflow_id": 105
+      "workflow_id": 183
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "example_netwitness_retrieve_pcap_file_time",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_retrieve_pcap_file_time\" isExecutable=\"true\" name=\"(Example) NetWitness Retrieve PCAP File (Time)\"\u003e\u003cdocumentation\u003eAn example that returns a PCAP file of packet data within the given time frame and attaches it to the incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15hno8i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kf710n\" name=\"NetWitness Retrieve PCAP Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1e6619f5-ca89-4a43-8741-cccfc6c78299\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_start_time = rule.properties.netwitness_start_time\\ninputs.nw_end_time = rule.properties.netwitness_end_time\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15hno8i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1m0vuvj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15hno8i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kf710n\"/\u003e\u003cendEvent id=\"EndEvent_10r7m9m\"\u003e\u003cincoming\u003eSequenceFlow_1m0vuvj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1m0vuvj\" sourceRef=\"ServiceTask_0kf710n\" targetRef=\"EndEvent_10r7m9m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kf710n\" id=\"ServiceTask_0kf710n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15hno8i\" id=\"SequenceFlow_15hno8i_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10r7m9m\" id=\"EndEvent_10r7m9m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"545\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"563\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1m0vuvj\" id=\"SequenceFlow_1m0vuvj_di\"\u003e\u003comgdi:waypoint x=\"386\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"545\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"465.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "An example that returns a PCAP file of packet data within the given time frame and attaches it to the incident.",
+      "export_key": "example_netwitness_retrieve_pcap_file_time",
+      "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+      "last_modified_time": 1712817708834,
+      "name": "(Example) NetWitness Retrieve PCAP File (Time)",
+      "object_type": "incident",
+      "programmatic_name": "example_netwitness_retrieve_pcap_file_time",
+      "tags": [],
+      "uuid": "e80d41a8-bbd8-46c0-9b7b-332b22d75268",
+      "workflow_id": 180
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "example_netwitness_get_meta_values",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_get_meta_values\" isExecutable=\"true\" name=\"(Example) NetWitness Get Meta Values\"\u003e\u003cdocumentation\u003eAn example that returns the meta values based on session meta ID ranges.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ztc54j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0skjobb\" name=\"NetWitness Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"01daa61c-dc22-4b1a-9c00-24836f61e687\"\u003e{\"inputs\":{\"bd4dc898-2b7e-49b2-8851-fd10359951ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":50}}},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_query = rule.properties.netwitness_query\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_query\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ztc54j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ebl4uj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0nneig5\"\u003e\u003cincoming\u003eSequenceFlow_0jv3l16\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1ajztsj\" name=\"NetWitness Get Meta ID ranges\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9517f6a9-b873-4016-a5f3-a7aba5332974\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_session_id1 = workflow.properties.nw_query.content.results.id1\\ninputs.nw_session_id2 = workflow.properties.nw_query.content.results.id2\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_meta_id_ranges\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ebl4uj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jfhn4l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ebl4uj\" sourceRef=\"ServiceTask_0skjobb\" targetRef=\"ServiceTask_1ajztsj\"/\u003e\u003cserviceTask id=\"ServiceTask_1c07xg0\" name=\"NetWitness Get Meta Values\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1535d518-222b-447b-99b4-0caf0200d6eb\"\u003e{\"inputs\":{\"bd4dc898-2b7e-49b2-8851-fd10359951ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":10}}},\"post_processing_script\":\"incident.addNote(helper.createRichText(\\\"Meta values between {} and {} are listed below.\u0026lt;br/\u0026gt; {}\\\".format(results.get(\\\"inputs\\\", {}).get(\\\"nw_meta_id1\\\"), results.get(\\\"inputs\\\", {}).get(\\\"nw_meta_id2\\\"), str(results.get(\\\"content\\\", {}).get(\\\"results\\\")))))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_meta_id1 = workflow.properties.nw_meta_id_ranges.content.params.field1\\ninputs.nw_meta_id2 = workflow.properties.nw_meta_id_ranges.content.params.field2\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jfhn4l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jv3l16\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0jfhn4l\" sourceRef=\"ServiceTask_1ajztsj\" targetRef=\"ServiceTask_1c07xg0\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0jv3l16\" sourceRef=\"ServiceTask_1c07xg0\" targetRef=\"EndEvent_0nneig5\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0ztc54j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0skjobb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0skjobb\" id=\"ServiceTask_0skjobb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nneig5\" id=\"EndEvent_0nneig5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"842\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"860\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ajztsj\" id=\"ServiceTask_1ajztsj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"467\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ebl4uj\" id=\"SequenceFlow_0ebl4uj_di\"\u003e\u003comgdi:waypoint x=\"379\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"467\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"423\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1c07xg0\" id=\"ServiceTask_1c07xg0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"650.503345724907\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jfhn4l\" id=\"SequenceFlow_0jfhn4l_di\"\u003e\u003comgdi:waypoint x=\"567\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"651\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"609\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jv3l16\" id=\"SequenceFlow_0jv3l16_di\"\u003e\u003comgdi:waypoint x=\"751\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"842\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"796.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ztc54j\" id=\"SequenceFlow_0ztc54j_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "An example that returns the meta values based on session meta ID ranges.",
+      "export_key": "example_netwitness_get_meta_values",
+      "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+      "last_modified_time": 1712817709308,
+      "name": "(Example) NetWitness Get Meta Values",
+      "object_type": "incident",
+      "programmatic_name": "example_netwitness_get_meta_values",
+      "tags": [],
+      "uuid": "9cd6544d-aacc-458d-9329-f71795500185",
+      "workflow_id": 182
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "example_netwitness_retrieve_log_file",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_netwitness_retrieve_log_file\" isExecutable=\"true\" name=\"(Example) NetWitness Retrieve Log File\"\u003e\u003cdocumentation\u003eAn example that uses NetWitness Retrieve Log Data function to return log data during a specific time frame and attaches it to the incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_063tqs9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1e0ceur\" name=\"NetWitness Retrieve Log Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"410c00e1-d0ee-4f13-9ef6-53c9e95dd114\"\u003e{\"inputs\":{\"e1123711-9103-48d1-84d7-36733ff79ded\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"6595d51c-128e-4597-83c8-bcde7e17ed8f\"}}},\"post_processing_script\":\"# Empty log_file has been retrieved\\nif not workflow.properties.nw_log_file.content:\\n  incident.addNote(\\\"Log file for requested dates is empty\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.nw_start_time = rule.properties.netwitness_start_time\\ninputs.nw_end_time = rule.properties.netwitness_end_time\\ninputs.nw_data_format = rule.properties.netwitness_data_format\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"nw_log_file\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_063tqs9\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vk0f44\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_063tqs9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1e0ceur\"/\u003e\u003cendEvent id=\"EndEvent_0n5s5yq\"\u003e\u003cincoming\u003eSequenceFlow_1vk0f44\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1vk0f44\" sourceRef=\"ServiceTask_1e0ceur\" targetRef=\"EndEvent_0n5s5yq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1e0ceur\" id=\"ServiceTask_1e0ceur_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"296\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_063tqs9\" id=\"SequenceFlow_063tqs9_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"296\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"247\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0n5s5yq\" id=\"EndEvent_0n5s5yq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"505\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"478\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vk0f44\" id=\"SequenceFlow_1vk0f44_di\"\u003e\u003comgdi:waypoint x=\"396\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"505\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "description": "An example that uses NetWitness Retrieve Log Data function to return log data during a specific time frame and attaches it to the incident.",
+      "export_key": "example_netwitness_retrieve_log_file",
+      "last_modified_by": "soar_apps_dev@ibm.com",
+      "last_modified_time": 1712817882371,
+      "name": "(Example) NetWitness Retrieve Log File",
+      "object_type": "incident",
+      "programmatic_name": "example_netwitness_retrieve_log_file",
+      "tags": [],
+      "uuid": "a7caaba7-5f5b-49f7-8534-defc7fce9fa6",
+      "workflow_id": 181
     }
   ],
   "workspaces": []
