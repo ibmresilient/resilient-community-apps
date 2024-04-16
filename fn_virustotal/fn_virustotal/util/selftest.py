@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
-import logging
-from resilient_lib import RequestsCommon
+from logging import getLogger, INFO, StreamHandler
 from resilient_lib import validate_fields
 from fn_virustotal.lib.vt_common import VirusTotalClient
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
+
+log = getLogger(__name__)
+log.setLevel(INFO)
+log.addHandler(StreamHandler())
 
 def selftest_function(opts):
     """
@@ -19,8 +19,7 @@ def selftest_function(opts):
     TEST_IP = "8.8.8.8"
 
     options = opts.get("fn_virustotal", {})
-    validate_fields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), options)
-    rc = RequestsCommon(options)
+    validate_fields(['api_token', 'polling_interval_sec', 'max_polling_wait_sec'], options)
     reason = ""
     try:
         vt = VirusTotalClient(opts, options)
@@ -41,9 +40,8 @@ def selftest_function(opts):
         reason = str(err)
 
     result = {
-                "state": state,
-                "reason": reason
-             }
+        "state": state,
+        "reason": reason}
 
     log.info(result)
 

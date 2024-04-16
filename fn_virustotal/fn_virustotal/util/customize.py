@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.1.1.824
 
-"""Generate the Resilient customizations required for fn_virustotal"""
+"""Generate the SOAR customizations required for fn_virustotal"""
 
 import base64
 import os
@@ -21,8 +22,12 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_virustotal",
-        "message_destinations": [u"fn_virustotal"],
-        "functions": [u"virustotal"],
+        "message_destinations": [
+            u"fn_virustotal"
+        ],
+        "functions": [
+            u"virustotal"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -31,7 +36,10 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"virustotal_scan_artifact", u"virustotal_scan_attachment"]
+        "playbooks": [
+            u"virustotal_scan_artifact",
+            u"virustotal_scan_attachment"
+        ]
     }
 
 
@@ -40,7 +48,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 50.0.9097
 
     Contents:
     - Message Destinations:

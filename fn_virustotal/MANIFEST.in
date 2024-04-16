@@ -1,7 +1,6 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
 recursive-include fn_virustotal/util *
 include fn_virustotal/LICENSE
 include doc/*.md

@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """VirusTotal REST API client"""
-import os
-import base64
-import time
-import json
+from os.path import getsize
+from base64 import urlsafe_b64encode
+from time import time, sleep
+from json import loads
 from urllib.parse import urlencode
-import logging 
+from logging import getLogger
 from resilient_lib import RequestsCommon, IntegrationError, validate_fields, str_to_bool
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 BASE_URL = "https://virustotal.com/api/v3"
 VT_MAX_FILE_UPLOAD_SIZE_MB = 650
@@ -20,8 +20,7 @@ VT_MAX_FILE_SIZE_MB = 32
 class VirusTotalClient(object):
     def __init__(self, opts, options):
         # Read the configuration options
-        required_fields = ["api_token", "polling_interval_sec", "max_polling_wait_sec"]
-        validate_fields(required_fields, options)
+        validate_fields(["api_token", "polling_interval_sec", "max_polling_wait_sec"], options)
         self.rc = RequestsCommon(opts, options)
         self.api_token = options.get("api_token")
         self.polling_interval_sec = options.get("polling_interval_sec")
@@ -36,30 +35,28 @@ class VirusTotalClient(object):
         """
         headers = {
             "accept": "application/json",
-            "x-apikey": "{0}".format(auth_token),
+            "x-apikey": f"{auth_token}",
             "content-type": "application/x-www-form-urlencoded"
         }
         return headers
 
     def scan_url(self, url: str) -> dict:
         """ Perform a VirusTotal scan on a URL.
-
         Args:
             url (str): URL to be scanned
-
         Returns:
             dict: Return the VT scan results in json format.
             str: code returned from the VT REST API 
         """
-        endpoint_url = "{0}/urls".format(self.base_url)
+        endpoint_url = f"{self.base_url}/urls"
         payload = urlencode({"url":url})
         response, code = self.rc.execute("POST",
-                                   endpoint_url,
-                                   data=payload,
-                                   headers=self.headers,
-                                   callback=callback)
-        response_json = response.json()
-        return response_json, code
+            endpoint_url,
+            data=payload,
+            headers=self.headers,
+            callback=callback)
+
+        return response.json(), code
 
     def wait_for_scan_to_complete(self, response_json: dict, start_time: float) -> tuple[dict, str]:
         """Given a VirusTotal JSON scan analysis object returned from VirusTotal scan submission, 
@@ -93,7 +90,7 @@ class VirusTotalClient(object):
         if not endpoint_url:
             raise IntegrationError("No self link in VirusTotal scan JSON object.") 
 
-        curr_time = time.time()
+        curr_time = time()
         analysis_response_json = {}
         status = None
         # Loop until analysis status is complete of the max poll time is exceeded.
@@ -103,7 +100,7 @@ class VirusTotalClient(object):
                                                 endpoint_url,
                                                 headers=self.headers)
             analysis_response_json = analysis_response.json()
-            LOG.info("analysis_response_json = {}".format(analysis_response_json))
+            LOG.info(f"analysis_response_json = {analysis_response_json}")
             analysis_data = analysis_response_json.get("data", {})
             if analysis_data:
                 attributes = analysis_data.get("attributes", {})
@@ -114,14 +111,14 @@ class VirusTotalClient(object):
                         return analysis_response_json, status
                     elif status in ["in-progress", "queued"]:
                         # resubmit
-                        curr_time = time.time()
+                        curr_time = time()
                         if int(curr_time - start_time)/1000 > int(self.max_polling_wait_sec):
-                            raise IntegrationError("exceeded max wait time: {}".format(self.max_polling_wait_sec))
+                            raise IntegrationError(f"exceeded max wait time: {self.max_polling_wait_sec}")
 
-                        time.sleep(int(self.polling_interval_sec))
+                        sleep(int(self.polling_interval_sec))
                         # start again to review results
                     else:
-                        raise IntegrationError("Invalid analysis status: {}.".format(status))
+                        raise IntegrationError(f"Invalid analysis status: {status}.")
 
         if (int(curr_time - start_time)/1000 > int(self.max_polling_wait_sec)) and status != "completed":
             raise IntegrationError("VirusTotal scan analysis is not complete - MAX poll time exceeded!")
@@ -139,9 +136,9 @@ class VirusTotalClient(object):
             str: code returned from the VT REST API.
         """
         # urlencode the URL with command from VirusTotal REST API doc.
-        url_id = base64.urlsafe_b64encode(url.encode()).decode().strip("=")
+        url_id = urlsafe_b64encode(url.encode()).decode().strip("=")
 
-        endpoint_url = "{0}/urls/{id}".format(self.base_url, id=url_id)
+        endpoint_url = f"{self.base_url}/urls/{url_id}"
         response, code = self.rc.execute("GET",
                                    endpoint_url,
                                    headers=self.headers,
@@ -163,7 +160,6 @@ class VirusTotalClient(object):
             dict: Return VT status on file analyses in JSON format.
             str: code returned from the VT REST API 
         """
-        start_time = time.time()
         # files = {"file": ("copy.txt", open("copy.txt", "rb"), "text/plain")}
         files = {"file": (filename, open(file_to_scan, "rb"), "application/octet-stream")}
         headers_for_file = {
@@ -173,16 +169,16 @@ class VirusTotalClient(object):
         # If the file to be scanned is greater than 32MB, we need to call VT endpoint
         # to get a URL to load the file to. 
         # First compute filesize in MBs.
-        files_size_MB = round(os.path.getsize(file_to_scan) / 1024**2, 3)
+        files_size_MB = round(getsize(file_to_scan) / 1024**2, 3)
         if files_size_MB > VT_MAX_FILE_UPLOAD_SIZE_MB:
-            raise IntegrationError("Cannot upload a file larger than {0} to VirusTotal: file size is {1} MB!".format(VT_MAX_FILE_UPLOAD_SIZE_MB, files_size_MB))
+            raise IntegrationError(f"Cannot upload a file larger than {VT_MAX_FILE_UPLOAD_SIZE_MB} to VirusTotal: file size is {files_size_MB} MB!")
 
         if files_size_MB >= VT_MAX_FILE_SIZE_MB:
             response = self.get_upload_url()
             vt_upload_url = response.get("data", None)
         else:
-            vt_upload_url = "{0}/files".format(self.base_url)
-        if vt_upload_url is None:
+            vt_upload_url = f"{self.base_url}/files"
+        if not vt_upload_url:
             raise IntegrationError("Error getting file upload URL from VirusTotal")
 
         response, code = self.rc.execute("POST",
@@ -191,7 +187,6 @@ class VirusTotalClient(object):
                                    headers=headers_for_file,
                                    callback=callback)
         return response.json(), code
-
 
     def get_file_report(self, id: str)  -> tuple[dict, str]:
         """ Get a file report from VirusTotal if one is available.
@@ -203,7 +198,7 @@ class VirusTotalClient(object):
             dict: Return information on the file from VT in JSON format
             str: code returned from the VT REST API 
         """
-        endpoint_url = "{0}/files/{id}".format(self.base_url, id=id)
+        endpoint_url = f"{self.base_url}/files/{id}"
         response, code = self.rc.execute("GET",
                                    endpoint_url,
                                    callback=callback,
@@ -220,7 +215,7 @@ class VirusTotalClient(object):
             dict: Returns a report in JSON format from VT
             str: code returned from the VT REST API 
         """
-        endpoint_url = "{0}/ip_addresses/{ip}".format(self.base_url, ip=ip)
+        endpoint_url = f"{self.base_url}/ip_addresses/{ip}"
         response, code = self.rc.execute("GET",
                                    endpoint_url,
                                    callback=callback,
@@ -236,7 +231,7 @@ class VirusTotalClient(object):
             dict: Returns a report in JSON format from VT
             str: code returned from the VT REST API 
         """
-        endpoint_url = "{0}/domains/{domain}".format(self.base_url, domain=domain)
+        endpoint_url = f"{self.base_url}/domains/{domain}"
         response, code = self.rc.execute("GET",
                                    endpoint_url,
                                    callback=callback,
@@ -251,7 +246,7 @@ class VirusTotalClient(object):
             dict: JSON object contains URL where a file can be uploaded to for analyses.
             (URL is returned in the "data" field.)
         """
-        endpoint_url = "{0}/files/upload_url".format(self.base_url)
+        endpoint_url = f"{self.base_url}/files/upload_url"
         response = self.rc.execute("GET",
                                    endpoint_url,
                                    headers=self.headers)
@@ -283,7 +278,7 @@ def callback(response: dict) -> tuple[dict, str]:
     if response.status_code < 300:
         code = "success"
     elif response.status_code in [400,404]:
-        content = json.loads(response.text)
+        content = loads(response.text)
         error = content.get("error", None)
         code = error.get("code", None) if error else None
     else:
