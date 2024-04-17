@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 from logging import getLogger
@@ -75,7 +75,7 @@ class LDAPUtilitiesHelper():
 
 def get_domains_list(opts):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: list of options
     :return: list of ldap domains
     """

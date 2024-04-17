@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -40,9 +40,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get function inputs
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
-        ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
-        ldap_attribute_name = getattr(fn_inputs, "ldap_attribute_name") # text (required)
-        ldap_attribute_values_asString = getattr(fn_inputs, "ldap_attribute_values") # text (required) [string repersentation of an array]
+        ldap_dn = getattr(fn_inputs, "ldap_dn", None) # text (required)
+        ldap_attribute_name = getattr(fn_inputs, "ldap_attribute_name", None) # text (required)
+        ldap_attribute_values_asString = getattr(fn_inputs, "ldap_attribute_values", None) # text (required) [string representation of an array]
 
         self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
         self.LOG.info(f"LDAP DN: {ldap_dn}")
@@ -52,7 +52,7 @@ class FunctionComponent(AppFunctionComponent):
         # Initiate variable, so that it does not error when called
         c = ""
 
-        # Instansiate helper (which gets appconfigs from file)
+        # Instantiate helper (which gets app configs from file)
         ldap = LDAPDomains(self.opts)
         helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
 
@@ -62,9 +62,9 @@ class FunctionComponent(AppFunctionComponent):
         except Exception as err:
             self.LOG.error(f"Error: {err}")
             raise ValueError(
-                """ldap_attribute_values must be a string repersenation of an array e.g. "['stringValue1, 1234, 'stringValue2']" """)
+                """ldap_attribute_values must be a string representation of an array e.g. "['stringValue1, 1234, 'stringValue2']" """)
 
-        # Instansiate LDAP Server and Connection
+        # Instantiate LDAP Server and Connection
         c = helper.get_ldap_connection()
 
         try:

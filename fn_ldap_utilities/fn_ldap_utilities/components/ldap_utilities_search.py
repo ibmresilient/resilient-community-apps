@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """ SOAR functions component to execute queries against an LDAP server """
 
@@ -90,10 +90,10 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get function inputs
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
-        input_ldap_search_base = getattr(fn_inputs, "ldap_search_base") # text (required)
-        input_ldap_search_filter = self.get_textarea_param(getattr(fn_inputs, "ldap_search_filter")) # textarea (required)
+        input_ldap_search_base = getattr(fn_inputs, "ldap_search_base", None) # text (required)
+        input_ldap_search_filter = self.get_textarea_param(getattr(fn_inputs, "ldap_search_filter", None)) # textarea (required)
         input_ldap_search_attributes = getattr(fn_inputs, "ldap_search_attributes", ALL_ATTRIBUTES) # text (optional)
-        input_ldap_search_param = getattr(fn_inputs, "ldap_search_param") # text (optional)
+        input_ldap_search_param = getattr(fn_inputs, "ldap_search_param", None) # text (optional)
 
         if input_ldap_search_attributes and input_ldap_search_attributes is not ALL_ATTRIBUTES:
             input_ldap_search_attributes = [str(attr) for attr in input_ldap_search_attributes.split(',')]
@@ -111,13 +111,13 @@ class FunctionComponent(AppFunctionComponent):
         # Initiate variable, so that it does not error when called
         conn = ""
 
-        # Instansiate helper (which gets appconfigs from file)
+        # Instantiate helper (which gets app configs from file)
         ldap = LDAPDomains(self.opts)
         helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
 
         input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)
 
-        # Instansiate LDAP Server and Connection
+        # Instantiate LDAP Server and Connection
         conn = helper.get_ldap_connection()
 
         try:

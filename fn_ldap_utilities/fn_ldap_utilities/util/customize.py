@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.1.51
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.1.0.695
 
-"""Generate the Resilient customizations required for fn_ldap_utilities"""
+"""Generate the SOAR customizations required for fn_ldap_utilities"""
 
 import base64
 import os
@@ -21,17 +22,42 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_ldap_utilities",
-        "message_destinations": [u"fn_ldap_utilities"],
-        "functions": [u"ldap_utilities_add", u"ldap_utilities_add_to_groups", u"ldap_utilities_remove_from_groups", u"ldap_utilities_search", u"ldap_utilities_set_password", u"ldap_utilities_toggle_access", u"ldap_utilities_update"],
+        "message_destinations": [
+            u"fn_ldap_utilities"
+        ],
+        "functions": [
+            u"ldap_utilities_add",
+            u"ldap_utilities_add_to_groups",
+            u"ldap_utilities_remove_from_groups",
+            u"ldap_utilities_search",
+            u"ldap_utilities_set_password",
+            u"ldap_utilities_toggle_access",
+            u"ldap_utilities_update"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"ldap_base_dn", u"ldap_domain_name"],
+        "incident_fields": [
+            u"ldap_base_dn",
+            u"ldap_domain_name"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"ldap_query_results"],
+        "datatables": [
+            u"ldap_query_results"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"No search results"],
-        "playbooks": [u"example_ldap_utilities_add", u"example_ldap_utilities_add_users_to_groups", u"example_ldap_utilities_remove_users_from_groups", u"example_ldap_utilities_search", u"example_ldap_utilities_set_password", u"example_ldap_utilities_toggle_access", u"example_ldap_utilities_update"]
+        "scripts": [
+            u"No search results"
+        ],
+        "playbooks": [
+            u"example_ldap_utilities_add",
+            u"example_ldap_utilities_add_users_to_groups",
+            u"example_ldap_utilities_remove_users_from_groups",
+            u"example_ldap_utilities_search",
+            u"example_ldap_utilities_set_password",
+            u"example_ldap_utilities_toggle_access",
+            u"example_ldap_utilities_update"
+        ]
     }
 
 
@@ -40,7 +66,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 49.0.8803
 
     Contents:
     - Message Destinations:

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 import logging
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
@@ -27,20 +27,20 @@ def selftest_function(opts):
         try:
             """
             If labels are given to the servers in the app.config `domain_name` will start with 'fn_ldap_utilities:' else if
-            labels are not given then `domain_name` will equal 'fn_ldap_utilites'.
+            labels are not given then `domain_name` will equal 'fn_ldap_utilities'.
             If `domain_name` contains ':' then a labels have been given to the servers and `domain` will be set to the label given to the server else
-            if `domain_name` does not contain ':' then servers have not been labled and `domain` will be set to `domain_name` which will equal 'fn_ldap_utilities'.
+            if `domain_name` does not contain ':' then servers have not been labeled and `domain` will be set to `domain_name` which will equal 'fn_ldap_utilities'.
             """
             domain = domain_name[domain_name.index(":")+1:] if ":" in domain_name else domain_name
 
-            # Instansiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets app configs from file)
             helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(domain, domains_list))
 
             options = opts.get(domain_name, {})
 
             log.info(f"Verifying app.config values for {str(options.get('ldap_server'))} config section")
 
-            # Instansiate LDAP Server and Connection
+            # Instantiate LDAP Server and Connection
             conn = helper.get_ldap_connection()
 
             # Bind to the connection

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -41,9 +41,9 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["ldap_dn"], fn_inputs)
 
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
-        ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
-        attribute_list = getattr(fn_inputs, "ldap_attribute_name_values") # text
-        group_list = getattr(fn_inputs, "ldap_multiple_group_dn") # text
+        ldap_dn = getattr(fn_inputs, "ldap_dn", None) # text (required)
+        attribute_list = getattr(fn_inputs, "ldap_attribute_name_values", None) # text
+        group_list = getattr(fn_inputs, "ldap_multiple_group_dn", None) # text
 
         try:
             # Try converting input to an dictionary
@@ -65,7 +65,7 @@ class FunctionComponent(AppFunctionComponent):
         # Initiate variable, so that it does not error when called
         conn = ""
 
-        # Instansiate helper (which gets appconfigs from file)
+        # Instantiate helper (which gets app configs from file)
         ldap = LDAPDomains(self.opts)
         helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
 

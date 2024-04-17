@@ -1,4 +1,4 @@
-# SOAR LDAP Utilities
+# IBM SOAR LDAP Utilities
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -14,7 +14,6 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [2.0.0 Changes](#200-changes)
-  - [Custom Layouts](#custom-layouts)
 - [Function - LDAP Utilities: Add](#function---ldap-utilities-add)
 - [Function - LDAP Utilities: Add to Group(s)](#function---ldap-utilities-add-to-groups)
 - [Function - LDAP Utilities: Remove from Group(s)](#function---ldap-utilities-remove-from-groups)
@@ -22,14 +21,19 @@
 - [Function - LDAP Utilities: Set Password](#function---ldap-utilities-set-password)
 - [Function - LDAP Utilities: Toggle Access](#function---ldap-utilities-toggle-access)
 - [Function - LDAP Utilities: Update](#function---ldap-utilities-update)
+- [Script - No search results](#script---no-search-results)
+  - [Custom Layouts](#custom-layouts)
 - [Data Table - LDAP Query results](#data-table---ldap-query-results)
+- [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
+
 ---
 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.3 | 03/2024 | Bug fix for ldap_utilities_search.py function. |
 | 2.1.2 | 08/2023 | Bug fix for set password function |
 | 2.1.1 | 06/2023 | Bug fix for CP4S |
 | 2.1.0 | 04/2023 | <ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul> |
@@ -57,7 +61,7 @@ These LDAP Utility integrations allow multiple activities to be initiated from w
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-SOAR components to allow reading and manipulation of your LDAP Server'
+IBM SOAR components to allow reading and manipulation of your LDAP Server'
 
 ### Key Features
 * Add users, groups, organizational units to LDAP
@@ -74,37 +78,38 @@ SOAR components to allow reading and manipulation of your LDAP Server'
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, App Host and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `49.0.8803`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `49.0.8803`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
+* Integration server is running `resilient_circuits>=49.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Layout | Read, Edit |
 
 The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
-* Cloud Pak is configured with an App Host.
+* IBM Cloud Pak for Security >= `1.10.15`.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
@@ -113,10 +118,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not support a proxy server.
 
 ### Python Environment
-Python 3.6 and greater are supported.
+Python 3.6, 3.9, and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * ldap3>=2.0.0
-* resilient_circuits>=45.0.0
+* resilient_circuits>=49.0.0
 
 ---
 
@@ -142,16 +147,16 @@ The following table provides the settings you need to configure the app. These s
 | **ldap_connect_timeout** | Yes | `10` | *Timeout in seconds* |
 
 #### 2.0.0 Changes
-Starting in version 2.0.0, more than one LDAP instance can be configured for SOAR case data synchronization. For enterprises with only one LDAP instance, your app.config file will continue to define the LDAP instance inder the `[fn_ldap_utilities]` section header.
+Starting in version 2.0.0, more than one LDAP instance can be configured for SOAR case data synchronization. For enterprises with only one LDAP instance, your app.config file will continue to define the LDAP instance under the `[fn_ldap_utilities]` section header.
 
-For enterprises with more than one LDAP instance, each instance will have it;s own section header, such as `[fn_ldap_utilites:Domain1]` where `Domain1` represents any label helpful to define your LDAP environment.
+For enterprises with more than one LDAP instance, each instance will have it;s own section header, such as `[fn_ldap_utilities:Domain1]` where `Domain1` represents any label helpful to define your LDAP environment.
 
 Be aware that modifications to custom workflows will be needed to correctly pass this label through the `ldap_domain_name` function input field if the LDAP server/servers in the app.config have labels.
 
-If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information abiout changing them to reference the `ldap_domain_name` function input field.
+If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `ldap_domain_name` function input field.
 
 ## Using the example functions
-Two incident fields have been added, `ldap_domain_name` and `ldap_base_dn`. If these are added to a case and given values then those values will be used when a rule is run that uses those fields. If a rule is run and the user enters a value that is differernt from the ones given in the incident then the user entered value will be used for that rule.
+Two incident fields have been added, `ldap_domain_name` and `ldap_base_dn`. If these are added to a case and given values then those values will be used when a rule is run that uses those fields. If a rule is run and the user enters a value that is different from the ones given in the incident then the user entered value will be used for that rule.
 
 ---
 
@@ -165,10 +170,10 @@ Add users, groups, organizational units to LDAP
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_attribute_name_values` | `text` | No | `"attribute1": "value1", "attribute2": "value2"` | comma separated name value pairs, each key and value must be surrounded by quotation marks like the example |
-| `ldap_dn` | `text` | Yes | `cn=user1,ou=test-ou,dc=example,dc=com` | Distinguished Name of entry you want to access |
-| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
-| `ldap_multiple_group_dn` | `text` | Yes | `['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']` | List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example |
+| `ldap_attribute_name_values` | `text` | No | `"attribute1": "value1", "attribute2": "value2"` | Comma separated name value pairs, each key and value must be surrounded by quotation marks like the example |
+| `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access. |
+| `ldap_domain_name` | `text` | No | `-` | The label of the LDAP server to use from the app.config |
+| `ldap_multiple_group_dn` | `text` | Yes | `"['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"` | List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example |
 
 </p>
 </details>
@@ -180,39 +185,39 @@ Add users, groups, organizational units to LDAP
 
 ```python
 results = {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
   "content": {
-    "result": 0,
     "description": "success",
     "dn": "",
     "message": "",
     "referrals": null,
+    "result": 0,
     "type": "addResponse"
   },
-  "raw": "{\"result\": 0, \"description\": \"success\", \"dn\": \"\", \"message\": \"\", \"referrals\": null, \"type\": \"addResponse\"}",
   "inputs": {
-    "ldap_domain_name": "Domain1",
-    "ldap_dn": "cn=gerry,cn=Users,dc=dev,dc=co3sys,dc=com",
-    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com', 'CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com']",
-    "ldap_attribute_name_values": "\"objectClass\": \"user\", \"uid\": \"gerry\", \"telephoneNumber\": \"7812993827\", \"name\": \"gerry\", \"mail\": \"gerry@mail.com\", \"sn\": \"richards\""
+    "ldap_attribute_name_values": "\"objectClass\": [\"top\",\"person\",\"organizationalPerson\",\"user\"], \"name\": \"Gary\", \"mail\": \"gary1@dev.co3sys.com\", \"sAMAccountName\": \"gary1\"",
+    "ldap_dn": "cn=Gary1,cn=Users,dc=dev,dc=co3sys,dc=com",
+    "ldap_domain_name": "Domain2",
+    "ldap_multiple_group_dn": "[]"
   },
   "metrics": {
-    "version": "1.0",
-    "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "execution_time_ms": 545,
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 15:16:50"
-  }
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.1",
+    "timestamp": "2023-08-09 09:54:11",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -220,18 +225,18 @@ results = {
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
 # If a value is given by the user field then set ldap_domain_name to that value
-if playbook.inputs.ldap_domain_name:
-  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
+if getattr(playbook.inputs, "ldap_domain_name", None):
+  inputs.ldap_domain_name = getattr(playbook.inputs, "ldap_domain_name", None)
 
-inputs.ldap_dn = playbook.inputs.ldap_user_info
-inputs.ldap_multiple_group_dn = playbook.inputs.ldap_groups if playbook.inputs.ldap_groups else '[]'
-inputs.ldap_attribute_name_values = playbook.inputs.ldap_attribute_name_values
+inputs.ldap_dn = getattr(playbook.inputs, "ldap_user_info", None)
+inputs.ldap_multiple_group_dn = getattr(playbook.inputs, "ldap_groups", None) if getattr(playbook.inputs, "ldap_groups", None) else '[]'
+inputs.ldap_attribute_name_values = getattr(playbook.inputs, "ldap_attribute_name_values", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -248,7 +253,7 @@ else:
 
 ---
 ## Function - LDAP Utilities: Add to Group(s)
-A function that allows adding multiple users to multiple groups
+A function that allows adding multiple users to multiple groups.
 
  ![screenshot: fn-ldap-utilities-add-to-groups ](./doc/screenshots/fn-ldap-utilities-add-to-groups.png)
 
@@ -257,9 +262,9 @@ A function that allows adding multiple users to multiple groups
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
-| `ldap_multiple_group_dn` | `text` | Yes | `['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']` | List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example |
-| `ldap_multiple_user_dn` | `text` | Yes | `['dn=tom smith,dc=example,dc=com', 'dn=ted smith,dc=example,dc=com']` | List (represented as a string) of each DN of the users, each value in the list must have quotes around it like the example |
+| `ldap_domain_name` | `text` | No | `-` | The label of the LDAP server to use from the app.config |
+| `ldap_multiple_group_dn` | `text` | Yes | `"['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"` | List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example |
+| `ldap_multiple_user_dn` | `text` | Yes | `"['dn=tom smith,dc=example,dc=com', 'dn=ted smith,dc=example,dc=com']"` | List (represented as a string) of each DN of the users, each value in the list must have quotes around it like the example |
 
 </p>
 </details>
@@ -271,39 +276,38 @@ A function that allows adding multiple users to multiple groups
 
 ```python
 results = {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
-  "content": null,
-  "raw": "null",
+  "content": {
+    "groups_dn": [
+      "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ],
+    "users_dn": [
+      "CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ]
+  },
   "inputs": {
     "ldap_domain_name": "Domain2",
-    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com']",
-    "ldap_multiple_user_dn": "['CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com']"
+    "ldap_multiple_group_dn": "[\u0027CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com\u0027]",
+    "ldap_multiple_user_dn": "[\u0027CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com\u0027]"
   },
   "metrics": {
-    "version": "1.0",
-    "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "execution_time_ms": 1081,
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 15:22:53"
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.0",
+    "timestamp": "2023-03-30 10:57:37",
+    "version": "1.0"
   },
-  "users_dn": [
-    [
-      "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
-    ]
-  ],
-  "groups_dn": [
-    "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
-  ]
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -314,21 +318,21 @@ results = {
 # inputs.ldap_multiple_group_dn = "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"
 
 # Both inputs must be a string representation of a List
-inputs.ldap_multiple_user_dn = playbook.inputs.ldap_multiple_user_dn
-inputs.ldap_multiple_group_dn = playbook.inputs.ldap_multiple_group_dn
+inputs.ldap_multiple_user_dn = getattr(playbook.inputs, "ldap_multiple_user_dn", None)
+inputs.ldap_multiple_group_dn = getattr(playbook.inputs, "ldap_multiple_group_dn", None)
 
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
 # If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if playbook.inputs.ldap_domain_name:
-  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
+if getattr(playbook.inputs, "ldap_domain_name", None):
+  inputs.ldap_domain_name = getattr(playbook.inputs, "ldap_domain_name", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -348,7 +352,7 @@ if results.get("success"):
 
 ---
 ## Function - LDAP Utilities: Remove from Group(s)
-A function that allows you to remove multiple from multiple groups
+A function that allows you to remove multiple from multiple groups.
 
  ![screenshot: fn-ldap-utilities-remove-from-groups ](./doc/screenshots/fn-ldap-utilities-remove-from-groups.png)
 
@@ -371,39 +375,38 @@ A function that allows you to remove multiple from multiple groups
 
 ```python
 results = {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
-  "content": null,
-  "raw": "null",
+  "content": {
+    "groups_dn": [
+      "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ],
+    "users_dn": [
+      "CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ]
+  },
   "inputs": {
     "ldap_domain_name": "Domain2",
-    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com']",
-    "ldap_multiple_user_dn": "['CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com']"
+    "ldap_multiple_group_dn": "[\u0027CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com\u0027]",
+    "ldap_multiple_user_dn": "[\u0027CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com\u0027]"
   },
   "metrics": {
-    "version": "1.0",
-    "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "execution_time_ms": 1093,
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 15:22:53"
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.0",
+    "timestamp": "2023-03-30 10:58:09",
+    "version": "1.0"
   },
-  "users_dn": [
-    [
-      "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
-    ]
-  ],
-  "groups_dn": [
-    "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
-  ]
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -414,21 +417,21 @@ results = {
 # inputs.ldap_multiple_group_dn = "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"
 
 # Both inputs must be a string representation of a List
-inputs.ldap_multiple_user_dn = playbook.inputs.ldap_multiple_user_dn
-inputs.ldap_multiple_group_dn = playbook.inputs.ldap_multiple_group_dn
+inputs.ldap_multiple_user_dn = getattr(playbook.inputs, "ldap_multiple_user_dn", None)
+inputs.ldap_multiple_group_dn = getattr(playbook.inputs, "ldap_multiple_group_dn", None)
 
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
 # If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if playbook.inputs.ldap_domain_name:
-  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
+if getattr(playbook.inputs, "ldap_domain_name", None):
+  inputs.ldap_domain_name = getattr(playbook.inputs, "ldap_domain_name", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -477,184 +480,115 @@ SOAR Function to do a search or query against an LDAP server.
 
 ```python
 results = {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
-  "content": [
-    {
-      "dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-      "accountExpires": "9999-12-31 23:59:59.999999+00:00",
-      "adminCount": 1,
-      "badPasswordTime": "1601-01-01 00:00:00+00:00",
-      "badPwdCount": 0,
-      "cn": "Gary",
-      "codePage": 0,
-      "countryCode": 0,
-      "dSCorePropagationData": [
-        "2018-11-08 20:14:42+00:00",
-        "1601-01-01 00:00:00+00:00"
-      ],
-      "displayName": "Gary Crosby",
-      "distinguishedName": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-      "givenName": "Gary",
-      "instanceType": 4,
-      "lastLogoff": "1601-01-01 00:00:00+00:00",
-      "lastLogon": "1601-01-01 00:00:00+00:00",
-      "lastLogonTimestamp": "2019-11-20 20:25:20.230009+00:00",
-      "logonCount": 0,
-      "mail": "gary5566@mailinator.com",
-      "memberOf": [
-        "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com",
-        "CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com",
-        "CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com"
-      ],
-      "name": "Gary",
-      "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
-      "objectClass": [
-        "top",
-        "person",
-        "organizationalPerson",
-        "user"
-      ],
-      "objectGUID": "{a75844e3-37d7-482b-ad45-3b39b51a3ca5}",
-      "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1877",
-      "primaryGroupID": 513,
-      "pwdLastSet": "2018-11-08 19:37:58.004913+00:00",
-      "sAMAccountName": "gary5566",
-      "sAMAccountType": 805306368,
-      "sn": "Crosby",
-      "telephoneNumber": "7812449347",
-      "uSNChanged": 969466,
-      "uSNCreated": 650188,
-      "uid": [
-        "gary5566"
-      ],
-      "userAccountControl": 66048,
-      "userPassword": [
-        "65zQ24h7Bx?i"
-      ],
-      "userPrincipalName": "gary5566@dev.co3sys.com",
-      "whenChanged": "2022-05-19 18:52:20+00:00",
-      "whenCreated": "2018-11-08 19:37:57+00:00"
-    }
-  ],
-  "raw": "[{\"dn\": \"CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com\", \"accountExpires\": \"9999-12-31 23:59:59.999999+00:00\", \"adminCount\": 1, \"badPasswordTime\": \"1601-01-01 00:00:00+00:00\", \"badPwdCount\": 0, \"cn\": \"Gary\", \"codePage\": 0, \"countryCode\": 0, \"dSCorePropagationData\": [\"2018-11-08 20:14:42+00:00\", \"1601-01-01 00:00:00+00:00\"], \"displayName\": \"Gary Crosby\", \"distinguishedName\": \"CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com\", \"givenName\": \"Gary\", \"instanceType\": 4, \"lastLogoff\": \"1601-01-01 00:00:00+00:00\", \"lastLogon\": \"1601-01-01 00:00:00+00:00\", \"lastLogonTimestamp\": \"2019-11-20 20:25:20.230009+00:00\", \"logonCount\": 0, \"mail\": \"gary5566@mailinator.com\", \"memberOf\": [\"CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com\", \"CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com\", \"CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com\"], \"name\": \"Gary\", \"objectCategory\": \"CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com\", \"objectClass\": [\"top\", \"person\", \"organizationalPerson\", \"user\"], \"objectGUID\": \"{a75844e3-37d7-482b-ad45-3b39b51a3ca5}\", \"objectSid\": \"S-1-5-21-1927197486-2714598076-3523470783-1877\", \"primaryGroupID\": 513, \"pwdLastSet\": \"2018-11-08 19:37:58.004913+00:00\", \"sAMAccountName\": \"gary5566\", \"sAMAccountType\": 805306368, \"sn\": \"Crosby\", \"telephoneNumber\": \"7812449347\", \"uSNChanged\": 969466, \"uSNCreated\": 650188, \"uid\": [\"gary5566\"], \"userAccountControl\": 66048, \"userPassword\": [\"65zQ24h7Bx?i\"], \"userPrincipalName\": \"gary5566@dev.co3sys.com\", \"whenChanged\": \"2022-05-19 18:52:20+00:00\", \"whenCreated\": \"2018-11-08 19:37:57+00:00\"}]",
+  "content": {
+    "entries": [
+      {
+        "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+        "badPasswordTime": "2023-08-09 12:37:03.680271+00:00",
+        "badPwdCount": 0,
+        "cn": "Billy Bremner",
+        "codePage": 0,
+        "countryCode": 0,
+        "dSCorePropagationData": [
+          "2023-08-10 14:22:07+00:00",
+          "2023-08-10 14:19:35+00:00",
+          "1601-01-01 00:04:17+00:00"
+        ],
+        "displayName": "Billy Bremner",
+        "distinguishedName": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "givenName": "Billy",
+        "instanceType": 4,
+        "lastLogoff": "1601-01-01 00:00:00+00:00",
+        "lastLogon": "2023-08-10 14:37:11.119774+00:00",
+        "lastLogonTimestamp": "2023-08-10 14:37:04.349319+00:00",
+        "lockoutTime": "1601-01-01 00:00:00+00:00",
+        "logonCount": 15,
+        "mail": "bbremner@example.com",
+        "memberOf": [
+          "CN=DermotGroup2,DC=dev,DC=co3sys,DC=com",
+          "CN=DermotGroup,CN=Users,DC=dev,DC=co3sys,DC=com"
+        ],
+        "name": "Billy Bremner",
+        "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+        "objectClass": [
+          "top",
+          "person",
+          "organizationalPerson",
+          "user"
+        ],
+        "objectGUID": "{af8b16cd-968a-448b-92fd-6b281d07ffde}",
+        "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-3118",
+        "primaryGroupID": 513,
+        "pwdLastSet": "2023-08-10 14:38:59.250429+00:00",
+        "sAMAccountName": "bbremner",
+        "sAMAccountType": 805306368,
+        "sn": "Bremner",
+        "uSNChanged": 1139323,
+        "uSNCreated": 803064,
+        "userAccountControl": 66048,
+        "userPassword": [
+          "superDuperSecret@9"
+        ],
+        "userPrincipalName": "bbremner@dev.co3sys.com",
+        "whenChanged": "2023-08-10 14:38:59+00:00",
+        "whenCreated": "2020-05-20 08:47:45+00:00"
+      }
+    ]
+  },
   "inputs": {
     "ldap_domain_name": "Domain2",
-    "ldap_search_filter": "(&(mail=%ldap_param%))",
-    "ldap_search_param": "gary5566@mailinator.com",
-    "ldap_search_base": "DC=dev,DC=co3sys,DC=com"
+    "ldap_search_base": "DC=dev,DC=co3sys,DC=com",
+    "ldap_search_filter": "(\u0026(mail=%ldap_param%))",
+    "ldap_search_param": "bbremner@example.com"
   },
   "metrics": {
-    "version": "1.0",
-    "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "execution_time_ms": 1230,
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 14:53:23"
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.2",
+    "timestamp": "2023-08-10 10:39:53",
+    "version": "1.0"
   },
-  "entries": [
-    {
-      "dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-      "accountExpires": "9999-12-31 23:59:59.999999+00:00",
-      "adminCount": 1,
-      "badPasswordTime": "1601-01-01 00:00:00+00:00",
-      "badPwdCount": 0,
-      "cn": "Gary",
-      "codePage": 0,
-      "countryCode": 0,
-      "dSCorePropagationData": [
-        "2018-11-08 20:14:42+00:00",
-        "1601-01-01 00:00:00+00:00"
-      ],
-      "displayName": "Gary Crosby",
-      "distinguishedName": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-      "givenName": "Gary",
-      "instanceType": 4,
-      "lastLogoff": "1601-01-01 00:00:00+00:00",
-      "lastLogon": "1601-01-01 00:00:00+00:00",
-      "lastLogonTimestamp": "2019-11-20 20:25:20.230009+00:00",
-      "logonCount": 0,
-      "mail": "gary5566@mailinator.com",
-      "memberOf": [
-        "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com",
-        "CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com",
-        "CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com"
-      ],
-      "name": "Gary",
-      "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
-      "objectClass": [
-        "top",
-        "person",
-        "organizationalPerson",
-        "user"
-      ],
-      "objectGUID": "{a75844e3-37d7-482b-ad45-3b39b51a3ca5}",
-      "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1877",
-      "primaryGroupID": 513,
-      "pwdLastSet": "2018-11-08 19:37:58.004913+00:00",
-      "sAMAccountName": "gary5566",
-      "sAMAccountType": 805306368,
-      "sn": "Crosby",
-      "telephoneNumber": "7812449347",
-      "uSNChanged": 969466,
-      "uSNCreated": 650188,
-      "uid": [
-        "gary5566"
-      ],
-      "userAccountControl": 66048,
-      "userPassword": [
-        "65zQ24h7Bx?i"
-      ],
-      "userPrincipalName": "gary5566@dev.co3sys.com",
-      "whenChanged": "2022-05-19 18:52:20+00:00",
-      "whenCreated": "2018-11-08 19:37:57+00:00"
-    }
-  ]
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
-# If search filters are given
-if playbook.inputs.ldap_search_filter:
-  inputs.ldap_search_filter = playbook.inputs.ldap_search_filter
-# If filters not given then set them to example filters
-else:
-  inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
+# Set the ldap_search_base and ldap_search_filter
+# using the ldap_param wildcard then get the email
+# address the user you want to toggle access for from the artifact's value
+inputs.ldap_search_filter = "(&(mail=%ldap_param%))"
+inputs.ldap_search_param =  artifact.value
 
-# If search attributes are given
-if playbook.inputs.ldap_search_attributes:
-  inputs.ldap_search_attributes = playbook.inputs.ldap_search_attributes
-# If search attributes not given then set them to example attributes
-else:
-  inputs.ldap_search_attributes = "*"
-
-inputs.ldap_search_param = artifact.value
 # If the incident field ldap_base_dn contains a value then set ldap_search_base to that value
 if incident.properties.ldap_base_dn:
   inputs.ldap_search_base = incident.properties.ldap_base_dn
 # If a value is given in the rule ldap_search_base field then set ldap_search_base to that value
-if playbook.inputs.ldap_search_base:
-  inputs.ldap_search_base = playbook.inputs.ldap_search_base
+if getattr(playbook.inputs, "ldap_search_base", None):
+  inputs.ldap_search_base = getattr(playbook.inputs, "ldap_search_base", None)
 
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
 # If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if playbook.inputs.ldap_domain_name:
-  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
+if getattr(playbook.inputs, "ldap_domain_name", None):
+  inputs.ldap_domain_name = getattr(playbook.inputs, "ldap_domain_name", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -690,11 +624,11 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access |
-| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
-| `ldap_new_auto_password_len` | `number` | No | `12` | Length of password to generate |
-| `ldap_new_password` | `text` | No | `-` | The new password you want to set for the entry |
-| `ldap_return_new_password` | `boolean` | No | `-` | True or false to return the new password. |
+| `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access. |
+| `ldap_domain_name` | `text` | No | `-` | The label of the LDAP server to use from the app.config |
+| `ldap_new_auto_password_len` | `number` | No | `12` | Length of password to generate. |
+| `ldap_new_password` | `text` | No | `-` | The new password you want to set for the entry. |
+| `ldap_return_new_password` | `boolean` | No | `-` | Either to return the new password or not. |
 
 </p>
 </details>
@@ -706,35 +640,35 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "user_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_new_password": null
+    "ldap_new_password": null,
+    "user_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com"
   },
-  "raw": null,
   "inputs": {
-    "ldap_domain_name": "Domain2",
     "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_domain_name": "Domain2",
     "ldap_new_password": "superDuperSecret@9",
     "ldap_return_new_password": false
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 10756,
+    "host": "local",
     "package": "fn-ldap-utilities",
     "package_version": "2.1.2",
-    "host": "local",
-    "execution_time_ms": 10756,
-    "timestamp": "2023-08-10 10:39:08"
-  }
+    "timestamp": "2023-08-10 10:39:08",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -743,17 +677,17 @@ results = playbook.functions.results.search_results
 # which will be the DN of the account you want to set a Set a New Password for
 inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
 inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
-inputs.ldap_new_password = playbook.inputs.ldap_user_new_password
-pass_len = playbook.inputs.ldap_new_auto_password_length
+inputs.ldap_new_password = getattr(playbook.inputs, "ldap_user_new_password", None)
+pass_len = getattr(playbook.inputs, "ldap_new_auto_password_length", None)
 if pass_len:
   inputs.ldap_new_auto_password_len = pass_len
-inputs.ldap_return_new_password = playbook.inputs.ldap_return_new_password
+inputs.ldap_return_new_password = getattr(playbook.inputs, "ldap_return_new_password", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -775,7 +709,7 @@ if results.get("success"):
 
 ---
 ## Function - LDAP Utilities: Toggle Access
-A function that allows an LDAP user, with the correct privileges to enable or disable another account given their DN
+A function that allows an LDAP user, with the correct privileges, to enable or disable another account given their DN.
 
  ![screenshot: fn-ldap-utilities-toggle-access ](./doc/screenshots/fn-ldap-utilities-toggle-access.png)
 
@@ -798,36 +732,34 @@ A function that allows an LDAP user, with the correct privileges to enable or di
 
 ```python
 results = {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
-  "content": null,
-  "raw": "null",
+  "content": {
+    "user_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "user_status": "Enable"
+  },
   "inputs": {
+    "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
     "ldap_domain_name": "Domain2",
-    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_toggle_access": {
-      "id": 102,
-      "name": "Enable"
-    }
+    "ldap_toggle_access": "Enable"
   },
   "metrics": {
-    "version": "1.0",
-    "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "execution_time_ms": 3714,
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 14:53:26"
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.2",
+    "timestamp": "2023-08-10 10:39:59",
+    "version": "1.0"
   },
-  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-  "user_status": "Enable"
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -836,13 +768,13 @@ results = playbook.functions.results.search_results
 # which will be the DN of the account you want to set a Toggle Access for
 inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
 inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
-inputs.ldap_toggle_access = playbook.inputs.ldap_toggle_access
+inputs.ldap_toggle_access = getattr(playbook.inputs, "ldap_toggle_access", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -867,7 +799,7 @@ if results.get("success"):
 
 ---
 ## Function - LDAP Utilities: Update
-A function that updates the attribute of a DN with a new value
+A function that updates the attribute of a DN with a new value.
 
  ![screenshot: fn-ldap-utilities-update ](./doc/screenshots/fn-ldap-utilities-update.png)
 
@@ -891,37 +823,38 @@ A function that updates the attribute of a DN with a new value
 
 ```python
 results = {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
-  "content": null,
-  "raw": "null",
+  "content": {
+    "attribute_name": "homePhone",
+    "attribute_values": [
+      "2638443927"
+    ],
+    "user_dn": "CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com"
+  },
   "inputs": {
-    "ldap_attribute_values": "['gary5566']",
-    "ldap_domain_name": "Domain1",
-    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_attribute_name": "uid"
+    "ldap_attribute_name": "homePhone",
+    "ldap_attribute_values": "[\u00272638443927\u0027]",
+    "ldap_dn": "CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_domain_name": "Domain2"
   },
   "metrics": {
-    "version": "1.0",
-    "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "execution_time_ms": 1090,
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 14:52:00"
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.0",
+    "timestamp": "2023-03-31 09:32:11",
+    "version": "1.0"
   },
-  "attribute_name": "uid",
-  "attribute_values": [
-    "gary5566"
-  ],
-  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -931,15 +864,15 @@ results = playbook.functions.results.search_results
 # the name of the attribute to update and list the values
 inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
 inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
-inputs.ldap_attribute_name = playbook.inputs.ldap_update_attribute_name
-inputs.ldap_attribute_values = playbook.inputs.ldap_attribute_update_value
+inputs.ldap_attribute_name = getattr(playbook.inputs, "ldap_update_attribute_name", None)
+inputs.ldap_attribute_values = getattr(playbook.inputs, "ldap_attribute_update_value", None)
 # inputs.ldap_attribute_values = "['081111111', '082222222']"
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -961,6 +894,37 @@ if results.get("success"):
 
 ---
 
+## Script - No search results
+
+
+**Object:** artifact
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+incident.addNote(f"No entries found for {artifact.value}")
+```
+
+</p>
+</details>
+
+---
+
+## Playbooks
+| Playbook Name | Description | Activation Type | Object | Status | Condition | 
+| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
+| Example: LDAP Utilities: Add (PB) | Add users, groups, organizational units to LDAP | Manual | incident | `enabled` | `-` | 
+| Example: LDAP Utilities: Add User(s) to Group(s) (PB) | add multiple users to multiple groups | Manual | artifact | `enabled` | `artifact.type equals String` | 
+| Example: LDAP Utilities: Remove User(s) from Group(s) (PB) | remove multiple users from a group | Manual | artifact | `enabled` | `artifact.type equals String` | 
+| Example: LDAP Utilities: Search (PB) | runs a person query against an LDAP server using the person's email address | Manual | artifact | `enabled` | `artifact.type equals Email Recipient OR artifact.type equals Email Sender OR artifact.type equals String` | 
+| Example: LDAP Utilities: Set Password (PB) | searches for a user using their email address, gets their DN and sets a new password for that user | Manual | artifact | `enabled` | `artifact.type equals Email Recipient OR artifact.type equals Email Sender OR artifact.type equals String` | 
+| Example: LDAP Utilities: Toggle Access (PB) | enable/disable an Active Directory user account | Manual | artifact | `enabled` | `artifact.type equals Email Recipient OR artifact.type equals Email Sender OR artifact.type equals String` | 
+| Example: LDAP Utilities: Update (PB) | updates the value of a DN's attribute with the given value(s) | Manual | artifact | `enabled` | `artifact.type equals Email Recipient OR artifact.type equals Email Sender OR artifact.type equals String` | 
+
+---
+
+
 
 ## Data Table - LDAP Query results
 
@@ -980,22 +944,17 @@ ldap_query_results
 
 ---
 
-## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| Example: LDAP Utilities: Add | Add users, groups, organizational units to LDAP | incident | `enabled` |
-| Example: LDAP Utilities: Add User(s) to Group(s) | add multiple users to multiple groups | artifact | `enabled` |
-| Example: LDAP Utilities: Remove User(s) from Group(s) | remove multiple users from a group | artifact | `enabled` |
-| Example: LDAP Utilities: Search | runs a person query against an LDAP server using the person's email address | artifact | `enabled` |
-| Example: LDAP Utilities: Set Password | searches for a user using their email address, gets their DN and sets a new password for that user | artifact | `enabled` |
-| Example: LDAP Utilities: Toggle Access | enable/disable an Active Directory user account | artifact | `enabled` |
-| Example: LDAP Utilities: Update | updates the value of a DN's attribute with the given value(s) | artifact | `enabled` |
+## Custom Fields
+| Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
+| ----- | --------------- | ---- | ------ | ----------- | ------- |
+| LDAP Base DN | `ldap_base_dn` | `text` | `properties` | DC=example,DC=com | - |
+| LDAP Domain Name | `ldap_domain_name` | `text` | `properties` | - | Domain name label given to the LDAP server you wish to use |
 
 ---
 
 ## How to configure to use a single LDAP Server
 To use only a single server there are two ways this can be configured
-1. User the configureation used in LDAP Utilities versions prior to v2.0.0
+1. User the configuration used in LDAP Utilities versions prior to v2.0.0
 ```
 [fn_ldap_utilities]
 # Ip address of the LDAP Server
@@ -1047,11 +1006,6 @@ if playbook.input.ldap_domain_name:
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
-#### Known Errors
-1. `Expected to execute a maximum of 50,000 lines`
-This error occurs when running the search function when processing a large search result. The playbook scripts have a max execution limit of 50,000 lines of code. If you hit this limit, try to add more filters to your search to return fewer results.
-2. `The maximum number of new objects created by rules and playbooks has been exceeded`
-This error occurs when running the search function when processing a large search result.  and the playbook script tried to add more than 500 rows to a data table. The 500 object creation limit is only a limitation with playbooks and not workflows. For the time being, use a rule and workflow to avoid this error if you feel adding so many datatable rows is necessary. Alternatively, add more filters to your search to return fewer results.
-
+ 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

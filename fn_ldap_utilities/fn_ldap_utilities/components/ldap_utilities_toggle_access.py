@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -39,8 +39,8 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get function inputs
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
-        ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
-        ldap_toggle_access = getattr(fn_inputs, "ldap_toggle_access") # select, values: "Enable", "Disable" (required)
+        ldap_dn = getattr(fn_inputs, "ldap_dn", None) # text (required)
+        ldap_toggle_access = getattr(fn_inputs, "ldap_toggle_access", None) # select, values: "Enable", "Disable" (required)
 
         self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
         self.LOG.info(f"LDAP DN: {ldap_dn}")
@@ -49,7 +49,7 @@ class FunctionComponent(AppFunctionComponent):
         # Initiate variable, so that it does not error when called
         c = ""
 
-        # Instansiate helper (which gets appconfigs from file)
+        # Instantiate helper (which gets app configs from file)
         ldap = LDAPDomains(self.opts)
         helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
 
@@ -61,15 +61,15 @@ class FunctionComponent(AppFunctionComponent):
         ldap_user_account_control_attribute = "userAccountControl"
 
         if (ldap_toggle_access.lower() == 'enable'):
-            ldap_user_accout_control_value = ldap_user_account_control_enabled
+            ldap_user_account_control_value = ldap_user_account_control_enabled
 
         elif (ldap_toggle_access.lower() == 'disable'):
-            ldap_user_accout_control_value = ldap_user_account_control_disabled
+            ldap_user_account_control_value = ldap_user_account_control_disabled
 
         else:
             raise ValueError("ldap_toggle_access function input must be 'Enable' or 'Disable'")
 
-        # Instansiate LDAP Server and Connection
+        # Instantiate LDAP Server and Connection
         c = helper.get_ldap_connection()
 
         try:
@@ -87,7 +87,7 @@ class FunctionComponent(AppFunctionComponent):
         try:
             yield self.status_message(f"Attempting to {ldap_toggle_access} {ldap_dn}")
             # Perform the Modify operation
-            success = c.modify(ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
+            success = c.modify(ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_account_control_value])]})
 
         except Exception as err:
             self.LOG.error(f"Error: {err}")

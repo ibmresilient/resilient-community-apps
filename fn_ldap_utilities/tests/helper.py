@@ -1,4 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Unit tests helper functions
 
 from ldap3 import Server, Connection, MOCK_SYNC
 from mock import Mock
@@ -36,7 +38,7 @@ class TestingHelper():
         return Mock(return_value=mocked_connection)
 
 def get_mock_config_data():
-    return u"""[fn_ldap_utilities]
+    return """[fn_ldap_utilities]
 ldap_server=192.168.0.1
 ldap_port=389
 ldap_use_ssl=False

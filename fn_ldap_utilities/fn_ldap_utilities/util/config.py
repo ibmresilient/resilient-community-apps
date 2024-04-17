@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Generate a default configuration-file section for fn_ldap_utilities"""
 
 from __future__ import print_function
@@ -8,9 +8,9 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    return u"""
+    return """
 # V2.0.0+ have the option to have multiple servers configured.
-# By default two examples of servers are given, example one is labeled `Domain1` and example two is labled `Domain2`.
+# By default two examples of servers are given, example one is labeled `Domain1` and example two is labeled `Domain2`.
 # The label for a server is placed after `[fn_ldap_utilities:` and then followed by `]`.
 # To add additional servers copy the below example server configuration from `[fn_ldap_utilities:Domain1]` to `ldap_connect_timeout=10`.
 # Then paste it at the bottom on the app.config.

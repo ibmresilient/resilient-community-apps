@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -40,8 +40,8 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get function inputs
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
-        input_ldap_multiple_user_dn_asString = getattr(fn_inputs, "ldap_multiple_user_dn") # text (required) [string repersentation of an array]
-        input_ldap_multiple_group_dn_asString = getattr(fn_inputs, "ldap_multiple_group_dn") # text (required) [string repersentation of an array]
+        input_ldap_multiple_user_dn_asString = getattr(fn_inputs, "ldap_multiple_user_dn", None) # text (required) [string representation of an array]
+        input_ldap_multiple_group_dn_asString = getattr(fn_inputs, "ldap_multiple_group_dn", None) # text (required) [string representation of an array]
 
         self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
         self.LOG.info(f"LDAP User DN: {input_ldap_multiple_user_dn_asString}")
@@ -50,7 +50,7 @@ class FunctionComponent(AppFunctionComponent):
         # Initiate variable, so that it does not error when called
         c = ""
 
-        # Instansiate helper (which gets app.configs from file)
+        # Instantiate helper (which gets app.configs from file)
         ldap = LDAPDomains(self.opts)
         helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
 
@@ -65,9 +65,9 @@ class FunctionComponent(AppFunctionComponent):
 
         except Exception:
             raise ValueError(
-                """input_ldap_multiple_user_dn and input_ldap_multiple_group_dn must be a string repersenation of an array e.g. "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']" """)
+                """input_ldap_multiple_user_dn and input_ldap_multiple_group_dn must be a string representation of an array e.g. "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']" """)
 
-        # Instansiate LDAP Server and Connection
+        # Instantiate LDAP Server and Connection
         c = helper.get_ldap_connection()
 
         try:
@@ -85,7 +85,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             yield self.status_message("Attempting to add user(s) to group(s)")
-            # Perform the removeMermbersFromGroups operation
+            # Perform the removeMembersFromGroups operation
             success = ad_add_members_to_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
 
         except Exception as err:

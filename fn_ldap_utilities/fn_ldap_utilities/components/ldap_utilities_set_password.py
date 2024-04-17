@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -43,10 +43,10 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get function inputs
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
-        ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
-        ldap_new_password = getattr(fn_inputs, "ldap_new_password") # text
+        ldap_dn = getattr(fn_inputs, "ldap_dn", None) # text (required)
+        ldap_new_password = getattr(fn_inputs, "ldap_new_password", None) # text
         ldap_new_auto_password_len = getattr(fn_inputs, "ldap_new_auto_password_len", DEFAULT_MAX_PASSWORD_LEN) # int Default length is 12
-        ldap_return_new_password = getattr(fn_inputs, "ldap_return_new_password") # boolean
+        ldap_return_new_password = getattr(fn_inputs, "ldap_return_new_password", None) # boolean
 
         self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
         self.LOG.info(f"LDAP DN: {ldap_dn}")
@@ -56,11 +56,11 @@ class FunctionComponent(AppFunctionComponent):
         # Initiate variable, so that it does not error when called
         c = ""
 
-        # Instansiate helper (which gets appconfigs from file)
+        # Instantiate helper (which gets app configs from file)
         ldap = LDAPDomains(self.opts)
         helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
 
-        # Instansiate LDAP Server and Connection
+        # Instantiate LDAP Server and Connection
         c = helper.get_ldap_connection()
 
         try:

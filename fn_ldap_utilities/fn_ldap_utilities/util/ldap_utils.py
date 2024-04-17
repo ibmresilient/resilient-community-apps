@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #   Util classes for LDAP
 
 from . import helper
@@ -27,7 +27,7 @@ class LDAPDomains():
         Check if the given ldap_domain_name is in the app.config
         :param ldap_domain_name: User selected domain
         :param domains_list: list of ldap domains
-        :return: dictionary of options for choosen domain
+        :return: dictionary of options for chosen domain
         """
         # If label not given and using previous versions app.config [fn_qradar_integration]
         if not ldap_domain_name and domains_list.get(helper.PACKAGE_NAME):

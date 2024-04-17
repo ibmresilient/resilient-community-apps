@@ -1,7 +1,6 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
 recursive-include fn_ldap_utilities/util *
 include fn_ldap_utilities/LICENSE
 include doc/*.md
