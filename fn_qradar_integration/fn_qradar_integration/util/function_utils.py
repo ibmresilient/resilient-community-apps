@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
-#
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-#
-#   Util functions
-#
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Util functions
 
 from six import string_types
-import logging
-from resilient_lib import validate_fields, IntegrationError
-from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME, UPDATE_FIELD, GET_FIELD
+from logging import getLogger
+from resilient_lib import validate_fields
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
 from fn_qradar_integration.util import qradar_utils
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 def make_query_string(query, params):
     """
@@ -43,13 +40,13 @@ def fix_dict_value(events):
         if isinstance(event, dict):
             for key in event:
                 if not isinstance(event[key], string_types):
-                    event[key] = u"{}".format(event[key])
+                    event[key] = f"{event[key]}"
 
     return events
 
 def get_servers_list(opts):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: list of options
     :return: list of qradar servers
     """

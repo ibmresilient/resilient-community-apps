@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
 from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
+from logging import getLogger
 
-
-import logging
-
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 TAB_NAME = "QRadar SIEM"
 

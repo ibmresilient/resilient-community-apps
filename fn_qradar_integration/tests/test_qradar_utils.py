@@ -99,7 +99,7 @@ def test_qradar_client():
                                                              "element_type":"IP"},
                                                             200)
         ret = qradar_client.search_ref_set(ref_set_name, "8.8.8.8")
-        assert ret["found"] == "True"
+        assert ret["found"] == True
 
         # 3. Exception in search_ref_set
         mocked_get_call.side_effect = Exception("Failed")
@@ -278,14 +278,14 @@ def test_find_all_ref_set_contains(mocked_search_ref_set, mocked_get_all_ref_set
     mocked_get_all_ref_set.return_value = all_sets
 
     ret1 = {
-        "found": "False",
+        "found": False,
         "content": None
     }
     content = {
         "item_name": "Item1"
     }
     ret2 = {
-        "found": "True",
+        "found": True,
         "content": content
     }
 

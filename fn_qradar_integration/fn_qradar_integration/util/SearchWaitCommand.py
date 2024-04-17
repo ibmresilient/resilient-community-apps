@@ -1,33 +1,30 @@
 # -*- coding: utf-8 -*-
-#
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-#
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Template Method Design Pattern for a search-and-wait-for-result command
-#
 # This file can be reused for composite commands.
-#
-from time import time, sleep
-import logging
 
-LOG = logging.getLogger(__name__)
+from time import time, sleep
+from logging import getLogger
+
+LOG = getLogger(__name__)
 
 class SearchTimeout(Exception):
     """ Query failed to complete in time specified """
     def __init__(self, search_id, search_status):
-        fail_msg = "Query [{}] timed out. Final Status was [{}]".format(search_id, search_status)
+        fail_msg = f"Query [{search_id}] timed out. Final Status was [{search_status}]"
         super(SearchTimeout, self).__init__(fail_msg)
         self.search_status = search_status
 
 class SearchJobFailure(Exception):
     """ Search job creation failure"""
     def __init__(self, query):
-        fail_msg = "Failed to create search job for query [{}] ".format(query)
+        fail_msg = f"Failed to create search job for query [{query}] "
         super(SearchJobFailure, self).__init__(fail_msg)
 
 class SearchFailure(Exception):
     """ Search failed to execute """
     def __init__(self, search_id, search_status):
-        fail_msg = "Query [{}] failed with status [{}]".format(search_id, search_status)
+        fail_msg = f"Query [{search_id}] failed with status [{search_status}]"
         super(SearchFailure, self).__init__(fail_msg)
         self.search_status = search_status
 

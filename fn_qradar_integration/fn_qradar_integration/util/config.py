@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Generate a default configuration-file section for fn_qradar_integration"""
 
 from __future__ import print_function
@@ -9,7 +9,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    return u'''
+    return '''
 # Note: If [fn_qradar_integration] is present without a label then all labeled servers will
 # be disregarded and only the server under [fn_qradar_integration] will be used
 #

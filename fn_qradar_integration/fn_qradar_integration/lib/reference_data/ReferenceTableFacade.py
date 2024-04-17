@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0221
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 from json import dumps, JSONEncoder
 import logging
 from requests.compat import urljoin, quote
@@ -49,7 +49,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
         :rtype: dict
         """
         ref_table_link = quote(ref_table, '')
-        url = u"{}{}/{}?inner_key={}&outer_key={}&value={}".format(client.api_url, REF_TABLE_ENDPOINT,
+        url = "{}{}/{}?inner_key={}&outer_key={}&value={}".format(client.api_url, REF_TABLE_ENDPOINT,
                                          ref_table_link, inner_key, outer_key, value)
 
         ret = None
@@ -62,7 +62,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [add_ref_element call failed with exception {}]".format(url, str(e)))
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [add_ref_element call failed with exception {str(e)}]")
 
         else:
             return ret
@@ -87,7 +87,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
         """
         ref_table_link = quote(ref_table, '')
         value = quote(value, '')
-        url = u"{}{}/{}?inner_key={}&outer_key={}&value={}".format(client.api_url, REF_TABLE_ENDPOINT,
+        url = "{}{}/{}?inner_key={}&outer_key={}&value={}".format(client.api_url, REF_TABLE_ENDPOINT,
                                          ref_table_link, inner_key, outer_key, value)
         ret = {}
         try:
@@ -98,7 +98,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [update_ref_element call failed with exception {}]".format(url, str(e)))
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [update_ref_element call failed with exception {str(e)}]")
 
         return ret
 
@@ -123,7 +123,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
         ref_table_link = quote(ref_table, '')
         value = quote(value, '')
 
-        url = u"{}{}/{}/{}/{}?value={}".format(client.api_url, REF_TABLE_ENDPOINT,
+        url = "{}{}/{}/{}/{}?value={}".format(client.api_url, REF_TABLE_ENDPOINT,
                                          ref_table_link, outer_key, inner_key, value)
         LOG.info(url)
         ret = {}
@@ -135,7 +135,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise IntegrationError("Delete request to url [{}] throws exception. Error [delete_ref_element failed with exception {}]".format(url, str(e)))
+            raise IntegrationError(f"Delete request to url [{url}] throws exception. Error [delete_ref_element failed with exception {str(e)}]")
 
         return ret
 
@@ -149,7 +149,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
         number_failed_tble_insert = 0
         if not isinstance(data, dict):
             raise TypeError("data must be a dictionary!")
-        request_url = urljoin(u"{}{}".format(
+        request_url = urljoin("{}{}".format(
             REF_TABLE_ENDPOINT, '/bulk_load/'), quote(get_as_str(table_name)))
         dumps_data = dumps(data, cls=ByteEncoder)
         resp = auth_info.make_call("POST", request_url, data=dumps_data)
@@ -165,7 +165,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
         Get a list of all the reference tables.
         :return: list of reference table names
         """
-        url = u"{}{}/{}".format(client.api_url, REF_TABLE_ENDPOINT, table_name)
+        url = f"{client.api_url}{REF_TABLE_ENDPOINT}/{table_name}"
         try:
             response = client.make_call("GET", url)
             #
@@ -185,7 +185,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_one_ref_teble call failed with exception {}]".format(url, str(e)))
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [get_one_ref_table call failed with exception {str(e)}]")
         else:
             return response.json()
 
@@ -195,7 +195,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
         Get a list of all the reference tables.
         :return: list of reference table names
         """
-        url = u"{}{}".format(client.api_url, REF_TABLE_ENDPOINT)
+        url = f"{client.api_url}{REF_TABLE_ENDPOINT}"
         try:
             response = client.make_call("GET", url)
             #
@@ -215,6 +215,6 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_all_ref_tables call failed with exception {}]".format(url, str(e)))
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [get_all_ref_tables call failed with exception {str(e)}]")
         else:
             return response.json()

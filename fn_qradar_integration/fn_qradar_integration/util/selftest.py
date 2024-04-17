@@ -30,7 +30,7 @@ def selftest_function(opts):
         for server_name in server_list:
             server = opts.get(server_name, {})
 
-            log.info("Verifying app.config values for {}".format(PACKAGE_NAME))
+            log.info(f"Verifying app.config values for {PACKAGE_NAME}")
 
             cafile = False if server.get("verify_cert", "").lower() == "false" else server.get("verify_cert")
             qradar_client = QRadarClient(host=server.get("host"),
@@ -41,11 +41,11 @@ def selftest_function(opts):
                                         opts=opts,
                                         function_opts=server)
 
-            connected = qradar_client.verify_connect()
+            qradar_client.verify_connect()
 
             log.info("Verifying QRadar connection...")
 
-            log.info("Test for {} was successful".format(server.get("host")))
+            log.info(f"Test for {server.get('host')} was successful")
 
         return {
             "state" : "success"
