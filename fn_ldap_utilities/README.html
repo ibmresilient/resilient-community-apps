@@ -6,7 +6,7 @@
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="MaaS360" href="../fn_maas360/README.html" /><link rel="prev" title="Kafka" href="../fn_kafka/README.html" />
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
-        <title>SOAR LDAP Utilities - QRadar SOAR Apps</title>
+        <title>IBM SOAR LDAP Utilities - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -226,7 +226,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">SOAR LDAP Utilities</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">IBM SOAR LDAP Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">McAfee ATD</a></li>
@@ -349,8 +349,8 @@
           </label>
         </div>
         <article role="main">
-          <section id="soar-ldap-utilities">
-<h1>SOAR LDAP Utilities<a class="headerlink" href="#soar-ldap-utilities" title="Link to this heading">¶</a></h1>
+          <section id="ibm-soar-ldap-utilities">
+<h1>IBM SOAR LDAP Utilities<a class="headerlink" href="#ibm-soar-ldap-utilities" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -374,7 +374,6 @@
 <li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
 <li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
 <li><p><a class="reference internal" href="#200-changes"><span class="xref myst">2.0.0 Changes</span></a></p></li>
-<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#function---ldap-utilities-add"><span class="xref myst">Function - LDAP Utilities: Add</span></a></p></li>
@@ -384,7 +383,13 @@
 <li><p><a class="reference internal" href="#function---ldap-utilities-set-password"><span class="xref myst">Function - LDAP Utilities: Set Password</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ldap-utilities-toggle-access"><span class="xref myst">Function - LDAP Utilities: Toggle Access</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ldap-utilities-update"><span class="xref myst">Function - LDAP Utilities: Update</span></a></p></li>
+<li><p><a class="reference internal" href="#script---no-search-results"><span class="xref myst">Script - No search results</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#data-table---ldap-query-results"><span class="xref myst">Data Table - LDAP Query results</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
 </ul>
@@ -401,35 +406,39 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.1.2</p></td>
+<tr class="row-even"><td><p>2.1.3</p></td>
+<td><p>03/2024</p></td>
+<td><p>Bug fix for ldap_utilities_search.py function.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1.2</p></td>
 <td><p>08/2023</p></td>
 <td><p>Bug fix for set password function</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.1</p></td>
+<tr class="row-even"><td><p>2.1.1</p></td>
 <td><p>06/2023</p></td>
 <td><p>Bug fix for CP4S</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>04/2023</p></td>
 <td><p><ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.1</p></td>
+<tr class="row-even"><td><p>2.0.1</p></td>
 <td><p>07/2022</p></td>
 <td><p>Fix helper.py so that ldap_connect_timeout is not required in app.config</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.0</p></td>
+<tr class="row-odd"><td><p>2.0.0</p></td>
 <td><p>04/2022</p></td>
 <td><p><ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.1</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
 <td><p>07/2021</p></td>
 <td><p>Support added for App Host</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>03/2019</p></td>
 <td><p><ul><li>Handle Unicode in Post-Process Scripts</li><li>Handle NTLM Authentication to Active Directory</li><li>Add functionality to allow for LDAP Wildcard queries with *</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>07/2018</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -453,7 +462,7 @@
 <p>These LDAP Utility integrations allow multiple activities to be initiated from workflows in the IBM SOAR platform to an external LDAP server. Functions include: search, update, set password, toggle access, and add user.
 <strong>SOAR LDAP Utilities’</strong></p>
 <p><img alt="screenshot: main" src="../_images/main23.png" /></p>
-<p>SOAR components to allow reading and manipulation of your LDAP Server’</p>
+<p>IBM SOAR components to allow reading and manipulation of your LDAP Server’</p>
 <section id="key-features">
 <h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
@@ -473,17 +482,17 @@
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
-<p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.8803</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.8803</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=49.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -499,6 +508,9 @@
 <tr class="row-odd"><td><p>Function</p></td>
 <td><p>Read</p></td>
 </tr>
+<tr class="row-even"><td><p>Layout</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -506,23 +518,23 @@
 </ul>
 <p>The following SOAR platform guides provide additional information:</p>
 <ul class="simple">
-<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
 <li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
 <li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
 </ul>
-<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= 1.4.</p></li>
-<li><p>Cloud Pak is configured with an App Host.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>The following Cloud Pak guides provide additional information:</p>
 <ul class="simple">
-<li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
 <li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
 </ul>
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
@@ -533,11 +545,11 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.6 and greater are supported.
+<p>Python 3.6, 3.9, and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>ldap3&gt;=2.0.0</p></li>
-<li><p>resilient_circuits&gt;=45.0.0</p></li>
+<li><p>resilient_circuits&gt;=49.0.0</p></li>
 </ul>
 </section>
 </section>
@@ -614,16 +626,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 <section id="id1">
 <h4>2.0.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
-<p>Starting in version 2.0.0, more than one LDAP instance can be configured for SOAR case data synchronization. For enterprises with only one LDAP instance, your app.config file will continue to define the LDAP instance inder the <code class="docutils literal notranslate"><span class="pre">[fn_ldap_utilities]</span></code> section header.</p>
-<p>For enterprises with more than one LDAP instance, each instance will have it;s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_ldap_utilites:Domain1]</span></code> where <code class="docutils literal notranslate"><span class="pre">Domain1</span></code> represents any label helpful to define your LDAP environment.</p>
+<p>Starting in version 2.0.0, more than one LDAP instance can be configured for SOAR case data synchronization. For enterprises with only one LDAP instance, your app.config file will continue to define the LDAP instance under the <code class="docutils literal notranslate"><span class="pre">[fn_ldap_utilities]</span></code> section header.</p>
+<p>For enterprises with more than one LDAP instance, each instance will have it;s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_ldap_utilities:Domain1]</span></code> where <code class="docutils literal notranslate"><span class="pre">Domain1</span></code> represents any label helpful to define your LDAP environment.</p>
 <p>Be aware that modifications to custom workflows will be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code> function input field if the LDAP server/servers in the app.config have labels.</p>
-<p>If you have existing custom workflows, see <a class="reference internal" href="#creating-workflows-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating workflows when server/servers in app.config are labeled</span></a> for more information abiout changing them to reference the <code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code> function input field.</p>
+<p>If you have existing custom workflows, see <a class="reference internal" href="#creating-workflows-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating workflows when server/servers in app.config are labeled</span></a> for more information about changing them to reference the <code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code> function input field.</p>
 </section>
 </section>
 </section>
 <section id="using-the-example-functions">
 <h2>Using the example functions<a class="headerlink" href="#using-the-example-functions" title="Link to this heading">¶</a></h2>
-<p>Two incident fields have been added, <code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code> and <code class="docutils literal notranslate"><span class="pre">ldap_base_dn</span></code>. If these are added to a case and given values then those values will be used when a rule is run that uses those fields. If a rule is run and the user enters a value that is differernt from the ones given in the incident then the user entered value will be used for that rule.</p>
+<p>Two incident fields have been added, <code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code> and <code class="docutils literal notranslate"><span class="pre">ldap_base_dn</span></code>. If these are added to a case and given values then those values will be used when a rule is run that uses those fields. If a rule is run and the user enters a value that is different from the ones given in the incident then the user entered value will be used for that rule.</p>
 </section>
 <hr class="docutils" />
 <section id="function-ldap-utilities-add">
@@ -647,24 +659,24 @@ Additional package dependencies may exist for each of these packages:</p>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;attribute1&quot;:</span> <span class="pre">&quot;value1&quot;,</span> <span class="pre">&quot;attribute2&quot;:</span> <span class="pre">&quot;value2&quot;</span></code></p></td>
-<td><p>comma separated name value pairs, each key and value must be surrounded by quotation marks like the example</p></td>
+<td><p>Comma separated name value pairs, each key and value must be surrounded by quotation marks like the example</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_dn</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">cn=user1,ou=test-ou,dc=example,dc=com</span></code></p></td>
-<td><p>Distinguished Name of entry you want to access</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CN=user1,CN=Users,DC=dev,DC=example,DC=com</span></code></p></td>
+<td><p>Distinguished Name of entry you want to access.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Domain1</span></code></p></td>
-<td><p>Name of the LDAP server to use from the app.config</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The label of the LDAP server to use from the app.config</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_multiple_group_dn</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">['dn=Accounts</span> <span class="pre">Group,dc=example,dc=com',</span> <span class="pre">'dn=IT</span> <span class="pre">Group,dc=example,dc=com']</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;['dn=Accounts</span> <span class="pre">Group,dc=example,dc=com',</span> <span class="pre">'dn=IT</span> <span class="pre">Group,dc=example,dc=com']&quot;</span></code></p></td>
 <td><p>List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example</p></td>
 </tr>
 </tbody>
@@ -678,54 +690,54 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
     <span class="s2">&quot;dn&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="s2">&quot;referrals&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;addResponse&quot;</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">result</span><span class="se">\&quot;</span><span class="s2">: 0, </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">dn</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">message</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">referrals</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">type</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">addResponse</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;cn=gerry,cn=Users,dc=dev,dc=co3sys,dc=com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[&#39;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&#39;, &#39;CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com&#39;]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_attribute_name_values&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">objectClass</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">user</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gerry</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">telephoneNumber</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">7812993827</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gerry</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">mail</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gerry@mail.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">richards</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;ldap_attribute_name_values&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">objectClass</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">top</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">person</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">organizationalPerson</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">user</span><span class="se">\&quot;</span><span class="s2">], </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Gary</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">mail</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gary1@dev.co3sys.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sAMAccountName</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gary1</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;cn=Gary1,cn=Users,dc=dev,dc=co3sys,dc=com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[]&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">545</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 15:16:50&quot;</span>
-  <span class="p">}</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-09 09:54:11&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span>
 <span class="c1"># If a value is given by the user field then set ldap_domain_name to that value</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_dn</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_user_info</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_groups</span> <span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_groups</span> <span class="k">else</span> <span class="s1">&#39;[]&#39;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_name_values</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_name_values</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_dn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_user_info&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_groups&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_groups&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;[]&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_name_values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_attribute_name_values&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_results</span>
 <span class="n">ldap_dn</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ldap_dn&#39;</span><span class="p">)</span>
@@ -741,7 +753,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="function-ldap-utilities-add-to-group-s">
 <h2>Function - LDAP Utilities: Add to Group(s)<a class="headerlink" href="#function-ldap-utilities-add-to-group-s" title="Link to this heading">¶</a></h2>
-<p>A function that allows adding multiple users to multiple groups</p>
+<p>A function that allows adding multiple users to multiple groups.</p>
 <p><img alt="screenshot: fn-ldap-utilities-add-to-groups " src="../_images/fn-ldap-utilities-add-to-groups.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -759,19 +771,19 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Domain1</span></code></p></td>
-<td><p>Name of the LDAP server to use from the app.config</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The label of the LDAP server to use from the app.config</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_multiple_group_dn</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">['dn=Accounts</span> <span class="pre">Group,dc=example,dc=com',</span> <span class="pre">'dn=IT</span> <span class="pre">Group,dc=example,dc=com']</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;['dn=Accounts</span> <span class="pre">Group,dc=example,dc=com',</span> <span class="pre">'dn=IT</span> <span class="pre">Group,dc=example,dc=com']&quot;</span></code></p></td>
 <td><p>List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_multiple_user_dn</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">['dn=tom</span> <span class="pre">smith,dc=example,dc=com',</span> <span class="pre">'dn=ted</span> <span class="pre">smith,dc=example,dc=com']</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;['dn=tom</span> <span class="pre">smith,dc=example,dc=com',</span> <span class="pre">'dn=ted</span> <span class="pre">smith,dc=example,dc=com']&quot;</span></code></p></td>
 <td><p>List (represented as a string) of each DN of the users, each value in the list must have quotes around it like the example</p></td>
 </tr>
 </tbody>
@@ -785,38 +797,37 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;groups_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;users_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[&#39;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&#39;]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_multiple_user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[&#39;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&#39;]&quot;</span>
+    <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\u0027</span><span class="s2">CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\u0027</span><span class="s2">]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_multiple_user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\u0027</span><span class="s2">CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\u0027</span><span class="s2">]&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1081</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 15:22:53&quot;</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-30 10:57:37&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
-  <span class="s2">&quot;users_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">[</span>
-      <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
-    <span class="p">]</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;groups_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
-  <span class="p">]</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Both inputs must be a string representation of a List</span>
 
@@ -825,20 +836,20 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="c1"># inputs.ldap_multiple_group_dn = &quot;[&#39;dn=Accounts Group,dc=example,dc=com&#39;, &#39;dn=IT Group,dc=example,dc=com&#39;]&quot;</span>
 
 <span class="c1"># Both inputs must be a string representation of a List</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_user_dn</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_user_dn</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_user_dn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_multiple_user_dn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span>
 <span class="c1"># If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_groups_results</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span>
@@ -857,7 +868,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="function-ldap-utilities-remove-from-group-s">
 <h2>Function - LDAP Utilities: Remove from Group(s)<a class="headerlink" href="#function-ldap-utilities-remove-from-group-s" title="Link to this heading">¶</a></h2>
-<p>A function that allows you to remove multiple from multiple groups</p>
+<p>A function that allows you to remove multiple from multiple groups.</p>
 <p><img alt="screenshot: fn-ldap-utilities-remove-from-groups " src="../_images/fn-ldap-utilities-remove-from-groups.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -901,38 +912,37 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;groups_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;users_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[&#39;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&#39;]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_multiple_user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[&#39;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&#39;]&quot;</span>
+    <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\u0027</span><span class="s2">CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\u0027</span><span class="s2">]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_multiple_user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\u0027</span><span class="s2">CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\u0027</span><span class="s2">]&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1093</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 15:22:53&quot;</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-30 10:58:09&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
-  <span class="s2">&quot;users_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">[</span>
-      <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
-    <span class="p">]</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;groups_dn&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
-  <span class="p">]</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Both inputs must be a string representation of a List</span>
 
@@ -941,20 +951,20 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="c1"># inputs.ldap_multiple_group_dn = &quot;[&#39;dn=Accounts Group,dc=example,dc=com&#39;, &#39;dn=IT Group,dc=example,dc=com&#39;]&quot;</span>
 
 <span class="c1"># Both inputs must be a string representation of a List</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_user_dn</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_user_dn</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_user_dn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_multiple_user_dn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_multiple_group_dn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_multiple_group_dn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span>
 <span class="c1"># If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">remove_groups_results</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
@@ -1033,180 +1043,111 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">&quot;dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;accountExpires&quot;</span><span class="p">:</span> <span class="s2">&quot;9999-12-31 23:59:59.999999+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;adminCount&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;badPasswordTime&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;badPwdCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;cn&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;codePage&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;countryCode&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;dSCorePropagationData&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;2018-11-08 20:14:42+00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary Crosby&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;distinguishedName&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;givenName&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;instanceType&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-      <span class="s2">&quot;lastLogoff&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastLogon&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastLogonTimestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-11-20 20:25:20.230009+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;logonCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;gary5566@mailinator.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;memberOf&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;objectCategory&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;objectClass&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;top&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;person&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;organizationalPerson&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;user&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;objectGUID&quot;</span><span class="p">:</span> <span class="s2">&quot;{a75844e3-37d7-482b-ad45-3b39b51a3ca5}&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;objectSid&quot;</span><span class="p">:</span> <span class="s2">&quot;S-1-5-21-1927197486-2714598076-3523470783-1877&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;primaryGroupID&quot;</span><span class="p">:</span> <span class="mi">513</span><span class="p">,</span>
-      <span class="s2">&quot;pwdLastSet&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-11-08 19:37:58.004913+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sAMAccountName&quot;</span><span class="p">:</span> <span class="s2">&quot;gary5566&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sAMAccountType&quot;</span><span class="p">:</span> <span class="mi">805306368</span><span class="p">,</span>
-      <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="s2">&quot;Crosby&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;telephoneNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;7812449347&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;uSNChanged&quot;</span><span class="p">:</span> <span class="mi">969466</span><span class="p">,</span>
-      <span class="s2">&quot;uSNCreated&quot;</span><span class="p">:</span> <span class="mi">650188</span><span class="p">,</span>
-      <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;gary5566&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;userAccountControl&quot;</span><span class="p">:</span> <span class="mi">66048</span><span class="p">,</span>
-      <span class="s2">&quot;userPassword&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;65zQ24h7Bx?i&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="s2">&quot;gary5566@dev.co3sys.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;whenChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 18:52:20+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;whenCreated&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-11-08 19:37:57+00:00&quot;</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;[{</span><span class="se">\&quot;</span><span class="s2">dn</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">accountExpires</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">9999-12-31 23:59:59.999999+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">adminCount</span><span class="se">\&quot;</span><span class="s2">: 1, </span><span class="se">\&quot;</span><span class="s2">badPasswordTime</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">1601-01-01 00:00:00+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">badPwdCount</span><span class="se">\&quot;</span><span class="s2">: 0, </span><span class="se">\&quot;</span><span class="s2">cn</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Gary</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">codePage</span><span class="se">\&quot;</span><span class="s2">: 0, </span><span class="se">\&quot;</span><span class="s2">countryCode</span><span class="se">\&quot;</span><span class="s2">: 0, </span><span class="se">\&quot;</span><span class="s2">dSCorePropagationData</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">2018-11-08 20:14:42+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">1601-01-01 00:00:00+00:00</span><span class="se">\&quot;</span><span class="s2">], </span><span class="se">\&quot;</span><span class="s2">displayName</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Gary Crosby</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">distinguishedName</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">givenName</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Gary</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">instanceType</span><span class="se">\&quot;</span><span class="s2">: 4, </span><span class="se">\&quot;</span><span class="s2">lastLogoff</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">1601-01-01 00:00:00+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">lastLogon</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">1601-01-01 00:00:00+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">lastLogonTimestamp</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2019-11-20 20:25:20.230009+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">logonCount</span><span class="se">\&quot;</span><span class="s2">: 0, </span><span class="se">\&quot;</span><span class="s2">mail</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gary5566@mailinator.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">memberOf</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com</span><span class="se">\&quot;</span><span class="s2">], </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Gary</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">objectCategory</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">objectClass</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">top</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">person</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">organizationalPerson</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">user</span><span class="se">\&quot;</span><span class="s2">], </span><span class="se">\&quot;</span><span class="s2">objectGUID</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">{a75844e3-37d7-482b-ad45-3b39b51a3ca5}</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">objectSid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">S-1-5-21-1927197486-2714598076-3523470783-1877</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">primaryGroupID</span><span class="se">\&quot;</span><span class="s2">: 513, </span><span class="se">\&quot;</span><span class="s2">pwdLastSet</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2018-11-08 19:37:58.004913+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sAMAccountName</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gary5566</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sAMAccountType</span><span class="se">\&quot;</span><span class="s2">: 805306368, </span><span class="se">\&quot;</span><span class="s2">sn</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Crosby</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">telephoneNumber</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">7812449347</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uSNChanged</span><span class="se">\&quot;</span><span class="s2">: 969466, </span><span class="se">\&quot;</span><span class="s2">uSNCreated</span><span class="se">\&quot;</span><span class="s2">: 650188, </span><span class="se">\&quot;</span><span class="s2">uid</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">gary5566</span><span class="se">\&quot;</span><span class="s2">], </span><span class="se">\&quot;</span><span class="s2">userAccountControl</span><span class="se">\&quot;</span><span class="s2">: 66048, </span><span class="se">\&quot;</span><span class="s2">userPassword</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">65zQ24h7Bx?i</span><span class="se">\&quot;</span><span class="s2">], </span><span class="se">\&quot;</span><span class="s2">userPrincipalName</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gary5566@dev.co3sys.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">whenChanged</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2022-05-19 18:52:20+00:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">whenCreated</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2018-11-08 19:37:57+00:00</span><span class="se">\&quot;</span><span class="s2">}]&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;entries&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;accountExpires&quot;</span><span class="p">:</span> <span class="s2">&quot;9999-12-31 23:59:59.999999+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;badPasswordTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-09 12:37:03.680271+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;badPwdCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;cn&quot;</span><span class="p">:</span> <span class="s2">&quot;Billy Bremner&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;codePage&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;countryCode&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;dSCorePropagationData&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;2023-08-10 14:22:07+00:00&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;2023-08-10 14:19:35+00:00&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;1601-01-01 00:04:17+00:00&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Billy Bremner&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;distinguishedName&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;givenName&quot;</span><span class="p">:</span> <span class="s2">&quot;Billy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;instanceType&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;lastLogoff&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lastLogon&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 14:37:11.119774+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lastLogonTimestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 14:37:04.349319+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lockoutTime&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;logonCount&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;bbremner@example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;memberOf&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;CN=DermotGroup2,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;CN=DermotGroup,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Billy Bremner&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;objectCategory&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;objectClass&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;top&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;person&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;organizationalPerson&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;user&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;objectGUID&quot;</span><span class="p">:</span> <span class="s2">&quot;{af8b16cd-968a-448b-92fd-6b281d07ffde}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;objectSid&quot;</span><span class="p">:</span> <span class="s2">&quot;S-1-5-21-1927197486-2714598076-3523470783-3118&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;primaryGroupID&quot;</span><span class="p">:</span> <span class="mi">513</span><span class="p">,</span>
+        <span class="s2">&quot;pwdLastSet&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 14:38:59.250429+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sAMAccountName&quot;</span><span class="p">:</span> <span class="s2">&quot;bbremner&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sAMAccountType&quot;</span><span class="p">:</span> <span class="mi">805306368</span><span class="p">,</span>
+        <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="s2">&quot;Bremner&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;uSNChanged&quot;</span><span class="p">:</span> <span class="mi">1139323</span><span class="p">,</span>
+        <span class="s2">&quot;uSNCreated&quot;</span><span class="p">:</span> <span class="mi">803064</span><span class="p">,</span>
+        <span class="s2">&quot;userAccountControl&quot;</span><span class="p">:</span> <span class="mi">66048</span><span class="p">,</span>
+        <span class="s2">&quot;userPassword&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;superDuperSecret@9&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="s2">&quot;bbremner@dev.co3sys.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;whenChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 14:38:59+00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;whenCreated&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-05-20 08:47:45+00:00&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_search_filter&quot;</span><span class="p">:</span> <span class="s2">&quot;(&amp;(mail=</span><span class="si">%ld</span><span class="s2">ap_param%))&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_search_param&quot;</span><span class="p">:</span> <span class="s2">&quot;gary5566@mailinator.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_search_base&quot;</span><span class="p">:</span> <span class="s2">&quot;DC=dev,DC=co3sys,DC=com&quot;</span>
+    <span class="s2">&quot;ldap_search_base&quot;</span><span class="p">:</span> <span class="s2">&quot;DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_search_filter&quot;</span><span class="p">:</span> <span class="s2">&quot;(</span><span class="se">\u0026</span><span class="s2">(mail=</span><span class="si">%ld</span><span class="s2">ap_param%))&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_search_param&quot;</span><span class="p">:</span> <span class="s2">&quot;bbremner@example.com&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1230</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 14:53:23&quot;</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 10:39:53&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
-  <span class="s2">&quot;entries&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">&quot;dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;accountExpires&quot;</span><span class="p">:</span> <span class="s2">&quot;9999-12-31 23:59:59.999999+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;adminCount&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;badPasswordTime&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;badPwdCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;cn&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;codePage&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;countryCode&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;dSCorePropagationData&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;2018-11-08 20:14:42+00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary Crosby&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;distinguishedName&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;givenName&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;instanceType&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-      <span class="s2">&quot;lastLogoff&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastLogon&quot;</span><span class="p">:</span> <span class="s2">&quot;1601-01-01 00:00:00+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastLogonTimestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-11-20 20:25:20.230009+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;logonCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;gary5566@mailinator.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;memberOf&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gary&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;objectCategory&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;objectClass&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;top&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;person&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;organizationalPerson&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;user&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;objectGUID&quot;</span><span class="p">:</span> <span class="s2">&quot;{a75844e3-37d7-482b-ad45-3b39b51a3ca5}&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;objectSid&quot;</span><span class="p">:</span> <span class="s2">&quot;S-1-5-21-1927197486-2714598076-3523470783-1877&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;primaryGroupID&quot;</span><span class="p">:</span> <span class="mi">513</span><span class="p">,</span>
-      <span class="s2">&quot;pwdLastSet&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-11-08 19:37:58.004913+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sAMAccountName&quot;</span><span class="p">:</span> <span class="s2">&quot;gary5566&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sAMAccountType&quot;</span><span class="p">:</span> <span class="mi">805306368</span><span class="p">,</span>
-      <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="s2">&quot;Crosby&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;telephoneNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;7812449347&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;uSNChanged&quot;</span><span class="p">:</span> <span class="mi">969466</span><span class="p">,</span>
-      <span class="s2">&quot;uSNCreated&quot;</span><span class="p">:</span> <span class="mi">650188</span><span class="p">,</span>
-      <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;gary5566&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;userAccountControl&quot;</span><span class="p">:</span> <span class="mi">66048</span><span class="p">,</span>
-      <span class="s2">&quot;userPassword&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;65zQ24h7Bx?i&quot;</span>
-      <span class="p">],</span>
-      <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="s2">&quot;gary5566@dev.co3sys.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;whenChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 18:52:20+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;whenCreated&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-11-08 19:37:57+00:00&quot;</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If search filters are given</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_filter</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_filter</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_filter</span>
-<span class="c1"># If filters not given then set them to example filters</span>
-<span class="k">else</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_filter</span> <span class="o">=</span> <span class="s2">&quot;(&amp;(objectClass=person)(mail=*</span><span class="si">%ld</span><span class="s2">ap_param%))&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the ldap_search_base and ldap_search_filter</span>
+<span class="c1"># using the ldap_param wildcard then get the email</span>
+<span class="c1"># address the user you want to toggle access for from the artifact&#39;s value</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_filter</span> <span class="o">=</span> <span class="s2">&quot;(&amp;(mail=</span><span class="si">%ld</span><span class="s2">ap_param%))&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_param</span> <span class="o">=</span>  <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 
-<span class="c1"># If search attributes are given</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_attributes</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_attributes</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_attributes</span>
-<span class="c1"># If search attributes not given then set them to example attributes</span>
-<span class="k">else</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_attributes</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
-
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_param</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 <span class="c1"># If the incident field ldap_base_dn contains a value then set ldap_search_base to that value</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_base_dn</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_base</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_base_dn</span>
 <span class="c1"># If a value is given in the rule ldap_search_base field then set ldap_search_base to that value</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_base</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_base</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_base</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_search_base&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_base</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_search_base&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ldap_domain_name</span>
 <span class="c1"># If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value</span>
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">search_results</span>
 <span class="n">ENTRY_TO_DATATABLE_MAP</span> <span class="o">=</span> <span class="p">{</span>
@@ -1251,31 +1192,31 @@ Additional package dependencies may exist for each of these packages:</p>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">CN=user1,CN=Users,DC=dev,DC=example,DC=com</span></code></p></td>
-<td><p>Distinguished Name of entry you want to access</p></td>
+<td><p>Distinguished Name of entry you want to access.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Domain1</span></code></p></td>
-<td><p>Name of the LDAP server to use from the app.config</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The label of the LDAP server to use from the app.config</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_new_auto_password_len</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
-<td><p>Length of password to generate</p></td>
+<td><p>Length of password to generate.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_new_password</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>The new password you want to set for the entry</p></td>
+<td><p>The new password you want to set for the entry.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldap_return_new_password</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>True or false to return the new password.</p></td>
+<td><p>Either to return the new password or not.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1288,50 +1229,50 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_new_password&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="s2">&quot;ldap_new_password&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ldap_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ldap_new_password&quot;</span><span class="p">:</span> <span class="s2">&quot;superDuperSecret@9&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ldap_return_new_password&quot;</span><span class="p">:</span> <span class="n">false</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">10756</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">10756</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 10:39:08&quot;</span>
-  <span class="p">}</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 10:39:08&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">search_results</span>
 <span class="c1"># Once the LDAP Utilities: Search completes, get the DN of the first entry</span>
 <span class="c1"># which will be the DN of the account you want to set a Set a New Password for</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_dn</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entries&quot;</span><span class="p">,</span> <span class="p">[])[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;dn&quot;</span><span class="p">]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_new_password</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_user_new_password</span>
-<span class="n">pass_len</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_new_auto_password_length</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_new_password</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_user_new_password&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pass_len</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_new_auto_password_length&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">pass_len</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_new_auto_password_len</span> <span class="o">=</span> <span class="n">pass_len</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_return_new_password</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_return_new_password</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_return_new_password</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_return_new_password&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">pass_results</span>
 <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
@@ -1352,7 +1293,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="function-ldap-utilities-toggle-access">
 <h2>Function - LDAP Utilities: Toggle Access<a class="headerlink" href="#function-ldap-utilities-toggle-access" title="Link to this heading">¶</a></h2>
-<p>A function that allows an LDAP user, with the correct privileges to enable or disable another account given their DN</p>
+<p>A function that allows an LDAP user, with the correct privileges, to enable or disable another account given their DN.</p>
 <p><img alt="screenshot: fn-ldap-utilities-toggle-access " src="../_images/fn-ldap-utilities-toggle-access.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1396,47 +1337,45 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;user_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Enable&quot;</span>
+  <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;ldap_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_toggle_access&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Enable&quot;</span>
-    <span class="p">}</span>
+    <span class="s2">&quot;ldap_toggle_access&quot;</span><span class="p">:</span> <span class="s2">&quot;Enable&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3714</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 14:53:26&quot;</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-10 10:39:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
-  <span class="s2">&quot;user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;user_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Enable&quot;</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">search_results</span>
 <span class="c1"># Once the LDAP Utilities: Search completes, get the DN of the first entry</span>
 <span class="c1"># which will be the DN of the account you want to set a Toggle Access for</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_dn</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entries&quot;</span><span class="p">,</span> <span class="p">[])[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;dn&quot;</span><span class="p">]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_toggle_access</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_toggle_access</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_toggle_access</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_toggle_access&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">toggle_results</span>
 <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
@@ -1460,7 +1399,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="function-ldap-utilities-update">
 <h2>Function - LDAP Utilities: Update<a class="headerlink" href="#function-ldap-utilities-update" title="Link to this heading">¶</a></h2>
-<p>A function that updates the attribute of a DN with a new value</p>
+<p>A function that updates the attribute of a DN with a new value.</p>
 <p><img alt="screenshot: fn-ldap-utilities-update " src="../_images/fn-ldap-utilities-update.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1510,36 +1449,37 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;attribute_name&quot;</span><span class="p">:</span> <span class="s2">&quot;homePhone&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;attribute_values&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;2638443927&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
+  <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ldap_attribute_values&quot;</span><span class="p">:</span> <span class="s2">&quot;[&#39;gary5566&#39;]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ldap_attribute_name&quot;</span><span class="p">:</span> <span class="s2">&quot;uid&quot;</span>
+    <span class="s2">&quot;ldap_attribute_name&quot;</span><span class="p">:</span> <span class="s2">&quot;homePhone&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_attribute_values&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\u0027</span><span class="s2">2638443927</span><span class="se">\u0027</span><span class="s2">]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Domain2&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1090</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-05-19 14:52:00&quot;</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ldap-utilities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-31 09:32:11&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
-  <span class="s2">&quot;attribute_name&quot;</span><span class="p">:</span> <span class="s2">&quot;uid&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;attribute_values&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;gary5566&quot;</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;user_dn&quot;</span><span class="p">:</span> <span class="s2">&quot;CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com&quot;</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">search_results</span>
 <span class="c1"># Once the LDAP Utilities: Search completes, get the DN of the first entry</span>
@@ -1547,14 +1487,14 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="c1"># the name of the attribute to update and list the values</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_domain_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ldap_domain_name&quot;</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_dn</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entries&quot;</span><span class="p">,</span> <span class="p">[])[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;dn&quot;</span><span class="p">]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_update_attribute_name</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_values</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_update_value</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_update_attribute_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_attribute_values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ldap_attribute_update_value&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="c1"># inputs.ldap_attribute_values = &quot;[&#39;081111111&#39;, &#39;082222222&#39;]&quot;</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">update_results</span>
 <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
@@ -1571,6 +1511,86 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
+</section>
+<hr class="docutils" />
+<section id="script-no-search-results">
+<h2>Script - No search results<a class="headerlink" href="#script-no-search-results" title="Link to this heading">¶</a></h2>
+<p><strong>Object:</strong> artifact</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No entries found for </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Example: LDAP Utilities: Add (PB)</p></td>
+<td><p>Add users, groups, organizational units to LDAP</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: LDAP Utilities: Add User(s) to Group(s) (PB)</p></td>
+<td><p>add multiple users to multiple groups</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">String</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: LDAP Utilities: Remove User(s) from Group(s) (PB)</p></td>
+<td><p>remove multiple users from a group</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">String</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: LDAP Utilities: Search (PB)</p></td>
+<td><p>runs a person query against an LDAP server using the person’s email address</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Recipient</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Sender</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">String</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: LDAP Utilities: Set Password (PB)</p></td>
+<td><p>searches for a user using their email address, gets their DN and sets a new password for that user</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Recipient</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Sender</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">String</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example: LDAP Utilities: Toggle Access (PB)</p></td>
+<td><p>enable/disable an Active Directory user account</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Recipient</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Sender</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">String</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Example: LDAP Utilities: Update (PB)</p></td>
+<td><p>updates the value of a DN’s attribute with the given value(s)</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Recipient</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">Email</span> <span class="pre">Sender</span> <span class="pre">OR</span> <span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">String</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
 <section id="data-table-ldap-query-results">
@@ -1623,52 +1643,33 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 </section>
 <hr class="docutils" />
-<section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Object</p></th>
-<th class="head"><p>Status</p></th>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+<th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Tooltip</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Example: LDAP Utilities: Add</p></td>
-<td><p>Add users, groups, organizational units to LDAP</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<tr class="row-even"><td><p>LDAP Base DN</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ldap_base_dn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>DC=example,DC=com</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td><p>Example: LDAP Utilities: Add User(s) to Group(s)</p></td>
-<td><p>add multiple users to multiple groups</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Example: LDAP Utilities: Remove User(s) from Group(s)</p></td>
-<td><p>remove multiple users from a group</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Example: LDAP Utilities: Search</p></td>
-<td><p>runs a person query against an LDAP server using the person’s email address</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Example: LDAP Utilities: Set Password</p></td>
-<td><p>searches for a user using their email address, gets their DN and sets a new password for that user</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Example: LDAP Utilities: Toggle Access</p></td>
-<td><p>enable/disable an Active Directory user account</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Example: LDAP Utilities: Update</p></td>
-<td><p>updates the value of a DN’s attribute with the given value(s)</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<tr class="row-odd"><td><p>LDAP Domain Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ldap_domain_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Domain name label given to the LDAP server you wish to use</p></td>
 </tr>
 </tbody>
 </table>
@@ -1679,7 +1680,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <h2>How to configure to use a single LDAP Server<a class="headerlink" href="#how-to-configure-to-use-a-single-ldap-server" title="Link to this heading">¶</a></h2>
 <p>To use only a single server there are two ways this can be configured</p>
 <ol class="arabic simple">
-<li><p>User the configureation used in LDAP Utilities versions prior to v2.0.0</p></li>
+<li><p>User the configuration used in LDAP Utilities versions prior to v2.0.0</p></li>
 </ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_ldap_utilities</span><span class="p">]</span>
 <span class="c1"># Ip address of the LDAP Server</span>
@@ -1736,18 +1737,9 @@ Additional package dependencies may exist for each of these packages:</p>
 <section id="troubleshooting-support">
 <h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
-<section id="known-errors">
-<h3>Known Errors<a class="headerlink" href="#known-errors" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Expected</span> <span class="pre">to</span> <span class="pre">execute</span> <span class="pre">a</span> <span class="pre">maximum</span> <span class="pre">of</span> <span class="pre">50,000</span> <span class="pre">lines</span></code>
-This error occurs when running the search function when processing a large search result. The playbook scripts have a max execution limit of 50,000 lines of code. If you hit this limit, try to add more filters to your search to return fewer results.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">maximum</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">new</span> <span class="pre">objects</span> <span class="pre">created</span> <span class="pre">by</span> <span class="pre">rules</span> <span class="pre">and</span> <span class="pre">playbooks</span> <span class="pre">has</span> <span class="pre">been</span> <span class="pre">exceeded</span></code>
-This error occurs when running the search function when processing a large search result.  and the playbook script tried to add more than 500 rows to a data table. The 500 object creation limit is only a limitation with playbooks and not workflows. For the time being, use a rule and workflow to avoid this error if you feel adding so many datatable rows is necessary. Alternatively, add more filters to your search to return fewer results.</p></li>
-</ol>
-</section>
 <section id="for-support">
 <h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
-<p>This is a IBM Community provided App. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
+<p>This is a IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
 </section>
 </section>
 </section>
@@ -1807,7 +1799,7 @@ This error occurs when running the search function when processing a large searc
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">SOAR LDAP Utilities</a><ul>
+<li><a class="reference internal" href="#">IBM SOAR LDAP Utilities</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 <li><a class="reference internal" href="#changes">2.1.0 Changes</a></li>
@@ -1838,16 +1830,17 @@ This error occurs when running the search function when processing a large searc
 <li><a class="reference internal" href="#function-ldap-utilities-set-password">Function - LDAP Utilities: Set Password</a></li>
 <li><a class="reference internal" href="#function-ldap-utilities-toggle-access">Function - LDAP Utilities: Toggle Access</a></li>
 <li><a class="reference internal" href="#function-ldap-utilities-update">Function - LDAP Utilities: Update</a></li>
+<li><a class="reference internal" href="#script-no-search-results">Script - No search results</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#data-table-ldap-query-results">Data Table - LDAP Query results</a><ul>
 <li><a class="reference internal" href="#api-name">API Name:</a></li>
 <li><a class="reference internal" href="#columns">Columns:</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
 <li><a class="reference internal" href="#how-to-configure-to-use-a-single-ldap-server">How to configure to use a single LDAP Server</a></li>
 <li><a class="reference internal" href="#creating-playbooks-when-server-servers-in-app-config-are-labeled">Creating playbooks when server/servers in app.config are labeled</a></li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
-<li><a class="reference internal" href="#known-errors">Known Errors</a></li>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
 </ul>
 </li>
