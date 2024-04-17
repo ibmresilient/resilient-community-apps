@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Proofpoint TRAP" href="../fn_proofpoint_trap/README.html" /><link rel="prev" title="Playbook Utils" href="../fn_playbook_utils/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Proofpoint TAP - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -369,9 +369,9 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 <section id="proofpoint-tap">
-<h1>Proofpoint TAP<a class="headerlink" href="#proofpoint-tap" title="Link to this heading">#</a></h1>
+<h1>Proofpoint TAP<a class="headerlink" href="#proofpoint-tap" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -406,7 +406,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <!--
   Specify all changes in this release. Do not remove the release
   notes of a previous release
@@ -448,11 +448,11 @@
 </table>
 </div>
 <section id="changes">
-<h3>1.1 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h3>
+<h3>1.1 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
 </section>
 </section>
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <p>In v1.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
@@ -461,7 +461,7 @@ Each playbook has the same functionality as the previous, corresponding rule/wor
 But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.</p>
 </section>
 <section id="user-specified-siem-endpoints">
-<h2>User specified SIEM endpoints<a class="headerlink" href="#user-specified-siem-endpoints" title="Link to this heading">#</a></h2>
+<h2>User specified SIEM endpoints<a class="headerlink" href="#user-specified-siem-endpoints" title="Link to this heading">¶</a></h2>
 <p>A new app.config setting <code class="docutils literal notranslate"><span class="pre">siem_event_types</span></code> is provided to allow the user to specify which Proofpoint /siem endpoints to query when converting TAP threats into SOAR incident/cases.  The parameter <code class="docutils literal notranslate"><span class="pre">siem_event_types</span></code> is a comma-separated list with the following possible values:</p>
 <ul class="simple">
 <li><p>clicks_blocked</p></li>
@@ -474,7 +474,7 @@ But migrating to playbooks will provide greater functionality along with future 
 <p>See the Proofpoint documentation for more information on the SIEM API: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API</p>
 </section>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
@@ -482,7 +482,7 @@ But migrating to playbooks will provide greater functionality along with future 
 <p>Proofpoint Targeted Attack Protection (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This includes ransomware and other advanced email threats delivered through malicious attachments and URLs.</p>
 <p><img alt="screenshot: main" src="../_images/main44.png" /></p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <!--
   List the Key Features of the Integration
 -->
@@ -496,13 +496,13 @@ But migrating to playbooks will provide greater functionality along with future 
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <!--
   List any Requirements
 -->
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
@@ -546,7 +546,7 @@ But migrating to playbooks will provide greater functionality along with future 
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
@@ -561,11 +561,11 @@ But migrating to playbooks will provide greater functionality along with future 
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app <strong>does</strong> support a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -573,7 +573,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 <section id="development-version">
-<h3>Development Version<a class="headerlink" href="#development-version" title="Link to this heading">#</a></h3>
+<h3>Development Version<a class="headerlink" href="#development-version" title="Link to this heading">¶</a></h3>
 <p>This app has been implemented using:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -594,7 +594,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </table>
 </div>
 <section id="configuration">
-<h4>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h4>
+<h4>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h4>
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
@@ -606,16 +606,16 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -687,7 +687,7 @@ List any steps that are needed to configure the endpoint to use this app.
 </div>
 </section>
 <section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
   You may wish to recommend a new incident tab.
@@ -699,7 +699,7 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="function-proofpoint-tap-get-campaign">
-<h2>Function - Proofpoint TAP Get Campaign<a class="headerlink" href="#function-proofpoint-tap-get-campaign" title="Link to this heading">#</a></h2>
+<h2>Function - Proofpoint TAP Get Campaign<a class="headerlink" href="#function-proofpoint-tap-get-campaign" title="Link to this heading">¶</a></h2>
 <p>Function pulls specific details about campaigns including description, the actor, malware family, techniques and the threat variants associated with the campaign.</p>
 <p><img alt="screenshot: fn-proofpoint-tap-get-campaign " src="../_images/fn-proofpoint-tap-get-campaign.png" /></p>
 <details><summary>Inputs:</summary>
@@ -893,7 +893,7 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="function-proofpoint-tap-get-forensics">
-<h2>Function - Proofpoint TAP Get Forensics<a class="headerlink" href="#function-proofpoint-tap-get-forensics" title="Link to this heading">#</a></h2>
+<h2>Function - Proofpoint TAP Get Forensics<a class="headerlink" href="#function-proofpoint-tap-get-forensics" title="Link to this heading">¶</a></h2>
 <p>Function pulls detailed forensic evidence about individual threats or campaigns observed in their environment.</p>
 <p><img alt="screenshot: fn-proofpoint-tap-get-forensics " src="../_images/fn-proofpoint-tap-get-forensics.png" /></p>
 <details><summary>Inputs:</summary>
@@ -981,7 +981,7 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="script-example-proofpoint-tap-create-artifact-for-campaign-object-name-or-threat">
-<h2>Script - Example: Proofpoint TAP - Create Artifact for Campaign Object Name or Threat<a class="headerlink" href="#script-example-proofpoint-tap-create-artifact-for-campaign-object-name-or-threat" title="Link to this heading">#</a></h2>
+<h2>Script - Example: Proofpoint TAP - Create Artifact for Campaign Object Name or Threat<a class="headerlink" href="#script-example-proofpoint-tap-create-artifact-for-campaign-object-name-or-threat" title="Link to this heading">¶</a></h2>
 <p>Script creates an Artifact for Proofpoint TAP Campaign Object Name or Threat based on the selected datatable row.</p>
 <p><strong>Object:</strong> proofpoint_tap_campaign_object_dt</p>
 <details><summary>Script Text:</summary>
@@ -1015,14 +1015,14 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="data-table-proofpoint-tap-campaign-object-details">
-<h2>Data Table - Proofpoint TAP Campaign Object Details<a class="headerlink" href="#data-table-proofpoint-tap-campaign-object-details" title="Link to this heading">#</a></h2>
+<h2>Data Table - Proofpoint TAP Campaign Object Details<a class="headerlink" href="#data-table-proofpoint-tap-campaign-object-details" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-proofpoint-tap-campaign-object-details" src="../_images/dt-proofpoint-tap-campaign-object-details.png" /></p>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>proofpoint_tap_campaign_object_dt</p>
 </section>
 <section id="columns">
-<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1085,7 +1085,7 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="custom-fields">
-<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1118,7 +1118,7 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="custom-artifact-types">
-<h2>Custom Artifact Types<a class="headerlink" href="#custom-artifact-types" title="Link to this heading">#</a></h2>
+<h2>Custom Artifact Types<a class="headerlink" href="#custom-artifact-types" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1142,7 +1142,7 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="id1">
-<h2>Playbooks<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1184,10 +1184,10 @@ List any steps that are needed to configure the endpoint to use this app.
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
 </section>
 </section>
@@ -1304,7 +1304,7 @@ List any steps that are needed to configure the endpoint to use this app.
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

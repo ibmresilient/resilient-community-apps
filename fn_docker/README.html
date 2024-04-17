@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Docker - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,12 +350,12 @@
         </div>
         <article role="main">
           <section id="docker">
-<h1>Docker<a class="headerlink" href="#docker" title="Link to this heading">#</a></h1>
+<h1>Docker<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h1>
 <p>The Resilient Integration with Docker provides tools to integrate Docker into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for Dockerised tools that can be used for Malware Research and Incident Response.</p>
 <p><strong>This package contains 1 Function, 3 Workflows, 3 Rules and 1 Data Table that help you integrate with Docker</strong></p>
 <p><img alt="screenshot" src="../_images/15.png" /></p>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#integration-appconfig-settings"><span class="xref myst">Integration app.config settings:</span></a></p></li>
 <li><p><a class="reference internal" href="#image-specific-appconfig-sections"><span class="xref myst">Image specific app.config sections</span></a></p></li>
@@ -375,27 +375,27 @@
 </section>
 </section>
 <section id="pre-requisite-steps-and-info">
-<h1>Pre-Requisite Steps and Info:<a class="headerlink" href="#pre-requisite-steps-and-info" title="Link to this heading">#</a></h1>
+<h1>Pre-Requisite Steps and Info:<a class="headerlink" href="#pre-requisite-steps-and-info" title="Link to this heading">¶</a></h1>
 <section id="install-docker">
-<h2>Install Docker<a class="headerlink" href="#install-docker" title="Link to this heading">#</a></h2>
+<h2>Install Docker<a class="headerlink" href="#install-docker" title="Link to this heading">¶</a></h2>
 <p>This integration requires access to a Docker daemon, in order to run containers and get output. Typically the Docker daemon would be on the same machine that you intend to run the containers from so this would mean installing Docker on your integration server itself.
 To install Docker on your Integration Server see <a class="reference external" href="https://docs.docker.com/install/linux/docker-ee/rhel/">this link</a> for RHEL, <a class="reference external" href="https://docs.docker.com/docker-for-mac/install/">this one</a> for MacOS or <a class="reference external" href="https://docs.docker.com/install/">this one</a> for everything else.</p>
 </section>
 <section id="pulling-images">
-<h2>Pulling Images<a class="headerlink" href="#pulling-images" title="Link to this heading">#</a></h2>
+<h2>Pulling Images<a class="headerlink" href="#pulling-images" title="Link to this heading">¶</a></h2>
 <p>This integration package does not pull docker images for you. This is intentional to reduce the chance of downloading an unintended image for use in your organisation.
 Images you wish to use with the integration will need to be pulled separately either from a registry or a Github repo using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span></code> command.</p>
 <p>Git Repo Example: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">-t</span> <span class="pre">amass</span> <span class="pre">https://github.com/OWASP/Amass.git</span></code>
 Dockerhub Example: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">blacktop/nsrl</span></code></p>
 </section>
 <section id="connection-options-and-installation">
-<h2>Connection options and installation:<a class="headerlink" href="#connection-options-and-installation" title="Link to this heading">#</a></h2>
+<h2>Connection options and installation:<a class="headerlink" href="#connection-options-and-installation" title="Link to this heading">¶</a></h2>
 <p>There are a number of connection options for this integration. The easiest to setup and maintain is using a local Docker connection by installing Docker on the Integration Server.
 Alternatively, if you already have an Docker daemon exposed on a port that you can connect to and use, you may instead opt to connect to and run containers using this daemon instead of installing Docker on your integration server.
 This is done by specifying the <code class="docutils literal notranslate"><span class="pre">docker_remote_url</span></code> value in the app.config section which will specify the location of the Docker daemon and also which remote connection option to use, of which there are two: TCP and SSH.</p>
 </section>
 <section id="ssh-connection-setup">
-<h2>SSH Connection Setup<a class="headerlink" href="#ssh-connection-setup" title="Link to this heading">#</a></h2>
+<h2>SSH Connection Setup<a class="headerlink" href="#ssh-connection-setup" title="Link to this heading">¶</a></h2>
 <p>SSH as a connection option is a relatively new connection option, first announced in <a class="reference external" href="https://blog.docker.com/2018/09/join-the-beta-for-docker-engine-18-09/">2018</a>
 is also provided to enable secure connections to a Docker daemon without the need to modify existing Docker setup.
 Docker SSH support requires Docker version 18.09 or higher.</p>
@@ -405,7 +405,7 @@ Docker SSH support requires Docker version 18.09 or higher.</p>
 For information on copying SSH keys to another machine as an authorized key, <a class="reference external" href="https://www.ssh.com/ssh/copy-id">see here</a></p>
 </section>
 <section id="known-issues">
-<h2>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">#</a></h2>
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">¶</a></h2>
 <p>Currently there is limited support for Attachment Workflows when using remote connections.
 This is due to how the remote volume bindings are established, where if the source directory does not exist on the destination host, it will attempt to create it.
 For this reason when using remote connections it is advised your source volume directory is in a common directory such as <code class="docutils literal notranslate"><span class="pre">/tmp/</span></code>.</p>
@@ -413,31 +413,31 @@ For this reason when using remote connections it is advised your source volume d
 </section>
 </section>
 <section id="about-the-provided-usecases">
-<h1>About the provided UseCases<a class="headerlink" href="#about-the-provided-usecases" title="Link to this heading">#</a></h1>
+<h1>About the provided UseCases<a class="headerlink" href="#about-the-provided-usecases" title="Link to this heading">¶</a></h1>
 <section id="volatility">
-<h2>Volatility<a class="headerlink" href="#volatility" title="Link to this heading">#</a></h2>
+<h2>Volatility<a class="headerlink" href="#volatility" title="Link to this heading">¶</a></h2>
 <p>The Volatility Framework is a completely open collection of tools,
 implemented in Python, <a class="reference external" href="https://github.com/volatilityfoundation/volatility">[source]</a> used to analyze volatile memory (RAM) samples.</p>
 <p><a class="reference external" href="https://hub.docker.com/r/remnux/volatility">View this image on DockerHub</a></p>
 </section>
 <section id="nsrl-whitelist">
-<h2>NSRL Whitelist<a class="headerlink" href="#nsrl-whitelist" title="Link to this heading">#</a></h2>
+<h2>NSRL Whitelist<a class="headerlink" href="#nsrl-whitelist" title="Link to this heading">¶</a></h2>
 <p>The National Software Reference Library (NSRL) is designed to collect software from various sources and incorporate file profiles computed from this software into a Reference Data Set (RDS) of information.
 The RDS is a collection of digital signatures of known, traceable software applications.<a class="reference external" href="https://www.nist.gov/software-quality-group/about-nsrl">Source</a></p>
 <p><a class="reference external" href="https://hub.docker.com/r/blacktop/nsrl">View this image on DockerHub</a></p>
 </section>
 <section id="amass">
-<h2>Amass<a class="headerlink" href="#amass" title="Link to this heading">#</a></h2>
+<h2>Amass<a class="headerlink" href="#amass" title="Link to this heading">¶</a></h2>
 <p>The OWASP Amass tool suite obtains subdomain names by scraping data sources, recursive brute forcing, crawling web archives, permuting/altering names and reverse DNS sweeping.<a class="reference external" href="https://github.com/OWASP/Amass">Source</a></p>
 <p><a class="reference external" href="https://github.com/OWASP/Amass">View this image on Github</a></p>
 </section>
 </section>
 <section id="app-config-settings">
-<h1>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h1>
+<h1>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h1>
 <p>There are two ways to configure settings for this Integration. You can choose to configure general settings for the Integration itself such as which method to use for connections.
 Additionally, each image you intend to create containers from can have its own app.config section.</p>
 <section id="integration-app-config-settings">
-<h2>Integration app.config settings:<a class="headerlink" href="#integration-app-config-settings" title="Link to this heading">#</a></h2>
+<h2>Integration app.config settings:<a class="headerlink" href="#integration-app-config-settings" title="Link to this heading">¶</a></h2>
 <p>The Integration has a number of app.config settings which manage how a connection to a Docker daemon is performed and also which images are approved to be run by the integration. The approved images list includes only the shortname of the docker image e.g remnux/volatility -&gt; volatility is the shortname.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">docker_approved_images</span><span class="o">=</span>&lt;imagename&gt;,&lt;imagename&gt;<span class="w"> </span><span class="c1"># Which images are approved to be run e.g volatility,nsrl</span>
 <span class="nv">docker_use_remote_conn</span><span class="o">=</span>&lt;True/False&gt;
@@ -446,7 +446,7 @@ Additionally, each image you intend to create containers from can have its own a
 </div>
 </section>
 <section id="image-specific-app-config-sections">
-<h2>Image specific app.config sections<a class="headerlink" href="#image-specific-app-config-sections" title="Link to this heading">#</a></h2>
+<h2>Image specific app.config sections<a class="headerlink" href="#image-specific-app-config-sections" title="Link to this heading">¶</a></h2>
 <p>Each Docker image has the opportunity to use its own app.config section for getting options which are specific to that image only. This includes the images full name, volume bindings if that container requires volumes and the command which will be sent to the built container.</p>
 <p>Image specific app.config sections are found by searching for the image shortname postfixed to <code class="docutils literal notranslate"><span class="pre">fn_docker_</span></code>. This means that to enable image specific options that you need your section should be named this way e.g <code class="docutils literal notranslate"><span class="pre">fn_docker_volatility</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>fn_docker_volatility<span class="o">]</span>
@@ -468,12 +468,12 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </ul>
 </section>
 <section id="functions">
-<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 </section>
 <section id="run-docker-container">
-<h2><strong>1: Run Docker Container</strong><a class="headerlink" href="#run-docker-container" title="Link to this heading">#</a></h2>
+<h2><strong>1: Run Docker Container</strong><a class="headerlink" href="#run-docker-container" title="Link to this heading">¶</a></h2>
 <section id="function-inputs">
-<h3>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h3>
+<h3>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -538,7 +538,7 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </div>
 </section>
 <section id="function-output">
-<h3>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h3>
+<h3>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;attachment_name&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
              <span class="s1">&#39;container_exit_status&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Error&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;StatusCode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
@@ -616,14 +616,14 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </section>
 </section>
 <section id="workflows">
-<h2>Workflows<a class="headerlink" href="#workflows" title="Link to this heading">#</a></h2>
+<h2>Workflows<a class="headerlink" href="#workflows" title="Link to this heading">¶</a></h2>
 <section id="send-artifact-to-docker-container">
-<h3><strong>1: Send Artifact To Docker Container</strong><a class="headerlink" href="#send-artifact-to-docker-container" title="Link to this heading">#</a></h3>
+<h3><strong>1: Send Artifact To Docker Container</strong><a class="headerlink" href="#send-artifact-to-docker-container" title="Link to this heading">¶</a></h3>
 <p>An example workflow scoped for Artifacts which will, when invoked, send the artifact to a Docker container, perform some operation on the input and returns information to Resilient.</p>
 <p>There are two provided use cases which each have their own Send Artifact To Docker Container workflow, showing how you can customize your own workflow to target a different image and usecase</p>
 </section>
 <section id="pre-process-script">
-<h3>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h3>
+<h3>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">docker_input</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">docker_artifact_type</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
@@ -631,7 +631,7 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </div>
 </section>
 <section id="post-process-script">
-<h3>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h3>
+<h3>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration&lt;/b&gt;</span>
 <span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
 
@@ -685,11 +685,11 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </div>
 </section>
 <section id="send-attachment-to-docker-container">
-<h3><strong>2: Send Attachment To Docker Container</strong><a class="headerlink" href="#send-attachment-to-docker-container" title="Link to this heading">#</a></h3>
+<h3><strong>2: Send Attachment To Docker Container</strong><a class="headerlink" href="#send-attachment-to-docker-container" title="Link to this heading">¶</a></h3>
 <p>An example workflow scoped for Attachments which will, when invoked, send the attachment to a Docker container, perform some operation on the input and returns information to Resilient.</p>
 </section>
 <section id="id1">
-<h3>2: Pre-Process Script:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>2: Pre-Process Script:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 
 <span class="c1"># If this workflow has the task_id available, gather it incase we need it.</span>
@@ -709,7 +709,7 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </div>
 </section>
 <section id="id2">
-<h3>2: Post-Process Script:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>2: Post-Process Script:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration&lt;/b&gt;</span>
 <span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
 
@@ -754,7 +754,7 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </section>
 </section>
 <section id="rules">
-<h2>Rules:<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules:<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -785,16 +785,16 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </div>
 </section>
 <section id="datatable">
-<h2>Datatable:<a class="headerlink" href="#datatable" title="Link to this heading">#</a></h2>
+<h2>Datatable:<a class="headerlink" href="#datatable" title="Link to this heading">¶</a></h2>
 <section id="docker-integration-invocations">
-<h3><strong>Docker Integration Invocations</strong><a class="headerlink" href="#docker-integration-invocations" title="Link to this heading">#</a></h3>
+<h3><strong>Docker Integration Invocations</strong><a class="headerlink" href="#docker-integration-invocations" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../_images/dtdocker.png" /></p>
 </section>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>docker_integration_invocations</p>
 <section id="columns">
-<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h4>
+<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -846,7 +846,7 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </section>
 </section>
 <section id="display-a-data-table-in-an-incident">
-<h3>Display a Data Table in an Incident<a class="headerlink" href="#display-a-data-table-in-an-incident" title="Link to this heading">#</a></h3>
+<h3>Display a Data Table in an Incident<a class="headerlink" href="#display-a-data-table-in-an-incident" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>In order to <strong>display</strong> the Test Data Table in your Incident, you must <strong>modify your Layout Settings</strong></p></li>
 </ul>
@@ -964,7 +964,7 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

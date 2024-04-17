@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Data Feed plugin for Splunk" href="../rc_data_feed_plugin_splunkfeed/README.html" /><link rel="prev" title="Data Feed KafkaFeed Plugin" href="../rc_data_feed_plugin_kafkafeed/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Data Feeder for SOAR - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,11 +350,11 @@
         </div>
         <article role="main">
           <section id="data-feeder-for-soar">
-<h1>Data Feeder for SOAR<a class="headerlink" href="#data-feeder-for-soar" title="Link to this heading">#</a></h1>
+<h1>Data Feeder for SOAR<a class="headerlink" href="#data-feeder-for-soar" title="Link to this heading">¶</a></h1>
 <p>This package contains the QRadar SOAR (Resilient) plugin to the Data Feed extension. The Data Feed Extension allows you to maintain “replica” data for QRadar SOAR incidents, artifacts, tasks, notes, attachments and so on, in another QRadar SOAR organization in the same or different QRadar SOAR platform, as well as another CP4S environment. The updates are performed in near real-time.</p>
 <p>Refer to the documentation on the Data Feed extension for use cases supported and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
 <section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Transfer incident data between two instances of QRadar SOAR (or CP4S).</p></li>
 <li><p>Transfer incident data between two Organizations within the same QRadar SOAR instance.</p></li>
@@ -364,12 +364,12 @@
 </ul>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
 <p>Unless otherwise specified, contents of this repository are published under the MIT open-source
 <a class="reference download internal" download="" href="../_downloads/e4ad05dad194f68c6249dc8d774d87be/LICENSE"><span class="xref download myst">LICENSE</span></a>.</p>
 </section>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -388,27 +388,27 @@
 </div>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>The integration package contains Python components that are called by the QRadar SOAR platform. These components run in the Resilient Circuits integration framework.
 The package also includes QRadar SOAR customizations that will be imported into the platform later.
 You perform these installation procedures at the QRadar SOAR integration server.</p>
 <p>Apps which are installed through the SOAR UI for App Host incorporate the UI components (rules and workflows) and no additional app installation is needed.</p>
 <section id="app-host-installation">
-<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">#</a></h3>
+<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>IBM SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="integration-server">
-<h3>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">#</a></h3>
+<h3>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">¶</a></h3>
 <p>If adding support for PostgreSQL, upgrade the package as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">rc_data_feed_plugin_resilientfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">[</span><span class="n">postgres</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
 <section id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Edit the resilient-circuits configuration file, as follows:</p>
 <ul>
@@ -472,7 +472,7 @@ You perform these installation procedures at the QRadar SOAR integration server.
 </div>
 </section>
 <section id="matching-incident-fields">
-<h3>matching_incident_fields<a class="headerlink" href="#matching-incident-fields" title="Link to this heading">#</a></h3>
+<h3>matching_incident_fields<a class="headerlink" href="#matching-incident-fields" title="Link to this heading">¶</a></h3>
 <p>Use this capability to filter which incidents and it’s tasks, notes, artifacts, etc. are sent to the target organization. Below are a few examples for how to use this capability.</p>
 <ul class="simple">
 <li><p>Filter on the incident owner.</p></li>
@@ -514,7 +514,7 @@ matching_operator=any</p>
 </section>
 </section>
 <section id="resilientfeed-class">
-<h2>ResilientFeed Class<a class="headerlink" href="#resilientfeed-class" title="Link to this heading">#</a></h2>
+<h2>ResilientFeed Class<a class="headerlink" href="#resilientfeed-class" title="Link to this heading">¶</a></h2>
 <p>This class allows you to write all incoming data to another QRadar SOAR Organization. Incidents, Artifacts, Attachments, Datatables, Notes, Milestones and Tasks (including task notes, and attachments) are copied.
 The following configuration items are supported:</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -575,7 +575,7 @@ The following configuration items are supported:</p>
 </div>
 </section>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>This functionality has been tested with QRadar SOAR instances &gt;= v48.
 There is presently an issue with v37.0 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use QRadar SOAR version &gt;=v37.1.</p></li>
@@ -586,7 +586,7 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 </ul>
 </section>
 <section id="setup-steps">
-<h2>Setup Steps<a class="headerlink" href="#setup-steps" title="Link to this heading">#</a></h2>
+<h2>Setup Steps<a class="headerlink" href="#setup-steps" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Ensure QRadar SOAR version requirements are met for both the source and destination instances.</p></li>
 <li><p>Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the QRadar SOAR source organization and importing them to the target QRadar SOAR organization.</p></li>
@@ -602,7 +602,7 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 <p><img alt="Adding Message Destination" src="../_images/rule_msg_destinations.png" /></p>
 </section>
 <section id="considerations">
-<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h2>
+<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>If real-time synchronization remains in place, changes in the source QRadar SOAR data will overwrite any changes made in the target QRadar SOAR organization data.</p></li>
 <li><p>Deleting a source incident, task, artifact, etc. will also delete the matching target information.</p></li>
@@ -613,7 +613,7 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 <p><img alt="Permissions" src="../_images/permissions.png" /></p>
 </section>
 <section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h2>
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>This solution is not intended for bidirectional synchronization.</p></li>
 <li><p>Unfortunately, the create date of the original incident is lost when the target incident is synchronized.</p></li>
@@ -626,7 +626,7 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </ul>
 </section>
 <section id="synchronization-methods">
-<h2>Synchronization Methods<a class="headerlink" href="#synchronization-methods" title="Link to this heading">#</a></h2>
+<h2>Synchronization Methods<a class="headerlink" href="#synchronization-methods" title="Link to this heading">¶</a></h2>
 <p>Three methods exist for synchronizing incident data:</p>
 <ul class="simple">
 <li><p>reload=True - This app.config setting will synchronize all incidents (including those closed) each time resilient-circuits is run. Review performance considerations above in [Considerations].</p></li>
@@ -635,7 +635,7 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </ul>
 </section>
 <section id="behavior">
-<h2>Behavior<a class="headerlink" href="#behavior" title="Link to this heading">#</a></h2>
+<h2>Behavior<a class="headerlink" href="#behavior" title="Link to this heading">¶</a></h2>
 <p>Unexpected behaviors can occur and are detailed here.</p>
 <ul class="simple">
 <li><p>If an incident is originally filtered via the <code class="docutils literal notranslate"><span class="pre">matching_incident_fields</span></code> setting, all incident data are filtered. If in the future that incident changes so that the matching criteria passes, at the time the incident is changed, only the incident is synchronized. To include all the other data elements such as tasks, artifact, attachments, etc., use the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> function.</p></li>
@@ -643,11 +643,11 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </ul>
 </section>
 <section id="database-support">
-<h2>Database Support<a class="headerlink" href="#database-support" title="Link to this heading">#</a></h2>
+<h2>Database Support<a class="headerlink" href="#database-support" title="Link to this heading">¶</a></h2>
 <p>An external database is used to maintain a mapping of the source incident data to the target incident data. For example, source incident 2100 maps to target incident 2222. The app will look up this relationship in order to update incident 2222 when ongoing changes to incident 2100 are made.
 Either a SQLite database (for integration servers) or a PostgreSQL (for app host or integration servers) can be used.</p>
 <section id="sqlite-database">
-<h3>SQLite Database<a class="headerlink" href="#sqlite-database" title="Link to this heading">#</a></h3>
+<h3>SQLite Database<a class="headerlink" href="#sqlite-database" title="Link to this heading">¶</a></h3>
 <p>A SQLite database can be used to maintain a mapping of incident data between the source and target QRadar SOAR instances. <strong>This database cannot be used for App Host environments due to the restartability of containers.</strong> Two tables are maintained for data synchronization:</p>
 <ul class="simple">
 <li><p>data_feeder_sync - contains specific ids for source and target instances and status. The fields are as follows:</p></li>
@@ -691,7 +691,7 @@ Either a SQLite database (for integration servers) or a PostgreSQL (for app host
 </div>
 </section>
 <section id="troubleshooting-sqlite-db">
-<h3>Troubleshooting SQLite DB<a class="headerlink" href="#troubleshooting-sqlite-db" title="Link to this heading">#</a></h3>
+<h3>Troubleshooting SQLite DB<a class="headerlink" href="#troubleshooting-sqlite-db" title="Link to this heading">¶</a></h3>
 <p>There are many tools to view the db tables, including open-source solutions. DBeaver is one open-source application supporting many different database types including sqlite.</p>
 <p>Use the following SQL statements for problem diagnostics:</p>
 <ul class="simple">
@@ -701,13 +701,13 @@ Either a SQLite database (for integration servers) or a PostgreSQL (for app host
 <p><img alt="DBeaver" src="../_images/db_view.png" /></p>
 </section>
 <section id="postgresql-database">
-<h3>PostgreSQL Database<a class="headerlink" href="#postgresql-database" title="Link to this heading">#</a></h3>
+<h3>PostgreSQL Database<a class="headerlink" href="#postgresql-database" title="Link to this heading">¶</a></h3>
 <p>Like the SQLite database, the same table structures are created and maintained in PostgreSQL.</p>
 <p>Use the SQLite DB if performing a one-time or limited-timeframe synchronization. Use PostgreSQL for continuously synchronization or when using App Host containers.</p>
 </section>
 </section>
 <section id="troubleshooting-tips">
-<h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Link to this heading">¶</a></h2>
 <p>Synchronization could fail for the following reasons:</p>
 <ul class="simple">
 <li><p>Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the target QRadar SOAR organization. Also check the permissions set on your target QRadar SOAR user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.</p></li>
@@ -823,7 +823,7 @@ Run the incident action: <code class="docutils literal notranslate"><span class=
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

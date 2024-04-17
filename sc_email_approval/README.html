@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>IBM SOAR Email Approval Process Content Pack - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,11 +350,11 @@
         </div>
         <article role="main">
           <section id="ibm-soar-email-approval-process-content-pack">
-<h1>IBM SOAR Email Approval Process Content Pack<a class="headerlink" href="#ibm-soar-email-approval-process-content-pack" title="Link to this heading">#</a></h1>
+<h1>IBM SOAR Email Approval Process Content Pack<a class="headerlink" href="#ibm-soar-email-approval-process-content-pack" title="Link to this heading">¶</a></h1>
 <p>This content package consists of rules, workflows, scripts and a datatable for an out-of-the-box email approval process. For customers who require a manual approval process before taking remediation actions, this content pack will support outbound emails sent to recipients with a request for action approval. The reply is then parsed to update the associated case task with the response.</p>
 <p><img alt="screenshot: email main" src="../_images/email_main.png" /></p>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -377,7 +377,7 @@
 </div>
 </section>
 <section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Out-of-the-box experience blending outbound and inbound email capabilities.</p></li>
 <li><p>Secure email through embedded one-way hash.</p></li>
@@ -388,7 +388,7 @@
 </ul>
 </section>
 <section id="what-s-included">
-<h2>What’s Included<a class="headerlink" href="#what-s-included" title="Link to this heading">#</a></h2>
+<h2>What’s Included<a class="headerlink" href="#what-s-included" title="Link to this heading">¶</a></h2>
 <p>This package consists of the following components:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -444,7 +444,7 @@
 </div>
 </section>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This content package relies on two apps which need to be installed and configured prior to importing the associated EmailApprovalContactPack.res file:</p>
 <ul class="simple">
 <li><p>IBM SOAR Task Helper Functions (https://exchange.xforce.ibmcloud.com/hub?q=task&amp;br=Resilient)</p></li>
@@ -454,12 +454,12 @@
 <p><img alt="screenshot: inbound email" src="../_images/inbound_email.png" /></p>
 </section>
 <section id="installation-and-configuration">
-<h2>Installation and Configuration<a class="headerlink" href="#installation-and-configuration" title="Link to this heading">#</a></h2>
+<h2>Installation and Configuration<a class="headerlink" href="#installation-and-configuration" title="Link to this heading">¶</a></h2>
 <p>It may be useful to place the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Process</span></code> datatable within a tab, such as the existing <code class="docutils literal notranslate"><span class="pre">Email</span></code> tab. This table serves as an audit of the email approval process and shows the sequence of communication.</p>
 <p><img alt="screenshot: layouts" src="../_images/layouts1.png" /></p>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>Before installing, verify that your environment meets the following prerequisites:</p>
 <ul class="simple">
 <li><p>IBM SOAR platform is version 43.1 or later, or Cloud Pak for Security (CP4S) 1.8 or later.</p></li>
@@ -486,10 +486,10 @@
 <p><img alt="screenshot: email response rule" src="../_images/inbound_email_conditions.png" /></p>
 </section>
 <section id="operation">
-<h2>Operation<a class="headerlink" href="#operation" title="Link to this heading">#</a></h2>
+<h2>Operation<a class="headerlink" href="#operation" title="Link to this heading">¶</a></h2>
 <p>The email approval content package incorporates two processes which are similar. Additional processes can be composed from these components.</p>
 <section id="artifact-process">
-<h3>Artifact Process<a class="headerlink" href="#artifact-process" title="Link to this heading">#</a></h3>
+<h3>Artifact Process<a class="headerlink" href="#artifact-process" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Email settings for the approval process are entered by the SOAR operator.</p></li>
 <li><p>A custom task is created to track the approval process in the Respond phase.</p></li>
@@ -502,7 +502,7 @@
 <img alt="screenshot: artifact workflow" src="../_images/artifact_workflow.png" /></p>
 </section>
 <section id="task-process">
-<h3>Task Process<a class="headerlink" href="#task-process" title="Link to this heading">#</a></h3>
+<h3>Task Process<a class="headerlink" href="#task-process" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Email settings for the approval process are entered by the SOAR operator.</p></li>
 <li><p>The email message is composed with data to track the response.</p></li>
@@ -514,7 +514,7 @@
 <img alt="screenshot: artifact workflow" src="../_images/task_workflow.png" /></p>
 </section>
 <section id="email-message">
-<h3>Email Message<a class="headerlink" href="#email-message" title="Link to this heading">#</a></h3>
+<h3>Email Message<a class="headerlink" href="#email-message" title="Link to this heading">¶</a></h3>
 <p>The email message body is composed via an in-script template and is composed of two sections. The first section contains information about the scope of the request (task or artifact) and any additional information about the request. Some emails can include an expiration date when the approval request is no longer valid.</p>
 <p>The second section contains references back to the SOAR case and the task used when the email is replied to. This information is secured by a one-way hash which ensures the case information cannot be altered.</p>
 <p>Replied to emails require SOAR Inbound Email to be configured with an account and folder dedicated to this process and the <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Response</span></code> rule enabled to process the reply.</p>
@@ -522,13 +522,13 @@
 </section>
 </section>
 <section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
 <section id="email-template">
-<h3>Email Template<a class="headerlink" href="#email-template" title="Link to this heading">#</a></h3>
+<h3>Email Template<a class="headerlink" href="#email-template" title="Link to this heading">¶</a></h3>
 <p>An email template used is contained in the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Pre</span> <span class="pre">Process</span> <span class="pre">Artifact</span></code> and <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Pre</span> <span class="pre">Process</span> <span class="pre">Task</span></code> scripts. The scripts uses both inline data substitution and data substitution performed on the back-end using a Python Jinja-style template. This template can be changed as long as the data sections are preserved (using the ‘##-’ separators). The logic to parse the email and these separators is contained in the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Process</span> <span class="pre">Response</span></code> script.</p>
 </section>
 <section id="approval-adjectives">
-<h3>Approval Adjectives<a class="headerlink" href="#approval-adjectives" title="Link to this heading">#</a></h3>
+<h3>Approval Adjectives<a class="headerlink" href="#approval-adjectives" title="Link to this heading">¶</a></h3>
 <p>A list of synonyms exists in the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Process</span> <span class="pre">Response</span></code> script are used to determine if the request is approved or rejected. If your language or process is different, edit these lists as needed.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">APPROVE_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span> <span class="s1">&#39;okay&#39;</span><span class="p">,</span> <span class="s1">&#39;approve&#39;</span><span class="p">,</span> <span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="s1">&#39;allow&#39;</span><span class="p">,</span> <span class="s1">&#39;proceed&#39;</span><span class="p">,</span> <span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="s1">&#39;accept&#39;</span><span class="p">]</span>
 <span class="n">DENY_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;disapprove&#39;</span><span class="p">,</span> <span class="s1">&#39;reject&#39;</span><span class="p">,</span> <span class="s1">&#39;rejected&#39;</span><span class="p">,</span> <span class="s1">&#39;deny&#39;</span><span class="p">,</span> <span class="s1">&#39;denied&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="s1">&#39;defer&#39;</span><span class="p">,</span> <span class="s1">&#39;deferred&#39;</span><span class="p">]</span>
@@ -537,7 +537,7 @@
 </section>
 </section>
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Pre</span> <span class="pre">Process</span> <span class="pre">Artifact</span></code> and <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Pre</span> <span class="pre">Process</span> <span class="pre">Task</span></code> scripts can be reused in your own workflows and playbooks. Each rely on activity fields (or Playbook Activation form fields) in place as follows:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -575,7 +575,7 @@
 <p><img alt="screenshot: email content" src="../_images/playbook_usage.png" /></p>
 </section>
 <section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
 <p>The majority of issues encountered are associated with the parsing the reply message and identifying it with the originating SOAR case and task. The parsing logic identifies the response, ‘approved’ or ‘denied’ or any configured synonym, and the SOAR identifiers which refer back to the SOAR case and task. Below is a sample email response.</p>
 <p>All message details are needed to accept the response email: msg-id, incident, task, and expiration are found in the <code class="docutils literal notranslate"><span class="pre">##-</span> <span class="pre">retain</span> <span class="pre">this</span> <span class="pre">data</span> <span class="pre">-##</span></code> section.</p>
 <p><img alt="screenshot: approval email" src="../_images/approval_email.png" /></p>
@@ -652,7 +652,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>NLP Search - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="nlp-search">
-<h1>NLP Search<a class="headerlink" href="#nlp-search" title="Link to this heading">#</a></h1>
+<h1>NLP Search<a class="headerlink" href="#nlp-search" title="Link to this heading">¶</a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
 <p>This function package provides the following feature to be used in a workflow:</p>
 <ul class="simple">
 <li><p>Search existing incidents and find the top similar ones.</p></li>
@@ -361,7 +361,7 @@
 Please refer to the User Guide for instructions on building the model and running predictions.</p>
 </section>
 <section id="system-requirements">
-<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading">#</a></h2>
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Resilient platform version 32 or later</p></li>
 <li><p>Ability to connect to a Resilient platform with HTTPS on port 443 and 65001</p></li>
@@ -375,7 +375,7 @@ Please refer to the User Guide for instructions on building the model and runnin
 </ul>
 </section>
 <section id="package-dependencies">
-<h2>Package Dependencies<a class="headerlink" href="#package-dependencies" title="Link to this heading">#</a></h2>
+<h2>Package Dependencies<a class="headerlink" href="#package-dependencies" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>sklearn 0.19.2</p></li>
 <li><p>pandas 0.23.3</p></li>
@@ -385,11 +385,11 @@ Please refer to the User Guide for instructions on building the model and runnin
 </ul>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>Install this package with ‘pip’, or run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code></p>
 </section>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
 <p>Create app.config by running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">-c</span></code> or update app.config with <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">-u</span></code>.</p>
 <p>The app.config file needs the following configuration values, in addition to those in the appropriate [resilient]
 section for connecting to your Resilient platform:</p>
@@ -410,35 +410,35 @@ section for connecting to your Resilient platform:</p>
 </div>
 </section>
 <section id="customize">
-<h2>Customize<a class="headerlink" href="#customize" title="Link to this heading">#</a></h2>
+<h2>Customize<a class="headerlink" href="#customize" title="Link to this heading">¶</a></h2>
 <p>Run with: <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">customize</span></code> to install function definitions and sample workflows to the Resilient platform.</p>
 </section>
 <section id="start">
-<h2>Start<a class="headerlink" href="#start" title="Link to this heading">#</a></h2>
+<h2>Start<a class="headerlink" href="#start" title="Link to this heading">¶</a></h2>
 <p>Start this function with: <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code></p>
 </section>
 <section id="build-a-new-nlp-model">
-<h2>Build a new NLP model<a class="headerlink" href="#build-a-new-nlp-model" title="Link to this heading">#</a></h2>
+<h2>Build a new NLP model<a class="headerlink" href="#build-a-new-nlp-model" title="Link to this heading">¶</a></h2>
 <p>Use the command line tool:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">-</span><span class="n">ml</span> <span class="n">build_nlp</span>
 </pre></div>
 </div>
 <p>to build a machine learning model</p>
 <section id="rebuild-the-nlp-model">
-<h3>Rebuild the NLP model<a class="headerlink" href="#rebuild-the-nlp-model" title="Link to this heading">#</a></h3>
+<h3>Rebuild the NLP model<a class="headerlink" href="#rebuild-the-nlp-model" title="Link to this heading">¶</a></h3>
 <p>Same as building a new model.</p>
 <p>As a rule, it is recommended that customers rebuild their model once a week.</p>
 <p>There are more advanced options. Please refer to the User Guide.</p>
 </section>
 </section>
 <section id="uninstall">
-<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">#</a></h2>
+<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip uninstall fn-machine-learning-nlp
 </pre></div>
 </div>
 </section>
 <section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
 <p>If <code class="docutils literal notranslate"><span class="pre">res-ml</span> <span class="pre">build_nlp</span></code> fails due to a LookupError caused by SSL errors and NLTK Downloader unable to obtain specific resources,
 you can run the file <code class="docutils literal notranslate"><span class="pre">bin/nltkdownload.py</span></code> and download everything for NLTK. This will resolve any future SSL errors when trying to access NLTK resources.</p>
 </section>
@@ -507,7 +507,7 @@ you can run the file <code class="docutils literal notranslate"><span class="pre
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

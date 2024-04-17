@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Cisco WebEx" href="../fn_create_webex_meeting/README.html" /><link rel="prev" title="Cloud Foundry" href="../fn_cloud_foundry/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>App Host Components - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="app-host-components">
-<h1>App Host Components<a class="headerlink" href="#app-host-components" title="Link to this heading">#</a></h1>
+<h1>App Host Components<a class="headerlink" href="#app-host-components" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
 <li><p><a class="reference internal" href="#revision-history"><span class="xref myst">Revision History</span></a></p></li>
@@ -376,7 +376,7 @@
 </section>
 <hr class="docutils" />
 <section id="revision-history">
-<h2>Revision History<a class="headerlink" href="#revision-history" title="Link to this heading">#</a></h2>
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -395,7 +395,7 @@
 </div>
 </section>
 <section id="about-this-package">
-<h2>About This Package<a class="headerlink" href="#about-this-package" title="Link to this heading">#</a></h2>
+<h2>About This Package<a class="headerlink" href="#about-this-package" title="Link to this heading">¶</a></h2>
 <p>This package is used to convert existing, single-file Python integrations to use the App Host framework.
 Today, the <code class="docutils literal notranslate"><span class="pre">componentsdir</span></code> parameter in the app.config file references a directory where these files reside.</p>
 <p>To use these files in an App Host environment, install this app using the Apps tab within Administrative Settings and,
@@ -403,7 +403,7 @@ through the Configuration tab of the app, add each single-file integration.</p>
 <p><img alt="screenshot" src="../_images/file_list.png" /></p>
 </section>
 <section id="container-environment">
-<h2>Container Environment<a class="headerlink" href="#container-environment" title="Link to this heading">#</a></h2>
+<h2>Container Environment<a class="headerlink" href="#container-environment" title="Link to this heading">¶</a></h2>
 <p>The container runs resilient-circuits similar to an Integration Server and continues to use the <code class="docutils literal notranslate"><span class="pre">componentsdir</span></code>
 app.config parameter. The following additional Python packages have been added to the container:</p>
 <ul class="simple">
@@ -420,7 +420,7 @@ app.config parameter. The following additional Python packages have been added t
 <a class="reference internal" href="#adding_additional_python_packages"><span class="xref myst">Adding Additional Python Packages</span></a> section.</p>
 </section>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This App Host package assumes that the message destination, functions, and rules for each single-file integration are
 already defined in your Resilient platform. If you require moving your integrations between Resilient platform,
 consider converting your single-file integrations to fully packaged Apps using the <code class="docutils literal notranslate"><span class="pre">resilient-sdk</span> <span class="pre">codegen</span></code> tool and
@@ -433,7 +433,7 @@ capability.</p>
 </ul>
 </section>
 <section id="installation-and-configuration">
-<h2>Installation and Configuration<a class="headerlink" href="#installation-and-configuration" title="Link to this heading">#</a></h2>
+<h2>Installation and Configuration<a class="headerlink" href="#installation-and-configuration" title="Link to this heading">¶</a></h2>
 <p>Perform the following procedure to install app-fn_components and configure your single file integrations. For details on installing apps, see the System Administrator Guide on the IBM Knowledge Center.</p>
 <ol class="arabic simple">
 <li><p>Log in to the Resilient platform, select Administrator Settings from the system menu then go to the Apps tab.</p></li>
@@ -462,14 +462,14 @@ capability.</p>
 It is best to remove these files from your Integration Server and restart resilient-circuits as both will be active otherwise.</p>
 </section>
 <section id="message-destination-setup">
-<h2>Message Destination Setup<a class="headerlink" href="#message-destination-setup" title="Link to this heading">#</a></h2>
+<h2>Message Destination Setup<a class="headerlink" href="#message-destination-setup" title="Link to this heading">¶</a></h2>
 <p>The next step is to add the API Key created for this container, <code class="docutils literal notranslate"><span class="pre">app_fn_components_exe_fn_components</span></code>,
 to each of the message destinations used by your single-file integrations.
 For convenience, all your single-file integrations can share the same message destination.</p>
 <p><img alt="screenshot" src="../_images/msg_dest_api_key.png" /></p>
 </section>
 <section id="api-key-permission-setup">
-<h2>API Key Permission Setup<a class="headerlink" href="#api-key-permission-setup" title="Link to this heading">#</a></h2>
+<h2>API Key Permission Setup<a class="headerlink" href="#api-key-permission-setup" title="Link to this heading">¶</a></h2>
 <p>Since it’s not known in advance which API key permissions are required for your single-file integrations, it is necessary
 to review each integration for the specific API calls performed for their operation. The base permissions for this API key are:</p>
 <ul class="simple">
@@ -481,13 +481,13 @@ Insufficient permissions will cause your integration to fail with an error messa
 <p><img alt="screenshot" src="../_images/api_key_permissions.png" /></p>
 </section>
 <section id="adding-additional-python-files-after-deployment">
-<h2>Adding Additional Python Files after Deployment<a class="headerlink" href="#adding-additional-python-files-after-deployment" title="Link to this heading">#</a></h2>
+<h2>Adding Additional Python Files after Deployment<a class="headerlink" href="#adding-additional-python-files-after-deployment" title="Link to this heading">¶</a></h2>
 <p>After the initial deployment of your fn_components app, repeat the steps in the
 <a class="reference internal" href="#installation_and_configuration"><span class="xref myst">Installation and Configuration</span></a> section when adding additional single-file Python integrations.
 Changes to the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file will trigger the container to restart. Alternatively, click the <code class="docutils literal notranslate"><span class="pre">Restart</span></code> button in the Details tab.</p>
 </section>
 <section id="adding-additional-python-packages">
-<h2>Adding Additional Python Packages<a class="headerlink" href="#adding-additional-python-packages" title="Link to this heading">#</a></h2>
+<h2>Adding Additional Python Packages<a class="headerlink" href="#adding-additional-python-packages" title="Link to this heading">¶</a></h2>
 <p>In order to enable the container to include additional Python packages, it is necessary to rebuild the container.
 This is possible by unzipping the app-fn_components-x.x.x.zip file and then uncompressing
 the <code class="docutils literal notranslate"><span class="pre">fn_components-x.x.x.tar.gz</span></code> archive. Edit the enclosed <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to include additional Python packages.
@@ -500,15 +500,15 @@ on the <a class="reference external" href="https://www.ibm.com/support/knowledge
 <p><img alt="screenshot" src="../_images/dockerfile.png" /></p>
 </section>
 <section id="app-host-troubleshooting">
-<h2>App Host Troubleshooting<a class="headerlink" href="#app-host-troubleshooting" title="Link to this heading">#</a></h2>
+<h2>App Host Troubleshooting<a class="headerlink" href="#app-host-troubleshooting" title="Link to this heading">¶</a></h2>
 <p>If your integration isn’t running, there are a few ways to determine the cause and take corrective actions.
 Below are a few common issues and the steps to correct.</p>
 <section id="app-restart">
-<h3>App Restart<a class="headerlink" href="#app-restart" title="Link to this heading">#</a></h3>
+<h3>App Restart<a class="headerlink" href="#app-restart" title="Link to this heading">¶</a></h3>
 <p>Make sure to restart the App anytime you make additions and changes to component files.</p>
 </section>
 <section id="message-destination">
-<h3>Message destination<a class="headerlink" href="#message-destination" title="Link to this heading">#</a></h3>
+<h3>Message destination<a class="headerlink" href="#message-destination" title="Link to this heading">¶</a></h3>
 <p>Check the logs to make sure your message destination is listened to. If not your log will have an entry similar to this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">13</span> <span class="mi">20</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="mi">226</span> <span class="n">ERROR</span> <span class="p">[</span><span class="n">actions_component</span><span class="p">]</span> <span class="n">STOMP</span> <span class="n">listener</span><span class="p">:</span> <span class="n">Error</span><span class="p">:</span>
 <span class="sa">b</span><span class="s1">&#39;java.lang.SecurityException: User a@example.com is not authorized to read from queue://actions.201.fn_ansible</span>
@@ -516,7 +516,7 @@ Below are a few common issues and the steps to correct.</p>
 </div>
 </section>
 <section id="file-names">
-<h3>File names<a class="headerlink" href="#file-names" title="Link to this heading">#</a></h3>
+<h3>File names<a class="headerlink" href="#file-names" title="Link to this heading">¶</a></h3>
 <p>Ensure your python files end in <code class="docutils literal notranslate"><span class="pre">.py</span></code>. Otherwise the list of loaded component files will bypass your integration. This log statement shows the files loaded when a container starts:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">27</span> <span class="mi">18</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="mi">000</span> <span class="n">INFO</span> <span class="p">[</span><span class="n">app</span><span class="p">]</span> <span class="n">Components</span> <span class="n">auto</span><span class="o">-</span><span class="n">load</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">rescircuits</span><span class="o">/</span><span class="n">components</span>
 <span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">27</span> <span class="mi">18</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="mi">007</span> <span class="n">INFO</span> <span class="p">[</span><span class="n">component_loader</span><span class="p">]</span> <span class="n">Loading</span> <span class="s1">&#39;create_note_from_data_table&#39;</span> <span class="kn">from</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">rescircuits</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">create_note_from_data_table</span><span class="o">.</span><span class="n">py</span>
@@ -528,7 +528,7 @@ Below are a few common issues and the steps to correct.</p>
 </div>
 </section>
 <section id="import-statements">
-<h3>Import statements<a class="headerlink" href="#import-statements" title="Link to this heading">#</a></h3>
+<h3>Import statements<a class="headerlink" href="#import-statements" title="Link to this heading">¶</a></h3>
 <p>Import statements which are unsupported will cause the container to become unusable and display a stack trace similar to below. Refer to section <a class="reference internal" href="#adding_additional_python_packages"><span class="xref myst">Adding Additional Python Packages</span></a>
 on how to build containers for your additional packages.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">27</span> <span class="mi">19</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">757</span> <span class="n">ERROR</span> <span class="p">[</span><span class="n">component_loader</span><span class="p">]</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">load</span> <span class="n">component</span> <span class="s1">&#39;task_utils_create&#39;</span>
@@ -631,7 +631,7 @@ on how to build containers for your additional packages.</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

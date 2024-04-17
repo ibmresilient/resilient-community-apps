@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Snapshot URL" href="../fn_snapshot_url/README.html" /><link rel="prev" title="Siemplify" href="../fn_siemplify/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Slack - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -367,9 +367,9 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 <section id="slack">
-<h1>Slack<a class="headerlink" href="#slack" title="Link to this heading">#</a></h1>
+<h1>Slack<a class="headerlink" href="#slack" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -403,7 +403,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <!--
   Specify all changes in this release. Do not remove the release
   notes of a previous release
@@ -430,7 +430,7 @@
 </div>
 <hr class="docutils" />
 <section id="fn-slack-2-1-0-changes">
-<h3>fn_slack 2.1.0 Changes<a class="headerlink" href="#fn-slack-2-1-0-changes" title="Link to this heading">#</a></h3>
+<h3>fn_slack 2.1.0 Changes<a class="headerlink" href="#fn-slack-2-1-0-changes" title="Link to this heading">¶</a></h3>
 <p>In v2.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
@@ -441,13 +441,13 @@ But migrating to playbooks will provide greater functionality along with future 
 </section>
 <hr class="docutils" />
 <section id="fn-slack-2-0-0-considerations">
-<h3>fn_slack 2.0.0 Considerations<a class="headerlink" href="#fn-slack-2-0-0-considerations" title="Link to this heading">#</a></h3>
+<h3>fn_slack 2.0.0 Considerations<a class="headerlink" href="#fn-slack-2-0-0-considerations" title="Link to this heading">¶</a></h3>
 <p>Slack integration is now able to use the channel ID instead of the channel name to post and archive. When using the channel name, this function must first retrieve a list of all channels in a workspace and then iterate through the list to find the desired channel. Using the channel ID, the function is able to immediately retrieve the desired channel and therefore is reccommended to use over channel name when calling functions via SOAR.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
@@ -455,7 +455,7 @@ But migrating to playbooks will provide greater functionality along with future 
 <p><strong>SOAR App for ‘fn_slack’</strong></p>
 <p>Function creates a Slack message based on a SOAR Incident, it’s Tasks, Notes, Artifacts and Attachments, exports conversation history from Slack channel to a text file, saves the text file as an Attachment and archives the Slack channel.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <!--
   List the Key Features of the Integration
 -->
@@ -471,7 +471,7 @@ But migrating to playbooks will provide greater functionality along with future 
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <!--
   List any Requirements
 -->
@@ -480,7 +480,7 @@ But migrating to playbooks will provide greater functionality along with future 
 </ul>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
@@ -521,7 +521,7 @@ But migrating to playbooks will provide greater functionality along with future 
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= 1.7</p></li>
@@ -536,11 +536,11 @@ But migrating to playbooks will provide greater functionality along with future 
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app does support a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -549,7 +549,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 <section id="endpoint-developed-with">
-<h3>Endpoint Developed With<a class="headerlink" href="#endpoint-developed-with" title="Link to this heading">#</a></h3>
+<h3>Endpoint Developed With<a class="headerlink" href="#endpoint-developed-with" title="Link to this heading">¶</a></h3>
 <p>This app has been implemented using:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -570,7 +570,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </table>
 </div>
 <section id="prerequisites">
-<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h4>
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
@@ -582,16 +582,16 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -624,7 +624,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </section>
 <hr class="docutils" />
 <section id="function-archive-slack-channel">
-<h2>Function - Archive Slack Channel<a class="headerlink" href="#function-archive-slack-channel" title="Link to this heading">#</a></h2>
+<h2>Function - Archive Slack Channel<a class="headerlink" href="#function-archive-slack-channel" title="Link to this heading">¶</a></h2>
 <p>Function exports conversation history from Slack channel to a text file, saves the text file as an Attachment and archives the Slack channel.</p>
 <p><img alt="screenshot: fn-archive-slack-channel " src="../_images/fn-archive-slack-channel.png" /></p>
 <details><summary>Inputs:</summary>
@@ -696,7 +696,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </section>
 <hr class="docutils" />
 <section id="function-post-attachment-to-slack">
-<h2>Function - Post attachment to Slack<a class="headerlink" href="#function-post-attachment-to-slack" title="Link to this heading">#</a></h2>
+<h2>Function - Post attachment to Slack<a class="headerlink" href="#function-post-attachment-to-slack" title="Link to this heading">¶</a></h2>
 <p>Function uploads Incident, Task or Artifact Attachments to Slack channel.</p>
 <p><img alt="screenshot: fn-post-attachment-to-slack " src="../_images/fn-post-attachment-to-slack.png" /></p>
 <details><summary>Inputs:</summary>
@@ -835,7 +835,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </section>
 <hr class="docutils" />
 <section id="function-post-message-to-slack">
-<h2>Function - Post message to Slack<a class="headerlink" href="#function-post-message-to-slack" title="Link to this heading">#</a></h2>
+<h2>Function - Post message to Slack<a class="headerlink" href="#function-post-message-to-slack" title="Link to this heading">¶</a></h2>
 <p>Function sends a message from an Incident, Task, Note or an Artifact to a Slack channel.</p>
 <p><img alt="screenshot: fn-post-message-to-slack " src="../_images/fn-post-message-to-slack.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1018,13 +1018,13 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </section>
 <hr class="docutils" />
 <section id="data-table-slack-conversations">
-<h2>Data Table - Slack Conversations<a class="headerlink" href="#data-table-slack-conversations" title="Link to this heading">#</a></h2>
+<h2>Data Table - Slack Conversations<a class="headerlink" href="#data-table-slack-conversations" title="Link to this heading">¶</a></h2>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>slack_conversations_db</p>
 </section>
 <section id="columns">
-<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1067,7 +1067,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </section>
 <hr class="docutils" />
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1115,10 +1115,10 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
 </section>
 </section>
@@ -1231,7 +1231,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

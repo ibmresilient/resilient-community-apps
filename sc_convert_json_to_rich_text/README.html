@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Convert JSON to Rich Text Script - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,14 +350,14 @@
         </div>
         <article role="main">
           <section id="convert-json-to-rich-text-script">
-<h1>Convert JSON to Rich Text Script<a class="headerlink" href="#convert-json-to-rich-text-script" title="Link to this heading">#</a></h1>
+<h1>Convert JSON to Rich Text Script<a class="headerlink" href="#convert-json-to-rich-text-script" title="Link to this heading">¶</a></h1>
 <p>This package consists of the <strong>convert_json_to_rich_text.res</strong> export file.</p>
 <p>The package contains a script to convert a json data structure into a hierarchical display of rich text,
 and adds the rich text to either an incident’s rich text (custom) field or an incident note.
 A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
 Typically, a function will create the workflow property and this script will run after that function to perform the conversion.</p>
 <section id="features">
-<h2>Features:<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<h2>Features:<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Display the hierarchical nature of json, presenting the json keys as bold labels</p></li>
 <li><p>Provide links to found URLs</p></li>
@@ -365,7 +365,7 @@ Typically, a function will create the workflow property and this script will run
 </ul>
 </section>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -384,14 +384,14 @@ Typically, a function will create the workflow property and this script will run
 </div>
 </section>
 <section id="installation-instructions">
-<h2>Installation instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading">#</a></h2>
+<h2>Installation instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading">¶</a></h2>
 <p>Before installing, verify that your environment meets the following prerequisites:</p>
 <ul class="simple">
 <li><p>Resilient platform version 45 or later.</p></li>
 <li><p>You have a Resilient account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.</p></li>
 </ul>
 <section id="steps">
-<h3>Steps<a class="headerlink" href="#steps" title="Link to this heading">#</a></h3>
+<h3>Steps<a class="headerlink" href="#steps" title="Link to this heading">¶</a></h3>
 <p><strong>Important:</strong> Repeatedly importing the <strong>.res</strong> files will overwrite any changes you have made to the script.</p>
 <ol class="arabic simple">
 <li><p>Log on to the Resilient platform using a suitable account.</p></li>
@@ -405,12 +405,12 @@ Typically, a function will create the workflow property and this script will run
 </ol>
 </section>
 <section id="result">
-<h3>Result<a class="headerlink" href="#result" title="Link to this heading">#</a></h3>
+<h3>Result<a class="headerlink" href="#result" title="Link to this heading">¶</a></h3>
 <p>After installing from <strong>convert_json_to_rich_text.res</strong>, the Resilient platform will have a new Python script called “Convert JSON to rich text v1.3”.</p>
 </section>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <p>In order to use this script, define a workflow property called: <code class="docutils literal notranslate"><span class="pre">convert_json_to_rich_text</span></code>, to define the json data and parameters to use for the conversion.
 Workflow properties can be added using a command similar to this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">,</span> <span class="p">{</span>
@@ -443,7 +443,7 @@ Workflow properties can be added using a command similar to this:</p>
 <p><img alt="Example Post Processing Script" src="../_images/example_post_script.png" /></p>
 </section>
 <section id="formatted-output-example">
-<h2>Formatted Output Example<a class="headerlink" href="#formatted-output-example" title="Link to this heading">#</a></h2>
+<h2>Formatted Output Example<a class="headerlink" href="#formatted-output-example" title="Link to this heading">¶</a></h2>
 <p><img alt="Example" src="../_images/example.png" /></p>
 </section>
 </section>
@@ -507,7 +507,7 @@ Workflow properties can be added using a command similar to this:</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

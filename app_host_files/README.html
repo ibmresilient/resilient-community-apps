@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>App Host Conversion Files - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="app-host-conversion-files">
-<h1>App Host Conversion Files<a class="headerlink" href="#app-host-conversion-files" title="Link to this heading">#</a></h1>
+<h1>App Host Conversion Files<a class="headerlink" href="#app-host-conversion-files" title="Link to this heading">¶</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>Starting with Resilient v37, IBM Resilient now supports container-based
 deployment of apps using an environment called App Host that pairs with your
 Resilient organization to run apps.</p>
@@ -375,7 +375,7 @@ Resilient organization.</p></li>
 </ul>
 </section>
 <section id="files">
-<h2>Files<a class="headerlink" href="#files" title="Link to this heading">#</a></h2>
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">¶</a></h2>
 <p>This directory contains three files and a directory of icons that will enable you to successfully package your app to deploy on App Host.
 Most of the content can remain the same - you will only need to make a few manual edits.</p>
 <ul class="simple">
@@ -385,19 +385,19 @@ Most of the content can remain the same - you will only need to make a few manua
 <li><p><a class="reference internal" href="#icons"><span class="xref myst">icons</span></a></p></li>
 </ul>
 <section id="dockerfile">
-<h3>Dockerfile<a class="headerlink" href="#dockerfile" title="Link to this heading">#</a></h3>
+<h3>Dockerfile<a class="headerlink" href="#dockerfile" title="Link to this heading">¶</a></h3>
 <p>The Dockerfile contains all the commands used to build the container image for a given app.
 We use the Red Hat Enterprise Linux Universal Base Image (UBI) with a Python3.6 environment and build a resilient-circuits
 environment on top of that. For more information on Red Hat UBI, please see their <a class="reference external" href="https://developers.redhat.com/products/rhel/ubi/">documentation</a>.</p>
 <section id="required-changes">
-<h4>Required Changes<a class="headerlink" href="#required-changes" title="Link to this heading">#</a></h4>
+<h4>Required Changes<a class="headerlink" href="#required-changes" title="Link to this heading">¶</a></h4>
 <p>For all apps, you will need to change the line <code class="docutils literal notranslate"><span class="pre">ARG</span> <span class="pre">APPLICATION=&lt;app_name&gt;</span></code> to match the name of your
 app. Note that the build process will use the <code class="docutils literal notranslate"><span class="pre">dist/&lt;app_name&gt;-&lt;version&gt;.tar.gz</span></code> source distribution produced by <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">sdist</span></code>.</p>
 <p>It is also recommended that for all apps, change <code class="docutils literal notranslate"><span class="pre">ARG</span> <span class="pre">RES_CIRCUITS_VERSION=37</span></code> to match
 the latest version of <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span></code> found on <a class="reference external" href="https://pypi.org/project/resilient-circuits/">PyPI</a>.</p>
 </section>
 <section id="advanced-changes">
-<h4>Advanced Changes<a class="headerlink" href="#advanced-changes" title="Link to this heading">#</a></h4>
+<h4>Advanced Changes<a class="headerlink" href="#advanced-changes" title="Link to this heading">¶</a></h4>
 <p>In certain cases, you may need to further alter the Dockerfile in order to install additional OS-level
 packages, install additional Python packages, or expose port(s) in order for your app to run properly.</p>
 <p>If you find that you need to install additional OS-level packages, edit this section:</p>
@@ -422,7 +422,7 @@ packages, install additional Python packages, or expose port(s) in order for you
 </div>
 </section>
 <section id="building-your-container">
-<h4>Building Your Container<a class="headerlink" href="#building-your-container" title="Link to this heading">#</a></h4>
+<h4>Building Your Container<a class="headerlink" href="#building-your-container" title="Link to this heading">¶</a></h4>
 <p>Once the Dockerfile is updated according to the needs of the app, it is now time to build an image.
 To do this, invoke a build command in the directory where the Dockerfile is found, e.g., <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">.</span> <span class="pre">-t</span> <span class="pre">your_company/your_custom_app:1.0.0</span></code>.</p>
 <p>In the above command, we use docker to build the image according to the Dockerfile. Other tools such as podman can also be used.</p>
@@ -441,7 +441,7 @@ container in detached mode.</p>
 </section>
 </section>
 <section id="apikey-permissions-txt">
-<h3>apikey_permissions.txt<a class="headerlink" href="#apikey-permissions-txt" title="Link to this heading">#</a></h3>
+<h3>apikey_permissions.txt<a class="headerlink" href="#apikey-permissions-txt" title="Link to this heading">¶</a></h3>
 <p>This file contains a list of all Resilient API key account permissions. By default, only
 <code class="docutils literal notranslate"><span class="pre">read_data</span></code> and <code class="docutils literal notranslate"><span class="pre">read_function</span></code> are enabled, which allow for communication over the message destination.
 Some apps, however, may require additional permissions in order to function properly, such as the use of different Resilient API calls. Uncomment those
@@ -450,12 +450,12 @@ packing, the SDK will read the permissions you enabled so that App Host can gene
 the appropriate permissions for your app.</p>
 </section>
 <section id="entrypoint-sh">
-<h3>entrypoint.sh<a class="headerlink" href="#entrypoint-sh" title="Link to this heading">#</a></h3>
+<h3>entrypoint.sh<a class="headerlink" href="#entrypoint-sh" title="Link to this heading">¶</a></h3>
 <p>In almost all cases, this file should be left unchanged. The <code class="docutils literal notranslate"><span class="pre">entrypoint.sh</span></code> file serves as a means to execute resilient-circuits and monitor
 changes to the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file. If changes are detected, the container will be killed and restarted by Kubernetes.</p>
 </section>
 <section id="icons">
-<h3>icons<a class="headerlink" href="#icons" title="Link to this heading">#</a></h3>
+<h3>icons<a class="headerlink" href="#icons" title="Link to this heading">¶</a></h3>
 <p>Two icons are provided to allow you to use or modify for your application.
 Add this directory to your application so that the <code class="docutils literal notranslate"><span class="pre">resilient-sdk</span> <span class="pre">package</span></code> process
 can bundle them together for display within the Resilient organization.</p>
@@ -467,7 +467,7 @@ See the <a class="reference external" href="https://exchange.xforce.ibmcloud.com
 </section>
 </section>
 <section id="resilient-sdk">
-<h2>resilient-sdk<a class="headerlink" href="#resilient-sdk" title="Link to this heading">#</a></h2>
+<h2>resilient-sdk<a class="headerlink" href="#resilient-sdk" title="Link to this heading">¶</a></h2>
 <p>Introduced with Resilient v37 is <a class="reference external" href="https://pypi.org/project/resilient-sdk/">resilient-sdk</a>. This
 tool is needed to build and package a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file that App Host will leverage to install your app. To do this,
 install the SDK from PyPi and run <code class="docutils literal notranslate"><span class="pre">resilient-sdk</span> <span class="pre">package</span> <span class="pre">-p</span> <span class="pre">/path/to/your/app</span></code> at the command line.
@@ -475,7 +475,7 @@ The resulting .zip file is placed in the app’s <code class="docutils literal n
 docker image will need to be placed in a container repository to complete the deployment to App Host.</p>
 </section>
 <section id="wrapping-up">
-<h2>Wrapping Up<a class="headerlink" href="#wrapping-up" title="Link to this heading">#</a></h2>
+<h2>Wrapping Up<a class="headerlink" href="#wrapping-up" title="Link to this heading">¶</a></h2>
 <p>Now that you have created a container image and <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file for your app, you are ready
 to install it and deploy to your Resilient organization through the UI using App Host.</p>
 </section>
@@ -546,7 +546,7 @@ to install it and deploy to your Resilient organization through the UI using App
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

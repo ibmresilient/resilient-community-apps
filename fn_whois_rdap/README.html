@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="SOAR Wiki" href="../fn_wiki/README.html" /><link rel="prev" title="Whois" href="../fn_whois/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Whois RDAP - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,7 +350,7 @@
         </div>
         <article role="main">
           <section id="whois-rdap">
-<h1>Whois RDAP<a class="headerlink" href="#whois-rdap" title="Link to this heading">#</a></h1>
+<h1>Whois RDAP<a class="headerlink" href="#whois-rdap" title="Link to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#fn-whois-rdap-functions-for-ibm-resilient"><span class="xref myst">fn-whois-rdap Functions for IBM Resilient</span></a></p>
 <ul>
@@ -374,9 +374,9 @@
 </ul>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <section id="history">
-<h3>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h3>
+<h3>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -413,12 +413,12 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><strong>Retrieve registry information for IP, URL or DNS Artifacts</strong></p>
 <p><img alt="screenshot: main" src="../_images/main71.png" /></p>
 <p>This integration retrieves registry information (via legacy WHOIS or new RDAP protocol) for IP, URL or DNS Artifacts that provides enrichment and threat intelligence on suspicious address. The information is added directly to artifact description and can include dns-zone, asn and asn description &amp; other useful metadata.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <!--
   List the Key Features of the Integration
 -->
@@ -431,7 +431,7 @@
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>IBM Resilient &gt;= <code class="docutils literal notranslate"><span class="pre">v35.0.5468</span></code></p></li>
 <li><p>An App Host environment or an Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=32.0.0</span></code></p>
@@ -443,9 +443,9 @@
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="app-host-installation">
-<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">#</a></h3>
+<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">¶</a></h3>
 <p>All the components for running Whois in a container already exist when using the App Host app. Once installed, review the app.config file in the Customizations tab.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_whois_rdap</span><span class="p">]</span>
 <span class="c1"># uncomment to include proxy support</span>
@@ -455,7 +455,7 @@
 </div>
 </section>
 <section id="integration-server-installation">
-<h3>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">#</a></h3>
+<h3>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">¶</a></h3>
 <ul>
 <li><p>Download the <code class="docutils literal notranslate"><span class="pre">app-fn_whois_rdap-x.x.x-nnnn.zip</span></code>.</p></li>
 <li><p>Copy the <code class="docutils literal notranslate"><span class="pre">.zip</span></code> to your Integration Server and SSH into it.</p></li>
@@ -490,7 +490,7 @@
 </section>
 </section>
 <section id="function-rdap-query">
-<h2>Function - RDAP: Query<a class="headerlink" href="#function-rdap-query" title="Link to this heading">#</a></h2>
+<h2>Function - RDAP: Query<a class="headerlink" href="#function-rdap-query" title="Link to this heading">¶</a></h2>
 <p>Using ipwhois library to make general queries in RDAP format</p>
 <p><img alt="screenshot: fn-rdap-query " src="../_images/fn-rdap-query.png" /></p>
 <details><summary>Inputs:</summary>
@@ -715,7 +715,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-whois-query">
-<h2>Function - WHOIS: Query<a class="headerlink" href="#function-whois-query" title="Link to this heading">#</a></h2>
+<h2>Function - WHOIS: Query<a class="headerlink" href="#function-whois-query" title="Link to this heading">¶</a></h2>
 <p>Using ipwhois library to make general queries in whois format</p>
 <p><img alt="screenshot: fn-whois-query " src="../_images/fn-rdap-query.png" /></p>
 <details><summary>Inputs:</summary>
@@ -840,10 +840,10 @@
 </section>
 <hr class="docutils" />
 <section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
 <p>There are several ways to verify the successful operation of a function.</p>
 <section id="resilient-action-status">
-<h3>Resilient Action Status<a class="headerlink" href="#resilient-action-status" title="Link to this heading">#</a></h3>
+<h3>Resilient Action Status<a class="headerlink" href="#resilient-action-status" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>When viewing an incident, use the Actions menu to view <strong>Action Status</strong>.</p></li>
 <li><p>By default, pending and errors are displayed.</p></li>
@@ -852,7 +852,7 @@
 </ul>
 </section>
 <section id="resilient-scripting-log">
-<h3>Resilient Scripting Log<a class="headerlink" href="#resilient-scripting-log" title="Link to this heading">#</a></h3>
+<h3>Resilient Scripting Log<a class="headerlink" href="#resilient-scripting-log" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>A separate log file is available to review scripting errors.</p></li>
 <li><p>This is useful when issues occur in the pre-processing or post-processing scripts.</p></li>
@@ -860,14 +860,14 @@
 </ul>
 </section>
 <section id="resilient-logs">
-<h3>Resilient Logs<a class="headerlink" href="#resilient-logs" title="Link to this heading">#</a></h3>
+<h3>Resilient Logs<a class="headerlink" href="#resilient-logs" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>By default, Resilient logs are retained at <code class="docutils literal notranslate"><span class="pre">/usr/share/co3/logs</span></code>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">client.log</span></code> may contain additional information regarding the execution of functions.</p></li>
 </ul>
 </section>
 <section id="resilient-circuits">
-<h3>Resilient-Circuits<a class="headerlink" href="#resilient-circuits" title="Link to this heading">#</a></h3>
+<h3>Resilient-Circuits<a class="headerlink" href="#resilient-circuits" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>The log is controlled in the <code class="docutils literal notranslate"><span class="pre">.resilient/app.config</span></code> file under the section [resilient] and the property <code class="docutils literal notranslate"><span class="pre">logdir</span></code>.</p></li>
 <li><p>The default file name is <code class="docutils literal notranslate"><span class="pre">app.log</span></code>.</p></li>
@@ -878,7 +878,7 @@
 </section>
 <hr class="docutils" />
 <section id="support">
-<h2>Support<a class="headerlink" href="#support" title="Link to this heading">#</a></h2>
+<h2>Support<a class="headerlink" href="#support" title="Link to this heading">¶</a></h2>
 <p>View the <a class="reference external" href="https://ibm.biz/soarcommunity">community forums</a> for help with this app.</p>
 </section>
 </section>
@@ -975,7 +975,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

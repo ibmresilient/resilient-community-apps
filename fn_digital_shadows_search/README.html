@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Digital Shadows Search - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="digital-shadows-search">
-<h1>Digital Shadows Search<a class="headerlink" href="#digital-shadows-search" title="Link to this heading">#</a></h1>
+<h1>Digital Shadows Search<a class="headerlink" href="#digital-shadows-search" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#appconfig-settings"><span class="xref myst">app.config settings</span></a></p></li>
 <li><p><a class="reference internal" href="#function-inputs"><span class="xref myst">Function Inputs</span></a></p></li>
@@ -372,7 +372,7 @@
 <p>The function makes use of the Digital Shadows <code class="docutils literal notranslate"><span class="pre">/api/search/find</span></code> API call to get information on a given query</p>
 </section>
 <section id="app-config-settings">
-<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h2>
+<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_digital_shadows_search</span><span class="p">]</span>
 <span class="n">ds_api_key</span><span class="o">=</span>
 <span class="n">ds_api_secret</span><span class="o">=</span>
@@ -381,7 +381,7 @@
 </div>
 </section>
 <section id="function-inputs">
-<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h2>
+<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -404,7 +404,7 @@
 </div>
 </section>
 <section id="function-output">
-<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h2>
+<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
 
@@ -678,7 +678,7 @@
 </div>
 </section>
 <section id="pre-process-script">
-<h2>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h2>
+<h2>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h2>
 <p>This example sets the <code class="docutils literal notranslate"><span class="pre">ds_search_value</span></code> input to the value of the Artifact the user took action on</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The search value to send to Digital Shadows (may be any String that contains an IP Address, URL etc.)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ds_search_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
@@ -686,7 +686,7 @@
 </div>
 </section>
 <section id="post-process-script">
-<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h2>
+<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
 <p>This example loops results.data and gets a count of each ‘type’ of results. Then for each result <strong>adds a row to the DS Datatable</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If function succeeds</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
@@ -723,7 +723,7 @@
 </div>
 </section>
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -742,16 +742,16 @@
 </div>
 </section>
 <section id="datatable">
-<h2>Datatable<a class="headerlink" href="#datatable" title="Link to this heading">#</a></h2>
+<h2>Datatable<a class="headerlink" href="#datatable" title="Link to this heading">¶</a></h2>
 <section id="digital-shadows-search-datatable">
-<h3>Digital Shadows Search Datatable<a class="headerlink" href="#digital-shadows-search-datatable" title="Link to this heading">#</a></h3>
+<h3>Digital Shadows Search Datatable<a class="headerlink" href="#digital-shadows-search-datatable" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../_images/53.png" /></p>
 <section id="api-name">
-<h4>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h4>
+<h4>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h4>
 <p>ds_search_results</p>
 </section>
 <section id="columns">
-<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h4>
+<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -782,7 +782,7 @@
 </div>
 </section>
 <section id="display-the-datatable-in-an-incident">
-<h4>Display the Datatable in an Incident<a class="headerlink" href="#display-the-datatable-in-an-incident" title="Link to this heading">#</a></h4>
+<h4>Display the Datatable in an Incident<a class="headerlink" href="#display-the-datatable-in-an-incident" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>In IBM Resilient, each Incident can have one Digital Shadows Search Datatable</p></li>
 <li><p>In order to <strong>display</strong> the Datatable in your Incident, you must <strong>modify your Layout Settings</strong></p></li>
@@ -867,7 +867,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

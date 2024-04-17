@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Secureworks CTP" href="../fn_secureworks_ctp/README.html" /><link rel="prev" title="SOAR Utilities" href="../fn_soar_utils/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Scheduler - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="scheduler">
-<h1>Scheduler<a class="headerlink" href="#scheduler" title="Link to this heading">#</a></h1>
+<h1>Scheduler<a class="headerlink" href="#scheduler" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#scheduler"><span class="xref myst">Scheduler</span></a></p>
 <ul>
@@ -414,7 +414,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <!--
   Specify all changes in this release. Do not remove the release
   notes of a previous release
@@ -472,7 +472,7 @@
 </table>
 </div>
 <section id="migrating-to-v1-0-2">
-<h3>Migrating to v1.0.2<a class="headerlink" href="#migrating-to-v1-0-2" title="Link to this heading">#</a></h3>
+<h3>Migrating to v1.0.2<a class="headerlink" href="#migrating-to-v1-0-2" title="Link to this heading">¶</a></h3>
 <p>When migrating to v1.0.2 from a previous release, add the following setting to your <code class="docutils literal notranslate"><span class="pre">[fn_scheduler]</span></code> app.config section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># db url if using a postgreSQL DB. Use this with AppHost</span>
 <span class="c1"># db_url=postgresql://username:password@host:port/database (or) db_url=postgresql+pypostgresql://username:password@host:port/database</span>
@@ -483,7 +483,7 @@
 This is necessary in an App Host environment to retain your schedules outside the app container.</p>
 </section>
 <section id="notes-regarding-v2-1-0">
-<h3>Notes regarding v2.1.0<a class="headerlink" href="#notes-regarding-v2-1-0" title="Link to this heading">#</a></h3>
+<h3>Notes regarding v2.1.0<a class="headerlink" href="#notes-regarding-v2-1-0" title="Link to this heading">¶</a></h3>
 <p>In v2.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
@@ -508,7 +508,7 @@ But migrating to playbooks provides greater functionality along with future app 
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: app_info.png" src="../_images/app_info.png" /></p>
 <p><strong>Functions to allow Playbooks/Rules to be scheduled</strong></p>
 <p>This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable. Times to run can be specified in the following ways:</p>
@@ -530,13 +530,13 @@ But migrating to playbooks provides greater functionality along with future app 
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <!--
   List any Requirements
 -->
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
@@ -577,7 +577,7 @@ But migrating to playbooks provides greater functionality along with future app 
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
@@ -592,11 +592,11 @@ But migrating to playbooks provides greater functionality along with future app 
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app <strong>does</strong> support a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -611,16 +611,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -662,7 +662,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </section>
 <section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
   You may wish to recommend a new incident tab.
@@ -672,7 +672,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="supported-scheduled-rules-playbooks">
-<h3>Supported Scheduled Rules/Playbooks<a class="headerlink" href="#supported-scheduled-rules-playbooks" title="Link to this heading">#</a></h3>
+<h3>Supported Scheduled Rules/Playbooks<a class="headerlink" href="#supported-scheduled-rules-playbooks" title="Link to this heading">¶</a></h3>
 <p>Scheduled Playbooks/Rules are possible for:</p>
 <ul class="simple">
 <li><p>incidents</p></li>
@@ -705,7 +705,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 </section>
 <section id="function-scheduled-rule-create">
-<h2>Function - Scheduled Rule Create<a class="headerlink" href="#function-scheduled-rule-create" title="Link to this heading">#</a></h2>
+<h2>Function - Scheduled Rule Create<a class="headerlink" href="#function-scheduled-rule-create" title="Link to this heading">¶</a></h2>
 <p>Schedule a rule or playbook to run on a schedule. This rule/playbook will be executed for a given incident, artifact, task, etc.</p>
 <p><img alt="screenshot: create_scheduled_job.png" src="../_images/create_scheduled_job.png" /></p>
 <details><summary>Inputs:</summary>
@@ -869,7 +869,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-scheduled-rule-modify">
-<h2>Function - Scheduled Rule Modify<a class="headerlink" href="#function-scheduled-rule-modify" title="Link to this heading">#</a></h2>
+<h2>Function - Scheduled Rule Modify<a class="headerlink" href="#function-scheduled-rule-modify" title="Link to this heading">¶</a></h2>
 <p>Modify a Scheduled job associated with a rule or playbook. Settings which can be modified include the trigger criteria (cron, delta, date or interval) and the parameters passed to the rule or playbook.</p>
 <p><img alt="screenshot: modify_scheduled_job.png" src="../_images/modify_scheduled_job.png" /></p>
 <details><summary>Inputs:</summary>
@@ -982,7 +982,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-scheduled-rule-list">
-<h2>Function - Scheduled Rule List<a class="headerlink" href="#function-scheduled-rule-list" title="Link to this heading">#</a></h2>
+<h2>Function - Scheduled Rule List<a class="headerlink" href="#function-scheduled-rule-list" title="Link to this heading">¶</a></h2>
 <p>List the schedules presently defined</p>
 <p><img alt="screenshot: list_scheduled_jobs.png" src="../_images/list_scheduled_jobs.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1086,7 +1086,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-scheduled-rule-pause">
-<h2>Function - Scheduled Rule Pause<a class="headerlink" href="#function-scheduled-rule-pause" title="Link to this heading">#</a></h2>
+<h2>Function - Scheduled Rule Pause<a class="headerlink" href="#function-scheduled-rule-pause" title="Link to this heading">¶</a></h2>
 <p>Pause a scheduled rule</p>
 <p><img alt="screenshot: scheduled_job_actions.png" src="../_images/scheduled_job_actions.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1175,7 +1175,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-scheduled-rule-remove">
-<h2>Function - Scheduled Rule Remove<a class="headerlink" href="#function-scheduled-rule-remove" title="Link to this heading">#</a></h2>
+<h2>Function - Scheduled Rule Remove<a class="headerlink" href="#function-scheduled-rule-remove" title="Link to this heading">¶</a></h2>
 <p>Stop and remove a scheduled job</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1233,7 +1233,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-scheduled-rule-resume">
-<h2>Function - Scheduled Rule Resume<a class="headerlink" href="#function-scheduled-rule-resume" title="Link to this heading">#</a></h2>
+<h2>Function - Scheduled Rule Resume<a class="headerlink" href="#function-scheduled-rule-resume" title="Link to this heading">¶</a></h2>
 <p>Resume a scheduled job</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1320,7 +1320,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-run-scheduled-job-now">
-<h2>Function - Run Scheduled Job Now<a class="headerlink" href="#function-run-scheduled-job-now" title="Link to this heading">#</a></h2>
+<h2>Function - Run Scheduled Job Now<a class="headerlink" href="#function-run-scheduled-job-now" title="Link to this heading">¶</a></h2>
 <p>Run a scheduled job immediately</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1394,13 +1394,13 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-scheduler-rules">
-<h2>Data Table - Scheduler Rules<a class="headerlink" href="#data-table-scheduler-rules" title="Link to this heading">#</a></h2>
+<h2>Data Table - Scheduler Rules<a class="headerlink" href="#data-table-scheduler-rules" title="Link to this heading">¶</a></h2>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>scheduler_rules</p>
 </section>
 <section id="columns">
-<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1463,7 +1463,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="playbooks-api">
-<h2>Playbooks API<a class="headerlink" href="#playbooks-api" title="Link to this heading">#</a></h2>
+<h2>Playbooks API<a class="headerlink" href="#playbooks-api" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1529,9 +1529,9 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="considerations">
-<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h2>
+<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h2>
 <section id="playbooks-and-rules">
-<h3>Playbooks and Rules<a class="headerlink" href="#playbooks-and-rules" title="Link to this heading">#</a></h3>
+<h3>Playbooks and Rules<a class="headerlink" href="#playbooks-and-rules" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>All Rules and Workflows of the Scheduler, have now been implemented in Playbooks. This however does not affect the Scheduler’s functionality to trigger Rules.</p></li>
 <li><p>A Playbook/Rule must be enabled to be scheduled and are again checked when the scheduled Playbook is triggered.</p></li>
@@ -1544,7 +1544,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 <section id="artifacts">
-<h3>Artifacts<a class="headerlink" href="#artifacts" title="Link to this heading">#</a></h3>
+<h3>Artifacts<a class="headerlink" href="#artifacts" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Playbooks executed against artifacts should include at least two Activity Fields:</p>
 <ul>
@@ -1561,31 +1561,31 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 <section id="datatables">
-<h3>Datatables<a class="headerlink" href="#datatables" title="Link to this heading">#</a></h3>
+<h3>Datatables<a class="headerlink" href="#datatables" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Datatable scheduled playbooks are not part of this package, but can be easily created for a specific Datatable.</p></li>
 <li><p>Datatable scheduled playbooks cannot currently reference the invoking datatable row in the pre-processing script. However, a playbooks’s activity field in the Activation form can be defined to prompt for it.</p></li>
 </ul>
 </section>
 <section id="persistence-of-scheduled-playbooks-rules">
-<h3>Persistence of Scheduled Playbooks/Rules<a class="headerlink" href="#persistence-of-scheduled-playbooks-rules" title="Link to this heading">#</a></h3>
+<h3>Persistence of Scheduled Playbooks/Rules<a class="headerlink" href="#persistence-of-scheduled-playbooks-rules" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Labels for scheduled Playbooks/Rules need to be unique. Attempting to create a duplicate will fail.</p></li>
 <li><p>Sqlite is used to persist scheduled Playbooks/Rules. Restarting resilient-circuits will continue with the scheduled Playbooks/Rules already defined.</p></li>
 </ul>
 </section>
 <section id="integrations">
-<h3>Integrations<a class="headerlink" href="#integrations" title="Link to this heading">#</a></h3>
+<h3>Integrations<a class="headerlink" href="#integrations" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>A function executed from a scheduled rule is free to perform any operation against IBM SOAR. Even through a scheduled Playbook/Rule runs from a specific Incident, IBM SOAR API calls can collect and operate on other incidents. For example, a scheduled rule can call a function which queries IBM SOAR for all open tasks with due dates to review any overdue.</p></li>
 </ul>
 </section>
 </section>
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
 </section>
 </section>
@@ -1705,7 +1705,7 @@ Additional package dependencies may exist for each of these packages:</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

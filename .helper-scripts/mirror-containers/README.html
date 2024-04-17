@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Repository Mirror Scripts - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="repository-mirror-scripts">
-<h1>Repository Mirror Scripts<a class="headerlink" href="#repository-mirror-scripts" title="Link to this heading">#</a></h1>
+<h1>Repository Mirror Scripts<a class="headerlink" href="#repository-mirror-scripts" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#about-this-package"><span class="xref myst">About this Package</span></a></p></li>
 <li><p><a class="reference internal" href="#mirror-all-imagessh"><span class="xref myst">mirror-all-images.sh</span></a></p></li>
@@ -362,11 +362,11 @@
 </section>
 <hr class="docutils" />
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <p>7/20 -  Initial Documentation</p>
 </section>
 <section id="about-this-package">
-<h2>About this Package:<a class="headerlink" href="#about-this-package" title="Link to this heading">#</a></h2>
+<h2>About this Package:<a class="headerlink" href="#about-this-package" title="Link to this heading">¶</a></h2>
 <p>This branch contains scripts which can be used to mirror App Host container images
 for local registry use. This is necessary when customers need to maintain their own
 apps for use in App Host along with those officially published on the App Exchange
@@ -377,7 +377,7 @@ or to replicate containers for air-gapped environments.</p>
 <li><p><a class="reference internal" href="#mirror-images.sh"><span class="xref myst">mirror-images.sh</span></a></p></li>
 </ul>
 <section id="initialization">
-<h3>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h3>
+<h3>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Ensure that the local container tool, docker or podman, is accessible. If root permissions
 are needed to run these commands, use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> or <code class="docutils literal notranslate"><span class="pre">su</span></code> to access that login account in advance.</p></li>
@@ -388,12 +388,12 @@ are needed to run these commands, use <code class="docutils literal notranslate"
 </section>
 </section>
 <section id="mirror-all-images-sh">
-<h2>mirror-all-images.sh<a class="headerlink" href="#mirror-all-images-sh" title="Link to this heading">#</a></h2>
+<h2>mirror-all-images.sh<a class="headerlink" href="#mirror-all-images-sh" title="Link to this heading">¶</a></h2>
 <p>This script is used to copy all container images from the IBM official registry, quay.io,
 to a customer’s private registry. It uses local container tools such as <code class="docutils literal notranslate"><span class="pre">docker</span></code> or <code class="docutils literal notranslate"><span class="pre">podman</span></code> to
 pull containers down from quay.io and then push them to the private registry.</p>
 <section id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h3>
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h3>
 <p>/bin/bash mirror-all-images fqdn.registry.io [docker | podman]</p>
 <ul class="simple">
 <li><p>fqdn.registry.io - name or ip address of the replication registry</p></li>
@@ -402,13 +402,13 @@ If missing, the script will attempt to determine which tool exists.</p></li>
 </ul>
 </section>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
 <p>/bin/bash mirror-all-images 834299573936.dkr.ecr.us-east-2.amazonaws.com podman</p>
 <p>/bin/bash mirror-all-images localhost:5000 podman insecure_registry latest_tag</p>
 </section>
 </section>
 <section id="mirror-images-sh">
-<h2>mirror-images.sh<a class="headerlink" href="#mirror-images-sh" title="Link to this heading">#</a></h2>
+<h2>mirror-images.sh<a class="headerlink" href="#mirror-images-sh" title="Link to this heading">¶</a></h2>
 <p>This script is used to copy a select number of container images from the IBM official registry, quay.io,
 to a customer’s private registry. It uses local container tools such as <code class="docutils literal notranslate"><span class="pre">docker</span></code> or <code class="docutils literal notranslate"><span class="pre">podman</span></code> to
 pull containers down from quay.io and then push them to the private registry.
@@ -420,7 +420,7 @@ Two additional files are used to control the behavior of the script:</p>
 container environment. Format of a line is the same as used in the <code class="docutils literal notranslate"><span class="pre">repo_quay.conf</span></code> file: <code class="docutils literal notranslate"><span class="pre">container_name:x.x.x</span></code>.</p></li>
 </ul>
 <section id="id1">
-<h3>Usage<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>Usage<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p>/bin/bash mirror-all-images fqdn.registry.io [docker | podman]</p>
 <ul class="simple">
 <li><p>fqdn.registry.io - name or ip address of the replication registry</p></li>
@@ -429,7 +429,7 @@ If missing, the script will attempt to determine which tool exists.</p></li>
 </ul>
 </section>
 <section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
 <p>/bin/bash mirror-images 192.168.12.186:5000</p>
 <p>repo_quay.conf</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fn_utilities</span><span class="p">:</span><span class="mf">1.14.0</span>
@@ -443,7 +443,7 @@ If missing, the script will attempt to determine which tool exists.</p></li>
 </section>
 </section>
 <section id="app-host-configuration">
-<h2>App Host Configuration<a class="headerlink" href="#app-host-configuration" title="Link to this heading">#</a></h2>
+<h2>App Host Configuration<a class="headerlink" href="#app-host-configuration" title="Link to this heading">¶</a></h2>
 <p>Refer to the <a class="reference external" href="https://www-03preprod.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/apps/private_repo_config.html">Configuring a private repository</a> document on how to
 develop Apps and configure App Host for your private registry.
 Also, it will be necessary to secure your local registry currently for it to be paired correctly with App Host e.g.
@@ -518,7 +518,7 @@ https://www.redhat.com/sysadmin/simple-container-registry</p>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

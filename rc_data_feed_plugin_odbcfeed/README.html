@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Parent/Child Relationships" href="../fn_relations/README.html" /><link rel="prev" title="McAfee ePO" href="../fn_mcafee_epo/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Data Feeder for ODBC Databases - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="data-feeder-for-odbc-databases">
-<h1>Data Feeder for ODBC Databases<a class="headerlink" href="#data-feeder-for-odbc-databases" title="Link to this heading">#</a></h1>
+<h1>Data Feeder for ODBC Databases<a class="headerlink" href="#data-feeder-for-odbc-databases" title="Link to this heading">¶</a></h1>
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>v1.1.0 Bug fixes for database re-connections attempts. Sync Incident function is now interruptible if the playbook/workflow is cancelled. Added ability to exclude fields from incident database table.</p></li>
 <li><p>v1.0.8 Allow Data Sync function to continue without failing a workflow/playbook</p></li>
@@ -364,7 +364,7 @@
 <li><p>v1.0.1 Duplication of incident id bug fix</p></li>
 </ul>
 <section id="notes">
-<h3>Notes:<a class="headerlink" href="#notes" title="Link to this heading">#</a></h3>
+<h3>Notes:<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Issues exist deleting attachments and artifact attachments for IBM SOAR v39 and v40. A future release is expected to resolve this issue.</p></li>
 <li><p>Deleting an incident will not also delete the incident artifacts, notes, tasks, datatables, etc.</p></li>
@@ -374,20 +374,20 @@
 </section>
 </section>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>This package contains the odbcfeed plugin to the Data Feed extension.  This Data Feed extension allows one to maintain “replica” data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.</p>
 <p>This plugin allows this replica data to be maintained in a sql-based database.</p>
 <p>Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
 <p>Unless otherwise specified, contents of this repository are published under the MIT open-source
 <a class="reference download internal" download="" href="../_downloads/c70543d4fadf91392a1f0c71ca6e8f7e/LICENSE"><span class="xref download myst">LICENSE</span></a>.</p>
 </section>
 <section id="change-log">
-<h2>Change log<a class="headerlink" href="#change-log" title="Link to this heading">#</a></h2>
+<h2>Change log<a class="headerlink" href="#change-log" title="Link to this heading">¶</a></h2>
 <section id="version-1-1-0-changes">
-<h3>Version 1.1.0 changes<a class="headerlink" href="#version-1-1-0-changes" title="Link to this heading">#</a></h3>
+<h3>Version 1.1.0 changes<a class="headerlink" href="#version-1-1-0-changes" title="Link to this heading">¶</a></h3>
 <p>Version 1.1.0 introduces the ability to exclude incident fields from the created <code class="docutils literal notranslate"><span class="pre">incident</span></code> database table.  Wildcards can be used to remove fields following a pattern. Ex. gdpr*.
 To use this capability, add the following app.config setting,exclude_incident_fields_file, to the particular database configuration section.</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -408,7 +408,7 @@ To use this capability, add the following app.config setting,exclude_incident_fi
 </div>
 </section>
 <section id="version-1-0-5-changes">
-<h3>Version 1.0.5 changes<a class="headerlink" href="#version-1-0-5-changes" title="Link to this heading">#</a></h3>
+<h3>Version 1.0.5 changes<a class="headerlink" href="#version-1-0-5-changes" title="Link to this heading">¶</a></h3>
 <p>Version 1.0.5 introduces the ability to include attachment content. When <code class="docutils literal notranslate"><span class="pre">include_attachment_data=true</span></code> is added to <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code>, an additional database column is added: <code class="docutils literal notranslate"><span class="pre">content</span></code>. This column is created to the <code class="docutils literal notranslate"><span class="pre">attachment</span></code> table in the equivalent database storage type as a blob:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -445,11 +445,11 @@ To use this capability, add the following app.config setting,exclude_incident_fi
 </section>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
 You perform these installation procedures at the Resilient integration server.</p>
 <section id="install-the-python-components">
-<h3>Install the Python components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">#</a></h3>
+<h3>Install the Python components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">¶</a></h3>
 <p>Complete the following steps to install the Python components:</p>
 <ul class="simple">
 <li><p>Ensure that the environment is up-to-date, as follows:</p></li>
@@ -544,7 +544,7 @@ Complete the following steps to configure and run the integration:</p>
 </section>
 </section>
 <section id="odbcfeed-class">
-<h2>ODBCFeed Class<a class="headerlink" href="#odbcfeed-class" title="Link to this heading">#</a></h2>
+<h2>ODBCFeed Class<a class="headerlink" href="#odbcfeed-class" title="Link to this heading">¶</a></h2>
 <p>The ODBCFeed class is probably the most flexible and useful of the feeds. It allows you to write all the incoming data to an ODBC database.
 The following configuration items are supported:</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -585,7 +585,7 @@ The following configuration items are supported:</p>
 </div>
 <p>When using a data feed database, IBM Resilient strongly recommends that you create and maintain the database on system separate from the Resilient platform, where queries cannot impact your running Resilient instance. Allowing access to the Resilient platform for a database instance can also compromise security of the platform itself.</p>
 <section id="additional-connection-strings">
-<h3>Additional connection strings<a class="headerlink" href="#additional-connection-strings" title="Link to this heading">#</a></h3>
+<h3>Additional connection strings<a class="headerlink" href="#additional-connection-strings" title="Link to this heading">¶</a></h3>
 <p>The following table lists additional database connection strings for the other supported databases.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -609,7 +609,7 @@ The following configuration items are supported:</p>
 </div>
 <p>Your naming of the database drivers (Ex. <code class="docutils literal notranslate"><span class="pre">MySQL</span></code>) may vary and is specified in your <code class="docutils literal notranslate"><span class="pre">odbcinst.ini</span></code> file.</p>
 <section id="integration-server">
-<h4>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">#</a></h4>
+<h4>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">¶</a></h4>
 <p>Oracle has the further requirement of specifying the connection string references in a TNSNAMES.ORA file. Setting up the Oracle client environment will include the following environment variables (and may include others):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">oracle</span><span class="o">/</span><span class="n">libraries</span><span class="o">/</span>
 <span class="n">export</span> <span class="n">TNS_ADMIN</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">tnsnames</span><span class="o">/</span>
@@ -617,7 +617,7 @@ The following configuration items are supported:</p>
 </div>
 </section>
 <section id="app-host">
-<h4>App Host<a class="headerlink" href="#app-host" title="Link to this heading">#</a></h4>
+<h4>App Host<a class="headerlink" href="#app-host" title="Link to this heading">¶</a></h4>
 <p>For App Host deployments, the tnsnames.ora file should be added to your app in the configuration section specifying the
 file name as <code class="docutils literal notranslate"><span class="pre">tnsnames.ora</span></code> and path <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>. The contents should contain the definitions for your Oracle database. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OracleODBC</span><span class="o">-</span><span class="mi">12</span><span class="n">c</span><span class="o">=</span><span class="p">(</span><span class="n">DESCRIPTION</span><span class="o">=</span><span class="p">(</span><span class="n">ADDRESS</span><span class="o">=</span><span class="p">(</span><span class="n">PROTOCOL</span><span class="o">=</span><span class="n">TCP</span><span class="p">)(</span><span class="n">HOST</span><span class="o">=</span><span class="mf">9.10.11.12</span><span class="p">)(</span><span class="n">PORT</span><span class="o">=</span><span class="mi">1521</span><span class="p">))</span>
@@ -632,13 +632,13 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 </section>
 </section>
 <section id="integration-server-requirements">
-<h3>Integration Server Requirements<a class="headerlink" href="#integration-server-requirements" title="Link to this heading">#</a></h3>
+<h3>Integration Server Requirements<a class="headerlink" href="#integration-server-requirements" title="Link to this heading">¶</a></h3>
 <p>All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc package, you will either need an environment with the <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">compiler</span></code> to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib).</p>
 <p>Information about pyodbc and installing unixodbc can be found here: https://github.com/mkleehammer/pyodbc/wiki/Install.</p>
 </section>
 </section>
 <section id="sqlitefeed-class">
-<h2>SQLiteFeed Class<a class="headerlink" href="#sqlitefeed-class" title="Link to this heading">#</a></h2>
+<h2>SQLiteFeed Class<a class="headerlink" href="#sqlitefeed-class" title="Link to this heading">¶</a></h2>
 <p>The SQLiteFeed class allows you to write all the incoming data to a SQLite DB file. SQLite is very useful for testing and in cases where you want to have the data stored in a single file that you can easily share. Some tools may natively support SQLite as well.</p>
 <p>SQLite supports CSV formatting, so you can easily export the data from the SQLite file into a CSV file, which can then be imported into another tool, such as Excel, for further analysis.</p>
 <p>The following configuration items are supported:</p>
@@ -664,7 +664,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 </div>
 </section>
 <section id="odbc-database-considerations">
-<h2>ODBC Database Considerations<a class="headerlink" href="#odbc-database-considerations" title="Link to this heading">#</a></h2>
+<h2>ODBC Database Considerations<a class="headerlink" href="#odbc-database-considerations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>All databases require their own set of drivers to be installed. This package does not install the libraries necessary as those operations are specific to the database used, Once the necessary driver(s) and installed, this information is captured in the odbcinst.ini file (for instance, found here: <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/odbcinst.inifile</span></code>) similar to the following:</p></li>
 </ul>
@@ -749,16 +749,16 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 </pre></div>
 </div>
 <section id="datetime-fields-and-timezones">
-<h3>Datetime Fields and Timezones<a class="headerlink" href="#datetime-fields-and-timezones" title="Link to this heading">#</a></h3>
+<h3>Datetime Fields and Timezones<a class="headerlink" href="#datetime-fields-and-timezones" title="Link to this heading">¶</a></h3>
 <p>All Resilient datetime fields retain their data in the UTC timezone. When persisting this data to a datastore, the ISO date format is used such as: 2019-04-18T19:07:42+00:00.</p>
 <p>Some databases, such as Postgres, convert query results with datetime fields into the timezone of the server system. To avoid this conversion, sql statements such SET TIMEZONE=’UTC’ should be used prior to any queries run.</p>
 <p>For MySql and MariaDB, sql_mode needs to be set without STRICT_TRANS_TABLE. See the database documentation on this setting: https://mariadb.com/kb/en/library/server-system-variables/#sql_mode.</p>
 </section>
 <section id="modifications">
-<h3>Modifications<a class="headerlink" href="#modifications" title="Link to this heading">#</a></h3>
+<h3>Modifications<a class="headerlink" href="#modifications" title="Link to this heading">¶</a></h3>
 <p>For some environments, it may be practical to modify the existing code to match your database environment. The sections below introduce the common aspects of this plugin which can be modified. In all cases, the changes will be made to <code class="docutils literal notranslate"><span class="pre">sqllib/sql_dialect.py</span></code>.</p>
 <section id="modify-dialect-encoding">
-<h4>Modify dialect encoding<a class="headerlink" href="#modify-dialect-encoding" title="Link to this heading">#</a></h4>
+<h4>Modify dialect encoding<a class="headerlink" href="#modify-dialect-encoding" title="Link to this heading">¶</a></h4>
 <p>Each SQL dialect modifies the database connection with the encoding used to read and write data. The configure_connection() function makes these changes and in all cases, sets the encoding to UTF-8. In some cases, the format of the encoding parameters may change between python environments and the following logic can be used to account for those different environments:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
     <span class="n">connection</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_WCHAR</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1">## pylint: disable=c-extension-no-member</span>
@@ -771,7 +771,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 </div>
 </section>
 <section id="modify-data-type-mapping">
-<h4>Modify data type mapping<a class="headerlink" href="#modify-data-type-mapping" title="Link to this heading">#</a></h4>
+<h4>Modify data type mapping<a class="headerlink" href="#modify-data-type-mapping" title="Link to this heading">¶</a></h4>
 <p>Each SQL dialect contains a mapping table to convert Resilient data types to your dialect’s datastore. See the function get_column_type() for how mapping is presently done.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_column_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_type</span><span class="p">):</span>  <span class="c1">## pylint: disable=no-self-use</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -809,7 +809,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 </div>
 </section>
 <section id="modifying-dialect-reserved-words">
-<h4>Modifying dialect reserved words<a class="headerlink" href="#modifying-dialect-reserved-words" title="Link to this heading">#</a></h4>
+<h4>Modifying dialect reserved words<a class="headerlink" href="#modifying-dialect-reserved-words" title="Link to this heading">¶</a></h4>
 <p>Each SQL Dialect contains reserved words which cannot be used in database table and column definitions. To ensure all data fields in Resilient can be stored, a list of reserve words is maintained. When a conflict is found the resulting table or column name has an underscore added to the name. From time to time, new database releases add to this reserved word list. Just add those words to an existing list:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>RESERVE_LIST = [&#39;all&#39;, &#39;analyse&#39;, &#39;analyze&#39;, &#39;and&#39;, &#39;any&#39;, &#39;array&#39;, &#39;as&#39;,
                 &#39;asc&#39;, &#39;asymmetric&#39;, &#39;both&#39;, &#39;case&#39;, &#39;cast&#39;,
@@ -928,7 +928,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

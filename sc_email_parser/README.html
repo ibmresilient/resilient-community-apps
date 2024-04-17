@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>IBM SOAR example email message parsing script - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,10 +350,10 @@
         </div>
         <article role="main">
           <section id="ibm-soar-example-email-message-parsing-script">
-<h1>IBM SOAR example email message parsing script<a class="headerlink" href="#ibm-soar-example-email-message-parsing-script" title="Link to this heading">#</a></h1>
+<h1>IBM SOAR example email message parsing script<a class="headerlink" href="#ibm-soar-example-email-message-parsing-script" title="Link to this heading">¶</a></h1>
 <p>This package consists of the <strong>RuleAndScript.res</strong> and <strong>ScriptAlone.res</strong> IBM SOAR configuration files. The first file contains an example email parsing script and a rule to run it automatically. The <strong>ScriptAlone.res</strong> file contains the script without the rule.</p>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -407,7 +407,7 @@
 </table>
 </div>
 <section id="changes-for-v2-3-0">
-<h3>Changes for v2.3.0<a class="headerlink" href="#changes-for-v2-3-0" title="Link to this heading">#</a></h3>
+<h3>Changes for v2.3.0<a class="headerlink" href="#changes-for-v2-3-0" title="Link to this heading">¶</a></h3>
 <p>Version of the 2.3.0 of the parsing script introduces the ability to capture an email’s Message-ID header. This value will be used to create email conversations based on the case’s incoming email.
 Version 2.0.0 of <a class="reference external" href="https://exchange.xforce.ibmcloud.com/hub/extension/caafba4e4f6d130e7db30ed4d5e53504">Outbound Email</a> will import a custom incident field (<code class="docutils literal notranslate"><span class="pre">email_message_id</span></code>) for retention of this information, along with new functionality to create outbound email conversations.</p>
 <p>If you want to use this parsing script without the fn_outbound_email app, you can manually create the incident field <code class="docutils literal notranslate"><span class="pre">email_message_id</span></code> and add it to a case tab, such as <code class="docutils literal notranslate"><span class="pre">Email</span></code>.
@@ -440,14 +440,14 @@ The below images show the creation of the <code class="docutils literal notransl
 </section>
 </section>
 <section id="installation-instructions">
-<h2>Installation instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading">#</a></h2>
+<h2>Installation instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading">¶</a></h2>
 <p>Before installing, verify that your environment meets the following prerequisites:</p>
 <ul class="simple">
 <li><p>IBM SOAR platform is version 50 or later.</p></li>
 <li><p>You have a IBM SOAR account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.</p></li>
 </ul>
 <section id="procedure">
-<h3>Procedure<a class="headerlink" href="#procedure" title="Link to this heading">#</a></h3>
+<h3>Procedure<a class="headerlink" href="#procedure" title="Link to this heading">¶</a></h3>
 <p><strong>Important:</strong> Repeatedly importing the <strong>.res</strong> files will overwrite any changes you have made to the script and rule.</p>
 <ol class="arabic simple">
 <li><p>Log on to the IBM SOAR platform using a suitable account.</p></li>
@@ -461,7 +461,7 @@ The below images show the creation of the <code class="docutils literal notransl
 </ol>
 </section>
 <section id="result">
-<h3>Result<a class="headerlink" href="#result" title="Link to this heading">#</a></h3>
+<h3>Result<a class="headerlink" href="#result" title="Link to this heading">¶</a></h3>
 <p>After installing from <strong>RuleAndScript.res</strong>, the IBM SOAR platform will have a new Python script called “Generic email script v2.3.3” and a new rule called “Process email message v2.3.3”. The rule runs the script when it is triggered by a new email message being received by the IBM SOAR platform. If instead you imported <strong>ScriptAlone.res</strong> then you will only have the new script and not the rule.</p>
 <p><strong>Note</strong>: This new rule is disabled by default. To enable:</p>
 <ol class="arabic simple">
@@ -474,7 +474,7 @@ If you are using an older email script:</p></li>
 </ol>
 </section>
 <section id="operation">
-<h3>Operation<a class="headerlink" href="#operation" title="Link to this heading">#</a></h3>
+<h3>Operation<a class="headerlink" href="#operation" title="Link to this heading">¶</a></h3>
 <p>The script is intended to perform generic email parsing on newly created email message objects. It performs the following:</p>
 <ul class="simple">
 <li><p>Checks if an existing incident exists whose title reflects the email message received.</p>
@@ -498,9 +498,9 @@ If you are using an older email script:</p></li>
 </section>
 </section>
 <section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
 <section id="the-incident-owner">
-<h3>The incident owner<a class="headerlink" href="#the-incident-owner" title="Link to this heading">#</a></h3>
+<h3>The incident owner<a class="headerlink" href="#the-incident-owner" title="Link to this heading">¶</a></h3>
 <p>New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin&#64;co3sys.com. This should be changed to reflect your IBM SOAR platform. For example, to change the owner to l1&#64;businessname.com, locate line 25 of the script:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new incident owner - the email address of a user or the name of a group and cannot be blank.</span>
 <span class="c1"># Change this value to reflect who will be the owner of the incident before running the script.</span>
@@ -515,7 +515,7 @@ If you are using an older email script:</p></li>
 </div>
 </section>
 <section id="allowlisting">
-<h3>Allowlisting<a class="headerlink" href="#allowlisting" title="Link to this heading">#</a></h3>
+<h3>Allowlisting<a class="headerlink" href="#allowlisting" title="Link to this heading">¶</a></h3>
 <p>A allowlists is a list of trustworthy data items that should not become suspicious artifacts, for example your own email server’s IP address.
 There are two categories of allowlist used in the script: IP address and URL domain. These allowlists are configured by altering data in the script.</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -545,7 +545,7 @@ There are two categories of allowlist used in the script: IP address and URL dom
 <p>Initially these allowlists are comprised of commented out entries which serve as examples of the data you might want to exclude from consideration. The allowlists will have no effect unless you uncomment the entries and make a grammatically correct list, or add some entries of your own.
 Please note that, compared to version v1 of the script, the allowlist variable location has changed and formats of the entries have been simplified.</p>
 <section id="ip-address-allowlists">
-<h4>IP address allowlists<a class="headerlink" href="#ip-address-allowlists" title="Link to this heading">#</a></h4>
+<h4>IP address allowlists<a class="headerlink" href="#ip-address-allowlists" title="Link to this heading">¶</a></h4>
 <p>The IP address allowlists are divided into separate IPv4 and IPv6 lists. These lists apply to the IP addresses retrieved by pattern matching in the body of the email message. If an IP address appears on a allowlist, it is not added as an artifact to the incident.</p>
 <p>There are two categories of IP allowlist entry, CIDR (Classless Inter-Domain Routing) and IPRange. For example, in IP V4, IBM owns the <code class="docutils literal notranslate"><span class="pre">9</span></code> class A network. You may want to also allowlist an IP range, such as <code class="docutils literal notranslate"><span class="pre">12.0.0.1</span> <span class="pre">-</span> <span class="pre">12.5.5.5</span></code>. To add these criteria to the allowlist you would add the following to ipV4AllowList:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="s2">&quot;9.0.0.0/8&quot;</span><span class="p">,</span>
@@ -584,7 +584,7 @@ Please note that, compared to version v1 of the script, the allowlist variable l
 </div>
 </section>
 <section id="url-domain-allowlists">
-<h4>URL domain allowlists<a class="headerlink" href="#url-domain-allowlists" title="Link to this heading">#</a></h4>
+<h4>URL domain allowlists<a class="headerlink" href="#url-domain-allowlists" title="Link to this heading">¶</a></h4>
 <p>The domain allowlist applies to URLs found in the body of the email. If a allowlisted domain is discovered in a potential URL artifact, then it is not added to the incident. Domains can be added explicitly, such as <code class="docutils literal notranslate"><span class="pre">mail.businessname.com</span></code>, or using a wildcard, such as <code class="docutils literal notranslate"><span class="pre">*.otherbusinessname.com</span></code>. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Domain allowlist</span>
 <span class="n">domainAllowList</span> <span class="o">=</span> <span class="p">[</span>
@@ -606,7 +606,7 @@ Please note that, compared to version v1 of the script, the allowlist variable l
 </section>
 </section>
 <section id="extension-and-customization">
-<h1>Extension and Customization<a class="headerlink" href="#extension-and-customization" title="Link to this heading">#</a></h1>
+<h1>Extension and Customization<a class="headerlink" href="#extension-and-customization" title="Link to this heading">¶</a></h1>
 <p>Please refer to the IBM SOAR Incident Response Platform Playbook Designer Guide for details on writing and customizing scripts. This guide is available from the Help/Contact menu in the IBM SOAR platform.</p>
 <p>There are two approaches to customization of the mechanism:</p>
 <ul class="simple">
@@ -615,9 +615,9 @@ Please note that, compared to version v1 of the script, the allowlist variable l
 </ul>
 <p>For a variety of reasons, adding more scripts is generally a better idea than adding more complexity to one script. The IBM SOAR platform could be expected to ingest multiple categories of email messages from different integrations. Some of the processing of the email messages could be common, and some processing could be category- or integration-specific. Keeping the common processing in one script, and the specialized processing in others would allow a cleaner and more maintainable implementation.</p>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
 <section id="extending-the-solution-to-deal-with-phishing-reports">
-<h3>Extending the solution to deal with Phishing reports<a class="headerlink" href="#extending-the-solution-to-deal-with-phishing-reports" title="Link to this heading">#</a></h3>
+<h3>Extending the solution to deal with Phishing reports<a class="headerlink" href="#extending-the-solution-to-deal-with-phishing-reports" title="Link to this heading">¶</a></h3>
 <p>Scenario: Emails arriving in a particular mailbox reflect individuals forwarding suspected phishing messages. The scripts operating on these email messages should, in addition to the generic processing, record the reporter’s email address as possibly having been the target of a phishing attack, and record the sender of the forwarded phishing email as suspicious.</p>
 <p>A solution:
 Add the following script to the IBM SOAR platform:</p>
@@ -660,7 +660,7 @@ Add the following script to the IBM SOAR platform:</p>
 </div>
 </section>
 <section id="campaign-identifier">
-<h3>Campaign identifier<a class="headerlink" href="#campaign-identifier" title="Link to this heading">#</a></h3>
+<h3>Campaign identifier<a class="headerlink" href="#campaign-identifier" title="Link to this heading">¶</a></h3>
 <p>Scenario: The email message subject on its own might not be enough to collect related email messages into one incident.
 It may be that the email message subject is not specific or reliable enough to use as the way to collect related emails. In particular, there may be an attack taking place where multiple attack vectors are being employed in a single campaign, which may result in many different kinds of email messages being received for this one campaign.
 One solution to the problem is to create a new field in an incident to contain a campaign identifier. This identifier could be either derived from the email message contents, or chosen from a hard-coded list when the campaign is recognized by the parsing script.</p>
@@ -754,7 +754,7 @@ One solution to the problem is to create a new field in an incident to contain a
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

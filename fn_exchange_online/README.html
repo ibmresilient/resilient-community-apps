@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="ExtraHop" href="../fn_extrahop/README.html" /><link rel="prev" title="Microsoft Exchange" href="../fn_exchange/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Microsoft Exchange Online - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -369,9 +369,9 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 <section id="microsoft-exchange-online">
-<h1>Microsoft Exchange Online<a class="headerlink" href="#microsoft-exchange-online" title="Link to this heading">#</a></h1>
+<h1>Microsoft Exchange Online<a class="headerlink" href="#microsoft-exchange-online" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -411,35 +411,35 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <!--
 
 -->
 <section id="id1">
-<h3>1.4.1<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>1.4.1<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p>Moved a global Python2 script to a local playbook Python3 script</p>
 </section>
 <section id="id2">
-<h3>1.4.0<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>1.4.0<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
 <p>If upgrading from a previous release, you’ll notice that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it’s corresponding rule, but with “(PB)” added at the end.</p>
 <p>You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.</p>
 </section>
 <section id="v1-3-0">
-<h3>v1.3.0<a class="headerlink" href="#v1-3-0" title="Link to this heading">#</a></h3>
+<h3>v1.3.0<a class="headerlink" href="#v1-3-0" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Support attaching incident attachments to a message.</p></li>
 </ul>
 </section>
 <section id="v1-2-0">
-<h3>v1.2.0<a class="headerlink" href="#v1-2-0" title="Link to this heading">#</a></h3>
+<h3>v1.2.0<a class="headerlink" href="#v1-2-0" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Minor performance improvement when query “all” user mailboxes.</p></li>
 <li><p>Continue querying “all” users if there is an error returned from a single call to the $batch endpoint.</p></li>
 </ul>
 </section>
 <section id="v1-1-0">
-<h3>v1.1.0<a class="headerlink" href="#v1-1-0" title="Link to this heading">#</a></h3>
+<h3>v1.1.0<a class="headerlink" href="#v1-1-0" title="Link to this heading">¶</a></h3>
 <p>The 1.1.0 release addresses performance issues when querying messages of all Exchange Online users of a tenant.</p>
 <ul class="simple">
 <li><p>Added batching of multiple message query requests into a single Microsoft Graph API request call using the /$batch endpoint.  The maximum number of requests that Microsoft Graph currently supports in the batch endpoint is 20 requests.  Should Microsoft change this value, the <code>max_batch_requests</code>  parameter should be updated in the app.config file.</p></li>
@@ -467,14 +467,14 @@
 <p>Edit the required configuration setting as described in the <a class="reference internal" href="#integration-server"><span class="xref myst">Integration Server</span></a> section.</p>
 </section>
 <section id="v1-0-0">
-<h3>v1.0.0<a class="headerlink" href="#v1-0-0" title="Link to this heading">#</a></h3>
+<h3>v1.0.0<a class="headerlink" href="#v1-0-0" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Initial Release</p></li>
 </ul>
 </section>
 </section>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -514,7 +514,7 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
@@ -546,7 +546,7 @@
 <p><img alt="screenshot: main" src="../_images/main13.png" /></p>
 <p>QRadar SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from QRadar SOAR.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <!--
   List the Key Features of the Integration
 -->
@@ -566,13 +566,13 @@
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <!--
   List any Requirements
 -->
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
@@ -613,7 +613,7 @@
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
@@ -628,13 +628,13 @@
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>If configuring fn_exchange_online with a proxy server, setting both the <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> and <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> can lead to connection issues.
 Microsoft only supports a secure HTTPS proxy and we recommend only using the <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> parameter.
 The <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> parameter should be omitted.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -644,13 +644,13 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>tzlocal&gt;=2.0.0</p></li>
 </ul>
 <section id="prerequisites">
-<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h4>
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
 </section>
 <section id="configuration">
-<h4>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h4>
+<h4>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h4>
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
@@ -723,7 +723,7 @@ The <code class="docutils literal notranslate"><span class="pre">http_proxy</spa
 </div>
 </section>
 <section id="permissions">
-<h4>Permissions<a class="headerlink" href="#permissions" title="Link to this heading">#</a></h4>
+<h4>Permissions<a class="headerlink" href="#permissions" title="Link to this heading">¶</a></h4>
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
@@ -753,16 +753,16 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
   You may wish to recommend a new incident tab.
@@ -777,7 +777,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-create-meeting">
-<h2>Function - Exchange Online: Create Meeting<a class="headerlink" href="#function-exchange-online-create-meeting" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Create Meeting<a class="headerlink" href="#function-exchange-online-create-meeting" title="Link to this heading">¶</a></h2>
 <p>This function creates a meeting event in the organizer’s Outlook calendar and sends a calendar event mail message to the meeting participants inviting them to the meeting.</p>
 <p><img alt="screenshot: fn-exchange-online-create-meeting " src="../_images/fn-exchange-online-create-meeting.png" /></p>
 <details><summary>Inputs:</summary>
@@ -974,7 +974,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-delete-message">
-<h2>Function - Exchange Online: Delete Message<a class="headerlink" href="#function-exchange-online-delete-message" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Delete Message<a class="headerlink" href="#function-exchange-online-delete-message" title="Link to this heading">¶</a></h2>
 <p>Delete a message in the specified user’s email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.</p>
 <p><img alt="screenshot: fn-exchange-online-delete-message " src="../_images/fn-exchange-online-delete-message.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1061,7 +1061,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-delete-messages-from-query-results">
-<h2>Function - Exchange Online: Delete Messages From Query Results<a class="headerlink" href="#function-exchange-online-delete-messages-from-query-results" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Delete Messages From Query Results<a class="headerlink" href="#function-exchange-online-delete-messages-from-query-results" title="Link to this heading">¶</a></h2>
 <p>This Exchange Online function deletes a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.</p>
 <p><img alt="screenshot: fn-exchange-online-delete-messages-from-query-results " src="../_images/fn-exchange-online-delete-messages-from-query-results.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1160,7 +1160,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-get-message">
-<h2>Function - Exchange Online: Get Message<a class="headerlink" href="#function-exchange-online-get-message" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Get Message<a class="headerlink" href="#function-exchange-online-get-message" title="Link to this heading">¶</a></h2>
 <p>This function returns the contents of an Exchange Online message in JSON format.</p>
 <p><img alt="screenshot: fn-exchange-online-get-message " src="../_images/fn-exchange-online-get-message.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1293,7 +1293,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-get-user-profile">
-<h2>Function - Exchange Online: Get User Profile<a class="headerlink" href="#function-exchange-online-get-user-profile" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Get User Profile<a class="headerlink" href="#function-exchange-online-get-user-profile" title="Link to this heading">¶</a></h2>
 <p>This function gets Exchange Online user profile for a given email address.</p>
 <p><img alt="screenshot: fn-exchange-online-get-user-profile " src="../_images/fn-exchange-online-get-user-profile.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1375,7 +1375,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-move-message-to-folder">
-<h2>Function - Exchange Online: Move Message to Folder<a class="headerlink" href="#function-exchange-online-move-message-to-folder" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Move Message to Folder<a class="headerlink" href="#function-exchange-online-move-message-to-folder" title="Link to this heading">¶</a></h2>
 <p>This function moves an Exchange Online message to the specified folder in the users mailbox.</p>
 <p><img alt="screenshot: fn-exchange-online-move-message-to-folder " src="../_images/fn-exchange-online-move-message-to-folder.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1473,7 +1473,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-query-messages">
-<h2>Function - Exchange Online: Query Messages<a class="headerlink" href="#function-exchange-online-query-messages" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Query Messages<a class="headerlink" href="#function-exchange-online-query-messages" title="Link to this heading">¶</a></h2>
 <p>This function queries Exchange Online to find messages matching the specified input parameters.  A list of messages is returned from the function.</p>
 <p><img alt="screenshot: fn-exchange-online-query-messages " src="../_images/fn-exchange-online-query-messages.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1947,7 +1947,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-send-message">
-<h2>Function - Exchange Online: Send Message<a class="headerlink" href="#function-exchange-online-send-message" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Send Message<a class="headerlink" href="#function-exchange-online-send-message" title="Link to this heading">¶</a></h2>
 <p>This function creates a message and sends it to the specified recipients.</p>
 <p><img alt="screenshot: fn-exchange-online-send-message " src="../_images/fn-exchange-online-send-message.png" /></p>
 <details><summary>Inputs:</summary>
@@ -2056,7 +2056,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="function-exchange-online-write-message-as-attachment">
-<h2>Function - Exchange Online: Write Message as Attachment<a class="headerlink" href="#function-exchange-online-write-message-as-attachment" title="Link to this heading">#</a></h2>
+<h2>Function - Exchange Online: Write Message as Attachment<a class="headerlink" href="#function-exchange-online-write-message-as-attachment" title="Link to this heading">¶</a></h2>
 <p>This function gets the mime content of an Exchange Online message and writes it as an incident attachment.</p>
 <p><img alt="screenshot: fn-exchange-online-write-message-as-attachment " src="../_images/fn-exchange-online-write-message-as-attachment.png" /></p>
 <details><summary>Inputs:</summary>
@@ -2156,7 +2156,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="script-exchange-online-create-artifacts-from-message">
-<h2>Script - Exchange Online Create Artifacts from Message<a class="headerlink" href="#script-exchange-online-create-artifacts-from-message" title="Link to this heading">#</a></h2>
+<h2>Script - Exchange Online Create Artifacts from Message<a class="headerlink" href="#script-exchange-online-create-artifacts-from-message" title="Link to this heading">¶</a></h2>
 <p>Create “Email Recipient”, “Email Sender” and “Email Subject” artifacts from a message row-entry in the Exchange Online Message Query Results data table.</p>
 <p><strong>Object:</strong> exo_message_query_results_dt</p>
 <details><summary>Script Text:</summary>
@@ -2187,14 +2187,14 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-exchange-online-message-query-results">
-<h2>Data Table - Exchange Online Message Query Results<a class="headerlink" href="#data-table-exchange-online-message-query-results" title="Link to this heading">#</a></h2>
+<h2>Data Table - Exchange Online Message Query Results<a class="headerlink" href="#data-table-exchange-online-message-query-results" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-exchange-online-message-query-results" src="../_images/dt-exchange-online-message-query-results.png" /></p>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>exo_message_query_results_dt</p>
 </section>
 <section id="columns">
-<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2262,7 +2262,7 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2334,10 +2334,10 @@ for your domain:</p>
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
 </section>
 </section>
@@ -2463,7 +2463,7 @@ for your domain:</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

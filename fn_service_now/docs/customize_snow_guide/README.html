@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="SOAR Customization Guide" href="../customize_resilient_guide/README.html" /><link rel="prev" title="ServiceNow Installation Guide" href="../install_guide/README.html" />
 
-    <link rel="shortcut icon" href="../../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>ServiceNow Customization Guide - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="servicenow-customization-guide">
-<h1>ServiceNow Customization Guide<a class="headerlink" href="#servicenow-customization-guide" title="Link to this heading">#</a></h1>
+<h1>ServiceNow Customization Guide<a class="headerlink" href="#servicenow-customization-guide" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
 <li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
@@ -411,7 +411,7 @@
 <p><em>This guide shows how to adapt the App installed on your ServiceNow instance to suit your Incident Response Workflow</em></p>
 </section>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>SOAR Platform updated to at least <code class="docutils literal notranslate"><span class="pre">v31.0.0</span></code> or Cloud Pak for Security running at least <code class="docutils literal notranslate"><span class="pre">v1.9.0</span></code>.</p></li>
 <li><p>App Host <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.6.0</span></code> or an Integration Server setup with <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">31.0.0</span></code> installed.</p></li>
@@ -424,12 +424,12 @@
 </section>
 <hr class="docutils" />
 <section id="architectural-diagram">
-<h2>Architectural Diagram<a class="headerlink" href="#architectural-diagram" title="Link to this heading">#</a></h2>
+<h2>Architectural Diagram<a class="headerlink" href="#architectural-diagram" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot" src="../../../_images/01.png" /></p>
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p>When this App is installed, on your ServiceNow instance, you have access to the <strong>ResilientHelper</strong> class in any ServiceNow <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>, <code class="docutils literal notranslate"><span class="pre">UI</span> <span class="pre">Action</span></code> or <code class="docutils literal notranslate"><span class="pre">Script</span> <span class="pre">Include</span></code>.</p>
 <p>From the architectural diagram above, within ServiceNow, any SOAR action must start with a ServiceNow <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>. ServiceNow <code class="docutils literal notranslate"><span class="pre">Workflows</span></code> are invoked from <code class="docutils literal notranslate"><span class="pre">UI</span> <span class="pre">Actions</span></code> or <code class="docutils literal notranslate"><span class="pre">Business</span> <span class="pre">Rules</span></code>.</p>
 <p>This app comes with <strong>4 pre-defined ServiceNow Workflows:</strong></p>
@@ -444,7 +444,7 @@
 </section>
 <hr class="docutils" />
 <section id="pre-defined-servicenow-workflows">
-<h2>Pre-Defined ServiceNow Workflows<a class="headerlink" href="#pre-defined-servicenow-workflows" title="Link to this heading">#</a></h2>
+<h2>Pre-Defined ServiceNow Workflows<a class="headerlink" href="#pre-defined-servicenow-workflows" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Each of the installed ‘out-of-the-box’ <code class="docutils literal notranslate"><span class="pre">Workflows</span></code> contain a <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Script</span></code></p></li>
 <li><p>It is in that <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Script</span></code> where we use the <strong>ResilientHelper</strong> class to invoke SOAR Actions</p></li>
@@ -693,9 +693,9 @@
 </section>
 <hr class="docutils" />
 <section id="resilienthelper-api">
-<h2>ResilientHelper API<a class="headerlink" href="#resilienthelper-api" title="Link to this heading">#</a></h2>
+<h2>ResilientHelper API<a class="headerlink" href="#resilienthelper-api" title="Link to this heading">¶</a></h2>
 <section id="create-gliderecord-record-string-snrecordid-string-casename-object-options">
-<h3><code class="docutils literal notranslate"><span class="pre">create(GlideRecord</span> <span class="pre">record,</span> <span class="pre">String</span> <span class="pre">snRecordId,</span> <span class="pre">String</span> <span class="pre">caseName,</span> <span class="pre">Object</span> <span class="pre">options)</span></code><a class="headerlink" href="#create-gliderecord-record-string-snrecordid-string-casename-object-options" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">create(GlideRecord</span> <span class="pre">record,</span> <span class="pre">String</span> <span class="pre">snRecordId,</span> <span class="pre">String</span> <span class="pre">caseName,</span> <span class="pre">Object</span> <span class="pre">options)</span></code><a class="headerlink" href="#create-gliderecord-record-string-snrecordid-string-casename-object-options" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Creates an Incident/Task in SOAR.</p></li>
 <li><p>Sets the the following Columns in ServiceNow:</p>
@@ -708,7 +708,7 @@
 <li><p>Adds a new row to the Data Table in SOAR.</p></li>
 </ul>
 <section id="parameters">
-<h4>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h4>
+<h4>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -739,7 +739,7 @@
 </div>
 </section>
 <section id="return">
-<h4>Return:<a class="headerlink" href="#return" title="Link to this heading">#</a></h4>
+<h4>Return:<a class="headerlink" href="#return" title="Link to this heading">¶</a></h4>
 <p>Returns an object with the following keys:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -773,12 +773,12 @@
 </section>
 <hr class="docutils" />
 <section id="addnote-string-res-reference-id-string-notetext-string-noteformat">
-<h3><code class="docutils literal notranslate"><span class="pre">addNote(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">noteText,</span> <span class="pre">String</span> <span class="pre">noteFormat)</span></code><a class="headerlink" href="#addnote-string-res-reference-id-string-notetext-string-noteformat" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">addNote(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">noteText,</span> <span class="pre">String</span> <span class="pre">noteFormat)</span></code><a class="headerlink" href="#addnote-string-res-reference-id-string-notetext-string-noteformat" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Creates a note in SOAR.</p></li>
 </ul>
 <section id="id1">
-<h4>Parameters:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<h4>Parameters:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -805,18 +805,18 @@
 </div>
 </section>
 <section id="id2">
-<h4>Return:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<h4>Return:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <p><em>Does not return anything</em>.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="updatestateinresilient-string-res-reference-id-string-snticketstate-string-snticketstatecolor">
-<h3><code class="docutils literal notranslate"><span class="pre">updateStateInResilient(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">snTicketState,</span> <span class="pre">String</span> <span class="pre">snTicketStateColor)</span></code><a class="headerlink" href="#updatestateinresilient-string-res-reference-id-string-snticketstate-string-snticketstatecolor" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">updateStateInResilient(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">snTicketState,</span> <span class="pre">String</span> <span class="pre">snTicketStateColor)</span></code><a class="headerlink" href="#updatestateinresilient-string-res-reference-id-string-snticketstate-string-snticketstatecolor" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Updates the <code class="docutils literal notranslate"><span class="pre">servicenow_status</span></code> column in the Data Table in IBM SOAR with the <code class="docutils literal notranslate"><span class="pre">snTicketState</span></code>.</p></li>
 </ul>
 <section id="id3">
-<h4>Parameters:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<h4>Parameters:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -843,18 +843,18 @@
 </div>
 </section>
 <section id="id4">
-<h4>Return:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<h4>Return:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
 <p><em>Does not return anything</em>.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="getresilientreferenceid-gliderecord-record">
-<h3><code class="docutils literal notranslate"><span class="pre">getResilientReferenceId(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilientreferenceid-gliderecord-record" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">getResilientReferenceId(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilientreferenceid-gliderecord-record" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Gets the IBM SOAR Reference ID for a linked record.</p></li>
 </ul>
 <section id="id5">
-<h4>Parameters:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<h4>Parameters:<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -873,18 +873,18 @@
 </div>
 </section>
 <section id="returns">
-<h4>Returns:<a class="headerlink" href="#returns" title="Link to this heading">#</a></h4>
+<h4>Returns:<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h4>
 <p><em>A string containing the Reference ID of the SOAR record</em>.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="getresilientreferencelink-gliderecord-record">
-<h3><code class="docutils literal notranslate"><span class="pre">getResilientReferenceLink(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilientreferencelink-gliderecord-record" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">getResilientReferenceLink(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilientreferencelink-gliderecord-record" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Gets the SOAR Reference Link to directly access the record in SOAR.</p></li>
 </ul>
 <section id="id6">
-<h4>Parameters:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<h4>Parameters:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -903,18 +903,18 @@
 </div>
 </section>
 <section id="id7">
-<h4>Returns:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<h4>Returns:<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
 <p><em>A string containing the URL link of the SOAR record</em>.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="getresilienttype-gliderecord-record">
-<h3><code class="docutils literal notranslate"><span class="pre">getResilientType(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilienttype-gliderecord-record" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">getResilientType(GlideRecord</span> <span class="pre">record)</span></code><a class="headerlink" href="#getresilienttype-gliderecord-record" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Gets the SOAR Type for a linked record (i.e. “Incident” or “Task”).</p></li>
 </ul>
 <section id="id8">
-<h4>Parameters:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<h4>Parameters:<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -933,14 +933,14 @@
 </div>
 </section>
 <section id="id9">
-<h4>Returns:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<h4>Returns:<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
 <p><em>A string containing either “Task” or “Incident” indicating the type of record linked in SOAR</em>.</p>
 </section>
 </section>
 </section>
 <hr class="docutils" />
 <section id="create-own-custom-servicenow-workflow">
-<h2>Create Own Custom ServiceNow Workflow<a class="headerlink" href="#create-own-custom-servicenow-workflow" title="Link to this heading">#</a></h2>
+<h2>Create Own Custom ServiceNow Workflow<a class="headerlink" href="#create-own-custom-servicenow-workflow" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>A Custom Workflow can be created to <em>overwrite</em> the above pre-defined workflows.</p></li>
 <li><p>To have your custom workflow be invoked instead of a pre-defined workflow, use must use the <strong>correct naming convention</strong>.</p></li>
@@ -948,7 +948,7 @@
 <li><p>Follow the steps below as a <strong>guide to create your own Custom Workflow</strong>.</p></li>
 </ul>
 <section id="step-1-use-correct-application-scope">
-<h3>Step 1: <em>Use Correct Application Scope</em><a class="headerlink" href="#step-1-use-correct-application-scope" title="Link to this heading">#</a></h3>
+<h3>Step 1: <em>Use Correct Application Scope</em><a class="headerlink" href="#step-1-use-correct-application-scope" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>In ServiceNow, click the <strong>gear icon</strong> in the top right corner.</p></li>
 <li><p>Click <strong>Developer</strong> in the menu.</p></li>
@@ -964,7 +964,7 @@
 </section>
 <hr class="docutils" />
 <section id="step-2-create-a-copy-of-existing-res-workflow">
-<h3>Step 2: <em>Create a Copy of Existing RES Workflow</em><a class="headerlink" href="#step-2-create-a-copy-of-existing-res-workflow" title="Link to this heading">#</a></h3>
+<h3>Step 2: <em>Create a Copy of Existing RES Workflow</em><a class="headerlink" href="#step-2-create-a-copy-of-existing-res-workflow" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Using the Navigation Panel, open the <strong>Workflow Editor</strong>:
 <img alt="screenshot" src="../../../_images/27.png" /></p></li>
@@ -980,7 +980,7 @@
 </section>
 <hr class="docutils" />
 <section id="step-3-modify-the-run-script">
-<h3>Step 3: <em>Modify the Run Script</em><a class="headerlink" href="#step-3-modify-the-run-script" title="Link to this heading">#</a></h3>
+<h3>Step 3: <em>Modify the Run Script</em><a class="headerlink" href="#step-3-modify-the-run-script" title="Link to this heading">¶</a></h3>
 <ul>
 <li><p>Double click the <strong>Run Script</strong>:
 <img alt="screenshot" src="../../../_images/63.png" /></p></li>
@@ -1174,7 +1174,7 @@
     </aside>
   </div>
 </div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>

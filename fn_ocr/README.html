@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="ODBC Query" href="../fn_odbc_query/README.html" /><link rel="prev" title="Network Utilities" href="../fn_network_utilities/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Image OCR - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -367,9 +367,9 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 <section id="image-ocr">
-<h1>Image OCR<a class="headerlink" href="#image-ocr" title="Link to this heading">#</a></h1>
+<h1>Image OCR<a class="headerlink" href="#image-ocr" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -399,7 +399,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -419,12 +419,12 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><strong>IBM SOAR app for text recognition in images</strong></p>
 <p><img alt="screenshot: main" src="../_images/main34.png" /></p>
 <p>An App that introduces OCR (Optical Character Recognition) functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Parse a picture and return lines with associated average confidence, allowing for automated reading of screenshots and other images</p></li>
 <li><p>Accepts different languages and can filter based on a minimum confidence score per line</p></li>
@@ -434,32 +434,32 @@
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 This app uses a custom build process on the backend which compiles tesseract and dependant libraries from source; this may lead to longer than average installation.
 Please keep in mind that this app relies on Tesseract 5.0.1, which is popular open-source OCR. Any limitations found in Tesseract 5.0.1 will similary be present in this app e.g. rotated text cannot be detected if it is shorter than 70 characters.</p>
 <section id="integration-server-installation">
-<h3>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">#</a></h3>
+<h3>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">¶</a></h3>
 <p>If you are running your own integration server (as opposed to using AppHost), you will need to install Tesseract OCR in your environment. Luckily, Tesseract is popular enough that, more often than not, there are pre-compiled binaries. The pre-compiled packages often come with language packages, but not always. Please see instructions below for installing on your OS, as well as how to add more langauges.</p>
 <p>You can also <a class="reference external" href="https://tesseract-ocr.github.io/tessdoc/Compiling.html">build from source</a>, although note that you will need to also install or compile <a class="reference external" href="http://www.leptonica.org">Leptonica</a>. You can check the Dockerfile for this app for an example of how to build from scratch, but keep in mind that it is likely you will not need to build any of the image libraries (libpng, libjpeg, libtiff, etc.) on your own local machine, as they are either present or available through <code class="docutils literal notranslate"><span class="pre">apt</span></code>, <code class="docutils literal notranslate"><span class="pre">yum</span></code>, <code class="docutils literal notranslate"><span class="pre">brew</span></code>, etc.</p>
 <p>If you build from source, you should add languages manually, by downloading <a class="reference external" href="https://github.com/tesseract-ocr/tessdata_fast">.traineddata files</a> and placing them in <code class="docutils literal notranslate"><span class="pre">/usr/local/share/tessdata</span></code>.</p>
 <p>For general installation instructions, see <a class="reference external" href="https://tesseract-ocr.github.io/tessdoc/Home.html#binaries">here</a>.</p>
 <section id="ubuntu-and-debian">
-<h4>Ubuntu and Debian<a class="headerlink" href="#ubuntu-and-debian" title="Link to this heading">#</a></h4>
+<h4>Ubuntu and Debian<a class="headerlink" href="#ubuntu-and-debian" title="Link to this heading">¶</a></h4>
 <p>See <a class="reference external" href="https://launchpad.net/~alex-p/+archive/ubuntu/tesseract-ocr-devel">Ubuntu</a>, <a class="reference external" href="https://notesalexp.org/tesseract-ocr/#tesseract_5.x">Debian</a>.</p>
 <p>To add a language, you can run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">tesseract-ocr-{lang}</span></code>, where <code class="docutils literal notranslate"><span class="pre">{lang}</span></code> is one of the language codes that can be found <a class="reference external" href="https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html">here</a>.</p>
 </section>
 <section id="windows">
-<h4>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h4>
+<h4>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h4>
 <p>See <a class="reference external" href="https://notesalexp.org/tesseract-ocr/#tesseract_5.x">Windows</a>. For extra languages, see <a class="reference external" href="https://github.com/UB-Mannheim/tesseract/wiki/Install-additional-language-and-script-models">here</a></p>
 </section>
 <section id="macos">
-<h4>MacOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h4>
+<h4>MacOS<a class="headerlink" href="#macos" title="Link to this heading">¶</a></h4>
 <p>For MacOS there is a <a class="reference external" href="https://formulae.brew.sh/formula/tesseract">brew formula</a>. There is also a <a class="reference external" href="https://formulae.brew.sh/formula/tesseract-lang">brew formula</a> for extra languages.</p>
 </section>
 </section>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
@@ -503,7 +503,7 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= 1.9</p></li>
@@ -518,11 +518,11 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app <strong>does</strong> support a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Both Python 3.6 and 3.9 are supported</p>
 <p>Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -534,7 +534,7 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 </ul>
 </section>
 <section id="endpoint-developed-with">
-<h3>Endpoint Developed With<a class="headerlink" href="#endpoint-developed-with" title="Link to this heading">#</a></h3>
+<h3>Endpoint Developed With<a class="headerlink" href="#endpoint-developed-with" title="Link to this heading">¶</a></h3>
 <p>This app has been implemented using:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -557,9 +557,9 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 </section>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
@@ -568,7 +568,7 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 </section>
 <hr class="docutils" />
 <section id="function-ocr-read-text-from-image-bytes">
-<h2>Function - OCR: Read Text From Image Bytes<a class="headerlink" href="#function-ocr-read-text-from-image-bytes" title="Link to this heading">#</a></h2>
+<h2>Function - OCR: Read Text From Image Bytes<a class="headerlink" href="#function-ocr-read-text-from-image-bytes" title="Link to this heading">¶</a></h2>
 <p>runs OCR on an image in byte string format and returns the relevant results</p>
 <p><img alt="screenshot: fn-read-text-from-image-bytes " src="../_images/fn-read-text-from-image-bytes.png" /></p>
 <details><summary>Inputs:</summary>
@@ -750,7 +750,7 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 </section>
 <hr class="docutils" />
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -778,10 +778,10 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is a IBM Community provided App. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
 </section>
 </section>
@@ -885,7 +885,7 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

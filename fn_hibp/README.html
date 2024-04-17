@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="HTML to PDF" href="../fn_html2pdf/README.html" /><link rel="prev" title="gRPC Interface" href="../fn_grpc_interface/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Have I Been Pwned - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,10 +350,10 @@
         </div>
         <article role="main">
           <section id="have-i-been-pwned">
-<h1>Have I Been Pwned<a class="headerlink" href="#have-i-been-pwned" title="Link to this heading">#</a></h1>
+<h1>Have I Been Pwned<a class="headerlink" href="#have-i-been-pwned" title="Link to this heading">¶</a></h1>
 <p><strong>This package contains two functions that allows you to search for breaches and pastes given an email address as an input.</strong></p>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -388,7 +388,7 @@
 </div>
 </section>
 <section id="app-config-settings">
-<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h2>
+<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <p>Set if using a proxy</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[fn_hibp]
 ## Proxy settings if needed
@@ -402,7 +402,7 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
 <p>Version 2.0.0 of Have I Been Pwned includes a modification to the returned payload. These changes include the incorporation of resilient-lib and results from the post processing script modified from <em>results.Breaches</em> to <em>results.content[“Breaches”]</em>.</p>
 </section>
 <section id="function-inputs">
-<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h2>
+<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -423,9 +423,9 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
 </div>
 </section>
 <section id="function-outputs">
-<h2>Function Outputs:<a class="headerlink" href="#function-outputs" title="Link to this heading">#</a></h2>
+<h2>Function Outputs:<a class="headerlink" href="#function-outputs" title="Link to this heading">¶</a></h2>
 <section id="have-i-been-pwned-get-breaches">
-<h3>Have I Been Pwned Get Breaches:<a class="headerlink" href="#have-i-been-pwned-get-breaches" title="Link to this heading">#</a></h3>
+<h3>Have I Been Pwned Get Breaches:<a class="headerlink" href="#have-i-been-pwned-get-breaches" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;Inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;email_address&quot;</span><span class="p">:</span> <span class="s2">&quot;test@email.com&quot;</span>
@@ -486,7 +486,7 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
 </div>
 </section>
 <section id="have-i-been-pwned-get-pastes">
-<h3>Have I Been Pwned Get Pastes:<a class="headerlink" href="#have-i-been-pwned-get-pastes" title="Link to this heading">#</a></h3>
+<h3>Have I Been Pwned Get Pastes:<a class="headerlink" href="#have-i-been-pwned-get-pastes" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;Inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;email_address&quot;</span><span class="p">:</span> <span class="s2">&quot;test@email.com&quot;</span>
@@ -521,14 +521,14 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
 </section>
 </section>
 <section id="pre-process-scripts">
-<h2>Pre-Process Scripts:<a class="headerlink" href="#pre-process-scripts" title="Link to this heading">#</a></h2>
+<h2>Pre-Process Scripts:<a class="headerlink" href="#pre-process-scripts" title="Link to this heading">¶</a></h2>
 <p>This example sets the email_address value <strong>to the value of the Incident’s Artifact.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">email_address</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 </div>
 </section>
 <section id="post-process-script">
-<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h2>
+<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
 <p>This example adds to the artifact’s description the number of breaches the email address was a part of if any exist.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">Breaches</span><span class="p">:</span>
   <span class="k">try</span><span class="p">:</span>
@@ -544,7 +544,7 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
 </div>
 </section>
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -657,7 +657,7 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Google Maps - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,17 +350,17 @@
         </div>
         <article role="main">
           <section id="google-maps">
-<h1>Google Maps<a class="headerlink" href="#google-maps" title="Link to this heading">#</a></h1>
+<h1>Google Maps<a class="headerlink" href="#google-maps" title="Link to this heading">¶</a></h1>
 <p><strong>This package contains one function that generates a link to Google Maps which shows directions from the given origin to the destination.</strong></p>
 <p><img alt="screenshot" src="../_images/17.png" /></p>
 <section id="app-config-settings">
-<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h2>
+<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
 </pre></div>
 </div>
 </section>
 <section id="function-inputs">
-<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h2>
+<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -386,7 +386,7 @@
 </div>
 </section>
 <section id="function-output">
-<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h2>
+<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="n">success</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -403,7 +403,7 @@
 </div>
 </section>
 <section id="pre-process-script">
-<h2>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h2>
+<h2>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h2>
 <p>This example sets the origin and gets the destination <strong>from the Incident Details.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Origin</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">google_maps_origin</span> <span class="o">=</span> <span class="s2">&quot;IBM, Armonk, New York&quot;</span>
@@ -417,7 +417,7 @@
 </div>
 </section>
 <section id="post-process-script">
-<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h2>
+<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
 <p>This example <strong>adds a Note to the Incident.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">):</span>
 
@@ -429,7 +429,7 @@
 </div>
 </section>
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -505,7 +505,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

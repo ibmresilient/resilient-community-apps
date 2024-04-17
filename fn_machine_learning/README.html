@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Machine Learning - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,23 +350,23 @@
         </div>
         <article role="main">
           <section id="machine-learning">
-<h1>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h1>
+<h1>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading">¶</a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
 <p>This function package provides the following feature to be used in a workflow:</p>
 <p>Make a prediction of a selected field of a given incident, using a pre-built machine learning model.</p>
 <p>In addition, this package contains a command line tool used to build a machine learning model.
 Please refer to the User Guide for explanation on building the model and running predictions.</p>
 </section>
 <section id="system-requirements">
-<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading">#</a></h2>
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Resilient Server version 30 or later</p></li>
 <li><p>Ability to connect to Resilient server with HTTPS on port 443 and 65001</p></li>
 </ul>
 </section>
 <section id="package-dependencies">
-<h2>Package Dependencies<a class="headerlink" href="#package-dependencies" title="Link to this heading">#</a></h2>
+<h2>Package Dependencies<a class="headerlink" href="#package-dependencies" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>sklearn 0.20.4</p></li>
 <li><p>pandas 0.24.2</p></li>
@@ -376,11 +376,11 @@ Please refer to the User Guide for explanation on building the model and running
 </ul>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>Install this package with ‘pip’, or run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code></p>
 </section>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
 <p>Create app.config by running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">-c</span></code> or update with <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">-u</span></code></p>
 <p>The app.config file needs the following configuration values, in addition to those in the appropriate [resilient] section for
 connecting to your Resilient platform:</p>
@@ -395,15 +395,15 @@ connecting to your Resilient platform:</p>
 as well as hold the models themselves. Specify the path to this folder in app.config file under <code class="docutils literal notranslate"><span class="pre">model_dir</span></code>.</p>
 </section>
 <section id="customize">
-<h2>Customize<a class="headerlink" href="#customize" title="Link to this heading">#</a></h2>
+<h2>Customize<a class="headerlink" href="#customize" title="Link to this heading">¶</a></h2>
 <p>Run with: <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">customize</span></code> to install function definitions and sample workflows to the Resilient server.</p>
 </section>
 <section id="start">
-<h2>Start<a class="headerlink" href="#start" title="Link to this heading">#</a></h2>
+<h2>Start<a class="headerlink" href="#start" title="Link to this heading">¶</a></h2>
 <p>Start this function app with: <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code></p>
 </section>
 <section id="build-a-machine-learning-model">
-<h2>Build a machine learning model<a class="headerlink" href="#build-a-machine-learning-model" title="Link to this heading">#</a></h2>
+<h2>Build a machine learning model<a class="headerlink" href="#build-a-machine-learning-model" title="Link to this heading">¶</a></h2>
 <p>Use the command line tool</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">-</span><span class="n">ml</span>
 </pre></div>
@@ -481,14 +481,14 @@ run:</p>
 <p>Note that the [resilient] section needs to be filled out and the <code class="docutils literal notranslate"><span class="pre">features</span></code> field that defines which features to use in
 building the model also needs to be filled out.</p>
 <section id="download-incidents">
-<h3>Download incidents<a class="headerlink" href="#download-incidents" title="Link to this heading">#</a></h3>
+<h3>Download incidents<a class="headerlink" href="#download-incidents" title="Link to this heading">¶</a></h3>
 <p>Enter desired values into ml.config, and download incidents and save them into a CSV file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">-</span><span class="n">ml</span> <span class="n">download</span> <span class="o">-</span><span class="n">o</span> <span class="n">resilient_incidents</span><span class="o">.</span><span class="n">csv</span>
 </pre></div>
 </div>
 </section>
 <section id="build-a-model">
-<h3>Build a model<a class="headerlink" href="#build-a-model" title="Link to this heading">#</a></h3>
+<h3>Build a model<a class="headerlink" href="#build-a-model" title="Link to this heading">¶</a></h3>
 <p>Using the setings in ml.config to build a machine learning model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">-</span><span class="n">ml</span> <span class="n">build</span> <span class="o">-</span><span class="n">c</span> <span class="n">resilient_incidents</span><span class="o">.</span><span class="n">csv</span> <span class="o">-</span><span class="n">o</span> <span class="n">incident_prediction</span><span class="o">.</span><span class="n">ml</span>
 </pre></div>
@@ -498,14 +498,14 @@ the folder specified in the app.config as model_dir. You can modify the name of 
 the input tab of the workflow if you want.</p>
 </section>
 <section id="view-a-saved-model">
-<h3>View a saved model<a class="headerlink" href="#view-a-saved-model" title="Link to this heading">#</a></h3>
+<h3>View a saved model<a class="headerlink" href="#view-a-saved-model" title="Link to this heading">¶</a></h3>
 <p>Use the view command to view a summary of a saved model</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">-</span><span class="n">ml</span> <span class="n">view</span> <span class="o">-</span><span class="n">i</span> <span class="n">incident_prediction</span><span class="o">.</span><span class="n">ml</span>
 </pre></div>
 </div>
 </section>
 <section id="rebuild-a-saved-model">
-<h3>Rebuild a saved model<a class="headerlink" href="#rebuild-a-saved-model" title="Link to this heading">#</a></h3>
+<h3>Rebuild a saved model<a class="headerlink" href="#rebuild-a-saved-model" title="Link to this heading">¶</a></h3>
 <p>If you have newly added incidents, and you want to retrain a saved model, you can rebuild it</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">-</span><span class="n">ml</span> <span class="n">rebuild</span> <span class="o">-</span><span class="n">i</span> <span class="n">incident_prediction</span><span class="o">.</span><span class="n">ml</span>
 </pre></div>
@@ -515,7 +515,7 @@ the input tab of the workflow if you want.</p>
 </section>
 </section>
 <section id="uninstall">
-<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">#</a></h2>
+<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip uninstall fn-machine-learning
 </pre></div>
 </div>
@@ -587,7 +587,7 @@ the input tab of the workflow if you want.</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="McAfee ePO" href="../fn_mcafee_epo/README.html" /><link rel="prev" title="Rapid7 InsightIDR" href="../fn_rapid7_insight_idr/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Palo Alto Panorama - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="palo-alto-panorama">
-<h1>Palo Alto Panorama<a class="headerlink" href="#palo-alto-panorama" title="Link to this heading">#</a></h1>
+<h1>Palo Alto Panorama<a class="headerlink" href="#palo-alto-panorama" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -388,7 +388,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -431,22 +431,22 @@
 </section>
 <hr class="docutils" />
 <section id="changes">
-<h2>1.4.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h2>
+<h2>1.4.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h2>
 <p>In v1.4, the setting <code class="docutils literal notranslate"><span class="pre">sf_device_group</span></code> has been added to the app.config settings file. This setting is required to be configured if the setting <code class="docutils literal notranslate"><span class="pre">sf_location</span></code> is configured as <code class="docutils literal notranslate"><span class="pre">device-group</span></code>.</p>
 </section>
 <section id="id1">
-<h2>1.3.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>1.3.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>In v1.3, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
 <p>If upgrading from a previous release, you’ll noticed that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it’s corresponding rule, but with “(PB)” added at the end. For automatic actions, the playbooks will be disabled by default.</p>
 <p>You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.</p>
 </section>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><strong>SOAR Components to Integrate with the Panorama Platform</strong></p>
 <p><img alt="screenshot: main" src="../_images/main37.png" /></p>
 <p>This integration contains Functions to interact with address groups, addresses, and user groups within Palo Alto Panorama. This integration can be configured to work with one or multiple Panorama instances.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Edit address groups in Panorama and PanOS</p></li>
 <li><p>Edit user groups in Panorama</p></li>
@@ -458,10 +458,10 @@
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
@@ -502,7 +502,7 @@
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
@@ -517,11 +517,11 @@
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app does support a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -533,16 +533,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -603,7 +603,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </table>
 </div>
 <section id="id2">
-<h4>1.2.0 Changes<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<h4>1.2.0 Changes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <p>Starting in version 1.2.0, more than one Panorama instance can be configured for SOAR case data synchronization. For enterprises with only one Panorama instance, your app.config file will continue to define the Panorama instance under the <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama]</span></code> section header.</p>
 <p>For enterprises with more than one Panorama instance, each instance will have it’s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama:panorama_label1]</span></code> where <code class="docutils literal notranslate"><span class="pre">panorama_label1</span></code> represents any label helpful to define your Panorama environment.</p>
 <p>Be aware that modifications to the workflows will be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field if the Panorama server/servers in the app.config have labels.</p>
@@ -613,7 +613,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-panorama-create-address">
-<h2>Function - Panorama Create Address<a class="headerlink" href="#function-panorama-create-address" title="Link to this heading">#</a></h2>
+<h2>Function - Panorama Create Address<a class="headerlink" href="#function-panorama-create-address" title="Link to this heading">¶</a></h2>
 <p>Creates a new address object in Panorama.</p>
 <p><img alt="screenshot: fn-panorama-create-address " src="../_images/fn-panorama-create-address.png" /></p>
 <details><summary>Inputs:</summary>
@@ -737,7 +737,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-panorama-edit-address-group">
-<h2>Function - Panorama Edit Address Group<a class="headerlink" href="#function-panorama-edit-address-group" title="Link to this heading">#</a></h2>
+<h2>Function - Panorama Edit Address Group<a class="headerlink" href="#function-panorama-edit-address-group" title="Link to this heading">¶</a></h2>
 <p>Edits an address group in Panorama.</p>
 <p><img alt="screenshot: fn-panorama-edit-address-group " src="../_images/fn-panorama-edit-address-group.png" /></p>
 <details><summary>Inputs:</summary>
@@ -901,7 +901,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-panorama-edit-users-in-a-group">
-<h2>Function - Panorama Edit Users in a Group<a class="headerlink" href="#function-panorama-edit-users-in-a-group" title="Link to this heading">#</a></h2>
+<h2>Function - Panorama Edit Users in a Group<a class="headerlink" href="#function-panorama-edit-users-in-a-group" title="Link to this heading">¶</a></h2>
 <p>Edits users in a group in Panorama. This only works with Panorama and does not work with PanOS.</p>
 <p><img alt="screenshot: fn-panorama-edit-users-in-a-group " src="../_images/fn-panorama-edit-users-in-a-group.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1060,7 +1060,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-panorama-get-address-groups">
-<h2>Function - Panorama Get Address Groups<a class="headerlink" href="#function-panorama-get-address-groups" title="Link to this heading">#</a></h2>
+<h2>Function - Panorama Get Address Groups<a class="headerlink" href="#function-panorama-get-address-groups" title="Link to this heading">¶</a></h2>
 <p>List address groups in Panorama.</p>
 <p><img alt="screenshot: fn-panorama-get-address-groups " src="../_images/fn-panorama-get-address-groups.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1192,7 +1192,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-panorama-get-addresses">
-<h2>Function - Panorama Get Addresses<a class="headerlink" href="#function-panorama-get-addresses" title="Link to this heading">#</a></h2>
+<h2>Function - Panorama Get Addresses<a class="headerlink" href="#function-panorama-get-addresses" title="Link to this heading">¶</a></h2>
 <p>List addresses in Panorama.</p>
 <p><img alt="screenshot: fn-panorama-get-addresses " src="../_images/fn-panorama-get-addresses.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1396,7 +1396,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-panorama-get-users-in-a-group">
-<h2>Function - Panorama Get Users in a Group<a class="headerlink" href="#function-panorama-get-users-in-a-group" title="Link to this heading">#</a></h2>
+<h2>Function - Panorama Get Users in a Group<a class="headerlink" href="#function-panorama-get-users-in-a-group" title="Link to this heading">¶</a></h2>
 <p>Lists users part of a group in Panorama. This only works with Panorama and does not work with PanOS.</p>
 <p><img alt="screenshot: fn-panorama-get-users-in-a-group " src="../_images/fn-panorama-get-users-in-a-group.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1546,7 +1546,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1614,7 +1614,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="how-to-configure-to-use-a-single-panorama-server">
-<h2>How to configure to use a single Panorama Server<a class="headerlink" href="#how-to-configure-to-use-a-single-panorama-server" title="Link to this heading">#</a></h2>
+<h2>How to configure to use a single Panorama Server<a class="headerlink" href="#how-to-configure-to-use-a-single-panorama-server" title="Link to this heading">¶</a></h2>
 <p>To use only a single server there are two ways this can be configured</p>
 <ol class="arabic simple">
 <li><p>Use the configuration used in Panorama Integration versions prior to V1.2.0</p></li>
@@ -1649,7 +1649,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="creating-playbooks-when-server-servers-in-app-config-are-labeled">
-<h2>Creating playbooks when server/servers in app.config are labeled<a class="headerlink" href="#creating-playbooks-when-server-servers-in-app-config-are-labeled" title="Link to this heading">#</a></h2>
+<h2>Creating playbooks when server/servers in app.config are labeled<a class="headerlink" href="#creating-playbooks-when-server-servers-in-app-config-are-labeled" title="Link to this heading">¶</a></h2>
 <p>The function input field <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> is required when Panorama server/servers in the app.config are labeled. In the example playbook input scripts the
 input field <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> is defined the following way,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span>
@@ -1659,10 +1659,10 @@ input field <code class="docutils literal notranslate"><span class="pre">panoram
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is a IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
 </section>
 </section>
@@ -1772,7 +1772,7 @@ input field <code class="docutils literal notranslate"><span class="pre">panoram
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

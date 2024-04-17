@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Google Cloud Functions - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,7 +350,7 @@
         </div>
         <article role="main">
           <section id="google-cloud-functions">
-<h1>Google Cloud Functions<a class="headerlink" href="#google-cloud-functions" title="Link to this heading">#</a></h1>
+<h1>Google Cloud Functions<a class="headerlink" href="#google-cloud-functions" title="Link to this heading">¶</a></h1>
 <p><strong>This package contains functions which invoke or interact with Google Cloud Functions.</strong></p>
 <p><img alt="screenshot" src="../_images/16.png" /></p>
 <p>Do you have a use-case or a need to get data / perform an operation from a service without exposing your IP?
@@ -362,7 +362,7 @@ In this example Workflow the output of the Google Cloud Function is used as an i
 This function takes the base64 result from the previous function and saves it in the Resilient Platform as an attachment.</p>
 </div></blockquote>
 <section id="app-config-settings">
-<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h2>
+<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_google_cloud_functions</span><span class="p">]</span>
 <span class="n">gcp_region</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">GCP_REGION_ID</span><span class="o">&gt;</span>
 <span class="n">gcp_project_id</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">GCP_PROJECT_ID</span><span class="o">&gt;</span>
@@ -375,7 +375,7 @@ This function takes the base64 result from the previous function and saves it in
 </div>
 </section>
 <section id="function-inputs-google-cloud-function">
-<h2>Function Inputs: Google Cloud Function:<a class="headerlink" href="#function-inputs-google-cloud-function" title="Link to this heading">#</a></h2>
+<h2>Function Inputs: Google Cloud Function:<a class="headerlink" href="#function-inputs-google-cloud-function" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -395,7 +395,7 @@ This function takes the base64 result from the previous function and saves it in
 </table>
 </div>
 <section id="function-inputs-base64-to-attachment">
-<h3>Function Inputs: Base64 to Attachment:<a class="headerlink" href="#function-inputs-base64-to-attachment" title="Link to this heading">#</a></h3>
+<h3>Function Inputs: Base64 to Attachment:<a class="headerlink" href="#function-inputs-base64-to-attachment" title="Link to this heading">¶</a></h3>
 <blockquote>
 <div><p>The inputs used by this function are acquired using the outputs of the Google Cloud Function</p>
 </div></blockquote>
@@ -430,16 +430,16 @@ This function takes the base64 result from the previous function and saves it in
 </section>
 </section>
 <section id="pre-processing-scripts">
-<h2>Pre-Processing Scripts<a class="headerlink" href="#pre-processing-scripts" title="Link to this heading">#</a></h2>
+<h2>Pre-Processing Scripts<a class="headerlink" href="#pre-processing-scripts" title="Link to this heading">¶</a></h2>
 <p>The workflow <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">GCP</span> <span class="pre">Cloud</span> <span class="pre">Functions:</span> <span class="pre">Sandbox</span> <span class="pre">and</span> <span class="pre">Screenshot</span> <span class="pre">Webpage</span></code> includes 2 functions.</p>
 <section id="function-gcp-cloud-functions-sandbox-and-screenshot-webpage">
-<h3>Function: GCP Cloud Functions: Sandbox and Screenshot Webpage<a class="headerlink" href="#function-gcp-cloud-functions-sandbox-and-screenshot-webpage" title="Link to this heading">#</a></h3>
+<h3>Function: GCP Cloud Functions: Sandbox and Screenshot Webpage<a class="headerlink" href="#function-gcp-cloud-functions-sandbox-and-screenshot-webpage" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">gcp_url</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 </div>
 </section>
 <section id="function-utilities-base64-to-attachment">
-<h3>Function: Utilities: Base64 to Attachment<a class="headerlink" href="#function-utilities-base64-to-attachment" title="Link to this heading">#</a></h3>
+<h3>Function: Utilities: Base64 to Attachment<a class="headerlink" href="#function-utilities-base64-to-attachment" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sandbox_screenshot</span><span class="p">[</span><span class="s2">&quot;input_url&quot;</span><span class="p">]</span>
 <span class="n">attachment_desc</span> <span class="o">=</span> <span class="s2">&quot;GCP Sandbox Screenshot of </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
@@ -451,7 +451,7 @@ This function takes the base64 result from the previous function and saves it in
 </section>
 </section>
 <section id="google-cloud-function-output">
-<h2>Google Cloud Function Output:<a class="headerlink" href="#google-cloud-function-output" title="Link to this heading">#</a></h2>
+<h2>Google Cloud Function Output:<a class="headerlink" href="#google-cloud-function-output" title="Link to this heading">¶</a></h2>
 <p>The function returns the results as a Python Dictionary. Here is an example ouput:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="p">:</span> <span class="p">{</span>
   <span class="n">success</span><span class="p">:</span> <span class="kc">True</span>
@@ -465,7 +465,7 @@ This function takes the base64 result from the previous function and saves it in
 </div>
 </section>
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -484,7 +484,7 @@ This function takes the base64 result from the previous function and saves it in
 </div>
 </section>
 <section id="dependancies">
-<h2>Dependancies<a class="headerlink" href="#dependancies" title="Link to this heading">#</a></h2>
+<h2>Dependancies<a class="headerlink" href="#dependancies" title="Link to this heading">¶</a></h2>
 <p>Other function packages are needed to use this package. Below is a table detailing what packages are needed to make the integration work and where to get them.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -570,7 +570,7 @@ This function takes the base64 result from the previous function and saves it in
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

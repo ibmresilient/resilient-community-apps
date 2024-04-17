@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Data Feed KafkaFeed Plugin" href="../rc_data_feed_plugin_kafkafeed/README.html" /><link rel="prev" title="Data Feed Extension" href="../rc_data_feed/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Data Feed Elasticsearch Plugin - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,15 +350,15 @@
         </div>
         <article role="main">
           <section id="data-feed-elasticsearch-plugin">
-<h1>Data Feed Elasticsearch Plugin<a class="headerlink" href="#data-feed-elasticsearch-plugin" title="Link to this heading">#</a></h1>
+<h1>Data Feed Elasticsearch Plugin<a class="headerlink" href="#data-feed-elasticsearch-plugin" title="Link to this heading">¶</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>This package contains the Elasticsearch Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain “replica” data for IBM QRadar SOAR incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.</p>
 <p>This plugin allows this replica data to be maintained in Elasticsearch.</p>
 <p>Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
 </section>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -388,7 +388,7 @@
 </table>
 </div>
 <section id="changes">
-<h3>1.1.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h3>
+<h3>1.1.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
 <p>This release modified the base portion of the Data Feeder which is controlled by the <code class="docutils literal notranslate"><span class="pre">[feed]</span></code> section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -417,20 +417,20 @@
 </section>
 </section>
 <section id="compatibility">
-<h2>Compatibility<a class="headerlink" href="#compatibility" title="Link to this heading">#</a></h2>
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Link to this heading">¶</a></h2>
 <p>SOAR Compatibilty: 30.0 or higher</p>
 <p>CP4S Compatibility: 1.4 or higher</p>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
 <p>Unless otherwise specified, contents of this repository are published under the MIT open-source
 <a class="reference download internal" download="" href="../_downloads/2a0fda0a4ac6ae7a4ed4764b8e60d0e8/LICENSE"><span class="xref download myst">LICENSE</span></a>.</p>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>The integration package contains Python components that are called by the IBM SOAR platform. These components run in the Resilient Circuits integration framework. The package also includes IBM SOAR customizations that will be imported into the platform.</p>
 <section id="app-host-installation">
-<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">#</a></h3>
+<h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">¶</a></h3>
 <p>With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:</p>
 <ol class="arabic simple">
 <li><p>Within IBM SOAR, navigate Administrative Settings and then Apps.</p></li>
@@ -440,9 +440,9 @@ section as necessary and updating the <code class="docutils literal notranslate"
 </ol>
 </section>
 <section id="integration-server-installation">
-<h3>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">#</a></h3>
+<h3>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">¶</a></h3>
 <section id="install-the-python-components">
-<h4>Install the Python components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">#</a></h4>
+<h4>Install the Python components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">¶</a></h4>
 <p>Complete the following steps to install the Python components:</p>
 <ul class="simple">
 <li><p>Ensure that the environment is up-to-date, as follows:</p></li>
@@ -524,7 +524,7 @@ Complete the following steps to configure and run the integration:</p>
 </section>
 </section>
 <section id="elasticfeed-class">
-<h2>ElasticFeed Class<a class="headerlink" href="#elasticfeed-class" title="Link to this heading">#</a></h2>
+<h2>ElasticFeed Class<a class="headerlink" href="#elasticfeed-class" title="Link to this heading">¶</a></h2>
 <p>This class allows you to write all incoming data to ElasticSearch. The data representation within Elastic is referenced by index, document type (incident, note, task, artifact, etc.) and document_id (incident_id, note_id, task_id, etc.).
 The following configuration items are supported:</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -568,7 +568,7 @@ The following configuration items are supported:</p>
 </table>
 </div>
 <section id="considerations">
-<h3>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h3>
+<h3>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h3>
 <p>ElasticSearch allows for the updating to and deleting of individual documents. No data duplication occurs. A recently deleted custom datatable column may also not update until circuits is re-run or until the datatable is edited in the UI.
 Consult section 7.2 of the rc-data-feed documentation for datatable limitations in general.</p>
 </section>
@@ -662,7 +662,7 @@ Consult section 7.2 of the rc-data-feed documentation for datatable limitations 
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="RSA NetWitness" href="../fn_rsa_netwitness/README.html" /><link rel="prev" title="QRadar EDR" href="../fn_reaqta/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Remedy - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -365,9 +365,9 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 <section id="remedy">
-<h1>Remedy<a class="headerlink" href="#remedy" title="Link to this heading">#</a></h1>
+<h1>Remedy<a class="headerlink" href="#remedy" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -398,7 +398,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <!--
   Specify all changes in this release. Do not remove the release
   notes of a previous release
@@ -426,7 +426,7 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
@@ -435,7 +435,7 @@
 <p><img alt="screenshot: main" src="../_images/main52.png" /></p>
 <p>Remedy for IBM SOAR. This integration provides the capability to create new incidents in Remedy from SOAR tasks via the HPD:IncidentInterface_Create form over the REST API. Once the task is complete, this integration also provides the capability to close existing Remedy Incidents by updating their status to “Resolved.”</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <!--
   List the Key Features of the Integration
 -->
@@ -447,13 +447,13 @@
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <!--
   List any Requirements
 -->
 <p>This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
@@ -519,7 +519,7 @@
 <p>The above guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>SOAR Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= 1.4.</p></li>
@@ -534,26 +534,26 @@
 <p>These guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app <strong>does</strong> support a proxy server.</p>
 </section>
 <section id="remedy-platform">
-<h3>Remedy Platform<a class="headerlink" href="#remedy-platform" title="Link to this heading">#</a></h3>
+<h3>Remedy Platform<a class="headerlink" href="#remedy-platform" title="Link to this heading">¶</a></h3>
 <p>This app requires Remedy IT Service Management Suite 20.x or above with AR Server 9.x or above. The REST API must be enabled and exposed on any port. If the REST API is not already enabled on the Remedy Platform, consult their documentation on <a class="reference external" href="https://docs.bmc.com/docs/ars91/en/configuring-the-rest-api-609071434.html">Configuring the REST API</a>.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the <a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a> section for the procedure.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -605,7 +605,7 @@
 </div>
 </section>
 <section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
   You may wish to recommend a new incident tab.
@@ -620,11 +620,11 @@
 </section>
 <hr class="docutils" />
 <section id="function-remedy-create-incident">
-<h2>Function - Remedy: Create Incident<a class="headerlink" href="#function-remedy-create-incident" title="Link to this heading">#</a></h2>
+<h2>Function - Remedy: Create Incident<a class="headerlink" href="#function-remedy-create-incident" title="Link to this heading">¶</a></h2>
 <p>Create a new incident in Remedy from a SOAR task.</p>
 <p><img alt="screenshot: fn-remedy-create-incident " src="../_images/fn-remedy-create-incident.png" /></p>
 <section id="activity-fields">
-<h3>Activity Fields<a class="headerlink" href="#activity-fields" title="Link to this heading">#</a></h3>
+<h3>Activity Fields<a class="headerlink" href="#activity-fields" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot: fn-remedy-create-incident-activity-fields " src="../_images/fn-remedy-create-incident-activity-fields.png" /></p>
 <p>Remedy is a highly customizable product, and this integration was designed with those customizations in mind.</p>
 <p>Note that when creating an incident in Remedy via the REST API, any auto-routing that is configured in the Remedy platform will continue to apply as it would when creating
@@ -1042,7 +1042,7 @@ will be reflected in the <a class="reference internal" href="#data-table---remed
 </section>
 <hr class="docutils" />
 <section id="function-remedy-close-incident">
-<h2>Function - Remedy: Close Incident<a class="headerlink" href="#function-remedy-close-incident" title="Link to this heading">#</a></h2>
+<h2>Function - Remedy: Close Incident<a class="headerlink" href="#function-remedy-close-incident" title="Link to this heading">¶</a></h2>
 <p>Close an incident ticket in Remedy by modifying its status. The function will make an API call to Remedy to retrieve the target incident form. If the status of that form is “Resolved,” “Closed,” or “Cancelled,” no change to the incident is made. Otherwise, the status is updated to Resolved with Status Reason “No Further Action Required” and Resolution “Closed from IBM SOAR.”</p>
 <p>When a task is closed under a case, an automatic rule will trigger containing this function. If a row in the Remedy datatable matches the name and ID of the task just closed, the logic described above will trigger to ensure that the corresponding incident in Remedy is also closed.</p>
 <p>In the event that multiple rows in the datatable match the target task (a task has been raised to Remedy more than once), the function will iterate over those rows to ensure that each of the corresponding incidents in Remedy are closed.</p>
@@ -1373,14 +1373,14 @@ will be reflected in the <a class="reference internal" href="#data-table---remed
 </section>
 <hr class="docutils" />
 <section id="data-table-remedy-linked-incidents-reference-table">
-<h2>Data Table - Remedy Linked Incidents Reference Table<a class="headerlink" href="#data-table-remedy-linked-incidents-reference-table" title="Link to this heading">#</a></h2>
+<h2>Data Table - Remedy Linked Incidents Reference Table<a class="headerlink" href="#data-table-remedy-linked-incidents-reference-table" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-remedy-linked-incidents-reference-table" src="../_images/dt-remedy-linked-incidents-reference-table.png" /></p>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>remedy_linked_incidents_reference_table</p>
 </section>
 <section id="columns">
-<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1422,11 +1422,11 @@ will be reflected in the <a class="reference internal" href="#data-table---remed
 </section>
 <hr class="docutils" />
 <section id="data-explanation">
-<h3>Data explanation<a class="headerlink" href="#data-explanation" title="Link to this heading">#</a></h3>
+<h3>Data explanation<a class="headerlink" href="#data-explanation" title="Link to this heading">¶</a></h3>
 <p>The Remedy Linked Incidents Reference Table will be updated when either the <code class="docutils literal notranslate"><span class="pre">Remedy:</span> <span class="pre">Create</span> <span class="pre">Incident</span></code> or <code class="docutils literal notranslate"><span class="pre">Remedy:</span> <span class="pre">Close</span> <span class="pre">Incident</span></code>
 function completes.</p>
 <section id="remedy-create-incident">
-<h4>Remedy: Create Incident<a class="headerlink" href="#remedy-create-incident" title="Link to this heading">#</a></h4>
+<h4>Remedy: Create Incident<a class="headerlink" href="#remedy-create-incident" title="Link to this heading">¶</a></h4>
 <p>Once an incident is posted to Remedy, the auto-routing feature has the potential to further alter the values of some of the fields within the Remedy incident
 (see <a class="reference internal" href="#activity-fields"><span class="xref myst">Activity Fields</span></a> for more information on this). Due to this potential, the integration will fetch the incident back from the
 Remedy server after it has been created to ensure the datatable is updated with accurate information. Once the incident data is received from Remedy, relevant
@@ -1440,13 +1440,13 @@ This ID is used to refer to the incident over the API.</p>
 the Request ID. This Incident Number is the ID that appears in the UI for the incident inside the Incident Management Console.</p>
 </section>
 <section id="remedy-close-incident">
-<h4>Remedy: Close Incident<a class="headerlink" href="#remedy-close-incident" title="Link to this heading">#</a></h4>
+<h4>Remedy: Close Incident<a class="headerlink" href="#remedy-close-incident" title="Link to this heading">¶</a></h4>
 <p>Once an Incident is Closed in Remedy, the datatable will be updated with the new status of that incident.</p>
 </section>
 </section>
 </section>
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1470,10 +1470,10 @@ the Request ID. This Incident Number is the ID that appears in the UI for the in
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is an IBM supported app. Please search https://ibm.com/mysupport for assistance.</p>
 </section>
 </section>
@@ -1586,7 +1586,7 @@ the Request ID. This Incident Number is the ID that appears in the UI for the in
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

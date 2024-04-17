@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Datatable Utilities" href="../fn_datatable_utils/README.html" /><link rel="prev" title="CVE Search" href="../fn_cve_search/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Darktrace - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -367,9 +367,9 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 <section id="darktrace">
-<h1>Darktrace <!-- omit in toc --><a class="headerlink" href="#darktrace" title="Link to this heading">#</a></h1>
+<h1>Darktrace <!-- omit in toc --><a class="headerlink" href="#darktrace" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents <!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents <!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -427,7 +427,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <!--
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
@@ -451,7 +451,7 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><strong>IBM SOAR app for bi-directional synchronization with Darktrace Threat Visualizer</strong></p>
 <p><img alt="screenshot: main" src="../_images/main9.png" /></p>
 <p>Bi-directional poller app for Darktrace. A poller provides near real-time pulls of AI Analyst Events as they are created and creates
@@ -461,7 +461,7 @@ a case in SOAR for each group of events.</p>
 sending notes to Darktrace, listing similar devices in Darktrace,
 and getting external endpoint details from Darktrace.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Automatic synchronization of Incident Events and their associated Model Breaches and Devices from Darktrace to SOAR.</p></li>
 <li><p>Manual playbooks in SOAR to enhance cases with details from Darktrace.</p></li>
@@ -472,10 +472,10 @@ and getting external endpoint details from Darktrace.</p>
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security. See <a class="reference internal" href="#endpoint-developed-with"><span class="xref myst">Endpoint Developed With</span></a> section for details on Darktrace requirements.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
@@ -525,7 +525,7 @@ and getting external endpoint details from Darktrace.</p>
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.9.1</span></code>.</p></li>
@@ -540,11 +540,11 @@ and getting external endpoint details from Darktrace.</p>
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app supports a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -552,7 +552,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 <section id="darktrace-development-version">
-<h3>Darktrace Development Version<a class="headerlink" href="#darktrace-development-version" title="Link to this heading">#</a></h3>
+<h3>Darktrace Development Version<a class="headerlink" href="#darktrace-development-version" title="Link to this heading">¶</a></h3>
 <p>This app has been implemented using:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -571,7 +571,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </table>
 </div>
 <section id="prerequisites">
-<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Darktrace instance with Threat Visualizer</p></li>
 <li><p>API Access Token and Secret generated from an admin account in Darktrace</p></li>
@@ -581,16 +581,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -672,7 +672,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </section>
 <section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
 <ul>
 <li><p>The app automatically creates a custom “Darktrace Incident” tab on first install. But more customization can be made in that tab:</p>
 <p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts7.png" /></p>
@@ -680,11 +680,11 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 <section id="poller-considerations">
-<h3>Poller Considerations<a class="headerlink" href="#poller-considerations" title="Link to this heading">#</a></h3>
+<h3>Poller Considerations<a class="headerlink" href="#poller-considerations" title="Link to this heading">¶</a></h3>
 <p>The poller is just one way to escalate Darktrace Incident Groups to SOAR cases. It’s also possible to send Darktrace information to a SIEM, such as IBM QRadar, which would then coorelate Incident Groups into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Darktrace Incident Group ID is preserved in the custom case field <code class="docutils literal notranslate"><span class="pre">darktrace_aianalyst_incident_group_id</span></code>, then all the remaining details about the group will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Darktrace Incident Group ID.</p>
 <p>When using another source of Darktrace Incident Group escalation to IBM SOAR, disable the poller by changing the app.config setting to <code class="docutils literal notranslate"><span class="pre">poller_interval=0</span></code>.</p>
 <section id="poller-templates-for-soar-cases">
-<h4>Poller Templates for SOAR Cases<a class="headerlink" href="#poller-templates-for-soar-cases" title="Link to this heading">#</a></h4>
+<h4>Poller Templates for SOAR Cases<a class="headerlink" href="#poller-templates-for-soar-cases" title="Link to this heading">¶</a></h4>
 <p>It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.</p>
 <p>This is especially relevant if you have required custom <em>close</em> fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom <code class="docutils literal notranslate"><span class="pre">close_case_template</span></code> and reference those required close fields in the template.</p>
 <p>When overriding the template in App Host, specify the file path for each file as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
@@ -754,7 +754,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-acknowledge-incident-event">
-<h2>Function - Darktrace: Acknowledge Incident Event<a class="headerlink" href="#function-darktrace-acknowledge-incident-event" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Acknowledge Incident Event<a class="headerlink" href="#function-darktrace-acknowledge-incident-event" title="Link to this heading">¶</a></h2>
 <p>Function to acknowledge an incident event or a list of incident events.</p>
 <p><img alt="screenshot: fn-darktrace-acknowledge-incident-event " src="../_images/fn-darktrace-acknowledge-incident-event.png" /></p>
 <details><summary>Inputs:</summary>
@@ -836,7 +836,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-acknowledge-model-breach">
-<h2>Function - Darktrace: Acknowledge Model Breach<a class="headerlink" href="#function-darktrace-acknowledge-model-breach" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Acknowledge Model Breach<a class="headerlink" href="#function-darktrace-acknowledge-model-breach" title="Link to this heading">¶</a></h2>
 <p>Function to acknowledge a model breach.</p>
 <p><img alt="screenshot: fn-darktrace-acknowledge-model-breach " src="../_images/fn-darktrace-acknowledge-model-breach.png" /></p>
 <details><summary>Inputs:</summary>
@@ -915,7 +915,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-add-device-tags">
-<h2>Function - Darktrace: Add Device Tags<a class="headerlink" href="#function-darktrace-add-device-tags" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Add Device Tags<a class="headerlink" href="#function-darktrace-add-device-tags" title="Link to this heading">¶</a></h2>
 <p>Function to add tag(s) to a device.</p>
 <p><img alt="screenshot: fn-darktrace-add-device-tags " src="../_images/fn-darktrace-add-device-tags.png" />
 <img alt="screenshot: fn-darktrace-add-device-tags " src="../_images/fn-darktrace-add-device-tags-1.png" /></p>
@@ -1026,7 +1026,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-clear-data-table">
-<h2>Function - Darktrace: Clear Data Table<a class="headerlink" href="#function-darktrace-clear-data-table" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Clear Data Table<a class="headerlink" href="#function-darktrace-clear-data-table" title="Link to this heading">¶</a></h2>
 <p>Clear a given data table so it can be updated</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1091,7 +1091,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-get-devices">
-<h2>Function - Darktrace: Get Devices<a class="headerlink" href="#function-darktrace-get-devices" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Get Devices<a class="headerlink" href="#function-darktrace-get-devices" title="Link to this heading">¶</a></h2>
 <p>Get the details of all the devices of an AI Analyst Incident</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1264,7 +1264,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-get-incident-events">
-<h2>Function - Darktrace: Get Incident Events<a class="headerlink" href="#function-darktrace-get-incident-events" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Get Incident Events<a class="headerlink" href="#function-darktrace-get-incident-events" title="Link to this heading">¶</a></h2>
 <p>Get the details of all the incident events of an AI Analyst Incident Group</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1876,7 +1876,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-get-incident-group">
-<h2>Function - Darktrace: Get Incident Group<a class="headerlink" href="#function-darktrace-get-incident-group" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Get Incident Group<a class="headerlink" href="#function-darktrace-get-incident-group" title="Link to this heading">¶</a></h2>
 <p>Get the details of all the incident events of an AI Analyst Incident Group</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -2017,7 +2017,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-list-similar-devices">
-<h2>Function - Darktrace: List Similar Devices<a class="headerlink" href="#function-darktrace-list-similar-devices" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: List Similar Devices<a class="headerlink" href="#function-darktrace-list-similar-devices" title="Link to this heading">¶</a></h2>
 <p>Function to list similar devices to the given device. The example playbook provided with the app adds a note to the incident with the list of similar devices. Note that the input <code class="docutils literal notranslate"><span class="pre">darktrace_device_count</span></code> is a <em>maximum</em>, and if there are fewer than that number of devices similar to the source device, the list may not have the full count</p>
 <p><img alt="screenshot: fn-darktrace-list-similar-devices " src="../_images/fn-darktrace-list-similar-devices.png" />
 <img alt="screenshot: fn-darktrace-list-similar-devices " src="../_images/fn-darktrace-list-similar-devices-1.png" /></p>
@@ -2176,7 +2176,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-unacknowledge-incident-event">
-<h2>Function - Darktrace: Unacknowledge Incident Event<a class="headerlink" href="#function-darktrace-unacknowledge-incident-event" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Unacknowledge Incident Event<a class="headerlink" href="#function-darktrace-unacknowledge-incident-event" title="Link to this heading">¶</a></h2>
 <p>Function to unacknowledge an incident event</p>
 <p><img alt="screenshot: fn-darktrace-unacknowledge-incident-event " src="../_images/fn-darktrace-unacknowledge-incident-event.png" /></p>
 <details><summary>Inputs:</summary>
@@ -2257,7 +2257,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-darktrace-unacknowledge-model-breach">
-<h2>Function - Darktrace: Unacknowledge Model Breach<a class="headerlink" href="#function-darktrace-unacknowledge-model-breach" title="Link to this heading">#</a></h2>
+<h2>Function - Darktrace: Unacknowledge Model Breach<a class="headerlink" href="#function-darktrace-unacknowledge-model-breach" title="Link to this heading">¶</a></h2>
 <p>Function to unacknowledge a model breach.</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -2335,7 +2335,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="script-parse-darktrace-details-to-incident-properties">
-<h2>Script - Parse Darktrace Details to Incident Properties<a class="headerlink" href="#script-parse-darktrace-details-to-incident-properties" title="Link to this heading">#</a></h2>
+<h2>Script - Parse Darktrace Details to Incident Properties<a class="headerlink" href="#script-parse-darktrace-details-to-incident-properties" title="Link to this heading">¶</a></h2>
 <p><strong>Object:</strong> <code class="docutils literal notranslate"><span class="pre">incident</span></code></p>
 <details><summary>Script Text:</summary>
 <p>
@@ -2362,7 +2362,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="script-parse-darktrace-device-details-to-artifacts">
-<h2>Script - Parse Darktrace Device Details to Artifacts<a class="headerlink" href="#script-parse-darktrace-device-details-to-artifacts" title="Link to this heading">#</a></h2>
+<h2>Script - Parse Darktrace Device Details to Artifacts<a class="headerlink" href="#script-parse-darktrace-device-details-to-artifacts" title="Link to this heading">¶</a></h2>
 <p><strong>Object:</strong> <code class="docutils literal notranslate"><span class="pre">incident</span></code></p>
 <details><summary>Script Text:</summary>
 <p>
@@ -2391,7 +2391,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="script-parse-darktrace-device-details-to-data-table">
-<h2>Script - Parse Darktrace Device Details to Data Table<a class="headerlink" href="#script-parse-darktrace-device-details-to-data-table" title="Link to this heading">#</a></h2>
+<h2>Script - Parse Darktrace Device Details to Data Table<a class="headerlink" href="#script-parse-darktrace-device-details-to-data-table" title="Link to this heading">¶</a></h2>
 <p><strong>Object:</strong> <code class="docutils literal notranslate"><span class="pre">incident</span></code></p>
 <details><summary>Script Text:</summary>
 <p>
@@ -2424,7 +2424,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="script-parse-darktrace-incident-events-details-to-data-table">
-<h2>Script - Parse Darktrace Incident Events Details to Data Table<a class="headerlink" href="#script-parse-darktrace-incident-events-details-to-data-table" title="Link to this heading">#</a></h2>
+<h2>Script - Parse Darktrace Incident Events Details to Data Table<a class="headerlink" href="#script-parse-darktrace-incident-events-details-to-data-table" title="Link to this heading">¶</a></h2>
 <p><strong>Object:</strong> <code class="docutils literal notranslate"><span class="pre">incident</span></code></p>
 <details><summary>Script Text:</summary>
 <p>
@@ -2454,7 +2454,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="script-parse-darktrace-model-breaches-details-to-data-table">
-<h2>Script - Parse Darktrace Model Breaches Details to Data Table<a class="headerlink" href="#script-parse-darktrace-model-breaches-details-to-data-table" title="Link to this heading">#</a></h2>
+<h2>Script - Parse Darktrace Model Breaches Details to Data Table<a class="headerlink" href="#script-parse-darktrace-model-breaches-details-to-data-table" title="Link to this heading">¶</a></h2>
 <p><strong>Object:</strong> <code class="docutils literal notranslate"><span class="pre">incident</span></code></p>
 <details><summary>Script Text:</summary>
 <p>
@@ -2488,13 +2488,13 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-associated-devices">
-<h2>Data Table - Associated Devices<a class="headerlink" href="#data-table-associated-devices" title="Link to this heading">#</a></h2>
+<h2>Data Table - Associated Devices<a class="headerlink" href="#data-table-associated-devices" title="Link to this heading">¶</a></h2>
 <section id="api-name">
-<h3>API Name: <!-- omit in toc --><a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name: <!-- omit in toc --><a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">darktrace_associated_devices_dt</span></code></p>
 </section>
 <section id="columns">
-<h3>Columns: <!-- omit in toc --><a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns: <!-- omit in toc --><a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2555,13 +2555,13 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-incident-events">
-<h2>Data Table - Incident Events<a class="headerlink" href="#data-table-incident-events" title="Link to this heading">#</a></h2>
+<h2>Data Table - Incident Events<a class="headerlink" href="#data-table-incident-events" title="Link to this heading">¶</a></h2>
 <section id="id1">
-<h3>API Name: <!-- omit in toc --><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>API Name: <!-- omit in toc --><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">darktrace_incident_events_dt</span></code></p>
 </section>
 <section id="id2">
-<h3>Columns: <!-- omit in toc --><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Columns: <!-- omit in toc --><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2610,13 +2610,13 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-model-breaches">
-<h2>Data Table - Model Breaches<a class="headerlink" href="#data-table-model-breaches" title="Link to this heading">#</a></h2>
+<h2>Data Table - Model Breaches<a class="headerlink" href="#data-table-model-breaches" title="Link to this heading">¶</a></h2>
 <section id="id3">
-<h3>API Name: <!-- omit in toc --><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>API Name: <!-- omit in toc --><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">darktrace_model_breaches_dt</span></code></p>
 </section>
 <section id="id4">
-<h3>Columns: <!-- omit in toc --><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3>Columns: <!-- omit in toc --><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2657,7 +2657,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="custom-fields">
-<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">¶</a></h2>
 <p>All custom fields can be access in an incident-level script by accesssing <code class="docutils literal notranslate"><span class="pre">incident.&lt;prefix&gt;.&lt;api_access_name&gt;</span></code>. Example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">group_category</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">darktrace_group_category</span>
 </pre></div>
@@ -2745,7 +2745,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -2832,7 +2832,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="for-support">
-<h2>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h2>
+<h2>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h2>
 <p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
 </section>
 </section>
@@ -2965,7 +2965,7 @@ Additional package dependencies may exist for each of these packages:</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

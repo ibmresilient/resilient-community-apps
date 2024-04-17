@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Shadowserver" href="../../../fn_shadowserver/README.html" /><link rel="prev" title="ServiceNow Customization Guide" href="../customize_snow_guide/README.html" />
 
-    <link rel="shortcut icon" href="../../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>SOAR Customization Guide - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="soar-customization-guide">
-<h1>SOAR Customization Guide<a class="headerlink" href="#soar-customization-guide" title="Link to this heading">#</a></h1>
+<h1>SOAR Customization Guide<a class="headerlink" href="#soar-customization-guide" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview:</span></a></p></li>
@@ -388,7 +388,7 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview:<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview:<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p>This package contains 8 Functions, 12 playbooks, and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#function---snow-create-record"><span class="xref myst">SNOW: Create Record</span></a> gives you the ability to create a Record in ServiceNow from a SOAR Case/Incident or Task.</p></li>
@@ -402,7 +402,7 @@
 </section>
 <hr class="docutils" />
 <section id="app-config-settings-app-config">
-<h2>App Config Settings (app.config):<a class="headerlink" href="#app-config-settings-app-config" title="Link to this heading">#</a></h2>
+<h2>App Config Settings (app.config):<a class="headerlink" href="#app-config-settings-app-config" title="Link to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_service_now</span><span class="p">]</span>
 <span class="c1"># Link to your ServiceNow Instance</span>
 <span class="n">sn_host</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">instance</span><span class="o">.</span><span class="n">service</span><span class="o">-</span><span class="n">now</span><span class="o">.</span><span class="n">com</span>
@@ -422,10 +422,10 @@
 </section>
 <hr class="docutils" />
 <section id="functions">
-<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot" src="../../../_images/110.png" /></p>
 <section id="function-snow-create-record">
-<h3>Function - SNOW: Create Record<a class="headerlink" href="#function-snow-create-record" title="Link to this heading">#</a></h3>
+<h3>Function - SNOW: Create Record<a class="headerlink" href="#function-snow-create-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/create</span></code> custom endpoint in ServiceNow to create a ServiceNow Record from an IBM SOAR Case/Incident or Task.</p>
 <p><img alt="screenshot" src="../../../_images/26.png" /></p>
 <details><summary>Inputs:</summary>
@@ -616,7 +616,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-snow-update-record">
-<h3>Function - SNOW: Update Record<a class="headerlink" href="#function-snow-update-record" title="Link to this heading">#</a></h3>
+<h3>Function - SNOW: Update Record<a class="headerlink" href="#function-snow-update-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/update</span></code> custom endpoint in ServiceNow to update a ServiceNow Record with a given dictionary of field name/value pairs.</p>
 <p><img alt="screenshot" src="../../../_images/8.png" /></p>
 <details><summary>Inputs:</summary>
@@ -729,7 +729,7 @@
 </div>
 </details>
 <section id="sending-soar-artifacts-to-snow">
-<h4>Sending SOAR artifacts to SNOW<a class="headerlink" href="#sending-soar-artifacts-to-snow" title="Link to this heading">#</a></h4>
+<h4>Sending SOAR artifacts to SNOW<a class="headerlink" href="#sending-soar-artifacts-to-snow" title="Link to this heading">¶</a></h4>
 <p>You can utilize the SNOW: Update Record function to send artifact values to SNOW records. The previous example for update is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:</p>
 <ol class="arabic">
 <li><p>Using the resilient-sdk, <code class="docutils literal notranslate"><span class="pre">clone</span></code> the example playbook into a new playbook with <code class="docutils literal notranslate"><span class="pre">changetype</span></code> artifact.</p>
@@ -751,7 +751,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-snow-close-record">
-<h3>Function - SNOW: Close Record<a class="headerlink" href="#function-snow-close-record" title="Link to this heading">#</a></h3>
+<h3>Function - SNOW: Close Record<a class="headerlink" href="#function-snow-close-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/close_record</span></code> custom endpoint in ServiceNow to change the state of a ServiceNow Record and add Close Notes and a Close Code to the Record.</p>
 <p><img alt="screenshot" src="../../../_images/34.png" /></p>
 <details><summary>Inputs:</summary>
@@ -934,7 +934,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-snow-add-note-to-record">
-<h3>Function - SNOW: Add Note to Record<a class="headerlink" href="#function-snow-add-note-to-record" title="Link to this heading">#</a></h3>
+<h3>Function - SNOW: Add Note to Record<a class="headerlink" href="#function-snow-add-note-to-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/add</span></code> custom endpoint in ServiceNow to add a SOAR Note to a ServiceNow Record as a “Work Note” or “Additional Comment”.</p>
 <p><img alt="screenshot" src="../../../_images/62.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1039,7 +1039,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-snow-add-attachment-to-record">
-<h3>Function - SNOW: Add Attachment to Record<a class="headerlink" href="#function-snow-add-attachment-to-record" title="Link to this heading">#</a></h3>
+<h3>Function - SNOW: Add Attachment to Record<a class="headerlink" href="#function-snow-add-attachment-to-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/add</span></code> custom endpoint in ServiceNow to add a SOAR Attachment to a ServiceNow Record.</p>
 <p><img alt="screenshot" src="../../../_images/71.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1151,7 +1151,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-snow-lookup-sys-id">
-<h3>Function - SNOW: Lookup sys_id<a class="headerlink" href="#function-snow-lookup-sys-id" title="Link to this heading">#</a></h3>
+<h3>Function - SNOW: Lookup sys_id<a class="headerlink" href="#function-snow-lookup-sys-id" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Gets the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of a ServiceNow Record.</p></li>
 <li><p>Used when creating a ServiceNow Record to get the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of the <code class="docutils literal notranslate"><span class="pre">assignment_group</span></code> to assign the new Record to.</p></li>
@@ -1246,7 +1246,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-snow-helper-update-data-table">
-<h3>Function - SNOW Helper: Update Data Table<a class="headerlink" href="#function-snow-helper-update-data-table" title="Link to this heading">#</a></h3>
+<h3>Function - SNOW Helper: Update Data Table<a class="headerlink" href="#function-snow-helper-update-data-table" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../../../_images/10.png" /></p>
 <details><summary>Inputs:</summary>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1333,7 +1333,7 @@
 </section>
 <hr class="docutils" />
 <section id="rules">
-<h2>Rules:<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules:<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1423,16 +1423,16 @@
 </section>
 <hr class="docutils" />
 <section id="data-tables">
-<h2>Data Tables:<a class="headerlink" href="#data-tables" title="Link to this heading">#</a></h2>
+<h2>Data Tables:<a class="headerlink" href="#data-tables" title="Link to this heading">¶</a></h2>
 <section id="servicenow-records">
-<h3>ServiceNow Records<a class="headerlink" href="#servicenow-records" title="Link to this heading">#</a></h3>
+<h3>ServiceNow Records<a class="headerlink" href="#servicenow-records" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../../../_images/9.png" /></p>
 <section id="api-name">
-<h4>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h4>
+<h4>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">sn_records_dt</span></code></p>
 </section>
 <section id="columns">
-<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h4>
+<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1481,7 +1481,7 @@
 </section>
 </section>
 <section id="security-incident-response-specific-customizations">
-<h2>Security Incident Response Specific Customizations<a class="headerlink" href="#security-incident-response-specific-customizations" title="Link to this heading">#</a></h2>
+<h2>Security Incident Response Specific Customizations<a class="headerlink" href="#security-incident-response-specific-customizations" title="Link to this heading">¶</a></h2>
 <p>By default the severity of a SOAR incident/case is mapped to the <code class="docutils literal notranslate"><span class="pre">severity</span></code> field in ServiceNow.
 This field is available in both the <code class="docutils literal notranslate"><span class="pre">incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> tables, however, Security Incident (SIR) tables have another field labeled <code class="docutils literal notranslate"><span class="pre">business_criticality</span></code>.
 It is recommend after the install to customize your playbooks in SOAR and SNOW to handle <code class="docutils literal notranslate"><span class="pre">business_criticality</span></code> rather than <code class="docutils literal notranslate"><span class="pre">severity</span></code> in SNOW.
@@ -1584,7 +1584,7 @@ See the <a class="reference internal" href="#../customize_snow_guide"><span clas
     </aside>
   </div>
 </div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>

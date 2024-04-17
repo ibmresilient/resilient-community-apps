@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Ansible Tower" href="../fn_ansible_tower/README.html" /><link rel="prev" title="Anomali Staxx" href="../fn_anomali_staxx/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Ansible - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="ansible">
-<h1>Ansible<a class="headerlink" href="#ansible" title="Link to this heading">#</a></h1>
+<h1>Ansible<a class="headerlink" href="#ansible" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#about-this-package"><span class="xref myst">About This Package</span></a></p></li>
 <li><p><a class="reference internal" href="#features"><span class="xref myst">Features</span></a></p></li>
@@ -367,11 +367,11 @@
 </section>
 <hr class="docutils" />
 <section id="about-this-package">
-<h2>About This Package:<a class="headerlink" href="#about-this-package" title="Link to this heading">#</a></h2>
+<h2>About This Package:<a class="headerlink" href="#about-this-package" title="Link to this heading">¶</a></h2>
 <p>This package contains functions that integrate with Ansible to run playbooks and modules for remote host execution.</p>
 </section>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -394,7 +394,7 @@
 </ul>
 </section>
 <section id="features">
-<h2>Features:<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<h2>Features:<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Run pre-written Ansible Playbooks from the Resilient platform, using parameter substitution.</p></li>
 <li><p>Run Ansible Modules for ad-hoc command execution.</p></li>
@@ -402,7 +402,7 @@
 </ul>
 <p>Additional documentation on Ansible can be found at <a class="reference external" href="https://docs.ansible.com/">the Ansible website</a>.</p>
 <section id="package-components">
-<h3>Package Components<a class="headerlink" href="#package-components" title="Link to this heading">#</a></h3>
+<h3>Package Components<a class="headerlink" href="#package-components" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Functions:</p>
 <ul>
@@ -428,7 +428,7 @@
 </section>
 </section>
 <section id="app-host-installation">
-<h2>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">#</a></h2>
+<h2>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">¶</a></h2>
 <p>All the components for running Ansible in a container already exist when using the App Host app. The remainder of this section details the Ansible configuration file changes.</p>
 <p>Under the Configuration Tab for an App, build out the ansible-runner files needed per the <a class="reference external" href="https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html">ansible-runner convention</a>. The necessary files are the <code class="docutils literal notranslate"><span class="pre">hosts</span></code> file, ssh_key and your yml playbooks. Build these files under <code class="docutils literal notranslate"><span class="pre">/var/rescircuits/ansible</span></code> and ensure that the app.config file contains the same reference:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_ansible</span><span class="p">]</span>
@@ -437,7 +437,7 @@
 </pre></div>
 </div>
 <section id="playbooks">
-<h3>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h3>
+<h3>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h3>
 <p>When adding playbooks through the Configuration tab of an App, ensure the File Path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits/ansible/project</span></code>.</p>
 <p>Note: Playbooks and modules cannot be run within the container environment.</p>
 <p>The minimum Ansible files needed are:</p>
@@ -452,15 +452,15 @@ several yaml files.
 <p>If you require additional ansible modules, additional effort is needed to include them as files in the Configuration tab.</p>
 </section>
 <section id="limitations">
-<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h3>
+<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">¶</a></h3>
 <p>Presently, there are limitations in the use of containers when playbook parameters sent from Resilient
 are used with any file defined in <code class="docutils literal notranslate"><span class="pre">/var/rescircuits/ansible/env</span></code>.</p>
 </section>
 </section>
 <section id="integration-server-installation">
-<h2>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">#</a></h2>
+<h2>Integration Server Installation<a class="headerlink" href="#integration-server-installation" title="Link to this heading">¶</a></h2>
 <section id="prerequisites">
-<h3>Prerequisites:<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<h3>Prerequisites:<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h3>
 <p>This integration relies on the installation of the ansible solution on the integration server. The process of installing ansible can be followed <a class="reference external" href="https://docs.ansible.com/ansible/latest/installation_guide/">here</a>.</p>
 <ul class="simple">
 <li><p>ansible &gt;= 2.8.1</p></li>
@@ -517,12 +517,12 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 </ul>
 </section>
 <section id="sample-workflow">
-<h3>Sample Workflow:<a class="headerlink" href="#sample-workflow" title="Link to this heading">#</a></h3>
+<h3>Sample Workflow:<a class="headerlink" href="#sample-workflow" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../_images/sample_workflow.png" /></p>
 </section>
 </section>
 <section id="function-inputs">
-<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h2>
+<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -554,7 +554,7 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 <p><img alt="screenshot" src="../_images/21.png" /></p>
 </section>
 <section id="function-output">
-<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h2>
+<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <p>Results returned to the Resilient platform from an Ansible function are in the following payload pattern:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
@@ -599,7 +599,7 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 <p>For very large data results, it may not be practical to save the results as a Note. Instead, the fn_utilities function <code class="docutils literal notranslate"><span class="pre">Utilities:</span> <span class="pre">String</span> <span class="pre">to</span> <span class="pre">Attachment</span></code> can be added to your workflow to send your Ansible results to an attachment. In this case, workflow properties are used to retain the results of this function for use by downstream functions.</p>
 </section>
 <section id="considerations">
-<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h2>
+<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Only the ansible-runner <code class="docutils literal notranslate"><span class="pre">synchronous</span></code> capability is supported.</p></li>
 <li><p>Playbook and artifact names must not contain unicode characters. This is a limitation in the ansible-runner package ( &lt;= 2.8.1) which should be resolved in a future release.</p></li>
@@ -625,7 +625,7 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 </div>
 </section>
 <section id="app-host-sshpass-support">
-<h2>App Host sshPass Support<a class="headerlink" href="#app-host-sshpass-support" title="Link to this heading">#</a></h2>
+<h2>App Host sshPass Support<a class="headerlink" href="#app-host-sshpass-support" title="Link to this heading">¶</a></h2>
 <p>You may find that you require the sshPass package for your use of Ansible. This package uses the <a class="reference external" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html">GPLv2 license</a> and
 this license restricts IBM from building and distributing a container under our <a class="reference external" href="https://www-03.ibm.com/software/sla/sladb.nsf/pdf/ilan/$file/ilan_en.pdf">International License Agreement</a>.</p>
 <p>If you require sshPass, you can build your own container by modifying the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> in the fn_ansible-x.x.x.tar.gz archive and uncomment the following
@@ -730,7 +730,7 @@ for the use of a private registry with App Host.</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

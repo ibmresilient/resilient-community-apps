@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>SOAR Content Package for VirusTotal v1.1 - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="soar-content-package-for-virustotal-v1-1">
-<h1>SOAR Content Package for VirusTotal v1.1<a class="headerlink" href="#soar-content-package-for-virustotal-v1-1" title="Link to this heading">#</a></h1>
+<h1>SOAR Content Package for VirusTotal v1.1<a class="headerlink" href="#soar-content-package-for-virustotal-v1-1" title="Link to this heading">¶</a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
 <p>This content package contains a single resource file with the following playbooks:</p>
 <ol class="arabic simple">
 <li><p>Automatic playbook: <code class="docutils literal notranslate"><span class="pre">VirusTotal:</span> <span class="pre">Scan</span> <span class="pre">for</span> <span class="pre">Hits</span> <span class="pre">Automatic</span> <span class="pre">(PB)</span></code></p></li>
@@ -372,7 +372,7 @@ IP address, hash, domain, and URL.</p></li>
 <p><img alt="Hits" src="../_images/vt-artifact-hit-2.png" /></p>
 </section>
 <section id="package-dependencies">
-<h2>Package Dependencies<a class="headerlink" href="#package-dependencies" title="Link to this heading">#</a></h2>
+<h2>Package Dependencies<a class="headerlink" href="#package-dependencies" title="Link to this heading">¶</a></h2>
 <p>The playbooks in this package depend on the following:</p>
 <ul class="simple">
 <li><p>SOAR v45.2.0</p></li>
@@ -380,10 +380,10 @@ IP address, hash, domain, and URL.</p></li>
 </ul>
 </section>
 <section id="prerequisite">
-<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Link to this heading">#</a></h2>
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Link to this heading">¶</a></h2>
 <p>This package requires the VirusTotal integration to be downloaded from the <a class="reference external" href="https://exchange.xforce.ibmcloud.com/hub/extension/9b9e32c2159332df425006e6d38effb0">app exchange</a> and installed.</p>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
@@ -391,23 +391,23 @@ IP address, hash, domain, and URL.</p></li>
 </section>
 </section>
 <section id="import">
-<h2>Import<a class="headerlink" href="#import" title="Link to this heading">#</a></h2>
+<h2>Import<a class="headerlink" href="#import" title="Link to this heading">¶</a></h2>
 <p>Ensure that the above package has been installed.
 Download the VirusTotal Content package and unzip it.
 In SOAR server, go to Administrator Settings-&gt;Organization-&gt;Migrate Settings-&gt;Import-&gt;Import Settings
 and select the <code class="docutils literal notranslate"><span class="pre">virustotal.res</span></code> file downloaded above.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <p>Once the resource file is successfully imported, the playbooks included in the file is ready for use.</p>
 <section id="virustotal-scan-for-hits-automatic-pb-playbook">
-<h3>VirusTotal: Scan for Hits Automatic (PB) Playbook<a class="headerlink" href="#virustotal-scan-for-hits-automatic-pb-playbook" title="Link to this heading">#</a></h3>
+<h3>VirusTotal: Scan for Hits Automatic (PB) Playbook<a class="headerlink" href="#virustotal-scan-for-hits-automatic-pb-playbook" title="Link to this heading">¶</a></h3>
 <p>This playbook automatically invokes a function from the fn_virustotal integration package and uses the results to create hits on artifacts based on the results from VirusTotal.</p>
 <p><img alt="Playbook" src="../_images/main79.png" /></p>
 </section>
 </section>
 <section id="function-virustotal">
-<h2>Function - VirusTotal<a class="headerlink" href="#function-virustotal" title="Link to this heading">#</a></h2>
+<h2>Function - VirusTotal<a class="headerlink" href="#function-virustotal" title="Link to this heading">¶</a></h2>
 <p>Perform VirusTotal scans and return reports on ip addresses, urls, domains, hashes and files.</p>
 <p><img alt="screenshot: fn-virustotal " src="../_images/fn-virustotal1.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1203,7 +1203,7 @@ and select the <code class="docutils literal notranslate"><span class="pre">viru
 </section>
 <hr class="docutils" />
 <section id="uninstall">
-<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">#</a></h2>
+<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">¶</a></h2>
 <p>Manually delete the following:</p>
 <ol class="arabic simple">
 <li><p>Playbooks</p></li>
@@ -1278,7 +1278,7 @@ and select the <code class="docutils literal notranslate"><span class="pre">viru
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

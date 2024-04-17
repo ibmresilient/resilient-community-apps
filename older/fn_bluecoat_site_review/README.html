@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Bluecoat Site Review - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -350,14 +350,14 @@
         </div>
         <article role="main">
           <section id="bluecoat-site-review">
-<h1>Bluecoat Site Review<a class="headerlink" href="#bluecoat-site-review" title="Link to this heading">#</a></h1>
+<h1>Bluecoat Site Review<a class="headerlink" href="#bluecoat-site-review" title="Link to this heading">¶</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>This function provides data enrichment on DNS Names and URLs available from Symantec <a class="reference external" href="https://sitereview.bluecoat.com">WebPulse (formally Bluecoat) Site Review</a> to enrich
 artifact values.</p>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>Install the function package by first unpacking the .zip file exposing the .tar.gz file.</p>
 <p>To install in “development mode”</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[sudo] pip install -e ./fn_bluecoat_site_review/
@@ -382,7 +382,7 @@ artifact values.</p>
 </div>
 </section>
 <section id="components">
-<h2>Components<a class="headerlink" href="#components" title="Link to this heading">#</a></h2>
+<h2>Components<a class="headerlink" href="#components" title="Link to this heading">¶</a></h2>
 <p>The following components are loaded into Resilient</p>
 <ul class="simple">
 <li><p>Function: Bluecoat Site Review Lookup</p></li>
@@ -392,7 +392,7 @@ artifact values.</p>
 <p>The sample rule is enabled for DNS and URL type artifacts</p>
 </section>
 <section id="results">
-<h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading">¶</a></h2>
 <p>The resulting data is appended in the artifact’s description field. Your process may parse
 and process the data differently. A sample note in the description field is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bluecoat</span> <span class="n">Categorization</span><span class="p">:</span> <span class="n">Suspicious</span><span class="p">,</span> <span class="n">Spam</span>
@@ -412,7 +412,7 @@ and process the data differently. A sample note in the description field is:</p>
 </div>
 <p>Below is a sample result from the function returning multiple categorizations:</p>
 <section id="sample-results">
-<h3>Sample results<a class="headerlink" href="#sample-results" title="Link to this heading">#</a></h3>
+<h3>Sample results<a class="headerlink" href="#sample-results" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
     <span class="sa">u</span><span class="s1">&#39;incident_id&#39;</span><span class="p">:</span> <span class="mi">2104</span><span class="p">,</span>
@@ -612,7 +612,7 @@ and process the data differently. A sample note in the description field is:</p>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

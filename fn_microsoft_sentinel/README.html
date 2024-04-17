@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="MISP" href="../fn_misp/README.html" /><link rel="prev" title="Microsoft Security Graph" href="../fn_microsoft_security_graph/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Microsoft Sentinel - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="microsoft-sentinel">
-<h1>Microsoft Sentinel<a class="headerlink" href="#microsoft-sentinel" title="Link to this heading">#</a></h1>
+<h1>Microsoft Sentinel<a class="headerlink" href="#microsoft-sentinel" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -392,7 +392,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -438,19 +438,19 @@
 </table>
 </div>
 <section id="v2-0-0">
-<h3>v2.0.0<a class="headerlink" href="#v2-0-0" title="Link to this heading">#</a></h3>
+<h3>v2.0.0<a class="headerlink" href="#v2-0-0" title="Link to this heading">¶</a></h3>
 <p>When upgrading from a previous version to v2.0.0, manually update your app.config file to add the <code class="docutils literal notranslate"><span class="pre">api_version</span></code> parameters to your <code class="docutils literal notranslate"><span class="pre">[fn_microsoft_sentinel]</span></code> section and <code class="docutils literal notranslate"><span class="pre">poller_filters_template</span></code> to the <code class="docutils literal notranslate"><span class="pre">[fn_microsoft_sentinel:profile_a]</span></code> section. The documentation on it’s use is in <a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a>.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><strong>SOAR integration for ‘fn_microsoft_sentinel’</strong></p>
 <p><img alt="screenshot: main" src="../_images/main32.png" /></p>
 <p>This app allows bi-directional synchronization between IBM SOAR and Microsoft Sentinel.
 Sentinel entities are exposed as artifacts for further investigation.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Escalate Microsoft Sentinel Incidents to IBM SOAR Cases</p></li>
 <li><p>Automatically keep Incidents and Cases synchronized</p></li>
@@ -462,10 +462,10 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
@@ -515,7 +515,7 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
@@ -530,11 +530,11 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app <strong>does</strong> support a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -546,7 +546,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="sentinel-configuration">
-<h2>Sentinel Configuration<a class="headerlink" href="#sentinel-configuration" title="Link to this heading">#</a></h2>
+<h2>Sentinel Configuration<a class="headerlink" href="#sentinel-configuration" title="Link to this heading">¶</a></h2>
 <p>Several steps are necessary to enable API access to Sentinel. Below is a brief list of steps to complete:</p>
 <ol class="arabic">
 <li><p>Define an App under <code class="docutils literal notranslate"><span class="pre">App</span> <span class="pre">registration</span></code>,  for Sentinel access. The Application (client) ID will be used as the app.config <code class="docutils literal notranslate"><span class="pre">client_id</span></code>.</p>
@@ -569,16 +569,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -659,7 +659,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>See the section below for examples of the templates.</p>
 </section>
 <section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
 <ul>
 <li><p>Import the Data Tables and Custom Fields like the screenshot below:</p>
 <p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts16.png" /></p>
@@ -671,7 +671,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 </section>
 <section id="function-sentinel-add-incident-comment">
-<h2>Function - Sentinel Add Incident Comment<a class="headerlink" href="#function-sentinel-add-incident-comment" title="Link to this heading">#</a></h2>
+<h2>Function - Sentinel Add Incident Comment<a class="headerlink" href="#function-sentinel-add-incident-comment" title="Link to this heading">¶</a></h2>
 <p>Create a comment for a given Sentinel incident. This is used with an rule to automatically sync
 SOAR Comments with Sentinel.</p>
 <details><summary>Inputs:</summary>
@@ -780,7 +780,7 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="function-sentinel-get-incident-alerts">
-<h2>Function - Sentinel Get Incident Alerts<a class="headerlink" href="#function-sentinel-get-incident-alerts" title="Link to this heading">#</a></h2>
+<h2>Function - Sentinel Get Incident Alerts<a class="headerlink" href="#function-sentinel-get-incident-alerts" title="Link to this heading">¶</a></h2>
 <p>Sentinel Get Incident Alerts</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -935,7 +935,7 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="function-sentinel-get-incident-comments">
-<h2>Function - Sentinel Get Incident Comments<a class="headerlink" href="#function-sentinel-get-incident-comments" title="Link to this heading">#</a></h2>
+<h2>Function - Sentinel Get Incident Comments<a class="headerlink" href="#function-sentinel-get-incident-comments" title="Link to this heading">¶</a></h2>
 <p>Get Comments from a Sentinel Incident</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1042,7 +1042,7 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="function-sentinel-get-incident-entities">
-<h2>Function - Sentinel Get Incident Entities<a class="headerlink" href="#function-sentinel-get-incident-entities" title="Link to this heading">#</a></h2>
+<h2>Function - Sentinel Get Incident Entities<a class="headerlink" href="#function-sentinel-get-incident-entities" title="Link to this heading">¶</a></h2>
 <p>Get the Entities associated with a Sentinel Incident</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1179,7 +1179,7 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="function-sentinel-update-incident">
-<h2>Function - Sentinel Update Incident<a class="headerlink" href="#function-sentinel-update-incident" title="Link to this heading">#</a></h2>
+<h2>Function - Sentinel Update Incident<a class="headerlink" href="#function-sentinel-update-incident" title="Link to this heading">¶</a></h2>
 <p>Update / Close a Sentinel incident based on Sentinel field changes in the Resilient Incident</p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1295,14 +1295,14 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-sentinel-incident-alerts">
-<h2>Data Table - Sentinel Incident Alerts<a class="headerlink" href="#data-table-sentinel-incident-alerts" title="Link to this heading">#</a></h2>
+<h2>Data Table - Sentinel Incident Alerts<a class="headerlink" href="#data-table-sentinel-incident-alerts" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-sentinel-incident-alerts" src="../_images/dt-sentinel-incident-alerts.png" /></p>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>sentinel_incident_alerts</p>
 </section>
 <section id="columns">
-<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1385,14 +1385,14 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-sentinel-incident-entities">
-<h2>Data Table - Sentinel Incident Entities<a class="headerlink" href="#data-table-sentinel-incident-entities" title="Link to this heading">#</a></h2>
+<h2>Data Table - Sentinel Incident Entities<a class="headerlink" href="#data-table-sentinel-incident-entities" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-sentinel-incident-entities" src="../_images/dt-sentinel-incident-entities.png" /></p>
 <section id="id1">
-<h3>API Name:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p>sentinel_incident_entities</p>
 </section>
 <section id="id2">
-<h3>Columns:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1440,7 +1440,7 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="custom-fields">
-<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1536,7 +1536,7 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1583,7 +1583,7 @@ SOAR Comments with Sentinel.</p>
 </section>
 <hr class="docutils" />
 <section id="custom-templates">
-<h2>Custom Templates<a class="headerlink" href="#custom-templates" title="Link to this heading">#</a></h2>
+<h2>Custom Templates<a class="headerlink" href="#custom-templates" title="Link to this heading">¶</a></h2>
 <p>Below are examples of templates for creating, updating, and closing SOAR incidents. Customize these templates and refer to them in our app.config file.</p>
 <p>Each template should be reviewed for correctness in your enterprise.
 For instance, closing a SOAR incident may include additional custom fields which the default template
@@ -1597,7 +1597,7 @@ mapping:</p>
 </div>
 <p>If your Sentinel login users differ from SOAR users, modify the <code class="docutils literal notranslate"><span class="pre">owner_id</span></code> mapping to use a substitution map as indicated in the jinja comment.</p>
 <section id="incident-create-template-jinja">
-<h3>incident_create_template.jinja<a class="headerlink" href="#incident-create-template-jinja" title="Link to this heading">#</a></h3>
+<h3>incident_create_template.jinja<a class="headerlink" href="#incident-create-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for creating a new SOAR incident from a Sentinel incident. #}</span>
   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
@@ -1634,7 +1634,7 @@ mapping:</p>
 </div>
 </section>
 <section id="incident-update-template-jinja">
-<h3>incident_update_template.jinja<a class="headerlink" href="#incident-update-template-jinja" title="Link to this heading">#</a></h3>
+<h3>incident_update_template.jinja<a class="headerlink" href="#incident-update-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for updating a new SOAR incident from a Sentinel incident. #}</span>
   <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1659,7 +1659,7 @@ mapping:</p>
 </div>
 </section>
 <section id="incident-close-template-jinja">
-<h3>incident_close_template.jinja<a class="headerlink" href="#incident-close-template-jinja" title="Link to this heading">#</a></h3>
+<h3>incident_close_template.jinja<a class="headerlink" href="#incident-close-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for closing a new SOAR incident from a Sentinel incident. #}</span>
   <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
@@ -1679,7 +1679,7 @@ mapping:</p>
 </div>
 </section>
 <section id="sentinel-close-incident-template-jinja">
-<h3>sentinel_close_incident_template.jinja<a class="headerlink" href="#sentinel-close-incident-template-jinja" title="Link to this heading">#</a></h3>
+<h3>sentinel_close_incident_template.jinja<a class="headerlink" href="#sentinel-close-incident-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="p">{</span><span class="c1"># JINJA template for closing a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1708,7 +1708,7 @@ mapping:</p>
 </div>
 </section>
 <section id="sentinel-update-incident-template-jinja">
-<h3>sentinel_update_incident_template.jinja<a class="headerlink" href="#sentinel-update-incident-template-jinja" title="Link to this heading">#</a></h3>
+<h3>sentinel_update_incident_template.jinja<a class="headerlink" href="#sentinel-update-incident-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="p">{</span><span class="c1"># JINJA template for updating a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1739,12 +1739,12 @@ mapping:</p>
 </section>
 <hr class="docutils" />
 <section id="custom-poller-filter-template">
-<h2>Custom poller filter template<a class="headerlink" href="#custom-poller-filter-template" title="Link to this heading">#</a></h2>
+<h2>Custom poller filter template<a class="headerlink" href="#custom-poller-filter-template" title="Link to this heading">¶</a></h2>
 <p>In version 2.0.0 the ability to use a jinja template for the poller filter was added.
 The following is the example template that is provided with this integration. This template also shows other filter examples
 that are commented out. The example template shows all Sentinel incident properties that can be filter for.</p>
 <section id="poller-filters-template-jinja">
-<h3>poller_filters_template.jinja<a class="headerlink" href="#poller-filters-template-jinja" title="Link to this heading">#</a></h3>
+<h3>poller_filters_template.jinja<a class="headerlink" href="#poller-filters-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for filtering Sentinel Incidents. #}</span>
   <span class="p">{</span><span class="c1"># If the value equals true then it passed the filter. #}</span>
@@ -1791,10 +1791,10 @@ that are commented out. The example template shows all Sentinel incident propert
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is a IBM supported App. For assistance, see <a class="reference external" href="https://ibm.com/mysupport">https://ibm.com/mysupport</a>.</p>
 </section>
 </section>
@@ -1924,7 +1924,7 @@ that are commented out. The example template shows all Sentinel incident propert
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

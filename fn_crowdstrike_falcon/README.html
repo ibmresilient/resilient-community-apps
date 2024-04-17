@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>CrowdStrike Falcon - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="crowdstrike-falcon">
-<h1>CrowdStrike Falcon<a class="headerlink" href="#crowdstrike-falcon" title="Link to this heading">#</a></h1>
+<h1>CrowdStrike Falcon<a class="headerlink" href="#crowdstrike-falcon" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#function---cs-falcon-search"><span class="xref myst">Function - CS Falcon: Search</span></a></p></li>
 <li><p><a class="reference internal" href="#function---cs-falcon-device-actions"><span class="xref myst">Function - CS Falcon: Device Actions</span></a></p></li>
@@ -377,7 +377,7 @@
 </section>
 <hr class="docutils" />
 <section id="app-config-settings">
-<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h2>
+<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Two different sets of API Keys are need for this Integration with CrowdStrike:</p>
 <ul>
@@ -424,11 +424,11 @@
 </section>
 <hr class="docutils" />
 <section id="function-cs-falcon-search">
-<h2>Function - CS Falcon: Search<a class="headerlink" href="#function-cs-falcon-search" title="Link to this heading">#</a></h2>
+<h2>Function - CS Falcon: Search<a class="headerlink" href="#function-cs-falcon-search" title="Link to this heading">¶</a></h2>
 <p>Queries your CrowdStrike Falcon Hosts for a list of Devices using a Filter and/or Query. If Devices are found they are returned as a Python List</p>
 <p><img alt="screenshot" src="../_images/12.png" /></p>
 <section id="inputs">
-<h3>Inputs:<a class="headerlink" href="#inputs" title="Link to this heading">#</a></h3>
+<h3>Inputs:<a class="headerlink" href="#inputs" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -457,7 +457,7 @@
 </div>
 </section>
 <section id="output">
-<h3>Output:<a class="headerlink" href="#output" title="Link to this heading">#</a></h3>
+<h3>Output:<a class="headerlink" href="#output" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
@@ -538,7 +538,7 @@
 </div>
 </section>
 <section id="pre-process-script">
-<h3>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h3>
+<h3>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h3>
 <p>This example uses the Artifact Value to create the <code class="docutils literal notranslate"><span class="pre">cs_filter_string</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: &quot;hostname:&#39;sampleName*&#39;+platform_name:&#39;Windows&#39;&quot; ==&gt; Searches CrowdStrike for devices who&#39;s hostname contains &#39;sampleName&#39; and platform is &#39;Windows&#39;</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cs_filter_string</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;hostname:&#39;</span><span class="si">{0}</span><span class="s2">*&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
@@ -549,7 +549,7 @@
 </div>
 </section>
 <section id="post-process-script">
-<h3>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h3>
+<h3>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h3>
 <p>This post-process loops each found device and adds its details to the <code class="docutils literal notranslate"><span class="pre">cs_falcon_devices_dt</span></code> Data Table</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Date</span>
 <span class="kn">from</span> <span class="nn">java.util</span> <span class="kn">import</span> <span class="n">Date</span>
@@ -580,7 +580,7 @@
 </section>
 <hr class="docutils" />
 <section id="function-cs-falcon-device-actions">
-<h2>Function - CS Falcon: Device Actions<a class="headerlink" href="#function-cs-falcon-device-actions" title="Link to this heading">#</a></h2>
+<h2>Function - CS Falcon: Device Actions<a class="headerlink" href="#function-cs-falcon-device-actions" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Function that uses the CrowdStrike Falcon ‘/devices/entities/devices-actions/’ endpoint to Contain or Lit Containment on a Device</p></li>
 <li><p>Sends the <code class="docutils literal notranslate"><span class="pre">contain</span></code> or <code class="docutils literal notranslate"><span class="pre">life_containment</span></code> request to CrowdStrike.</p></li>
@@ -592,7 +592,7 @@
 <p><strong>Lift Containment:</strong></p>
 <p><img alt="screenshot" src="../_images/31.png" /></p>
 <section id="id1">
-<h3>Inputs:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>Inputs:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -621,7 +621,7 @@
 </div>
 </section>
 <section id="id2">
-<h3>Output:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Output:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
@@ -652,7 +652,7 @@
 </div>
 </section>
 <section id="id3">
-<h3>Pre-Process Script:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>Pre-Process Script:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>This example is using a Workflow with a Data Table Object Type. Therefore it can get the device_id from the row this Rule was invoked on</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the unique CrowdStrike device_id. Taken here from the CS Falcon: Devices Data Table</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cs_device_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">device_id</span>
@@ -662,7 +662,7 @@
 </div>
 </section>
 <section id="id4">
-<h3>Post-Process Script:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3>Post-Process Script:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>This post-process creates a formatted timestamp, updates the Data Table and adds a Note to the Incident</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Date</span>
 <span class="kn">from</span> <span class="nn">java.util</span> <span class="kn">import</span> <span class="n">Date</span>
@@ -701,11 +701,11 @@
 </section>
 <hr class="docutils" />
 <section id="function-cs-falcon-get-devices-ioc-ran-on">
-<h2>Function - CS Falcon: Get Devices IOC Ran On<a class="headerlink" href="#function-cs-falcon-get-devices-ioc-ran-on" title="Link to this heading">#</a></h2>
+<h2>Function - CS Falcon: Get Devices IOC Ran On<a class="headerlink" href="#function-cs-falcon-get-devices-ioc-ran-on" title="Link to this heading">¶</a></h2>
 <p>Queries your CrowdStrike Falcon Hosts with a String Representation of an IOC and returns a list of Device IDs that the IOC Ran On</p>
 <p><img alt="screenshot" src="../_images/51.png" /></p>
 <section id="id5">
-<h3>Inputs:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>Inputs:<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -740,7 +740,7 @@
 </div>
 </section>
 <section id="id6">
-<h3>Output:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>Output:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
     <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -781,7 +781,7 @@
 </div>
 </section>
 <section id="id7">
-<h3>Pre-Process Script:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>Pre-Process Script:<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>This example uses the Artifact Value and Type properties when defining the inputs</p></li>
 </ul>
@@ -797,7 +797,7 @@
 </div>
 </section>
 <section id="id8">
-<h3>Post-Process Script:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3>Post-Process Script:<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>This post-process loops each device_id found and adds its details to the <code class="docutils literal notranslate"><span class="pre">cs_falcon_devices_ioc_ran_on_results_dt</span></code> Data Table</p></li>
 <li><p>If no devices were found for the IOC or an error occurred, a Note is added to the Incident with the reason why</p></li>
@@ -828,7 +828,7 @@
 </section>
 <hr class="docutils" />
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -870,16 +870,16 @@
 </section>
 <hr class="docutils" />
 <section id="data-tables">
-<h2>Data Tables<a class="headerlink" href="#data-tables" title="Link to this heading">#</a></h2>
+<h2>Data Tables<a class="headerlink" href="#data-tables" title="Link to this heading">¶</a></h2>
 <section id="cs-falcon-devices">
-<h3>CS Falcon: Devices<a class="headerlink" href="#cs-falcon-devices" title="Link to this heading">#</a></h3>
+<h3>CS Falcon: Devices<a class="headerlink" href="#cs-falcon-devices" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../_images/dt_0_i.png" /></p>
 <section id="api-name">
-<h4>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h4>
+<h4>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h4>
 <p>cs_falcon_devices_dt</p>
 </section>
 <section id="columns">
-<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h4>
+<h4>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -936,14 +936,14 @@
 </section>
 </section>
 <section id="cs-falcon-devices-ioc-ran-on-results">
-<h3>CS Falcon: Devices IOC Ran On Results<a class="headerlink" href="#cs-falcon-devices-ioc-ran-on-results" title="Link to this heading">#</a></h3>
+<h3>CS Falcon: Devices IOC Ran On Results<a class="headerlink" href="#cs-falcon-devices-ioc-ran-on-results" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../_images/dt_0_ii.png" /></p>
 <section id="id9">
-<h4>API Name:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<h4>API Name:<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
 <p>cs_falcon_devices_ioc_ran_on_results_dt</p>
 </section>
 <section id="id10">
-<h4>Columns:<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<h4>Columns:<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -980,7 +980,7 @@
 </section>
 </section>
 <section id="display-a-data-table-in-an-incident">
-<h3>Display a Data Table in an Incident<a class="headerlink" href="#display-a-data-table-in-an-incident" title="Link to this heading">#</a></h3>
+<h3>Display a Data Table in an Incident<a class="headerlink" href="#display-a-data-table-in-an-incident" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>In order to <strong>display</strong> the Test Data Table in your Incident, you must <strong>modify your Layout Settings</strong></p></li>
 </ul>
@@ -1091,7 +1091,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Twitter Search API" href="../fn_twitter_most_popular/README.html" /><link rel="prev" title="Trusteer Pinpoint Detect" href="../fn_trusteer_ppd/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Twilio SMS - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="twilio-sms">
-<h1>Twilio SMS<a class="headerlink" href="#twilio-sms" title="Link to this heading">#</a></h1>
+<h1>Twilio SMS<a class="headerlink" href="#twilio-sms" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
 <li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p></li>
@@ -368,7 +368,7 @@
 <p><img alt="screenshot" src="../_images/sms_activity_log.png" /></p>
 </section>
 <section id="prerequisites">
-<h2>Prerequisites:<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<h2>Prerequisites:<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resilient</span> <span class="n">version</span> <span class="mi">33</span> <span class="ow">or</span> <span class="n">later</span>
 <span class="n">resilient_circuits</span> <span class="n">version</span> <span class="mi">32</span> <span class="ow">or</span> <span class="n">later</span>
 <span class="n">twilio</span> <span class="n">version</span> <span class="mf">6.21.0</span> <span class="ow">or</span> <span class="n">later</span>
@@ -376,7 +376,7 @@
 </div>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>After downloading the package from the IBM AppExchange,
 unzip to retrive the tar.gz file:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>unzip fn_twilio-&lt;version&gt;.zip
@@ -401,7 +401,7 @@ settings as well as your <code class="docutils literal notranslate"><span class=
 <p>After installation, the package will be loaded by <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code>.</p>
 </section>
 <section id="app-config-settings">
-<h2>app.config settings<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h2>
+<h2>app.config settings<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <p>This package requires that it is installed on an Integrations server (preferably a RHEL platform) and that the resilient-circuits application is running.
 Install this package with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>, or <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code>.
 To set the config values in the app.config file with a new resilient instance run <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">-c</span></code>
@@ -420,9 +420,9 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 <p>Run with: <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code>.</p>
 </section>
 <section id="twilio-send-sms">
-<h2>twilio_send_sms<a class="headerlink" href="#twilio-send-sms" title="Link to this heading">#</a></h2>
+<h2>twilio_send_sms<a class="headerlink" href="#twilio-send-sms" title="Link to this heading">¶</a></h2>
 <section id="function-inputs">
-<h3>Function Inputs<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h3>
+<h3>Function Inputs<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -451,7 +451,7 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 </div>
 </section>
 <section id="function-output">
-<h3>Function Output<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h3>
+<h3>Function Output<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s1">&#39;twilio_status&#39;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
@@ -473,7 +473,7 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 </div>
 </section>
 <section id="pre-process-script">
-<h3>Pre-Process Script<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h3>
+<h3>Pre-Process Script<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h3>
 <p>The following is an example of setup of each parameter using a simple workflow pre-processing script.
 The message can be customised to suit your own use case.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inputs.twilio_sms_destination = rule.properties.twilio_sms_destination
@@ -482,7 +482,7 @@ inputs.twilio_sms_message = &#39;An incident &#39; + incident.name + &#39; (&#39
 </div>
 </section>
 <section id="post-process-script">
-<h3>Post-Process Script<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h3>
+<h3>Post-Process Script<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h3>
 <p>The results returned to Resilient can be used to determine the status for each destination.
 Below is an example post process script which adds a note for each destination.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
@@ -514,9 +514,9 @@ Below is an example post process script which adds a note for each destination.<
 </section>
 </section>
 <section id="twilio-get-responses">
-<h2>Twilio: Get Responses<a class="headerlink" href="#twilio-get-responses" title="Link to this heading">#</a></h2>
+<h2>Twilio: Get Responses<a class="headerlink" href="#twilio-get-responses" title="Link to this heading">¶</a></h2>
 <section id="id1">
-<h3>Function Inputs<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>Function Inputs<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -557,7 +557,7 @@ Below is an example post process script which adds a note for each destination.<
 </div>
 </section>
 <section id="id2">
-<h3>Function Output<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Function Output<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
   <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -592,7 +592,7 @@ Below is an example post process script which adds a note for each destination.<
 </div>
 </section>
 <section id="id3">
-<h3>Pre-Process Script<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>Pre-Process Script<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>The following is an example of setup of each parameter using a simple workflow pre-processing script.
 The message can be customised to suit your own use case.</p>
 <p>From a datatable row:</p>
@@ -602,7 +602,7 @@ The message can be customised to suit your own use case.</p>
 </div>
 </section>
 <section id="id4">
-<h3>Post-Process Script<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3>Post-Process Script<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>Below is an example post process script which adds a row to the datatable for each response.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
 
@@ -623,10 +623,10 @@ The message can be customised to suit your own use case.</p>
 </section>
 </section>
 <section id="example-twilio-receive-messages">
-<h2>Example: Twilio Receive Messages<a class="headerlink" href="#example-twilio-receive-messages" title="Link to this heading">#</a></h2>
+<h2>Example: Twilio Receive Messages<a class="headerlink" href="#example-twilio-receive-messages" title="Link to this heading">¶</a></h2>
 <p>Get all SMS messages based on destination phone number and date sent information.</p>
 <section id="id5">
-<h3>Function Inputs<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>Function Inputs<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -667,7 +667,7 @@ The message can be customised to suit your own use case.</p>
 </div>
 </section>
 <section id="id6">
-<h3>Function Output<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>Function Output<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
   <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -702,7 +702,7 @@ The message can be customised to suit your own use case.</p>
 </div>
 </section>
 <section id="id7">
-<h3>Pre-Process Script<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>Pre-Process Script<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>The following is an example of setup of each parameter using a simple workflow pre-processing script.
 The message can be customised to suit your own use case.</p>
 <p>From a datatable row:</p>
@@ -713,7 +713,7 @@ The message can be customised to suit your own use case.</p>
 </div>
 </section>
 <section id="id8">
-<h3>Post-Process Script<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3>Post-Process Script<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <p>Below is an example post process script which adds a row to the datatable for each response.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
 
@@ -734,7 +734,7 @@ The message can be customised to suit your own use case.</p>
 </section>
 </section>
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -856,7 +856,7 @@ The message can be customised to suit your own use case.</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

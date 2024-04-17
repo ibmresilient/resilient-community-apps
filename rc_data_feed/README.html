@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Data Feed Elasticsearch Plugin" href="../rc_data_feed_plugin_elasticfeed/README.html" /><link rel="prev" title="Zscaler Internet Access" href="../fn_zia/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Data Feed Extension - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="data-feed-extension">
-<h1>Data Feed Extension<a class="headerlink" href="#data-feed-extension" title="Link to this heading">#</a></h1>
+<h1>Data Feed Extension<a class="headerlink" href="#data-feed-extension" title="Link to this heading">¶</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>This package contains the Data Feed extension.  This extension allows you to maintain “replica” data for a IBM QRadar SOAR system.  The updates are performed in near real-time.</p>
 <p>The use case for this extension is for situations where you want to run business intelligence queries from other tools.  It overcomes the need to query the IBM QRadar SOAR database directly (since the IBM QRadar SOAR DB schema is not documented and can change at any time).</p>
 <p>The data can be written to any or all of the following destinations:</p>
@@ -381,7 +381,7 @@
 <p>Newly added fields and data tables are created in the destination database (for ODBC/SQLite destinations) in real-time.</p>
 </section>
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -404,7 +404,7 @@
 </div>
 </section>
 <section id="useful-tools">
-<h2>Useful Tools<a class="headerlink" href="#useful-tools" title="Link to this heading">#</a></h2>
+<h2>Useful Tools<a class="headerlink" href="#useful-tools" title="Link to this heading">¶</a></h2>
 <p>Most “business intelligence” tools allow you to query data from SQL databases.  Here are some tools that you can use to run queries/reports against this data:</p>
 <ul class="simple">
 <li><p>Tableau</p></li>
@@ -421,33 +421,33 @@
 </div>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
 <p>Unless otherwise specified, contents of this repository are published under the MIT open-source
 <a class="reference internal" href="#LICENSE"><span class="xref myst">LICENSE</span></a>.</p>
 <p>Files and subdirectories within this repository may contain specific licenses that apply individually to that item.</p>
 </section>
 <section id="faq">
-<h2>FAQ<a class="headerlink" href="#faq" title="Link to this heading">#</a></h2>
+<h2>FAQ<a class="headerlink" href="#faq" title="Link to this heading">¶</a></h2>
 <section id="ibm-qradar-soar-uses-postgresql-why-can-t-i-just-open-up-access-to-the-postgresql-and-query-the-db-directly">
-<h3>IBM QRadar SOAR uses PostgreSQL.  Why can’t I just open up access to the PostgreSQL and query the DB directly?<a class="headerlink" href="#ibm-qradar-soar-uses-postgresql-why-can-t-i-just-open-up-access-to-the-postgresql-and-query-the-db-directly" title="Link to this heading">#</a></h3>
+<h3>IBM QRadar SOAR uses PostgreSQL.  Why can’t I just open up access to the PostgreSQL and query the DB directly?<a class="headerlink" href="#ibm-qradar-soar-uses-postgresql-why-can-t-i-just-open-up-access-to-the-postgresql-and-query-the-db-directly" title="Link to this heading">¶</a></h3>
 <p>The primary reason is because IBM QRadar SOAR doesn’t support direct database access.  Why’s that?  The DB schema is not documented and has a different semantic model than is exposed by the IBM QRadar SOAR REST API.  It would be confusing to document two separate models.  It’d also slow down the IBM QRadar SOAR team if we had to be concerned with breaking code that we didn’t write.</p>
 <p>The DB schema changes for almost every release, which could mean breaking anything that is accessing the database directly.</p>
 </section>
 <section id="you-support-postgresql-can-i-create-a-new-database-on-my-ibm-qradar-soar-appliance-and-connect-to-that">
-<h3>You support PostgreSQL, can I create a new database on my IBM QRadar SOAR appliance and connect to that?<a class="headerlink" href="#you-support-postgresql-can-i-create-a-new-database-on-my-ibm-qradar-soar-appliance-and-connect-to-that" title="Link to this heading">#</a></h3>
+<h3>You support PostgreSQL, can I create a new database on my IBM QRadar SOAR appliance and connect to that?<a class="headerlink" href="#you-support-postgresql-can-i-create-a-new-database-on-my-ibm-qradar-soar-appliance-and-connect-to-that" title="Link to this heading">¶</a></h3>
 <p>This is not recommended.  It would be better to maintain the database on another system where queries won’t impact your running IBM QRadar SOAR instance.</p>
 <p>Allowing access to the IBM QRadar SOAR appliance PostgreSQL instance can also compromise security of the appliance itself.  It is possible to do it securely, but it would be somewhat complicated to configure properly.  For example, the IBM QRadar SOAR appliance today doesn’t support TLS connections to the PostgreSQL port because it isn’t needed (all communication happens over localhost/loopback).</p>
 </section>
 <section id="is-historical-data-maintained">
-<h3>Is historical data maintained?<a class="headerlink" href="#is-historical-data-maintained" title="Link to this heading">#</a></h3>
+<h3>Is historical data maintained?<a class="headerlink" href="#is-historical-data-maintained" title="Link to this heading">¶</a></h3>
 <p>Not at this time.  The data written represents the current snapshot.  It would be possible to have the extension maintain historical data, but doing so would be non-trivial.  If you have a need for historical data queries, we’d love to hear from you.  Please log a GitHub issue that explains your use case in as much detail as you can.</p>
 </section>
 <section id="why-isn-t-x-supported-as-a-feed-destination">
-<h3>Why isn’t “X” supported as a “feed destination”?<a class="headerlink" href="#why-isn-t-x-supported-as-a-feed-destination" title="Link to this heading">#</a></h3>
+<h3>Why isn’t “X” supported as a “feed destination”?<a class="headerlink" href="#why-isn-t-x-supported-as-a-feed-destination" title="Link to this heading">¶</a></h3>
 <p>Do you need others?  If so, we’d love to see a pull request from you!  If you can’t do that, then maybe file an issue in GitHub and perhaps someone else can add it.</p>
 </section>
 <section id="how-does-this-perform">
-<h3>How does this perform?<a class="headerlink" href="#how-does-this-perform" title="Link to this heading">#</a></h3>
+<h3>How does this perform?<a class="headerlink" href="#how-does-this-perform" title="Link to this heading">¶</a></h3>
 <p>It performs reasonably well because after initial data population, all updates are performed by reading messages from message queues.</p>
 <p>There are opportunities for improvement however:</p>
 <ul class="simple">
@@ -538,7 +538,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

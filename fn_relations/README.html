@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="REST API" href="../fn_rest_api/README.html" /><link rel="prev" title="Data Feeder for ODBC Databases" href="../rc_data_feed_plugin_odbcfeed/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Parent/Child Relationships - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="parent-child-relationships">
-<h1>Parent/Child Relationships<a class="headerlink" href="#parent-child-relationships" title="Link to this heading">#</a></h1>
+<h1>Parent/Child Relationships<a class="headerlink" href="#parent-child-relationships" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -392,7 +392,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -432,7 +432,7 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p>The Relations app is meant to provide the ability to allow parent/child relations levels within QRadar SOAR to link incidents “manually”. This package consists of 9 functions, and 11 playbooks along with 2 new fields and 1 new data table.</p>
 <p>This document outlines the functionality of function as it relates to QRadar SOAR.</p>
 <p><strong>Builds Relationships of Incidents within IBM Security SOAR</strong></p>
@@ -440,7 +440,7 @@
 <p>App used within the QRadar SOAR platform allowing the relationship building of incidents as Children and Parents.</p>
 <p>The app will also allow syncing of notes between the incidents with a relationship, auto closing child incidents of a closed parent, and syncing changes in child status with the parent Datatable that shows all children.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Assign Parent incident to Child</p></li>
 <li><p>Remove Child Relation if established incorrectly</p></li>
@@ -466,11 +466,11 @@
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>No application specific configuration settings are required.</p>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
@@ -523,7 +523,7 @@
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
@@ -538,7 +538,7 @@
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -548,25 +548,25 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="install">
-<h3>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h3>
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
 <section id="app-configuration">
-<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">#</a></h3>
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
 <p>No application specific configuration settings are required.</p>
 </section>
 <section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">#</a></h3>
+<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Import the Data Tables and Custom Fields like the screenshot below:</p></li>
 </ul>
 <section id="if-relation-level-is-parent">
-<h4>If Relation Level is: <strong>Parent</strong><a class="headerlink" href="#if-relation-level-is-parent" title="Link to this heading">#</a></h4>
+<h4>If Relation Level is: <strong>Parent</strong><a class="headerlink" href="#if-relation-level-is-parent" title="Link to this heading">¶</a></h4>
 <p>New Tab: Child Incidents</p>
 <ul class="simple">
 <li><p>Add Relations Child Incidents data table</p></li>
@@ -578,7 +578,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <p><img alt="screenshot: parent_layout" src="../_images/parent_build.png" /></p>
 </section>
 <section id="if-relation-level-is-child">
-<h4>If Relation Level is: <strong>Child</strong><a class="headerlink" href="#if-relation-level-is-child" title="Link to this heading">#</a></h4>
+<h4>If Relation Level is: <strong>Child</strong><a class="headerlink" href="#if-relation-level-is-child" title="Link to this heading">¶</a></h4>
 <p>Summary Section:</p>
 <ul class="simple">
 <li><p>Add Relation Level</p></li>
@@ -590,7 +590,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-assign-parent">
-<h2>Function - Relations: Assign Parent<a class="headerlink" href="#function-relations-assign-parent" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Assign Parent<a class="headerlink" href="#function-relations-assign-parent" title="Link to this heading">¶</a></h2>
 <p>Create a parent/child relationship between the 2 incidents provided.</p>
 <p><img alt="screenshot: fn-relations-assign-parent " src="../_images/fn-relations-assign-parent.png" /></p>
 <details><summary>Inputs:</summary>
@@ -765,7 +765,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-auto-close-child-incidents">
-<h2>Function - Relations: Auto Close Child Incidents<a class="headerlink" href="#function-relations-auto-close-child-incidents" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Auto Close Child Incidents<a class="headerlink" href="#function-relations-auto-close-child-incidents" title="Link to this heading">¶</a></h2>
 <p>Close child incidents when the parent incident is closed.</p>
 <p><img alt="screenshot: fn-relations-auto-close-child-incidents " src="../_images/fn-relations-auto-close-child-incidents.png" /></p>
 <details><summary>Inputs:</summary>
@@ -842,7 +842,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-copy-task">
-<h2>Function - Relations: Copy Task<a class="headerlink" href="#function-relations-copy-task" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Copy Task<a class="headerlink" href="#function-relations-copy-task" title="Link to this heading">¶</a></h2>
 <p>Copy a task from a Parent Incident down to the Children.</p>
 <p><img alt="screenshot: fn-relations-copy-task " src="../_images/fn-relations-copy-task.png" /></p>
 <details><summary>Inputs:</summary>
@@ -933,7 +933,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-remove-child-relation">
-<h2>Function - Relations: Remove Child Relation<a class="headerlink" href="#function-relations-remove-child-relation" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Remove Child Relation<a class="headerlink" href="#function-relations-remove-child-relation" title="Link to this heading">¶</a></h2>
 <p>Used to remove the relation child relation from a Child incident as well as removing the parent relation from the Parent incident if it no longer has children.</p>
 <p><img alt="screenshot: fn-relations-remove-child-relation " src="../_images/fn-relations-remove-child-relation.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1016,7 +1016,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-sync-artifact">
-<h2>Function - Relations: Sync Artifact<a class="headerlink" href="#function-relations-sync-artifact" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Sync Artifact<a class="headerlink" href="#function-relations-sync-artifact" title="Link to this heading">¶</a></h2>
 <p>Sync Artifacts from the incident where the artifact is currently to the parent or children.</p>
 <p><img alt="screenshot: fn-relations-sync-artifact " src="../_images/fn-relations-sync-artifact.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1107,7 +1107,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-sync-child-table-data">
-<h2>Function - Relations: Sync Child Table Data<a class="headerlink" href="#function-relations-sync-child-table-data" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Sync Child Table Data<a class="headerlink" href="#function-relations-sync-child-table-data" title="Link to this heading">¶</a></h2>
 <p>Update data within the Parent Table if the Child data changes.</p>
 <p><img alt="screenshot: fn-relations-sync-child-table-data " src="../_images/fn-relations-sync-child-table-data.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1220,7 +1220,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-sync-datatable-data">
-<h2>Function - Relations: Sync Datatable Data<a class="headerlink" href="#function-relations-sync-datatable-data" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Sync Datatable Data<a class="headerlink" href="#function-relations-sync-datatable-data" title="Link to this heading">¶</a></h2>
 <p>A Function used to Sync Datatable Data from the incident where it resides to the parent or children.</p>
 <p><img alt="screenshot: fn-relations-sync-datatable-data " src="../_images/fn-relations-sync-datatable-data.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1327,7 +1327,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-sync-notes">
-<h2>Function - Relations: Sync Notes<a class="headerlink" href="#function-relations-sync-notes" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Sync Notes<a class="headerlink" href="#function-relations-sync-notes" title="Link to this heading">¶</a></h2>
 <p>Sync notes from the incident where the note is currently to the parent or children.</p>
 <p><img alt="screenshot: fn-relations-sync-notes " src="../_images/fn-relations-sync-notes.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1414,7 +1414,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-sync-task-notes">
-<h2>Function - Relations: Sync Task Notes<a class="headerlink" href="#function-relations-sync-task-notes" title="Link to this heading">#</a></h2>
+<h2>Function - Relations: Sync Task Notes<a class="headerlink" href="#function-relations-sync-task-notes" title="Link to this heading">¶</a></h2>
 <p>Sync Task notes from a copied Task back to parent originating Task.</p>
 <p><img alt="screenshot: fn-relations-sync-task-notes " src="../_images/fn-relations-sync-task-notes.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1501,14 +1501,14 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="data-table-relations-child-incidents">
-<h2>Data Table - Relations Child Incidents<a class="headerlink" href="#data-table-relations-child-incidents" title="Link to this heading">#</a></h2>
+<h2>Data Table - Relations Child Incidents<a class="headerlink" href="#data-table-relations-child-incidents" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-relations-child-incidents" src="../_images/dt-relations-child-incidents.png" /></p>
 <section id="api-name">
-<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">#</a></h3>
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
 <p>dt_relations_child_incidents</p>
 </section>
 <section id="columns">
-<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">#</a></h3>
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1541,7 +1541,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="custom-fields">
-<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">#</a></h2>
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1574,7 +1574,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="custom-artifact-types">
-<h2>Custom Artifact Types<a class="headerlink" href="#custom-artifact-types" title="Link to this heading">#</a></h2>
+<h2>Custom Artifact Types<a class="headerlink" href="#custom-artifact-types" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1594,7 +1594,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1654,10 +1654,10 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is a IBM Supported provided App. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance or <a class="reference external" href="https://ibm.com/mysupport">open a support case</a>.</p>
 </section>
 </section>
@@ -1774,7 +1774,7 @@ Additional package dependencies may exist for each of these packages:</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

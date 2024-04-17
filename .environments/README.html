@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Setup - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,7 +350,7 @@
         </div>
         <article role="main">
           <section id="setup">
-<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ brew install gpg
 
 $ gpg --version
@@ -358,7 +358,7 @@ $ gpg --version
 </div>
 </section>
 <section id="import-keys">
-<h1>Import Keys<a class="headerlink" href="#import-keys" title="Link to this heading">#</a></h1>
+<h1>Import Keys<a class="headerlink" href="#import-keys" title="Link to this heading">¶</a></h1>
 <p>gpg –import environment_keys_pub.gp</p>
 <p>gpg –allow-secret-key-import –import environment_keys_sec.gpg</p>
 <p>** See a member of the Integrations team for the secret password</p>
@@ -370,7 +370,7 @@ $ gpg --version
 </div>
 </section>
 <section id="file-structure">
-<h1>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading">#</a></h1>
+<h1>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading">¶</a></h1>
 <p>Every integration maintaining environment settings should have it’s own directory with an encrypted app.config file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fn_teams</span><span class="o">/</span>
    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">gpg</span>
@@ -381,7 +381,7 @@ $ gpg --version
 <p>Use <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> for packages used in your development environment and <code class="docutils literal notranslate"><span class="pre">metadata.txt</span></code> to capture Resilient and endpoint version information.</p>
 </section>
 <section id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h1>
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">fn_teams</span>
 <span class="n">gpg</span> <span class="o">--</span><span class="n">output</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">gpg</span> <span class="o">--</span><span class="n">encrypt</span> <span class="o">--</span><span class="n">recipient</span> <span class="n">hydra</span><span class="nd">@ibm</span><span class="o">.</span><span class="n">com</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span> 
 </pre></div>
@@ -430,7 +430,7 @@ $ gpg --version
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

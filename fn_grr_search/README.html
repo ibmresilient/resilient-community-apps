@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>GRR - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,11 +350,11 @@
         </div>
         <article role="main">
           <section id="grr">
-<h1>GRR<a class="headerlink" href="#grr" title="Link to this heading">#</a></h1>
+<h1>GRR<a class="headerlink" href="#grr" title="Link to this heading">¶</a></h1>
 <p><strong>This package contains one function that allows you to search for your GRR Agents using IP, Host or User.</strong></p>
 <p><img alt="screenshot" src="../_images/fn_grr_snap_1.png" /></p>
 <section id="app-config-settings">
-<h2>app.config Settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">#</a></h2>
+<h2>app.config Settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_grr_search</span><span class="p">]</span>
 <span class="n">grr_server</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8000</span>
 <span class="n">grr_user</span><span class="o">=</span><span class="n">user</span>
@@ -365,7 +365,7 @@
 </div>
 </section>
 <section id="function-inputs">
-<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">#</a></h2>
+<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -391,7 +391,7 @@
 </div>
 </section>
 <section id="function-output">
-<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">#</a></h2>
+<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;grr_search_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;ip&#39;</span><span class="p">,</span>
     <span class="s1">&#39;grr_search_value&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
@@ -459,7 +459,7 @@
 </div>
 </section>
 <section id="pre-process-script">
-<h2>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">#</a></h2>
+<h2>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h2>
 <p>This example sets the search value <strong>to the value of the Incident’s Artifact.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the grr_search_value</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">grr_search_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
@@ -467,7 +467,7 @@
 </div>
 </section>
 <section id="post-process-script">
-<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">#</a></h2>
+<h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
 <p>This example loops the found agents and <strong>adds Notes to the Incident.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="c1"># Loop all found agents</span>
@@ -494,7 +494,7 @@
 </div>
 </section>
 <section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -572,7 +572,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

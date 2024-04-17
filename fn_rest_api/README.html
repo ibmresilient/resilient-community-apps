@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Salesforce" href="../fn_salesforce/README.html" /><link rel="prev" title="Parent/Child Relationships" href="../fn_relations/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>REST API - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,9 +350,9 @@
         </div>
         <article role="main">
           <section id="rest-api">
-<h1>REST API<a class="headerlink" href="#rest-api" title="Link to this heading">#</a></h1>
+<h1>REST API<a class="headerlink" href="#rest-api" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h2>Table of Contents  <!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<h2>Table of Contents  <!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -431,7 +431,7 @@
 </section>
 <hr class="docutils" />
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -459,12 +459,12 @@
 </section>
 <hr class="docutils" />
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><img alt="main" src="../_images/main53.png" /></p>
 <p><strong>Function to call REST web services in the SOAR Platform</strong></p>
 <p>This application is based on the <code class="docutils literal notranslate"><span class="pre">call_rest_api</span></code> function from the <code class="docutils literal notranslate"><span class="pre">fn_utilities</span></code>, which is expected to be deprecated in the future. It’s purpose is to enable the ability to connect with external web services by sending REST API requests. The function supports commonly used REST methods such as GET, HEAD, POST, PUT, DELETE, OPTIONS, and PATCH. The specific details of the request, such as the type of request, URL, and other options like headers, cookies, and the request body, can be specified through the function parameters. Once a response is received from the service, it is presented in both text and JSON format. Additionally, other details about the response, such as the response status code, reason, cookies, headers, time elapsed, and links, are also provided.</p>
 <section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Make REST API requests to external web services.</p></li>
 <li><p>Request body, headers, query parameters and cookies now support complex structures just as nested key-value pairs and lists by JSON format.</p></li>
@@ -478,10 +478,10 @@
 </section>
 <hr class="docutils" />
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
-<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">#</a></h3>
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
@@ -528,7 +528,7 @@
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
-<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">#</a></h3>
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
 <li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
@@ -543,11 +543,11 @@
 <p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
-<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">#</a></h3>
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app does support a proxy server.</p>
 </section>
 <section id="python-environment">
-<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h3>
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
@@ -558,7 +558,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
@@ -566,24 +566,24 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-rest-api">
-<h2>Function - REST API<a class="headerlink" href="#function-rest-api" title="Link to this heading">#</a></h2>
+<h2>Function - REST API<a class="headerlink" href="#function-rest-api" title="Link to this heading">¶</a></h2>
 <p>This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS. The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time. The function can be reused to make multiple requests to an endpoint or even access multiple endpoints.</p>
 <p><img alt="fn-rest-api-playbook.png" src="../_images/fn-rest-api-playbook.png" /></p>
 </section>
 <section id="input-considerations">
-<h2>Input Considerations<a class="headerlink" href="#input-considerations" title="Link to this heading">#</a></h2>
+<h2>Input Considerations<a class="headerlink" href="#input-considerations" title="Link to this heading">¶</a></h2>
 <section id="sensitive-information-using-app-secrets">
-<h3>Sensitive information using App Secrets<a class="headerlink" href="#sensitive-information-using-app-secrets" title="Link to this heading">#</a></h3>
+<h3>Sensitive information using App Secrets<a class="headerlink" href="#sensitive-information-using-app-secrets" title="Link to this heading">¶</a></h3>
 <p>For sensitive information that may be included in the <code class="docutils literal notranslate"><span class="pre">rest_header</span></code>, <code class="docutils literal notranslate"><span class="pre">rest_url</span></code>, <code class="docutils literal notranslate"><span class="pre">rest_body</span></code>, or <code class="docutils literal notranslate"><span class="pre">rest_cookies</span></code>, SECRETS can be directly substituted into input parameters, there by avoiding the need to expose any sensitive information as plain text. This can be done by creating a SECRET under the application’s configuration tab and referencing the same with a <code class="docutils literal notranslate"><span class="pre">$</span></code> sign followed by the SECRET’s name enclosed within curly brace. PAM Credentials can also be referenced it a similar fashion.</p>
 </section>
 <section id="format">
-<h3>Format:<a class="headerlink" href="#format" title="Link to this heading">#</a></h3>
+<h3>Format:<a class="headerlink" href="#format" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>SECRETS : <code class="docutils literal notranslate"><span class="pre">${SECRET_NAME}</span></code></p></li>
 <li><p>PAM     : <code class="docutils literal notranslate"><span class="pre">^{PAM_CREDENTIALS}</span></code></p></li>
 </ul>
 <section id="example">
-<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#example" title="Link to this heading">#</a></h4>
+<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#example" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">json</span>
 
     <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
@@ -601,7 +601,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="input-format">
-<h2>Input format<a class="headerlink" href="#input-format" title="Link to this heading">#</a></h2>
+<h2>Input format<a class="headerlink" href="#input-format" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Function inputs can only accept values that are either strings, numbers, or
 booleans, and they cannot accommodate more intricate data structures like lists
@@ -610,11 +610,11 @@ in the form of key-value pairs. To address this constraint, you can provide inpu
 for such parameters using one of the methods described below.</p></li>
 </ul>
 <section id="json-format">
-<h3>1. JSON format:<a class="headerlink" href="#json-format" title="Link to this heading">#</a></h3>
+<h3>1. JSON format:<a class="headerlink" href="#json-format" title="Link to this heading">¶</a></h3>
 <p>Standard json file format. Supports complex data structures such as lists
 or nested Key-value pairs.</p>
 <section id="id1">
-<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">   &quot;name&quot; : &quot;user1&quot;,</span>
 <span class="s2">   &quot;password&quot; : &quot;p@ssword1&quot;,</span>
@@ -628,12 +628,12 @@ or nested Key-value pairs.</p>
 </section>
 </section>
 <section id="hint">
-<h3>Hint: <!-- omit in toc --><a class="headerlink" href="#hint" title="Link to this heading">#</a></h3>
+<h3>Hint: <!-- omit in toc --><a class="headerlink" href="#hint" title="Link to this heading">¶</a></h3>
 <p>An easier way to feed inputs to the above mentioned fields would be using
 python dictionaries. While the inputs don’t directly support dict, the in-built
 json package can be used to convert a python dict to a json string.</p>
 <section id="id2">
-<h4>Example: <!-- omit in toc --><a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<h4>Example: <!-- omit in toc --><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="kn">import</span> <span class="nn">json</span>
    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;name&quot;</span>     <span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
@@ -651,17 +651,17 @@ json package can be used to convert a python dict to a json string.</p>
 </section>
 </section>
 <section id="new-line-separated-legacy-format">
-<h3>2. New-line separated (Legacy) format:<a class="headerlink" href="#new-line-separated-legacy-format" title="Link to this heading">#</a></h3>
+<h3>2. New-line separated (Legacy) format:<a class="headerlink" href="#new-line-separated-legacy-format" title="Link to this heading">¶</a></h3>
 <p>This format allows for specifying inputs as key-value pairs, separated
 by a new line. It lets us create quick and easy inputs that is properly
 formatted for the request. The primary purpose of this format is to retain
 backwards compatibility.</p>
 <section id="note">
-<h4>Note:  <!-- omit in toc --><a class="headerlink" href="#note" title="Link to this heading">#</a></h4>
+<h4>Note:  <!-- omit in toc --><a class="headerlink" href="#note" title="Link to this heading">¶</a></h4>
 <p>This format does not support complex data structures such as lists or nested key-value pairs.</p>
 </section>
 <section id="id3">
-<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">   name : user1</span>
 <span class="s2">   password : p@ssword1</span>
@@ -680,12 +680,12 @@ backwards compatibility.</p>
 </section>
 <hr class="docutils" />
 <section id="retry-mechanism">
-<h2>Retry Mechanism<a class="headerlink" href="#retry-mechanism" title="Link to this heading">#</a></h2>
+<h2>Retry Mechanism<a class="headerlink" href="#retry-mechanism" title="Link to this heading">¶</a></h2>
 <p>This mechanism ensures the reliable exchange of data by automatically reattempting requests
 that have failed. You can configure the application to do so by modifying the below mentioned
 parameters.</p>
 <section id="retry-tries-rest-retry-tries">
-<h3>1. RETRY TRIES (rest_retry_tries)<a class="headerlink" href="#retry-tries-rest-retry-tries" title="Link to this heading">#</a></h3>
+<h3>1. RETRY TRIES (rest_retry_tries)<a class="headerlink" href="#retry-tries-rest-retry-tries" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This parameter defines the maximum number of retry attempts that will be made for a
 failed request before the system ceases further retry efforts. If the maximum number
 of retry attempts is reached and the request still fails, the system will cease further
@@ -697,7 +697,7 @@ Default value : 1 (no retry)
 </div>
 </section>
 <section id="retry-delay-rest-retry-delay">
-<h3>2. RETRY DELAY (rest_retry_delay)<a class="headerlink" href="#retry-delay-rest-retry-delay" title="Link to this heading">#</a></h3>
+<h3>2. RETRY DELAY (rest_retry_delay)<a class="headerlink" href="#retry-delay-rest-retry-delay" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This parameter used to define the delay between retry attempts when a request fails and
 the request retry mechanism is invoked. This parameter plays a crucial role in controlling
 the timing of automatic retry attempts.
@@ -707,7 +707,7 @@ Default value : 1 second (no delay)
 </div>
 </section>
 <section id="retry-backoff-rest-retry-backoff">
-<h3>3. RETRY BACKOFF (rest_retry_backoff)<a class="headerlink" href="#retry-backoff-rest-retry-backoff" title="Link to this heading">#</a></h3>
+<h3>3. RETRY BACKOFF (rest_retry_backoff)<a class="headerlink" href="#retry-backoff-rest-retry-backoff" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This parameter is used to specify the multiplier applied to delay between attempts.
 The backoff strategy follows the below mentioned algorithm.
 
@@ -737,7 +737,7 @@ The retry mechanism attempts requests in the following manner:
 </section>
 </section>
 <section id="attachments">
-<h2>Attachments<a class="headerlink" href="#attachments" title="Link to this heading">#</a></h2>
+<h2>Attachments<a class="headerlink" href="#attachments" title="Link to this heading">¶</a></h2>
 <p>Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.
 The following fields can be used to find and locate the file to be sent.</p>
 <p>Note: Only one file can be sent per request. If both attachment_id and artifact_id is provided,
@@ -756,11 +756,11 @@ the application will prioritize attachment over artifact</p>
 </pre></div>
 </div>
 <section id="request-format">
-<h3>REQUEST FORMAT<a class="headerlink" href="#request-format" title="Link to this heading">#</a></h3>
+<h3>REQUEST FORMAT<a class="headerlink" href="#request-format" title="Link to this heading">¶</a></h3>
 <p>The endpoint has the capability to receive a REST request containing a file attachment in various formats. The selection of the methodology for sending a file depends on the specific requirements of the endpoint.</p>
 </section>
 <section id="file-bundled-as-a-multipart-form-data">
-<h3>1. file bundled as a multipart/form-data:<a class="headerlink" href="#file-bundled-as-a-multipart-form-data" title="Link to this heading">#</a></h3>
+<h3>1. file bundled as a multipart/form-data:<a class="headerlink" href="#file-bundled-as-a-multipart-form-data" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This methodology sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
 request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
 divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
@@ -781,7 +781,7 @@ the endpoint that is being used and is to be set by the user. Default value : &q
 </div>
 </section>
 <section id="file-bundled-as-request-body">
-<h3>2. file bundled as request body:<a class="headerlink" href="#file-bundled-as-request-body" title="Link to this heading">#</a></h3>
+<h3>2. file bundled as request body:<a class="headerlink" href="#file-bundled-as-request-body" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This methodology sends the binary data of the file as REST request body. Certain endpoints require
 files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False
 </pre></div>
@@ -794,13 +794,13 @@ files to be sent in this format. Although most endpoints tend to use multipart/f
 </section>
 <hr class="docutils" />
 <section id="authentication">
-<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">#</a></h2>
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h2>
 <p>The Call REST API function offers support for various authentication protocols that can be employed alongside the REST
 request. These authentication methods are optional. If the endpoint does not necessitate any form of
 authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication
 process.</p>
 <section id="oauth-2-0">
-<h3>OAuth 2.0<a class="headerlink" href="#oauth-2-0" title="Link to this heading">#</a></h3>
+<h3>OAuth 2.0<a class="headerlink" href="#oauth-2-0" title="Link to this heading">¶</a></h3>
 <p>OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint
 to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different
 flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and
@@ -810,7 +810,7 @@ Authentication flow, as mentioned below.</p>
 authorization server and the API you are integrating with. Make sure to consult
 the OAuth2 documentation specific to the service you are working with.</p>
 <section id="method-1-using-code">
-<h4>Method 1: Using CODE:<a class="headerlink" href="#method-1-using-code" title="Link to this heading">#</a></h4>
+<h4>Method 1: Using CODE:<a class="headerlink" href="#method-1-using-code" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span> The authorization server redirects the user back to address specified on the
  redirect URI with an authorization CODE. This CODE is a temporary token
  that represents the user&#39;s authorization and usually can be used only once.
@@ -824,7 +824,7 @@ the OAuth2 documentation specific to the service you are working with.</p>
 </div>
 </section>
 <section id="method-2-using-refresh-token">
-<h4>Method 2: Using REFRESH_TOKEN<a class="headerlink" href="#method-2-using-refresh-token" title="Link to this heading">#</a></h4>
+<h4>Method 2: Using REFRESH_TOKEN<a class="headerlink" href="#method-2-using-refresh-token" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span> It is a credential that is used to obtain a new access token from the
  authorization server when the original access token expires. It is an integral
  part of the OAuth 2.0 protocol and enables long-lived access to protected
@@ -839,7 +839,7 @@ the OAuth2 documentation specific to the service you are working with.</p>
 </div>
 </section>
 <section id="method-3-using-access-token">
-<h4>Method 3: Using ACCESS_TOKEN<a class="headerlink" href="#method-3-using-access-token" title="Link to this heading">#</a></h4>
+<h4>Method 3: Using ACCESS_TOKEN<a class="headerlink" href="#method-3-using-access-token" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  If an ACCESS_TOKEN is available, it can be directly used without having to
   perform authentication. In order to use the ACCESS_TOKEN, all that is required
   is the ACCESS_TOKEN &amp; the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the
@@ -849,7 +849,7 @@ the OAuth2 documentation specific to the service you are working with.</p>
 </section>
 </section>
 <section id="client-side-authentication-with-certificates">
-<h3>Client-side authentication with certificates<a class="headerlink" href="#client-side-authentication-with-certificates" title="Link to this heading">#</a></h3>
+<h3>Client-side authentication with certificates<a class="headerlink" href="#client-side-authentication-with-certificates" title="Link to this heading">¶</a></h3>
 <p>Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to
 verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS
 authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).
@@ -859,7 +859,7 @@ security by ensuring that the client is trusted and authenticated before
 allowing access to sensitive resources or data. And so this can be used
 in tandem with other authentication methods</p>
 <section id="client-authentication-certificate-client-auth-cert">
-<h4>1. Client Authentication Certificate (client_auth_cert)<a class="headerlink" href="#client-authentication-certificate-client-auth-cert" title="Link to this heading">#</a></h4>
+<h4>1. Client Authentication Certificate (client_auth_cert)<a class="headerlink" href="#client-authentication-certificate-client-auth-cert" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  A client authentication certificate, also known as a client certificate,
   is a digital certificate that is issued to the client (user or device) as
   part of the mutual authentication process. It contains the client&#39;s public
@@ -870,7 +870,7 @@ in tandem with other authentication methods</p>
 </div>
 </section>
 <section id="client-authentication-private-key-client-auth-key">
-<h4>2. Client Authentication Private Key (client_auth_key)<a class="headerlink" href="#client-authentication-private-key-client-auth-key" title="Link to this heading">#</a></h4>
+<h4>2. Client Authentication Private Key (client_auth_key)<a class="headerlink" href="#client-authentication-private-key-client-auth-key" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Private key is a cryptographic key that corresponds to the client&#39;s public
   key in the client authentication certificate. The private key is securely
   stored by the client and kept confidential. During the SSL/TLS handshake,
@@ -882,7 +882,7 @@ in tandem with other authentication methods</p>
 </div>
 </section>
 <section id="client-authentication-pem-client-auth-pem">
-<h4>3. Client Authentication PEM (client_auth_pem)<a class="headerlink" href="#client-authentication-pem-client-auth-pem" title="Link to this heading">#</a></h4>
+<h4>3. Client Authentication PEM (client_auth_pem)<a class="headerlink" href="#client-authentication-pem-client-auth-pem" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  This is simply the file format used to store both the client authentication
   certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM
   files are a common format for storing cryptographic objects, such as
@@ -895,7 +895,7 @@ independent file.</p>
 </section>
 </section>
 <section id="input-formats">
-<h3>Input Formats:<a class="headerlink" href="#input-formats" title="Link to this heading">#</a></h3>
+<h3>Input Formats:<a class="headerlink" href="#input-formats" title="Link to this heading">¶</a></h3>
 <p>The information within these certificates can be directly copied and pasted as
 plain text into the appropriate certificate type, enclosed within quotation marks.
 When making an API call, the application should automatically generate the
@@ -919,13 +919,13 @@ same input format, as shown below.</p>
 </div>
 </section>
 <section id="json-web-token-authentication">
-<h3>JSON Web Token Authentication<a class="headerlink" href="#json-web-token-authentication" title="Link to this heading">#</a></h3>
+<h3>JSON Web Token Authentication<a class="headerlink" href="#json-web-token-authentication" title="Link to this heading">¶</a></h3>
 <p>JWT is also a supported form of authentication. The application has functionality builtin
 that allows for the creation, compilation, and manipulation of JWTs. It can accept several
 optional parameters to customize the authentication process.
 JWT based authentication can be performed in 2 ways:</p>
 <section id="using-endpoint-provided-token">
-<h4>1. Using Endpoint provided token<a class="headerlink" href="#using-endpoint-provided-token" title="Link to this heading">#</a></h4>
+<h4>1. Using Endpoint provided token<a class="headerlink" href="#using-endpoint-provided-token" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  This application can function with a predefined jwt token. A fully generated JWT
   token can be directly provided, and the application will automatically form the REST
   headers required for a request.
@@ -933,7 +933,7 @@ JWT based authentication can be performed in 2 ways:</p>
 </div>
 </section>
 <section id="compiling-a-token-using-jwt-parameters">
-<h4>2. Compiling a Token using JWT parameters<a class="headerlink" href="#compiling-a-token-using-jwt-parameters" title="Link to this heading">#</a></h4>
+<h4>2. Compiling a Token using JWT parameters<a class="headerlink" href="#compiling-a-token-using-jwt-parameters" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  This application can also generate a jwt token. (Skip if you have already specified
   a jwt_token). The application can automatically compile a jwt token using certain
   parameters which can be provided in json string or line separated format (similar to
@@ -1781,7 +1781,7 @@ JWT based authentication can be performed in 2 ways:</p>
 </section>
 <hr class="docutils" />
 <section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">#</a></h2>
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1801,10 +1801,10 @@ JWT based authentication can be performed in 2 ways:</p>
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">#</a></h2>
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">#</a></h3>
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
 </section>
 </section>
@@ -1955,7 +1955,7 @@ JWT based authentication can be performed in 2 ways:</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

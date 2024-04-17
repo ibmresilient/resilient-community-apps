@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="AbuseIPDB Threat Service" href="../rc-cts-abuseipdb/README.html" /><link rel="prev" title="Data Feeder for SOAR" href="../rc_data_feed_plugin_resilientfeed/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
         <title>Data Feed plugin for Splunk - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -350,20 +350,20 @@
         </div>
         <article role="main">
           <section id="data-feed-plugin-for-splunk">
-<h1>Data Feed plugin for Splunk<a class="headerlink" href="#data-feed-plugin-for-splunk" title="Link to this heading">#</a></h1>
+<h1>Data Feed plugin for Splunk<a class="headerlink" href="#data-feed-plugin-for-splunk" title="Link to this heading">¶</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>This package contains the SplunkFeed Plugin to the Data Feed extension. This Data Feed extension allows one to maintain “replica” data for IBM SOAR incidents, artifacts, tasks, notes, etc via a HTTP Event Collector in Splunk. The updates are performed in near real-time.</p>
 <p>This plugin allows this replica data to be maintained in Splunk.</p>
 <p>Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
 <p>Unless otherwise specified, contents of this repository are published under the MIT open-source
 <a class="reference download internal" download="" href="../_downloads/81bfbcae20a442ef630dcd7fdd1b62ee/LICENSE"><span class="xref download myst">LICENSE</span></a>.</p>
 </section>
 <section id="release-notes">
-<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h2>
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -397,7 +397,7 @@
 </table>
 </div>
 <section id="changes">
-<h3>1.1.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h3>
+<h3>1.1.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
 <p>This release modified the base portion of the Data Feeder which is controlled by the <code class="docutils literal notranslate"><span class="pre">[feed]</span></code> section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -425,7 +425,7 @@
 </div>
 </section>
 <section id="id1">
-<h3>1.2.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>1.2.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p>This release modified the base portion of the Data Feeder which is controlled by the <code class="docutils literal notranslate"><span class="pre">[feed]</span></code> section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version.
 Version 1.2.0 also introduces the ability to exclude incident fields from the created <code class="docutils literal notranslate"><span class="pre">incident</span></code> database table.  Wildcards can be used to remove fields following a pattern. Ex. gdpr*.
 To use this capability, add the following app.config setting, exclude_incident_fields_file, to the particular database configuration section.</p>
@@ -452,24 +452,24 @@ To use this capability, add the following app.config setting, exclude_incident_f
 </section>
 </section>
 <section id="compatibility">
-<h2>Compatibility<a class="headerlink" href="#compatibility" title="Link to this heading">#</a></h2>
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Link to this heading">¶</a></h2>
 <p>SOAR: 45.0 or higher</p>
 <p>CP4S: 1.10 or higher</p>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>The data feeder app for Splunk contains Python components that are called by the IBM SOAR platform. It can either by installed directly in the app for management and execution through the App Host, or installed on your own Integration server, running our integration framework: resilient-circuits. It is preferred that an enterprise use App Host, as all the component installation and dependencies are already packaged.</p>
 <section id="app-host">
-<h3>App Host<a class="headerlink" href="#app-host" title="Link to this heading">#</a></h3>
+<h3>App Host<a class="headerlink" href="#app-host" title="Link to this heading">¶</a></h3>
 <p>Simply install the .zip file into the app. It includes:</p>
 <ul class="simple">
 <li><p>Rules to automatically share incident data with Splunk. Review the rules which start with ‘Data Feeder:’ if you wish to reduce the types of information shared. To share datatable data, create a new rule specifying the datatable and assign it to ‘data_feed’ destination. See the <a class="reference internal" href="#app.config-file"><span class="xref myst">app.config file</span></a> section for more information on how to configure your data feed environment.</p></li>
 </ul>
 </section>
 <section id="integration-server">
-<h3>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">#</a></h3>
+<h3>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">¶</a></h3>
 <section id="install-the-python-components">
-<h4>Install the Python components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">#</a></h4>
+<h4>Install the Python components<a class="headerlink" href="#install-the-python-components" title="Link to this heading">¶</a></h4>
 <p>Complete the following steps to install the Python components:</p>
 <ul class="simple">
 <li><p>Ensure that the environment is up-to-date, as follows:</p></li>
@@ -507,7 +507,7 @@ Complete the following steps to configure and run the integration:</p>
 </section>
 </section>
 <section id="app-config-file">
-<h3>app.config file<a class="headerlink" href="#app-config-file" title="Link to this heading">#</a></h3>
+<h3>app.config file<a class="headerlink" href="#app-config-file" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Edit the app.config configuration file, as follows:</p>
 <ul>
@@ -562,7 +562,7 @@ Complete the following steps to configure and run the integration:</p>
 </section>
 </section>
 <section id="splunkhecfeed-class">
-<h2>SplunkHECFeed Class<a class="headerlink" href="#splunkhecfeed-class" title="Link to this heading">#</a></h2>
+<h2>SplunkHECFeed Class<a class="headerlink" href="#splunkhecfeed-class" title="Link to this heading">¶</a></h2>
 <p>The SplunkHECFeed class utilizes the Splunk HTTP Event Collector for data import. This is convenient as the data from IBM SOAR is readily converted to JSON which can be natively consumed by Splunk.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -617,7 +617,7 @@ Complete the following steps to configure and run the integration:</p>
 </table>
 </div>
 <section id="considerations">
-<h3>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h3>
+<h3>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Enable the HTTP Event Collector within Splunk ES before using this data feed.</p></li>
 <li><p>Splunk events are immutable. IBM SOAR object changes are represented as new events. No event deletion is possible.</p></li>
@@ -626,7 +626,7 @@ Complete the following steps to configure and run the integration:</p>
 </section>
 </section>
 <section id="splunk-configuration">
-<h2>Splunk Configuration<a class="headerlink" href="#splunk-configuration" title="Link to this heading">#</a></h2>
+<h2>Splunk Configuration<a class="headerlink" href="#splunk-configuration" title="Link to this heading">¶</a></h2>
 <p>Follow these steps to create an HTTP Event Collector:</p>
 <ol class="arabic simple">
 <li><p>Go to Settings and select Indexes.</p></li>
@@ -641,7 +641,7 @@ Complete the following steps to configure and run the integration:</p>
 </ol>
 </section>
 <section id="additional-data-feed-documentation">
-<h2>Additional Data Feed Documentation<a class="headerlink" href="#additional-data-feed-documentation" title="Link to this heading">#</a></h2>
+<h2>Additional Data Feed Documentation<a class="headerlink" href="#additional-data-feed-documentation" title="Link to this heading">¶</a></h2>
 <p>For more information on the setup and use of the data feeder, including the use of the Data Sync Incident function, refer to the <a class="reference external" href="https://github.com/ibmresilient/resilient-community-apps/blob/main/rc_data_feed/doc/IBM_SOAR_Data_Feed_App_Guide.docx">Data Feeder Documentation</a>.</p>
 </section>
 </section>
@@ -737,7 +737,7 @@ Complete the following steps to configure and run the integration:</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
