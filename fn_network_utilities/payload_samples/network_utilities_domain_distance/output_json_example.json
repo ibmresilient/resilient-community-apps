@@ -1,0 +1,13 @@
+{
+  "domain_name": "1bm.com",
+  "distances": {
+    "ibm.com": 1,
+    "resilientsystems.com": 14,
+    "ibmcloud.com": 6,
+    "bluemix.com": 5
+  },
+  "closest": {
+    "name": "ibm.com",
+    "distance": 1
+  }
+}
