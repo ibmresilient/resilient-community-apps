@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="TOR" href="../fn_query_tor_network/README.html" /><link rel="prev" title="QRadar Enhanced Data Migration" href="../fn_qradar_enhanced_data/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.5 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 -->
         <title>QRadar Integration - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -114,6 +114,8 @@
 <label class="overlay toc-overlay" for="__toc">
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
 
 
@@ -348,7 +350,7 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <article role="main">
+        <article role="main" id="furo-main-content">
           <section id="qradar-integration">
 <h1>QRadar Integration<a class="headerlink" href="#qradar-integration" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
@@ -376,6 +378,7 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#function---qradar-siem-add-reference-set-item"><span class="xref myst">Function - QRadar SIEM: Add Reference Set Item </span></a></p></li>
+<li><p><a class="reference internal" href="#function---qradar-siem-create-offense-note"><span class="xref myst">Function - QRadar SIEM: Create Offense Note</span></a></p></li>
 <li><p><a class="reference internal" href="#function---qradar-siem-delete-reference-set-item"><span class="xref myst">Function - QRadar SIEM: Delete Reference Set Item </span></a></p></li>
 <li><p><a class="reference internal" href="#function---qradar-siem-find-reference-set-item"><span class="xref myst">Function - QRadar SIEM: Find Reference Set Item </span></a></p></li>
 <li><p><a class="reference internal" href="#function---qradar-siem-find-reference-sets"><span class="xref myst">Function - QRadar SIEM: Find Reference Sets </span></a></p></li>
@@ -385,6 +388,7 @@
 <li><p><a class="reference internal" href="#function---qradar-siem-reference-table-get-table-data"><span class="xref myst">Function - QRadar SIEM: Reference Table Get Table Data </span></a></p></li>
 <li><p><a class="reference internal" href="#function---qradar-siem-reference-table-update-item"><span class="xref myst">Function - QRadar SIEM: Reference Table Update Item </span></a></p></li>
 <li><p><a class="reference internal" href="#function---qradar-siem-qradar-search"><span class="xref myst">Function - QRadar SIEM: QRadar Search </span></a></p></li>
+<li><p><a class="reference internal" href="#function---qradar-siem-update-offense"><span class="xref myst">Function - QRadar SIEM: Update Offense</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---qradar-siem-offense-events"><span class="xref myst">Data Table - QRadar SIEM Offense Events</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---qradar-siem-reference-sets"><span class="xref myst">Data Table - QRadar SIEM Reference Sets</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---qradar-siem-reference-table-queried-rows"><span class="xref myst">Data Table - QRadar SIEM Reference Table Queried Rows</span></a></p></li>
@@ -410,75 +414,79 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.3.1</p></td>
+<tr class="row-even"><td><p>2.4.0</p></td>
+<td><p>April. 2024</p></td>
+<td><p>Added functions to create offense notes and make changes to an offense</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.3.1</p></td>
 <td><p>April. 2024</p></td>
 <td><p>Bug fix for search_ref_set function</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.3.0</p></td>
+<tr class="row-even"><td><p>2.3.0</p></td>
 <td><p>September. 2023</p></td>
 <td><p>Python3 / Playbook Conversion</p></td>
 </tr>
-<tr class="row-even"><td><p>2.2.6</p></td>
+<tr class="row-odd"><td><p>2.2.6</p></td>
 <td><p>June. 2023</p></td>
 <td><p>Fix bug in qradar_search function</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.2.5</p></td>
+<tr class="row-even"><td><p>2.2.5</p></td>
 <td><p>July. 2022</p></td>
 <td><p>Bug Fix for windows clients</p></td>
 </tr>
-<tr class="row-even"><td><p>2.2.4</p></td>
+<tr class="row-odd"><td><p>2.2.4</p></td>
 <td><p>July. 2022</p></td>
 <td><p>Update SOAR required version</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.2.3</p></td>
+<tr class="row-even"><td><p>2.2.3</p></td>
 <td><p>June. 2022</p></td>
 <td><p>Bug fix for using with MSSP</p></td>
 </tr>
-<tr class="row-even"><td><p>2.2.2</p></td>
+<tr class="row-odd"><td><p>2.2.2</p></td>
 <td><p>May. 2022</p></td>
 <td><p>Add more documentation and bug fix</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.2.1</p></td>
+<tr class="row-even"><td><p>2.2.1</p></td>
 <td><p>March 2022</p></td>
 <td><p>Cancel QRadar queries which have timed out</p></td>
 </tr>
-<tr class="row-even"><td><p>2.2.0</p></td>
+<tr class="row-odd"><td><p>2.2.0</p></td>
 <td><p>March 2022</p></td>
 <td><p>Allow multiple QRadar instances</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.1</p></td>
+<tr class="row-even"><td><p>2.1.1</p></td>
 <td><p>July 2021</p></td>
 <td><p>Fixed selftest failing when using cafile</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>Feb. 2021</p></td>
 <td><p>Additional functions for reference table mapping.</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.9</p></td>
+<tr class="row-even"><td><p>2.0.9</p></td>
 <td><p>Feb. 2021</p></td>
 <td><p>Bug fixes associated with require input field validation.</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.8</p></td>
+<tr class="row-odd"><td><p>2.0.8</p></td>
 <td><p>Nov. 2020</p></td>
 <td><p>Fixed a bug failing search function when used with token.</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.7</p></td>
+<tr class="row-even"><td><p>2.0.7</p></td>
 <td><p>July 2020</p></td>
 <td><p>Correct typos and describe optional Search activity field Update SOAR version.</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.6</p></td>
+<tr class="row-odd"><td><p>2.0.6</p></td>
 <td><p>May 2020</p></td>
 <td><p>Add option to return all results from Search.</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.4</p></td>
+<tr class="row-even"><td><p>2.0.4</p></td>
 <td><p>April 2020</p></td>
 <td><p>Additional configuration notes.</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0</p></td>
+<tr class="row-odd"><td><p>2.0</p></td>
 <td><p>March 2019</p></td>
 <td><p>Supports the 2.0 release.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0</p></td>
+<tr class="row-even"><td><p>1.0</p></td>
 <td><p>July 2018</p></td>
 <td><p>Initial publication.</p></td>
 </tr>
@@ -512,6 +520,8 @@ The QRadar app with the SOAR platform package provides the following:</p>
 <li><p>List all reference tables</p></li>
 <li><p>View all items associated with a given reference table</p></li>
 <li><p>Add/Update/Delete items to a QRadar reference table</p></li>
+<li><p>Update an offense, such as changing status to closed</p></li>
+<li><p>Writing notes to an offense</p></li>
 </ul>
 <p>With the above functions, this package includes example workflows that demonstrate how to call the functions, rules that start the example workflows, and custom data tables updated by the example workflows.</p>
 </section>
@@ -759,6 +769,101 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;IP: </span><span class="si">{}</span><span class="s2"> added to reference set: </span><span class="si">{}</span><span class="s2"> on QRadar server: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;qradar_reference_set_name&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;qradar_label&quot;</span><span class="p">]))</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Failed to add IP: </span><span class="si">{}</span><span class="s2"> to reference set on QRadar server: </span><span class="si">{}</span><span class="s2">. Status Code: </span><span class="si">{}</span><span class="s2">, message: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;qradar_label&quot;</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;status_code&quot;</span><span class="p">]),</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;qradar_reference_set_name&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-qradar-siem-create-offense-note">
+<h2>Function - QRadar SIEM: Create Offense Note<a class="headerlink" href="#function-qradar-siem-create-offense-note" title="Link to this heading">¶</a></h2>
+<p>Add a note to an offense</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">qradar_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Enter name of QRadar server to use from the app.config</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">qradar_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>QRadar Id</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">qradar_note</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Note to create</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;note_text&quot;</span><span class="p">:</span> <span class="s2">&quot;test from soar</span><span class="se">\\</span><span class="s2">x03&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;create_time&quot;</span><span class="p">:</span> <span class="mi">1713464714559</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">214</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;API_token: ms qradar integration&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;qradar_note&quot;</span><span class="p">:</span> <span class="s2">&quot;test from soar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;qradar_id&quot;</span><span class="p">:</span> <span class="mi">164</span><span class="p">,</span>
+        <span class="s2">&quot;qradar_label&quot;</span><span class="p">:</span> <span class="s2">&quot;9.46.246.248&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-qradar-integration&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.4.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">463</span><span class="p">,</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-18 14:25:14&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_note</span>  <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_note</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_label</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_server</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_note_results</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QRadar note created for </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span><span class="si">}</span><span class="s2"> &#39;</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_note</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QRadar note failed for: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span><span class="si">}</span><span class="s2"> Reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1868,6 +1973,187 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 </section>
 <hr class="docutils" />
+<section id="function-qradar-siem-update-offense">
+<h2>Function - QRadar SIEM: Update Offense<a class="headerlink" href="#function-qradar-siem-update-offense" title="Link to this heading">¶</a></h2>
+<p>Update information about an offense.</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">qradar_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Enter name of QRadar server to use from the app.config</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">qradar_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>QRadar Id</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">qradar_update_json</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{&quot;severity&quot;:</span> <span class="pre">50,</span> <span class="pre">&quot;categories&quot;:</span> <span class="pre">[&quot;Virtual</span> <span class="pre">Machine</span> <span class="pre">Creation</span> <span class="pre">Attempt&quot;,</span> <span class="pre">&quot;Read</span> <span class="pre">Activity</span> <span class="pre">Attempted&quot;]}</span></code></p></td>
+<td><p>JSON formatted fields to update an app. Use double quotes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following fields are available (but not limited to) to change:</p>
+<ul class="simple">
+<li><p>assigned_to</p></li>
+<li><p>categories</p></li>
+<li><p>closing_reason_id</p></li>
+<li><p>credibility</p></li>
+<li><p>description</p></li>
+<li><p>follow_up</p></li>
+<li><p>inactive</p></li>
+<li><p>magnitude</p></li>
+<li><p>offense_type</p></li>
+<li><p>protected</p></li>
+<li><p>relevance</p></li>
+<li><p>severity</p></li>
+<li><p>status</p></li>
+</ul>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;last_persisted_time&quot;</span><span class="p">:</span> <span class="mi">1713465658000</span><span class="p">,</span>
+        <span class="s2">&quot;username_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Login</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">100462</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;CRE_RULE&quot;</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;event_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;flow_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;assigned_to&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;security_category_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;follow_up&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;source_address_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">99</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;inactive&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;closing_user&quot;</span><span class="p">:</span> <span class="s2">&quot;API_token: ms qradar integration&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;destination_networks&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;other&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;source_network&quot;</span><span class="p">:</span> <span class="s2">&quot;other&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;close_time&quot;</span><span class="p">:</span> <span class="mi">1713465658000</span><span class="p">,</span>
+        <span class="s2">&quot;remote_destination_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="mi">1711492873201</span><span class="p">,</span>
+        <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;last_updated_time&quot;</span><span class="p">:</span> <span class="mi">1711492873201</span><span class="p">,</span>
+        <span class="s2">&quot;credibility&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">164</span><span class="p">,</span>
+        <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;User Login Success&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;policy_category_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;log_sources&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;F5FirePass&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type_id&quot;</span><span class="p">:</span> <span class="mi">232</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;F5FirePass @ f5networks.firepass.test.com&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">962</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;closing_reason_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;device_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;first_persisted_time&quot;</span><span class="p">:</span> <span class="mi">1711492873000</span><span class="p">,</span>
+        <span class="s2">&quot;offense_type&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;domain_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;offense_source&quot;</span><span class="p">:</span> <span class="s2">&quot;31.107.167.255&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;local_destination_address_ids&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;local_destination_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;CLOSED&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;qradar_update_json&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">CLOSED</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">closing_reason_id</span><span class="se">\&quot;</span><span class="s2">: 1}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;qradar_id&quot;</span><span class="p">:</span> <span class="mi">164</span><span class="p">,</span>
+        <span class="s2">&quot;qradar_label&quot;</span><span class="p">:</span> <span class="s2">&quot;11.22.33.44&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-qradar-integration&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.4.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">499</span><span class="p">,</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-18 14:40:58&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">closing_reason_lookup</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;False Positive&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;Non-Issue&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;Policy Violation&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;Duplicate&quot;</span><span class="p">:</span> <span class="mi">56</span><span class="p">,</span>
+  <span class="s2">&quot;Not an Issue&quot;</span><span class="p">:</span> <span class="mi">57</span><span class="p">,</span>
+  <span class="s2">&quot;Resolved&quot;</span><span class="p">:</span> <span class="mi">54</span><span class="p">,</span>
+  <span class="s2">&quot;Unresolved&quot;</span><span class="p">:</span> <span class="mi">55</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">closing_reason_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">closing_reason</span><span class="p">):</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Closing reason not found: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">closing_reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_label</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_label</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_update_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+  <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;CLOSED&quot;</span><span class="p">,</span> 
+  <span class="s2">&quot;closing_reason_id&quot;</span><span class="p">:</span> <span class="n">closing_reason_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">closing_reason</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">qradar_update_offense_results</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QRadar offense update successful for: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QRadar offense update failed for: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_id</span><span class="si">}</span><span class="s2"> Reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+---
+</section>
 <section id="data-table-qradar-siem-offense-events">
 <h2>Data Table - QRadar SIEM Offense Events<a class="headerlink" href="#data-table-qradar-siem-offense-events" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-qradar-offense-events" src="../_images/dt-qradar-offense-events.png" /></p>
@@ -2173,6 +2459,16 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
 </tr>
+<tr class="row-odd"><td><p>QRadar SIEM: Update Offense (close offense)</p></td>
+<td><p>Example of closing an offense</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>QRadar SIEM: Create Note</p></td>
+<td><p>Create a note for an offense</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -2286,6 +2582,7 @@ input field <code class="docutils literal notranslate"><span class="pre">qradar_
 </ul>
 </li>
 <li><a class="reference internal" href="#function-qradar-siem-add-reference-set-item">Function - QRadar SIEM: Add Reference Set Item</a></li>
+<li><a class="reference internal" href="#function-qradar-siem-create-offense-note">Function - QRadar SIEM: Create Offense Note</a></li>
 <li><a class="reference internal" href="#function-qradar-siem-delete-reference-set-item">Function - QRadar SIEM: Delete Reference Set Item</a></li>
 <li><a class="reference internal" href="#function-qradar-siem-find-reference-set-item">Function - QRadar SIEM: Find Reference Set Item</a></li>
 <li><a class="reference internal" href="#function-qradar-siem-find-reference-sets">Function - QRadar SIEM: Find Reference Sets</a></li>
@@ -2295,6 +2592,7 @@ input field <code class="docutils literal notranslate"><span class="pre">qradar_
 <li><a class="reference internal" href="#function-qradar-siem-reference-table-get-table-data">Function - QRadar SIEM: Reference Table Get Table Data</a></li>
 <li><a class="reference internal" href="#function-qradar-siem-reference-table-update-item">Function - QRadar SIEM: Reference Table Update Item</a></li>
 <li><a class="reference internal" href="#function-qradar-siem-qradar-search">Function - QRadar SIEM: QRadar Search</a></li>
+<li><a class="reference internal" href="#function-qradar-siem-update-offense">Function - QRadar SIEM: Update Offense</a></li>
 <li><a class="reference internal" href="#data-table-qradar-siem-offense-events">Data Table - QRadar SIEM Offense Events</a><ul>
 <li><a class="reference internal" href="#api-name">API Name:</a></li>
 <li><a class="reference internal" href="#columns">Columns:</a></li>
@@ -2337,7 +2635,7 @@ input field <code class="docutils literal notranslate"><span class="pre">qradar_
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=36754332"></script>
