@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "success": true,
+    "reason": null,
+    "content": {
+        "note_text": "test from soar\\x03",
+        "create_time": 1713464714559,
+        "id": 214,
+        "username": "API_token: ms qradar integration"
+    },
+    "raw": null,
+    "inputs": {
+        "qradar_note": "test from soar",
+        "qradar_id": 164,
+        "qradar_label": "9.46.246.248"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-qradar-integration",
+        "package_version": "2.4.0",
+        "host": "localhost",
+        "execution_time_ms": 463,
+        "timestamp": "2024-04-18 14:25:14"
+    }
+}
