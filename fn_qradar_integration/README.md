@@ -14,6 +14,7 @@
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
 - [Function - QRadar SIEM: Add Reference Set Item ](#function---qradar-siem-add-reference-set-item)
+- [Function - QRadar SIEM: Create Offense Note](#function---qradar-siem-create-offense-note)
 - [Function - QRadar SIEM: Delete Reference Set Item ](#function---qradar-siem-delete-reference-set-item)
 - [Function - QRadar SIEM: Find Reference Set Item ](#function---qradar-siem-find-reference-set-item)
 - [Function - QRadar SIEM: Find Reference Sets ](#function---qradar-siem-find-reference-sets)
@@ -23,6 +24,7 @@
 - [Function - QRadar SIEM: Reference Table Get Table Data ](#function---qradar-siem-reference-table-get-table-data)
 - [Function - QRadar SIEM: Reference Table Update Item ](#function---qradar-siem-reference-table-update-item)
 - [Function - QRadar SIEM: QRadar Search ](#function---qradar-siem-qradar-search)
+- [Function - QRadar SIEM: Update Offense](#function---qradar-siem-update-offense)
 - [Data Table - QRadar SIEM Offense Events](#data-table---qradar-siem-offense-events)
 - [Data Table - QRadar SIEM Reference Sets](#data-table---qradar-siem-reference-sets)
 - [Data Table - QRadar SIEM Reference Table Queried Rows](#data-table---qradar-siem-reference-table-queried-rows)
@@ -40,6 +42,7 @@
 -->
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.4.0 | April. 2024 | Added functions to create offense notes and make changes to an offense |
 | 2.3.1 | April. 2024 | Bug fix for search_ref_set function |
 | 2.3.0 | September. 2023 | Python3 / Playbook Conversion |
 | 2.2.6 | June. 2023 | Fix bug in qradar_search function |
@@ -87,6 +90,8 @@ The QRadar app with the SOAR platform package provides the following:
 * List all reference tables
 * View all items associated with a given reference table
 * Add/Update/Delete items to a QRadar reference table
+* Update an offense, such as changing status to closed
+* Writing notes to an offense
 
 With the above functions, this package includes example workflows that demonstrate how to call the functions, rules that start the example workflows, and custom data tables updated by the example workflows.
 
@@ -145,7 +150,6 @@ Python 3.6, 3.9, and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=50.0.0
 
-
 ---
 
 ## Installation
@@ -191,7 +195,6 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 * Import the Data Tables and Custom Fields like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
 
 ---
 
@@ -261,6 +264,84 @@ if results["status_code"] == 200:
   incident.addNote(u"IP: {} added to reference set: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
 else:
   incident.addNote(u"Failed to add IP: {} to reference set on QRadar server: {}. Status Code: {}, message: {}".format(artifact.value, results.inputs["qradar_label"], str(results["status_code"]), results.inputs["qradar_reference_set_name"]))
+```
+
+</p>
+</details>
+
+---
+## Function - QRadar SIEM: Create Offense Note 
+Add a note to an offense 
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
+| `qradar_id` | `int` | Yes | `-` | QRadar Id |
+| `qradar_note` | `text` | Yes | `-` | Note to create |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+    "version": 2,
+    "success": true,
+    "reason": null,
+    "content": {
+        "note_text": "test from soar\\x03",
+        "create_time": 1713464714559,
+        "id": 214,
+        "username": "API_token: ms qradar integration"
+    },
+    "raw": null,
+    "inputs": {
+        "qradar_note": "test from soar",
+        "qradar_id": 164,
+        "qradar_label": "9.46.246.248"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-qradar-integration",
+        "package_version": "2.4.0",
+        "host": "localhost",
+        "execution_time_ms": 463,
+        "timestamp": "2024-04-18 14:25:14"
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.qradar_id = playbook.inputs.qradar_id
+inputs.qradar_note  = playbook.inputs.qradar_note
+inputs.qradar_label = playbook.inputs.qradar_server
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.create_note_results
+if results.success:
+  incident.addNote(f"QRadar note created for {playbook.inputs.qradar_id} '{playbook.inputs.qradar_note}'")
+else:
+  incident.addNote(f"QRadar note failed for: {playbook.inputs.qradar_id} Reason: {results.reason}")
 ```
 
 </p>
@@ -1180,7 +1261,169 @@ incident.addNote("{} offenses have successfully been queried".format(len(results
 </details>
 
 ---
+## Function - QRadar SIEM: Update Offense 
+Update information about an offense.
 
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
+| `qradar_id` | `number` | yes | `-` | QRadar Id |
+| `qradar_update_json` | `text` | yes | `{"severity": 50, "categories": ["Virtual Machine Creation Attempt", "Read Activity Attempted"]}` | JSON formatted fields to update an app. Use double quotes. |
+
+The following fields are available (but not limited to) to change:
+* assigned_to
+* categories
+* closing_reason_id
+* credibility
+* description
+* follow_up
+* inactive
+* magnitude
+* offense_type
+* protected
+* relevance
+* severity
+* status
+
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+    "version": 2,
+    "success": true,
+    "reason": null,
+    "content": {
+        "last_persisted_time": 1713465658000,
+        "username_count": 1,
+        "description": "Login\n",
+        "rules": [
+            {
+                "id": 100462,
+                "type": "CRE_RULE"
+            }
+        ],
+        "event_count": 1,
+        "flow_count": 0,
+        "assigned_to": null,
+        "security_category_count": 1,
+        "follow_up": false,
+        "source_address_ids": [
+            99
+        ],
+        "source_count": 1,
+        "inactive": true,
+        "protected": false,
+        "closing_user": "API_token: ms qradar integration",
+        "destination_networks": [
+            "other"
+        ],
+        "source_network": "other",
+        "category_count": 1,
+        "close_time": 1713465658000,
+        "remote_destination_count": 1,
+        "start_time": 1711492873201,
+        "magnitude": 1,
+        "last_updated_time": 1711492873201,
+        "credibility": 2,
+        "id": 164,
+        "categories": [
+            "User Login Success"
+        ],
+        "severity": 1,
+        "policy_category_count": 0,
+        "log_sources": [
+            {
+                "type_name": "F5FirePass",
+                "type_id": 232,
+                "name": "F5FirePass @ f5networks.firepass.test.com",
+                "id": 962
+            }
+        ],
+        "closing_reason_id": 1,
+        "device_count": 1,
+        "first_persisted_time": 1711492873000,
+        "offense_type": 0,
+        "relevance": 0,
+        "domain_id": 3,
+        "offense_source": "31.107.167.255",
+        "local_destination_address_ids": [],
+        "local_destination_count": 0,
+        "status": "CLOSED"
+    },
+    "raw": null,
+    "inputs": {
+        "qradar_update_json": "{\"status\": \"CLOSED\", \"closing_reason_id\": 1}",
+        "qradar_id": 164,
+        "qradar_label": "11.22.33.44"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-qradar-integration",
+        "package_version": "2.4.0",
+        "host": "localhost",
+        "execution_time_ms": 499,
+        "timestamp": "2024-04-18 14:40:58"
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+import json
+
+closing_reason_lookup = {
+  "False Positive": 2,
+  "Non-Issue": 1,
+  "Policy Violation": 3,
+  "Duplicate": 56,
+  "Not an Issue": 57,
+  "Resolved": 54,
+  "Unresolved": 55
+}
+
+if not closing_reason_lookup.get(playbook.inputs.closing_reason):
+  helper.fail(f"Closing reason not found: {playbook.inputs.closing_reason}")
+
+inputs.qradar_label = playbook.inputs.qradar_label
+inputs.qradar_id = playbook.inputs.qradar_id
+inputs.qradar_update_json = json.dumps({
+  "status": "CLOSED", 
+  "closing_reason_id": closing_reason_lookup.get(playbook.inputs.closing_reason)
+})
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.qradar_update_offense_results
+if results.success:
+  incident.addNote(f"QRadar offense update successful for: {playbook.inputs.qradar_id}")
+else:
+  incident.addNote(f"QRadar offense update failed for: {playbook.inputs.qradar_id} Reason: {results.reason}")
+```
+
+</p>
+</details>
+---
 
 ## Data Table - QRadar SIEM Offense Events
 
@@ -1277,6 +1520,8 @@ qradar_reference_table
 | QRadar SIEM: Move from Sample Blocked to Sample Suspected - Example (PB) | Remove an item from QRadar reference set and add it to reference set. Add a note to the Incident after completing each step. | artifact | `enabled` |
 | QRadar SIEM: Update this Reference Table Item - Example (PB) | Update an existing reference table item. If it does not exist, it will be added | qradar_reference_table_queried_rows | `enabled` |
 | QRadar SIEM: Search QRadar for offense id -Example (PB) | Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results. | incident | `enabled` |
+| QRadar SIEM: Update Offense (close offense) | Example of closing an offense | incident | `enabled` |
+| QRadar SIEM: Create Note | Create a note for an offense | incident | `enabled` | 
 
 ---
 

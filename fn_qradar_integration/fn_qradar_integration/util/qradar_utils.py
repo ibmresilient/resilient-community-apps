@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, line-too-long
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Util classes for qradar
 
 from base64 import b64encode
 from logging import getLogger
 from six import binary_type
+from typing import Union
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 from fn_qradar_integration.util import function_utils
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, IntegrationError
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 from fn_qradar_integration.lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
-from resilient_lib import IntegrationError
-from urllib.parse import quote as quote_func, urljoin
+from urllib.parse import quote as quote_func, urljoin, urlencode
 
 LOG = getLogger(__name__)
 FORWARD_SLASH = b'%2F'
 ARIEL_SEARCHES_DELETE = "ariel/searches/{}"
+OFFENSES_ENDPOINT = "siem/offenses/"
+NOTE_MARKER = "\x03"
 
 def quote(input_v, safe=None):
     """
@@ -48,6 +51,7 @@ class QRadarServers():
 
         return servers, server_name_list
 
+    @staticmethod
     def qradar_label_test(qradar_label, servers_list):
         """
         Check if the given qradar_label is in the app.config
@@ -58,7 +62,7 @@ class QRadarServers():
         # If label not given and using previous versions app.config [fn_qradar_integration]
         if not qradar_label and servers_list.get(qradar_constants.PACKAGE_NAME):
             return servers_list[qradar_constants.PACKAGE_NAME]
-        elif not qradar_label:
+        if not qradar_label:
             raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
 
         label = qradar_constants.PACKAGE_NAME+":"+qradar_label
@@ -143,9 +147,9 @@ class AuthInfo(object):
             # 404 is not found, such as reference not found or item not found in reference set
             if response.status_code in (404,):
                 return response
-            else:
-                response.raise_for_status()
-                return response
+
+            response.raise_for_status()
+            return response
 
         return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
 
@@ -548,3 +552,49 @@ class QRadarClient(object):
         :return:
         """
         return cls.reference_tables.add_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
+
+    @classmethod
+    def update_offense(cls, offense_id: int, update_payload: dict) -> Union[None, dict]:
+        """
+        Method to update a QRadar offense
+        :param offense_id: id of the offense to be updated (required)
+        :param update_payload: dictionary of payload to update the offense
+        :return: updated offense
+        """
+        offense_url_base = urljoin(cls.auth_info.api_url, urljoin(OFFENSES_ENDPOINT, str(offense_id)))
+
+        encoded_params = urlencode(update_payload)
+
+        offense_url = f"{offense_url_base}?{encoded_params}"
+
+        LOG.debug("Making POST request to [%s]", offense_url)
+
+        updated_offense = cls.auth_info.make_call("POST", offense_url)
+
+        if not updated_offense:
+            LOG.error('Unable to update Offense.')
+            return None
+
+        return updated_offense.json()
+
+    @classmethod
+    def create_offense_note(cls, offense_id: int, note_text: str) -> Union[None, dict]:
+        """
+        Method to attach a new note to an offense
+        :param offense_id: id of the offense to which the note will be attached
+        :param note_text: Text content of the note
+        :return Newly created offense note from the supplied params
+        """
+        note_url_base = urljoin(cls.auth_info.api_url, urljoin(OFFENSES_ENDPOINT, str(offense_id)))
+        note_url = f"{note_url_base}/notes"
+
+        # Put our "marker" on the end so we know it is a note we created.
+        notes = {"note_text": note_text+NOTE_MARKER}
+
+        offense_note = cls.auth_info.make_call("POST", note_url, data=notes)
+
+        if not offense_note:
+            LOG.error('Unable to create offense note.')
+            return None
+
+        return offense_note.json()

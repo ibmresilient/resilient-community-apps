@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1712588514449,
+  "export_date": 1713533811028,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param2",
       "hide_notification": false,
-      "id": 4949,
+      "id": 748,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_label",
       "hide_notification": false,
-      "id": 4960,
+      "id": 749,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -76,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_reference_set_name",
       "hide_notification": false,
-      "id": 5111,
+      "id": 750,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_reference_table_item_value",
       "hide_notification": false,
-      "id": 5112,
+      "id": 751,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param3",
       "hide_notification": false,
-      "id": 4950,
+      "id": 752,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -163,7 +163,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_reference_table_item_outer_key",
       "hide_notification": false,
-      "id": 5113,
+      "id": 753,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -192,7 +192,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query_range_start",
       "hide_notification": false,
-      "id": 5114,
+      "id": 754,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -219,9 +219,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/qradar_note",
+      "hide_notification": false,
+      "id": 2038,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qradar_note",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "qradar_note",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "cc12bbe8-e108-4935-84e0-e1c5d47435fb",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/qradar_query_range_end",
       "hide_notification": false,
-      "id": 5115,
+      "id": 757,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -250,7 +280,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query_all_results",
       "hide_notification": false,
-      "id": 5116,
+      "id": 758,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -275,7 +305,7 @@
           "label": "Yes",
           "properties": null,
           "uuid": "d480e32c-fd0d-4c0c-850f-390bf3a7dbe8",
-          "value": 1052
+          "value": 266
         },
         {
           "default": true,
@@ -284,7 +314,7 @@
           "label": "No",
           "properties": null,
           "uuid": "54c4eb52-d955-4e05-9f76-c3819853ff68",
-          "value": 1053
+          "value": 267
         }
       ]
     },
@@ -298,7 +328,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_reference_set_item_value",
       "hide_notification": false,
-      "id": 5117,
+      "id": 759,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -327,7 +357,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_reference_table_item_inner_key",
       "hide_notification": false,
-      "id": 5118,
+      "id": 760,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -356,7 +386,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param4",
       "hide_notification": false,
-      "id": 4953,
+      "id": 762,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -383,9 +413,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/qradar_update_json",
+      "hide_notification": false,
+      "id": 2037,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qradar_update_json",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "{ \"status\": \"CLOSED\", \"closing_reason_id\":1 }",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "qradar_update_json",
+      "tooltip": "json encoding of fields to update",
+      "type_id": 11,
+      "uuid": "f358ee92-3189-43e9-94e0-cb0a62875223",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/qradar_search_param1",
       "hide_notification": false,
-      "id": 4955,
+      "id": 765,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -414,7 +474,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query",
       "hide_notification": false,
-      "id": 4957,
+      "id": 767,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -428,16 +488,7 @@
       "tags": [],
       "templates": [
         {
-          "id": 7,
-          "name": "search events for username",
-          "template": {
-            "content": "SELECT %param1% FROM events WHERE username=%param2% LAST %param3% MINUTES",
-            "format": "text"
-          },
-          "uuid": "34fa3300-c28c-4346-8d3b-745a1afa75dc"
-        },
-        {
-          "id": 8,
+          "id": 3,
           "name": "search ip address",
           "template": {
             "content": "SELECT %param1% FROM events WHERE sourceip=\u0027%param2%\u0027 LAST %param3% MINUTES",
@@ -446,13 +497,22 @@
           "uuid": "dcbdb7c8-2068-4e97-8127-57131cbdccbf"
         },
         {
-          "id": 9,
+          "id": 4,
           "name": "search events for offense_id",
           "template": {
             "content": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES",
             "format": "text"
           },
           "uuid": "2b88eb5c-504a-4950-8674-0cf8f56f1a83"
+        },
+        {
+          "id": 5,
+          "name": "search events for username",
+          "template": {
+            "content": "SELECT %param1% FROM events WHERE username=%param2% LAST %param3% MINUTES",
+            "format": "text"
+          },
+          "uuid": "34fa3300-c28c-4346-8d3b-745a1afa75dc"
         }
       ],
       "text": "qradar_query",
@@ -471,7 +531,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_reference_table_name",
       "hide_notification": false,
-      "id": 5119,
+      "id": 770,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -500,7 +560,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param5",
       "hide_notification": false,
-      "id": 4958,
+      "id": 771,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -527,9 +587,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/qradar_id",
+      "hide_notification": false,
+      "id": 1873,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qradar_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "qradar_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "1d8545d5-9433-4f11-8c35-98cf232a1b4a",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "incident/qradar_id",
       "hide_notification": false,
-      "id": 4856,
+      "id": 683,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -559,7 +649,7 @@
       "deprecated": false,
       "export_key": "incident/qradar_destination",
       "hide_notification": false,
-      "id": 4866,
+      "id": 684,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -591,7 +681,7 @@
   ],
   "functions": [
     {
-      "created_date": 1711462221396,
+      "created_date": 1711372418191,
       "description": {
         "content": "Add an item to a given QRadar reference set",
         "format": "text"
@@ -599,19 +689,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Add Reference Set Item",
       "export_key": "qradar_add_reference_set_item",
-      "id": 66,
+      "id": 32,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462221396,
+      "last_modified_time": 1711372418191,
       "name": "qradar_add_reference_set_item",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"status_code\": 200, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 2, \"creation_time\": 1440703724417, \"name\": \"DHCP Servers\", \"namespace\": \"SHARED\", \"element_type\": \"IP\", \"collection_id\": 11}, \"inputs\": {\"qradar_label\": \"1.1.1.1\", \"qradar_reference_set_name\": \"DHCP Servers\", \"qradar_reference_set_item_value\": \"9.9.9.9\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"content\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}}}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_label\": {\"type\": \"string\"}, \"qradar_reference_set_name\": {\"type\": \"string\"}, \"qradar_reference_set_item_value\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "30b6899a-d015-48c3-8fd9-500788d4b437",
       "version": 0,
@@ -641,10 +733,86 @@
           "step_label": null
         }
       ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example of adding an item to QRadar reference set",
+          "object_type": "artifact",
+          "programmatic_name": "qradar_add_reference_set_item",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 52
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example of moving QRadar item from one reference set to another",
+          "object_type": "artifact",
+          "programmatic_name": "qradar_move_item_to_different_ref_set",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 39
+        }
+      ]
+    },
+    {
+      "created_date": 1713464062531,
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "destination_handle": "fn_qradar_integration",
+      "display_name": "QRadar SIEM: Create Offense Note",
+      "export_key": "qradar_create_offense_note",
+      "id": 130,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1713527997045,
+      "name": "qradar_create_offense_note",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
+      "output_json_example": "{\"version\": 2, \"success\": true, \"reason\": null, \"content\": {\"note_text\": \"test from soar\\\\x03\", \"create_time\": 1713464714559, \"id\": 214, \"username\": \"API_token: ms qradar integration\"}, \"raw\": null, \"inputs\": {\"qradar_note\": \"test from soar\", \"qradar_id\": 164, \"qradar_label\": \"9.46.246.248\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.4.0\", \"host\": \"localhost\", \"execution_time_ms\": 463, \"timestamp\": \"2024-04-18 14:25:14\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-04/schema#\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"integer\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"null\"}, \"content\": {\"type\": \"object\", \"properties\": {\"note_text\": {\"type\": \"string\"}, \"create_time\": {\"type\": \"integer\"}, \"id\": {\"type\": \"integer\"}, \"username\": {\"type\": \"string\"}}, \"required\": [\"note_text\", \"create_time\", \"id\", \"username\"]}, \"raw\": {\"type\": \"null\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_note\": {\"type\": \"string\"}, \"qradar_id\": {\"type\": \"integer\"}, \"qradar_label\": {\"type\": \"string\"}}, \"required\": [\"qradar_note\", \"qradar_id\", \"qradar_label\"]}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}, \"required\": [\"version\", \"package\", \"package_version\", \"host\", \"execution_time_ms\", \"timestamp\"]}}, \"required\": [\"version\", \"success\", \"reason\", \"content\", \"raw\", \"inputs\", \"metrics\"]}",
+      "tags": [],
+      "uuid": "6b1c1afa-b63d-4bcb-8a38-cadfa8ddc453",
+      "version": 2,
+      "view_items": [
+        {
+          "content": "a49a50f2-68ba-4ccb-87d5-c7e55d2cbfef",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1d8545d5-9433-4f11-8c35-98cf232a1b4a",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "cc12bbe8-e108-4935-84e0-e1c5d47435fb",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": []
     },
     {
-      "created_date": 1711462221494,
+      "created_date": 1711372418351,
       "description": {
         "content": "Delete an item from a given QRadar reference set",
         "format": "text"
@@ -652,19 +820,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Delete Reference Set Item",
       "export_key": "qradar_delete_reference_set_item",
-      "id": 67,
+      "id": 33,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462221494,
+      "last_modified_time": 1711372418351,
       "name": "qradar_delete_reference_set_item",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"status_code\": 200, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1440703735265, \"name\": \"DNS Servers\", \"namespace\": \"SHARED\", \"element_type\": \"IP\", \"collection_id\": 12}}, \"raw\": \"{\\\"status_code\\\": 200, \\\"content\\\": {\\\"timeout_type\\\": \\\"FIRST_SEEN\\\", \\\"number_of_elements\\\": 1, \\\"creation_time\\\": 1440703735265, \\\"name\\\": \\\"DNS Servers\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"element_type\\\": \\\"IP\\\", \\\"collection_id\\\": 12}}\", \"inputs\": {\"qradar_reference_set_name\": \"DNS Servers\", \"qradar_reference_set_item_value\": \"9.9.9.9\", \"qradar_label\": \"1.1.1.1\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.3.0\", \"host\": \"local\", \"execution_time_ms\": 1306, \"timestamp\": \"2023-09-14 21:08:54\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"content\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_reference_set_name\": {\"type\": \"string\"}, \"qradar_reference_set_item_value\": {\"type\": \"string\"}, \"qradar_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "a7dc3d26-ab97-44a3-b56a-e367315b08e0",
       "version": 0,
@@ -694,10 +864,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example of moving QRadar item from one reference set to another",
+          "object_type": "artifact",
+          "programmatic_name": "qradar_move_item_to_different_ref_set",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 39
+        }
+      ]
     },
     {
-      "created_date": 1711462221621,
+      "created_date": 1711372418506,
       "description": {
         "content": "Find an item in a given QRadar reference set",
         "format": "text"
@@ -705,19 +886,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Find Reference Set Item",
       "export_key": "qradar_find_reference_set_item",
-      "id": 68,
+      "id": 34,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462221621,
+      "last_modified_time": 1711372418506,
       "name": "qradar_find_reference_set_item",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"status_code\": 200, \"found\": \"True\", \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"data\": [{\"last_seen\": 1694498079793, \"first_seen\": 1694498079793, \"source\": \"EC: Sysmon - Detected a Possible Credential Dumping Tool\", \"value\": \"192.168.107.107\", \"domain_id\": null}], \"creation_time\": 1557250160405, \"name\": \"EC Compromised Hosts\", \"namespace\": \"SHARED\", \"element_type\": \"IP\", \"collection_id\": 35}, \"inputs\": {\"qradar_reference_set_name\": \"EC Compromised Hosts\", \"qradar_reference_set_item_value\": \"192.168.107.107\", \"qradar_label\": \"1.1.1.1\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"found\": {\"type\": \"string\"}, \"content\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"data\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"last_seen\": {\"type\": \"integer\"}, \"first_seen\": {\"type\": \"integer\"}, \"source\": {\"type\": \"string\"}, \"value\": {\"type\": \"string\"}, \"domain_id\": {}}}}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}}}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_reference_set_name\": {\"type\": \"string\"}, \"qradar_reference_set_item_value\": {\"type\": \"string\"}, \"qradar_label\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "9d817ee3-a8cf-4a0a-a8a6-969f6090f276",
       "version": 0,
@@ -747,10 +930,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example of finding an item from a QRadar reference set",
+          "object_type": "artifact",
+          "programmatic_name": "qradar_find_reference_set_item",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 42
+        }
+      ]
     },
     {
-      "created_date": 1711462221718,
+      "created_date": 1711372418651,
       "description": {
         "content": "Find reference sets that contain a given item value, together with information about this item in those reference sets. Information includes whether this item is added to the reference set manually or by a rule.",
         "format": "text"
@@ -758,19 +952,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Find Reference Sets",
       "export_key": "qradar_find_reference_sets",
-      "id": 69,
+      "id": 35,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462221718,
+      "last_modified_time": 1711372418651,
       "name": "qradar_find_reference_sets",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"reference_items\": [{\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"data\": [{\"last_seen\": 1694498079793, \"first_seen\": 1694498079793, \"source\": \"EC: Sysmon - Detected a Possible Credential Dumping Tool\", \"value\": \"192.168.107.107\", \"domain_id\": null}], \"creation_time\": 1557250160405, \"name\": \"EC Compromised Hosts\", \"namespace\": \"SHARED\", \"element_type\": \"IP\", \"collection_id\": 35}], \"inputs\": {\"qradar_label\": \"1.1.1.1\", \"qradar_reference_set_item_value\": \"192.168.107.107\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"reference_items\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"data\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"last_seen\": {\"type\": \"integer\"}, \"first_seen\": {\"type\": \"integer\"}, \"source\": {\"type\": \"string\"}, \"value\": {\"type\": \"string\"}, \"domain_id\": {}}}}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}}}}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_label\": {\"type\": \"string\"}, \"qradar_reference_set_item_value\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "09885813-f640-45bc-8892-d1a741a7d53e",
       "version": 0,
@@ -792,10 +988,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example of finding all QRadar reference sets for artifact",
+          "object_type": "artifact",
+          "programmatic_name": "qradar_find_reference_sets_artifact",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 45
+        }
+      ]
     },
     {
-      "created_date": 1711462221808,
+      "created_date": 1711372418799,
       "description": {
         "content": "Get all reference tables from a QRadar instance",
         "format": "text"
@@ -803,19 +1010,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Reference Table Get All Tables",
       "export_key": "qradar_get_all_reference_tables",
-      "id": 70,
+      "id": 36,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462221808,
+      "last_modified_time": 1711372418799,
       "name": "qradar_get_all_reference_tables",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": [{\"time_to_live\": \"0 years 1 mons 0 days 0 hours 0 mins 0.0 secs\", \"timeout_type\": \"LAST_SEEN\", \"number_of_elements\": 0, \"creation_time\": 1693550078786, \"name\": \"Generated_Cases\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 43, \"key_label\": \"offense_id\"}, {\"timeout_type\": \"UNKNOWN\", \"number_of_elements\": 5, \"creation_time\": 1607452116847, \"name\": \"pulse_imports\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 28}, {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1694502585199, \"name\": \"test_ref_tabe_1\", \"namespace\": \"SHARED\", \"key_name_types\": {\"Inner Key 1\": \"ALN\"}, \"element_type\": \"ALN\", \"collection_id\": 44, \"key_label\": \"Outer Key Label\"}], \"raw\": \"[{\\\"time_to_live\\\": \\\"0 years 1 mons 0 days 0 hours 0 mins 0.0 secs\\\", \\\"timeout_type\\\": \\\"LAST_SEEN\\\", \\\"number_of_elements\\\": 0, \\\"creation_time\\\": 1693550078786, \\\"name\\\": \\\"Generated_Cases\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"element_type\\\": \\\"ALN\\\", \\\"collection_id\\\": 43, \\\"key_label\\\": \\\"offense_id\\\"}, {\\\"timeout_type\\\": \\\"UNKNOWN\\\", \\\"number_of_elements\\\": 5, \\\"creation_time\\\": 1607452116847, \\\"name\\\": \\\"pulse_imports\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"element_type\\\": \\\"ALN\\\", \\\"collection_id\\\": 28}, {\\\"timeout_type\\\": \\\"FIRST_SEEN\\\", \\\"number_of_elements\\\": 1, \\\"creation_time\\\": 1694502585199, \\\"name\\\": \\\"test_ref_tabe_1\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"key_name_types\\\": {\\\"Inner Key 1\\\": \\\"ALN\\\"}, \\\"element_type\\\": \\\"ALN\\\", \\\"collection_id\\\": 44, \\\"key_label\\\": \\\"Outer Key Label\\\"}]\", \"inputs\": {\"qradar_label\": \"1.1.1.1\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.3.0\", \"host\": \"local\", \"execution_time_ms\": 1442, \"timestamp\": \"2023-09-15 18:47:24\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"time_to_live\": {\"type\": \"string\"}, \"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}, \"key_label\": {\"type\": \"string\"}, \"key_name_types\": {\"type\": \"object\", \"properties\": {\"Inner Key 1\": {\"type\": \"string\"}}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "0abff118-314e-4728-964d-03558088a62a",
       "version": 0,
@@ -829,10 +1038,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: QRadar - Get all Reference Tables",
+          "object_type": "incident",
+          "programmatic_name": "example_qradar__get_all_reference_tables",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 56
+        }
+      ]
     },
     {
-      "created_date": 1711462221902,
+      "created_date": 1711372418946,
       "description": {
         "content": "Add an item to a given QRadar reference table",
         "format": "text"
@@ -840,19 +1060,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Reference Table Add Item",
       "export_key": "qradar_reference_table_add_item",
-      "id": 71,
+      "id": 37,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462221902,
+      "last_modified_time": 1711372418946,
       "name": "qradar_reference_table_add_item",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"status_code\": 200, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1694502585199, \"name\": \"test_ref_tabe_1\", \"namespace\": \"SHARED\", \"key_name_types\": {\"Inner Key 1\": \"ALN\"}, \"element_type\": \"ALN\", \"collection_id\": 44, \"key_label\": \"Outer Key Label\"}}, \"raw\": \"{\\\"status_code\\\": 200, \\\"content\\\": {\\\"timeout_type\\\": \\\"FIRST_SEEN\\\", \\\"number_of_elements\\\": 1, \\\"creation_time\\\": 1694502585199, \\\"name\\\": \\\"test_ref_tabe_1\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"key_name_types\\\": {\\\"Inner Key 1\\\": \\\"ALN\\\"}, \\\"element_type\\\": \\\"ALN\\\", \\\"collection_id\\\": 44, \\\"key_label\\\": \\\"Outer Key Label\\\"}}\", \"inputs\": {\"qradar_reference_table_item_value\": \"192.168.107.107\", \"qradar_reference_table_item_inner_key\": null, \"qradar_reference_table_item_outer_key\": null, \"qradar_reference_table_name\": \"test_ref_tabe_1\", \"qradar_label\": \"1.1.1.1\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.3.0\", \"host\": \"local\", \"execution_time_ms\": 1659, \"timestamp\": \"2023-09-12 15:10:39\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"content\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"key_name_types\": {\"type\": \"object\", \"properties\": {\"Inner Key 1\": {\"type\": \"string\"}}}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}, \"key_label\": {\"type\": \"string\"}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_reference_table_item_value\": {\"type\": \"string\"}, \"qradar_reference_table_item_inner_key\": {}, \"qradar_reference_table_item_outer_key\": {}, \"qradar_reference_table_name\": {\"type\": \"string\"}, \"qradar_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "2843283c-4d98-4c71-b2e3-b0636c7a0df8",
       "version": 0,
@@ -898,10 +1120,31 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Add a Reference Table Item",
+          "object_type": "artifact",
+          "programmatic_name": "add_a_reference_table_item",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 50
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: QRadar - Add Reference Table Item DT",
+          "object_type": "qradar_reference_table",
+          "programmatic_name": "example_qradar__add_reference_table_item_dt",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 40
+        }
+      ]
     },
     {
-      "created_date": 1711462221997,
+      "created_date": 1711372419094,
       "description": {
         "content": "Delete an item from a given QRadar reference table",
         "format": "text"
@@ -909,19 +1152,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Reference Table Delete Item",
       "export_key": "qradar_reference_table_delete_item",
-      "id": 72,
+      "id": 38,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462221997,
+      "last_modified_time": 1711372419094,
       "name": "qradar_reference_table_delete_item",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"status_code\": 200, \"content\": {\"timeout_type\": \"UNKNOWN\", \"number_of_elements\": 5, \"creation_time\": 1607452116847, \"name\": \"pulse_imports\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 28}}, \"raw\": \"{\\\"status_code\\\": 200, \\\"content\\\": {\\\"timeout_type\\\": \\\"UNKNOWN\\\", \\\"number_of_elements\\\": 5, \\\"creation_time\\\": 1607452116847, \\\"name\\\": \\\"pulse_imports\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"element_type\\\": \\\"ALN\\\", \\\"collection_id\\\": 28}}\", \"inputs\": {\"qradar_reference_table_item_value\": \"test123\", \"qradar_reference_table_item_inner_key\": \"part-3\", \"qradar_reference_table_item_outer_key\": \"pulse-a142f062-f41b-4c2c-96b8-4ab4e3b7bde4\", \"qradar_reference_table_name\": \"pulse_imports\", \"qradar_label\": \"1.1.1.1\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.3.0\", \"host\": \"local\", \"execution_time_ms\": 1420, \"timestamp\": \"2023-09-15 16:58:55\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"content\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_reference_table_item_value\": {\"type\": \"string\"}, \"qradar_reference_table_item_inner_key\": {\"type\": \"string\"}, \"qradar_reference_table_item_outer_key\": {\"type\": \"string\"}, \"qradar_reference_table_name\": {\"type\": \"string\"}, \"qradar_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "10b6522f-ffc5-4742-8174-06ffe108aaf7",
       "version": 0,
@@ -967,10 +1212,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: QRadar - Delete Reference Table Item DT",
+          "object_type": "qradar_reference_table_queried_rows",
+          "programmatic_name": "example_qradar__delete_reference_table_item_dt",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 37
+        }
+      ]
     },
     {
-      "created_date": 1711462222088,
+      "created_date": 1711372419233,
       "description": {
         "content": "Get the elements in the reference table",
         "format": "text"
@@ -978,19 +1234,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Reference Table Get Table Data",
       "export_key": "qradar_reference_table_get_table",
-      "id": 73,
+      "id": 39,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462222088,
+      "last_modified_time": 1711372419233,
       "name": "qradar_reference_table_get_table",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"data\": {\"None\": {\"None\": {\"last_seen\": 1694502641647, \"first_seen\": 1694502641647, \"source\": \"reference data api\", \"value\": \"192.168.107.107\", \"domain_id\": null}}}, \"creation_time\": 1694502585199, \"name\": \"test_ref_tabe_1\", \"namespace\": \"SHARED\", \"key_name_types\": {\"Inner Key 1\": \"ALN\"}, \"element_type\": \"ALN\", \"collection_id\": 44, \"key_label\": \"Outer Key Label\"}, \"raw\": \"{\\\"timeout_type\\\": \\\"FIRST_SEEN\\\", \\\"number_of_elements\\\": 1, \\\"data\\\": {\\\"None\\\": {\\\"None\\\": {\\\"last_seen\\\": 1694502641647, \\\"first_seen\\\": 1694502641647, \\\"source\\\": \\\"reference data api\\\", \\\"value\\\": \\\"192.168.107.107\\\", \\\"domain_id\\\": null}}}, \\\"creation_time\\\": 1694502585199, \\\"name\\\": \\\"test_ref_tabe_1\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"key_name_types\\\": {\\\"Inner Key 1\\\": \\\"ALN\\\"}, \\\"element_type\\\": \\\"ALN\\\", \\\"collection_id\\\": 44, \\\"key_label\\\": \\\"Outer Key Label\\\"}\", \"inputs\": {\"qradar_reference_table_name\": \"test_ref_tabe_1\", \"qradar_label\": \"1.1.1.1\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.3.0\", \"host\": \"local\", \"execution_time_ms\": 1392, \"timestamp\": \"2023-09-15 19:00:19\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"data\": {\"type\": \"object\", \"properties\": {\"None\": {\"type\": \"object\", \"properties\": {\"None\": {\"type\": \"object\", \"properties\": {\"last_seen\": {\"type\": \"integer\"}, \"first_seen\": {\"type\": \"integer\"}, \"source\": {\"type\": \"string\"}, \"value\": {\"type\": \"string\"}, \"domain_id\": {}}}}}}}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"key_name_types\": {\"type\": \"object\", \"properties\": {\"Inner Key 1\": {\"type\": \"string\"}}}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}, \"key_label\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_reference_table_name\": {\"type\": \"string\"}, \"qradar_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6450077b-708a-4e65-9eda-6e403a3f4410",
       "version": 0,
@@ -1012,10 +1270,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: QRadar - Get Reference Table Data",
+          "object_type": "qradar_reference_table",
+          "programmatic_name": "qradar_get_reference_table_data",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 41
+        }
+      ]
     },
     {
-      "created_date": 1711462222178,
+      "created_date": 1711372419376,
       "description": {
         "content": "Update an item in a given QRadar reference table",
         "format": "text"
@@ -1023,19 +1292,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: Reference Table Update Item",
       "export_key": "qradar_reference_table_update_item",
-      "id": 74,
+      "id": 40,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462222178,
+      "last_modified_time": 1711372419376,
       "name": "qradar_reference_table_update_item",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"status_code\": 200, \"content\": {\"timeout_type\": \"UNKNOWN\", \"number_of_elements\": 6, \"creation_time\": 1607452116847, \"name\": \"pulse_imports\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 28}}, \"raw\": \"{\\\"status_code\\\": 200, \\\"content\\\": {\\\"timeout_type\\\": \\\"UNKNOWN\\\", \\\"number_of_elements\\\": 6, \\\"creation_time\\\": 1607452116847, \\\"name\\\": \\\"pulse_imports\\\", \\\"namespace\\\": \\\"SHARED\\\", \\\"element_type\\\": \\\"ALN\\\", \\\"collection_id\\\": 28}}\", \"inputs\": {\"qradar_reference_table_item_value\": \"test123\", \"qradar_reference_table_item_inner_key\": \"part-3\", \"qradar_reference_table_item_outer_key\": \"pulse-a142f062-f41b-4c2c-96b8-4ab4e3b7bde4\", \"qradar_label\": \"1.1.1.1\", \"qradar_reference_table_name\": \"pulse_imports\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.3.0\", \"host\": \"local\", \"execution_time_ms\": 1365, \"timestamp\": \"2023-09-15 16:57:43\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"content\": {\"type\": \"object\", \"properties\": {\"timeout_type\": {\"type\": \"string\"}, \"number_of_elements\": {\"type\": \"integer\"}, \"creation_time\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"namespace\": {\"type\": \"string\"}, \"element_type\": {\"type\": \"string\"}, \"collection_id\": {\"type\": \"integer\"}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_reference_table_item_value\": {\"type\": \"string\"}, \"qradar_reference_table_item_inner_key\": {\"type\": \"string\"}, \"qradar_reference_table_item_outer_key\": {\"type\": \"string\"}, \"qradar_label\": {\"type\": \"string\"}, \"qradar_reference_table_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "2f0ec2b9-0266-42bc-ac4c-71ddfe593344",
       "version": 0,
@@ -1081,10 +1352,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: Qradar - Update this Reference Table Item DT",
+          "object_type": "qradar_reference_table_queried_rows",
+          "programmatic_name": "example_qradar__update_this_reference_table_item",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 38
+        }
+      ]
     },
     {
-      "created_date": 1711462222273,
+      "created_date": 1711372419524,
       "description": {
         "content": "Search QRadar for events",
         "format": "text"
@@ -1092,19 +1374,21 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar SIEM: QRadar Search",
       "export_key": "qradar_search",
-      "id": 75,
+      "id": 41,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711462222273,
+      "last_modified_time": 1711372419524,
       "name": "qradar_search",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"events\": [{\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Information\", \"logsourcename_logsourceid\": \"Experience Center: Cisco IronPort @ 192.168.0.15\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027Context is Local to Local\u0027, \u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Mail\u0027, \u0027BB:DeviceDefinition: Proxy\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Suspicious Activity\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Context is Local to Local\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Process Creation Success\", \"logsourcename_logsourceid\": \"Experience Center: WindowsAuthServer @ IE8WIN7\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Operating System\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Suspicious Windows Events\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"User Login Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"User Login Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Misc Login Succeeded\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027BB:CategoryDefinition: Authentication Success\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:CategoryDefinition: Post Exploit Account Activity\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected a Massive Creation of EC2 Instances\u0027, \u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Virtual Machine Creation Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Suspicious Activity\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Suspicious Activity\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected a Massive Creation of EC2 Instances\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Read Activity Attempted\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Object Download Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - A Database backup Has Been Downloaded From S3 Bucket\u0027, \u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Information\", \"logsourcename_logsourceid\": \"Experience Center: Cisco IronPort @ 192.168.0.15\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027Context is Local to Local\u0027, \u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Mail\u0027, \u0027BB:DeviceDefinition: Proxy\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Suspicious Activity\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Context is Local to Local\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Suspicious Activity\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - A Database backup Has Been Downloaded From S3 Bucket\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Process Creation Success\", \"logsourcename_logsourceid\": \"Experience Center: WindowsAuthServer @ IE8WIN7\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Operating System\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"Suspicious Windows Events\", \"logsourcename_logsourceid\": \"Custom Rule Engine-8 :: hychuang-4\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"User Login Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Context is Remote to Local\u0027]\"}, {\"StartTime\": \"2023-09-12 01:53\", \"categoryname_category\": \"User Login Attempt\", \"logsourcename_logsourceid\": \"Experience Center: AWS Syslog @ 192.168.0.17\", \"protocolname_protocolid\": \"Reserved\", \"rulename_creeventlist\": \"[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Context is Remote to Local\u0027]\"}], \"inputs\": {\"qradar_query\": \"SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days\", \"qradar_query_all_results\": true, \"qradar_search_param1\": \"DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)\", \"qradar_search_param2\": \"7\", \"qradar_search_param3\": \"7\", \"qradar_search_param4\": \"\", \"qradar_search_param5\": \"\", \"qradar_label\": \"1.1.1.1\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"events\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"StartTime\": {\"type\": \"string\"}, \"categoryname_category\": {\"type\": \"string\"}, \"logsourcename_logsourceid\": {\"type\": \"string\"}, \"protocolname_protocolid\": {\"type\": \"string\"}, \"rulename_creeventlist\": {\"type\": \"string\"}}}}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_query\": {\"type\": \"string\"}, \"qradar_query_all_results\": {\"type\": \"boolean\"}, \"qradar_search_param1\": {\"type\": \"string\"}, \"qradar_search_param2\": {\"type\": \"string\"}, \"qradar_search_param3\": {\"type\": \"string\"}, \"qradar_search_param4\": {\"type\": \"string\"}, \"qradar_search_param5\": {\"type\": \"string\"}, \"qradar_label\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "c3e6f6cc-8905-41e6-9841-ebe99845d778",
       "version": 0,
@@ -1190,18 +1474,84 @@
           "step_label": null
         }
       ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example of searching QRadar events using offense id",
+          "object_type": "incident",
+          "programmatic_name": "qradar_search_event_offense",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 47
+        }
+      ]
+    },
+    {
+      "created_date": 1713443231948,
+      "description": {
+        "content": "Use for making updates to a QRadar offense, including closing an offense",
+        "format": "text"
+      },
+      "destination_handle": "fn_qradar_integration",
+      "display_name": "QRadar SIEM: Update Offense",
+      "export_key": "qradar_update_offense",
+      "id": 116,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1713527997464,
+      "name": "qradar_update_offense",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
+      "output_json_example": "{\"version\": 2, \"success\": true, \"reason\": null, \"content\": {\"last_persisted_time\": 1713465658000, \"username_count\": 1, \"description\": \"Login\\n\", \"rules\": [{\"id\": 100462, \"type\": \"CRE_RULE\"}], \"event_count\": 1, \"flow_count\": 0, \"assigned_to\": null, \"security_category_count\": 1, \"follow_up\": false, \"source_address_ids\": [99], \"source_count\": 1, \"inactive\": true, \"protected\": false, \"closing_user\": \"API_token: ms qradar integration\", \"destination_networks\": [\"other\"], \"source_network\": \"other\", \"category_count\": 1, \"close_time\": 1713465658000, \"remote_destination_count\": 1, \"start_time\": 1711492873201, \"magnitude\": 1, \"last_updated_time\": 1711492873201, \"credibility\": 2, \"id\": 164, \"categories\": [\"User Login Success\"], \"severity\": 1, \"policy_category_count\": 0, \"log_sources\": [{\"type_name\": \"F5FirePass\", \"type_id\": 232, \"name\": \"F5FirePass @ f5networks.firepass.test.com\", \"id\": 962}], \"closing_reason_id\": 1, \"device_count\": 1, \"first_persisted_time\": 1711492873000, \"offense_type\": 0, \"relevance\": 0, \"domain_id\": 3, \"offense_source\": \"31.107.167.255\", \"local_destination_address_ids\": [], \"local_destination_count\": 0, \"status\": \"CLOSED\"}, \"raw\": null, \"inputs\": {\"qradar_update_json\": \"{\\\"status\\\": \\\"CLOSED\\\", \\\"closing_reason_id\\\": 1}\", \"qradar_id\": 164, \"qradar_label\": \"11.22.33.44\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-qradar-integration\", \"package_version\": \"2.4.0\", \"host\": \"localhost\", \"execution_time_ms\": 499, \"timestamp\": \"2024-04-18 14:40:58\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-04/schema#\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"integer\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"null\"}, \"content\": {\"type\": \"object\", \"properties\": {\"last_persisted_time\": {\"type\": \"integer\"}, \"username_count\": {\"type\": \"integer\"}, \"description\": {\"type\": \"string\"}, \"rules\": {\"type\": \"array\", \"items\": [{\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}}, \"required\": [\"id\", \"type\"]}]}, \"event_count\": {\"type\": \"integer\"}, \"flow_count\": {\"type\": \"integer\"}, \"assigned_to\": {\"type\": \"null\"}, \"security_category_count\": {\"type\": \"integer\"}, \"follow_up\": {\"type\": \"boolean\"}, \"source_address_ids\": {\"type\": \"array\", \"items\": [{\"type\": \"integer\"}]}, \"source_count\": {\"type\": \"integer\"}, \"inactive\": {\"type\": \"boolean\"}, \"protected\": {\"type\": \"boolean\"}, \"closing_user\": {\"type\": \"string\"}, \"destination_networks\": {\"type\": \"array\", \"items\": [{\"type\": \"string\"}]}, \"source_network\": {\"type\": \"string\"}, \"category_count\": {\"type\": \"integer\"}, \"close_time\": {\"type\": \"integer\"}, \"remote_destination_count\": {\"type\": \"integer\"}, \"start_time\": {\"type\": \"integer\"}, \"magnitude\": {\"type\": \"integer\"}, \"last_updated_time\": {\"type\": \"integer\"}, \"credibility\": {\"type\": \"integer\"}, \"id\": {\"type\": \"integer\"}, \"categories\": {\"type\": \"array\", \"items\": [{\"type\": \"string\"}]}, \"severity\": {\"type\": \"integer\"}, \"policy_category_count\": {\"type\": \"integer\"}, \"log_sources\": {\"type\": \"array\", \"items\": [{\"type\": \"object\", \"properties\": {\"type_name\": {\"type\": \"string\"}, \"type_id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}}, \"required\": [\"type_name\", \"type_id\", \"name\", \"id\"]}]}, \"closing_reason_id\": {\"type\": \"integer\"}, \"device_count\": {\"type\": \"integer\"}, \"first_persisted_time\": {\"type\": \"integer\"}, \"offense_type\": {\"type\": \"integer\"}, \"relevance\": {\"type\": \"integer\"}, \"domain_id\": {\"type\": \"integer\"}, \"offense_source\": {\"type\": \"string\"}, \"local_destination_address_ids\": {\"type\": \"array\", \"items\": {}}, \"local_destination_count\": {\"type\": \"integer\"}, \"status\": {\"type\": \"string\"}}, \"required\": [\"last_persisted_time\", \"username_count\", \"description\", \"rules\", \"event_count\", \"flow_count\", \"assigned_to\", \"security_category_count\", \"follow_up\", \"source_address_ids\", \"source_count\", \"inactive\", \"protected\", \"closing_user\", \"destination_networks\", \"source_network\", \"category_count\", \"close_time\", \"remote_destination_count\", \"start_time\", \"magnitude\", \"last_updated_time\", \"credibility\", \"id\", \"categories\", \"severity\", \"policy_category_count\", \"log_sources\", \"closing_reason_id\", \"device_count\", \"first_persisted_time\", \"offense_type\", \"relevance\", \"domain_id\", \"offense_source\", \"local_destination_address_ids\", \"local_destination_count\", \"status\"]}, \"raw\": {\"type\": \"null\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"qradar_update_json\": {\"type\": \"string\"}, \"qradar_id\": {\"type\": \"integer\"}, \"qradar_label\": {\"type\": \"string\"}}, \"required\": [\"qradar_update_json\", \"qradar_id\", \"qradar_label\"]}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}, \"required\": [\"version\", \"package\", \"package_version\", \"host\", \"execution_time_ms\", \"timestamp\"]}}, \"required\": [\"version\", \"success\", \"reason\", \"content\", \"raw\", \"inputs\", \"metrics\"]}",
+      "tags": [],
+      "uuid": "ef19902e-8b8e-42a5-b981-750bc3742248",
+      "version": 4,
+      "view_items": [
+        {
+          "content": "1d8545d5-9433-4f11-8c35-98cf232a1b4a",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "a49a50f2-68ba-4ccb-87d5-c7e55d2cbfef",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f358ee92-3189-43e9-94e0-cb0a62875223",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 15,
+  "id": 30,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1712588513093,
+      "create_date": 1713533809460,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1210,7 +1560,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1712588513093,
+      "update_date": 1713533809460,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1218,7 +1568,9 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "79447e8c-ea27-4dd1-98e4-a5664a81f7b4"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_qradar_integration",
@@ -1226,7 +1578,7 @@
       "programmatic_name": "fn_qradar_integration",
       "tags": [],
       "users": [
-        "admin@example.com"
+        "a@example.com"
       ],
       "uuid": "1184d338-96e3-4315-8b2c-b0b9e623573c"
     }
@@ -1238,14 +1590,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2a921f39_5519_4e42_9575_0c4660373120\" isExecutable=\"true\" name=\"playbook_2a921f39_5519_4e42_9575_0c4660373120\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_05ukolq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Reference Table Add Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2843283c-4d98-4c71-b2e3-b0636c7a0df8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_label = row[\\\"qradar_server\\\"]\\ninputs.qradar_reference_table_name = row.reference_table\\ninputs.qradar_reference_table_item_outer_key = getattr(playbook.inputs, \\\"qradar_ref_table_outer_key\\\") or \\\"1\\\"\\ninputs.qradar_reference_table_item_inner_key = getattr(playbook.inputs, \\\"qradar_ref_table_inner_key\\\") or \\\"city\\\"\\ninputs.qradar_reference_table_item_value = getattr(playbook.inputs, \\\"qradar_ref_table_update\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_reference_table_add_item_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05ukolq\u003c/incoming\u003e\u003coutgoing\u003eFlow_1m31bgz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0121dxr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_05ukolq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1m31bgz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"qradar_add_item_to_this_reference_table_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2da1bfa0-afff-4ed3-b8e7-d7c9e3813142\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1m31bgz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0121dxr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0121dxr\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2a921f39_5519_4e42_9575_0c4660373120\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0121dxr\" id=\"Flow_0121dxr_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1m31bgz\" id=\"Flow_1m31bgz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05ukolq\" id=\"Flow_05ukolq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.75\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"368.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462223118,
+      "create_date": 1711372438384,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_2a921f39_5519_4e42_9575_0c4660373120",
@@ -1271,7 +1623,7 @@
             "deprecated": false,
             "export_key": "playbook_2a921f39_5519_4e42_9575_0c4660373120/qradar_ref_table_inner_key",
             "hide_notification": false,
-            "id": 5120,
+            "id": 778,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1286,7 +1638,7 @@
             "templates": [],
             "text": "Inner Key",
             "tooltip": "",
-            "type_id": 1068,
+            "type_id": 1023,
             "uuid": "a1db564b-b99f-43ae-a85a-743aa508e66a",
             "values": []
           },
@@ -1300,7 +1652,7 @@
             "deprecated": false,
             "export_key": "playbook_2a921f39_5519_4e42_9575_0c4660373120/qradar_ref_table_outer_key",
             "hide_notification": false,
-            "id": 5121,
+            "id": 779,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1315,7 +1667,7 @@
             "templates": [],
             "text": "Outer Key",
             "tooltip": "",
-            "type_id": 1068,
+            "type_id": 1023,
             "uuid": "c6b277e0-e4bc-44ef-9e19-501a4508b878",
             "values": []
           },
@@ -1329,7 +1681,7 @@
             "deprecated": false,
             "export_key": "playbook_2a921f39_5519_4e42_9575_0c4660373120/qradar_ref_table_update",
             "hide_notification": false,
-            "id": 5122,
+            "id": 780,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1344,7 +1696,7 @@
             "templates": [],
             "text": "Update Value",
             "tooltip": "",
-            "type_id": 1068,
+            "type_id": 1023,
             "uuid": "cbf157ba-0c20-4e51-a98e-954da395b07e",
             "values": []
           }
@@ -1369,27 +1721,27 @@
         "uuid": "f6e49d25-030b-4d71-9966-dcc0dfe29d66"
       },
       "has_logical_errors": false,
-      "id": 51,
+      "id": 16,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588371610,
+      "last_modified_time": 1713527998981,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462223450,
+          "created_date": 1711372438811,
           "description": "",
           "enabled": false,
           "export_key": "qradar_add_item_to_this_reference_table_post_process",
-          "id": 67,
+          "id": 13,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462223450,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372438811,
           "name": "qradar_add_item_to_this_reference_table_post_process",
           "object_type": "qradar_reference_table",
           "playbook_handle": "qradar_add_item_to_this_reference_table_example",
@@ -1436,7 +1788,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2a921f39-5519-4e42-9575-0c4660373120",
-        "id": 51,
+        "id": 36,
         "name": "playbook_2a921f39_5519_4e42_9575_0c4660373120",
         "type": "playbook",
         "uuid": "217e3ae6-ab28-4905-99ea-91179390d986"
@@ -1444,19 +1796,19 @@
       "tags": [],
       "type": "default",
       "uuid": "2a921f39-5519-4e42-9575-0c4660373120",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b382e66a_4fb9_4cba_b7c2_389cc932fe2b\" isExecutable=\"true\" name=\"playbook_b382e66a_4fb9_4cba_b7c2_389cc932fe2b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0j3dobt\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0sli2rn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0j3dobt\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_3\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"QRadar SIEM: Add Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"30b6899a-d015-48c3-8fd9-500788d4b437\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\\ninputs.qradar_reference_set_name  = getattr(playbook.inputs, \\\"qradar_reference_set_name\\\")\\ninputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_add_reference_set_item_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0j3dobt\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zd8gb9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0zd8gb9\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"adding_an_item_to_qradar_reference_set\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"33675164-e8d0-4790-a43f-aed28815b3b9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0zd8gb9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sli2rn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0sli2rn\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b382e66a_4fb9_4cba_b7c2_389cc932fe2b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sli2rn\" id=\"Flow_0sli2rn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zd8gb9\" id=\"Flow_0zd8gb9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0j3dobt\" id=\"Flow_0j3dobt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462224097,
+      "create_date": 1711372439483,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_b382e66a_4fb9_4cba_b7c2_389cc932fe2b",
@@ -1482,7 +1834,7 @@
             "deprecated": false,
             "export_key": "playbook_b382e66a_4fb9_4cba_b7c2_389cc932fe2b/qradar_reference_set_name",
             "hide_notification": false,
-            "id": 5123,
+            "id": 781,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1497,7 +1849,7 @@
             "templates": [],
             "text": "Reference Set Name",
             "tooltip": "Name of the reference set to search on",
-            "type_id": 1069,
+            "type_id": 1024,
             "uuid": "c15253c9-6c54-4c1f-aae6-2856fec48b0e",
             "values": []
           },
@@ -1511,7 +1863,7 @@
             "deprecated": false,
             "export_key": "playbook_b382e66a_4fb9_4cba_b7c2_389cc932fe2b/qradar_server",
             "hide_notification": false,
-            "id": 5124,
+            "id": 782,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1526,7 +1878,7 @@
             "templates": [],
             "text": "QRadar Server",
             "tooltip": "Enter the label given to the QRadar server in the app.config you wish to use",
-            "type_id": 1069,
+            "type_id": 1024,
             "uuid": "bff0dffd-9ece-47e0-880d-dbc07d6a55e5",
             "values": []
           }
@@ -1551,27 +1903,27 @@
         "uuid": "985ebb7b-6875-4102-b7f2-da593f844401"
       },
       "has_logical_errors": false,
-      "id": 52,
+      "id": 17,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588372465,
+      "last_modified_time": 1713527999664,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462224386,
+          "created_date": 1711372439840,
           "description": "",
           "enabled": false,
           "export_key": "adding_an_item_to_qradar_reference_set",
-          "id": 68,
+          "id": 14,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462224386,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372439840,
           "name": "adding_an_item_to_qradar_reference_set",
           "object_type": "artifact",
           "playbook_handle": "qradar_add_to_reference_set",
@@ -1582,14 +1934,14 @@
         },
         {
           "actions": [],
-          "created_date": 1711462224430,
+          "created_date": 1711372439956,
           "description": "",
           "enabled": false,
           "export_key": "adding_an_item_to_QRadar_reference_set_post_process",
-          "id": 69,
+          "id": 15,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462224430,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372439956,
           "name": "adding_an_item_to_QRadar_reference_set_post_process",
           "object_type": "artifact",
           "playbook_handle": "qradar_add_to_reference_set",
@@ -1636,7 +1988,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b382e66a-4fb9-4cba-b7c2-389cc932fe2b",
-        "id": 52,
+        "id": 48,
         "name": "playbook_b382e66a_4fb9_4cba_b7c2_389cc932fe2b",
         "type": "playbook",
         "uuid": "29a55b8e-8a31-40e7-861f-cba9885269f7"
@@ -1644,19 +1996,19 @@
       "tags": [],
       "type": "default",
       "uuid": "b382e66a-4fb9-4cba-b7c2-389cc932fe2b",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0\" isExecutable=\"true\" name=\"playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_01ubqye\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Reference Table Add Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2843283c-4d98-4c71-b2e3-b0636c7a0df8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_table_item_value = artifact.value\\ninputs.qradar_reference_table_item_inner_key = getattr(playbook.inputs, \\\"qradar_ref_table_inner_key\\\")\\ninputs.qradar_reference_table_item_outer_key = getattr(playbook.inputs, \\\"qradar_ref_table_outer_key\\\")\\ninputs.qradar_reference_table_name = getattr(playbook.inputs, \\\"qradar_reference_table_name\\\")\\ninputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_reference_table_add_item_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01ubqye\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kyd7uz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"qradar_add_a_reference_table_item_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"011b209e-4b98-497d-bbe8-fb174684f7b4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kyd7uz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nxhcme\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0nxhcme\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_01ubqye\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1kyd7uz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0nxhcme\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nxhcme\" id=\"Flow_0nxhcme_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kyd7uz\" id=\"Flow_1kyd7uz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01ubqye\" id=\"Flow_01ubqye_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462225159,
+      "create_date": 1711372440699,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0",
@@ -1682,7 +2034,7 @@
             "deprecated": false,
             "export_key": "playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0/qradar_ref_table_inner_key",
             "hide_notification": false,
-            "id": 5125,
+            "id": 783,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1697,7 +2049,7 @@
             "templates": [],
             "text": "Inner Key",
             "tooltip": "",
-            "type_id": 1070,
+            "type_id": 1025,
             "uuid": "90810314-37c2-4a78-8a57-29cb3b57a422",
             "values": []
           },
@@ -1711,7 +2063,7 @@
             "deprecated": false,
             "export_key": "playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0/qradar_ref_table_outer_key",
             "hide_notification": false,
-            "id": 5126,
+            "id": 784,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1726,7 +2078,7 @@
             "templates": [],
             "text": "Outer Key",
             "tooltip": "",
-            "type_id": 1070,
+            "type_id": 1025,
             "uuid": "304ffc94-4908-48dd-b381-943a235add8e",
             "values": []
           },
@@ -1740,7 +2092,7 @@
             "deprecated": false,
             "export_key": "playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0/qradar_reference_table_name",
             "hide_notification": false,
-            "id": 5127,
+            "id": 785,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1755,7 +2107,7 @@
             "templates": [],
             "text": "Reference Table Name",
             "tooltip": "",
-            "type_id": 1070,
+            "type_id": 1025,
             "uuid": "3a8b4c58-dcb1-462f-a634-f8cd9ee7926d",
             "values": []
           },
@@ -1769,7 +2121,7 @@
             "deprecated": false,
             "export_key": "playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0/qradar_server",
             "hide_notification": false,
-            "id": 5128,
+            "id": 786,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1784,7 +2136,7 @@
             "templates": [],
             "text": "QRadar Server",
             "tooltip": "Enter the label given to the QRadar server in the app.config you wish to use",
-            "type_id": 1070,
+            "type_id": 1025,
             "uuid": "0081b6aa-e2f9-404d-a8c9-a9e318447d23",
             "values": []
           }
@@ -1809,27 +2161,27 @@
         "uuid": "99d84bcc-6afd-4796-8052-062efe6074ca"
       },
       "has_logical_errors": false,
-      "id": 53,
+      "id": 18,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588373232,
+      "last_modified_time": 1713528000303,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462225537,
+          "created_date": 1711372441150,
           "description": "",
           "enabled": false,
           "export_key": "qradar_add_a_reference_table_item_post_process",
-          "id": 70,
+          "id": 16,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462225537,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372441150,
           "name": "qradar_add_a_reference_table_item_post_process",
           "object_type": "artifact",
           "playbook_handle": "qradar_add_to_reference_table",
@@ -1884,7 +2236,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_5ffc3f3b-9b4e-4a99-a731-def23992caf0",
-        "id": 53,
+        "id": 43,
         "name": "playbook_5ffc3f3b_9b4e_4a99_a731_def23992caf0",
         "type": "playbook",
         "uuid": "3a6cecd5-c037-4b1a-9b29-4c4d32e7cc40"
@@ -1892,19 +2244,232 @@
       "tags": [],
       "type": "default",
       "uuid": "5ffc3f3b-9b4e-4a99-a731-def23992caf0",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 11,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415\" isExecutable=\"true\" name=\"playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19njwl9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Create Offense Note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6b1c1afa-b63d-4bcb-8a38-cadfa8ddc453\"\u003e{\"inputs\":{\"1d8545d5-9433-4f11-8c35-98cf232a1b4a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":164}},\"cc12bbe8-e108-4935-84e0-e1c5d47435fb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"test from soar\"}},\"a49a50f2-68ba-4ccb-87d5-c7e55d2cbfef\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"9.46.246.248\"}}},\"pre_processing_script\":\"inputs.qradar_id = playbook.inputs.qradar_id\\ninputs.qradar_note = playbook.inputs.qradar_note\\ninputs.qradar_label = playbook.inputs.qradar_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_note_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19njwl9\u003c/incoming\u003e\u003coutgoing\u003eFlow_12rpf79\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19njwl9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sgipbn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_12rpf79\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"create note result post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a568d63d-b125-4763-be80-e62ea2994757\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12rpf79\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sgipbn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1sgipbn\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sgipbn\" id=\"Flow_1sgipbn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12rpf79\" id=\"Flow_12rpf79_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19njwl9\" id=\"Flow_19njwl9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1713470868503,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+      "description": {
+        "content": "Create a note for an offense",
+        "format": "text"
+      },
+      "display_name": "QRadar SIEM: Create Note",
+      "export_key": "qradar_siem_create_note",
+      "field_type_handle": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+      "fields_type": {
+        "actions": [],
+        "display_name": "QRadar SIEM: Create Note",
+        "export_key": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+        "fields": {
+          "qradar_id": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415/qradar_id",
+            "hide_notification": false,
+            "id": 2043,
+            "input_type": "number",
+            "internal": false,
+            "is_tracked": false,
+            "name": "qradar_id",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "QRadar Id",
+            "tooltip": "",
+            "type_id": 1128,
+            "uuid": "44cf2bfe-3f9b-429e-a711-1887cdfd6f7e",
+            "values": []
+          },
+          "qradar_label": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415/qradar_label",
+            "hide_notification": false,
+            "id": 2044,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "qradar_label",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "QRadar Label",
+            "tooltip": "",
+            "type_id": 1128,
+            "uuid": "39189a49-18ab-4d01-be7f-a4b30cdc9426",
+            "values": []
+          },
+          "qradar_note": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415/qradar_note",
+            "hide_notification": false,
+            "id": 2045,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "qradar_note",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Note",
+            "tooltip": "",
+            "type_id": 1128,
+            "uuid": "c1818619-9bdf-4bff-b588-9e97b31c9640",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+        "uuid": "30a151f9-6351-46be-b2dd-0bbe02c89f10"
+      },
+      "has_logical_errors": false,
+      "id": 106,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1713528601153,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1713471239970,
+          "description": "",
+          "enabled": false,
+          "export_key": "create note result post process",
+          "id": 110,
+          "language": "python3",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1713528597212,
+          "name": "create note result post process",
+          "object_type": "incident",
+          "playbook_handle": "qradar_siem_create_note",
+          "programmatic_name": "qradar_siem_create_note_create_note_result_post_process",
+          "script_text": "results = playbook.functions.results.create_note_results\nif results.success:\n  incident.addNote(f\"QRadar note created for offense {playbook.inputs.qradar_id}: \u0027{playbook.inputs.qradar_note}\u0027\")\nelse:\n  incident.addNote(f\"QRadar note failed for offense: {playbook.inputs.qradar_id} Reason: {results.reason}\")",
+          "tags": [],
+          "uuid": "a568d63d-b125-4763-be80-e62ea2994757"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "44cf2bfe-3f9b-429e-a711-1887cdfd6f7e",
+            "element": "field_uuid",
+            "field_type": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "c1818619-9bdf-4bff-b588-9e97b31c9640",
+            "element": "field_uuid",
+            "field_type": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "39189a49-18ab-4d01-be7f-a4b30cdc9426",
+            "element": "field_uuid",
+            "field_type": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "qradar_siem_create_note",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_c5b903c3-e424-4fbf-a056-72fa4d8d2415",
+        "id": 189,
+        "name": "playbook_c5b903c3_e424_4fbf_a056_72fa4d8d2415",
+        "type": "playbook",
+        "uuid": "35428033-6426-46f8-8e2c-32187a4e16a5"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "c5b903c3-e424-4fbf-a056-72fa4d8d2415",
+      "version": 15
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_138367c6_bceb_4dff_bccc_33b1d16a9caf\" isExecutable=\"true\" name=\"playbook_138367c6_bceb_4dff_bccc_33b1d16a9caf\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0n5zqg8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Reference Table Delete Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"10b6522f-ffc5-4742-8174-06ffe108aaf7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_table_name = row.table\\ninputs.qradar_reference_table_item_outer_key = row.outer_key\\ninputs.qradar_reference_table_item_inner_key = row.inner_key\\ninputs.qradar_reference_table_item_value = row.value\\ninputs.qradar_label = row[\\\"qradar_server\\\"]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_reference_table_delete_item_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0n5zqg8\u003c/incoming\u003e\u003coutgoing\u003eFlow_0gbmoyj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xyncyv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0n5zqg8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0gbmoyj\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"qradar_delete_this_reference_table_item_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2e1b4b21-b0ff-4abf-8507-588cd7f489e9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0gbmoyj\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xyncyv\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xyncyv\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_138367c6_bceb_4dff_bccc_33b1d16a9caf\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xyncyv\" id=\"Flow_0xyncyv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gbmoyj\" id=\"Flow_0gbmoyj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0n5zqg8\" id=\"Flow_0n5zqg8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462226203,
+      "create_date": 1711372441768,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_138367c6_bceb_4dff_bccc_33b1d16a9caf",
@@ -1940,27 +2505,27 @@
         "uuid": "4940b938-dbb9-4bf0-9fd3-2253ded83e6f"
       },
       "has_logical_errors": false,
-      "id": 54,
+      "id": 19,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588373965,
+      "last_modified_time": 1713528001576,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462226371,
+          "created_date": 1711372442017,
           "description": "",
           "enabled": false,
           "export_key": "qradar_delete_this_reference_table_item_post_process",
-          "id": 71,
+          "id": 17,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462226371,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372442017,
           "name": "qradar_delete_this_reference_table_item_post_process",
           "object_type": "qradar_reference_table_queried_rows",
           "playbook_handle": "qradar_delete_this_reference_table_item_example",
@@ -1990,7 +2555,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_138367c6-bceb-4dff-bccc-33b1d16a9caf",
-        "id": 54,
+        "id": 35,
         "name": "playbook_138367c6_bceb_4dff_bccc_33b1d16a9caf",
         "type": "playbook",
         "uuid": "65254e0a-b3a6-4406-8ceb-937996808766"
@@ -1998,19 +2563,19 @@
       "tags": [],
       "type": "default",
       "uuid": "138367c6-bceb-4dff-bccc-33b1d16a9caf",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d6067ad7_ca97_4bb8_bcdf_e46cea03e2ba\" isExecutable=\"true\" name=\"playbook_d6067ad7_ca97_4bb8_bcdf_e46cea03e2ba\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1ttipn5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar SIEM: Find Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9d817ee3-a8cf-4a0a-a8a6-969f6090f276\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\\ninputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name\\ninputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\")\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_find_reference_set_item_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ttipn5\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kh2xwd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1ttipn5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1x8yej6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0kh2xwd\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"finding_an_item_from_a_QRadar_reference_set_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0b1eaf89-7fc8-4338-aa29-e730bc11a403\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kh2xwd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1x8yej6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1x8yej6\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d6067ad7_ca97_4bb8_bcdf_e46cea03e2ba\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1x8yej6\" id=\"Flow_1x8yej6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kh2xwd\" id=\"Flow_0kh2xwd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ttipn5\" id=\"Flow_1ttipn5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.75\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"377.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462226972,
+      "create_date": 1711372442681,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_d6067ad7_ca97_4bb8_bcdf_e46cea03e2ba",
@@ -2036,7 +2601,7 @@
             "deprecated": false,
             "export_key": "playbook_d6067ad7_ca97_4bb8_bcdf_e46cea03e2ba/qradar_reference_set_name",
             "hide_notification": false,
-            "id": 5129,
+            "id": 787,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2052,7 +2617,7 @@
             "templates": [],
             "text": "Reference Set Name",
             "tooltip": "Name of the reference set to search on",
-            "type_id": 1072,
+            "type_id": 1027,
             "uuid": "831cef84-d8e5-434a-a0ee-d541dbcdd914",
             "values": []
           },
@@ -2066,7 +2631,7 @@
             "deprecated": false,
             "export_key": "playbook_d6067ad7_ca97_4bb8_bcdf_e46cea03e2ba/qradar_server",
             "hide_notification": false,
-            "id": 5130,
+            "id": 788,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2081,7 +2646,7 @@
             "templates": [],
             "text": "QRadar Server",
             "tooltip": "Enter the label given to the QRadar server in the app.config you wish to use",
-            "type_id": 1072,
+            "type_id": 1027,
             "uuid": "d6bc9c30-602d-4d8c-831e-65edb2633ce2",
             "values": []
           }
@@ -2106,27 +2671,27 @@
         "uuid": "29c6594b-fafa-462b-9329-3c1a7d83d7c7"
       },
       "has_logical_errors": false,
-      "id": 55,
+      "id": 20,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588374700,
+      "last_modified_time": 1713528002251,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462227259,
+          "created_date": 1711372443071,
           "description": "",
           "enabled": false,
           "export_key": "finding_an_item_from_a_QRadar_reference_set_post_process",
-          "id": 72,
+          "id": 18,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462227259,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372443071,
           "name": "finding_an_item_from_a_QRadar_reference_set_post_process",
           "object_type": "artifact",
           "playbook_handle": "find_in_qradar_reference_set_pb",
@@ -2165,7 +2730,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d6067ad7-ca97-4bb8-bcdf-e46cea03e2ba",
-        "id": 55,
+        "id": 50,
         "name": "playbook_d6067ad7_ca97_4bb8_bcdf_e46cea03e2ba",
         "type": "playbook",
         "uuid": "e5f0275c-f62c-4c93-a500-29e248368fbd"
@@ -2173,19 +2738,19 @@
       "tags": [],
       "type": "default",
       "uuid": "d6067ad7-ca97-4bb8-bcdf-e46cea03e2ba",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_355b1397_0164_4fc6_9a9b_f3a68f6d9f89\" isExecutable=\"true\" name=\"playbook_355b1397_0164_4fc6_9a9b_f3a68f6d9f89\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1ewf5hd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Reference Table Get Table Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6450077b-708a-4e65-9eda-6e403a3f4410\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_table_name = row[\u0027reference_table\u0027]\\ninputs.qradar_label = row[\\\"qradar_server\\\"]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_reference_table_get_table_data_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ewf5hd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xbhqti\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1tt98rk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ewf5hd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1xbhqti\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"qradar_gather_reference_table_data_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a06ad6ab-9c79-4875-887e-a1bdf4c69a5d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xbhqti\u003c/incoming\u003e\u003coutgoing\u003eFlow_1tt98rk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1tt98rk\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_355b1397_0164_4fc6_9a9b_f3a68f6d9f89\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tt98rk\" id=\"Flow_1tt98rk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xbhqti\" id=\"Flow_1xbhqti_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ewf5hd\" id=\"Flow_1ewf5hd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462227884,
+      "create_date": 1711372443771,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_355b1397_0164_4fc6_9a9b_f3a68f6d9f89",
@@ -2221,27 +2786,27 @@
         "uuid": "05dd3fda-e1a9-494a-9145-37039c2e12e2"
       },
       "has_logical_errors": false,
-      "id": 56,
+      "id": 21,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588375417,
+      "last_modified_time": 1713528002899,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462228059,
+          "created_date": 1711372444034,
           "description": "",
           "enabled": false,
           "export_key": "qradar_gather_reference_table_data_post_process",
-          "id": 73,
+          "id": 19,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462228059,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1713443051674,
           "name": "qradar_gather_reference_table_data_post_process",
           "object_type": "qradar_reference_table",
           "playbook_handle": "qradar_gather_reference_table_data_example",
@@ -2263,7 +2828,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_355b1397-0164-4fc6-9a9b-f3a68f6d9f89",
-        "id": 56,
+        "id": 39,
         "name": "playbook_355b1397_0164_4fc6_9a9b_f3a68f6d9f89",
         "type": "playbook",
         "uuid": "b94da843-20e5-4b78-bf3e-fad40629d507"
@@ -2271,19 +2836,19 @@
       "tags": [],
       "type": "default",
       "uuid": "355b1397-0164-4fc6-9a9b-f3a68f6d9f89",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_99288f51_7057_42dd_8abe_c9c8a2e03815\" isExecutable=\"true\" name=\"playbook_99288f51_7057_42dd_8abe_c9c8a2e03815\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0x14fq5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Find Reference Sets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"09885813-f640-45bc-8892-d1a741a7d53e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\\ninputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\", None)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_find_reference_sets_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0x14fq5\u003c/incoming\u003e\u003coutgoing\u003eFlow_0pm1ubl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0x14fq5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0y5m8od\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0pm1ubl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"find_all_qradar_reference_sets_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cbbe6ec2-29ed-4400-9e01-522e6bb73f56\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0pm1ubl\u003c/incoming\u003e\u003coutgoing\u003eFlow_0y5m8od\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0y5m8od\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_99288f51_7057_42dd_8abe_c9c8a2e03815\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0y5m8od\" id=\"Flow_0y5m8od_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0pm1ubl\" id=\"Flow_0pm1ubl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0x14fq5\" id=\"Flow_0x14fq5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462288247,
+      "create_date": 1711372444743,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_99288f51_7057_42dd_8abe_c9c8a2e03815",
@@ -2309,7 +2874,7 @@
             "deprecated": false,
             "export_key": "playbook_99288f51_7057_42dd_8abe_c9c8a2e03815/qradar_server",
             "hide_notification": false,
-            "id": 5131,
+            "id": 789,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2324,7 +2889,7 @@
             "templates": [],
             "text": "QRadar Server",
             "tooltip": "Enter the label given to the QRadar server in the app.config you wish to use",
-            "type_id": 1074,
+            "type_id": 1029,
             "uuid": "4f85e1eb-ef10-45fb-a591-5f42903752e8",
             "values": []
           }
@@ -2349,27 +2914,27 @@
         "uuid": "9c298222-ad72-4299-9fd4-e1621895aa00"
       },
       "has_logical_errors": false,
-      "id": 57,
+      "id": 22,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588376208,
+      "last_modified_time": 1713528003507,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462288488,
+          "created_date": 1711372445065,
           "description": "",
           "enabled": false,
           "export_key": "find_all_qradar_reference_sets_post_process",
-          "id": 74,
+          "id": 20,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462288488,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372445065,
           "name": "find_all_qradar_reference_sets_post_process",
           "object_type": "artifact",
           "playbook_handle": "get_all_qradar_reference_sets",
@@ -2400,7 +2965,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_99288f51-7057-42dd-8abe-c9c8a2e03815",
-        "id": 57,
+        "id": 46,
         "name": "playbook_99288f51_7057_42dd_8abe_c9c8a2e03815",
         "type": "playbook",
         "uuid": "2c036d74-2c8f-4a0e-9226-e28a20b0b226"
@@ -2408,19 +2973,19 @@
       "tags": [],
       "type": "default",
       "uuid": "99288f51-7057-42dd-8abe-c9c8a2e03815",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7\" isExecutable=\"true\" name=\"playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0c33c8w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Reference Table Get All Tables\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0abff118-314e-4728-964d-03558088a62a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_reference_table_get_all_tables_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c33c8w\u003c/incoming\u003e\u003coutgoing\u003eFlow_1or4mlg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1f5g0cc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0c33c8w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1or4mlg\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\" qradar_reference_table_get_all_tables_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7a5feda6-77ba-4091-9a92-6cc70ef8f635\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1or4mlg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1f5g0cc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1f5g0cc\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1f5g0cc\" id=\"Flow_1f5g0cc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1or4mlg\" id=\"Flow_1or4mlg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c33c8w\" id=\"Flow_0c33c8w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462289114,
+      "create_date": 1711372445735,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7",
@@ -2446,7 +3011,7 @@
             "deprecated": false,
             "export_key": "playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7/qradar_server",
             "hide_notification": false,
-            "id": 5132,
+            "id": 790,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2461,7 +3026,7 @@
             "templates": [],
             "text": "QRadar Server",
             "tooltip": "QRadar Server Label given to the QRadar server must be added only if present in the app.config ",
-            "type_id": 1075,
+            "type_id": 1030,
             "uuid": "1456ed16-c498-4dab-a1aa-0990fa6bec26",
             "values": []
           }
@@ -2486,27 +3051,27 @@
         "uuid": "3d307002-7507-4ccd-812f-89753d4e7b7e"
       },
       "has_logical_errors": false,
-      "id": 58,
+      "id": 23,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588376886,
+      "last_modified_time": 1713528004060,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462289344,
+          "created_date": 1711372446055,
           "description": "",
           "enabled": false,
           "export_key": " qradar_reference_table_get_all_tables_post_process",
-          "id": 75,
+          "id": 21,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462289344,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372446055,
           "name": " qradar_reference_table_get_all_tables_post_process",
           "object_type": "incident",
           "playbook_handle": "qradar_get_all_reference_tables_example",
@@ -2537,7 +3102,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_3e15a087-0799-4b05-87ce-32cffbffa5c7",
-        "id": 58,
+        "id": 40,
         "name": "playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7",
         "type": "playbook",
         "uuid": "381a897e-a16c-4360-a67e-d13737aebb11"
@@ -2550,14 +3115,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 11,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69\" isExecutable=\"true\" name=\"playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mlt7oj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: QRadar Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c3e6f6cc-8905-41e6-9841-ebe99845d778\"\u003e{\"inputs\":{\"a49a50f2-68ba-4ccb-87d5-c7e55d2cbfef\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b6053690-d7b2-4204-b48a-f86503b419d9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c33fbe1d-125c-4a79-82e8-6608d1c7bb5e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d21f2814-40e6-4f7a-b269-6ff2c7a3196e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d7a544ff-689b-4f15-b3c1-a7ebd20bbf3b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"54c4eb52-d955-4e05-9f76-c3819853ff68\"}}},\"pre_processing_script\":\"inputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\")\\n\\n\\nif getattr(playbook.inputs, \\\"qradar_query_all_results\\\"):\\n  inputs.qradar_query_all_results = getattr(playbook.inputs, \\\"qradar_query_all_results\\\")\\n\\n  \\ninputs.qradar_query = \\\"SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days\\\"\\ninputs.qradar_search_param1  = \\\"DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)\\\"\\ninputs.qradar_search_param2 = incident.properties.qradar_id\\nif getattr(playbook.inputs, \\\"days_to_search_back\\\"): \\n  inputs.qradar_search_param3 = getattr(playbook.inputs, \\\"days_to_search_back\\\")\\nelse:\\n  inputs.qradar_search_param3 = \u00277\u0027\\ninputs.qradar_query_range_start = \u00271\u0027\\ninputs.qradar_query_range_end = \u00275\u0027\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_search_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mlt7oj\u003c/incoming\u003e\u003coutgoing\u003eFlow_10dtv7a\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1mlt7oj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_09zi6q9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_10dtv7a\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"qradar_search_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7db7d19a-729f-4c31-9345-c95b6cfb2b03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10dtv7a\u003c/incoming\u003e\u003coutgoing\u003eFlow_09zi6q9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09zi6q9\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09zi6q9\" id=\"Flow_09zi6q9_di\"\u003e\u003comgdi:waypoint x=\"420\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"420\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10dtv7a\" id=\"Flow_10dtv7a_di\"\u003e\u003comgdi:waypoint x=\"420\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"420\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mlt7oj\" id=\"Flow_1mlt7oj_di\"\u003e\u003comgdi:waypoint x=\"420\" y=\"146\"/\u003e\u003comgdi:waypoint x=\"420\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"326\" y=\"94\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"321.5\" y=\"267.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"353.5\" y=\"573.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"321.5\" y=\"437.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462289927,
+      "create_date": 1711372446668,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69",
@@ -2583,7 +3148,7 @@
             "deprecated": false,
             "export_key": "playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69/days_to_search_back",
             "hide_notification": false,
-            "id": 5133,
+            "id": 791,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2598,7 +3163,7 @@
             "templates": [],
             "text": "Number of days to search back",
             "tooltip": "Note when populated all results are returned for within this search back time period.",
-            "type_id": 1076,
+            "type_id": 1031,
             "uuid": "49aec288-e86c-4256-a43e-dbd612dc1e40",
             "values": []
           },
@@ -2612,7 +3177,7 @@
             "deprecated": false,
             "export_key": "playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69/qradar_query_all_results",
             "hide_notification": false,
-            "id": 5134,
+            "id": 792,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2627,7 +3192,7 @@
             "templates": [],
             "text": "QRadar Query all Results",
             "tooltip": "When all results are queried, a  predefined number of results are returned",
-            "type_id": 1076,
+            "type_id": 1031,
             "uuid": "5e8bc7a6-5f46-4204-a3b5-cef0073e51f5",
             "values": [
               {
@@ -2637,7 +3202,7 @@
                 "label": "Yes",
                 "properties": null,
                 "uuid": "51c6430c-3595-479e-b27e-cba5e2d308f0",
-                "value": 1054
+                "value": 268
               },
               {
                 "default": true,
@@ -2646,7 +3211,7 @@
                 "label": "No",
                 "properties": null,
                 "uuid": "362bd37f-f943-42f3-9eca-1548ff428127",
-                "value": 1055
+                "value": 269
               }
             ]
           },
@@ -2660,7 +3225,7 @@
             "deprecated": false,
             "export_key": "playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69/qradar_server",
             "hide_notification": false,
-            "id": 5135,
+            "id": 793,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2675,7 +3240,7 @@
             "templates": [],
             "text": "QRadar Server",
             "tooltip": "Enter the label given to the QRadar server in the app.config you wish to use",
-            "type_id": 1076,
+            "type_id": 1031,
             "uuid": "f021a1ea-62b3-4303-9ec1-67b2c4abbe48",
             "values": []
           }
@@ -2700,27 +3265,27 @@
         "uuid": "8bed8941-83a6-4d88-b605-860deb4407fe"
       },
       "has_logical_errors": false,
-      "id": 59,
+      "id": 24,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588377626,
+      "last_modified_time": 1713528004656,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462290274,
+          "created_date": 1711372447145,
           "description": "",
           "enabled": false,
           "export_key": "qradar_search_post_process",
-          "id": 76,
+          "id": 22,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462290274,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372447145,
           "name": "qradar_search_post_process",
           "object_type": "incident",
           "playbook_handle": "search_qradar_for_offense_id",
@@ -2775,7 +3340,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b8c11ef3-56fb-484d-ae61-160c1c8adf69",
-        "id": 59,
+        "id": 49,
         "name": "playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69",
         "type": "playbook",
         "uuid": "e361b56f-e26a-48f8-8136-8b5dcba974d7"
@@ -2783,19 +3348,19 @@
       "tags": [],
       "type": "default",
       "uuid": "b8c11ef3-56fb-484d-ae61-160c1c8adf69",
-      "version": 13
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd\" isExecutable=\"true\" name=\"playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0i5ble0\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Delete Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a7dc3d26-ab97-44a3-b56a-e367315b08e0\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\\ninputs.qradar_reference_set_name = getattr(playbook.inputs, \\\"qradar_reference_set_name\\\")\\ninputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_opr\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0i5ble0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1v2e59r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar SIEM: Add Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"30b6899a-d015-48c3-8fd9-500788d4b437\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\\ninputs.qradar_reference_set_name = getattr(playbook.inputs, \\\"qradar_reference_set_to_move_to\\\")\\ninputs.qradar_label = getattr(playbook.inputs, \\\"qradar_server\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_add_reference_set_item_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0fwl34d\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rxnj1n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0i5ble0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"qradar_add_reference_set_item_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3977c579-fda6-498b-aa2d-5761582576b1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rxnj1n\u003c/incoming\u003e\u003coutgoing\u003eFlow_11icb6k\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1v2e59r\" sourceRef=\"ServiceTask_1\" targetRef=\"ConditionPoint_6\"/\u003e\u003cexclusiveGateway default=\"Flow_07e9s1d\" id=\"ConditionPoint_6\" resilient:documentation=\"Delete_Success\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1v2e59r\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fwl34d\u003c/outgoing\u003e\u003coutgoing\u003eFlow_07e9s1d\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cendEvent id=\"EndPoint_7\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_07e9s1d\u003c/incoming\u003e\u003cincoming\u003eFlow_11icb6k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rxnj1n\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_5\"/\u003e\u003csequenceFlow id=\"Flow_11icb6k\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_7\"/\u003e\u003csequenceFlow id=\"Flow_0fwl34d\" name=\"Success\" sourceRef=\"ConditionPoint_6\" targetRef=\"ServiceTask_2\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\\nresults = playbook.functions.results.delete_opr\\nif results.content.get(\\\"status_code\\\") == 200:\\n  incident.addNote(\\\"IP {} removed successfully from {} on QRadar server: {}\\\".format(artifact.value, playbook.inputs.qradar_reference_set_name, \\\"test\\\"))\\n  result = True\\n  \\nelse:\\n  incident.addNote(u\\\"Failed to remove {} from {} on QRadar Server: {}, message: {}\\\".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.inputs[\\\"qradar_label\\\"], results.content.get(\\\"message\\\")))\\n  result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_07e9s1d\" name=\"Else\" sourceRef=\"ConditionPoint_6\" targetRef=\"EndPoint_7\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07e9s1d\" id=\"Flow_07e9s1d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"407\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"645\"/\u003e\u003comgdi:waypoint x=\"569\" y=\"645\"/\u003e\u003comgdi:waypoint x=\"569\" y=\"884\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"634\" y=\"627\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fwl34d\" id=\"Flow_0fwl34d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"407\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"552\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"552\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"698\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"43\" x=\"879\" y=\"579\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11icb6k\" id=\"Flow_11icb6k_di\"\u003e\u003comgdi:waypoint x=\"762\" y=\"910\"/\u003e\u003comgdi:waypoint x=\"635\" y=\"910\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rxnj1n\" id=\"Flow_0rxnj1n_di\"\u003e\u003comgdi:waypoint x=\"860\" y=\"782\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"868\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v2e59r\" id=\"Flow_1v2e59r_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"355\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0i5ble0\" id=\"Flow_0i5ble0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"698\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"868\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_6\" id=\"ConditionPoint_6_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"245.333\" x=\"597.9549549549549\" y=\"354.66666666666663\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_7\" id=\"EndPoint_7_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"503.3207207207207\" y=\"883.5675675675676\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462350260,
+      "create_date": 1711372447784,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd",
@@ -2821,7 +3386,7 @@
             "deprecated": false,
             "export_key": "playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd/qradar_reference_set_name",
             "hide_notification": false,
-            "id": 5136,
+            "id": 794,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2836,7 +3401,7 @@
             "templates": [],
             "text": "Reference Set Name",
             "tooltip": "Name of the reference set to search on",
-            "type_id": 1077,
+            "type_id": 1032,
             "uuid": "106f50e4-7a96-4d26-97c5-90eb1a988a5f",
             "values": []
           },
@@ -2850,7 +3415,7 @@
             "deprecated": false,
             "export_key": "playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd/qradar_reference_set_to_move_to",
             "hide_notification": false,
-            "id": 5137,
+            "id": 795,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2865,7 +3430,7 @@
             "templates": [],
             "text": "QRadar Reference Set to Move to",
             "tooltip": "Reference set name to move value to",
-            "type_id": 1077,
+            "type_id": 1032,
             "uuid": "8182b786-e92a-4b10-9be0-4554310efc73",
             "values": []
           },
@@ -2879,7 +3444,7 @@
             "deprecated": false,
             "export_key": "playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd/qradar_server",
             "hide_notification": false,
-            "id": 5138,
+            "id": 796,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2894,7 +3459,7 @@
             "templates": [],
             "text": "QRadar Server",
             "tooltip": "Enter the label given to the QRadar server in the app.config you wish to use",
-            "type_id": 1077,
+            "type_id": 1032,
             "uuid": "d0df4f8e-380d-418f-8956-173d17e07a60",
             "values": []
           }
@@ -2919,27 +3484,27 @@
         "uuid": "c63ee550-ffef-4dae-87ef-e76c43cfdaf5"
       },
       "has_logical_errors": false,
-      "id": 60,
+      "id": 25,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588378473,
+      "last_modified_time": 1713528005352,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462350591,
+          "created_date": 1711372448189,
           "description": "",
           "enabled": false,
           "export_key": "qradar_add_reference_set_item_post_process",
-          "id": 77,
+          "id": 23,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462350591,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372448189,
           "name": "qradar_add_reference_set_item_post_process",
           "object_type": "artifact",
           "playbook_handle": "qradar_move_from_sample_blocked_to_sample_suspected",
@@ -2950,14 +3515,14 @@
         },
         {
           "actions": [],
-          "created_date": 1711462350636,
+          "created_date": 1711372448310,
           "description": "",
           "enabled": false,
           "export_key": "qradar_delete_reference_set_item_post_process",
-          "id": 78,
+          "id": 24,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462350636,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1711372448310,
           "name": "qradar_delete_reference_set_item_post_process",
           "object_type": "artifact",
           "playbook_handle": "qradar_move_from_sample_blocked_to_sample_suspected",
@@ -3012,7 +3577,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_739eedd5-56b6-4ee5-852a-47e3ad0be6cd",
-        "id": 60,
+        "id": 44,
         "name": "playbook_739eedd5_56b6_4ee5_852a_47e3ad0be6cd",
         "type": "playbook",
         "uuid": "5c3dde3b-3589-4a6f-90e8-6dde3ed46078"
@@ -3020,19 +3585,295 @@
       "tags": [],
       "type": "default",
       "uuid": "739eedd5-56b6-4ee5-852a-47e3ad0be6cd",
-      "version": 8
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 15,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_45f5d635_535a_4636_bf6c_a2dce79634a9\" isExecutable=\"true\" name=\"playbook_45f5d635_535a_4636_bf6c_a2dce79634a9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_18cwz35\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Update Offense\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ef19902e-8b8e-42a5-b981-750bc3742248\"\u003e{\"inputs\":{\"1d8545d5-9433-4f11-8c35-98cf232a1b4a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":164}},\"f358ee92-3189-43e9-94e0-cb0a62875223\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"{\\\"status\\\": \\\"CLOSED\\\", \\\"closing_reason_id\\\": 1}\"}},\"a49a50f2-68ba-4ccb-87d5-c7e55d2cbfef\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"9.46.246.248\"}}},\"pre_processing_script\":\"import json\\n\\nclosing_reason_lookup = {\\n  \\\"False Positive\\\": 2,\\n  \\\"Non-Issue\\\": 1,\\n  \\\"Policy Violation\\\": 3,\\n  \\\"Duplicate\\\": 56,\\n  \\\"Not an Issue\\\": 57,\\n  \\\"Resolved\\\": 54,\\n  \\\"Unresolved\\\": 55\\n}\\n\\nif not closing_reason_lookup.get(playbook.inputs.closing_reason):\\n  helper.fail(f\\\"Closing reason not found: {playbook.inputs.closing_reason}\\\")\\n\\ninputs.qradar_label = playbook.inputs.qradar_label\\ninputs.qradar_id = playbook.inputs.qradar_id\\ninputs.qradar_update_json = json.dumps({\\n  \\\"status\\\": \\\"CLOSED\\\", \\n  \\\"closing_reason_id\\\": closing_reason_lookup.get(playbook.inputs.closing_reason)\\n})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_update_offense_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_18cwz35\u003c/incoming\u003e\u003coutgoing\u003eFlow_04vffqk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_18cwz35\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ysocen\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_04vffqk\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"update_results_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"87311a7e-bf70-455a-ab08-4761b793f4c4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04vffqk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ysocen\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ysocen\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_45f5d635_535a_4636_bf6c_a2dce79634a9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ysocen\" id=\"Flow_1ysocen_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04vffqk\" id=\"Flow_04vffqk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18cwz35\" id=\"Flow_18cwz35_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"318.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1713469592048,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+      "description": {
+        "content": "Example of closing an offense using the Update Offense function",
+        "format": "text"
+      },
+      "display_name": "QRadar SIEM: Update Offense (close offense)",
+      "export_key": "qradar_siem_update_offense",
+      "field_type_handle": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+      "fields_type": {
+        "actions": [],
+        "display_name": "QRadar SIEM: Update Offense",
+        "export_key": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+        "fields": {
+          "closing_reason": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9/closing_reason",
+            "hide_notification": false,
+            "id": 2039,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "closing_reason",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Closing Reason",
+            "tooltip": "",
+            "type_id": 1127,
+            "uuid": "748e0024-5852-426a-afac-05918bca0a8a",
+            "values": [
+              {
+                "default": true,
+                "enabled": true,
+                "hidden": false,
+                "label": "False Positive",
+                "properties": null,
+                "uuid": "d3fe13a4-f0c7-4c57-8313-355232838090",
+                "value": 635
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Non-Issue",
+                "properties": null,
+                "uuid": "5dca728a-eb94-4ca9-b661-574627905f97",
+                "value": 636
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Policy Violation",
+                "properties": null,
+                "uuid": "decd4c9f-a016-4fed-94ce-de63ee3afcd4",
+                "value": 637
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Not an Issue",
+                "properties": null,
+                "uuid": "f0caa5a3-37a1-4c96-9c52-04fdfa86c93c",
+                "value": 638
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Resolved",
+                "properties": null,
+                "uuid": "f8bfa353-b9e3-4bb3-bcb9-0cdd4a85321d",
+                "value": 639
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Unresolved",
+                "properties": null,
+                "uuid": "9ab5b698-4191-4c71-b47b-f4cd1dacc28b",
+                "value": 640
+              }
+            ]
+          },
+          "qradar_id": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9/qradar_id",
+            "hide_notification": false,
+            "id": 2040,
+            "input_type": "number",
+            "internal": false,
+            "is_tracked": false,
+            "name": "qradar_id",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "QRadar Id",
+            "tooltip": "",
+            "type_id": 1127,
+            "uuid": "c5d24bd6-7c92-4920-848f-58089332debc",
+            "values": []
+          },
+          "qradar_label": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9/qradar_label",
+            "hide_notification": false,
+            "id": 2041,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "qradar_label",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "QRadar Label",
+            "tooltip": "",
+            "type_id": 1127,
+            "uuid": "a0ee2d56-e04e-4869-9f7c-b73cac747111",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+        "uuid": "7668083e-3c06-46e9-9a58-ddaa296082bf"
+      },
+      "has_logical_errors": false,
+      "id": 105,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1713533769393,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1713470442800,
+          "description": "",
+          "enabled": false,
+          "export_key": "update_results_post_process",
+          "id": 109,
+          "language": "python3",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1713471566604,
+          "name": "update_results_post_process",
+          "object_type": "incident",
+          "playbook_handle": "qradar_siem_update_offense",
+          "programmatic_name": "qradar_siem_update_offense_update_results_post_process",
+          "script_text": "results = playbook.functions.results.qradar_update_offense_results\nif results.success:\n  incident.addNote(f\"QRadar offense update successful for: {playbook.inputs.qradar_id}\")\nelse:\n  incident.addNote(f\"QRadar offense update failed for: {playbook.inputs.qradar_id} Reason: {results.reason}\")",
+          "tags": [],
+          "uuid": "87311a7e-bf70-455a-ab08-4761b793f4c4"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "\u003ch5\u003eThis playbook demonstrates closing an offense\u003c/h5\u003e",
+            "element": "html",
+            "field_type": null,
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "c5d24bd6-7c92-4920-848f-58089332debc",
+            "element": "field_uuid",
+            "field_type": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "748e0024-5852-426a-afac-05918bca0a8a",
+            "element": "field_uuid",
+            "field_type": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "a0ee2d56-e04e-4869-9f7c-b73cac747111",
+            "element": "field_uuid",
+            "field_type": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "qradar_siem_update_offense",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_45f5d635-535a-4636-bf6c-a2dce79634a9",
+        "id": 188,
+        "name": "playbook_45f5d635_535a_4636_bf6c_a2dce79634a9",
+        "type": "playbook",
+        "uuid": "00ba5ead-d61a-44c0-822c-3eb58311e427"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "45f5d635-535a-4636-bf6c-a2dce79634a9",
+      "version": 19
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8226cc88_51c0_4e19_a616_3f0b9122d7f8\" isExecutable=\"true\" name=\"playbook_8226cc88_51c0_4e19_a616_3f0b9122d7f8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0wuqnza\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Reference Table Update Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0ec2b9-0266-42bc-ac4c-71ddfe593344\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_label = row[\\\"qradar_server\\\"]\\ninputs.qradar_reference_table_name = row.table\\ninputs.qradar_reference_table_item_outer_key = row.outer_key\\ninputs.qradar_reference_table_item_inner_key = row.inner_key\\n\\nif playbook.inputs.qradar_ref_table_update:\\n  inputs.qradar_reference_table_item_value = getattr(playbook.inputs, \\\"qradar_ref_table_update\\\")\\nelse:\\n  inputs.qradar_reference_table_item_value = \\\"This is an example\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_reference_table_update_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wuqnza\u003c/incoming\u003e\u003coutgoing\u003eFlow_0r1fmcv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0k34hck\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0wuqnza\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0r1fmcv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"qradar_update_this_reference_table_item_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"36051609-2b4c-4d3a-99f3-488223e2c2bd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0r1fmcv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k34hck\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0k34hck\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8226cc88_51c0_4e19_a616_3f0b9122d7f8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k34hck\" id=\"Flow_0k34hck_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"654\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r1fmcv\" id=\"Flow_0r1fmcv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"478\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wuqnza\" id=\"Flow_0wuqnza_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"654\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"477.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711462351406,
+      "create_date": 1711372449047,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_8226cc88_51c0_4e19_a616_3f0b9122d7f8",
@@ -3058,7 +3899,7 @@
             "deprecated": false,
             "export_key": "playbook_8226cc88_51c0_4e19_a616_3f0b9122d7f8/qradar_ref_table_update",
             "hide_notification": false,
-            "id": 5139,
+            "id": 797,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3073,7 +3914,7 @@
             "templates": [],
             "text": "Update Value",
             "tooltip": "",
-            "type_id": 1078,
+            "type_id": 1033,
             "uuid": "65533630-31bf-47d8-964e-c35f4c103405",
             "values": []
           }
@@ -3098,27 +3939,27 @@
         "uuid": "0deb4abf-4567-433d-be42-3b759a9fe87f"
       },
       "has_logical_errors": false,
-      "id": 61,
+      "id": 26,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712588378963,
+      "last_modified_time": 1713528006375,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711462351652,
+          "created_date": 1711372449368,
           "description": "",
           "enabled": false,
           "export_key": "qradar_update_this_reference_table_item_post_process",
-          "id": 79,
+          "id": 25,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1711462351652,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1713443054949,
           "name": "qradar_update_this_reference_table_item_post_process",
           "object_type": "qradar_reference_table_queried_rows",
           "playbook_handle": "qradar_update_this_reference_table_item_example",
@@ -3157,7 +3998,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8226cc88-51c0-4e19-a616-3f0b9122d7f8",
-        "id": 61,
+        "id": 45,
         "name": "playbook_8226cc88_51c0_4e19_a616_3f0b9122d7f8",
         "type": "playbook",
         "uuid": "0f304816-e95f-4e97-aab4-fb84a73a790f"
@@ -3165,7 +4006,7 @@
       "tags": [],
       "type": "default",
       "uuid": "8226cc88-51c0-4e19-a616-3f0b9122d7f8",
-      "version": 8
+      "version": 7
     }
   ],
   "regulators": null,
@@ -3196,7 +4037,7 @@
           "deprecated": false,
           "export_key": "qradar_offense_event/category",
           "hide_notification": false,
-          "id": 5086,
+          "id": 700,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3213,7 +4054,7 @@
           "templates": [],
           "text": "Category",
           "tooltip": "",
-          "type_id": 1064,
+          "type_id": 1016,
           "uuid": "ee0a6fe5-c02d-4475-8eca-38af4a6c445a",
           "values": [],
           "width": 127
@@ -3228,7 +4069,7 @@
           "deprecated": false,
           "export_key": "qradar_offense_event/log_source",
           "hide_notification": false,
-          "id": 5087,
+          "id": 701,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3245,7 +4086,7 @@
           "templates": [],
           "text": "Log Source",
           "tooltip": "logsourceid",
-          "type_id": 1064,
+          "type_id": 1016,
           "uuid": "329c8249-a81e-444a-aaf8-ccd8558dc980",
           "values": [],
           "width": 156
@@ -3260,7 +4101,7 @@
           "deprecated": false,
           "export_key": "qradar_offense_event/protocol",
           "hide_notification": false,
-          "id": 5088,
+          "id": 702,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3277,7 +4118,7 @@
           "templates": [],
           "text": "Protocol",
           "tooltip": "protocolid",
-          "type_id": 1064,
+          "type_id": 1016,
           "uuid": "630337b1-fea8-471e-9601-f89629ec13b4",
           "values": [],
           "width": 123
@@ -3292,7 +4133,7 @@
           "deprecated": false,
           "export_key": "qradar_offense_event/qradar_server",
           "hide_notification": false,
-          "id": 5089,
+          "id": 703,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3309,7 +4150,7 @@
           "templates": [],
           "text": "QRadar Server",
           "tooltip": "",
-          "type_id": 1064,
+          "type_id": 1016,
           "uuid": "30b009ed-57b1-485c-91b1-feeedd5e1316",
           "values": [],
           "width": 134
@@ -3324,7 +4165,7 @@
           "deprecated": false,
           "export_key": "qradar_offense_event/query_time",
           "hide_notification": false,
-          "id": 5090,
+          "id": 704,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3341,7 +4182,7 @@
           "templates": [],
           "text": "Query Time",
           "tooltip": "",
-          "type_id": 1064,
+          "type_id": 1016,
           "uuid": "0e067ef0-1472-4633-af00-04f668429209",
           "values": [],
           "width": 119
@@ -3356,7 +4197,7 @@
           "deprecated": false,
           "export_key": "qradar_offense_event/rule",
           "hide_notification": false,
-          "id": 5091,
+          "id": 705,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3373,7 +4214,7 @@
           "templates": [],
           "text": "Rule",
           "tooltip": "creeventlist",
-          "type_id": 1064,
+          "type_id": 1016,
           "uuid": "e9fc2abf-43df-4f4c-8c2a-27f1d073f010",
           "values": [],
           "width": 123
@@ -3388,7 +4229,7 @@
           "deprecated": false,
           "export_key": "qradar_offense_event/start_time",
           "hide_notification": false,
-          "id": 5092,
+          "id": 706,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3405,7 +4246,7 @@
           "templates": [],
           "text": "Start Time",
           "tooltip": "starttime",
-          "type_id": 1064,
+          "type_id": 1016,
           "uuid": "d99b3a20-5a56-46f5-a15c-d4171489401a",
           "values": [],
           "width": 155
@@ -3445,7 +4286,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_set/item_value",
           "hide_notification": false,
-          "id": 5093,
+          "id": 707,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3462,7 +4303,7 @@
           "templates": [],
           "text": "Item Value",
           "tooltip": "Item value",
-          "type_id": 1065,
+          "type_id": 1017,
           "uuid": "fde56836-581c-47a9-a961-67427a5b3a80",
           "values": [],
           "width": 219
@@ -3477,7 +4318,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_set/qradar_server",
           "hide_notification": false,
-          "id": 5094,
+          "id": 708,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3494,7 +4335,7 @@
           "templates": [],
           "text": "QRadar Server",
           "tooltip": "",
-          "type_id": 1065,
+          "type_id": 1017,
           "uuid": "06ccaf4d-5742-4905-9c9e-6e921ff84f62",
           "values": [],
           "width": 116
@@ -3509,7 +4350,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_set/query_time",
           "hide_notification": false,
-          "id": 5095,
+          "id": 709,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3526,7 +4367,7 @@
           "templates": [],
           "text": "Query Time",
           "tooltip": "",
-          "type_id": 1065,
+          "type_id": 1017,
           "uuid": "7d2b6797-d507-411a-a6fa-2f007089d93e",
           "values": [],
           "width": 124
@@ -3541,7 +4382,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_set/reference_set",
           "hide_notification": false,
-          "id": 5096,
+          "id": 710,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3558,7 +4399,7 @@
           "templates": [],
           "text": "Reference Set",
           "tooltip": "Name of reference set",
-          "type_id": 1065,
+          "type_id": 1017,
           "uuid": "0c0a0482-2e19-49e8-b63b-8eb912ed8f8e",
           "values": [],
           "width": 161
@@ -3573,7 +4414,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_set/source",
           "hide_notification": false,
-          "id": 5097,
+          "id": 711,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3590,7 +4431,7 @@
           "templates": [],
           "text": "Source",
           "tooltip": "how this value is added to the reference set",
-          "type_id": 1065,
+          "type_id": 1017,
           "uuid": "5110a075-82a8-4ee1-9e9b-26bb7fb1075f",
           "values": [],
           "width": 196
@@ -3630,7 +4471,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table/collection_id",
           "hide_notification": false,
-          "id": 5098,
+          "id": 712,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3647,7 +4488,7 @@
           "templates": [],
           "text": "Collection Id",
           "tooltip": "",
-          "type_id": 1066,
+          "type_id": 1018,
           "uuid": "d4a93bb2-a6ae-4b1f-a70c-7f5bc2b85fc9",
           "values": [],
           "width": 157
@@ -3662,7 +4503,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table/namespace",
           "hide_notification": false,
-          "id": 5099,
+          "id": 713,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3679,7 +4520,7 @@
           "templates": [],
           "text": "Namespace",
           "tooltip": "",
-          "type_id": 1066,
+          "type_id": 1018,
           "uuid": "3ba3eaa4-bbed-436c-bf2f-7649752d4565",
           "values": [],
           "width": 90
@@ -3694,7 +4535,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table/number_of_elements",
           "hide_notification": false,
-          "id": 5100,
+          "id": 714,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3712,7 +4553,7 @@
           "templates": [],
           "text": "Number Of Elements",
           "tooltip": "",
-          "type_id": 1066,
+          "type_id": 1018,
           "uuid": "15a5979f-a942-40ce-a44a-e5a75b06c13d",
           "values": [],
           "width": 207
@@ -3727,7 +4568,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table/qradar_server",
           "hide_notification": false,
-          "id": 5101,
+          "id": 715,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3744,7 +4585,7 @@
           "templates": [],
           "text": "QRadar Server",
           "tooltip": "",
-          "type_id": 1066,
+          "type_id": 1018,
           "uuid": "e7bcb374-2601-43e8-9124-672e189631b1",
           "values": [],
           "width": 126
@@ -3759,7 +4600,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table/query_time",
           "hide_notification": false,
-          "id": 5102,
+          "id": 716,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3776,7 +4617,7 @@
           "templates": [],
           "text": "Query Time",
           "tooltip": "",
-          "type_id": 1066,
+          "type_id": 1018,
           "uuid": "b97bd233-f69f-484a-a8a4-79c2a186392f",
           "values": [],
           "width": 137
@@ -3791,7 +4632,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table/reference_table",
           "hide_notification": false,
-          "id": 5103,
+          "id": 717,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3809,7 +4650,7 @@
           "templates": [],
           "text": "Reference Table",
           "tooltip": "",
-          "type_id": 1066,
+          "type_id": 1018,
           "uuid": "1be69e07-4d48-412e-98d1-ca83e086e159",
           "values": [],
           "width": 137
@@ -3849,7 +4690,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table_queried_rows/inner_key",
           "hide_notification": false,
-          "id": 5104,
+          "id": 718,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3866,7 +4707,7 @@
           "templates": [],
           "text": "Inner Key",
           "tooltip": "",
-          "type_id": 1067,
+          "type_id": 1019,
           "uuid": "c771fb55-91e7-4eec-9310-7de7e232b58e",
           "values": [],
           "width": 127
@@ -3881,7 +4722,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table_queried_rows/outer_key",
           "hide_notification": false,
-          "id": 5105,
+          "id": 719,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3898,7 +4739,7 @@
           "templates": [],
           "text": "Outer Key",
           "tooltip": "",
-          "type_id": 1067,
+          "type_id": 1019,
           "uuid": "ae89d5d2-9036-4560-997b-ce15c2b3f488",
           "values": [],
           "width": 132
@@ -3913,7 +4754,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table_queried_rows/qradar_server",
           "hide_notification": false,
-          "id": 5106,
+          "id": 720,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3930,7 +4771,7 @@
           "templates": [],
           "text": "QRadar Server",
           "tooltip": "",
-          "type_id": 1067,
+          "type_id": 1019,
           "uuid": "113e09d4-c996-4074-be7e-6796877ee316",
           "values": [],
           "width": 127
@@ -3945,7 +4786,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table_queried_rows/query_time",
           "hide_notification": false,
-          "id": 5107,
+          "id": 721,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3962,7 +4803,7 @@
           "templates": [],
           "text": "Query Time",
           "tooltip": "",
-          "type_id": 1067,
+          "type_id": 1019,
           "uuid": "df4e4804-755a-43b3-9c8e-7023f05a71d4",
           "values": [],
           "width": 134
@@ -3977,7 +4818,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table_queried_rows/status",
           "hide_notification": false,
-          "id": 5108,
+          "id": 722,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3994,7 +4835,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1067,
+          "type_id": 1019,
           "uuid": "49ae33c0-f2a9-4da6-a63a-158ae5f9125f",
           "values": [],
           "width": 50
@@ -4009,7 +4850,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table_queried_rows/table",
           "hide_notification": false,
-          "id": 5109,
+          "id": 723,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4026,7 +4867,7 @@
           "templates": [],
           "text": "Table",
           "tooltip": "",
-          "type_id": 1067,
+          "type_id": 1019,
           "uuid": "b90fbf39-8688-4f7a-ace4-9cf802de9074",
           "values": [],
           "width": 127
@@ -4041,7 +4882,7 @@
           "deprecated": false,
           "export_key": "qradar_reference_table_queried_rows/value",
           "hide_notification": false,
-          "id": 5110,
+          "id": 724,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4058,7 +4899,7 @@
           "templates": [],
           "text": "Value",
           "tooltip": "",
-          "type_id": 1067,
+          "type_id": 1019,
           "uuid": "20200102-b242-4505-ac95-d3441b79ae40",
           "values": [],
           "width": 94

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.1.1.824
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.1.0.695
 
 """Generate the SOAR customizations required for fn_qradar_integration"""
 
@@ -27,6 +27,7 @@ def codegen_reload_data():
         ],
         "functions": [
             u"qradar_add_reference_set_item",
+            u"qradar_create_offense_note",
             u"qradar_delete_reference_set_item",
             u"qradar_find_reference_set_item",
             u"qradar_find_reference_sets",
@@ -35,7 +36,8 @@ def codegen_reload_data():
             u"qradar_reference_table_delete_item",
             u"qradar_reference_table_get_table",
             u"qradar_reference_table_update_item",
-            u"qradar_search"
+            u"qradar_search",
+            u"qradar_update_offense"
         ],
         "workflows": [],
         "actions": [],
@@ -63,6 +65,8 @@ def codegen_reload_data():
             u"qradar_gather_reference_table_data_example",
             u"qradar_get_all_reference_tables_example",
             u"qradar_move_from_sample_blocked_to_sample_suspected",
+            u"qradar_siem_create_note",
+            u"qradar_siem_update_offense",
             u"qradar_update_this_reference_table_item_example",
             u"search_qradar_for_offense_id"
         ]
@@ -81,6 +85,7 @@ def customization_data(client=None):
         - fn_qradar_integration
     - Functions:
         - qradar_add_reference_set_item
+        - qradar_create_offense_note
         - qradar_delete_reference_set_item
         - qradar_find_reference_set_item
         - qradar_find_reference_sets
@@ -90,6 +95,7 @@ def customization_data(client=None):
         - qradar_reference_table_get_table
         - qradar_reference_table_update_item
         - qradar_search
+        - qradar_update_offense
     - Playbooks:
         - find_in_qradar_reference_set_pb
         - get_all_qradar_reference_sets
@@ -100,6 +106,8 @@ def customization_data(client=None):
         - qradar_gather_reference_table_data_example
         - qradar_get_all_reference_tables_example
         - qradar_move_from_sample_blocked_to_sample_suspected
+        - qradar_siem_create_note
+        - qradar_siem_update_offense
         - qradar_update_this_reference_table_item_example
         - search_qradar_for_offense_id
     - Incident Fields:
