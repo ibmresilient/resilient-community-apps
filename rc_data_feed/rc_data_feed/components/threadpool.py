@@ -10,7 +10,7 @@ import traceback
 
 from pydoc import locate
 from resilient_lib import get_file_attachment
-from rc_data_feed.lib.feed import FeedContext
+from rc_data_feed.lib.feed import FeedContext, CriticalPluginError
 
 LOG = logging.getLogger(__name__)
 
@@ -121,6 +121,7 @@ class PluginPool(object):
         :type payload: dict
         """
         item_sent = False
+        failure_feeds = []
         for feed_name, feed_output in self.feed_outputs.items():
             # don't let a failure in one feed break all the rest
             try:
@@ -128,14 +129,19 @@ class PluginPool(object):
                     LOG.info("Calling feed %s:%s for workspace: %s", feed_name, feed_output.__class__.__name__, workspace)
                     self.run_plugin(feed_output.send_data, args=(context, payload))
                     item_sent = True
+            except CriticalPluginError as cerr:
+                LOG.error("Critical failure in feed: %s %s. Removing plugin", feed_name, str(cerr))
+                failure_feeds.append(feed_name)
             except Exception as err:
-                LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
+                LOG.error("Failure in feed %s %s", feed_name, err)
                 error_trace = traceback.format_exc()
                 LOG.error("Traceback %s", error_trace)
 
         if not item_sent:
-            LOG.info("No feed found to satisfy workspace: '%s' for %s (%s)", workspace, type_name, payload.get('id'))
+            LOG.info("No feed found or failure to satisfy workspace: '%s' for %s (%s)", workspace, type_name, payload.get('id'))
 
+        for feed_name in failure_feeds:
+            del self.feed_outputs[feed_name]
 
     def send_data(self, type_info, inc_id, payload, is_deleted, incl_attachment_data):
         """
@@ -163,7 +169,7 @@ class PluginPool(object):
                 payload['content'] = get_file_attachment(self.rest_client_helper.inst_rest_client, inc_id,
                                                          task_id=payload.get('task_id'),
                                                          attachment_id=payload['id'])
-            except Exception as err:
+            except Exception:
                 LOG.error("Unable to get attachment content for incident {0} attachment {1}".format(inc_id, payload['id']))
                 payload['content'] = None
         elif not is_deleted and incl_attachment_data \

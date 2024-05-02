@@ -13,9 +13,9 @@ from resilient_circuits import ResilientComponent, handler, ActionMessage, is_th
 from resilient_lib import str_to_bool, get_workflow_status
 from resilient import SimpleHTTPException
 
-from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo, get_incident
-from rc_data_feed.components.threadpool import PluginPool
+from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
+from rc_data_feed.components.threadpool import PluginPool
 
 LOG = logging.getLogger(__name__)
 MOD_10 = 10
@@ -142,7 +142,7 @@ class FeedComponent(ResilientComponent):
 
             self.plugin_pool.send_data(type_info, inc_id, payload, is_deleted, self.incl_attachment_data)
 
-        except Exception as err:
+        except Exception:
             error_trace = traceback.format_exc()
             LOG.error("Traceback %s", error_trace)
             LOG.error("Failure on action %s object %s type_info %s",

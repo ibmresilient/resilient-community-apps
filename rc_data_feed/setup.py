@@ -6,13 +6,13 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed',
     display_name='Data Feeder for SOAR',
-    version='3.1.0',
+    version='3.2.0',
     license='MIT',
-    author='IBM Resilient Labs',
-    author_email='resil.labs@gmail.com',
+    author='IBM SOAR',
+    author_email='',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for sending data feeds to other (BI) systems",
-    long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
+    description="QRadar SOAR integration for sending data feeds to other (BI) systems",
+    long_description="QRadar SOAR integration for sending data feeds to other (BI) systems",
     install_requires=[
         'resilient_circuits>=48.2',
     ],

@@ -1,11 +1,31 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 
 """This module contains utility/context classes useful in the processing of feeds."""
 
 import abc
 
+class CriticalPluginError(Exception):
+    """
+    Class used to signal critical plugin errors. The plugin will remove this plugin from
+    it's execution. 
+
+    .. code-block:: python
+        from rc_data_feed.lib.feed import CriticalPluginError
+
+        raise CriticalPluginError("Example raising custom error")
+    """
+
+    def __init__(self, value=None):
+        self.value = value
+
+        # Add a __qualname__ attribute if does not exist - needed for PY27 retry
+        if not hasattr(CriticalPluginError, "__qualname__"):
+            setattr(CriticalPluginError, "__qualname__", CriticalPluginError.__name__)
+
+    def __str__(self):
+        return repr(self.value)
 
 class FeedContext(object):  # pylint: disable=too-few-public-methods
     """

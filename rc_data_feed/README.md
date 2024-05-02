@@ -36,6 +36,7 @@ Newly added fields and data tables are created in the destination database (for 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.2.0   | 5/2024 | Added ability to trap critical plugin errors |
 | 3.1.0   | 2/2024 | Bug fix for exception handling. Added interruptible Sync Incidents playbook. |
 | 3.0.0   | 1/2024 | Added Task Note synchronization. Robustness around incident and attachment error conditions. Added threading of plugin execution. |
 
