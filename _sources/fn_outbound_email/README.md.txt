@@ -27,6 +27,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.1.2 | 05/2024 | Bug fix for imported packages |
 | v2.1.1 | 03/2024 | Bug fix for external paths to templates when running on windows integration server |
 | v2.1.0 | 5/2023 | Added message signing and encryption capabilities. Replaced workflows with playbooks |
 | v2.0.2 | 12/2022 | Bug fix when specifying your own default template |
