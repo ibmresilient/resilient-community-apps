@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -21,14 +21,14 @@ def selftest_function(opts):
    selftest_broker = options.get("selftest_broker")
 
    if not selftest_broker:
-      return {"state": "unimplemented"}
+      return {"state": "unimplemented", "reason": "selftest_broker is not supplied in app.config"}
    else:
       # get the a producer for testing
-      state = "success"
       try:
          producer = create_producer(opts, selftest_broker)
          producer.close()
-      except:
-         state = "failure"      
-
-      return {"state": state}
+         return {"state": "success"}
+      
+      except Exception as err:
+         return {"state": "failure",
+                 "reason": err}

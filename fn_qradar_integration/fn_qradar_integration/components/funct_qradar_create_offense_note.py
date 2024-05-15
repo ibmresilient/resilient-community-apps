@@ -29,12 +29,12 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.qradar_id
             -   fn_inputs.qradar_label
-            -   fn_inputs.qradar_note
+            -   fn_inputs.qradar_siem_note
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields(["qradar_id", "qradar_note"], fn_inputs)
+        validate_fields(["qradar_id", "qradar_siem_note"], fn_inputs)
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
@@ -55,7 +55,7 @@ class FunctionComponent(AppFunctionComponent):
                                      opts=self.opts,
                                      function_opts=server_options)
 
-        results = qradar_client.create_offense_note(fn_inputs.qradar_id, fn_inputs.qradar_note)
+        results = qradar_client.create_offense_note(fn_inputs.qradar_id, fn_inputs.qradar_siem_note)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

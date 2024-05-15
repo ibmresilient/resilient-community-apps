@@ -10,7 +10,7 @@
     },
     "raw": null,
     "inputs": {
-        "qradar_note": "test from soar",
+        "qradar_siem_note": "test from soar",
         "qradar_id": 164,
         "qradar_label": "9.46.246.248"
     },

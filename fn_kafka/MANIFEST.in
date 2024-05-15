@@ -1,4 +1,13 @@
 include README.md
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
 recursive-include fn_kafka/util *
 include fn_kafka/LICENSE
-include fn_kafka/doc/screenshots/*
+include doc/screenshots/*
+include doc/*.md
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+global-exclude *.bak

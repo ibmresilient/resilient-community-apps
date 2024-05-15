@@ -40,7 +40,7 @@
       "inputs": {
         "type": "object",
         "properties": {
-          "qradar_note": {
+          "qradar_siem_note": {
             "type": "string"
           },
           "qradar_id": {
@@ -51,7 +51,7 @@
           }
         },
         "required": [
-          "qradar_note",
+          "qradar_siem_note",
           "qradar_id",
           "qradar_label"
         ]

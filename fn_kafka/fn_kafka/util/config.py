@@ -15,13 +15,13 @@ def config_section_data():
 # comment out or leave unset to disable listening 
 listener_brokers=
 # name broker to use for selftest
-selftest_broker=
+selftest_broker=brokerA
 
 [fn_kafka:brokerA]
 # repeat this section to identify another broker: [fn_kafka:brokerB]
 # see https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html for all the possible parameters
 bootstrap_servers=127.0.0.1:9092
-# listner group for consumers
+# listener group for consumers
 #group_id=
 # client identifier for producers
 #client_id=

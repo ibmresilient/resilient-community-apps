@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 import logging
@@ -21,12 +21,12 @@ def get_broker_section(opts, broker_label):
     return broker_section
 
 def create_producer(opts, broker_label):
-        # find the broker section
-        broker_section = get_broker_section(opts, broker_label)
+    # find the broker section
+    broker_section = get_broker_section(opts, broker_label)
 
-        # remove parts which don't relate to creating a producer
-        pop_key(["topics", "template_dir", "group_id"], broker_section)
-        return KafkaProducer(**broker_section)
+    # remove parts which don't relate to creating a producer
+    pop_key(["topics", "template_dir", "group_id"], broker_section)
+    return KafkaProducer(**broker_section)
 
 def s_to_b(value):
     """[string to binary]"""

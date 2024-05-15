@@ -1,6 +1,6 @@
 {
   {# JINJA template for creating a new IBM SOAR incident. #}
-  "name": "Kakfa Incident - {{ title|e }}",
+  "name": "Kafka Incident - {{ title|e }}",
   {# use the filter resilient_datetimeformat to convert values for IBM SOAR's Epoch timestamp #}
   "discovered_date": {{ createdTimeUtc|resilient_datetimeformat }},
   "create_date": {{ firstActivityTimeUtc|resilient_datetimeformat }},

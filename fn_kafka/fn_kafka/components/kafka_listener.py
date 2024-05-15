@@ -1,13 +1,13 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
-import json
 import os
 import threading
 import resilient
+from json import loads, JSONDecodeError
 from kafka import KafkaConsumer
 from resilient_circuits import ResilientComponent
 from resilient_lib import IntegrationError, validate_fields
@@ -47,7 +47,7 @@ class KafkaListener(threading.Thread):
     def run(self):
         """[main poller logic. consume messages]
         msg.key: optional incident id for existing incident updates
-        msf.json: string encoded json of payload to create/upate an incident
+        msf.json: string encoded json of payload to create/update an incident
         """
         for msg in self.kafka_listener:
             try:
@@ -56,10 +56,13 @@ class KafkaListener(threading.Thread):
                 msg_value = msg.value
                 msg_incident_id = msg.key   # this refers to an existing incident id
                 msg_topic = msg.topic
-                # convert to json
+
+                LOG.info("Received a message from topic %s", msg_topic)
+                
+                # convert to JSON
                 msg_json = convert_msg(msg_value)
                 if not msg_json:
-                    LOG.error("Unable to convert kafka msg to json: %s", msg_value)
+                    # Skip this message because we could not convert it to a JSON to pass to SOAR
                     continue
 
                 existing_incident = None
@@ -70,17 +73,28 @@ class KafkaListener(threading.Thread):
                     if not existing_incident:
                         LOG.error("Incident Id not found: %s. exiting", msg_incident_id)
                         continue
+                
+                # If the template_dir is specified in the configs, then look for expected templates for update/create
+                if self.template_dir:
+                    
+                    LOG.info("Looking for template to use in directory %s", self.template_dir)
 
-                if msg_incident_id:
-                    jinja_template_file = os.path.join(self.template_dir, UPDATE_TEMPLATE.format(msg_topic))
-                else:
-                    jinja_template_file = os.path.join(self.template_dir, CREATE_TEMPLATE.format(msg_topic))
+                    # If an incident ID is provided, then we are looking to update an incident, otherwise we'll create a new one
+                    if msg_incident_id:
+                        jinja_template_file = os.path.join(self.template_dir, UPDATE_TEMPLATE.format(msg_topic))
+                    else:
+                        jinja_template_file = os.path.join(self.template_dir, CREATE_TEMPLATE.format(msg_topic))
 
-                if os.path.isfile(jinja_template_file):
-                    payload = self.jinja_env.make_payload_from_template(jinja_template_file, None, \
+                    # Transform msg content based on provided template
+                    if os.path.isfile(jinja_template_file):
+                        LOG.info("Found template %s, rendering incident payload from template", jinja_template_file)
+                        payload = self.jinja_env.make_payload_from_template(jinja_template_file, None, \
                                                                         msg_json)
+                    else:
+                        LOG.info("Template %s not found. Attempting to create/update case from unmapped message content.", jinja_template_file)
+                        payload = msg_json
                 else:
-                    LOG.debug("No mapping template referenced")
+                    LOG.info("No mapping template referenced")
                     payload = msg_json
 
                 try:
@@ -113,7 +127,7 @@ class KafkaListener(threading.Thread):
             incident = self.update_incident(payload, existing_incident)
             LOG.info("Updated incident: %s", incident['id'])
         else:
-            incident = self.rest_client.post(INCIDENT_URL, payload)
+            incident = self.rest_client.post(INCIDENT_URL, payload, skip_retry=[400, 404])   # Skip retry if the JSON is not able to be processed by SOAR
             LOG.info("Created incident: %s", incident['id'])
 
         return incident
@@ -170,7 +184,7 @@ class KafkaListener(threading.Thread):
 
 class KafkaListenerComponent(ResilientComponent):
     """
-    Event-driven polling for Sentinel Incidents
+    Event-driven polling for Kafka messages
     """
 
     def __init__(self, opts):
@@ -196,12 +210,22 @@ class KafkaListenerComponent(ResilientComponent):
                 continue
 
             listener = KafkaListener(self.rest_client(), broker_section)
+            listener.daemon = True      # Make listener a daemon thread so when we ^C to exit resilient-circuits, the entire program exits
             listener.start()
             self.listeners.append(listener)
 
 def convert_msg(msg):
+    """ Convert message from string to JSON; this allows the app to create a case based off of a Kafka message
+
+    :param msg: Message received from  broker
+    :type msg: str
+
+    :return: JSON of message sent in (or None if there was an issue)
+    """
     try:
-        return json.loads(msg)
+        return loads(msg)
+    except JSONDecodeError:
+        LOG.error("Unable to convert Kafka msg to JSON: %s; case will not be created", msg)
     except Exception as err:
         LOG.error(str(err))
         return None

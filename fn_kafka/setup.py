@@ -5,22 +5,25 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_kafka',
-    version='1.0.1',
+    display_name='Kafka',
+    version='1.0.2',
     license='MIT',
-    author='Mark Scherfling',
-    author_email='Resilient Labs',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    author='IBM SOAR',
+    author_email='',
+    url='https://ibm.biz/soarcommunity',
     description="Resilient Circuits Components for 'fn_kafka'",
-    long_description="""Support the ability to produce and consume Kafka messages over a nunber of brokers.
+    long_description="""Support the ability to produce and consume Kafka messages over a number of brokers.\n
 Key features:
-* Ability to define multiple brokers for producing and consuming messages
-* Send to Kafka allows key/value or just value transmissions on a topic
-* Poller for listening on broker topics with configurable templates""",
+<ul>
+<li>Ability to define multiple brokers for producing and consuming messages</li>
+<li>Send to Kafka allows key/value or just value transmissions on a topic</li>
+<li>Poller for listening on broker topics with configurable templates</li>
+</ul>
+Links: <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_kafka/README.html'>Documentation</a></ul>
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul><ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=46.0.0',
-        'kafka>=1.3.5',
-        'resilient-lib',
-        'resilient'
+        'resilient_circuits>=51.0.0',
+        'kafka-python-ng~=2.0',     # see: https://github.com/dpkp/kafka-python/issues/2436 & https://github.com/dpkp/kafka-python/issues/2431 
     ],
     packages=find_packages(),
     include_package_data=True,

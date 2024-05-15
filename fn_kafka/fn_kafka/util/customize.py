@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.1.262
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v52.0.0.0.927
 
-"""Generate the Resilient customizations required for fn_kafka"""
+"""Generate the SOAR customizations required for fn_kafka"""
 
 import base64
 import os
@@ -28,19 +28,17 @@ def codegen_reload_data():
         "functions": [
             u"kafka_send"
         ],
-        "workflows": [
-            u"example_kafka_send"
-        ],
-        "actions": [
-            u"Example: Kafka Send"
-        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [],
+        "playbooks": [
+            u"kafka_send"
+        ]
     }
 
 
@@ -49,17 +47,15 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 50.0.9097
 
     Contents:
     - Message Destinations:
         - fn_kafka
     - Functions:
         - kafka_send
-    - Workflows:
-        - example_kafka_send
-    - Rules:
-        - Example: Kafka Send
+    - Playbooks:
+        - kafka_send
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
