@@ -51,6 +51,7 @@
 | 1.0.2 | 7/2022 | Bug fix for defender_get_related_alert_information |
 | 1.1.0 | 9/2022 | Added filtering at the alert level |
 | 1.2.0 | 8/2023 | Add playbooks |
+| 1.2.1 | 5/2024 | Fix for defender_find_machines_by_file function |
 
 ### 1.2.0 Changes
 In v1.2, the existing rules and workflows have been replaced with playbooks.

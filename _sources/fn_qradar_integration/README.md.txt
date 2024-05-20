@@ -42,6 +42,7 @@
 -->
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.4.1 | May. 2024 | Bug fix for function input field name qradar_note. Change it to qradar_siem_note. |
 | 2.4.0 | April. 2024 | Added functions to create offense notes and make changes to an offense |
 | 2.3.1 | April. 2024 | Bug fix for search_ref_set function |
 | 2.3.0 | September. 2023 | Python3 / Playbook Conversion |
@@ -280,7 +281,7 @@ Add a note to an offense
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
 | `qradar_id` | `int` | Yes | `-` | QRadar Id |
-| `qradar_note` | `text` | Yes | `-` | Note to create |
+| `qradar_siem_note` | `text` | Yes | `-` | Note to create |
 
 </p>
 </details>
@@ -303,7 +304,7 @@ results = {
     },
     "raw": null,
     "inputs": {
-        "qradar_note": "test from soar",
+        "qradar_siem_note": "test from soar",
         "qradar_id": 164,
         "qradar_label": "9.46.246.248"
     },
@@ -326,7 +327,7 @@ results = {
 
 ```python
 inputs.qradar_id = playbook.inputs.qradar_id
-inputs.qradar_note  = playbook.inputs.qradar_note
+inputs.qradar_siem_note  = playbook.inputs.qradar_siem_note
 inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
@@ -339,7 +340,7 @@ inputs.qradar_label = playbook.inputs.qradar_server
 ```python
 results = playbook.functions.results.create_note_results
 if results.success:
-  incident.addNote(f"QRadar note created for {playbook.inputs.qradar_id} '{playbook.inputs.qradar_note}'")
+  incident.addNote(f"QRadar note created for {playbook.inputs.qradar_id} '{playbook.inputs.qradar_siem_note}'")
 else:
   incident.addNote(f"QRadar note failed for: {playbook.inputs.qradar_id} Reason: {results.reason}")
 ```
