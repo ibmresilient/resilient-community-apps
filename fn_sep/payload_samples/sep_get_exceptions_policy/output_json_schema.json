@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array"
+        },
+        "configuration": {
+          "type": "object",
+          "properties": {
+            "files": {
+              "type": "array"
+            },
+            "non_pe_rules": {
+              "type": "array"
+            },
+            "directories": {
+              "type": "array"
+            },
+            "webdomains": {
+              "type": "array"
+            },
+            "certificates": {
+              "type": "array"
+            },
+            "applications": {
+              "type": "array"
+            },
+            "blacklistrules": {
+              "type": "array"
+            },
+            "applications_to_monitor": {
+              "type": "array"
+            },
+            "mac": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "type": "array"
+                }
+              }
+            },
+            "linux": {
+              "type": "object",
+              "properties": {
+                "directories": {
+                  "type": "array"
+                },
+                "extension_list": {}
+              }
+            },
+            "extension_list": {},
+            "knownrisks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rulestate": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "threat": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "action": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "tamper_files": {
+              "type": "array"
+            },
+            "dns_and_host_applications": {
+              "type": "array"
+            },
+            "dns_and_host_blacklistrules": {
+              "type": "array"
+            }
+          }
+        },
+        "lockedoptions": {
+          "type": "object",
+          "properties": {
+            "knownrisk": {
+              "type": "boolean"
+            },
+            "extension": {
+              "type": "boolean"
+            },
+            "file": {
+              "type": "boolean"
+            },
+            "domain": {
+              "type": "boolean"
+            },
+            "securityrisk": {
+              "type": "boolean"
+            },
+            "sonar": {
+              "type": "boolean"
+            },
+            "application": {
+              "type": "boolean"
+            },
+            "dnshostfile": {
+              "type": "boolean"
+            },
+            "certificate": {
+              "type": "boolean"
+            }
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lastmodifiedtime": {
+          "type": "integer"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sep_exceptions_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
