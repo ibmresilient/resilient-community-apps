@@ -7,7 +7,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, FILES_URL, PACKAGE_NAME
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, FILES_URL_BY_MACHINE, PACKAGE_NAME
 
 FUNCTION = "defender_find_machines_by_file"
 
@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
                                        self.options)
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
-            url = FILES_URL.format(defender_indicator_value)
+            url = FILES_URL_BY_MACHINE.format(defender_indicator_value)
             machines_result, status, reason = defender_api.call(url, content_type=None)
 
             if not status:
