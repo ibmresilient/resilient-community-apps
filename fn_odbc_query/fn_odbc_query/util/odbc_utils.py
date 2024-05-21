@@ -159,7 +159,7 @@ class odbcDBs():
         """
         Create list of label names and a dictionary of the databases and their configs
         :param opts: Dict of options
-        :return dbs: Dictonary of all the ODBC databases from the app.config that contains each databases configurations
+        :return dbs: Dictionary of all the ODBC databases from the app.config that contains each databases configurations
         :return db_name_list: List filled with all of the labels for the servers from the app.config
         """
         dbs = {}
@@ -173,12 +173,13 @@ class odbcDBs():
 
         return dbs, db_name_list
 
+    @staticmethod
     def database_label_test(db_label, dbs_list):
         """
         Check if the given db_label is in the app.config
         :param db_label: User selected database
         :param dbs_list: list of databases
-        :return: dictionary of options for choosen database
+        :return: dictionary of options for chosen database
         """
         # If label not given and using previous versions app.config [fn_odbc_query]
         if not db_label and dbs_list.get(PACKAGE_NAME):

@@ -8,7 +8,7 @@ from json import dumps
 from fn_odbc_query.util import function_utils, odbc_utils
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
-from resilient_lib import IntegrationError, str_to_bool, validate_fields
+from resilient_lib import str_to_bool, validate_fields
 
 FN_NAME = "fn_odbc_query"
 
@@ -29,9 +29,9 @@ class FunctionComponent(AppFunctionComponent):
         sql_condition_value3: value for the question mark - condition value 3
         Inputs:
             -   fn_inputs.sql_query
-            -   fn_inputs.sql_condition_value3
             -   fn_inputs.sql_condition_value1
             -   fn_inputs.sql_condition_value2
+            -   fn_inputs.sql_condition_value3
             -   fn_inputs.db_label
         """
 
@@ -42,10 +42,11 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get the function parameters:
         sql_query = fn_inputs.sql_query
-        sql_params = [getattr(fn_inputs, f"sql_condition_value{num}", None) for num in range(1, len(fn_inputs)-1)]
+        sql_params = [getattr(fn_inputs, f"sql_condition_value{num}", None) \
+                      for num in range(1, len(fn_inputs)-1) if getattr(fn_inputs, f"sql_condition_value{num}")]
         db_label = getattr(fn_inputs, "db_label", None)
 
-        # Log parameers
+        # Log parameters
         self.LOG.info(str(sql_params))
 
         # Get configuration for database specified
@@ -66,6 +67,7 @@ class FunctionComponent(AppFunctionComponent):
         # Validate sql query
         function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
+        odbc_connection = reason = results = None
         try:
             yield self.status_message("Opening ODBC connection...")
             # Connect with ODBC
@@ -104,7 +106,7 @@ class FunctionComponent(AppFunctionComponent):
                 raise ValueError(f"SQL statement '{sql_statement}' is not supported")
 
         except Exception as err:
-            raise IntegrationError(str(err))
+            reason = str(err)
 
         # Commit changes and tear down connection
         finally:
@@ -114,4 +116,4 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=bool(results), reason=reason)

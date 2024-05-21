@@ -21,12 +21,16 @@ def snake_to_camel(word):
 setup(
     name='fn_odbc_query',
     display_name='ODBC Functions for SOAR',
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     author='IBM QRadar SOAR',
     url="http://ibm.biz/resilientcommunity",
-    description="SOAR Components for 'fn_odbc_query'",
-    long_description="ODBC Functions for SOAR",
+    description="ODBC Functions for SOAR",
+    long_description="""Perform SELECT, INSERT or DELETE SQL statements against one or more databases.
+<br>
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_odbc_query/README.html'>App Documentation</a></ul>""",
     install_requires=[
         'resilient_circuits>=43.0.0',
         'pyodbc~=4.0'

@@ -27,14 +27,14 @@ sql_number_of_records_returned=10
 # Executes commits automatically after every SQL statement.
 sql_autocommit=true
 # Define which supported setting to use by using one of the keywords:
-# MariaDB, PostgreSQL, MySQL, SQLServer
+# MariaDB, PostgreSQL, MySQL, SQLServer, Oracle
 sql_database_type=PostgreSQL
 # Define query timeout in seconds.
 #sql_query_timeout=10
 
 [fn_odbc_query:database_label2]
 # Define your connection string
-sql_connection_string=Driver={PostgreSQL};Server=IPAddress;Port=5432;Database=myDataBase;Uid=myUserName;Pwd=myPassword;
+sql_connection_string=Driver={Oracle 12c ODBC driver};DBQ=<server>:1521/<db>;Uid=<user>;Pwd=<pwd>;
 # Define restricted SQL statements as a list, separated by a comma, using square brackets.
 sql_restricted_sql_statements=["delete", "insert", "update"]
 # Define number of rows to fetch.
@@ -42,8 +42,8 @@ sql_number_of_records_returned=10
 # Executes commits automatically after every SQL statement.
 sql_autocommit=true
 # Define which supported setting to use by using one of the keywords:
-# MariaDB, PostgreSQL, MySQL, SQLServer
-sql_database_type=PostgreSQL
+# MariaDB, PostgreSQL, MySQL, SQLServer, Oracle
+sql_database_type=Oracle
 # Define query timeout in seconds.
 #sql_query_timeout=10
 """
