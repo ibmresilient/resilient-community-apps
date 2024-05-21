@@ -22,7 +22,8 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 09/2022 | Add support for mulit-tenancy |
+| 1.2.0 | 05/2024 | Allow entire queries on sql_query input field. Added example playbook. |
+| 1.1.0 | 09/2022 | Add support for multi-tenancy |
 | 1.0.3 | 07/2020 | App Host Support |
 | 1.0.2 | 02/2019 | Added Python 3.6 support |
 | 1.0.1 | 12/2019 | Documentation update and "Example ODBC SELECT PostgreSQL Workflow" update |
@@ -44,9 +45,9 @@ ODBC Functions for SOAR
 
 ### Key Features
 * Ability to perform SELECT, INSERT, UPDATE, and DELETE operations on relational databases.
-* Support for MySQL/MariaDB, Postgres, oracle, and Microsoft SQL Server.
+* Support for MySQL/MariaDB, Postgres, Oracle, and Microsoft SQL Server.
 * Compatible with App Host.
-* Supportt for having multiple databases configured in the app.config
+* Support for having multiple databases configured in the app.config
 * Contains preconfigured drivers if using the container format.
 
 ---
@@ -114,10 +115,12 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **sql_autocommit** | No | `true` | *Executes commits automatically after every SQL statement* |
 | **sql_connection_string** | Yes | `Driver={PostgreSQL};Server=IPAddress;Port=5432;Database=myDataBase;Uid=myUserName;Pwd=myPassword;` | *Connection string* |
-| **sql_database_type** | Yes | `PostgreSQL` | *Supported setting to use by using one of the keywords: MariaDB, PostgreSQL, MySQL, SQLServer* |
+| **sql_database_type** | Yes | `PostgreSQL` | *Supported setting to use by using one of the keywords: MariaDB, PostgreSQL, MySQL, SQLServer, Oracle* |
 | **sql_number_of_records_returned** | No | `10` | *Number of rows to fetch* |
 | **sql_restricted_sql_statements** | No | `["delete", "insert", "update"]` | *Restricted SQL statements as a list, separated by a comma, using square brackets.* |
 | **sql_query_timeout** | No | `30` | *Query timeout in seconds.* |
+
+*Note:* The Oracle connection string is slightly different: `Driver={Oracle 12c ODBC driver};DBQ=<server>:<port>/<database>;Uid=<user>;Pwd=<pwd>;`
 
 #### Drivers
 Use the following drivers in `sql_connection_string`:
@@ -134,7 +137,7 @@ Starting in version 1.1.0, more than one ODBC database can be configured for SOA
 
 For enterprises with more than one ODBC database, each database will have it's own section header, such as `[fn_odbc_query:database_label1]` where `database_label1` represents any label helpful to define your ODBC environment.
 
-Be aware that modifications to the workflows will be needed to correctly pass this label through the `db_label` function input field if the ODBC database/dattabases in the app.config have labels.
+Be aware that modifications to the workflows will be needed to correctly pass this label through the `db_label` function input field if the ODBC database/databases in the app.config have labels.
 
 If using the app.config from before version 1.1.0 then the `db_label` field can be ignored.
 
@@ -144,7 +147,6 @@ If you have existing custom workflows, see [Creating workflows when database/dat
 * Import the Data Tables and Custom Fields like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
 
 ---
 
@@ -223,7 +225,7 @@ inputs.db_label = rule.properties.db_label
 ```python
 # This list contains SOAR data table api field names.
 # Exclude fist two columns 'sql_artifact_value' and 'sql_timestamp' from this list.
-# Modify this list acording to your SOAR data table fields.
+# Modify this list according to your SOAR data table fields.
 DATATABLE_COLUMN_NAMES_LIST = [
   "sql_column_1",
   "sql_column_2",
@@ -320,6 +322,15 @@ The rule field `db_label` is a text field in which the user enters the label of 
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
+
+### SQLServer
+Microsoft SQLServer does not provide specific detail for errors. Here are a few you may encounter and the possible remedy.
+
+| Error | Next Steps |
+| ----- | ---------- |
+|`[42000] [FreeTDS][SQL Server]Statement(s) could not be prepared. (8180) (SQLExecDirectW)`| A SQL statement contains a substitution placeholder (?) but no parameter was specified |
+| `'HY000', 'The driver did not supply an error!'` | The SQL statement may be malformed or missing an ending semicolon (;) |
+
 
 ### For Support
 This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
