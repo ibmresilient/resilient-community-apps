@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.1.197
+# Generated with resilient-sdk v51.0.2.0.974
 
-"""Generate the Resilient customizations required for fn_pagerduty"""
+"""Generate the SOAR customizations required for fn_pagerduty"""
 
 import base64
 import os
@@ -36,15 +36,25 @@ def codegen_reload_data():
         "workflows": [],
         "actions": [],
         "incident_fields": [
+            u"pd_incident_escalation_policy_id",
+            u"pd_incident_escalation_policy_name",
             u"pd_incident_id",
+            u"pd_incident_key",
+            u"pd_incident_priority",
+            u"pd_incident_service_id",
+            u"pd_incident_service_name",
+            u"pd_incident_status",
             u"pd_incident_url"
         ],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [
+            u"PagerDuty Create Incident Post-Process Script"
+        ],
         "playbooks": [
+            u"pagerduty_create_incident_on_creation_pb",
             u"pagerduty_create_incident_pb",
             u"pagerduty_create_pagerduty_note_pb",
             u"pagerduty_create_service_pb",
@@ -61,7 +71,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
@@ -74,6 +84,7 @@ def customization_data(client=None):
         - pagerduty_list_services
         - pagerduty_transition_incident
     - Playbooks:
+        - pagerduty_create_incident_on_creation_pb
         - pagerduty_create_incident_pb
         - pagerduty_create_pagerduty_note_pb
         - pagerduty_create_service_pb
@@ -82,8 +93,17 @@ def customization_data(client=None):
         - pagerduty_resolve_pagerduty_incident_pb
         - pagerduty_update_pagerduty_incident_pb
     - Incident Fields:
+        - pd_incident_escalation_policy_id
+        - pd_incident_escalation_policy_name
         - pd_incident_id
+        - pd_incident_key
+        - pd_incident_priority
+        - pd_incident_service_id
+        - pd_incident_service_name
+        - pd_incident_status
         - pd_incident_url
+    - Scripts:
+        - PagerDuty Create Incident Post-Process Script
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

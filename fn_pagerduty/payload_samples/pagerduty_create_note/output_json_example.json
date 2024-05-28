@@ -1,17 +1,35 @@
 {
-  "note": {
-    "id": "PNL36C8",
-    "user": {
-      "id": "PMTNPRV",
-      "type": "user_reference",
-      "summary": "Sami Amer",
-      "self": "https://api.pagerduty.com/users/PMTNPRV",
-      "html_url": "https://soar-hydra.pagerduty.com/users/PMTNPRV"
-    },
-    "content": "Test Note",
-    "created_at": "2022-07-15T15:48:12-04:00",
-    "channel": {
-      "summary": "The PagerDuty website or APIs"
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "note": {
+      "id": "PK0LFV9",
+      "user": {
+        "id": "PZ8LY8P",
+        "type": "user_reference",
+        "summary": "John Doe",
+        "self": "https://api.pagerduty.com/users/PZ8LY8P",
+        "html_url": "https://ibmtest-8.pagerduty.com/users/PZ8LY8P"
+      },
+      "content": "test",
+      "created_at": "2024-04-16T10:20:15-04:00",
+      "channel": {
+        "summary": "The PagerDuty website or APIs"
+      }
     }
+  },
+  "raw": null,
+  "inputs": {
+    "pd_incident_id": "Q06KVFVBOFHPI7",
+    "pd_description": "<div class=\"rte\"><div>test</div></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 524,
+    "timestamp": "2024-04-16 10:20:15"
   }
 }

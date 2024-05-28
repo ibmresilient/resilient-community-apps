@@ -1,61 +1,35 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, clean_html, IntegrationError
-from .pd_common import create_note
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
+from resilient_lib import validate_fields, clean_html
+from fn_pagerduty.lib.pd_common import PACKAGE_NAME, PDClient
 
-class FunctionComponent(ResilientComponent):
+FN_NAME = "pagerduty_create_note"
+
+class FunctionComponent(AppFunctionComponent):
     """Component that implements Resilient function 'pagerduty_create_note"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.res_options = opts.get("resilient", {})
-        self.options = opts.get("pagerduty", {})
-        validate_fields(['api_token', 'from_email'], self.options)
-        self.log = logging.getLogger(__name__)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.res_options = opts.get("resilient", {})
-        self.options = opts.get("pagerduty", {})
-        validate_fields(['api_token', 'from_email'], self.options)
-
-
-    @function("pagerduty_create_note")
-    def _pagerduty_create_note_function(self, event, *args, **kwargs):
-        """Function: """
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Create a note on a PagerDuty incident"""
         try:
             # validate the function parameters:
-            validate_fields([u'pd_incident_id', u'pd_description'], kwargs)
+            validate_fields(['pd_incident_id', 'pd_description'], fn_inputs)
 
-            incident_id = kwargs.get(u'pd_incident_id')  # text
-            description = clean_html(kwargs.get(u'pd_description'))  # text
+            incident_id = getattr(fn_inputs, 'pd_incident_id', None)  # text
+            description = clean_html(getattr(fn_inputs, 'pd_description', None))  # text
 
-            yield StatusMessage("Starting Create Note for Incidents...")
-            resp = create_note(self.options, incident_id, description)
-            yield StatusMessage("Pagerduty Note created")
+            yield self.status_message("Starting PagerDuty Create Note for Incidents...")
+            resp = PDClient(self.options).create_note(incident_id, description)
+            yield self.status_message("Pagerduty Note created")
 
             # Produce a FunctionResult with the results - if not error, the response is not used
             yield FunctionResult(resp)
         except Exception as err:
             yield FunctionError(str(err))
-
-
-    def create_note_callback(self, resp):
-        """ handle results such as this
-            {"error":{"message":"Invalid Input Provided","code":2001,"errors":["Content cannot be empty."]}}
-        """
-        result = resp.json()
-        if 'error' in result and result['error']['code'] == 2001:
-            msg = ": ".join((result['error']['message'], str(result['error']['errors'])))
-            self.log.warning(msg)
-            StatusMessage(msg)
-            return {}
-
-        raise IntegrationError(resp.text)

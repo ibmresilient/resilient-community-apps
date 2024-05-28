@@ -1,71 +1,48 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, clean_html, build_incident_url, build_resilient_url, unescape
-from .pd_common import create_incident
+from resilient_lib import validate_fields, clean_html, build_incident_url, unescape
+from fn_pagerduty.lib.pd_common import PACKAGE_NAME, PDClient
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 
+FN_NAME = "pagerduty_create_incident"
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'pagerduty_create_incident"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'pagerduty_create_incident"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.res_options = opts.get("resilient", {})
-        self.options = opts.get("pagerduty", {})
-        validate_fields(['api_token', 'from_email'], self.options)
-        self.log = logging.getLogger(__name__)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME, ['api_token', 'from_email'])
 
-
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("pagerduty", {})
-        validate_fields(['api_token', 'from_email'], self.options)
-        self.res_options = opts.get("resilient", {})
-
-    @function("pagerduty_create_incident")
-    def _pagerduty_create_incident_function(self, event, *args, **kwargs):
-        """Function: create an incident"""
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Create an incident on PagerDuty"""
         try:
             # validate required fields
-            validate_fields(['incidentID', 'pd_title', 'pd_service', 'pd_escalation_policy'], kwargs)
+            validate_fields(['incidentID', 'pd_title', 'pd_service'], fn_inputs)
+            
+            incidentID = getattr(fn_inputs, "incidentID", None)
+            res_client = self.rest_client()
+            url = build_incident_url(res_client.base_url, incidentID, self.rest_client().org_name)
 
-            createDict = self._buildIncidentPayload(kwargs, self.options, self.res_options)
-            #
-            yield StatusMessage("Starting Create Incident...")
-            resp = create_incident(createDict)
-            yield StatusMessage("Pagerduty Incident Created")
+            payloadDict = self.options.copy()
+            payloadDict['incidentID'] = incidentID
+            payloadDict['title'] = unescape(getattr(fn_inputs, "pd_title", None))
+            desc = self.get_textarea_param(getattr(fn_inputs, "pd_description", ""))
+            desc = clean_html(desc)
+
+            payloadDict['description'] = '\n'.join((url, desc))
+            payloadDict['service'] = getattr(fn_inputs, "pd_service", None)
+            payloadDict['escalation_policy'] = getattr(fn_inputs, "pd_escalation_policy", None)
+            payloadDict['priority'] = getattr(fn_inputs, "pd_priority", None)
+            payloadDict['incident_key'] = getattr(fn_inputs, "pd_incident_key", None)
+
+            yield self.status_message("Starting PagerDuty Create Incident...")
+            resp = PDClient(payloadDict).create_incident()
+            yield self.status_message("Pagerduty Incident Created")
 
             # Produce a FunctionResult with the results
             yield FunctionResult({"pd": resp})
         except Exception as err:
             yield FunctionError(str(err))
-
-
-    def _buildIncidentPayload(self, kwargs, pd_options, res_options):
-        # Get the function parameters:
-        incidentID = kwargs.get("incidentID")
-
-        url = build_incident_url(build_resilient_url(self.res_options.get('host'), self.res_options.get('port')), incidentID,self.res_options.get("org"))
-
-        payloadDict = pd_options.copy()
-        payloadDict['incidentID'] = incidentID
-        payloadDict['title'] = unescape(kwargs.get("pd_title"))
-        desc = self.get_textarea_param(kwargs.get("pd_description"))
-        if desc:
-            desc = clean_html(desc)
-        else:
-            desc = ''
-
-        payloadDict['description'] = '\n'.join((url, desc))
-        payloadDict['service'] = kwargs.get("pd_service")
-        payloadDict['escalation_policy'] = kwargs.get("pd_escalation_policy")
-        payloadDict['priority'] = kwargs.get("pd_priority")
-        payloadDict['incident_key'] = kwargs.get("pd_incident_key")
-
-        return payloadDict

@@ -2,45 +2,92 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
-    "note": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "user": {
+        "note": {
           "type": "object",
           "properties": {
             "id": {
               "type": "string"
             },
-            "type": {
+            "user": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "self": {
+                  "type": "string"
+                },
+                "html_url": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
               "type": "string"
             },
-            "summary": {
+            "created_at": {
               "type": "string"
             },
-            "self": {
-              "type": "string"
-            },
-            "html_url": {
-              "type": "string"
+            "channel": {
+              "type": "object",
+              "properties": {
+                "summary": {
+                  "type": "string"
+                }
+              }
             }
           }
-        },
-        "content": {
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "pd_incident_id": {
           "type": "string"
         },
-        "created_at": {
+        "pd_description": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
           "type": "string"
         },
-        "channel": {
-          "type": "object",
-          "properties": {
-            "summary": {
-              "type": "string"
-            }
-          }
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
         }
       }
     }

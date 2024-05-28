@@ -20,6 +20,7 @@
 - [Function - PagerDuty List Services](#function---pagerduty-list-incidents)
 - [Function - PagerDuty List Incidents](#function---pagerduty-create-service)
 - [Custom Fields](#custom-fields)
+- [Poller Templates](#poller-templates)
 - [Playbooks](#Playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
@@ -30,9 +31,10 @@
 | 1.0.0 | 09/2018 | Initial Release |
 | 1.0.1 | 05/2020 | Support added for App Host |
 | 1.0.2 | 07/2022 | Updated documentation to new format |
-| 1.1.0 | 10/2023 | Add Playbooks and implement Create Service, List Services, and List Incidents functions|
+| 1.1.0 | 10/2023 | Add Playbooks and implement Create Service, List Services, and List Incidents functions |
+| 1.2.0 | 04/2024 | Add support for authentication with API key. Add poller for bi-directional sync between SOAR and PagerDuty incidents. |
 ---
-### PagerDuty App  2.1.0 Changes
+### PagerDuty App  1.1.0 Changes
 In v1.1.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
@@ -43,15 +45,16 @@ Add Create Service, List Services and List Incidents functions.
 
 ## Overview
 
-**Resilient Circuits Components for 'fn_pagerduty'**
+**SOAR Components for 'fn_pagerduty'**
 
-Resilient Circuits Components for 'fn_pagerduty'. Used to create pagerduty incidents, create notes and transition incidents (acknowledged and resolved)
+SOAR Components for 'fn_pagerduty'. Used to create PagerDuty incidents, create notes and transition incidents (acknowledged and resolved)
 
 ### Key Features
-This Resilient Functions package provides integration with PagerDuty for:
+This SOAR Functions package provides integration with PagerDuty for:
 * Incident Creation
 * Incident Transitions
 * Note Creation
+* Bi-directional sync
 
 ---
 
@@ -63,18 +66,20 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `50.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `50.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
+* Integration server is running `resilient_circuits>=50.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Incident | Create, Read, Edit |
+  | Layout | Read, Edit |
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -85,7 +90,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.10.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -99,20 +104,20 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not support a proxy server.
 
 ### Python Environment
-Both Python 3.6 and 3.9 are supported
+Both Python 3.6, 3.9 and 3.11 are supported
 
 Additional package dependencies may exist for each of these packages:
 * beautifulsoup4
 * pdpyras
 * resilient-lib
-* resilient_circuits>=30.0.0
+* resilient_circuits>=50.0.0
 
 
 #### Prerequisites
-resilient-circuits >=v30.0.0
+resilient-circuits >=v50.0.0
 
 #### Configuration
-Follow the steps to add a pagerduty section to your `app.config` file by running `resilient-circuits config [-u | -c]` and updating the fields:
+Follow the steps to add a PagerDuty section to your `app.config` file by running `resilient-circuits config [-u | -c]` and updating the fields:
 
 ```
 [pagerduty]
@@ -134,16 +139,20 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `<api_token>` | API Token from pagerduty |
-| **from_email** | Yes | `some@email.com` | for some endpoints (namely creating and modifying incidents), pagerduty requires the "email address of the user to record as having taken the action". In this app, this is passed to the package `pdpyras` as `default_from`. You can read about pdpyras [here](https://pagerduty.github.io/pdpyras/#using-a-basic-rest-api-key), and read about pagerduty's REST API headers (of which is the from_email header) [here](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTUw-rest-api-v2-overview)|
-| **resilient_client** | Yes | `IBM Resilient` | this refers to the name identifier used for logging|
+| **api_token** | Yes | `<api_token>` | API Token from PagerDuty |
+| **from_email** | Yes | `some@email.com` | for some endpoints (namely creating and modifying incidents), PagerDuty requires the "email address of the user to record as having taken the action". In this app, this is passed to the package `pdpyras` as `default_from`. You can read about pdpyras [here](https://pagerduty.github.io/pdpyras/#using-a-basic-rest-api-key), and read about PagerDuty's REST API headers (of which is the from_email header) [here](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTUw-rest-api-v2-overview)|
+| **resilient_client** | Yes | `IBM SOAR` | this refers to the name identifier used for logging|
 | **verifyflag** | Yes | `False` | True/False flag associated with https client certification (False means no https certification) |
+| **pd_sync_notes** | No | `False` | True/False to sync notes from PagerDuty incident to SOAR incident. |
+| **pd_poller_filter** | No | `"statuses": ["triggered", "acknowledged"]` | Filters to apply to the poller when getting incidents from PagerDuty. See the default app.config for more details. |
+| **polling_interval** | Yes | `0` | Time in seconds to wait between polling PagerDuty. 0 will disable the poller. |
+| **polling_lookback** | Yes | `60` | Time in minutes to lookback the first time the poller runs. |
 
 
 ---
 
 ## Function - PagerDuty Create Incident
-Create a PagerDuty Incident based on a Resilient Incident
+Create a PagerDuty Incident based on a SOAR Incident
 
  ![screenshot: create_incident ](./doc/screenshots/create_incident.png)
 
@@ -156,12 +165,12 @@ Create a PagerDuty Incident based on a Resilient Incident
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incidentID` | `number` | No | `-` | incident_id, typically from incident.id |
-| `pd_description` | `text` | No | `-` | description from pagerduty |
-| `pd_escalation_policy` | `text` | Yes | `-` | escalation policy name from pagerduty |
+| `pd_description` | `text` | No | `-` | description from PagerDuty |
+| `pd_escalation_policy` | `text` | Yes | `-` | escalation policy name from PagerDuty |
 | `pd_incident_key` | `text` | No | `-` | used during acknowledge and resolve event actions |
 | `pd_priority` | `text` | No | `-` | incident priority |
-| `pd_service` | `text` | Yes | `-` | service name from pagerduty |
-| `pd_title` | `text` | Yes | `-` | title from pagerduty |
+| `pd_service` | `text` | Yes | `-` | service name from PagerDuty |
+| `pd_title` | `text` | Yes | `-` | title from PagerDuty |
 
 </p>
 </details>
@@ -268,7 +277,7 @@ results = {
 
 ```python
 inputs.incidentID = incident.id
-inputs.pd_title = "Resilient: {}".format(incident.name)
+inputs.pd_title = "SOAR: {}".format(incident.name)
 inputs.pd_incident_key = 'RES-'+str(incident.id)
 
 priority = { 'Low': 'p3', 'Medium': 'p2', 'High': 'p1' }
@@ -298,7 +307,7 @@ incident.properties.pd_incident_url = "<a href='{}' target='blank'>Link</a>".for
 
 ---
 ## Function - PagerDuty Create Note
-Create a PagerDuty Note based on a Resilient Incident's Note
+Create a PagerDuty Note based on a SOAR Incident's Note
  ![screenshot: create_pagerduty_note ](./doc/screenshots/create_pagerduty_note.png)
 
 <details><summary>Inputs:</summary>
@@ -306,7 +315,7 @@ Create a PagerDuty Note based on a Resilient Incident's Note
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `pd_description` | `text` | No | `-` | description from pagerduty |
+| `pd_description` | `text` | No | `-` | description from PagerDuty |
 | `pd_incident_id` | `text` | Yes | `-` | id of incident |
 
 </p>
@@ -363,7 +372,7 @@ None
 
 ---
 ## Function - PagerDuty Transition Incident
-Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)
+Transition a PagerDuty Incident based on changes to a SOAR Incident (such as Closing the Incident)
 
  ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/resolve_pagerduty_incident.png)
 
@@ -374,10 +383,10 @@ Transition a PagerDuty Incident based on changes to a Resilient Incident (such a
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `pd_description` | `text` | No | `-` | descrption from pagerduty |
+| `pd_description` | `text` | No | `-` | description from PagerDuty |
 | `pd_incident_id` | `text` | Yes | `-` | id of incident |
 | `pd_priority` | `text` | No | `-` | incident priority |
-| `pd_status` | `text` | No | `-` | status of pagerduty incident |
+| `pd_status` | `text` | No | `-` | status of PagerDuty incident |
 
 </p>
 </details>
@@ -554,7 +563,7 @@ List all incidents on PagerDuty
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `pd_search_date` | `text` | No | `-` | descrption from pagerduty |
+| `pd_search_date` | `text` | No | `-` | description from PagerDuty |
 
 
 </p>
@@ -1014,7 +1023,99 @@ else:
 
 ---
 
+## Poller Templates
+It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.
 
+This is especially relevant if you have required custom _close_ fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom `close_case` and reference those required close fields in the template.
+
+When overriding the template in App Host, specify the file path for each file as `/var/rescircuits`.
+
+Below are the default templates used which can be copied, modified, and used with app_config's
+`soar_create_case`, `soar_update_case`, and `soar_close_case` settings to override the default templates.
+
+<details><summary>soar_create_case.jinja</summary>
+
+```jinja
+{
+  {# JINJA template for creating a new SOAR incident from a PagerDuty incident #}
+  "name": "{{ title }}",
+  "description": "{{ summary | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  "discovered_date": {{ created_at | soar_datetimeformat(date_format="%Y-%m-%dT%H:%M:%SZ") }},
+  "start_date": {{ created_at | soar_datetimeformat(date_format="%Y-%m-%dT%H:%M:%SZ") }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ **assignedTo** |soar_substitute('{"Automation": "soar_user1@example.com", "default_user@example.com": "soar_user2@example.com", "DEFAULT": "default_user@example.com" }') }}", #}
+  "plan_status": "A",
+  "severity_code": "{{ urgency | soar_substitute('{"high": "High", "low": "Low"}') }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "pd_incident_id": "{{ id }}",
+    "pd_incident_url": "<a target='_blank' href='{{ html_url }}'>Link</a>",
+    "pd_incident_service_name": "{{ service.summary }}",
+    "pd_incident_service_id": "{{ service.id }}",
+    "pd_incident_key": "{{ incident_key }}",
+    "pd_incident_status": "{{ status }}",
+    "pd_incident_escalation_policy_name": "{{ escalation_policy.summary }}",
+    "pd_incident_escalation_policy_id": "{{ escalation_policy.id }}"
+    {% if priority %}
+      ,"pd_incident_priority": "{{ priority.summary }}"
+    {% endif %}
+  }
+}
+```
+
+</details>
+
+<details><summary>soar_close_case.jinja</summary>
+
+```jinja
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  {# modify to specify your specific **data** fields #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": {% if resolve_reason %} "Closed by PagerDuty, with resolution note {{ resolve_reason }}" {% else %} "Closed by PagerDuty" {% endif %},
+  "properties": {
+    "pd_incident_id": "{{ id }}",
+    "pd_incident_url": "<a target='_blank' href='{{ html_url }}'>Link</a>",
+    "pd_incident_service_name": "{{ service.summary }}",
+    "pd_incident_service_id": "{{ service.id }}",
+    "pd_incident_key": "{{ incident_key }}",
+    "pd_incident_status": "{{ status }}",
+    "pd_incident_escalation_policy_name": "{{ escalation_policy.summary }}",
+    "pd_incident_escalation_policy_id": "{{ escalation_policy.id }}"
+    {% if priority %}
+      ,"pd_incident_priority": "{{ priority.summary }}"
+    {% endif %}
+  }
+}
+```
+
+</details>
+
+<details><summary>soar_update_case.jinja</summary>
+
+```jinja
+{
+  {# JINJA template for updating a SOAR incident from a PagerDuty incident #}
+  "severity_code": "{{ urgency | soar_substitute('{"high": "High", "low": "Low"}') }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "pd_incident_service_name": "{{ service.summary }}",
+    "pd_incident_service_id": "{{ service.id }}",
+    "pd_incident_status": "{{ status }}",
+    "pd_incident_escalation_policy_name": "{{ escalation_policy.summary }}",
+    "pd_incident_escalation_policy_id": "{{ escalation_policy.id }}"
+    {% if priority %}
+      ,"pd_incident_priority": "{{ priority.summary }}"
+    {% endif %}
+  }
+}
+```
+
+</details>
+
+---
 
 ## Playbooks
 | Playbook Name | Object | Activation type | Status |

@@ -4,32 +4,25 @@
     Generated with resilient-sdk v51.0.2.0.974
 -->
 
-# Playbook - PagerDuty: Create Incident (PB)
+# Playbook - PagerDuty: Create Incident from SOAR (PB)
 
 ### API Name
-`pagerduty_create_incident_pb`
+`pagerduty_create_incident_on_creation_pb`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
-`Manual`
+`Automatic`
 
 ### Activation Conditions
-`incident.properties.pd_incident_id not_has_a_value`
-
-### Activation Form Elements
-| Input Field Label | API Name | Element Type | Tooltip | Requirement |
-| ----------------- | -------- | ------------ | ------- | ----------- |
-| Escalation policy name from PagerDuty | `pd_escalation_policy` | text | If left empty, it will be set to 'default'. | Optional |
-| Incident Description | `pd_description` | text | Description from PagerDuty | Optional |
-| Pagerduty Service Name | `pd_service` | text | Service name from PagerDuty | Always |
+`incident.properties.pd_incident_id not_has_a_value AND incident.properties.pd_incident_service_name has_a_value AND object_added`
 
 ### Object Type
 `incident`
 
 ### Description
-Create a PagerDuty Incident based on a Resilient Incident.
+Automatically create a PagerDuty incident from a SOAR incident when SOAR incident is created. For this playbook to execute, the SOAR incident field, PagerDuty Incident Service Name, has to have a value.
 
 
 ---
@@ -46,9 +39,7 @@ Create a PagerDuty Incident based on a Resilient Incident.
 
 ### Function-Input Script
 ```python
-inputs.pd_escalation_policy = getattr(playbook.inputs, "pd_escalation_policy", None) or "default"
-
-inputs.pd_service = getattr(playbook.inputs, "pd_service", None)
+inputs.pd_service = incident.properties.pd_incident_service_name
 inputs.incidentID = incident.id
 inputs.pd_title = f"SOAR: {incident.name}"
 inputs.pd_incident_key = f'RES-{str(incident.id)}'
