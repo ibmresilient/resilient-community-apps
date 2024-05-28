@@ -500,6 +500,10 @@
 <td><p>5/2024</p></td>
 <td><p>Fix for defender_find_machines_by_file function</p></td>
 </tr>
+<tr class="row-even"><td><p>1.2.2</p></td>
+<td><p>5/2024</p></td>
+<td><p>Fix for playbook script common name issue</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -3451,7 +3455,7 @@ customize their close incident process with different required fields. In this e
 <details><summary>Script Text:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a Defender indicator to an artifact_type</span>
-<span class="c1"># lookup for Defender indicator types to arttfact types</span>
+<span class="c1"># lookup for Defender indicator types to artifact types</span>
 <span class="n">type_lookup</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;FileSha1&quot;</span><span class="p">:</span> <span class="s2">&quot;Malware SHA-1 Hash&quot;</span><span class="p">,</span>
         <span class="s2">&quot;FileSha256&quot;</span><span class="p">:</span> <span class="s2">&quot;Malware SHA-256 Hash&quot;</span><span class="p">,</span>
