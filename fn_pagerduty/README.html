@@ -441,6 +441,7 @@
 <li><p><a class="reference internal" href="#function---pagerduty-list-incidents"><span class="xref myst">Function - PagerDuty List Services</span></a></p></li>
 <li><p><a class="reference internal" href="#function---pagerduty-create-service"><span class="xref myst">Function - PagerDuty List Incidents</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
+<li><p><a class="reference internal" href="#poller-templates"><span class="xref myst">Poller Templates</span></a></p></li>
 <li><p><a class="reference internal" href="#Playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
 </ul>
@@ -473,12 +474,16 @@
 <td><p>10/2023</p></td>
 <td><p>Add Playbooks and implement Create Service, List Services, and List Incidents functions</p></td>
 </tr>
+<tr class="row-even"><td><p>1.2.0</p></td>
+<td><p>04/2024</p></td>
+<td><p>Add support for authentication with API key. Add poller for bi-directional sync between SOAR and PagerDuty incidents.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" />
-<section id="pagerduty-app-2-1-0-changes">
-<h3>PagerDuty App  2.1.0 Changes<a class="headerlink" href="#pagerduty-app-2-1-0-changes" title="Link to this heading">¶</a></h3>
+<section id="pagerduty-app-1-1-0-changes">
+<h3>PagerDuty App  1.1.0 Changes<a class="headerlink" href="#pagerduty-app-1-1-0-changes" title="Link to this heading">¶</a></h3>
 <p>In v1.1.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
 <p>If upgrading from a previous release, you’ll noticed that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it’s corresponding rule, but with “(PB)” added at the end. For automatic actions, the playbooks will be disabled by default.</p>
 <p>You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.</p>
@@ -487,15 +492,16 @@
 </section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p><strong>Resilient Circuits Components for ‘fn_pagerduty’</strong></p>
-<p>Resilient Circuits Components for ‘fn_pagerduty’. Used to create pagerduty incidents, create notes and transition incidents (acknowledged and resolved)</p>
+<p><strong>SOAR Components for ‘fn_pagerduty’</strong></p>
+<p>SOAR Components for ‘fn_pagerduty’. Used to create PagerDuty incidents, create notes and transition incidents (acknowledged and resolved)</p>
 <section id="key-features">
 <h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
-<p>This Resilient Functions package provides integration with PagerDuty for:</p>
+<p>This SOAR Functions package provides integration with PagerDuty for:</p>
 <ul class="simple">
 <li><p>Incident Creation</p></li>
 <li><p>Incident Transitions</p></li>
 <li><p>Note Creation</p></li>
+<li><p>Bi-directional sync</p></li>
 </ul>
 </section>
 </section>
@@ -508,14 +514,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.8131</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.8131</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=50.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -530,6 +536,12 @@
 </tr>
 <tr class="row-odd"><td><p>Function</p></td>
 <td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>Incident</p></td>
+<td><p>Create, Read, Edit</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layout</p></td>
+<td><p>Read, Edit</p></td>
 </tr>
 </tbody>
 </table>
@@ -548,7 +560,7 @@
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= 1.4.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= 1.10.</p></li>
 <li><p>Cloud Pak is configured with an App Host.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -565,21 +577,21 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Both Python 3.6 and 3.9 are supported</p>
+<p>Both Python 3.6, 3.9 and 3.11 are supported</p>
 <p>Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>beautifulsoup4</p></li>
 <li><p>pdpyras</p></li>
 <li><p>resilient-lib</p></li>
-<li><p>resilient_circuits&gt;=30.0.0</p></li>
+<li><p>resilient_circuits&gt;=50.0.0</p></li>
 </ul>
 <section id="prerequisites">
 <h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h4>
-<p>resilient-circuits &gt;=v30.0.0</p>
+<p>resilient-circuits &gt;=v50.0.0</p>
 </section>
 <section id="configuration">
 <h4>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h4>
-<p>Follow the steps to add a pagerduty section to your <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file by running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">[-u</span> <span class="pre">|</span> <span class="pre">-c]</span></code> and updating the fields:</p>
+<p>Follow the steps to add a PagerDuty section to your <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file by running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">[-u</span> <span class="pre">|</span> <span class="pre">-c]</span></code> and updating the fields:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pagerduty</span><span class="p">]</span>
 <span class="n">api_token</span><span class="o">=&lt;</span><span class="n">api_token</span><span class="o">&gt;</span>
 <span class="c1"># bypass https certificate validation (only set to False for testing purposes)</span>
@@ -615,22 +627,42 @@
 <tr class="row-even"><td><p><strong>api_token</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&lt;api_token&gt;</span></code></p></td>
-<td><p>API Token from pagerduty</p></td>
+<td><p>API Token from PagerDuty</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>from_email</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">some&#64;email.com</span></code></p></td>
-<td><p>for some endpoints (namely creating and modifying incidents), pagerduty requires the “email address of the user to record as having taken the action”. In this app, this is passed to the package <code class="docutils literal notranslate"><span class="pre">pdpyras</span></code> as <code class="docutils literal notranslate"><span class="pre">default_from</span></code>. You can read about pdpyras <a class="reference external" href="https://pagerduty.github.io/pdpyras/#using-a-basic-rest-api-key">here</a>, and read about pagerduty’s REST API headers (of which is the from_email header) <a class="reference external" href="https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTUw-rest-api-v2-overview">here</a></p></td>
+<td><p>for some endpoints (namely creating and modifying incidents), PagerDuty requires the “email address of the user to record as having taken the action”. In this app, this is passed to the package <code class="docutils literal notranslate"><span class="pre">pdpyras</span></code> as <code class="docutils literal notranslate"><span class="pre">default_from</span></code>. You can read about pdpyras <a class="reference external" href="https://pagerduty.github.io/pdpyras/#using-a-basic-rest-api-key">here</a>, and read about PagerDuty’s REST API headers (of which is the from_email header) <a class="reference external" href="https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTUw-rest-api-v2-overview">here</a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>resilient_client</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">Resilient</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span></code></p></td>
 <td><p>this refers to the name identifier used for logging</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>verifyflag</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 <td><p>True/False flag associated with https client certification (False means no https certification)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>pd_sync_notes</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>True/False to sync notes from PagerDuty incident to SOAR incident.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pd_poller_filter</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;statuses&quot;:</span> <span class="pre">[&quot;triggered&quot;,</span> <span class="pre">&quot;acknowledged&quot;]</span></code></p></td>
+<td><p>Filters to apply to the poller when getting incidents from PagerDuty. See the default app.config for more details.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>polling_interval</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>Time in seconds to wait between polling PagerDuty. 0 will disable the poller.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>polling_lookback</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p>Time in minutes to lookback the first time the poller runs.</p></td>
 </tr>
 </tbody>
 </table>
@@ -640,7 +672,7 @@
 <hr class="docutils" />
 <section id="function-pagerduty-create-incident">
 <h2>Function - PagerDuty Create Incident<a class="headerlink" href="#function-pagerduty-create-incident" title="Link to this heading">¶</a></h2>
-<p>Create a PagerDuty Incident based on a Resilient Incident</p>
+<p>Create a PagerDuty Incident based on a SOAR Incident</p>
 <p><img alt="screenshot: create_incident " src="../_images/create_incident.png" /></p>
 <p><img alt="screenshot: create_incident_pb " src="../_images/create_incident_pb.png" /></p>
 <details><summary>Inputs:</summary>
@@ -666,13 +698,13 @@
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>description from pagerduty</p></td>
+<td><p>description from PagerDuty</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd_escalation_policy</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>escalation policy name from pagerduty</p></td>
+<td><p>escalation policy name from PagerDuty</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pd_incident_key</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
@@ -690,13 +722,13 @@
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>service name from pagerduty</p></td>
+<td><p>service name from PagerDuty</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd_title</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>title from pagerduty</p></td>
+<td><p>title from PagerDuty</p></td>
 </tr>
 </tbody>
 </table>
@@ -801,7 +833,7 @@
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incidentID</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">pd_title</span> <span class="o">=</span> <span class="s2">&quot;Resilient: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">pd_title</span> <span class="o">=</span> <span class="s2">&quot;SOAR: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">pd_incident_key</span> <span class="o">=</span> <span class="s1">&#39;RES-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
 <span class="n">priority</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Low&#39;</span><span class="p">:</span> <span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;Medium&#39;</span><span class="p">:</span> <span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span> <span class="p">}</span>
@@ -829,7 +861,7 @@
 <hr class="docutils" />
 <section id="function-pagerduty-create-note">
 <h2>Function - PagerDuty Create Note<a class="headerlink" href="#function-pagerduty-create-note" title="Link to this heading">¶</a></h2>
-<p>Create a PagerDuty Note based on a Resilient Incident’s Note
+<p>Create a PagerDuty Note based on a SOAR Incident’s Note
 <img alt="screenshot: create_pagerduty_note " src="../_images/create_pagerduty_note.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -848,7 +880,7 @@
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>description from pagerduty</p></td>
+<td><p>description from PagerDuty</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pd_incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
@@ -906,7 +938,7 @@
 <hr class="docutils" />
 <section id="function-pagerduty-transition-incident">
 <h2>Function - PagerDuty Transition Incident<a class="headerlink" href="#function-pagerduty-transition-incident" title="Link to this heading">¶</a></h2>
-<p>Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)</p>
+<p>Transition a PagerDuty Incident based on changes to a SOAR Incident (such as Closing the Incident)</p>
 <p><img alt="screenshot: resolve_pagerduty_incident.png " src="../_images/resolve_pagerduty_incident.png" /></p>
 <p><img alt="screenshot: update_pagerduty_incident_severity.png " src="../_images/update_pagerduty_incident_severity.png" /></p>
 <details><summary>Inputs:</summary>
@@ -926,7 +958,7 @@
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>descrption from pagerduty</p></td>
+<td><p>description from PagerDuty</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pd_incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
@@ -944,7 +976,7 @@
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>status of pagerduty incident</p></td>
+<td><p>status of PagerDuty incident</p></td>
 </tr>
 </tbody>
 </table>
@@ -1119,7 +1151,7 @@ None
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>descrption from pagerduty</p></td>
+<td><p>description from PagerDuty</p></td>
 </tr>
 </tbody>
 </table>
@@ -1559,6 +1591,88 @@ None
 </details>
 </section>
 <hr class="docutils" />
+<section id="poller-templates">
+<h2>Poller Templates<a class="headerlink" href="#poller-templates" title="Link to this heading">¶</a></h2>
+<p>It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.</p>
+<p>This is especially relevant if you have required custom <em>close</em> fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom <code class="docutils literal notranslate"><span class="pre">close_case</span></code> and reference those required close fields in the template.</p>
+<p>When overriding the template in App Host, specify the file path for each file as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
+<p>Below are the default templates used which can be copied, modified, and used with app_config’s
+<code class="docutils literal notranslate"><span class="pre">soar_create_case</span></code>, <code class="docutils literal notranslate"><span class="pre">soar_update_case</span></code>, and <code class="docutils literal notranslate"><span class="pre">soar_close_case</span></code> settings to override the default templates.</p>
+<details><summary>soar_create_case.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from a PagerDuty incident #}</span>
+<span class="x">  &quot;name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">summary</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# start_date cannot be after discovered_date #}</span>
+<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_at</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;start_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_at</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  </span><span class="c">{# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
+<span class="x">  </span><span class="c">{# &quot;owner_id&quot;: &quot;{{ **assignedTo** |soar_substitute(&#39;{&quot;Automation&quot;: &quot;soar_user1@example.com&quot;, &quot;default_user@example.com&quot;: &quot;soar_user2@example.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@example.com&quot; }&#39;) }}&quot;, #}</span>
+<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
+<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">urgency</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;high&quot;: &quot;High&quot;, &quot;low&quot;: &quot;Low&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;pd_incident_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_url&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">html_url</span> <span class="cp">}}</span><span class="x">&#39;&gt;Link&lt;/a&gt;&quot;,</span>
+<span class="x">    &quot;pd_incident_service_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_service_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_key&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">incident_key</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_escalation_policy_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_escalation_policy_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span> <span class="cp">%}</span>
+<span class="x">      ,&quot;pd_incident_priority&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_close_case.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
+<span class="x">  </span><span class="c">{# modify to specify your specific **data** fields #}</span>
+<span class="x">  &quot;plan_status&quot;: &quot;C&quot;,</span>
+<span class="x">  &quot;resolution_id&quot;: &quot;Resolved&quot;,</span>
+<span class="x">  &quot;resolution_summary&quot;: </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">resolve_reason</span> <span class="cp">%}</span><span class="x"> &quot;Closed by PagerDuty, with resolution note </span><span class="cp">{{</span> <span class="nv">resolve_reason</span> <span class="cp">}}</span><span class="x">&quot; </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> &quot;Closed by PagerDuty&quot; </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">,</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;pd_incident_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_url&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">html_url</span> <span class="cp">}}</span><span class="x">&#39;&gt;Link&lt;/a&gt;&quot;,</span>
+<span class="x">    &quot;pd_incident_service_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_service_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_key&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">incident_key</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_escalation_policy_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_escalation_policy_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span> <span class="cp">%}</span>
+<span class="x">      ,&quot;pd_incident_priority&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_update_case.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for updating a SOAR incident from a PagerDuty incident #}</span>
+<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">urgency</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;high&quot;: &quot;High&quot;, &quot;low&quot;: &quot;Low&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;pd_incident_service_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_service_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_escalation_policy_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;pd_incident_escalation_policy_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span> <span class="cp">%}</span>
+<span class="x">      ,&quot;pd_incident_priority&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+</section>
+<hr class="docutils" />
 <section id="playbooks">
 <h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1679,7 +1793,7 @@ None
 <li><a class="reference internal" href="#">PagerDuty</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#pagerduty-app-2-1-0-changes">PagerDuty App  2.1.0 Changes</a></li>
+<li><a class="reference internal" href="#pagerduty-app-1-1-0-changes">PagerDuty App  1.1.0 Changes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
@@ -1708,6 +1822,7 @@ None
 <li><a class="reference internal" href="#function-pagerduty-create-service">Function - PagerDuty Create Service</a></li>
 <li><a class="reference internal" href="#function-pagerduty-list-incidents">Function - PagerDuty List Incidents</a></li>
 <li><a class="reference internal" href="#function-pagerduty-list-services">Function - PagerDuty List Services</a></li>
+<li><a class="reference internal" href="#poller-templates">Poller Templates</a></li>
 <li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
