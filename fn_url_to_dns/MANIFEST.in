@@ -1,0 +1,4 @@
+include README.md
+include fn_url_to_dns/util/*
+include fn_url_to_dns/LICENSE
+include fn_url_to_dns/doc/*

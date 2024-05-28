@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "salesforce_attachments": [
+      "test.txt"
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2522,
+    "salesforce_case_id": "500Hr00001X98NnIAJ",
+    "task_id": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-salesforce",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 6912,
+    "timestamp": "2023-07-25 12:50:08"
+  }
+}
