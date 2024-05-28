@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.0.131
+# Generated with resilient-sdk v51.0.2.0.974
 
-"""Generate the Resilient customizations required for fn_microsoft_defender"""
+"""Generate the SOAR customizations required for fn_microsoft_defender"""
 
 import base64
 import os
@@ -100,7 +100,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
