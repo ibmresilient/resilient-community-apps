@@ -49,6 +49,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.4.1 | 05/2024 | Replace deprecated datetime call. |
 | 2.4.0 | 02/2024 | Update to poller to automatically account for time zone differences between SOAR and QRadar. Remove '.' from query name. |
 | 2.3.4 | 11/2023 | Bug fix for syncing note between QRadar and SOAR |
 | 2.3.3 | 10/2023 | Bug fix for making an api call to use case manager on the QRadar server to retrieve MITRE mappings for a rule. |
@@ -96,13 +97,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `49.0.0`.
+* SOAR platform >= `50.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `49.0.0`.
+* SOAR platform >= `50.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=49.0.0`.
+* Integration server is running `resilient_circuits>=50.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -136,7 +137,7 @@ The app **does** support a proxy server.
 ### Python Environment
 Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=49.0.0
+* resilient_circuits>=50.0.0
 
 ### QRadar Requirements
 The app works with QRadar 7.4.0 or higher and requires the QRadar Analyst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
@@ -155,7 +156,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **host** | Yes | `localhost` | *QRadar host* |
+| **host** | Yes | `1.1.1.3` | *The ip address or FQDN of the QRadar host to connect to* |
 | **username** | Yes | `admin` | *QRadar account username.* |
 | **qradarpassword** | Yes | `password` | *Password associated with the QRadar account username* |
 | **qradartoken** | Yes | `cb971c75-b2f9-4445-aaae-xxxxxxxxxxxx` | *SEC Token generated in QRadar* |

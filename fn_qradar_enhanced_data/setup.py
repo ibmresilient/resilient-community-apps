@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_qradar_enhanced_data',
     display_name='QRadar Enhanced Data Migration',
-    version='2.4.0',
+    version='2.4.1',
     license='MIT License',
     author='IBM SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/main/fn_qradar_enhanced_data',
