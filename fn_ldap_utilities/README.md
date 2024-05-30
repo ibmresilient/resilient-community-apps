@@ -33,6 +33,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.4 | 05/2024 | Bug fix for using NTLM authentication. |
 | 2.1.3 | 03/2024 | Bug fix for ldap_utilities_search.py function. |
 | 2.1.2 | 08/2023 | Bug fix for set password function |
 | 2.1.1 | 06/2023 | Bug fix for CP4S |
@@ -81,13 +82,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `49.0.8803`.
+* SOAR platform >= `50.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `49.0.8803`.
+* SOAR platform >= `50.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=49.0.0`.
+* Integration server is running `resilient_circuits>=50.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -121,7 +122,8 @@ The app does not support a proxy server.
 Python 3.6, 3.9, and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * ldap3>=2.0.0
-* resilient_circuits>=49.0.0
+* pycryptodome>=3.20.0
+* resilient_circuits>=50.0.0
 
 ---
 
