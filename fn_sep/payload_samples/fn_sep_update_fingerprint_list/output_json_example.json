@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {},
+  "raw": "{}",
+  "inputs": {
+    "sep_domainid": "sep_domainid",
+    "sep_hash_value": "sep_hash_value",
+    "sep_fingerprintlist_name": "Test Blacklist Updated",
+    "sep_description": "This is test of adding files in blacklist.",
+    "sep_fingerprintlist_id": "sep_fingerprintlist_id"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.0.1",
+    "host": "host",
+    "execution_time_ms": 2087,
+    "timestamp": "2023-01-06 09:30:38"
+  }
+}

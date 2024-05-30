@@ -1,0 +1,4 @@
+include README.md
+include fn_query_tor_network/util/*
+include fn_query_tor_network/LICENSE
+include fn_query_tor_network/doc/*

@@ -1,0 +1,60 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": "1684173756348",
+      "replyToId": null,
+      "etag": "1684173756348",
+      "messageType": "message",
+      "createdDateTime": "2023-05-15T18:02:36.348Z",
+      "lastModifiedDateTime": "2023-05-15T18:02:36.348Z",
+      "lastEditedDateTime": null,
+      "deletedDateTime": null,
+      "subject": null,
+      "summary": null,
+      "chatId": null,
+      "importance": "normal",
+      "locale": "en-us",
+      "webUrl": "https://teams.microsoft.com/l/message/19%3Aa62cab990d8648b6a9047787e030fa7e%40thread.tacv2/1684173756348?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b&createdTime=1684173756348&parentMessageId=1684173756348",
+      "policyViolation": null,
+      "eventDetail": null,
+      "from": {
+        "application": null,
+        "device": null,
+        "user": {
+          "@odata.type": "#microsoft.graph.teamworkUserIdentity",
+          "id": "43dd7b73-6a70-475e-88c3-609a9f30b514",
+          "displayName": "Mark Scherfling",
+          "userIdentityType": "aadUser",
+          "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b"
+        }
+      },
+      "body": {
+        "contentType": "text",
+        "content": "hello world"
+      },
+      "channelIdentity": {
+        "teamId": "322d20bf-450e-46d6-9338-f7e3b66a064c",
+        "channelId": "19:a62cab990d8648b6a9047787e030fa7e@thread.tacv2"
+      },
+      "attachments": [],
+      "mentions": [],
+      "reactions": []
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
+    "ms_channel_name": "Incident 2121 testing channels"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 3707,
+    "timestamp": "2023-05-15 14:06:30"
+  }
+}
