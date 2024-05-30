@@ -1,0 +1,1820 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="IBM XForce Collections" href="../fn_xforce/README.html" /><link rel="prev" title="SOAR Wiki" href="../fn_wiki/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Wiz - QRadar SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=afe95b24" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">QRadar SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">QRadar SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Recently Updated Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pb_sans_isc_scan_ip/README.html">ISC SANS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rapid7_insight_idr/README.html">Rapid7 InsightIDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">Palo Alto Panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feeder for ODBC Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">App Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/python_api.html">IBM SOAR Python Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">Ansible Tower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">AWS IAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_axonius/README.html">Axonius</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">Cisco AMP for Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Cisco Umbrella Investigate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">ClamAV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">Cloud Foundry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">App Host Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">Microsoft Exchange Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">Google Cloud DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">gRPC Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">HTML to PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">IsItPhishing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">IBM SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">McAfee ESM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">MISP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">MITRE ATT&amp;CK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">ODBC Query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint TAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">Proofpoint TRAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">Pulsedive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">Remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">RSA NetWitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fn_service_now/README.html">ServiceNow</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of ServiceNow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/install_guide/README.html">ServiceNow Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/customize_snow_guide/README.html">ServiceNow Customization Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/customize_resilient_guide/README.html">SOAR Customization Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">Task Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Twilio SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">Watson Translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">Whois RDAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">SOAR Wiki</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Wiz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">IBM XForce Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_resilientfeed/README.html">Data Feeder for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="wiz">
+<h1>Wiz<a class="headerlink" href="#wiz" title="Link to this heading">¶</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#poller-considerations"><span class="xref myst">Poller Considerations</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#poller-templates-for-soar-cases"><span class="xref myst">Poller Templates for SOAR Cases</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---wiz-pull-vulnerabilities"><span class="xref myst">Function - Wiz: Pull Vulnerabilities</span></a></p></li>
+<li><p><a class="reference internal" href="#function---wiz-query-issue"><span class="xref myst">Function - Wiz: Query Issue</span></a></p></li>
+<li><p><a class="reference internal" href="#function---wiz-send-soar-notes"><span class="xref myst">Function - Wiz: Send SOAR Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#function---wiz-sync-status"><span class="xref myst">Function - Wiz: Sync Status</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---wiz-projects-table"><span class="xref myst">Data Table - Wiz Projects Table</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---wiz-vulnerabilities-table"><span class="xref myst">Data Table - Wiz Vulnerabilities Table</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>04/2024</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+<p><strong>IBM SOAR app for synchronization with Wiz issue, project, and vulnerability data</strong></p>
+<p><img alt="screenshot: main" src="../_images/main74.png" /></p>
+<p>Wiz is a cloud security platform that scans and monitors cloud resources for vulnerabilities and affected assets.</p>
+<p>This app polls Wiz Issues to create, update, or close corresponding cases in IBM QRadar SOAR and enriches the cases with Wiz project and vulnerability data for investigation. The app also updates Wiz issues based on changes to corresponding SOAR cases.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
+<!--
+  List the Key Features of the Integration
+-->
+<ul class="simple">
+<li><p>Create, update, close IBM SOAR cases based on updates from Wiz Issues</p></li>
+<li><p>Synchronize statuses and notes between SOAR cases and Wiz issues</p></li>
+<li><p>Pull data on projects and vulnerabilities associated with Wiz Issue into SOAR case</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
+<!--
+  List any Requirements 
+--> 
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.1.0.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>Incidents</p></td>
+<td><p>Read, Create</p></td>
+</tr>
+<tr class="row-odd"><td><p>Edit Incidents</p></td>
+<td><p>Fields, Status, Notes</p></td>
+</tr>
+<tr class="row-even"><td><p>Layouts</p></td>
+<td><p>Read, Edit</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
+<p>The app <strong>does</strong> support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
+<p>Python 3.6 and Python 3.9 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>resilient-circuits&gt;=51.0.1.0.0</p></li>
+</ul>
+</section>
+<section id="development-version">
+<h3>Development Version<a class="headerlink" href="#development-version" title="Link to this heading">¶</a></h3>
+<p>This app has been implemented using:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Product Name</p></th>
+<th class="head"><p>API URL</p></th>
+<th class="head"><p>API Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Wiz</p></td>
+<td><p>https://api.{region}.app.wiz.io/graphql</p></td>
+<td><p>v1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="prerequisites">
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h4>
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+<ul class="simple">
+<li><p>An active Wiz service account</p></li>
+<li><p>Client ID and secret</p></li>
+</ul>
+</section>
+<section id="permissions">
+<h4>Permissions<a class="headerlink" href="#permissions" title="Link to this heading">¶</a></h4>
+<!--
+List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
+-->
+<p>Your Wiz service account should have the following permissions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">read:issues</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update:issues</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read:projects</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read:vulnerabilities</span></code></p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>api_url</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://api.us1.app.wiz.io/graphql</span></code></p></td>
+<td><p>URL to query Wiz GraphQL API. The region may be us1, us2, eu1, or eu2, update to your account specifications.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>client_id</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
+<td><p>Client ID for service account</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>client_secret</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
+<td><p>Client secret token for service account</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>endpoint_url</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://app.wiz.io</span></code></p></td>
+<td><p>Base URL for Wiz to generate links back to Wiz issues. For almost all deployments, it will be https://app.wiz.io</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>polling_interval</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">86400</span></code></p></td>
+<td><p>Number of seconds between poller cycles</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>polling_lookback</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">120</span></code></p></td>
+<td><p>Number of minutes to lookback when querying for issues the first time the poller runs</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>token_url</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://auth.app.wiz.io/oauth/token</span></code></p></td>
+<td><p>Wiz token URL for generating a Authentication Bearer token. For government tenants, set to the token URL to https://auth.gov.wiz.io/oauth/token</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="poller-considerations">
+<h3>Poller Considerations<a class="headerlink" href="#poller-considerations" title="Link to this heading">¶</a></h3>
+<p>When the poller is enabled, Wiz issues are automatically escalated from this app to be created as cases in SOAR. Any updates are checked at the cadence defined by the value set for <code class="docutils literal notranslate"><span class="pre">poller_interval</span></code>. Updates for this app are classified as any changes in a Wiz issue status. If a Wiz issue status is updated, the poller will reflect this change in the corresponding SOAR case.
+It is possible to escalate cases from other sources. In this scenario, the poller would be disabled by setting <code class="docutils literal notranslate"><span class="pre">poller_interval=0</span></code> and a separate source might capture a case from the endpoint and in turn create a case in SOAR. This app can still be useful for enrichment of that
+newly created case even though it was not directly escalated from this app. As long as the reference ID (i.e. Issue ID) for each case is preserved, all remaining details will synchronize to the SOAR case through this app automatically.
+Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> they have been created as cases in SOAR will not be processed by the poller.</p>
+<section id="poller-templates-for-soar-cases">
+<h4>Poller Templates for SOAR Cases<a class="headerlink" href="#poller-templates-for-soar-cases" title="Link to this heading">¶</a></h4>
+<p>It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.</p>
+<p>This is especially relevant if you have required custom <em>close</em> fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom <code class="docutils literal notranslate"><span class="pre">close_case_template</span></code> and reference those required close fields in the template.</p>
+<p>When overriding the template in App Host, specify the file path for each file as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
+<p>Below are the default templates used which can be copied, modified, and used with app_config’s
+<code class="docutils literal notranslate"><span class="pre">soar_create_case_template</span></code>, <code class="docutils literal notranslate"><span class="pre">soar_update_case_template</span></code>, and <code class="docutils literal notranslate"><span class="pre">soar_close_case_template</span></code> settings to override the default templates.</p>
+<details><summary>soar_create_case.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from an endpoint #}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
+<span class="s1">    &quot;INFORMATIONAL&quot;: &quot;Low&quot;, </span>
+<span class="s1">    &quot;LOW&quot;: &quot;Low&quot;, </span>
+<span class="s1">    &quot;MEDIUM&quot;: &quot;Medium&quot;, </span>
+<span class="s1">    &quot;HIGH&quot;: &quot;High&quot;,</span>
+<span class="s1">    &quot;CRITICAL&quot;: &quot;High&quot;</span>
+<span class="s1">  }&#39;&#39;&#39;</span>
+  <span class="cp">%}</span>
+<span class="x">  &quot;name&quot;: &quot;Wiz Issue - </span><span class="cp">{{</span> <span class="nv">sourceRule.name</span> <span class="cp">}}</span><span class="x">: </span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">sourceRule.controlDescription</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">createdAt</span><span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;start_date&quot;: </span><span class="cp">{{</span> <span class="nv">createdAt</span><span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
+<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">    &quot;wiz_issue_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;wiz_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">    &quot;wiz_description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">sourceRule.controlDescription</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  },</span>
+
+<span class="x">  </span><span class="c">{# add comments as necessary #}</span>
+<span class="x">  &quot;comments&quot;: [</span>
+<span class="x">    {</span>
+<span class="x">      &quot;text&quot;: {</span>
+<span class="x">        &quot;format&quot;: &quot;html&quot;,</span>
+<span class="x">        &quot;content&quot;: &quot;&lt;b&gt;Created by Wiz:&lt;/b&gt; </span><span class="cp">{{</span> <span class="nv">entity_url</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      }</span>
+<span class="x">    }</span>
+<span class="x">  ]</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_update_case.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for updating a new SOAR incident from an endpoint #}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
+<span class="s1">    &quot;INFORMATIONAL&quot;: &quot;Low&quot;, </span>
+<span class="s1">    &quot;LOW&quot;: &quot;Low&quot;, </span>
+<span class="s1">    &quot;MEDIUM&quot;: &quot;Medium&quot;, </span>
+<span class="s1">    &quot;HIGH&quot;: &quot;High&quot;,</span>
+<span class="s1">    &quot;CRITICAL&quot;: &quot;High&quot;</span>
+<span class="s1">  }&#39;&#39;&#39;</span>
+  <span class="cp">%}</span>
+<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">      &quot;wiz_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+<details><summary>soar_close_case.jinja</summary>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
+<span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">resolution_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
+<span class="s1">    &quot;RESOLVED&quot;: &quot;Resolved&quot;,</span>
+<span class="s1">    &quot;REJECTED&quot;: &quot;Unresolved&quot;</span>
+<span class="s1">  }&#39;&#39;&#39;</span>
+  <span class="cp">%}</span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">close_message</span> <span class="o">=</span> <span class="s2">&quot;Closed by Wiz: Issue status:&quot;</span> <span class="cp">%}</span>
+
+<span class="x">  &quot;plan_status&quot;: &quot;C&quot;,</span>
+<span class="x">  &quot;resolution_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">resolution_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  &quot;resolution_summary&quot;: &quot;</span><span class="cp">{{</span><span class="nv">close_message</span><span class="cp">}}</span><span class="x"> </span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# add additional fields based on your &#39;on close&#39; field requirements #}</span>
+<span class="x">  &quot;properties&quot;: {</span>
+<span class="x">      &quot;wiz_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</details>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-wiz-pull-vulnerabilities">
+<h2>Function - Wiz: Pull Vulnerabilities<a class="headerlink" href="#function-wiz-pull-vulnerabilities" title="Link to this heading">¶</a></h2>
+<p>Query Wiz for vulnerability data</p>
+<p><img alt="screenshot: fn-wiz-pull-vulnerabilities " src="../_images/fn-wiz-pull-vulnerabilities.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_num_results</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_project_ids</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_query_filter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">&quot;first&quot;:</span> <span class="pre">5,</span> <span class="pre">&quot;filterBy&quot;:</span> <span class="pre">{</span> <span class="pre">&quot;vendorSeverity&quot;:</span> <span class="pre">[</span> <span class="pre">&quot;CRITICAL&quot;</span> <span class="pre">]</span> <span class="pre">}</span> <span class="pre">}</span></code></p></td>
+<td><p>Dictionary that represents ‘variables’ object that gets passed with the Wiz query to filter results. Required ‘first’ parameter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;1234567-abcdefg1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1234567-abcdefg2&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1234567-abcdefg3&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;CVEDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CVSSSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dataSourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;Wiz Demo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by </span><span class="se">\u0027</span><span class="s2">use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;detailedName&quot;</span><span class="p">:</span> <span class="s2">&quot;GET /WebGoat/SqlInjectionMitigations/servers?column=id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;detectionMethod&quot;</span><span class="p">:</span> <span class="s2">&quot;EXTERNAL_NETWORK_SCAN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;epssPercentile&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;epssProbability&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;epssSeverity&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;exploitabilityScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;firstDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.228481Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fixedVersion&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;hasCisaKevExploit&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;hasExploit&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ignoreRules&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;impactScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;lastDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.228481Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;layerMetadata&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;https:/test/com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;locationPath&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CWE-89&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;portalUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~</span><span class="se">\u0027</span><span class="s2">ID))&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project 2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-2&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;project 4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-4&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;remediation&quot;</span><span class="p">:</span> <span class="s2">&quot;The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;resolvedAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;validatedInRuntime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;vendorSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;vulnerableAsset&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;cloudPlatform&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;cloudProviderURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://test-console.aws.amazon.com/ec2/v2/home?#instanceDetailsid=0&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;hasLimitedInternetExposure&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;hasWideInternetExposure&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ipAddresses&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2.2.2.2&quot;</span>
+          <span class="p">],</span>
+          <span class="s2">&quot;isAccessibleFromOtherSubscriptions&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;isAccessibleFromOtherVnets&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;isAccessibleFromVPN&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Demo vulns findings&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;operatingSystem&quot;</span><span class="p">:</span> <span class="s2">&quot;Linux&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;providerUniqueId&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:instance/abcedefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subscriptionExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;998231069301&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;abcdefg-12345&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subscriptionName&quot;</span><span class="p">:</span> <span class="s2">&quot;wiz-integrations&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Demo vulns findings&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;VIRTUAL_MACHINE&quot;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;CVEDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CVSSSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dataSourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;Wiz Demo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by </span><span class="se">\u0027</span><span class="s2">use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;detailedName&quot;</span><span class="p">:</span> <span class="s2">&quot;GET /WebGoat/SqlInjectionMitigations/servers?column=id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;detectionMethod&quot;</span><span class="p">:</span> <span class="s2">&quot;EXTERNAL_NETWORK_SCAN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;epssPercentile&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;epssProbability&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;epssSeverity&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;exploitabilityScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;firstDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.226955Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fixedVersion&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;hasCisaKevExploit&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;hasExploit&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ignoreRules&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;impactScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;lastDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.226955Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;layerMetadata&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;https:/test/com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;locationPath&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CWE-89&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;portalUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~</span><span class="se">\u0027</span><span class="s2">ID))&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project 2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-2&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;project 4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-4&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;remediation&quot;</span><span class="p">:</span> <span class="s2">&quot;The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;resolvedAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;validatedInRuntime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;vendorSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;vulnerableAsset&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;cloudPlatform&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;cloudProviderURL&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;hasLimitedInternetExposure&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;hasWideInternetExposure&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;imageId&quot;</span><span class="p">:</span> <span class="s2">&quot;sha256:7d1eabcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;isAccessibleFromOtherSubscriptions&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;isAccessibleFromOtherVnets&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;isAccessibleFromVPN&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test-aws.amazonaws.com/eks/kube-proxy@sha256:7d1eabcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;providerUniqueId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;us-east-1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subscriptionExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;6024000000000&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;e644fdd8-abcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subscriptionName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;io.cri-containerd.image&quot;</span><span class="p">:</span> <span class="s2">&quot;managed&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;CONTAINER_IMAGE&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;wiz_project_ids&quot;</span><span class="p">:</span> <span class="s2">&quot;83b76efe-a7b6-5762-8a53-8e8f59e68bd8,af52828c-4eb1-5c4e-847c-ebc3a5ead531,d6ac50bb-aec0-52fc-80ab-bacd7b02f178&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3713</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-689e-4f7f-b84e-4eced01ba15f-55b865fcb6-pnkfz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:57:40&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Pull out project ids associated with the given issue. We can use this to query Wiz for vulnerabilities data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">query_issue_results</span>
+
+<span class="n">project_ids</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get issue data to retrieve projects.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;projects&quot;</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="k">if</span> <span class="n">projects</span><span class="p">:</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">wiz_project_ids</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">])</span>    
+<span class="c1"># OPTIONAL: Specify the maximum desired number of results, returns max of 50 results by default</span>
+<span class="c1"># inputs.wiz_num_results = </span>
+
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">def</span> <span class="nf">get_projects</span><span class="p">(</span><span class="n">vuln</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Get a string of the project names affected by this vulnerability </span>
+<span class="sd">  :param vuln (dict): vulnerability object</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;projects&#39;</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="k">if</span> <span class="n">projects</span><span class="p">:</span>
+    <span class="n">project_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">project_names</span><span class="p">)</span>
+  
+  <span class="k">return</span> <span class="s2">&quot;-&quot;</span>
+  
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">vulnerability_results</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get vulnerability data to update Wiz Vulnerabilities data table: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
+    <span class="n">vulnerabilities</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="n">vulnerabilities</span><span class="p">:</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;wiz_vulnerabilities_table&quot;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;date_added&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerability_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerability_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;affected_projects&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_projects</span><span class="p">(</span><span class="n">vuln</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vendor_severity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vendorSeverity&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;remediation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;remediation&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerable_asset_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vulnerableAsset&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerable_asset_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vulnerableAsset&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerable_asset_os&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vulnerableAsset&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;operatingSystem&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vulnerabilities</span><span class="p">)</span><span class="si">}</span><span class="s2"> vulnerabilities to Wiz Vulnerabilities data table&quot;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; No content found to add to vulnerabilities data table&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-wiz-query-issue">
+<h2>Function - Wiz: Query Issue<a class="headerlink" href="#function-wiz-query-issue" title="Link to this heading">¶</a></h2>
+<p>Enrich case data with issue data</p>
+<p><img alt="screenshot: fn-wiz-query-issue " src="../_images/fn-wiz-query-issue.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_issue_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;createdAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T10:16:14.443631Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;dueAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;entitySnapshot&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;cloudPlatform&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;cloudProviderURL&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;createdAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;externalId&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerability##592f0bdc-ab9b##&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;fa059989-abcdefg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CVE-2023-5528&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nativeType&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;providerId&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerability##592f0bdc-ab9b##&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resourceGroupExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;subscriptionExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subscriptionName&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subscriptionTags&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;SECURITY_TOOL_FINDING&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;createdAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:55:20.461314Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;serviceAccount&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm-soar&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Note from SOAR: test note&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:55:20.46232Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;83b76efe-abcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project 2&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-2&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;af52828c-abcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;project 4&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-4&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;d6ac50bb-abcdefg&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;resolvedAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;serviceTickets&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;INFORMATIONAL&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;sourceRule&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;__typename&quot;</span><span class="p">:</span> <span class="s2">&quot;Control&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;controlDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;60873d6d-abcdefg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;All Findings&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resolutionRecommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;securitySubCategories&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;statusChangedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T10:14:50.891007Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;TOXIC_COMBINATION&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:55:20.484648Z&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;wiz_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">668</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-abcdefg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:57:34&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">wiz_issue_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">wiz_issue_id</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">query_issue_results</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get issue data to update custom fields: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;projects&quot;</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="k">if</span> <span class="n">projects</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">:</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;Observed Data&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;Found project in Wiz&#39;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">projects</span><span class="p">)</span><span class="si">}</span><span class="s2"> projects as artifacts&quot;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; No projects found in Wiz to add as artifacts&quot;</span><span class="p">)</span>
+      
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-wiz-send-soar-notes">
+<h2>Function - Wiz: Send SOAR Notes<a class="headerlink" href="#function-wiz-send-soar-notes" title="Link to this heading">¶</a></h2>
+<p>Send notes from SOAR case to Wiz issue</p>
+<p><img alt="screenshot: fn-wiz-send-soar-notes " src="../_images/fn-wiz-send-soar-notes.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_issue_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_soar_note</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Successfully updated issue.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;dueAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;wiz_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wiz_soar_note&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">soar-rte-content</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">test</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2034</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-abcdefg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:58:17&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">wiz_issue_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">wiz_issue_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">wiz_soar_note</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">notes_result</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Notes to Issue:&lt;/b&gt; Failed to add note to Wiz issue: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-wiz-sync-status">
+<h2>Function - Wiz: Sync Status<a class="headerlink" href="#function-wiz-sync-status" title="Link to this heading">¶</a></h2>
+<p>Update Wiz issue status if case status changed</p>
+<p><img alt="screenshot: fn-wiz-sync-status " src="../_images/fn-wiz-sync-status.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_issue_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_resolution_reason</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wiz_resolution_summary</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Successfully updated issue.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;dueAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="s2">&quot;WONT_FIX&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;REJECTED&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;wiz_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wiz_resolution_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Not an Issue&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wiz_resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;nan&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1383</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-4eabcdefg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:58:34&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">wiz_issue_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">wiz_issue_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">wiz_resolution_reason</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">wiz_resolution_summary</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">status_results</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Unable to sync issue status: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
+    <span class="n">issue</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">issue</span><span class="p">:</span>
+      <span class="n">new_status</span> <span class="o">=</span> <span class="s2">&quot;REJECTED&quot;</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">wiz_issue_status</span> <span class="o">=</span> <span class="n">new_status</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Successfully closed Wiz issue with status </span><span class="si">{</span><span class="n">new_status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Unable to sync issue status because Wiz Issue not found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Wiz: Populate Case</p></td>
+<td><p>Add Wiz issue details to SOAR case: Get Issue data, create artifacts for projects, populate a data table for project details. Continue to get relevant vulnerabilities that affect the projects related to the issue. Use this data to populate a vulnerabilities data table.</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.wiz_issue_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">object_added</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wiz: Pull Vulnerabilities</p></td>
+<td><p>Query for vulnerabilities based on provided variables filter that gets passed to Wiz query.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.wiz_issue_id</span> <span class="pre">has_a_value</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Wiz: Pull Vulnerabilities by Project</p></td>
+<td><p>Pull vulnerabilities associated with a given project ID and add to vulnerabilities data table</p></td>
+<td><p>Manual</p></td>
+<td><p>wiz_projects_table</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wiz: Sync Notes to Issue</p></td>
+<td><p>Add notes from SOAR Case to Wiz Issue</p></td>
+<td><p>Automatic</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.wiz_issue_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">note.text</span> <span class="pre">not_contains</span> <span class="pre">Wiz:</span>&#160; <span class="pre">AND</span> <span class="pre">object_added</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Wiz: Sync Status</p></td>
+<td><p>Update Wiz issue status if case status changes</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.plan_status</span> <span class="pre">changed_to</span> <span class="pre">Closed</span> <span class="pre">AND</span> <span class="pre">incident.properties.wiz_issue_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.resolution_summary</span> <span class="pre">not_contains</span> <span class="pre">Closed</span> <span class="pre">by</span> <span class="pre">Wiz:</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="custom-layouts">
+<h2>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h2>
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+<ul>
+<li><p>Import the Data Tables and Custom Fields like the screenshot below:</p>
+<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts31.png" /></p>
+</li>
+</ul>
+</section>
+<section id="data-table-wiz-projects-table">
+<h2>Data Table - Wiz Projects Table<a class="headerlink" href="#data-table-wiz-projects-table" title="Link to this heading">¶</a></h2>
+<p><img alt="screenshot: dt-wiz-projects-table" src="../_images/dt-wiz-projects-table.png" /></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
+<p>wiz_projects_table</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Business Unit</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">business_unit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Business unit related to project</p></td>
+</tr>
+<tr class="row-odd"><td><p>Date Added</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">date_added</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Timestamp of date when row was added to data table</p></td>
+</tr>
+<tr class="row-even"><td><p>Project ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>ID hash of a project</p></td>
+</tr>
+<tr class="row-odd"><td><p>Project Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Name of project</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-table-wiz-vulnerabilities-table">
+<h2>Data Table - Wiz Vulnerabilities Table<a class="headerlink" href="#data-table-wiz-vulnerabilities-table" title="Link to this heading">¶</a></h2>
+<p><img alt="screenshot: dt-wiz-vulnerabilities-table" src="../_images/dt-wiz-vulnerabilities-table.png" /></p>
+<section id="id1">
+<h3>API Name:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>wiz_vulnerabilities_table</p>
+</section>
+<section id="id2">
+<h3>Columns:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Affected Projects</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">affected_projects</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Project names where vulnerability has been identified</p></td>
+</tr>
+<tr class="row-odd"><td><p>Date Added</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">date_added</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Timestamp that the row was added to the data table</p></td>
+</tr>
+<tr class="row-even"><td><p>Remediation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remediation</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Suggested remediation by Wiz</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vendor Severity</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vendor_severity</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Vendor Severity Score</p></td>
+</tr>
+<tr class="row-even"><td><p>Vulnerability Description</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vulnerability_description</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Description of identified vulnerability</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vulnerability Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vulnerability_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Name of identified vulnerability</p></td>
+</tr>
+<tr class="row-even"><td><p>Vulnerable Asset ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vulnerable_asset_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Vulnerable asset affected by vulnerability</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vulnerable Asset Operating System</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vulnerable_asset_os</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Operating system of asset affected by vulnerability</p></td>
+</tr>
+<tr class="row-even"><td><p>Vulnerable Asset Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vulnerable_asset_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Type of asset affected by vulnerability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+<th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Wiz Issue Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">wiz_issue_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wiz Issue Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">wiz_issue_status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Wiz Description</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">wiz_description</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textArea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Source control description from Wiz Issue</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
+<p>This is an IBM supported app. Please search <a class="reference external" href="https://ibm.com/mysupport">ibm.com/mysupport</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_xforce/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">IBM XForce Collections</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_wiki/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">SOAR Wiki</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Wiz</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+<li><a class="reference internal" href="#development-version">Development Version</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#permissions">Permissions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
+<li><a class="reference internal" href="#poller-considerations">Poller Considerations</a><ul>
+<li><a class="reference internal" href="#poller-templates-for-soar-cases">Poller Templates for SOAR Cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-wiz-pull-vulnerabilities">Function - Wiz: Pull Vulnerabilities</a></li>
+<li><a class="reference internal" href="#function-wiz-query-issue">Function - Wiz: Query Issue</a></li>
+<li><a class="reference internal" href="#function-wiz-send-soar-notes">Function - Wiz: Send SOAR Notes</a></li>
+<li><a class="reference internal" href="#function-wiz-sync-status">Function - Wiz: Sync Status</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
+<li><a class="reference internal" href="#data-table-wiz-projects-table">Data Table - Wiz Projects Table</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-table-wiz-vulnerabilities-table">Data Table - Wiz Vulnerabilities Table</a><ul>
+<li><a class="reference internal" href="#id1">API Name:</a></li>
+<li><a class="reference internal" href="#id2">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/custom.js?v=a365c389"></script>
+    </body>
+</html>
