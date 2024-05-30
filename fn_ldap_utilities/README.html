@@ -465,39 +465,43 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.1.3</p></td>
+<tr class="row-even"><td><p>2.1.4</p></td>
+<td><p>05/2024</p></td>
+<td><p>Bug fix for using NTLM authentication.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1.3</p></td>
 <td><p>03/2024</p></td>
 <td><p>Bug fix for ldap_utilities_search.py function.</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.2</p></td>
+<tr class="row-even"><td><p>2.1.2</p></td>
 <td><p>08/2023</p></td>
 <td><p>Bug fix for set password function</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.1</p></td>
+<tr class="row-odd"><td><p>2.1.1</p></td>
 <td><p>06/2023</p></td>
 <td><p>Bug fix for CP4S</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.0</p></td>
+<tr class="row-even"><td><p>2.1.0</p></td>
 <td><p>04/2023</p></td>
 <td><p><ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul></p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.1</p></td>
+<tr class="row-odd"><td><p>2.0.1</p></td>
 <td><p>07/2022</p></td>
 <td><p>Fix helper.py so that ldap_connect_timeout is not required in app.config</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.0</p></td>
+<tr class="row-even"><td><p>2.0.0</p></td>
 <td><p>04/2022</p></td>
 <td><p><ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul></p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.1</p></td>
+<tr class="row-odd"><td><p>1.1.1</p></td>
 <td><p>07/2021</p></td>
 <td><p>Support added for App Host</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>03/2019</p></td>
 <td><p><ul><li>Handle Unicode in Post-Process Scripts</li><li>Handle NTLM Authentication to Active Directory</li><li>Add functionality to allow for LDAP Wildcard queries with *</li></ul></p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>07/2018</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -544,14 +548,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.8803</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.8803</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=49.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=50.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -608,7 +612,8 @@
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>ldap3&gt;=2.0.0</p></li>
-<li><p>resilient_circuits&gt;=49.0.0</p></li>
+<li><p>pycryptodome&gt;=3.20.0</p></li>
+<li><p>resilient_circuits&gt;=50.0.0</p></li>
 </ul>
 </section>
 </section>
