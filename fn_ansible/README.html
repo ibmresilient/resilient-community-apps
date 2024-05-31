@@ -6,7 +6,7 @@
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Ansible Tower" href="../fn_ansible_tower/README.html" /><link rel="prev" title="Anomali Staxx" href="../fn_anomali_staxx/README.html" />
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Ansible - QRadar SOAR Apps</title>
+        <title>Ansible for SOAR - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -238,7 +238,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Ansible</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Ansible for SOAR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">Ansible Tower</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">Amazon AWS GuardDuty</a></li>
@@ -409,84 +409,94 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="ansible">
-<h1>Ansible<a class="headerlink" href="#ansible" title="Link to this heading">¶</a></h1>
+          <section id="ansible-for-soar">
+<h1>Ansible for SOAR<a class="headerlink" href="#ansible-for-soar" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#about-this-package"><span class="xref myst">About This Package</span></a></p></li>
-<li><p><a class="reference internal" href="#features"><span class="xref myst">Features</span></a></p></li>
-<li><p><a class="reference internal" href="#package-components"><span class="xref myst">Package Components</span></a></p></li>
-<li><p><a class="reference internal" href="#app-host-installation"><span class="xref myst">App Host Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#120-changes"><span class="xref myst">1.2.0 Changes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#integration-server-installation"><span class="xref myst">Integration Server Installation</span></a></p></li>
-<li><p><a class="reference internal" href="#function-inputs"><span class="xref myst">Function Inputs</span></a></p></li>
-<li><p><a class="reference internal" href="#function-output"><span class="xref myst">Function Output</span></a></p></li>
-<li><p><a class="reference internal" href="#considerations"><span class="xref myst">Considerations</span></a></p></li>
+<li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#app-host-installation"><span class="xref myst">App Host Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---ansible-module"><span class="xref myst">Function - Ansible Module</span></a></p></li>
+<li><p><a class="reference internal" href="#function---ansible-playbook"><span class="xref myst">Function - Ansible Playbook</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
+<li><p><a class="reference internal" href="#Considerations"><span class="xref myst">Considerations</span></a></p></li>
 <li><p><a class="reference internal" href="#app-host-sshpass-support"><span class="xref myst">App Host sshPass Support</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="about-this-package">
-<h2>About This Package:<a class="headerlink" href="#about-this-package" title="Link to this heading">¶</a></h2>
-<p>This package contains functions that integrate with Ansible to run playbooks and modules for remote host execution.</p>
-</section>
-<section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Version</p></th>
-<th class="head"><p>Comment</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.2</p></td>
-<td><p>Support for App Host</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
+<td><p>05/2024</p></td>
+<td><p>Refresh the integration. Convert rule/workflows to playbooks.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1</p></td>
-<td><p>Change result payload format to JSON returned to Resilient</p></td>
+<tr class="row-odd"><td><p>1.1.1</p></td>
+<td><p>04/2021</p></td>
+<td><p>Support for App Host.</p></td>
+</tr>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>11/2019</p></td>
+<td><p>Change result payload format to JSON returned to SOAR.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<ul class="simple">
-<li><p>For customers upgrading from 1.0, the example workflows will use different post-processing script logic, based on the json results returned.</p></li>
-</ul>
 </section>
-<section id="features">
-<h2>Features:<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
+<section id="changes">
+<h2>1.2.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h2>
+<p>In v1.2, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
+<p>If upgrading from a previous release, you’ll noticed that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it’s corresponding rule, but with “(PB)” added at the end. For automatic actions, the playbooks will be disabled by default.</p>
+<p>You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.</p>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p><strong>Run Ansible Playbooks and Modules</strong></p>
+<p><img alt="screenshot: main" src="../_images/main1.png" /></p>
+<p>This app runs the Ansible environment to allow the running of playbooks and modules against your enterprise.
+Specify the playbooks, hosts and environment variables necessary for execution.</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>Run pre-written Ansible Playbooks from the Resilient platform, using parameter substitution.</p></li>
+<li><p>Run pre-written Ansible Playbooks from the SOAR platform, using parameter substitution.</p></li>
 <li><p>Run Ansible Modules for ad-hoc command execution.</p></li>
-<li><p>Run Resilient Rules at the Incident and Artifact levels.</p></li>
+<li><p>Run SOAR playbooks at the Incident and Artifact levels.</p></li>
 </ul>
 <p>Additional documentation on Ansible can be found at <a class="reference external" href="https://docs.ansible.com/">the Ansible website</a>.</p>
-<section id="package-components">
-<h3>Package Components<a class="headerlink" href="#package-components" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Functions:</p>
-<ul>
-<li><p>fn_ansible</p></li>
-<li><p>fn_ansible_module</p></li>
-</ul>
-</li>
-<li><p>Workflows:</p>
-<ul>
-<li><p>Example: Ansible - Run a Module</p></li>
-<li><p>Example: Ansible - Run a Playbook from an Incident</p></li>
-<li><p>Example: Ansible - Run a Playbook on an Artifact</p></li>
-</ul>
-</li>
-<li><p>Rules:</p>
-<ul>
-<li><p>Example: Ansible - Run a Module</p></li>
-<li><p>Example: Ansible - Run a Playbook</p></li>
-<li><p>Example: Ansible - Run a Playbook from an Artifact</p></li>
-</ul>
-</li>
-</ul>
 </section>
 </section>
+<hr class="docutils" />
 <section id="app-host-installation">
 <h2>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">¶</a></h2>
 <p>All the components for running Ansible in a container already exist when using the App Host app. The remainder of this section details the Ansible configuration file changes.</p>
@@ -496,24 +506,23 @@
 <span class="n">artifact_dir</span><span class="o">=/</span><span class="n">tmp</span>
 </pre></div>
 </div>
-<section id="playbooks">
-<h3>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h3>
-<p>When adding playbooks through the Configuration tab of an App, ensure the File Path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits/ansible/project</span></code>.</p>
-<p>Note: Playbooks and modules cannot be run within the container environment.</p>
+<section id="ansible-playbooks">
+<h3>Ansible Playbooks<a class="headerlink" href="#ansible-playbooks" title="Link to this heading">¶</a></h3>
+<p>When adding Ansible playbooks through the Configuration tab of an App, ensure the File Path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits/ansible/project</span></code>.</p>
+<p>Note: Ansible playbooks and modules cannot be run within the container environment.</p>
 <p>The minimum Ansible files needed are:</p>
 <ul class="simple">
 <li><p>hosts, and</p></li>
 <li><p>playbooks</p></li>
 </ul>
 <p>Your environment may require more configuration files, such as ssh_key and envvars.</p>
-<p>This is an example of the configuration files used including
-several yaml files.
-<img alt="screenshot" src="../_images/ansible_config_files.png" /></p>
+<p>This is an example of the configuration files used including several yaml files.
+<img alt="screenshot" src="fn_ansible/screenshots/ansible_config_files.png" /></p>
 <p>If you require additional ansible modules, additional effort is needed to include them as files in the Configuration tab.</p>
 </section>
 <section id="limitations">
 <h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">¶</a></h3>
-<p>Presently, there are limitations in the use of containers when playbook parameters sent from Resilient
+<p>Presently, there are limitations in the use of containers when Ansible playbook parameters sent from SOAR
 are used with any file defined in <code class="docutils literal notranslate"><span class="pre">/var/rescircuits/ansible/env</span></code>.</p>
 </section>
 </section>
@@ -524,9 +533,9 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 <p>This integration relies on the installation of the ansible solution on the integration server. The process of installing ansible can be followed <a class="reference external" href="https://docs.ansible.com/ansible/latest/installation_guide/">here</a>.</p>
 <ul class="simple">
 <li><p>ansible &gt;= 2.8.1</p></li>
-<li><p>ansible-runner &gt;= 1.3.4</p></li>
-<li><p>Resilient platform &gt;= v31.0.0</p></li>
-<li><p>Integrations Server Resilient Circuits &gt;= v30.0.0</p></li>
+<li><p>ansible-runner &gt;= 2.3.6</p></li>
+<li><p>SOAR platform &gt;= v50.0.0</p></li>
+<li><p>Integrations Server Resilient Circuits &gt;= v50.0.0</p></li>
 <li><p>Ansible config directory per the <a class="reference external" href="https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html">ansible-runner convention</a></p></li>
 <li><p>Ansible relies on a system library <code class="docutils literal notranslate"><span class="pre">sshpass</span></code>. Depending on your Integration Server operation system, different procedures are required to install this system library.</p></li>
 <li><p>For RHEL servers, the <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/8/html/user_guide/chap-red_hat_developer_toolset">Red Hat Developer Toolset</a> is needed to build the ansible runtime environment. This may also require a registered subscription manager to install.</p></li>
@@ -544,7 +553,7 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 </pre></div>
 </div>
 </li>
-<li><p>To import the function, example rules and workflows into your Resilient platform, run:</p>
+<li><p>To import the function, example rules and workflows into your SOAR platform, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ resilient-circuits customize -l fn-ansible
 </pre></div>
 </div>
@@ -576,88 +585,446 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 </li>
 </ul>
 </section>
-<section id="sample-workflow">
-<h3>Sample Workflow:<a class="headerlink" href="#sample-workflow" title="Link to this heading">¶</a></h3>
-<p><img alt="screenshot" src="../_images/sample_workflow.png" /></p>
 </section>
-</section>
-<section id="function-inputs">
-<h2>Function Inputs:<a class="headerlink" href="#function-inputs" title="Link to this heading">¶</a></h2>
+<hr class="docutils" />
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
+<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=50.0.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Input Name</p></th>
-<th class="head text-center"><p>Type</p></th>
-<th class="head text-center"><p>Required</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Info</p></th>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>ansible_playbook_name</p></td>
-<td class="text-center"><p>String</p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p>“my_playbook” or “my_playbook.yml”</p></td>
-<td><p>Identifies target playbook to run</p></td>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
 </tr>
-<tr class="row-odd"><td><p>ansible_parameters</p></td>
-<td class="text-center"><p>String</p></td>
-<td class="text-center"><p>No</p></td>
-<td><p>“host_names=192.168.1.4”</p></td>
-<td><p>Substitution variables for a Playbook at runtime. For example, a Playbook containing <code class="docutils literal notranslate"><span class="pre">hosts:</span> <span class="pre">&quot;{{host_names}}&quot;</span></code> will be replaced using the example value of 196.168.1.4. Use semi-colons (;) to separate different parameters.</p></td>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Some parameters can contain more than one value. In these cases, use a comma (,) to separate the values. Example: <code class="docutils literal notranslate"><span class="pre">host_names=192.168.56.1,192.168.56.2</span></code>.</p>
-<p>When using playbooks run against artifacts, an additional parameter is sent specifying the artifact value to the playbook as <code class="docutils literal notranslate"><span class="pre">artifact_value=&lt;artifact_value&gt;</span></code>. Therefore, in your playbook, ensure to add <code class="docutils literal notranslate"><span class="pre">{{artifact_value}}</span></code> for value substitution.</p>
-<p><img alt="screenshot" src="../_images/21.png" /></p>
+</li>
+</ul>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
-<section id="function-output">
-<h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
-<p>Results returned to the Resilient platform from an Ansible function are in the following payload pattern:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="sa">u</span><span class="s1">&#39;ansible_playbook_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;find_files2&#39;</span><span class="p">,</span>
-    <span class="sa">u</span><span class="s1">&#39;ansible_parameters&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;age=-2d; host_names=192.168.56.3,192.168.56.4; path=/usr/local/bin/&#39;</span>
-  <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-ansible&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-06-19 11:06:39&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;xxx.cambridge.ibm.com&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">12549</span>
-  <span class="p">},</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="sa">u</span><span class="s1">&#39;192.168.56.4&#39;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="s1">&#39;fatal: [192.168.56.4]: UNREACHABLE! =&gt; {&quot;changed&quot;: false, &quot;msg&quot;: &quot;timed out&quot;, &quot;unreachable&quot;: true}&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="s1">&#39;failed&#39;</span>
+<section id="cloud-pak-for-security">
+<h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
+<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
+<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following Cloud Pak guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
+<p>The app does not support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
+<p>Python 3.6, 3.9, and 3.11 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>ansible-runner==1.3.4; python_version==”3.6”</p></li>
+<li><p>ansible-runner~=2.3.6; python_version&gt;=”3.9”</p></li>
+<li><p>ansible==2.8.3; python_version==”3.6”</p></li>
+<li><p>ansible~=7.3.0; python_version&gt;=”3.9”</p></li>
+<li><p>python-daemon==2.3.2; python_version==”3.6”</p></li>
+<li><p>python-daemon~=3.0.1; python_version&gt;=”3.9”</p></li>
+<li><p>resilient_circuits&gt;=50.0.0</p></li>
+<li><p>resilient_lib&gt;=50.0.0</p></li>
+<li><p>pywinrm</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="app-configuration">
+<h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>artifact_dir</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;/full/path/to/artifacts/directory&gt;</span></code></p></td>
+<td><p>*Full path to artifacts directory. App Host deployments should use /tmp. *</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>artifact_retention_num</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p><em>Change this value to trim the collection of previous process run</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>runner_dir</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;/full/path/to/your/ansible/directory&gt;</span></code></p></td>
+<td><p>*Full path to the Ansible runner directory. App Host deployments should use /var/rescircuits/ansible. *</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-ansible-module">
+<h2>Function - Ansible Module<a class="headerlink" href="#function-ansible-module" title="Link to this heading">¶</a></h2>
+<p>Run an Ansible Module</p>
+<p><img alt="screenshot: fn-ansible-module " src="../_images/fn-ansible-module.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ansible_hosts</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>host name pattern or group for module execution</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ansible_module</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>command and parameters to run</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ansible_parameters</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">paths=/etc;depth=1</span></code></p></td>
+<td><p>parameters for the module separated by a semicolon (;)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;52&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u001b</span><span class="s2">[1;35m[WARNING]: No inventory was parsed, only implicit localhost is available</span><span class="se">\u001b</span><span class="s2">[0m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;successful&quot;</span>
     <span class="p">},</span>
-    <span class="sa">u</span><span class="s1">&#39;192.168.56.3&#39;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="s1">&#39;failed&#39;</span>
+    <span class="s2">&quot;localhost&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_ansible_no_log&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;changed&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;echo&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;World!&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;delta&quot;</span><span class="p">:</span> <span class="s2">&quot;0:00:00.062326&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-19 14:17:15.149417&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;invocation&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;module_args&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;_raw_params&quot;</span><span class="p">:</span> <span class="s2">&quot;echo Hello World!&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;_uses_shell&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;argv&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;chdir&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;creates&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;executable&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;expand_argument_vars&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;removes&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;stdin&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;stdin_add_newline&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;strip_empty_ends&quot;</span><span class="p">:</span> <span class="n">true</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rc&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-19 14:17:15.087091&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stderr&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stderr_lines&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;stdout&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stdout_lines&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Hello World!&quot;</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;successful&quot;</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;192.168.56.4&quot;: {&quot;detail&quot;: &quot;fatal: [192.168.56.4]: UNREACHABLE! =&gt; {</span><span class="se">\\</span><span class="s1">&quot;changed</span><span class="se">\\</span><span class="s1">&quot;: false, </span><span class="se">\\</span><span class="s1">&quot;msg</span><span class="se">\\</span><span class="s1">&quot;: </span><span class="se">\\</span><span class="s1">&quot;timed out</span><span class="se">\\</span><span class="s1">&quot;, </span><span class="se">\\</span><span class="s1">&quot;unreachable</span><span class="se">\\</span><span class="s1">&quot;: true}&quot;, &quot;summary&quot;: &quot;failed&quot;}, &quot;192.168.56.3&quot;: {&quot;detail&quot;: &quot;&quot;, &quot;summary&quot;: &quot;failed&quot;}&#39;</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;ansible_hosts&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ansible_module&quot;</span><span class="p">:</span> <span class="s2">&quot;command&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ansible_parameters&quot;</span><span class="p">:</span> <span class="s2">&quot;echo Hello World!&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">11817</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ansible&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-19 14:17:15&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The following Post-Processing Script cleans up the payload and adds it as an incident note:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;No results returned on parameters: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">])</span>
-<span class="k">else</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">item</span><span class="p">][</span><span class="s1">&#39;detail&#39;</span><span class="p">]))</span>
-
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">ansible_hosts</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ansible_hosts&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ansible_module</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ansible_module&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ansible_parameters</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ansible_module_arguments&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">module_results</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Running Ansible module: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ansible_module</span><span class="si">}</span><span class="se">\n</span><span class="s2">Parameters: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">No results returned.&quot;</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{}):</span>
+      <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Running Ansible module: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Parameters: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Results: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ansible_module</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;detail&#39;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running Ansible Module: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ansible_module</span><span class="si">}</span><span class="s2"> failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-ansible-playbook">
+<h2>Function - Ansible Playbook<a class="headerlink" href="#function-ansible-playbook" title="Link to this heading">¶</a></h2>
+<p>Ansible is simple IT engine for automation, it is designed for manage many systems, rather than just one at a time.</p>
+<p><img alt="screenshot: fn-ansible-playbook " src="../_images/fn-ansible-playbook.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ansible_parameters</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">age=30;paths=C:\Users\Administrator</span></code></p></td>
+<td><p>parameters for the playbook separated by a semicolon (;)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ansible_playbook_name</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_ansible_no_log&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;changed&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;echo&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Hello&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;delta&quot;</span><span class="p">:</span> <span class="s2">&quot;0:00:00.012063&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-19 14:31:34.888730&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;invocation&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;module_args&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;_raw_params&quot;</span><span class="p">:</span> <span class="s2">&quot;echo Hello&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;_uses_shell&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;argv&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;chdir&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;creates&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;executable&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;expand_argument_vars&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;removes&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;stdin&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;stdin_add_newline&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;strip_empty_ends&quot;</span><span class="p">:</span> <span class="n">true</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rc&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-19 14:31:34.876667&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stderr&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stderr_lines&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;stdout&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stdout_lines&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Hello&quot;</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;successful&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;63&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u001b</span><span class="s2">[1;35mthe implicit localhost does not match </span><span class="se">\u0027</span><span class="s2">all</span><span class="se">\u0027\u001b</span><span class="s2">[0m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;successful&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;ansible_parameters&quot;</span><span class="p">:</span> <span class="s2">&quot;command=echo Hello&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ansible_playbook_name&quot;</span><span class="p">:</span> <span class="s2">&quot;playbook2&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">11915</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ansible&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-19 14:31:35&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">ansible_playbook_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ansible_playbook_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">artifact_value</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;artifact_value=</span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ansible_playbook_variables&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ansible_parameters</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ansible_playbook_variables&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">artifact_value</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ansible_parameters</span> <span class="o">=</span> <span class="n">artifact_value</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">playbook_results</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;No results returned on parameters: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">))</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{}):</span>
+      <span class="n">note</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;detail&#39;</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running Ansible playbook: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ansible_playbook_name</span><span class="si">}</span><span class="s2"> failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
 <p>For very large data results, it may not be practical to save the results as a Note. Instead, the fn_utilities function <code class="docutils literal notranslate"><span class="pre">Utilities:</span> <span class="pre">String</span> <span class="pre">to</span> <span class="pre">Attachment</span></code> can be added to your workflow to send your Ansible results to an attachment. In this case, workflow properties are used to retain the results of this function for use by downstream functions.</p>
 </section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ansible: Run a Module - Example (PB)</p></td>
+<td><p>Run an Ansible module for ad-hoc operations</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ansible: Run a Playbook - Example (PB)</p></td>
+<td><p>Run a playbook from an Incident with specific hosts and parameters</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Ansible: Run a Playbook from an Artifact - Example (PB)</p></td>
+<td><p>Merge artifact_value with Ansible parameters to run a Playbook</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
 <section id="considerations">
 <h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -665,9 +1032,9 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 <li><p>Playbook and artifact names must not contain unicode characters. This is a limitation in the ansible-runner package ( &lt;= 2.8.1) which should be resolved in a future release.</p></li>
 <li><p>The app.config setting <code class="docutils literal notranslate"><span class="pre">artifact_retention_num</span></code> is available to clean up previous execution files older than the specified days. Use a value of 0 to specify no deletion.</p></li>
 <li><p>Consider using Rule Activity Field select lists for Ansible module name and parameter restrictions. This ensures that only specific commands are used for ad-hoc executions.</p></li>
-<li><p>Also consider using Rule Activity Field select lists for Ansible playbook names for similar reasons to ensure only specific playbooks are supported through Resilient.</p></li>
+<li><p>Also consider using Rule Activity Field select lists for Ansible playbook names for similar reasons to ensure only specific playbooks are supported through SOAR.</p></li>
 <li><p>The workflow associated with a module or playbook function will remain blocked until all host executions are complete and the results are returned. The ansible-runner <code class="docutils literal notranslate"><span class="pre">Asynchronous</span></code> operation corrects this restriction but remains a future enhancement.</p></li>
-<li><p>Playbooks should use the <code class="docutils literal notranslate"><span class="pre">debug</span></code> statement to return findings back to Resilient. The example below runs the <code class="docutils literal notranslate"><span class="pre">find</span></code> module, returning the file found using the debug statement.</p></li>
+<li><p>Playbooks should use the <code class="docutils literal notranslate"><span class="pre">debug</span></code> statement to return findings back to SOAR. The example below runs the <code class="docutils literal notranslate"><span class="pre">find</span></code> module, returning the file found using the debug statement.</p></li>
 </ul>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{host_names}}&quot;</span>
 <span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
@@ -684,6 +1051,7 @@ are used with any file defined in <code class="docutils literal notranslate"><sp
 </pre></div>
 </div>
 </section>
+<hr class="docutils" />
 <section id="app-host-sshpass-support">
 <h2>App Host sshPass Support<a class="headerlink" href="#app-host-sshpass-support" title="Link to this heading">¶</a></h2>
 <p>You may find that you require the sshPass package for your use of Ansible. This package uses the <a class="reference external" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html">GPLv2 license</a> and
@@ -691,13 +1059,19 @@ this license restricts IBM from building and distributing a container under our 
 <p>If you require sshPass, you can build your own container by modifying the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> in the fn_ansible-x.x.x.tar.gz archive and uncomment the following
 RUN command. See the documentation on <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html">hosting your own container registry for App Host</a>
 for the use of a private registry with App Host.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## ---- section for changes ----</span>
-<span class="c1"># uncomment to support sshpass in your container</span>
-<span class="c1">#RUN wget http://mirror.pit.teraswitch.com/fedora/epel/epel-release-latest-8.noarch.rpm &amp;&amp; \</span>
-<span class="c1">#    rpm -ivh epel-release-latest-8.noarch.rpm &amp;&amp; \</span>
-<span class="c1">#    yum --enablerepo=epel -y install sshpass</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment to support sshpass in your privately built container</span>
+<span class="c1">#yum install -y sshpass</span>
 </pre></div>
 </div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
+<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
+<p>This is a IBM supported App. For assistance, see <a class="reference external" href="https://ibm.com/mysupport">https://ibm.com/mysupport</a>.</p>
+</section>
 </section>
 </section>
 
@@ -756,28 +1130,44 @@ for the use of a private registry with App Host.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Ansible</a><ul>
+<li><a class="reference internal" href="#">Ansible for SOAR</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#about-this-package">About This Package:</a></li>
-<li><a class="reference internal" href="#history">History</a></li>
-<li><a class="reference internal" href="#features">Features:</a><ul>
-<li><a class="reference internal" href="#package-components">Package Components</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#changes">1.2.0 Changes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#app-host-installation">App Host Installation</a><ul>
-<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#ansible-playbooks">Ansible Playbooks</a></li>
 <li><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#integration-server-installation">Integration Server Installation</a><ul>
 <li><a class="reference internal" href="#prerequisites">Prerequisites:</a></li>
-<li><a class="reference internal" href="#sample-workflow">Sample Workflow:</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#function-inputs">Function Inputs:</a></li>
-<li><a class="reference internal" href="#function-output">Function Output:</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-ansible-module">Function - Ansible Module</a></li>
+<li><a class="reference internal" href="#function-ansible-playbook">Function - Ansible Playbook</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#considerations">Considerations</a></li>
 <li><a class="reference internal" href="#app-host-sshpass-support">App Host sshPass Support</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
