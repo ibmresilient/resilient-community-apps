@@ -6,7 +6,7 @@ Usage: resilient-circuits selftest -l fn_ansible
 """
 
 import logging
-import time
+from time import time
 from fn_ansible.lib.ansible_api import run_playbook
 
 log = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ def selftest_function(opts):
 
     try:
         selftest_results = run_playbook(
-            id=time.time(),
+            id=time(),
             private_data_dir=runner_dir,
             artifact_dir=artifact_dir,
             module_name=ANSIBLE_PING,
@@ -39,14 +39,14 @@ def selftest_function(opts):
             extravars={"ansible_connection": "local"}
         )
 
-        if selftest_results['localhost'].get('summary') == "successful":
+        if selftest_results.get('localhost', {}).get('summary') == "successful":
             return {
                 "state": "success"
             }
         else:
             return {
                 "state": "failure",
-                "reason": "returned summary: {}".format(selftest_results['localhost'].get('summary'))
+                "reason": "returned summary: {}".format(selftest_results.get('localhost', {}).get('summary'))
             }
 
     except Exception as err:
