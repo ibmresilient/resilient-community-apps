@@ -1,0 +1,272 @@
+{
+  "data": {
+    "vulnerabilityFindings": {
+      "nodes": [
+        {
+          "id": "5e95ff50",
+          "portalUrl": "https://test.com",
+          "name": "CVE-2020-35522",
+          "CVEDescription": "In LibTIFF, there is a memory malloc failure in tif_pixarlog.c. A crafted TIFF document can lead to an abort, resulting in a remote denial of service attack.",
+          "CVSSSeverity": "MEDIUM",
+          "score": 5.5,
+          "exploitabilityScore": 1.8,
+          "impactScore": 3.6,
+          "dataSourceName": null,
+          "hasExploit": false,
+          "hasCisaKevExploit": false,
+          "status": "OPEN",
+          "vendorSeverity": "MEDIUM",
+          "firstDetectedAt": "2022-05-01T11:36:10.063767Z",
+          "lastDetectedAt": "2024-04-07T20:06:16Z",
+          "resolvedAt": null,
+          "description": "The package `libtiff` version `4.0.3-35.amzn2` was detected in `YUM package manager` on a machine running `Amazon 2 (Karoo)` is vulnerable to `CVE-2020-35522`, which exists in versions `< 4.0.3-35.amzn2.0.1`.\n\nThe vulnerability was found in the [Official Amazon Linux Security Advisories](https://alas.aws.amazon.com/AL2/ALAS-2022-1780.html) with vendor severity: `Medium` ([NVD](https://nvd.nist.gov/vuln/detail/CVE-2020-35522) severity: `Medium`).\n\nThe vulnerability can be remediated by updating the package to version `4.0.3-35.amzn2.0.1` or higher, using `yum update libtiff`.",
+          "remediation": "yum update libtiff",
+          "detailedName": "libtiff",
+          "version": "4.0.3-35.amzn2",
+          "fixedVersion": "4.0.3-35.amzn2.0.1",
+          "detectionMethod": "PACKAGE",
+          "link": "https://alas.aws.amazon.com",
+          "locationPath": null,
+          "resolutionReason": null,
+          "epssSeverity": "MEDIUM",
+          "epssPercentile": 51.3,
+          "epssProbability": 0.2,
+          "validatedInRuntime": null,
+          "layerMetadata": null,
+          "projects": [
+            {
+              "id": "83b76efe",
+              "name": "Project 2",
+              "slug": "project-2",
+              "businessUnit": "",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            },
+            {
+              "id": "af52828c",
+              "name": "project 4",
+              "slug": "project-4",
+              "businessUnit": "Dev",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            },
+            {
+              "id": "d6ac50bb",
+              "name": "Project1",
+              "slug": "project1",
+              "businessUnit": "Dev",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            }
+          ],
+          "ignoreRules": null,
+          "vulnerableAsset": {
+            "id": "c828de0d",
+            "type": "VIRTUAL_MACHINE",
+            "name": "test-4",
+            "region": "us-east-1",
+            "providerUniqueId": "arn:aws:ec2:us-east-1",
+            "cloudProviderURL": "https://us-east-1.console.aws.amazon.com",
+            "cloudPlatform": "AWS",
+            "status": "Inactive",
+            "subscriptionName": "wiz-integrations",
+            "subscriptionExternalId": "998231069301",
+            "subscriptionId": "94e76baa",
+            "tags": {
+              "Name": "test-4"
+            },
+            "hasLimitedInternetExposure": false,
+            "hasWideInternetExposure": false,
+            "isAccessibleFromVPN": null,
+            "isAccessibleFromOtherVnets": null,
+            "isAccessibleFromOtherSubscriptions": null,
+            "operatingSystem": "Linux",
+            "ipAddresses": [
+              "172.31.29.61"
+            ],
+            "imageName": "amzn2-ami-hvm"
+          }
+        },
+        {
+          "id": "84e6f460",
+          "portalUrl": "https://test.com",
+          "name": "CVE-2022-0909",
+          "CVEDescription": "Divide By Zero error in tiffcrop in libtiff 4.3.0 allows attackers to cause a denial-of-service via a crafted tiff file. For users that compile libtiff from sources, the fix is available with commit f8d0f9aa.",
+          "CVSSSeverity": "MEDIUM",
+          "score": 5.5,
+          "exploitabilityScore": 1.8,
+          "impactScore": 3.6,
+          "dataSourceName": null,
+          "hasExploit": false,
+          "hasCisaKevExploit": false,
+          "status": "OPEN",
+          "vendorSeverity": "MEDIUM",
+          "firstDetectedAt": "2022-05-01T11:36:10.067346Z",
+          "lastDetectedAt": "2024-04-07T20:06:16Z",
+          "resolvedAt": null,
+          "description": "The package `libtiff` version `4.0.3-35.amzn2` was detected in `YUM package manager` on a machine running `Amazon 2 (Karoo)` is vulnerable to `CVE-2022-0909`, which exists in versions `< 4.0.3-35.amzn2.0.1`.\n\nThe vulnerability was found in the [Official Amazon Linux Security Advisories](https://alas.aws.amazon.com/AL2/ALAS-2022-1780.html) with vendor severity: `Medium` ([NVD](https://nvd.nist.gov/vuln/detail/CVE-2022-0909) severity: `Medium`).\n\nThe vulnerability can be remediated by updating the package to version `4.0.3-35.amzn2.0.1` or higher, using `yum update libtiff`.",
+          "remediation": "yum update libtiff",
+          "detailedName": "libtiff",
+          "version": "4.0.3-35.amzn2",
+          "fixedVersion": "4.0.3-35.amzn2.0.1",
+          "detectionMethod": "PACKAGE",
+          "link": "https://alas.aws.amazon.com",
+          "locationPath": null,
+          "resolutionReason": null,
+          "epssSeverity": "MEDIUM",
+          "epssPercentile": 52.7,
+          "epssProbability": 0.2,
+          "validatedInRuntime": null,
+          "layerMetadata": null,
+          "projects": [
+            {
+              "id": "83b76efe",
+              "name": "Project 2",
+              "slug": "project-2",
+              "businessUnit": "",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            },
+            {
+              "id": "af52828c",
+              "name": "project 4",
+              "slug": "project-4",
+              "businessUnit": "Dev",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            },
+            {
+              "id": "d6ac50bb",
+              "name": "Project1",
+              "slug": "project1",
+              "businessUnit": "Dev",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            }
+          ],
+          "ignoreRules": null,
+          "vulnerableAsset": {
+            "id": "c828de0d",
+            "type": "VIRTUAL_MACHINE",
+            "name": "test-4",
+            "region": "us-east-1",
+            "providerUniqueId": "arn:aws:ec2:us-east-1",
+            "cloudProviderURL": "https://us-east-1.console.aws.amazon.com",
+            "cloudPlatform": "AWS",
+            "status": "Inactive",
+            "subscriptionName": "wiz-integrations",
+            "subscriptionExternalId": "998231069301",
+            "subscriptionId": "94e76baa",
+            "tags": {
+              "Name": "test-4"
+            },
+            "hasLimitedInternetExposure": false,
+            "hasWideInternetExposure": false,
+            "isAccessibleFromVPN": null,
+            "isAccessibleFromOtherVnets": null,
+            "isAccessibleFromOtherSubscriptions": null,
+            "operatingSystem": "Linux",
+            "ipAddresses": [
+              "172.31.29.61"
+            ],
+            "imageName": "amzn2-ami-hvm"
+          }
+        },
+        {
+          "id": "be844291",
+          "portalUrl": "https://test.com",
+          "name": "CVE-2016-9532",
+          "CVEDescription": "Integer overflow in the writeBufferToSeparateStrips function in tiffcrop.c in LibTIFF before 4.0.7 allows remote attackers to cause a denial of service (out-of-bounds read) via a crafted tif file.",
+          "CVSSSeverity": "MEDIUM",
+          "score": 5.5,
+          "exploitabilityScore": 1.8,
+          "impactScore": 3.6,
+          "dataSourceName": null,
+          "hasExploit": false,
+          "hasCisaKevExploit": false,
+          "status": "OPEN",
+          "vendorSeverity": "MEDIUM",
+          "firstDetectedAt": "2022-05-01T11:36:10.078415Z",
+          "lastDetectedAt": "2024-04-07T20:06:16Z",
+          "resolvedAt": null,
+          "description": "The package `libtiff` version `4.0.3-35.amzn2` was detected in `YUM package manager` on a machine running `Amazon 2 (Karoo)` is vulnerable to `CVE-2016-9532`, which exists in versions `< 4.0.3-35.amzn2.0.1`.\n\nThe vulnerability was found in the [Official Amazon Linux Security Advisories](https://alas.aws.amazon.com/AL2/ALAS-2022-1780.html) with vendor severity: `Medium` ([NVD](https://nvd.nist.gov/vuln/detail/CVE-2016-9532) severity: `Medium`).\n\nThe vulnerability can be remediated by updating the package to version `4.0.3-35.amzn2.0.1` or higher, using `yum update libtiff`.",
+          "remediation": "yum update libtiff",
+          "detailedName": "libtiff",
+          "version": "4.0.3-35.amzn2",
+          "fixedVersion": "4.0.3-35.amzn2.0.1",
+          "detectionMethod": "PACKAGE",
+          "link": "https://alas.aws.amazon.com",
+          "locationPath": null,
+          "resolutionReason": null,
+          "epssSeverity": "HIGH",
+          "epssPercentile": 81.4,
+          "epssProbability": 0.8,
+          "validatedInRuntime": null,
+          "layerMetadata": null,
+          "projects": [
+            {
+              "id": "83b76efe",
+              "name": "Project 2",
+              "slug": "project-2",
+              "businessUnit": "",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            },
+            {
+              "id": "af52828c",
+              "name": "project 4",
+              "slug": "project-4",
+              "businessUnit": "Dev",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            },
+            {
+              "id": "d6ac50bb",
+              "name": "Project1",
+              "slug": "project1",
+              "businessUnit": "Dev",
+              "riskProfile": {
+                "businessImpact": "MBI"
+              }
+            }
+          ],
+          "ignoreRules": null,
+          "vulnerableAsset": {
+            "id": "c828de0d",
+            "type": "VIRTUAL_MACHINE",
+            "name": "test-4",
+            "region": "us-east-1",
+            "providerUniqueId": "arn:aws:ec2:us-east-1",
+            "cloudProviderURL": "https://us-east-1.console.aws.amazon.com",
+            "cloudPlatform": "AWS",
+            "status": "Inactive",
+            "subscriptionName": "wiz-integrations",
+            "subscriptionExternalId": "998231069301",
+            "subscriptionId": "94e76baa",
+            "tags": {
+              "Name": "test-4"
+            },
+            "hasLimitedInternetExposure": false,
+            "hasWideInternetExposure": false,
+            "isAccessibleFromVPN": null,
+            "isAccessibleFromOtherVnets": null,
+            "isAccessibleFromOtherSubscriptions": null,
+            "operatingSystem": "Linux",
+            "ipAddresses": [
+              "172.31.29.61"
+            ],
+            "imageName": "amzn2-ami-hvm"
+          }
+        }
+      ]
+    }
+  }
+}
