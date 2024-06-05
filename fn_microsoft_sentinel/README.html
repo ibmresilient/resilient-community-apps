@@ -433,14 +433,17 @@
 <ul>
 <li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
 <li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
-<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#function---sentinel-add-incident-comment"><span class="xref myst">Function - Sentinel Add Incident Comment</span></a></p></li>
 <li><p><a class="reference internal" href="#function---sentinel-get-incident-alerts"><span class="xref myst">Function - Sentinel Get Incident Alerts</span></a></p></li>
 <li><p><a class="reference internal" href="#function---sentinel-get-incident-comments"><span class="xref myst">Function - Sentinel Get Incident Comments</span></a></p></li>
 <li><p><a class="reference internal" href="#function---sentinel-get-incident-entities"><span class="xref myst">Function - Sentinel Get Incident Entities</span></a></p></li>
-<li><p><a class="reference internal" href="#function---sentinel-update-incident"><span class="xref myst">Function - Sentinel Update Incident</span></a></p></li>
+<li><p><a class="reference internal" href="#function---sentinel-update-incident"><span class="xref myst">Function - Sentinel Update Incident</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#data-table---sentinel-incident-alerts"><span class="xref myst">Data Table - Sentinel Incident Alerts</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---sentinel-incident-entities"><span class="xref myst">Data Table - Sentinel Incident Entities</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
@@ -453,6 +456,10 @@
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -462,44 +469,48 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.0.0</p></td>
+<tr class="row-even"><td><p>2.1.0</p></td>
+<td><p>03/2024</p></td>
+<td><p>Add support for multi-tenancy.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.0.0</p></td>
 <td><p>01/2024</p></td>
 <td><p><ul><li>Bug fix in jinja template, “incident_update_template.jinja”, for escaping double quotation mark when rendering in json.</li><li>Update jinja templates to use values rather than IDs.</li><li>Add new setting in the app.config to set api-version.</li><li>Add the ability to use a jinja template as the poller incident filter.</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>07/2023</p></td>
 <td><p>Add config setting to not close SOAR case was Sentinel incident is closed</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>04/2023</p></td>
 <td><p>Update function ‘Sentinel Update Incident’</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.4</p></td>
+<tr class="row-even"><td><p>1.0.4</p></td>
 <td><p>06/2022</p></td>
 <td><p>Several template fixes for tags (labels) and severity</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.3</p></td>
+<tr class="row-odd"><td><p>1.0.3</p></td>
 <td><p>04/2022</p></td>
 <td><p>Support for app.config verify and cert parameters</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
 <td><p>02/2022</p></td>
 <td><p>Bug fix in some situations updating Sentinel from SOAR</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>11/2021</p></td>
 <td><p>Minor bug fixes and datatable improvements</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>08/2021</p></td>
 <td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<section id="v2-0-0">
-<h3>v2.0.0<a class="headerlink" href="#v2-0-0" title="Link to this heading">¶</a></h3>
-<p>When upgrading from a previous version to v2.0.0, manually update your app.config file to add the <code class="docutils literal notranslate"><span class="pre">api_version</span></code> parameters to your <code class="docutils literal notranslate"><span class="pre">[fn_microsoft_sentinel]</span></code> section and <code class="docutils literal notranslate"><span class="pre">poller_filters_template</span></code> to the <code class="docutils literal notranslate"><span class="pre">[fn_microsoft_sentinel:profile_a]</span></code> section. The documentation on it’s use is in <a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a>.</p>
+<section id="v2-1-0">
+<h3>v2.1.0<a class="headerlink" href="#v2-1-0" title="Link to this heading">¶</a></h3>
+<p>When upgrading from a previous version to v2.1.0, manually update your app.config to be able to use the multi-tenant capability. The app.config changes are documented here <a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a>. The previous version of the app.config from versions before 2.1.0 are compatible with version 2.1.0+.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -517,6 +528,7 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <li><p>Retrieve Sentinel Incident alert entities as artifacts and data table rows</p></li>
 <li><p>Sync comments to and from Sentinel Incidents</p></li>
 <li><p>Support editable templates for field mapping between the two systems</p></li>
+<li><p>Supports configuring multiple Sentinel servers</p></li>
 </ul>
 </section>
 </section>
@@ -526,17 +538,17 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
-<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
-<p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=49.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=50.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -578,7 +590,7 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
 <li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -599,7 +611,7 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>jinja2~=3.1.0</p></li>
-<li><p>resilient_circuits&gt;=49.0.0</p></li>
+<li><p>resilient_circuits&gt;=50.0.0</p></li>
 <li><p>simplejson~=3.19.0</p></li>
 </ul>
 </section>
@@ -655,20 +667,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://management.azure.com</span></code></p></td>
 <td><p><em>URL for Azure access. This field is typically not changed</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>tenant_id</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">aaa-bbb-ccc</span></code></p></td>
-<td><p><em>Your tenant_id</em></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>client_id</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">aaa-bbb-ddd</span></code></p></td>
-<td><p><em>Your App Id or client_id</em></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>app_secret</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">aaa-bbb-eee</span></code></p></td>
-<td><p><em>Your app secret</em></p></td>
+<tr class="row-odd"><td><p><strong>ms_sentinel_labels</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">label1</span></code></p></td>
+<td><p><em>A comma separated list of label(s) to access</em></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>polling_lookback</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
@@ -682,25 +684,20 @@ Additional package dependencies may exist for each of these packages:</p>
 </tr>
 <tr class="row-even"><td><p><strong>api_version</strong></p></td>
 <td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2023-11-01</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2023-11-01-preview</span></code></p></td>
 <td><p><em>API version to use when making API calls to Microsoft Sentinel. Sentinel API versions can be found https://learn.microsoft.com/en-us/rest/api/securityinsights/api-versions</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>sentinel_profiles</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">profile_a</span></code></p></td>
-<td><p><em>Comma separated list of profile(s) to access based on subscription id, resource group name and workspace</em></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>https_proxy</strong></p></td>
+<tr class="row-odd"><td><p><strong>https_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https:/your.proxy.com</span></code></p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>http_proxy</strong></p></td>
+<tr class="row-even"><td><p><strong>http_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">http:/your.proxy.com</span></code></p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>verify</strong></p></td>
+<tr class="row-odd"><td><p><strong>verify</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 <td><p><em>verify= false or /path/to/client_certificate.pem</em></p></td>
@@ -708,32 +705,105 @@ Additional package dependencies may exist for each of these packages:</p>
 </tbody>
 </table>
 </div>
-<p>For each profile:
-| Config | Required | Example | Description |
-| —— | :——: | ——- | ———– |<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">**subscription_id**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span></code>aaa-bbb-fff<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">*subscription_id</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access</span> <span class="pre">*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**workspace_name**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">*workspace</span> <span class="pre">name</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access.*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**resource_groupname**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">*resource</span> <span class="pre">group</span> <span class="pre">for</span> <span class="pre">incident</span> <span class="pre">access.*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**new_incident_filters**</span> <span class="pre">|</span> <span class="pre">No</span> <span class="pre">|</span></code>”status”: [“New”, “Active”],”severity”: [“High”, “Medium”,”Low”]<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">*Set</span> <span class="pre">of</span> <span class="pre">filters</span> <span class="pre">to</span> <span class="pre">apply</span> <span class="pre">when</span> <span class="pre">escalating</span> <span class="pre">incidents</span> <span class="pre">to</span> <span class="pre">SOAR.</span> <span class="pre">Incidents</span> <span class="pre">not</span> <span class="pre">matching</span> <span class="pre">the</span> <span class="pre">criteria</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">synchronized.</span> <span class="pre">In</span> <span class="pre">this</span> <span class="pre">example,</span> <span class="pre">both</span> <span class="pre">a</span> <span class="pre">match</span> <span class="pre">of</span> <span class="pre">status</span> <span class="pre">and</span> <span class="pre">severity</span> <span class="pre">would</span> <span class="pre">be</span> <span class="pre">required.</span> <span class="pre">*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**poller_filters_template**</span> <span class="pre">|</span> <span class="pre">No</span> <span class="pre">|</span> <span class="pre">/var/rescircuits/poller_filters_template.jinja</span> <span class="pre">|</span> <span class="pre">Customer</span> <span class="pre">supplied</span> <span class="pre">template</span> <span class="pre">for</span> <span class="pre">filters</span> <span class="pre">to</span> <span class="pre">apply</span> <span class="pre">to</span> <span class="pre">new</span> <span class="pre">Sentinel</span> <span class="pre">incidents</span> <span class="pre">found</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">poller.</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**max_alerts**</span> <span class="pre">|</span> <span class="pre">Yes</span> <span class="pre">|</span> <span class="pre">10</span> <span class="pre">|</span> <span class="pre">*limit</span> <span class="pre">the</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">alerts</span> <span class="pre">per</span> <span class="pre">sentinel</span> <span class="pre">incident</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">first</span> <span class="pre">n</span> <span class="pre">alerts</span> <span class="pre">or</span> <span class="pre">leave</span> <span class="pre">blank</span> <span class="pre">for</span> <span class="pre">all</span> <span class="pre">alerts*</span> <span class="pre">|</span> <span class="pre">|</span> <span class="pre">**close_soar_case**</span> <span class="pre">|</span> <span class="pre">No</span> <span class="pre">|</span></code>True` | Whether the SOAR case should be closed when its linked Sentinel incident is closed. If set to False the linked SOAR case will be updated, but not closed. |
-| <strong>create_incident_template</strong> | No | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
-| <strong>update_incident_template</strong> | No | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
-| <strong>close_incident_template</strong> | No | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
-| <strong>sentinel_update_incident_template</strong> | No | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the SOAR incident is updated |
-| <strong>sentinel_close_incident_template</strong> | No | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the SOAR incident is closed |</p>
+<p>For each labeled server:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>tenant_id</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aaa-bbb-ccc</span></code></p></td>
+<td><p><em>Your tenant_id</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>client_id</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aaa-bbb-ddd</span></code></p></td>
+<td><p><em>Your App Id or client_id</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>app_secret</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aaa-bbb-eee</span></code></p></td>
+<td><p><em>Your app secret</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>subscription_id</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aaa-bbb-fff</span></code></p></td>
+<td><p>*subscription_id for incident access *</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>workspace_name</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>``</p></td>
+<td><p><em>workspace name for incident access.</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>resource_groupname</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>``</p></td>
+<td><p><em>resource group for incident access.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>new_incident_filters</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;status&quot;:</span> <span class="pre">[&quot;New&quot;,</span> <span class="pre">&quot;Active&quot;],&quot;severity&quot;:</span> <span class="pre">[&quot;High&quot;,</span> <span class="pre">&quot;Medium&quot;,&quot;Low&quot;]</span></code></p></td>
+<td><p>*Set of filters to apply when escalating incidents to SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. *</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>poller_filters_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>/var/rescircuits/poller_filters_template.jinja</p></td>
+<td><p>Customer supplied template for filters to apply to new Sentinel incidents found by the poller.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>max_alerts</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>10</p></td>
+<td><p><em>limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>close_soar_case</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Whether the SOAR case should be closed when its linked Sentinel incident is closed. If set to False the linked SOAR case will be updated, but not closed.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>create_incident_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>/var/rescircuits/create_incident_template.jinja</p></td>
+<td><p>Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>update_incident_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>/var/rescircuits/update_incident_template.jinja</p></td>
+<td><p>Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>close_incident_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>/var/rescircuits/close_incident_template.jinja</p></td>
+<td><p>Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sentinel_update_incident_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>/var/rescircuits/update_sentinel_incident_template.jinja</p></td>
+<td><p>Customer supplied template for updating a sentinel incident when the SOAR incident is updated</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sentinel_close_incident_template</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>/var/rescircuits/update_sentinel_incident_template.jinja</p></td>
+<td><p>Customer supplied template for closing a sentinel incident when the SOAR incident is closed</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>See the section below for examples of the templates.</p>
-</section>
-<section id="custom-layouts">
-<h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>Import the Data Tables and Custom Fields like the screenshot below:</p>
-<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts16.png" /></p>
-<p>The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentinel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.</p>
-</li>
-</ul>
 <hr class="docutils" />
 <p><img alt="screenshot: function-list " src="../_images/function_list.png" /></p>
 </section>
 </section>
 <section id="function-sentinel-add-incident-comment">
 <h2>Function - Sentinel Add Incident Comment<a class="headerlink" href="#function-sentinel-add-incident-comment" title="Link to this heading">¶</a></h2>
-<p>Create a comment for a given Sentinel incident. This is used with an rule to automatically sync
+<p>Create a comment for a given Sentinel incident. This is used by a playbook to automatically sync
 SOAR Comments with Sentinel.</p>
+<p><img alt="screenshot: fn-sentinel-add-incident-comment " src="../_images/fn-sentinel-add-incident-comment.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -751,19 +821,25 @@ SOAR Comments with Sentinel.</p>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Comment to add to the Sentinel Incident.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>This is information is captured in a custom incident field.</p></td>
+<td><p>The ID of a Sentinel Incident.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_label</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>This is information is captured in a custom incident field.</p></td>
+<td><p>Label give to the Sentinel server in the app.config. Example in app.config [fn_microsoft_sentinel:label1] the label here is label1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The Sentinel profile name.</p></td>
 </tr>
 </tbody>
 </table>
@@ -777,8 +853,9 @@ SOAR Comments with Sentinel.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/6c98642b-7248-4b4d-994e-32443f100e78/Comments/45cee46a-c1c3-11ed-89ef-fa89897771d7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;45cee46a-c1c3-11ed-89ef-fa89897771d7&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">1f017068-0000-0100-0000-6616d57f0000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81/Comments/42acd50c-f765-11ee-ab89-fa89897771d8&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;42acd50c-f765-11ee-ab89-fa89897771d8&quot;</span><span class="p">,</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -786,22 +863,24 @@ SOAR Comments with Sentinel.</p>
         <span class="s2">&quot;objectId&quot;</span><span class="p">:</span> <span class="s2">&quot;fb5360be-0c6a-4260-ae69-9b07dd735441&quot;</span><span class="p">,</span>
         <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13T17:19:57.3027524Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;From IBM SOAR:</span><span class="se">\n</span><span class="s2">bye&quot;</span>
+      <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:59.058255Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;lastModifiedTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:59.058255Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;From IBM SOAR:</span><span class="se">\n</span><span class="s2">hello&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Incidents/Comments&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;bye&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6c98642b-7248-4b4d-994e-32443f100e78&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;profile_a&quot;</span>
+    <span class="s2">&quot;sentinel_incident_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1497</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13 13:19:57&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:07:59&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -813,26 +892,30 @@ SOAR Comments with Sentinel.</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_incident_comment</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_number</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Date</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import datetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">comment_results</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
   <span class="c1"># Get the current time</span>
-  <span class="n">dt_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+  <span class="n">dt_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
   <span class="c1"># note.text = f&quot;&lt;b&gt;Sent to Sentinel at {dt_now}&lt;/b&gt;&lt;br&gt;{str(note.text.content)}&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Comment Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -842,6 +925,7 @@ SOAR Comments with Sentinel.</p>
 <section id="function-sentinel-get-incident-alerts">
 <h2>Function - Sentinel Get Incident Alerts<a class="headerlink" href="#function-sentinel-get-incident-alerts" title="Link to this heading">¶</a></h2>
 <p>Sentinel Get Incident Alerts</p>
+<p><img alt="screenshot: fn-sentinel-get-incident-alerts " src="../_images/fn-sentinel-get-incident-alerts.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -859,13 +943,19 @@ SOAR Comments with Sentinel.</p>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The ID of a Sentinel Incident.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_label</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Label give to the Sentinel server in the app.config. Example in app.config [fn_microsoft_sentinel:label1] the label here is label1.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The Sentinel profile name.</p></td>
 </tr>
 </tbody>
 </table>
@@ -881,51 +971,59 @@ SOAR Comments with Sentinel.</p>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/8a2fe554-9e4e-8298-cd70-4159a5494b7e&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">,</span>
         <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;SecurityAlert&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;8a2fe554-9e4e-8298-cd70-4159a5494b7e&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">,</span>
         <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
           <span class="s2">&quot;additionalData&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;AlertMessageEnqueueTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-12T20:52:26.593Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;OriginalProductComponentName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;AlertMessageEnqueueTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:49.911Z&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;MTP_Classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;OriginalProductComponentName&quot;</span><span class="p">:</span> <span class="s2">&quot;Databases&quot;</span><span class="p">,</span>
             <span class="s2">&quot;OriginalProductName&quot;</span><span class="p">:</span> <span class="s2">&quot;Azure Security Center&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;StoreAlertPublisher&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">Succeeded</span><span class="se">\&quot;</span><span class="s2">:true,</span><span class="se">\&quot;</span><span class="s2">Reason</span><span class="se">\&quot;</span><span class="s2">:null,</span><span class="se">\&quot;</span><span class="s2">PublishTime</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">2023-03-12T20:52:03.3552179Z</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;effectiveSubscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;a4b7e24a-xxxx-4d84-xxxx-89e99b336784&quot;</span>
+            <span class="s2">&quot;StoreAlertPublisher&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">Succeeded</span><span class="se">\&quot;</span><span class="s2">:true,</span><span class="se">\&quot;</span><span class="s2">Reason</span><span class="se">\&quot;</span><span class="s2">:null,</span><span class="se">\&quot;</span><span class="s2">PublishTime</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">2024-04-10T15:29:41.6565662Z</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;effectiveSubscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
           <span class="p">},</span>
-          <span class="s2">&quot;alertDisplayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Traffic detected from IP addresses recommended for blocking&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;alertLink&quot;</span><span class="p">:</span> <span class="s2">&quot;https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034/subscriptionId/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroup/demoassets/referencedFrom/alertDeepLink/location/centralus&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;alertType&quot;</span><span class="p">:</span> <span class="s2">&quot;Network_TrafficFromUnrecommendedIP&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;compromisedEntity&quot;</span><span class="p">:</span> <span class="s2">&quot;logforwarder&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;alertDisplayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspected brute-force attack attempt&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;alertLink&quot;</span><span class="p">:</span> <span class="s2">&quot;https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e/subscriptionId/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroup/DemoAssets/referencedFrom/alertDeepLink/location/centralus&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;alertType&quot;</span><span class="p">:</span> <span class="s2">&quot;SQL.VM_BruteForce&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;compromisedEntity&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
           <span class="s2">&quot;confidenceLevel&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Defender for Cloud detected inbound traffic from IP addresses that are recommended to be blocked. This typically occurs when this IP address doesn</span><span class="se">\u0027</span><span class="s2">t communicate regularly with this resource.</span><span class="se">\r\n</span><span class="s2">Alternatively, the IP address has been flagged as malicious by Microsoft</span><span class="se">\u0027</span><span class="s2">s threat intelligence sources.&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;endTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-10T00:00:00Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;Traffic detected from IP addresses recommended for blocking&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;processingEndTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-12T20:52:01.0089039Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.</span><span class="se">\r\n</span><span class="s2">Once obtained, an attacker can have full access to the database. While this specific alert doesn</span><span class="se">\u0027</span><span class="s2">t indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.</span><span class="se">\r\n</span><span class="s2">To investigate this suspected brute-force attempt, review it</span><span class="se">\u0027</span><span class="s2">s origin (based on the application name and IP/Location), and try to find out whether it</span><span class="se">\u0027</span><span class="s2">s recognized to you, or suspicious.</span><span class="se">\r\n</span><span class="s2">If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.</span><span class="se">\r\n</span><span class="s2">Also, consider using only AAD authentication to further enhance your security posture.</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;endTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:10Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspected brute-force attack attempt&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;processingEndTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:40.734843Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;productComponentName&quot;</span><span class="p">:</span> <span class="s2">&quot;Databases&quot;</span><span class="p">,</span>
           <span class="s2">&quot;productName&quot;</span><span class="p">:</span> <span class="s2">&quot;Azure Security Center&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;providerAlertId&quot;</span><span class="p">:</span> <span class="s2">&quot;2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;providerAlertId&quot;</span><span class="p">:</span> <span class="s2">&quot;2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e&quot;</span><span class="p">,</span>
           <span class="s2">&quot;remediationSteps&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">kind</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">openBlade</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">displayValue</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Enforce rule</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">extension</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Microsoft_Azure_Security_R3</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">detailBlade</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">AdaptiveNetworkControlsResourceBlade</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">detailBladeInputs</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">protectedResourceId=/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder</span><span class="se">\&quot;</span><span class="s2">}&quot;</span>
+            <span class="s2">&quot;* Apply [workflow automation](https://go.microsoft.com/fwlink/?linkid=2174808) to block future attacks.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;* Consider [blocking the IP address](https://go.microsoft.com/fwlink/?linkid=2099055) of the attacking client and hardening your firewall.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;* When possible, use [Windows authentication](https://go.microsoft.com/fwlink/?linkid=2129121) and disable SQL Server authentication.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;* Use [strong passwords](https://go.microsoft.com/fwlink/?linkid=2099068) and avoid reusing them across multiple databases.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;* If applicable, disable default and well known application/database accounts such as SA.&quot;</span>
           <span class="p">],</span>
           <span class="s2">&quot;resourceIdentifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;a4b7e24a-xxxx-4d84-xxxx-89e99b336784&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
               <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;AzureResource&quot;</span>
             <span class="p">},</span>
             <span class="p">{</span>
+              <span class="s2">&quot;agentId&quot;</span><span class="p">:</span> <span class="s2">&quot;7db452ea-1cae-4079-94a5-85dc76156e96&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
               <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;LogAnalytics&quot;</span><span class="p">,</span>
               <span class="s2">&quot;workspaceId&quot;</span><span class="p">:</span> <span class="s2">&quot;c6c712b0-dc3d-4408-945a-4bde1db6579b&quot;</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;startTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-10T00:00:00Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;startTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:10Z&quot;</span><span class="p">,</span>
           <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;New&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;systemAlertId&quot;</span><span class="p">:</span> <span class="s2">&quot;8a2fe554-9e4e-8298-cd70-4159a5494b7e&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;systemAlertId&quot;</span><span class="p">:</span> <span class="s2">&quot;4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">,</span>
           <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="s2">&quot;PreAttack&quot;</span>
           <span class="p">],</span>
-          <span class="s2">&quot;timeGenerated&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-12T20:52:26.5903077Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;timeGenerated_ms&quot;</span><span class="p">:</span> <span class="mi">1678654346000</span><span class="p">,</span>
+          <span class="s2">&quot;timeGenerated&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:49.9010714Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;timeGenerated_ms&quot;</span><span class="p">:</span> <span class="mi">1712762989000</span><span class="p">,</span>
           <span class="s2">&quot;vendorName&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft&quot;</span>
         <span class="p">},</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Entities&quot;</span>
@@ -933,15 +1031,16 @@ SOAR Comments with Sentinel.</p>
     <span class="p">]</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6c98642b-7248-4b4d-994e-32443f100e78&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;profile_a&quot;</span>
+    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1944</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">883</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13 13:05:04&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:07:28&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -953,23 +1052,25 @@ SOAR Comments with Sentinel.</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_number</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="n">current_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">current_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">alerts_results</span>
-
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">):</span>
     <span class="n">properties</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span>
     <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;sentinel_incident_alerts&quot;</span><span class="p">)</span>
     <span class="n">row</span><span class="p">[</span><span class="s1">&#39;report_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_dt</span>
@@ -988,6 +1089,8 @@ SOAR Comments with Sentinel.</p>
       <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alertLink&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;Alert Link&lt;/a&gt;&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
       <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;https://security.microsoft.com/alerts/</span><span class="si">{</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;systemAlertId&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;Alert Link&lt;/a&gt;&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Incident Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -996,7 +1099,8 @@ SOAR Comments with Sentinel.</p>
 <hr class="docutils" />
 <section id="function-sentinel-get-incident-comments">
 <h2>Function - Sentinel Get Incident Comments<a class="headerlink" href="#function-sentinel-get-incident-comments" title="Link to this heading">¶</a></h2>
-<p>Get Comments from a Sentinel Incident</p>
+<p>Get Comments from a Sentinel Incident.</p>
+<p><img alt="screenshot: fn-sentinel-get-incident-comments " src="../_images/fn-sentinel-get-incident-comments.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1013,20 +1117,26 @@ SOAR Comments with Sentinel.</p>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SOAR</span> <span class="pre">Incident</span> <span class="pre">ID</span></code></p></td>
-<td><p>IncidentID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code></p></td>
+<td><p>SOAR Incident ID</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The ID of a Sentinel Incident.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_label</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Label give to the Sentinel server in the app.config. Example in app.config [fn_microsoft_sentinel:label1] the label here is label1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The Sentinel profile name.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1042,33 +1152,36 @@ SOAR Comments with Sentinel.</p>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/6c98642b-7248-4b4d-994e-32443f100e78/Comments/cdd41cd8-7d4e-4b7a-976f-f409938fe791&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;cdd41cd8-7d4e-4b7a-976f-f409938fe791&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">1f016d66-0000-0100-0000-6616d56e0000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81/Comments/aebab623-5e91-43a7-b7a6-541548fc738f&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;aebab623-5e91-43a7-b7a6-541548fc738f&quot;</span><span class="p">,</span>
         <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
           <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;admin@example.com&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Admin&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;example@microsoft.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
             <span class="s2">&quot;objectId&quot;</span><span class="p">:</span> <span class="s2">&quot;43dd7b73-6a70-475e-88c3-609a9f30b514&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="s2">&quot;admin@example.com&quot;</span>
+            <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="s2">&quot;example@microsoft.com&quot;</span>
           <span class="p">},</span>
-          <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13T17:19:47.2791036Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;bye&quot;</span>
+          <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:42.5540333Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;lastModifiedTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:42.5540333Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span>
         <span class="p">},</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Incidents/Comments&quot;</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2178</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6c98642b-7248-4b4d-994e-32443f100e78&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;profile_a&quot;</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2121</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1426</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1044</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13 13:19:53&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:07:55&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1080,21 +1193,26 @@ SOAR Comments with Sentinel.</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_number</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">comment_results</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">):</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)))</span>
+  <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">):</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Get Incident Comments failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1103,7 +1221,8 @@ SOAR Comments with Sentinel.</p>
 <hr class="docutils" />
 <section id="function-sentinel-get-incident-entities">
 <h2>Function - Sentinel Get Incident Entities<a class="headerlink" href="#function-sentinel-get-incident-entities" title="Link to this heading">¶</a></h2>
-<p>Get the Entities associated with a Sentinel Incident</p>
+<p>Get the Entities associated with a Sentinel Incident.</p>
+<p><img alt="screenshot: fn-sentinel-get-incident-entities " src="../_images/fn-sentinel-get-incident-entities.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1121,13 +1240,19 @@ SOAR Comments with Sentinel.</p>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The ID of a Sentinel Incident.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_label</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Label give to the Sentinel server in the app.config. Example in app.config [fn_microsoft_sentinel:label1] the label here is label1.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The Sentinel profile name.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1141,56 +1266,75 @@ SOAR Comments with Sentinel.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;6c98642b-7248-4b4d-994e-32443f100e78_8a2fe554-9e4e-8298-cd70-4159a5494b7e&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81_4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/fca87582-43c0-5af8-fdec-dfda212ee53c&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/b9ce5c65-0b04-27bf-c4af-c5926008a5d3&quot;</span><span class="p">,</span>
         <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;Ip&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;fca87582-43c0-5af8-fdec-dfda212ee53c&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;b9ce5c65-0b04-27bf-c4af-c5926008a5d3&quot;</span><span class="p">,</span>
         <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;80.66.76.30&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;80.66.76.30&quot;</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;soar_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;80.66.76.30&quot;</span><span class="p">,</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/fd328c82-310e-6bb5-1d3b-f1c635dd5f20&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/8e6ffdf6-05ab-b16e-aaa7-c3465af09c46&quot;</span><span class="p">,</span>
         <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;AzureResource&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;fd328c82-310e-6bb5-1d3b-f1c635dd5f20&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;8e6ffdf6-05ab-b16e-aaa7-c3465af09c46&quot;</span><span class="p">,</span>
         <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;logforwarder&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;a4b7e24a-xxxx-4d84-xxxx-89e99b336784&quot;</span>
+          <span class="s2">&quot;additionalData&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;ResourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ResourceType&quot;</span><span class="p">:</span> <span class="s2">&quot;Virtual Machine&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;logforwarder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;soar_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/a41bc108-5e1e-7f62-4294-7412e5319c81&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/eda45dbc-9011-cfbc-4e9b-4fd97d44f069&quot;</span><span class="p">,</span>
         <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;Host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;a41bc108-5e1e-7f62-4294-7412e5319c81&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eda45dbc-9011-cfbc-4e9b-4fd97d44f069&quot;</span><span class="p">,</span>
         <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;azureID&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder&quot;</span>
+          <span class="s2">&quot;azureID&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;hostName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;omsAgentID&quot;</span><span class="p">:</span> <span class="s2">&quot;7db452ea-1cae-4079-94a5-85dc76156e96&quot;</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;soar_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;System Name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;System Name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;Account&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;accountName&quot;</span><span class="p">:</span> <span class="s2">&quot;sa&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;sa&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;User Account&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;sa&quot;</span><span class="p">,</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6c98642b-7248-4b4d-994e-32443f100e78&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;profile_a&quot;</span>
+    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2254</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2788</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13 13:26:31&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:08:00&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1202,36 +1346,41 @@ SOAR Comments with Sentinel.</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_number</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
-<span class="n">current_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">current_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">entities_results</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)[</span><span class="n">alert</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">alert</span><span class="p">):</span>
       <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;sentinel_incident_entities&quot;</span><span class="p">)</span>
       <span class="n">row</span><span class="p">[</span><span class="s1">&#39;report_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_dt</span>
       <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alert</span>
       <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
       <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;friendlyName&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_properties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;friendlyName&#39;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_properties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
       <span class="c1"># Create an artifact</span>
       <span class="n">desc</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;created from Sentinel entity: </span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
-      <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;azureID&#39;</span><span class="p">):</span>
-        <span class="n">desc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;azureID&#39;</span><span class="p">))</span>
+      <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;azureID&#39;</span><span class="p">):</span>
+        <span class="n">desc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;azureID&#39;</span><span class="p">))</span>
       <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resilient_artifact_type&#39;</span><span class="p">):</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resilient_artifact_type&#39;</span><span class="p">),</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resilient_artifact_value&#39;</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Incident Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1240,7 +1389,8 @@ SOAR Comments with Sentinel.</p>
 <hr class="docutils" />
 <section id="function-sentinel-update-incident">
 <h2>Function - Sentinel Update Incident<a class="headerlink" href="#function-sentinel-update-incident" title="Link to this heading">¶</a></h2>
-<p>Update / Close a Sentinel incident based on Sentinel field changes in the Resilient Incident</p>
+<p>Update / Close a Sentinel incident based on Sentinel field changes in the SOAR Incident.</p>
+<p><img alt="screenshot: fn-sentinel-update-incident " src="../_images/fn-sentinel-update-incident.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1257,20 +1407,26 @@ SOAR Comments with Sentinel.</p>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SOAR</span> <span class="pre">Incident</span> <span class="pre">ID</span></code></p></td>
-<td><p>IncidentID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code></p></td>
+<td><p>SOAR Incident ID</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The ID of a Sentinel Incident.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_label</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Label give to the Sentinel server in the app.config. Example in app.config [fn_microsoft_sentinel:label1] the label here is label1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The Sentinel profile name.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1284,47 +1440,67 @@ SOAR Comments with Sentinel.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">0c01af2a-0000-0100-0000-640f343f0000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/29293940-bec6-4549-8d8a-0f6341dc37cc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;29293940-bec6-4549-8d8a-0f6341dc37cc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">1f01df97-0000-0100-0000-6616d7020000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">&quot;additionalData&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;alertProductNames&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;alertsCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;alertProductNames&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Azure Security Center&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;alertsCount&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s2">&quot;bookmarksCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;commentsCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">&quot;commentsCount&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;PreAttack&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;techniques&quot;</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-10T18:26:47.7370027Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;incidentNumber&quot;</span><span class="p">:</span> <span class="mi">1905</span><span class="p">,</span>
-      <span class="s2">&quot;incidentUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/29293940-bec6-4549-8d8a-0f6341dc37cc&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;lastModifiedTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13T14:33:35.862704Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:50.0960914Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.</span><span class="se">\u00a0</span><span class="s2"> Once obtained, an attacker can have full access to the database. While this specific alert doesn</span><span class="se">\u0027</span><span class="s2">t indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.</span><span class="se">\u00a0</span><span class="s2"> To investigate this suspected brute-force attempt, review it</span><span class="se">\u0027</span><span class="s2">s origin (based on the application name and IP/Location), and try to find out whether it</span><span class="se">\u0027</span><span class="s2">s recognized to you, or suspicious.</span><span class="se">\u00a0</span><span class="s2"> If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.</span><span class="se">\u00a0</span><span class="s2"> Also, consider using only AAD authentication to further enhance your security posture.</span><span class="se">\u00a0</span><span class="s2">&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;incidentNumber&quot;</span><span class="p">:</span> <span class="mi">4609</span><span class="p">,</span>
+      <span class="s2">&quot;incidentUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="s2">&quot;test tag&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="s2">&quot;another label&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;lastModifiedTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:14:26.8445378Z&quot;</span><span class="p">,</span>
       <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
         <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
         <span class="s2">&quot;objectId&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;ownerType&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
         <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;relatedAnalyticRuleIds&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;New&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test incident&quot;</span>
+      <span class="s2">&quot;providerIncidentId&quot;</span><span class="p">:</span> <span class="s2">&quot;4609&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;providerName&quot;</span><span class="p">:</span> <span class="s2">&quot;Azure Sentinel&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;relatedAnalyticRuleIds&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/alertRules/14fefa89-3cdd-429f-923b-b524aa8c65c3&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspected brute-force attack attempt&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Incidents&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2176</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;29293940-bec6-4549-8d8a-0f6341dc37cc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;profile_a&quot;</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2121</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1455</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2209</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-13 10:33:35&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:14:26&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1336,16 +1512,19 @@ SOAR Comments with Sentinel.</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_number</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_profile</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_profile</span>
+<span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sentinel_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sentinel_label</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
 </pre></div>
@@ -1354,6 +1533,76 @@ SOAR Comments with Sentinel.</p>
 </details>
 </section>
 <hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sentinel: Comment Sync - Example (PB)</p></td>
+<td><p>Sync an Incident note to a Sentinel Incident comment.</p></td>
+<td><p>Automatic</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sentinel_incident_number</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">note.text</span> <span class="pre">not_contains</span> <span class="pre">From</span> <span class="pre">Sentinel</span> <span class="pre">AND</span> <span class="pre">object_added</span> <span class="pre">AND</span> <span class="pre">(incident.properties.sentinel_profile</span> <span class="pre">has_a_value</span> <span class="pre">OR</span> <span class="pre">incident.properties.sentinel_label</span> <span class="pre">has_a_value)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Sentinel: Get Incident Alerts - Example (PB)</p></td>
+<td><p>Get alerts for a Sentinel Incident.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sentinel_incident_number</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">(incident.properties.sentinel_profile</span> <span class="pre">has_a_value</span> <span class="pre">OR</span> <span class="pre">incident.properties.sentinel_label</span> <span class="pre">has_a_value)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Sentinel: Get Incident Comments - Example (PB)</p></td>
+<td><p>Get Sentinel incident comments.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sentinel_incident_number</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">(incident.properties.sentinel_profile</span> <span class="pre">has_a_value</span> <span class="pre">OR</span> <span class="pre">incident.properties.sentinel_label</span> <span class="pre">has_a_value)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Sentinel: Get Incident Entities - Example (PB)</p></td>
+<td><p>Get Entities for a Sentinel Incident.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sentinel_incident_number</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">(incident.properties.sentinel_profile</span> <span class="pre">has_a_value</span> <span class="pre">OR</span> <span class="pre">incident.properties.sentinel_label</span> <span class="pre">has_a_value)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Sentinel: Incident Sync - Example (PB)</p></td>
+<td><p>Sync SOAR incident with linked Sentinel incident.</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sentinel_incident_number</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">object_added</span> <span class="pre">AND</span> <span class="pre">(incident.properties.sentinel_profile</span> <span class="pre">has_a_value</span> <span class="pre">OR</span> <span class="pre">incident.properties.sentinel_label</span> <span class="pre">has_a_value)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Sentinel: Update Incident - Example (PB)</p></td>
+<td><p>Update SOAR incident with new information from the Sentinel incident.</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sentinel_incident_number</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">(incident.description</span> <span class="pre">changed</span> <span class="pre">OR</span> <span class="pre">incident.name</span> <span class="pre">changed</span> <span class="pre">OR</span> <span class="pre">incident.resolution_id</span> <span class="pre">changed</span> <span class="pre">OR</span> <span class="pre">incident.resolution_summary</span> <span class="pre">changed</span> <span class="pre">OR</span> <span class="pre">incident.severity_code</span> <span class="pre">changed</span> <span class="pre">OR</span> <span class="pre">incident.properties.sentinel_incident_labels</span> <span class="pre">changed)</span> <span class="pre">AND</span> <span class="pre">(incident.properties.sentinel_profile</span> <span class="pre">has_a_value</span> <span class="pre">OR</span> <span class="pre">incident.properties.sentinel_label</span> <span class="pre">has_a_value)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="custom-layouts">
+<h2>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Import the Data Tables and Custom Fields like the screenshot below:</p>
+<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts16.png" /></p>
+<p>The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentinel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.</p>
+</li>
+</ul>
+</section>
 <section id="data-table-sentinel-incident-alerts">
 <h2>Data Table - Sentinel Incident Alerts<a class="headerlink" href="#data-table-sentinel-incident-alerts" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-sentinel-incident-alerts" src="../_images/dt-sentinel-incident-alerts.png" /></p>
@@ -1376,67 +1625,67 @@ SOAR Comments with Sentinel.</p>
 <tr class="row-even"><td><p>Alert Date</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_date</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Date and time of the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Alert Id</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_id</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Sentinel Alert ID.</p></td>
 </tr>
 <tr class="row-even"><td><p>Alert Name</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_name</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Name of the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Alert Type</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_type</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The Type of Sentinel Alert.</p></td>
 </tr>
 <tr class="row-even"><td><p>Compromised Entity</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_compromised_entity</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Compromised Entities on the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Confidence Level</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_confidence_level</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Confidence level of the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-even"><td><p>Description</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_description</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Description of the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Link</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_url</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
-<td><p>-</p></td>
+<td><p>URL link to the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-even"><td><p>Remediation Steps</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_remediation_steps</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Remediation steps from the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Report Date</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">report_date</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Report date of the Sentinel Incident.</p></td>
 </tr>
 <tr class="row-even"><td><p>Severity</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_severity</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Severity of the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Status</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_status</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Status of the Sentinel Alert.</p></td>
 </tr>
 <tr class="row-even"><td><p>Tactics</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_tactics</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>Tactics of the Sentinel Alert.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1466,32 +1715,32 @@ SOAR Comments with Sentinel.</p>
 <tr class="row-even"><td><p>Alert ID</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">alert_id</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The Sentinel Alert ID.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Entity ID</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">entity_id</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The Sentinel Entity ID.</p></td>
 </tr>
 <tr class="row-even"><td><p>Entity Properties</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">entity_properties</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The properties of the Sentinel Entity.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Entity Type</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">entity_type</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The type of the Sentinel Entity.</p></td>
 </tr>
 <tr class="row-even"><td><p>Entity Value</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">entity_value</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The value of the Sentinel Entity.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Report Date</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">report_date</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
-<td><p>-</p></td>
+<td><p>The reported date and time of the Sentinel Incident.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1583,59 +1832,19 @@ SOAR Comments with Sentinel.</p>
 <td><p>-</p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-even"><td><p>Sentinel Profile</p></td>
+<tr class="row-even"><td><p>Sentinel Server Label</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sentinel_label</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Label give to the Sentinel server in the app.config. Example in app.config [fn_microsoft_sentinel:label1] the label here is label1.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sentinel Profile</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">sentinel_profile</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
 <td><p>-</p></td>
 <td><p>-</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Object</p></th>
-<th class="head"><p>Status</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Sentinel Comment Sync</p></td>
-<td><p>Sync an Incident note to a Sentinel Incident comment</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Sentinel Get Incident Alerts</p></td>
-<td><p>Get alerts for a Sentinel Incident</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Sentinel Get Incident Comments</p></td>
-<td><p>Get sentinel incident comments</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Sentinel Get Incident Entities</p></td>
-<td><p>Get Entities for a Sentinel Incident</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Sentinel Incident Sync</p></td>
-<td><p>Sync SOAR incident with linked Sentinel incident</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Sentinel Update Incident</p></td>
-<td><p>Update SOAR incident with new information from the Sentinel incident</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1663,10 +1872,12 @@ mapping:</p>
   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
   <span class="s2">&quot;discovered_date&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
   <span class="s2">&quot;start_date&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">firstActivityTimeUtc</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">firstActivityTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span><span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
-  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
-  <span class="p">},</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">description</span> <span class="o">%</span><span class="p">}</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+    <span class="p">},</span>
+  <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="c1"># if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
   <span class="p">{</span><span class="c1"># &quot;owner_id&quot;: &quot;{{ properties.owner.userPrincipalName|soar_substitute(&#39;{&quot;sentinel_user1@co.com&quot;: &quot;soar_user1@ent.com&quot;, &quot;sentinel_user2@co.com&quot;: &quot;soar_user2@ent.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@ent.com&quot; }&#39;) }}&quot;, #}</span>
   <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status|soar_substitute(&#39;{&quot;</span><span class="n">Closed</span><span class="s2">&quot;: &quot;</span><span class="n">C</span><span class="s2">&quot;, &quot;</span><span class="n">Active</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">New</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
@@ -1675,21 +1886,42 @@ mapping:</p>
     <span class="s2">&quot;sentinel_incident_number&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|e }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.incidentNumber }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;{{ properties.incidentUrl }}&#39;&gt;Sentinel Incident&lt;/a&gt;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ soar_profile }}&quot;</span>
+    <span class="s2">&quot;sentinel_incident_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;{{ properties.incidentUrl }}&#39;&gt;Sentinel Incident&lt;/a&gt;&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classification</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationReason</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationComment</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">assignedTo</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">additionalData</span><span class="o">.</span><span class="n">tactics</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">soar_profile</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ soar_profile }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">resilient_profile</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resilient_profile }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">soar_label</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ soar_label }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">}</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;Closed&quot;</span> <span class="o">%</span><span class="p">}</span>
-  <span class="p">,</span>
-  <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Sentinel&quot;</span>
+    <span class="p">,</span>
+    <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Sentinel&quot;</span>
   <span class="p">{</span><span class="o">%</span><span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 <span class="p">}</span>
+
 </pre></div>
 </div>
 </section>
@@ -1744,24 +1976,26 @@ mapping:</p>
     <span class="p">{</span><span class="c1"># JINJA template for closing a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)}}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;:&quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;:&quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;:&quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">BenignPositive</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">TruePositive</span><span class="s2">&quot;, &quot;</span><span class="n">DEFAULT</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classificationComment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_summary|striptags|safe }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">BenignPositive</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">TruePositive</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;classificationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">InaccurateData</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">SuspiciousButExpected</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">SuspiciousActivity</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;classificationComment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_summary|striptags|safe }}&quot;</span>
         <span class="p">{</span><span class="c1"># modify as necessary #}</span>
-        <span class="s2">&quot;classificationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">InaccurateData</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">SuspiciousActivity</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
-                <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-            <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
-        <span class="p">]</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+            <span class="p">,</span><span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
+                <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
+                    <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+                <span class="p">}</span>
+                <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1772,25 +2006,26 @@ mapping:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="p">{</span><span class="c1"># JINJA template for updating a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)}}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;:&quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;:&quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;:&quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_status }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_classification }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classificationComment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_classification_comment|safe }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classificationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_classification_reason }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|striptags|safe }}&quot;</span><span class="p">,</span>
-        <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
-                <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-            <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
-        <span class="p">]</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_status }}&quot;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">description</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|striptags|safe }}&quot;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+            <span class="p">,</span><span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
+                <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
+                    <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+                <span class="p">}</span>
+                <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1918,7 +2153,7 @@ that are commented out. The example template shows all Sentinel incident propert
 <li><a class="reference internal" href="#">Microsoft Sentinel</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#v2-0-0">v2.0.0</a></li>
+<li><a class="reference internal" href="#v2-1-0">v2.1.0</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
@@ -1936,7 +2171,6 @@ that are commented out. The example template shows all Sentinel incident propert
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#install">Install</a></li>
 <li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
-<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#function-sentinel-add-incident-comment">Function - Sentinel Add Incident Comment</a></li>
@@ -1944,6 +2178,8 @@ that are commented out. The example template shows all Sentinel incident propert
 <li><a class="reference internal" href="#function-sentinel-get-incident-comments">Function - Sentinel Get Incident Comments</a></li>
 <li><a class="reference internal" href="#function-sentinel-get-incident-entities">Function - Sentinel Get Incident Entities</a></li>
 <li><a class="reference internal" href="#function-sentinel-update-incident">Function - Sentinel Update Incident</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
 <li><a class="reference internal" href="#data-table-sentinel-incident-alerts">Data Table - Sentinel Incident Alerts</a><ul>
 <li><a class="reference internal" href="#api-name">API Name:</a></li>
 <li><a class="reference internal" href="#columns">Columns:</a></li>
@@ -1955,7 +2191,6 @@ that are commented out. The example template shows all Sentinel incident propert
 </ul>
 </li>
 <li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
-<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#custom-templates">Custom Templates</a><ul>
 <li><a class="reference internal" href="#incident-create-template-jinja">incident_create_template.jinja</a></li>
 <li><a class="reference internal" href="#incident-update-template-jinja">incident_update_template.jinja</a></li>
