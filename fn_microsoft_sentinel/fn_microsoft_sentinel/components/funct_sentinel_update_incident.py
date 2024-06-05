@@ -34,35 +34,40 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.incident_id
             -   fn_inputs.sentinel_incident_id
             -   fn_inputs.sentinel_profile
+            -   fn_inputs.sentinel_label
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Verify we have the required inputs
-        validate_fields(["incident_id", "sentinel_profile", "sentinel_incident_id"], fn_inputs)
+        validate_fields(["incident_id", "sentinel_incident_id"], fn_inputs)
 
         # Create variables for inputs
         incident_id = fn_inputs.incident_id
         sentinel_incident_id = fn_inputs.sentinel_incident_id
-        sentinel_profile = fn_inputs.sentinel_profile
+        sentinel_profile = getattr(fn_inputs, "sentinel_profile", None)
+        sentinel_label = getattr(fn_inputs, "sentinel_label", None)
+        if not sentinel_profile and not sentinel_label:
+            raise ValueError("Either sentinel_profile or sentinel_label need to be given.")
 
         # Log inputs
         self.LOG.info(f"Incident ID: {incident_id}")
         self.LOG.info(f"Sentinel Incident ID: {sentinel_incident_id}")
         self.LOG.info(f"Sentinel Profile: {sentinel_profile}")
+        self.LOG.info(f"Sentinel Label: {sentinel_label}")
 
         # Get the SOAR incident data
         soar_incident = ResilientCommon(self.rest_client()).get_soar_incident(incident_id)
 
         # Confirm that we have custom fields
-        for confirm_field in ["sentinel_profile", SENTINEL_INCIDENT_NUMBER]:
+        for confirm_field in [SENTINEL_INCIDENT_NUMBER]:
             if not soar_incident['properties'].get(confirm_field):
                 raise ValueError(f"Custom field: {confirm_field} and/or value not found.")
 
-        # Create connection to Sentinel
-        sentinel_api = SentinelAPI(self.opts, self.options)
-
         # Get the configuration for the selected Sentinel profile from the app.config
-        profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
+        profile_data = self.sentinel_profiles.get_profile(sentinel_label if sentinel_label else sentinel_profile)
+
+        # Create connection to Sentinel
+        sentinel_api = SentinelAPI(self.opts, self.options, profile_data if sentinel_label else None)
 
         # Is this SOAR incident active or closed?
         if soar_incident["plan_status"] == "A":

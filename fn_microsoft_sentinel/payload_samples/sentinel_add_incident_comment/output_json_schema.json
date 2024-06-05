@@ -60,7 +60,8 @@
         "sentinel_incident_id": {
           "type": "string"
         },
-        "sentinel_profile": {
+        "sentinel_profile": {},
+        "sentinel_label": {
           "type": "string"
         },
         "sentinel_incident_comment": {

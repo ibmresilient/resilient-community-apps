@@ -28,26 +28,34 @@ class FunctionComponent(AppFunctionComponent):
         Function: Create a comment for a given Sentinel incident
         Inputs:
             -   fn_inputs.sentinel_profile
+            -   fn_inputs.sentinel_label
             -   fn_inputs.sentinel_incident_id
             -   fn_inputs.sentinel_incident_comment
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
         validate_fields(
-            ["sentinel_profile", "sentinel_incident_id", "sentinel_incident_comment"],
+            ["sentinel_incident_id", "sentinel_incident_comment"],
             fn_inputs
         )
 
         # Get the function parameters:
-        sentinel_profile = fn_inputs.sentinel_profile
+        sentinel_profile = getattr(fn_inputs, "sentinel_profile", None)
+        sentinel_label = getattr(fn_inputs, "sentinel_label", None)
+        if not sentinel_profile and not sentinel_label:
+            raise ValueError("Either sentinel_profile or sentinel_label need to be given.")
         sentinel_incident_id = fn_inputs.sentinel_incident_id
         sentinel_incident_comment = fn_inputs.sentinel_incident_comment
 
-        self.LOG.info(f"sentinel_profile: {sentinel_profile}")
-        self.LOG.info(f"sentinel_incident_id: {sentinel_incident_id}")
-        self.LOG.info(f"sentinel_incident_comment: {sentinel_incident_comment}")
+        self.LOG.info(f"Sentinel Profile: {sentinel_profile}")
+        self.LOG.info(f"Sentinel Label: {sentinel_label}")
+        self.LOG.info(f"Sentinel Incident ID: {sentinel_incident_id}")
+        self.LOG.info(f"Sentinel Incident Comment: {sentinel_incident_comment}")
+
+        # Get the configuration for the selected Sentinel profile from the app.config
+        profile_data = self.sentinel_profiles.get_profile(sentinel_label if sentinel_label else sentinel_profile)
 
         # Create connection to Sentinel
-        sentinel_api = SentinelAPI(self.opts, self.options)
+        sentinel_api = SentinelAPI(self.opts, self.options, profile_data if sentinel_label else None)
         result = {}
         reason = ""
         status = True
@@ -57,8 +65,6 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message(f"Bypassing synchronization of note: {sentinel_incident_comment}")
             status = False
         else:
-            # Get the configuration for the selected Sentinel profile from the app.config
-            profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
             result, status, reason = sentinel_api.create_comment(profile_data,
                                                                 sentinel_incident_id,
                                                                 clean_html(sentinel_incident_comment))

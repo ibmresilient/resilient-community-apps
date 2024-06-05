@@ -13,7 +13,55 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "etag": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "properties": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "createdTimeUtc": {
+                    "type": "string"
+                  },
+                  "lastModifiedTimeUtc": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "object",
+                    "properties": {
+                      "objectId": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "userPrincipalName": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -27,7 +75,8 @@
         "incident_id": {
           "type": "integer"
         },
-        "sentinel_profile": {
+        "sentinel_profile": {},
+        "sentinel_label": {
           "type": "string"
         }
       }

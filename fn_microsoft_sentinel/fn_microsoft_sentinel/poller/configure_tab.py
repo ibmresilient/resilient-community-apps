@@ -26,6 +26,7 @@ class IncidentGroupsTab(Tab):
         Field("sentinel_incident_tactics"),
         Field("sentinel_incident_url"),
         Field("sentinel_profile"),
+        Field("sentinel_label"),
         Datatable("sentinel_incident_alerts"),
         Datatable("sentinel_incident_entities")
     ]

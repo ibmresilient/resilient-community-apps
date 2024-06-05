@@ -31,21 +31,39 @@ class SentinelProfiles():
         :raises KeyError: error when a named profile is not found in app.config
         :return: Dictionary of profiles
         """
-        # The 'sentinel_profiles' setting in the app.config is a comma separated list of profile names.
-        sentinel_profiles = options.get("sentinel_profiles", "")
+        # Boolean that represents if labels are being used instead of profiles
+        labels = False
+        # The 'ms_sentinel_labels' setting in the app.config is a comma separated list of label names.
+        sentinel_labels = options.get("ms_sentinel_labels", "")
+        if sentinel_labels:
+            sentinel_profiles = sentinel_labels
+            labels = True
+        else:
+            # The 'sentinel_profiles' setting in the app.config is a comma separated list of profile names.
+            sentinel_profiles = options.get("sentinel_profiles", "")
+        # Convert the string list to a python list.
+        profile_list = [item.strip() for item in sentinel_profiles.split(",")]
 
         # Confirm all profiles are valid
         profiles = {}
-        # Convert the string list to a python list.
-        profile_list = [item.strip() for item in sentinel_profiles.split(",")]
         for profile in profile_list: # Loop though the profile names in the list.
             profile_name = f"{PACKAGE_NAME}:{profile}"
             profile_data = opts.get(profile_name)
             if not profile_data:
-                raise KeyError(f"Unable to find Sentinel profile: {profile_name}")
+                if labels:
+                    raise KeyError(f"Unable to find Sentinel label: {profile_name}")
+                else:
+                    raise KeyError(f"Unable to find Sentinel profile: {profile_name}")
 
             # Check each profile for the correct settings
             validate_fields(REQUIRED_PROFILE_FIELDS, profile_data)
+            if labels: # If using labels validate additional required fields
+                validate_fields([
+                    {"name": "tenant_id", "placeholder": "aaa-bbb-ccc"},
+                    {"name": "client_id", "placeholder": "aaa-bbb-ddd"},
+                    {"name": "app_secret", "placeholder": "aaa-bbb-eee"}],
+                    profile_data
+                )
 
             profiles[profile] = profile_data
 

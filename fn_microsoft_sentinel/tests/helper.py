@@ -3,7 +3,7 @@
 
 PACKAGE_NAME = "fn_microsoft_sentinel"
 
-config_data = '''
+config_data1 = '''
 [fn_microsoft_sentinel]
 azure_url = https://management.azure.com
 tenant_id = bbb-ccc-aaa
@@ -11,7 +11,7 @@ client_id = bbb-ddd-aaa
 app_secret = bbb-eee-aaa
 polling_lookback = 120
 polling_interval = 0
-api_version = 2023-11-01
+api_version = 2023-11-01-preview
 sentinel_profiles = profile_a
 verify = false
 
@@ -21,6 +21,26 @@ workspace_name = AzureWorkspace
 resource_groupname = GroupName
 max_alerts = 50
 new_incident_filters = "status": ["New", "Active"], "severity": ["High", "Medium","Low"]
+close_soar_case=true
+'''
+
+config_data2 = '''
+[fn_microsoft_sentinel]
+azure_url = https://management.azure.com
+polling_lookback = 120
+polling_interval = 0
+api_version = 2023-11-01-preview
+ms_sentinel_labels = label1
+verify = false
+
+[fn_microsoft_sentinel:label1]
+tenant_id = bbb-ccc-aaa
+client_id = bbb-ddd-aaa
+app_secret = bbb-eee-aaa
+subscription_id = bbb-fff-bbb
+workspace_name = AzureWorkspace
+resource_groupname = GroupName
+max_alerts = 50
 close_soar_case=true
 '''
 
@@ -300,6 +320,33 @@ def soar_incident_mock():
         'plan_status': 'A'
     }
 
+def soar_incident_mock2():
+    return {
+        'name': 'Sentinel Incident 3972 - Suspicious authentication activity on one endpoint',
+        'description': '<div>None</div>',
+        'phase_id': 'Respond',
+        'vers': 14,
+        'properties': {
+            'sentinel_incident_assigned_to': 'None',
+            'sentinel_incident_classification': '',
+            'sentinel_incident_id': '3972',
+            'sentinel_incident_classification_reason': '',
+            'sentinel_incident_tactics': 'InitialAccess',
+            'sentinel_profile': None,
+            'sentinel_label': 'label1',
+            'sentinel_incident_classification_comment': '',
+            'internal_customizations_field': None,
+            'sentinel_incident_url': '<a href="https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/63f75ad5-bee4-4fe3-aeb6-43d0df142713">Sentinel Incident</a>',
+            'sentinel_incident_labels': '',
+            'sentinel_incident_number':'63f75ad5-bee4-4fe3-aeb6-43d0df142713',
+            'sentinel_incident_status': 'Active'
+        },
+        'resolution_id': None,
+        'resolution_summary': None,
+        'severity_code': "Medium",
+        'plan_status': 'A'
+    }
+
 class MockSOAR:
     """ Mock SOAR connection """
     def __init__(self, rest_client):
@@ -312,12 +359,15 @@ class MockSOAR:
     
     def get_soar_incident(self, incident_id):
         """ Mock get_soar_incident results """
-        return soar_incident_mock()
+        if incident_id == 2105:
+            return soar_incident_mock2()
+        else:
+            return soar_incident_mock()
 
 class MockClient:
     """ Add Mock connection data """
 
-    def __init__(self, opts, options):
+    def __init__(self, opts, options, sentinel_server=None):
         """ Mock """
         pass
 

@@ -5,12 +5,12 @@
   "content": {
     "value": [
       {
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/ec7cd79e-dd28-5e7b-094d-af3574027758",
-        "name": "ec7cd79e-dd28-5e7b-094d-af3574027758",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/4c4831e9-2ed7-a44a-e530-c784cc7c2ddc",
+        "name": "4c4831e9-2ed7-a44a-e530-c784cc7c2ddc",
         "type": "Microsoft.SecurityInsights/Entities",
         "kind": "SecurityAlert",
         "properties": {
-          "systemAlertId": "ec7cd79e-dd28-5e7b-094d-af3574027758",
+          "systemAlertId": "4c4831e9-2ed7-a44a-e530-c784cc7c2ddc",
           "tactics": [
             "PreAttack"
           ],
@@ -29,14 +29,14 @@
           "productName": "Azure Security Center",
           "productComponentName": "Databases",
           "alertType": "SQL.VM_BruteForce",
-          "processingEndTime": "2024-02-06T19:03:15.7566188Z",
+          "processingEndTime": "2024-04-10T15:29:40.734843Z",
           "status": "New",
-          "endTimeUtc": "2024-02-06T19:02:44Z",
-          "startTimeUtc": "2024-02-06T19:02:44Z",
-          "timeGenerated": "2024-02-06T19:03:17.5439712Z",
+          "endTimeUtc": "2024-04-10T15:29:10Z",
+          "startTimeUtc": "2024-04-10T15:29:10Z",
+          "timeGenerated": "2024-04-10T15:29:49.9010714Z",
           "compromisedEntity": "PAMSqlSv",
-          "providerAlertId": "2516950546359999999_bd8e4a80-5adb-4012-95de-8efeae6973cd",
-          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2516950546359999999_bd8e4a80-5adb-4012-95de-8efeae6973cd/subscriptionId/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroup/DemoAssets/referencedFrom/alertDeepLink/location/centralus",
+          "providerAlertId": "2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e",
+          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e/subscriptionId/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroup/DemoAssets/referencedFrom/alertDeepLink/location/centralus",
           "resourceIdentifiers": [
             {
               "type": "AzureResource",
@@ -52,29 +52,30 @@
           ],
           "additionalData": {
             "MTP_Classification": "Unknown",
-            "StoreAlertPublisher": "{\"Succeeded\":true,\"Reason\":null,\"PublishTime\":\"2024-02-06T19:03:16.660682Z\"}",
-            "AlertMessageEnqueueTime": "2024-02-06T19:03:17.588Z",
+            "StoreAlertPublisher": "{\"Succeeded\":true,\"Reason\":null,\"PublishTime\":\"2024-04-10T15:29:41.6565662Z\"}",
+            "AlertMessageEnqueueTime": "2024-04-10T15:29:49.911Z",
             "OriginalProductName": "Azure Security Center",
             "OriginalProductComponentName": "Databases",
             "effectiveSubscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
           },
           "friendlyName": "Suspected brute-force attack attempt",
-          "timeGenerated_ms": 1707246197000
+          "timeGenerated_ms": 1712762989000
         }
       }
     ]
   },
   "raw": null,
   "inputs": {
-    "sentinel_incident_id": "76ae2188-c4bf-42f3-958a-eb2b148a9190",
-    "sentinel_profile": "profile_a"
+    "sentinel_incident_id": "b3763ac5-6319-496b-b404-6c5000418a81",
+    "sentinel_profile": null,
+    "sentinel_label": "label1"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-microsoft-sentinel",
-    "package_version": "2.0.0",
+    "package_version": "2.1.0",
     "host": "local",
-    "execution_time_ms": 442,
-    "timestamp": "2024-02-06 14:03:51"
+    "execution_time_ms": 883,
+    "timestamp": "2024-04-10 14:07:28"
   }
 }

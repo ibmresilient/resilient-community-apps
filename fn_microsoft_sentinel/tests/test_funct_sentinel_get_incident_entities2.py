@@ -7,18 +7,18 @@ import pytest, helper
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-FUNCTION_NAME = "sentinel_get_incident_comments"
+FUNCTION_NAME = "sentinel_get_incident_entities"
 
 # Read the default configuration-data section from the package
-config_data = helper.config_data1
+config_data = helper.config_data2
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_sentinel_get_incident_comments_function(circuits, function_params, timeout=5):
+def call_sentinel_get_incident_entities_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("sentinel_get_incident_comments", function_params)
+    evt = SubmitTestFunction("sentinel_get_incident_entities", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -33,15 +33,15 @@ def call_sentinel_get_incident_comments_function(circuits, function_params, time
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("sentinel_get_incident_comments_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("sentinel_get_incident_entities_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestSentinelGetIncidentComments:
-    """ Tests for the sentinel_get_incident_comments function"""
+class TestSentinelGetIncidentEntities2:
+    """ Tests for the sentinel_get_incident_entities function with version 2.1.0's app.config """
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -49,20 +49,18 @@ class TestSentinelGetIncidentComments:
         assert func is not None
 
     mock_inputs_1 = {
-        "sentinel_profile": "profile_a",
-        "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
-        "incident_id": 2178
+        "sentinel_label": "label1",
+        "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78"
     }
 
-    expected_results_1 = helper.get_incident_comments_results()
+    expected_results_1 = helper.sentinel_get_incident_entities_results()
 
-    @patch("fn_microsoft_sentinel.components.funct_sentinel_get_incident_comments.SentinelAPI", helper.MockClient)
-    @patch("fn_microsoft_sentinel.components.funct_sentinel_get_incident_comments.ResilientCommon", helper.MockSOAR)
+    @patch("fn_microsoft_sentinel.components.funct_sentinel_get_incident_entities.SentinelAPI", helper.MockClient)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_sentinel_get_incident_comments_function(circuits_app, mock_inputs)
+        results = call_sentinel_get_incident_entities_function(circuits_app, mock_inputs)
         assert(expected_results == results.get("content", {}))

@@ -45,11 +45,23 @@
                 "objectId": {},
                 "email": {},
                 "assignedTo": {},
-                "userPrincipalName": {}
+                "userPrincipalName": {},
+                "ownerType": {}
               }
             },
             "labels": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "labelName": {
+                    "type": "string"
+                  },
+                  "labelType": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "lastModifiedTimeUtc": {
               "type": "string"
@@ -83,6 +95,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "techniques": {
+                  "type": "array"
                 }
               }
             },
@@ -115,7 +130,8 @@
         "sentinel_incident_id": {
           "type": "string"
         },
-        "sentinel_profile": {
+        "sentinel_profile": {},
+        "sentinel_label": {
           "type": "string"
         }
       }

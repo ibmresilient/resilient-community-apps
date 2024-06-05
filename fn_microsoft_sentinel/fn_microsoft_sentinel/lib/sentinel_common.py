@@ -3,12 +3,12 @@
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 from calendar import timegm
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from logging import getLogger
 from time import strptime
 from uuid import uuid1
 
-from resilient_lib import IntegrationError, RequestsCommon
+from resilient_lib import IntegrationError, RequestsCommon, str_to_bool, readable_datetime
 from simplejson.errors import JSONDecodeError
 
 from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
@@ -53,46 +53,47 @@ ENTITY_TYPE_LOOKUP = {
     "submission mail": "Email Body"
 }
 
-# Extra parameters possible in sentinel section for requests calls
-REQUEST_PARAMS = {
-    'verify': lambda val: False if val and val.lower() in ['false', 'no', 'off', '0'] else val,
-    'cert': str
-}
-
 LOG = getLogger(__name__)
 
 class SentinelAPI():
     """ class to manage authentication and API calls to Sentinel """
-    def __init__(self, opts, options):
+    def __init__(self, opts, options, sentinel_server=None):
         """
         Build the connection class for Sentinel
         :param opts (Dict): All of the configurations in the app.config
         :param options (Dict): function_section parameters
+        :param sentinel_server (Dict): Settings from the labeled Sentinel Server in the app.config
         """
+        self.base_url = options.get("azure_url", None)
         self.polling_lookback = int(options.get("polling_lookback", DEFAULT_POLLER_LOOKBACK_MINUTES))
-        self.base_url = options.get("azure_url")
-        self.rc = RequestsCommon(opts, options)
-        self.tenant_id = options.get("tenant_id")
-        self.client_id = options.get("client_id")
-        self.app_secret = options.get("app_secret")
-        self.kwargs = self.get_requests_kwargs(REQUEST_PARAMS, options)
-        LOG.debug(f"kwargs: {self.kwargs}")
-
+        verify = options.get("verify", "True")
         self.api_version = API_VERSION
-        # If api_version is given in the app.config
-        if options.get("api_version"):
+        # If api_version is given in the app.config under [fn_microsoft_sentinel].
+        if options.get("api_version", None):
             self.api_version = f"api-version={options.get('api_version')}"
+        self.proxies = {}
+        if options.get("https_proxy", None):
+            self.proxies["https"] = options.get("https_proxy", None)
 
+        self.rc = RequestsCommon(opts, options)
+        
+        if not sentinel_server: # If using the old app.config with sentinel_profiles setting.
+            self.tenant_id = options.get("tenant_id", None)
+            self.client_id = options.get("client_id", None)
+            self.app_secret = options.get("app_secret", None)
+        else: # If using the new app.config with ms_sentinel_labels setting.
+            self.tenant_id = sentinel_server.get("tenant_id", None)
+            self.client_id = sentinel_server.get("client_id", None)
+            self.app_secret = sentinel_server.get("app_secret", None)
+            if not options.get("verify", None):
+                verify = sentinel_server.get("verify", "True") # Get verify setting from labeled Sentinel server.
+            if not options.get("api_version", None) and sentinel_server.get("api_version", None):
+                self.api_version = f"api-version={sentinel_server.get('api_version')}" # Get api_version setting from labeled Sentinel server.
+            if not self.proxies and sentinel_server.get("https_proxy", None):
+                self.proxies["https"] = sentinel_server.get("https_proxy", None) # Get https_proxy setting from labeled Sentinel server.
+
+        self.verify = str_to_bool(verify) if isinstance(verify, str) and verify.lower() in ["false", "true"] else verify
         self.access_token = None
-
-    def get_requests_kwargs(self, params_list, options):
-        """
-        Create dictionary of addl parameters to send to the requests call
-        :param params_list [dict]: parameters to include if specified in [function_section]
-        :param options [dict]: function_section parameters
-        :return [dict]: returned values, with any conversion is necessary
-        """
-        return { k:opr(options[k]) for k, opr in params_list.items() if k in options }
 
     def _authenticate(self, app_scope=AUTH_SCOPE):
         """
@@ -109,7 +110,7 @@ class SentinelAPI():
             "client_secret": self.app_secret,
             "grant_type": "client_credentials"
         }
-        result = self.rc.execute("POST", authenticate_url, data=post_data, **self.kwargs)
+        result = self.rc.execute("POST", authenticate_url, data=post_data, verify=self.verify, proxies=self.proxies)
         result_json = result.json()
 
         if "access_token" in result_json:
@@ -148,12 +149,14 @@ class SentinelAPI():
             if oper in ["PUT", "POST", "PATCH"]:
                 result, status = self.rc.execute(oper, url_endpoint, json=payload, headers=headers,
                     callback=callback_response,
-                    **self.kwargs
+                    verify=self.verify,
+                    proxies=self.proxies
                 )
             else:
                 result, status = self.rc.execute(oper, url_endpoint, params=payload, headers=headers,
                     callback=callback_response,
-                    **self.kwargs
+                    verify=self.verify,
+                    proxies=self.proxies
                 )
         except Exception as err:
             LOG.error(str(err))
@@ -171,11 +174,12 @@ class SentinelAPI():
 
         return result, status, reason
 
-    def query_incidents(self, profile_data):
+    def query_incidents(self, profile_data, last_poller_time):
         """
         Query Sentinel for all incidents created within the last polling window. If first time,
         then use a lookback value.
         :param profile_data [dict]: Profile to query incidents
+        :param last_poller_time [int]: epoch time the poller last ran
         :return result [dict]: API results
         :return status [bool]: True if API call was successful
         :return reason [str]: Reason of error when status=False
@@ -188,7 +192,7 @@ class SentinelAPI():
         )
 
         # Build filter information
-        last_poller_datetime = self._get_last_poller_date(profile_data)
+        last_poller_datetime = datetime.fromtimestamp(int(last_poller_time / 1000), timezone.utc)
         payload = {"$filter": self._make_createdate_filter(last_poller_datetime)}
 
         result, status, reason = self._call(url, payload=payload)
@@ -200,16 +204,16 @@ class SentinelAPI():
         LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
-    def query_next_incidents(self, profile_data, nextlink):
+    def query_next_incidents(self, nextlink, last_poller_time):
         """
         Get the next set of incident data
-        :param profile_data ([dict]): app settings for this profile
         :param nextlink [str]: url
+        :param last_poller_time [int]: epoch time the poller last ran
         :return result [dict]: API results
         :return status [bool]: True if API call was successful
         :return reason [str]: Reason of error when status=False
         """
-        last_poller_datetime = self._get_last_poller_date(profile_data)
+        last_poller_datetime = datetime.fromtimestamp(int(last_poller_time / 1000), timezone.utc)
 
         result, status, reason = self._call(nextlink)
         if status:
@@ -231,15 +235,15 @@ class SentinelAPI():
         """
         # Loop through all incidents and filter out older incidents outside poller window
         filtered = []
-        for inc in result['value']:
+        for inc in result.get('value', []):
             try:
-                str_date = inc['properties'][field]
-                incident_last_modified_date = datetime.strptime(str_date[:str_date.rfind('.')], date_format)
+                str_date = inc.get('properties', {}).get(field)
+                incident_last_modified_date = datetime.strptime(str_date[:str_date.rfind('.')], date_format).replace(tzinfo=timezone.utc)
                 if incident_last_modified_date >= poller_last_modified_date:
                     filtered.append(inc)
-                    LOG.debug(f"Allowing incident:{inc['name']} {incident_last_modified_date.isoformat()}")
+                    LOG.debug(f"Allowing incident:{inc.get('name')} {incident_last_modified_date.isoformat()}")
                 else:
-                    LOG.debug(f"Filtering incident:{inc['name']} {incident_last_modified_date.isoformat()}")
+                    LOG.debug(f"Filtering incident:{inc.get('name')} {incident_last_modified_date.isoformat()}")
 
             except ValueError as err:
                 LOG.error(str(err))
@@ -347,23 +351,7 @@ class SentinelAPI():
 
         # Remove milliseconds
         return "properties/lastModifiedTimeUtc ge {lookback_date}Z"\
-                    .format(lookback_date=last_poller_datetime_iso[:last_poller_datetime_iso.rfind('.')])
-
-    def _get_last_poller_date(self, profile_data):
-        """
-        Get the last poller datetime based on a profile. If first time, use the lookback
-        parameter to calculate it from the current datetime.
-        :param profile_data [str]: Profile to get last poller runtime
-        :return [datetime]: Datetime to use for last poller run time
-        """
-        if profile_data.get('last_poller_time'):
-            last_poller_datetime = profile_data['last_poller_time']
-            LOG.debug(f"last_poller_time: {last_poller_datetime.isoformat()}")
-        else:
-            # Use lookback value
-            last_poller_datetime = datetime.utcnow() - timedelta(minutes=self.polling_lookback)
-
-        return last_poller_datetime
+                    .format(lookback_date=last_poller_datetime_iso[:last_poller_datetime_iso.rfind('+')])
 
     def create_update_incident(self, profile_data, sentinel_incident_id, incident_payload):
         """

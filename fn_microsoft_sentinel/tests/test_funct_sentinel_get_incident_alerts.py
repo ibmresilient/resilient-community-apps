@@ -10,7 +10,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 FUNCTION_NAME = "sentinel_get_incident_alerts"
 
 # Read the default configuration-data section from the package
-config_data = helper.config_data
+config_data = helper.config_data1
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

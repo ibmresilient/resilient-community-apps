@@ -36,7 +36,15 @@
     {% if properties.additionalData.tactics %}
       ,"sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
     {% endif %}
-    ,"sentinel_profile": "{{ soar_profile }}"
+    {% if soar_profile %}
+      ,"sentinel_profile": "{{ soar_profile }}"
+    {% endif %}
+    {% if resilient_profile %}
+      ,"sentinel_profile": "{{ resilient_profile }}"
+    {% endif %}
+    {% if soar_label %}
+      ,"sentinel_label": "{{ soar_label }}"
+    {% endif %}
   }
   {% if properties.status == "Closed" %}
     ,

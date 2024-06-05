@@ -10,7 +10,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 FUNCTION_NAME = "sentinel_get_incident_comments"
 
 # Read the default configuration-data section from the package
-config_data = helper.config_data1
+config_data = helper.config_data2
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -39,9 +39,8 @@ def call_sentinel_get_incident_comments_function(circuits, function_params, time
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
-
-class TestSentinelGetIncidentComments:
-    """ Tests for the sentinel_get_incident_comments function"""
+class TestSentinelGetIncidentComments2:
+    """ Tests for the sentinel_get_incident_comments function with version 2.1.0's app.config """
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -49,7 +48,7 @@ class TestSentinelGetIncidentComments:
         assert func is not None
 
     mock_inputs_1 = {
-        "sentinel_profile": "profile_a",
+        "sentinel_label": "label1",
         "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
         "incident_id": 2178
     }

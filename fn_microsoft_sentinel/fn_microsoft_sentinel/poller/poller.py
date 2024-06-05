@@ -58,11 +58,7 @@ class PollerComponent(AppFunctionComponent):
         :rtype: bool
         """
         # Validate required fields in app.config are set
-        validate_fields([{"name": "azure_url"},
-                         {"name": "client_id", "placeholder": "aaa-bbb-ddd"},
-                         {"name": "tenant_id", "placeholder": "aaa-bbb-ccc"},
-                         {"name": "app_secret", "placeholder": "aaa-bbb-eee"},
-                         {"name": "sentinel_profiles"}],
+        validate_fields([{"name": "azure_url"}],
                          self.options)
 
         self.polling_interval = int(self.options.get("polling_interval", 0))
@@ -95,15 +91,20 @@ class PollerComponent(AppFunctionComponent):
         :type last_poller_time: int
         """
         for profile_name, profile_data in self.sentinel_profiles.get_profiles().items():
-            result, status, _reason = self.sentinel_client.query_incidents(profile_data)
+            # If using the new app.config with ms_sentinel_labels, then set SentinelAPI connection with profile/label data.
+            if self.options.get("ms_sentinel_labels", None):
+                self.sentinel_client = SentinelAPI(self.opts, self.options, profile_data)
+            result, status, _reason = self.sentinel_client.query_incidents(profile_data, kwargs.get("last_poller_time"))
             if status:
                 self._parse_results(result, profile_name, profile_data)
-                if result.get("nextLink"):
+                while result.get("nextLink"):
                     LOG.debug("running nextLink")
                     result, status, _reason = self.sentinel_client.query_next_incidents(
-                        profile_data,
-                        result.get("nextLink")
+                        result.get("nextLink"),
+                        kwargs.get("last_poller_time")
                     )
+                    if status:
+                        self._parse_results(result, profile_name, profile_data)
 
     def _parse_results(self, result, profile_name, profile_data):
         """
@@ -205,9 +206,13 @@ class PollerComponent(AppFunctionComponent):
         :param profile_name [str]: [incident profile]
         :param soar_incident [dict]: [existing SOAR or none]
         """
-        # Add in the profile to track
-        sentinel_incident['soar_profile'] = profile_name
-        sentinel_incident['resilient_profile'] = profile_name
+        if self.options.get("ms_sentinel_labels", None):
+            # If using new app.config add label to track
+            sentinel_incident['soar_label'] = profile_name
+        else:
+            # Add in the profile to track
+            sentinel_incident['soar_profile'] = profile_name
+            sentinel_incident['resilient_profile'] = profile_name
 
         # Create a new incident
         incident_payload = self.jinja_env.make_payload_from_template(
@@ -226,7 +231,7 @@ def get_profile_filters(str_filters):
     :return [dict]: dictionary representation of filters
     """
     if not str_filters:
-        return None
+        return
 
     try:
         return loads(f"{{ {str_filters} }}")

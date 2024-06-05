@@ -3,56 +3,68 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/e5a310d8-a920-428c-ba13-e04300c1d50c",
-    "name": "e5a310d8-a920-428c-ba13-e04300c1d50c",
-    "etag": "\"06022ab4-0000-0100-0000-65c2829b0000\"",
+    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81",
+    "name": "b3763ac5-6319-496b-b404-6c5000418a81",
+    "etag": "\"1f01df97-0000-0100-0000-6616d7020000\"",
     "type": "Microsoft.SecurityInsights/Incidents",
     "properties": {
       "title": "Suspected brute-force attack attempt",
-      "description": "Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one. Once obtained, an attacker can have full access to the database. While this specific alert doesn't indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack. To investigate this suspected brute-force attempt, review it's origin (based on the application name and IP/Location), and try to find out whether it's recognized to you, or suspicious. If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names. Also, consider using only AAD authentication to further enhance your security posture.",
-      "severity": "Medium",
-      "status": "New",
+      "description": "Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.\u00a0 Once obtained, an attacker can have full access to the database. While this specific alert doesn't indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.\u00a0 To investigate this suspected brute-force attempt, review it's origin (based on the application name and IP/Location), and try to find out whether it's recognized to you, or suspicious.\u00a0 If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.\u00a0 Also, consider using only AAD authentication to further enhance your security posture.\u00a0",
+      "severity": "High",
+      "status": "Active",
       "owner": {
         "objectId": null,
         "email": null,
         "assignedTo": null,
-        "userPrincipalName": null
+        "userPrincipalName": null,
+        "ownerType": null
       },
-      "labels": [],
-      "lastModifiedTimeUtc": "2024-02-06T19:03:55.9750177Z",
-      "createdTimeUtc": "2024-02-06T18:31:01.9288406Z",
-      "incidentNumber": 3946,
+      "labels": [
+        {
+          "labelName": "test tag",
+          "labelType": "User"
+        },
+        {
+          "labelName": "another label",
+          "labelType": "User"
+        }
+      ],
+      "lastModifiedTimeUtc": "2024-04-10T18:14:26.8445378Z",
+      "createdTimeUtc": "2024-04-10T15:29:50.0960914Z",
+      "incidentNumber": 4609,
       "additionalData": {
         "alertsCount": 1,
         "bookmarksCount": 0,
-        "commentsCount": 1,
+        "commentsCount": 2,
         "alertProductNames": [
           "Azure Security Center"
         ],
         "tactics": [
           "PreAttack"
-        ]
+        ],
+        "techniques": []
       },
       "relatedAnalyticRuleIds": [
         "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/alertRules/14fefa89-3cdd-429f-923b-b524aa8c65c3"
       ],
-      "incidentUrl": "https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/e5a310d8-a920-428c-ba13-e04300c1d50c",
+      "incidentUrl": "https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81",
       "providerName": "Azure Sentinel",
-      "providerIncidentId": "3946"
+      "providerIncidentId": "4609"
     }
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2104,
-    "sentinel_incident_id": "e5a310d8-a920-428c-ba13-e04300c1d50c",
-    "sentinel_profile": "profile_a"
+    "incident_id": 2121,
+    "sentinel_incident_id": "b3763ac5-6319-496b-b404-6c5000418a81",
+    "sentinel_profile": null,
+    "sentinel_label": "label1"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-microsoft-sentinel",
-    "package_version": "2.0.0",
+    "package_version": "2.1.0",
     "host": "local",
-    "execution_time_ms": 965,
-    "timestamp": "2024-02-06 14:03:56"
+    "execution_time_ms": 2209,
+    "timestamp": "2024-04-10 14:14:26"
   }
 }

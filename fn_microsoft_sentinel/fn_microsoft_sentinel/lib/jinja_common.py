@@ -6,15 +6,14 @@ from json import loads
 from logging import getLogger
 from os.path import dirname, exists, isfile, join, realpath
 from time import strptime
-
-from resilient_circuits.template_functions import environment, render_json
+from resilient_lib import global_jinja_env, render_json
 
 LOG = getLogger(__name__)
 
 class JinjaEnvironment():
     def __init__(self):
         # Add the timestamp-parse function to the global JINJA environment
-        env = environment()
+        env = global_jinja_env()
         env.globals.update({
             "soar_datetimeformat": jinja_resilient_datetimeformat,
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
