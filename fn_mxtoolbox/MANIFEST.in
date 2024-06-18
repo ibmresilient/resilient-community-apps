@@ -1,0 +1,4 @@
+include README.md
+include fn_mxtoolbox/util/*
+include fn_mxtoolbox/LICENSE
+include fn_mxtoolbox/doc/*
