@@ -3,9 +3,9 @@
 
 import json
 import os
-import datetime
 from sys import api_version
 from unittest import mock
+import logging
 
 import pytest
 from mock import patch, Mock
@@ -226,7 +226,8 @@ def test_get_vulnerabilities(fx_generate_auth_token, app_common: AppCommon, capl
         # Test unusual number of vulnerabilities requested, but doesn't exceed the max
         test_response = load_json(PATH_VULNERABILITIES_MOCK)
         mock_api_call.return_value = test_response
-        vulns = app_common.get_vulnerabilities(["a", "b", "c"], num_results=60)
+        with caplog.at_level(logging.WARNING):
+            vulns = app_common.get_vulnerabilities(["a", "b", "c"], num_results=60)
         assert "Script may fail to execute." in caplog.text
         assert len(vulns) == 3      # There are test vulnerabilities in the dummy data
 
@@ -287,7 +288,7 @@ def test_get_vulnerabilities(fx_generate_auth_token, app_common: AppCommon, capl
     
 def test_update_issue(fx_generate_auth_token, app_common: AppCommon):
     '''
-    Test method to update an issue. Test if an error was returned by Wiz API
+    Test method to update an issue.
     '''
     with patch("fn_wiz.lib.app_common.AppCommon._api_call") as mock_api_call:
         # Test if update is successful
@@ -341,8 +342,9 @@ def test_sync_status_with_wiz(fx_generate_auth_token, app_common: AppCommon, cap
     
     with patch("fn_wiz.lib.app_common.AppCommon.update_issue") as mock_update:
         # Test if a case is closed with "Resolved" in SOAR, the corresponding issue cannot be closed in Wiz due to API restrictions
-        with pytest.raises(IntegrationError) as interror:
-            app_common.sync_status_with_wiz(issue_id, "Resolved")
+        with caplog.at_level(logging.WARNING):
+            with pytest.raises(IntegrationError) as interror:
+                app_common.sync_status_with_wiz(issue_id, "Resolved")
         assert interror.value.value == "Cannot update Wiz issue to be 'Resolved'"
         assert "Cannot update Wiz issue to be 'Resolved'" in caplog.text
         

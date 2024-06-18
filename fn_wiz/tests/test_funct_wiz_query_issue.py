@@ -3,15 +3,23 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch
 
 PACKAGE_NAME = "fn_wiz"
 FUNCTION_NAME = "wiz_query_issue"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Mock out configs
+config_data = """[fn_wiz]
+client_id=abcd-efgh
+client_secret=abcdefg-hijklmno
+endpoint_url=https://fake.app.wiz.com
+api_url=https://wizapi.io/graphql
+token_url=https://wizauth.io
+polling_interval=0
+polling_lookback=0
+"""
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

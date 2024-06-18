@@ -837,7 +837,7 @@ results = {
               "clientAuth"
             ],
             "authority_key_identifier": {
-              "keyid": "b76ba2eaa8aa848c79eab4da0f98b2c59576b9f4"
+              "keyid": "a12ab1abc1ab123c12abc1ab1a12a1a12345a1a1"
             },
             "subject_alternative_name": [
               "www.example.org",
@@ -849,7 +849,7 @@ results = {
               "www.example.edu",
               "www.example.net"
             ],
-            "subject_key_identifier": "b0933fe81782fd6cb2b61787cbe380fe829b019e",
+            "subject_key_identifier": "a12ab1abc1ab123c12abc1ab1a12a1a12345a1a2",
             "crl_distribution_points": [
               "http://crl3.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl",
               "http://crl4.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl"
@@ -858,15 +858,15 @@ results = {
               "digitalSignature",
               "keyEncipherment"
             ],
-            "1.3.6.1.4.1.11129.2.4.2": "0482016b0169007600eecdd064d5db1acec55cb79db4cd13a23287467cbcecde",
+            "1.3.6.1.4.1.11129.2.4.2": "1234567b1234567890abcde064d5db1acec55cb79db4cd13a12345678abcdefg",
             "CA": false,
             "ca_information_access": {
               "CA Issuers": "http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt",
               "OCSP": "http://ocsp.digicert.com"
             }
           },
-          "thumbprint": "f2aad73d32683b716d2a7d61b51c6d5764ab3899",
-          "serial_number": "c1fcb184518c7e3866741236d6b73f1",
+          "thumbprint": "a1abc12345678b716d2a7d61b51c6d5764ab1234",
+          "serial_number": "a1abc123456c7a1234567890d6b12a1",
           "issuer": {
             "C": "US",
             "CN": "DigiCert TLS RSA SHA256 2020 CA1",
