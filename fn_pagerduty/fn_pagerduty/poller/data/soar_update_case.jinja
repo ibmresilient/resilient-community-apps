@@ -1,0 +1,15 @@
+{
+  {# JINJA template for updating a SOAR incident from a PagerDuty incident #}
+  "severity_code": "{{ urgency | soar_substitute('{"high": "High", "low": "Low"}') }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "pd_incident_service_name": "{{ service.summary }}",
+    "pd_incident_service_id": "{{ service.id }}",
+    "pd_incident_status": "{{ status }}",
+    "pd_incident_escalation_policy_name": "{{ escalation_policy.summary }}",
+    "pd_incident_escalation_policy_id": "{{ escalation_policy.id }}"
+    {% if priority %}
+      ,"pd_incident_priority": "{{ priority.summary }}"
+    {% endif %}
+  }
+}
