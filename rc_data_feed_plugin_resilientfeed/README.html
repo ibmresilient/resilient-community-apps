@@ -411,8 +411,8 @@
         <article role="main" id="furo-main-content">
           <section id="data-feeder-for-soar">
 <h1>Data Feeder for SOAR<a class="headerlink" href="#data-feeder-for-soar" title="Link to this heading">¶</a></h1>
-<p>This package contains the QRadar SOAR (Resilient) plugin to the Data Feed extension. The Data Feed Extension allows you to maintain “replica” data for QRadar SOAR incidents, artifacts, tasks, notes, attachments and so on, in another QRadar SOAR organization in the same or different QRadar SOAR platform, as well as another CP4S environment. The updates are performed in near real-time.</p>
-<p>Refer to the documentation on the Data Feed extension for use cases supported and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
+<p>This package contains the QRadar SOAR (Resilient) plugin to the Data Feed suite of solutions. The Data Feed plugin allows you to maintain “replica” data for QRadar SOAR incidents, artifacts, tasks, notes, attachments and so on, in another QRadar SOAR organization in the same or different QRadar SOAR platform, as well as another QRadar Suite environment. The updates are performed in near real-time.</p>
+<p>Refer to the documentation on the Data Feed app for use cases supported and configuration options. Also refer to the other Data Feed plugins which can be used in combination.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -420,7 +420,9 @@
 <li><p>Transfer incident data between two Organizations within the same QRadar SOAR instance.</p></li>
 <li><p>Transfer incident data to more than one QRadar SOAR instance at the same time.</p></li>
 <li><p>Synchronized incident data objects include: artifacts, attachments, notes, milestones, tasks and datatables.</p></li>
+<li><p>Synchronize selective incident data based on a list of fields to exclude.</p></li>
 <li><p>Choice of databases to retain synchronization information: SQLite or PostgreSQL.</p></li>
+<li><p>V2.0 introduces bidirectional synchronization. See <a class="reference internal" href="#v20-changes"><span class="xref myst">V2.0 Changes</span></a> for more information.</p></li>
 </ul>
 </section>
 <section id="license">
@@ -439,22 +441,89 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-right"><p>4/2024</p></td>
+<tr class="row-even"><td class="text-right"><p>5/2024</p></td>
+<td class="text-right"><p>2.0.0</p></td>
+<td class="text-right"><p>Bi-directional synchronization between <em>source</em> and <em>destination</em> SOAR organizations</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>4/2024</p></td>
 <td class="text-right"><p>1.1.0</p></td>
 <td class="text-right"><p>Enhancements for datatable select/multi-select fields. Fixes for synchronizing task attachments and notes. Threaded updates for better performance.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<section id="v2-0-changes">
+<h3>V2.0 Changes<a class="headerlink" href="#v2-0-changes" title="Link to this heading">¶</a></h3>
+<p>2.0.0 introduces bidirectional changes. This can be used during a transitional period
+of moving to a new SOAR platform or QRadar Suite. This solution uses a shared PostgreSQL database and requires the SOAR data feeder plugin to be installed in <em>both</em> SOAR organization environment. One environment is considered the ‘source’ and the other as the ‘destination’.
+The following incident objects are synchronized:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Incident Object</p></th>
+<th class="head"><p>Source Synchronization</p></th>
+<th class="head"><p>destination Synchronization</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Incident</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>destination incident changes (ex. severity, date occurring, incident closing) are sync’d back to the <em>source</em> incident. New incidents in the <em>destination</em> SOAR will synchronize to the <em>source</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Notes</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>New <em>destination</em> notes synchronize to the <em>source</em> incident.</p></td>
+</tr>
+<tr class="row-even"><td><p>Artifacts</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>New <em>destination</em> artifacts synchronize to the <em>source</em> incident.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tasks</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Changes to tasks (ex. owner, due date, task completion) sync bidirectionally.</p></td>
+</tr>
+<tr class="row-even"><td><p>Task Notes</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Task Attachments</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Attachments</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Milestones</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Datatables</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>Bidirectional</p></td>
+<td><p>A custom rule is needed for each datatable to synchronize. Make sure the datatable exists in both the <em>source</em> and <em>destination</em> SOAR organizations.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See sections <a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a> and <a class="reference internal" href="#troubleshooting-tips"><span class="xref myst">Troubleshooting</span></a> below for key issues when using bidirectional synchronization.</p>
+</section>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<p>The integration package contains Python components that are called by the QRadar SOAR platform. These components run in the Resilient Circuits integration framework.
-The package also includes QRadar SOAR customizations that will be imported into the platform later.
-You perform these installation procedures at the QRadar SOAR integration server.</p>
-<p>Apps which are installed through the SOAR UI for App Host incorporate the UI components (rules and workflows) and no additional app installation is needed.</p>
+<p>This app can be used in either an App Host or an Integration Server configuration. Refer to the sections below for the steps to perform.</p>
 <section id="app-host-installation">
 <h3>App Host Installation<a class="headerlink" href="#app-host-installation" title="Link to this heading">¶</a></h3>
+<p>Apps which are installed through the SOAR UI for App Host incorporate the UI components (rules and workflows) and no additional app installation is needed.</p>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>IBM SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
@@ -462,7 +531,10 @@ You perform these installation procedures at the QRadar SOAR integration server.
 </section>
 <section id="integration-server">
 <h3>Integration Server<a class="headerlink" href="#integration-server" title="Link to this heading">¶</a></h3>
-<p>If adding support for PostgreSQL, upgrade the package as:</p>
+<ul class="simple">
+<li><p>When installing on an integration server, install this base Data Feeder app prior to installing the SOAR plugin <a class="reference external" href="https://exchange.xforce.ibmcloud.com/hub/extension/86511b76452a58f4cb3bccfd6b01b842">Data Feeder</a>.</p></li>
+<li><p>If adding support for PostgreSQL, install the package as:</p></li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">rc_data_feed_plugin_resilientfeed</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">[</span><span class="n">postgres</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -502,7 +574,7 @@ You perform these installation procedures at the QRadar SOAR integration server.
   
   <span class="p">[</span><span class="n">resilient_feed</span><span class="p">]</span>
   <span class="n">class</span><span class="o">=</span><span class="n">ResilientFeed</span>
-  <span class="c1"># provide configuration information to the target QRadar SOAR and Organization</span>
+  <span class="c1"># provide configuration information to the destination QRadar SOAR and Organization</span>
   <span class="n">host</span><span class="o">=</span><span class="n">localhost</span>
   <span class="c1">#proxy_host=</span>
   <span class="n">api_key_id</span><span class="o">=</span>
@@ -513,7 +585,7 @@ You perform these installation procedures at the QRadar SOAR integration server.
   <span class="n">org</span><span class="o">=</span>
   <span class="n">cafile</span><span class="o">=</span><span class="n">false</span>
   <span class="c1"># identify a sqlite db file to retain mapping between QRadar SOAR instances.</span>
-  <span class="n">sqlite_sync_file</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">file</span>
+  <span class="c1">#sqlite_sync_file=/path/to/file</span>
   <span class="c1"># postgresql db connection if sqlite_sync_file is not used</span>
   <span class="n">postgresql_connect</span><span class="o">=</span><span class="n">Driver</span><span class="o">=</span><span class="p">{</span><span class="n">PostgresSQL</span> <span class="n">Driver</span><span class="p">};</span><span class="n">Server</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="p">;</span><span class="n">DB</span><span class="o">=&lt;</span><span class="n">db</span><span class="o">&gt;</span><span class="p">;</span><span class="n">Port</span><span class="o">=</span><span class="mi">5432</span><span class="p">;</span><span class="n">connectTimeout</span><span class="o">=</span><span class="mi">0</span>
   <span class="n">postgresql_uid</span><span class="o">=&lt;</span><span class="n">acct</span><span class="o">&gt;</span>
@@ -526,14 +598,16 @@ You perform these installation procedures at the QRadar SOAR integration server.
   <span class="c1">#exclude_incident_fields=</span>
   <span class="c1"># optionally include references within the incident to source org_id and incident_id. Values true/false</span>
   <span class="n">sync_reference_fields</span><span class="o">=</span><span class="kc">True</span>
-  <span class="c1"># true|false - specify whether to delete the target incident if the source incident is deleted. Default: false</span>
+  <span class="c1"># true|false - specify whether to delete the destination incident if the source incident is deleted. Default: false</span>
   <span class="n">delete_incidents</span><span class="o">=</span><span class="n">false</span>
+  <span class="c1"># destination syncs changes back to source (new artifacts, notes, etc.). Only editing an incident or a task is supported</span>
+<span class="c1"># sync_role_source = True</span>
 </pre></div>
 </div>
 </section>
 <section id="matching-incident-fields">
 <h3>matching_incident_fields<a class="headerlink" href="#matching-incident-fields" title="Link to this heading">¶</a></h3>
-<p>Use this capability to filter which incidents and it’s tasks, notes, artifacts, etc. are sent to the target organization. Below are a few examples for how to use this capability.</p>
+<p>Use this capability to filter which incidents and it’s tasks, notes, artifacts, etc. are sent to the <em>destination</em> organization. Below are a few examples for how to use this capability.</p>
 <ul class="simple">
 <li><p>Filter on the incident owner.</p></li>
 </ul>
@@ -592,7 +666,7 @@ The following configuration items are supported:</p>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>host, #proxy_host, api_key_id, api_key_secret, #email,  #password, port, org, cafile</p></td>
 <td class="text-left"><p></p></td>
-<td class="text-left"><p>Specify the connection values similar to the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section for connection to the target SOAR environment</p></td>
+<td class="text-left"><p>Specify the connection values similar to the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section for connection to the <em>destination</em> SOAR environment</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>sqlite_sync_file</p></td>
 <td class="text-left"><p>/path/to/file</p></td>
@@ -623,12 +697,16 @@ The following configuration items are supported:</p>
 <td class="text-left"><p>Optional semicolon separated list of fields and field sections to exclude when synchronizing an incident.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>sync_reference_fields</p></td>
-<td class="text-left"><p>true|false</p></td>
-<td class="text-left"><p>Specify <code class="docutils literal notranslate"><span class="pre">True</span></code> to add information to the target incident to maintain the original org id incident id, sync host and incident create date. Fields are <code class="docutils literal notranslate"><span class="pre">df_org_id</span></code>, <code class="docutils literal notranslate"><span class="pre">df_inc_id</span></code>, <code class="docutils literal notranslate"><span class="pre">df_host</span></code> and <code class="docutils literal notranslate"><span class="pre">df_create_date</span></code>, respectively</p></td>
+<td class="text-left"><p>True|False</p></td>
+<td class="text-left"><p>Specify <code class="docutils literal notranslate"><span class="pre">True</span></code> to add information to the <em>destination</em> incident to maintain the original org id incident id, sync host and incident create date. Fields are <code class="docutils literal notranslate"><span class="pre">df_org_id</span></code>, <code class="docutils literal notranslate"><span class="pre">df_inc_id</span></code>, <code class="docutils literal notranslate"><span class="pre">df_host</span></code> and <code class="docutils literal notranslate"><span class="pre">df_create_date</span></code>, respectively</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>delete_incidents</p></td>
 <td class="text-left"><p>true|false</p></td>
-<td class="text-left"><p>Specify ‘True’ to delete the target incident and it’s data when the source incident is deleted</p></td>
+<td class="text-left"><p>Specify ‘True’ to delete the <em>destination</em> incident and it’s data when the <em>source</em> incident is deleted</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>sync_role_source</p></td>
+<td class="text-left"><p>true|false</p></td>
+<td class="text-left"><p>Specify ‘True’ to identify this SOAR organization as the <em>source</em> SOAR. ‘False’ represents the <em>destination</em> SOAR. The default is ‘True’.</p></td>
 </tr>
 </tbody>
 </table>
@@ -639,50 +717,54 @@ The following configuration items are supported:</p>
 <ul class="simple">
 <li><p>This functionality has been tested with QRadar SOAR instances &gt;= v48.
 There is presently an issue with v37.0 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use QRadar SOAR version &gt;=v37.1.</p></li>
-<li><p>The target QRadar SOAR platform must be at the same version or greater than the source QRadar SOAR platform.</p></li>
-<li><p>The target QRadar SOAR organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under <code class="docutils literal notranslate"><span class="pre">Administrator</span> <span class="pre">Settings</span></code>.</p></li>
-<li><p>The target QRadar SOAR organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty.</p></li>
+<li><p>The <em>destination</em> QRadar SOAR platform must be at the same version or greater than the <em>source</em> QRadar SOAR platform.</p></li>
+<li><p>The <em>destination</em> QRadar SOAR organization must have the same set of custom fields, datatables, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under <code class="docutils literal notranslate"><span class="pre">Administrator</span> <span class="pre">Settings</span></code>.</p></li>
+<li><p>The <em>destination</em> QRadar SOAR organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty.</p></li>
 <li><p>To synchronize datatables in real time, create rules specifying the <code class="docutils literal notranslate"><span class="pre">feed_data_resilient</span></code> message destination in order to changes.</p></li>
 </ul>
 </section>
 <section id="setup-steps">
 <h2>Setup Steps<a class="headerlink" href="#setup-steps" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Ensure QRadar SOAR version requirements are met for both the source and destination instances.</p></li>
-<li><p>Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the QRadar SOAR source organization and importing them to the target QRadar SOAR organization.</p></li>
-<li><p>Manually recreate the users and groups needed in the target QRadar SOAR organization.</p></li>
-<li><p>Configure the app.config settings with the settings for the target QRadar SOAR organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.</p></li>
+<li><p>Ensure QRadar SOAR version requirements are met for both the <em>source</em> and <em>destination</em> instances.</p></li>
+<li><p>Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the QRadar SOAR <em>source</em> organization and importing them to the <em>destination</em> QRadar SOAR organization.</p></li>
+<li><p>Manually recreate the users and groups needed in the <em>destination</em> QRadar SOAR organization.</p></li>
+<li><p>Configure the app.config settings with the settings for the <em>destination</em> QRadar SOAR organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code> to confirm connectivity to both instances of QRadar SOAR (with <code class="docutils literal notranslate"><span class="pre">reload=False</span></code>).</p></li>
-<li><p>The best way to test is to set <code class="docutils literal notranslate"><span class="pre">reload=False</span></code> under <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code> in your app.config file, and in the source QRadar SOAR organization, run the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> rule to synchronize a small number of incidents. Change the message destination of the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> function to <code class="docutils literal notranslate"><span class="pre">feed_data_resilient</span></code> as it may be used by another Data Feeder plugin.</p></li>
+<li><p>The best way to test is to set <code class="docutils literal notranslate"><span class="pre">reload=False</span></code> under <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code> in your app.config file, and in the <em>source</em> QRadar SOAR organization, run the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> rule to synchronize a small number of incidents. Change the message destination of the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code> function to <code class="docutils literal notranslate"><span class="pre">feed_data_resilient</span></code> as it may be used by another Data Feeder plugin.</p></li>
 </ol>
 <p><img alt="Changing Message Destination" src="../_images/sync_incidents_msg_destination.png" /></p>
 <ol class="arabic simple" start="7">
 <li><p>If using other Data Feeder plugins (ex. odbcfeed), change the Data Feeder rules to include the <code class="docutils literal notranslate"><span class="pre">feed_data_resilient</span></code> message destination. Restart resilient-circuits in order for the message destination change to take effect.</p></li>
 </ol>
 <p><img alt="Adding Message Destination" src="../_images/rule_msg_destinations.png" /></p>
+<section id="bidirectional-synchronization">
+<h3>Bidirectional Synchronization<a class="headerlink" href="#bidirectional-synchronization" title="Link to this heading">¶</a></h3>
+<p>Bidirectional synchronization is performed with the data feeder SOAR plugin installed in both SOAR/QRadar Suite organization environments, sharing the same database to track the relationship between incidents, tasks, notes, etc. When using App Host, this database must be PostgreSQL. PostgreSQL is also suggested in an Integration Server environment based on it’s robustness and performance.</p>
+<p>If bidirectional updates are unnecessary, then you only install this app in the <em>source</em> SOAR environment.</p>
+<p>When configuring each plugin, one SOAR organization is designated as the <em>source</em> (see app.config setting: sync_role_source) with the other designated as the <em>destination</em>. These identifiers are important to ensure database lookups are performed correctly when updating tasks, or creating new artifacts or notes in the <em>destination</em> SOAR organization.</p>
+<p>The database plays a key role to ensure there is no duplication of incidents, tasks, notes when creating or updating data. Special logic called debounce is used to ensure updates made from the either SOAR organization do not infinitely bounce back and forth between the two organizations. To that end, if there are repeated failures to persist data to the database, <strong>the app will shut down</strong>. Additional information can be found in the <a class="reference internal" href="#troubleshooting-tips"><span class="xref myst">Troubleshooting section</span></a>.</p>
+<p>Not all incident data changes made in the <em>destination</em> SOAR organization is returned to the <em>source</em> SOAR organization incident. For instance, changes to GDPR breach information <em>may</em> not synchronize. However, changes to the owner, severity, etc. and  closing the incident will synchronize.</p>
+</section>
 </section>
 <section id="considerations">
 <h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>If real-time synchronization remains in place, changes in the source QRadar SOAR data will overwrite any changes made in the target QRadar SOAR organization data.</p></li>
-<li><p>Deleting a source incident, task, artifact, etc. will also delete the matching target information.</p></li>
+<li><p>For non bidirectional synchronization environments, if real-time synchronization remains in place, changes in the <em>source</em> QRadar SOAR data will overwrite any changes made in the <em>destination</em> QRadar SOAR organization data.</p></li>
+<li><p>Deleting a <em>source</em> incident, task, artifact, etc. will also delete the matching <em>destination</em> information.</p></li>
 <li><p>Synchronization of incidents may fail if newer required fields were created that were not present on these older incidents. Same is true for newer ‘on close’ created fields. This can be overcome by changing the fields from <code class="docutils literal notranslate"><span class="pre">required</span></code> to <code class="docutils literal notranslate"><span class="pre">optional</span></code>.</p></li>
-<li><p>Unofficial timing tests shows creating incident data can take .3-.5 seconds each data type. Consider the time it will take for all your incident data to synchronize when using <code class="docutils literal notranslate"><span class="pre">reload=True</span></code>.</p></li>
-<li><p>Review the permissions given to target QRadar SOAR user or api_key. They must have the appropriate values to read and write incidents, artifacts, attachments, comments, milestones, tasks, and datatables. In addition, some incidents have wiki entries associated with them. Finally, older versions of QRadar SOAR also intermix simulation incidents. Provide the permission to create those as necessary.</p></li>
+<li><p>Unofficial timing tests shows creating incident data can take .3-.5 seconds per each data type. Consider the time it will take for all your incident data to synchronize when using <code class="docutils literal notranslate"><span class="pre">reload=True</span></code>.</p></li>
+<li><p>Review the permissions given to <em>destination</em> QRadar SOAR user or api_key. They must have the appropriate values to read and write incidents, artifacts, attachments, comments, milestones, tasks, and datatables. In addition, some incidents have wiki entries associated with them. Finally, older versions of QRadar SOAR also intermix simulation incidents. Provide the permission to create those as necessary.</p></li>
 </ul>
 <p><img alt="Permissions" src="../_images/permissions.png" /></p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>This solution is not intended for bidirectional synchronization.</p></li>
-<li><p>Unfortunately, the create date of the original incident is lost when the target incident is synchronized.</p></li>
+<li><p>Unfortunately, the create date of the original incident is lost when the <em>destination</em> incident is synchronized.</p></li>
 <li><p>Timer data cannot be synchronized.</p></li>
 <li><p>Presently, artifacts with custom artifact types cannot synchronize.</p></li>
-<li><p>Deleting a source incident task attachment presently doesn’t synchronize.</p></li>
 <li><p>Incident email messages (via the built-in Inbound Email Connectors) do not synchronize.</p></li>
-<li><p>It’s presently not possible to restrict synchronization of incident elements such as tasks, artifacts, notes, etc.
-when using <code class="docutils literal notranslate"><span class="pre">reload=all</span></code> and the action <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feeder:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code>.</p></li>
 </ul>
 </section>
 <section id="synchronization-methods">
@@ -690,7 +772,7 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 <p>Three methods exist for synchronizing incident data:</p>
 <ul class="simple">
 <li><p>reload=True - This app.config setting will synchronize all incidents (including those closed) each time resilient-circuits is run. Review performance considerations above in [Considerations].</p></li>
-<li><p>real-time changes - If the automatic rules for incident, artifact, tasks, etc. are enabled, then any change to a object will perform the synchronization to the target organization. Note: Datatable rules need to be created in order to synchronize them in real-time.</p></li>
+<li><p>real-time changes - If the automatic rules for incident, artifact, tasks, etc. are enabled, then any change to a object will perform the synchronization to the <em>source</em> (for bidirectional synchronization) and the <em>destination</em> organization. Note: Datatable rules need to be created in order to synchronize them in real-time.</p></li>
 <li><p>Data Feeder: Sync Incidents function - This function allows one to specify the range of incident data to synchronize. This is useful to limit the range of incidents to transmit.</p></li>
 </ul>
 </section>
@@ -704,13 +786,13 @@ when using <code class="docutils literal notranslate"><span class="pre">reload=a
 </section>
 <section id="database-support">
 <h2>Database Support<a class="headerlink" href="#database-support" title="Link to this heading">¶</a></h2>
-<p>An external database is used to maintain a mapping of the source incident data to the target incident data. For example, source incident 2100 maps to target incident 2222. The app will look up this relationship in order to update incident 2222 when ongoing changes to incident 2100 are made.
-Either a SQLite database (for integration servers) or a PostgreSQL (for app host or integration servers) can be used.</p>
+<p>An external database is used to maintain a mapping of the <em>source</em> and <em>destination</em> incident data. For example, <em>source</em> incident 2100 maps to <em>destination</em> incident 2222. The app will look up this relationship in order to update incident 2222 when ongoing changes to incident 2100 are made.
+Either a SQLite database (for Integration Servers) or a PostgreSQL (for app host or Integration Servers) can be used.</p>
 <section id="sqlite-database">
 <h3>SQLite Database<a class="headerlink" href="#sqlite-database" title="Link to this heading">¶</a></h3>
-<p>A SQLite database can be used to maintain a mapping of incident data between the source and target QRadar SOAR instances. <strong>This database cannot be used for App Host environments due to the restartability of containers.</strong> Two tables are maintained for data synchronization:</p>
+<p>A SQLite database can be used to maintain a mapping of incident data between the <em>source</em> and <em>destination</em> QRadar SOAR instances. <strong>This database cannot be used for App Host environments due to the restartability of containers.</strong> Two tables are maintained for data synchronization:</p>
 <ul class="simple">
-<li><p>data_feeder_sync - contains specific ids for source and target instances and status. The fields are as follows:</p></li>
+<li><p>data_feeder_sync - contains specific ids for <em>source</em> and <em>destination</em> instances and status. The fields are as follows:</p></li>
 </ul>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -755,27 +837,27 @@ Either a SQLite database (for integration servers) or a PostgreSQL (for app host
 <p>There are many tools to view the db tables, including open-source solutions. DBeaver is one open-source application supporting many different database types including sqlite.</p>
 <p>Use the following SQL statements for problem diagnostics:</p>
 <ul class="simple">
-<li><p>select * from data_feeder_sync where org2=<target organization></p></li>
-<li><p>select * from data_feeder_retry where org2=<target organization></p></li>
+<li><p>select * from data_feeder_sync where org2=<destination organization></p></li>
+<li><p>select * from data_feeder_retry where org2=<destination organization></p></li>
 </ul>
 <p><img alt="DBeaver" src="../_images/db_view.png" /></p>
 </section>
 <section id="postgresql-database">
 <h3>PostgreSQL Database<a class="headerlink" href="#postgresql-database" title="Link to this heading">¶</a></h3>
 <p>Like the SQLite database, the same table structures are created and maintained in PostgreSQL.</p>
-<p>Use the SQLite DB if performing a one-time or limited-timeframe synchronization. Use PostgreSQL for continuously synchronization or when using App Host containers.</p>
+<p>Use the SQLite DB if performing a one-time or limited-timeframe synchronization. Use PostgreSQL for continuously synchronization or when using App Host containers. PostgresSQL is the only database supported for the bi-directional synchronization option.</p>
 </section>
 </section>
 <section id="troubleshooting-tips">
 <h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Link to this heading">¶</a></h2>
 <p>Synchronization could fail for the following reasons:</p>
 <ul class="simple">
-<li><p>Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the target QRadar SOAR organization. Also check the permissions set on your target QRadar SOAR user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.</p></li>
+<li><p>Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the <em>destination</em> QRadar SOAR organization. Also check the permissions set on your <em>destination</em> QRadar SOAR user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.</p></li>
 <li><p>Artifacts with custom artifact types cannot be synchronized at this time.</p></li>
 <li><p>Older incident fields missing required fields defined at a later point in time. The only remedy is to modify the definition of the fields from <code class="docutils literal notranslate"><span class="pre">required</span></code> to <code class="docutils literal notranslate"><span class="pre">optional</span></code> and then resync the field using the rule <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Feed:</span> <span class="pre">Sync</span> <span class="pre">Incidents</span></code>.</p></li>
 <li><p>Matching criteria filtered the incident. Review the values specified in <code class="docutils literal notranslate"><span class="pre">matching_incident_fields</span></code> and the value specified in <code class="docutils literal notranslate"><span class="pre">matching_operator</span></code>.
 If a field is richtext, use the <code class="docutils literal notranslate"><span class="pre">~</span></code> operator to find the value. For example: description ~ warning.</p></li>
-<li><p>Change the log level to debug to receive additional troubleshooting information on synchronization issues.</p></li>
+<li><p>Change the log level to DEBUG to receive additional troubleshooting information on synchronization issues.</p></li>
 <li><p>Changes to tasks, artifacts, notes, etc. before the incident is synchronized.</p>
 <ul>
 <li><p>If the log displays a message such as:
@@ -786,6 +868,15 @@ Run the incident action: <code class="docutils literal notranslate"><span class=
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">resilient</span><span class="p">]</span>
 <span class="n">loglevel</span> <span class="o">=</span> <span class="n">DEBUG</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For bidirectional synchronization, if there are more than 5 consecutive failures to update the database, the app will be shutdown. This is necessary as database failures can cause updates between the <em>source</em> and <em>destination</em> organizations to bounce back and forth infinitely creating duplicates of the data in question: incident, note, task, artifact, etc.</p></li>
+<li><p>This is what the logs will look like when the final database errors occur and when the app is shutdown. The remediation steps are to review the errors (possibly database access is lost), correct the issue, and restart the app.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">25</span> <span class="mi">20</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">363</span> <span class="n">ERROR</span> <span class="p">[</span><span class="n">db_sync_postgres</span><span class="p">]</span> <span class="p">[</span><span class="n">MainThread</span><span class="p">]</span> <span class="n">find_sync_row</span> <span class="n">err</span> <span class="p">(</span><span class="s1">&#39;08S01&#39;</span><span class="p">,</span> <span class="s1">&#39;[08S01] SQLPrepareW unable due to the connection lost (35) (SQLPrepare)&#39;</span><span class="p">)</span>
+<span class="mi">2024</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">25</span> <span class="mi">20</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">363</span> <span class="n">ERROR</span> <span class="p">[</span><span class="n">threadpool</span><span class="p">]</span> <span class="p">[</span><span class="n">MainThread</span><span class="p">]</span> <span class="n">Critical</span> <span class="n">failure</span> <span class="ow">in</span> <span class="n">feed</span><span class="p">:</span> <span class="n">resilient_feed</span> <span class="n">SyncRowError</span><span class="p">(</span><span class="n">OperationalError</span><span class="p">(</span><span class="s1">&#39;08S01&#39;</span><span class="p">,</span> <span class="s1">&#39;[08S01] SQLPrepareW unable due to the connection lost (35) (SQLPrepare)&#39;</span><span class="p">))</span><span class="o">.</span> <span class="n">Removing</span> <span class="n">plugin</span>
+<span class="mi">2024</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">25</span> <span class="mi">20</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">364</span> <span class="n">INFO</span> <span class="p">[</span><span class="n">threadpool</span><span class="p">]</span> <span class="p">[</span><span class="n">MainThread</span><span class="p">]</span> <span class="n">No</span> <span class="n">feed</span> <span class="n">found</span> <span class="ow">or</span> <span class="n">failure</span> <span class="n">to</span> <span class="n">satisfy</span> <span class="n">workspace</span><span class="p">:</span> <span class="s1">&#39;Default workspace&#39;</span> <span class="k">for</span> <span class="n">task</span> <span class="p">(</span><span class="mi">256</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -849,7 +940,10 @@ Run the incident action: <code class="docutils literal notranslate"><span class=
 <li><a class="reference internal" href="#">Data Feeder for SOAR</a><ul>
 <li><a class="reference internal" href="#features">Features</a></li>
 <li><a class="reference internal" href="#license">License</a></li>
-<li><a class="reference internal" href="#history">History</a></li>
+<li><a class="reference internal" href="#history">History</a><ul>
+<li><a class="reference internal" href="#v2-0-changes">V2.0 Changes</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#app-host-installation">App Host Installation</a></li>
 <li><a class="reference internal" href="#integration-server">Integration Server</a></li>
@@ -859,7 +953,10 @@ Run the incident action: <code class="docutils literal notranslate"><span class=
 </li>
 <li><a class="reference internal" href="#resilientfeed-class">ResilientFeed Class</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
-<li><a class="reference internal" href="#setup-steps">Setup Steps</a></li>
+<li><a class="reference internal" href="#setup-steps">Setup Steps</a><ul>
+<li><a class="reference internal" href="#bidirectional-synchronization">Bidirectional Synchronization</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#considerations">Considerations</a></li>
 <li><a class="reference internal" href="#limitations">Limitations</a></li>
 <li><a class="reference internal" href="#synchronization-methods">Synchronization Methods</a></li>
