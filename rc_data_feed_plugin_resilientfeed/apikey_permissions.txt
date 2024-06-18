@@ -38,7 +38,7 @@ read_incident_public_task
 #edit_group
 #create_users
 #edit_users
-#read_users
+read_users
 #
 ## workflow permissions - needed when using workflow_id
 #read_workflow

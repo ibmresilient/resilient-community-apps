@@ -160,7 +160,7 @@ def parse_matching_criteria(filters, filter_operator):
                     match_value = json.loads(match_value.replace("'", '"'))  # make sure correct json format
                 except Exception as err:
                     LOG.error(str(err))
-                    pass
+
             # determine if working with a string, boolean, or int
             elif match_value in ["true", "True", "false", "False"]:
                 match_value = str_to_bool(match_value)

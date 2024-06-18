@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """Function implementation"""
 
 import logging
 import json
 import re
-from data_feeder_plugins.resilientfeed.lib.filters import Filters, parse_matching_criteria, MatchError
-from resilient_lib import str_to_bool
-from rc_data_feed.lib.feed import FeedDestinationBase
 from .resilient_common import Resilient
+from data_feeder_plugins.resilientfeed.lib.filters import Filters, parse_matching_criteria, MatchError
+from data_feeder_plugins.resilientfeed.lib.db_sync_common import SyncRowError
+from rc_data_feed.lib.feed import FeedDestinationBase, CriticalPluginError
+from resilient_lib import str_to_bool
 
 LOG = logging.getLogger(__name__)
 
@@ -24,6 +25,9 @@ DF_ORG_ID = "df_org_id"
 DF_HOST = "df_host"
 DF_ORIGINAL_CREATE_DATE = "df_create_date"
 
+# number of errors to sync to the db before we close down the app
+MAX_SYNC_ROW_ERRORS = 5
+
 """
 This module contains the ResilientFeedDestination for writing Resilient data
 to an instance of Resilient.
@@ -35,9 +39,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         super(ResilientFeedDestination, self).__init__()
         self.options = options
 
-        self.resilient_source = Resilient(options, rest_client_helper)
-        self.resilient_target = Resilient(options, None)
-
         # incident fields to exclude
         self.exclude_fields = options.get("exclude_incident_fields", "").replace(" ", "").split(";")
         self.sync_references = str_to_bool(options.get("sync_reference_fields", "false"))
@@ -45,10 +46,23 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         self.match_list, self.match_operator_and = parse_matching_criteria(options.get("matching_incident_fields", None),
                                                                            options.get("matching_operator", None))
+        # role
+        self.is_source = str_to_bool(options.get("sync_role_source", "true"))
+        LOG.info(f"Sync role: {'source' if self.is_source else 'target'}")
+
+        self.resilient_source = Resilient(options, rest_client_helper, self.is_source)
+        self.resilient_target = Resilient(options, None, self.is_source)
+
+        self.sync_error_count = 0
+
+        # ensure that this combination of source and target do not represent a source/source relationship
+        if self.is_source and not self.resilient_target.register_configuration(self.resilient_source.rest_client.base_url,
+                                                                               self.resilient_source.rest_client.org_name):
+            raise CriticalPluginError("source and destination environments are both configured to 'sync_role_source=true'")
 
     def send_data(self, context, payload):
         """
-        synchronize a object between Resilient instances. Steps performed are:
+        synchronize an object between SOAR instances. Steps performed are:
         1) Convert id references to values
         2) Match incident filter criteria
         3) cleanup loads, removing fields identified
@@ -57,97 +71,107 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         :param payload:
         :return: None
         """
-        type_name = context.type_info.get_pretty_type_name()
-
-        orig_type_id = payload.get('id', None)
-        if context.is_deleted:
-            _type_id = self.resilient_target.delete_type(self.resilient_source.rest_client.org_id, context.inc_id,
-                                                         type_name, payload, orig_type_id, delete=self.delete_incidents)
-
-            return
-
-        # set up the criteria to accept incident synchronizing, if any
-        matching_criteria = Filters(self.match_list, self.match_operator_and)
-
-        # check for attachments and artifacts with attachments
-        if type_name == "attachment" or (type_name == "artifact" and payload.get("attachment", None)):
-            cleaned_payload = self.clean_payload(context.inc_id, type_name, payload)
-
-            self.resilient_target.upload_attachment(self.resilient_source.rest_client,
-                                                    self.resilient_source.rest_client.org_id, context.inc_id,
-                                                    type_name, cleaned_payload, orig_type_id)
-            return
-
-        src_field_names = self.build_field_names(context, self._is_datatable(payload))
-        # get target org field names
-        target_field_names = self.resilient_target.get_type_info(type_name)
-
-        # convert selection lists and multi-selection lists to values, not id's
         try:
-            # make sure datatables exist in new org
-            if self._is_datatable(payload) and not target_field_names:
-                LOG.warning(u"Discarding datatable not found in target org: %s", type_name)
+            type_name = context.type_info.get_pretty_type_name()
+
+            orig_type_id = payload.get('id', None)
+            if context.is_deleted:
+                _type_id = self.resilient_target.delete_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                                                             type_name, payload, orig_type_id, delete=self.delete_incidents)
+
                 return
 
-            if self._is_datatable(payload):
-                new_payload = self.convert_datatable_values(src_field_names, payload)
-                discard_list = None
-            else:
-                # get the fields for the target resilient
-                new_payload, discard_list = self.convert_values(matching_criteria, type_name,
-                                                                src_field_names, target_field_names,
-                                                                None, payload)
+            # set up the criteria to accept incident synchronizing, if any
+            matching_criteria = Filters(self.match_list, self.match_operator_and)
 
-            # remove fields unrelated to creating/upgrading an object
-            cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
+            # check for attachments and artifacts with attachments
+            if type_name == "attachment" or (type_name == "artifact" and payload.get("attachment", None)):
+                cleaned_payload = self.clean_payload(context.inc_id, type_name, payload)
 
-            # perform the creation or update in the new resilient org
-            new_id, opr_type = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
-                                                                        type_name, cleaned_payload, orig_type_id)
+                # determine if this is a task attachment
+                _orig_task_id, _sync_task_id, mapped_type_name, _is_child_note = self.resilient_target._map_parent(self.resilient_source.rest_client.org_id, 
+                                                                                                                   context.inc_id, type_name, payload)
 
-            addl_create_list = []
-            # create a note for the downstream incident when created
-            if new_id and opr_type == "created" and type_name == "incident":
-                note = u"Incident created from \nHost:{}\nOrg {}\nIncident {}".format(self.resilient_source.get_source_host(),
-                                                                                      self.resilient_source.rest_client.org_id,
-                                                                                      context.inc_id)
-                if discard_list:
-                    note = u"{}\n\nDiscarded fields: \n{}".format(note, "\n".join(discard_list))
+                self.resilient_target.upload_attachment(self.resilient_source.rest_client,
+                                                        self.resilient_source.rest_client.org_id, context.inc_id,
+                                                        mapped_type_name, cleaned_payload, orig_type_id)
+                return
 
-                payload = {
-                    "text": {
-                        "format": "text",
-                        "content": note
+            src_field_names = self.build_field_names(context, self._is_datatable(payload))
+            # get target org field names
+            target_field_names = self.resilient_target.get_type_info(type_name)
+
+            # convert selection lists and multi-selection lists to values, not id's
+            try:
+                # make sure datatables exist in new org
+                if self._is_datatable(payload) and not target_field_names:
+                    LOG.warning("Discarding datatable not found in target org: %s", type_name)
+                    return
+
+                if self._is_datatable(payload):
+                    new_payload = self.convert_datatable_values(src_field_names, payload)
+                    discard_list = None
+                else:
+                    # get the fields for the target resilient
+                    new_payload, discard_list = self.convert_values(matching_criteria, type_name,
+                                                                    src_field_names, target_field_names,
+                                                                    None, payload)
+
+                # remove fields unrelated to creating/upgrading an object
+                cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
+
+                # perform the creation or update in the new resilient org
+                new_id, opr_type = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                                                                            type_name, cleaned_payload, orig_type_id)
+
+                addl_create_list = []
+                # create a note for the downstream incident when created
+                if new_id and opr_type == "created" and type_name == "incident":
+                    note = f"Incident created from \nHost:{self.resilient_source.get_source_host()}\nOrg {self.resilient_source.rest_client.org_id}\nIncident {context.inc_id}"
+                    if discard_list:
+                        discard_fields = '\n'.join(discard_list)
+                        note = f"{note}\n\nDiscarded fields: \n{discard_fields}"
+
+                    payload = {
+                        "text": {
+                            "format": "text",
+                            "content": note
+                        }
                     }
-                }
-                sync_inc_id, new_type_id = self.resilient_target._create_type(new_id, None, "note", payload)
-                if sync_inc_id:
-                    addl_create_list.append("{}:{}".format('note', new_type_id))
+                    sync_inc_id, new_type_id = self.resilient_target._create_type(new_id, None, "note", payload)
+                    if sync_inc_id:
+                        addl_create_list.append(f"note:{new_type_id}")
 
-            # retry any types which are dependent on this created object
-            # TODO duplicates need to look for dependencies
-            if new_id:
-                retry_create_list = self.retries(self.resilient_source.rest_client.org_id,
-                                                 context.inc_id,
-                                                 type_name)
-                addl_create_list.extend(retry_create_list)
+                # retry any types which are dependent on this created object
+                if new_id:
+                    retry_create_list = self.retries(self.resilient_source.rest_client.org_id,
+                                                    context.inc_id,
+                                                    type_name)
+                    addl_create_list.extend(retry_create_list)
 
-            new_id and LOG.debug("%s:%s %s, additional updates: %s", type_name, new_id, opr_type, addl_create_list)
-        except MatchError as err:
-            LOG.info("%s on Incident %s", err, context.inc_id)
+                new_id and LOG.debug("%s:%s %s, additional updates: %s", type_name, new_id, opr_type, addl_create_list)
+            except MatchError as err:
+                LOG.info("%s on Incident %s", err, context.inc_id)
 
-            # create a sync entry so we know we skipped this incident
-            self.resilient_target.dbsync.create_sync_row(self.resilient_source.rest_client.org_id, context.inc_id,
-                                                         type_name, orig_type_id,
-                                                         None, None, "filtered")
+                # create a sync entry so we know we skipped this incident
+                self.resilient_target.dbsync.create_sync_row(self.resilient_source.rest_client.org_id, context.inc_id,
+                                                            type_name, orig_type_id,
+                                                            None, None, "filtered")
+            self.sync_error_count = 0 # reset the consecutive counter
+        except SyncRowError as err:
+            self.sync_error_count += 1  # track consecutive errors
+            # critical issue when app fails db updates. This is remove the plugin
+            # from execution.
+            if self.sync_error_count > MAX_SYNC_ROW_ERRORS:
+                raise CriticalPluginError(err) from err
 
     def retries(self, orig_org_id, orig_inc_id, type_name):
         """This function performs retries against incident objects, tasks, artifacts, notes, etc.
         which were requeued until the incident object was successfully sync'd to the target SOAR.
-        Syncing of these objects will continue for all objects related to that incident. Requeueing 
+        Syncing of these objects will continue for all objects related to that incident. Requeueing
         is possible if synchronization fails for any reason.
 
-        :param orig_org_id: original org_id 
+        :param orig_org_id: original org_id
         :type orig_org_id: int
         :param orig_inc_id: original incident_id
         :type orig_inc_id: int
@@ -160,7 +184,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         # determine if there are any retries needed
         retry_list = self.resilient_target.dbsync.find_retry_rows(orig_org_id, orig_inc_id,
                                                                   self.resilient_target.return_type_parent(type_name, type_name))
-        # retry any object queued for retry based on a dependency 
+        # retry any object queued for retry based on a dependency
         # this can occur when tasks show up in msg destination before the incident
         #   and artifacts that have parent artifacts
         for retry_item in retry_list:
@@ -168,8 +192,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             retry_orig_id = retry_item[0]
             retry_sync_inc_id = retry_item[1]
             retry_type_name = retry_item[2]
-            #retry_orig_id = retry_item[3] if retry_type_name in ['tasknote', 'taskattachment'] else retry_item[0]
-            dep_type_id = retry_item[3] # task_id for tasknote and taskattachment, inc_id
+
             retry_payload = json.loads(retry_item[4]) # deserialize the payload back to json
             retry_count = retry_item[5]
 
@@ -188,7 +211,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                                                             retry_orig_id, retry_count=retry_count)
 
             if new_type_id:
-                retry_create_list.append("{}:{}".format(retry_type_name, new_type_id))
+                retry_create_list.append(f"{retry_type_name}:{new_type_id}")
 
         return retry_create_list
 
@@ -201,6 +224,20 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         return bool(payload.get("table_name", None))
 
     def convert_datatable_values(self, src_field_names, payload):
+        # Assisted by WCA@IBM
+        # Latest GenAI contribution: ibm/granite-20b-code-instruct-v2
+        """
+        This function converts numeric Ids (such as owner_id) the related value.
+
+        :param src_field_names: A dictionary containing information about the
+                                incident, task, note, etc. fields, 
+                                including their names and input types.
+        :param payload: The payload containing the values of Ids.
+        :type: dict
+
+        :return: A dictionary containing the converted values 
+        :rtype: dict
+        """
         new_fields = {}
         cells = payload['cells']
         for field in cells:
@@ -237,7 +274,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 matched_value = next((item['label'] \
                     for item in target_field_names.get(field_key, {}).get('values', []) if item['label'] == new_value), None)
                 if matched_value != new_value:
-                    LOG.warning(f"Select field/value {field_key}/{new_value} does not exist in target organization, replacing it with None")
+                    LOG.warning("Select field/value %s/%s does not exist in target organization, replacing it with None", field_key, new_value)
                     return None
 
             elif src_field_names[field_key]['input_type'] == 'multiselect':
@@ -247,7 +284,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                     if new_val == val:
                         new_values.append(val)
                     else:
-                        LOG.warning(f"Multiselect field/value {field_key}/{val} does not exist in target organization, replacing it with None")
+                        LOG.warning("Multiselect field/value %s/%s does not exist in target organization, replacing it with None", field_key, val)
                 return new_values
 
         return new_value
@@ -293,12 +330,12 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             if type_name == "incident":
                 # apply logic to determine if the incident should be created
                 if not matching_criteria.match_payload_value(field_key, new_value):
-                    msg = u"Match exclusion for field: '{}', value: {}".format(field_key, new_value)
+                    msg = f"Match exclusion for field: '{field_key}', value: {new_value}"
                     raise MatchError(msg)
                 # ensure custom fields exist
                 if prefix == "properties" and field_key not in target_field_names:
                     # field not found on target org, we will discard
-                    LOG.warning(u"Discarding custom field not found in target org: %s", field_key)
+                    LOG.warning("Discarding custom field not found in target org: %s", field_key)
                     discarded_fields.append(field_key)
                     continue
 
@@ -318,6 +355,23 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         if field_key == "plan_status":
             return orig_values
 
+        if field_key == "members":
+            # members need to be looked up against the list of users in the system
+            if isinstance(orig_values, dict):
+                member_list = orig_values["values"].keys()
+            elif isinstance(orig_values, list):
+                member_list = orig_values
+            else:
+                member_list = []
+
+            new_members = []
+            for member_id in member_list:
+                email_member = self.resilient_source.get_users_by_user_id(int(member_id))
+                if email_member:
+                    new_members.append(email_member)
+
+            return new_members
+
         # recreate the list of values, dropping any not found
         if isinstance(orig_values, list):
             new_value = []
@@ -331,7 +385,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                         break
 
                 if not found and item:
-                    LOG.warning(u"Substitute value: %s not found for field: %s, omitting", item, field_key)
+                    LOG.warning("Substitute value: %s not found for field: %s, omitting", item, field_key)
 
         # recurse over dictionaries
         elif isinstance(orig_values, dict):
@@ -348,7 +402,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                     break
 
             if not found and new_value:
-                LOG.warning(u"Substitute value: %s not found for field: %s, omitting", new_value, field_key)
+                LOG.warning("Substitute value: %s not found for field: %s, omitting", new_value, field_key)
                 new_value = None
 
         return new_value
@@ -361,33 +415,30 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         :param payload: dictionary
         :return: dictionary of cleaned payload
         """
-        orig_org_id = payload.get('org_id', None)
-        orig_type_id = payload.pop('id', None)
+        orig_org_id = payload.get("org_id", None)
+        _orig_type_id = payload.pop("id", None)
 
         # incident
-        payload.pop('org', None)
-        payload.pop('org_name', None)
-        payload.pop('workspace', None)
+        for pop_field in ["org", "org_name", "workspace"]:
+            payload.pop(pop_field, None)
 
-        if payload.get('assessment'):
-            payload['assessment'] = clean_xml(payload['assessment'])
+        if payload.get("assessment"):
+            payload["assessment"] = clean_xml(payload["assessment"])
 
-        if payload.get('pii', {}).get('assessment'):
-            payload['pii']['assessment'] = clean_xml(payload['pii']['assessment'])
+        if payload.get("pii", {}).get("assessment"):
+            payload["pii"]["assessment"] = clean_xml(payload["pii"]["assessment"])
 
         # Task
-        payload.pop('inc_owner_id', None)
-        payload.pop('reng_version', None)
-        payload.pop('at_id', None)
-        payload.pop('creator_principal', None)
-        payload.pop('creator', None)  # older versions of resilient uses this
-        if isinstance(payload.get('phase_id', None), dict):
-            payload['phase_id'].pop('id', None)
-        if isinstance(payload.get('category_id', None), dict):
-            payload['category_id'].pop('id', None)
+        for pop_field in ["inc_owner_id", "reng_version", "at_id", "creator_principal", "creator"]:
+            payload.pop(pop_field, None)
+
+        if isinstance(payload.get("phase_id", None), dict):
+            payload["phase_id"].pop("id", None)
+        if isinstance(payload.get("category_id", None), dict):
+            payload["category_id"].pop("id", None)
 
         # fields which are rich text requiring new formats
-        for field_name in ['instructions', 'description']:
+        for field_name in ["instructions", "description"]:
             if payload.get(field_name) and not isinstance(payload.get(field_name), dict):
                 payload[field_name] = {
                     "format": "html",
@@ -397,11 +448,8 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         if type_name == "incident":
             payload = exclude_incident_fields(self.exclude_fields, payload)
 
-            if self.sync_references:
-                payload['properties'][DF_ORG_ID] = orig_org_id
-                payload['properties'][DF_INC_ID] = orig_type_id
-                payload['properties'][DF_HOST] = self.resilient_source.get_source_host()
-                payload['properties'][DF_ORIGINAL_CREATE_DATE] = payload.get('create_date', 0)
+            if self.sync_references and self.is_source:
+                self.add_sync_fields(orig_org_id, orig_inc_id, payload)
 
         elif type_name in ("artifact", "note") and payload.get("parent_id", None):
             # make the artifact type an api style name as custom artifact types are only supported this way
@@ -409,7 +457,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
             # find the parent Id as it's been moved
             # failures to find parent_id will requeue for retry later
-            _, target_parent_id, sync_state = \
+            _, target_parent_id, sync_state, _sync_source_role = \
                 self.resilient_target.dbsync.find_sync_row(self.resilient_source.rest_client.org_id, orig_inc_id,
                                                            type_name, payload.get("parent_id"))
 
@@ -418,13 +466,25 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         return payload
 
-    def add_sync_fields(self, orig_inc_id, payload):
-        if self.sync_references:
-            payload['properties'][DF_ORG_ID] = self.resilient_source.rest_client.org_id
-            payload['properties'][DF_INC_ID] = orig_inc_id
-            payload['properties'][DF_HOST] = self.resilient_source.get_source_host()
-            payload['properties'][DF_ORIGINAL_CREATE_DATE] = payload.get('create_date', 0)
+    def add_sync_fields(self, orig_org_id, orig_inc_id, payload):
+        """Certain tracking fields should be added to every incident
+    
+        :param orig_org_id: source
+        :type orig_org_id: int
+        :param orig_inc_id: source org incident id
+        :type orig_inc_id: int
+        :param payload: incident fields to sync to destination org
+        :type payload: dict
 
+        :return updated payload with tracking fields added
+        :rtype dict
+        """
+        payload["properties"][DF_ORG_ID] = orig_org_id
+        payload["properties"][DF_INC_ID] = orig_inc_id
+        payload["properties"][DF_HOST] = self.resilient_source.get_source_host()
+        payload["properties"][DF_ORIGINAL_CREATE_DATE] = payload.get("create_date", 0)
+
+        return payload
 
     def _clean_assignee_value(self, input_type, email):
         """
@@ -456,6 +516,15 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         return new_payload
 
     def build_field_names(self, context, is_datatable):
+        """return all object field definitions in a key/value format
+
+        :param context: _description_
+        :type context: object
+        :param is_datatable: true if returning information about a datatable
+        :type is_datatable: bool
+        :return: all object schema field definitions
+        :rtype: dict
+        """
         # get all the field definitions from the source environment
         all_fields = context.type_info.get_all_fields(refresh=False)
 
@@ -484,7 +553,6 @@ def clean_xml(value):
         return match.group(1)
 
     return value
-
 
 def exclude_incident_fields(exclude_fields, payload):
     """

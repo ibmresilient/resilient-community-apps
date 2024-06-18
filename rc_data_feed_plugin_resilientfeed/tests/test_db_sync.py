@@ -8,7 +8,7 @@ DB_FILE = ":memory:" #"/tmp/test_{}.sqlite3".format(time.time())
 
 @pytest.fixture
 def db_conn():
-    return DBSyncFactory.get_dbsync(202, DB_FILE, None, None, None) # org_id, sqllite_file, db_connection, db_user, db_pwd
+    return DBSyncFactory.get_dbsync(202, DB_FILE, None, None, None, True) # org_id, sqllite_file, db_connection, db_user, db_pwd, sync_source_role
 
 def test_retry_task_insert_select_delete(db_conn):
     payload = {'actions': [], 'active': True, 'attachments_count': None, 'auto_deactivate': True,

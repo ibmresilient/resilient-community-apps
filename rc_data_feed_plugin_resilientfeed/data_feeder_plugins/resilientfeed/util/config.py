@@ -10,7 +10,7 @@ def config_section_data():
     """
     config_data = u"""[resilient_feed]
 class=ResilientFeed
-# provide configuration information to the target Resilient and Organization
+# provide configuration information to the destination SOAR and Organization
 host=localhost
 port=443
 api_key_id=
@@ -23,7 +23,7 @@ cafile=false
 #proxy_host=
 #proxy_port=
 # identify a sqlite db file to retain mapping between resilient instances.
-sqlite_sync_file=/path/to/file
+#sqlite_sync_file=/path/to/file
 # postgresql db connection if sqlite_sync_file is not used
 postgresql_connect=Driver={PostgreSQL};Server=127.0.0.1;DATABASE=<db>;Port=5432;connectTimeout=0
 postgresql_uid=<acct>
@@ -37,8 +37,11 @@ postgresql_pwd=<pwd>
 #exclude_incident_fields=
 # include references within the incident to source host, org_id, incident_id and create_date. Values true/false
 sync_reference_fields=true
-# true|false - specify whether to delete the target incident if the source incident is deleted. Default: false
+# true|false - specify whether to delete the destination incident if the source incident is deleted. Default: false
 delete_incidents=false
+# sync_role source syncs incident data to a destination (incident, notes, artifacts, etc.). 
+#      destination syncs changes back to source (new artifacts, notes, etc.). Only editing an incident is supported
+# sync_role_source = True
 """
     return config_data
 
