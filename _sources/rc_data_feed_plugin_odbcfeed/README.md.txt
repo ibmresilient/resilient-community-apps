@@ -1,6 +1,7 @@
 # Data Feeder for ODBC Databases
 
 ## Release Notes
+* v1.1.1 Refactored exclusion list logic
 * v1.1.0 Bug fixes for database re-connections attempts. Sync Incident function is now interruptible if the playbook/workflow is cancelled. Added ability to exclude fields from incident database table.
 * v1.0.8 Allow Data Sync function to continue without failing a workflow/playbook
 * v1.0.7 Fixes for mariaDB and mySQL DB access within App Host
