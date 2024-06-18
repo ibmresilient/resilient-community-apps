@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """ Class for Resilient circuits Functions supporting REST API client for Cisco AMP for endpoints  """
 import logging
@@ -16,6 +16,7 @@ except:
 import json
 import re
 from datetime import datetime
+from resilient_lib import IntegrationError
 
 LOG = logging.getLogger(__name__)
 # Define query limit default for the integration.
@@ -37,7 +38,7 @@ class Ampclient(object):
         self.base_url = options.get("base_url")
         self.client_id = options.get("client_id")
         self.api_token = options.get("api_token")
-        self.api_version = options.get("api_version")
+        self.api_endpoint_version = f"/{options.get('api_version')}"
         self.max_retries = int(options.get("max_retries"))
         self.proxies = {}
         if "https_proxy" in options and options["https_proxy"] is not None:
@@ -49,20 +50,21 @@ class Ampclient(object):
         # Rest request endpoints
         self._endpoints = {
             # Computers
-            "computers":                    "/"+self.api_version+"/computers/",
-            "computer":                     "/"+self.api_version+"/computers/{}",
-            "computer_trajectory":          "/"+self.api_version+"/computers/{}/trajectory/",
-            "activity":                     "/"+self.api_version+"/computers/activity",
+            "computers":                    self.api_endpoint_version+"/computers/",
+            "computer":                     self.api_endpoint_version+"/computers/{}",
+            "computer_trajectory":          self.api_endpoint_version+"/computers/{}/trajectory/",
+            "activity":                     self.api_endpoint_version+"/computers/activity",
+            "isolation":                    self.api_endpoint_version+"/computers/{}/isolation",
             # File lists
-            "file_lists":                   "/"+self.api_version+"/file_lists/simple_custom_detections",
-            "file_lists_files":             "/"+self.api_version+"/file_lists/{}/files",
-            "file_lists_files_by_sha256":   "/"+self.api_version+"/file_lists/{}/files/{}",
+            "file_lists":                   self.api_endpoint_version+"/file_lists/simple_custom_detections",
+            "file_lists_files":             self.api_endpoint_version+"/file_lists/{}/files",
+            "file_lists_files_by_sha256":   self.api_endpoint_version+"/file_lists/{}/files/{}",
             # Events
-            "events":                       "/"+self.api_version+"/events",
-            "event_types":                  "/"+self.api_version+"/event_types/",
+            "events":                       self.api_endpoint_version+"/events",
+            "event_types":                  self.api_endpoint_version+"/event_types/",
             # Groups
-            "groups":                       "/"+self.api_version+"/groups/",
-            "group_by_guid":                "/"+self.api_version+"/groups/{}"
+            "groups":                       self.api_endpoint_version+"/groups/",
+            "group_by_guid":                self.api_endpoint_version+"/groups/{}"
         }
         self._headers = {"content-type": "application/json", "Accept": "application/json",
                          "Accept-Encoding": "application/gzip", "Authorization": "Basic FILTERED"}
@@ -123,6 +125,7 @@ class Ampclient(object):
 
         while retry_attempts <= self.max_retries:
             try:
+                # TODO: use resilient-lib instead?
                 # Save timestamp of new request to ratelimiter.
                 self.rate_limiter.add_ts(time.time())
                 if method == "GET":
@@ -133,6 +136,8 @@ class Ampclient(object):
                     r = self._s.patch(url, params=params, data=data, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 elif method == "DELETE":
                     r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies)
+                elif method == "PUT":
+                    r = self._s.put(url, params=params, data=data, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 else:
                     raise ValueError("Unsupported request method '{}'.".format(method))
 
@@ -163,9 +168,18 @@ class Ampclient(object):
                     # Allow error to bubble up to the Resilient function.
                     break
                 elif e.response.status_code == 404 and method == "GET" and \
-                        re.match("^https://.*/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
+                        re.match("^https://.*/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(/isolation)?$", url):
                     # We are probably trying to get a computer guid which doesn't exist here.
-                    LOG.error("Got '404' error, possible attempt get a computer guid which doesn't exist.")
+                    LOG.error("Got '404' error, possible attempt to get a computer guid which doesn't exist.")
+                    # Allow error to bubble up to the Resilient function.
+                    break
+                elif e.response.status_code == 409 and "isolation" in uri:
+                    # If a 409 error comes back from the isolation endpoint, that means that there is a conflict/computer is already in desired state
+                    # e.g. if user is requesting isolation, but computer is already isolated; the same for de-isolation
+                    if method == "PUT":
+                        LOG.warning("Got '409' error, computer may already be in isolated state.")
+                    else:
+                        LOG.warning("Got '409' error, computer may already be in de-isolated state.")
                     # Allow error to bubble up to the Resilient function.
                     break
                 else:
@@ -541,3 +555,25 @@ class Ampclient(object):
             return rtn
         else:
             return rtn
+
+    def manage_isolations(self, connector_guid: str, method: str):
+        """ Method to make requests to isolation endpoint.
+        Can be used to isolate/de-isolate computer by connector GUID or get isolation status
+
+        :param: connector_guid: Connector guid of computer to isolate/de-isolate
+        :type connector_guid: str
+        :param method: one of PUT (to isolate a computer) or DELETE (to de-isolate a computer) or GET (to get isolation status)
+        :type method: str
+
+        :return: Result in JSON format
+
+        """
+        if method not in ["GET", "PUT", "DELETE"]:
+            raise IntegrationError(f"Method {method} for isolation endpoint is not supported")
+
+        uri = self._endpoints["isolation"].format(connector_guid)
+
+        LOG.debug("URI: %s, method: %s", uri, method)
+
+        r_json = self._req(uri, method=method)
+        return r_json

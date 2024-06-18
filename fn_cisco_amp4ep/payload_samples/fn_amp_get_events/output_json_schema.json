@@ -1,3 +1,611 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "string"
+                },
+                "next": {
+                  "type": "string"
+                }
+              }
+            },
+            "results": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "current_item_count": {
+                  "type": "integer"
+                },
+                "index": {
+                  "type": "integer"
+                },
+                "items_per_page": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "timestamp_nanoseconds": {
+                "type": "integer"
+              },
+              "date": {
+                "type": "string"
+              },
+              "event_type": {
+                "type": "string"
+              },
+              "event_type_id": {
+                "type": "integer"
+              },
+              "connector_guid": {
+                "type": "string"
+              },
+              "group_guids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "computer": {
+                "type": "object",
+                "properties": {
+                  "connector_guid": {
+                    "type": "string"
+                  },
+                  "hostname": {
+                    "type": "string"
+                  },
+                  "external_ip": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "network_addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "ip": {
+                          "type": "string"
+                        },
+                        "mac": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "computer": {
+                        "type": "string"
+                      },
+                      "trajectory": {
+                        "type": "string"
+                      },
+                      "group": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "user": {
+                    "type": "string"
+                  }
+                }
+              },
+              "isolation": {
+                "type": "object",
+                "properties": {
+                  "duration": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "detection": {
+                "type": "string"
+              },
+              "detection_id": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string"
+              },
+              "file": {
+                "type": "object",
+                "properties": {
+                  "disposition": {
+                    "type": "string"
+                  },
+                  "file_name": {
+                    "type": "string"
+                  },
+                  "file_path": {
+                    "type": "string"
+                  },
+                  "identity": {
+                    "type": "object",
+                    "properties": {
+                      "sha256": {
+                        "type": "string"
+                      },
+                      "sha1": {
+                        "type": "string"
+                      },
+                      "md5": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "parent": {
+                    "type": "object",
+                    "properties": {
+                      "disposition": {
+                        "type": "string"
+                      },
+                      "identity": {
+                        "type": "object",
+                        "properties": {
+                          "sha256": {
+                            "type": "string"
+                          },
+                          "sha1": {
+                            "type": "string"
+                          },
+                          "md5": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "process_id": {
+                        "type": "integer"
+                      },
+                      "file_name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "archived_file": {
+                    "type": "object",
+                    "properties": {
+                      "disposition": {
+                        "type": "string"
+                      },
+                      "identity": {
+                        "type": "object",
+                        "properties": {
+                          "sha256": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "attack_details": {
+                    "type": "object",
+                    "properties": {
+                      "application": {
+                        "type": "string"
+                      },
+                      "attacked_module": {
+                        "type": "string"
+                      },
+                      "base_address": {
+                        "type": "string"
+                      },
+                      "suspicious_files": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "indicators": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "tactics": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "severity": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "short_description": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "techniques": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "tactics": {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "external_id": {
+                          "type": "string"
+                        },
+                        "mitre_name": {
+                          "type": "string"
+                        },
+                        "mitre_url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "techniques": {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "external_id": {
+                          "type": "string"
+                        },
+                        "mitre_name": {
+                          "type": "string"
+                        },
+                        "mitre_url": {
+                          "type": "string"
+                        },
+                        "tactics_names": {
+                          "type": "string"
+                        },
+                        "platforms": {
+                          "type": "string"
+                        },
+                        "system_requirements": {},
+                        "permissions": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "data_sources": {
+                          "type": "string"
+                        },
+                        "related_tactics": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "start_timestamp": {
+                "type": "integer"
+              },
+              "start_date": {
+                "type": "string"
+              },
+              "vulnerabilities": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "cve": {
+                      "type": "string"
+                    },
+                    "score": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "threat_hunting": {
+                "type": "object",
+                "properties": {
+                  "incident_report_guid": {
+                    "type": "string"
+                  },
+                  "incident_hunt_guid": {
+                    "type": "string"
+                  },
+                  "incident_title": {
+                    "type": "string"
+                  },
+                  "incident_summary": {
+                    "type": "string"
+                  },
+                  "incident_remediation": {
+                    "type": "string"
+                  },
+                  "tactics": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "external_id": {
+                          "type": "string"
+                        },
+                        "mitre_name": {
+                          "type": "string"
+                        },
+                        "mitre_url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "techniques": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "external_id": {
+                          "type": "string"
+                        },
+                        "mitre_name": {
+                          "type": "string"
+                        },
+                        "mitre_url": {
+                          "type": "string"
+                        },
+                        "tactics_names": {
+                          "type": "string"
+                        },
+                        "platforms": {
+                          "type": "string"
+                        },
+                        "system_requirements": {},
+                        "permissions": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "data_sources": {
+                          "type": "string"
+                        },
+                        "related_tactics": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "severity": {
+                    "type": "string"
+                  },
+                  "incident_start_time": {
+                    "type": "integer"
+                  },
+                  "incident_end_time": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "network_info": {
+                "type": "object",
+                "properties": {
+                  "dirty_url": {
+                    "type": "string"
+                  },
+                  "remote_ip": {
+                    "type": "string"
+                  },
+                  "remote_port": {
+                    "type": "integer"
+                  },
+                  "local_ip": {
+                    "type": "string"
+                  },
+                  "local_port": {
+                    "type": "integer"
+                  },
+                  "nfm": {
+                    "type": "object",
+                    "properties": {
+                      "direction": {
+                        "type": "string"
+                      },
+                      "protocol": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "parent": {
+                    "type": "object",
+                    "properties": {
+                      "process_id": {
+                        "type": "integer"
+                      },
+                      "disposition": {
+                        "type": "string"
+                      },
+                      "file_name": {
+                        "type": "string"
+                      },
+                      "identity": {
+                        "type": "object",
+                        "properties": {
+                          "sha256": {
+                            "type": "string"
+                          },
+                          "sha1": {
+                            "type": "string"
+                          },
+                          "md5": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "cloud_ioc": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "short_description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "type": "object",
+                "properties": {
+                  "serial_number": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "scan": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "clean": {
+                    "type": "boolean"
+                  },
+                  "scanned_files": {
+                    "type": "integer"
+                  },
+                  "scanned_processes": {
+                    "type": "integer"
+                  },
+                  "scanned_paths": {
+                    "type": "integer"
+                  },
+                  "malicious_detections": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "error": {
+                "type": "object",
+                "properties": {
+                  "error_code": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "query_execution_time": {
+      "type": "string"
+    },
+    "input_params": {
+      "type": "object",
+      "properties": {
+        "detection_sha256": {},
+        "application_sha256": {},
+        "connector_guid": {},
+        "group_guid": {},
+        "start_date": {},
+        "event_type": {},
+        "severity": {},
+        "limit": {},
+        "offset": {}
+      }
+    }
+  }
 }

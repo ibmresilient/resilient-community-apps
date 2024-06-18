@@ -1,3 +1,32 @@
 {
-    
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/file_lists/simple_custom_detections"
+      },
+      "results": {
+        "total": 1,
+        "current_item_count": 1,
+        "index": 0,
+        "items_per_page": 500
+      }
+    },
+    "data": [
+      {
+        "name": "Simple Custom Detection List",
+        "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+        "type": "simple_custom_detections",
+        "links": {
+          "file_list": "https://api.amp.cisco.com/v1/file_lists/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+        }
+      }
+    ]
+  },
+  "query_execution_time": "2024-05-31 16:19:18",
+  "input_params": {
+    "name": null,
+    "limit": null,
+    "offset": null
+  }
 }

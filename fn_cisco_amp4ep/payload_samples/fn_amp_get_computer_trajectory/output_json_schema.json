@@ -1,3 +1,423 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "computer": {
+              "type": "object",
+              "properties": {
+                "connector_guid": {
+                  "type": "string"
+                },
+                "hostname": {
+                  "type": "string"
+                },
+                "windows_processor_id": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "boolean"
+                },
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "computer": {
+                      "type": "string"
+                    },
+                    "trajectory": {
+                      "type": "string"
+                    },
+                    "group": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "operating_system": {
+                  "type": "string"
+                },
+                "os_version": {
+                  "type": "string"
+                },
+                "internal_ips": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "external_ip": {
+                  "type": "string"
+                },
+                "flag": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "integer"
+                },
+                "install_date": {
+                  "type": "string"
+                },
+                "is_compromised": {
+                  "type": "boolean"
+                },
+                "demo": {
+                  "type": "boolean"
+                },
+                "os_type": {
+                  "type": "string"
+                },
+                "supports": {
+                  "type": "object",
+                  "properties": {
+                    "device_trajectory": {
+                      "type": "boolean"
+                    },
+                    "events": {
+                      "type": "boolean"
+                    },
+                    "move_to_group": {
+                      "type": "boolean"
+                    },
+                    "request_snapshot": {
+                      "type": "boolean"
+                    },
+                    "scan": {
+                      "type": "boolean"
+                    },
+                    "orbital": {
+                      "type": "object",
+                      "properties": {
+                        "is_supported": {
+                          "type": "boolean"
+                        },
+                        "agent_active": {
+                          "type": "boolean"
+                        },
+                        "agent_nil_state": {
+                          "type": "boolean"
+                        },
+                        "agent_supported": {
+                          "type": "boolean"
+                        },
+                        "min_supported_agent_version": {
+                          "type": "string"
+                        },
+                        "min_supported_os_version": {
+                          "type": "string"
+                        },
+                        "os_supported": {
+                          "type": "boolean"
+                        },
+                        "policy_supported": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                },
+                "network_addresses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "mac": {
+                        "type": "string"
+                      },
+                      "ip": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "connector_version": {
+                  "type": "string"
+                },
+                "group_guid": {
+                  "type": "string"
+                },
+                "policy": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "faults": {
+                  "type": "array"
+                },
+                "isolation": {
+                  "type": "object",
+                  "properties": {
+                    "available": {
+                      "type": "boolean"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "orbital": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "risk_score": {
+                  "type": "integer"
+                }
+              }
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "timestamp_nanoseconds": {
+                    "type": "integer"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "type": "string"
+                  },
+                  "event_type_id": {
+                    "type": "integer"
+                  },
+                  "group_guids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "isolation": {
+                    "type": "object",
+                    "properties": {
+                      "duration": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "detection": {
+                    "type": "string"
+                  },
+                  "detection_id": {
+                    "type": "string"
+                  },
+                  "severity": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "object",
+                    "properties": {
+                      "disposition": {
+                        "type": "string"
+                      },
+                      "file_name": {
+                        "type": "string"
+                      },
+                      "file_path": {
+                        "type": "string"
+                      },
+                      "identity": {
+                        "type": "object",
+                        "properties": {
+                          "sha256": {
+                            "type": "string"
+                          },
+                          "sha1": {
+                            "type": "string"
+                          },
+                          "md5": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "parent": {
+                        "type": "object",
+                        "properties": {
+                          "process_id": {
+                            "type": "integer"
+                          },
+                          "disposition": {
+                            "type": "string"
+                          },
+                          "file_name": {
+                            "type": "string"
+                          },
+                          "identity": {
+                            "type": "object",
+                            "properties": {
+                              "sha256": {
+                                "type": "string"
+                              },
+                              "sha1": {
+                                "type": "string"
+                              },
+                              "md5": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "file_type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "error": {
+                    "type": "object",
+                    "properties": {
+                      "error_code": {
+                        "type": "integer"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "start_timestamp": {
+                    "type": "integer"
+                  },
+                  "start_date": {
+                    "type": "string"
+                  },
+                  "network_info": {
+                    "type": "object",
+                    "properties": {
+                      "remote_ip": {
+                        "type": "string"
+                      },
+                      "remote_port": {
+                        "type": "integer"
+                      },
+                      "local_ip": {
+                        "type": "string"
+                      },
+                      "local_port": {
+                        "type": "integer"
+                      },
+                      "nfm": {
+                        "type": "object",
+                        "properties": {
+                          "direction": {
+                            "type": "string"
+                          },
+                          "protocol": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "parent": {
+                        "type": "object",
+                        "properties": {
+                          "disposition": {
+                            "type": "string"
+                          },
+                          "identity": {
+                            "type": "object",
+                            "properties": {
+                              "sha256": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "cloud_ioc": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "short_description": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "tactics": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "techniques": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "total": {
+      "type": "integer"
+    },
+    "query_execution_time": {
+      "type": "string"
+    },
+    "input_params": {
+      "type": "object",
+      "properties": {
+        "connector_guid": {
+          "type": "string"
+        },
+        "q": {},
+        "limit": {}
+      }
+    }
+  }
 }

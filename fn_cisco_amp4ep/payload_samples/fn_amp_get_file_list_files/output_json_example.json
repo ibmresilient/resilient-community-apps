@@ -1,3 +1,100 @@
 {
-    
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/file_lists/aaaaaaaa-1111-2222-bbbb-cccccccccccc/files"
+      },
+      "results": {
+        "total": 0,
+        "current_item_count": 0,
+        "index": 0,
+        "items_per_page": 500
+      }
+    },
+    "data": {
+      "name": "Simple Custom Detection List",
+      "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+      "policies": [
+        {
+          "name": "Audit",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Protect",
+          "guid": "0280b143-7091-45c4-8502-ab250219d796",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Triage",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Server",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Domain Controller",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Audit",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Protect",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Triage",
+          "guid": "cb94c359-8eec-460b-a6c2-d7631510d34e",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/cb94c359-8eec-460b-a6c2-d7631510d34e"
+          }
+        },
+        {
+          "name": "Audit",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        {
+          "name": "Protect",
+          "guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "links": {
+            "policy": "https://api.amp.cisco.com/v1/policies/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        }
+      ],
+      "items": []
+    }
+  },
+  "query_execution_time": "2024-05-31 16:22:49",
+  "input_params": {
+    "file_list_guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+    "file_sha256": null,
+    "limit": null,
+    "offset": null
+  }
 }

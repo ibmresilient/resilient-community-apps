@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-"""Test Bigfix client  class"""
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+"""Test AMP client  class"""
 from __future__ import print_function
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
@@ -25,7 +25,7 @@ def assert_keys_in(json_obj, *keys):
 
 def get_config():
     return dict({
-        "bigfix_url": "https://api.amp.cisco.com/",
+        "base_url": "https://api.amp.cisco.com/",
         "api_version": "v1",
         "client_id": "01234abcde56789efedc",
         "api_token": "abcd1234-a123-123a-123a-123456abcdef",
@@ -420,3 +420,24 @@ class TestAMPClient:
         with pytest.raises(HTTPError) as e:
             response = amp_client.get_computers(**params)
         assert str(e.value) == expected_results
+
+    """ Test amp_client.manage_isolations  """
+    def test_manage_isolations(self, caplog):
+        amp_client = Ampclient(get_config(), rate_limiter)
+
+        guid = "abcdefg"
+        uri = f"/v1/computers/{guid}/isolation"
+        with patch("fn_cisco_amp4ep.lib.amp_client.Ampclient._req") as mock_request:
+            mock_request.return_value = {"test": "value"}
+            # GET
+            amp_client.manage_isolations(guid, "GET")
+            mock_request.assert_called_with(uri, method="GET")
+
+            # PUT
+            amp_client.manage_isolations(guid, "PUT")
+            mock_request.assert_called_with(uri, method="PUT")
+
+            # NOT GET/PUT/DELETE
+            with pytest.raises(IntegrationError) as interror:
+                amp_client.manage_isolations(guid, "POST")
+            assert "Method POST for isolation endpoint is not supported" in interror.value.value

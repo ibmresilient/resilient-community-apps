@@ -589,7 +589,7 @@ def mocked_session(*args, **kwargs):
 
         def get(self, url, **kwargs):
 
-            if url == "/v1/computers/":
+            if re.match("^https://.*/v1/computers/$", url):
                 if "limit" in kwargs["params"] and  kwargs["params"]["limit"] is not None:
                     return MockGetResponse(get_computers_limit(), 200)
                 elif "hostname" in kwargs["params"] and  kwargs["params"]["hostname"] is not None:
@@ -603,46 +603,46 @@ def mocked_session(*args, **kwargs):
                                 return MockGetResponse(get_computers(), 200)
                 else:
                     return MockGetResponse(get_computers(), 200)
-            elif re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
+            elif re.match("^https://.*/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
                 return MockGetResponse(get_computer(), 200)
-            elif re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trajectory/$", url):
+            elif re.match("^https://.*/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trajectory/$", url):
                 return MockGetResponse(get_computer_trajectory(), 200)
-            elif re.match("^/v1/computers/activity$", url):
+            elif re.match("^https://.*/v1/computers/activity$", url):
                 return MockGetResponse(get_activity(), 200)
-            elif re.match("^/v1/file_lists/simple_custom_detections$", url):
+            elif re.match("^https://.*/v1/file_lists/simple_custom_detections$", url):
                 return MockGetResponse(get_file_lists(), 200)
-            elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files$", url):
+            elif re.match("^https://.*/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files$", url):
                 return MockGetResponse(get_file_list_files(False), 200)
-            elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
+            elif re.match("^https://.*/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
                 return MockGetResponse(get_file_list_files(True), 200)
-            elif re.match("^/v1/events(\?.+)*$", url):
+            elif re.match("^https://.*/v1/events(\?.+)*$", url):
                 return MockGetResponse(get_events(), 200)
-            elif re.match("^/v1/event_types/$", url):
+            elif re.match("^https://.*/v1/event_types/$", url):
                 return MockGetResponse(get_event_types(), 200)
-            elif re.match("^/v1/groups/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
+            elif re.match("^https://.*/v1/groups/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
                 return MockGetResponse(get_groups(False), 200)
-            elif re.match("^/v1/groups/$", url):
+            elif re.match("^https://.*/v1/groups/$", url):
                 return MockGetResponse(get_groups(True), 200)
             else:
                 return MockGetResponse(None, 404)
 
         def post(self, url, **kwargs):
 
-            if re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
+            if re.match("^https://.*/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
                 return MockGetResponse(set_file_list_files(), 201)
             else:
                 return MockGetResponse(None, 404)
 
         def delete(self, url, **kwargs):
 
-            if re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}", url):
+            if re.match("^https://.*/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}", url):
                 return MockGetResponse(delete_file_list_files(), 200)
             else:
                 return MockGetResponse(None, 404)
 
         def patch(self, url, **kwargs):
 
-            if re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
+            if re.match("^https://.*/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
                 return MockGetResponse(move_computer(), 202)
             else:
                 return MockGetResponse(None, 404)

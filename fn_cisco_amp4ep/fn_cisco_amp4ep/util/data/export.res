@@ -14,7 +14,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP add artifact from activity",
-      "id": 134,
+      "id": 14,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP add artifact from activity",
@@ -64,7 +64,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP add artifact from event",
-      "id": 135,
+      "id": 15,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: AMP add artifact from event",
@@ -92,7 +92,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: AMP add artifact from trajectory",
-      "id": 136,
+      "id": 16,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP add artifact from trajectory",
@@ -135,7 +135,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP delete file from list",
-      "id": 137,
+      "id": 17,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP delete file from list",
@@ -171,7 +171,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP get computer by connector guid",
-      "id": 139,
+      "id": 19,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get computer by connector guid",
@@ -205,7 +205,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP get computer by name",
-      "id": 140,
+      "id": 20,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: AMP get computer by name",
@@ -224,7 +224,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: AMP get computer (refresh)",
-      "id": 138,
+      "id": 18,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get computer (refresh)",
@@ -272,7 +272,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP get computers with activity",
-      "id": 143,
+      "id": 23,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: AMP get computers with activity",
@@ -299,7 +299,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP get computer trajectory",
-      "id": 141,
+      "id": 21,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get computer trajectory",
@@ -342,7 +342,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP get computer trajectory by activity",
-      "id": 142,
+      "id": 22,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get computer trajectory by activity",
@@ -361,7 +361,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: AMP get events",
-      "id": 145,
+      "id": 25,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get events",
@@ -421,7 +421,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP get events by type",
-      "id": 146,
+      "id": 26,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get events by type",
@@ -440,7 +440,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: AMP get event types",
-      "id": 144,
+      "id": 24,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get event types",
@@ -467,7 +467,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP get files from list",
-      "id": 147,
+      "id": 27,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get files from list",
@@ -509,7 +509,7 @@
       "custom_condition": "1 AND (2 OR 3)",
       "enabled": true,
       "export_key": "Example: AMP get group name by guid",
-      "id": 148,
+      "id": 28,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "Example: AMP get group name by guid",
@@ -528,7 +528,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: AMP get groups",
-      "id": 149,
+      "id": 29,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get groups",
@@ -547,7 +547,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: AMP get SCD file lists",
-      "id": 150,
+      "id": 30,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP get SCD file lists",
@@ -574,7 +574,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP move computer",
-      "id": 151,
+      "id": 31,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP move computer",
@@ -593,7 +593,7 @@
           "step_label": null
         },
         {
-          "content": "d9c9f54a-442e-47fc-8302-85b4fcff2274",
+          "content": "4338bc57-19e1-4068-ad22-220b81c1ee56",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -618,7 +618,7 @@
       ],
       "enabled": true,
       "export_key": "Example: AMP set file in list",
-      "id": 152,
+      "id": 32,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AMP set file in list",
@@ -652,7 +652,8 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1701920453818,
+  "case_matching_profiles": [],
+  "export_date": 1718309556692,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -666,7 +667,7 @@
       "deprecated": false,
       "export_key": "__function/amp_group_name",
       "hide_notification": false,
-      "id": 1090,
+      "id": 384,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -695,7 +696,7 @@
       "deprecated": false,
       "export_key": "__function/amp_start_date",
       "hide_notification": false,
-      "id": 1083,
+      "id": 385,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -724,7 +725,7 @@
       "deprecated": false,
       "export_key": "__function/amp_q",
       "hide_notification": false,
-      "id": 1086,
+      "id": 386,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -753,7 +754,7 @@
       "deprecated": false,
       "export_key": "__function/amp_file_sha256",
       "hide_notification": false,
-      "id": 1097,
+      "id": 387,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -782,7 +783,7 @@
       "deprecated": false,
       "export_key": "__function/amp_event_type",
       "hide_notification": false,
-      "id": 1087,
+      "id": 388,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -811,7 +812,7 @@
       "deprecated": false,
       "export_key": "__function/amp_internal_ip",
       "hide_notification": false,
-      "id": 1094,
+      "id": 389,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -838,9 +839,67 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/amp_computer_isolation",
+      "hide_notification": false,
+      "id": 404,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "amp_computer_isolation",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "amp_computer_isolation",
+      "tooltip": "Indicate whether to isolate or de-isolate a computer or refresh isolation status",
+      "type_id": 11,
+      "uuid": "bad4b364-bd88-4452-be39-9b3e1e644bc4",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Isolate",
+          "properties": null,
+          "uuid": "b4f83ea3-a49d-4a1f-a6bd-a94027a29d01",
+          "value": 132
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "De-isolate",
+          "properties": null,
+          "uuid": "3e48f775-bed2-4653-9fd3-ebcfba913fb1",
+          "value": 133
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Refresh",
+          "properties": null,
+          "uuid": "ae41d9c2-8e4f-4879-bb13-8b495d185644",
+          "value": 135
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/amp_offset",
       "hide_notification": false,
-      "id": 1093,
+      "id": 390,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -869,7 +928,7 @@
       "deprecated": false,
       "export_key": "__function/amp_severity",
       "hide_notification": false,
-      "id": 1096,
+      "id": 391,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -898,7 +957,7 @@
       "deprecated": false,
       "export_key": "__function/amp_application_sha256",
       "hide_notification": false,
-      "id": 1085,
+      "id": 392,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -927,7 +986,7 @@
       "deprecated": false,
       "export_key": "__function/amp_file_description",
       "hide_notification": false,
-      "id": 1095,
+      "id": 393,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -956,7 +1015,7 @@
       "deprecated": false,
       "export_key": "__function/amp_scd_name",
       "hide_notification": false,
-      "id": 1100,
+      "id": 394,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -985,7 +1044,7 @@
       "deprecated": false,
       "export_key": "__function/amp_limit",
       "hide_notification": false,
-      "id": 1088,
+      "id": 395,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1014,7 +1073,7 @@
       "deprecated": false,
       "export_key": "__function/amp_hostname",
       "hide_notification": false,
-      "id": 1098,
+      "id": 396,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1043,7 +1102,7 @@
       "deprecated": false,
       "export_key": "__function/amp_group_guid",
       "hide_notification": false,
-      "id": 1089,
+      "id": 397,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1072,7 +1131,7 @@
       "deprecated": false,
       "export_key": "__function/amp_conn_guid",
       "hide_notification": false,
-      "id": 1091,
+      "id": 398,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1101,7 +1160,7 @@
       "deprecated": false,
       "export_key": "__function/amp_detection_sha256",
       "hide_notification": false,
-      "id": 1084,
+      "id": 399,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1130,7 +1189,7 @@
       "deprecated": false,
       "export_key": "__function/amp_file_list_guid",
       "hide_notification": false,
-      "id": 1092,
+      "id": 400,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1159,7 +1218,7 @@
       "deprecated": false,
       "export_key": "__function/amp_external_ip",
       "hide_notification": false,
-      "id": 1099,
+      "id": 401,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1188,7 +1247,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_offset",
       "hide_notification": false,
-      "id": 1082,
+      "id": 374,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1217,7 +1276,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_limit",
       "hide_notification": false,
-      "id": 1076,
+      "id": 375,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1246,7 +1305,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_artifact_type_events",
       "hide_notification": false,
-      "id": 1080,
+      "id": 376,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1271,7 +1330,7 @@
           "label": "Malware SHA-256 Hash",
           "properties": null,
           "uuid": "141ec0ba-3aa7-4712-b296-d2598ce5df23",
-          "value": 432
+          "value": 102
         },
         {
           "default": false,
@@ -1280,7 +1339,7 @@
           "label": "System Name",
           "properties": null,
           "uuid": "6f99e72c-dae9-4db8-9dbc-27b084b1075b",
-          "value": 433
+          "value": 103
         },
         {
           "default": false,
@@ -1289,7 +1348,7 @@
           "label": "File Name",
           "properties": null,
           "uuid": "65e3a9af-1e8e-4025-9da0-6b666563240e",
-          "value": 434
+          "value": 104
         },
         {
           "default": false,
@@ -1298,7 +1357,7 @@
           "label": "File Path",
           "properties": null,
           "uuid": "4ccdbd11-8c6e-484d-bf3f-a98b19e302a3",
-          "value": 435
+          "value": 105
         },
         {
           "default": false,
@@ -1307,7 +1366,7 @@
           "label": "IP Address",
           "properties": null,
           "uuid": "82669f2d-9c79-44b3-90b2-3b3b20d1b9ed",
-          "value": 436
+          "value": 106
         }
       ]
     },
@@ -1321,7 +1380,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_q",
       "hide_notification": false,
-      "id": 1075,
+      "id": 377,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1350,7 +1409,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_start_date",
       "hide_notification": false,
-      "id": 1077,
+      "id": 378,
       "input_type": "datepicker",
       "internal": false,
       "is_tracked": false,
@@ -1377,103 +1436,9 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "actioninvocation/amp_group_name",
-      "hide_notification": false,
-      "id": 1081,
-      "input_type": "select",
-      "internal": false,
-      "is_tracked": false,
-      "name": "amp_group_name",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Group name",
-      "tooltip": "A Cisco AMP for Endpoints group name.",
-      "type_id": 6,
-      "uuid": "d9c9f54a-442e-47fc-8302-85b4fcff2274",
-      "values": [
-        {
-          "default": true,
-          "enabled": true,
-          "hidden": false,
-          "label": "Test_Group1",
-          "properties": null,
-          "uuid": "70e0d9ca-6536-46b2-a76f-081711bb5dee",
-          "value": 437
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Test Group2",
-          "properties": null,
-          "uuid": "5a7d70c7-2929-443b-a187-aa9a4daafeb7",
-          "value": 438
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Test_Group3",
-          "properties": null,
-          "uuid": "f96057db-a877-438e-a6d6-bfd608160d41",
-          "value": 439
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Test Group4",
-          "properties": null,
-          "uuid": "c8c4e67a-eb61-4d6b-b257-e624e88464ba",
-          "value": 440
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "MY_group",
-          "properties": null,
-          "uuid": "ff6fc96b-0499-4163-bdf2-aacc105ac97d",
-          "value": 441
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "lue",
-          "properties": null,
-          "uuid": "aaddfdb6-c189-4db1-9cca-011076350d2b",
-          "value": 442
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "\u0b13\u0b14\u0b15\u0b16\u0b17\u0b18\u0b19\u0b1a\u0b1b\u0b1c\u0b1d\u0b1e",
-          "properties": null,
-          "uuid": "1e3c8a67-14f0-439b-9712-693def1c5219",
-          "value": 443
-        }
-      ]
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "actioninvocation/amp_scd_name",
       "hide_notification": false,
-      "id": 1078,
+      "id": 380,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1498,7 +1463,7 @@
           "label": "File Blacklist",
           "properties": null,
           "uuid": "a46f1ccb-bec2-4efb-b344-544829f66712",
-          "value": 424
+          "value": 114
         },
         {
           "default": true,
@@ -1507,7 +1472,7 @@
           "label": "Test List1",
           "properties": null,
           "uuid": "423322d4-d784-4488-b124-151255595951",
-          "value": 425
+          "value": 115
         },
         {
           "default": false,
@@ -1516,7 +1481,7 @@
           "label": "Test_List2",
           "properties": null,
           "uuid": "9e1e3856-85e6-4e85-8c75-4ed98cb31b3a",
-          "value": 426
+          "value": 116
         },
         {
           "default": false,
@@ -1525,7 +1490,7 @@
           "label": "Test List3",
           "properties": null,
           "uuid": "e2b882eb-5208-47ff-9a28-9cb4b571559d",
-          "value": 427
+          "value": 117
         },
         {
           "default": false,
@@ -1534,7 +1499,7 @@
           "label": "Test_List4",
           "properties": null,
           "uuid": "d5ff73b6-6e49-4d75-8b00-4e997d449131",
-          "value": 428
+          "value": 118
         }
       ]
     },
@@ -1548,7 +1513,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_artifact_type_trajectory",
       "hide_notification": false,
-      "id": 1074,
+      "id": 381,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1573,7 +1538,7 @@
           "label": "Malware SHA-256 Hash",
           "properties": null,
           "uuid": "516715c7-f481-45f6-bdb2-4049447fe86c",
-          "value": 418
+          "value": 119
         },
         {
           "default": false,
@@ -1582,7 +1547,7 @@
           "label": "System Name",
           "properties": null,
           "uuid": "79410766-9117-4f06-b104-f97609caea17",
-          "value": 419
+          "value": 120
         },
         {
           "default": false,
@@ -1591,7 +1556,7 @@
           "label": "File Name",
           "properties": null,
           "uuid": "8ecc6fac-d39a-4e5d-a85e-229b9490ab79",
-          "value": 420
+          "value": 121
         },
         {
           "default": false,
@@ -1600,7 +1565,7 @@
           "label": "File Path",
           "properties": null,
           "uuid": "53b3b4c0-6af3-49d0-96c1-631740fefa46",
-          "value": 421
+          "value": 122
         },
         {
           "default": false,
@@ -1609,7 +1574,7 @@
           "label": "IP Address",
           "properties": null,
           "uuid": "52998df7-c79c-4986-abdc-49de3c463373",
-          "value": 422
+          "value": 123
         },
         {
           "default": false,
@@ -1618,7 +1583,7 @@
           "label": "URL",
           "properties": null,
           "uuid": "007f19c8-941b-42fc-bc46-d82b91b3da67",
-          "value": 423
+          "value": 124
         }
       ]
     },
@@ -1632,7 +1597,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_severity",
       "hide_notification": false,
-      "id": 1079,
+      "id": 382,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1657,7 +1622,7 @@
           "label": "High",
           "properties": null,
           "uuid": "a2450428-e27e-4c3e-b46f-9eddd4b75666",
-          "value": 429
+          "value": 125
         },
         {
           "default": false,
@@ -1666,7 +1631,7 @@
           "label": "Medium",
           "properties": null,
           "uuid": "d2113d24-7b16-4d29-a326-9afe2c0010ee",
-          "value": 430
+          "value": 126
         },
         {
           "default": false,
@@ -1675,7 +1640,7 @@
           "label": "Low",
           "properties": null,
           "uuid": "e5b310c0-e754-47f8-8a11-7f0af302e50f",
-          "value": 431
+          "value": 127
         }
       ]
     },
@@ -1689,7 +1654,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/amp_artifact_type_activities",
       "hide_notification": false,
-      "id": 1073,
+      "id": 383,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1714,7 +1679,7 @@
           "label": "System Name",
           "properties": null,
           "uuid": "7ce591b9-3715-4725-9aef-ee6a47f1c7bd",
-          "value": 416
+          "value": 128
         },
         {
           "default": false,
@@ -1723,7 +1688,66 @@
           "label": "Guid as String",
           "properties": null,
           "uuid": "b5841d4c-39af-4b96-bbbb-68103055c0a8",
-          "value": 417
+          "value": 129
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/amp_group_name",
+      "hide_notification": false,
+      "id": 408,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "amp_group_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Group Name",
+      "tooltip": "A Cisco AMP for Endpoints group name.",
+      "type_id": 6,
+      "uuid": "4338bc57-19e1-4068-ad22-220b81c1ee56",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "Test Group 1",
+          "properties": null,
+          "uuid": "0c1af28a-5cca-4776-96b5-601f512482da",
+          "value": 136
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Test Group 2",
+          "properties": null,
+          "uuid": "6704a1cf-b06a-410c-8748-0b9c0b17b309",
+          "value": 137
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Test Group 3",
+          "properties": null,
+          "uuid": "71b4f727-460e-4da0-a01f-f47e1b591228",
+          "value": 138
         }
       ]
     },
@@ -1741,7 +1765,52 @@
   ],
   "functions": [
     {
-      "created_date": 1698655264065,
+      "created_date": 1716393423311,
+      "description": {
+        "content": "Isolate/de-isolate a computer by connector guid.",
+        "format": "text"
+      },
+      "destination_handle": "fn_cisco_amp",
+      "display_name": "AMP: Computer Isolation",
+      "export_key": "fn_amp_computer_isolation",
+      "id": 13,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1718027287288,
+      "name": "fn_amp_computer_isolation",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
+      "tags": [],
+      "uuid": "5f8421ef-80ac-4242-b13d-16675696ee90",
+      "version": 8,
+      "view_items": [
+        {
+          "content": "46b4e9d1-5eb2-4302-93a1-4776b08b6f81",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "bad4b364-bd88-4452-be39-9b3e1e644bc4",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
+      "created_date": 1716325743808,
       "description": {
         "content": "Delete a SHA-256 from a file list by file_list_guid.",
         "format": "text"
@@ -1749,18 +1818,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Delete File from List",
       "export_key": "fn_amp_delete_file_list_files",
-      "id": 65,
+      "id": 1,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655264142,
+      "last_modified_time": 1716325743808,
       "name": "fn_amp_delete_file_list_files",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "43b8de27-d727-4133-9c3d-c4916ac5a212",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "6a6a5df6-6607-4bcc-a807-cb94ef825887",
@@ -1788,12 +1861,12 @@
           "programmatic_name": "wf_amp_delete_file_list_files",
           "tags": [],
           "uuid": null,
-          "workflow_id": 146
+          "workflow_id": 11
         }
       ]
     },
     {
-      "created_date": 1698655264175,
+      "created_date": 1716325743877,
       "description": {
         "content": "Returns list of computers from search of Cisco AMP environment for any events or activities associated with a file or network operation.",
         "format": "text"
@@ -1801,18 +1874,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Activity",
       "export_key": "fn_amp_get_activity",
-      "id": 66,
+      "id": 2,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655264252,
+      "last_modified_time": 1716325743877,
       "name": "fn_amp_get_activity",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "674b7a23-f1e6-4103-af0e-f86012a3bff3",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "9d013523-35f9-45dd-89f6-b165c6e2d5f1",
@@ -1848,12 +1925,12 @@
           "programmatic_name": "wf_amp_get_activity",
           "tags": [],
           "uuid": null,
-          "workflow_id": 142
+          "workflow_id": 7
         }
       ]
     },
     {
-      "created_date": 1698655264287,
+      "created_date": 1716325743933,
       "description": {
         "content": "Returns information on a  computer with an agent deployed on them by connector guid.",
         "format": "text"
@@ -1861,18 +1938,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Computer",
       "export_key": "fn_amp_get_computer",
-      "id": 67,
+      "id": 3,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655264360,
+      "last_modified_time": 1716325743933,
       "name": "fn_amp_get_computer",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "2749a756-6490-4f15-b54f-4cc82394fe8a",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "46b4e9d1-5eb2-4302-93a1-4776b08b6f81",
@@ -1892,7 +1973,7 @@
           "programmatic_name": "wf_amp_get_computer_refresh",
           "tags": [],
           "uuid": null,
-          "workflow_id": 157
+          "workflow_id": 18
         },
         {
           "actions": [],
@@ -1902,28 +1983,32 @@
           "programmatic_name": "wf_amp_get_computer_by_guid",
           "tags": [],
           "uuid": null,
-          "workflow_id": 156
+          "workflow_id": 12
         }
       ]
     },
     {
-      "created_date": 1698655264392,
+      "created_date": 1716325743990,
       "description": {
-        "content": "Returns a list of all activities associated with a particular computer by connector guid",
+        "content": "Returns a list of all activities associated with a particular computer by connector guid.",
         "format": "text"
       },
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Computer Trajectory",
       "export_key": "fn_amp_get_computer_trajectory",
-      "id": 68,
+      "id": 4,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 6,
-        "name": "dummy@dummy.com",
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1698655264468,
+      "last_modified_time": 1716473542938,
       "name": "fn_amp_get_computer_trajectory",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "ff9a67d2-b9d6-4642-ad5a-b51d1a8be1f3",
       "version": 1,
@@ -1954,7 +2039,7 @@
           "programmatic_name": "wf_amp_get_computer_trajectory",
           "tags": [],
           "uuid": null,
-          "workflow_id": 155
+          "workflow_id": 3
         },
         {
           "actions": [],
@@ -1964,12 +2049,12 @@
           "programmatic_name": "wf_amp_get_computer_trajectory_by_activity",
           "tags": [],
           "uuid": null,
-          "workflow_id": 147
+          "workflow_id": 16
         }
       ]
     },
     {
-      "created_date": 1698655264500,
+      "created_date": 1716325744043,
       "description": {
         "content": "Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname.",
         "format": "text"
@@ -1977,18 +2062,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Computers",
       "export_key": "fn_amp_get_computers",
-      "id": 69,
+      "id": 5,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655264577,
+      "last_modified_time": 1716325744043,
       "name": "fn_amp_get_computers",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "2f0603c8-81b2-4190-a9f5-d1b6b9a1215f",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "43026be5-a7c4-480b-b45f-5dd4be9201a3",
@@ -2040,7 +2129,7 @@
           "programmatic_name": "wf_amp_get_computer_by_name",
           "tags": [],
           "uuid": null,
-          "workflow_id": 149
+          "workflow_id": 10
         },
         {
           "actions": [],
@@ -2050,7 +2139,7 @@
           "programmatic_name": "wf_amp_get_computer_trajectory",
           "tags": [],
           "uuid": null,
-          "workflow_id": 155
+          "workflow_id": 3
         },
         {
           "actions": [],
@@ -2060,12 +2149,12 @@
           "programmatic_name": "wf_amp_move_computer",
           "tags": [],
           "uuid": null,
-          "workflow_id": 160
+          "workflow_id": 19
         }
       ]
     },
     {
-      "created_date": 1698655264606,
+      "created_date": 1716325744119,
       "description": {
         "content": "Returns list of events identified and filtered by a unique ID. Provides a human readable name, and short description of each event by ID.",
         "format": "text"
@@ -2073,18 +2162,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Event Types",
       "export_key": "fn_amp_get_event_types",
-      "id": 70,
+      "id": 6,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655264679,
+      "last_modified_time": 1716325744119,
       "name": "fn_amp_get_event_types",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "6e90b4dd-7a5f-4ff8-9299-2d7630fa6366",
-      "version": 1,
+      "version": 0,
       "view_items": [],
       "workflows": [
         {
@@ -2095,12 +2188,12 @@
           "programmatic_name": "wf_amp_get_event_types",
           "tags": [],
           "uuid": null,
-          "workflow_id": 143
+          "workflow_id": 9
         }
       ]
     },
     {
-      "created_date": 1698655264709,
+      "created_date": 1716325744172,
       "description": {
         "content": "Returns a  list of events.",
         "format": "text"
@@ -2108,18 +2201,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Events",
       "export_key": "fn_amp_get_events",
-      "id": 71,
+      "id": 7,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655264787,
+      "last_modified_time": 1716325744172,
       "name": "fn_amp_get_events",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "6f5e6bff-316f-48f5-bfce-fb963be11c35",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "4fb46a00-e13f-4277-8da1-13de7b680cc5",
@@ -2203,7 +2300,7 @@
           "programmatic_name": "wf_amp_get_events",
           "tags": [],
           "uuid": null,
-          "workflow_id": 152
+          "workflow_id": 2
         },
         {
           "actions": [],
@@ -2213,12 +2310,12 @@
           "programmatic_name": "wf_amp_get_events_by_type",
           "tags": [],
           "uuid": null,
-          "workflow_id": 151
+          "workflow_id": 13
         }
       ]
     },
     {
-      "created_date": 1698655264824,
+      "created_date": 1716325744227,
       "description": {
         "content": "Returns a list of items for a particular file_list. You need to provide file_list_guid to retrieve these items.",
         "format": "text"
@@ -2226,18 +2323,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Files from List",
       "export_key": "fn_amp_get_file_list_files",
-      "id": 72,
+      "id": 8,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655264909,
+      "last_modified_time": 1716325744227,
       "name": "fn_amp_get_file_list_files",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "14f58a3d-8423-4290-b964-d1f2cb7a6cb5",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "6a6a5df6-6607-4bcc-a807-cb94ef825887",
@@ -2281,12 +2382,12 @@
           "programmatic_name": "wf_amp_get_file_list_files",
           "tags": [],
           "uuid": null,
-          "workflow_id": 150
+          "workflow_id": 8
         }
       ]
     },
     {
-      "created_date": 1698655264946,
+      "created_date": 1716325744281,
       "description": {
         "content": "Returns a list of simple custom detection file lists. You can filter this list by name.",
         "format": "text"
@@ -2294,18 +2395,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get File Lists",
       "export_key": "fn_amp_get_file_lists",
-      "id": 73,
+      "id": 9,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655265033,
+      "last_modified_time": 1716325744281,
       "name": "fn_amp_get_file_lists",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "637946a7-b59b-4ec0-95cf-f833bca79bc6",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "1f3e4234-2059-4922-ae58-194d0a1a3f06",
@@ -2341,7 +2446,7 @@
           "programmatic_name": "wf_amp_get_file_lists",
           "tags": [],
           "uuid": null,
-          "workflow_id": 154
+          "workflow_id": 17
         },
         {
           "actions": [],
@@ -2351,12 +2456,12 @@
           "programmatic_name": "wf_amp_set_file_list_files",
           "tags": [],
           "uuid": null,
-          "workflow_id": 159
+          "workflow_id": 15
         }
       ]
     },
     {
-      "created_date": 1698655265070,
+      "created_date": 1716325744332,
       "description": {
         "content": "Returns basic information on multiple groups or group by name. Returns more detailed information on group by guid.",
         "format": "text"
@@ -2364,18 +2469,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Get Groups",
       "export_key": "fn_amp_get_groups",
-      "id": 74,
+      "id": 10,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655265152,
+      "last_modified_time": 1716325744332,
       "name": "fn_amp_get_groups",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "69456802-f5ba-4602-9d40-d75d0fda42aa",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "43026be5-a7c4-480b-b45f-5dd4be9201a3",
@@ -2411,7 +2520,7 @@
           "programmatic_name": "wf_amp_get_group_name_by_guid",
           "tags": [],
           "uuid": null,
-          "workflow_id": 145
+          "workflow_id": 5
         },
         {
           "actions": [],
@@ -2421,7 +2530,7 @@
           "programmatic_name": "wf_amp_get_groups",
           "tags": [],
           "uuid": null,
-          "workflow_id": 158
+          "workflow_id": 14
         },
         {
           "actions": [],
@@ -2431,12 +2540,12 @@
           "programmatic_name": "wf_amp_move_computer",
           "tags": [],
           "uuid": null,
-          "workflow_id": 160
+          "workflow_id": 19
         }
       ]
     },
     {
-      "created_date": 1698655265188,
+      "created_date": 1716325744384,
       "description": {
         "content": "Move a computer by connector guid to a group by group guid.",
         "format": "text"
@@ -2444,18 +2553,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Move Computer",
       "export_key": "fn_amp_move_computer",
-      "id": 75,
+      "id": 11,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655265275,
+      "last_modified_time": 1716325744384,
       "name": "fn_amp_move_computer",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "4f4c38ef-1adc-4865-9cc6-c7f33251ebb4",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "46b4e9d1-5eb2-4302-93a1-4776b08b6f81",
@@ -2483,12 +2596,12 @@
           "programmatic_name": "wf_amp_move_computer",
           "tags": [],
           "uuid": null,
-          "workflow_id": 160
+          "workflow_id": 19
         }
       ]
     },
     {
-      "created_date": 1698655265313,
+      "created_date": 1716325744442,
       "description": {
         "content": "Add a SHA-256 to a file list by file_list_guid.",
         "format": "text"
@@ -2496,18 +2609,22 @@
       "destination_handle": "fn_cisco_amp",
       "display_name": "AMP: Set File in List",
       "export_key": "fn_amp_set_file_list_files",
-      "id": 76,
+      "id": 12,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
+        "display_name": "PS API KEY",
         "id": 6,
-        "name": "dummy@dummy.com",
-        "type": "user"
+        "name": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+        "type": "apikey"
       },
-      "last_modified_time": 1698655265403,
+      "last_modified_time": 1716325744442,
       "name": "fn_amp_set_file_list_files",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "3beefe3a-b832-4948-afeb-689982453fd4",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "6a6a5df6-6607-4bcc-a807-cb94ef825887",
@@ -2543,20 +2660,20 @@
           "programmatic_name": "wf_amp_set_file_list_files",
           "tags": [],
           "uuid": null,
-          "workflow_id": 159
+          "workflow_id": 15
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 74,
+  "id": 15,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1701920450392,
+      "create_date": 1718309544797,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2565,17 +2682,16 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1701920450392,
+      "update_date": 1718309544797,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
       "api_keys": [
-        "690c3023-beed-4832-aa43-1e0f0564a779"
+        "07af0e87-bc2c-42cf-bd4a-34650eb11e0d"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -2590,20 +2706,195 @@
   "notifications": null,
   "overrides": null,
   "phases": [],
-  "playbooks": [],
+  "playbooks": [
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 22,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04\" isExecutable=\"true\" name=\"playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1cw5rah\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"AMP: Computer Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f8421ef-80ac-4242-b13d-16675696ee90\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.amp_conn_guid = row.connector_guid\\ninputs.amp_computer_isolation = playbook.inputs.amp_computer_isolation\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"isolation_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cw5rah\u003c/incoming\u003e\u003coutgoing\u003eFlow_09bgfaz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1cw5rah\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0a6o8ay\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"AMP: Post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"683baf71-0476-421c-83a1-260328803015\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09bgfaz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0a6o8ay\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09bgfaz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0a6o8ay\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cw5rah\" id=\"Flow_1cw5rah_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"116\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09bgfaz\" id=\"Flow_09bgfaz_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0a6o8ay\" id=\"Flow_0a6o8ay_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"600\" y=\"64\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1716472799006,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04",
+      "description": {
+        "content": "Isolate/De-isolate computer by connector GUID",
+        "format": "text"
+      },
+      "display_name": "AMP: Computer Isolation (PB)",
+      "export_key": "amp_computer_isolation",
+      "field_type_handle": "playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04",
+      "fields_type": {
+        "actions": [],
+        "display_name": "AMP: Computer Isolation (PB)",
+        "export_key": "playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04",
+        "fields": {
+          "amp_computer_isolation": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04/amp_computer_isolation",
+            "hide_notification": false,
+            "id": 403,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "amp_computer_isolation",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Computer Isolation",
+            "tooltip": "Indicate whether to isolate or de-isolate a computer",
+            "type_id": 1009,
+            "uuid": "ed29f5a2-b428-4c24-a7b9-5e98c15d7403",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Isolate",
+                "properties": null,
+                "uuid": "974a21b3-e055-4114-bd6b-9c778f025422",
+                "value": 130
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "De-isolate",
+                "properties": null,
+                "uuid": "86ca2b30-9f9e-4dc9-a212-310f3bea9e8b",
+                "value": 131
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Refresh",
+                "properties": null,
+                "uuid": "d4409c56-b452-4c3d-a43a-a96bbcf3ab10",
+                "value": 134
+              }
+            ]
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04",
+        "uuid": "1ed1250f-0175-4afc-9a5f-6fc5fafa5738"
+      },
+      "has_logical_errors": false,
+      "id": 2,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1718285147438,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1716474021123,
+          "description": "Post note to case and update data table",
+          "enabled": false,
+          "export_key": "AMP: Post-process",
+          "id": 6,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1717004464480,
+          "name": "AMP: Post-process",
+          "object_type": "amp_computers",
+          "playbook_handle": "amp_computer_isolation",
+          "programmatic_name": "amp_computer_isolation_amp_post_note",
+          "script_text": "results = playbook.functions.results.isolation_results\n\nif not results.success:\n  incident.addNote(f\"\u003cb\u003eCisco AMP for Endpoints: Computer Isolation (PB):\u003c/b\u003e Unable to change isolation status of computer: {results.reason}\")\nelse:\n  content = results.get(\"content\", {})\n  if content:\n    response = content.get(\"response\", None)\n    incident.addNote(f\"\u003cb\u003eCisco AMP for Endpoints: Computer Isolation (PB)\u003c/b\u003e Response {response}\")\n    row.isolation_status = response.get(\"data\", {}).get(\"status\")\n    ",
+          "tags": [],
+          "uuid": "683baf71-0476-421c-83a1-260328803015"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "amp_computers.connector_guid",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "ed29f5a2-b428-4c24-a7b9-5e98c15d7403",
+            "element": "field_uuid",
+            "field_type": "playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "amp_computer_isolation",
+      "object_type": "amp_computers",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_40dfbfcb-6969-4546-9172-6a00a65dcd04",
+        "id": 2,
+        "name": "playbook_40dfbfcb_6969_4546_9172_6a00a65dcd04",
+        "type": "playbook",
+        "uuid": "22e9c070-3bf7-49b3-9238-97e9d1d436a8"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "40dfbfcb-6969-4546-9172-6a00a65dcd04",
+      "version": 28
+    }
+  ],
   "regulators": null,
   "roles": [],
   "scripts": [
     {
       "actions": [],
-      "created_date": 1698655262276,
+      "created_date": 1716325742787,
       "description": "Example script to create artifacts from Cisco AMP for Endpoints activity properties. Supported artifact types are: \"System Name\"",
       "enabled": false,
       "export_key": "scr_amp_add_artifact_from_activity",
-      "id": 69,
+      "id": 3,
       "language": "python3",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698655716126,
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325742787,
       "name": "scr_amp_add_artifact_from_activity",
       "object_type": "amp_activity",
       "playbook_handle": null,
@@ -2614,14 +2905,14 @@
     },
     {
       "actions": [],
-      "created_date": 1698655262367,
+      "created_date": 1716325742825,
       "description": "Example script to create artifacts from Cisco AMP for Endpoints event properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\"",
       "enabled": false,
       "export_key": "scr_amp_add_artifact_from_event",
-      "id": 70,
+      "id": 4,
       "language": "python3",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698655987888,
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325742825,
       "name": "scr_amp_add_artifact_from_event",
       "object_type": "amp_events",
       "playbook_handle": null,
@@ -2632,14 +2923,14 @@
     },
     {
       "actions": [],
-      "created_date": 1698655262462,
+      "created_date": 1716325742855,
       "description": "Example script to create artifacts from Cisco AMP for Endpoints computer trajectory properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\", \"URL\"",
       "enabled": false,
       "export_key": "scr_amp_add_artifact_from_trajectory",
-      "id": 71,
+      "id": 5,
       "language": "python3",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698655994737,
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325742855,
       "name": "scr_amp_add_artifact_from_trajectory",
       "object_type": "amp_computer_trajectory",
       "playbook_handle": null,
@@ -2650,10 +2941,10 @@
     }
   ],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
+    "build_number": 9097,
+    "major": 50,
     "minor": 0,
-    "version": "46.0.8131"
+    "version": "50.0.9097"
   },
   "tags": [],
   "task_order": [],
@@ -2674,7 +2965,7 @@
           "deprecated": false,
           "export_key": "amp_activity/active",
           "hide_notification": false,
-          "id": 1010,
+          "id": 311,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -2690,7 +2981,7 @@
           "templates": [],
           "text": "Active",
           "tooltip": "",
-          "type_id": 1080,
+          "type_id": 1000,
           "uuid": "0e42ef43-1906-41f2-84c4-07ce06936cd2",
           "values": [],
           "width": 122
@@ -2705,7 +2996,7 @@
           "deprecated": false,
           "export_key": "amp_activity/connector_guid",
           "hide_notification": false,
-          "id": 1011,
+          "id": 312,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2721,7 +3012,7 @@
           "templates": [],
           "text": "Connector guid",
           "tooltip": "",
-          "type_id": 1080,
+          "type_id": 1000,
           "uuid": "7f4776cd-f085-484f-8874-bcbe5c23528e",
           "values": [],
           "width": 131
@@ -2736,7 +3027,7 @@
           "deprecated": false,
           "export_key": "amp_activity/hostname",
           "hide_notification": false,
-          "id": 1012,
+          "id": 313,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2752,7 +3043,7 @@
           "templates": [],
           "text": "Hostname",
           "tooltip": "",
-          "type_id": 1080,
+          "type_id": 1000,
           "uuid": "edd7bc13-ee34-4ee1-801a-4ce91a069d18",
           "values": [],
           "width": 99
@@ -2767,7 +3058,7 @@
           "deprecated": false,
           "export_key": "amp_activity/query",
           "hide_notification": false,
-          "id": 1013,
+          "id": 314,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2783,7 +3074,7 @@
           "templates": [],
           "text": "Query string",
           "tooltip": "",
-          "type_id": 1080,
+          "type_id": 1000,
           "uuid": "f06517f5-3c37-4612-8620-0b479d4068e9",
           "values": [],
           "width": 99
@@ -2798,7 +3089,7 @@
           "deprecated": false,
           "export_key": "amp_activity/query_execution_time",
           "hide_notification": false,
-          "id": 1014,
+          "id": 315,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2814,7 +3105,7 @@
           "templates": [],
           "text": "Query execution time",
           "tooltip": "",
-          "type_id": 1080,
+          "type_id": 1000,
           "uuid": "d4f091d8-945a-4aa3-9e5e-02e1925c56b6",
           "values": [],
           "width": 182
@@ -2854,7 +3145,7 @@
           "deprecated": false,
           "export_key": "amp_computers/connector_guid",
           "hide_notification": false,
-          "id": 1015,
+          "id": 316,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2866,14 +3157,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Connector guid",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "12ab5937-5289-48df-ab23-328b02343a46",
           "values": [],
-          "width": 82
+          "width": 116
         },
         "connector_version": {
           "allow_default_value": false,
@@ -2885,7 +3177,7 @@
           "deprecated": false,
           "export_key": "amp_computers/connector_version",
           "hide_notification": false,
-          "id": 1016,
+          "id": 317,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2897,14 +3189,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Connector version",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "b480e133-49d3-40b6-859b-fd33e3f8eb95",
           "values": [],
-          "width": 55
+          "width": 139
         },
         "external_ip": {
           "allow_default_value": false,
@@ -2916,7 +3209,7 @@
           "deprecated": false,
           "export_key": "amp_computers/external_ip",
           "hide_notification": false,
-          "id": 1017,
+          "id": 318,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2928,14 +3221,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "External ip",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "a2d0e9a6-3164-45f9-b6dd-606694f434e2",
           "values": [],
-          "width": 60
+          "width": 83
         },
         "group_guid": {
           "allow_default_value": false,
@@ -2947,7 +3241,7 @@
           "deprecated": false,
           "export_key": "amp_computers/group_guid",
           "hide_notification": false,
-          "id": 1018,
+          "id": 319,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2959,14 +3253,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Group guid",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "75f99504-945b-4c06-a409-6c0700f7cf3f",
           "values": [],
-          "width": 60
+          "width": 84
         },
         "group_name": {
           "allow_default_value": false,
@@ -2978,7 +3273,7 @@
           "deprecated": false,
           "export_key": "amp_computers/group_name",
           "hide_notification": false,
-          "id": 1019,
+          "id": 320,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2990,14 +3285,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Group name",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "7ec60e7b-ff54-4d62-81a0-4c617cde0a5d",
           "values": [],
-          "width": 52
+          "width": 93
         },
         "hostname": {
           "allow_default_value": false,
@@ -3009,7 +3305,7 @@
           "deprecated": false,
           "export_key": "amp_computers/hostname",
           "hide_notification": false,
-          "id": 1020,
+          "id": 321,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3021,14 +3317,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Hostname",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "82c0f18b-9a84-4bf7-bdd5-9bfcec8fcf21",
           "values": [],
-          "width": 60
+          "width": 77
         },
         "install_date": {
           "allow_default_value": false,
@@ -3040,7 +3337,7 @@
           "deprecated": false,
           "export_key": "amp_computers/install_date",
           "hide_notification": false,
-          "id": 1021,
+          "id": 322,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3052,14 +3349,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Install date",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "a9f37077-eb38-4cfa-84ec-ffeda9a9e9dc",
           "values": [],
-          "width": 31
+          "width": 88
         },
         "internal_ips": {
           "allow_default_value": false,
@@ -3071,7 +3369,7 @@
           "deprecated": false,
           "export_key": "amp_computers/internal_ips",
           "hide_notification": false,
-          "id": 1022,
+          "id": 323,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3083,14 +3381,47 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Internal ips",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "d7f729ec-f2c3-4ee5-824a-1cd222f6f6aa",
           "values": [],
-          "width": 60
+          "width": 89
+        },
+        "isolation_status": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "amp_computers/isolation_status",
+          "hide_notification": false,
+          "id": 405,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "isolation_status",
+          "operation_perms": {},
+          "operations": [],
+          "order": 12,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "short_text": "",
+          "tags": [],
+          "templates": [],
+          "text": "Isolation Status",
+          "tooltip": "",
+          "type_id": 1001,
+          "uuid": "95535d83-6f86-48fd-8fbc-54c2e88a5bba",
+          "values": [],
+          "width": 122
         },
         "last_seen": {
           "allow_default_value": false,
@@ -3102,7 +3433,7 @@
           "deprecated": false,
           "export_key": "amp_computers/last_seen",
           "hide_notification": false,
-          "id": 1023,
+          "id": 324,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3114,14 +3445,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Last seen",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "481451bf-3db5-4046-8b75-207e14ddbad1",
           "values": [],
-          "width": 25
+          "width": 72
         },
         "operating_system": {
           "allow_default_value": false,
@@ -3133,7 +3465,7 @@
           "deprecated": false,
           "export_key": "amp_computers/operating_system",
           "hide_notification": false,
-          "id": 1024,
+          "id": 325,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3145,14 +3477,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Operating system",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "66397bd0-7349-4ee5-a6e5-dc48cf28b46d",
           "values": [],
-          "width": 87
+          "width": 134
         },
         "policy_name": {
           "allow_default_value": false,
@@ -3164,7 +3497,7 @@
           "deprecated": false,
           "export_key": "amp_computers/policy_name",
           "hide_notification": false,
-          "id": 1025,
+          "id": 326,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3176,14 +3509,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Policy name",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "ac06525f-2f73-4546-b792-d85523ded04e",
           "values": [],
-          "width": 32
+          "width": 93
         },
         "query_execution_time": {
           "allow_default_value": false,
@@ -3195,7 +3529,7 @@
           "deprecated": false,
           "export_key": "amp_computers/query_execution_time",
           "hide_notification": false,
-          "id": 1026,
+          "id": 327,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3207,14 +3541,15 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Query execution time",
           "tooltip": "",
-          "type_id": 1081,
+          "type_id": 1001,
           "uuid": "f2cbc1c8-dc08-47d2-b698-4367a7d6e666",
           "values": [],
-          "width": 118
+          "width": 163
         }
       },
       "for_actions": false,
@@ -3251,7 +3586,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/date",
           "hide_notification": false,
-          "id": 1027,
+          "id": 328,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3267,7 +3602,7 @@
           "templates": [],
           "text": "Event date",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "43625053-2798-466f-af6d-050ccf5445f9",
           "values": [],
           "width": 29
@@ -3282,7 +3617,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/direction",
           "hide_notification": false,
-          "id": 1028,
+          "id": 329,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3298,7 +3633,7 @@
           "templates": [],
           "text": "Direction",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "52088775-fa66-4a7f-ac32-3dbacd076daf",
           "values": [],
           "width": 47
@@ -3313,7 +3648,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/dirty_url",
           "hide_notification": false,
-          "id": 1029,
+          "id": 330,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3329,7 +3664,7 @@
           "templates": [],
           "text": "Dirty url",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "8b35c160-acc4-4580-a86a-c12e517649af",
           "values": [],
           "width": 24
@@ -3344,7 +3679,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/disposition",
           "hide_notification": false,
-          "id": 1030,
+          "id": 331,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3360,7 +3695,7 @@
           "templates": [],
           "text": "Disposition",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "f2470b59-439b-405e-a532-5660aaa0702e",
           "values": [],
           "width": 58
@@ -3375,7 +3710,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/event_type",
           "hide_notification": false,
-          "id": 1031,
+          "id": 332,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3391,7 +3726,7 @@
           "templates": [],
           "text": "Event type",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "9dfde382-ee9c-4a47-84c9-1e07ef72f676",
           "values": [],
           "width": 29
@@ -3406,7 +3741,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/file_name",
           "hide_notification": false,
-          "id": 1032,
+          "id": 333,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3422,7 +3757,7 @@
           "templates": [],
           "text": "File name",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "dc28d858-8a36-4340-be3b-498ac6da0a27",
           "values": [],
           "width": 28
@@ -3437,7 +3772,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/file_path",
           "hide_notification": false,
-          "id": 1033,
+          "id": 334,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3453,7 +3788,7 @@
           "templates": [],
           "text": "File path",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "f00b0d14-ea99-44ec-805e-b75b34d542de",
           "values": [],
           "width": 23
@@ -3468,7 +3803,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/file_type",
           "hide_notification": false,
-          "id": 1034,
+          "id": 335,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3484,7 +3819,7 @@
           "templates": [],
           "text": "File type",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "bb10de8b-b1b1-4a5b-8727-eca997085c99",
           "values": [],
           "width": 22
@@ -3499,7 +3834,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/hostname",
           "hide_notification": false,
-          "id": 1035,
+          "id": 336,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3515,7 +3850,7 @@
           "templates": [],
           "text": "Hostname",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "4fbc891a-bc02-4994-afe8-4290c47a4b78",
           "values": [],
           "width": 53
@@ -3530,7 +3865,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/local_port",
           "hide_notification": false,
-          "id": 1036,
+          "id": 337,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3546,7 +3881,7 @@
           "templates": [],
           "text": "Local port",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "b4b244cb-7f46-4b72-8c2e-9abcf3ad7e21",
           "values": [],
           "width": 28
@@ -3561,7 +3896,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/parent_sha256",
           "hide_notification": false,
-          "id": 1037,
+          "id": 338,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3577,7 +3912,7 @@
           "templates": [],
           "text": "Parent sha256",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "79ff916e-b400-412c-aaed-c0bb27019f55",
           "values": [],
           "width": 36
@@ -3592,7 +3927,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/protocol",
           "hide_notification": false,
-          "id": 1038,
+          "id": 339,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3608,7 +3943,7 @@
           "templates": [],
           "text": "Protocol",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "a10ed8f4-38e6-4636-8898-36a6817c48e4",
           "values": [],
           "width": 44
@@ -3623,7 +3958,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/query",
           "hide_notification": false,
-          "id": 1039,
+          "id": 340,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3639,7 +3974,7 @@
           "templates": [],
           "text": "Query string",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "0fccd620-af6c-4db4-85c1-d18a777c0d15",
           "values": [],
           "width": 31
@@ -3654,7 +3989,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/query_execution_time",
           "hide_notification": false,
-          "id": 1040,
+          "id": 341,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3670,7 +4005,7 @@
           "templates": [],
           "text": "Query execution time",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "9a39c66e-c30b-4c7d-bf69-cd11bc55c6df",
           "values": [],
           "width": 61
@@ -3685,7 +4020,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/remote_ip",
           "hide_notification": false,
-          "id": 1041,
+          "id": 342,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3701,7 +4036,7 @@
           "templates": [],
           "text": "Remote ip",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "563ddc5c-f169-467f-b516-2b0bc4fdc6c1",
           "values": [],
           "width": 40
@@ -3716,7 +4051,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/remote_port",
           "hide_notification": false,
-          "id": 1042,
+          "id": 343,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3732,7 +4067,7 @@
           "templates": [],
           "text": "Remote port",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "4a75a1d9-b72a-490d-8121-f878927d9138",
           "values": [],
           "width": 40
@@ -3747,7 +4082,7 @@
           "deprecated": false,
           "export_key": "amp_computer_trajectory/sha256",
           "hide_notification": false,
-          "id": 1043,
+          "id": 344,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3763,7 +4098,7 @@
           "templates": [],
           "text": "File sha256",
           "tooltip": "",
-          "type_id": 1082,
+          "type_id": 1002,
           "uuid": "77082eea-7c34-410f-aa5a-74fabc9e0e18",
           "values": [],
           "width": 36
@@ -3803,7 +4138,7 @@
           "deprecated": false,
           "export_key": "amp_events/date",
           "hide_notification": false,
-          "id": 1044,
+          "id": 345,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3819,7 +4154,7 @@
           "templates": [],
           "text": "Event date",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "747da700-7fe8-421e-af7a-73dcd4d8622c",
           "values": [],
           "width": 30
@@ -3834,7 +4169,7 @@
           "deprecated": false,
           "export_key": "amp_events/disposition",
           "hide_notification": false,
-          "id": 1045,
+          "id": 346,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3850,7 +4185,7 @@
           "templates": [],
           "text": "File disposition",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "5d5a8fb7-39f2-4b44-a174-77074f5ee2ac",
           "values": [],
           "width": 58
@@ -3865,7 +4200,7 @@
           "deprecated": false,
           "export_key": "amp_events/event_id",
           "hide_notification": false,
-          "id": 1046,
+          "id": 347,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3881,7 +4216,7 @@
           "templates": [],
           "text": "Event id",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "67590bd4-1442-4ba9-a735-3653ec1fe132",
           "values": [],
           "width": 35
@@ -3896,7 +4231,7 @@
           "deprecated": false,
           "export_key": "amp_events/event_type",
           "hide_notification": false,
-          "id": 1047,
+          "id": 348,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3912,7 +4247,7 @@
           "templates": [],
           "text": "Event type",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "fed643f3-fd0e-4e64-81c7-12264be0fa2e",
           "values": [],
           "width": 48
@@ -3927,7 +4262,7 @@
           "deprecated": false,
           "export_key": "amp_events/external_ip",
           "hide_notification": false,
-          "id": 1048,
+          "id": 349,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3943,7 +4278,7 @@
           "templates": [],
           "text": "External ip",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "e4865642-d1c4-4f93-99ac-3e5c9fc2ce76",
           "values": [],
           "width": 49
@@ -3958,7 +4293,7 @@
           "deprecated": false,
           "export_key": "amp_events/file_name",
           "hide_notification": false,
-          "id": 1049,
+          "id": 350,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3974,7 +4309,7 @@
           "templates": [],
           "text": "File name",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "fd485706-44ff-4668-b491-755c0923729e",
           "values": [],
           "width": 42
@@ -3989,7 +4324,7 @@
           "deprecated": false,
           "export_key": "amp_events/file_path",
           "hide_notification": false,
-          "id": 1050,
+          "id": 351,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4005,7 +4340,7 @@
           "templates": [],
           "text": "File path",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "ab78a944-98c0-427b-9456-216dfcb5c7bb",
           "values": [],
           "width": 36
@@ -4020,7 +4355,7 @@
           "deprecated": false,
           "export_key": "amp_events/hostname",
           "hide_notification": false,
-          "id": 1051,
+          "id": 352,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4036,7 +4371,7 @@
           "templates": [],
           "text": "Hostname",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "6b3442ce-220a-41f6-8687-828b6e281510",
           "values": [],
           "width": 54
@@ -4051,7 +4386,7 @@
           "deprecated": false,
           "export_key": "amp_events/query_execution_time",
           "hide_notification": false,
-          "id": 1052,
+          "id": 353,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4067,7 +4402,7 @@
           "templates": [],
           "text": "Query Execution time",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "5ab210b8-dd18-47f8-a223-1d498c896a0a",
           "values": [],
           "width": 113
@@ -4082,7 +4417,7 @@
           "deprecated": false,
           "export_key": "amp_events/severity",
           "hide_notification": false,
-          "id": 1053,
+          "id": 354,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4098,7 +4433,7 @@
           "templates": [],
           "text": "severity",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "2d540808-207a-424d-b678-bc50f14a17df",
           "values": [],
           "width": 41
@@ -4113,7 +4448,7 @@
           "deprecated": false,
           "export_key": "amp_events/sha256",
           "hide_notification": false,
-          "id": 1054,
+          "id": 355,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4129,7 +4464,7 @@
           "templates": [],
           "text": "File sha256",
           "tooltip": "",
-          "type_id": 1083,
+          "type_id": 1003,
           "uuid": "95738fea-3824-4533-8db2-dd136d67671c",
           "values": [],
           "width": 37
@@ -4169,7 +4504,7 @@
           "deprecated": false,
           "export_key": "amp_event_types/event_type_description",
           "hide_notification": false,
-          "id": 1055,
+          "id": 356,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4185,7 +4520,7 @@
           "templates": [],
           "text": "Event type description",
           "tooltip": "",
-          "type_id": 1084,
+          "type_id": 1004,
           "uuid": "54d2af86-48b3-48fe-9310-30c87edb9c63",
           "values": [],
           "width": 198
@@ -4200,7 +4535,7 @@
           "deprecated": false,
           "export_key": "amp_event_types/event_type_id",
           "hide_notification": false,
-          "id": 1056,
+          "id": 357,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4216,7 +4551,7 @@
           "templates": [],
           "text": "Event type id",
           "tooltip": "",
-          "type_id": 1084,
+          "type_id": 1004,
           "uuid": "13b60488-0787-4eb3-b43f-be08f9cccaed",
           "values": [],
           "width": 126
@@ -4231,7 +4566,7 @@
           "deprecated": false,
           "export_key": "amp_event_types/event_type_name",
           "hide_notification": false,
-          "id": 1057,
+          "id": 358,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4247,7 +4582,7 @@
           "templates": [],
           "text": "Event type name",
           "tooltip": "",
-          "type_id": 1084,
+          "type_id": 1004,
           "uuid": "33780073-aa40-488c-bd3b-ff4e39451755",
           "values": [],
           "width": 151
@@ -4262,7 +4597,7 @@
           "deprecated": false,
           "export_key": "amp_event_types/query_execution_time",
           "hide_notification": false,
-          "id": 1058,
+          "id": 359,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4278,7 +4613,7 @@
           "templates": [],
           "text": "Query execution time",
           "tooltip": "",
-          "type_id": 1084,
+          "type_id": 1004,
           "uuid": "81e8d54e-8667-4f6c-9a01-870f8f21ef0d",
           "values": [],
           "width": 187
@@ -4318,7 +4653,7 @@
           "deprecated": false,
           "export_key": "amp_file_list_files/file_description",
           "hide_notification": false,
-          "id": 1059,
+          "id": 360,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4334,7 +4669,7 @@
           "templates": [],
           "text": "File Description",
           "tooltip": "",
-          "type_id": 1085,
+          "type_id": 1005,
           "uuid": "fdaff322-faa9-4b78-bf9f-140f83041fc2",
           "values": [],
           "width": 336
@@ -4349,7 +4684,7 @@
           "deprecated": false,
           "export_key": "amp_file_list_files/guid",
           "hide_notification": false,
-          "id": 1060,
+          "id": 361,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4365,7 +4700,7 @@
           "templates": [],
           "text": "List guid",
           "tooltip": "",
-          "type_id": 1085,
+          "type_id": 1005,
           "uuid": "7049a72e-e36b-44c4-b64d-8d7d02214e5a",
           "values": [],
           "width": 23
@@ -4380,7 +4715,7 @@
           "deprecated": false,
           "export_key": "amp_file_list_files/list_name",
           "hide_notification": false,
-          "id": 1061,
+          "id": 362,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4396,7 +4731,7 @@
           "templates": [],
           "text": "List Name",
           "tooltip": "",
-          "type_id": 1085,
+          "type_id": 1005,
           "uuid": "6e4bc578-0ff0-4d42-8d40-4459d7e3c6ef",
           "values": [],
           "width": 31
@@ -4411,7 +4746,7 @@
           "deprecated": false,
           "export_key": "amp_file_list_files/query_execution_time",
           "hide_notification": false,
-          "id": 1062,
+          "id": 363,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4427,7 +4762,7 @@
           "templates": [],
           "text": "Query execution time",
           "tooltip": "",
-          "type_id": 1085,
+          "type_id": 1005,
           "uuid": "c994d5d0-0114-4069-a079-88d64cffe246",
           "values": [],
           "width": 73
@@ -4442,7 +4777,7 @@
           "deprecated": false,
           "export_key": "amp_file_list_files/sha256",
           "hide_notification": false,
-          "id": 1063,
+          "id": 364,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4458,7 +4793,7 @@
           "templates": [],
           "text": "File sha256",
           "tooltip": "",
-          "type_id": 1085,
+          "type_id": 1005,
           "uuid": "9d437f1a-2c86-40e3-b591-52390f01bfc3",
           "values": [],
           "width": 86
@@ -4473,7 +4808,7 @@
           "deprecated": false,
           "export_key": "amp_file_list_files/source",
           "hide_notification": false,
-          "id": 1064,
+          "id": 365,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4489,7 +4824,7 @@
           "templates": [],
           "text": "File source",
           "tooltip": "",
-          "type_id": 1085,
+          "type_id": 1005,
           "uuid": "88d3ebf8-e48c-4244-bd81-ef387ffb37f6",
           "values": [],
           "width": 84
@@ -4529,7 +4864,7 @@
           "deprecated": false,
           "export_key": "amp_groups/group_description",
           "hide_notification": false,
-          "id": 1065,
+          "id": 366,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4545,7 +4880,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "",
-          "type_id": 1086,
+          "type_id": 1006,
           "uuid": "ee970484-2808-40c0-b0b3-d777d6b6e0be",
           "values": [],
           "width": 274
@@ -4560,7 +4895,7 @@
           "deprecated": false,
           "export_key": "amp_groups/group_name",
           "hide_notification": false,
-          "id": 1066,
+          "id": 367,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4576,7 +4911,7 @@
           "templates": [],
           "text": "Name",
           "tooltip": "",
-          "type_id": 1086,
+          "type_id": 1006,
           "uuid": "2e266ea6-9563-47d2-a426-adde14f9d0ff",
           "values": [],
           "width": 96
@@ -4591,7 +4926,7 @@
           "deprecated": false,
           "export_key": "amp_groups/guid",
           "hide_notification": false,
-          "id": 1067,
+          "id": 368,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4607,7 +4942,7 @@
           "templates": [],
           "text": "Group guid",
           "tooltip": "",
-          "type_id": 1086,
+          "type_id": 1006,
           "uuid": "dea56f8e-2ee9-48bf-a1e1-58a23f8bd988",
           "values": [],
           "width": 185
@@ -4622,7 +4957,7 @@
           "deprecated": false,
           "export_key": "amp_groups/query_execution_time",
           "hide_notification": false,
-          "id": 1068,
+          "id": 369,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4638,7 +4973,7 @@
           "templates": [],
           "text": "Query execution time",
           "tooltip": "",
-          "type_id": 1086,
+          "type_id": 1006,
           "uuid": "2d5c4a9a-6fd6-4a0f-9f87-0caefeaf4381",
           "values": [],
           "width": 120
@@ -4678,7 +5013,7 @@
           "deprecated": false,
           "export_key": "amp_scd_file_lists/guid",
           "hide_notification": false,
-          "id": 1069,
+          "id": 370,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4694,7 +5029,7 @@
           "templates": [],
           "text": "List guid",
           "tooltip": "",
-          "type_id": 1087,
+          "type_id": 1007,
           "uuid": "5aa8a668-1c0c-4da0-b281-01be4bf92805",
           "values": [],
           "width": 172
@@ -4709,7 +5044,7 @@
           "deprecated": false,
           "export_key": "amp_scd_file_lists/list_name",
           "hide_notification": false,
-          "id": 1070,
+          "id": 371,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4725,7 +5060,7 @@
           "templates": [],
           "text": "List name",
           "tooltip": "",
-          "type_id": 1087,
+          "type_id": 1007,
           "uuid": "7f4094f8-d4c4-4d17-af1d-c3e68363d4d6",
           "values": [],
           "width": 120
@@ -4740,7 +5075,7 @@
           "deprecated": false,
           "export_key": "amp_scd_file_lists/query_execution_time",
           "hide_notification": false,
-          "id": 1071,
+          "id": 372,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4756,7 +5091,7 @@
           "templates": [],
           "text": "Query execution time",
           "tooltip": "",
-          "type_id": 1087,
+          "type_id": 1007,
           "uuid": "ac481815-d276-4cbd-9ab5-4edff516c487",
           "values": [],
           "width": 160
@@ -4771,7 +5106,7 @@
           "deprecated": false,
           "export_key": "amp_scd_file_lists/type",
           "hide_notification": false,
-          "id": 1072,
+          "id": 373,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4787,7 +5122,7 @@
           "templates": [],
           "text": "List type",
           "tooltip": "",
-          "type_id": 1087,
+          "type_id": 1007,
           "uuid": "9b2ef12a-0f46-4d36-9408-729aac4cf4ac",
           "values": [],
           "width": 208
@@ -4817,363 +5152,363 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "wf_amp_add_artifact_from_trajectory",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_add_artifact_from_trajectory\" isExecutable=\"true\" name=\"Example: AMP add artifact from trajectory\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Example workflow  to create artifacts from Cisco AMP for Endpoints computer trajectory properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\", \"URL\"]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1i59157\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_0bwwghg\" name=\"scr_amp_add_artifact_from_traject...\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ca7adedc-3016-477b-8e38-c9cf29d2ec19\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1i59157\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0o523pg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1i59157\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_0bwwghg\"/\u003e\u003cendEvent id=\"EndEvent_1kg9i68\"\u003e\u003cincoming\u003eSequenceFlow_0o523pg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0o523pg\" sourceRef=\"ScriptTask_0bwwghg\" targetRef=\"EndEvent_1kg9i68\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0x9qbxb\"\u003e\u003ctext\u003eGenerate Resilient artifact from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ttfz1q\" sourceRef=\"ScriptTask_0bwwghg\" targetRef=\"TextAnnotation_0x9qbxb\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0bwwghg\" id=\"ScriptTask_0bwwghg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"245\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1i59157\" id=\"SequenceFlow_1i59157_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"245\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1kg9i68\" id=\"EndEvent_1kg9i68_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"400\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"418\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o523pg\" id=\"SequenceFlow_0o523pg_di\"\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"400\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"372.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0x9qbxb\" id=\"TextAnnotation_0x9qbxb_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"157\" x=\"245\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ttfz1q\" id=\"Association_0ttfz1q_di\"\u003e\u003comgdi:waypoint x=\"295\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"295\" xsi:type=\"omgdc:Point\" y=\"98\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 7,
+        "workflow_id": "wf_amp_move_computer",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_move_computer\" isExecutable=\"true\" name=\"Example: AMP move computer\"\u003e\u003cdocumentation\u003eExample multi-part workflow to move a computer to a different group. The group name parameter is assigned from an activity field drop-down at runtime, the computer name parameter is assigned from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0bjrdbz\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_18ri6ss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1i3mvwp\" name=\"AMP: Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0603c8-81b2-4190-a9f5-d1b6b9a1215f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computers script ##\\n#  fn_amp_get_computers  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n# Processing\\nresponse = results.get(\\\"response\\\")\\nnoteText = \u0027\u0027\\n\\nif response is not None and response.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") \u0026gt; 0:\\n   pass\\n   # If we get here do nothing result passed on to function \u0027fn_amp_move_computer\u0027 as \u0027workflow.properties.get_computers_results\u0027\\nelse:\\n   noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computers\\\")\\n\\n   incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_hostname = row.hostname\\ninputs.amp_group_guid = None\\ninputs.amp_external_ip = None\\ninputs.amp_internal_ip = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_computers_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0bjrdbz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0a3f39y\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1jdcaav\" name=\"AMP: Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69456802-f5ba-4602-9d40-d75d0fda42aa\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_groups script ##\\n#  fn_amp_get_groups  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:         {\\n      \\\"response\\\": {\\n        \\\"version\\\": \\\"v1.2.0\\\",\\n        \\\"data\\\": [\\n          {\\n            \\\"source\\\": null,\\n            \\\"guid\\\": \\\"abcd1234-a123-b456-c769-abcdef123456\\\",\\n            \\\"name\\\": \\\"Audit\\\",\\n            \\\"links\\\": {\\n              \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/abcd1234-a123-b456-c769-abcdef123456\\\"\\n            },\\n            \\\"description\\\": \\\"Test Audit Group 1\\\"\\n          },\\n          ...\\n        ],\\n        \\\"metadata\\\": {\\n          \\\"results\\\": {\\n            \\\"index\\\": 0,\\n            \\\"total\\\": 5,\\n            \\\"items_per_page\\\": 500,\\n            \\\"current_item_count\\\": 5\\n          },\\n          \\\"links\\\": {\\n            \\\"self\\\": \\\"https://api.amp.cisco.com/v1/groups\\\"\\n          }\\n        }\\n      },\\n      \\\"query_execution_time\\\": \\\"2018-10-08 12:49:38\\\"\\n    }\\n\\\"\\\"\\\"\\n\\n# Processing\\nresponse = results.get(\\\"response\\\")\\ninput_params = results.get(\\\"input_params\\\")\\nnote_text = \u0027\u0027\\n\\nif response is not None and response.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") \u0026gt; 0:\\n   pass\\n   # If we get here do nothing result passed on to function \u0027fn_amp_move_computer\u0027 as \u0027workflow.properties.get_groups_results\u0027\\nelse:\\n   note_text += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for group name \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(input_params.get(\\\"name\\\",{}), \\\"fn_amp_get_groups\\\")\\n   incident.addNote(helper.createRichText(note_text))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\" # The inputs.amp_group_name  needs to be set to a group name.\\n# e.g. inputs.amp_group_name = \\\"Int_Test_Group1\\\"\\ninputs.amp_group_guid = None\\ninputs.amp_group_name = rule.properties.amp_group_name\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_groups_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_18ri6ss\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_028ezne\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cinclusiveGateway id=\"InclusiveGateway_09mj2tk\"\u003e\u003cincoming\u003eSequenceFlow_0a3f39y\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_028ezne\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fhhuhm\u003c/outgoing\u003e\u003c/inclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0a3f39y\" sourceRef=\"ServiceTask_1i3mvwp\" targetRef=\"InclusiveGateway_09mj2tk\"/\u003e\u003csequenceFlow id=\"SequenceFlow_028ezne\" sourceRef=\"ServiceTask_1jdcaav\" targetRef=\"InclusiveGateway_09mj2tk\"/\u003e\u003cserviceTask id=\"ServiceTask_1vo8fhv\" name=\"AMP: Move Computer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4f4c38ef-1adc-4865-9cc6-c7f33251ebb4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_move_computer script ##\\n#  fn_amp_move_computer  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                           \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\"},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n              \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n              \\\"links\\\": {\\n                \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n              },\\n              \\\"policy\\\": {\\n                \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                \\\"name\\\": \\\"Audit\\\"\\n              },\\n              \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n              \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n              \\\"hostname\\\": \\\"Demo_AMP\\\",\\n              \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n              \\\"network_addresses\\\": [\\n                {\\n                  \\\"ip\\\": \\\"255.240.221.92\\\",\\n                  \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                }\\n              ],\\n              \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n              \\\"internal_ips\\\": [\\n                \\\"255.240.221.92\\\"\\n              ],\\n              \\\"active\\\": true\\n            },\\n            \\\"metadata\\\": {\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-08 15:22:26\\\"\\n        }\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_move_computer script\\nDATA_TBL_FIELDS = [\\\"delete_execution_time\\\", \\\"status\\\"]\\n\\n# Processing\\nresponse = results.get(\\\"response\\\")\\nquery_execution_time = results.get(\\\"query_execution_time\\\")\\ninput_params_groups = workflow.properties.get_groups_results.input_params\\n\\nif response is not None:\\n    resp_data = response.get(\\\"data\\\", {})\\n    hostname = resp_data.get(\\\"hostname\\\")\\n    row.group_guid = resp_data.get(\\\"group_guid\\\")\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Successfully moved computer with hostname \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"to group \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(hostname, input_params_groups.get(\\\"name\\\"), \\\"fn_amp_move_computer\\\")\\nelse:\\n  noteText = \\\"Cisco AMP Integration: Move unsuccessful for computer with guid \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"to group \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(hostname, input_params_groups.get(\\\"name\\\"), \\\"fn_amp_move_computer\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"response_groups =  workflow.properties.get_groups_results.response\\ninput_params_groups = workflow.properties.get_groups_results.input_params\\nresponse_computers =  workflow.properties.get_computers_results.response\\ninput_params_computers = workflow.properties.get_computers_results.input_params\\nif response_groups.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") \u0026gt; 0:\\n  inputs.amp_group_guid = response_groups[\\\"data\\\"][0][\\\"guid\\\"]\\nelse:\\n  raise ValueError(\\\"No results returned for group name\\\")\\nif response_computers.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") \u0026gt; 0:\\n  inputs.amp_conn_guid = response_computers[\\\"data\\\"][0][\\\"connector_guid\\\"]\\nelse:\\n  raise ValueError(\\\"No results returned for computer name\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0fhhuhm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0m9yv61\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0fhhuhm\" sourceRef=\"InclusiveGateway_09mj2tk\" targetRef=\"ServiceTask_1vo8fhv\"/\u003e\u003cendEvent id=\"EndEvent_0tqmwlh\"\u003e\u003cincoming\u003eSequenceFlow_0m9yv61\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0m9yv61\" sourceRef=\"ServiceTask_1vo8fhv\" targetRef=\"EndEvent_0tqmwlh\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0bjrdbz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1i3mvwp\"/\u003e\u003csequenceFlow id=\"SequenceFlow_18ri6ss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1jdcaav\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1pic966\"\u003e\u003ctext\u003eGet group guid from group name. Group name input parameter assigned from an activity field drop-down at run-time.\u003c/text\u003e\u003c/textAnnotation\u003e\u003ctextAnnotation id=\"TextAnnotation_116bnwe\"\u003e\u003ctext\u003eGet computer connector guid from hostname. Hostname input parameter assigned from a data table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0j0zm5r\" sourceRef=\"ServiceTask_1jdcaav\" targetRef=\"TextAnnotation_1pic966\"/\u003e\u003cassociation id=\"Association_1oijdp9\" sourceRef=\"ServiceTask_1i3mvwp\" targetRef=\"TextAnnotation_116bnwe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1aubei5\"\u003e\u003ctext\u003eMove computer by guid\u00a0 to group by guid.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m23lt0\" sourceRef=\"ServiceTask_1vo8fhv\" targetRef=\"TextAnnotation_1aubei5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1i3mvwp\" id=\"ServiceTask_1i3mvwp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"229\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1jdcaav\" id=\"ServiceTask_1jdcaav_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"99\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"InclusiveGateway_09mj2tk\" id=\"InclusiveGateway_09mj2tk_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"456\" y=\"208\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"481\" y=\"261\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0a3f39y\" id=\"SequenceFlow_0a3f39y_di\"\u003e\u003comgdi:waypoint x=\"350\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"403\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"403\" y=\"233\"/\u003e\u003comgdi:waypoint x=\"456\" y=\"233\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"373\" y=\"244.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_028ezne\" id=\"SequenceFlow_028ezne_di\"\u003e\u003comgdi:waypoint x=\"350\" y=\"139\"/\u003e\u003comgdi:waypoint x=\"481\" y=\"139\"/\u003e\u003comgdi:waypoint x=\"481\" y=\"208\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"370.5\" y=\"117.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1vo8fhv\" id=\"ServiceTask_1vo8fhv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"571\" y=\"193\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fhhuhm\" id=\"SequenceFlow_0fhhuhm_di\"\u003e\u003comgdi:waypoint x=\"506\" y=\"233\"/\u003e\u003comgdi:waypoint x=\"571\" y=\"233\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"538.5\" y=\"211\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tqmwlh\" id=\"EndEvent_0tqmwlh_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"726\" y=\"215\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"744\" y=\"254\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0m9yv61\" id=\"SequenceFlow_0m9yv61_di\"\u003e\u003comgdi:waypoint x=\"671\" y=\"233\"/\u003e\u003comgdi:waypoint x=\"726\" y=\"233\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"698.5\" y=\"211\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1pic966\" id=\"TextAnnotation_1pic966_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"249\" x=\"218\" y=\"13\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bjrdbz\" id=\"SequenceFlow_0bjrdbz_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"250\" y=\"269\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"239\" y=\"231\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_18ri6ss\" id=\"SequenceFlow_18ri6ss_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"139\"/\u003e\u003comgdi:waypoint x=\"250\" y=\"139\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"239\" y=\"165.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_116bnwe\" id=\"TextAnnotation_116bnwe_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"203\" x=\"228\" y=\"375\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0j0zm5r\" id=\"Association_0j0zm5r_di\"\u003e\u003comgdi:waypoint x=\"301\" y=\"99\"/\u003e\u003comgdi:waypoint x=\"301\" y=\"63\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1oijdp9\" id=\"Association_1oijdp9_di\"\u003e\u003comgdi:waypoint x=\"300\" y=\"309\"/\u003e\u003comgdi:waypoint x=\"300\" y=\"374\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1aubei5\" id=\"TextAnnotation_1aubei5_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"182\" x=\"571\" y=\"95\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m23lt0\" id=\"Association_1m23lt0_di\"\u003e\u003comgdi:waypoint x=\"621\" y=\"193\"/\u003e\u003comgdi:waypoint x=\"620\" y=\"125\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
-      "description": "Example workflow  to create artifacts from Cisco AMP for Endpoints computer trajectory properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\", \"URL\"",
-      "export_key": "wf_amp_add_artifact_from_trajectory",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698655269005,
-      "name": "Example: AMP add artifact from trajectory",
-      "object_type": "amp_computer_trajectory",
-      "programmatic_name": "wf_amp_add_artifact_from_trajectory",
-      "tags": [],
-      "uuid": "a5be3c8b-0e57-4df7-9b94-82a1542f0443",
-      "workflow_id": 153
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_amp_get_events",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_events\" isExecutable=\"true\" name=\"Example: AMP get events\"\u003e\u003cdocumentation\u003eExample workflow to return a  list of all events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ial590\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1c5dln0\" name=\"AMP: Get Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f5e6bff-316f-48f5-bfce-fb963be11c35\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_events script ##\\n#  fn_amp_get_events  -  Events list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:  {\\n          \\\"input_params\\\": {\\\"detection_sha256\\\": null, \\\"application_sha256\\\": null, \\\"connector_guid\\\": null,\\n                           \\\"group_guid\\\": null, \\\"start_date\\\": null, \\\"event_type\\\": null, \\\"limit\\\": null, \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"id\\\": 6455442249407791000,\\n                \\\"timestamp\\\": 1503024774,\\n                \\\"severity\\\": \\\"High\\\",\\n                \\\"timestamp_nanoseconds\\\": 98000000,\\n                \\\"date\\\": \\\"2017-08-18T02:52:54+00:00\\\",\\n                \\\"event_type\\\": \\\"Threat Detected\\\",\\n                \\\"event_type_id\\\": 1090519054,\\n                \\\"detection\\\": \\\"benign_qa_testware7\\\",\\n                \\\"detection_id\\\": \\\"6455442249407791109\\\",\\n                \\\"group_guids\\\": [\\n                  \\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                ],\\n                \\\"computer\\\": {\\n                  \\\"connector_guid\\\": \\\"af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                  \\\"hostname\\\": \\\"WIN-S1AC1PI6L5L\\\",\\n                  \\\"external_ip\\\": \\\"10.200.65.31\\\",\\n                  \\\"user\\\": \\\"johndoe@WIN-S1AC1PI6L5L\\\",\\n                  \\\"active\\\": true,\\n                  \\\"network_addresses\\\": [\\n                    {\\n                      \\\"ip\\\": \\\"10.0.2.15\\\",\\n                      \\\"mac\\\": \\\"08:00:27:85:28:61\\\"\\n                    }\\n                  ],\\n                  \\\"links\\\": {\\n                    \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                    \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01/trajectory\\\",\\n                    \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                  }\\n                },\\n                \\\"file\\\": {\\n                  \\\"disposition\\\": \\\"Unknown\\\",\\n                  \\\"file_name\\\": \\\"file.zip\\\",\\n                  \\\"file_path\\\": \\\"\\\\\\\\\\\\\\\\?\\\\\\\\C:\\\\\\\\Users\\\\\\\\johndoe\\\\\\\\Downloads\\\\\\\\file.zip\\\",\\n                  \\\"identity\\\": {\\n                    \\\"sha256\\\": \\\"f8a6a244138cb1e2f044f63f3dc42beeb555da892bbd7a121274498cbdfc9ad5\\\",\\n                    \\\"sha1\\\": \\\"20eeee16345e0c1283f7b500126350cb938b8570\\\",\\n                    \\\"md5\\\": \\\"6853839cde69359049ae6f7bd3ae86d7\\\"\\n                  },\\n                  \\\"archived_file\\\": {\\n                    \\\"disposition\\\": \\\"Malicious\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"46679a50632d05b99683a14b91a69ce908de1673fbb71e9cd325e5685fcd7e49\\\"\\n                    }\\n                  },\\n                  \\\"parent\\\": {\\n                    \\\"process_id\\\": 3416,\\n                    \\\"disposition\\\": \\\"Clean\\\",\\n                    \\\"file_name\\\": \\\"explorer.exe\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"80ef843fa78c33b511394a9c7535a9cbace1deb2270e86ee4ad2faffa5b1e7d2\\\",\\n                      \\\"sha1\\\": \\\"ea97227d34b8526055a543ade7d18587a927f6a3\\\",\\n                      \\\"md5\\\": \\\"15bc38a7492befe831966adb477cf76f\\\"\\n                    }\\n                  }\\n                }\\n              },\\n              ...\\n              ...\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 0,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 0\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/events\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-09 11:05:12\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_events script - reference only\\nDATA_TBL_FIELDS_TOP = [\\\"query_execution_time\\\", \\\"event_id\\\", \\\"date\\\", \\\"event_type\\\", \\\"event_type_id\\\", \\\"severity\\\"]\\nDATA_TBL_FIELDS_COMPUTER = [\\\"hostname\\\", \\\"external_ip\\\"]\\nDATA_TBL_FIELDS_FILE = [\\\"disposition\\\", \\\"file_name\\\", \\\"file_path\\\", \\\"sha256\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], \\\"fn_amp_get_events\\\")\\n    for d in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_events\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.event_id = str(d.id)\\n        newrow.event_type = d.event_type\\n        newrow.severity = d.severity\\n        newrow.date = d.date\\n        c = d[\\\"computer\\\"]\\n        if c is not None:\\n            for fi in DATA_TBL_FIELDS_COMPUTER:\\n                if isinstance(c[fi], str) or len(c[fi]) == 0:\\n                    newrow[fi] = c[fi]\\n                else:\\n                    newrow[fi] = \u0027[\u0027 + \u0027\u0027.join(c[fi]) + \u0027]\u0027\\n        fl = d[\\\"file\\\"]\\n        if fl is not None:\\n            fident  =  fl[\\\"identity\\\"]\\n            if fident is not None:\\n                newrow.sha256 = fident.sha256\\n            for fi in DATA_TBL_FIELDS_FILE:\\n                if fl[fi] is not None:\\n                    newrow[fi] = fl[fi]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_events\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_application_sha256 = None\\ninputs.amp_conn_guid  = None\\ninputs.amp_detection_sha256  = None\\ninputs.amp_event_type = None\\ninputs.amp_group_guid  = None\\ninputs.amp_limit  = rule.properties.amp_limit\\ninputs.amp_offset  = rule.properties.amp_offset\\ninputs.amp_start_date  = rule.properties.amp_start_date\\ninputs.amp_severity = rule.properties.amp_severity\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ial590\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sxlc0m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ial590\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1c5dln0\"/\u003e\u003cendEvent id=\"EndEvent_1avfjgm\"\u003e\u003cincoming\u003eSequenceFlow_1sxlc0m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1sxlc0m\" sourceRef=\"ServiceTask_1c5dln0\" targetRef=\"EndEvent_1avfjgm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0y9r24l\"\u003e\u003ctext\u003eGet events. Optional\u00a0 input parameters start_date, limit and offset assigned from activity fields.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14b7i4h\" sourceRef=\"ServiceTask_1c5dln0\" targetRef=\"TextAnnotation_0y9r24l\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1c5dln0\" id=\"ServiceTask_1c5dln0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ial590\" id=\"SequenceFlow_0ial590_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1avfjgm\" id=\"EndEvent_1avfjgm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"445\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"463\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sxlc0m\" id=\"SequenceFlow_1sxlc0m_di\"\u003e\u003comgdi:waypoint x=\"359\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"401\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"401\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"445\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"416\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0y9r24l\" id=\"TextAnnotation_0y9r24l_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"237\" x=\"190\" y=\"38\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14b7i4h\" id=\"Association_14b7i4h_di\"\u003e\u003comgdi:waypoint x=\"309\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"309\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "Example workflow to return a  list of all events.",
-      "export_key": "wf_amp_get_events",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1699511724995,
-      "name": "Example: AMP get events",
-      "object_type": "incident",
-      "programmatic_name": "wf_amp_get_events",
-      "tags": [],
-      "uuid": "e4725b6a-5f80-40a2-ab88-ae45669ec347",
-      "workflow_id": 152
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 8,
-        "workflow_id": "wf_amp_get_computer_trajectory",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_trajectory\" isExecutable=\"true\" name=\"Example: AMP get computer trajectory\"\u003e\u003cdocumentation\u003eExample multi-part workflow to return trajectory associated with a particular computer by computer name and optional search string. The computer name is assigned from an activity value, the query string is assigned from an activity field at run-time.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10gi90j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1uzsg0v\" name=\"AMP: Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0603c8-81b2-4190-a9f5-d1b6b9a1215f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computers script ##\\n#  fn_amp_get_computers  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\", \\\"policy_guid\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params = results.input_params\\n\\nif response is not None:\\n   # If we get here do nothing result passed on to function \u0027fn_amp_get_computer_trajectory\u0027 as \u0027workflow.properties.get_computers_results\u0027\\n   pass\\nelse:\\n   noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computers\\\")\\n\\n   incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_hostname = row.hostname\\ninputs.amp_group_guid = None\\ninputs.amp_external_ip = None\\ninputs.amp_internal_ip = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_computers_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10gi90j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ltovhi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10gi90j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1uzsg0v\"/\u003e\u003cserviceTask id=\"ServiceTask_0uosgo2\" name=\"AMP: Get Computer Trajectory\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ff9a67d2-b9d6-4642-ad5a-b51d1a8be1f3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer_trajectory script ##\\n#  fn_amp_get_computer_trajectory  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\", \\\"q\\\": null, \\\"limit\\\": null},\\n          \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n          \\\"query\\\": None,\\n          \\\"connector_guid\\\": None,\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"computer\\\": {\\n                \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                \\\"links\\\": {\\n                  \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                  \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/9d55c259-c960-488b-9b2d-06478fa19ee4\\\"\\n                },\\n                \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                \\\"group_guid\\\": \\\"9d55c259-c960-488b-9b2d-06478fa19ee4\\\",\\n                \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                \\\"network_addresses\\\": [\\n                  {\\n                    \\\"ip\\\": \\\"255.240.221.92\\\",\\n                    \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                  }\\n                ],\\n                \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                \\\"internal_ips\\\": [\\n                  \\\"255.240.221.92\\\"\\n                ],\\n                \\\"policy\\\": {\\n                  \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                  \\\"name\\\": \\\"Audit\\\"\\n                },\\n                \\\"active\\\": true\\n              },\\n              \\\"events\\\": [{\\\"timestamp\\\": 1502989429,\u0027\\n                          \\\"timestamp_nanoseconds\\\": 659151942,\u0027\\n                          \\\"date\\\": \\\"2017-08-17T17:03:49+00:00\\\",\u0027\\n                          \\\"event_type\\\": \\\"NFM\\\",\u0027\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": { \\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                            \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54233,\\n                                            \\\"nfm\\\": {\\\"direction\\\": \\\"Outgoing connection from\\\", \\\"protocol\\\": \\\"TCP\\\"},\\n                                            \\\"parent\\\": {\\\"disposition\\\": \\\"Clean\\\",\\n                                                       \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                            }\\n                          }\\n                         },\\n                         {\\\"timestamp\\\": 1502989426,\\n                          \\\"timestamp_nanoseconds\\\": 155931927,\\n                          \\\"date\\\": \\\"2017-08-17T17:03:46+00:00\\\",\\n                          \\\"event_type\\\": \\\"NFM\\\",\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": {\\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                           \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54232,\\n                                           \\\"nfm\\\": { \\\"direction\\\": \\\"Outgoing connection from\\\",\\\"protocol\\\": \\\"TCP\\\"},\\n                                           \\\"parent\\\": { \\\"disposition\\\": \\\"Clean\\\",\\n                                                        \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                        }\\n                          }\\n                         }\\n                        ]\\n            },\\n            \\\"metadata\\\": {\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\"\\n              }\\n            }\\n          }\\n        }\\n\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer_trajectory script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"query\\\", \\\"hostname\\\"]\\nDATA_TBL_FIELDS_EVNTS = [\\\"date\\\", \\\"event_type\\\", ]\\nDATA_TBL_FIELDS_FILE = [\\\"file_type\\\", \\\"file_name\\\", \\\"disposition\\\", \\\"file_path\\\", \\\"sha256\\\", \\\"parent_sha256\\\" ]\\nDATA_TBL_FIELDS_NI = [\\\"local_port\\\", \\\"remote_port\\\",  \\\"remote_ip\\\", \\\"direction\\\", \\\"protocol\\\", \\\"dirty_url\\\", \\\"disposition\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params = results.input_params\\ntotal = results.total\\n\\nif response is not None:\\n    data = response[\\\"data\\\"]\\n    computer = data[\\\"computer\\\"]\\n    connector_guid = computer.connector_guid\\n    hostname = computer.hostname\\n    events = data[\\\"events\\\"]\\n    q = input_params[\\\"q\\\"]\\n\\n    noteText = u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n               \\\" for hostname \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for query  \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(len(data[\\\"events\\\"]), total, hostname, q, \\\"fn_amp_get_computer_trajectory\\\")\\n    for e in events:\\n        newrow = incident.addRow(\\\"amp_computer_trajectory\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.query = q\\n        newrow.hostname = hostname\\n        for f in DATA_TBL_FIELDS_EVNTS:\\n            if e[f] is not None:\\n                newrow[f] = e[f]\\n            fi = e.file\\n            if fi is not None:\\n                id = fi.identity\\n                pa = fi.parent\\n                for f2 in DATA_TBL_FIELDS_FILE:\\n                    if fi[f2] is not None:\\n                        newrow[f2] = fi[f2]\\n                    if id is not None and id[f2] is not None:\\n                        newrow[f2] = id[f2]\\n                    if pa is not None:\\n                        pi = pa.identity\\n                        if pi is not None and pi[f2] is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi[\\\"sha256\\\"]\\n\\n            ni = e.network_info\\n            if ni is not None:\\n                nfm = ni.nfm\\n                pa = ni.parent\\n                for f3 in DATA_TBL_FIELDS_NI:\\n                    if ni[f3] is not None:\\n                        newrow[f3] = ni[f3]\\n                    if nfm is not None and nfm[f3] is not None:\\n                        newrow[f3] = nfm[f3]\\n                    if pa is not None:\\n                        pi = pa.identity\\n                        if pi is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi[\\\"sha256\\\"]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(\\\"fn_amp_get_computer_trajectory\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"response =  workflow.properties.get_computers_results.response\\nif response.get(\\\"data\\\", []):\\n  inputs.amp_conn_guid = response[\\\"data\\\"][0][\\\"connector_guid\\\"]\\ninputs.amp_q = rule.properties.amp_q\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ltovhi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0wr2pgk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ltovhi\" sourceRef=\"ServiceTask_1uzsg0v\" targetRef=\"ServiceTask_0uosgo2\"/\u003e\u003cendEvent id=\"EndEvent_1v9eqou\"\u003e\u003cincoming\u003eSequenceFlow_0wr2pgk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wr2pgk\" sourceRef=\"ServiceTask_0uosgo2\" targetRef=\"EndEvent_1v9eqou\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1s36svn\"\u003e\u003ctext\u003eGet computer connector guid by hostname.\n\u00a0Hostname input parameter assigned from a data table entry.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wz6qxz\" sourceRef=\"ServiceTask_1uzsg0v\" targetRef=\"TextAnnotation_1s36svn\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0frua4g\"\u003e\u003ctext\u003eGet computer trajectory by computer connector guid.\n\u00a0An optional query string parameter is assigned from an activity field at run-time.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1q30b32\" sourceRef=\"ServiceTask_0uosgo2\" targetRef=\"TextAnnotation_0frua4g\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1uzsg0v\" id=\"ServiceTask_1uzsg0v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10gi90j\" id=\"SequenceFlow_10gi90j_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0uosgo2\" id=\"ServiceTask_0uosgo2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"483\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ltovhi\" id=\"SequenceFlow_1ltovhi_di\"\u003e\u003comgdi:waypoint x=\"373\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"483\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"428\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v9eqou\" id=\"EndEvent_1v9eqou_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"651\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"669\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wr2pgk\" id=\"SequenceFlow_0wr2pgk_di\"\u003e\u003comgdi:waypoint x=\"583\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"618\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"618\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"651\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"633\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1s36svn\" id=\"TextAnnotation_1s36svn_di\"\u003e\u003comgdc:Bounds height=\"77\" width=\"156\" x=\"246\" y=\"49\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wz6qxz\" id=\"Association_1wz6qxz_di\"\u003e\u003comgdi:waypoint x=\"323\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"323\" y=\"126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0frua4g\" id=\"TextAnnotation_0frua4g_di\"\u003e\u003comgdc:Bounds height=\"93\" width=\"160\" x=\"453\" y=\"36\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1q30b32\" id=\"Association_1q30b32_di\"\u003e\u003comgdi:waypoint x=\"533\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"533\" y=\"129\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 8,
-      "description": "Example multi-part workflow to return trajectory associated with a particular computer by computer name and optional search string. The computer name is assigned from an activity value, the query string is assigned from an activity field at run-time.",
-      "export_key": "wf_amp_get_computer_trajectory",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1701920273898,
-      "name": "Example: AMP get computer trajectory",
+      "content_version": 7,
+      "description": "Example multi-part workflow to move a computer to a different group. The group name parameter is assigned from an activity field drop-down at runtime, the computer name parameter is assigned from an artifact value.",
+      "export_key": "wf_amp_move_computer",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717443321937,
+      "name": "Example: AMP move computer",
       "object_type": "amp_computers",
-      "programmatic_name": "wf_amp_get_computer_trajectory",
+      "programmatic_name": "wf_amp_move_computer",
       "tags": [],
-      "uuid": "05f1fe56-9cd4-43ce-a6a4-941c7a144c7e",
-      "workflow_id": 155
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_amp_add_artifact_from_activity",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_add_artifact_from_activity\" isExecutable=\"true\" name=\"Example: AMP add artifact from activity\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Example workflow  to create an artifact from Cisco AMP for Endpoints activity properties. Supported artifact types are:  \"System Name\" and connector guid (as string).]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1e70cfn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_0q3n0oz\" name=\"scr_amp_add_artifact_from_activit...\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3139c4bb-f9b7-4742-a69e-c432d45a83e9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1e70cfn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_00ibtgb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1e70cfn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_0q3n0oz\"/\u003e\u003cendEvent id=\"EndEvent_1qy33n3\"\u003e\u003cincoming\u003eSequenceFlow_00ibtgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_00ibtgb\" sourceRef=\"ScriptTask_0q3n0oz\" targetRef=\"EndEvent_1qy33n3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0lw44f9\"\u003e\u003ctext\u003eGenerate Resilient artifact from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1qz1jt6\" sourceRef=\"ScriptTask_0q3n0oz\" targetRef=\"TextAnnotation_0lw44f9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0q3n0oz\" id=\"ScriptTask_0q3n0oz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1e70cfn\" id=\"SequenceFlow_1e70cfn_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1qy33n3\" id=\"EndEvent_1qy33n3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"397\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"415\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00ibtgb\" id=\"SequenceFlow_00ibtgb_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"370\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0lw44f9\" id=\"TextAnnotation_0lw44f9_di\"\u003e\u003comgdc:Bounds height=\"33\" width=\"170\" x=\"208\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1qz1jt6\" id=\"Association_1qz1jt6_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Example workflow  to create an artifact from Cisco AMP for Endpoints activity properties. Supported artifact types are:  \"System Name\" and connector guid (as string).",
-      "export_key": "wf_amp_add_artifact_from_activity",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698655267573,
-      "name": "Example: AMP add artifact from activity",
-      "object_type": "amp_activity",
-      "programmatic_name": "wf_amp_add_artifact_from_activity",
-      "tags": [],
-      "uuid": "1b769415-99db-40d6-bbbb-ddd8d796c049",
-      "workflow_id": 148
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_amp_get_group_name_by_guid",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_group_name_by_guid\" isExecutable=\"true\" name=\"Example: AMP get group name by guid\"\u003e\u003cdocumentation\u003eExample workflow to  return a group name by guid. Input parameter is assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1iubtej\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1acf7kf\" name=\"AMP: Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69456802-f5ba-4602-9d40-d75d0fda42aa\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_groups script ##\\n#  fn_amp_get_groups\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n           \\\"query_execution_time\\\": \\\"2018-11-22 12:14:28\\\",\\n           \\\"input_params\\\": {\\n             \\\"group_guid\\\": \\\"5931a062-19b3-46ad-9b09-d246430aba02\\\",\\n             \\\"name\\\": null,\\n             \\\"limit\\\": null\\n           },\\n           \\\"response\\\": {\\n             \\\"version\\\": \\\"v1.2.0\\\",\\n             \\\"metadata\\\": {\\n               \\\"links\\\": {\\n                 \\\"self\\\": \\\"https://api.amp.cisco.com/v1/groups/5931a062-19b3-46ad-9b09-d246430aba02?limit=10\\\"\\n               }\\n             },\\n             \\\"data\\\": {\\n               \\\"name\\\": \\\"Test Group2\\\",\\n               \\\"description\\\": \\\"Test group 3.\\\",\\n               \\\"guid\\\": \\\"5931a062-19b3-46ad-9b09-d246430aba02\\\",\\n               \\\"source\\\": null,\\n               \\\"policies\\\": [\\n                 {\\n                   \\\"name\\\": \\\"Audit\\\",\\n                   \\\"description\\\": \\\"This policy puts the AMP for Endpoints Connector in a mode that will only detect malicious files but not quarantine them. Malicious network traffic is also detected but not blocked.\\\",\\n                   \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                   \\\"product\\\": \\\"windows\\\",\\n                   \\\"default\\\": true,\\n                   \\\"serial_number\\\": 52,\\n                   \\\"links\\\": {\\n                     \\\"policy_xml\\\": \\\"https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b.xml\\\",\\n                     \\\"policy\\\": \\\"https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\"\\n                   },\\n                   \\\"file_lists\\\": [\\n                     {\\n                       \\\"name\\\": \\\"File Blacklist\\\",\\n                       \\\"guid\\\": \\\"9710a198-b95a-462a-b184-9e688968fd94\\\",\\n                       \\\"type\\\": \\\"simple_custom_detections\\\"\\n                     },\\n                     {\\n                       \\\"name\\\": \\\"Execution Blacklist\\\",\\n                       \\\"guid\\\": \\\"3792e397-50b0-42e3-98af-35b9b7988223\\\",\\n                       \\\"type\\\": \\\"application_blocking\\\"\\n                     },\\n                     {\\n                       \\\"name\\\": \\\"File Whitelist\\\",\\n                       \\\"guid\\\": \\\"6b0baed2-fc8c-454d-b168-4510a89f4588\\\",\\n                       \\\"type\\\": \\\"application_whitelist\\\"\\n                     }\\n                   ],\\n                   \\\"ip_lists\\\": [],\\n                   \\\"exclusion_sets\\\": [\\n                     {\\n                       \\\"name\\\": \\\"Workstation Exclusions\\\",\\n                       \\\"guid\\\": \\\"6bc4b73c-b4be-4487-96aa-ea24520ef3d7\\\"\\n                     }\\n                   ],\\n                   \\\"used_in_groups\\\": [\\n                     {\\n                       \\\"name\\\": \\\"Audit\\\",\\n                       \\\"description\\\": \\\"Audit Group for Partner - IBM Security\\\",\\n                       \\\"guid\\\": \\\"9d55c259-c960-488b-9b2d-06478fa19ee4\\\"\\n                     }\\n                   ],\\n                   \\\"inherited\\\": false\\n                 },\\n                 ...\\n                 ...\\n               ]\\n             }\\n           }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable\\nDATA_TBL_FIELDS = [\\\"group_name\\\"]\\n\\n# Processing\\nresponse = results.response\\n\\nif response is not None:\\n   data = response[\\\"data\\\"]\\n   row.group_name = data.name\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_group_guid = row.group_guid\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1iubtej\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1n595ba\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1iubtej\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1acf7kf\"/\u003e\u003cendEvent id=\"EndEvent_0trvylr\"\u003e\u003cincoming\u003eSequenceFlow_1n595ba\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1n595ba\" sourceRef=\"ServiceTask_1acf7kf\" targetRef=\"EndEvent_0trvylr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0bd5wxs\"\u003e\u003ctext\u003eGet a group name by guid. Input parameter is assigned from data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1i6kv6p\" sourceRef=\"ServiceTask_1acf7kf\" targetRef=\"TextAnnotation_0bd5wxs\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1acf7kf\" id=\"ServiceTask_1acf7kf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"262\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1iubtej\" id=\"SequenceFlow_1iubtej_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0trvylr\" id=\"EndEvent_0trvylr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"470\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1n595ba\" id=\"SequenceFlow_1n595ba_di\"\u003e\u003comgdi:waypoint x=\"362\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0bd5wxs\" id=\"TextAnnotation_0bd5wxs_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"196\" x=\"216\" y=\"43\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1i6kv6p\" id=\"Association_1i6kv6p_di\"\u003e\u003comgdi:waypoint x=\"313\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"314\" y=\"89\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "Example workflow to  return a group name by guid. Input parameter is assigned from a datatable row.",
-      "export_key": "wf_amp_get_group_name_by_guid",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698734983638,
-      "name": "Example: AMP get group name by guid",
-      "object_type": "amp_computers",
-      "programmatic_name": "wf_amp_get_group_name_by_guid",
-      "tags": [],
-      "uuid": "802116c1-becd-4d87-b533-c915ef8a0734",
-      "workflow_id": 145
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_amp_add_artifact_from_event",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_add_artifact_from_event\" isExecutable=\"true\" name=\"Example: AMP Add artifact from event\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Example workflow to create artifacts from Cisco AMP for Endpoints event properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\"]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0t42t0v\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_19it1os\" name=\"scr_amp_add_artifact_from_event\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c203e299-8e4d-4b6e-9968-b6fa38bebc46\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0t42t0v\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1euqsy0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0t42t0v\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_19it1os\"/\u003e\u003cendEvent id=\"EndEvent_1dpnt0e\"\u003e\u003cincoming\u003eSequenceFlow_1euqsy0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1euqsy0\" sourceRef=\"ScriptTask_19it1os\" targetRef=\"EndEvent_1dpnt0e\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1vnayjo\"\u003e\u003ctext\u003eGenerate Resilient artifact from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wdb5gx\" sourceRef=\"ScriptTask_19it1os\" targetRef=\"TextAnnotation_1vnayjo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_19it1os\" id=\"ScriptTask_19it1os_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"231\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0t42t0v\" id=\"SequenceFlow_0t42t0v_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"214.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dpnt0e\" id=\"EndEvent_1dpnt0e_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"397\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"415\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1euqsy0\" id=\"SequenceFlow_1euqsy0_di\"\u003e\u003comgdi:waypoint x=\"331\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"364\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1vnayjo\" id=\"TextAnnotation_1vnayjo_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"163\" x=\"231\" y=\"57\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wdb5gx\" id=\"Association_1wdb5gx_di\"\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"88\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Example workflow to create artifacts from Cisco AMP for Endpoints event properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\"",
-      "export_key": "wf_amp_add_artifact_from_event",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698655266465,
-      "name": "Example: AMP Add artifact from event",
-      "object_type": "amp_events",
-      "programmatic_name": "wf_amp_add_artifact_from_event",
-      "tags": [],
-      "uuid": "5ff52578-83d8-415a-97bb-a4f7a7ca3fae",
-      "workflow_id": 144
+      "uuid": "84a4be63-64ea-4af5-895b-4929f87d2351",
+      "workflow_id": 19
     },
     {
       "actions": [],
       "content": {
         "version": 2,
         "workflow_id": "wf_amp_get_activity",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_activity\" isExecutable=\"true\" name=\"Example: AMP get computers with activity\"\u003e\u003cdocumentation\u003eExample workflow to return a list of computers from a search of Cisco AMP environment for any events or activities associated with a file or network operation. Input parameter is derived from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1875ial\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1crkcwl\" name=\"AMP: Get Activity\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"674b7a23-f1e6-4103-af0e-f86012a3bff3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_activity script ##\\n#  fn_amp_get_activity  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"q\\\": \\\"wsymqyv90.exe\\\", \\\"limit\\\": null, \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"active\\\": true,\\n                \\\"hostname\\\": \\\"Demo_Upatre\\\",\\n                \\\"connector_guid\\\": \\\"76edc092-9e9f-42d4-a2b5-77c094efe348\\\",\\n                \\\"links\\\": {\\n                  \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/76edc092-9e9f-42d4-a2b5-77c094efe348/trajectory?q=wsymqyv90.exe\\\",\\n                  \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/76edc092-9e9f-42d4-a2b5-77c094efe348\\\",\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/f31bb1cf-c986-4a56-a259-5acd56f7639e\\\"\\n                }\\n              }\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 1,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 1\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/activity?q=wsymqyv90.exe\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-18 16:42:11\\\",\\n          \\\"query\\\": \\\"wsymqyv90.exe\\\",\\n        }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_activity script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"query\\\", \\\"active\\\", \\\"hostname\\\", \\\"connector_guid\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\nquery =  results.input_params[\\\"q\\\"]\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for query string \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], query ,\\\"fn_amp_get_activity\\\")\\n    for data in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_activity\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.query = query\\n        for f in DATA_TBL_FIELDS:\\n            if f == \\\"query\\\" or f == \\\"query_execution_time\\\":\\n                continue\\n            newrow[f] = data[f]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_activity\\\")\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_q = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1875ial\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0m52k5v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1875ial\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1crkcwl\"/\u003e\u003cendEvent id=\"EndEvent_0b43gmj\"\u003e\u003cincoming\u003eSequenceFlow_0m52k5v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0m52k5v\" sourceRef=\"ServiceTask_1crkcwl\" targetRef=\"EndEvent_0b43gmj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0u29w6b\"\u003e\u003ctext\u003eGet computers with activity with search by query string.\n\u00a0Query string input parameter assigned from an artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sx1zkj\" sourceRef=\"ServiceTask_1crkcwl\" targetRef=\"TextAnnotation_0u29w6b\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1crkcwl\" id=\"ServiceTask_1crkcwl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"244\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1875ial\" id=\"SequenceFlow_1875ial_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"244\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0b43gmj\" id=\"EndEvent_0b43gmj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"395\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"413\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0m52k5v\" id=\"SequenceFlow_0m52k5v_di\"\u003e\u003comgdi:waypoint x=\"344\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"395\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"369.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0u29w6b\" id=\"TextAnnotation_0u29w6b_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"217\" x=\"244\" y=\"47\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sx1zkj\" id=\"Association_0sx1zkj_di\"\u003e\u003comgdi:waypoint x=\"294\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"294\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_activity\" isExecutable=\"true\" name=\"Example: AMP get computers with activity\"\u003e\u003cdocumentation\u003eExample workflow to return a list of computers from a search of Cisco AMP environment for any events or activities associated with a file or network operation. Input parameter is derived from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1875ial\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1crkcwl\" name=\"AMP: Get Activity\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"674b7a23-f1e6-4103-af0e-f86012a3bff3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_activity script ##\\n#  fn_amp_get_activity  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"q\\\": \\\"wsymqyv90.exe\\\", \\\"limit\\\": null, \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"active\\\": true,\\n                \\\"hostname\\\": \\\"Demo_Upatre\\\",\\n                \\\"connector_guid\\\": \\\"76edc092-9e9f-42d4-a2b5-77c094efe348\\\",\\n                \\\"links\\\": {\\n                  \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/76edc092-9e9f-42d4-a2b5-77c094efe348/trajectory?q=wsymqyv90.exe\\\",\\n                  \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/76edc092-9e9f-42d4-a2b5-77c094efe348\\\",\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/f31bb1cf-c986-4a56-a259-5acd56f7639e\\\"\\n                }\\n              }\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 1,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 1\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/activity?q=wsymqyv90.exe\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-18 16:42:11\\\",\\n          \\\"query\\\": \\\"wsymqyv90.exe\\\",\\n        }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_activity script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"query\\\", \\\"active\\\", \\\"hostname\\\", \\\"connector_guid\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\nquery =  results.input_params[\\\"q\\\"]\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for query string \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], query ,\\\"fn_amp_get_activity\\\")\\n    for data in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_activity\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.query = query\\n        for f in DATA_TBL_FIELDS:\\n            if f == \\\"query\\\" or f == \\\"query_execution_time\\\":\\n                continue\\n            newrow[f] = data[f]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_activity\\\")\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_q = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1875ial\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0m52k5v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1875ial\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1crkcwl\"/\u003e\u003cendEvent id=\"EndEvent_0b43gmj\"\u003e\u003cincoming\u003eSequenceFlow_0m52k5v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0m52k5v\" sourceRef=\"ServiceTask_1crkcwl\" targetRef=\"EndEvent_0b43gmj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0u29w6b\"\u003e\u003ctext\u003eGet computers with activity with search by query string.\n\u00a0Query string input parameter assigned from an artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sx1zkj\" sourceRef=\"ServiceTask_1crkcwl\" targetRef=\"TextAnnotation_0u29w6b\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1crkcwl\" id=\"ServiceTask_1crkcwl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"244\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1875ial\" id=\"SequenceFlow_1875ial_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"244\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0b43gmj\" id=\"EndEvent_0b43gmj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"395\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"413\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0m52k5v\" id=\"SequenceFlow_0m52k5v_di\"\u003e\u003comgdi:waypoint x=\"344\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"395\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"369.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0u29w6b\" id=\"TextAnnotation_0u29w6b_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"217\" x=\"244\" y=\"47\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sx1zkj\" id=\"Association_0sx1zkj_di\"\u003e\u003comgdi:waypoint x=\"294\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"294\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 2,
       "description": "Example workflow to return a list of computers from a search of Cisco AMP environment for any events or activities associated with a file or network operation. Input parameter is derived from an artifact value.",
       "export_key": "wf_amp_get_activity",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698733932696,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717439214532,
       "name": "Example: AMP get computers with activity",
       "object_type": "artifact",
       "programmatic_name": "wf_amp_get_activity",
       "tags": [],
       "uuid": "ab9fc0f4-c8aa-40b0-8299-8b4b30633307",
-      "workflow_id": 142
+      "workflow_id": 7
     },
     {
       "actions": [],
       "content": {
-        "version": 6,
-        "workflow_id": "wf_amp_get_file_list_files",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_file_list_files\" isExecutable=\"true\" name=\"Example: AMP get files from list\"\u003e\u003cdocumentation\u003eExample workflow to return a list of items for a particular file list guid. The input parameter is assigned from a datatable row entry.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05wnwz5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0lwp3g6\" name=\"AMP: Get Files from List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"14f58a3d-8423-4290-b964-d1f2cb7a6cb5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_file_list_files script ##\\n#  fn_amp_get_file_list_files  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:  {\\n          \\\"input_params\\\": {\\\"file_list_guid\\\": \\\"e773a9eb-296c-40df-98d8-bed46322589d\\\",\\n                           \\\"file_sha256\\\": \\\"\\\", \\\"limit\\\": null,\\n                           \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"items\\\": [\\n                {\\n                  \\\"source\\\": \\\"Created by entering SHA-256 via Public api.\\\",\\n                  \\\"sha256\\\": \\\"c26dc4e73a335b4414d238b6b30bfd6aff693293f9e4946b5df13f9aac40af5c\\\",\\n                  \\\"description\\\": \\\"A test malware file. \\\",\\n                  \\\"links\\\": {\\n                    \\\"file_list\\\": \\\"https://api.amp.cisco.com/v1/file_lists/9710a198-b95a-462a-b184-9e688968fd94\\\"\\n                  }\\n                },\\n                {\\n                  \\\"source\\\": \\\"Created by entering SHA-256 via Public api.\\\",\\n                  \\\"sha256\\\": \\\"d15766ead5d8ffe68fd96d4bda75c07378fc74f76e251ae6631f4ec8226d2bcb\\\",\\n                  \\\"description\\\": \\\"\\\\\\\"Malware test file - by JP.\\\\\\\"\\\",\\n                  \\\"links\\\": {\\n                    \\\"file_list\\\": \\\"https://api.amp.cisco.com/v1/file_lists/9710a198-b95a-462a-b184-9e688968fd94\\\"\\n                  }\\n                }\\n              ],\\n              \\\"guid\\\": \\\"9710a198-b95a-462a-b184-9e688968fd94\\\",\\n              \\\"name\\\": \\\"File Blacklist\\\",\\n              \\\"policies\\\": [\\n                {\\n                  \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                  \\\"name\\\": \\\"Audit\\\",\\n                  \\\"links\\\": {\\n                    \\\"policy\\\": \\\"https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\"\\n                  }\\n                },\\n                {\\n                  \\\"guid\\\": \\\"51450374-366c-4759-9099-7baa138c499f\\\",\\n                  \\\"name\\\": \\\"Triage\\\",\\n                  \\\"links\\\": {\\n                    \\\"policy\\\": \\\"https://api.amp.cisco.com/v1/policies/51450374-366c-4759-9099-7baa138c499f\\\"\\n                  }\\n                },\\n                ...\\n                ...\\n              ]\\n            },\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 2,\\n                \\\"items_per_page\\\": 50,\\n                \\\"current_item_count\\\": 2\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/file_lists/9710a198-b95a-462a-b184-9e688968fd94/files?limit=50\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-23 10:09:19\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_list_files script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"list_name\\\", \\\"guid\\\", \\\"file_description\\\", \\\"sha256\\\", \\\"source\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\nif response is not None:\\n    data = response[\\\"data\\\"]\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"for list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(len(data[\\\"items\\\"]), r[\\\"total\\\"], data[\\\"name\\\"], \\\"fn_amp_get_file_list_files\\\")\\n    if data is not None:\\n        items = data[\\\"items\\\"]\\n        for i in items:\\n            newrow = incident.addRow(\\\"amp_file_list_files\\\")\\n            newrow.query_execution_time = query_execution_time\\n            for f in DATA_TBL_FIELDS[1:]:\\n                if data[f] is not None:\\n                    newrow[f] = data[f]\\n                if i[f] is not None:\\n                    newrow[f] = i[f]\\n            if data.name is not None:\\n                newrow.list_name = data.name\\n            if i.description is not None:\\n                newrow.file_description = i.description\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(\\\"fn_amp_get_file_list_files\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_file_list_guid = row.guid\\ninputs.amp_file_sha256 = None\\ninputs.amp_limit = None\\ninputs.amp_offset = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05wnwz5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05ejv23\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05wnwz5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0lwp3g6\"/\u003e\u003cendEvent id=\"EndEvent_1eddmkb\"\u003e\u003cincoming\u003eSequenceFlow_05ejv23\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05ejv23\" sourceRef=\"ServiceTask_0lwp3g6\" targetRef=\"EndEvent_1eddmkb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ock4rz\"\u003e\u003ctext\u003eGet file information from a list by guid. File list guid input parameter assigned from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1o8mpak\" sourceRef=\"ServiceTask_0lwp3g6\" targetRef=\"TextAnnotation_0ock4rz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0lwp3g6\" id=\"ServiceTask_0lwp3g6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05wnwz5\" id=\"SequenceFlow_05wnwz5_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1eddmkb\" id=\"EndEvent_1eddmkb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"434\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05ejv23\" id=\"SequenceFlow_05ejv23_di\"\u003e\u003comgdi:waypoint x=\"368\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"392\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ock4rz\" id=\"TextAnnotation_0ock4rz_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"273\" x=\"184\" y=\"54\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1o8mpak\" id=\"Association_1o8mpak_di\"\u003e\u003comgdi:waypoint x=\"318\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"318\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 1,
+        "workflow_id": "wf_amp_get_file_lists",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_file_lists\" isExecutable=\"true\" name=\"Example: AMP get SCD file lists\"\u003e\u003cdocumentation\u003eExample workflow to returns a list of all simple custom detection file lists.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0iwoycn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1hxtqgh\" name=\"AMP: Get File Lists\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"637946a7-b59b-4ec0-95cf-f833bca79bc6\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_file_lists script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"name\\\": null, \\\"limit\\\": null, \\\"offset\\\": null },\\n          \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                       u\u0027data\u0027: {u\u0027items\u0027: [],\\n                                 u\u0027guid\u0027: u\u00279710a198-b95a-462a-b184-9e688968fd94\u0027,\\n                                 u\u0027name\u0027: u\u0027File Blacklist\u0027,\\n                                 u\u0027policies\u0027: [{ u\u0027guid\u0027: u\u0027a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                    u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027\\n                                                 }\\n                                               }, {\\n                                                 u\u0027guid\u0027: u\u0027fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                     u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027\\n                                                 }\\n                                               }\\n                                 ]\\n                        },\\n                        u\u0027metadata\u0027: {u\u0027results\u0027:\\n                                        {u\u0027index\u0027: 10,\\n                                         u\u0027total\u0027: 1,\\n                                         u\u0027items_per_page\u0027: 500,\\n                                         u\u0027current_item_count\u0027: 0\\n                                         },\\n                                      u\u0027links\u0027: {\\n                                          u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files\u0027\\n                                         }\\n                                      }\\n                        }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n    }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_lists script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"list_name\\\", \\\"guid\\\", \\\"type\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], \\\"fn_amp_get_file_lists\\\")\\n    for d in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_scd_file_lists\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.list_name = d[\\\"name\\\"]\\n        newrow.guid = d[\\\"guid\\\"]\\n        newrow.type = d[\\\"type\\\"]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_file_lists\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0iwoycn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_025lrs9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0iwoycn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1hxtqgh\"/\u003e\u003cendEvent id=\"EndEvent_1k0p68z\"\u003e\u003cincoming\u003eSequenceFlow_025lrs9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_025lrs9\" sourceRef=\"ServiceTask_1hxtqgh\" targetRef=\"EndEvent_1k0p68z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0mhqnue\"\u003e\u003ctext\u003eGet simple custom detection file lists. No input parameters assigned.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1eehidt\" sourceRef=\"ServiceTask_1hxtqgh\" targetRef=\"TextAnnotation_0mhqnue\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1hxtqgh\" id=\"ServiceTask_1hxtqgh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"240\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0iwoycn\" id=\"SequenceFlow_0iwoycn_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"240\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1k0p68z\" id=\"EndEvent_1k0p68z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"379\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"397\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_025lrs9\" id=\"SequenceFlow_025lrs9_di\"\u003e\u003comgdi:waypoint x=\"340\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"379\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"359.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0mhqnue\" id=\"TextAnnotation_0mhqnue_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"211\" x=\"193\" y=\"45\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1eehidt\" id=\"Association_1eehidt_di\"\u003e\u003comgdi:waypoint x=\"290\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"290\" y=\"105\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 6,
-      "description": "Example workflow to return a list of items for a particular file list guid. The input parameter is assigned from a datatable row entry.",
-      "export_key": "wf_amp_get_file_list_files",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1701920084918,
-      "name": "Example: AMP get files from list",
-      "object_type": "amp_scd_file_lists",
-      "programmatic_name": "wf_amp_get_file_list_files",
-      "tags": [],
-      "uuid": "e7ca53c9-2f87-4218-ae25-b58652eaf3e5",
-      "workflow_id": 150
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_amp_get_event_types",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_event_types\" isExecutable=\"true\" name=\"Example: AMP get event types\"\u003e\u003cdocumentation\u003eExample workflow which queries for event types  and returns result of human readable name, and short description of each event by ID.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0vw5fl4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10cp45l\" name=\"AMP: Get Event Types\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6e90b4dd-7a5f-4ff8-9299-2d7630fa6366\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_event_types script ##\\n#  fn_amp_get_event_types  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"description\\\": \\\"An agent has been told to fetch policy.\\\",\\n                \\\"id\\\": 553648130,\\n                \\\"name\\\": \\\"Policy Update\\\"\\n              },\\n              {\\n                \\\"description\\\": \\\"An agent has started scanning.\\\",\\n                \\\"id\\\": 554696714,\\n                \\\"name\\\": \\\"Scan Started\\\"\\n              },\\n              {\\n                \\\"description\\\": \\\"A scan has completed without detecting anything malicious.\\\",\\n                \\\"id\\\": 554696715,\\n                \\\"name\\\": \\\"Scan Completed, No Detections\\\"\\n              },\\n              ...\\n              ...\\n\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"total\\\": 94\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/event_types\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-08 16:27:32\\\"\\n        }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_event_types script - reference only\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"event_type_name\\\", \\\"event_type_id\\\" \\\"event_type_description\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], \\\"fn_amp_get_event_types\\\")\\n    for data in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_event_types\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.event_type_name = data.name\\n        newrow.event_type_id = str(data.id)\\n        newrow.event_type_description = data.description\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_event_types\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0vw5fl4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0njwv2e\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0vw5fl4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10cp45l\"/\u003e\u003cendEvent id=\"EndEvent_1fsjym3\"\u003e\u003cincoming\u003eSequenceFlow_0njwv2e\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0njwv2e\" sourceRef=\"ServiceTask_10cp45l\" targetRef=\"EndEvent_1fsjym3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_07t8iaf\"\u003e\u003ctext\u003eGet event types. No input parameters.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0v6du0v\" sourceRef=\"ServiceTask_10cp45l\" targetRef=\"TextAnnotation_07t8iaf\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10cp45l\" id=\"ServiceTask_10cp45l_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vw5fl4\" id=\"SequenceFlow_0vw5fl4_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1fsjym3\" id=\"EndEvent_1fsjym3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0njwv2e\" id=\"SequenceFlow_0njwv2e_di\"\u003e\u003comgdi:waypoint x=\"361\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"406\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_07t8iaf\" id=\"TextAnnotation_07t8iaf_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"131\" x=\"245\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0v6du0v\" id=\"Association_0v6du0v_di\"\u003e\u003comgdi:waypoint x=\"311\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"311\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "Example workflow which queries for event types  and returns result of human readable name, and short description of each event by ID.",
-      "export_key": "wf_amp_get_event_types",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1699511547907,
-      "name": "Example: AMP get event types",
+      "content_version": 1,
+      "description": "Example workflow to returns a list of all simple custom detection file lists.",
+      "export_key": "wf_amp_get_file_lists",
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325748708,
+      "name": "Example: AMP get SCD file lists",
       "object_type": "incident",
-      "programmatic_name": "wf_amp_get_event_types",
+      "programmatic_name": "wf_amp_get_file_lists",
       "tags": [],
-      "uuid": "fb76b80a-fd7e-407c-b530-b29fcbbf5547",
-      "workflow_id": 143
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "wf_amp_get_computer_by_name",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_by_name\" isExecutable=\"true\" name=\"Example: AMP get computer by name\"\u003e\u003cdocumentation\u003eExample workflow to return a computer with an agent deployed on it by parameter hostname. Input parameter is derived from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1noh398\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1fk9h4r\" name=\"AMP: Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0603c8-81b2-4190-a9f5-d1b6b9a1215f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computers script ##\\n#  fn_amp_get_computers  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\"]\\n\\n# Processing\\nnoteText = \u0027\u0027\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params = results.input_params\\n\\nif response is not None and response.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") != 0:\\n    noteText = u\\\"Cisco AMP for Endpoints Integration: Result returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(input_params.get(\\\"hostname\\\", {}), \\\"fn_amp_get_computer\\\")\\n    for data in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_computers\\\")\\n        newrow.query_execution_time = query_execution_time\\n        for f in DATA_TBL_FIELDS:\\n            if f == \\\"query_execution_time\\\" or \\\"policy\\\" in f:\\n                continue\\n            if isinstance(data[f], str) or len(data[f]) == 0:\\n                newrow[f] = data[f]\\n            else:\\n                newrow[f] = \u0027,\u0027.join(data[f])\\n        policy = data.policy\\n        if policy is not None:\\n            newrow.policy_name = policy[\\\"name\\\"]\\nelse:\\n    noteText += u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(input_params.get(\\\"hostname\\\", {}), \\\"fn_amp_get_computers\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_hostname = artifact.value\\ninputs.amp_group_guid = None\\ninputs.amp_external_ip = None\\ninputs.amp_internal_ip = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1noh398\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_02lhwss\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1noh398\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1fk9h4r\"/\u003e\u003cendEvent id=\"EndEvent_1s5l9a7\"\u003e\u003cincoming\u003eSequenceFlow_02lhwss\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_02lhwss\" sourceRef=\"ServiceTask_1fk9h4r\" targetRef=\"EndEvent_1s5l9a7\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xh3l71\"\u003e\u003ctext\u003eGet computer information by hostname. Hostname input parameter assigned from an artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1vpteoj\" sourceRef=\"ServiceTask_1fk9h4r\" targetRef=\"TextAnnotation_0xh3l71\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fk9h4r\" id=\"ServiceTask_1fk9h4r_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1noh398\" id=\"SequenceFlow_1noh398_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xh3l71\" id=\"TextAnnotation_0xh3l71_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"193\" x=\"254\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1vpteoj\" id=\"Association_1vpteoj_di\"\u003e\u003comgdi:waypoint x=\"304\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"304\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1s5l9a7\" id=\"EndEvent_1s5l9a7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02lhwss\" id=\"SequenceFlow_02lhwss_di\"\u003e\u003comgdi:waypoint x=\"354\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "description": "Example workflow to return a computer with an agent deployed on it by parameter hostname. Input parameter is derived from an artifact value.",
-      "export_key": "wf_amp_get_computer_by_name",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1701419075481,
-      "name": "Example: AMP get computer by name",
-      "object_type": "artifact",
-      "programmatic_name": "wf_amp_get_computer_by_name",
-      "tags": [],
-      "uuid": "2058180c-62a0-46f7-bc9c-4fb6dc186dae",
-      "workflow_id": 149
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_amp_delete_file_list_files",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_delete_file_list_files\" isExecutable=\"true\" name=\"Example: AMP delete file from list\"\u003e\u003cdocumentation\u003eExample workflow to delete a SHA-256 from a file list by file_list_guid. Input  parameters are derived from a datatable entry.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0hkoqko\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xpc38a\" name=\"AMP: Delete File from List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"43b8de27-d727-4133-9c3d-c4916ac5a212\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_delete_file_lists script ##\\n#  fn_amp_delete_computer_trajectory  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:    {\\n             \\\"input_params\\\": {\\\"file_list_guid\\\": \\\"e773a9eb-296c-40df-98d8-bed46322589d\\\",\\n                       \\\"file_sha256\\\": \\\"8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\\\"}\\n             \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                          u\u0027data\u0027: {},\\n                          u\u0027metadata\u0027: {u\u0027links\u0027: {\\n                                            u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\u0027}\\n                                       }\\n                          },\\n              \\\"delete_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n            }\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_lists script\\nDATA_TBL_FIELDS = [\\\"delete_execution_time\\\", \\\"status\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Successfully deleted file with sha256 value \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"from SCD list guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(row.sha256, row.guid, \\\"fn_amp_delete_file_list_files\\\")\\nelse:\\n  noteText = \\\"Cisco AMP Integration: Delete unsuccessful for file with sha256 value \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"from SCD list guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(row.sha256, row.guid, \\\"fn_amp_delete_file_list_files\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_file_list_guid = row.guid\\ninputs.amp_file_sha256 = row.sha256\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hkoqko\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1g09fz6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hkoqko\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xpc38a\"/\u003e\u003cendEvent id=\"EndEvent_15qlmr2\"\u003e\u003cincoming\u003eSequenceFlow_1g09fz6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1g09fz6\" sourceRef=\"ServiceTask_0xpc38a\" targetRef=\"EndEvent_15qlmr2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_105d6wk\"\u003e\u003ctext\u003eDelete file sha-256 from a list by guid. Both input parameters assigned from data-table row fields.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1kn3f0k\" sourceRef=\"ServiceTask_0xpc38a\" targetRef=\"TextAnnotation_105d6wk\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xpc38a\" id=\"ServiceTask_0xpc38a_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"278\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hkoqko\" id=\"SequenceFlow_0hkoqko_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"278\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"257\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_15qlmr2\" id=\"EndEvent_15qlmr2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1g09fz6\" id=\"SequenceFlow_1g09fz6_di\"\u003e\u003comgdi:waypoint x=\"378\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"402\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"402\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_105d6wk\" id=\"TextAnnotation_105d6wk_di\"\u003e\u003comgdc:Bounds height=\"55\" width=\"177\" x=\"275\" y=\"33\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1kn3f0k\" id=\"Association_1kn3f0k_di\"\u003e\u003comgdi:waypoint x=\"328\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"328\" y=\"88\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Example workflow to delete a SHA-256 from a file list by file_list_guid. Input  parameters are derived from a datatable entry.",
-      "export_key": "wf_amp_delete_file_list_files",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698733124911,
-      "name": "Example: AMP delete file from list",
-      "object_type": "amp_file_list_files",
-      "programmatic_name": "wf_amp_delete_file_list_files",
-      "tags": [],
-      "uuid": "b520a701-5e73-47e7-b981-ee3b3cf48bb0",
-      "workflow_id": 146
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "wf_amp_get_computer_by_guid",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_by_guid\" isExecutable=\"true\" name=\"Example: AMP get computer by connector guid\"\u003e\u003cdocumentation\u003eExample workflow to return a computer with an agent deployed on it  by parameter connector guid.  Input parameter is derived from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1u5j8yd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_15f1geq\" name=\"AMP: Get Computer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2749a756-6490-4f15-b54f-4cc82394fe8a\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer script ##\\n#  fn_amp_get_computer  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\"]\\n\\n# Processing\\nresponse = results.response\\ninput_params =  results.input_params\\nquery_execution_time = results.query_execution_time\\nnoteText = \u0027\u0027\\nerrors = response.errors\\n\\nif response is not None and errors is None:\\n    data = response[\\\"data\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Result returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; with connector guid \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(data[\\\"hostname\\\"], data[\\\"connector_guid\\\"], \\\"fn_amp_get_computers\\\")\\n    newrow = incident.addRow(\\\"amp_computers\\\")\\n    newrow.query_execution_time = query_execution_time\\n    for f in DATA_TBL_FIELDS:\\n        if f == \\\"query_execution_time\\\" or \\\"policy\\\" in f:\\n            continue\\n        if isinstance(data[f], str) or len(data[f]) == 0:\\n            newrow[f] = data[f]\\n        else:\\n            newrow[f] = \u0027,\u0027.join(data[f])\\n    policy = data.policy\\n    if policy is not None:\\n        newrow.policy_name = policy[\\\"name\\\"]\\nelif errors is not None and errors[0][\\\"error_code\\\"] == 404:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: Got a 404 error while attempting to get computer information for \\\" \\\\\\n                \\\"connector guid \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; for function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; because of a possible invalid or deleted guid.\\\"\\\\\\n        .format(input_params[\\\"conn_guid\\\"], \\\"fn_amp_get_computers\\\")\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computers\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_conn_guid = artifact.value\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1u5j8yd\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ej1r3h\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1u5j8yd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_15f1geq\"/\u003e\u003cendEvent id=\"EndEvent_1ponv0f\"\u003e\u003cincoming\u003eSequenceFlow_1ej1r3h\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ej1r3h\" sourceRef=\"ServiceTask_15f1geq\" targetRef=\"EndEvent_1ponv0f\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0lvatzs\"\u003e\u003ctext\u003eGet computer information by connector guid.\n\u00a0Guid input parameter assigned from an artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06l2vrz\" sourceRef=\"ServiceTask_15f1geq\" targetRef=\"TextAnnotation_0lvatzs\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_15f1geq\" id=\"ServiceTask_15f1geq_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u5j8yd\" id=\"SequenceFlow_1u5j8yd_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ponv0f\" id=\"EndEvent_1ponv0f_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"456\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"474\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ej1r3h\" id=\"SequenceFlow_1ej1r3h_di\"\u003e\u003comgdi:waypoint x=\"359\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0lvatzs\" id=\"TextAnnotation_0lvatzs_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"177\" x=\"259\" y=\"28\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06l2vrz\" id=\"Association_06l2vrz_di\"\u003e\u003comgdi:waypoint x=\"308\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"308\" y=\"91\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "description": "Example workflow to return a computer with an agent deployed on it  by parameter connector guid.  Input parameter is derived from an artifact value.",
-      "export_key": "wf_amp_get_computer_by_guid",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1699512986576,
-      "name": "Example: AMP get computer by connector guid",
-      "object_type": "artifact",
-      "programmatic_name": "wf_amp_get_computer_by_guid",
-      "tags": [],
-      "uuid": "b5084df6-e2d3-430a-a680-dd4e72ef6c37",
-      "workflow_id": 156
+      "uuid": "aa1a0b2c-007a-4f57-b7c5-43d38d7c1667",
+      "workflow_id": 17
     },
     {
       "actions": [],
       "content": {
         "version": 3,
         "workflow_id": "wf_amp_get_events_by_type",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_events_by_type\" isExecutable=\"true\" name=\"Example: AMP get events by type\"\u003e\u003cdocumentation\u003eExample workflow to  return events by event type id. Input parameter is assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_046r7h7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wkbupu\" name=\"AMP: Get Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f5e6bff-316f-48f5-bfce-fb963be11c35\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_events script ##\\n#  fn_amp_get_events  -  Events list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:  {\\n          \\\"input_params\\\": {\\\"detection_sha256\\\": null, \\\"application_sha256\\\": null, \\\"connector_guid\\\": null,\\n                           \\\"group_guid\\\": null, \\\"start_date\\\": null, \\\"event_type\\\": null, \\\"limit\\\": null, \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"id\\\": 6455442249407791000,\\n                \\\"timestamp\\\": 1503024774,\\n                \\\"timestamp_nanoseconds\\\": 98000000,\\n                \\\"date\\\": \\\"2017-08-18T02:52:54+00:00\\\",\\n                \\\"event_type\\\": \\\"Threat Detected\\\",\\n                \\\"event_type_id\\\": 1090519054,\\n                \\\"detection\\\": \\\"benign_qa_testware7\\\",\\n                \\\"detection_id\\\": \\\"6455442249407791109\\\",\\n                \\\"group_guids\\\": [\\n                  \\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                ],\\n                \\\"computer\\\": {\\n                  \\\"connector_guid\\\": \\\"af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                  \\\"hostname\\\": \\\"WIN-S1AC1PI6L5L\\\",\\n                  \\\"external_ip\\\": \\\"10.200.65.31\\\",\\n                  \\\"user\\\": \\\"johndoe@WIN-S1AC1PI6L5L\\\",\\n                  \\\"active\\\": true,\\n                  \\\"network_addresses\\\": [\\n                    {\\n                      \\\"ip\\\": \\\"10.0.2.15\\\",\\n                      \\\"mac\\\": \\\"08:00:27:85:28:61\\\"\\n                    }\\n                  ],\\n                  \\\"links\\\": {\\n                    \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                    \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01/trajectory\\\",\\n                    \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                  }\\n                },\\n                \\\"file\\\": {\\n                  \\\"disposition\\\": \\\"Unknown\\\",\\n                  \\\"file_name\\\": \\\"file.zip\\\",\\n                  \\\"file_path\\\": \\\"\\\\\\\\\\\\\\\\?\\\\\\\\C:\\\\\\\\Users\\\\\\\\johndoe\\\\\\\\Downloads\\\\\\\\file.zip\\\",\\n                  \\\"identity\\\": {\\n                    \\\"sha256\\\": \\\"f8a6a244138cb1e2f044f63f3dc42beeb555da892bbd7a121274498cbdfc9ad5\\\",\\n                    \\\"sha1\\\": \\\"20eeee16345e0c1283f7b500126350cb938b8570\\\",\\n                    \\\"md5\\\": \\\"6853839cde69359049ae6f7bd3ae86d7\\\"\\n                  },\\n                  \\\"archived_file\\\": {\\n                    \\\"disposition\\\": \\\"Malicious\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"46679a50632d05b99683a14b91a69ce908de1673fbb71e9cd325e5685fcd7e49\\\"\\n                    }\\n                  },\\n                  \\\"parent\\\": {\\n                    \\\"process_id\\\": 3416,\\n                    \\\"disposition\\\": \\\"Clean\\\",\\n                    \\\"file_name\\\": \\\"explorer.exe\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"80ef843fa78c33b511394a9c7535a9cbace1deb2270e86ee4ad2faffa5b1e7d2\\\",\\n                      \\\"sha1\\\": \\\"ea97227d34b8526055a543ade7d18587a927f6a3\\\",\\n                      \\\"md5\\\": \\\"15bc38a7492befe831966adb477cf76f\\\"\\n                    }\\n                  }\\n                }\\n              },\\n              ...\\n              ...\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 0,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 0\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/events\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-09 11:05:12\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_events script - reference only\\nDATA_TBL_FIELDS_TOP = [\\\"query_execution_time\\\", \\\"event_id\\\", \\\"date\\\" \\\"event_type\\\", \\\"severity\\\"]\\nDATA_TBL_FIELDS_COMPUTER = [\\\"hostname\\\", \\\"external_ip\\\"]\\nDATA_TBL_FIELDS_FILE = [\\\"disposition\\\", \\\"file_name\\\", \\\"file_path\\\", \\\"sha256\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params =  results.input_params\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    event_type = input_params[\\\"event_type\\\"]\\n    noteText = u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \\\" \\\\\\n               u\\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for event type id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(len(response[\\\"data\\\"]), r[\\\"total\\\"], event_type, \\\"fn_amp_get_events\\\")\\n    for d in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_events\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.event_id = str(d.id)\\n        newrow.event_type = d.event_type\\n        newrow.date = d.date\\n        c = d[\\\"computer\\\"]\\n        if c is not None:\\n            for fi in DATA_TBL_FIELDS_COMPUTER:\\n                if isinstance(c[fi], str) or len(c[fi]) == 0:\\n                    newrow[fi] = c[fi]\\n                else:\\n                    newrow[fi] = \u0027[\u0027 + \u0027\u0027.join(c[fi]) + \u0027]\u0027\\n        fl = d[\\\"file\\\"]\\n        if fl is not None:\\n            fident  =  fl[\\\"identity\\\"]\\n            if fident is not None:\\n                newrow.sha256 = fident.sha256\\n            for fi in DATA_TBL_FIELDS_FILE:\\n                if fl[fi] is not None:\\n                    newrow[fi] = fl[fi]\\nelse:\\n    noteText += u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for event type id \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\" \\\\\\n                \\\" for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(event_type, \\\"fn_amp_get_events\\\", )\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_046r7h7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_14801jf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_046r7h7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wkbupu\"/\u003e\u003cendEvent id=\"EndEvent_1qml3qt\"\u003e\u003cincoming\u003eSequenceFlow_14801jf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_14801jf\" sourceRef=\"ServiceTask_0wkbupu\" targetRef=\"EndEvent_1qml3qt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10r8axu\"\u003e\u003ctext\u003eGet events by event type id. Event type id input parameter assigned from a data-table row.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1a3d0dd\" sourceRef=\"ServiceTask_0wkbupu\" targetRef=\"TextAnnotation_10r8axu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wkbupu\" id=\"ServiceTask_0wkbupu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"257\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_046r7h7\" id=\"SequenceFlow_046r7h7_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"257\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"244\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1qml3qt\" id=\"EndEvent_1qml3qt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"412\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"430\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14801jf\" id=\"SequenceFlow_14801jf_di\"\u003e\u003comgdi:waypoint x=\"357\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"412\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10r8axu\" id=\"TextAnnotation_10r8axu_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"239\" x=\"187\" y=\"33\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1a3d0dd\" id=\"Association_1a3d0dd_di\"\u003e\u003comgdi:waypoint x=\"307\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"307\" y=\"83\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_events_by_type\" isExecutable=\"true\" name=\"Example: AMP get events by type\"\u003e\u003cdocumentation\u003eExample workflow to  return events by event type id. Input parameter is assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_046r7h7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wkbupu\" name=\"AMP: Get Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f5e6bff-316f-48f5-bfce-fb963be11c35\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_events script ##\\n#  fn_amp_get_events  -  Events list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:  {\\n          \\\"input_params\\\": {\\\"detection_sha256\\\": null, \\\"application_sha256\\\": null, \\\"connector_guid\\\": null,\\n                           \\\"group_guid\\\": null, \\\"start_date\\\": null, \\\"event_type\\\": null, \\\"limit\\\": null, \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"id\\\": 6455442249407791000,\\n                \\\"timestamp\\\": 1503024774,\\n                \\\"timestamp_nanoseconds\\\": 98000000,\\n                \\\"date\\\": \\\"2017-08-18T02:52:54+00:00\\\",\\n                \\\"event_type\\\": \\\"Threat Detected\\\",\\n                \\\"event_type_id\\\": 1090519054,\\n                \\\"detection\\\": \\\"benign_qa_testware7\\\",\\n                \\\"detection_id\\\": \\\"6455442249407791109\\\",\\n                \\\"group_guids\\\": [\\n                  \\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                ],\\n                \\\"computer\\\": {\\n                  \\\"connector_guid\\\": \\\"af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                  \\\"hostname\\\": \\\"WIN-S1AC1PI6L5L\\\",\\n                  \\\"external_ip\\\": \\\"10.200.65.31\\\",\\n                  \\\"user\\\": \\\"johndoe@WIN-S1AC1PI6L5L\\\",\\n                  \\\"active\\\": true,\\n                  \\\"network_addresses\\\": [\\n                    {\\n                      \\\"ip\\\": \\\"10.0.2.15\\\",\\n                      \\\"mac\\\": \\\"08:00:27:85:28:61\\\"\\n                    }\\n                  ],\\n                  \\\"links\\\": {\\n                    \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                    \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01/trajectory\\\",\\n                    \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                  }\\n                },\\n                \\\"file\\\": {\\n                  \\\"disposition\\\": \\\"Unknown\\\",\\n                  \\\"file_name\\\": \\\"file.zip\\\",\\n                  \\\"file_path\\\": \\\"\\\\\\\\\\\\\\\\?\\\\\\\\C:\\\\\\\\Users\\\\\\\\johndoe\\\\\\\\Downloads\\\\\\\\file.zip\\\",\\n                  \\\"identity\\\": {\\n                    \\\"sha256\\\": \\\"f8a6a244138cb1e2f044f63f3dc42beeb555da892bbd7a121274498cbdfc9ad5\\\",\\n                    \\\"sha1\\\": \\\"20eeee16345e0c1283f7b500126350cb938b8570\\\",\\n                    \\\"md5\\\": \\\"6853839cde69359049ae6f7bd3ae86d7\\\"\\n                  },\\n                  \\\"archived_file\\\": {\\n                    \\\"disposition\\\": \\\"Malicious\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"46679a50632d05b99683a14b91a69ce908de1673fbb71e9cd325e5685fcd7e49\\\"\\n                    }\\n                  },\\n                  \\\"parent\\\": {\\n                    \\\"process_id\\\": 3416,\\n                    \\\"disposition\\\": \\\"Clean\\\",\\n                    \\\"file_name\\\": \\\"explorer.exe\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"80ef843fa78c33b511394a9c7535a9cbace1deb2270e86ee4ad2faffa5b1e7d2\\\",\\n                      \\\"sha1\\\": \\\"ea97227d34b8526055a543ade7d18587a927f6a3\\\",\\n                      \\\"md5\\\": \\\"15bc38a7492befe831966adb477cf76f\\\"\\n                    }\\n                  }\\n                }\\n              },\\n              ...\\n              ...\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 0,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 0\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/events\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-09 11:05:12\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_events script - reference only\\nDATA_TBL_FIELDS_TOP = [\\\"query_execution_time\\\", \\\"event_id\\\", \\\"date\\\" \\\"event_type\\\", \\\"severity\\\"]\\nDATA_TBL_FIELDS_COMPUTER = [\\\"hostname\\\", \\\"external_ip\\\"]\\nDATA_TBL_FIELDS_FILE = [\\\"disposition\\\", \\\"file_name\\\", \\\"file_path\\\", \\\"sha256\\\"]\\n\\n# Processing\\nresponse = results.get(\\\"response\\\")\\nquery_execution_time = results.get(\\\"query_execution_time\\\")\\ninput_params =  results.get(\\\"input_params\\\", {})\\nif response is not None:\\n    r = response.get(\\\"metadata\\\", {}).get(\\\"results\\\")\\n    resp_data = response.get(\\\"data\\\", [])\\n    event_type = input_params.get(\\\"event_type\\\")\\n    noteText = u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \\\" \\\\\\n               u\\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for event type id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\".format(len(resp_data), r.get(\\\"total\\\"), event_type, \\\"fn_amp_get_events\\\")\\n    for d in resp_data:\\n        newrow = incident.addRow(\\\"amp_events\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.event_id = str(d.get(\\\"id\\\", \\\"\\\"))\\n        newrow.event_type = d.get(\\\"event_type\\\", \\\"\\\")\\n        newrow.date = d.get(\\\"date\\\", \\\"\\\")\\n        c = d.get(\\\"computer\\\")\\n        if c is not None:\\n            for fi in DATA_TBL_FIELDS_COMPUTER:\\n                comp_field = c.get(fi)\\n                if isinstance(comp_field, str) or len(comp_field) == 0:\\n                    newrow[fi] = comp_field\\n                else:\\n                    newrow[fi] = \u0027[\u0027 + \u0027\u0027.join(comp_field) + \u0027]\u0027\\n        fl = d.get(\\\"file\\\")\\n        if fl is not None:\\n            fident  =  fl.get(\\\"identity\\\")\\n            if fident is not None:\\n                newrow.sha256 = fident.get(\\\"sha256\\\")\\n            for fi in DATA_TBL_FIELDS_FILE:\\n                if fl.get(fi) is not None:\\n                    newrow[fi] = fl[fi]\\nelse:\\n    noteText += u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for event type id \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\" \\\\\\n                \\\" for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(event_type, \\\"fn_amp_get_events\\\", )\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_046r7h7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_14801jf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_046r7h7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wkbupu\"/\u003e\u003cendEvent id=\"EndEvent_1qml3qt\"\u003e\u003cincoming\u003eSequenceFlow_14801jf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_14801jf\" sourceRef=\"ServiceTask_0wkbupu\" targetRef=\"EndEvent_1qml3qt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10r8axu\"\u003e\u003ctext\u003eGet events by event type id. Event type id input parameter assigned from a data-table row.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1a3d0dd\" sourceRef=\"ServiceTask_0wkbupu\" targetRef=\"TextAnnotation_10r8axu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wkbupu\" id=\"ServiceTask_0wkbupu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"257\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_046r7h7\" id=\"SequenceFlow_046r7h7_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"257\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"244\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1qml3qt\" id=\"EndEvent_1qml3qt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"412\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"430\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14801jf\" id=\"SequenceFlow_14801jf_di\"\u003e\u003comgdi:waypoint x=\"357\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"412\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10r8axu\" id=\"TextAnnotation_10r8axu_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"239\" x=\"187\" y=\"33\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1a3d0dd\" id=\"Association_1a3d0dd_di\"\u003e\u003comgdi:waypoint x=\"307\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"307\" y=\"83\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 3,
       "description": "Example workflow to  return events by event type id. Input parameter is assigned from a datatable row.",
       "export_key": "wf_amp_get_events_by_type",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1699511799590,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717443004804,
       "name": "Example: AMP get events by type",
       "object_type": "amp_event_types",
       "programmatic_name": "wf_amp_get_events_by_type",
       "tags": [],
       "uuid": "7c457e20-782b-4011-afdc-2a1521c7b366",
-      "workflow_id": 151
+      "workflow_id": 13
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_amp_add_artifact_from_event",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_add_artifact_from_event\" isExecutable=\"true\" name=\"Example: AMP Add artifact from event\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Example workflow to create artifacts from Cisco AMP for Endpoints event properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\"]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0t42t0v\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_19it1os\" name=\"scr_amp_add_artifact_from_event\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c203e299-8e4d-4b6e-9968-b6fa38bebc46\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0t42t0v\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1euqsy0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0t42t0v\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_19it1os\"/\u003e\u003cendEvent id=\"EndEvent_1dpnt0e\"\u003e\u003cincoming\u003eSequenceFlow_1euqsy0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1euqsy0\" sourceRef=\"ScriptTask_19it1os\" targetRef=\"EndEvent_1dpnt0e\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1vnayjo\"\u003e\u003ctext\u003eGenerate Resilient artifact from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wdb5gx\" sourceRef=\"ScriptTask_19it1os\" targetRef=\"TextAnnotation_1vnayjo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_19it1os\" id=\"ScriptTask_19it1os_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"231\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0t42t0v\" id=\"SequenceFlow_0t42t0v_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"214.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dpnt0e\" id=\"EndEvent_1dpnt0e_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"397\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"415\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1euqsy0\" id=\"SequenceFlow_1euqsy0_di\"\u003e\u003comgdi:waypoint x=\"331\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"364\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1vnayjo\" id=\"TextAnnotation_1vnayjo_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"163\" x=\"231\" y=\"57\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wdb5gx\" id=\"Association_1wdb5gx_di\"\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"88\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Example workflow to create artifacts from Cisco AMP for Endpoints event properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\"",
+      "export_key": "wf_amp_add_artifact_from_event",
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325746221,
+      "name": "Example: AMP Add artifact from event",
+      "object_type": "amp_events",
+      "programmatic_name": "wf_amp_add_artifact_from_event",
+      "tags": [],
+      "uuid": "5ff52578-83d8-415a-97bb-a4f7a7ca3fae",
+      "workflow_id": 6
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "wf_amp_get_event_types",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_event_types\" isExecutable=\"true\" name=\"Example: AMP get event types\"\u003e\u003cdocumentation\u003eExample workflow which queries for event types  and returns result of human readable name, and short description of each event by ID.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0vw5fl4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10cp45l\" name=\"AMP: Get Event Types\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6e90b4dd-7a5f-4ff8-9299-2d7630fa6366\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_event_types script ##\\n#  fn_amp_get_event_types  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"description\\\": \\\"An agent has been told to fetch policy.\\\",\\n                \\\"id\\\": 553648130,\\n                \\\"name\\\": \\\"Policy Update\\\"\\n              },\\n              {\\n                \\\"description\\\": \\\"An agent has started scanning.\\\",\\n                \\\"id\\\": 554696714,\\n                \\\"name\\\": \\\"Scan Started\\\"\\n              },\\n              {\\n                \\\"description\\\": \\\"A scan has completed without detecting anything malicious.\\\",\\n                \\\"id\\\": 554696715,\\n                \\\"name\\\": \\\"Scan Completed, No Detections\\\"\\n              },\\n              ...\\n              ...\\n\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"total\\\": 94\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/event_types\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-08 16:27:32\\\"\\n        }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_event_types script - reference only\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"event_type_name\\\", \\\"event_type_id\\\" \\\"event_type_description\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], \\\"fn_amp_get_event_types\\\")\\n    for data in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_event_types\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.event_type_name = data.get(\\\"name\\\", \\\"\\\")\\n        newrow.event_type_id = str(data.get(\\\"id\\\", \\\"\\\"))\\n        newrow.event_type_description = data.get(\\\"description\\\", \\\"\\\")\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_event_types\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0vw5fl4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0njwv2e\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0vw5fl4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10cp45l\"/\u003e\u003cendEvent id=\"EndEvent_1fsjym3\"\u003e\u003cincoming\u003eSequenceFlow_0njwv2e\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0njwv2e\" sourceRef=\"ServiceTask_10cp45l\" targetRef=\"EndEvent_1fsjym3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_07t8iaf\"\u003e\u003ctext\u003eGet event types. No input parameters.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0v6du0v\" sourceRef=\"ServiceTask_10cp45l\" targetRef=\"TextAnnotation_07t8iaf\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10cp45l\" id=\"ServiceTask_10cp45l_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vw5fl4\" id=\"SequenceFlow_0vw5fl4_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1fsjym3\" id=\"EndEvent_1fsjym3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0njwv2e\" id=\"SequenceFlow_0njwv2e_di\"\u003e\u003comgdi:waypoint x=\"361\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"406\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_07t8iaf\" id=\"TextAnnotation_07t8iaf_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"131\" x=\"245\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0v6du0v\" id=\"Association_0v6du0v_di\"\u003e\u003comgdi:waypoint x=\"311\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"311\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Example workflow which queries for event types  and returns result of human readable name, and short description of each event by ID.",
+      "export_key": "wf_amp_get_event_types",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717185967219,
+      "name": "Example: AMP get event types",
+      "object_type": "incident",
+      "programmatic_name": "wf_amp_get_event_types",
+      "tags": [],
+      "uuid": "fb76b80a-fd7e-407c-b530-b29fcbbf5547",
+      "workflow_id": 9
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_amp_get_file_list_files",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_file_list_files\" isExecutable=\"true\" name=\"Example: AMP get files from list\"\u003e\u003cdocumentation\u003eExample workflow to return a list of items for a particular file list guid. The input parameter is assigned from a datatable row entry.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05wnwz5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0lwp3g6\" name=\"AMP: Get Files from List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"14f58a3d-8423-4290-b964-d1f2cb7a6cb5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_file_list_files script ##\\n#  fn_amp_get_file_list_files  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:  {\\n          \\\"input_params\\\": {\\\"file_list_guid\\\": \\\"e773a9eb-296c-40df-98d8-bed46322589d\\\",\\n                           \\\"file_sha256\\\": \\\"\\\", \\\"limit\\\": null,\\n                           \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"items\\\": [\\n                {\\n                  \\\"source\\\": \\\"Created by entering SHA-256 via Public api.\\\",\\n                  \\\"sha256\\\": \\\"c26dc4e73a335b4414d238b6b30bfd6aff693293f9e4946b5df13f9aac40af5c\\\",\\n                  \\\"description\\\": \\\"A test malware file. \\\",\\n                  \\\"links\\\": {\\n                    \\\"file_list\\\": \\\"https://api.amp.cisco.com/v1/file_lists/9710a198-b95a-462a-b184-9e688968fd94\\\"\\n                  }\\n                },\\n                {\\n                  \\\"source\\\": \\\"Created by entering SHA-256 via Public api.\\\",\\n                  \\\"sha256\\\": \\\"d15766ead5d8ffe68fd96d4bda75c07378fc74f76e251ae6631f4ec8226d2bcb\\\",\\n                  \\\"description\\\": \\\"\\\\\\\"Malware test file - by JP.\\\\\\\"\\\",\\n                  \\\"links\\\": {\\n                    \\\"file_list\\\": \\\"https://api.amp.cisco.com/v1/file_lists/9710a198-b95a-462a-b184-9e688968fd94\\\"\\n                  }\\n                }\\n              ],\\n              \\\"guid\\\": \\\"9710a198-b95a-462a-b184-9e688968fd94\\\",\\n              \\\"name\\\": \\\"File Blacklist\\\",\\n              \\\"policies\\\": [\\n                {\\n                  \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                  \\\"name\\\": \\\"Audit\\\",\\n                  \\\"links\\\": {\\n                    \\\"policy\\\": \\\"https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\"\\n                  }\\n                },\\n                {\\n                  \\\"guid\\\": \\\"51450374-366c-4759-9099-7baa138c499f\\\",\\n                  \\\"name\\\": \\\"Triage\\\",\\n                  \\\"links\\\": {\\n                    \\\"policy\\\": \\\"https://api.amp.cisco.com/v1/policies/51450374-366c-4759-9099-7baa138c499f\\\"\\n                  }\\n                },\\n                ...\\n                ...\\n              ]\\n            },\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 2,\\n                \\\"items_per_page\\\": 50,\\n                \\\"current_item_count\\\": 2\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/file_lists/9710a198-b95a-462a-b184-9e688968fd94/files?limit=50\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-23 10:09:19\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_list_files script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"list_name\\\", \\\"guid\\\", \\\"file_description\\\", \\\"sha256\\\", \\\"source\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\nif response is not None:\\n    data = response[\\\"data\\\"]\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"for list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(len(data[\\\"items\\\"]), r[\\\"total\\\"], data[\\\"name\\\"], \\\"fn_amp_get_file_list_files\\\")\\n    if data is not None:\\n        items = data[\\\"items\\\"]\\n        for i in items:\\n            newrow = incident.addRow(\\\"amp_file_list_files\\\")\\n            newrow.query_execution_time = query_execution_time\\n            for f in DATA_TBL_FIELDS[1:]:\\n                if data[f] is not None:\\n                    newrow[f] = data[f]\\n                if i[f] is not None:\\n                    newrow[f] = i[f]\\n            if data.name is not None:\\n                newrow.list_name = data.name\\n            if i.description is not None:\\n                newrow.file_description = i.description\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(\\\"fn_amp_get_file_list_files\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_file_list_guid = row.guid\\ninputs.amp_file_sha256 = None\\ninputs.amp_limit = None\\ninputs.amp_offset = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05wnwz5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05ejv23\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05wnwz5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0lwp3g6\"/\u003e\u003cendEvent id=\"EndEvent_1eddmkb\"\u003e\u003cincoming\u003eSequenceFlow_05ejv23\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05ejv23\" sourceRef=\"ServiceTask_0lwp3g6\" targetRef=\"EndEvent_1eddmkb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ock4rz\"\u003e\u003ctext\u003eGet file information from a list by guid. File list guid input parameter assigned from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1o8mpak\" sourceRef=\"ServiceTask_0lwp3g6\" targetRef=\"TextAnnotation_0ock4rz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0lwp3g6\" id=\"ServiceTask_0lwp3g6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05wnwz5\" id=\"SequenceFlow_05wnwz5_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1eddmkb\" id=\"EndEvent_1eddmkb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"434\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05ejv23\" id=\"SequenceFlow_05ejv23_di\"\u003e\u003comgdi:waypoint x=\"368\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"392\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ock4rz\" id=\"TextAnnotation_0ock4rz_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"273\" x=\"184\" y=\"54\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1o8mpak\" id=\"Association_1o8mpak_di\"\u003e\u003comgdi:waypoint x=\"318\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"318\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Example workflow to return a list of items for a particular file list guid. The input parameter is assigned from a datatable row entry.",
+      "export_key": "wf_amp_get_file_list_files",
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325746755,
+      "name": "Example: AMP get files from list",
+      "object_type": "amp_scd_file_lists",
+      "programmatic_name": "wf_amp_get_file_list_files",
+      "tags": [],
+      "uuid": "e7ca53c9-2f87-4218-ae25-b58652eaf3e5",
+      "workflow_id": 8
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "wf_amp_get_group_name_by_guid",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_group_name_by_guid\" isExecutable=\"true\" name=\"Example: AMP get group name by guid\"\u003e\u003cdocumentation\u003eExample workflow to  return a group name by guid. Input parameter is assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1iubtej\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1acf7kf\" name=\"AMP: Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69456802-f5ba-4602-9d40-d75d0fda42aa\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_groups script ##\\n#  fn_amp_get_groups\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n           \\\"query_execution_time\\\": \\\"2018-11-22 12:14:28\\\",\\n           \\\"input_params\\\": {\\n             \\\"group_guid\\\": \\\"5931a062-19b3-46ad-9b09-d246430aba02\\\",\\n             \\\"name\\\": null,\\n             \\\"limit\\\": null\\n           },\\n           \\\"response\\\": {\\n             \\\"version\\\": \\\"v1.2.0\\\",\\n             \\\"metadata\\\": {\\n               \\\"links\\\": {\\n                 \\\"self\\\": \\\"https://api.amp.cisco.com/v1/groups/5931a062-19b3-46ad-9b09-d246430aba02?limit=10\\\"\\n               }\\n             },\\n             \\\"data\\\": {\\n               \\\"name\\\": \\\"Test Group2\\\",\\n               \\\"description\\\": \\\"Test group 3.\\\",\\n               \\\"guid\\\": \\\"5931a062-19b3-46ad-9b09-d246430aba02\\\",\\n               \\\"source\\\": null,\\n               \\\"policies\\\": [\\n                 {\\n                   \\\"name\\\": \\\"Audit\\\",\\n                   \\\"description\\\": \\\"This policy puts the AMP for Endpoints Connector in a mode that will only detect malicious files but not quarantine them. Malicious network traffic is also detected but not blocked.\\\",\\n                   \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                   \\\"product\\\": \\\"windows\\\",\\n                   \\\"default\\\": true,\\n                   \\\"serial_number\\\": 52,\\n                   \\\"links\\\": {\\n                     \\\"policy_xml\\\": \\\"https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b.xml\\\",\\n                     \\\"policy\\\": \\\"https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\"\\n                   },\\n                   \\\"file_lists\\\": [\\n                     {\\n                       \\\"name\\\": \\\"File Blacklist\\\",\\n                       \\\"guid\\\": \\\"9710a198-b95a-462a-b184-9e688968fd94\\\",\\n                       \\\"type\\\": \\\"simple_custom_detections\\\"\\n                     },\\n                     {\\n                       \\\"name\\\": \\\"Execution Blacklist\\\",\\n                       \\\"guid\\\": \\\"3792e397-50b0-42e3-98af-35b9b7988223\\\",\\n                       \\\"type\\\": \\\"application_blocking\\\"\\n                     },\\n                     {\\n                       \\\"name\\\": \\\"File Whitelist\\\",\\n                       \\\"guid\\\": \\\"6b0baed2-fc8c-454d-b168-4510a89f4588\\\",\\n                       \\\"type\\\": \\\"application_whitelist\\\"\\n                     }\\n                   ],\\n                   \\\"ip_lists\\\": [],\\n                   \\\"exclusion_sets\\\": [\\n                     {\\n                       \\\"name\\\": \\\"Workstation Exclusions\\\",\\n                       \\\"guid\\\": \\\"6bc4b73c-b4be-4487-96aa-ea24520ef3d7\\\"\\n                     }\\n                   ],\\n                   \\\"used_in_groups\\\": [\\n                     {\\n                       \\\"name\\\": \\\"Audit\\\",\\n                       \\\"description\\\": \\\"Audit Group for Partner - IBM Security\\\",\\n                       \\\"guid\\\": \\\"9d55c259-c960-488b-9b2d-06478fa19ee4\\\"\\n                     }\\n                   ],\\n                   \\\"inherited\\\": false\\n                 },\\n                 ...\\n                 ...\\n               ]\\n             }\\n           }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable\\nDATA_TBL_FIELDS = [\\\"group_name\\\"]\\n\\n# Processing\\nresponse = results.response\\n\\nif response is not None:\\n   data = response[\\\"data\\\"]\\n   row.group_name = data.get(\\\"name\\\", \\\"\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_group_guid = row.group_guid\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1iubtej\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1n595ba\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1iubtej\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1acf7kf\"/\u003e\u003cendEvent id=\"EndEvent_0trvylr\"\u003e\u003cincoming\u003eSequenceFlow_1n595ba\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1n595ba\" sourceRef=\"ServiceTask_1acf7kf\" targetRef=\"EndEvent_0trvylr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0bd5wxs\"\u003e\u003ctext\u003eGet a group name by guid. Input parameter is assigned from data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1i6kv6p\" sourceRef=\"ServiceTask_1acf7kf\" targetRef=\"TextAnnotation_0bd5wxs\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1acf7kf\" id=\"ServiceTask_1acf7kf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"262\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1iubtej\" id=\"SequenceFlow_1iubtej_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0trvylr\" id=\"EndEvent_0trvylr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"470\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1n595ba\" id=\"SequenceFlow_1n595ba_di\"\u003e\u003comgdi:waypoint x=\"362\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0bd5wxs\" id=\"TextAnnotation_0bd5wxs_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"196\" x=\"216\" y=\"43\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1i6kv6p\" id=\"Association_1i6kv6p_di\"\u003e\u003comgdi:waypoint x=\"313\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"314\" y=\"89\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Example workflow to  return a group name by guid. Input parameter is assigned from a datatable row.",
+      "export_key": "wf_amp_get_group_name_by_guid",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717184609335,
+      "name": "Example: AMP get group name by guid",
+      "object_type": "amp_computers",
+      "programmatic_name": "wf_amp_get_group_name_by_guid",
+      "tags": [],
+      "uuid": "802116c1-becd-4d87-b533-c915ef8a0734",
+      "workflow_id": 5
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_amp_delete_file_list_files",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_delete_file_list_files\" isExecutable=\"true\" name=\"Example: AMP delete file from list\"\u003e\u003cdocumentation\u003eExample workflow to delete a SHA-256 from a file list by file_list_guid. Input  parameters are derived from a datatable entry.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0hkoqko\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xpc38a\" name=\"AMP: Delete File from List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"43b8de27-d727-4133-9c3d-c4916ac5a212\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_delete_file_lists script ##\\n#  fn_amp_delete_computer_trajectory  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:    {\\n             \\\"input_params\\\": {\\\"file_list_guid\\\": \\\"e773a9eb-296c-40df-98d8-bed46322589d\\\",\\n                       \\\"file_sha256\\\": \\\"8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\\\"}\\n             \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                          u\u0027data\u0027: {},\\n                          u\u0027metadata\u0027: {u\u0027links\u0027: {\\n                                            u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\u0027}\\n                                       }\\n                          },\\n              \\\"delete_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n            }\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_lists script\\nDATA_TBL_FIELDS = [\\\"delete_execution_time\\\", \\\"status\\\"]\\n\\n# Processing\\nresponse = results.get(\\\"response\\\")\\n\\nif response is not None:\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Successfully deleted file with sha256 value \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"from SCD list guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(row.sha256, row.guid, \\\"fn_amp_delete_file_list_files\\\")\\nelse:\\n  noteText = \\\"Cisco AMP Integration: Delete unsuccessful for file with sha256 value \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"from SCD list guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(row.sha256, row.guid, \\\"fn_amp_delete_file_list_files\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_file_list_guid = row.guid\\ninputs.amp_file_sha256 = row.sha256\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hkoqko\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1g09fz6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hkoqko\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xpc38a\"/\u003e\u003cendEvent id=\"EndEvent_15qlmr2\"\u003e\u003cincoming\u003eSequenceFlow_1g09fz6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1g09fz6\" sourceRef=\"ServiceTask_0xpc38a\" targetRef=\"EndEvent_15qlmr2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_105d6wk\"\u003e\u003ctext\u003eDelete file sha-256 from a list by guid. Both input parameters assigned from data-table row fields.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1kn3f0k\" sourceRef=\"ServiceTask_0xpc38a\" targetRef=\"TextAnnotation_105d6wk\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xpc38a\" id=\"ServiceTask_0xpc38a_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"278\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hkoqko\" id=\"SequenceFlow_0hkoqko_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"278\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"257\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_15qlmr2\" id=\"EndEvent_15qlmr2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1g09fz6\" id=\"SequenceFlow_1g09fz6_di\"\u003e\u003comgdi:waypoint x=\"378\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"402\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"402\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_105d6wk\" id=\"TextAnnotation_105d6wk_di\"\u003e\u003comgdc:Bounds height=\"55\" width=\"177\" x=\"275\" y=\"33\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1kn3f0k\" id=\"Association_1kn3f0k_di\"\u003e\u003comgdi:waypoint x=\"328\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"328\" y=\"88\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "description": "Example workflow to delete a SHA-256 from a file list by file_list_guid. Input  parameters are derived from a datatable entry.",
+      "export_key": "wf_amp_delete_file_list_files",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717512477369,
+      "name": "Example: AMP delete file from list",
+      "object_type": "amp_file_list_files",
+      "programmatic_name": "wf_amp_delete_file_list_files",
+      "tags": [],
+      "uuid": "b520a701-5e73-47e7-b981-ee3b3cf48bb0",
+      "workflow_id": 11
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_amp_add_artifact_from_activity",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_add_artifact_from_activity\" isExecutable=\"true\" name=\"Example: AMP add artifact from activity\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Example workflow  to create an artifact from Cisco AMP for Endpoints activity properties. Supported artifact types are:  \"System Name\" and connector guid (as string).]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1e70cfn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_0q3n0oz\" name=\"scr_amp_add_artifact_from_activit...\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3139c4bb-f9b7-4742-a69e-c432d45a83e9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1e70cfn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_00ibtgb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1e70cfn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_0q3n0oz\"/\u003e\u003cendEvent id=\"EndEvent_1qy33n3\"\u003e\u003cincoming\u003eSequenceFlow_00ibtgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_00ibtgb\" sourceRef=\"ScriptTask_0q3n0oz\" targetRef=\"EndEvent_1qy33n3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0lw44f9\"\u003e\u003ctext\u003eGenerate Resilient artifact from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1qz1jt6\" sourceRef=\"ScriptTask_0q3n0oz\" targetRef=\"TextAnnotation_0lw44f9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0q3n0oz\" id=\"ScriptTask_0q3n0oz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1e70cfn\" id=\"SequenceFlow_1e70cfn_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1qy33n3\" id=\"EndEvent_1qy33n3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"397\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"415\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00ibtgb\" id=\"SequenceFlow_00ibtgb_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"370\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0lw44f9\" id=\"TextAnnotation_0lw44f9_di\"\u003e\u003comgdc:Bounds height=\"33\" width=\"170\" x=\"208\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1qz1jt6\" id=\"Association_1qz1jt6_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Example workflow  to create an artifact from Cisco AMP for Endpoints activity properties. Supported artifact types are:  \"System Name\" and connector guid (as string).",
+      "export_key": "wf_amp_add_artifact_from_activity",
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325745766,
+      "name": "Example: AMP add artifact from activity",
+      "object_type": "amp_activity",
+      "programmatic_name": "wf_amp_add_artifact_from_activity",
+      "tags": [],
+      "uuid": "1b769415-99db-40d6-bbbb-ddd8d796c049",
+      "workflow_id": 4
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_amp_get_computer_refresh",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_refresh\" isExecutable=\"true\" name=\"Example: AMP get computer (refresh)\"\u003e\u003cdocumentation\u003eExample workflow to refresh datatable entry for a computer.  Input parameter is assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0v69czv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0n27b9a\" name=\"AMP: Get Computer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2749a756-6490-4f15-b54f-4cc82394fe8a\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer script ##\\n#  fn_amp_get_computer  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\"]\\n\\n# Processing\\nresponse = results.get(\\\"response\\\")\\nquery_execution_time = results.get(\\\"query_execution_time\\\")\\n\\nif response is not None:\\n    data = response.get(\\\"data\\\", {})\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Result returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; with connector guid \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(data.get(\\\"hostname\\\"), data.get(\\\"connector_guid\\\"), \\\"fn_amp_get_computer\\\")\\n\\n    row.query_execution_time = query_execution_time\\n    for f in DATA_TBL_FIELDS:\\n        if f == \\\"query_execution_time\\\" or \\\"policy\\\" in f:\\n            continue\\n        data_field = data.get(f)\\n        if isinstance(data_field, str) or len(data_field) == 0:\\n            row[f] = data_field\\n        else:\\n            row[f] = \u0027,\u0027.join(data_field)\\n    policy = data.get(\\\"policy\\\")\\n    if policy is not None:\\n        row.policy_name = policy.get(\\\"name\\\")\\n\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computer\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_conn_guid = row.connector_guid\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v69czv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ev3g9j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0v69czv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0n27b9a\"/\u003e\u003cendEvent id=\"EndEvent_0rrug12\"\u003e\u003cincoming\u003eSequenceFlow_0ev3g9j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ev3g9j\" sourceRef=\"ServiceTask_0n27b9a\" targetRef=\"EndEvent_0rrug12\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1d1yr6s\"\u003e\u003ctext\u003eGet a computer details by connector guid. Input parameter is assigned from datatable row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_11eh93d\" sourceRef=\"ServiceTask_0n27b9a\" targetRef=\"TextAnnotation_1d1yr6s\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0n27b9a\" id=\"ServiceTask_0n27b9a_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"256\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v69czv\" id=\"SequenceFlow_0v69czv_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"256\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"227\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rrug12\" id=\"EndEvent_0rrug12_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ev3g9j\" id=\"SequenceFlow_0ev3g9j_di\"\u003e\u003comgdi:waypoint x=\"356\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"389.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1d1yr6s\" id=\"TextAnnotation_1d1yr6s_di\"\u003e\u003comgdc:Bounds height=\"57\" width=\"167\" x=\"222\" y=\"31\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_11eh93d\" id=\"Association_11eh93d_di\"\u003e\u003comgdi:waypoint x=\"306\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"306\" y=\"88\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "description": "Example workflow to refresh datatable entry for a computer.  Input parameter is assigned from a datatable row.",
+      "export_key": "wf_amp_get_computer_refresh",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717440642439,
+      "name": "Example: AMP get computer (refresh)",
+      "object_type": "amp_computers",
+      "programmatic_name": "wf_amp_get_computer_refresh",
+      "tags": [],
+      "uuid": "386699db-e84d-4002-b1d0-f3419a7891ae",
+      "workflow_id": 18
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_amp_get_computer_trajectory_by_activity",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_trajectory_by_activity\" isExecutable=\"true\" name=\"Example: AMP get computer trajectory by activity\"\u003e\u003cdocumentation\u003eExample workflow to return trajectory associated with a particular computer by computer guid  and search string. The computer guid  and  query string parameters are assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_042pype\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1208yv9\" name=\"AMP: Get Computer Trajectory\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ff9a67d2-b9d6-4642-ad5a-b51d1a8be1f3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer_trajectory script ##\\n#  fn_amp_get_computer_trajectory  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\", \\\"q\\\": null, \\\"limit\\\": null},\\n          \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n          \\\"query\\\": None,\\n          \\\"connector_guid\\\": None,\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"computer\\\": {\\n                \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                \\\"links\\\": {\\n                  \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                  \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/9d55c259-c960-488b-9b2d-06478fa19ee4\\\"\\n                },\\n                \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                \\\"group_guid\\\": \\\"9d55c259-c960-488b-9b2d-06478fa19ee4\\\",\\n                \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                \\\"network_addresses\\\": [\\n                  {\\n                    \\\"ip\\\": \\\"255.240.221.92\\\",\\n                    \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                  }\\n                ],\\n                \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                \\\"internal_ips\\\": [\\n                  \\\"255.240.221.92\\\"\\n                ],\\n                \\\"policy\\\": {\\n                  \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                  \\\"name\\\": \\\"Audit\\\"\\n                },\\n                \\\"active\\\": true\\n              },\\n              \\\"events\\\": [{\\\"timestamp\\\": 1502989429,\u0027\\n                          \\\"timestamp_nanoseconds\\\": 659151942,\u0027\\n                          \\\"date\\\": \\\"2017-08-17T17:03:49+00:00\\\",\u0027\\n                          \\\"event_type\\\": \\\"NFM\\\",\u0027\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": { \\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                            \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54233,\\n                                            \\\"nfm\\\": {\\\"direction\\\": \\\"Outgoing connection from\\\", \\\"protocol\\\": \\\"TCP\\\"},\\n                                            \\\"parent\\\": {\\\"disposition\\\": \\\"Clean\\\",\\n                                                       \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                            }\\n                          }\\n                         },\\n                         {\\\"timestamp\\\": 1502989426,\\n                          \\\"timestamp_nanoseconds\\\": 155931927,\\n                          \\\"date\\\": \\\"2017-08-17T17:03:46+00:00\\\",\\n                          \\\"event_type\\\": \\\"NFM\\\",\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": {\\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                           \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54232,\\n                                           \\\"nfm\\\": { \\\"direction\\\": \\\"Outgoing connection from\\\",\\\"protocol\\\": \\\"TCP\\\"},\\n                                           \\\"parent\\\": { \\\"disposition\\\": \\\"Clean\\\",\\n                                                        \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                        }\\n                          }\\n                         }\\n                        ]\\n            },\\n            \\\"metadata\\\": {\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\"\\n              }\\n            }\\n          }\\n        }\\n\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer_trajectory script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"query\\\", \\\"hostname\\\"]\\nDATA_TBL_FIELDS_EVNTS = [\\\"date\\\", \\\"event_type\\\", ]\\nDATA_TBL_FIELDS_FILE = [\\\"file_type\\\", \\\"file_name\\\", \\\"disposition\\\", \\\"file_path\\\", \\\"sha256\\\", \\\"parent_sha256\\\" ]\\nDATA_TBL_FIELDS_NI = [\\\"local_port\\\", \\\"remote_port\\\",  \\\"remote_ip\\\", \\\"direction\\\", \\\"protocol\\\", \\\"dirty_url\\\", \\\"disposition\\\"]\\n\\n# Processing\\nresponse = results.get(\\\"response\\\")\\nquery_execution_time = results.get(\\\"query_execution_time\\\")\\ninput_params = results.get(\\\"input_params\\\")\\ntotal = results.get(\\\"total\\\")\\n\\nif response is not None:\\n    data = response.get(\\\"data\\\", {})\\n    computer = data.get(\\\"computer\\\", {})\\n    connector_guid = computer.get(\\\"connector_guid\\\")\\n    hostname = computer.get(\\\"hostname\\\")\\n    events = data.get(\\\"events\\\", [])\\n    q = input_params.get(\\\"q\\\")\\n\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n               \\\" for connector guid \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for query  \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(events, total, connector_guid, q, \\\"fn_amp_get_computer_trajectory\\\")\\n    for e in events:\\n        newrow = incident.addRow(\\\"amp_computer_trajectory\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.query = q\\n        newrow.hostname = hostname\\n        for f in DATA_TBL_FIELDS_EVNTS:\\n            if e.get(f) is not None:\\n                newrow[f] = e[f]\\n            fi = e.get(\\\"file\\\")\\n            if fi is not None:\\n                id = fi.get(\\\"identity\\\")\\n                pa = fi.get(\\\"parent\\\")\\n                for f2 in DATA_TBL_FIELDS_FILE:\\n                    if fi.get(f2) is not None:\\n                        newrow[f2] = fi[f2]\\n                    if id is not None and id.get(f2) is not None:\\n                        newrow[f2] = id[f2]\\n                    if pa is not None:\\n                        pi = pa.get(\\\"identity\\\")\\n                        if pi is not None and pi.get(f2) is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi.get(\\\"sha256\\\")\\n\\n            ni = e.get(\\\"network_info\\\")\\n            if ni is not None:\\n                nfm = ni.get(\\\"nfm\\\")\\n                pa = ni.get(\\\"parent\\\")\\n                for f3 in DATA_TBL_FIELDS_NI:\\n                    if ni.get(f3) is not None:\\n                        newrow[f3] = ni[f3]\\n                    if nfm is not None and nfm.get(f3) is not None:\\n                        newrow[f3] = nfm[f3]\\n                    if pa is not None:\\n                        pi = pa.get(\\\"identity\\\")\\n                        if pi is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi.get(\\\"sha256\\\")\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(\\\"fn_amp_get_computer_trajectory\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_conn_guid = row.connector_guid\\ninputs.amp_q = row.query\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_042pype\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19yollc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_042pype\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1208yv9\"/\u003e\u003cendEvent id=\"EndEvent_1jmjd4m\"\u003e\u003cincoming\u003eSequenceFlow_19yollc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_19yollc\" sourceRef=\"ServiceTask_1208yv9\" targetRef=\"EndEvent_1jmjd4m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1f5vrxf\"\u003e\u003ctext\u003eGet computer trajectory by computer connector guid\u00a0 and\u00a0\nquery string. Both input parameters assigned from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0itnlb6\" sourceRef=\"ServiceTask_1208yv9\" targetRef=\"TextAnnotation_1f5vrxf\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1208yv9\" id=\"ServiceTask_1208yv9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"270\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_042pype\" id=\"SequenceFlow_042pype_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"270\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"234\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1jmjd4m\" id=\"EndEvent_1jmjd4m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"409\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"427\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19yollc\" id=\"SequenceFlow_19yollc_di\"\u003e\u003comgdi:waypoint x=\"370\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"409\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"389.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1f5vrxf\" id=\"TextAnnotation_1f5vrxf_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"314\" x=\"163\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0itnlb6\" id=\"Association_0itnlb6_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"100\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "description": "Example workflow to return trajectory associated with a particular computer by computer guid  and search string. The computer guid  and  query string parameters are assigned from a datatable row.",
+      "export_key": "wf_amp_get_computer_trajectory_by_activity",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717441489327,
+      "name": "Example: AMP get computer trajectory by activity",
+      "object_type": "amp_activity",
+      "programmatic_name": "wf_amp_get_computer_trajectory_by_activity",
+      "tags": [],
+      "uuid": "7805106f-3567-49fc-b389-63f9cc8e1a4b",
+      "workflow_id": 16
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_amp_add_artifact_from_trajectory",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_add_artifact_from_trajectory\" isExecutable=\"true\" name=\"Example: AMP add artifact from trajectory\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Example workflow  to create artifacts from Cisco AMP for Endpoints computer trajectory properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\", \"URL\"]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1i59157\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_0bwwghg\" name=\"scr_amp_add_artifact_from_traject...\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ca7adedc-3016-477b-8e38-c9cf29d2ec19\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1i59157\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0o523pg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1i59157\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_0bwwghg\"/\u003e\u003cendEvent id=\"EndEvent_1kg9i68\"\u003e\u003cincoming\u003eSequenceFlow_0o523pg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0o523pg\" sourceRef=\"ScriptTask_0bwwghg\" targetRef=\"EndEvent_1kg9i68\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0x9qbxb\"\u003e\u003ctext\u003eGenerate Resilient artifact from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ttfz1q\" sourceRef=\"ScriptTask_0bwwghg\" targetRef=\"TextAnnotation_0x9qbxb\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0bwwghg\" id=\"ScriptTask_0bwwghg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"245\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1i59157\" id=\"SequenceFlow_1i59157_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"245\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1kg9i68\" id=\"EndEvent_1kg9i68_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"400\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"418\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o523pg\" id=\"SequenceFlow_0o523pg_di\"\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"400\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"372.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0x9qbxb\" id=\"TextAnnotation_0x9qbxb_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"157\" x=\"245\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ttfz1q\" id=\"Association_0ttfz1q_di\"\u003e\u003comgdi:waypoint x=\"295\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"295\" xsi:type=\"omgdc:Point\" y=\"98\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Example workflow  to create artifacts from Cisco AMP for Endpoints computer trajectory properties. Supported artifact types are: \"Malware SHA-256 Hash\", \"System Name\", \"File Name\", \"File Path\", \"IP Address\", \"URL\"",
+      "export_key": "wf_amp_add_artifact_from_trajectory",
+      "last_modified_by": "07af0e87-bc2c-42cf-bd4a-34650eb11e0d",
+      "last_modified_time": 1716325745004,
+      "name": "Example: AMP add artifact from trajectory",
+      "object_type": "amp_computer_trajectory",
+      "programmatic_name": "wf_amp_add_artifact_from_trajectory",
+      "tags": [],
+      "uuid": "a5be3c8b-0e57-4df7-9b94-82a1542f0443",
+      "workflow_id": 1
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "wf_amp_get_computer_by_guid",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_by_guid\" isExecutable=\"true\" name=\"Example: AMP get computer by connector guid\"\u003e\u003cdocumentation\u003eExample workflow to return a computer with an agent deployed on it  by parameter connector guid.  Input parameter is derived from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1u5j8yd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_15f1geq\" name=\"AMP: Get Computer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2749a756-6490-4f15-b54f-4cc82394fe8a\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer script ##\\n#  fn_amp_get_computer  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\"]\\n\\n# Processing\\nresponse = results.response\\ninput_params =  results.input_params\\nquery_execution_time = results.query_execution_time\\nnoteText = \u0027\u0027\\nerrors = response.get(\\\"errors\\\", None)\\n\\nif response is not None and errors is None:\\n    data = response[\\\"data\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Result returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; with connector guid \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(data[\\\"hostname\\\"], data[\\\"connector_guid\\\"], \\\"fn_amp_get_computers\\\")\\n    newrow = incident.addRow(\\\"amp_computers\\\")\\n    newrow.query_execution_time = query_execution_time\\n    for f in DATA_TBL_FIELDS:\\n        if f == \\\"query_execution_time\\\" or \\\"policy\\\" in f:\\n            continue\\n        if isinstance(data[f], str) or len(data[f]) == 0:\\n            newrow[f] = data[f]\\n        else:\\n            newrow[f] = \u0027,\u0027.join(data[f])\\n    policy = data[\\\"policy\\\"]\\n    if policy is not None:\\n        newrow.policy_name = policy[\\\"name\\\"]\\nelif errors is not None and errors[0][\\\"error_code\\\"] == 404:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: Got a 404 error while attempting to get computer information for \\\" \\\\\\n                \\\"connector guid \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; for function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; because of a possible invalid or deleted guid.\\\"\\\\\\n        .format(input_params[\\\"conn_guid\\\"], \\\"fn_amp_get_computers\\\")\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computers\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_conn_guid = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1u5j8yd\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ej1r3h\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1u5j8yd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_15f1geq\"/\u003e\u003cendEvent id=\"EndEvent_1ponv0f\"\u003e\u003cincoming\u003eSequenceFlow_1ej1r3h\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ej1r3h\" sourceRef=\"ServiceTask_15f1geq\" targetRef=\"EndEvent_1ponv0f\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0lvatzs\"\u003e\u003ctext\u003eGet computer information by connector guid.\n\u00a0Guid input parameter assigned from an artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06l2vrz\" sourceRef=\"ServiceTask_15f1geq\" targetRef=\"TextAnnotation_0lvatzs\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_15f1geq\" id=\"ServiceTask_15f1geq_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u5j8yd\" id=\"SequenceFlow_1u5j8yd_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ponv0f\" id=\"EndEvent_1ponv0f_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"456\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"474\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ej1r3h\" id=\"SequenceFlow_1ej1r3h_di\"\u003e\u003comgdi:waypoint x=\"359\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0lvatzs\" id=\"TextAnnotation_0lvatzs_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"177\" x=\"259\" y=\"28\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06l2vrz\" id=\"Association_06l2vrz_di\"\u003e\u003comgdi:waypoint x=\"308\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"308\" y=\"91\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "description": "Example workflow to return a computer with an agent deployed on it  by parameter connector guid.  Input parameter is derived from an artifact value.",
+      "export_key": "wf_amp_get_computer_by_guid",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717439197477,
+      "name": "Example: AMP get computer by connector guid",
+      "object_type": "artifact",
+      "programmatic_name": "wf_amp_get_computer_by_guid",
+      "tags": [],
+      "uuid": "b5084df6-e2d3-430a-a680-dd4e72ef6c37",
+      "workflow_id": 12
     },
     {
       "actions": [],
       "content": {
         "version": 3,
         "workflow_id": "wf_amp_get_groups",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_groups\" isExecutable=\"true\" name=\"Example: AMP get groups\"\u003e\u003cdocumentation\u003eExample workflow to return information on all groups.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10t1thl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1mb33p5\" name=\"AMP: Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69456802-f5ba-4602-9d40-d75d0fda42aa\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_groups script ##\\n#  fn_amp_get_groups  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"group_guid\\\": null, \\\"limit\\\": null, \\\"name\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"source\\\": null,\\n                \\\"guid\\\": \\\"abcd1234-a123-b456-c769-abcdef123456\\\",\\n                \\\"name\\\": \\\"Audit\\\",\\n                \\\"links\\\": {\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/abcd1234-a123-b456-c769-abcdef123456\\\"\\n                },\\n                \\\"description\\\": \\\"Test Audit Group 1\\\"\\n              },\\n              ...\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 5,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 5\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/groups\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-08 12:49:38\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_groups script\\nDATA_TBL_FIELDS = [\\\"group_name\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], \\\"fn_amp_get_groups\\\")\\n    for data in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_groups\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.group_name = data.name\\n        newrow.guid =  data.guid\\n        newrow.group_description = data.description\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_groups\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_group_guid = None\\ninputs.amp_group_name = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10t1thl\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ocuyqg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10t1thl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1mb33p5\"/\u003e\u003cendEvent id=\"EndEvent_1kyg5gx\"\u003e\u003cincoming\u003eSequenceFlow_0ocuyqg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ocuyqg\" sourceRef=\"ServiceTask_1mb33p5\" targetRef=\"EndEvent_1kyg5gx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0roh6et\"\u003e\u003ctext\u003eGet information on groups. No input parameters assigned.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ph0fzm\" sourceRef=\"ServiceTask_1mb33p5\" targetRef=\"TextAnnotation_0roh6et\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1mb33p5\" id=\"ServiceTask_1mb33p5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"287\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10t1thl\" id=\"SequenceFlow_10t1thl_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"287\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1kyg5gx\" id=\"EndEvent_1kyg5gx_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"437\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"455\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ocuyqg\" id=\"SequenceFlow_0ocuyqg_di\"\u003e\u003comgdi:waypoint x=\"387\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"437\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"412\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0roh6et\" id=\"TextAnnotation_0roh6et_di\"\u003e\u003comgdc:Bounds height=\"44\" width=\"143\" x=\"265\" y=\"48\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ph0fzm\" id=\"Association_0ph0fzm_di\"\u003e\u003comgdi:waypoint x=\"337\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"337\" y=\"92\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_groups\" isExecutable=\"true\" name=\"Example: AMP get groups\"\u003e\u003cdocumentation\u003eExample workflow to return information on all groups.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10t1thl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1mb33p5\" name=\"AMP: Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69456802-f5ba-4602-9d40-d75d0fda42aa\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_groups script ##\\n#  fn_amp_get_groups  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"group_guid\\\": null, \\\"limit\\\": null, \\\"name\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"source\\\": null,\\n                \\\"guid\\\": \\\"abcd1234-a123-b456-c769-abcdef123456\\\",\\n                \\\"name\\\": \\\"Audit\\\",\\n                \\\"links\\\": {\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/abcd1234-a123-b456-c769-abcdef123456\\\"\\n                },\\n                \\\"description\\\": \\\"Test Audit Group 1\\\"\\n              },\\n              ...\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 5,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 5\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/groups\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-08 12:49:38\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_groups script\\nDATA_TBL_FIELDS = [\\\"group_name\\\"]\\n\\n# Processing\\nresponse = results.get(\\\"response\\\", {})\\nquery_execution_time = results.get(\\\"query_execution_time\\\", \\\"\\\")\\n\\nif response is not None:\\n    r = response.get(\\\"metadata\\\", {}).get(\\\"results\\\")\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response.get(\\\"data\\\", [])), r.get(\\\"total\\\"), \\\"fn_amp_get_groups\\\")\\n    for data in response.get(\\\"data\\\", []):\\n        newrow = incident.addRow(\\\"amp_groups\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.group_name = data.get(\\\"name\\\")\\n        newrow.guid =  data.get(\\\"guid\\\")\\n        newrow.group_description = data.get(\\\"description\\\")\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_groups\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_group_guid = None\\ninputs.amp_group_name = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10t1thl\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ocuyqg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10t1thl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1mb33p5\"/\u003e\u003cendEvent id=\"EndEvent_1kyg5gx\"\u003e\u003cincoming\u003eSequenceFlow_0ocuyqg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ocuyqg\" sourceRef=\"ServiceTask_1mb33p5\" targetRef=\"EndEvent_1kyg5gx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0roh6et\"\u003e\u003ctext\u003eGet information on groups. No input parameters assigned.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ph0fzm\" sourceRef=\"ServiceTask_1mb33p5\" targetRef=\"TextAnnotation_0roh6et\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1mb33p5\" id=\"ServiceTask_1mb33p5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"287\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10t1thl\" id=\"SequenceFlow_10t1thl_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"287\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1kyg5gx\" id=\"EndEvent_1kyg5gx_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"437\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"455\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ocuyqg\" id=\"SequenceFlow_0ocuyqg_di\"\u003e\u003comgdi:waypoint x=\"387\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"437\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"412\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0roh6et\" id=\"TextAnnotation_0roh6et_di\"\u003e\u003comgdc:Bounds height=\"44\" width=\"143\" x=\"265\" y=\"48\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ph0fzm\" id=\"Association_0ph0fzm_di\"\u003e\u003comgdi:waypoint x=\"337\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"337\" y=\"92\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 3,
       "description": "Example workflow to return information on all groups.",
       "export_key": "wf_amp_get_groups",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698734984491,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717439139304,
       "name": "Example: AMP get groups",
       "object_type": "incident",
       "programmatic_name": "wf_amp_get_groups",
       "tags": [],
       "uuid": "62b6407e-e2b0-4a01-97a7-56c9345e01b2",
-      "workflow_id": 158
+      "workflow_id": 14
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 8,
+        "workflow_id": "wf_amp_get_computer_trajectory",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_trajectory\" isExecutable=\"true\" name=\"Example: AMP get computer trajectory\"\u003e\u003cdocumentation\u003eExample multi-part workflow to return trajectory associated with a particular computer by computer name and optional search string. The computer name is assigned from an activity value, the query string is assigned from an activity field at run-time.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10gi90j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1uzsg0v\" name=\"AMP: Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0603c8-81b2-4190-a9f5-d1b6b9a1215f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computers script ##\\n#  fn_amp_get_computers  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\", \\\"policy_guid\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params = results.input_params\\n\\nif response is not None:\\n   # If we get here do nothing result passed on to function \u0027fn_amp_get_computer_trajectory\u0027 as \u0027workflow.properties.get_computers_results\u0027\\n   pass\\nelse:\\n   noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computers\\\")\\n\\n   incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_hostname = row.hostname\\ninputs.amp_group_guid = None\\ninputs.amp_external_ip = None\\ninputs.amp_internal_ip = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_computers_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10gi90j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ltovhi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10gi90j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1uzsg0v\"/\u003e\u003cserviceTask id=\"ServiceTask_0uosgo2\" name=\"AMP: Get Computer Trajectory\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ff9a67d2-b9d6-4642-ad5a-b51d1a8be1f3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer_trajectory script ##\\n#  fn_amp_get_computer_trajectory  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\", \\\"q\\\": null, \\\"limit\\\": null},\\n          \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n          \\\"query\\\": None,\\n          \\\"connector_guid\\\": None,\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"computer\\\": {\\n                \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                \\\"links\\\": {\\n                  \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                  \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/9d55c259-c960-488b-9b2d-06478fa19ee4\\\"\\n                },\\n                \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                \\\"group_guid\\\": \\\"9d55c259-c960-488b-9b2d-06478fa19ee4\\\",\\n                \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                \\\"network_addresses\\\": [\\n                  {\\n                    \\\"ip\\\": \\\"255.240.221.92\\\",\\n                    \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                  }\\n                ],\\n                \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                \\\"internal_ips\\\": [\\n                  \\\"255.240.221.92\\\"\\n                ],\\n                \\\"policy\\\": {\\n                  \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                  \\\"name\\\": \\\"Audit\\\"\\n                },\\n                \\\"active\\\": true\\n              },\\n              \\\"events\\\": [{\\\"timestamp\\\": 1502989429,\u0027\\n                          \\\"timestamp_nanoseconds\\\": 659151942,\u0027\\n                          \\\"date\\\": \\\"2017-08-17T17:03:49+00:00\\\",\u0027\\n                          \\\"event_type\\\": \\\"NFM\\\",\u0027\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": { \\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                            \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54233,\\n                                            \\\"nfm\\\": {\\\"direction\\\": \\\"Outgoing connection from\\\", \\\"protocol\\\": \\\"TCP\\\"},\\n                                            \\\"parent\\\": {\\\"disposition\\\": \\\"Clean\\\",\\n                                                       \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                            }\\n                          }\\n                         },\\n                         {\\\"timestamp\\\": 1502989426,\\n                          \\\"timestamp_nanoseconds\\\": 155931927,\\n                          \\\"date\\\": \\\"2017-08-17T17:03:46+00:00\\\",\\n                          \\\"event_type\\\": \\\"NFM\\\",\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": {\\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                           \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54232,\\n                                           \\\"nfm\\\": { \\\"direction\\\": \\\"Outgoing connection from\\\",\\\"protocol\\\": \\\"TCP\\\"},\\n                                           \\\"parent\\\": { \\\"disposition\\\": \\\"Clean\\\",\\n                                                        \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                        }\\n                          }\\n                         }\\n                        ]\\n            },\\n            \\\"metadata\\\": {\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\"\\n              }\\n            }\\n          }\\n        }\\n\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer_trajectory script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"query\\\", \\\"hostname\\\"]\\nDATA_TBL_FIELDS_EVNTS = [\\\"date\\\", \\\"event_type\\\", ]\\nDATA_TBL_FIELDS_FILE = [\\\"file_type\\\", \\\"file_name\\\", \\\"disposition\\\", \\\"file_path\\\", \\\"sha256\\\", \\\"parent_sha256\\\" ]\\nDATA_TBL_FIELDS_NI = [\\\"local_port\\\", \\\"remote_port\\\",  \\\"remote_ip\\\", \\\"direction\\\", \\\"protocol\\\", \\\"dirty_url\\\", \\\"disposition\\\"]\\n\\n# Processing\\nresponse = results.get(\\\"response\\\", {})\\nquery_execution_time = results.get(\\\"query_execution_time\\\")\\ninput_params = results.get(\\\"input_params\\\", {})\\ntotal = results.get(\\\"total\\\")\\n\\nif response is not None:\\n    data = response.get(\\\"data\\\", {})\\n    computer = data.get(\\\"computer\\\", {})\\n    connector_guid = computer.get(\\\"connector_guid\\\", \\\"\\\")\\n    hostname = computer.get(\\\"hostname\\\", \\\"\\\")\\n    events = data.get(\\\"events\\\", [])\\n    q = input_params.get(\\\"q\\\")\\n\\n    noteText = u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n               \\\" for hostname \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for query  \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(len(data[\\\"events\\\"]), total, hostname, q, \\\"fn_amp_get_computer_trajectory\\\")\\n    for e in events:\\n        newrow = incident.addRow(\\\"amp_computer_trajectory\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.query = q\\n        newrow.hostname = hostname\\n        for f in DATA_TBL_FIELDS_EVNTS:\\n            if e[f] is not None:\\n                newrow[f] = e[f]\\n            fi = e.get(\\\"file\\\")\\n            if fi is not None:\\n                id = fi.get(\\\"identity\\\")\\n                pa = fi.get(\\\"parent\\\")\\n                for f2 in DATA_TBL_FIELDS_FILE:\\n                    if fi.get(f2) is not None:\\n                        newrow[f2] = fi[f2]\\n                    if id is not None and id.get(f2) is not None:\\n                        newrow[f2] = id[f2]\\n                    if pa is not None:\\n                        pi = pa.get(\\\"identity\\\")\\n                        if pi is not None and pi.get(f2) is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi.get(\\\"sha256\\\")\\n\\n            ni = e.get(\\\"network_info\\\")\\n            if ni is not None:\\n                nfm = ni.get(\\\"nfm\\\")\\n                pa = ni.get(\\\"parent\\\")\\n                for f3 in DATA_TBL_FIELDS_NI:\\n                    if ni.get(f3) is not None:\\n                        newrow[f3] = ni[f3]\\n                    if nfm is not None and nfm.get(f3) is not None:\\n                        newrow[f3] = nfm[f3]\\n                    if pa is not None:\\n                        pi = pa.get(\\\"identity\\\")\\n                        if pi is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi.get(\\\"sha256\\\")\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(\\\"fn_amp_get_computer_trajectory\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"response =  workflow.properties.get_computers_results.response\\nif response.get(\\\"data\\\", []):\\n  inputs.amp_conn_guid = response[\\\"data\\\"][0][\\\"connector_guid\\\"]\\ninputs.amp_q = rule.properties.amp_q\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ltovhi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0wr2pgk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ltovhi\" sourceRef=\"ServiceTask_1uzsg0v\" targetRef=\"ServiceTask_0uosgo2\"/\u003e\u003cendEvent id=\"EndEvent_1v9eqou\"\u003e\u003cincoming\u003eSequenceFlow_0wr2pgk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wr2pgk\" sourceRef=\"ServiceTask_0uosgo2\" targetRef=\"EndEvent_1v9eqou\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1s36svn\"\u003e\u003ctext\u003eGet computer connector guid by hostname.\n\u00a0Hostname input parameter assigned from a data table entry.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wz6qxz\" sourceRef=\"ServiceTask_1uzsg0v\" targetRef=\"TextAnnotation_1s36svn\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0frua4g\"\u003e\u003ctext\u003eGet computer trajectory by computer connector guid.\n\u00a0An optional query string parameter is assigned from an activity field at run-time.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1q30b32\" sourceRef=\"ServiceTask_0uosgo2\" targetRef=\"TextAnnotation_0frua4g\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1uzsg0v\" id=\"ServiceTask_1uzsg0v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10gi90j\" id=\"SequenceFlow_10gi90j_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0uosgo2\" id=\"ServiceTask_0uosgo2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"483\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ltovhi\" id=\"SequenceFlow_1ltovhi_di\"\u003e\u003comgdi:waypoint x=\"373\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"483\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"428\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v9eqou\" id=\"EndEvent_1v9eqou_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"651\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"669\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wr2pgk\" id=\"SequenceFlow_0wr2pgk_di\"\u003e\u003comgdi:waypoint x=\"583\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"618\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"618\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"651\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"633\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1s36svn\" id=\"TextAnnotation_1s36svn_di\"\u003e\u003comgdc:Bounds height=\"77\" width=\"156\" x=\"246\" y=\"49\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wz6qxz\" id=\"Association_1wz6qxz_di\"\u003e\u003comgdi:waypoint x=\"323\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"323\" y=\"126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0frua4g\" id=\"TextAnnotation_0frua4g_di\"\u003e\u003comgdc:Bounds height=\"93\" width=\"160\" x=\"453\" y=\"36\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1q30b32\" id=\"Association_1q30b32_di\"\u003e\u003comgdi:waypoint x=\"533\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"533\" y=\"129\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 8,
+      "description": "Example multi-part workflow to return trajectory associated with a particular computer by computer name and optional search string. The computer name is assigned from an activity value, the query string is assigned from an activity field at run-time.",
+      "export_key": "wf_amp_get_computer_trajectory",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717441126547,
+      "name": "Example: AMP get computer trajectory",
+      "object_type": "amp_computers",
+      "programmatic_name": "wf_amp_get_computer_trajectory",
+      "tags": [],
+      "uuid": "05f1fe56-9cd4-43ce-a6a4-941c7a144c7e",
+      "workflow_id": 3
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "wf_amp_get_events",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_events\" isExecutable=\"true\" name=\"Example: AMP get events\"\u003e\u003cdocumentation\u003eExample workflow to return a  list of all events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ial590\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1c5dln0\" name=\"AMP: Get Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f5e6bff-316f-48f5-bfce-fb963be11c35\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_events script ##\\n#  fn_amp_get_events  -  Events list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:  {\\n          \\\"input_params\\\": {\\\"detection_sha256\\\": null, \\\"application_sha256\\\": null, \\\"connector_guid\\\": null,\\n                           \\\"group_guid\\\": null, \\\"start_date\\\": null, \\\"event_type\\\": null, \\\"limit\\\": null, \\\"offset\\\": null},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": [\\n              {\\n                \\\"id\\\": 6455442249407791000,\\n                \\\"timestamp\\\": 1503024774,\\n                \\\"severity\\\": \\\"High\\\",\\n                \\\"timestamp_nanoseconds\\\": 98000000,\\n                \\\"date\\\": \\\"2017-08-18T02:52:54+00:00\\\",\\n                \\\"event_type\\\": \\\"Threat Detected\\\",\\n                \\\"event_type_id\\\": 1090519054,\\n                \\\"detection\\\": \\\"benign_qa_testware7\\\",\\n                \\\"detection_id\\\": \\\"6455442249407791109\\\",\\n                \\\"group_guids\\\": [\\n                  \\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                ],\\n                \\\"computer\\\": {\\n                  \\\"connector_guid\\\": \\\"af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                  \\\"hostname\\\": \\\"WIN-S1AC1PI6L5L\\\",\\n                  \\\"external_ip\\\": \\\"10.200.65.31\\\",\\n                  \\\"user\\\": \\\"johndoe@WIN-S1AC1PI6L5L\\\",\\n                  \\\"active\\\": true,\\n                  \\\"network_addresses\\\": [\\n                    {\\n                      \\\"ip\\\": \\\"10.0.2.15\\\",\\n                      \\\"mac\\\": \\\"08:00:27:85:28:61\\\"\\n                    }\\n                  ],\\n                  \\\"links\\\": {\\n                    \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01\\\",\\n                    \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01/trajectory\\\",\\n                    \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"\\n                  }\\n                },\\n                \\\"file\\\": {\\n                  \\\"disposition\\\": \\\"Unknown\\\",\\n                  \\\"file_name\\\": \\\"file.zip\\\",\\n                  \\\"file_path\\\": \\\"\\\\\\\\\\\\\\\\?\\\\\\\\C:\\\\\\\\Users\\\\\\\\johndoe\\\\\\\\Downloads\\\\\\\\file.zip\\\",\\n                  \\\"identity\\\": {\\n                    \\\"sha256\\\": \\\"f8a6a244138cb1e2f044f63f3dc42beeb555da892bbd7a121274498cbdfc9ad5\\\",\\n                    \\\"sha1\\\": \\\"20eeee16345e0c1283f7b500126350cb938b8570\\\",\\n                    \\\"md5\\\": \\\"6853839cde69359049ae6f7bd3ae86d7\\\"\\n                  },\\n                  \\\"archived_file\\\": {\\n                    \\\"disposition\\\": \\\"Malicious\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"46679a50632d05b99683a14b91a69ce908de1673fbb71e9cd325e5685fcd7e49\\\"\\n                    }\\n                  },\\n                  \\\"parent\\\": {\\n                    \\\"process_id\\\": 3416,\\n                    \\\"disposition\\\": \\\"Clean\\\",\\n                    \\\"file_name\\\": \\\"explorer.exe\\\",\\n                    \\\"identity\\\": {\\n                      \\\"sha256\\\": \\\"80ef843fa78c33b511394a9c7535a9cbace1deb2270e86ee4ad2faffa5b1e7d2\\\",\\n                      \\\"sha1\\\": \\\"ea97227d34b8526055a543ade7d18587a927f6a3\\\",\\n                      \\\"md5\\\": \\\"15bc38a7492befe831966adb477cf76f\\\"\\n                    }\\n                  }\\n                }\\n              },\\n              ...\\n              ...\\n            ],\\n            \\\"metadata\\\": {\\n              \\\"results\\\": {\\n                \\\"index\\\": 0,\\n                \\\"total\\\": 0,\\n                \\\"items_per_page\\\": 500,\\n                \\\"current_item_count\\\": 0\\n              },\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/events\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-09 11:05:12\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_events script - reference only\\nDATA_TBL_FIELDS_TOP = [\\\"query_execution_time\\\", \\\"event_id\\\", \\\"date\\\", \\\"event_type\\\", \\\"event_type_id\\\", \\\"severity\\\"]\\nDATA_TBL_FIELDS_COMPUTER = [\\\"hostname\\\", \\\"external_ip\\\"]\\nDATA_TBL_FIELDS_FILE = [\\\"disposition\\\", \\\"file_name\\\", \\\"file_path\\\", \\\"sha256\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], \\\"fn_amp_get_events\\\")\\n    for d in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_events\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.event_id = str(d.get(\\\"id\\\", \\\"\\\"))\\n        newrow.event_type = d.get(\\\"event_type\\\", \\\"\\\")\\n        newrow.severity = d.get(\\\"severity\\\", \\\"\\\")\\n        newrow.date = d.get(\\\"date\\\", \\\"\\\")\\n        c = d.get(\\\"computer\\\")\\n        if c is not None:\\n            for fi in DATA_TBL_FIELDS_COMPUTER:\\n                comp_field = c.get(fi)\\n                if isinstance(comp_field, str) or len(comp_field) == 0:\\n                    newrow[fi] = comp_field\\n                else:\\n                    newrow[fi] = \u0027[\u0027 + \u0027\u0027.join(comp_field) + \u0027]\u0027\\n        fl = d.get(\\\"file\\\")\\n        if fl is not None:\\n            fident  =  fl.get(\\\"identity\\\")\\n            if fident is not None:\\n                newrow.sha256 = fident.get(\\\"sha256\\\", \\\"\\\")\\n            for fi in DATA_TBL_FIELDS_FILE:\\n                if fl.get(fi) is not None:\\n                    newrow[fi] = fl[fi]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_events\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_application_sha256 = None\\ninputs.amp_conn_guid  = None\\ninputs.amp_detection_sha256  = None\\ninputs.amp_event_type = None\\ninputs.amp_group_guid  = None\\ninputs.amp_limit  = rule.properties.amp_limit\\ninputs.amp_offset  = rule.properties.amp_offset\\ninputs.amp_start_date  = rule.properties.amp_start_date\\ninputs.amp_severity = rule.properties.amp_severity\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ial590\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sxlc0m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ial590\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1c5dln0\"/\u003e\u003cendEvent id=\"EndEvent_1avfjgm\"\u003e\u003cincoming\u003eSequenceFlow_1sxlc0m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1sxlc0m\" sourceRef=\"ServiceTask_1c5dln0\" targetRef=\"EndEvent_1avfjgm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0y9r24l\"\u003e\u003ctext\u003eGet events. Optional\u00a0 input parameters start_date, limit and offset assigned from activity fields.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14b7i4h\" sourceRef=\"ServiceTask_1c5dln0\" targetRef=\"TextAnnotation_0y9r24l\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1c5dln0\" id=\"ServiceTask_1c5dln0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ial590\" id=\"SequenceFlow_0ial590_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1avfjgm\" id=\"EndEvent_1avfjgm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"445\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"463\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sxlc0m\" id=\"SequenceFlow_1sxlc0m_di\"\u003e\u003comgdi:waypoint x=\"359\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"401\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"401\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"445\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"416\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0y9r24l\" id=\"TextAnnotation_0y9r24l_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"237\" x=\"190\" y=\"38\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14b7i4h\" id=\"Association_14b7i4h_di\"\u003e\u003comgdi:waypoint x=\"309\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"309\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "description": "Example workflow to return a  list of all events.",
+      "export_key": "wf_amp_get_events",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717438826819,
+      "name": "Example: AMP get events",
+      "object_type": "incident",
+      "programmatic_name": "wf_amp_get_events",
+      "tags": [],
+      "uuid": "e4725b6a-5f80-40a2-ab88-ae45669ec347",
+      "workflow_id": 2
     },
     {
       "actions": [],
       "content": {
         "version": 3,
-        "workflow_id": "wf_amp_set_file_list_files",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_set_file_list_files\" isExecutable=\"true\" name=\"Example: AMP set file in list\"\u003e\u003cdocumentation\u003eExample multi-part workflow to add a SHA-256 to a file list using a file list name. The sha256 parameter is assigned from an artifact value, the file list name is assigned from an activity field drop-down at run-time.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1faq28z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1yn3zot\" name=\"AMP: Set File in List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3beefe3a-b832-4948-afeb-689982453fd4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_set_file_list_files script ##\\n#  fn_amp_set_file_list_files\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\":{\\\"file_list_guid\\\": \\\"e773a9eb-296c-40df-98d8-bed46322589d\\\",\\n                          \\\"file_sha256\\\": \\\"8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\\\",\\n                          \\\"description\\\": \\\"Sha256 description\\\"},\\n          \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                                  u\u0027data\u0027: {u\u0027source\u0027: u\u0027Created by entering SHA-256 via Public api.\u0027,\\n                                    u\u0027sha256\u0027: u\u00278a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\u0027,\\n                                    u\u0027description\u0027: u\u0027Test file sha256\u0027,\\n                                    u\u0027links\u0027: {u\u0027file_list\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d\u0027}\\n                                  },\\n                                  u\u0027metadata\u0027: {\\n                                    u\u0027links\u0027: {\\n                                        u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\u0027}\\n                                    }\\n                                  },\\n          \\\"query_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_set_file_list_files script\\n\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params = results.input_params\\nerrors = response.errors\\n\\nif response is not None and errors is None:\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Successfully added sha256 \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"to list with guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(input_params.file_sha256, input_params.file_list_guid, \\\"fn_amp_set_file_list_files\\\")\\nelse:\\n  noteText = \\\"Cisco AMP Integration: Unsuccessful attempt to set sha256 \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; to list with guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n             \\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(input_params.file_sha256, input_params.file_list_guid, \\\"fn_amp_set_file_list_files\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# The parameter amp_file_list_guid needs to be set to a valid file list guid.\\n# e.g. inputs.amp_file_list_guid = \\\"9710a198-b95a-462a-b184-9e688968fd94\\\"\\n# In the example it will be assigned from an activity field drop-down.\\nget_file_lists_response = workflow.properties.get_file_lists_results.response\\ninputs.amp_file_list_guid = get_file_lists_response[\\\"data\\\"][0][\\\"guid\\\"]\\ninputs.amp_file_sha256 = artifact.value\\nif artifact.description is not None:\\n  inputs.amp_file_description = artifact.description.content\\nelse:\\n  inputs.amp_file_description = \\\"Empty description.\\\"\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1qbbd2o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1b27gws\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_02gqeu3\"\u003e\u003cincoming\u003eSequenceFlow_1b27gws\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1b27gws\" sourceRef=\"ServiceTask_1yn3zot\" targetRef=\"EndEvent_02gqeu3\"/\u003e\u003cserviceTask id=\"ServiceTask_1x3b09s\" name=\"AMP: Get File Lists\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"637946a7-b59b-4ec0-95cf-f833bca79bc6\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_file_lists script ##\\n#  fn_amp_get_file_lists script\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"limit\\\": null, \\\"name\\\": \\\"File Blacklist\\\", \\\"offset\\\": null}\\n          \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                       u\u0027data\u0027: {u\u0027items\u0027: [],\\n                                 u\u0027guid\u0027: u\u00279710a198-b95a-462a-b184-9e688968fd94\u0027,\\n                                 u\u0027name\u0027: u\u0027File Blacklist\u0027,\\n                                 u\u0027policies\u0027: [{ u\u0027guid\u0027: u\u0027a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                    u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027\\n                                                 }\\n                                               }, {\\n                                                 u\u0027guid\u0027: u\u0027fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                     u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027\\n                                                 }\\n                                               }\\n                                 ]\\n                        },\\n                        u\u0027metadata\u0027: {u\u0027results\u0027:\\n                                        {u\u0027index\u0027: 10,\\n                                         u\u0027total\u0027: 1,\\n                                         u\u0027items_per_page\u0027: 500,\\n                                         u\u0027current_item_count\u0027: 0\\n                                         },\\n                                      u\u0027links\u0027: {\\n                                          u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files\u0027\\n                                         }\\n                                      }\\n                        }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_lists script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"list_name\\\", \\\"guid\\\", \\\"type\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n   pass\\n   # If we get here do nothing result passed on to unction \u0027fn_amp_get_file_list_files\u0027 as \u0027workflow.properties.get_file_lists_results\u0027\\nelse:\\n   noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_file_lists\\\")\\n\\n   incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_file_lists_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1faq28z\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1qbbd2o\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1faq28z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1x3b09s\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1qbbd2o\" sourceRef=\"ServiceTask_1x3b09s\" targetRef=\"ServiceTask_1yn3zot\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_18be0k8\"\u003e\u003ctext\u003eGet file list guid by list name.\u00a0 List name input parameter assigned from an activity field drop-down at run-time.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_132azf6\" sourceRef=\"ServiceTask_1x3b09s\" targetRef=\"TextAnnotation_18be0k8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0z05h9m\"\u003e\u003ctext\u003eAdd sha256 to a file list by guid.\n\u00a0Sha-256 input parameters assigned from an artifact value and description.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sdih56\" sourceRef=\"ServiceTask_1yn3zot\" targetRef=\"TextAnnotation_0z05h9m\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yn3zot\" id=\"ServiceTask_1yn3zot_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"433\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02gqeu3\" id=\"EndEvent_02gqeu3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"576\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"549\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1b27gws\" id=\"SequenceFlow_1b27gws_di\"\u003e\u003comgdi:waypoint x=\"533\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"576\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"509.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1x3b09s\" id=\"ServiceTask_1x3b09s_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"222\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1faq28z\" id=\"SequenceFlow_1faq28z_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"222\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qbbd2o\" id=\"SequenceFlow_1qbbd2o_di\"\u003e\u003comgdi:waypoint x=\"322\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"332.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_18be0k8\" id=\"TextAnnotation_18be0k8_di\"\u003e\u003comgdc:Bounds height=\"70\" width=\"182\" x=\"181\" y=\"33\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_132azf6\" id=\"Association_132azf6_di\"\u003e\u003comgdi:waypoint x=\"272\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"272\" y=\"103\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0z05h9m\" id=\"TextAnnotation_0z05h9m_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"208\" x=\"413\" y=\"25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sdih56\" id=\"Association_0sdih56_di\"\u003e\u003comgdi:waypoint x=\"482\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"482\" y=\"90\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "wf_amp_get_computer_by_name",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_by_name\" isExecutable=\"true\" name=\"Example: AMP get computer by name\"\u003e\u003cdocumentation\u003eExample workflow to return a computer with an agent deployed on it by parameter hostname. Input parameter is derived from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1noh398\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1fk9h4r\" name=\"AMP: Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0603c8-81b2-4190-a9f5-d1b6b9a1215f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computers script ##\\n#  fn_amp_get_computers  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\"]\\n\\n# Processing\\nnoteText = \u0027\u0027\\nresponse = results.get(\\\"response\\\")\\nquery_execution_time = results.get(\\\"query_execution_time\\\")\\ninput_params = results.get(\\\"input_params\\\")\\n\\nif response is not None and response.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") != 0:\\n    noteText = u\\\"Cisco AMP for Endpoints Integration: Result returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(input_params.get(\\\"hostname\\\"), \\\"fn_amp_get_computer\\\")\\n    for data in response.get(\\\"data\\\", []):\\n        newrow = incident.addRow(\\\"amp_computers\\\")\\n        newrow.query_execution_time = query_execution_time\\n        for f in DATA_TBL_FIELDS:\\n            if f == \\\"query_execution_time\\\" or \\\"policy\\\" in f:\\n                continue\\n            data_fields = data.get(f)\\n            if isinstance(data_fields, str) or len(data_fields) == 0:\\n                newrow[f] = data[f]\\n            else:\\n                newrow[f] = \u0027,\u0027.join(data_fields)\\n        policy = data.get(\\\"policy\\\")\\n        if policy is not None:\\n            newrow.policy_name = policy.get(\\\"name\\\", \\\"\\\")\\nelse:\\n    noteText += u\\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; SOAR \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(input_params.get(\\\"hostname\\\", {}), \\\"fn_amp_get_computers\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_hostname = artifact.value\\ninputs.amp_group_guid = None\\ninputs.amp_external_ip = None\\ninputs.amp_internal_ip = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1noh398\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_02lhwss\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1noh398\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1fk9h4r\"/\u003e\u003cendEvent id=\"EndEvent_1s5l9a7\"\u003e\u003cincoming\u003eSequenceFlow_02lhwss\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_02lhwss\" sourceRef=\"ServiceTask_1fk9h4r\" targetRef=\"EndEvent_1s5l9a7\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xh3l71\"\u003e\u003ctext\u003eGet computer information by hostname. Hostname input parameter assigned from an artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1vpteoj\" sourceRef=\"ServiceTask_1fk9h4r\" targetRef=\"TextAnnotation_0xh3l71\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fk9h4r\" id=\"ServiceTask_1fk9h4r_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1noh398\" id=\"SequenceFlow_1noh398_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xh3l71\" id=\"TextAnnotation_0xh3l71_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"193\" x=\"254\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1vpteoj\" id=\"Association_1vpteoj_di\"\u003e\u003comgdi:waypoint x=\"304\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"304\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1s5l9a7\" id=\"EndEvent_1s5l9a7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02lhwss\" id=\"SequenceFlow_02lhwss_di\"\u003e\u003comgdi:waypoint x=\"354\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 3,
+      "description": "Example workflow to return a computer with an agent deployed on it by parameter hostname. Input parameter is derived from an artifact value.",
+      "export_key": "wf_amp_get_computer_by_name",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717442532553,
+      "name": "Example: AMP get computer by name",
+      "object_type": "artifact",
+      "programmatic_name": "wf_amp_get_computer_by_name",
+      "tags": [],
+      "uuid": "2058180c-62a0-46f7-bc9c-4fb6dc186dae",
+      "workflow_id": 10
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "wf_amp_set_file_list_files",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_set_file_list_files\" isExecutable=\"true\" name=\"Example: AMP set file in list\"\u003e\u003cdocumentation\u003eExample multi-part workflow to add a SHA-256 to a file list using a file list name. The sha256 parameter is assigned from an artifact value, the file list name is assigned from an activity field drop-down at run-time.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1faq28z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1yn3zot\" name=\"AMP: Set File in List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3beefe3a-b832-4948-afeb-689982453fd4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_set_file_list_files script ##\\n#  fn_amp_set_file_list_files\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\":{\\\"file_list_guid\\\": \\\"e773a9eb-296c-40df-98d8-bed46322589d\\\",\\n                          \\\"file_sha256\\\": \\\"8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\\\",\\n                          \\\"description\\\": \\\"Sha256 description\\\"},\\n          \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                                  u\u0027data\u0027: {u\u0027source\u0027: u\u0027Created by entering SHA-256 via Public api.\u0027,\\n                                    u\u0027sha256\u0027: u\u00278a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\u0027,\\n                                    u\u0027description\u0027: u\u0027Test file sha256\u0027,\\n                                    u\u0027links\u0027: {u\u0027file_list\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d\u0027}\\n                                  },\\n                                  u\u0027metadata\u0027: {\\n                                    u\u0027links\u0027: {\\n                                        u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284\u0027}\\n                                    }\\n                                  },\\n          \\\"query_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_set_file_list_files script\\n\\n\\n# Processing\\nresponse = results.get(\\\"response\\\")\\nquery_execution_time = results.get(\\\"query_execution_time\\\")\\ninput_params = results.get(\\\"input_params\\\", {})\\nerrors = response.get(\\\"errors\\\")\\n\\nif response is not None and errors is None:\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Successfully added sha256 \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"to list with guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(input_params.get(\\\"file_sha256\\\"), input_params.get(\\\"file_list_guid\\\"), \\\"fn_amp_set_file_list_files\\\")\\nelse:\\n  noteText = \\\"Cisco AMP Integration: Unsuccessful attempt to set sha256 \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; to list with guid \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n             \\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(input_params.get(\\\"file_sha256\\\"), input_params.get(\\\"file_list_guid\\\"), \\\"fn_amp_set_file_list_files\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# The parameter amp_file_list_guid needs to be set to a valid file list guid.\\n# e.g. inputs.amp_file_list_guid = \\\"9710a198-b95a-462a-b184-9e688968fd94\\\"\\n# In the example it will be assigned from an activity field drop-down.\\nget_file_lists_response = workflow.properties.get_file_lists_results.response\\ninputs.amp_file_list_guid = get_file_lists_response[\\\"data\\\"][0][\\\"guid\\\"]\\ninputs.amp_file_sha256 = artifact.value\\nif artifact.description is not None:\\n  inputs.amp_file_description = artifact.description.content\\nelse:\\n  inputs.amp_file_description = \\\"Empty description.\\\"\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1qbbd2o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1b27gws\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_02gqeu3\"\u003e\u003cincoming\u003eSequenceFlow_1b27gws\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1b27gws\" sourceRef=\"ServiceTask_1yn3zot\" targetRef=\"EndEvent_02gqeu3\"/\u003e\u003cserviceTask id=\"ServiceTask_1x3b09s\" name=\"AMP: Get File Lists\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"637946a7-b59b-4ec0-95cf-f833bca79bc6\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_file_lists script ##\\n#  fn_amp_get_file_lists script\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"limit\\\": null, \\\"name\\\": \\\"File Blacklist\\\", \\\"offset\\\": null}\\n          \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                       u\u0027data\u0027: {u\u0027items\u0027: [],\\n                                 u\u0027guid\u0027: u\u00279710a198-b95a-462a-b184-9e688968fd94\u0027,\\n                                 u\u0027name\u0027: u\u0027File Blacklist\u0027,\\n                                 u\u0027policies\u0027: [{ u\u0027guid\u0027: u\u0027a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                    u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027\\n                                                 }\\n                                               }, {\\n                                                 u\u0027guid\u0027: u\u0027fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                     u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027\\n                                                 }\\n                                               }\\n                                 ]\\n                        },\\n                        u\u0027metadata\u0027: {u\u0027results\u0027:\\n                                        {u\u0027index\u0027: 10,\\n                                         u\u0027total\u0027: 1,\\n                                         u\u0027items_per_page\u0027: 500,\\n                                         u\u0027current_item_count\u0027: 0\\n                                         },\\n                                      u\u0027links\u0027: {\\n                                          u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files\u0027\\n                                         }\\n                                      }\\n                        }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_lists script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"list_name\\\", \\\"guid\\\", \\\"type\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is None:\\n   noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for SOAR function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_file_lists\\\")\\n\\n   incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_file_lists_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1faq28z\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1qbbd2o\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1faq28z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1x3b09s\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1qbbd2o\" sourceRef=\"ServiceTask_1x3b09s\" targetRef=\"ServiceTask_1yn3zot\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_18be0k8\"\u003e\u003ctext\u003eGet file list guid by list name.\u00a0 List name input parameter assigned from an activity field drop-down at run-time.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_132azf6\" sourceRef=\"ServiceTask_1x3b09s\" targetRef=\"TextAnnotation_18be0k8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0z05h9m\"\u003e\u003ctext\u003eAdd sha256 to a file list by guid.\n\u00a0Sha-256 input parameters assigned from an artifact value and description.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sdih56\" sourceRef=\"ServiceTask_1yn3zot\" targetRef=\"TextAnnotation_0z05h9m\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yn3zot\" id=\"ServiceTask_1yn3zot_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"433\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02gqeu3\" id=\"EndEvent_02gqeu3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"576\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"549\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1b27gws\" id=\"SequenceFlow_1b27gws_di\"\u003e\u003comgdi:waypoint x=\"533\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"576\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"509.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1x3b09s\" id=\"ServiceTask_1x3b09s_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"222\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1faq28z\" id=\"SequenceFlow_1faq28z_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"222\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qbbd2o\" id=\"SequenceFlow_1qbbd2o_di\"\u003e\u003comgdi:waypoint x=\"322\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"332.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_18be0k8\" id=\"TextAnnotation_18be0k8_di\"\u003e\u003comgdc:Bounds height=\"70\" width=\"182\" x=\"181\" y=\"33\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_132azf6\" id=\"Association_132azf6_di\"\u003e\u003comgdi:waypoint x=\"272\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"272\" y=\"103\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0z05h9m\" id=\"TextAnnotation_0z05h9m_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"208\" x=\"413\" y=\"25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sdih56\" id=\"Association_0sdih56_di\"\u003e\u003comgdi:waypoint x=\"482\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"482\" y=\"90\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
       "description": "Example multi-part workflow to add a SHA-256 to a file list using a file list name. The sha256 parameter is assigned from an artifact value, the file list name is assigned from an activity field drop-down at run-time.",
       "export_key": "wf_amp_set_file_list_files",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698734170615,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1717439504463,
       "name": "Example: AMP set file in list",
       "object_type": "artifact",
       "programmatic_name": "wf_amp_set_file_list_files",
       "tags": [],
       "uuid": "252df5ee-f82d-4f10-920a-b9c6f0fee6b7",
-      "workflow_id": 159
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_amp_get_computer_trajectory_by_activity",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_trajectory_by_activity\" isExecutable=\"true\" name=\"Example: AMP get computer trajectory by activity\"\u003e\u003cdocumentation\u003eExample workflow to return trajectory associated with a particular computer by computer guid  and search string. The computer guid  and  query string parameters are assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_042pype\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1208yv9\" name=\"AMP: Get Computer Trajectory\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ff9a67d2-b9d6-4642-ad5a-b51d1a8be1f3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer_trajectory script ##\\n#  fn_amp_get_computer_trajectory  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\", \\\"q\\\": null, \\\"limit\\\": null},\\n          \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n          \\\"query\\\": None,\\n          \\\"connector_guid\\\": None,\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"computer\\\": {\\n                \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                \\\"links\\\": {\\n                  \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                  \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                  \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/9d55c259-c960-488b-9b2d-06478fa19ee4\\\"\\n                },\\n                \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                \\\"group_guid\\\": \\\"9d55c259-c960-488b-9b2d-06478fa19ee4\\\",\\n                \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                \\\"network_addresses\\\": [\\n                  {\\n                    \\\"ip\\\": \\\"255.240.221.92\\\",\\n                    \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                  }\\n                ],\\n                \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                \\\"internal_ips\\\": [\\n                  \\\"255.240.221.92\\\"\\n                ],\\n                \\\"policy\\\": {\\n                  \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                  \\\"name\\\": \\\"Audit\\\"\\n                },\\n                \\\"active\\\": true\\n              },\\n              \\\"events\\\": [{\\\"timestamp\\\": 1502989429,\u0027\\n                          \\\"timestamp_nanoseconds\\\": 659151942,\u0027\\n                          \\\"date\\\": \\\"2017-08-17T17:03:49+00:00\\\",\u0027\\n                          \\\"event_type\\\": \\\"NFM\\\",\u0027\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": { \\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                            \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54233,\\n                                            \\\"nfm\\\": {\\\"direction\\\": \\\"Outgoing connection from\\\", \\\"protocol\\\": \\\"TCP\\\"},\\n                                            \\\"parent\\\": {\\\"disposition\\\": \\\"Clean\\\",\\n                                                       \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                            }\\n                          }\\n                         },\\n                         {\\\"timestamp\\\": 1502989426,\\n                          \\\"timestamp_nanoseconds\\\": 155931927,\\n                          \\\"date\\\": \\\"2017-08-17T17:03:46+00:00\\\",\\n                          \\\"event_type\\\": \\\"NFM\\\",\\n                          \\\"group_guids\\\": [\\\"b077d6bc-bbdf-42f7-8838-a06053fbd98a\\\"],\\n                          \\\"network_info\\\": {\\\"dirty_url\\\": \\\"http://www.sanjosemaristas.com/app/index.php?\\\", \\\"remote_ip\\\": \\\"188.120.225.17\\\",\\n                                           \\\"remote_port\\\": 80, \\\"local_ip\\\": \\\"192.168.1.3\\\", \\\"local_port\\\": 54232,\\n                                           \\\"nfm\\\": { \\\"direction\\\": \\\"Outgoing connection from\\\",\\\"protocol\\\": \\\"TCP\\\"},\\n                                           \\\"parent\\\": { \\\"disposition\\\": \\\"Clean\\\",\\n                                                        \\\"identity\\\": {\\\"sha256\\\": \\\"5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124\\\"}\\n                                        }\\n                          }\\n                         }\\n                        ]\\n            },\\n            \\\"metadata\\\": {\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\"\\n              }\\n            }\\n          }\\n        }\\n\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer_trajectory script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"query\\\", \\\"hostname\\\"]\\nDATA_TBL_FIELDS_EVNTS = [\\\"date\\\", \\\"event_type\\\", ]\\nDATA_TBL_FIELDS_FILE = [\\\"file_type\\\", \\\"file_name\\\", \\\"disposition\\\", \\\"file_path\\\", \\\"sha256\\\", \\\"parent_sha256\\\" ]\\nDATA_TBL_FIELDS_NI = [\\\"local_port\\\", \\\"remote_port\\\",  \\\"remote_ip\\\", \\\"direction\\\", \\\"protocol\\\", \\\"dirty_url\\\", \\\"disposition\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params = results.input_params\\ntotal = results.total\\n\\nif response is not None:\\n    data = response[\\\"data\\\"]\\n    computer = data[\\\"computer\\\"]\\n    connector_guid = computer.connector_guid\\n    hostname = computer.hostname\\n    events = data[\\\"events\\\"]\\n    q = input_params[\\\"q\\\"]\\n\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n               \\\" for connector guid \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for query  \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(len(data[\\\"events\\\"]), total, connector_guid, q, \\\"fn_amp_get_computer_trajectory\\\")\\n    for e in events:\\n        newrow = incident.addRow(\\\"amp_computer_trajectory\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.query = q\\n        newrow.hostname = hostname\\n        for f in DATA_TBL_FIELDS_EVNTS:\\n            if e[f] is not None:\\n                newrow[f] = e[f]\\n            fi = e.file\\n            if fi is not None:\\n                id = fi.identity\\n                pa = fi.parent\\n                for f2 in DATA_TBL_FIELDS_FILE:\\n                    if fi[f2] is not None:\\n                        newrow[f2] = fi[f2]\\n                    if id is not None and id[f2] is not None:\\n                        newrow[f2] = id[f2]\\n                    if pa is not None:\\n                        pi = pa.identity\\n                        if pi is not None and pi[f2] is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi[\\\"sha256\\\"]\\n\\n            ni = e.network_info\\n            if ni is not None:\\n                nfm = ni.nfm\\n                pa = ni.parent\\n                for f3 in DATA_TBL_FIELDS_NI:\\n                    if ni[f3] is not None:\\n                        newrow[f3] = ni[f3]\\n                    if nfm is not None and nfm[f3] is not None:\\n                        newrow[f3] = nfm[f3]\\n                    if pa is not None:\\n                        pi = pa.identity\\n                        if pi is not None:\\n                            newrow[\\\"parent_sha256\\\"] = pi[\\\"sha256\\\"]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(\\\"fn_amp_get_computer_trajectory\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_conn_guid = row.connector_guid\\ninputs.amp_q = row.query\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_042pype\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19yollc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_042pype\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1208yv9\"/\u003e\u003cendEvent id=\"EndEvent_1jmjd4m\"\u003e\u003cincoming\u003eSequenceFlow_19yollc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_19yollc\" sourceRef=\"ServiceTask_1208yv9\" targetRef=\"EndEvent_1jmjd4m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1f5vrxf\"\u003e\u003ctext\u003eGet computer trajectory by computer connector guid\u00a0 and\u00a0\nquery string. Both input parameters assigned from a data-table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0itnlb6\" sourceRef=\"ServiceTask_1208yv9\" targetRef=\"TextAnnotation_1f5vrxf\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1208yv9\" id=\"ServiceTask_1208yv9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"270\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_042pype\" id=\"SequenceFlow_042pype_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"270\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"234\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1jmjd4m\" id=\"EndEvent_1jmjd4m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"409\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"427\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19yollc\" id=\"SequenceFlow_19yollc_di\"\u003e\u003comgdi:waypoint x=\"370\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"409\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"389.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1f5vrxf\" id=\"TextAnnotation_1f5vrxf_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"314\" x=\"163\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0itnlb6\" id=\"Association_0itnlb6_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"100\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Example workflow to return trajectory associated with a particular computer by computer guid  and search string. The computer guid  and  query string parameters are assigned from a datatable row.",
-      "export_key": "wf_amp_get_computer_trajectory_by_activity",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698733902907,
-      "name": "Example: AMP get computer trajectory by activity",
-      "object_type": "amp_activity",
-      "programmatic_name": "wf_amp_get_computer_trajectory_by_activity",
-      "tags": [],
-      "uuid": "7805106f-3567-49fc-b389-63f9cc8e1a4b",
-      "workflow_id": 147
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_amp_get_file_lists",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_file_lists\" isExecutable=\"true\" name=\"Example: AMP get SCD file lists\"\u003e\u003cdocumentation\u003eExample workflow to returns a list of all simple custom detection file lists.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0iwoycn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1hxtqgh\" name=\"AMP: Get File Lists\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"637946a7-b59b-4ec0-95cf-f833bca79bc6\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_file_lists script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"name\\\": null, \\\"limit\\\": null, \\\"offset\\\": null },\\n          \\\"response\\\": {u\u0027version\u0027: u\u0027v1.2.0\u0027,\\n                       u\u0027data\u0027: {u\u0027items\u0027: [],\\n                                 u\u0027guid\u0027: u\u00279710a198-b95a-462a-b184-9e688968fd94\u0027,\\n                                 u\u0027name\u0027: u\u0027File Blacklist\u0027,\\n                                 u\u0027policies\u0027: [{ u\u0027guid\u0027: u\u0027a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                    u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b\u0027\\n                                                 }\\n                                               }, {\\n                                                 u\u0027guid\u0027: u\u0027fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027,\\n                                                 u\u0027name\u0027: u\u0027Audit\u0027,\\n                                                 u\u0027links\u0027: {\\n                                                     u\u0027policy\u0027: u\u0027https://api.amp.cisco.com/v1/policies/fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267\u0027\\n                                                 }\\n                                               }\\n                                 ]\\n                        },\\n                        u\u0027metadata\u0027: {u\u0027results\u0027:\\n                                        {u\u0027index\u0027: 10,\\n                                         u\u0027total\u0027: 1,\\n                                         u\u0027items_per_page\u0027: 500,\\n                                         u\u0027current_item_count\u0027: 0\\n                                         },\\n                                      u\u0027links\u0027: {\\n                                          u\u0027self\u0027: u\u0027https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files\u0027\\n                                         }\\n                                      }\\n                        }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-08-09 11:56:02\\\"\\n    }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_file_lists script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"list_name\\\", \\\"guid\\\", \\\"type\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    r = response[\\\"metadata\\\"][\\\"results\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; results returned out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(len(response[\\\"data\\\"]), r[\\\"total\\\"], \\\"fn_amp_get_file_lists\\\")\\n    for d in response[\\\"data\\\"]:\\n        newrow = incident.addRow(\\\"amp_scd_file_lists\\\")\\n        newrow.query_execution_time = query_execution_time\\n        newrow.list_name = d[\\\"name\\\"]\\n        newrow.guid = d[\\\"guid\\\"]\\n        newrow.type = d[\\\"type\\\"]\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_file_lists\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0iwoycn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_025lrs9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0iwoycn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1hxtqgh\"/\u003e\u003cendEvent id=\"EndEvent_1k0p68z\"\u003e\u003cincoming\u003eSequenceFlow_025lrs9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_025lrs9\" sourceRef=\"ServiceTask_1hxtqgh\" targetRef=\"EndEvent_1k0p68z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0mhqnue\"\u003e\u003ctext\u003eGet simple custom detection file lists. No input parameters assigned.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1eehidt\" sourceRef=\"ServiceTask_1hxtqgh\" targetRef=\"TextAnnotation_0mhqnue\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1hxtqgh\" id=\"ServiceTask_1hxtqgh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"240\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0iwoycn\" id=\"SequenceFlow_0iwoycn_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"240\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1k0p68z\" id=\"EndEvent_1k0p68z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"379\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"397\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_025lrs9\" id=\"SequenceFlow_025lrs9_di\"\u003e\u003comgdi:waypoint x=\"340\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"379\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"359.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0mhqnue\" id=\"TextAnnotation_0mhqnue_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"211\" x=\"193\" y=\"45\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1eehidt\" id=\"Association_1eehidt_di\"\u003e\u003comgdi:waypoint x=\"290\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"290\" y=\"105\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Example workflow to returns a list of all simple custom detection file lists.",
-      "export_key": "wf_amp_get_file_lists",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1698733992817,
-      "name": "Example: AMP get SCD file lists",
-      "object_type": "incident",
-      "programmatic_name": "wf_amp_get_file_lists",
-      "tags": [],
-      "uuid": "aa1a0b2c-007a-4f57-b7c5-43d38d7c1667",
-      "workflow_id": 154
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_amp_get_computer_refresh",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_get_computer_refresh\" isExecutable=\"true\" name=\"Example: AMP get computer (refresh)\"\u003e\u003cdocumentation\u003eExample workflow to refresh datatable entry for a computer.  Input parameter is assigned from a datatable row.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0v69czv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0n27b9a\" name=\"AMP: Get Computer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2749a756-6490-4f15-b54f-4cc82394fe8a\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computer script ##\\n#  fn_amp_get_computer  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computer script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"hostname\\\", \\\"operating_system\\\", \\\"connector_guid\\\", \\\"connector_version\\\", \\\"group_guid\\\",\\n                   \\\"last_seen\\\", \\\"external_ip\\\", \\\"internal_ips\\\", \\\"install_date\\\", \\\"last_seen\\\", \\\"policy_name\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\n\\nif response is not None:\\n    data = response[\\\"data\\\"]\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Result returned for computer \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; with connector guid \\\" \\\\\\n               \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(data[\\\"hostname\\\"], data[\\\"connector_guid\\\"], \\\"fn_amp_get_computer\\\")\\n\\n    row.query_execution_time = query_execution_time\\n    for f in DATA_TBL_FIELDS:\\n        if f == \\\"query_execution_time\\\" or \\\"policy\\\" in f:\\n            continue\\n        if isinstance(data[f], str) or len(data[f]) == 0:\\n            row[f] = data[f]\\n        else:\\n            row[f] = \u0027,\u0027.join(data[f])\\n    policy = data.policy\\n    if policy is not None:\\n        row.policy_name = policy[\\\"name\\\"]\\n\\nelse:\\n    noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computer\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_conn_guid = row.connector_guid\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v69czv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ev3g9j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0v69czv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0n27b9a\"/\u003e\u003cendEvent id=\"EndEvent_0rrug12\"\u003e\u003cincoming\u003eSequenceFlow_0ev3g9j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ev3g9j\" sourceRef=\"ServiceTask_0n27b9a\" targetRef=\"EndEvent_0rrug12\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1d1yr6s\"\u003e\u003ctext\u003eGet a computer details by connector guid. Input parameter is assigned from datatable row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_11eh93d\" sourceRef=\"ServiceTask_0n27b9a\" targetRef=\"TextAnnotation_1d1yr6s\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0n27b9a\" id=\"ServiceTask_0n27b9a_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"256\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v69czv\" id=\"SequenceFlow_0v69czv_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"256\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"227\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rrug12\" id=\"EndEvent_0rrug12_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ev3g9j\" id=\"SequenceFlow_0ev3g9j_di\"\u003e\u003comgdi:waypoint x=\"356\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"389.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1d1yr6s\" id=\"TextAnnotation_1d1yr6s_di\"\u003e\u003comgdc:Bounds height=\"57\" width=\"167\" x=\"222\" y=\"31\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_11eh93d\" id=\"Association_11eh93d_di\"\u003e\u003comgdi:waypoint x=\"306\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"306\" y=\"88\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "Example workflow to refresh datatable entry for a computer.  Input parameter is assigned from a datatable row.",
-      "export_key": "wf_amp_get_computer_refresh",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1699512370657,
-      "name": "Example: AMP get computer (refresh)",
-      "object_type": "amp_computers",
-      "programmatic_name": "wf_amp_get_computer_refresh",
-      "tags": [],
-      "uuid": "386699db-e84d-4002-b1d0-f3419a7891ae",
-      "workflow_id": 157
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 13,
-        "workflow_id": "wf_amp_move_computer",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_amp_move_computer\" isExecutable=\"true\" name=\"Example: AMP move computer\"\u003e\u003cdocumentation\u003eExample multi-part workflow to move a computer to a different group. The group name parameter is assigned from an activity field drop-down at runtime, the computer name parameter is assigned from an artifact value.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0bjrdbz\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_18ri6ss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1i3mvwp\" name=\"AMP: Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0603c8-81b2-4190-a9f5-d1b6b9a1215f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_computers script ##\\n#  fn_amp_get_computers  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n                  \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"},\\n                  \\\"response\\\": {\\n                    \\\"version\\\": \\\"v1.2.0\\\",\\n                    \\\"data\\\": {\\n                      \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n                      \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                      \\\"links\\\": {\\n                        \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                        \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                        \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n                      },\\n                      \\\"policy\\\": {\\n                        \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                        \\\"name\\\": \\\"Audit\\\"\\n                      },\\n                      \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n                      \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n                      \\\"hostname\\\": \\\"Demo_AMP\\\",\\n                      \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n                      \\\"network_addresses\\\": [\\n                        {\\n                          \\\"ip\\\": \\\"255.240.221.92\\\",\\n                          \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                        }\\n                      ],\\n                      \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n                      \\\"internal_ips\\\": [\\n                        \\\"255.240.221.92\\\"\\n                      ],\\n                      \\\"faults\\\": [],\\n                      \\\"active\\\": true,\\n                      \\\"last_seen\\\": \\\"2018-05-22T16:53:27Z\\\"\\n                    },\\n                    \\\"metadata\\\": {\\n                      \\\"links\\\": {\\n                        \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n                      }\\n                    }\\n                  },\\n                  \\\"query_execution_time\\\": \\\"2018-10-22 09:28:25\\\"\\n}\\n\\\"\\\"\\\"\\n# Processing\\nresponse = results.response\\nnoteText = \u0027\u0027\\n\\nif response is not None and response[\\\"metadata\\\"][\\\"results\\\"][\\\"total\\\"] \u0026gt; 0:\\n   pass\\n   # If we get here do nothing result passed on to function \u0027fn_amp_move_computer\u0027 as \u0027workflow.properties.get_computers_results\u0027\\nelse:\\n   noteText += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\"fn_amp_get_computers\\\")\\n\\n   incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.amp_hostname = row.hostname\\ninputs.amp_group_guid = None\\ninputs.amp_external_ip = None\\ninputs.amp_internal_ip = None\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_computers_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0bjrdbz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0a3f39y\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1jdcaav\" name=\"AMP: Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69456802-f5ba-4602-9d40-d75d0fda42aa\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_get_groups script ##\\n#  fn_amp_get_groups  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult:         {\\n      \\\"response\\\": {\\n        \\\"version\\\": \\\"v1.2.0\\\",\\n        \\\"data\\\": [\\n          {\\n            \\\"source\\\": null,\\n            \\\"guid\\\": \\\"abcd1234-a123-b456-c769-abcdef123456\\\",\\n            \\\"name\\\": \\\"Audit\\\",\\n            \\\"links\\\": {\\n              \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/abcd1234-a123-b456-c769-abcdef123456\\\"\\n            },\\n            \\\"description\\\": \\\"Test Audit Group 1\\\"\\n          },\\n          ...\\n        ],\\n        \\\"metadata\\\": {\\n          \\\"results\\\": {\\n            \\\"index\\\": 0,\\n            \\\"total\\\": 5,\\n            \\\"items_per_page\\\": 500,\\n            \\\"current_item_count\\\": 5\\n          },\\n          \\\"links\\\": {\\n            \\\"self\\\": \\\"https://api.amp.cisco.com/v1/groups\\\"\\n          }\\n        }\\n      },\\n      \\\"query_execution_time\\\": \\\"2018-10-08 12:49:38\\\"\\n    }\\n\\\"\\\"\\\"\\n\\n# Processing\\nresponse = results.response\\ninput_params = results.input_params\\nnote_text = \u0027\u0027\\n\\nif response is not None and response[\\\"metadata\\\"][\\\"results\\\"][\\\"total\\\"] \u0026gt; 0:\\n   pass\\n   # If we get here do nothing result passed on to function \u0027fn_amp_move_computer\u0027 as \u0027workflow.properties.get_groups_results\u0027\\nelse:\\n   note_text += \\\"Cisco AMP for Endpoints Integration: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for group name \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(input_params.get(\\\"name\\\",{}), \\\"fn_amp_get_groups\\\")\\n   incident.addNote(helper.createRichText(note_text))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\" # The inputs.amp_group_name  needs to be set to a group name.\\n# e.g. inputs.amp_group_name = \\\"Int_Test_Group1\\\"\\ninputs.amp_group_guid = None\\ninputs.amp_group_name = rule.properties.amp_group_name\\ninputs.amp_limit = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_groups_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_18ri6ss\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_028ezne\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cinclusiveGateway id=\"InclusiveGateway_09mj2tk\"\u003e\u003cincoming\u003eSequenceFlow_0a3f39y\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_028ezne\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fhhuhm\u003c/outgoing\u003e\u003c/inclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0a3f39y\" sourceRef=\"ServiceTask_1i3mvwp\" targetRef=\"InclusiveGateway_09mj2tk\"/\u003e\u003csequenceFlow id=\"SequenceFlow_028ezne\" sourceRef=\"ServiceTask_1jdcaav\" targetRef=\"InclusiveGateway_09mj2tk\"/\u003e\u003cserviceTask id=\"ServiceTask_1vo8fhv\" name=\"AMP: Move Computer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4f4c38ef-1adc-4865-9cc6-c7f33251ebb4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Cisco AMP for endpoints - fn_amp_move_computer script ##\\n#  fn_amp_move_computer  -  Event type list\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n          \\\"input_params\\\": {\\\"conn_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                           \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\"},\\n          \\\"response\\\": {\\n            \\\"version\\\": \\\"v1.2.0\\\",\\n            \\\"data\\\": {\\n              \\\"operating_system\\\": \\\"Windows 7, SP 1.0\\\",\\n              \\\"connector_guid\\\": \\\"00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n              \\\"links\\\": {\\n                \\\"trajectory\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f/trajectory\\\",\\n                \\\"computer\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\",\\n                \\\"group\\\": \\\"https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a\\\"\\n              },\\n              \\\"policy\\\": {\\n                \\\"guid\\\": \\\"a98a0f97-4d54-4175-9eef-b8dee9c8e74b\\\",\\n                \\\"name\\\": \\\"Audit\\\"\\n              },\\n              \\\"external_ip\\\": \\\"145.1.91.176\\\",\\n              \\\"group_guid\\\": \\\"89663c44-f95e-4ee8-896d-7611744a6e9a\\\",\\n              \\\"hostname\\\": \\\"Demo_AMP\\\",\\n              \\\"install_date\\\": \\\"2018-05-22T16:53:27Z\\\",\\n              \\\"network_addresses\\\": [\\n                {\\n                  \\\"ip\\\": \\\"255.240.221.92\\\",\\n                  \\\"mac\\\": \\\"a0:28:f5:c3:71:d5\\\"\\n                }\\n              ],\\n              \\\"connector_version\\\": \\\"6.0.9.10685\\\",\\n              \\\"internal_ips\\\": [\\n                \\\"255.240.221.92\\\"\\n              ],\\n              \\\"active\\\": true\\n            },\\n            \\\"metadata\\\": {\\n              \\\"links\\\": {\\n                \\\"self\\\": \\\"https://api.amp.cisco.com/v1/computers/00da1a57-b833-43ba-8ea2-79a5ab21908f\\\"\\n              }\\n            }\\n          },\\n          \\\"query_execution_time\\\": \\\"2018-10-08 15:22:26\\\"\\n        }\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_move_computer script\\nDATA_TBL_FIELDS = [\\\"delete_execution_time\\\", \\\"status\\\"]\\n\\n# Processing\\nresponse = results.response\\nquery_execution_time = results.query_execution_time\\ninput_params_groups = workflow.properties.get_groups_results.input_params\\n\\nif response is not None:\\n    hostname = response[\\\"data\\\"][\\\"hostname\\\"]\\n    group_guid  = response[\\\"data\\\"][\\\"group_guid\\\"]\\n    row.group_guid = group_guid\\n    noteText = \\\"Cisco AMP for Endpoints Integration: Successfully moved computer with hostname \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"to group \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(hostname, input_params_groups.get(\\\"name\\\",{}), \\\"fn_amp_move_computer\\\")\\nelse:\\n  noteText = \\\"Cisco AMP Integration: Move unsuccessful for computer with guid \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; \\\" \\\\\\n               \\\"to group \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(hostname, input_params_groups.get(\\\"name\\\",{}), \\\"fn_amp_move_computer\\\")\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"response_groups =  workflow.properties.get_groups_results.response\\ninput_params_groups = workflow.properties.get_groups_results.input_params\\nresponse_computers =  workflow.properties.get_computers_results.response\\ninput_params_computers = workflow.properties.get_computers_results.input_params\\nif response_groups.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") \u0026gt; 0:\\n  inputs.amp_group_guid = response_groups[\\\"data\\\"][0][\\\"guid\\\"]\\nelse:\\n  raise ValueError(\\\"No results returned for group name\\\")\\nif response_computers.get(\\\"metadata\\\", {}).get(\\\"results\\\", {}).get(\\\"total\\\") \u0026gt; 0:\\n  inputs.amp_conn_guid = response_computers[\\\"data\\\"][0][\\\"connector_guid\\\"]\\nelse:\\n  raise ValueError(\\\"No results returned for computer name\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0fhhuhm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0m9yv61\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0fhhuhm\" sourceRef=\"InclusiveGateway_09mj2tk\" targetRef=\"ServiceTask_1vo8fhv\"/\u003e\u003cendEvent id=\"EndEvent_0tqmwlh\"\u003e\u003cincoming\u003eSequenceFlow_0m9yv61\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0m9yv61\" sourceRef=\"ServiceTask_1vo8fhv\" targetRef=\"EndEvent_0tqmwlh\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0bjrdbz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1i3mvwp\"/\u003e\u003csequenceFlow id=\"SequenceFlow_18ri6ss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1jdcaav\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1pic966\"\u003e\u003ctext\u003eGet group guid from group name. Group name input parameter assigned from an activity field drop-down at run-time.\u003c/text\u003e\u003c/textAnnotation\u003e\u003ctextAnnotation id=\"TextAnnotation_116bnwe\"\u003e\u003ctext\u003eGet computer connector guid from hostname. Hostname input parameter assigned from a data table row field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0j0zm5r\" sourceRef=\"ServiceTask_1jdcaav\" targetRef=\"TextAnnotation_1pic966\"/\u003e\u003cassociation id=\"Association_1oijdp9\" sourceRef=\"ServiceTask_1i3mvwp\" targetRef=\"TextAnnotation_116bnwe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1aubei5\"\u003e\u003ctext\u003eMove computer by guid\u00a0 to group by guid.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m23lt0\" sourceRef=\"ServiceTask_1vo8fhv\" targetRef=\"TextAnnotation_1aubei5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1i3mvwp\" id=\"ServiceTask_1i3mvwp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"229\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1jdcaav\" id=\"ServiceTask_1jdcaav_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"99\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"InclusiveGateway_09mj2tk\" id=\"InclusiveGateway_09mj2tk_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"456\" y=\"208\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"481\" y=\"261\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0a3f39y\" id=\"SequenceFlow_0a3f39y_di\"\u003e\u003comgdi:waypoint x=\"350\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"403\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"403\" y=\"233\"/\u003e\u003comgdi:waypoint x=\"456\" y=\"233\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"373\" y=\"244.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_028ezne\" id=\"SequenceFlow_028ezne_di\"\u003e\u003comgdi:waypoint x=\"350\" y=\"139\"/\u003e\u003comgdi:waypoint x=\"481\" y=\"139\"/\u003e\u003comgdi:waypoint x=\"481\" y=\"208\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"370.5\" y=\"117.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1vo8fhv\" id=\"ServiceTask_1vo8fhv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"571\" y=\"193\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fhhuhm\" id=\"SequenceFlow_0fhhuhm_di\"\u003e\u003comgdi:waypoint x=\"506\" y=\"233\"/\u003e\u003comgdi:waypoint x=\"571\" y=\"233\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"538.5\" y=\"211\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tqmwlh\" id=\"EndEvent_0tqmwlh_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"726\" y=\"215\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"744\" y=\"254\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0m9yv61\" id=\"SequenceFlow_0m9yv61_di\"\u003e\u003comgdi:waypoint x=\"671\" y=\"233\"/\u003e\u003comgdi:waypoint x=\"726\" y=\"233\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"698.5\" y=\"211\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1pic966\" id=\"TextAnnotation_1pic966_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"249\" x=\"218\" y=\"13\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bjrdbz\" id=\"SequenceFlow_0bjrdbz_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"250\" y=\"269\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"239\" y=\"231\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_18ri6ss\" id=\"SequenceFlow_18ri6ss_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" y=\"139\"/\u003e\u003comgdi:waypoint x=\"250\" y=\"139\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"239\" y=\"165.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_116bnwe\" id=\"TextAnnotation_116bnwe_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"203\" x=\"228\" y=\"375\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0j0zm5r\" id=\"Association_0j0zm5r_di\"\u003e\u003comgdi:waypoint x=\"301\" y=\"99\"/\u003e\u003comgdi:waypoint x=\"301\" y=\"63\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1oijdp9\" id=\"Association_1oijdp9_di\"\u003e\u003comgdi:waypoint x=\"300\" y=\"309\"/\u003e\u003comgdi:waypoint x=\"300\" y=\"374\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1aubei5\" id=\"TextAnnotation_1aubei5_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"182\" x=\"571\" y=\"95\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m23lt0\" id=\"Association_1m23lt0_di\"\u003e\u003comgdi:waypoint x=\"621\" y=\"193\"/\u003e\u003comgdi:waypoint x=\"620\" y=\"125\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 13,
-      "description": "Example multi-part workflow to move a computer to a different group. The group name parameter is assigned from an activity field drop-down at runtime, the computer name parameter is assigned from an artifact value.",
-      "export_key": "wf_amp_move_computer",
-      "last_modified_by": "dummy@dummy.com",
-      "last_modified_time": 1701920010476,
-      "name": "Example: AMP move computer",
-      "object_type": "amp_computers",
-      "programmatic_name": "wf_amp_move_computer",
-      "tags": [],
-      "uuid": "84a4be63-64ea-4af5-895b-4929f87d2351",
-      "workflow_id": 160
+      "workflow_id": 15
     }
   ],
   "workspaces": []

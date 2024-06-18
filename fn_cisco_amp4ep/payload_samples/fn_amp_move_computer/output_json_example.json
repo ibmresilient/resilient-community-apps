@@ -1,3 +1,62 @@
 {
-    
+    "response": {
+        "version": "v1.2.0",
+        "metadata": {
+        "links": {
+            "self": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-bbbb-1111-2222-cccccccccccc?group_guid=aaaaaaaa-bbbb-1111-2222-cccccccccccc"
+        }
+        },
+        "data": {
+        "connector_guid": "aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+        "hostname": "Demo_AMP",
+        "windows_processor_id": "195b0d8736e2af4",
+        "active": true,
+        "links": {
+            "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+            "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-bbbb-1111-2222-cccccccccccc/trajectory",
+            "group": "https://api.amp.cisco.com/v1/groups/6c3c2005-4c74-4ba7-8dbb-c4d5b6bafe03"
+        },
+        "connector_version": "99.0.99.20946",
+        "operating_system": "Windows 10",
+        "os_version": "10.0.19044.1466",
+        "internal_ips": [
+            "xxx.xxx.xxx.xxx"
+        ],
+        "external_ip": "xxx.xxx.xxx.xxx",
+        "group_guid": "aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+        "install_date": "2022-02-16T11:40:01Z",
+        "is_compromised": true,
+        "demo": true,
+        "csc_id": "aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+        "network_addresses": [
+            {
+            "mac": "xx:xx:xx:xx:xx:xx",
+            "ip": "xxx.xxx.xxx.xxx"
+            }
+        ],
+        "policy": {
+            "guid": "aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+            "name": "Protect Policy"
+        },
+        "groups": [
+            {
+            "guid": "aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+            "name": "Protect"
+            }
+        ],
+        "faults": [],
+        "isolation": {
+            "available": false,
+            "status": "not_isolated"
+        },
+        "orbital": {
+            "status": "not_enabled"
+        }
+        },
+    "query_execution_time": "2024-05-31 16:12:46",
+    "input_params": {
+        "amp_conn_guid": "aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+        "amp_group_guid": "aaaaaaaa-bbbb-1111-2222-cccccccccccc"
+    }
+  }
 }

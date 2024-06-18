@@ -1,3 +1,166 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "connector_guid": {
+              "type": "string"
+            },
+            "hostname": {
+              "type": "string"
+            },
+            "windows_processor_id": {
+              "type": "string"
+            },
+            "active": {
+              "type": "boolean"
+            },
+            "links": {
+              "type": "object",
+              "properties": {
+                "computer": {
+                  "type": "string"
+                },
+                "trajectory": {
+                  "type": "string"
+                },
+                "group": {
+                  "type": "string"
+                }
+              }
+            },
+            "connector_version": {
+              "type": "string"
+            },
+            "operating_system": {
+              "type": "string"
+            },
+            "os_version": {
+              "type": "string"
+            },
+            "internal_ips": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "external_ip": {
+              "type": "string"
+            },
+            "group_guid": {
+              "type": "string"
+            },
+            "install_date": {
+              "type": "string"
+            },
+            "is_compromised": {
+              "type": "boolean"
+            },
+            "demo": {
+              "type": "boolean"
+            },
+            "csc_id": {
+              "type": "string"
+            },
+            "network_addresses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "mac": {
+                    "type": "string"
+                  },
+                  "ip": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "policy": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "groups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "guid": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "faults": {
+              "type": "array"
+            },
+            "isolation": {
+              "type": "object",
+              "properties": {
+                "available": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "orbital": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "query_execution_time": {
+      "type": "string"
+    },
+    "input_params": {
+      "type": "object",
+      "properties": {
+        "amp_conn_guid": {
+          "type": "string"
+        },
+        "amp_group_guid": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

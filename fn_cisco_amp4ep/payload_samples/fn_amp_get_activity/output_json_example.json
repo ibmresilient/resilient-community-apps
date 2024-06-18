@@ -1,3 +1,68 @@
 {
-    
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/computers/activity?q=0.0.0.0"
+      },
+      "results": {
+        "total": 4,
+        "current_item_count": 4,
+        "index": 0,
+        "items_per_page": 500
+      }
+    },
+    "data": [
+      {
+        "connector_guid": "aaaaaaa-1111-bbbb-cccc-000000000000",
+        "hostname": "Demo_Zbot",
+        "windows_processor_id": "7f42db5a8e63019",
+        "active": true,
+        "links": {
+          "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000",
+          "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000/trajectory?q=0.0.0.0",
+          "group": "https://api.amp.cisco.com/v1/groups/aaaaaaa-1111-bbbb-cccc-000000000000"
+        }
+      },
+      {
+        "connector_guid": "aaaaaaa-1111-bbbb-cccc-000000000000",
+        "hostname": "Demo_Stabuniq",
+        "windows_processor_id": "ba356d0fe198472",
+        "active": true,
+        "links": {
+          "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000",
+          "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000/trajectory?q=0.0.0.0",
+          "group": "https://api.amp.cisco.com/v1/groups/aaaaaaa-1111-bbbb-cccc-000000000000"
+        }
+      },
+      {
+        "connector_guid": "aaaaaaa-1111-bbbb-cccc-000000000000",
+        "hostname": "Demo_Tinba",
+        "windows_processor_id": "00000000000",
+        "active": true,
+        "links": {
+          "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000",
+          "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000/trajectory?q=0.0.0.0",
+          "group": "https://api.amp.cisco.com/v1/groups/aaaaaaa-1111-bbbb-cccc-000000000000"
+        }
+      },
+      {
+        "connector_guid": "aaaaaaa-1111-bbbb-cccc-000000000000",
+        "hostname": "Demo_Low_Prev_Retro",
+        "windows_processor_id": "111111111111",
+        "active": true,
+        "links": {
+          "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000",
+          "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000/trajectory?q=0.0.0.0",
+          "group": "https://api.amp.cisco.com/v1/groups/aaaaaaa-1111-bbbb-cccc-000000000000"
+        }
+      }
+    ]
+  },
+  "query_execution_time": "2024-06-03 16:34:53",
+  "input_params": {
+    "q": "0.0.0.0",
+    "limit": null,
+    "offset": null
+  }
 }

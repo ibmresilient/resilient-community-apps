@@ -1,3 +1,127 @@
 {
-    
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-1111-2222-bbbb-cccccccccccc/trajectory"
+      }
+    },
+    "data": {
+      "computer": {
+        "connector_guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+        "hostname": "Demo_WannaCry_Ransomware",
+        "windows_processor_id": "4d136b0589a27ef",
+        "active": true,
+        "links": {
+          "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-1111-2222-bbbb-cccccccccccc/trajectory",
+          "group": "https://api.amp.cisco.com/v1/groups/5059b918-a96b-4a2b-9b67-445f0ac1a020"
+        },
+        "operating_system": "Windows 10 (Build 19044.1466)",
+        "os_version": "10.0.19044.1466",
+        "internal_ips": [
+          "226.249.214.245"
+        ],
+        "external_ip": "238.190.21.1",
+        "flag": false,
+        "id": 71440046,
+        "install_date": "2024-04-29T00:10:43Z",
+        "is_compromised": true,
+        "demo": true,
+        "os_type": "WinOs",
+        "supports": {
+          "device_trajectory": true,
+          "events": true,
+          "move_to_group": true,
+          "request_snapshot": true,
+          "scan": true,
+          "orbital": {
+            "is_supported": true,
+            "agent_active": false,
+            "agent_nil_state": false,
+            "agent_supported": true,
+            "min_supported_agent_version": "7.1.5.11523",
+            "min_supported_os_version": "10.0.16299",
+            "os_supported": true,
+            "policy_supported": false
+          }
+        },
+        "network_addresses": [
+          {
+            "mac": "1e:c0:c8:7e:bf:07",
+            "ip": "226.249.214.245"
+          }
+        ],
+        "connector_version": "8.4.0.30201",
+        "group_guid": "5059b918-a96b-4a2b-9b67-445f0ac1a020",
+        "policy": {
+          "guid": "0280b143-7091-45c4-8502-ab250219d796",
+          "name": "Protect"
+        },
+        "groups": [
+          {
+            "guid": "5059b918-a96b-4a2b-9b67-445f0ac1a020",
+            "name": "Protect"
+          }
+        ],
+        "faults": [],
+        "isolation": {
+          "available": true,
+          "status": "not_isolated"
+        },
+        "orbital": {
+          "status": "not_enabled"
+        },
+        "risk_score": 100
+      },
+      "events": [
+        {
+          "id": "1717014714006451188",
+          "timestamp": 1717014714,
+          "timestamp_nanoseconds": 0,
+          "date": "2024-05-29T20:31:54+00:00",
+          "event_type": "Endpoint Isolation Stop Success",
+          "event_type_id": 553648204,
+          "group_guids": [
+            "5059b918-a96b-4a2b-9b67-445f0ac1a020"
+          ],
+          "isolation": {
+            "duration": 46
+          }
+        },
+        {
+          "id": "1717014382449028169",
+          "timestamp": 1717014382,
+          "timestamp_nanoseconds": 0,
+          "date": "2024-05-29T20:26:22+00:00",
+          "event_type": "Endpoint Isolation Start Success",
+          "event_type_id": 553648202,
+          "group_guids": [
+            "5059b918-a96b-4a2b-9b67-445f0ac1a020"
+          ]
+        },
+        {
+          "id": "1717004932523748810",
+          "timestamp": 1717004932,
+          "timestamp_nanoseconds": 0,
+          "date": "2024-05-29T17:48:52+00:00",
+          "event_type": "Endpoint Isolation Stop Success",
+          "event_type_id": 553648204,
+          "group_guids": [
+            "5059b918-a96b-4a2b-9b67-445f0ac1a020"
+          ],
+          "isolation": {
+            "duration": 46
+          }
+        }
+      ]
+    }
+  },
+  "total": 500,
+  "query_execution_time": "2024-05-31 16:13:50",
+  "input_params": {
+    "connector_guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+    "q": null,
+    "limit": null
+  }
 }

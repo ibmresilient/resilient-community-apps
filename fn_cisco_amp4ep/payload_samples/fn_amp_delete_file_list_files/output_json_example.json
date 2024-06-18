@@ -1,3 +1,15 @@
-{
-    
+{ "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/file_lists/aaaaaaaa-bbbb-1111-2222-ccccccccccccd/files/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "data": {}
+  },
+  "query_execution_time": "2024-05-31 16:12:46",
+  "input_params": {
+    "file_list_guid": "aaaaaaaa-bbbb-1111-2222-cccccccccccc",
+    "file_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
 }

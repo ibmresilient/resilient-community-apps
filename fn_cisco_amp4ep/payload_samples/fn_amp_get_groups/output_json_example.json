@@ -1,3 +1,23 @@
 {
-    
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/groups?name=Test+Group2"
+      },
+      "results": {
+        "total": 0,
+        "current_item_count": 0,
+        "index": 0,
+        "items_per_page": 500
+      }
+    },
+    "data": []
+  },
+  "query_execution_time": "2024-05-31 16:12:46",
+  "input_params": {
+    "group_guid": null,
+    "name": "Test Group2",
+    "limit": null
+  }
 }

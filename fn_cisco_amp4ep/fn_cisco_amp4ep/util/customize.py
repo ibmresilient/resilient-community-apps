@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# Generated with resilient-sdk v50.1.262
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v52.0.0.0.927
 
-"""Generate the Resilient customizations required for fn_cisco_amp4ep"""
+"""Generate the SOAR customizations required for fn_cisco_amp4ep"""
 
 import base64
 import os
@@ -26,6 +26,7 @@ def codegen_reload_data():
             u"fn_cisco_amp"
         ],
         "functions": [
+            u"fn_amp_computer_isolation",
             u"fn_amp_delete_file_list_files",
             u"fn_amp_get_activity",
             u"fn_amp_get_computer",
@@ -100,7 +101,9 @@ def codegen_reload_data():
             u"scr_amp_add_artifact_from_event",
             u"scr_amp_add_artifact_from_trajectory"
         ],
-        "playbooks": [],
+        "playbooks": [
+            u"amp_computer_isolation"
+        ]
     }
 
 
@@ -109,12 +112,13 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 50.0.9097
 
     Contents:
     - Message Destinations:
         - fn_cisco_amp
     - Functions:
+        - fn_amp_computer_isolation
         - fn_amp_delete_file_list_files
         - fn_amp_get_activity
         - fn_amp_get_computer
@@ -147,6 +151,8 @@ def customization_data(client=None):
         - wf_amp_get_groups
         - wf_amp_move_computer
         - wf_amp_set_file_list_files
+    - Playbooks:
+        - amp_computer_isolation
     - Rules:
         - Example: AMP add artifact from activity
         - Example: AMP add artifact from event

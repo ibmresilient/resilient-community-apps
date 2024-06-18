@@ -1,3 +1,94 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "string"
+                }
+              }
+            },
+            "results": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "current_item_count": {
+                  "type": "integer"
+                },
+                "index": {
+                  "type": "integer"
+                },
+                "items_per_page": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "guid": {
+              "type": "string"
+            },
+            "policies": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "guid": {
+                    "type": "string"
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "policy": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "items": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "query_execution_time": {
+      "type": "string"
+    },
+    "input_params": {
+      "type": "object",
+      "properties": {
+        "file_list_guid": {
+          "type": "string"
+        },
+        "file_sha256": {},
+        "limit": {},
+        "offset": {}
+      }
+    }
+  }
 }

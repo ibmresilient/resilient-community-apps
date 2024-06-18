@@ -1,3 +1,31 @@
 {
-    
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/event_types"
+      },
+      "results": {
+        "total": 117
+      }
+    },
+    "data": [
+      {
+        "id": 50000000,
+        "name": "Initial Agent Registration",
+        "description": "A new agent has registered with the system."
+      },
+      {
+        "id": 50000000,
+        "name": "Policy Update",
+        "description": "An agent has been told to fetch policy."
+      },
+      {
+        "id": 50000000,
+        "name": "Scan Started",
+        "description": "An agent has started scanning."
+      }
+    ]
+  },
+  "query_execution_time": "2024-05-31 16:06:25"
 }
