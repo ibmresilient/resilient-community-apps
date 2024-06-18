@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed_plugin_odbcfeed',
     display_name='Data Feeder ODBC Plugin for SOAR',
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     author='IBM SOAR',
     author_email='',
