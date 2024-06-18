@@ -653,7 +653,7 @@ results = {
               "serverAuth"
             ],
             "authority_key_identifier": {
-              "keyid": "8a747faf85cdee95cd3d9cd0e24614f371351d27"
+              "keyid": "aa123abc12abcd95cd3d9cd0e24614f123456a12"
             },
             "subject_alternative_name": [
               "dns.google",
@@ -668,7 +668,7 @@ results = {
               "2001:4860:4860::6464",
               "2001:4860:4860::64"
             ],
-            "subject_key_identifier": "179673524cd05b5021791a86e71b83bd2af51ea7",
+            "subject_key_identifier": "aa123abc12abcd95cd3d9cd0e24614f123456a13",
             "crl_distribution_points": [
               "http://crls.pki.goog/gts1c3/fVJxbV-Ktmk.crl"
             ],
@@ -676,15 +676,15 @@ results = {
               "digitalSignature",
               "keyEncipherment"
             ],
-            "1.3.6.1.4.1.11129.2.4.2": "0481f100ef0076007a328c54d8b72db620ea38e0521ee98416703213854d3bd2",
+            "1.3.6.1.4.1.11129.2.4.2": "1234a123ab1234567a328c54d8b72db620ea38e0521ab12345678903854d3ab1",
             "CA": false,
             "ca_information_access": {
               "CA Issuers": "http://pki.goog/repo/certs/gts1c3.der",
               "OCSP": "http://ocsp.pki.goog/gts1c3"
             }
           },
-          "thumbprint": "2ece976216382893410d61dbe2e7c28e95e01556",
-          "serial_number": "e3714538d4ad50580a5308c05fac0ccc",
+          "thumbprint": "aa123abc12abcd95cd3d9cd0e24614f123456a22",
+          "serial_number": "a1234567a1ab12345a5308c05fac0abc",
           "issuer": {
             "C": "US",
             "CN": "GTS CA 1C3",

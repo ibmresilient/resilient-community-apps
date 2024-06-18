@@ -530,7 +530,7 @@ results = {
         "uSNCreated": 803064,
         "userAccountControl": 66048,
         "userPassword": [
-          "superDuperSecret@9"
+          "abcpassword"
         ],
         "userPrincipalName": "bbremner@dev.co3sys.com",
         "whenChanged": "2023-08-10 14:38:59+00:00",
@@ -649,7 +649,7 @@ results = {
   "inputs": {
     "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
     "ldap_domain_name": "Domain2",
-    "ldap_new_password": "superDuperSecret@9",
+    "ldap_new_password": "abcpassword",
     "ldap_return_new_password": false
   },
   "metrics": {

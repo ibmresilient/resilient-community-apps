@@ -275,7 +275,7 @@ token_url=https://accounts.google.com/o/oauth2/token
 You can now add these credentials and scope to an app.config file or alternatively use as command-line arguments for the `oauth2_generate_refresh_token` utility.
 ```
 client_id=337895628616-h4epvvbqv5946aun1u9qg7kqp6tu5c1j.apps.googleusercontent.com
-client_secret=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
+client_secret=ABCDEF-1AB_2ABCdeFGhij3abABabCde-AB
 scope=https://mail.google.com/
 token_url=https://accounts.google.com/o/oauth2/token
 auth_url=https://accounts.google.com/o/oauth2/auth
@@ -401,7 +401,7 @@ You can now add credentials and scope obtained above to an app.config file or al
 
 ```
 client_id=1c22e8d1-daf0-407e-b576-0778cc3cd812
-client_secret=OT48Q~enmvy5HpCpub2maQxCVdhvEgowkT1WBbGc
+client_secret=AB12A~abcde5AbCabc2maQxCVdhvEgowkT1ABcDe
 scope=offline_access https://outlook.office365.com/SMTP.Send
 token_url=https://login.microsoftonline.com/c06fa6c3-5dd0-48c9-9a4b-7edbf1904269/oauth2/v2.0/token
 auth_url=https://login.microsoftonline.com/c06fa6c3-5dd0-48c9-9a4b-7edbf1904269/oauth2/v2.0/authorize
