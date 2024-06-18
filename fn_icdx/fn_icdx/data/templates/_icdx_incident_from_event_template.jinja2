@@ -1,0 +1,158 @@
+{
+   "description":{
+      "format":"html",
+      "content": "{%- if log_time -%}{{"Time collected : "+ log_time|string }} {% endif %}\nEvent escalated from ICDx Forwarder."
+   },
+   {# ds_to_millis expects the data parameter to be a string datetime in the following format 2017-05-17T17:07:59.114Z -#}
+   "discovered_date": {%- if time -%}{{ ds_to_millis(time) }} {% else %} 0 {% endif %},
+    {%- if owner -%}"owner_id": {% if represents_int(owner) == False %}"{{owner}}" {% else %}{{owner}}{%- endif -%}, {%- endif -%}
+    {%- if severity_code -%}"severity_code": {{severity_code}}, {% endif %}
+
+
+    {# Gather Artifact Information  -#}
+    "artifacts" : [
+    {%- set comma = joiner(",") -%}
+    {# File Artifact Information  -#}
+    {%- if file -%}
+        {%- if file.get('md5', False) -%}
+        {{- comma() }}
+           {"type": {"name": "Malware MD5 Hash"}, "value": "{{file.md5}}", "description" : {"format" : "html","content" : "File MD5 Hash, generated from ICDx Event with UUID of {{uuid}}"}}
+               
+        {%- endif -%}
+        {%- if file.get('sha2', False) -%}
+        {{- comma() }}
+           {"type": {"name": "Malware SHA-256 Hash"}, "value": "{{file.sha2}}","description" : {"format" : "html","content" : "File SHA256 Hash, generated from ICDx Event with UUID of {{uuid}}"}}
+               
+        {%- endif -%}
+        {%- if file.get('sha1', False) -%}
+        {{- comma() }}
+           {"type": {"name": "Malware SHA1 Hash"}, "value": "{{file.sha1}}","description" : {"format" : "html","content" : "File SHA1 Hash, generated from ICDx Event with UUID of {{uuid}}"}}
+        {%- endif -%}
+        {%- if file.get('name', False) -%}
+        {{- comma() }}
+           {"type": {"name": "File Name"}, "value": "{{file.name}}","description" : {"format" : "html","content" : "File Name, generated from ICDx Event with UUID of {{uuid}}"}}
+               
+        {%- endif -%}
+        {%- if file.get('path', False) -%}
+            
+        {{- comma() }}
+           {"type": {"name": "File Path"}, "value": "{{custom_regex_escape(file.path)}}","description" : {"format" : "html","content" : "File Path, generated from ICDx Event with UUID of {{uuid}}"}}
+        {%- endif -%}
+        
+
+    {# End file parsing-#}
+    {%- endif -%}
+
+    {# Network Connection Artifacts -#}
+    {%- if connection -%}
+
+        {# Source Network Artifacts Information  -#}
+        {%- if connection.get('src_ip', None) -%}
+            {%- if is_valid_ipv4_addr(connection.src_ip) -%}
+               {{- comma() }}
+               {"type": {"name": "IP Address"}, "value": "{{connection.src_ip}}",
+                   "description" : {"format" : "html","content" : "Source ipv4 Address, generated from ICDx Event with UUID of {{uuid}}"},
+                   "properties": [{"name": "source", "value": true}]}
+                   
+            {%- elif is_valid_ipv6_addr(connection.src_ip) -%}
+               {{- comma() }}
+               {"type": {"name": "IP Address"}, "value": "{{connection.src_ip}}",
+                   "description" : {"format" : "html","content" : "Source ipv6 Address, generated from ICDx Event with UUID of {{uuid}}"},
+                   "properties": [{"name": "source", "value": true}]}
+                   
+            {%- endif -%}
+            
+        {%- endif -%}
+        {%- if connection.get('src_mac', None) -%}
+            {{- comma() }}
+            {"type": {"name": "MAC Address"}, "value": "{{connection.src_mac}}",
+               "description" : {"format" : "html","content" : "Source MAC Address, generated from ICDx Event with UUID of {{uuid}}"}}
+
+        {%- endif -%}
+        {%- if connection.get('src_port', None) -%}
+            {{- comma() }}
+            {"type": {"name": "Port"}, "value": "{{connection.src_port}}",
+               "description" : {"format" : "html","content" : "Source Port, generated from ICDx Event with UUID of {{uuid}}"}}
+
+        {%- endif -%}
+
+        {%- if connection.get('src_service', None) -%}
+            {{- comma() }}
+           {"type": {"name": "Service"}, "value": "{{connection.src_service}}",
+               "description" : {"format" : "html","content" : "Source Service Name, generated from ICDx Event with UUID of {{uuid}}"}}
+
+        {%- endif -%}
+        {# Destination Network Artifacts Information  -#}
+        {%- if connection.get('dst_ip', None) -%}
+            {%- if is_valid_ipv4_addr(connection.dst_ip) -%}
+               {{- comma() }}
+               {"type": {"name": "IP Address"}, "value": "{{connection.dst_ip}}",
+                   "description" : {"format" : "html","content" : "Destination ipv4 Address, generated from ICDx Event with UUID of {{uuid}}"},
+                   "properties": [{"name": "destination", "value": true}]}
+                   
+            {%- elif is_valid_ipv6_addr(connection.dst_ip) -%}
+               {{- comma() }}
+               {"type": {"name": "IP Address"}, "value": "{{connection.dst_ip}}",
+                   "description" : {"format" : "html","content" : "Destination ipv6 Address, generated from ICDx Event with UUID of {{uuid}}"},
+                   "properties": [{"name": "destination", "value": true}]}
+                   
+            {%- endif -%}
+        
+        {%- endif -%}
+
+        {%- if connection.get('dst_mac', None) -%}
+            {{- comma() }}
+            {"type": {"name": "MAC Address"}, "value": "{{connection.dst_mac}}",
+               "description" : {"format" : "html","content" : "Destination MAC Address, generated from ICDx Event with UUID of {{uuid}}"}}
+
+        {%- endif -%}
+        {%- if connection.get('dst_port', None) -%}
+            {{- comma() }}
+            {"type": {"name": "Port"}, "value": "{{connection.dst_port}}",
+               "description" : {"format" : "html","content" : "Destination Port, generated from ICDx Event with UUID of {{uuid}}"}}
+
+        {%- endif -%}
+
+        {%- if connection.get('dst_service', None) -%}
+            {{- comma() }}
+           {"type": {"name": "Service"}, "value": "{{connection.dst_service}}",
+               "description" : {"format" : "html","content" : "Destination Service Name, generated from ICDx Event with UUID of {{uuid}}"}}
+
+        {%- endif -%}
+    {# End connection parsing-#}
+    {%- endif -%}
+
+    {# Email Artifacts -#}
+    {%- if email -%}
+        {%- if email.get('header_subject', None) -%}
+            {{- comma() }}
+            {"type": {"name": "Email Subject"}, "value": "{{email.header_subject}}",
+               "description" : {"format" : "html","content" : "Collected Email Subject, generated from ICDx Event with UUID of {{uuid}}"}}
+        {%- endif -%}
+        {%- if email.get('header_from', None) -%}
+            {{- comma() }}
+            {"type": {"name": "Email Sender"}, "value": "{{email.header_from}}",
+               "description" : {"format" : "html","content" : "Collected Email Sender, generated from ICDx Event with UUID of {{uuid}}"}}
+        {%- endif -%}
+        {%- if email.get('smtp_to', None) -%}
+            {%- if is_list(email.smtp_to) -%}
+                {%- for recipient in email.smtp_to -%}
+                    {{- comma() }}
+                    {"type": {"name": "Email Recipient"}, "value": "{{recipient}}",
+                       "description" : {"format" : "html","content" : "Collected Email Recipient, generated from ICDx Event with UUID of {{uuid}}"}}
+                {%- endfor -%}
+            {%- else -%}
+                {{- comma() }}
+                {"type": {"name": "Email Recipient"}, "value": "{{email.smtp_to}}",
+                   "description" : {"format" : "html","content" : "Collected Email Recipient, generated from ICDx Event with UUID of {{uuid}}"}}
+            {%- endif -%}
+        {%- endif -%}
+
+
+    {# End email parsing-#}
+    {%- endif -%}
+    {# Close off the incident artifact array-#}
+    ],
+    
+    "name": "{%- if type -%}{{type}} i{% else %} I{%- endif -%}ncident {%- if product_name -%} {{" gathered from "+product_name}} {% else %} {{" escalated from ICDx"}}  {%- endif -%} {{" with UUID - "+uuid}}"
+}
