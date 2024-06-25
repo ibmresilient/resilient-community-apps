@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -21,7 +21,7 @@ def snake_to_camel(word):
 setup(
     name='fn_symantec_dlp',
     display_name="Symantec DLP",
-    version='2.0.0',
+    version='2.0.1',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -30,10 +30,11 @@ setup(
     long_description="""This app allows bi-directional synchronization between IBM SOAR and Symantec DLP.
     Symantec DLP incidents are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.""",
     install_requires=[
-        'resilient_circuits>=43.0.0',
+        'resilient_circuits>=50.0.0',
         'jinja2'
     ],
     packages=find_packages(),
+    python_requires='>=3.6',
     include_package_data=True,
     platforms='any',
     classifiers=[

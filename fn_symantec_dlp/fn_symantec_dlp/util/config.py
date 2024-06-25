@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © IBM Corporation 2010, 2022
+# Copyright © IBM Corporation 2010, 2024
 
 """Generate a default configuration-file section for fn_symantec_dlp"""
 
@@ -10,7 +10,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u"""[fn_symantec_dlp]
+    return """[fn_symantec_dlp]
 # Symantec DLP Enforce Server IP
 sdlp_host=<serverip>
 # Symantec DLP REST API version
@@ -26,10 +26,9 @@ polling_interval=60
 # Poller lookback time first time, in days
 polling_lookback=14
 # false|/path/to/certificate
-cafile=
+cafile=False
 # Override default jinja templates files as necessary for case creation, closing and updating.
 create_case_template=
 close_case_template=
 update_case_template=
 """
-    return config_data

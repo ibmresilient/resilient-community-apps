@@ -12,7 +12,7 @@
     "incident_type_ids": [16],
     "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|soar_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
 
-    {#  Custom properties for DLP Attributes #}
+    {# Custom properties for DLP Attributes #}
     "properties": {
         "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},
         "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName|replace('incident.status.', '') }}",
@@ -24,72 +24,72 @@
     },
     {# Artifacts which we will try to pull out of the Incident #}
     "artifacts": [
-    {% if staticIncidentDetails.infoMap.get('discoverServer', False) %}
-      {{- comma() }}
-      {
-        "type": {"name": "System Name"},
-        "value": "{{ staticIncidentDetails.infoMap.discoverServer|replace('\\', '\\\\')|replace('"', '\\"') }}",
-        "description": {
-          "format": "text",
-          "content": "System Name of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+      {% if staticIncidentDetails.infoMap.get('discoverServer', False) %}
+        {{- comma() }}
+        {
+          "type": {"name": "System Name"},
+          "value": "{{ staticIncidentDetails.infoMap.discoverServer|replace('\\', '\\\\')|replace('"', '\\"') }}",
+          "description": {
+            "format": "text",
+            "content": "System Name of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+          }
         }
-      }
-    {% endif %}
-    {% if staticIncidentDetails.infoMap.get('discoverContentRootPath', False) %}
-      {{- comma() }}
-      {
-        "type": { "name": "File Path"}, 
-        "value": "{{ staticIncidentDetails.infoMap.discoverContentRootPath|replace("\\", "\\\\") }}",
-        "description" : {
-            "format" : "html", 
-            "content" : "File Path of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+      {% endif %}
+      {% if staticIncidentDetails.infoMap.get('discoverContentRootPath', False) %}
+        {{- comma() }}
+        {
+          "type": { "name": "File Path"},
+          "value": "{{ staticIncidentDetails.infoMap.discoverContentRootPath|replace("\\", "\\\\") }}",
+          "description" : {
+              "format" : "html",
+              "content" : "File Path of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+          }
         }
-      }
-    {%- endif -%}
-    {% if staticIncidentDetails.infoMap.get('discoverName', False) %}
-      {{- comma() }}
-      {
-        "type": { "name": "File Name"}, 
-        "value": "{{ staticIncidentDetails.infoMap.discoverName|replace("\\", "\\\\") }}",
-        "description" : {
-            "format" : "html", 
-            "content" : "File Name of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+      {%- endif -%}
+      {% if staticIncidentDetails.infoMap.get('discoverName', False) %}
+        {{- comma() }}
+        {
+          "type": { "name": "File Name"},
+          "value": "{{ staticIncidentDetails.infoMap.discoverName|replace("\\", "\\\\") }}",
+          "description" : {
+              "format" : "html",
+              "content" : "File Name of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+          }
         }
-      }
-    {%- endif -%}
-    {% if staticIncidentDetails.infoMap.get('fileOwner', False) %}
-      {{- comma() }}
-      {
-        "type": { "name": "User Account"}, 
-        "value": "{{ staticIncidentDetails.infoMap.fileOwner|replace("\\", "\\\\") }}",
-        "description" : {
-            "format" : "html", 
-            "content" : "File Owner of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+      {%- endif -%}
+      {% if staticIncidentDetails.infoMap.get('fileOwner', False) %}
+        {{- comma() }}
+        {
+          "type": { "name": "User Account"},
+          "value": "{{ staticIncidentDetails.infoMap.fileOwner|replace("\\", "\\\\") }}",
+          "description" : {
+              "format" : "html",
+              "content" : "File Owner of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+          }
         }
-      }
-    {%- endif -%}
-    {% if staticIncidentDetails.infoMap.get('endpointMachineIpAddress', False) %}
-      {{- comma() }}
-      {
-        "type": {"name": "IP Address"},
-        "value": "{{ staticIncidentDetails.infoMap.endpointMachineIpAddress|replace('\\', '\\\\')|replace('"', '\\"') }}",
-        "description": {
-          "format": "text",
-          "content": "IP Address of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
-          "properties": [{"name": "source", "value": true}]
+      {%- endif -%}
+      {% if staticIncidentDetails.infoMap.get('endpointMachineIpAddress', False) %}
+        {{- comma() }}
+        {
+          "type": {"name": "IP Address"},
+          "value": "{{ staticIncidentDetails.infoMap.endpointMachineIpAddress|replace('\\', '\\\\')|replace('"', '\\"') }}",
+          "description": {
+            "format": "text",
+            "content": "IP Address of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+          },
+          "properties": [{"name": "source", "value": "true"}]
         }
-      }
-    {% endif %}
+      {% endif %}
     ],
     "comments": [
-        {%- for note_text in notes -%}
-        {    
-            "text": {
-                "format": "html",
-                "content": "{{note_text|replace('\\', '\\\\')|replace('"', '\\"')}}"
-            }        
+      {%- for note_text in notes -%}
+        {
+          "text": {
+            "format": "html",
+            "content": "{{note_text|replace('\\', '\\\\')|replace('"', '\\"')}}"
+          }
         }
         {{ "," if not loop.last else "" }}
-        {%- endfor -%}
+      {%- endfor -%}
     ]
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 import calendar
 import logging
 import json
@@ -59,7 +59,7 @@ class JinjaEnvironment():
         template_file_path = specified_template
         if template_file_path:
             if not (os.path.exists(template_file_path) and os.path.isfile(template_file_path)):
-                LOG.error(u"Template file: %s doesn't exist, using default template",
+                LOG.error("Template file: %s doesn't exist, using default template",
                         template_file_path)
                 template_file_path = None
 
@@ -70,7 +70,7 @@ class JinjaEnvironment():
                                     default_template
                                 )
 
-        LOG.debug(u"Incident template file: %s", template_file_path)
+        LOG.debug("Incident template file: %s", template_file_path)
         with open(template_file_path, "r") as definition:
             return definition.read()
 
@@ -131,4 +131,3 @@ def jinja_soar_trimlist(org_list):
     if not isinstance(org_list, list):
         return org_list
     return [element.strip() for element in org_list]
-    

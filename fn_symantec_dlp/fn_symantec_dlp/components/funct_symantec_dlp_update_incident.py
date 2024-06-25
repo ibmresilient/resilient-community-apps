@@ -1,20 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
-import logging
-from unittest.mock import patch
-from resilient import get_client
+
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError
-from fn_symantec_dlp.lib.resilient_common import ResilientCommon
-from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
+from resilient_lib import IntegrationError, validate_fields, SOARCommon
+from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_symantec_dlp"
 FN_NAME = "symantec_dlp_update_incident"
-
-LOG = logging.getLogger(__name__)
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'symantec_dlp_update_incident'"""
@@ -31,37 +24,32 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.sdlp_incident_status
             -   fn_inputs.incident_id
         """
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+        validate_fields(["sdlp_incident_severity_id", "sdlp_incident_status", "incident_id"], fn_inputs)
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-
-        rest_client = get_client(self.opts)
-        res_common = ResilientCommon(rest_client)
         sdlp_client = SymantecDLPCommon(self.rc, self.options)
 
-        incident_id = fn_inputs.incident_id
-        sdlp_incident_status = fn_inputs.sdlp_incident_status
-        sdlp_incident_severity_id = fn_inputs.sdlp_incident_severity_id
+        incident_id = getattr(fn_inputs, "incident_id", None)
+        sdlp_incident_status = getattr(fn_inputs, "sdlp_incident_status", None)
+        sdlp_incident_severity_id = getattr(fn_inputs, "sdlp_incident_severity_id", None)
         success = False
 
         # Get the SOAR incident
-        uri = u"/incidents/{}?handle_format=names".format(incident_id)
-        incident = self.rest_client().get(uri)
+        incident = self.rest_client().get(f"/incidents/{incident_id}?handle_format=names")
 
         if not incident:
-            IntegrationError("Symantec DLP Update Incident: Incident {0} not found".format(incident_id))
-
+            IntegrationError(f"Symantec DLP Update Incident: Incident {incident_id} not found")
 
         # Make sure there is an Symantec DLP incident associated with this incident
         sdlp_incident_id = incident.get('properties', {}).get('sdlp_incident_id', None)
         if not sdlp_incident_id:
-            IntegrationError("Symantec DLP Update Incident: sdlp_incident_id {0} not found".format(sdlp_incident_id))
+            IntegrationError(f"Symantec DLP Update Incident: sdlp_incident_id {sdlp_incident_id} not found")
 
         if sdlp_incident_status or sdlp_incident_severity_id:
-
             status_response = sdlp_client.update_sdlp_incident_editable_details(sdlp_incident_id, sdlp_incident_status, sdlp_incident_severity_id)
 
-            # Becareful here.  It seems like the DLP endpoint to set the status returns 200 even though the status
-            # is not truely set. Both incident status name and status id need to be set to change the incident status but 
+            # Be careful here. It seems like the DLP endpoint to set the status returns 200 even though the status
+            # is not truely set. Both incident status name and status id need to be set to change the incident status but
             # no matter what you send it still comes back with 200.
             if sdlp_incident_id and sdlp_incident_id in status_response.get("updatedIncidentIds", []):
                 update_payload = {}
@@ -74,13 +62,12 @@ class FunctionComponent(AppFunctionComponent):
                         sdlp_incident_severity_id = "Low"
                     update_payload["severity_code"] = sdlp_incident_severity_id
                 # Update the SOAR incident
-                patch_result = res_common.update_incident(incident_id, update_payload)
+                patch_result = SOARCommon(self.rest_client).update_soar_case(incident_id, update_payload).json()
                 success = patch_result.get("success")
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        results = {"success": success,
-                   "sdlp_incident_id": sdlp_incident_id,
-                   "sdlp_incident_status": sdlp_incident_status,
-                   "sdlp_incident_severity_id": sdlp_incident_severity_id}
-        yield FunctionResult(results)
+        yield FunctionResult({"success": success,
+            "sdlp_incident_id": sdlp_incident_id,
+            "sdlp_incident_status": sdlp_incident_status,
+            "sdlp_incident_severity_id": sdlp_incident_severity_id})

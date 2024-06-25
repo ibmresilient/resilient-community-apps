@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
-# Copyright © IBM Corporation 2010, 2022
+# Copyright © IBM Corporation 2010, 2024
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
    test with: resilient-circuits selftest -l fn_symantec_dlp
 """
 
 import logging
-from resilient_lib import RequestsCommon, ResultPayload, IntegrationError, validate_fields
+from resilient_lib import RequestsCommon, IntegrationError, validate_fields
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
-
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """

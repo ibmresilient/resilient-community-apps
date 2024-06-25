@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, clean_html
+from resilient_lib import IntegrationError, clean_html, validate_fields
 from fn_symantec_dlp.lib.constants import FROM_SYMANTEC_DLP_COMMENT_HDR, SENT_TO_SYMANTEC_DLP_HDR
-from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
+from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_symantec_dlp"
 FN_NAME = "symantec_dlp_send_note_to_dlp_incident"
 
 class FunctionComponent(AppFunctionComponent):
@@ -27,14 +25,15 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.sdlp_note_text
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        note_text = fn_inputs.sdlp_note_text
-        sdlp_incident_id = fn_inputs.sdlp_incident_id
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+        validate_fields(["sdlp_incident_id", "sdlp_note_text"], fn_inputs)
+        note_text = getattr(fn_inputs, "sdlp_note_text", None)
+        sdlp_incident_id = getattr(fn_inputs, "sdlp_incident_id", None)
 
         reason = None
         success = False
         if FROM_SYMANTEC_DLP_COMMENT_HDR in note_text or SENT_TO_SYMANTEC_DLP_HDR in note_text:
-            yield self.status_message("Bypassing synchronization of note: {}".format(note_text))
+            yield self.status_message(f"Bypassing synchronization of note: {note_text}")
             success = True
         else:
             try:
@@ -45,18 +44,12 @@ class FunctionComponent(AppFunctionComponent):
 
                 if sdlp_incident_id in updated_incident_ids:
                     success = True
-                    yield self.status_message("Symantec DLP comment added to DLP incident id: {}"\
-                                    .format(sdlp_incident_id))
+                    yield self.status_message(f"Symantec DLP comment added to DLP incident id: {sdlp_incident_id}")
                 else:
                     reason = "failure"
-                    yield self.status_message("Symantec DLP comment failure for incident id {}: {}"\
-                                    .format(sdlp_incident_id, reason))
+                    yield self.status_message(f"Symantec DLP comment failure for incident id {sdlp_incident_id}: {reason}")
             except IntegrationError as err:
                 reason = str(err)
 
-        results = {"success": success,
-                   "reason:": reason}
-
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
-
-        yield FunctionResult(results)
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+        yield FunctionResult({"success": success, "reason:": reason})

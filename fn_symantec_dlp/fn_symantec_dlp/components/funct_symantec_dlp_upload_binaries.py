@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient import get_client
-from fn_symantec_dlp.lib.resilient_common import ResilientCommon
-from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
+from resilient_lib import validate_fields
+from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_symantec_dlp"
 FN_NAME = "symantec_dlp_upload_binaries"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'symantec_dlp_upload_binaries'"""
@@ -22,27 +18,25 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Upload the Symantec DLP Component binary files and add as artifact files.
+        Function: Upload the Symantec DLP Component binary files and add as artifact files or incident attachment.
         Inputs:
             -   fn_inputs.sdlp_incident_id
             -   fn_inputs.incident_id
+            -   fn_inputs.sdlp_attachment_upload_type
         """
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        validate_fields(["sdlp_incident_id", "incident_id"], fn_inputs)
+        sdlp_incident_id = getattr(fn_inputs, "sdlp_incident_id", None)
+        soar_case_id = getattr(fn_inputs, "incident_id", None)
+        # This defines is the sdlp attachment will be uploaded to SOAR as an artifact or an attachment.
+        # The value can be either artifact or attachment. Default is artifact.
+        attachment_upload_type = getattr(fn_inputs, "sdlp_attachment_upload_type", "artifact") or "artifact"
 
-        sdlp_incident_id = fn_inputs.sdlp_incident_id
-        soar_case_id = fn_inputs.incident_id
-
-        rest_client = get_client(self.opts)
-        res_common = ResilientCommon(rest_client)
         sdlp_client = SymantecDLPCommon(self.rc, self.options)
 
-        artifact_name_list = sdlp_client.upload_sdlp_binaries(res_common, sdlp_incident_id, soar_case_id)
+        artifact_name_list = sdlp_client.upload_sdlp_binaries(sdlp_incident_id, soar_case_id, self.rest_client(), attachment_upload_type)
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        results = {
-                   "success": True,
-                   "artifact_name_list": artifact_name_list
-                }
-        yield FunctionResult(results)
+        yield FunctionResult({"success": True, "artifact_name_list": artifact_name_list})

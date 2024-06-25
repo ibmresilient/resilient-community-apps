@@ -29,9 +29,9 @@ success = content.get("success", False)
 sdlp_incident_id = content.get("sdlp_incident_id", None)
 sdlp_incident_status = content.get("sdlp_incident_status", None)
 if success:
-  noteText = u'<b>Symantec DLP: Update Incident Status</b><br> DLP incident {0} status set to: {1}.'.format(sdlp_incident_id, sdlp_incident_status)
+  noteText = '<b>Symantec DLP: Update Incident Status</b><br> DLP incident {0} status set to: {1}.'.format(sdlp_incident_id, sdlp_incident_status)
 else:
-  noteText = u'<b>Symantec DLP: Update Incident Status</b><br>Error: Check DLP incidentId {0} status in Symantec DLP.'.format(sdlp_incident_id)
+  noteText = '<b>Symantec DLP: Update Incident Status</b><br>Error: Check DLP incidentId {0} status in Symantec DLP.'.format(sdlp_incident_id)
 
 incident.addNote(noteText)
 ```
