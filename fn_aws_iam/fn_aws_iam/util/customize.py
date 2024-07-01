@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# Generated with resilient-sdk v51.0.0.0.430
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v52.0.0.0.1048
 
 """Generate the SOAR customizations required for fn_aws_iam"""
 
@@ -119,7 +119,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 48.2.16
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:

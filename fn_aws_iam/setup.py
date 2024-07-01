@@ -19,7 +19,8 @@ def snake_to_camel(word):
 
 setup(
     name='fn_aws_iam',
-    version='1.0.2',
+    display_name = 'AWS IAM',
+    version='1.0.3',
     license='MIT',
     author='IBM SOAR',
     author_email='',
