@@ -12,6 +12,7 @@
   - [Python Environment](#python-environment)
 - [Installation](#installation)
   - [Install](#install)
+  - [Panorama API permissions](#panorama-api-permissions)
   - [App Configuration](#app-configuration)
 - [Function - Panorama Create Address](#function---panorama-create-address)
 - [Function - Panorama Edit Address Group](#function---panorama-edit-address-group)
@@ -123,6 +124,11 @@ Additional package dependencies may exist for each of these packages:
 ### Install
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
+
+### Panorama API permissions
+The following show to permissions needs for the Panorama API key:
+ ![screenshot: fn-panorama-permission1 ](./doc/screenshots/fn-panorama-permission1.png)
+ ![screenshot: fn-panorama-permission2 ](./doc/screenshots/fn-panorama-permission2.png)
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
