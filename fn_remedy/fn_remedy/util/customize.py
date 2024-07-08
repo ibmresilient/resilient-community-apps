@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.0.974
 
 """Generate the SOAR customizations required for fn_remedy"""
 
@@ -20,15 +22,30 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_remedy",
-        "message_destinations": [u"fn_remedy"],
-        "functions": [u"remedy_close_incident", u"remedy_create_incident"],
-        "workflows": [u"close_a_remedy_incident_from_task", u"create_a_remedy_incident_from_task"],
-        "actions": [u"Remedy Close Incident from Task", u"Remedy Create Incident from Task"],
+        "message_destinations": [
+            u"fn_remedy"
+        ],
+        "functions": [
+            u"remedy_close_incident",
+            u"remedy_create_incident"
+        ],
+        "workflows": [
+            u"close_a_remedy_incident_from_task",
+            u"create_a_remedy_incident_from_task"
+        ],
+        "actions": [
+            u"Remedy Close Incident from Task",
+            u"Remedy Create Incident from Task"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [u"remedy_linked_incidents_reference_table"],
+        "incident_types": [],
+        "datatables": [
+            u"remedy_linked_incidents_reference_table"
+        ],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,7 +54,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 39.0.6328
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:

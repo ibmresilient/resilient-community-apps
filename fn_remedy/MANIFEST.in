@@ -1,11 +1,13 @@
 include README.md
 include Dockerfile
-include entrypoint.sh
+include apikey_permissions.txt
 recursive-include fn_remedy/util *
-recursive-include fn_remedy/lib *
 include fn_remedy/LICENSE
 include doc/*.md
 include doc/screenshots/*
+include icons/*.png
 recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak
