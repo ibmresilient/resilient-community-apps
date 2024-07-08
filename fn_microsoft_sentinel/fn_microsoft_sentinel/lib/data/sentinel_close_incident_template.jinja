@@ -1,0 +1,26 @@
+{
+    {# JINJA template for closing a new Sentinel incident from a SOAR incident. #}
+    "properties": {
+        "title": "{{ name|soar_splitpart(1)}}",
+        "severity": "{{ severity_code|string|soar_substitute('{"Low": "Low", "Medium": "Medium", "High": "High"}') }}",
+        "status": "Closed",
+        "classification": "{{ resolution_id|string|soar_substitute('{"Unresolved": "Undetermined", "Duplicate": "FalsePositive", "Not an Issue": "BenignPositive", "Resolved": "TruePositive"}') }}",
+        "classificationReason": "{{ resolution_id|string|soar_substitute('{"Unresolved": "", "Duplicate": "InaccurateData", "Not an Issue": "SuspiciousButExpected", "Resolved": "SuspiciousActivity"}') }}",
+        "classificationComment": "{{ resolution_summary|striptags|safe }}"
+        {# modify as necessary #}
+        {% if properties.sentinel_incident_labels %}
+            {% set label_list = properties.sentinel_incident_labels.split(',') -%}
+            ,"labels": [
+            {% for label in label_list %}
+                {% if label %}
+                {
+                    "labelName": {{ label | trim | json }},
+                    "labelType": "User"
+                }
+                {% endif %}
+            {% if not loop.last %},{% endif %}
+            {% endfor %}
+            ]
+        {% endif %}
+    }
+}

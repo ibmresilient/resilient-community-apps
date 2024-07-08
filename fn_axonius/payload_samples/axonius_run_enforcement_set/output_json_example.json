@@ -1,0 +1,25 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": [
+      {
+        "id": "65ef47d95cd7f554699537f0",
+        "name": "addCustomData_002"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "axonius_enforcement_set_name": "addCustomData_002"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-axonius",
+    "package_version": "1.0.0",
+    "host": "mylaptopl",
+    "execution_time_ms": 28131,
+    "timestamp": "2024-03-11 16:57:29"
+  }
+}

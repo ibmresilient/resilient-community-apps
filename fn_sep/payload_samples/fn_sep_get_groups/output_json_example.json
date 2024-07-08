@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "content": [
+      {
+        "id": "id",
+        "name": "My Company",
+        "description": "",
+        "fullPathName": "My Company",
+        "numberOfPhysicalComputers": 1,
+        "numberOfRegisteredUsers": 1,
+        "createdBy": "createdBy                                                                                                ",
+        "created": 1670774894035,
+        "lastModified": 1670774894035,
+        "policySerialNumber": "E3DD-12/28/2022 14:30:24 853",
+        "policyDate": 1672237824853,
+        "customIpsNumber": "",
+        "domain": {
+          "id": "id",
+          "name": "name"
+        },
+        "policyInheritanceEnabled": false
+      },
+      {
+        "id": "id",
+        "name": "Default Group",
+        "description": "",
+        "fullPathName": "My Company\\Default Group",
+        "numberOfPhysicalComputers": 0,
+        "numberOfRegisteredUsers": 0,
+        "createdBy": "createdBy                                                                                                ",
+        "created": 1670774894035,
+        "lastModified": 1670774894035,
+        "policySerialNumber": "459F-12/28/2022 14:30:24 853",
+        "policyDate": 1672237824853,
+        "customIpsNumber": "",
+        "domain": {
+          "id": "id",
+          "name": "Default"
+        },
+        "policyInheritanceEnabled": true
+      },
+      {
+        "id": "id",
+        "name": "Test",
+        "description": "",
+        "fullPathName": "My Company\\Test",
+        "numberOfPhysicalComputers": 0,
+        "numberOfRegisteredUsers": 0,
+        "createdBy": "createdBy                                                                                                ",
+        "created": 1670853895754,
+        "lastModified": 1670853895754,
+        "policySerialNumber": "01C5-12/28/2022 14:30:24 853",
+        "policyDate": 1672237824853,
+        "customIpsNumber": "",
+        "domain": {
+          "id": "id",
+          "name": "Default"
+        },
+        "policyInheritanceEnabled": true
+      }
+    ],
+    "totalPages": 1,
+    "firstPage": true,
+    "lastPage": true,
+    "totalElements": 3,
+    "size": 25,
+    "number": 0,
+    "sort": [
+      {
+        "direction": "ASC",
+        "property": "NAME",
+        "ascending": true
+      }
+    ],
+    "numberOfElements": 3
+  },
+  "raw": "{\"content\": [{\"id\": \"id\", \"name\": \"My Company\", \"description\": \"\", \"fullPathName\": \"My Company\", \"numberOfPhysicalComputers\": 1, \"numberOfRegisteredUsers\": 1, \"createdBy\": \"createdBy                                                                                                \", \"created\": 1670774894035, \"lastModified\": 1670774894035, \"policySerialNumber\": \"E3DD-12/28/2022 14:30:24 853\", \"policyDate\": 1672237824853, \"customIpsNumber\": \"\", \"domain\": {\"id\": \"3CB04764AC1F211B2A79E12FEDEA41B1\", \"name\": \"Default\"}, \"policyInheritanceEnabled\": false}, {\"id\": \"459F58A0AC1F211B0743E90D2F0C32A1\", \"name\": \"Default Group\", \"description\": \"\", \"fullPathName\": \"My Company\\\\Default Group\", \"numberOfPhysicalComputers\": 0, \"numberOfRegisteredUsers\": 0, \"createdBy\": \"AF3C39A10A320801000000DBF200C60A                                                                                                \", \"created\": 1670774894035, \"lastModified\": 1670774894035, \"policySerialNumber\": \"459F-12/28/2022 14:30:24 853\", \"policyDate\": 1672237824853, \"customIpsNumber\": \"\", \"domain\": {\"id\": \"3CB04764AC1F211B2A79E12FEDEA41B1\", \"name\": \"Default\"}, \"policyInheritanceEnabled\": true}, {\"id\": \"01C53575AC1F211B53E6515D65FC81CD\", \"name\": \"Test\", \"description\": \"\", \"fullPathName\": \"My Company\\\\Test\", \"numberOfPhysicalComputers\": 0, \"numberOfRegisteredUsers\": 0, \"createdBy\": \"AF3C39A10A320801000000DBF200C60A                                                                                                \", \"created\": 1670853895754, \"lastModified\": 1670853895754, \"policySerialNumber\": \"01C5-12/28/2022 14:30:24 853\", \"policyDate\": 1672237824853, \"customIpsNumber\": \"\", \"domain\": {\"id\": \"3CB04764AC1F211B2A79E12FEDEA41B1\", \"name\": \"Default\"}, \"policyInheritanceEnabled\": true}], \"totalPages\": 1, \"firstPage\": true, \"lastPage\": true, \"totalElements\": 3, \"size\": 25, \"number\": 0, \"sort\": [{\"direction\": \"ASC\", \"property\": \"NAME\", \"ascending\": true}], \"numberOfElements\": 3}",
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.0.1",
+    "host": "host",
+    "execution_time_ms": 2148,
+    "timestamp": "2023-01-06 10:17:14"
+  }
+}
