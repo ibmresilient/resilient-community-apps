@@ -1,37 +1,5 @@
 # ServiceNow Customization Guide
 
-## Table of Contents
-- [Table of Contents](#table-of-contents)
-- [Prerequisites](#prerequisites)
-- [Architectural Diagram](#architectural-diagram)
-- [Overview](#overview)
-- [Pre-Defined ServiceNow Workflows](#pre-defined-servicenow-workflows)
-- [ResilientHelper API](#resilienthelper-api)
-  - [`create(GlideRecord record, String snRecordId, String caseName, Object options)`](#creategliderecord-record-string-snrecordid-string-casename-object-options)
-    - [Parameters:](#parameters)
-    - [Return:](#return)
-  - [`addNote(String res_reference_id, String noteText, String noteFormat)`](#addnotestring-res_reference_id-string-notetext-string-noteformat)
-    - [Parameters:](#parameters-1)
-    - [Return:](#return-1)
-  - [`updateStateInResilient(String res_reference_id, String snTicketState, String snTicketStateColor)`](#updatestateinresilientstring-res_reference_id-string-snticketstate-string-snticketstatecolor)
-    - [Parameters:](#parameters-2)
-    - [Return:](#return-2)
-  - [`getResilientReferenceId(GlideRecord record)`](#getresilientreferenceidgliderecord-record)
-    - [Parameters:](#parameters-3)
-    - [Returns:](#returns)
-  - [`getResilientReferenceLink(GlideRecord record)`](#getresilientreferencelinkgliderecord-record)
-    - [Parameters:](#parameters-4)
-    - [Returns:](#returns-1)
-  - [`getResilientType(GlideRecord record)`](#getresilienttypegliderecord-record)
-    - [Parameters:](#parameters-5)
-    - [Returns:](#returns-2)
-- [Create Own Custom ServiceNow Workflow](#create-own-custom-servicenow-workflow)
-  - [Step 1: *Use Correct Application Scope*](#step-1-use-correct-application-scope)
-  - [Step 2: *Create a Copy of Existing RES Workflow*](#step-2-create-a-copy-of-existing-res-workflow)
-  - [Step 3: *Modify the Run Script*](#step-3-modify-the-run-script)
-
----
-
 *This guide shows how to adapt the App installed on your ServiceNow instance to suit your Incident Response Workflow*
 
 
@@ -279,6 +247,7 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 			"Resolved": "red",
 			"Closed": "red",
 			"Canceled": "red",
+			"Cancelled": "red",
 
 			// colors for security incidents states
 			"Draft": "green",
@@ -536,3 +505,8 @@ Returns an object with the following keys:
  ![screenshot](./screenshots/9.png)
 * **Close** the tab that contains the Workflow Editor.
 ---
+
+## Links
+- [IBM SOAR ServiceNow App Main Page](../../README.md)
+- [Install Guide](../install_guide/README.md)
+- [Customize SOAR App Guide](../customize_resilient_guide/README.md)

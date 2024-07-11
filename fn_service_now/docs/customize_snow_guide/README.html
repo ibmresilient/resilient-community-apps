@@ -412,65 +412,7 @@
         <article role="main" id="furo-main-content">
           <section id="servicenow-customization-guide">
 <h1>ServiceNow Customization Guide<a class="headerlink" href="#servicenow-customization-guide" title="Link to this heading">¶</a></h1>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
-<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
-<li><p><a class="reference internal" href="#architectural-diagram"><span class="xref myst">Architectural Diagram</span></a></p></li>
-<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
-<li><p><a class="reference internal" href="#pre-defined-servicenow-workflows"><span class="xref myst">Pre-Defined ServiceNow Workflows</span></a></p></li>
-<li><p><a class="reference internal" href="#resilienthelper-api"><span class="xref myst">ResilientHelper API</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#creategliderecord-record-string-snrecordid-string-casename-object-options"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">create(GlideRecord</span> <span class="pre">record,</span> <span class="pre">String</span> <span class="pre">snRecordId,</span> <span class="pre">String</span> <span class="pre">caseName,</span> <span class="pre">Object</span> <span class="pre">options)</span></code></span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#parameters"><span class="xref myst">Parameters:</span></a></p></li>
-<li><p><a class="reference internal" href="#return"><span class="xref myst">Return:</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#addnotestring-res_reference_id-string-notetext-string-noteformat"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">addNote(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">noteText,</span> <span class="pre">String</span> <span class="pre">noteFormat)</span></code></span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#parameters-1"><span class="xref myst">Parameters:</span></a></p></li>
-<li><p><a class="reference internal" href="#return-1"><span class="xref myst">Return:</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#updatestateinresilientstring-res_reference_id-string-snticketstate-string-snticketstatecolor"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">updateStateInResilient(String</span> <span class="pre">res_reference_id,</span> <span class="pre">String</span> <span class="pre">snTicketState,</span> <span class="pre">String</span> <span class="pre">snTicketStateColor)</span></code></span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#parameters-2"><span class="xref myst">Parameters:</span></a></p></li>
-<li><p><a class="reference internal" href="#return-2"><span class="xref myst">Return:</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#getresilientreferenceidgliderecord-record"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">getResilientReferenceId(GlideRecord</span> <span class="pre">record)</span></code></span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#parameters-3"><span class="xref myst">Parameters:</span></a></p></li>
-<li><p><a class="reference internal" href="#returns"><span class="xref myst">Returns:</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#getresilientreferencelinkgliderecord-record"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">getResilientReferenceLink(GlideRecord</span> <span class="pre">record)</span></code></span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#parameters-4"><span class="xref myst">Parameters:</span></a></p></li>
-<li><p><a class="reference internal" href="#returns-1"><span class="xref myst">Returns:</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#getresilienttypegliderecord-record"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">getResilientType(GlideRecord</span> <span class="pre">record)</span></code></span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#parameters-5"><span class="xref myst">Parameters:</span></a></p></li>
-<li><p><a class="reference internal" href="#returns-2"><span class="xref myst">Returns:</span></a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#create-own-custom-servicenow-workflow"><span class="xref myst">Create Own Custom ServiceNow Workflow</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#step-1-use-correct-application-scope"><span class="xref myst">Step 1: <em>Use Correct Application Scope</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-2-create-a-copy-of-existing-res-workflow"><span class="xref myst">Step 2: <em>Create a Copy of Existing RES Workflow</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-3-modify-the-run-script"><span class="xref myst">Step 3: <em>Modify the Run Script</em></span></a></p></li>
-</ul>
-</li>
-</ul>
-<hr class="docutils" />
 <p><em>This guide shows how to adapt the App installed on your ServiceNow instance to suit your Incident Response Workflow</em></p>
-</section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -706,6 +648,7 @@
 <span class="w">			</span><span class="s2">&quot;Resolved&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
 <span class="w">			</span><span class="s2">&quot;Closed&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
 <span class="w">			</span><span class="s2">&quot;Canceled&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">&quot;Cancelled&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
 
 <span class="w">			</span><span class="c1">// colors for security incidents states</span>
 <span class="w">			</span><span class="s2">&quot;Draft&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
@@ -1118,8 +1061,16 @@
 <img alt="screenshot" src="../../../_images/91.png" /></p></li>
 <li><p><strong>Close</strong> the tab that contains the Workflow Editor.</p></li>
 </ul>
-<hr class="docutils" />
 </section>
+</section>
+<hr class="docutils" />
+<section id="links">
+<h2>Links<a class="headerlink" href="#links" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../README.html"><span class="std std-doc">IBM SOAR ServiceNow App Main Page</span></a></p></li>
+<li><p><a class="reference internal" href="../install_guide/README.html"><span class="std std-doc">Install Guide</span></a></p></li>
+<li><p><a class="reference internal" href="../customize_resilient_guide/README.html"><span class="std std-doc">Customize SOAR App Guide</span></a></p></li>
+</ul>
 </section>
 </section>
 
@@ -1179,7 +1130,6 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">ServiceNow Customization Guide</a><ul>
-<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li><a class="reference internal" href="#architectural-diagram">Architectural Diagram</a></li>
 <li><a class="reference internal" href="#overview">Overview</a></li>
@@ -1223,6 +1173,7 @@
 <li><a class="reference internal" href="#step-3-modify-the-run-script">Step 3: <em>Modify the Run Script</em></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </li>
 </ul>

@@ -412,82 +412,69 @@
         <article role="main" id="furo-main-content">
           <section id="soar-customization-guide">
 <h1>SOAR Customization Guide<a class="headerlink" href="#soar-customization-guide" title="Link to this heading">¶</a></h1>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
-<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview:</span></a></p></li>
-<li><p><a class="reference internal" href="#app-config-settings-appconfig"><span class="xref myst">App Config Settings (app.config):</span></a></p></li>
-<li><p><a class="reference internal" href="#functions"><span class="xref myst">Functions:</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#function---snow-create-record"><span class="xref myst">Function - SNOW: Create Record</span></a></p></li>
-<li><p><a class="reference internal" href="#function---snow-update-record"><span class="xref myst">Function - SNOW: Update Record</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#sending-soar-artifacts-to-snow"><span class="xref myst">Sending SOAR artifacts to SNOW</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#function---snow-close-record"><span class="xref myst">Function - SNOW: Close Record</span></a></p></li>
-<li><p><a class="reference internal" href="#function---snow-add-note-to-record"><span class="xref myst">Function - SNOW: Add Note to Record</span></a></p></li>
-<li><p><a class="reference internal" href="#function---snow-add-attachment-to-record"><span class="xref myst">Function - SNOW: Add Attachment to Record</span></a></p></li>
-<li><p><a class="reference internal" href="#function---snow-lookup-sys_id"><span class="xref myst">Function - SNOW: Lookup sys_id</span></a></p></li>
-<li><p><a class="reference internal" href="#function---snow-helper-update-data-table"><span class="xref myst">Function - SNOW Helper: Update Data Table</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules:</span></a></p></li>
-<li><p><a class="reference internal" href="#data-tables"><span class="xref myst">Data Tables:</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#servicenow-records"><span class="xref myst">ServiceNow Records</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#api-name"><span class="xref myst">API Name:</span></a></p></li>
-<li><p><a class="reference internal" href="#columns"><span class="xref myst">Columns:</span></a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#security-incident-response-specific-customizations"><span class="xref myst">Security Incident Response Specific Customizations</span></a></p></li>
-</ul>
-</section>
-<hr class="docutils" />
 <section id="overview">
-<h2>Overview:<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>This package contains 8 Functions, 12 playbooks, and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.</p>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>This package contains 8 Functions, 19 playbooks, and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#function---snow-create-record"><span class="xref myst">SNOW: Create Record</span></a> gives you the ability to create a Record in ServiceNow from a SOAR Case/Incident or Task.</p></li>
-<li><p><a class="reference internal" href="#function---snow-update-record"><span class="xref myst">SNOW: Update Record</span></a> allows you to update multiple column fields in a ServiceNow Record.</p></li>
-<li><p><a class="reference internal" href="#function---snow-close-record"><span class="xref myst">SNOW: Close Record</span></a> lets you close a related Record in ServiceNow from a SOAR Case/Incident or Task.</p></li>
-<li><p><a class="reference internal" href="#function---snow-add-note-to-record"><span class="xref myst">SNOW: Add Note to Record</span></a> allows you to send a SOAR Note to a ServiceNow Record as a <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">Note</span></code> or <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Comment</span></code>.</p></li>
-<li><p><a class="reference internal" href="#function---snow-add-attachment-to-record"><span class="xref myst">SNOW: Add Attachment to Record</span></a> gives you the ability to send a SOAR Attachment to a ServiceNow Record.</p></li>
-<li><p><a class="reference internal" href="#function---snow-lookup-sysid"><span class="xref myst">SNOW: Lookup sys_id</span></a> queries your ServiceNow Instance for a Record and returns the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of that Record.</p></li>
-<li><p><a class="reference internal" href="#function---snow-helper-update-data-table"><span class="xref myst">SNOW Helper: Update Data Table</span></a> helper function that updates the ServiceNow Records Data Table status.</p></li>
+<li><p><a class="reference internal" href="#snow-create-record"><span class="xref myst">SNOW: Create Record</span></a> gives you the ability to create a Record in ServiceNow from a SOAR Case/Incident or Task.</p></li>
+<li><p><a class="reference internal" href="#snow-update-record"><span class="xref myst">SNOW: Update Record</span></a> allows you to update multiple column fields in a ServiceNow Record.</p></li>
+<li><p><a class="reference internal" href="#snow-close-record"><span class="xref myst">SNOW: Close Record</span></a> lets you close a related Record in ServiceNow from a SOAR Case/Incident or Task.</p></li>
+<li><p><a class="reference internal" href="#snow-add-note-to-record"><span class="xref myst">SNOW: Add Note to Record</span></a> allows you to send a SOAR Note to a ServiceNow Record as a <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">Note</span></code> or <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Comment</span></code>.</p></li>
+<li><p><a class="reference internal" href="#snow-add-attachment-to-record"><span class="xref myst">SNOW: Add Attachment to Record</span></a> gives you the ability to send a SOAR Attachment to a ServiceNow Record.</p></li>
+<li><p><a class="reference internal" href="#snow-lookup-sys_id"><span class="xref myst">SNOW: Lookup sys_id</span></a> queries your ServiceNow Instance for a Record and returns the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of that Record.</p></li>
+<li><p><a class="reference internal" href="#snow-helper-update-data-table"><span class="xref myst">SNOW Helper: Update Data Table</span></a> helper function that updates the ServiceNow Records Data Table status.</p></li>
 </ul>
+<p>Some playbooks from the app are disabled by default. These are the automatic playbooks. Enable them after import for full app functionality.</p>
 </section>
 <hr class="docutils" />
 <section id="app-config-settings-app-config">
-<h2>App Config Settings (app.config):<a class="headerlink" href="#app-config-settings-app-config" title="Link to this heading">¶</a></h2>
+<h2>App Config Settings (app.config)<a class="headerlink" href="#app-config-settings-app-config" title="Link to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_service_now</span><span class="p">]</span>
-<span class="c1"># Link to your ServiceNow Instance</span>
 <span class="n">sn_host</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">instance</span><span class="o">.</span><span class="n">service</span><span class="o">-</span><span class="n">now</span><span class="o">.</span><span class="n">com</span>
-
-<span class="c1"># The URI to the ServiceNow App that handles the requests from SOAR</span>
 <span class="n">sn_api_uri</span><span class="o">=/</span><span class="n">api</span><span class="o">/</span><span class="n">x_ibmrt_resilient</span><span class="o">/</span><span class="n">api</span>
 
-<span class="c1"># The name of the table in ServiceNow you want to integrate with</span>
-<span class="c1"># as of v2.0 we support the &#39;incident&#39; and &#39;sn_si_incident&#39; tables</span>
+<span class="c1"># &#39;sn_table_name&#39;: Name of the table in ServiceNow to create a record with.</span>
+<span class="c1"># &#39;incident&#39; table and the &#39;sn_si_incident&#39; table are both supported</span>
+<span class="c1"># (NOTE: ServiceNow Security Incident Response module is required for sn_si_incident)</span>
+<span class="c1"># as of v2.3.0 this setting is no longer required. It is now only used in the playbooks</span>
+<span class="c1"># labeled [DEPRECATED]</span>
 <span class="n">sn_table_name</span><span class="o">=</span><span class="n">incident</span>
 
-<span class="c1"># Username and Password for your Administrative User in ServiceNow</span>
-<span class="n">sn_username</span><span class="o">=</span><span class="n">ibmresilient</span>
-<span class="n">sn_password</span><span class="o">=</span><span class="n">MyPassword</span>
+<span class="c1"># Username + Password of ServiceNow Integrator user who has the the &quot;x_ibmrt_resilient.integrator&quot; role</span>
+<span class="n">sn_username</span><span class="o">=&lt;</span><span class="n">ServiceNow</span> <span class="n">Username</span><span class="o">&gt;</span>
+<span class="n">sn_password</span><span class="o">=&lt;</span><span class="n">ServiceNow</span> <span class="n">Password</span><span class="o">&gt;</span>
+
+<span class="c1"># (ONLY FOR CP4S with custom endpoint) Enter the custom cases-rest prefix of your CP4S instance</span>
+<span class="c1"># ex: if host is my-cases-rest.cp4s.ibmsecurity.com, cp4s_cases_prefix=my-cases-rest</span>
+<span class="c1"># If you don&#39;t have a custom cases rest endpoint there is no need to use this config value</span>
+<span class="c1">#cp4s_cases_prefix=&lt;CP4S Cases Rest Custom Prefix&gt;</span>
+
+<span class="c1"># OPTIONAL: render notes in rich, formatted text when sent to SNOW</span>
+<span class="c1"># only available to users who have `glide.ui.security.allow_codetag`</span>
+<span class="c1"># enabled on their SNOW system. Set to `True` to properly render HTML notes</span>
+<span class="c1"># render_rich_text = False</span>
 </pre></div>
 </div>
+<section id="a-note-on-sn-table-name">
+<h3>A note on <code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code><a class="headerlink" href="#a-note-on-sn-table-name" title="Link to this heading">¶</a></h3>
+<p>Since v2.3.0, the value set in app.config for <code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code> is simply used as the default table
+in which to create new records in ServiceNow when sending data from SOAR. This can be overridden
+by setting the table name as an input to the Create Record function.</p>
+<p>A distinction is now also made to synchronize any record create in SOAR from ServiceNow with its
+original table in ServiceNow. This means that the <code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code> is no longer read in from app.config
+for any synchronization functions and is rather read from the underlying data of the record in ServiceNow.
+You’ll notice this change in the addition of a column in the ServiceNow Records datatable in SOAR to
+reflect the originating table name.</p>
+</section>
 </section>
 <hr class="docutils" />
 <section id="functions">
-<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot" src="../../../_images/110.png" /></p>
-<section id="function-snow-create-record">
-<h3>Function - SNOW: Create Record<a class="headerlink" href="#function-snow-create-record" title="Link to this heading">¶</a></h3>
+<section id="snow-create-record">
+<h3>SNOW: Create Record<a class="headerlink" href="#snow-create-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/create</span></code> custom endpoint in ServiceNow to create a ServiceNow Record from an IBM SOAR Case/Incident or Task.</p>
+<p>Since version 2.3.0 <code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code> was introduced as an optional input to this function. This now allows a Playbook designer to craft playbooks that create records in different tables in ServiceNow. The previous behavior (of using the table set in app.config for all record creation) is maintained by default. See the <strong>Inputs</strong> section for more details on how to use <code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code>.</p>
 <p><img alt="screenshot" src="../../../_images/25.png" /></p>
 <details><summary>Inputs:</summary>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -525,6 +512,12 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">'{&quot;assignment_group&quot;:</span> <span class="pre">&quot;IT</span> <span class="pre">Security&quot;}'</span></code></p></td>
 <td><p>An extensible JSON String of the field names and values to set in the new ServiceNow Record</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;incident&quot;</span></code></p></td>
+<td><p>Optional table in which to create this record in ServiceNow. For task creation, this is set by default to the table of the parent incident. When not set via function inputs this always defaults to the value in app.config.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -533,7 +526,7 @@
 <ul class="simple">
 <li><p>sets <code class="docutils literal notranslate"><span class="pre">short_description</span></code> in ServiceNow as the <code class="docutils literal notranslate"><span class="pre">incident.name</span></code> or <code class="docutils literal notranslate"><span class="pre">task.name</span></code></p></li>
 <li><p>sets <code class="docutils literal notranslate"><span class="pre">description</span></code> in ServiceNow as the <code class="docutils literal notranslate"><span class="pre">incident.description</span></code> or <code class="docutils literal notranslate"><span class="pre">task.instructions</span></code></p></li>
-<li><p>sets <code class="docutils literal notranslate"><span class="pre">work_notes</span></code> in ServiceNow as the <code class="docutils literal notranslate"><span class="pre">sn_init_work_note</span></code></p></li>
+<li><p>sets <code class="docutils literal notranslate"><span class="pre">work_notes</span></code> in ServiceNow as the <code class="docutils literal notranslate"><span class="pre">sn_init_work_note</span></code> function input</p></li>
 </ul>
 <p><strong>These defaults can be overwritten</strong> by passing values from them in the <code class="docutils literal notranslate"><span class="pre">sn_optional_fields</span></code> input. To do this you would extend the example input Script provided with the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_optional_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
@@ -602,7 +595,7 @@
 </pre></div>
 </div>
 </details>
-<details><summary>Example input Script:</summary>
+<details><summary>Example Input Script:</summary>
 <ul>
 <li><p>We also make use of user inputs from <strong>Rule Activity Fields</strong> by using: <code class="docutils literal notranslate"><span class="pre">playbook.inputs.sn_initial_note</span></code>.</p></li>
 <li><p>In the supplied example playbook, there are 3 Functions chained together, with this Function being the third.</p>
@@ -642,17 +635,22 @@
 <span class="c1"># Initial work note to attach to created ServiceNow Record</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sn_init_work_note</span> <span class="o">=</span> <span class="n">init_snow_note_text</span>
 
+<span class="c1"># Parse the urgency and impact numbers value from the text input and incident severity, respectively</span>
+<span class="n">impact</span> <span class="o">=</span> <span class="n">sn_severity_map</span><span class="p">[</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">]</span>
+<span class="n">urgency</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_urgency</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
 <span class="c1"># Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.</span>
 <span class="c1"># ServiceNow Example: setValue(&#39;assignment_group&#39;, request.body.data.sn_optional_fields.assignment_group)</span>
-<span class="c1"># For SIR tables it is recommended to map &quot;business_criticality&quot; to sn_severity_map as that is visible in the SNOW query_builder</span>
-<span class="c1"># (see the example commented out below)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sn_optional_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
-  <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;RES-</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="n">sn_severity_map</span><span class="p">[</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">],</span>
-  <span class="c1">#&quot;business_criticality&quot;: sn_severity_map[incident.severity_code],</span>
+  <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;RES-</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;impact&quot;</span><span class="p">:</span> <span class="n">impact</span><span class="p">,</span>
+  <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="n">urgency</span><span class="p">,</span>
   <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">assignment_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sys_id&quot;</span><span class="p">),</span>
   <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">caller_id</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sys_id&quot;</span><span class="p">)</span>
 <span class="p">})</span>
+
+<span class="c1"># This makes sure this creates this record in the &quot;incident&quot; table</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_table_name</span> <span class="o">=</span> <span class="s2">&quot;incident&quot;</span>
 </pre></div>
 </div>
 </details>
@@ -662,11 +660,12 @@
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_record</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="c1"># Set incident fields sn_snow_record_id and sn_snow_record_link</span>
+  <span class="c1"># Set incident fields sn_snow_record_id, sn_snow_record_link, and sn_snow_table_name</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_id</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sn_ref_id&quot;</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;Link&lt;/a&gt;&quot;&quot;&quot;</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_table_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sn_table_name&quot;</span><span class="p">)</span>
 
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;This Incident has been created in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;This Incident has been created in &lt;b&gt;ServiceNow&lt;/b&gt; with Urgency &#39;</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_urgency</span><span class="si">}</span><span class="s2">&#39;in the </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_table_name&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> table.</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_ref_id&#39;</span><span class="p">)</span><span class="si">}</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span>
 
@@ -676,8 +675,8 @@
 </details>
 </section>
 <hr class="docutils" />
-<section id="function-snow-update-record">
-<h3>Function - SNOW: Update Record<a class="headerlink" href="#function-snow-update-record" title="Link to this heading">¶</a></h3>
+<section id="snow-update-record">
+<h3>SNOW: Update Record<a class="headerlink" href="#snow-update-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/update</span></code> custom endpoint in ServiceNow to update a ServiceNow Record with a given dictionary of field name/value pairs.</p>
 <p><img alt="screenshot" src="../../../_images/8.png" /></p>
 <details><summary>Inputs:</summary>
@@ -811,8 +810,8 @@
 </section>
 </section>
 <hr class="docutils" />
-<section id="function-snow-close-record">
-<h3>Function - SNOW: Close Record<a class="headerlink" href="#function-snow-close-record" title="Link to this heading">¶</a></h3>
+<section id="snow-close-record">
+<h3>SNOW: Close Record<a class="headerlink" href="#snow-close-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/close_record</span></code> custom endpoint in ServiceNow to change the state of a ServiceNow Record and add Close Notes and a Close Code to the Record.</p>
 <p><img alt="screenshot" src="../../../_images/34.png" /></p>
 <details><summary>Inputs:</summary>
@@ -939,16 +938,10 @@
   <span class="s2">&quot;New&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">&quot;In Progress&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="s2">&quot;On Hold&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">&quot;[INC] Resolved&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-  <span class="s2">&quot;[INC] Closed&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-  <span class="s2">&quot;[INC] Canceled&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-	<span class="s2">&quot;[SIR] Analysis&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-	<span class="s2">&quot;[SIR] Contain&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-	<span class="s2">&quot;[SIR] Eradicate&quot;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
-	<span class="s2">&quot;[SIR] Recover&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-	<span class="s2">&quot;[SIR] Review&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-	<span class="s2">&quot;[SIR] Closed&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-	<span class="s2">&quot;[SIR] Canceled&quot;</span><span class="p">:</span> <span class="mi">7</span>
+  <span class="s2">&quot;Resolved&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="s2">&quot;Closed&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s2">&quot;Canceled&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">&quot;Cancelled&quot;</span><span class="p">:</span> <span class="mi">8</span> <span class="c1"># servicenow has inconsistent spellings of this word...</span>
 <span class="p">}</span>
 
 <span class="c1"># ID of this incident</span>
@@ -994,8 +987,8 @@
 </details>
 </section>
 <hr class="docutils" />
-<section id="function-snow-add-note-to-record">
-<h3>Function - SNOW: Add Note to Record<a class="headerlink" href="#function-snow-add-note-to-record" title="Link to this heading">¶</a></h3>
+<section id="snow-add-note-to-record">
+<h3>SNOW: Add Note to Record<a class="headerlink" href="#snow-add-note-to-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/add</span></code> custom endpoint in ServiceNow to add a SOAR Note to a ServiceNow Record as a “Work Note” or “Additional Comment”.</p>
 <p><img alt="screenshot" src="../../../_images/62.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1099,8 +1092,8 @@
 </details>
 </section>
 <hr class="docutils" />
-<section id="function-snow-add-attachment-to-record">
-<h3>Function - SNOW: Add Attachment to Record<a class="headerlink" href="#function-snow-add-attachment-to-record" title="Link to this heading">¶</a></h3>
+<section id="snow-add-attachment-to-record">
+<h3>SNOW: Add Attachment to Record<a class="headerlink" href="#snow-add-attachment-to-record" title="Link to this heading">¶</a></h3>
 <p>Uses the <code class="docutils literal notranslate"><span class="pre">/add</span></code> custom endpoint in ServiceNow to add a SOAR Attachment to a ServiceNow Record.</p>
 <p><img alt="screenshot" src="../../../_images/71.png" /></p>
 <details><summary>Inputs:</summary>
@@ -1211,8 +1204,8 @@
 </details>
 </section>
 <hr class="docutils" />
-<section id="function-snow-lookup-sys-id">
-<h3>Function - SNOW: Lookup sys_id<a class="headerlink" href="#function-snow-lookup-sys-id" title="Link to this heading">¶</a></h3>
+<section id="snow-lookup-sys-id">
+<h3>SNOW: Lookup sys_id<a class="headerlink" href="#snow-lookup-sys-id" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Gets the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of a ServiceNow Record.</p></li>
 <li><p>Used when creating a ServiceNow Record to get the <code class="docutils literal notranslate"><span class="pre">sys_id</span></code> of the <code class="docutils literal notranslate"><span class="pre">assignment_group</span></code> to assign the new Record to.</p></li>
@@ -1306,8 +1299,8 @@
 </details>
 </section>
 <hr class="docutils" />
-<section id="function-snow-helper-update-data-table">
-<h3>Function - SNOW Helper: Update Data Table<a class="headerlink" href="#function-snow-helper-update-data-table" title="Link to this heading">¶</a></h3>
+<section id="snow-helper-update-data-table">
+<h3>SNOW Helper: Update Data Table<a class="headerlink" href="#snow-helper-update-data-table" title="Link to this heading">¶</a></h3>
 <p><img alt="screenshot" src="../../../_images/10.png" /></p>
 <details><summary>Inputs:</summary>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1393,90 +1386,165 @@
 </section>
 </section>
 <hr class="docutils" />
-<section id="rules">
-<h2>Rules:<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<p>Some playbooks from the app are disabled by default. These are the automatic playbooks. Enable them after import for full app functionality.</p>
+<p>Since v2.3.0 some older playbooks have been removed:</p>
+<ul class="simple">
+<li><p><strong>[SIR] Update Record on Severity Change (PB)</strong></p></li>
+</ul>
+<p>Since v2.3.0 two playbooks have been “Deprecated” and are disabled upon upgrade:</p>
+<ul class="simple">
+<li><p><strong>[DEPRECATED] SNOW: Create New Record (PB)</strong> (formerly <code class="docutils literal notranslate"><span class="pre">SNOW:</span> <span class="pre">Create</span> <span class="pre">New</span> <span class="pre">Record</span> <span class="pre">(PB)</span></code>)</p></li>
+<li><p><strong>[DEPRECATED] SNOW: Update/Close Record [Task] (PB)</strong> (formerly <code class="docutils literal notranslate"><span class="pre">SNOW:</span> <span class="pre">Update/Close</span> <span class="pre">Record</span> <span class="pre">[Task]</span> <span class="pre">(PB)</span></code>)</p></li>
+</ul>
+<p>These deprecated playbooks are no longer intended for production use and should no longer be used as they are limited in their capabilities.
+They rely on the deprecated <code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code> config which is no longer fully supported. See <a class="reference internal" href="#a-note-on-sn_table_name"><span class="xref myst">section below</span></a> for more information.
+These deprecated playbooks might be removed completely in a future release.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
-<th class="head text-center"><p>Object Type</p></th>
-<th class="head"><p>Activity Fields</p></th>
-<th class="head"><p>Workflow Triggered</p></th>
-<th class="head"><p>Conditions</p></th>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>SNOW: Create Record [Incident]</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Assignment</span> <span class="pre">Group</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Initial</span> <span class="pre">Note</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Create</span> <span class="pre">Record</span> <span class="pre">[Incident]</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> does not have a value</p></td>
+<tr class="row-even"><td><p>SNOW: Add Attachment to Record (PB)</p></td>
+<td><p>Send this attachment to the associated record in ServiceNow.</p></td>
+<td><p>Manual</p></td>
+<td><p>attachment</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">has_a_value</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>SNOW: Create Record [Task]</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Assignment</span> <span class="pre">Group</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Initial</span> <span class="pre">Note</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Create</span> <span class="pre">Record</span> <span class="pre">[Task]</span></code></p></td>
-<td><p>None</p></td>
+<tr class="row-odd"><td><p>SNOW: Close Incident on Datatable Value Change (PB)</p></td>
+<td><p>Automatically closes the case/incident in SOAR when the status of the record in ServiceNow is changed to “Closed” or “Resolved.”</p></td>
+<td><p>Automatic</p></td>
+<td><p>sn_records_dt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(sn_records_dt.sn_records_dt_snow_status</span> <span class="pre">contains</span> <span class="pre">Closed</span> <span class="pre">OR</span> <span class="pre">sn_records_dt.sn_records_dt_snow_status</span> <span class="pre">contains</span> <span class="pre">Resolved)</span> <span class="pre">AND</span> <span class="pre">sn_records_dt.sn_records_dt_type</span> <span class="pre">equals</span> <span class="pre">Incident</span> </code></p></td>
 </tr>
-<tr class="row-even"><td><p>SNOW: Update/Close Record [Incident]</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Record</span> <span class="pre">State</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Code</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Notes</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Close</span> <span class="pre">Record</span> <span class="pre">[Incident]</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> has a value</p></td>
+<tr class="row-even"><td><p>SNOW: Create Child Incident (PB)</p></td>
+<td><p>Create a new ‘incident’ record in ServiceNow based off of the linked parent incident.</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.properties.sn_snow_table_name</span> <span class="pre">equals</span> <span class="pre">incident</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>SNOW: Update/Close Record [Task]</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Record</span> <span class="pre">State</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Code</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Notes</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Close</span> <span class="pre">Record</span> <span class="pre">[Task]</span></code></p></td>
-<td><p>None</p></td>
+<tr class="row-odd"><td><p>SNOW: Create New Incident (PB)</p></td>
+<td><p>Creates a new record in the Incident (incident) table in ServiceNow.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">not_has_a_value</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>SNOW: Update/Close Record</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Table</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Record</span> <span class="pre">State</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Code</span></code>, <code class="docutils literal notranslate"><span class="pre">SN</span> <span class="pre">Close</span> <span class="pre">Notes</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Close</span> <span class="pre">Record</span> <span class="pre">[Task]</span></code></p></td>
-<td><p>None</p></td>
+<tr class="row-even"><td><p>SNOW: Create New Security Incident (PB)</p></td>
+<td><p>Creates a new record in the Security Incident (sn_si_incident) table in ServiceNow. Note that this option is only available if your ServiceNow instance is configured with the Security Response module.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">not_has_a_value</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>SNOW: Send as Additional Comment</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Note</span></code></p></td>
-<td><p>None</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Add</span> <span class="pre">Comment</span> <span class="pre">to</span> <span class="pre">Record</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Note</span> <span class="pre">Text</span></code> does not contain “Sent to ServiceNow at”</p></td>
+<tr class="row-odd"><td><p>SNOW: Create New Record from Task (PB)</p></td>
+<td><p>NOTE: Since v2.3.0, consider using “Create Child Incident” or “Create Security Response Task” playbooks which maintain the relationship of the task to the case better than this playbook does.  Create a new record from the selected task. This will create the new record in the same ServiceNow table (incident vs sn_si_incident) that the SOAR case is associated with. If the case in SOAR isn’t linked to a record in ServiceNow, the table will default to the value set by sn_table_name in the app.config.</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>SNOW: Send as Work Note</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Note</span></code></p></td>
-<td><p>None</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Add</span> <span class="pre">Work</span> <span class="pre">Note</span> <span class="pre">to</span> <span class="pre">Record</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Note</span> <span class="pre">Text</span></code> does not contain “Sent to ServiceNow at”</p></td>
+<tr class="row-even"><td><p>SNOW: Create Security Response Task (PB)</p></td>
+<td><p>Create a Security Response Task linked to the parent Security Incident of this task’s parent incident.</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.properties.sn_snow_table_name</span> <span class="pre">equals</span> <span class="pre">sn_si_incident</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>SNOW: Add Attachment to Record</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Attachment</span></code></p></td>
-<td><p>None</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Add</span> <span class="pre">Attachment</span> <span class="pre">to</span> <span class="pre">Record</span></code></p></td>
-<td><p>None</p></td>
+<tr class="row-odd"><td><p>SNOW: Update Record on Severity Change (PB)</p></td>
+<td><p></p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.severity_code</span> <span class="pre">changed</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>SNOW: [INC] Update Record on Severity Change</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
-<td><p>None</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Record</span> <span class="pre">on</span> <span class="pre">Severity</span> <span class="pre">Change</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Severity</span></code> is changed AND <code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> has a value AND is a INC incident in SNOW</p></td>
+<tr class="row-even"><td><p>SNOW: Send as Additional Comment (PB)</p></td>
+<td><p></p></td>
+<td><p>Manual</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">note.text</span> <span class="pre">not_contains</span> <span class="pre">Sent</span> <span class="pre">to</span> <span class="pre">ServiceNow</span> <span class="pre">at</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>SNOW: [SIR] Update Record on Severity Change</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
-<td><p>None</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Record</span> <span class="pre">on</span> <span class="pre">Severity</span> <span class="pre">Change</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Severity</span></code> is changed AND <code class="docutils literal notranslate"><span class="pre">SNOW</span> <span class="pre">Record</span> <span class="pre">ID</span></code> has a value AND is a SIR Incident in SNOW</p></td>
+<tr class="row-odd"><td><p>SNOW: Send as Work Note (PB)</p></td>
+<td><p></p></td>
+<td><p>Manual</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">note.text</span> <span class="pre">not_contains</span> <span class="pre">Sent</span> <span class="pre">to</span> <span class="pre">ServiceNow</span> <span class="pre">at</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>SNOW: Update Data Table on Status Change [Incident]</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Incident</span></code></p></td>
-<td><p>None</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Data</span> <span class="pre">Table</span> <span class="pre">on</span> <span class="pre">Status</span> <span class="pre">Change</span> <span class="pre">[Incident]</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Status</span></code> is changed</p></td>
+<tr class="row-even"><td><p>SNOW: Update Data Table on Status Change [Incident] (PB)</p></td>
+<td><p></p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.plan_status</span> <span class="pre">changed</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>SNOW: Update Data Table on Status Change [Task]</p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></td>
-<td><p>None</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">SNOW:</span> <span class="pre">Update</span> <span class="pre">Data</span> <span class="pre">Table</span> <span class="pre">on</span> <span class="pre">Status</span> <span class="pre">Change</span> <span class="pre">[Task]</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Status</span></code> is changed</p></td>
+<tr class="row-odd"><td><p>SNOW: Update Data Table on Status Change [Task] (PB)</p></td>
+<td><p></p></td>
+<td><p>Automatic</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">task.status</span> <span class="pre">changed</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: Update/Close Incident (PB)</p></td>
+<td><p>Update the state of this record in the incident table in ServiceNow</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.properties.sn_snow_table_name</span> <span class="pre">equals</span> <span class="pre">incident</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: Update/Close Record (PB)</p></td>
+<td><p>Update the state of this record in the “incident” table in ServiceNow</p></td>
+<td><p>Manual</p></td>
+<td><p>sn_records_dt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt.sn_records_dt_snow_table</span> <span class="pre">equals</span> <span class="pre">incident</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: Update/Close Response Task (PB)</p></td>
+<td><p>Update the state of this record in the “sn_si_task” table in ServiceNow</p></td>
+<td><p>Manual</p></td>
+<td><p>sn_records_dt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt.sn_records_dt_snow_table</span> <span class="pre">equals</span> <span class="pre">sn_si_task</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW: Update/Close Security Incident (PB)</p></td>
+<td><p>Update the state of this record in the “sn_si_incident” table in ServiceNow</p></td>
+<td><p>Manual</p></td>
+<td><p>sn_records_dt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt.sn_records_dt_snow_table</span> <span class="pre">equals</span> <span class="pre">sn_si_incident</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW: Update/Close SIR Incident (PB)</p></td>
+<td><p>Update the state of this record in the “sn_si_incident” table in ServiceNow</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.properties.sn_snow_table_name</span> <span class="pre">equals</span> <span class="pre">sn_si_incident</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>[DEPRECATED] SNOW: Create New Record (PB)</p></td>
+<td><p>Deprecated as of v2.3.0. Please use “SNOW: Create New Incident (PB)” to create “incident” records and “SNOW: Create New Security Incident (PB)” to create “sn_si_incident” records.  This playbook is used to create a new record in ServiceNow from this case in SOAR. It reads the sn_table_name config to determine the table in which to create the record.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.sn_snow_record_id</span> <span class="pre">not_has_a_value</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>[DEPRECATED] SNOW: Update/Close Record [Task] (PB)</p></td>
+<td><p>Deprecated as of v2.3.0 because tasks don’t contain enough information to distinguish between Security Incidents, Security Response Tasks, and Incidents. This playbook is now disabled by default. Please use the associated playbook for the record from the datatable.</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1500,40 +1568,59 @@
 <tr class="row-odd"><th class="head"><p>Column Name</p></th>
 <th class="head"><p>API Access Name</p></th>
 <th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Last Updated</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_time</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">DateTimePicker</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Name</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_name</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Type</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_type</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>SOAR ID</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_res_id</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>SNOW ID</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_sn_ref_id</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>SOAR Status</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_res_status</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Rich</span> <span class="pre">Text</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>SNOW Status</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_snow_status</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Rich</span> <span class="pre">Text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>The time this row was last updated</p></td>
 </tr>
 <tr class="row-odd"><td><p>Links</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_links</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Rich</span> <span class="pre">Text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>Opens the record in a new tab in either IBM SOAR or SNOW</p></td>
+</tr>
+<tr class="row-even"><td><p>Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>The name of the record</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_sn_ref_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>ID of record in SNOW, unique to its table in SNOW</p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW Parent ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_sn_parent_ref_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>ID of record’s parent in SNOW if the record is a “child” record</p></td>
+</tr>
+<tr class="row-odd"><td><p>SNOW Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_snow_status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>The current status of the record in SNOW</p></td>
+</tr>
+<tr class="row-even"><td><p>SNOW Table</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_snow_table</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>The table in ServiceNow where this record exists</p></td>
+</tr>
+<tr class="row-odd"><td><p>SOAR ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_res_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Unique ID of IBM SOAR Incident or Task</p></td>
+</tr>
+<tr class="row-even"><td><p>SOAR Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_res_status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>The current status of the Incident/Task in IBM SOAR</p></td>
+</tr>
+<tr class="row-odd"><td><p>Type in SOAR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_records_dt_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Type of the linked object in SOAR. Either Incident or Task</p></td>
 </tr>
 </tbody>
 </table>
@@ -1541,13 +1628,54 @@
 </section>
 </section>
 </section>
-<section id="security-incident-response-specific-customizations">
-<h2>Security Incident Response Specific Customizations<a class="headerlink" href="#security-incident-response-specific-customizations" title="Link to this heading">¶</a></h2>
-<p>By default the severity of a SOAR incident/case is mapped to the <code class="docutils literal notranslate"><span class="pre">severity</span></code> field in ServiceNow.
-This field is available in both the <code class="docutils literal notranslate"><span class="pre">incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> tables, however, Security Incident (SIR) tables have another field labeled <code class="docutils literal notranslate"><span class="pre">business_criticality</span></code>.
-It is recommend after the install to customize your playbooks in SOAR and SNOW to handle <code class="docutils literal notranslate"><span class="pre">business_criticality</span></code> rather than <code class="docutils literal notranslate"><span class="pre">severity</span></code> in SNOW.
-Customize the “[SIR] SNOW Update Record on Severity Change” playbook and “SNOW: Create Record [Incident]”. The “RES_WF_CreateIncident” playbook on SNOW should be customized as well.
-See the <a class="reference internal" href="#../customize_snow_guide"><span class="xref myst">Customize ServiceNow App Guide</span></a> for more details.</p>
+<hr class="docutils" />
+<section id="custom-fields">
+<h2>Custom Fields<a class="headerlink" href="#custom-fields" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Prefix</p></th>
+<th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ServiceNow Record</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_snow_record_link</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Link to ServiceNow Record</p></td>
+</tr>
+<tr class="row-odd"><td><p>ServiceNow Record ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_snow_record_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>ID of ServiceNow Record</p></td>
+</tr>
+<tr class="row-even"><td><p>ServiceNow Table Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sn_snow_table_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>incident</p></td>
+<td><p>The name of the table in ServiceNow for the corresponding record</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="links">
+<h2>Links<a class="headerlink" href="#links" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../README.html"><span class="std std-doc">IBM SOAR ServiceNow App Main Page</span></a></p></li>
+<li><p><a class="reference internal" href="../install_guide/README.html"><span class="std std-doc">Install Guide</span></a></p></li>
+<li><p><a class="reference internal" href="../customize_snow_guide/README.html"><span class="std std-doc">Customize ServiceNow App Guide</span></a></p></li>
+</ul>
 </section>
 </section>
 
@@ -1607,23 +1735,25 @@ See the <a class="reference internal" href="#../customize_snow_guide"><span clas
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">SOAR Customization Guide</a><ul>
-<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#overview">Overview:</a></li>
-<li><a class="reference internal" href="#app-config-settings-app-config">App Config Settings (app.config):</a></li>
-<li><a class="reference internal" href="#functions">Functions:</a><ul>
-<li><a class="reference internal" href="#function-snow-create-record">Function - SNOW: Create Record</a></li>
-<li><a class="reference internal" href="#function-snow-update-record">Function - SNOW: Update Record</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#app-config-settings-app-config">App Config Settings (app.config)</a><ul>
+<li><a class="reference internal" href="#a-note-on-sn-table-name">A note on <code class="docutils literal notranslate"><span class="pre">sn_table_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#snow-create-record">SNOW: Create Record</a></li>
+<li><a class="reference internal" href="#snow-update-record">SNOW: Update Record</a><ul>
 <li><a class="reference internal" href="#sending-soar-artifacts-to-snow">Sending SOAR artifacts to SNOW</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#function-snow-close-record">Function - SNOW: Close Record</a></li>
-<li><a class="reference internal" href="#function-snow-add-note-to-record">Function - SNOW: Add Note to Record</a></li>
-<li><a class="reference internal" href="#function-snow-add-attachment-to-record">Function - SNOW: Add Attachment to Record</a></li>
-<li><a class="reference internal" href="#function-snow-lookup-sys-id">Function - SNOW: Lookup sys_id</a></li>
-<li><a class="reference internal" href="#function-snow-helper-update-data-table">Function - SNOW Helper: Update Data Table</a></li>
+<li><a class="reference internal" href="#snow-close-record">SNOW: Close Record</a></li>
+<li><a class="reference internal" href="#snow-add-note-to-record">SNOW: Add Note to Record</a></li>
+<li><a class="reference internal" href="#snow-add-attachment-to-record">SNOW: Add Attachment to Record</a></li>
+<li><a class="reference internal" href="#snow-lookup-sys-id">SNOW: Lookup sys_id</a></li>
+<li><a class="reference internal" href="#snow-helper-update-data-table">SNOW Helper: Update Data Table</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#rules">Rules:</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#data-tables">Data Tables:</a><ul>
 <li><a class="reference internal" href="#servicenow-records">ServiceNow Records</a><ul>
 <li><a class="reference internal" href="#api-name">API Name:</a></li>
@@ -1632,7 +1762,8 @@ See the <a class="reference internal" href="#../customize_snow_guide"><span clas
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#security-incident-response-specific-customizations">Security Incident Response Specific Customizations</a></li>
+<li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </li>
 </ul>

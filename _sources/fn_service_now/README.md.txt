@@ -1,19 +1,5 @@
 # ServiceNow
 
-- [Release Notes](#release-notes)
-  - [v2.2.0](#v220)
-  - [2.2.0 Changes](#220-changes)
-  - [v2.1.0](#v210)
-  - [v2.0.9](#v209)
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Requirements](#requirements)
-- [Install](#install)
-- [Customize](#customize)
-- [Documentation](#documentation)
-
----
-
 ```{toctree}
 :maxdepth: 1
 :hidden:
@@ -28,20 +14,38 @@ docs/customize_resilient_guide/README
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
+### v2.3.0
+* Multiple tables can be used at the same time. See the "Create Record" function in **Customize SOAR Guide** for details.
+* Configuration test updated to ensure that ServiceNow app configuration includes table name in `ServiceNowAllowedTables` list.
+* New automatic playbook in SOAR to close SOAR incidents automatically when record is closed in ServiceNow.
+  Playbook is disabled by default, enable the playbook to get this functionality.
+* The SOAR app now supports synchronization with records from any supported table. This is an improvement from v2.2.x where only the
+  table listed in app.config was fully supported. See the "Create Record" function in **Customize SOAR Guide** for details.
+* Configuration test updated to ensure that ServiceNow app configuration includes table name in `ServiceNowAllowedTables` list
+* Added two new manual playbooks to send SOAR Tasks to ServiceNow as either child incidents for the `incident` (Incident) table or Security Incident Tasks
+  for the `sn_si_incident` (Security Incident Response) table. These playbooks will only activate when the parent incident in SOAR is
+  linked to the respective table (example: incident from table `incident` will allow to send task as child incident).
+* Verified on ServiceNow Washington DC release.
+
 ### v2.2.1
 * Bug fix for breaking html formatted fields on a SOAR incident.
 
 ### v2.2.0
-* Added playbooks
-* Validated on ServiceNow Vancouver release (use v2.1.0 on ServiceNow)
+* Added playbooks.
+* Validated on ServiceNow Vancouver release (use v2.1.0 on ServiceNow).
 
 ### 2.2.0 Changes
-In v2.2, the existing rules and workflows have been replaced with playbooks.
+Since v2.2, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
-For automatic actions, the playbooks will be disabled by default.
+For automatic actions, the playbooks will be disabled by default to avoid conflict with the automatic rules.
+All rules and workflows packaged with previous versions of the app should be removed so that
+the latest playbooks can be used. Once complete, please enable the automatic playbooks for the app.
+To accommodate potential upgrades from pre v2.2 versions, these automatic playbooks will remain
+disabled out of the box. For any future upgrades, they will be reset to disabled and should always be
+re-enabled after upgrade.
 
 You can continue to use the rules/workflows.
 But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
@@ -95,15 +99,14 @@ Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops P
 ---
 
 ## Requirements
-* ServiceNow Instance with ITSM enabled and running `Kingston`, or newer releases
+* ServiceNow Instance with ITSM enabled and running `Utah`, or newer releases
 * Access to the **Incident Table** in ServiceNow
-* ServiceNow `IBM SOAR App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
-  * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.0.9` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
+* ServiceNow `IBM SOAR App >= v2.3.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
+  * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.3.0` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
 * If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide/README.md) for more information
-* IBM Cloud Pak for Security `>= 1.6.0` *or* IBM SOAR `>= v45.0.0`
-* App Host `>= v1.10.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v45.0.0`.
-  - `fn_service_now >= v1.0.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
-  - If integrating with SIR, `fn_service_now >= v2.1.0` is recommended
+* IBM Cloud Pak for Security `>= 1.10.18` *or* IBM SOAR `>= v51.0.0.0`
+* App Host `>= v1.15.1.0` (recommended) *or* an Integration Server running `resilient-circuits >= v51.0.2.0`.
+  - `fn_service_now >= v2.3.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 
 ---
 
@@ -121,4 +124,3 @@ The default configuration satisfies the requirements for a number of use cases. 
 
 ## Documentation
 * See [ibm.biz/res-snow-docs](http://ibm.biz/res-snow-docs) for our latest documentation
-

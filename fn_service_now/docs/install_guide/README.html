@@ -412,60 +412,22 @@
         <article role="main" id="furo-main-content">
           <section id="servicenow-installation-guide">
 <h1>ServiceNow Installation Guide<a class="headerlink" href="#servicenow-installation-guide" title="Link to this heading">¶</a></h1>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
-<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
-<li><p><a class="reference internal" href="#step-1-install-servicenow-ibm-soar-app"><span class="xref myst">Step 1: <em>Install ServiceNow IBM SOAR App</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role"><span class="xref myst">Step 2: <em>Create a User in ServiceNow and assign it the correct Role</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-3-create-an-api-key-on-the-soar-platform"><span class="xref myst">Step 3: <em>Create an API Key on the SOAR Platform</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-4-enter-ibm-soar-configurations"><span class="xref myst">Step 4: <em>Enter IBM SOAR Configurations</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-5-download--install-fn_service_now-app"><span class="xref myst">Step 5: <em>Download &amp; Install fn_service_now App</em></span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#download--install-on-app-host"><span class="xref myst">Download &amp; Install on App Host</span></a></p></li>
-<li><p><a class="reference internal" href="#download--install-on-integration-server"><span class="xref myst">Download &amp; Install on Integration Server</span></a></p></li>
-<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration:</span></a></p></li>
-<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#step-6-install-and-configure-servicenow-mid-server-if-needed"><span class="xref myst">Step 6: <em>Install and Configure ServiceNow MID Server (if needed)</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-7-give-your-servicenow-users-the-correct-role"><span class="xref myst">Step 7: <em>Give your ServiceNow users the correct Role</em></span></a></p></li>
-<li><p><a class="reference internal" href="#step-8-security-incident-response-sir-configurations"><span class="xref myst">Step 8: Security Incident Response (SIR) Configurations</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#configure-servicenowallowedtablenames-sir-only"><span class="xref myst">Configure <code class="docutils literal notranslate"><span class="pre">ServiceNowAllowedTableNames</span></code> (SIR only)</span></a></p></li>
-<li><p><a class="reference internal" href="#add-ibm-soar-tab-to-security-incident-ui-sir-only"><span class="xref myst">Add IBM SOAR tab to Security Incident UI (SIR only)</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#sync-to-soar-automatically-on-group-assignment-sir-only"><span class="xref myst">Sync to SOAR automatically on group assignment (SIR only)</span></a></p></li>
-<li><p><a class="reference internal" href="#step-9-test"><span class="xref myst">Step 9: <em>Test</em></span></a></p></li>
-</ul>
-</section>
-<hr class="docutils" />
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
-<ul>
+<ul class="simple">
 <li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Kingston</span></code> or newer releases</p></li>
 <li><p>Access to the <code class="docutils literal notranslate"><span class="pre">Incident</span> <span class="pre">Table</span></code> in ServiceNow</p></li>
 <li><p>A user in ServiceNow with an <code class="docutils literal notranslate"><span class="pre">admin</span></code> role</p></li>
-<li><p>IBM Cloud Pak for Security <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.9.0</span></code> <em>or</em> IBM SOAR <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v45.0.0</span></code></p></li>
-<li><p>An App Host &gt;= <code class="docutils literal notranslate"><span class="pre">v1.9.0</span></code> or an Integrations Server running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">v45.0.0</span></code>.</p>
-<blockquote>
-<div><ul class="simple">
+<li><p>IBM Cloud Pak for Security <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.10.18</span></code> <em>or</em> IBM SOAR <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v51.0.0.0</span></code></p></li>
+<li><p>An App Host &gt;= <code class="docutils literal notranslate"><span class="pre">v1.15.0</span></code> or an Integrations Server running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">v51.0.0.0</span></code>.</p>
+<ul>
 <li><p>To setup an App Host see: <a class="reference external" href="https://ibm.biz/res-app-host-setup">ibm.biz/res-app-host-setup</a></p></li>
 <li><p>To setup an Integration Server see: <a class="reference external" href="https://ibm.biz/res-int-server-guide">ibm.biz/res-int-server-guide</a></p></li>
 </ul>
-</div></blockquote>
 </li>
 <li><p>If SOAR instance is not publicly accessible (behind a firewall), a <code class="docutils literal notranslate"><span class="pre">ServiceNow</span> <span class="pre">MID</span> <span class="pre">Server</span></code> is required</p></li>
 <li><p>If you want to integrate with ServiceNow Security Incident Response (SIR), make sure to install it first</p></li>
-</ul>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v1.0.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p>
-<ul>
-<li><p>If integrating with SIR, <code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.0.0</span></code> is required</p></li>
-</ul>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.3.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -486,20 +448,17 @@
 <hr class="docutils" />
 <section id="step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role">
 <h2>Step 2: <em>Create a User in ServiceNow and assign it the correct Role</em><a class="headerlink" href="#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role" title="Link to this heading">¶</a></h2>
-<ul>
+<ul class="simple">
 <li><p>In ServiceNow, go to the <strong>Users Table</strong> and click <strong>New</strong>.
 <img alt="screenshot" src="../../../_images/92.png" /></p></li>
 <li><p>Enter the following:</p>
-<ul class="simple">
+<ul>
 <li><p><strong>User ID:</strong> <code class="docutils literal notranslate"><span class="pre">ibmresilient</span></code></p></li>
 <li><p><strong>First Name:</strong> IBM</p></li>
 <li><p><strong>Last Name:</strong> SOAR</p></li>
 <li><p><strong>Password:</strong> #########</p></li>
 <li><p><strong>Email:</strong> <code class="docutils literal notranslate"><span class="pre">ibm_resilient_integration&#64;example.com</span></code></p></li>
 </ul>
-<blockquote>
-<div><p>Note: In San Diego or later the box “Password needs reset” is automatically checked. This must be unchecked for the connection from SOAR -&gt; SNOW to properly work.</p>
-</div></blockquote>
 </li>
 <li><p>Set the <strong>Timezone</strong> to the same timezone of your SOAR Platform.
 <img alt="screenshot" src="../../../_images/101.png" /></p></li>
@@ -608,7 +567,7 @@
 </tr>
 <tr class="row-even"><td><p>ServiceNowAllowedTableNames</p></td>
 <td class="text-center"><p>Yes</p></td>
-<td><p>A CSV list of all the <strong>Table Names</strong> in ServiceNow IBM SOAR is allowed to integrate with. <em>Out-of-the-box this app requires access to the <code class="docutils literal notranslate"><span class="pre">incident</span></code>, <code class="docutils literal notranslate"><span class="pre">sys_user</span></code> and <code class="docutils literal notranslate"><span class="pre">sys_user_group</span></code> tables.</em> For integrating with ServiceNow Security Incident Response (SIR) this app requires <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_task</span></code></p></td>
+<td><p>A CSV list of all the <strong>Table Names</strong> in ServiceNow IBM SOAR is allowed to integrate with. <em>Out-of-the-box this app requires access to the <code class="docutils literal notranslate"><span class="pre">incident</span></code>, <code class="docutils literal notranslate"><span class="pre">sys_user</span></code> and <code class="docutils literal notranslate"><span class="pre">sys_user_group</span></code> tables.</em> For integrating with ServiceNow Security Incident Response (SIR) this app requires <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_task</span></code>. Since v2.3.0 this apps supports integrating with both the <code class="docutils literal notranslate"><span class="pre">incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> tables at the same time</p></td>
 </tr>
 <tr class="row-odd"><td><p>IBM SOAR Assignment Group Names</p></td>
 <td class="text-center"><p>No</p></td>
@@ -810,10 +769,8 @@
 <li><p>Click <strong>Save</strong>.</p></li>
 </ul>
 </section>
-</section>
-<hr class="docutils" />
 <section id="sync-to-soar-automatically-on-group-assignment-sir-only">
-<h2>Sync to SOAR automatically on group assignment (SIR only)<a class="headerlink" href="#sync-to-soar-automatically-on-group-assignment-sir-only" title="Link to this heading">¶</a></h2>
+<h3>Sync to SOAR automatically on group assignment (SIR only)<a class="headerlink" href="#sync-to-soar-automatically-on-group-assignment-sir-only" title="Link to this heading">¶</a></h3>
 <p>When integrating with SIR tables, there is a parameter that can be set in the IBM Security QRadar SOAR Properties section for automatic escalation to SOAR on group assignment. This is most useful for Security Response Tasks but can also be used on the parent Security Incident table.</p>
 <p>By default, this app includes the “IBM SOAR Response Group” but that needs to be created.</p>
 <ul class="simple">
@@ -826,6 +783,7 @@
 <li><p>Click <strong>Submit</strong>.</p></li>
 <li><p>Similarly to as in <a class="reference internal" href="#step-7-give-your-servicenow-users-the-correct-role"><span class="xref myst">Step 7</span></a>, give any user except the user that was created in Step 7 the role <code class="docutils literal notranslate"><span class="pre">sn_si.analyst</span></code> and add them to the response group you created above.</p></li>
 </ul>
+</section>
 </section>
 <hr class="docutils" />
 <section id="step-9-test">
@@ -863,7 +821,15 @@
 <li><p>If successful, open the ServiceNow tab on the incident and make sure the new task is in the table
 <img alt="screenshot" src="../../../_images/251.png" /></p></li>
 </ul>
+</section>
 <hr class="docutils" />
+<section id="links">
+<h2>Links<a class="headerlink" href="#links" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../README.html"><span class="std std-doc">IBM SOAR ServiceNow App Main Page</span></a></p></li>
+<li><p><a class="reference internal" href="../customize_resilient_guide/README.html"><span class="std std-doc">Customize SOAR App Guide</span></a></p></li>
+<li><p><a class="reference internal" href="../customize_snow_guide/README.html"><span class="std std-doc">Customize ServiceNow App Guide</span></a></p></li>
+</ul>
 </section>
 </section>
 
@@ -923,7 +889,6 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">ServiceNow Installation Guide</a><ul>
-<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li><a class="reference internal" href="#step-1-install-servicenow-ibm-soar-app">Step 1: <em>Install ServiceNow IBM SOAR App</em></a></li>
 <li><a class="reference internal" href="#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role">Step 2: <em>Create a User in ServiceNow and assign it the correct Role</em></a></li>
@@ -941,10 +906,11 @@
 <li><a class="reference internal" href="#step-8-security-incident-response-sir-configurations">Step 8: Security Incident Response (SIR) Configurations</a><ul>
 <li><a class="reference internal" href="#configure-servicenowallowedtablenames-sir-only">Configure <code class="docutils literal notranslate"><span class="pre">ServiceNowAllowedTableNames</span></code> (SIR only)</a></li>
 <li><a class="reference internal" href="#add-ibm-soar-tab-to-security-incident-ui-sir-only">Add IBM SOAR tab to Security Incident UI (SIR only)</a></li>
+<li><a class="reference internal" href="#sync-to-soar-automatically-on-group-assignment-sir-only">Sync to SOAR automatically on group assignment (SIR only)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#sync-to-soar-automatically-on-group-assignment-sir-only">Sync to SOAR automatically on group assignment (SIR only)</a></li>
 <li><a class="reference internal" href="#step-9-test">Step 9: <em>Test</em></a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </li>
 </ul>

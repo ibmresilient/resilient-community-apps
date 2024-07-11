@@ -412,23 +412,6 @@
         <article role="main" id="furo-main-content">
           <section id="servicenow">
 <h1>ServiceNow<a class="headerlink" href="#servicenow" title="Link to this heading">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#v220"><span class="xref myst">v2.2.0</span></a></p></li>
-<li><p><a class="reference internal" href="#220-changes"><span class="xref myst">2.2.0 Changes</span></a></p></li>
-<li><p><a class="reference internal" href="#v210"><span class="xref myst">v2.1.0</span></a></p></li>
-<li><p><a class="reference internal" href="#v209"><span class="xref myst">v2.0.9</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
-<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
-<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p></li>
-<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
-<li><p><a class="reference internal" href="#customize"><span class="xref myst">Customize</span></a></p></li>
-<li><p><a class="reference internal" href="#documentation"><span class="xref myst">Documentation</span></a></p></li>
-</ul>
-<hr class="docutils" />
 <div class="toctree-wrapper compound">
 </div>
 <section id="release-notes">
@@ -437,6 +420,22 @@
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
+<section id="v2-3-0">
+<h3>v2.3.0<a class="headerlink" href="#v2-3-0" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Multiple tables can be used at the same time. See the “Create Record” function in <strong>Customize SOAR Guide</strong> for details.</p></li>
+<li><p>Configuration test updated to ensure that ServiceNow app configuration includes table name in <code class="docutils literal notranslate"><span class="pre">ServiceNowAllowedTables</span></code> list.</p></li>
+<li><p>New automatic playbook in SOAR to close SOAR incidents automatically when record is closed in ServiceNow.
+Playbook is disabled by default, enable the playbook to get this functionality.</p></li>
+<li><p>The SOAR app now supports synchronization with records from any supported table. This is an improvement from v2.2.x where only the
+table listed in app.config was fully supported. See the “Create Record” function in <strong>Customize SOAR Guide</strong> for details.</p></li>
+<li><p>Configuration test updated to ensure that ServiceNow app configuration includes table name in <code class="docutils literal notranslate"><span class="pre">ServiceNowAllowedTables</span></code> list</p></li>
+<li><p>Added two new manual playbooks to send SOAR Tasks to ServiceNow as either child incidents for the <code class="docutils literal notranslate"><span class="pre">incident</span></code> (Incident) table or Security Incident Tasks
+for the <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> (Security Incident Response) table. These playbooks will only activate when the parent incident in SOAR is
+linked to the respective table (example: incident from table <code class="docutils literal notranslate"><span class="pre">incident</span></code> will allow to send task as child incident).</p></li>
+<li><p>Verified on ServiceNow Washington DC release.</p></li>
+</ul>
+</section>
 <section id="v2-2-1">
 <h3>v2.2.1<a class="headerlink" href="#v2-2-1" title="Link to this heading">¶</a></h3>
 <ul class="simple">
@@ -446,17 +445,22 @@
 <section id="v2-2-0">
 <h3>v2.2.0<a class="headerlink" href="#v2-2-0" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>Added playbooks</p></li>
-<li><p>Validated on ServiceNow Vancouver release (use v2.1.0 on ServiceNow)</p></li>
+<li><p>Added playbooks.</p></li>
+<li><p>Validated on ServiceNow Vancouver release (use v2.1.0 on ServiceNow).</p></li>
 </ul>
 </section>
 <section id="changes">
 <h3>2.2.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
-<p>In v2.2, the existing rules and workflows have been replaced with playbooks.
+<p>Since v2.2, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
 <p>If upgrading from a previous release, you’ll notice that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it’s corresponding rule, but with “(PB)” added at the end.
-For automatic actions, the playbooks will be disabled by default.</p>
+For automatic actions, the playbooks will be disabled by default to avoid conflict with the automatic rules.
+All rules and workflows packaged with previous versions of the app should be removed so that
+the latest playbooks can be used. Once complete, please enable the automatic playbooks for the app.
+To accommodate potential upgrades from pre v2.2 versions, these automatic playbooks will remain
+disabled out of the box. For any future upgrades, they will be reset to disabled and should always be
+re-enabled after upgrade.</p>
 <p>You can continue to use the rules/workflows.
 But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.</p>
 </section>
@@ -537,19 +541,18 @@ But migrating to playbooks provides greater functionality along with future app 
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Kingston</span></code>, or newer releases</p></li>
+<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Utah</span></code>, or newer releases</p></li>
 <li><p>Access to the <strong>Incident Table</strong> in ServiceNow</p></li>
-<li><p>ServiceNow <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">v1.0.0</span></code> installed on your ServiceNow Instance which you can download from <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-app">the ServiceNow Store</a></p>
+<li><p>ServiceNow <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">v2.3.0</span></code> installed on your ServiceNow Instance which you can download from <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-app">the ServiceNow Store</a></p>
 <ul>
-<li><p>If integrating with ServiceNow Security Incident Table (SIR), <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">2.0.9</span></code> and ServiceNow Security Incident Response with its dependencies are required. More information <a class="reference external" href="https://www.servicenow.com/products/security-incident-response.html">here</a>.</p></li>
+<li><p>If integrating with ServiceNow Security Incident Table (SIR), <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">2.3.0</span></code> and ServiceNow Security Incident Response with its dependencies are required. More information <a class="reference external" href="https://www.servicenow.com/products/security-incident-response.html">here</a>.</p></li>
 </ul>
 </li>
 <li><p>If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the <a class="reference internal" href="docs/install_guide/README.html"><span class="std std-doc">Install Guide</span></a> for more information</p></li>
-<li><p>IBM Cloud Pak for Security <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.6.0</span></code> <em>or</em> IBM SOAR <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v45.0.0</span></code></p></li>
-<li><p>App Host <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v1.10.0</span></code> (recommended) <em>or</em> an Integrations Server running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">v45.0.0</span></code>.</p>
+<li><p>IBM Cloud Pak for Security <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.10.18</span></code> <em>or</em> IBM SOAR <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v51.0.0.0</span></code></p></li>
+<li><p>App Host <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v1.15.1.0</span></code> (recommended) <em>or</em> an Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">v51.0.2.0</span></code>.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v1.0.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p></li>
-<li><p>If integrating with SIR, <code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.1.0</span></code> is recommended</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.3.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p></li>
 </ul>
 </li>
 </ul>
@@ -634,6 +637,7 @@ But migrating to playbooks provides greater functionality along with future app 
             <ul>
 <li><a class="reference internal" href="#">ServiceNow</a><ul>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#v2-3-0">v2.3.0</a></li>
 <li><a class="reference internal" href="#v2-2-1">v2.2.1</a></li>
 <li><a class="reference internal" href="#v2-2-0">v2.2.0</a></li>
 <li><a class="reference internal" href="#changes">2.2.0 Changes</a></li>
