@@ -4,32 +4,32 @@
     Generated with resilient-sdk v52.0.0.0.1010
 -->
 
-# Playbook - [DEPRECATED] SNOW: Update/Close Record [Task] (PB)
+# Playbook - SNOW: Update/Close Security Incident (PB)
 
 ### API Name
-`snow_updateclose_record_task_pb`
+`snow_updateclose_sir_incident_from_datatable_pb`
 
 ### Status
-`disabled`
+`enabled`
 
 ### Activation Type
 `Manual`
 
 ### Activation Conditions
-`-`
+`sn_records_dt.sn_records_dt_snow_table equals sn_si_incident`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | SN Close Code | `sn_close_code` | select | Optional. Sets the close code only when Record State is CLOSED | Optional |
 | SN Close Notes | `sn_close_notes` | text | Optional. Note to be added to record when state is CLOSED | Optional |
-| SN Record State | `sn_record_state` | select | Use INC state for SNOW Incident tables and SIR States for Security Incident Response tables | Always |
+| SN Record State | `sn_record_state` | select | - | Always |
 
 ### Object Type
-`task`
+`sn_records_dt`
 
 ### Description
-Deprecated as of v2.3.0 because tasks don't contain enough information to distinguish between Security Incidents, Security Response Tasks, and Incidents. This playbook is now disabled by default. Please use the associated playbook for the record from the datatable.
+Update the state of this record in the "sn_si_incident" table in ServiceNow
 
 
 ---
@@ -39,7 +39,7 @@ Deprecated as of v2.3.0 because tasks don't contain enough information to distin
 `fn_snow_close_record`
 
 ### Output Name
-`close_record`
+`close_in_sn`
 
 ### Message Destination
 `fn_service_now`
@@ -53,40 +53,71 @@ map_sn_record_states = {
   "New": 1,
   "In Progress": 2,
   "On Hold": 3,
-  "[INC] Resolved": 6,
-  "[INC] Closed": 7,
-  "[INC] Canceled": 8,
-	"[SIR] Analysis": 16,
-	"[SIR] Contain": 18,
-	"[SIR] Eradicate": 19,
-	"[SIR] Recover": 20,
-	"[SIR] Review": 100,
-	"[SIR] Closed": 3,
-	"[SIR] Canceled": 7
+	"Analysis": 16,
+	"Contain": 18,
+	"Eradicate": 19,
+	"Recover": 20,
+	"Review": 100,
+	"Closed": 3,
+	"Canceled": 7,
+  "Cancelled": 7 # servicenow has inconsistent spellings of this word...
 }
 
 # ID of this incident
 inputs.incident_id = incident.id
 
-# ID of this task
-inputs.task_id = task.id
+# RES ID of this SNOW record from the Data Table row
+inputs.sn_res_id = row.sn_records_dt_res_id
 
 # The state to change the record to
-# inputs.sn_record_state = map_sn_record_states["Closed"]
-inputs.sn_record_state = map_sn_record_states[getattr(playbook.inputs, "sn_record_state", None)]
+inputs.sn_record_state = map_sn_record_states.get(getattr(playbook.inputs, "sn_record_state", None))
 
 # The resolution notes that are normally required when you close a ServiceNow record
-# inputs.sn_close_notes = "This incident has been resolved in IBM SOAR. No further action required"
 if getattr(playbook.inputs, "sn_close_notes", None):
   inputs.sn_close_notes = getattr(playbook.inputs, "sn_close_notes", None)
 
 # The ServiceNow 'close_code' that you normally select when closing a ServiceNow record
-# inputs.sn_close_code = "Solved (Permanently)"
 if getattr(playbook.inputs, "sn_close_code", None):
   inputs.sn_close_code = getattr(playbook.inputs, "sn_close_code", None)
 
 # Add a Work Note to the Record in ServiceNow
 inputs.sn_close_work_note = f"This record's state has been changed to {playbook.inputs.sn_record_state} by IBM SOAR"
+
+```
+
+---
+## Function - SNOW Helper: Add Task Note
+
+### API Name
+`fn_snow_helper_add_task_note`
+
+### Output Name
+`add_task_note`
+
+### Message Destination
+`fn_service_now`
+
+### Function-Input Script
+```python
+note_text = None
+results = playbook.functions.results.close_in_sn
+if results.get("success"):
+  # If successfully closed the record, set below note_text
+  note_text = f"""<br>This Task has been updated in <b>ServiceNow</b>
+              <br><b>ServiceNow ID:</b> {results.get('sn_ref_id')}
+              <br><b>ServiceNow Record State:</b> {results.get('sn_record_state')}
+              <br><b>ServiceNow Closing Notes:</b> {results.get('inputs', {}).get('sn_close_notes')}
+              <br><b>ServiceNow Closing Code:</b> {results.get('inputs', {}).get('sn_close_code')}"""
+else:
+  # Else, it failed, so set this note_text
+  note_text = f"""<br>Failed to close this Task in <b>ServiceNow</b>
+            <br><b>Reason:</b> {results.get("reason")}"""
+
+# Get sn_res_id from the Data Table
+inputs.sn_res_id = row.sn_records_dt_res_id
+
+# Set the sn_note_text input
+inputs.sn_note_text = note_text
 
 ```
 
@@ -101,22 +132,29 @@ inputs.sn_close_work_note = f"This record's state has been changed to {playbook.
 `Local script`
 
 ### Object Type
-`task`
+`sn_records_dt`
 
 ### Script Content
 ```python
-results = playbook.functions.results.close_record
-if results.get("success"):
-  note_text = f"""<br>This Task has been updated in <b>ServiceNow</b>
-              <br><b>ServiceNow ID:</b> {results.get('sn_ref_id')}
-              <br><b>ServiceNow Record State:</b> {results.get('sn_record_state')}
-              <br><b>ServiceNow Closing Notes:</b> {results.get('inputs', {}).get('sn_close_notes')}
-              <br><b>ServiceNow Closing Code:</b> {results.get('inputs', {}).get('sn_close_code')}"""
-else:
-  note_text = f"""<br>Failed to close this Task in <b>ServiceNow</b>
-              <br><b>Reason:</b> {results.get('reason')}"""
+results = playbook.functions.results.close_in_sn
+# If the SOAR item type is Incident (if it is Task, we run the SNOW Helper: Add Task Note function)
+if row.sn_records_dt_type == "Incident":
+  note_text = None
 
-task.addNote(helper.createRichText(note_text))
+  # If it was a success, set below note_text
+  if results.get("success"):
+    note_text = f"""<br>This Incident has been updated in <b>ServiceNow</b>
+                <br><b>ServiceNow ID:</b> {results.get('sn_ref_id')}
+                <br><b>ServiceNow Record State:</b> {results.get('sn_record_state')}
+                <br><b>ServiceNow Closing Notes:</b> {results.get('inputs', {}).get('sn_close_notes')}
+                <br><b>ServiceNow Closing Code:</b> {results.get('inputs', {}).get('sn_close_code')}"""
+
+  # Else, it failed, so set below note_text
+  else:
+    note_text = f"""<br>Failed to close this Incident in <b>ServiceNow</b>
+                <br><b>Reason:</b> {results.get('reason')}"""
+
+  incident.addNote(helper.createRichText(note_text))
 ```
 
 ---

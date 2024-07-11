@@ -21,13 +21,13 @@ render_rich_text=True
 
 def mock_pre_scrip_dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, bool and int. 
+     Supports types: basestring, bool and int.
      Supports nested directories.
      If the value is None, it sets it to False"""
 
   json_entry = '"{0}":{1}'
   json_entry_str = '"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
@@ -42,7 +42,7 @@ def mock_pre_scrip_dict_to_json_str(d):
     if isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
-    
+
     elif isinstance(value, bool):
       value = 'true' if value == True else 'false'
       entries.append(json_entry.format(key, value))
@@ -63,7 +63,7 @@ def mock_byteify(data):
 
     if isinstance(data, unicode):
         data_as_utf8_str_dict = data.encode("utf-8")
-        
+
         # if Python 3.x data_as_utf8_str_dict will be bytes, so we convert back to str
         if isinstance(data_as_utf8_str_dict, bytes):
             data_as_utf8_str_dict = data_as_utf8_str_dict.decode(("utf-8"))
@@ -74,9 +74,9 @@ def mock_byteify(data):
     return data_as_utf8_str_dict
 
 class MockedResponse:
-  def __init__(self, status_code, text):
-    self.status_code = status_code
-    self.text = text
+    def __init__(self, status_code, text):
+        self.status_code = status_code
+        self.text = text
 
 class SNResilientMock(BasicResilientMock):
 
@@ -104,8 +104,10 @@ class SNResilientMock(BasicResilientMock):
         "sn_records_dt_type": "Task",
         "sn_records_dt_res_id": "RES-1001-2002",
         "sn_records_dt_sn_ref_id": "INC123456",
+        "sn_records_dt_sn_parent_ref_id": None,
         "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
         "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+        "sn_records_dt_snow_table": "incident",
         "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       },
       {
@@ -114,8 +116,10 @@ class SNResilientMock(BasicResilientMock):
         "sn_records_dt_name": "Mock Incident Name",
         "sn_records_dt_type": "Incident",
         "sn_records_dt_sn_ref_id": "INC123457",
+        "sn_records_dt_sn_parent_ref_id": None,
         "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
         "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+        "sn_records_dt_snow_table": "sn_si_incident",
         "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       }
     ]
@@ -125,10 +129,12 @@ class SNResilientMock(BasicResilientMock):
             "sn_records_dt_time": 1543333316605,
             "sn_records_dt_res_id": "RES-1001-2002",
             "sn_records_dt_sn_ref_id": "INC123456",
+            "sn_records_dt_sn_parent_ref_id": None,
             "sn_records_dt_name": "Mock Task Name",
             "sn_records_dt_type": "Task",
             "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
             "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+            "sn_records_dt_snow_table": "incident",
             "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
         },
         {
@@ -137,33 +143,35 @@ class SNResilientMock(BasicResilientMock):
             "sn_records_dt_name": "Mock Incident Name",
             "sn_records_dt_type": "Incident",
             "sn_records_dt_sn_ref_id": "INC123457",
+            "sn_records_dt_sn_parent_ref_id": None,
             "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Closed</div>""",
             "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+            "sn_records_dt_snow_table": "sn_si_incident",
             "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       }
     ]
 
     @staticmethod
     def format_datatable_row(row, row_id):
-      formatted_row = {}
+        formatted_row = {}
 
-      for key, value in row.items():
-        formatted_row[key] = {
-          "row_id": row_id,
-          "id": key,
-          "value": value
-        }
-  
-      return {"id": row_id, "cells": formatted_row}
-    
+        for key, value in row.items():
+            formatted_row[key] = {
+            "row_id": row_id,
+            "id": key,
+            "value": value
+            }
+
+        return {"id": row_id, "cells": formatted_row}
+
     @staticmethod
     def get_datatable_rows(rows):
-      row_id = 0
-      return_rows = []
-      for row in rows:
-        row_id += 1
-        return_rows.append(SNResilientMock.format_datatable_row(row, row_id))
-      return return_rows
+        row_id = 0
+        return_rows = []
+        for row in rows:
+            row_id += 1
+            return_rows.append(SNResilientMock.format_datatable_row(row, row_id))
+        return return_rows
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+$")
     def attachments_one_incident_get(self, request):

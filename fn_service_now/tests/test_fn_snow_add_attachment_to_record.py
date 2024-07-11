@@ -60,4 +60,4 @@ class TestFnSnowAddAttachmentToRecord:
 
         results = call_fn_snow_add_attachment_to_record_function(circuits_app, inputs)
         for key in expected_results:
-          assert(expected_results[key] == results[key])
+            assert(expected_results[key] == results[key])

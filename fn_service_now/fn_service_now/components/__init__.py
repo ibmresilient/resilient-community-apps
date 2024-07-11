@@ -14,6 +14,7 @@ class SNOWTab(Tab):
     CONTAINS = [
         Field("sn_snow_record_id"),
         Field("sn_snow_record_link"),
+        Field("sn_snow_table_name"),
         Datatable("sn_records_dt")
     ]
 

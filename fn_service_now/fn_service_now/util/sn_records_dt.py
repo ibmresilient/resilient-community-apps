@@ -43,7 +43,16 @@ class ServiceNowRecordsDataTable(object):
 
         return None
 
-    def add_row(self, time, name, res_type, res_id, sn_ref_id, res_status, snow_status, link):
+    def get_sn_table_name(self, res_id):
+        row = self.get_row("sn_records_dt_res_id", res_id)
+
+        if row:
+            cells = row["cells"]
+            return str(cells["sn_records_dt_snow_table"]["value"])
+
+        return None
+
+    def add_row(self, time, name, res_type, res_id, sn_ref_id, res_status, snow_status, snow_table, link, parent_ref_id=None):
         """Adds a new row to the data table and returns that row"""
         # Generate uri to POST datatable row
         uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}/row_data?handle_format=names"
@@ -56,8 +65,14 @@ class ServiceNowRecordsDataTable(object):
             ("sn_records_dt_sn_ref_id", sn_ref_id),
             ("sn_records_dt_res_status", res_status),
             ("sn_records_dt_snow_status", snow_status),
+            ("sn_records_dt_snow_table", snow_table),
             ("sn_records_dt_links", link)
         ]
+
+        if parent_ref_id:
+            cells.append(
+                ("sn_records_dt_sn_parent_ref_id", parent_ref_id)
+            )
 
         formatted_cells = {}
 
@@ -81,7 +96,7 @@ class ServiceNowRecordsDataTable(object):
             if cell_name in cells_to_update:
                 return cells_to_update[cell_name]
 
-            return row["cells"][cell_name]["value"]
+            return row["cells"][cell_name].get("value")
 
         cells = [
             ("sn_records_dt_time", get_value("sn_records_dt_time")),
@@ -90,7 +105,9 @@ class ServiceNowRecordsDataTable(object):
             ("sn_records_dt_res_id", get_value("sn_records_dt_res_id")),
             ("sn_records_dt_sn_ref_id", get_value("sn_records_dt_sn_ref_id")),
             ("sn_records_dt_res_status", get_value("sn_records_dt_res_status")),
+            ("sn_records_dt_sn_parent_ref_id", get_value("sn_records_dt_sn_parent_ref_id")),
             ("sn_records_dt_snow_status", get_value("sn_records_dt_snow_status")),
+            ("sn_records_dt_snow_table", get_value("sn_records_dt_snow_table")),
             ("sn_records_dt_links", get_value("sn_records_dt_links"))
         ]
 

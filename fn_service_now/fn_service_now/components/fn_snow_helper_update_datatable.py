@@ -5,13 +5,15 @@
 
 from logging import getLogger
 from time import time
-from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
+
+from resilient_circuits import (FunctionResult, ResilientComponent,
+                                StatusMessage, function, handler)
+from resilient_lib import ResultPayload, validate_fields
+
+from fn_service_now.util.resilient_helper import (SN_STATE_COLOR_MAP,
+                                                  CONFIG_DATA_SECTION,
                                                   ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
-from resilient_circuits import (FunctionError, FunctionResult,
-                                ResilientComponent, StatusMessage, function,
-                                handler)
-from resilient_lib import ResultPayload, validate_fields
 
 
 class FunctionPayload(object):
@@ -50,95 +52,86 @@ class FunctionComponent(ResilientComponent):
 
         log = getLogger(__name__)
 
-        try:
-            # Instantiate helper (which gets app configs from file)
-            res_helper = ResilientHelper(self.options)
-            rp = ResultPayload(CONFIG_DATA_SECTION)
-            validate_fields(["incident_id", "sn_resilient_status"], kwargs)
+        # Instantiate helper (which gets app configs from file)
+        res_helper = ResilientHelper(self.opts, self.options)
+        rp = ResultPayload(CONFIG_DATA_SECTION)
+        validate_fields(["incident_id", "sn_resilient_status"], kwargs)
 
-            # Get the function inputs:
-            inputs = {
-                # number (required)
-                "incident_id": kwargs.get("incident_id"),
-                # number (optional)
-                "task_id": kwargs.get("task_id"),
-                # text (required)
-                "sn_resilient_status": kwargs.get("sn_resilient_status"),
+        # Get the function inputs:
+        inputs = {
+            # number (required)
+            "incident_id": kwargs.get("incident_id"),
+            # number (optional)
+            "task_id": kwargs.get("task_id"),
+            # text (required)
+            "sn_resilient_status": kwargs.get("sn_resilient_status"),
+        }
+
+        # Create payload dict with inputs
+        payload = FunctionPayload(inputs)
+
+        yield StatusMessage("Function Inputs OK")
+
+        # Instantiate new Resilient API object
+        res_client = self.rest_client()
+
+        # Instantiate a reference to the ServiceNow Datatable
+        res_datatable = ServiceNowRecordsDataTable(
+            res_client, payload.inputs["incident_id"])
+
+        # Get the datatable data and rows
+        res_datatable.get_data()
+
+        # Generate the res_id
+        payload.res_id = res_helper.generate_res_id(
+            payload.inputs["incident_id"], payload.inputs["task_id"])
+
+        # Search for a row that contains the res_id
+        row_found = res_datatable.get_row(
+            "sn_records_dt_res_id", payload.res_id)
+
+        # Get current time (*1000 as API does not accept int)
+        now = int(time() * 1000)
+
+        if row_found:
+
+            resilient_status = res_helper.state_to_text(
+                payload.inputs.get("sn_resilient_status"))
+
+            yield StatusMessage(f"Row found for {payload.res_id}. Updating resilient_status to {resilient_status}")
+
+            resilient_status = res_helper.convert_text_to_richtext(resilient_status, SN_STATE_COLOR_MAP.get(resilient_status, "red"))
+
+            cells_to_update = {
+                "sn_records_dt_time": now,
+                "sn_records_dt_res_status": resilient_status
             }
 
-            # Create payload dict with inputs
-            payload = FunctionPayload(inputs)
+            # Update the row
+            update_row_response = res_datatable.update_row(
+                row_found, cells_to_update)
+            payload.row_id = update_row_response["id"]
 
-            yield StatusMessage("Function Inputs OK")
+        else:
+            payload.success = False
+            err_msg = "No row found for the {0} {1}"
 
-            # Instantiate new Resilient API object
-            res_client = self.rest_client()
-
-            # Instantiate a reference to the ServiceNow Datatable
-            res_datatable = ServiceNowRecordsDataTable(
-                res_client, payload.inputs["incident_id"])
-
-            # Get the datatable data and rows
-            res_datatable.get_data()
-
-            # Generate the res_id
-            payload.res_id = res_helper.generate_res_id(
-                payload.inputs["incident_id"], payload.inputs["task_id"])
-
-            # Search for a row that contains the res_id
-            row_found = res_datatable.get_row(
-                "sn_records_dt_res_id", payload.res_id)
-
-            # Get current time (*1000 as API does not accept int)
-            now = int(time() * 1000)
-
-            if row_found:
-
-                resilient_status = res_helper.state_to_text(
-                    payload.inputs.get("sn_resilient_status"))
-
-                yield StatusMessage(f"Row found for {payload.res_id}. Updating resilient_status to {resilient_status}")
-
-                if resilient_status == "Active":
-                    resilient_status = res_helper.convert_text_to_richtext(
-                        "Active", "green")
-
-                else:
-                    resilient_status = res_helper.convert_text_to_richtext(
-                        "Closed", "red")
-
-                cells_to_update = {
-                    "sn_records_dt_time": now,
-                    "sn_records_dt_res_status": resilient_status
-                }
-
-                # Update the row
-                update_row_response = res_datatable.update_row(
-                    row_found, cells_to_update)
-                payload.row_id = update_row_response["id"]
+            if payload.inputs["task_id"]:
+                err_msg = err_msg.format("Task", payload.inputs["task_id"])
 
             else:
-                payload.success = False
-                err_msg = "No row found for the {0} {1}"
+                err_msg = err_msg.format(
+                    "Incident", payload.inputs["incident_id"])
 
-                if payload.inputs["task_id"]:
-                    err_msg = err_msg.format("Task", payload.inputs["task_id"])
+            yield StatusMessage(err_msg)
 
-                else:
-                    err_msg = err_msg.format(
-                        "Incident", payload.inputs["incident_id"])
+        results = payload.as_dict()
+        rp_results = rp.done(results.get("success"), results)
+        # add in all results for backward-compatibility
+        rp_results.update(results)
 
-                yield StatusMessage(err_msg)
+        log.debug("RESULTS: %s", rp_results)
+        log.info("Complete")
 
-            results = payload.as_dict()
-            rp_results = rp.done(results.get("success"), results)
-            # add in all results for backward-compatibility
-            rp_results.update(results)
-
-            log.debug("RESULTS: %s", rp_results)
-            log.info("Complete")
-
-            # Produce a FunctionResult with the rp_results
-            yield FunctionResult(rp_results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the rp_results
+        yield FunctionResult(rp_results)

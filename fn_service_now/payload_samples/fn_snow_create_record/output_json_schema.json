@@ -28,6 +28,9 @@
             "sn_init_work_note": {
               "type": "string"
             },
+            "sn_table_name": {
+              "type": "string"
+            },
             "sn_optional_fields": {
               "type": "object",
               "properties": {
@@ -67,6 +70,9 @@
         },
         "sn_time_created": {
           "type": "integer"
+        },
+        "sn_table_name": {
+          "type": "string"
         }
       }
     },
@@ -83,6 +89,9 @@
           "type": "integer"
         },
         "sn_init_work_note": {
+          "type": "string"
+        },
+        "sn_table_name": {
           "type": "string"
         },
         "sn_optional_fields": {
@@ -147,6 +156,9 @@
     },
     "sn_time_created": {
       "type": "integer"
+    },
+    "sn_table_name": {
+      "type": "string"
     }
   }
 }

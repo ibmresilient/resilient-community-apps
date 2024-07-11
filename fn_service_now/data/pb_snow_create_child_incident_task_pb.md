@@ -4,33 +4,33 @@
     Generated with resilient-sdk v52.0.0.0.1010
 -->
 
-# Playbook - [DEPRECATED] SNOW: Create New Record (PB)
+# Playbook - SNOW: Create Child Incident (PB)
 
 ### API Name
-`snow_create_record_incident_pb`
+`snow_create_child_incident_task_pb`
 
 ### Status
-`disabled`
+`enabled`
 
 ### Activation Type
 `Manual`
 
 ### Activation Conditions
-`incident.properties.sn_snow_record_id not_has_a_value`
+`incident.properties.sn_snow_record_id has_a_value AND incident.properties.sn_snow_table_name equals incident`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | SN Assignment Group | `sn_assignment_group` | select | The group this record will be assigned to in ServiceNow | Always |
+| SN Impact | `sn_impact` | select | Impact to set for this record in ServiceNow. Defaults to "3 - Low" | Optional |
 | SN Initial Note | `sn_initial_note` | textarea | - | Optional |
+| SN Urgency | `sn_urgency` | select | Urgency to set for this record in ServiceNow. Defaults to "3 - Low" | Optional |
 
 ### Object Type
-`incident`
+`task`
 
 ### Description
-Deprecated as of v2.3.0. Please use "SNOW: Create New Incident (PB)" to create "incident" records and "SNOW: Create New Security Incident (PB)" to create "sn_si_incident" records.
-
-This playbook is used to create a new record in ServiceNow from this case in SOAR. It reads the sn_table_name config to determine the table in which to create the record.
+Create a new 'incident' record in ServiceNow based off of the linked parent incident.
 
 
 ---
@@ -100,46 +100,70 @@ inputs.sn_query_value = "ibmresilient" #our integrations user in ServiceNow
 ### Function-Input Script
 ```python
 from json import dumps
-# Map IBM SOAR severity values to ServiceNow severity values
-sn_severity_map = {
-  "High": 1,
-  "Medium": 2,
-  "Low": 3
-}
-
 # Default text of the initial note added to the ServiceNow Record
-init_snow_note_text = f"""Record created from a IBM SOAR Incident ID: {incident.id}.
-                          Severity: {incident.severity_code}
-                          Incident Type(s): {', '.join(incident.incident_type_ids)}"""
+init_snow_note_text = f"""Child Incident created from IBM SOAR Task ID: {task.id}. Associated IBM SOAR Incident ID: {incident.id}. Parent incident in SerivceNow: {incident.properties.sn_snow_record_id}"""
 
-# If the user adds a comment when they invoke the rule, that comment gets concatenated here
+# If the user adds a comment when they invoke the playbook, that comment gets concatenated here
 initial_note = None
 if getattr(playbook.inputs, "sn_initial_note", None):
-  initial_note = getattr(playbook.inputs, "sn_initial_note", None).content
+  initial_note = playbook.inputs.sn_initial_note.content
 if initial_note:
   init_snow_note_text = f"{init_snow_note_text}\n\n{initial_note}"
 
 # ID of this incident
 inputs.incident_id = incident.id
 
-# Initial work note to attach to created ServiceNow Record
+# ID of this task
+inputs.task_id = task.id
+
+# Initial work note to attach to created ServiceNow record
 inputs.sn_init_work_note = init_snow_note_text
+
+# Parse the urgency and impact numbers value from the text input
+impact = int(playbook.inputs.sn_impact[0])
+urgency = int(playbook.inputs.sn_urgency[0])
 
 # Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.
 # ServiceNow Example: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
-# For SIR tables it is recommended to map "business_criticality" to sn_severity_map as that is visible in the SNOW query_builder
-# (see the example commented out below)
 inputs.sn_optional_fields = dumps({
-  "short_description": f"RES-{incident.id}: {incident.name}",
-  "impact": sn_severity_map[incident.severity_code],
-  #"business_criticality": sn_severity_map[incident.severity_code],
+  "short_description": f"RES-{incident.id}-{task.id}: {task.name}",
   "assignment_group": playbook.functions.results.assignment_group.get("sys_id"),
-  "caller_id": playbook.functions.results.caller_id.get("sys_id")
+  "caller_id": playbook.functions.results.caller_id.get("sys_id"),
+  "parent_incident": playbook.functions.results.parent_inc_sys_id.get("sys_id"),
+  "impact": impact,
+  "urgency": urgency
 })
 
-# to override the table name set in app.config, set inputs.sn_table_name=<table_name_to_send_to>
-# inputs.sn_table_name = "incident"
+# this specifc Playbook only will run to create recrods as child incidents, so use the same incident table as the parent
+inputs.sn_table_name = incident.properties.sn_snow_table_name
 
+# because we're creating a child incident here, set the parent REF ID
+inputs.sn_parent_ref_id = incident.properties.sn_snow_record_id
+
+```
+
+---
+## Function - SNOW: Lookup sys_id
+
+### API Name
+`fn_snow_lookup_sysid`
+
+### Output Name
+`parent_inc_sys_id`
+
+### Message Destination
+`fn_service_now`
+
+### Function-Input Script
+```python
+# The table in ServiceNow to query
+inputs.sn_table_name = "incident"
+
+# The name of the field/table column to query
+inputs.sn_query_field = "number"
+
+# The value to equate the cell to
+inputs.sn_query_value = incident.properties.sn_snow_record_id
 ```
 
 ---
@@ -153,22 +177,21 @@ inputs.sn_optional_fields = dumps({
 `Local script`
 
 ### Object Type
-`incident`
+`task`
 
 ### Script Content
 ```python
 results = playbook.functions.results.create_record
 if results.get("success"):
-  # Set incident fields sn_snow_record_id, sn_snow_record_link, and sn_snow_table_name
-  incident.sn_snow_record_id = results.get("sn_ref_id")
-  incident.sn_snow_record_link = f"""<a href='{results.get('sn_record_link')}'>Link</a>"""
-  incident.sn_snow_table_name = results.get("sn_table_name")
 
-  noteText = f"""<br>This Incident has been created in <b>ServiceNow</b> in the {results.get('sn_table_name')} table.
+  note_text = f"""<br>This Task has been created in <b>ServiceNow</b> with Impact '{playbook.inputs.sn_impact}' and Urgency '{playbook.inputs.sn_urgency}' in the {results.get('sn_table_name')} table as a Child Incident of {incident.properties.sn_snow_record_id} ({incident.properties.sn_snow_record_link.content}).
               <br><b>ServiceNow ID:</b>  {results.get('sn_ref_id')}
               <br><b>ServiceNow Link:</b> <a href='{results.get('sn_record_link')}'>{results.get('sn_record_link')}</a>"""
 
-  incident.addNote(helper.createRichText(noteText))
+  task.addNote(helper.createRichText(note_text))
+
+elif results.get("reason"):
+  task.addNote(results.get("reason"))
 
 ```
 

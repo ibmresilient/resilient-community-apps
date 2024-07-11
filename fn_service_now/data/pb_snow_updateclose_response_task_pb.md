@@ -4,10 +4,10 @@
     Generated with resilient-sdk v52.0.0.0.1010
 -->
 
-# Playbook - SNOW: Update/Close Record (PB)
+# Playbook - SNOW: Update/Close Response Task (PB)
 
 ### API Name
-`snow_updateclose_record_pb`
+`snow_updateclose_response_task_pb`
 
 ### Status
 `enabled`
@@ -16,12 +16,11 @@
 `Manual`
 
 ### Activation Conditions
-`sn_records_dt.sn_records_dt_snow_table equals incident`
+`sn_records_dt.sn_records_dt_snow_table equals sn_si_task`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| SN Close Code | `sn_close_code` | select | Optional. Sets the close code only when Record State is CLOSED | Optional |
 | SN Close Notes | `sn_close_notes` | text | Optional. Note to be added to record when state is CLOSED | Optional |
 | SN Record State | `sn_record_state` | select | - | Always |
 
@@ -29,7 +28,7 @@
 `sn_records_dt`
 
 ### Description
-Update the state of this record in the "incident" table in ServiceNow
+Update the state of this record in the "sn_si_task" table in ServiceNow
 
 
 ---
@@ -48,15 +47,12 @@ Update the state of this record in the "incident" table in ServiceNow
 ```python
 # A Dictionary that maps Record States to their corresponding codes
 # These codes are defined in ServiceNow and may be different for each ServiceNow configuration
-# Codes prepended with [SIR] are specific to Security Incident Response incidents
 map_sn_record_states = {
-  "New": 1,
-  "In Progress": 2,
-  "On Hold": 3,
-  "Resolved": 6,
-  "Closed": 7,
-  "Canceled": 8,
-  "Cancelled": 8 # servicenow has inconsistent spellings of this word...
+	"Draft": 1,
+	"Ready": 18,
+	"Assigned": 16,
+	"Work in Progress": 18,
+	"Closed": 3
 }
 
 # ID of this incident
@@ -71,10 +67,6 @@ inputs.sn_record_state = map_sn_record_states.get(getattr(playbook.inputs, "sn_r
 # The resolution notes that are normally required when you close a ServiceNow record
 if getattr(playbook.inputs, "sn_close_notes", None):
   inputs.sn_close_notes = getattr(playbook.inputs, "sn_close_notes", None)
-
-# The ServiceNow 'close_code' that you normally select when closing a ServiceNow record
-if getattr(playbook.inputs, "sn_close_code", None):
-  inputs.sn_close_code = getattr(playbook.inputs, "sn_close_code", None)
 
 # Add a Work Note to the Record in ServiceNow
 inputs.sn_close_work_note = f"This record's state has been changed to {playbook.inputs.sn_record_state} by IBM SOAR"

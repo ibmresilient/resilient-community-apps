@@ -4,10 +4,10 @@
     Generated with resilient-sdk v52.0.0.0.1010
 -->
 
-# Playbook - SNOW: Update/Close Incident (PB)
+# Playbook - SNOW: Update/Close SIR Incident (PB)
 
 ### API Name
-`snow_updateclose_record_incident_pb`
+`snow_updateclose_sir_incident_pb`
 
 ### Status
 `enabled`
@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`incident.properties.sn_snow_record_id has_a_value AND incident.properties.sn_snow_table_name equals incident`
+`incident.properties.sn_snow_record_id has_a_value AND incident.properties.sn_snow_table_name equals sn_si_incident`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
@@ -29,7 +29,7 @@
 `incident`
 
 ### Description
-Update the state of this record in the incident table in ServiceNow
+Update the state of this record in the "sn_si_incident" table in ServiceNow
 
 
 ---
@@ -53,10 +53,14 @@ map_sn_record_states = {
   "New": 1,
   "In Progress": 2,
   "On Hold": 3,
-  "Resolved": 6,
-  "Closed": 7,
-  "Canceled": 8,
-  "Cancelled": 8 # servicenow has inconsistent spellings of this word...
+	"Analysis": 16,
+	"Contain": 18,
+	"Eradicate": 19,
+	"Recover": 20,
+	"Review": 100,
+	"Closed": 3,
+	"Canceled": 7,
+  "Cancelled": 7 # servicenow has inconsistent spellings of this word...
 }
 
 # ID of this incident

@@ -45,7 +45,9 @@ class TestFnSnowCreateRecord:
       "sn_init_work_note": "We have fixed this",
       "sn_optional_fields": mock_pre_scrip_dict_to_json_str({
         "assignment_group": "IT Security"
-      })
+      }),
+      "sn_table_name": None,
+      "sn_parent_ref_id": None
     }
 
     output1 = {
@@ -58,11 +60,38 @@ class TestFnSnowCreateRecord:
       "sn_ref_id": "INC123459",
       "sn_sys_id": "12558dfsasd43a5sdf32df",
       "sn_record_state": "New",
-      "sn_record_link": "https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC123459"
+      "sn_record_link": "https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC123459",
+      "sn_table_name": "incident"
     }
     output1["inputs"]["sn_optional_fields"] = json.loads(output1["inputs"]["sn_optional_fields"], object_hook=mock_byteify)
 
-    @pytest.mark.parametrize("inputs, expected_results", [(inputs1, output1)])
+    inputs2 = {
+      "incident_id": 3003,
+      "task_id": 4004,
+      "sn_init_work_note": "We have fixed this",
+      "sn_optional_fields": mock_pre_scrip_dict_to_json_str({
+        "assignment_group": "IT Security"
+      }),
+      "sn_table_name": "sn_si_incident", # override app.config
+      "sn_parent_ref_id": None
+    }
+
+    output2 = {
+      "success": True,
+      "reason": None,
+      "inputs": deepcopy(inputs2),
+      "row_id": 3,
+      "res_id": "RES-3003-4004",
+      "res_link": "https://example.com/#incidents/3003?task_id=4004",
+      "sn_ref_id": "INC123459",
+      "sn_sys_id": "12558dfsasd43a5sdf32df",
+      "sn_record_state": "New",
+      "sn_record_link": "https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC123459",
+      "sn_table_name": "sn_si_incident"
+    }
+    output2["inputs"]["sn_optional_fields"] = json.loads(output2["inputs"]["sn_optional_fields"], object_hook=mock_byteify)
+
+    @pytest.mark.parametrize("inputs, expected_results", [(inputs1, output1), (inputs2, output2)])
     def test_success(self, circuits_app, inputs, expected_results, request):
         """ Test calling with sample values for the parameters """
 
@@ -88,7 +117,7 @@ class TestFnSnowCreateRecord:
         results = call_fn_snow_create_record_function(circuits_app, inputs)
 
         del results["sn_time_created"]
-        results['res_link'] = 'https://example.com/#incidents/3003?task_id=4004'
+        results["res_link"] = 'https://example.com/#incidents/3003?task_id=4004'
         results["sn_record_link"] = "https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC123459"
         for key in expected_results:
           assert(expected_results[key] == results[key])

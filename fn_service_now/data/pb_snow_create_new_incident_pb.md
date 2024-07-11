@@ -4,13 +4,13 @@
     Generated with resilient-sdk v52.0.0.0.1010
 -->
 
-# Playbook - [DEPRECATED] SNOW: Create New Record (PB)
+# Playbook - SNOW: Create New Incident (PB)
 
 ### API Name
-`snow_create_record_incident_pb`
+`snow_create_new_incident_pb`
 
 ### Status
-`disabled`
+`enabled`
 
 ### Activation Type
 `Manual`
@@ -23,14 +23,13 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | SN Assignment Group | `sn_assignment_group` | select | The group this record will be assigned to in ServiceNow | Always |
 | SN Initial Note | `sn_initial_note` | textarea | - | Optional |
+| SN Urgency | `sn_urgency` | select | Urgency to set for this record in ServiceNow. Defaults to "3 - Low" | Optional |
 
 ### Object Type
 `incident`
 
 ### Description
-Deprecated as of v2.3.0. Please use "SNOW: Create New Incident (PB)" to create "incident" records and "SNOW: Create New Security Incident (PB)" to create "sn_si_incident" records.
-
-This playbook is used to create a new record in ServiceNow from this case in SOAR. It reads the sn_table_name config to determine the table in which to create the record.
+Creates a new record in the Incident (incident) table in ServiceNow.
 
 
 ---
@@ -125,20 +124,22 @@ inputs.incident_id = incident.id
 # Initial work note to attach to created ServiceNow Record
 inputs.sn_init_work_note = init_snow_note_text
 
+# Parse the urgency and impact numbers value from the text input and incident severity, respectively
+impact = sn_severity_map[incident.severity_code]
+urgency = int(playbook.inputs.sn_urgency[0])
+
 # Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.
 # ServiceNow Example: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
-# For SIR tables it is recommended to map "business_criticality" to sn_severity_map as that is visible in the SNOW query_builder
-# (see the example commented out below)
 inputs.sn_optional_fields = dumps({
   "short_description": f"RES-{incident.id}: {incident.name}",
-  "impact": sn_severity_map[incident.severity_code],
-  #"business_criticality": sn_severity_map[incident.severity_code],
+  "impact": impact,
+  "urgency": urgency,
   "assignment_group": playbook.functions.results.assignment_group.get("sys_id"),
   "caller_id": playbook.functions.results.caller_id.get("sys_id")
 })
 
-# to override the table name set in app.config, set inputs.sn_table_name=<table_name_to_send_to>
-# inputs.sn_table_name = "incident"
+# This makes sure this creates this record in the "incident" table
+inputs.sn_table_name = "incident"
 
 ```
 
@@ -164,7 +165,7 @@ if results.get("success"):
   incident.sn_snow_record_link = f"""<a href='{results.get('sn_record_link')}'>Link</a>"""
   incident.sn_snow_table_name = results.get("sn_table_name")
 
-  noteText = f"""<br>This Incident has been created in <b>ServiceNow</b> in the {results.get('sn_table_name')} table.
+  noteText = f"""<br>This Incident has been created in <b>ServiceNow</b> with Urgency '{playbook.inputs.sn_urgency}'in the {results.get('sn_table_name')} table.
               <br><b>ServiceNow ID:</b>  {results.get('sn_ref_id')}
               <br><b>ServiceNow Link:</b> <a href='{results.get('sn_record_link')}'>{results.get('sn_record_link')}</a>"""
 

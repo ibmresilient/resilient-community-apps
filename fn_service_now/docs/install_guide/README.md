@@ -1,38 +1,17 @@
 # ServiceNow Installation Guide
 
-## Table of Contents
-- [Table of Contents](#table-of-contents)
-- [Prerequisites](#prerequisites)
-- [Step 1: *Install ServiceNow IBM SOAR App*](#step-1-install-servicenow-ibm-soar-app)
-- [Step 2: *Create a User in ServiceNow and assign it the correct Role*](#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role)
-- [Step 3: *Create an API Key on the SOAR Platform*](#step-3-create-an-api-key-on-the-soar-platform)
-- [Step 4: *Enter IBM SOAR Configurations*](#step-4-enter-ibm-soar-configurations)
-- [Step 5: *Download \& Install fn\_service\_now App*](#step-5-download--install-fn_service_now-app)
-  - [Download \& Install on App Host](#download--install-on-app-host)
-  - [Download \& Install on Integration Server](#download--install-on-integration-server)
-  - [App Configuration:](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Step 6: *Install and Configure ServiceNow MID Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
-- [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
-- [Step 8: Security Incident Response (SIR) Configurations](#step-8-security-incident-response-sir-configurations)
-  - [Configure `ServiceNowAllowedTableNames` (SIR only)](#configure-servicenowallowedtablenames-sir-only)
-  - [Add IBM SOAR tab to Security Incident UI (SIR only)](#add-ibm-soar-tab-to-security-incident-ui-sir-only)
-- [Sync to SOAR automatically on group assignment (SIR only)](#sync-to-soar-automatically-on-group-assignment-sir-only)
-- [Step 9: *Test*](#step-9-test)
----
 
 ## Prerequisites
 * ServiceNow Instance with ITSM enabled and running `Kingston` or newer releases
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
-* IBM Cloud Pak for Security `>= 1.9.0` *or* IBM SOAR `>= v45.0.0`
-* An App Host >= `v1.9.0` or an Integrations Server running `resilient-circuits >= v45.0.0`.
-  > - To setup an App Host see: [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-  > - To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+* IBM Cloud Pak for Security `>= 1.10.18` *or* IBM SOAR `>= v51.0.0.0`
+* An App Host >= `v1.15.0` or an Integrations Server running `resilient-circuits >= v51.0.0.0`.
+  * To setup an App Host see: [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
+  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 * If SOAR instance is not publicly accessible (behind a firewall), a `ServiceNow MID Server` is required
 * If you want to integrate with ServiceNow Security Incident Response (SIR), make sure to install it first
-- `fn_service_now >= v1.0.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
-  - If integrating with SIR, `fn_service_now >= v2.0.0` is required
+* `fn_service_now >= v2.3.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 ---
 
 ## Step 1: *Install ServiceNow IBM SOAR App*
@@ -57,7 +36,6 @@
   * **Last Name:** SOAR
   * **Password:** #########
   * **Email:** `ibm_resilient_integration@example.com`
-  > Note: In San Diego or later the box "Password needs reset" is automatically checked. This must be unchecked for the connection from SOAR -> SNOW to properly work.
 * Set the **Timezone** to the same timezone of your SOAR Platform.
  ![screenshot](./screenshots/10.png)
 * Click **Submit.**
@@ -111,7 +89,7 @@
   | ServiceNow MID Server Name | No | The MID Server to use with this App or leave blank if not using a MID Server |
   | Configure with CP4S? | Yes | Defaults to **No**. Should be changed to **Yes** if you are connecting to a Cloud Pak for Security instance |
   | CP4S Rest URL | No | (Required if configuring with CP4S) The rest URL of the CP4S instance. Usually this is `cases-rest.<host_name>` but sometimes it is a custom prefix. |
-  | ServiceNowAllowedTableNames | Yes | A CSV list of all the **Table Names** in ServiceNow IBM SOAR is allowed to integrate with. *Out-of-the-box this app requires access to the `incident`, `sys_user` and `sys_user_group` tables.* For integrating with ServiceNow Security Incident Response (SIR) this app requires `sn_si_incident` and `sn_si_task` |
+  | ServiceNowAllowedTableNames | Yes | A CSV list of all the **Table Names** in ServiceNow IBM SOAR is allowed to integrate with. *Out-of-the-box this app requires access to the `incident`, `sys_user` and `sys_user_group` tables.* For integrating with ServiceNow Security Incident Response (SIR) this app requires `sn_si_incident` and `sn_si_task`. Since v2.3.0 this apps supports integrating with both the `incident` and `sn_si_incident` tables at the same time |
   | IBM SOAR Assignment Group Names | No | A CSV list of assignment groups that, upon assignment on a SIR incident, will automatically sync the security incident or task to SOAR |
   | Logging Verbosity | Yes | Defaults to **error**. Can be changed to **debug** if needed later. |
   | Logging Destination | Yes | Defaults to **db** (which will print any error logs to the Application Logs Table). Can be changed to **file** if needed later. |
@@ -246,9 +224,7 @@ If integrating with SIR related tables, you need to configure the Security Incid
   ![screenshot](./screenshots/40.jpg)
 * Click **Save**.
 
----
-
-## Sync to SOAR automatically on group assignment (SIR only)
+### Sync to SOAR automatically on group assignment (SIR only)
 When integrating with SIR tables, there is a parameter that can be set in the IBM Security QRadar SOAR Properties section for automatic escalation to SOAR on group assignment. This is most useful for Security Response Tasks but can also be used on the parent Security Incident table.
 
 By default, this app includes the "IBM SOAR Response Group" but that needs to be created.
@@ -294,3 +270,8 @@ By default, this app includes the "IBM SOAR Response Group" but that needs to be
   ![screenshot](./screenshots/25.png)
 
 ---
+
+## Links
+- [IBM SOAR ServiceNow App Main Page](../../README.md)
+- [Customize SOAR App Guide](../customize_resilient_guide/README.md)
+- [Customize ServiceNow App Guide](../customize_snow_guide/README.md)
