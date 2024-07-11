@@ -1,0 +1,83 @@
+{
+    "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Indicators",
+    "value": [
+      {
+        "id": "15",
+        "indicatorValue": "198.51.100.0",
+        "indicatorType": "IpAddress",
+        "action": "AlertAndBlock",
+        "createdBy": "211596a5-5a56-43f6-8347-97937364677b",
+        "severity": "Medium",
+        "category": 1,
+        "application": null,
+        "educateUrl": null,
+        "bypassDurationHours": null,
+        "title": "abc title",
+        "description": "sss",
+        "recommendedActions": null,
+        "creationTimeDateTimeUtc": "2021-02-15T20:20:46.0719488Z",
+        "expirationTime": null,
+        "lastUpdateTime": "2021-02-15T20:20:46.0794839Z",
+        "lastUpdatedBy": null,
+        "rbacGroupNames": [
+          
+        ],
+        "rbacGroupIds": [
+          
+        ],
+        "notificationId": null,
+        "notificationBody": null,
+        "version": null,
+        "mitreTechniques": [
+          
+        ],
+        "historicalDetection": false,
+        "lookBackPeriod": null,
+        "generateAlert": true,
+        "additionalInfo": null,
+        "createdByDisplayName": "defender",
+        "externalId": null,
+        "createdBySource": "PublicApi",
+        "certificateInfo": null
+      },
+      {
+        "id": "14",
+        "indicatorValue": "198.51.100.0",
+        "indicatorType": "IpAddress",
+        "action": "Allowed",
+        "createdBy": "211596a5-5a56-43f6-8347-97937364677b",
+        "severity": "Medium",
+        "category": 1,
+        "application": null,
+        "educateUrl": null,
+        "bypassDurationHours": null,
+        "title": "ss",
+        "description": "ddd",
+        "recommendedActions": null,
+        "creationTimeDateTimeUtc": "2021-01-13T18:44:08.2441224Z",
+        "expirationTime": null,
+        "lastUpdateTime": "2021-01-13T18:44:08.2518094Z",
+        "lastUpdatedBy": null,
+        "rbacGroupNames": [
+          
+        ],
+        "rbacGroupIds": [
+          
+        ],
+        "notificationId": null,
+        "notificationBody": null,
+        "version": null,
+        "mitreTechniques": [
+          
+        ],
+        "historicalDetection": false,
+        "lookBackPeriod": null,
+        "generateAlert": false,
+        "additionalInfo": null,
+        "createdByDisplayName": "defender",
+        "externalId": null,
+        "createdBySource": "PublicApi",
+        "certificateInfo": null
+      }
+    ]
+  }
