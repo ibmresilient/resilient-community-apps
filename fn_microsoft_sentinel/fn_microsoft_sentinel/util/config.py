@@ -66,6 +66,6 @@ verify = true
 #create_incident_template=
 #update_incident_template=
 #close_incident_template=
-#update_sentinel_incident_template=
-#close_sentinel_incident_template=
+#sentinel_update_incident_template=
+#sentinel_close_incident_template=
 """
