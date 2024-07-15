@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="MISP" href="../fn_misp/README.html" /><link rel="prev" title="Microsoft Security Graph" href="../fn_microsoft_security_graph/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.4.3 and Furo 2024.05.06 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.4.4 and Furo 2024.05.06 -->
         <title>Microsoft Sentinel - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
@@ -470,45 +470,62 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-even"><td><p>2.1.1</p></td>
+<td><p>07/2024</p></td>
+<td><p>Correction to documentation on template references</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>03/2024</p></td>
 <td><p>Add support for multi-tenancy.</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.0</p></td>
+<tr class="row-even"><td><p>2.0.0</p></td>
 <td><p>01/2024</p></td>
 <td><p><ul><li>Bug fix in jinja template, “incident_update_template.jinja”, for escaping double quotation mark when rendering in json.</li><li>Update jinja templates to use values rather than IDs.</li><li>Add new setting in the app.config to set api-version.</li><li>Add the ability to use a jinja template as the poller incident filter.</li></ul></p></td>
 </tr>
-<tr class="row-even"><td><p>1.2.0</p></td>
+<tr class="row-odd"><td><p>1.2.0</p></td>
 <td><p>07/2023</p></td>
 <td><p>Add config setting to not close SOAR case was Sentinel incident is closed</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>04/2023</p></td>
 <td><p>Update function ‘Sentinel Update Incident’</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.4</p></td>
+<tr class="row-odd"><td><p>1.0.4</p></td>
 <td><p>06/2022</p></td>
 <td><p>Several template fixes for tags (labels) and severity</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.3</p></td>
+<tr class="row-even"><td><p>1.0.3</p></td>
 <td><p>04/2022</p></td>
 <td><p>Support for app.config verify and cert parameters</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.2</p></td>
+<tr class="row-odd"><td><p>1.0.2</p></td>
 <td><p>02/2022</p></td>
 <td><p>Bug fix in some situations updating Sentinel from SOAR</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>11/2021</p></td>
 <td><p>Minor bug fixes and datatable improvements</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>08/2021</p></td>
 <td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<section id="v2-1-1">
+<h3>v2.1.1<a class="headerlink" href="#v2-1-1" title="Link to this heading">¶</a></h3>
+<p>The default configuration file incorrectly specified the override Sentinel template references were:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">update_sentinel_incident_template</span>
+<span class="n">close_sentinel_incident_template</span>
+</pre></div>
+</div>
+<p>The correct settings are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sentinel_update_incident_template</span>
+<span class="n">sentinel_close_incident_template</span>
+</pre></div>
+</div>
+</section>
 <section id="v2-1-0">
 <h3>v2.1.0<a class="headerlink" href="#v2-1-0" title="Link to this heading">¶</a></h3>
 <p>When upgrading from a previous version to v2.1.0, manually update your app.config to be able to use the multi-tenant capability. The app.config changes are documented here <a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a>. The previous version of the app.config from versions before 2.1.0 are compatible with version 2.1.0+.</p>
@@ -2154,6 +2171,7 @@ that are commented out. The example template shows all Sentinel incident propert
 <li><a class="reference internal" href="#">Microsoft Sentinel</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#v2-1-1">v2.1.1</a></li>
 <li><a class="reference internal" href="#v2-1-0">v2.1.0</a></li>
 </ul>
 </li>

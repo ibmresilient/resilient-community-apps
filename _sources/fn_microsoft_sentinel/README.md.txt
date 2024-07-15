@@ -37,6 +37,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.1 | 07/2024 | Correction to documentation on template references |
 | 2.1.0 | 03/2024 | Add support for multi-tenancy. |
 | 2.0.0 | 01/2024 | <ul><li>Bug fix in jinja template, "incident_update_template.jinja", for escaping double quotation mark when rendering in json.</li><li>Update jinja templates to use values rather than IDs.</li><li>Add new setting in the app.config to set api-version.</li><li>Add the ability to use a jinja template as the poller incident filter.</li></ul> |
 | 1.2.0 | 07/2023 | Add config setting to not close SOAR case was Sentinel incident is closed |
@@ -46,6 +47,22 @@
 | 1.0.2 | 02/2022 | Bug fix in some situations updating Sentinel from SOAR |
 | 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
+
+### v2.1.1
+
+The default configuration file incorrectly specified the override Sentinel template references were:
+
+```
+update_sentinel_incident_template
+close_sentinel_incident_template
+```
+
+The correct settings are:
+
+```
+sentinel_update_incident_template
+sentinel_close_incident_template
+```
 
 ### v2.1.0
 
