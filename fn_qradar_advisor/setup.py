@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_qradar_advisor',
     display_name="QRadar Advisor Functions",
-    version='2.1.0',
+    version='2.1.1',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -15,7 +15,10 @@ setup(
     long_description="The QRadar Advisor integration with IBM QRadar SOAR enables SOAR users to gather Cyber "
                      "Threat Intelligence(CTI) data from IBM Watson and QRadar. In addition, the integration receives "
                      "MITRE ATT&CK information from QRadar Advisor. The integration supports QRadar Advisor quick search, "
-                     "full search, map a rule, and retrieve offense insights and analysis.",
+                     "full search, map a rule, and retrieve offense insights and analysis."
+                     "<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>"
+                     "<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>"
+                     "<ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_qradar_advisor/README.html'>App Documentation</a></ul>",
     install_requires=[
         'resilient_circuits>=46.0.0'
     ],

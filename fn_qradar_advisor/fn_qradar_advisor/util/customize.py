@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v52.0.0.0.1053
 
-"""Generate the Resilient customizations required for fn_qradar_advisor"""
+"""Generate the SOAR customizations required for fn_qradar_advisor"""
 
 import base64
 import os
@@ -20,17 +22,46 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_qradar_advisor",
-        "message_destinations": [u"fn_qradar_advisor"],
-        "functions": [u"qradar_advisor_full_search", u"qradar_advisor_map_rule", u"qradar_advisor_offense_analysis", u"qradar_advisor_quick_search"],
-        "workflows": [u"qradar_advisor_full_search", u"qradar_advisor_map_rule", u"qradar_advisor_offense_analysis", u"qradar_advisor_quick_search"],
-        "actions": [u"Create Artifact (QRadar Advisor Analysis)", u"Create Artifact (Watson Search with Local Context)", u"QRadar Advisor: Map QRadar rule", u"QRadar Advisor: Offense Analysis", u"Watson Search", u"Watson Search with Local Context"],
-        "incident_fields": [u"mitre_tactic_name", u"qradar_id", u"qradar_rule"],
+        "message_destinations": [
+            u"fn_qradar_advisor"
+        ],
+        "functions": [
+            u"qradar_advisor_full_search",
+            u"qradar_advisor_map_rule",
+            u"qradar_advisor_offense_analysis",
+            u"qradar_advisor_quick_search"
+        ],
+        "workflows": [
+            u"qradar_advisor_full_search",
+            u"qradar_advisor_map_rule",
+            u"qradar_advisor_offense_analysis",
+            u"qradar_advisor_quick_search"
+        ],
+        "actions": [
+            u"Create Artifact (QRadar Advisor Analysis)",
+            u"Create Artifact (Watson Search with Local Context)",
+            u"QRadar Advisor: Map QRadar rule",
+            u"QRadar Advisor: Offense Analysis",
+            u"Watson Search",
+            u"Watson Search with Local Context"
+        ],
+        "incident_fields": [
+            u"mitre_tactic_name",
+            u"qradar_id",
+            u"qradar_rule"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"qradar_advisor_observable", u"qradar_advisor_observable_for_artifact"],
+        "datatables": [
+            u"qradar_advisor_observable",
+            u"qradar_advisor_observable_for_artifact"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"Create Artifact for QRadar Advisor Analysis Observable", u"Create Artifact for Watson Search with Local Context"],
-        "playbooks": []
+        "scripts": [
+            u"Create Artifact for QRadar Advisor Analysis Observable",
+            u"Create Artifact for Watson Search with Local Context"
+        ],
+        "playbooks": [],
     }
 
 
@@ -39,7 +70,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 44.0.7583
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
