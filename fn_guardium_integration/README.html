@@ -1,0 +1,878 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Have I Been Pwned" href="../fn_hibp/README.html" /><link rel="prev" title="gRPC Interface" href="../fn_grpc_interface/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 7.4.4 and Furo 2024.05.06 -->
+        <title>Guardium Integration Application for IBM Resilient. - QRadar SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=afe95b24" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">QRadar SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">QRadar SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Recently Updated Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pb_sans_isc_scan_ip/README.html">ISC SANS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rapid7_insight_idr/README.html">Rapid7 InsightIDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">Palo Alto Panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feeder for ODBC Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">App Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/python_api.html">IBM SOAR Python Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">Ansible Tower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">fn_aws_guardduty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">AWS IAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_axonius/README.html">Axonius</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">Cisco Secure Endpoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Cisco Umbrella Investigate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">ClamAV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">Cloud Foundry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">App Host Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">Microsoft Exchange Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">Google Cloud DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">gRPC Interface</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Guardium Integration Application for IBM Resilient.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#table-of-contents">Table of Contents -</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#about-this-package">About this package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#resilient-configurations">Resilient Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#rules">Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#run-application">Run Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#application-usage-and-details">Application Usage and Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#guardium-4a-list-parameter-names-by-report-name">Guardium: 4A. List Parameter Names By Report Name :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#guardium-4b-search-all-guardium-reports">Guardium: 4B. Search All Guardium Reports :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">HTML to PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">IsItPhishing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">IBM SOAR LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">McAfee ESM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">MISP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">MITRE ATT&amp;CK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">About MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">ODBC Query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">PhishTank Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint TAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">Proofpoint TRAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">Pulsedive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">Remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">RSA NetWitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fn_service_now/README.html">ServiceNow</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of ServiceNow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/install_guide/README.html">ServiceNow Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/customize_snow_guide/README.html">ServiceNow Customization Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/customize_resilient_guide/README.html">SOAR Customization Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">Task Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Twilio SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmware_cbc/README.html">VMware Carbon Black Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">Watson Translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">Whois RDAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">SOAR Wiki</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiz/README.html">Wiz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">IBM XForce Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_resilientfeed/README.html">Data Feeder for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="guardium-integration-application-for-ibm-resilient">
+<h1>Guardium Integration Application for IBM Resilient.<a class="headerlink" href="#guardium-integration-application-for-ibm-resilient" title="Link to this heading">¶</a></h1>
+</section>
+<section id="table-of-contents">
+<h1>Table of Contents -<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="#about-this-package"><span class="xref myst">About this package</span></a></p></li>
+<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#configuration"><span class="xref myst">Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#resilient-configurations"><span class="xref myst">Resilient Configurations</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#run-application"><span class="xref myst">Run Application</span></a></p></li>
+<li><p><a class="reference internal" href="#application-usage-and-details"><span class="xref myst">Application Usage and Details</span></a></p></li>
+</ul>
+</section>
+<section id="about-this-package">
+<h1>About this package<a class="headerlink" href="#about-this-package" title="Link to this heading">¶</a></h1>
+<p><strong>This package provides the following features to the Resilient platform.</strong></p>
+<ol class="arabic simple">
+<li><p>Run Active Risk Spotter - Risky Users Scores.</p></li>
+<li><p>Search for Entitlements to Sensitive Objects.</p></li>
+<li><p>Search for User Outlier Details.</p></li>
+<li><p>List Parameter Names By Report Name.</p></li>
+<li><p>Search All Guardium Reports.</p></li>
+<li><p>Block User from Data Source.</p></li>
+<li><p>Generate Guardium Client Secret from Resilient.</p></li>
+</ol>
+</section>
+<section id="use-cases">
+<h1>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h1>
+<ol class="arabic simple">
+<li><p>Enrich existing Resilient incidents with reporting data from Guardium Data Protection. These incidents do not have to be created by Guardium as there will be instances where Guardium data (for example, risky user names/IPs, risky database tables, sources of sensitive data, user anomalies) could be useful for an investigation, playbook and/or remediation.</p></li>
+<li><p>Blocking a risky user or IP address in databases using Guardium Data Protection’s blocking feature. A Resilient user needs to make sure to block the right user name or IP address and not the connection between an application and the database, which can stop the application from running.</p></li>
+</ol>
+</section>
+<section id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Resilient platform &gt;= v34.0.5261</p></li>
+<li><p>Integrations Server running Resilient Circuits &gt;= v35.0.203</p></li>
+<li><p>circuits&gt;=3.2</p></li>
+<li><p>requests&gt;=2.23.0</p></li>
+<li><p>resilient-lib&gt;=35.0.203</p></li>
+<li><p>paramiko&gt;=2.7.1</p></li>
+<li><p>six&gt;=1.14.0</p></li>
+<li><p>paramiko_expect&gt;=0.2.8</p></li>
+</ul>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<p>This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework.</p>
+<ul class="simple">
+<li><p>Download the .tar.gz file from the App Exchange and extract it.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">fn_guardium_integration-&lt;version&gt;.tar.gz</span></code> file to your Integration Server.</p></li>
+<li><p>To install the package, run:
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">fn_guardium_integration-&lt;version&gt;.tar.gz</span></code></p></li>
+<li><p>To import the function, example rules, message destinations, workflows, data tables and custom incident fields into your Resilient platform run:
+<code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">customize</span> <span class="pre">-y</span> <span class="pre">-l</span> <span class="pre">fn-guardium-integration</span></code></p></li>
+<li><p>To uninstall a function from the Resilient platform, run the following:
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">fn_guardium_integration</span></code></p></li>
+</ul>
+</section>
+<section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h1>
+<p>Run the following command to generate the <code class="docutils literal notranslate"><span class="pre">[fn_guardium_integration]</span></code> configuration section in the Resilient app.config file:
+<code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config[-u/-c]</span></code></p>
+<p>The following Guardium Integration configuration data is added:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_guardium_integration</span><span class="p">]</span>
+<span class="c1"># Search results data table ID, should not be changed</span>
+<span class="n">search_table</span><span class="o">=</span><span class="n">guardium_search_report_data</span>
+
+<span class="c1"># Search Sensitive objects table ID, should not be changed</span>
+<span class="n">sensitive_table</span><span class="o">=</span><span class="n">grd_sensitive_objects</span>
+
+<span class="c1"># Search Outlier Details table ID, should not be changed</span>
+<span class="n">outlier_table</span><span class="o">=</span><span class="n">grd_outlier_details</span>
+
+<span class="c1"># false - disable firewall authentication, true - enable firewall authentication</span>
+<span class="n">enable_firewall_auth</span><span class="o">=</span><span class="n">false</span>
+
+<span class="c1"># Firewall Server IP Address</span>
+<span class="n">bso_ip</span><span class="o">=</span>
+
+<span class="c1"># Firewall Auth User Name, should be given if `enable_firewall_auth=true`</span>
+<span class="n">bso_user</span><span class="o">=</span>
+
+<span class="c1"># Firewall Auth Password, should be given if `enable_firewall_auth=true`</span>
+<span class="n">bso_password</span><span class="o">=</span>
+
+<span class="c1"># Guardium http/https proxy server address, leave blank for no proxy</span>
+<span class="c1"># Example https://proxy_server.com:8080</span>
+<span class="n">proxy</span><span class="o">=</span>
+
+<span class="c1"># Guardium proxy used to generate client secret through ssh and cli user</span>
+<span class="c1">#the command that should be executed and used as the proxy.</span>
+<span class="c1"># example: /usr/bin/nc --proxy proxy.bar.com:8080 target_host target_port</span>
+<span class="n">proxy_command</span><span class="o">=</span>
+
+<span class="c1"># Guardium Host IP/DNS</span>
+<span class="n">guardium_host</span><span class="o">=</span>
+
+<span class="c1"># Guardium Restful service port.</span>
+<span class="n">port</span><span class="o">=</span><span class="mi">8443</span>
+
+<span class="c1"># Guardium User Name</span>
+<span class="n">guardium_user</span><span class="o">=</span>
+
+<span class="c1"># Guardium password</span>
+<span class="n">guardium_password</span><span class="o">=</span>
+
+<span class="c1"># SSL/TLS</span>
+<span class="n">guardium_cert</span><span class="o">=</span><span class="n">false</span>
+
+<span class="c1"># Q-Radar Block group, The group which will be used to block the user access to database</span>
+<span class="n">q_radar_block_group</span><span class="o">=</span>
+
+<span class="c1"># Q-Radar block group policy Name</span>
+<span class="n">block_policy_name</span><span class="o">=</span>
+
+<span class="c1"># The following parameters &#39;cli_user&#39; and &#39;cli_password&#39; are used for the package selftest function.</span>
+<span class="c1"># These parameters should be defined only when the package selftest functionality is being used.</span>
+<span class="n">cli_user</span><span class="o">=</span>
+<span class="n">cli_password</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>Edit the [fn_guardium_integration] as follows:</p>
+<ol class="arabic simple">
+<li><p><em>search_table:</em> Field should not be altered.</p></li>
+<li><p><em>sensitive_table:</em> Field should not be altered.</p></li>
+<li><p><em>outlier_table:</em> Field should not be altered.</p></li>
+<li><p><em>enable_firewall_auth:</em> If Guardium is behind the firewall and needs firewall authentication to access the system, you must set this parameter. If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, to enable firewall authentication. Set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, to disable firewall authentication.</p></li>
+<li><p><em>bso_ip:</em> if <em>enable_firewall_auth</em> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> then add the firewall IP Address.</p></li>
+<li><p><em>bso_user:</em> if <em>enable_firewall_auth</em> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> then update the firewall Authentication User.</p></li>
+<li><p><em>bso_password:</em> if <em>enable_firewall_auth</em> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> then update the firewall Authentication Password.</p></li>
+<li><p><em>proxy:</em> Guardium http/https proxy server address, leave blank for no proxy.</p></li>
+<li><p><em>proxy_command:</em> The proxy command to generate the client secret if a proxy is being used. Can be left blank if no proxy .Ex: <code class="docutils literal notranslate"><span class="pre">/usr/bin/nc</span> <span class="pre">--proxy</span> <span class="pre">proxy.bar.com:8080</span> <span class="pre">target_host</span> <span class="pre">target_port</span></code></p></li>
+<li><p><em>guardium_host:</em> Guradium host IP/DNS.</p></li>
+<li><p><em>port:</em> Guardium Restful service port. Default is 8443.</p></li>
+<li><p><em>guardium_user:</em> Guardium username, which is used to generate an access token from Guardium.</p></li>
+<li><p><em>guardium_password:</em> Guardium password used to generate an access token from Guardium.</p></li>
+<li><p><em>guardium_cert:</em> Guardium certificate. Use a TSL/SSL certificate path if required.</p></li>
+<li><p><em>q_radar_block_group:</em> Guardium group used for blocking a user from Data Source.</p></li>
+<li><p><em>block_policy_name:</em> Guardium policy used for blocking a user from Data Source. This policy should be installed in the Guardium system.</p></li>
+<li><p><em>cli_user:</em> Parameter used for the selftest function package only; parameter should be defined only when the package selftest functionality is used.</p></li>
+<li><p><em>cli_password:</em> Parameter used for the selftest function package only; parameter should be defined only when the package selftest functionality is used.</p></li>
+</ol>
+</section>
+<section id="resilient-configurations">
+<h1>Resilient Configurations<a class="headerlink" href="#resilient-configurations" title="Link to this heading">¶</a></h1>
+<section id="add-results-table">
+<h2>Add Results table<a class="headerlink" href="#add-results-table" title="Link to this heading">¶</a></h2>
+<p>To add data tables to incident tabs, use the following steps.</p>
+<ol class="arabic">
+<li><p>Log in to the Resilient platform and navigate to the Customization Settings tab.
+<img alt="screenshot" src="../_images/customize.png" /></p></li>
+<li><p>Navigate to Layout settings and click on Incident Tabs then select the Details Incident Tab.
+<img alt="screenshot" src="../_images/details.png" /></p></li>
+<li><p>Add a Header block and name it <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Results</span></code>.</p></li>
+<li><p>Drag and drop the data tables, <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Search</span> <span class="pre">Report</span> <span class="pre">Data</span></code>, <code class="docutils literal notranslate"><span class="pre">Outlier</span> <span class="pre">Details</span></code>, and <code class="docutils literal notranslate"><span class="pre">Sensitive</span> <span class="pre">Objects</span></code>. and When done, save the tab.</p>
+<p><img alt="screenshot" src="../_images/header.png" /></p>
+</li>
+</ol>
+</section>
+<section id="add-customized-incident-fields">
+<h2>Add Customized Incident Fields<a class="headerlink" href="#add-customized-incident-fields" title="Link to this heading">¶</a></h2>
+<p>To add custom incident fields to incident tabs, use the following steps.</p>
+<ol class="arabic">
+<li><p>Navigate to Customization Settings tab.
+<img alt="screenshot" src="../_images/customize.png" /></p></li>
+<li><p>Navigate to Layout settings and click on Incident Tabs then select the Details Incident Tab.
+<img alt="screenshot" src="../_images/details.png" /></p></li>
+<li><p>Drag and drop the following fields to the selected tab, [<em>server</em>, <em>database_type</em>, <em>os_user</em>, <em>client_hostname</em>, <em>client_ip</em>, <em>database</em>, <em>source_program</em>,  <em>db_user</em>,  <em>confidence_score</em>,  <em>rare_or_new_behavior</em>, <em>diverse_behavior</em>, <em>unusual_working_hours</em>,  <em>high_volume_outlier</em>, <em>vulnerable_obj_outlier</em>,  <em>error_outlier</em>, <em>ongoing_outlier</em>, <em>privileged_user</em>]. When done, save the tab.</p>
+<p><img alt="screenshot" src="../_images/fields.png" /></p>
+</li>
+</ol>
+</section>
+</section>
+<section id="rules">
+<h1>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h1>
+<p>Rules configurations are listed below, please verify Resilient rules section after package customization.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head"><p>Object Type</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+<th class="head"><p>Activity Fields</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Guardium: 1. Run Active Risk Spotter - Risky Users Scores</p></td>
+<td><p>Incident</p></td>
+<td><p>Example: Guardium Search Report</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code>, <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code>, <code class="docutils literal notranslate"><span class="pre">fetch</span> <span class="pre">size</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Guardium: 2. Search for Entitlements to Sensitive Objects</p></td>
+<td><p>Incident</p></td>
+<td><p>Example: Guardium Search Report</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code>, <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Incident</span> <span class="pre">Type</span> <span class="pre">!=</span> <span class="pre">Guardium</span> <span class="pre">Outliers</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Guardium: 3. Search for User Outlier Details</p></td>
+<td><p>Incidetn</p></td>
+<td><p>Example: Guardium Search Outlier Details</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code>, <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Incident</span> <span class="pre">Type</span> <span class="pre">!=</span> <span class="pre">Guardium</span> <span class="pre">Policy</span> <span class="pre">violations</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Guardium: 4A. List Parameter Names By Report Name</p></td>
+<td><p>Incident</p></td>
+<td><p>Example: Guardium List Parameter Names by Report Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Report</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>Guardium: 4B. Search All Guardium Reports</p></td>
+<td><p>Incident</p></td>
+<td><p>Example: Guardium Search Report</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Report</span></code>, <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code>, <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code>, <code class="docutils literal notranslate"><span class="pre">fetch</span> <span class="pre">size</span></code>,<code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">Aliases</span></code>,<code class="docutils literal notranslate"><span class="pre">Remote</span> <span class="pre">Data</span> <span class="pre">Source</span></code>,<code class="docutils literal notranslate"><span class="pre">Parameter</span> <span class="pre">label</span></code>,<code class="docutils literal notranslate"><span class="pre">Parameter</span> <span class="pre">value</span></code>,<code class="docutils literal notranslate"><span class="pre">Sort</span> <span class="pre">Column</span></code>,<code class="docutils literal notranslate"><span class="pre">Sort</span> <span class="pre">Type</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Guardium: 5. Block User from Data Source</p></td>
+<td><p>Incident</p></td>
+<td><p>Example: Guardium Block User Access to DB</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">User</span> <span class="pre">Name</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>Guardium: Generate Client Secret</p></td>
+<td><p>Incident</p></td>
+<td><p>Example: Generate Guardium Client Secret</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Cli</span> <span class="pre">User</span></code>, <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Cli</span> <span class="pre">Password</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="run-application">
+<h1>Run Application<a class="headerlink" href="#run-application" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Start Resilient Circuits by executing the following command.
+<code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code></p></li>
+</ul>
+</section>
+<section id="application-usage-and-details">
+<h1>Application Usage and Details<a class="headerlink" href="#application-usage-and-details" title="Link to this heading">¶</a></h1>
+<section id="guardium-generate-client-secret">
+<h2>Guardium: Generate Client Secret:<a class="headerlink" href="#guardium-generate-client-secret" title="Link to this heading">¶</a></h2>
+<section id="function-guardium-generate-client-secret">
+<h3>Function Guardium Generate Client Secret<a class="headerlink" href="#function-guardium-generate-client-secret" title="Link to this heading">¶</a></h3>
+<p>The function should only be executed after a fresh installation of the Guardium integration or after upgrading the Guardium system.
+The function generates the Guardium client secret and client ID. The function also detects the Guardium system unit type (standalone or central manager type) and updates the search function remote datasource option as per the available Guardium hosts.
+The system details acquired by the function are used to generate a Guardium access token. This is used in successive API calls from the Resilient integration.
+The Resilient field, <strong>guardium_system_reference</strong>, is used to store the client secret data.</p>
+</section>
+<section id="function-workflow">
+<h3>Function Workflow:<a class="headerlink" href="#function-workflow" title="Link to this heading">¶</a></h3>
+</section>
+<section id="example-generate-guardium-client-secret">
+<h3>Example: Generate Guardium Client Secret<a class="headerlink" href="#example-generate-guardium-client-secret" title="Link to this heading">¶</a></h3>
+<p>This workflow can be invoked from any Resilient incident action menu.</p>
+<p><img alt="screenshot" src="../_images/client_secret_workflow.png" /></p>
+<p><img alt="screenshot" src="../_images/client_secret_1.png" /></p>
+<p><img alt="screenshot" src="../_images/client_secret_2.png" /></p>
+<p>Enter the Guardium cli user name and password and press Execute to invoke the workflow. Navigate to the Notes section of the incident and wait for the message: <em>Guardium client secret generation completed.</em></p>
+<p><strong>Note:</strong> After generating the client secret, if the Resilient rules condition section has in-consistencies as shown below in red, customize the package once again to resolve the issue.</p>
+<p><img alt="screenshot" src="../_images/incident_type_error.png" /></p>
+</section>
+</section>
+<section id="guardium-run-active-risk-spotter-risky-users-scores">
+<h2>1. Guardium: Run Active Risk Spotter - Risky Users Scores:<a class="headerlink" href="#guardium-run-active-risk-spotter-risky-users-scores" title="Link to this heading">¶</a></h2>
+<section id="function-guardium-search-report">
+<h3>Function Guardium Search Report<a class="headerlink" href="#function-guardium-search-report" title="Link to this heading">¶</a></h3>
+<p>This function is used to run the <code class="docutils literal notranslate"><span class="pre">active</span> <span class="pre">risk</span> <span class="pre">spotter</span> <span class="pre">-</span> <span class="pre">risky</span> <span class="pre">users</span> <span class="pre">scores</span></code> report. Risk scores are 0-10 with 10 being the most risky.
+Learn more here: https://www.ibm.com/support/knowledgecenter/SSMPHH_11.1.0/com.ibm.guardium.doc/protect/risk_spotter_results.html</p>
+</section>
+<section id="id1">
+<h3>Function Workflow:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+</section>
+<section id="example-guardium-run-active-risk-spotter">
+<h3>Example: Guardium Run Active Risk Spotter:<a class="headerlink" href="#example-guardium-run-active-risk-spotter" title="Link to this heading">¶</a></h3>
+<p>This workflow can be invoked from any Resilient incident action menu.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code> -  Report start Date &amp; Time.
+<code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code> - Report end Date &amp; Time.
+<code class="docutils literal notranslate"><span class="pre">fetch</span> <span class="pre">size</span></code> - Maximum number of records to be fetched.</p>
+<p><img alt="screenshot" src="../_images/risk_spotter.png" /></p>
+<p><img alt="screenshot" src="../_images/run_risk_spotter.png" /></p>
+<p><img alt="screenshot" src="../_images/table_risk_spotter.png" /></p>
+<p>The returned results are used to refresh the data table, <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Search</span> <span class="pre">Report</span> <span class="pre">Data</span></code>.</p>
+</section>
+</section>
+<section id="guardium-2-search-for-entitlements-to-sensitive-objects">
+<h2>Guardium: 2. Search for Entitlements to Sensitive Objects:<a class="headerlink" href="#guardium-2-search-for-entitlements-to-sensitive-objects" title="Link to this heading">¶</a></h2>
+<section id="function-guardium-search-sensitive-object">
+<h3>Function Guardium Search Sensitive Object<a class="headerlink" href="#function-guardium-search-sensitive-object" title="Link to this heading">¶</a></h3>
+<p>This function retrieves the sensitive objects. The returned report contains user entitlements to sensitive objects, which is useful for breach investigation and remediation.
+Guardium search results from Access category are filtered by incident field values from <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">User</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">IP</span></code> and Guardium <code class="docutils literal notranslate"><span class="pre">Sensitive</span> <span class="pre">objects</span></code> group elements.</p>
+</section>
+<section id="id2">
+<h3>Function Workflow:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+</section>
+<section id="example-guardium-search-sensitive-objects">
+<h3>Example: Guardium Search Sensitive Objects<a class="headerlink" href="#example-guardium-search-sensitive-objects" title="Link to this heading">¶</a></h3>
+<p>This workflow can be invoked from any Resilient incident action menu except for incidents of type <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Outliers</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code> -  Report start Date &amp; Time.
+<code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code> - Report end Date &amp; Time.</p>
+<p><img alt="screenshot" src="../_images/sensitive.png" /></p>
+<p><img alt="screenshot" src="../_images/run_sensitive.png" /></p>
+<p><img alt="screenshot" src="../_images/res_sensitive.png" /></p>
+<p>The returned results are used to refresh the data table, <code class="docutils literal notranslate"><span class="pre">Sensitive</span> <span class="pre">Objects</span></code>.</p>
+</section>
+</section>
+<section id="guardium-3-search-for-user-outlier-details">
+<h2>Guardium: 3. Search for User Outlier Details:<a class="headerlink" href="#guardium-3-search-for-user-outlier-details" title="Link to this heading">¶</a></h2>
+<section id="function-guardium-search-outlier-details">
+<h3>Function Guardium Search Outlier Details<a class="headerlink" href="#function-guardium-search-outlier-details" title="Link to this heading">¶</a></h3>
+<p>This function retrieves the outlier details.
+This report allows a user to enrich a Resilient incident with user outlier data (for instance: SQL errors, password errors, excessive download size).
+Guardium Search results from Outlier category are filtered by incident field values from <code class="docutils literal notranslate"><span class="pre">Database</span></code>, <code class="docutils literal notranslate"><span class="pre">Server</span></code>, <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">User</span></code>, and <code class="docutils literal notranslate"><span class="pre">Date</span> <span class="pre">Discovered</span></code>.</p>
+</section>
+<section id="id3">
+<h3>Function Workflow:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+</section>
+<section id="example-guardium-search-outlier-details">
+<h3>Example: Guardium Search Outlier Details<a class="headerlink" href="#example-guardium-search-outlier-details" title="Link to this heading">¶</a></h3>
+<p>This workflow can be invoked from any Resilient incident action menu except for incidents of type <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Policy</span> <span class="pre">Violations</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code> -  Report start Date &amp; Time.
+<code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code> - Report end Date &amp; Time.</p>
+<p><img alt="screenshot" src="../_images/outlier.png" /></p>
+<p><img alt="screenshot" src="../_images/run_outlier.png" /></p>
+<p><img alt="screenshot" src="../_images/res_outlier.png" /></p>
+<p>The returned results are used to refresh the data table, <code class="docutils literal notranslate"><span class="pre">Outlier</span> <span class="pre">details</span></code>.</p>
+</section>
+</section>
+</section>
+<section id="guardium-4a-list-parameter-names-by-report-name">
+<h1>Guardium: 4A. List Parameter Names By Report Name :<a class="headerlink" href="#guardium-4a-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h1>
+<section id="function-guardium-list-parameter-names-by-report-name">
+<h2>Function Guardium List Parameter Names by Report Name<a class="headerlink" href="#function-guardium-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h2>
+<p>This function is used to get the additional parameters required to run Guardium reports.
+The function is used prior to executing a Guardium report to get a list of the required parameters for the execution.</p>
+</section>
+<section id="id4">
+<h2>Function Workflow:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+</section>
+<section id="example-guardium-list-parameter-names-by-report-name">
+<h2>Example: Guardium List Parameter Names by Report Name<a class="headerlink" href="#example-guardium-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h2>
+<p>This workflow can be invoked from any incident action menu. Select any report from the drop-down menu to retrieve the required list of Guardium parameters.</p>
+<p><img alt="screenshot" src="../_images/list_report.png" /></p>
+<p><img alt="screenshot" src="../_images/run_list_params.png" /></p>
+<p><img alt="screenshot" src="../_images/result_list.png" /></p>
+<p>A note is added to the incident with information on selected report parameters.</p>
+</section>
+</section>
+<section id="guardium-4b-search-all-guardium-reports">
+<h1>Guardium: 4B. Search All Guardium Reports :<a class="headerlink" href="#guardium-4b-search-all-guardium-reports" title="Link to this heading">¶</a></h1>
+<section id="id5">
+<h2>Function Guardium Search Report<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>This function is used to search Guardium reports. The function has access to all default Guardium reports.
+This option is for a user who is familiar with Guardium. It allows the user to choose from any of Guardium’s 600+ out of the box reports which can be used for enrichment of Resilient data. This option is under the pre-canned options as it requires knowledge of Guardium to choose the most useful reports.</p>
+</section>
+<section id="id6">
+<h2>Function Workflow:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+</section>
+<section id="example-guardium-search-report">
+<h2>Example: Guardium Search Report<a class="headerlink" href="#example-guardium-search-report" title="Link to this heading">¶</a></h2>
+<p>This workflow can be invoked from any incident action menu.</p>
+<p><img alt="screenshot" src="../_images/search.png" /></p>
+<p><img alt="screenshot" src="../_images/run_search.png" /></p>
+<p><img alt="screenshot" src="../_images/res_search.png" /></p>
+<p>The returned results are used to refresh the data table <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Search</span> <span class="pre">Report</span> <span class="pre">Data</span></code>.</p>
+</section>
+<section id="guardium-5-block-user-from-data-source">
+<h2>Guardium: 5. Block User from Data Source:<a class="headerlink" href="#guardium-5-block-user-from-data-source" title="Link to this heading">¶</a></h2>
+<section id="function-guardium-block-user">
+<h3>Function Guardium block user<a class="headerlink" href="#function-guardium-block-user" title="Link to this heading">¶</a></h3>
+<p>This function can be used to block user access to the Database.</p>
+</section>
+</section>
+<section id="id7">
+<h2>Function Workflow:<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+</section>
+<section id="example-guardium-block-user-access-to-db">
+<h2>Example: Guardium Block User Access to DB<a class="headerlink" href="#example-guardium-block-user-access-to-db" title="Link to this heading">¶</a></h2>
+<p>This workflow can be invoked from any incident actions menu.</p>
+<p><img alt="screenshot" src="../_images/block.png" /></p>
+<p><img alt="screenshot" src="../_images/run_block.png" /></p>
+<p><img alt="screenshot" src="../_images/res_block.png" /></p>
+<p>A note is added to the incident with result of workflow.</p>
+<p>:copyright:IBM Corp. 2010, 2020. All Rights Reserved.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_hibp/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Have I Been Pwned</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_grpc_interface/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">gRPC Interface</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/custom.js?v=a365c389"></script>
+    </body>
+</html>
