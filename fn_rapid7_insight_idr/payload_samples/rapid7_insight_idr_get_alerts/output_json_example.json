@@ -1,0 +1,38 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": [
+      {
+        "id": "eeeeeeeeee-83c0-4953-bc40-aaaaaaaaaaaaa",
+        "title": "Custom Alert Possible Traffic for Venus Ransomware Detected was triggered for log Zscaler Firewall_Logs EUS2ZSCALEP002 in log set Firewall Activity",
+        "alert_type": "Custom Alert - Pattern Detection",
+        "alert_type_description": "One or more logs matched the pattern you defined.",
+        "created_time": "2023-11-22T23:49:17.013Z",
+        "first_event_time": "2023-11-22T23:44:38.234Z",
+        "latest_event_time": "2023-11-22T23:49:17.013Z",
+        "alert_source": "User Behavior Analytics",
+        "detection_rule_rrn": null
+      }
+    ],
+    "metadata": {
+      "index": 0,
+      "size": 20,
+      "total_pages": 1,
+      "total_data": 1
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_rrn": "rrn:investigation:usxx:xxxxxx-1234-4608-be60-xxxxxxxxx:investigation:ggggggggggg"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "Pro.local",
+    "execution_time_ms": 219,
+    "timestamp": "2023-12-04 15:32:42"
+  }
+}
