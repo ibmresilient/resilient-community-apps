@@ -1,11 +1,14 @@
 include README.md
-include apikey_permissions.txt
 include Dockerfile
+include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_aws_guardduty/util *
-recursive-include fn_aws_guardduty/data *
 include fn_aws_guardduty/LICENSE
 include doc/*.md
 include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak

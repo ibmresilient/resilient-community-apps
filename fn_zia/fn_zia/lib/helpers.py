@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Helper functions for Resilient circuits Functions supporting ZIA """
 from __future__ import print_function

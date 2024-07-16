@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_zia",
     display_name="Zscaler Internet Access Functions for IBM SOAR",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
     author="IBM SOAR",
     author_email="",

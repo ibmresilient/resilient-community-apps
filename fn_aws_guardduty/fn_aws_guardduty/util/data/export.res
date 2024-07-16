@@ -1,169 +1,12 @@
 {
   "action_order": [],
-  "actions": [
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "incident.plan_status",
-          "method": "changed_to",
-          "type": null,
-          "value": "Closed"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_archived",
-          "method": "not_equals",
-          "type": null,
-          "value": "True"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_detector_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_finding_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_region",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        }
-      ],
-      "enabled": true,
-      "export_key": "Example: AWS GuardDuty: Archive Finding",
-      "id": 69,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: AWS GuardDuty: Archive Finding",
-      "object_type": "incident",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 0,
-      "uuid": "bca3c12d-b674-419a-a81c-9b2d92ab1f7d",
-      "view_items": [],
-      "workflows": [
-        "wf_aws_guardduty_archive_finding"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_detector_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_finding_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_region",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        }
-      ],
-      "enabled": true,
-      "export_key": "Example: AWS GuardDuty: Refresh Finding Details",
-      "id": 70,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: AWS GuardDuty: Refresh Finding Details",
-      "object_type": "incident",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "d7aa6986-65c9-4321-9880-f742e56452f3",
-      "view_items": [],
-      "workflows": [
-        "wf_aws_guardduty_refresh_finding"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_detector_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_finding_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_finding_updated_at",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_region",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_trigger_refresh",
-          "method": "changed",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.aws_guardduty_trigger_refresh",
-          "method": "equals",
-          "type": null,
-          "value": true
-        }
-      ],
-      "enabled": true,
-      "export_key": "Example: AWS GuardDuty: Update Finding Details",
-      "id": 71,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: AWS GuardDuty: Update Finding Details",
-      "object_type": "incident",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 0,
-      "uuid": "3603fc28-266b-487f-868f-fec33eafdd65",
-      "view_items": [],
-      "workflows": [
-        "wf_aws_guardduty_refresh_finding"
-      ]
-    }
-  ],
+  "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1614695408340,
+  "case_matching_profiles": [],
+  "export_date": 1712817023408,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -175,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/aws_gd_region",
       "hide_notification": false,
-      "id": 545,
+      "id": 867,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -204,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/aws_gd_detector_id",
       "hide_notification": false,
-      "id": 546,
+      "id": 868,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -233,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/aws_gd_finding_id",
       "hide_notification": false,
-      "id": 547,
+      "id": 869,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -262,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 548,
+      "id": 781,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -291,7 +134,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_severity",
       "hide_notification": false,
-      "id": 433,
+      "id": 801,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -320,7 +163,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_region",
       "hide_notification": false,
-      "id": 434,
+      "id": 802,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -349,7 +192,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_count",
       "hide_notification": false,
-      "id": 435,
+      "id": 803,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -378,7 +221,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_finding_id",
       "hide_notification": false,
-      "id": 436,
+      "id": 804,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -407,7 +250,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_finding_arn",
       "hide_notification": false,
-      "id": 437,
+      "id": 805,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -436,7 +279,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_resource_type",
       "hide_notification": false,
-      "id": 438,
+      "id": 806,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -465,7 +308,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_detector_id",
       "hide_notification": false,
-      "id": 439,
+      "id": 807,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -494,7 +337,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_finding_updated_at",
       "hide_notification": false,
-      "id": 440,
+      "id": 808,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -523,7 +366,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_archived",
       "hide_notification": false,
-      "id": 441,
+      "id": 809,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -552,7 +395,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_finding_type",
       "hide_notification": false,
-      "id": 442,
+      "id": 810,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -581,7 +424,7 @@
       "deprecated": false,
       "export_key": "incident/aws_guardduty_trigger_refresh",
       "hide_notification": false,
-      "id": 443,
+      "id": 811,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -614,12 +457,7 @@
   ],
   "functions": [
     {
-      "creator": {
-        "display_name": "Resilient Sysadmin",
-        "id": 4,
-        "name": "a@a.com",
-        "type": "user"
-      },
+      "created_date": 1711976363330,
       "description": {
         "content": "Resilient Function to archive an AWS GuardDuty finding when the corresponding incident is closed.",
         "format": "text"
@@ -630,15 +468,19 @@
       "id": 40,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 4,
-        "name": "a@a.com",
+        "id": 6,
+        "name": "dummy@dummy.com",
         "type": "user"
       },
-      "last_modified_time": 1614694311110,
+      "last_modified_time": 1711976363330,
       "name": "func_aws_guardduty_archive_finding",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "ee7aaede-3fd1-46d5-bd05-4bd6062f67e3",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "9af24b4c-9409-43ec-8c72-ea86f04fbc25",
@@ -674,17 +516,12 @@
           "programmatic_name": "wf_aws_guardduty_archive_finding",
           "tags": [],
           "uuid": null,
-          "workflow_id": 41
+          "workflow_id": 39
         }
       ]
     },
     {
-      "creator": {
-        "display_name": "Resilient Sysadmin",
-        "id": 4,
-        "name": "a@a.com",
-        "type": "user"
-      },
+      "created_date": 1711976363429,
       "description": {
         "content": "Resilient Function to refresh AWS GuardDuty finding details in an incident.",
         "format": "text"
@@ -694,16 +531,20 @@
       "export_key": "func_aws_guardduty_refresh_finding",
       "id": 41,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 4,
-        "name": "a@a.com",
-        "type": "user"
+        "display_name": "AllenAPIKey",
+        "id": 15,
+        "name": "f69e1d43-d39e-4307-8a31-841225718d96",
+        "type": "apikey"
       },
-      "last_modified_time": 1614694311179,
+      "last_modified_time": 1712813124902,
       "name": "func_aws_guardduty_refresh_finding",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "2d1446f8-13fc-4400-af6a-c96b55d9a0df",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "9af24b4c-9409-43ec-8c72-ea86f04fbc25",
@@ -754,10 +595,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 6,
+  "id": 24,
+  "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [
     {
+      "default_scan_option": "unsupported",
       "desc": "Amazon Web Services (AWS) IAM access key id.",
       "enabled": true,
       "export_key": "aws_iam_access_key_id",
@@ -775,6 +618,7 @@
       "version": 0
     },
     {
+      "default_scan_option": "unsupported",
       "desc": "Amazon Web Services (AWS) IAM user name.",
       "enabled": true,
       "export_key": "aws_iam_user_name",
@@ -792,6 +636,7 @@
       "version": 0
     },
     {
+      "default_scan_option": "unsupported",
       "desc": "Amazon Web Services (AWS) S3 bucket name.",
       "enabled": true,
       "export_key": "aws_s3_bucket_name",
@@ -811,7 +656,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1614695398721,
+      "create_date": 1712817020240,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -820,39 +665,434 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1614695398721,
+      "update_date": 1712817020240,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "c385a87d-550a-4851-9e76-6c5a11801d64",
+        "f69e1d43-d39e-4307-8a31-841225718d96"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_aws_gd",
       "name": "fn_aws_gd",
       "programmatic_name": "fn_aws_gd",
       "tags": [],
-      "users": [
-        "a@a.com"
-      ],
+      "users": [],
       "uuid": "982c1bc0-69a7-4dc6-bee7-508470d51ee5"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
+  "playbooks": [
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.plan_status",
+              "method": "changed_to",
+              "type": null,
+              "value": "Closed"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_archived",
+              "method": "not_equals",
+              "type": null,
+              "value": "True"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_detector_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_finding_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_region",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 6,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b\" isExecutable=\"true\" name=\"playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15uoz7n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"AWS GuardDuty: Archive finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ee7aaede-3fd1-46d5-bd05-4bd6062f67e3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15uoz7n\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lejp4v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15uoz7n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"AWS GuardDuty: Archive Finding Post Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"021b041b-85f9-4682-a99e-30b6b8756f48\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lejp4v\u003c/incoming\u003e\u003coutgoing\u003eFlow_00l1m6l\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_00l1m6l\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1lejp4v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_00l1m6l\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00l1m6l\" id=\"Flow_00l1m6l_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lejp4v\" id=\"Flow_1lejp4v_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15uoz7n\" id=\"Flow_15uoz7n_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"656\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1712644785652,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "dummy@dummy.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b",
+      "description": {
+        "content": "A SOAR playbook to archive an AWS GuardDuty finding when the corresponding incident is closed.",
+        "format": "text"
+      },
+      "display_name": "Example: AWS GuardDuty: Archive Finding (PB)",
+      "export_key": "example_aws_guardduty_archive_finding_pb",
+      "field_type_handle": "playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: AWS GuardDuty: Archive Finding (PB)",
+        "export_key": "playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b",
+        "uuid": "d71d232a-55eb-4158-aa12-acb39d848f6f"
+      },
+      "has_logical_errors": false,
+      "id": 62,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "dummy@dummy.com",
+        "type": "user"
+      },
+      "last_modified_time": 1712807095443,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1712644944801,
+          "description": "",
+          "enabled": false,
+          "export_key": "AWS GuardDuty: Archive Finding Post Script",
+          "id": 57,
+          "language": "python3",
+          "last_modified_by": "dummy@dummy.com",
+          "last_modified_time": 1712807093564,
+          "name": "AWS GuardDuty: Archive Finding Post Script",
+          "object_type": "incident",
+          "playbook_handle": "example_aws_guardduty_archive_finding_pb",
+          "programmatic_name": "example_aws_guardduty_archive_finding_pb_aws_guardduty_archive_finding_post_script",
+          "script_text": "##  wf_aws_guardduty_refresh_finding ##\n# Example result:\n\"\"\"\nGood\n====\nResult: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: True, \u0027reason\u0027: None,\n         \u0027content\u0027: {\u0027status\u0027: \u0027ok\u0027},\n         \u0027raw\u0027: \u0027{\"status\": \"ok\"}\u0027,\n         \u0027inputs\u0027: {\u0027aws_gd_finding_id\u0027: \u0027c2bb95a17b879bffc96c58f8a1689785\u0027, \u0027aws_gd_region\u0027: \u0027us-east-2\u0027,\n                    \u0027aws_gd_detector_id\u0027: \u002732b7017d2019dfe922abc4e07c3fdded\u0027\n                    },\n         \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\n         \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027execution_time_ms\u0027: 1310, \u0027timestamp\u0027: \u00272021-01-28 11:31:30\u0027\n        }\n}\nError:\nResult: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: True, \u0027reason\u0027: None,\n         \u0027content\u0027: {\u0027status\u0027: \u0027error\u0027,\n                     \u0027msg\u0027: \u0027An error occurred (BadRequestException) when calling the ArchiveFindings operation:\n                     The request is rejected because the input detectorId is not owned by the current account.\u0027},\n                     \u0027raw\u0027: \u0027\u003ccontent_as_string\u003e\u0027,\n         \u0027inputs\u0027: {\u0027aws_gd_finding_id\u0027: \u0027c2bb95a17b879bffc96c58f8a1689784\u0027, \u0027aws_gd_region\u0027: \u0027us-east-2\u0027,\n                    \u0027aws_gd_detector_id\u0027: \u002732b7017d2019dfe922abc4e07c3fdfff\u0027\n                    },\n         \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\n         \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027execution_time_ms\u0027: 1446, \u0027timestamp\u0027: \u00272021-01-28 11:34:53\u0027\n         }\n}\n\"\"\"\n#  Globals\nFN_NAME = \"func_aws_guardduty_archive_finding\"\nWF_NAME = \"Example: AWS GuardDuty: Archive Finding\"\n# Resilient artifact names to api names.\n# Processing\n# Processing\nCONTENT = playbook.functions.results.output\nINPUTS = playbook.functions.results.inputs\nQUERY_EXECUTION_DATE = playbook.functions.results.output[\"metrics\"][\"timestamp\"]\n\n\n# Processing\n\ndef main():\n    note_text = \u0027\u0027\n    if CONTENT:\n        if CONTENT[\"status\"] == \"ok\":\n            note_text = \"AWS IAM Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: The finding with id \u003cb\u003e{1}\u003c/b\u003e and detector id \" \\\n                        \"\u003cb\u003e{2}\u003c/b\u003e in region \u003cb\u003e{3}\u003c/b\u003e was successfully archived for Resilient function \u003cb\u003e{4}\u003c/b\u003e\"\\\n                .format(WF_NAME, INPUTS[\"aws_gd_finding_id\"], INPUTS[\"aws_gd_detector_id\"], INPUTS[\"aws_gd_region\"], FN_NAME)\n            # Update archived property.\n            incident.properties.aws_guardduty_archived = \"True\"  \n            \n\n        elif CONTENT[\"status\"] == \"error\":\n            note_text = \"AWS IAM Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: The finding with id \u003cb\u003e{1}\u003c/b\u003e and detector id \" \\\n                        \"\u003cb\u003e{2}\u003c/b\u003e in region \u003cb\u003e{3}\u003c/b\u003e failed archive with error \u003cb\u003e{4}\u003c/b\u003e for Resilient function \u003cb\u003e{5}\u003c/b\u003e\"\\\n                .format(WF_NAME, INPUTS[\"aws_gd_finding_id\"], INPUTS[\"aws_gd_detector_id\"], INPUTS[\"aws_gd_region\"],\n                        CONTENT[\"msg\"], FN_NAME)\n\n        else:\n            note_text = \"AWS IAM Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: The finding with id \u003cb\u003e{1}\u003c/b\u003e and detector id \" \\\n                        \"\u003cb\u003e{2}\u003c/b\u003e in region \u003cb\u003e{3}\u003c/b\u003e got unexpected status \u003cb\u003e{4}\u003c/b\u003e for Resilient function \u003cb\u003e{5}\u003c/b\u003e\" \\\n                .format(WF_NAME, INPUTS[\"aws_gd_finding_id\"], INPUTS[\"aws_gd_detector_id\"], CONTENT[\"status\"], INPUTS[\"aws_gd_region\"],\n                        FN_NAME)\n\n    else:\n        note_text += \"AWS IAM Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: There was no result returned for Resilient function \u003cb\u003e{0}\u003c/b\u003e\"\\\n            .format(WF_NAME, FN_NAME)\n\n    incident.addNote(helper.createRichText(note_text))\n\nif __name__ == \"__main__\":\n    main()\n",
+          "tags": [],
+          "uuid": "021b041b-85f9-4682-a99e-30b6b8756f48"
+        }
+      ],
+      "name": "example_aws_guardduty_archive_finding_pb",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_dcfbac7d-214a-41c3-bf6e-7f4b9abd4e7b",
+        "id": 73,
+        "name": "playbook_dcfbac7d_214a_41c3_bf6e_7f4b9abd4e7b",
+        "type": "playbook",
+        "uuid": "eaa61a78-0e52-4a1b-ab44-62aff583b296"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "dcfbac7d-214a-41c3-bf6e-7f4b9abd4e7b",
+      "version": 11
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 29,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a99e9657_b10e_44e3_8558_e494fe2c9039\" isExecutable=\"true\" name=\"playbook_a99e9657_b10e_44e3_8558_e494fe2c9039\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1r6qekf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"AWS GuardDuty: Refresh Finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2d1446f8-13fc-4400-af6a-c96b55d9a0df\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1r6qekf\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ifg4iq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1r6qekf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1x750lg\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"AWS GuardDuty: Refresh Finding Details Post Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6b13da79-dd49-48b8-b511-588b0570d078\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ifg4iq\u003c/incoming\u003e\u003coutgoing\u003eFlow_1x750lg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ifg4iq\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1x750lg\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a99e9657_b10e_44e3_8558_e494fe2c9039\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1x750lg\" id=\"Flow_1x750lg_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ifg4iq\" id=\"Flow_1ifg4iq_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1r6qekf\" id=\"Flow_1r6qekf_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"656\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1712644253283,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "dummy@dummy.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_a99e9657_b10e_44e3_8558_e494fe2c9039",
+      "description": {
+        "content": "A SOAR playbook to refresh or update AWS GuardDuty finding details in an incident.",
+        "format": "text"
+      },
+      "display_name": "Example: AWS GuardDuty: Refresh Finding Details (PB)",
+      "export_key": "example_aws_guardduty_refresh_finding_details_pb",
+      "field_type_handle": "playbook_a99e9657_b10e_44e3_8558_e494fe2c9039",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: AWS GuardDuty: Refresh Finding Details (PB)",
+        "export_key": "playbook_a99e9657_b10e_44e3_8558_e494fe2c9039",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_a99e9657_b10e_44e3_8558_e494fe2c9039",
+        "uuid": "55ec1f55-147d-4b19-a64d-4dad5f711128"
+      },
+      "has_logical_errors": false,
+      "id": 61,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "dummy@dummy.com",
+        "type": "user"
+      },
+      "last_modified_time": 1712806941408,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1712644430310,
+          "description": "",
+          "enabled": false,
+          "export_key": "AWS GuardDuty: Refresh Finding Details Post Script",
+          "id": 55,
+          "language": "python3",
+          "last_modified_by": "dummy@dummy.com",
+          "last_modified_time": 1712807345125,
+          "name": "AWS GuardDuty: Refresh Finding Details Post Script",
+          "object_type": "incident",
+          "playbook_handle": "example_aws_guardduty_refresh_finding_details_pb",
+          "programmatic_name": "example_aws_guardduty_refresh_finding_details_pb_aws_guardduty_refresh_finding_details_post_script",
+          "script_text": "##  wf_aws_guardduty_refresh_finding ##\n# Example result:\n\"\"\"\nResult: { \u0027version\u0027: \u00271.0\u0027,\n          \u0027success\u0027: True,\n          \u0027reason\u0027: None,\n          \u0027content\u0027: {\u0027payload\u0027: {\u0027name\u0027: \u0027AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.\u0027,\n                                  \u0027description\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \u0027An API was used to access a bucket from an IP address on a custom threat list.\u0027},\n                                  \u0027discovered_date\u0027: \u00272020-11-25T13:46:37.960Z\u0027,\n                                  \u0027severity_code\u0027: \u0027Low\u0027,\n                                  \u0027properties\u0027: {\u0027aws_guardduty_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\n                                                \u0027aws_guardduty_finding_arn\u0027: \u0027arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631\u0027,\n                                                \u0027aws_guardduty_finding_type\u0027: \u0027UnauthorizedAccess:S3/MaliciousIPCaller.Custom\u0027,\n                                                \u0027aws_guardduty_finding_updated_at\u0027: \u00272020-11-26T15:18:12.620Z\u0027, \u0027aws_guardduty_region\u0027: \u0027us-west-2\u0027,\n                                                \u0027aws_guardduty_resource_type\u0027: \u0027S3Bucket\u0027, \u0027aws_guardduty_count\u0027: 4,\n                                                \u0027aws_guardduty_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\n                                  \u0027artifacts\u0027: [],\n                                  \u0027comments\u0027: [{\u0027text\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \"AWS GuardDuty finding Payload:\\n\u003cFINDING_PAYLOAD_AS_STRING\u003e\"}}]\n\n                                },\n                      \"data_tables\": {\"gd_action_details\": [{\"cells\": {\"action_type\": {\"value\": \"AWS_API_CALL\"},\n                                                            \"action_api\": {\"value\": \"GeneratedFindingAPIName\"},\n                                                            \"event_first_seen\": {\"value\": \"2020-11-25T13:46:37.960Z\"},\n                                                            \"event_last_seen\": {\"value\": \"2020-11-26T15:18:12.620Z\"},\n                                                            \"actor_caller_type\": {\"value\": \"Remote IP\"}, \"city_name\": {\"value\": \"GeneratedFindingCityName\"}, \"country_name\": {\"value\": \"GeneratedFindingCountryName\"}, \"asn\": {\"value\": \"-1\"}, \"asn_org\": {\"value\": \"GeneratedFindingASNOrg\"}, \"isp\": {\"value\": \"GeneratedFindingISP\"}, \"org\": {\"value\": \"GeneratedFindingORG\"}, \"action_service_name\": {\"value\": \"GeneratedFindingAPIServiceName\"}, \"remote_ip\": {\"value\": \"198.51.100.0\"}}}],\n                                    \"gd_resource_affected\": [{\"cells\": {\"resource_type\": {\"value\": \"S3Bucket\"}, \"instance_id\": {\"value\": \"i-99999999\"}, \"instance_type\": {\"value\": \"m3.xlarge\"}, \"instance_state\": {\"value\": \"running\"}, \"resource_role\": {\"value\": \"TARGET\"}, \"instance_private_ip\": {\"value\": \"10.0.0.1\"}, \"instance_private_dns\": {\"value\": \"GeneratedFindingPrivateName\"}, \"instance_public_ip\": {\"value\": \"198.51.100.0\"}, \"instance_public_dns\": {\"value\": \"GeneratedFindingPublicDNSName\"}, \"s3bucket_name\": {\"value\": \"bucketName\"}, \"s3bucket_owner\": {\"value\": \"CanonicalId of Owner\"}}}]\n\n                      }}\u0027,\n            \u0027inputs\u0027: {\u0027incident_id\u0027: 2168, \u0027aws_gd_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\n                      \u0027aws_gd_region\u0027: \u0027us-west-2\u0027, \u0027aws_gd_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\n            \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\n                        \u0027host\u0027: \u0027Johnp-MacBook-Pro-2.galway.ie.ibm.com\u0027, \u0027execution_time_ms\u0027: 10739,\n                        \u0027timestamp\u0027: \u00272021-01-18 16:51:10\u0027}\n}\n\"\"\"\n#  Globals\n# List of fields in datatable for wf_aws_guardduty_refresh_finding script\nDATA_TABLES = [\"gd_action_details\", \"gd_resource_affected\"]\nFN_NAME = \"func_aws_guardduty_refresh_finding\"\nWF_NAME = \"Example: AWS GuardDuty: Refresh Finding\"\n# Resilient artifact names to api names.\nARTIFACT_API_TO_TYPE = {\n    \"aws_iam_access_key_id\": \"AWS IAM Access Key ID\",\n    \"aws_iam_user_name\": \"AWS IAM User Name\",\n    \"aws_s3_bucket_name\": \"AWS S3 Bucket Name\",\n    \"IP Address\": \"IP Address\",\n    \"DNS Name\": \"DNS Name\",\n    \"Port\": \"Port\"\n}\n\nCONTENT = playbook.functions.results.output\nQUERY_EXECUTION_DATE = playbook.functions.results.output[\"metrics\"][\"timestamp\"]\nif CONTENT:\n    FINDING = CONTENT.finding\n    PAYLOAD = CONTENT.payload\n    ARTIFACTS = CONTENT.artifacts\n    DATA_TABLES = CONTENT.data_tables\n\n# Processing\n\ndef main():\n    note_text = \u0027\u0027\n    if CONTENT:\n        note_text = \"AWS GuardDuty Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: Finding data returned for Resilient function \" \\\n                    \"\u003cb\u003e{2}\u003c/b\u003e\".format(WF_NAME, len(CONTENT), FN_NAME)\n\n        update_fields()\n        update_datatables()\n        if ARTIFACTS:\n            add_artifacts()\n    else:\n        note_text = \"AWS GuardDuty Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: No finding data returned for Resilient function \" \\\n                    \"\u003cb\u003e{2}\u003c/b\u003e\".format(WF_NAME, len(CONTENT), FN_NAME)\n\n    incident.addNote(helper.createRichText(note_text))\n\ndef update_fields():\n    incident.severity_code = PAYLOAD[\"severity_code\"]\n    incident.properties.aws_guardduty_finding_updated_at = PAYLOAD[\"properties\"][\"aws_guardduty_finding_updated_at\"]\n    incident.properties.aws_guardduty_count = str(PAYLOAD[\"properties\"][\"aws_guardduty_count\"])\n    incident.properties.aws_guardduty_archived = str(PAYLOAD[\"properties\"][\"aws_guardduty_archived\"])\n    incident.properties.aws_guardduty_severity = str(PAYLOAD[\"properties\"][\"aws_guardduty_severity\"])\n\ndef update_datatables():\n    for data_table in DATA_TABLES:\n        for row in DATA_TABLES[data_table]:\n            newrow = incident.addRow(data_table)\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\n            data_table_fields = row[\"cells\"]\n            for f, v_info in data_table_fields.items():\n                newrow[f] = v_info.value\n\n\ndef add_artifacts():\n    for artifact in ARTIFACTS:\n        artifact_type = ARTIFACT_API_TO_TYPE[artifact[\"type\"][\"name\"]]\n        artifact_value = artifact[\"value\"]\n        description = artifact[\"description\"][\"content\"]\n        incident.addArtifact(artifact_type, artifact_value, description)\n\n\nif __name__ == \"__main__\":\n    main()\n",
+          "tags": [],
+          "uuid": "6b13da79-dd49-48b8-b511-588b0570d078"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_detector_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_finding_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_region",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "example_aws_guardduty_refresh_finding_details_pb",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_a99e9657-b10e-44e3-8558-e494fe2c9039",
+        "id": 72,
+        "name": "playbook_a99e9657_b10e_44e3_8558_e494fe2c9039",
+        "type": "playbook",
+        "uuid": "0b63830b-8a85-4ced-80a7-5c6e7990dcc1"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "a99e9657-b10e-44e3-8558-e494fe2c9039",
+      "version": 33
+    },
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_detector_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_finding_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_finding_updated_at",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_region",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_trigger_refresh",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.aws_guardduty_trigger_refresh",
+              "method": "equals",
+              "type": null,
+              "value": true
+            }
+          ],
+          "logic_type": "all"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 6,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29\" isExecutable=\"true\" name=\"playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kqhenv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"AWS GuardDuty: Refresh Finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2d1446f8-13fc-4400-af6a-c96b55d9a0df\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kqhenv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cq2222\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kqhenv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"AWS GuardDuty: Update Finding Details Post Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7667b80e-9574-4ba3-82d6-08c86feb194d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cq2222\u003c/incoming\u003e\u003coutgoing\u003eFlow_0pa5lc0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0pa5lc0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0cq2222\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0pa5lc0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0pa5lc0\" id=\"Flow_0pa5lc0_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"384\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cq2222\" id=\"Flow_0cq2222_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kqhenv\" id=\"Flow_1kqhenv_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"656\" y=\"384\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1712643819790,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "dummy@dummy.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29",
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "display_name": "Example: AWS GuardDuty: Update Finding Details (PB)",
+      "export_key": "example_aws_guardduty_update_finding_details_pb",
+      "field_type_handle": "playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: AWS GuardDuty: Update Finding Details (PB)",
+        "export_key": "playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29",
+        "uuid": "41a9e2b5-8170-49ce-bf49-53dd6d588355"
+      },
+      "has_logical_errors": false,
+      "id": 59,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "dummy@dummy.com",
+        "type": "user"
+      },
+      "last_modified_time": 1712806936959,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1712644637206,
+          "description": "",
+          "enabled": false,
+          "export_key": "AWS GuardDuty: Update Finding Details Post Script",
+          "id": 56,
+          "language": "python3",
+          "last_modified_by": "dummy@dummy.com",
+          "last_modified_time": 1712806934892,
+          "name": "AWS GuardDuty: Update Finding Details Post Script",
+          "object_type": "incident",
+          "playbook_handle": "example_aws_guardduty_update_finding_details_pb",
+          "programmatic_name": "example_aws_guardduty_update_finding_details_pb_aws_guardduty_refresh_finding_details_post_script",
+          "script_text": "##  wf_aws_guardduty_refresh_finding ##\n# Example result:\n\"\"\"\nResult: { \u0027version\u0027: \u00271.0\u0027,\n          \u0027success\u0027: True,\n          \u0027reason\u0027: None,\n          \u0027content\u0027: {\u0027payload\u0027: {\u0027name\u0027: \u0027AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.\u0027,\n                                  \u0027description\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \u0027An API was used to access a bucket from an IP address on a custom threat list.\u0027},\n                                  \u0027discovered_date\u0027: \u00272020-11-25T13:46:37.960Z\u0027,\n                                  \u0027severity_code\u0027: \u0027Low\u0027,\n                                  \u0027properties\u0027: {\u0027aws_guardduty_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\n                                                 \u0027aws_guardduty_finding_arn\u0027: \u0027arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631\u0027,\n                                                 \u0027aws_guardduty_finding_type\u0027: \u0027UnauthorizedAccess:S3/MaliciousIPCaller.Custom\u0027,\n                                                 \u0027aws_guardduty_finding_updated_at\u0027: \u00272020-11-26T15:18:12.620Z\u0027, \u0027aws_guardduty_region\u0027: \u0027us-west-2\u0027,\n                                                 \u0027aws_guardduty_resource_type\u0027: \u0027S3Bucket\u0027, \u0027aws_guardduty_count\u0027: 4,\n                                                 \u0027aws_guardduty_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\n                                  \u0027artifacts\u0027: [],\n                                  \u0027comments\u0027: [{\u0027text\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \"AWS GuardDuty finding Payload:\\n\u003cFINDING_PAYLOAD_AS_STRING\u003e\"}}]\n\n                                 },\n                      \"data_tables\": {\"gd_action_details\": [{\"cells\": {\"action_type\": {\"value\": \"AWS_API_CALL\"},\n                                                             \"action_api\": {\"value\": \"GeneratedFindingAPIName\"},\n                                                             \"event_first_seen\": {\"value\": \"2020-11-25T13:46:37.960Z\"},\n                                                             \"event_last_seen\": {\"value\": \"2020-11-26T15:18:12.620Z\"},\n                                                            \"actor_caller_type\": {\"value\": \"Remote IP\"}, \"city_name\": {\"value\": \"GeneratedFindingCityName\"}, \"country_name\": {\"value\": \"GeneratedFindingCountryName\"}, \"asn\": {\"value\": \"-1\"}, \"asn_org\": {\"value\": \"GeneratedFindingASNOrg\"}, \"isp\": {\"value\": \"GeneratedFindingISP\"}, \"org\": {\"value\": \"GeneratedFindingORG\"}, \"action_service_name\": {\"value\": \"GeneratedFindingAPIServiceName\"}, \"remote_ip\": {\"value\": \"198.51.100.0\"}}}],\n                                     \"gd_resource_affected\": [{\"cells\": {\"resource_type\": {\"value\": \"S3Bucket\"}, \"instance_id\": {\"value\": \"i-99999999\"}, \"instance_type\": {\"value\": \"m3.xlarge\"}, \"instance_state\": {\"value\": \"running\"}, \"resource_role\": {\"value\": \"TARGET\"}, \"instance_private_ip\": {\"value\": \"10.0.0.1\"}, \"instance_private_dns\": {\"value\": \"GeneratedFindingPrivateName\"}, \"instance_public_ip\": {\"value\": \"198.51.100.0\"}, \"instance_public_dns\": {\"value\": \"GeneratedFindingPublicDNSName\"}, \"s3bucket_name\": {\"value\": \"bucketName\"}, \"s3bucket_owner\": {\"value\": \"CanonicalId of Owner\"}}}]\n\n                      }}\u0027,\n            \u0027inputs\u0027: {\u0027incident_id\u0027: 2168, \u0027aws_gd_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\n                       \u0027aws_gd_region\u0027: \u0027us-west-2\u0027, \u0027aws_gd_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\n            \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\n                        \u0027host\u0027: \u0027Johnp-MacBook-Pro-2.galway.ie.ibm.com\u0027, \u0027execution_time_ms\u0027: 10739,\n                        \u0027timestamp\u0027: \u00272021-01-18 16:51:10\u0027}\n}\n\"\"\"\n#  Globals\n# List of fields in datatable for wf_aws_guardduty_refresh_finding script\nDATA_TABLES = [\"gd_action_details\", \"gd_resource_affected\"]\nFN_NAME = \"func_aws_guardduty_refresh_finding\"\nWF_NAME = \"Example: AWS GuardDuty: Refresh Finding\"\n# Resilient artifact names to api names.\nARTIFACT_API_TO_TYPE = {\n    \"aws_iam_access_key_id\": \"AWS IAM Access Key ID\",\n    \"aws_iam_user_name\": \"AWS IAM User Name\",\n    \"aws_s3_bucket_name\": \"AWS S3 Bucket Name\",\n    \"IP Address\": \"IP Address\",\n    \"DNS Name\": \"DNS Name\",\n    \"Port\": \"Port\"\n}\nCONTENT = playbook.functions.results.output\nQUERY_EXECUTION_DATE = playbook.functions.results.output.content[\"metrics\"][\"timestamp\"]\nif CONTENT:\n    FINDING = CONTENT.finding\n    PAYLOAD = CONTENT.payload\n    ARTIFACTS = CONTENT.artifacts\n    DATA_TABLES = CONTENT.data_tables\n\n# Processing\n\ndef main():\n    note_text = \u0027\u0027\n    if CONTENT:\n        note_text = \"AWS GuardDuty Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: Finding data returned for Resilient function \" \\\n                    \"\u003cb\u003e{2}\u003c/b\u003e\".format(WF_NAME, len(CONTENT), FN_NAME)\n\n        update_fields()\n        update_datatables()\n        if ARTIFACTS:\n            add_artifacts()\n    else:\n        note_text = \"AWS GuardDuty Integration: Workflow \u003cb\u003e{0}\u003c/b\u003e: No finding data returned for Resilient function \" \\\n                    \"\u003cb\u003e{2}\u003c/b\u003e\".format(WF_NAME, len(CONTENT), FN_NAME)\n\n    incident.addNote(helper.createRichText(note_text))\n\ndef update_fields():\n    incident.severity_code = PAYLOAD[\"severity_code\"]\n    incident.properties.aws_guardduty_finding_updated_at = PAYLOAD[\"properties\"][\"aws_guardduty_finding_updated_at\"]\n    incident.properties.aws_guardduty_count = str(PAYLOAD[\"properties\"][\"aws_guardduty_count\"])\n    incident.properties.aws_guardduty_archived = str(PAYLOAD[\"properties\"][\"aws_guardduty_archived\"])\n    incident.properties.aws_guardduty_severity = str(PAYLOAD[\"properties\"][\"aws_guardduty_severity\"])\n\ndef update_datatables():\n    for data_table in DATA_TABLES:\n        for row in DATA_TABLES[data_table]:\n            newrow = incident.addRow(data_table)\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\n            data_table_fields = row[\"cells\"]\n            for f, v_info in data_table_fields.items():\n                newrow[f] = v_info.value\n\n\ndef add_artifacts():\n    for artifact in ARTIFACTS:\n        artifact_type = ARTIFACT_API_TO_TYPE[artifact[\"type\"][\"name\"]]\n        artifact_value = artifact[\"value\"]\n        description = artifact[\"description\"][\"content\"]\n        incident.addArtifact(artifact_type, artifact_value, description)\n\n\nif __name__ == \"__main__\":\n    main()\n",
+          "tags": [],
+          "uuid": "7667b80e-9574-4ba3-82d6-08c86feb194d"
+        }
+      ],
+      "name": "example_aws_guardduty_update_finding_details_pb",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_db21b0b4-697b-40c0-bb9a-47615ce77f29",
+        "id": 70,
+        "name": "playbook_db21b0b4_697b_40c0_bb9a_47615ce77f29",
+        "type": "playbook",
+        "uuid": "148b36d1-9dd3-47ba-9a0e-2a8fdcd41bdc"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "db21b0b4-697b-40c0-bb9a-47615ce77f29",
+      "version": 11
+    }
+  ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 6328,
-    "major": 39,
+    "build_number": 8803,
+    "major": 49,
     "minor": 0,
-    "version": "39.0.6328"
+    "version": "49.0.8803"
   },
   "tags": [],
   "task_order": [],
@@ -873,7 +1113,7 @@
           "deprecated": false,
           "export_key": "gd_access_key_details/access_key_id",
           "hide_notification": false,
-          "id": 445,
+          "id": 812,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -889,7 +1129,7 @@
           "templates": [],
           "text": "Access key ID",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1034,
           "uuid": "b27dad20-dacc-44a1-8f30-9b212914b79f",
           "values": [],
           "width": 132
@@ -904,7 +1144,7 @@
           "deprecated": false,
           "export_key": "gd_access_key_details/principal_id",
           "hide_notification": false,
-          "id": 446,
+          "id": 813,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -920,7 +1160,7 @@
           "templates": [],
           "text": "Principal ID",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1034,
           "uuid": "60b722d7-f071-4c21-a3f2-f1353a18bb91",
           "values": [],
           "width": 114
@@ -935,7 +1175,7 @@
           "deprecated": false,
           "export_key": "gd_access_key_details/query_execution_date",
           "hide_notification": false,
-          "id": 447,
+          "id": 814,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -951,7 +1191,7 @@
           "templates": [],
           "text": "Query Execution date",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1034,
           "uuid": "a5903a18-b86b-41cc-bfd7-d3ba9e6e2270",
           "values": [],
           "width": 199
@@ -966,7 +1206,7 @@
           "deprecated": false,
           "export_key": "gd_access_key_details/user_name",
           "hide_notification": false,
-          "id": 448,
+          "id": 815,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -982,7 +1222,7 @@
           "templates": [],
           "text": "User name",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1034,
           "uuid": "3cd04b96-5a00-4a9b-9be4-7a2f8a9cd950",
           "values": [],
           "width": 104
@@ -997,7 +1237,7 @@
           "deprecated": false,
           "export_key": "gd_access_key_details/user_type",
           "hide_notification": false,
-          "id": 449,
+          "id": 816,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1013,7 +1253,7 @@
           "templates": [],
           "text": "User type",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1034,
           "uuid": "7df25967-de3a-4324-8afd-b1197ff4e63e",
           "values": [],
           "width": 95
@@ -1053,7 +1293,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/action_api",
           "hide_notification": false,
-          "id": 450,
+          "id": 817,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1069,7 +1309,7 @@
           "templates": [],
           "text": "Action api",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "f1be8138-1a2b-4458-b648-8ea44bd26713",
           "values": [],
           "width": 69
@@ -1084,7 +1324,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/action_type",
           "hide_notification": false,
-          "id": 451,
+          "id": 818,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1100,7 +1340,7 @@
           "templates": [],
           "text": "Action type",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "71698e3e-e588-49c6-b7f2-91af22412140",
           "values": [],
           "width": 77
@@ -1115,7 +1355,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/actor_caller_type",
           "hide_notification": false,
-          "id": 452,
+          "id": 819,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1131,7 +1371,7 @@
           "templates": [],
           "text": "Actor caller type",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "32323b4c-f368-4c88-bbfe-3606cd04eb9d",
           "values": [],
           "width": 112
@@ -1146,7 +1386,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/asn",
           "hide_notification": false,
-          "id": 453,
+          "id": 820,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1162,7 +1402,7 @@
           "templates": [],
           "text": "Asn",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "02e84510-244e-443f-bdce-ddb364ee6d7c",
           "values": [],
           "width": 25
@@ -1177,7 +1417,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/asn_org",
           "hide_notification": false,
-          "id": 454,
+          "id": 821,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1193,7 +1433,7 @@
           "templates": [],
           "text": "Finding asn org",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "2647e26a-3241-49a5-b85e-7da32e5578b6",
           "values": [],
           "width": 51
@@ -1208,7 +1448,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/city_name",
           "hide_notification": false,
-          "id": 455,
+          "id": 822,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1224,7 +1464,7 @@
           "templates": [],
           "text": "City name",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "836614f1-62ab-48a7-990a-fc9d557a15b0",
           "values": [],
           "width": 67
@@ -1239,7 +1479,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/connection_direction",
           "hide_notification": false,
-          "id": 456,
+          "id": 823,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1255,7 +1495,7 @@
           "templates": [],
           "text": "Connection direction",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "a0a63bea-02c8-48cc-9b68-c195bd5f8854",
           "values": [],
           "width": 76
@@ -1270,7 +1510,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/country_name",
           "hide_notification": false,
-          "id": 457,
+          "id": 824,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1286,7 +1526,7 @@
           "templates": [],
           "text": "Country",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "eb19d165-6679-4761-813f-6ee810099d45",
           "values": [],
           "width": 94
@@ -1301,7 +1541,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/dns_blocked",
           "hide_notification": false,
-          "id": 458,
+          "id": 825,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1317,7 +1557,7 @@
           "templates": [],
           "text": "DNS request blocked",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "9c7f5f14-3d52-4337-9ab4-72477308c024",
           "values": [],
           "width": 53
@@ -1332,7 +1572,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/dns_domain_name",
           "hide_notification": false,
-          "id": 459,
+          "id": 826,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1348,7 +1588,7 @@
           "templates": [],
           "text": "DNS domain name",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "7f392168-f15d-489e-9c3b-163c3836111e",
           "values": [],
           "width": 50
@@ -1363,7 +1603,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/event_first_seen",
           "hide_notification": false,
-          "id": 460,
+          "id": 827,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1379,7 +1619,7 @@
           "templates": [],
           "text": "Event first Seen",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "09a9027f-ee68-4e92-bb8c-bbf0d89a4719",
           "values": [],
           "width": 38
@@ -1394,7 +1634,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/event_last_seen",
           "hide_notification": false,
-          "id": 461,
+          "id": 828,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1410,7 +1650,7 @@
           "templates": [],
           "text": "Event Last Seen",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "d9c15e25-0920-4c6b-bf2c-322b0314f2dd",
           "values": [],
           "width": 38
@@ -1425,7 +1665,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/isp",
           "hide_notification": false,
-          "id": 462,
+          "id": 829,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1441,7 +1681,7 @@
           "templates": [],
           "text": "Finding isp",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "ec7698cf-30e5-4cc3-af24-24533035e224",
           "values": [],
           "width": 50
@@ -1456,7 +1696,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/local_ip",
           "hide_notification": false,
-          "id": 463,
+          "id": 830,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1472,7 +1712,7 @@
           "templates": [],
           "text": "Local IP address",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "4734c0dd-6c93-483e-9875-0fbc8b76a8b9",
           "values": [],
           "width": 53
@@ -1487,7 +1727,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/local_port",
           "hide_notification": false,
-          "id": 464,
+          "id": 831,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1503,7 +1743,7 @@
           "templates": [],
           "text": "Local port",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "d4b0ffc2-f20c-4ca6-9c58-ab947552234d",
           "values": [],
           "width": 35
@@ -1518,7 +1758,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/org",
           "hide_notification": false,
-          "id": 465,
+          "id": 832,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1534,7 +1774,7 @@
           "templates": [],
           "text": "Finding org",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "059db373-635b-4afd-9ffa-9580b7dab2f9",
           "values": [],
           "width": 50
@@ -1549,7 +1789,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/protocol",
           "hide_notification": false,
-          "id": 466,
+          "id": 833,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1565,7 +1805,7 @@
           "templates": [],
           "text": "Protocol",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "d366e76b-cd33-47b8-829f-bc08594371f5",
           "values": [],
           "width": 56
@@ -1580,7 +1820,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/query_execution_date",
           "hide_notification": false,
-          "id": 467,
+          "id": 834,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1596,7 +1836,7 @@
           "templates": [],
           "text": "Query Execution date",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "7e199cfc-4d0d-4efc-897b-4de690071d22",
           "values": [],
           "width": 66
@@ -1611,7 +1851,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/remote_ip",
           "hide_notification": false,
-          "id": 468,
+          "id": 835,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1627,7 +1867,7 @@
           "templates": [],
           "text": "Remote IP address",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "55a83144-7056-42e8-8385-84a05b9eb949",
           "values": [],
           "width": 134
@@ -1642,7 +1882,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/remote_port",
           "hide_notification": false,
-          "id": 469,
+          "id": 836,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1658,7 +1898,7 @@
           "templates": [],
           "text": "Remote port",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "1455bed3-ae3e-4bc8-87da-656f87f53c13",
           "values": [],
           "width": 51
@@ -1673,7 +1913,7 @@
           "deprecated": false,
           "export_key": "gd_action_details/service_name",
           "hide_notification": false,
-          "id": 470,
+          "id": 837,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1689,7 +1929,7 @@
           "templates": [],
           "text": "Service name",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1035,
           "uuid": "58db2789-f873-44e8-a9b9-e69099f0803a",
           "values": [],
           "width": 139
@@ -1729,7 +1969,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/account_id",
           "hide_notification": false,
-          "id": 471,
+          "id": 838,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1745,7 +1985,7 @@
           "templates": [],
           "text": "Account ID",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "15334021-e452-44a6-9662-c7c877463f5a",
           "values": [],
           "width": 68
@@ -1760,7 +2000,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/count",
           "hide_notification": false,
-          "id": 472,
+          "id": 839,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1776,7 +2016,7 @@
           "templates": [],
           "text": "Count",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "12a837a0-b7bf-44c2-b75c-30f5a26ef0bb",
           "values": [],
           "width": 57
@@ -1791,7 +2031,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/created_at",
           "hide_notification": false,
-          "id": 473,
+          "id": 840,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1807,7 +2047,7 @@
           "templates": [],
           "text": "Created at",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "54643cce-7c5e-4cf4-86ca-0cef9b80aab3",
           "values": [],
           "width": 59
@@ -1822,7 +2062,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/query_execution_date",
           "hide_notification": false,
-          "id": 474,
+          "id": 841,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1838,7 +2078,7 @@
           "templates": [],
           "text": "Query Execution date",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "8a7df4b7-eb1a-4e5d-8b66-a3b3093318d4",
           "values": [],
           "width": 120
@@ -1853,7 +2093,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/region",
           "hide_notification": false,
-          "id": 475,
+          "id": 842,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1869,7 +2109,7 @@
           "templates": [],
           "text": "Region",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "6cc4c558-88b6-4a01-88aa-8f5b570989c7",
           "values": [],
           "width": 59
@@ -1884,7 +2124,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/resource_id",
           "hide_notification": false,
-          "id": 476,
+          "id": 843,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1900,7 +2140,7 @@
           "templates": [],
           "text": "Resource ID",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "839c7996-d8d4-406f-a176-f0d985e18141",
           "values": [],
           "width": 75
@@ -1915,7 +2155,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/severity",
           "hide_notification": false,
-          "id": 477,
+          "id": 844,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1931,7 +2171,7 @@
           "templates": [],
           "text": "Severity",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "75282f43-6caf-44db-b9eb-8773cc8b2e4b",
           "values": [],
           "width": 62
@@ -1946,7 +2186,7 @@
           "deprecated": false,
           "export_key": "gd_finding_overview/updated_at",
           "hide_notification": false,
-          "id": 478,
+          "id": 845,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1962,7 +2202,7 @@
           "templates": [],
           "text": "Updated at",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1036,
           "uuid": "d1009026-3194-41d9-a6bd-8e518535401a",
           "values": [],
           "width": 69
@@ -2002,7 +2242,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/instance_id",
           "hide_notification": false,
-          "id": 479,
+          "id": 846,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2018,7 +2258,7 @@
           "templates": [],
           "text": "ID",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "a1b947dd-72f2-4235-b1b2-883f128b3366",
           "values": [],
           "width": 87
@@ -2033,7 +2273,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/instance_state",
           "hide_notification": false,
-          "id": 480,
+          "id": 847,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2049,7 +2289,7 @@
           "templates": [],
           "text": "State",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "b00c52eb-e7e1-4578-a683-8a2387b8131d",
           "values": [],
           "width": 106
@@ -2064,7 +2304,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/private_dns_name",
           "hide_notification": false,
-          "id": 481,
+          "id": 848,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2080,7 +2320,7 @@
           "templates": [],
           "text": "Private dns name",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "7ec6545a-02fc-45da-b878-97f6a33a9e05",
           "values": [],
           "width": 48
@@ -2095,7 +2335,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/private_ip",
           "hide_notification": false,
-          "id": 482,
+          "id": 849,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2111,7 +2351,7 @@
           "templates": [],
           "text": "Private ip address",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "c6e5a1a9-ceb6-4872-a36a-87e38a7e85c6",
           "values": [],
           "width": 199
@@ -2126,7 +2366,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/public_dns_name",
           "hide_notification": false,
-          "id": 483,
+          "id": 850,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2142,7 +2382,7 @@
           "templates": [],
           "text": "Public dns name",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "2beb8aeb-4878-4e63-9c33-3d9ba845efc5",
           "values": [],
           "width": 42
@@ -2157,7 +2397,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/public_ip",
           "hide_notification": false,
-          "id": 484,
+          "id": 851,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2173,7 +2413,7 @@
           "templates": [],
           "text": "Public ip address",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "6f078d4e-74d6-437b-8c8b-6f1e9826c7a7",
           "values": [],
           "width": 53
@@ -2188,7 +2428,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/query_execution_date",
           "hide_notification": false,
-          "id": 485,
+          "id": 852,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2204,7 +2444,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "6a836888-0e24-4a41-9026-3a35e6c43b74",
           "values": [],
           "width": 156
@@ -2219,7 +2459,7 @@
           "deprecated": false,
           "export_key": "gd_instance_details/type",
           "hide_notification": false,
-          "id": 486,
+          "id": 853,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2235,7 +2475,7 @@
           "templates": [],
           "text": "Type",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1037,
           "uuid": "98475689-2714-48e2-b5f8-d4b0e01e8870",
           "values": [],
           "width": 102
@@ -2275,7 +2515,7 @@
           "deprecated": false,
           "export_key": "gd_resource_affected/instance_id",
           "hide_notification": false,
-          "id": 487,
+          "id": 854,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2291,7 +2531,7 @@
           "templates": [],
           "text": "Instance ID",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1038,
           "uuid": "28e8cd5f-c497-4ab4-a0c9-38183628a5ec",
           "values": [],
           "width": 110
@@ -2306,7 +2546,7 @@
           "deprecated": false,
           "export_key": "gd_resource_affected/instance_type",
           "hide_notification": false,
-          "id": 488,
+          "id": 855,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2322,7 +2562,7 @@
           "templates": [],
           "text": "Instance type",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1038,
           "uuid": "2c108511-9154-4704-9da5-ca2845e297a1",
           "values": [],
           "width": 132
@@ -2337,7 +2577,7 @@
           "deprecated": false,
           "export_key": "gd_resource_affected/query_execution_date",
           "hide_notification": false,
-          "id": 489,
+          "id": 856,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2353,7 +2593,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1038,
           "uuid": "4044d357-4e24-47c3-9ede-eb55bdfe2271",
           "values": [],
           "width": 65
@@ -2368,7 +2608,7 @@
           "deprecated": false,
           "export_key": "gd_resource_affected/resource_role",
           "hide_notification": false,
-          "id": 490,
+          "id": 857,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2384,7 +2624,7 @@
           "templates": [],
           "text": "Resource role",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1038,
           "uuid": "c03b7250-29a4-4f47-a4f3-4bcac4c662ef",
           "values": [],
           "width": 130
@@ -2399,7 +2639,7 @@
           "deprecated": false,
           "export_key": "gd_resource_affected/resource_type",
           "hide_notification": false,
-          "id": 491,
+          "id": 858,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2415,7 +2655,7 @@
           "templates": [],
           "text": "Resource type",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1038,
           "uuid": "df53ffe5-968d-4f95-a2c8-038271420ee8",
           "values": [],
           "width": 133
@@ -2455,7 +2695,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/bucket_arn",
           "hide_notification": false,
-          "id": 492,
+          "id": 859,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2471,7 +2711,7 @@
           "templates": [],
           "text": "Bucket Arn",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "358718e0-ba9a-4530-8569-ba55c994d8d6",
           "values": [],
           "width": 64
@@ -2486,7 +2726,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/bucket_name",
           "hide_notification": false,
-          "id": 493,
+          "id": 860,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2502,7 +2742,7 @@
           "templates": [],
           "text": "Bucket name",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "53120c05-d2bf-4d6f-a74f-a5c990d947ef",
           "values": [],
           "width": 72
@@ -2517,7 +2757,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/bucket_owner",
           "hide_notification": false,
-          "id": 494,
+          "id": 861,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2533,7 +2773,7 @@
           "templates": [],
           "text": "Bucket owner",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "91b04ad5-1fa8-4dc0-bd3b-cd2f0a2ce100",
           "values": [],
           "width": 76
@@ -2548,7 +2788,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/bucket_type",
           "hide_notification": false,
-          "id": 495,
+          "id": 862,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2564,7 +2804,7 @@
           "templates": [],
           "text": "Bucket Type",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "1f4de505-a95e-4385-90f9-66bd2cb55dd6",
           "values": [],
           "width": 69
@@ -2579,7 +2819,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/effective_permissions",
           "hide_notification": false,
-          "id": 496,
+          "id": 863,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2595,7 +2835,7 @@
           "templates": [],
           "text": "Effective Permission",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "2053ab7c-40bf-4b34-803e-b67139d212c4",
           "values": [],
           "width": 74
@@ -2610,7 +2850,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/encryption_type",
           "hide_notification": false,
-          "id": 497,
+          "id": 864,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2626,7 +2866,7 @@
           "templates": [],
           "text": "Encryption type",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "301a2f73-f969-4638-a5a1-eaecfec590dd",
           "values": [],
           "width": 94
@@ -2641,7 +2881,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/kms_master_key_arn",
           "hide_notification": false,
-          "id": 498,
+          "id": 865,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2657,7 +2897,7 @@
           "templates": [],
           "text": "Kms master key ARN",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "8f230a0c-7569-4a43-af3e-d2800c518eee",
           "values": [],
           "width": 107
@@ -2672,7 +2912,7 @@
           "deprecated": false,
           "export_key": "gd_s3_bucket_details/query_execution_date",
           "hide_notification": false,
-          "id": 499,
+          "id": 866,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2688,7 +2928,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1039,
           "uuid": "a2fc4076-6459-4682-95dd-c123dac09a3d",
           "values": [],
           "width": 115
@@ -2714,47 +2954,6 @@
       "uuid": "c71024b5-5f5a-470e-b020-7d4b22db5e83"
     }
   ],
-  "workflows": [
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "wf_aws_guardduty_archive_finding",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_aws_guardduty_archive_finding\" isExecutable=\"true\" name=\"Example: AWS GuardDuty: Archive Finding\"\u003e\u003cdocumentation\u003eResilient Workflow to archive an AWS GuardDuty finding when the corresponding incident is closed.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_06kfw43\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11o56o1\" name=\"AWS GUARDDUTY: Archive finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ee7aaede-3fd1-46d5-bd05-4bd6062f67e3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  wf_aws_guardduty_refresh_finding ##\\n# Example result:\\n\\\"\\\"\\\"\\nGood\\n====\\nResult: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: True, \u0027reason\u0027: None,\\n         \u0027content\u0027: {\u0027status\u0027: \u0027ok\u0027},\\n         \u0027raw\u0027: \u0027{\\\"status\\\": \\\"ok\\\"}\u0027,\\n         \u0027inputs\u0027: {\u0027aws_gd_finding_id\u0027: \u0027c2bb95a17b879bffc96c58f8a1689785\u0027, \u0027aws_gd_region\u0027: \u0027us-east-2\u0027,\\n                    \u0027aws_gd_detector_id\u0027: \u002732b7017d2019dfe922abc4e07c3fdded\u0027\\n                    },\\n         \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n         \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027execution_time_ms\u0027: 1310, \u0027timestamp\u0027: \u00272021-01-28 11:31:30\u0027\\n        }\\n}\\nError:\\nResult: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: True, \u0027reason\u0027: None,\\n         \u0027content\u0027: {\u0027status\u0027: \u0027error\u0027,\\n                     \u0027msg\u0027: \u0027An error occurred (BadRequestException) when calling the ArchiveFindings operation:\\n                     The request is rejected because the input detectorId is not owned by the current account.\u0027},\\n                     \u0027raw\u0027: \u0027\u0026lt;content_as_string\u0026gt;\u0027,\\n         \u0027inputs\u0027: {\u0027aws_gd_finding_id\u0027: \u0027c2bb95a17b879bffc96c58f8a1689784\u0027, \u0027aws_gd_region\u0027: \u0027us-east-2\u0027,\\n                    \u0027aws_gd_detector_id\u0027: \u002732b7017d2019dfe922abc4e07c3fdfff\u0027\\n                    },\\n         \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n         \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027execution_time_ms\u0027: 1446, \u0027timestamp\u0027: \u00272021-01-28 11:34:53\u0027\\n         }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"func_aws_guardduty_archive_finding\\\"\\nWF_NAME = \\\"Example: AWS GuardDuty: Archive Finding\\\"\\n# Resilient artifact names to api names.\\n# Processing\\n# Processing\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT:\\n        if CONTENT[\\\"status\\\"] == \\\"ok\\\":\\n            note_text = \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The finding with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and detector id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; in region \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; was successfully archived for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"aws_gd_finding_id\\\"], INPUTS[\\\"aws_gd_detector_id\\\"], INPUTS[\\\"aws_gd_region\\\"], FN_NAME)\\n            # Update archived property.\\n            incident.properties.aws_guardduty_archived = \\\"True\\\"  \\n            \\n\\n        elif CONTENT[\\\"status\\\"] == \\\"error\\\":\\n            note_text = \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The finding with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and detector id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; in region \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; failed archive with error \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"aws_gd_finding_id\\\"], INPUTS[\\\"aws_gd_detector_id\\\"], INPUTS[\\\"aws_gd_region\\\"],\\n                        CONTENT[\\\"msg\\\"], FN_NAME)\\n\\n        else:\\n            note_text = \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The finding with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and detector id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; in region \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; got unexpected status \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\" \\\\\\n                .format(WF_NAME, INPUTS[\\\"aws_gd_finding_id\\\"], INPUTS[\\\"aws_gd_detector_id\\\"], CONTENT[\\\"status\\\"], INPUTS[\\\"aws_gd_region\\\"],\\n                        FN_NAME)\\n\\n    else:\\n        note_text += \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was no result returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_06kfw43\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1o6uno2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_06kfw43\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11o56o1\"/\u003e\u003cendEvent id=\"EndEvent_1hcamul\"\u003e\u003cincoming\u003eSequenceFlow_1o6uno2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1o6uno2\" sourceRef=\"ServiceTask_11o56o1\" targetRef=\"EndEvent_1hcamul\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11o56o1\" id=\"ServiceTask_11o56o1_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"253\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06kfw43\" id=\"SequenceFlow_06kfw43_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"222\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"222\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"253\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"237\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hcamul\" id=\"EndEvent_1hcamul_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"408\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"426\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1o6uno2\" id=\"SequenceFlow_1o6uno2_di\"\u003e\u003comgdi:waypoint x=\"353\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"380.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "a@a.com",
-      "description": "Resilient Workflow to archive an AWS GuardDuty finding when the corresponding incident is closed.",
-      "export_key": "wf_aws_guardduty_archive_finding",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1614694312212,
-      "name": "Example: AWS GuardDuty: Archive Finding",
-      "object_type": "incident",
-      "programmatic_name": "wf_aws_guardduty_archive_finding",
-      "tags": [],
-      "uuid": "1e619863-9ce2-4194-a889-0608b3f8193d",
-      "workflow_id": 41
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "wf_aws_guardduty_refresh_finding",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_aws_guardduty_refresh_finding\" isExecutable=\"true\" name=\"Example: AWS GuardDuty: Refresh Finding Details\"\u003e\u003cdocumentation\u003eResilient Workflow to refresh or update AWS GuardDuty finding details in an incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zedv2p\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06mwqw8\" name=\"AWS GUARDDUTY: Refresh Finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2d1446f8-13fc-4400-af6a-c96b55d9a0df\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  wf_aws_guardduty_refresh_finding ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027version\u0027: \u00271.0\u0027,\\n          \u0027success\u0027: True,\\n          \u0027reason\u0027: None,\\n          \u0027content\u0027: {\u0027payload\u0027: {\u0027name\u0027: \u0027AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.\u0027,\\n                                  \u0027description\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \u0027An API was used to access a bucket from an IP address on a custom threat list.\u0027},\\n                                  \u0027discovered_date\u0027: \u00272020-11-25T13:46:37.960Z\u0027,\\n                                  \u0027severity_code\u0027: \u0027Low\u0027,\\n                                  \u0027properties\u0027: {\u0027aws_guardduty_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\\n                                                 \u0027aws_guardduty_finding_arn\u0027: \u0027arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631\u0027,\\n                                                 \u0027aws_guardduty_finding_type\u0027: \u0027UnauthorizedAccess:S3/MaliciousIPCaller.Custom\u0027,\\n                                                 \u0027aws_guardduty_finding_updated_at\u0027: \u00272020-11-26T15:18:12.620Z\u0027, \u0027aws_guardduty_region\u0027: \u0027us-west-2\u0027,\\n                                                 \u0027aws_guardduty_resource_type\u0027: \u0027S3Bucket\u0027, \u0027aws_guardduty_count\u0027: 4,\\n                                                 \u0027aws_guardduty_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\\n                                  \u0027artifacts\u0027: [],\\n                                  \u0027comments\u0027: [{\u0027text\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \\\"AWS GuardDuty finding Payload:\\\\n\u0026lt;FINDING_PAYLOAD_AS_STRING\u0026gt;\\\"}}]\\n\\n                                 },\\n                      \\\"data_tables\\\": {\\\"gd_action_details\\\": [{\\\"cells\\\": {\\\"action_type\\\": {\\\"value\\\": \\\"AWS_API_CALL\\\"},\\n                                                             \\\"action_api\\\": {\\\"value\\\": \\\"GeneratedFindingAPIName\\\"},\\n                                                             \\\"event_first_seen\\\": {\\\"value\\\": \\\"2020-11-25T13:46:37.960Z\\\"},\\n                                                             \\\"event_last_seen\\\": {\\\"value\\\": \\\"2020-11-26T15:18:12.620Z\\\"},\\n                                                            \\\"actor_caller_type\\\": {\\\"value\\\": \\\"Remote IP\\\"}, \\\"city_name\\\": {\\\"value\\\": \\\"GeneratedFindingCityName\\\"}, \\\"country_name\\\": {\\\"value\\\": \\\"GeneratedFindingCountryName\\\"}, \\\"asn\\\": {\\\"value\\\": \\\"-1\\\"}, \\\"asn_org\\\": {\\\"value\\\": \\\"GeneratedFindingASNOrg\\\"}, \\\"isp\\\": {\\\"value\\\": \\\"GeneratedFindingISP\\\"}, \\\"org\\\": {\\\"value\\\": \\\"GeneratedFindingORG\\\"}, \\\"action_service_name\\\": {\\\"value\\\": \\\"GeneratedFindingAPIServiceName\\\"}, \\\"remote_ip\\\": {\\\"value\\\": \\\"198.51.100.0\\\"}}}],\\n                                     \\\"gd_resource_affected\\\": [{\\\"cells\\\": {\\\"resource_type\\\": {\\\"value\\\": \\\"S3Bucket\\\"}, \\\"instance_id\\\": {\\\"value\\\": \\\"i-99999999\\\"}, \\\"instance_type\\\": {\\\"value\\\": \\\"m3.xlarge\\\"}, \\\"instance_state\\\": {\\\"value\\\": \\\"running\\\"}, \\\"resource_role\\\": {\\\"value\\\": \\\"TARGET\\\"}, \\\"instance_private_ip\\\": {\\\"value\\\": \\\"10.0.0.1\\\"}, \\\"instance_private_dns\\\": {\\\"value\\\": \\\"GeneratedFindingPrivateName\\\"}, \\\"instance_public_ip\\\": {\\\"value\\\": \\\"198.51.100.0\\\"}, \\\"instance_public_dns\\\": {\\\"value\\\": \\\"GeneratedFindingPublicDNSName\\\"}, \\\"s3bucket_name\\\": {\\\"value\\\": \\\"bucketName\\\"}, \\\"s3bucket_owner\\\": {\\\"value\\\": \\\"CanonicalId of Owner\\\"}}}]\\n\\n                      }}\u0027,\\n            \u0027inputs\u0027: {\u0027incident_id\u0027: 2168, \u0027aws_gd_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\\n                       \u0027aws_gd_region\u0027: \u0027us-west-2\u0027, \u0027aws_gd_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\\n            \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                        \u0027host\u0027: \u0027Johnp-MacBook-Pro-2.galway.ie.ibm.com\u0027, \u0027execution_time_ms\u0027: 10739,\\n                        \u0027timestamp\u0027: \u00272021-01-18 16:51:10\u0027}\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable for wf_aws_guardduty_refresh_finding script\\nDATA_TABLES = [\\\"gd_action_details\\\", \\\"gd_resource_affected\\\"]\\nFN_NAME = \\\"func_aws_guardduty_refresh_finding\\\"\\nWF_NAME = \\\"Example: AWS GuardDuty: Refresh Finding\\\"\\n# Resilient artifact names to api names.\\nARTIFACT_API_TO_TYPE = {\\n    \\\"aws_iam_access_key_id\\\": \\\"AWS IAM Access Key ID\\\",\\n    \\\"aws_iam_user_name\\\": \\\"AWS IAM User Name\\\",\\n    \\\"aws_s3_bucket_name\\\": \\\"AWS S3 Bucket Name\\\",\\n    \\\"IP Address\\\": \\\"IP Address\\\",\\n    \\\"DNS Name\\\": \\\"DNS Name\\\",\\n    \\\"Port\\\": \\\"Port\\\"\\n}\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nif CONTENT:\\n    FINDING = CONTENT.finding\\n    PAYLOAD = CONTENT.payload\\n    ARTIFACTS = PAYLOAD.artifacts\\n    DATA_TABLES = CONTENT.data_tables\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT:\\n        note_text = \\\"AWS GuardDuty Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Finding data returned for Resilient function \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n\\n        update_fields()\\n        update_datatables()\\n        if ARTIFACTS:\\n            add_artifacts()\\n    else:\\n        note_text = \\\"AWS GuardDuty Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: No finding data returned for Resilient function \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\ndef update_fields():\\n    incident.severity_code = PAYLOAD[\\\"severity_code\\\"]\\n    incident.properties.aws_guardduty_finding_updated_at = PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_finding_updated_at\\\"]\\n    incident.properties.aws_guardduty_count = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_count\\\"])\\n    incident.properties.aws_guardduty_archived = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_archived\\\"])\\n    incident.properties.aws_guardduty_severity = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_severity\\\"])\\n\\ndef update_datatables():\\n    for data_table in DATA_TABLES:\\n        for row in DATA_TABLES[data_table]:\\n            newrow = incident.addRow(data_table)\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            data_table_fields = row[\\\"cells\\\"]\\n            for f, v_info in data_table_fields.items():\\n                newrow[f] = v_info.value\\n\\n\\ndef add_artifacts():\\n    for artifact in ARTIFACTS:\\n        artifact_type = ARTIFACT_API_TO_TYPE[artifact[\\\"type\\\"][\\\"name\\\"]]\\n        artifact_value = artifact[\\\"value\\\"]\\n        description = artifact[\\\"description\\\"][\\\"content\\\"]\\n        incident.addArtifact(artifact_type, artifact_value, description)\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zedv2p\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0k5uvi0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zedv2p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06mwqw8\"/\u003e\u003cendEvent id=\"EndEvent_0ec9efk\"\u003e\u003cincoming\u003eSequenceFlow_0k5uvi0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0k5uvi0\" sourceRef=\"ServiceTask_06mwqw8\" targetRef=\"EndEvent_0ec9efk\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06mwqw8\" id=\"ServiceTask_06mwqw8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zedv2p\" id=\"SequenceFlow_0zedv2p_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ec9efk\" id=\"EndEvent_0ec9efk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"395\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"413\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0k5uvi0\" id=\"SequenceFlow_0k5uvi0_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"395\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"375\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "a@a.com",
-      "description": "Resilient Workflow to refresh or update AWS GuardDuty finding details in an incident.",
-      "export_key": "wf_aws_guardduty_refresh_finding",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1614694311994,
-      "name": "Example: AWS GuardDuty: Refresh Finding Details",
-      "object_type": "incident",
-      "programmatic_name": "wf_aws_guardduty_refresh_finding",
-      "tags": [],
-      "uuid": "25ff8bf1-ed1b-433b-912a-a78e6a9384c5",
-      "workflow_id": 40
-    }
-  ],
+  "workflows": [],
   "workspaces": []
 }

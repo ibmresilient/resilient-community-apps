@@ -20,9 +20,9 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 setup(
     name="fn_aws_guardduty",
-    version="1.0.0",
+    version="1.1.0",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     author_email="",
     url='https://ibm.com/mysupport',
     description="Amazon AWS GuardDuty Integration for Resilient",

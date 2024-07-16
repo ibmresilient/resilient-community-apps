@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.0.974
 
-"""Generate the Resilient customizations required for fn_zia"""
+"""Generate the SOAR customizations required for fn_zia"""
 
 import base64
 import os
@@ -20,15 +22,78 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_zia",
-        "message_destinations": [u"zia"],
-        "functions": [u"funct_zia_add_to_allowlist", u"funct_zia_add_to_blocklist", u"funct_zia_add_to_url_category", u"funct_zia_add_url_category", u"funct_zia_get_allowlist", u"funct_zia_get_blocklist", u"funct_zia_get_sandbox_report", u"funct_zia_get_url_categories", u"funct_zia_remove_from_allowlist", u"funct_zia_remove_from_blocklist", u"funct_zia_remove_from_url_category", u"funct_zia_url_lookup"],
-        "workflows": [u"wf_zia_add_artifact_to_allowlist", u"wf_zia_add_artifact_to_blocklist", u"wf_zia_add_artifact_to_customlist", u"wf_zia_add_custom_category", u"wf_zia_add_urls_to_allowlist", u"wf_zia_add_urls_to_blocklist", u"wf_zia_add_urls_to_customlist", u"wf_zia_get_allowlist", u"wf_zia_get_blocklist", u"wf_zia_get_customlist", u"wf_zia_get_sandbox_report", u"wf_zia_get_url_categories", u"wf_zia_remove_artifact_from_allowlist", u"wf_zia_remove_artifact_from_blocklist", u"wf_zia_remove_artifact_from_customlist", u"wf_zia_remove_from_allowlist", u"wf_zia_remove_from_blocklist", u"wf_zia_remove_from_customlist", u"wf_zia_url_lookup"],
-        "actions": [u"ZIA: Add Artifact To Allowlist", u"ZIA: Add Artifact To Blocklist", u"ZIA: Add Artifact To Customlist", u"ZIA: Add Custom Category", u"ZIA: Add URLs To AllowList", u"ZIA: Add URLs To BlockList", u"ZIA: Add URLs To CustomList", u"ZIA: Get Allowlist", u"ZIA: Get Blocklist", u"ZIA: Get Customlist", u"ZIA: Get Sandbox Report", u"ZIA: Get URL Categories", u"ZIA: Remove Artifact From Allowlist", u"ZIA: Remove Artifact From Blocklist", u"ZIA: Remove Artifact From Customlist", u"ZIA: Remove From Allowlist", u"ZIA: Remove From Blocklist", u"ZIA: Remove From Customlist", u"ZIA: URL Lookup"],
+        "message_destinations": [
+            u"zia"
+        ],
+        "functions": [
+            u"funct_zia_add_to_allowlist",
+            u"funct_zia_add_to_blocklist",
+            u"funct_zia_add_to_url_category",
+            u"funct_zia_add_url_category",
+            u"funct_zia_get_allowlist",
+            u"funct_zia_get_blocklist",
+            u"funct_zia_get_sandbox_report",
+            u"funct_zia_get_url_categories",
+            u"funct_zia_remove_from_allowlist",
+            u"funct_zia_remove_from_blocklist",
+            u"funct_zia_remove_from_url_category",
+            u"funct_zia_url_lookup"
+        ],
+        "workflows": [
+            u"wf_zia_add_artifact_to_allowlist",
+            u"wf_zia_add_artifact_to_blocklist",
+            u"wf_zia_add_artifact_to_customlist",
+            u"wf_zia_add_custom_category",
+            u"wf_zia_add_urls_to_allowlist",
+            u"wf_zia_add_urls_to_blocklist",
+            u"wf_zia_add_urls_to_customlist",
+            u"wf_zia_get_allowlist",
+            u"wf_zia_get_blocklist",
+            u"wf_zia_get_customlist",
+            u"wf_zia_get_sandbox_report",
+            u"wf_zia_get_url_categories",
+            u"wf_zia_remove_artifact_from_allowlist",
+            u"wf_zia_remove_artifact_from_blocklist",
+            u"wf_zia_remove_artifact_from_customlist",
+            u"wf_zia_remove_from_allowlist",
+            u"wf_zia_remove_from_blocklist",
+            u"wf_zia_remove_from_customlist",
+            u"wf_zia_url_lookup"
+        ],
+        "actions": [
+            u"ZIA: Add Artifact To Allowlist",
+            u"ZIA: Add Artifact To Blocklist",
+            u"ZIA: Add Artifact To Customlist",
+            u"ZIA: Add Custom Category",
+            u"ZIA: Add URLs To AllowList",
+            u"ZIA: Add URLs To BlockList",
+            u"ZIA: Add URLs To CustomList",
+            u"ZIA: Get Allowlist",
+            u"ZIA: Get Blocklist",
+            u"ZIA: Get Customlist",
+            u"ZIA: Get Sandbox Report",
+            u"ZIA: Get URL Categories",
+            u"ZIA: Remove Artifact From Allowlist",
+            u"ZIA: Remove Artifact From Blocklist",
+            u"ZIA: Remove Artifact From Customlist",
+            u"ZIA: Remove From Allowlist",
+            u"ZIA: Remove From Blocklist",
+            u"ZIA: Remove From Customlist",
+            u"ZIA: URL Lookup"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [u"zia_allowlist", u"zia_blocklist", u"zia_customlists", u"zia_sandbox_report_summary", u"zia_url_categories"],
+        "incident_types": [],
+        "datatables": [
+            u"zia_allowlist",
+            u"zia_blocklist",
+            u"zia_customlists",
+            u"zia_sandbox_report_summary",
+            u"zia_url_categories"
+        ],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,7 +102,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.6328
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
