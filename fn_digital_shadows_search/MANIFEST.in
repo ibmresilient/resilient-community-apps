@@ -1,0 +1,3 @@
+include README.md
+include fn_digital_shadows_search/util/*
+include fn_digital_shadows_search/LICENSE
