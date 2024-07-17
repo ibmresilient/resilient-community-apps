@@ -1,0 +1,11 @@
+{
+  {# JINJA template for updating a Resilient incident containing a Secureworks ticket. #}
+
+  "properties": {
+    {# Add any other custom incident fields needing updating here. #}
+    "scwx_ctp_contact_name": "{{contact.name}}",
+    "scwx_ctp_contact_id": "{{contact.id}}",
+    "scwx_ctp_priority": "{{priority}}",
+    "scwx_ctp_status": "{{status}}"
+  }
+}
