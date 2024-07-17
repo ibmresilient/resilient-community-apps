@@ -168,7 +168,7 @@ myst_substitutions = {
 }
 
 # generate list of recently updated apps which will be removed from the "all apps" side bar and placed at the top
-recently_updated_names = ["pb_sans_isc_scan_ip", "fn_rapid7_insight_idr", "fn_pa_panorama", "fn_mcafee_epo", "rc_data_feed_plugin_odbcfeed", "fn_relations", "fn_rest_api", "fn_salesforce"]
+recently_updated_names = ["fn_service_now", "fn_remedy", "fn_siemplify", "fn_vmware_cbc", "fn_aws_iam", "fn_symantec_dlp", "rc_data_feed_plugin_resilientfeed", "fn_wiz"]
 # generate paths to each readme for the TOC/sidebar
 all_readmes = "\n    ".join([f"/{p}/README.md" for p in all_packages if p not in recently_updated_names])
 recently_updated = "\n    ".join([f"/{p}/README.md" for p in recently_updated_names])
@@ -177,12 +177,12 @@ recently_updated = "\n    ".join([f"/{p}/README.md" for p in recently_updated_na
 # create root table of contents; this determines the main page (index.rst)
 # as well as the left side bar contents
 TOC = f"""
-**Recently Updated Apps**
+**New and Recently Updated Apps**
 
 .. toctree::
     :maxdepth: 1
     :titlesonly:
-    :caption: Recently Updated Apps
+    :caption: New and Recently Updated Apps
 
     {recently_updated}
 
