@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 from logging import getLogger
 from resilient_lib import OAuth2ClientCredentialsSession

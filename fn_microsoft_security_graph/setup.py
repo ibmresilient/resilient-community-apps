@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_microsoft_security_graph',
     display_name='Microsoft Security Graph Integration for SOAR',
-    version='1.2.0',
+    version='1.2.1',
     license='MIT',
     author='IBM SOAR',
     url = 'https://ibm.com/mysupport',

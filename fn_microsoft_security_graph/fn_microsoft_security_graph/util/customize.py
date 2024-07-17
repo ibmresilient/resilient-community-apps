@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.0.974
 
-"""Generate the Resilient customizations required for fn_microsoft_security_graph"""
+"""Generate the SOAR customizations required for fn_microsoft_security_graph"""
 
 import base64
 import os
@@ -20,17 +22,37 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_microsoft_security_graph",
-        "message_destinations": [u"microsoft_security_graph_message_destination"],
-        "functions": [u"microsoft_security_graph_alert_search", u"microsoft_security_graph_get_alert_details", u"microsoft_security_graph_update_alert"],
-        "workflows": [u"example_microsoft_security_graph_alert_search", u"example_microsoft_security_graph_get_alert_details", u"example_microsoft_security_graph_resolve_alert", u"example_microsoft_security_graph_update_alert"],
-        "actions": [u"Example: Microsoft Security Graph Alert Search", u"Example: Microsoft Security Graph Get Details", u"Example: Microsoft Security Graph Resolve Alert", u"Example: Microsoft Security Graph Update Alert"],
-        "incident_fields": [u"microsoft_security_graph_alert_id"],
+        "message_destinations": [
+            u"microsoft_security_graph_message_destination"
+        ],
+        "functions": [
+            u"microsoft_security_graph_alert_search",
+            u"microsoft_security_graph_get_alert_details",
+            u"microsoft_security_graph_update_alert"
+        ],
+        "workflows": [
+            u"example_microsoft_security_graph_alert_search",
+            u"example_microsoft_security_graph_get_alert_details",
+            u"example_microsoft_security_graph_resolve_alert",
+            u"example_microsoft_security_graph_update_alert"
+        ],
+        "actions": [
+            u"Example: Microsoft Security Graph Alert Search",
+            u"Example: Microsoft Security Graph Get Details",
+            u"Example: Microsoft Security Graph Resolve Alert",
+            u"Example: Microsoft Security Graph Update Alert"
+        ],
+        "incident_fields": [
+            u"microsoft_security_graph_alert_id"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [u"Convert json to rich text"],
-        "playbooks": []
+        "scripts": [
+            u"Convert json to rich text"
+        ],
+        "playbooks": [],
     }
 
 
@@ -39,7 +61,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 41.0.6783
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
