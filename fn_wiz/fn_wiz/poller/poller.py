@@ -73,11 +73,8 @@ def query_entities(app_common, last_poller_time):
     # use *args and **kwargs to collect urls, api_keys, etc. needed for API call(s).
     #   query_entities_since_ts(last_poller_time, *args, **kwargs)
 
-    query_results = app_common.query_new_entities_since_ts(last_poller_time)
-    query_results_changed = app_common.query_changed_entities_since_ts(last_poller_time)
-
-    # combine all the issues that have been created or where the status has been updated since the last poll
-    query_results.extend(query_results_changed)
+    query_results = app_common.query_changed_entities_since_ts(last_poller_time)
+ 
     return query_results
 
 
@@ -182,11 +179,14 @@ class PollerComponent(AppFunctionComponent):
         :type last_poller_time: int
         """
 
+        # Refresh vulnerabilities cache
+        self.app_common.get_vulnerabilities()
+
         # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
         query_results = query_entities(self.app_common, kwargs["last_poller_time"])
 
         if query_results:
-            self.process_query_list(query_results) 
+            self.process_query_list(query_results)
 
     def process_query_list(self, query_results):
         """

@@ -35,6 +35,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 08/2024 | Optimize pulling vulnerabilities |
 | 1.0.0 | 04/2024 | Initial Release |
 
 ---
@@ -166,6 +167,7 @@ When the poller is enabled, Wiz issues are automatically escalated from this app
 It is possible to escalate cases from other sources. In this scenario, the poller would be disabled by setting `poller_interval=0` and a separate source might capture a case from the endpoint and in turn create a case in SOAR. This app can still be useful for enrichment of that
 newly created case even though it was not directly escalated from this app. As long as the reference ID (i.e. Issue ID) for each case is preserved, all remaining details will synchronize to the SOAR case through this app automatically.
 Note: Any Wiz issues that are marked as "resolved" in Wiz *before* they have been created as cases in SOAR will not be processed by the poller.
+*New in v1.0.1*: To reduce number of outgoing API calls to Wiz API when requesting vulnerability data, a cache has been implemented. On each iteration of the poller, the cache is refreshed with the most recent 500 OPEN vulnerabilities that have a vendorSeverity of CRITICAL or HIGH. This is used to populate the vulnerabilities data table. If you would like to customize this query, consider utilizing the Pull Vulnerabilities playbook, where you can enter a custom query to provide as the `variables` for the Wiz GraphQL query.
 
 #### Poller Templates for SOAR Cases
 It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.

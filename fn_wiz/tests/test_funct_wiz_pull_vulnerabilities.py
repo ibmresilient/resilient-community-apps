@@ -8,6 +8,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from resilient_lib import IntegrationError
 from mock import patch
 from json import loads
+from fn_wiz.lib.app_common import MAX_VULN_RESULTS
 
 PACKAGE_NAME = "fn_wiz"
 FUNCTION_NAME = "wiz_pull_vulnerabilities"
@@ -59,61 +60,76 @@ class TestWizPullVulnerabilities:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    ###
     # Test if a list of project ids are provided (for example, in Populate Case playbook)
-    mock_inputs_1 = {
-        "wiz_project_ids": "a,b,c,d"
-    }
+    mock_inputs_1 = { "wiz_project_ids": "b,a,c,d" }
     expected_results_1 = { "response": {"test": "response"} }
     expected_projects_list_1 = ["a", "b", "c", "d"]
 
     # Test if a list of project ids are provided **and** a value for max num results
     # (for example, in Populate Case playbook)
-    mock_inputs_2 = {
-        "wiz_project_ids": "a,b,c,d",
-        "wiz_num_results": 10
-    }
+    mock_inputs_2 = { "wiz_project_ids": "a,b,c,d",
+                        "wiz_num_results": 10 }
     expected_results_2 = { "response": {"test": "response"} }
     expected_projects_list_2 = ["a", "b", "c", "d"]
 
+    @pytest.mark.parametrize("mock_inputs, expected_results, expected_projects", [
+        (mock_inputs_1, expected_results_1, expected_projects_list_1),
+        (mock_inputs_2, expected_results_2, expected_projects_list_2)
+    ])
+    def test_success_with_projects(self, circuits_app, mock_inputs, expected_results, expected_projects):
+        """ Test calling with sample values for the parameters for projects and number of results"""
+        with patch("fn_wiz.components.funct_wiz_pull_vulnerabilities.AppCommon.get_vulnerabilities_by_project") as mock_app_common:
+            mock_app_common.return_value = {"test": "response"}
+            results = call_wiz_pull_vulnerabilities_function(circuits_app, mock_inputs)
+            assert(expected_results == results.get('content'))
+            mock_app_common.assert_called_with(expected_projects, mock_inputs.get('wiz_num_results', MAX_VULN_RESULTS))
+    ###
+
+    ###
     # Test if only num_results is passed in
-    mock_inputs_3 = {
-        "wiz_num_results": 10
-    }
+    mock_inputs_3 = { "wiz_num_results": 10 }
     expected_results_3 = { "response": {"test": "response"} }
     expected_projects_list_3 = []
 
-    # Test if wiz_query_filter is passed in (for example in Pull Vulnerabilities playbook)
-    mock_inputs_4 = {"wiz_query_filter": '{"first": 5}'}
-    expected_results_4 = { "response": {"test": "response"} }
-    expected_projects_list_4 = []
-
-    # Test if no inputs are passed in
+    # Test if no inputs are passed in; num_results will get populated with the default
     mock_inputs_5 = {}
     expected_results_5 = { "response": {"test": "response"} }
     expected_projects_list_5 = []
 
     @pytest.mark.parametrize("mock_inputs, expected_results, expected_projects", [
-        (mock_inputs_1, expected_results_1, expected_projects_list_1),
-        (mock_inputs_2, expected_results_2, expected_projects_list_2),
         (mock_inputs_3, expected_results_3, expected_projects_list_3),
-        (mock_inputs_4, expected_results_4, expected_projects_list_4),
         (mock_inputs_5, expected_results_5, expected_projects_list_5)
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results, expected_projects):
-        """ Test calling with sample values for the parameters """
-        with patch("fn_wiz.components.funct_wiz_pull_vulnerabilities.AppCommon.get_vulnerabilities") as mock_app_common:
+    def test_success_no_projects(self, circuits_app, mock_inputs, expected_results, expected_projects):
+        """ Test calling with sample values for the parameters with no projects or """
+        with patch("fn_wiz.components.funct_wiz_pull_vulnerabilities.AppCommon.get_vulnerabilities_by_project") as mock_app_common:
             mock_app_common.return_value = {"test": "response"}
             results = call_wiz_pull_vulnerabilities_function(circuits_app, mock_inputs)
             assert(expected_results == results.get('content'))
-            if "wiz_query_filter" in mock_inputs.keys():
-                custom_filter = loads(mock_inputs.get('wiz_query_filter'))
-                mock_app_common.assert_called_with(expected_projects, custom_filter=custom_filter, num_results=mock_inputs.get('wiz_num_results', 50))
-            else:
-                mock_app_common.assert_called_with(expected_projects, custom_filter=None, num_results=mock_inputs.get('wiz_num_results', 50))
-    
-    
-    def test_failure(self, circuits_app):
+            mock_app_common.assert_called_with(expected_projects, mock_inputs.get('wiz_num_results', MAX_VULN_RESULTS))
+    ###
+
+    ###
+    # Test if wiz_query_filter is passed in (for example in Pull Vulnerabilities playbook)
+    mock_inputs_4 = {"wiz_query_filter": '{"first": 5}'}
+    expected_results_4 = { "response": {"test": "response"} }
+
+    @pytest.mark.parametrize("mock_inputs, expected_results", [
+        (mock_inputs_4, expected_results_4)
+    ])
+    def test_success_patch_custom(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
+        with patch("fn_wiz.components.funct_wiz_pull_vulnerabilities.AppCommon.get_vulnerabilities_custom") as mock_app_common:
+            mock_app_common.return_value = {"test": "response"}
+            results = call_wiz_pull_vulnerabilities_function(circuits_app, mock_inputs)
+            assert(expected_results == results.get('content'))
+            custom_filter = loads(mock_inputs.get('wiz_query_filter'))
+            mock_app_common.assert_called_with(custom_filter)
+    ###
+
+    def test_failure(self, circuits_app):
+        """ Test calling with sample values for the parameters but with values that raise integration errors"""
         with patch("fn_wiz.components.funct_wiz_pull_vulnerabilities.AppCommon.get_vulnerabilities") as mock_app_common:
             # Test if bad custom filter is passed in -- JSONDecoder error
             mock_inputs_6 = {"wiz_query_filter": "{[]}"}
@@ -125,7 +141,7 @@ class TestWizPullVulnerabilities:
                 assert(expected_results_6 == results.get('content'))
             
 
-             # Test if bad custom filter is passed in -- integer 
+             # Test if bad custom filter is passed in -- number
             mock_inputs_6 = {"wiz_query_filter": "123456"}
             expected_results_6 = []
             mock_app_common.return_value = {"test": "response"}

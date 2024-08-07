@@ -5,8 +5,8 @@
 
 import logging
 from urllib.parse import urljoin
+from cachetools import cached, TTLCache
 
-from requests.exceptions import JSONDecodeError
 from resilient_lib import IntegrationError, validate_fields, readable_datetime, str_to_bool, clean_html
 
 from fn_wiz.lib.wiz_graphql_queries import GRAPHQL_PULL_ISSUES, GRAPHQL_PULL_VULNERABILITIES, GRAPHQL_UPDATE_ISSUE
@@ -24,6 +24,8 @@ MAX_RESULTS = 500
 # Can be up to 500, but script to add vulnerabilities
 # to a data table might fail due to a large volume of operations
 MAX_VULN_RESULTS = 50
+
+CACHE_TTL = 60*60*24    # 86400 seconds = 1 day
 
 class AppCommon():
     def __init__(self, rc, package_name, app_configs):
@@ -204,37 +206,12 @@ class AppCommon():
             end_cursor = page_info.get('endCursor', None)
         
         return entities
-        
-    def query_new_entities_since_ts(self, timestamp: int):
-        """
-        Get new issues since last poller run based on the createdAt date
 
-        :param timestamp: datetime when the last poller ran
-        :type timestamp: datetime
-        :return: changed entity list
-        :rtype: list
-        """
-
-        entities = []       # list of all our issue objects
-
-        variables = {
-                "first": MAX_RESULTS,
-                "filterBy": {
-                    "createdAt": {
-                        "after": readable_datetime(timestamp) # utc datetime format
-                    }
-                }
-            }
-
-        entities = self._api_call_paged_issues(variables)
-
-        LOG.debug("Found %s issues created since %s", len(entities), timestamp)
-
-        return entities
     
     def query_changed_entities_since_ts(self, timestamp: int):
         """
-        Get issues since last poller run where the statusChangedAt date has been updated since the last poll
+        Get issues since last poller run where the statusChangedAt date has been updated since the last poll. This 
+        will include any newly created issues.
 
         :param timestamp: datetime when the last poller ran
         :type timestamp: datetime
@@ -275,7 +252,8 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(entity_id))
 
     def get_issue(self, wiz_issue_id: str):
-        """Get issue data
+        """
+        Get issue data
 
         :param wiz_issue_id: Issue ID
         :type wiz_issue_id: str
@@ -310,46 +288,16 @@ class AppCommon():
 
         return issues[0]
 
-    def get_vulnerabilities(self, project_ids: list = [], custom_filter: dict = None, num_results: int = None):
-        """ Get vulnerabilities associated with provided project IDs. Order by firstDetectedAt (DESC), so most recently detected are first.
-        Return the top `num_results` vulnerabilities.
-        If a custom filter is provided in app.config with `get_vulnerabilities_filter`, then use that as the `variables` to use in the Wiz query
-        Priority is: if project_ids and/or num_results is provided, create the `variables` dict with that information -> if `custom_filter` is provided
-        use the `custom_filter` as the `variables` -> If none of the optional args are provided just query with no project_ids specification
-
-        We should not paginate vulnerabilities results because there can be thousands of results for a given query. This can overwhelm SOAR and
-        would not be meaningful in a data table
-
-        :param project_ids: the ids of all projects for which we want to get the associated vulnerabilities
-        :type project_ids: list of strings
-        :param custom_filter: custom "variables" object which can be used to filter results from Wiz API
-        :type custom_filter: dict
-        :param num_results: number of vulnerabilities to request from Wiz API
-        :param num_results: int
-
-        :return vulnerabilities: all vulnerabilities returned from query
-        :rtype: list of dictionaries
+    @cached(TTLCache(maxsize=1024, ttl=CACHE_TTL), key=lambda _, num_results=MAX_RESULTS: num_results)
+    def get_vulnerabilities(self, num_results = MAX_RESULTS):
         """
-
-        # If num_results is None for some reason, or not provided, warn the user that we will default to MAX_VULN_RESULTS
-        if not num_results:
-            LOG.warning("num_results was not provided, using default value: %s.",MAX_VULN_RESULTS)
-            num_results = MAX_VULN_RESULTS
-        # Wiz can return a max of MAX_RESULTS items
-        if num_results > MAX_RESULTS:
-            raise IntegrationError(f"Requested number of results exceeds maximum ({MAX_RESULTS}) as allowed by Wiz API. \
-                                   Please update function input 'wiz_num_results' or the 'first' parameter in app.config \
-                                   'get_vulnerabilities_filter' option to a lower value.")
-        # Warn user if requesting more items than default MAX_VULN_RESULTS
-        if num_results > MAX_VULN_RESULTS:
-            LOG.warning("Requested number of results %s exceeds recommended %s items from query. \
-                        Script may fail to execute.", num_results, MAX_VULN_RESULTS)
+        Get all recent vulnerabilities -- top MAX_RESULTS of High and Critical Severity, in order of most recent
+        """
         
-        # Our default `variables` object that will use any of the optional inputs num_results or project_ids
+        # get all vulnerabilities (max 500)
         variables = {
-            "first": num_results or MAX_VULN_RESULTS,
+            "first": num_results,
             "filterBy": {
-                "projectId": project_ids,
                 "vendorSeverity": ["HIGH", "CRITICAL"],
                 "status": ["OPEN"]
             },
@@ -357,18 +305,6 @@ class AppCommon():
                 "direction": "DESC"     # descending by firstDetectedAt value; most recent at the beginning
             }
         }
-
-        # But if a custom_filter is provided **and** project_ids list is empty or None, then use the custom_filter
-        if custom_filter and not project_ids:
-            # But first check if the required 'first' parameter is there, otherwise Wiz will reject the query
-            if not custom_filter.get('first'):
-                raise IntegrationError(f"Required 'first' parameter for Wiz query is not provided in \
-                                       wiz_filter_query input: {custom_filter}. Please revise the filter \
-                                       input to include the 'first' parameter to indicate how max number \
-                                       of results to retrieve from Wiz.")
-            # If the `first` parameter is provided, we can pass the filter to Wiz as the `variables`
-            variables = custom_filter
- 
         query = {
                 "query": GRAPHQL_PULL_VULNERABILITIES,
                 "variables": variables
@@ -376,14 +312,103 @@ class AppCommon():
         
         vulnerabilities = []
 
-        LOG.debug("get_vulnerabilities: Querying for vulnerabilities with variables: %s", variables)
+        LOG.info("Querying for vulnerabilities from Wiz with variables: %s", variables)
 
         response = self._api_call("POST", self.graphql_api_url, query)
 
         # Vulnerabilities are stored as "nodes"
         vulnerabilities = response.get('data', {}).get('vulnerabilityFindings', {}).get('nodes', [])
 
-        LOG.debug("Found %s vulnerabilities for projects: %s", len(vulnerabilities), project_ids)
+        LOG.debug("Found %s vulnerabilities.", len(vulnerabilities))
+        
+        return vulnerabilities
+
+    @cached(TTLCache(maxsize=1024, ttl=CACHE_TTL), key=lambda _, project_ids, num_results: f'{",".join(project_ids)}:{num_results}' )
+    def get_vulnerabilities_by_project(self, project_ids, num_results):
+        """
+        Filter vulnerabilities by the project ids (can be 1 or multiple in a list)
+        Cache key is the alphabetized list of project ids joined together as a comma separated string and concatenated with ":num_results"
+
+        :param project_ids: SORTED list of project IDs
+        :type project_ids: list[str]
+        :param num_results: Number of vulnerabilities to return
+        :type num_results: int
+
+        :returns: num_results # of vulnerabilities
+        :rtype: JSON
+        """
+
+        LOG.debug("Querying for vulnerabilities with get_vulnerabilities_by_project()")
+
+        if num_results > MAX_RESULTS:
+            raise IntegrationError(f"Requested number of results exceeds maximum ({MAX_RESULTS}) as allowed by Wiz API. \
+                                   Please update function input 'wiz_num_results' to a lower value.")
+        
+        vulnerabilities = self.get_vulnerabilities()    # should be cached
+        associated_vulns = []       # vulnerabilities to be returned back to the playbook
+
+        if num_results and not project_ids:
+            # If project ids list is empty, just return the top num_results (this is what the Wiz API does)
+            associated_vulns = vulnerabilities[:num_results]
+
+            LOG.debug("Collected most recent %s vulnerabilities since last vulnerabilities refresh: %s seconds.", len(associated_vulns), CACHE_TTL)
+
+        else:
+            # Convert project_ids into a set so that we can use intersection for comparison
+            project_ids = set(project_ids)
+
+            # Pull out vulnerabilities that have project ids that match the project_ids passed in
+            for vuln in vulnerabilities:
+                vuln_projects = {p.get("id","") for p in vuln.get("projects", [])}  # set comprehension to get project IDs for this vulnerability
+                if vuln_projects & project_ids:
+                    # If any of the project Ids provided via the function inputs are found in the vulnerability, then add the vulnerability to our running list
+                    associated_vulns.append(vuln)
+
+                # if we only want the first "num_results", when we hit this number, return
+                if len(associated_vulns) == num_results:
+                    break
+        
+            LOG.debug("Found %s vulnerabilities associated with projects %s.", len(associated_vulns), project_ids)
+            
+        return associated_vulns
+
+    def get_vulnerabilities_custom(self, custom_filter: dict):
+        """
+        Get vulnerabilities with a custom filter provided by user via function inputs.
+
+        We should not paginate vulnerabilities results because there can be thousands of results for a given query. This can overwhelm SOAR and
+        would not be meaningful in a data table
+
+        :param custom_filter: custom "variables" object which can be used to filter results from Wiz API
+        :type custom_filter: dict
+
+        :return vulnerabilities: all vulnerabilities returned from query
+        :rtype: list of dictionaries
+        """
+
+        # But first check if the required 'first' parameter is there, otherwise Wiz will reject the query
+        if not custom_filter.get('first'):
+            raise IntegrationError(f"Required 'first' parameter for Wiz query is not provided in \
+                                    wiz_filter_query input: {custom_filter}. Please revise the filter \
+                                    input to include the 'first' parameter with a value < {MAX_RESULTS} to indicate max number \
+                                    of results to retrieve from Wiz.")
+        
+        # If the `first` parameter is provided, we can pass the filter to Wiz as the `variables`
+        query = {
+                "query": GRAPHQL_PULL_VULNERABILITIES,
+                "variables": custom_filter
+            }
+        
+        vulnerabilities = []
+
+        LOG.info("Querying for vulnerabilities from Wiz with custom filter for variables: %s", custom_filter)
+
+        response = self._api_call("POST", self.graphql_api_url, query)
+
+        # Vulnerabilities are stored as "nodes"
+        vulnerabilities = response.get('data', {}).get('vulnerabilityFindings', {}).get('nodes', [])
+
+        LOG.debug("Found %s vulnerabilities for wiz_query_filter %s", len(vulnerabilities), custom_filter)
         
         return vulnerabilities
 
