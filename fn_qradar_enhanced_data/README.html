@@ -442,12 +442,11 @@
 <li><p><a class="reference internal" href="#function---qradar-get-offense-mitre-reference"><span class="xref myst">Function - QRadar Get Offense MITRE Reference</span></a></p></li>
 <li><p><a class="reference internal" href="#function---qradar-offense-summary"><span class="xref myst">Function - QRadar Offense Summary</span></a></p></li>
 <li><p><a class="reference internal" href="#function---qradar-top-events"><span class="xref myst">Function - QRadar Top Events</span></a></p></li>
-<li><p><a class="reference internal" href="#script---create-artifact-from-assets-info"><span class="xref myst">Script - Create Artifact from Assets info</span></a></p></li>
-<li><p><a class="reference internal" href="#script---create-artifact-from-destination-ip-info"><span class="xref myst">Script - Create Artifact from Destination IP info</span></a></p></li>
-<li><p><a class="reference internal" href="#script---create-artifact-from-events-info"><span class="xref myst">Script - Create Artifact from Events info</span></a></p></li>
-<li><p><a class="reference internal" href="#script---create-artifact-from-flows-info"><span class="xref myst">Script - Create Artifact from Flows info</span></a></p></li>
-<li><p><a class="reference internal" href="#script---create-artifact-from-source-ip-info"><span class="xref myst">Script - Create Artifact from Source IP info</span></a></p></li>
-<li><p><a class="reference internal" href="#script---set-incident-last-updated-time"><span class="xref myst">Script - Set Incident Last Updated Time</span></a></p></li>
+<li><p><a class="reference internal" href="#script---set-incident-last-updated-time"><span class="xref myst">Script - Set Incident Last Updated Time</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#data-table---qr-assets"><span class="xref myst">Data Table - QR Assets</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---qr-categories"><span class="xref myst">Data Table - QR Categories</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---qr-destination-ips-first-10"><span class="xref myst">Data Table - QR Destination IPs (First 10)</span></a></p></li>
@@ -457,7 +456,7 @@
 <li><p><a class="reference internal" href="#data-table---qr-triggered-rules"><span class="xref myst">Data Table - QR Triggered Rules</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---qradar-rules-and-mitre-tactics-and-techniques"><span class="xref myst">Data Table - QRadar Rules and MITRE Tactics and Techniques</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
-<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-artifact-types"><span class="xref myst">Custom Artifact Types</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#version-200-changes"><span class="xref myst">Version 2.0.0 Changes</span></a></p>
 <ul>
@@ -483,79 +482,83 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.4.1</p></td>
+<tr class="row-even"><td><p>2.5.0</p></td>
+<td><p>06/2024</p></td>
+<td><p>Create more artifacts from QRadar offense top events. Convert rules/workflows to playbooks.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.4.1</p></td>
 <td><p>05/2024</p></td>
 <td><p>Replace deprecated datetime call.</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.4.0</p></td>
+<tr class="row-even"><td><p>2.4.0</p></td>
 <td><p>02/2024</p></td>
 <td><p>Update to poller to automatically account for time zone differences between SOAR and QRadar. Remove ‘.’ from query name.</p></td>
 </tr>
-<tr class="row-even"><td><p>2.3.4</p></td>
+<tr class="row-odd"><td><p>2.3.4</p></td>
 <td><p>11/2023</p></td>
 <td><p>Bug fix for syncing note between QRadar and SOAR</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.3.3</p></td>
+<tr class="row-even"><td><p>2.3.3</p></td>
 <td><p>10/2023</p></td>
 <td><p>Bug fix for making an api call to use case manager on the QRadar server to retrieve MITRE mappings for a rule.</p></td>
 </tr>
-<tr class="row-even"><td><p>2.3.2</p></td>
+<tr class="row-odd"><td><p>2.3.2</p></td>
 <td><p>08/2023</p></td>
 <td><p>Bug fix for MITRE function and poller search</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.3.1</p></td>
+<tr class="row-even"><td><p>2.3.1</p></td>
 <td><p>05/2023</p></td>
 <td><p>Bug fix for MITRE playbook</p></td>
 </tr>
-<tr class="row-even"><td><p>2.3.0</p></td>
+<tr class="row-odd"><td><p>2.3.0</p></td>
 <td><p>05/2023</p></td>
 <td><p>Support configurable settings to retry QRadar query</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.2.0</p></td>
+<tr class="row-even"><td><p>2.2.0</p></td>
 <td><p>02/2023</p></td>
 <td><p>Add notes &amp; assigned sync</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>10/2022</p></td>
 <td><p>Add Mitre Info from Offense to case</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.1</p></td>
+<tr class="row-even"><td><p>2.0.1</p></td>
 <td><p>08/2022</p></td>
 <td><p>Update documentation</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.0</p></td>
+<tr class="row-odd"><td><p>2.0.0</p></td>
 <td><p>02/2022</p></td>
 <td><p>Real time update to the Offense Summary</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.2</p></td>
+<tr class="row-even"><td><p>1.2.2</p></td>
 <td><p>04/2022</p></td>
 <td><p>Delete search on time-out</p></td>
 </tr>
-<tr class="row-even"><td><p>1.2.1</p></td>
+<tr class="row-odd"><td><p>1.2.1</p></td>
 <td><p>03/2022</p></td>
 <td><p>Bug fix</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>01/2022</p></td>
 <td><p>Allow multiple QRadar instances</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.3</p></td>
+<tr class="row-odd"><td><p>1.1.3</p></td>
 <td><p>01/2022</p></td>
 <td><p>Support for latest Analyst Workflow versions</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.2</p></td>
+<tr class="row-even"><td><p>1.1.2</p></td>
 <td><p>10/2021</p></td>
 <td><p>Update to use latest resilient-circuits</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.1</p></td>
+<tr class="row-odd"><td><p>1.1.1</p></td>
 <td><p>07/2021</p></td>
 <td><p>Fixed selftest failing when using cafile</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>07/2021</p></td>
 <td><p>Support for Flows and QRoc</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>12/2020</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -565,6 +568,17 @@
 <ul class="simple">
 <li><p>For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See <a class="reference internal" href="#1.2.0-changes"><span class="xref myst">1.2.0 Changes</span></a></p></li>
 </ul>
+<hr class="docutils" />
+<section id="fn-qradar-enhanced-data-2-5-0-changes">
+<h3>fn_qradar_enhanced_data 2.5.0 Changes<a class="headerlink" href="#fn-qradar-enhanced-data-2-5-0-changes" title="Link to this heading">¶</a></h3>
+<p>In v2.5, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
+<p>If upgrading from a previous release, you’ll noticed that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it’s corresponding rule, but with “(PB)” added at the end.
+For automatic actions, the playbooks will be disabled by default.</p>
+<p>You can continue to use the rules/workflows.
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.</p>
+</section>
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -589,17 +603,17 @@
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
-<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
-<p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0.0.9340</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0.0.9340</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=50.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -638,7 +652,7 @@
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10</span></code>.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
 <li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -655,10 +669,10 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.9 and Python 3.11 are supported.
+<p>Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient_circuits&gt;=50.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 <section id="qradar-requirements">
@@ -863,7 +877,7 @@ These settings can be added to the app.config <code class="docutils literal notr
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_destination</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">qradar_offense_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_id</span>
@@ -872,7 +886,7 @@ These settings can be added to the app.config <code class="docutils literal notr
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
 </pre></div>
@@ -1578,7 +1592,7 @@ The QRadar token used to connect to the QRadar server has to be the same QRadar 
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_offense_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">qradar_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_destination</span>
@@ -1588,7 +1602,7 @@ The QRadar token used to connect to the QRadar server has to be the same QRadar 
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mitre_results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">mitre_results</span>
 
@@ -1717,34 +1731,46 @@ The QRadar token used to connect to the QRadar server has to be the same QRadar 
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_offense_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_query_type</span> <span class="o">=</span> <span class="s2">&quot;offenserules&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_query_type</span> <span class="o">=</span> <span class="s2">&quot;offensesummary&quot;</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">qradar_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_destination</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">soar_table_name</span> <span class="o">=</span> <span class="s2">&quot;qr_triggered_rules&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">soar_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">offense_sum</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-  <span class="n">link</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://&quot;</span> <span class="o">+</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qrhost&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/console/ui/offenses?filter=</span><span class="si">{0}</span><span class="s2">%3B%3D%3B%3B</span><span class="si">{1}</span><span class="s2">&amp;page=1&amp;pagesize=10</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">{2}</span><span class="s2">&lt;/a&gt;&quot;</span>
+  <span class="n">link</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://&quot;</span> <span class="o">+</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qrhost&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/console/ui/offenses/</span><span class="si">{0}{1}</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">{2}</span><span class="s2">&lt;/a&gt;&quot;</span>
+  <span class="n">offenseid</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offenseid&quot;</span><span class="p">)</span>
+  <span class="n">offense</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offense&quot;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">assignedTo</span> <span class="o">=</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;assignedTo&quot;</span><span class="p">)</span>
+  <span class="n">offenseSource</span> <span class="o">=</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offenseSource&quot;</span><span class="p">)</span>
 
-  <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rules_data&quot;</span><span class="p">):</span>
-    <span class="n">qradar_event</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;qr_triggered_rules&quot;</span><span class="p">)</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">rule_name</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">),</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">rule_group</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">))))))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">rule_type</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;False&quot;</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;newEvents&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addToReferenceData&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addToReferenceSet&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;removeFromReferenceData&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;removeFromReferenceSet&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;notify&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;notifySeverityOverride&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;selectiveForwardingResponse&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;customAction&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">date_created</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;creationDate&quot;</span><span class="p">))</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">last_modified</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;modificationDate&quot;</span><span class="p">))</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">reported_time</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;current_time&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_index_type</span> <span class="o">=</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offenseType&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_index_value</span> <span class="o">=</span> <span class="n">offenseSource</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_source</span> <span class="o">=</span> <span class="n">offenseSource</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_source_ip_count</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sourceCount&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_destination_ip_count</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;remoteDestinationCount&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;localDestinationCount&quot;</span><span class="p">)))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_event_count</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;/events?page=1&amp;pagesize=10&quot;</span><span class="p">,</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eventCount&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_flow_count</span> <span class="o">=</span>  <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;/flows?page=1&amp;pagesize=10&quot;</span><span class="p">,</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;flowCount&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_assigned</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;?filter=status%3B%3D%3BOpen%3BOPEN&amp;filter=assignedTo%3B%3D%3B%3B</span><span class="si">{}</span><span class="s2">&amp;page=1&amp;pagesize=10&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">assignedTo</span> <span class="k">if</span> <span class="n">assignedTo</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">assignedTo</span><span class="p">)</span> <span class="k">if</span> <span class="n">assignedTo</span> <span class="k">else</span> <span class="s2">&quot;Unassigned&quot;</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_magnitude</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;magnitude&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_credibility</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;credibility&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_severity</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;severity&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_relevance</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;relevance&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_status</span> <span class="o">=</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_domain</span> <span class="o">=</span> <span class="s2">&quot;Default Domain&quot;</span>
+  <span class="k">if</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="p">{}):</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_domain</span> <span class="o">=</span> <span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_start_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;startTime&quot;</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">qr_offense_last_updated_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">offense</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastUpdatedTime&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1753,7 +1779,8 @@ The QRadar token used to connect to the QRadar server has to be the same QRadar 
 <hr class="docutils" />
 <section id="function-qradar-top-events">
 <h2>Function - QRadar Top Events<a class="headerlink" href="#function-qradar-top-events" title="Link to this heading">¶</a></h2>
-<p>Search QRadar Top events for the given Offense ID</p>
+<p>Search QRadar Top events for the given Offense ID.
+The sub-playbook that uses this function has the input “create_extra_artifacts” that is False by default. If this is enabled then artifacts will be created for top event properties. The artifacts will be file names, file paths, hashes, and commands.</p>
 <p><img alt="screenshot: fn-qradar-top-events " src="../_images/fn-qradar-top-events.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1839,7 +1866,7 @@ The QRadar token used to connect to the QRadar server has to be the same QRadar 
 </div>
 <p>Note: This function uses the qradar_search_paramX input fields twice.
 First, params 2 &amp; 3 are used with <code class="docutils literal notranslate"><span class="pre">qradar_query</span></code> to build a temporary table of results.
-Then fields 1, 4-6 are combined to return the limited results requested.<br />
+Then fields 1, 4-6 are combined to return the limited results requested.
 When reusing these input fields be aware of these purposes.</p>
 </p>
 </details>
@@ -1849,251 +1876,176 @@ When reusing these input fields be aware of these purposes.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;current_time&quot;</span><span class="p">:</span> <span class="mi">1666275957000</span><span class="p">,</span>
+    <span class="s2">&quot;qrhost&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;offenseid&quot;</span><span class="p">:</span> <span class="s2">&quot;67&quot;</span><span class="p">,</span>
     <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;MAX_starttime&quot;</span><span class="p">:</span> <span class="s2">&quot;1666114282856.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;categorycount&quot;</span><span class="p">:</span> <span class="s2">&quot;6.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;Default Domain&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domainid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;728.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;macAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;usernamecount&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;vulnerabilityCount&quot;</span><span class="p">:</span> <span class="mi">0</span>
-      <span class="p">},</span>
-      <span class="p">{</span>
-        <span class="s2">&quot;MAX_starttime&quot;</span><span class="p">:</span> <span class="s2">&quot;1666114280756.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;categorycount&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;Default Domain&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domainid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;7.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;macAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Attachment Detection - Potentially Malicious URL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Potential Web Vulnerability&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;logsourcename&quot;</span><span class="p">:</span> <span class="s2">&quot;Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;destinationip&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
         <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;usernamecount&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;vulnerabilityCount&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;1717078699748&quot;</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;MAX_starttime&quot;</span><span class="p">:</span> <span class="s2">&quot;1666114279942.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;categorycount&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;Default Domain&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domainid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;14.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;macAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;4.4.4.4&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;usernamecount&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;vulnerabilityCount&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="s2">&quot;event_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Attachment Detection - Phishing&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hostile Mail Attachment&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;logsourcename&quot;</span><span class="p">:</span> <span class="s2">&quot;Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;destinationip&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;1717078700653&quot;</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;MAX_starttime&quot;</span><span class="p">:</span> <span class="s2">&quot;1666114279022.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;categorycount&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;Default Domain&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domainid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;14.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;macAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;5.5.5.5&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;usernamecount&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;vulnerabilityCount&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="s2">&quot;event_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Attachment Detection - Content violation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hostile Mail Attachment&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;logsourcename&quot;</span><span class="p">:</span> <span class="s2">&quot;Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;destinationip&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;1717078701655&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;event_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Attachment Detection - Phishing&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hostile Mail Attachment&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;logsourcename&quot;</span><span class="p">:</span> <span class="s2">&quot;Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;destinationip&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;1717078704658&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;event_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Attachment Detection - Potentially Malicious URL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Potential Web Vulnerability&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;logsourcename&quot;</span><span class="p">:</span> <span class="s2">&quot;Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;destinationip&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;1717078705660&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;event_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Attachment Detection - Phishing&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hostile Mail Attachment&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;logsourcename&quot;</span><span class="p">:</span> <span class="s2">&quot;Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;destinationip&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sourceip&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.8&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eventcount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;1717078705660&quot;</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;offenseid&quot;</span><span class="p">:</span> <span class="s2">&quot;13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qrhost&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.0&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;qradar_label&quot;</span><span class="p">:</span> <span class="s2">&quot;qradar_label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_query&quot;</span><span class="p">:</span> <span class="s2">&quot;SELECT %param1</span><span class="si">% F</span><span class="s2">ROM events %param2</span><span class="si">% %</span><span class="s2">param4</span><span class="si">% %</span><span class="s2">param5</span><span class="si">% %</span><span class="s2">param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_query_type&quot;</span><span class="p">:</span> <span class="s2">&quot;sourceip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_search_param1&quot;</span><span class="p">:</span> <span class="s2">&quot;sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_search_param2&quot;</span><span class="p">:</span> <span class="s2">&quot;WHERE INOFFENSE(%param3%)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_search_param3&quot;</span><span class="p">:</span> <span class="s2">&quot;13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_search_param4&quot;</span><span class="p">:</span> <span class="s2">&quot;GROUP BY sourceip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_search_param5&quot;</span><span class="p">:</span> <span class="s2">&quot;ORDER BY max(starttime) DESC&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qradar_search_param6&quot;</span><span class="p">:</span> <span class="s2">&quot;LIMIT 10&quot;</span><span class="p">,</span>
-
-    <span class="s2">&quot;soar_incident_id&quot;</span><span class="p">:</span> <span class="mi">2111</span><span class="p">,</span>
-    <span class="s2">&quot;soar_table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;qr_top_source_ips&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">13137</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-20 10:25:58&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">&quot;current_time&quot;</span><span class="p">:</span> <span class="mi">1719237689000</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;qradar_search_param3&quot;</span><span class="p">:</span> <span class="s2">&quot;67&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qradar_search_param2&quot;</span><span class="p">:</span> <span class="s2">&quot;WHERE INOFFENSE(%param3%)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qradar_search_param1&quot;</span><span class="p">:</span> <span class="s2">&quot;QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, </span><span class="se">\&quot;</span><span class="s2">EC File Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC File Path</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC Filename</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC IMP Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC MD5 Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC ParentCommandLine</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC Process CommandLine</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC SHA1 Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">EC SHA256 Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">File Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">MD5 Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">SHA1 Hash</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">SHA256 Hash</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qradar_query_type&quot;</span><span class="p">:</span> <span class="s2">&quot;topevents&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qradar_search_param6&quot;</span><span class="p">:</span> <span class="s2">&quot;LIMIT 10&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;soar_incident_id&quot;</span><span class="p">:</span> <span class="mi">2105</span><span class="p">,</span>
+    <span class="s2">&quot;soar_table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;qr_offense_top_events&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qradar_search_param5&quot;</span><span class="p">:</span> <span class="s2">&quot;ORDER BY starttime&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qradar_query&quot;</span><span class="p">:</span> <span class="s2">&quot;SELECT %param1</span><span class="si">% F</span><span class="s2">ROM events %param2</span><span class="si">% %</span><span class="s2">param4</span><span class="si">% %</span><span class="s2">param5</span><span class="si">% %</span><span class="s2">param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qradar_label&quot;</span><span class="p">:</span> <span class="s2">&quot;qradar_1_1_1_1_1103&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2535</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-06-24 10:01:29&quot;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_search_param3</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_query_type</span> <span class="o">=</span> <span class="s2">&quot;categories&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">qradar_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT %param1</span><span class="si">% F</span><span class="s2">ROM events %param2</span><span class="si">% %</span><span class="s2">param4</span><span class="si">% %</span><span class="s2">param5</span><span class="si">% %</span><span class="s2">param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_search_param1</span> <span class="o">=</span> <span class="s1">&#39;QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, &quot;EC File Hash&quot;, &quot;EC File Path&quot;, &quot;EC Filename&quot;, &quot;EC IMP Hash&quot;, &quot;EC MD5 Hash&quot;, &quot;EC ParentCommandLine&quot;, &quot;EC Process CommandLine&quot;, &quot;EC SHA1 Hash&quot;, &quot;EC SHA256 Hash&quot;, &quot;File Hash&quot;, &quot;MD5 Hash&quot;, &quot;SHA1 Hash&quot;, &quot;SHA256 Hash&quot;&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_search_param2</span> <span class="o">=</span> <span class="s2">&quot;WHERE INOFFENSE(%param3%)&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_search_param5</span> <span class="o">=</span> <span class="s2">&quot;ORDER BY starttime&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_search_param6</span> <span class="o">=</span> <span class="s2">&quot;LIMIT 10&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_search_param3</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">qradar_query_type</span> <span class="o">=</span> <span class="s2">&quot;topevents&quot;</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">qradar_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_destination</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">soar_table_name</span> <span class="o">=</span> <span class="s2">&quot;qr_categories&quot;</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">soar_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">soar_table_name</span> <span class="o">=</span> <span class="s2">&quot;qr_offense_top_events&quot;</span>
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">top_events</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-  <span class="n">link</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://&quot;</span> <span class="o">+</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qrhost&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/console/ui/offenses/</span><span class="si">{0}</span><span class="s2">/events?filter=</span><span class="si">{1}</span><span class="s2">%3B%3D%3B%3B</span><span class="si">{2}</span><span class="s2">&amp;page=1&amp;pagesize=10</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">{3}</span><span class="s2">&lt;/a&gt;&quot;</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">[])))</span>
+<span class="k">if</span> <span class="n">content</span> <span class="ow">and</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+  <span class="n">link</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://&quot;</span> <span class="o">+</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;qrhost&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/console/ui/offenses/</span><span class="si">{0}</span><span class="s2">/events?filter=</span><span class="si">{1}</span><span class="s2">%3B%3D%3B%3B</span><span class="si">{2}</span><span class="s2">&amp;page=1&amp;pagesize=10</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">{3}</span><span class="s2">&lt;/a&gt;&quot;</span>
   <span class="n">offenseid</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offenseid&quot;</span><span class="p">)</span>
-  <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
-    <span class="n">categoryname</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;categoryname&quot;</span><span class="p">)</span>
-    <span class="n">qradar_event</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;qr_categories&quot;</span><span class="p">)</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;category_name&quot;</span><span class="p">,</span> <span class="n">categoryname</span><span class="p">,</span> <span class="n">categoryname</span><span class="p">)</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;category_name&quot;</span><span class="p">,</span> <span class="n">categoryname</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;magnitude&quot;</span><span class="p">))</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">event_count</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;category_name&quot;</span><span class="p">,</span> <span class="n">categoryname</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eventcount&quot;</span><span class="p">))</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">event_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eventtime&quot;</span><span class="p">))</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">sourceip_count</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;category_name&quot;</span><span class="p">,</span> <span class="n">categoryname</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sourceipcount&quot;</span><span class="p">))</span>
-    <span class="n">qradar_event</span><span class="o">.</span><span class="n">destinationip_count</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;category_name&quot;</span><span class="p">,</span> <span class="n">categoryname</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;destinationipcount&quot;</span><span class="p">))</span>
+  <span class="n">artifact_creation_count</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+    <span class="n">event_name</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event_name&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Add Rows to data table</span>
+    <span class="n">category_name</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;category_name&quot;</span><span class="p">)</span>
+    <span class="n">sourceip</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sourceip&quot;</span><span class="p">)</span>
+    <span class="n">destinationip</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;destinationip&quot;</span><span class="p">)</span>
+    <span class="n">logsourcename</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logsourcename&quot;</span><span class="p">)</span>
+    <span class="n">qradar_event</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;qr_offense_top_events&quot;</span><span class="p">)</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">event_name</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;event_name&quot;</span><span class="p">,</span> <span class="n">event_name</span><span class="p">,</span> <span class="n">event_name</span><span class="p">)</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;category_name&quot;</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">source_ip</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;sourceip&quot;</span><span class="p">,</span> <span class="n">sourceip</span><span class="p">,</span> <span class="n">sourceip</span><span class="p">)</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">destination_ip</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;destinationip&quot;</span><span class="p">,</span> <span class="n">destinationip</span><span class="p">,</span> <span class="n">destinationip</span><span class="p">)</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">log_source</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;log_source_name&quot;</span><span class="p">,</span> <span class="n">logsourcename</span><span class="p">,</span> <span class="n">logsourcename</span><span class="p">)</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">event_count</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offenseid</span><span class="p">,</span> <span class="s2">&quot;event_name&quot;</span><span class="p">,</span> <span class="n">event_name</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eventcount&quot;</span><span class="p">))</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">event_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">))</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;magnitude&quot;</span><span class="p">)</span>
+    <span class="n">qradar_event</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">)</span>
     <span class="n">qradar_event</span><span class="o">.</span><span class="n">reported_time</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;current_time&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="script-create-artifact-from-assets-info">
-<h2>Script - Create Artifact from Assets info<a class="headerlink" href="#script-create-artifact-from-assets-info" title="Link to this heading">¶</a></h2>
-<p>Create artifact from Assets info for the selected row</p>
-<p><strong>Object:</strong> qr_assets</p>
-<details><summary>Script Text:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create artifacts according to how they can be mapped to</span>
-<span class="c1"># SOAR default artifacts. If user has custom artifacts, and wants</span>
-<span class="c1"># to map them as well, please modify the following mapping dict.</span>
 
-<span class="n">type_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span> <span class="p">}</span>
-
-<span class="k">for</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">select_to_create_artifact_from_asset_info</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">type_mapping</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">type_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">),</span>
-      <span class="n">row</span><span class="o">.</span><span class="n">ip_address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">artifact_type</span> <span class="o">==</span> <span class="s2">&quot;IP Address&quot;</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">asset_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">),</span>
-      <span class="s2">&quot;QRadar Offense </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">)</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="script-create-artifact-from-destination-ip-info">
-<h2>Script - Create Artifact from Destination IP info<a class="headerlink" href="#script-create-artifact-from-destination-ip-info" title="Link to this heading">¶</a></h2>
-<p>Create artifact from Destination IP info for the selected row</p>
-<p><strong>Object:</strong> qr_top_destination_ips</p>
-<details><summary>Script Text:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create artifacts for those observables according to how they can be mapped to</span>
-<span class="c1"># SOAR default artifacts. If user has custom artifacts, and wants</span>
-<span class="c1"># to map them as well, please modify the following mapping dict.</span>
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="n">type_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;Destination IP&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="p">}</span>
-
-<span class="k">for</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">select_to_create_artifact_from_destip</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">type_mapping</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">type_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">),</span>
-      <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&lt;[^&lt;&gt;]+&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">destination_ip</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)),</span>
-      <span class="s2">&quot;QRadar Offense </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">)</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="script-create-artifact-from-events-info">
-<h2>Script - Create Artifact from Events info<a class="headerlink" href="#script-create-artifact-from-events-info" title="Link to this heading">¶</a></h2>
-<p>Create artifact from the Events info of the selected row</p>
-<p><strong>Object:</strong> qr_offense_top_events</p>
-<details><summary>Script Text:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create artifacts for those observables according to how they can be mapped to</span>
-<span class="c1"># SOAR default artifacts. If user has custom artifacts, and wants</span>
-<span class="c1"># to map them as well, please modify the following mapping dict.</span>
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="n">type_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;Source IP&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="s2">&quot;Destination IP&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="s2">&quot;Username&quot;</span><span class="p">:</span> <span class="s2">&quot;User Account&quot;</span> <span class="p">}</span>
-
-<span class="k">for</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">select_to_create_artifact</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">type_mapping</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Source IP&quot;</span><span class="p">,</span> <span class="s2">&quot;Destination IP&quot;</span><span class="p">]:</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&lt;[^&lt;&gt;]+&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">source_ip</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">artifact_type</span> <span class="o">==</span> <span class="s2">&quot;Source IP&quot;</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">destination_ip</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">username</span>
-
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">type_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">),</span> <span class="n">value</span><span class="p">,</span> <span class="s2">&quot;QRadar Offense </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">))</span>
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="script-create-artifact-from-flows-info">
-<h2>Script - Create Artifact from Flows info<a class="headerlink" href="#script-create-artifact-from-flows-info" title="Link to this heading">¶</a></h2>
-<p>Create artifact from the Flows info of the selected row</p>
-<p><strong>Object:</strong> qr_flows</p>
-<details><summary>Script Text:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create artifacts for those observables according to how they can be mapped to</span>
-<span class="c1"># SOAR default artifacts. If user has custom artifacts, and wants</span>
-<span class="c1"># to map them as well, please modify the following mapping dict.</span>
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="n">type_mapping</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;Source IP&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Destination IP&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Source Port&quot;</span><span class="p">:</span> <span class="s2">&quot;Port&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Destination Port&quot;</span><span class="p">:</span> <span class="s2">&quot;Port&quot;</span>
-<span class="p">}</span>
-
-<span class="k">for</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">select_to_create_artifact_from_flows_info</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">type_mapping</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">type_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">),</span>
-      <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&lt;[^&lt;&gt;]+&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">source_ip</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Source IP&quot;</span><span class="p">,</span> <span class="s2">&quot;Source Port&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">destination_ip</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)),</span>
-      <span class="s2">&quot;QRadar Offense </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">)</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="script-create-artifact-from-source-ip-info">
-<h2>Script - Create Artifact from Source IP info<a class="headerlink" href="#script-create-artifact-from-source-ip-info" title="Link to this heading">¶</a></h2>
-<p>Create artifact from Source IP info for the selected row</p>
-<p><strong>Object:</strong> qr_top_source_ips</p>
-<details><summary>Script Text:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create artifacts for those observables according to how they can be mapped to</span>
-<span class="c1"># SOAR default artifacts. If user has custom artifacts, and wants</span>
-<span class="c1"># to map them as well, please modify the following mapping dict.</span>
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="n">type_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;Source IP&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="s2">&quot;MAC&quot;</span><span class="p">:</span> <span class="s2">&quot;MAC Address&quot;</span><span class="p">,</span> <span class="p">}</span>
-
-<span class="k">for</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">select_to_create_artifact_from_sourceip</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">artifact_type</span> <span class="ow">in</span> <span class="n">type_mapping</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">type_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">),</span>
-      <span class="n">row</span><span class="o">.</span><span class="n">mac</span> <span class="k">if</span> <span class="n">artifact_type</span> <span class="o">==</span> <span class="s2">&quot;MAC&quot;</span> <span class="k">else</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&lt;[^&lt;&gt;]+&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">source_ip</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)),</span>
-      <span class="s2">&quot;QRadar Offense </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">)</span>
-    <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;create_extra_artifacts&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+      <span class="c1"># Create Artifacts</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC File Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_file_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC File Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC File Path&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_file_path&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC File Path&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC Filename&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_filename&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC Filename&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC IMP Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_imp_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC IMP Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC MD5 Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_md5_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC MD5 Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC ParentCommandLine&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_parentcommandline&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC ParentCommandLine&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC Process CommandLine&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_process_commandline&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC Process CommandLine&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC SHA1 Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_sha1_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC SHA1 Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC SHA256 Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;ec_sha256_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EC SHA256 Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;File Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;filehash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;File Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MD5 Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;md5_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MD5 Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SHA1 Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;sha1_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SHA1 Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SHA256 Hash&quot;</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;sha256_hash&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SHA256 Hash&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Event Name: </span><span class="si">{</span><span class="n">event_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -2118,6 +2070,95 @@ When reusing these input fields be aware of these purposes.</p>
 </div>
 </p>
 </details>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Create Artifact from Assets info (PB)</p></td>
+<td><p>Create artifact from Assets info for the selected row</p></td>
+<td><p>Manual</p></td>
+<td><p>qr_assets</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Create artifact from Destination IP info (PB)</p></td>
+<td><p>Create artifact from Destination IP info for the selected row</p></td>
+<td><p>Manual</p></td>
+<td><p>qr_top_destination_ips</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Create Artifact from Events info (PB)</p></td>
+<td><p>Create artifact from the Events info of the selected row</p></td>
+<td><p>Manual</p></td>
+<td><p>qr_offense_top_events</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Create artifact from Source IP info (PB)</p></td>
+<td><p>Create artifact from Source IP info for the selected row</p></td>
+<td><p>Manual</p></td>
+<td><p>qr_top_source_ips</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Create Artifacts from Flows Info (PB)</p></td>
+<td><p>Create artifact from the Flows info of the selected row</p></td>
+<td><p>Manual</p></td>
+<td><p>qr_flows</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>QRadar Create Note</p></td>
+<td><p>Add a note from SOAR to its linked QRadar offense</p></td>
+<td><p>Automatic</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.qradar_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">note.text</span> <span class="pre">not_contains</span> <span class="pre">Added</span> <span class="pre">from</span> <span class="pre">QRadar</span> <span class="pre">AND</span> <span class="pre">object_added</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>QRadar Enhanced Data (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.qradar_destination</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.properties.qradar_id</span> <span class="pre">has_a_value</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>QRadar Enhanced Data Poller (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.qr_last_updated_time</span> <span class="pre">changed</span> <span class="pre">AND</span> <span class="pre">incident.properties.qradar_destination</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.properties.qradar_id</span> <span class="pre">has_a_value</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>QRadar Enhanced Data Refresh (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.qradar_destination</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">incident.properties.qradar_id</span> <span class="pre">has_a_value</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>QRadar Get MITRE Reference From Rules</p></td>
+<td><p>Using the QRadar ID for the offense in question, this playbook will retrieve the related MITRE Tactics and Techniques from QRadar based on the defined rules.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.qradar_id</span> <span class="pre">has_a_value</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
 <section id="data-table-qr-assets">
@@ -2262,7 +2303,7 @@ When reusing these input fields be aware of these purposes.</p>
 <hr class="docutils" />
 <section id="data-table-qr-destination-ips-first-10">
 <h2>Data Table - QR Destination IPs (First 10)<a class="headerlink" href="#data-table-qr-destination-ips-first-10" title="Link to this heading">¶</a></h2>
-<p><img alt="screenshot: dt-qr-destination-ips-first-10" src="../_images/dt-qr-destination-ips-first-10-events.png" /></p>
+<p><img alt="screenshot: dt-qr-destination-ips-first-10" src="../_images/dt-qr-destination-ips-first-10.png" /></p>
 <section id="id5">
 <h3>API Name:<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>qr_top_destination_ips</p>
@@ -2472,7 +2513,7 @@ When reusing these input fields be aware of these purposes.</p>
 <hr class="docutils" />
 <section id="data-table-qr-source-ips-first-10">
 <h2>Data Table - QR Source IPs (First 10)<a class="headerlink" href="#data-table-qr-source-ips-first-10" title="Link to this heading">¶</a></h2>
-<p><img alt="screenshot: dt-qr-source-ips-first-10" src="../_images/dt-qr-source-ips-first-10-events.png" /></p>
+<p><img alt="screenshot: dt-qr-source-ips-first-10" src="../_images/dt-qr-source-ips-first-10.png" /></p>
 <section id="id11">
 <h3>API Name:<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
 <p>qr_top_source_ips</p>
@@ -2612,6 +2653,7 @@ When reusing these input fields be aware of these purposes.</p>
 <hr class="docutils" />
 <section id="data-table-qradar-rules-and-mitre-tactics-and-techniques">
 <h2>Data Table - QRadar Rules and MITRE Tactics and Techniques<a class="headerlink" href="#data-table-qradar-rules-and-mitre-tactics-and-techniques" title="Link to this heading">¶</a></h2>
+<p><img alt="screenshot: dt-qradar-rules-and-mitre-tactics-and-techniques" src="../_images/dt-qradar-rules-and-mitre-tactics-and-techniques.png" /></p>
 <section id="id15">
 <h3>API Name:<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
 <p>qradar_rules_and_mitre_tactics_and_techniques</p>
@@ -2831,76 +2873,68 @@ When reusing these input fields be aware of these purposes.</p>
 </div>
 </section>
 <hr class="docutils" />
-<section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
+<section id="custom-artifact-types">
+<h2>Custom Artifact Types<a class="headerlink" href="#custom-artifact-types" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
-<th class="head"><p>Object</p></th>
-<th class="head"><p>Workflow Triggered</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Create Artifact from Assets info</p></td>
-<td><p>qr_assets</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Create artifact from Destination IP info</p></td>
-<td><p>qr_top_destination_ips</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Create Artifact from Events info</p></td>
-<td><p>qr_offense_top_events</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Create artifact from Source IP info</p></td>
-<td><p>qr_top_source_ips</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Create Artifacts from Flows Info</p></td>
-<td><p>qr_flows</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>QRadar Enhanced Data</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">qradar_triggered_rules</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>QRadar Enhanced Data Poller</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">qradar_triggered_rules</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>QRadar Enhanced Data Refresh</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">qradar_triggered_rules</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows’ input and post processing scripts can be customized for data retrieval and data presentation.</p>
-</section>
-<hr class="docutils" />
-<section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<tr class="row-odd"><th class="head"><p>Display Name</p></th>
+<th class="head"><p>API Access Name</p></th>
 <th class="head"><p>Description</p></th>
-<th class="head"><p>Object</p></th>
-<th class="head"><p>Status</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>QRadar Create Note</p></td>
-<td><p>Add a note from SOAR to its linked QRadar offense</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<tr class="row-even"><td><p>EC File Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_file_hash</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>QRadar Get MITRE Reference From Rules</p></td>
-<td><p>Using the QRadar ID for the offense in question, this playbook will retrieve the related MITRE Tactics and Techniques from QRadar based on the defined rules.</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<tr class="row-odd"><td><p>EC File Path</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_file_path</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>EC Filename</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_filename</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>EC IMP Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_imp_hash</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>EC MD5 Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_md5_hash</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>EC ParentCommandLine</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_parentcommandline</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>EC Process CommandLine</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_process_commandline</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>EC SHA1 Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_sha1_hash</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>EC SHA256 Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ec_sha256_hash</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>File Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">filehash</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>MD5 Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">md5_hash</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>SHA1 Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sha1_hash</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>SHA256 Hash</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sha256_hash</span></code></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -3040,7 +3074,10 @@ The max value of num_workers is 500.</p>
             <ul>
 <li><a class="reference internal" href="#">QRadar Enhanced Data Migration</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#fn-qradar-enhanced-data-2-5-0-changes">fn_qradar_enhanced_data 2.5.0 Changes</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
@@ -3069,12 +3106,8 @@ The max value of num_workers is 500.</p>
 <li><a class="reference internal" href="#function-qradar-get-offense-mitre-reference">Function - QRadar Get Offense MITRE Reference</a></li>
 <li><a class="reference internal" href="#function-qradar-offense-summary">Function - QRadar Offense Summary</a></li>
 <li><a class="reference internal" href="#function-qradar-top-events">Function - QRadar Top Events</a></li>
-<li><a class="reference internal" href="#script-create-artifact-from-assets-info">Script - Create Artifact from Assets info</a></li>
-<li><a class="reference internal" href="#script-create-artifact-from-destination-ip-info">Script - Create Artifact from Destination IP info</a></li>
-<li><a class="reference internal" href="#script-create-artifact-from-events-info">Script - Create Artifact from Events info</a></li>
-<li><a class="reference internal" href="#script-create-artifact-from-flows-info">Script - Create Artifact from Flows info</a></li>
-<li><a class="reference internal" href="#script-create-artifact-from-source-ip-info">Script - Create Artifact from Source IP info</a></li>
 <li><a class="reference internal" href="#script-set-incident-last-updated-time">Script - Set Incident Last Updated Time</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#data-table-qr-assets">Data Table - QR Assets</a><ul>
 <li><a class="reference internal" href="#api-name">API Name:</a></li>
 <li><a class="reference internal" href="#columns">Columns:</a></li>
@@ -3116,8 +3149,7 @@ The max value of num_workers is 500.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
-<li><a class="reference internal" href="#rules">Rules</a></li>
-<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#custom-artifact-types">Custom Artifact Types</a></li>
 <li><a class="reference internal" href="#version-2-0-0-changes">Version 2.0.0 Changes</a><ul>
 <li><a class="reference internal" href="#qradar-api-searches">QRadar API Searches</a></li>
 <li><a class="reference internal" href="#qradar-enhanced-data-refresh-manual-rule">QRadar Enhanced Data Refresh Manual Rule</a></li>
