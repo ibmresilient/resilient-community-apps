@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.1.0.695
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.2.2.1096
 
 """Generate the SOAR customizations required for fn_qradar_enhanced_data"""
 
@@ -31,26 +31,8 @@ def codegen_reload_data():
             u"qradar_offense_summary",
             u"qradar_top_events"
         ],
-        "workflows": [
-            u"example_of_searching_qradar_flows_using_offense_id",
-            u"example_of_searching_qradar_top_events_using_offense_id",
-            u"qradar_assets_information",
-            u"qradar_categories",
-            u"qradar_destination_ips",
-            u"qradar_offense_summary",
-            u"qradar_source_ips",
-            u"qradar_triggered_rules"
-        ],
-        "actions": [
-            u"Create Artifact from Assets info",
-            u"Create artifact from Destination IP info",
-            u"Create Artifact from Events info",
-            u"Create artifact from Source IP info",
-            u"Create Artifacts from Flows Info ",
-            u"QRadar Enhanced Data",
-            u"QRadar Enhanced Data Poller",
-            u"QRadar Enhanced Data Refresh"
-        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [
             u"qr_assigned",
             u"qr_credibility",
@@ -72,7 +54,21 @@ def codegen_reload_data():
             u"qradar_destination",
             u"qradar_id"
         ],
-        "incident_artifact_types": [],
+        "incident_artifact_types": [
+            u"ec_file_hash",
+            u"ec_file_path",
+            u"ec_filename",
+            u"ec_imp_hash",
+            u"ec_md5_hash",
+            u"ec_parentcommandline",
+            u"ec_process_commandline",
+            u"ec_sha1_hash",
+            u"ec_sha256_hash",
+            u"filehash",
+            u"md5_hash",
+            u"sha1_hash",
+            u"sha256_hash"
+        ],
         "incident_types": [],
         "datatables": [
             u"qr_assets",
@@ -86,16 +82,27 @@ def codegen_reload_data():
         ],
         "automatic_tasks": [],
         "scripts": [
-            u"Create Artifact from Assets info",
-            u"Create Artifact from Destination IP info",
-            u"Create Artifact from Events info",
-            u"Create Artifact from Flows info",
-            u"Create Artifact from Source IP info",
             u"Set Incident Last Updated Time"
         ],
         "playbooks": [
+            u"create_artifact_from_assets_info_pb",
+            u"create_artifact_from_destination_ip_info_pb",
+            u"create_artifact_from_events_info_pb",
+            u"create_artifact_from_source_ip_info_pb",
+            u"create_artifacts_from_flows_info_pb",
             u"qradar_create_note",
-            u"qradar_get_qradar_rule_mitre_reference"
+            u"qradar_enhanced_data_pb",
+            u"qradar_enhanced_data_poller_pb",
+            u"qradar_enhanced_data_refresh_pb",
+            u"qradar_get_qradar_rule_mitre_reference",
+            u"subplaybook_example_of_fetching_contributing_rules_for_offense",
+            u"subplaybook_example_of_searching_and_returning_assets_information",
+            u"subplaybook_example_of_searching_and_returning_categories",
+            u"subplaybook_example_of_searching_and_returning_destination_ips_information",
+            u"subplaybook_example_of_searching_and_returning_source_ips_information",
+            u"subplaybook_example_of_searching_qradar_flows_using_offense_id",
+            u"subplaybook_example_of_searching_qradar_top_events_using_offense_id",
+            u"subplaybook_qradar_offense_summary"
         ]
     }
 
@@ -105,7 +112,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 50.0.9097
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
@@ -115,27 +122,25 @@ def customization_data(client=None):
         - qradar_get_offense_mitre_reference
         - qradar_offense_summary
         - qradar_top_events
-    - Workflows:
-        - example_of_searching_qradar_flows_using_offense_id
-        - example_of_searching_qradar_top_events_using_offense_id
-        - qradar_assets_information
-        - qradar_categories
-        - qradar_destination_ips
-        - qradar_offense_summary
-        - qradar_source_ips
-        - qradar_triggered_rules
     - Playbooks:
+        - create_artifact_from_assets_info_pb
+        - create_artifact_from_destination_ip_info_pb
+        - create_artifact_from_events_info_pb
+        - create_artifact_from_source_ip_info_pb
+        - create_artifacts_from_flows_info_pb
         - qradar_create_note
+        - qradar_enhanced_data_pb
+        - qradar_enhanced_data_poller_pb
+        - qradar_enhanced_data_refresh_pb
         - qradar_get_qradar_rule_mitre_reference
-    - Rules:
-        - Create Artifact from Assets info
-        - Create artifact from Destination IP info
-        - Create Artifact from Events info
-        - Create artifact from Source IP info
-        - Create Artifacts from Flows Info 
-        - QRadar Enhanced Data
-        - QRadar Enhanced Data Poller
-        - QRadar Enhanced Data Refresh
+        - subplaybook_example_of_fetching_contributing_rules_for_offense
+        - subplaybook_example_of_searching_and_returning_assets_information
+        - subplaybook_example_of_searching_and_returning_categories
+        - subplaybook_example_of_searching_and_returning_destination_ips_information
+        - subplaybook_example_of_searching_and_returning_source_ips_information
+        - subplaybook_example_of_searching_qradar_flows_using_offense_id
+        - subplaybook_example_of_searching_qradar_top_events_using_offense_id
+        - subplaybook_qradar_offense_summary
     - Incident Fields:
         - qr_assigned
         - qr_credibility
@@ -156,6 +161,20 @@ def customization_data(client=None):
         - qr_source_ip_count
         - qradar_destination
         - qradar_id
+    - Custom Artifact Types:
+        - ec_file_hash
+        - ec_file_path
+        - ec_filename
+        - ec_imp_hash
+        - ec_md5_hash
+        - ec_parentcommandline
+        - ec_process_commandline
+        - ec_sha1_hash
+        - ec_sha256_hash
+        - filehash
+        - md5_hash
+        - sha1_hash
+        - sha256_hash
     - Data Tables:
         - qr_assets
         - qr_categories
@@ -166,11 +185,6 @@ def customization_data(client=None):
         - qr_triggered_rules
         - qradar_rules_and_mitre_tactics_and_techniques
     - Scripts:
-        - Create Artifact from Assets info
-        - Create Artifact from Destination IP info
-        - Create Artifact from Events info
-        - Create Artifact from Flows info
-        - Create Artifact from Source IP info
         - Set Incident Last Updated Time
     """
 

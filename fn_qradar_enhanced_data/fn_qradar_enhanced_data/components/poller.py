@@ -94,7 +94,7 @@ class PollerComponent(ResilientComponent):
         # Get the current UTC time.
         self.last_poller_time = datetime.now(timezone.utc) - timedelta(minutes=poller_lookback)
         LOG.info(f"Minutes for poller to lookback: {poller_lookback}")
-        
+
         # Look for the setting `timezone_offset` in the app.config and add a warning log that it is deprecated.
         qradar_servers = QRadarServers(self.opts).get_servers_dict() # Dictionary of all configured QRadar servers and there settings.
         for qradar_server in qradar_servers.values(): # Loop through the configured QRadar servers
@@ -162,12 +162,12 @@ class PollerComponent(ResilientComponent):
             filter = []
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
-                filter_note.append(f"id={str(id)}")
+                filter_note.append(f"id={str(id)} and status!=CLOSED")
                 qr_last_updated = case_server_dict[server][id].get('properties', {}).get('qr_last_updated_time', 0)
                 # If not in SOAR case then set time to 0
                 if not qr_last_updated:
                     qr_last_updated = 0
-                filter.append(f"id={str(id)} and last_persisted_time > {int(qr_last_updated)}")
+                filter.append(f"id={str(id)} and last_persisted_time > {int(qr_last_updated)} and status!=CLOSED")
 
             filters = " or ".join(list(set(filter))) # Using set will remove any duplicate IDs in the list
             filter_notes = " or ".join(list(set(filter_note)))
@@ -224,7 +224,7 @@ class PollerComponent(ResilientComponent):
                     raise IntegrationError(str(response))
 
                 LOG.info(f"Case: {str(updated_cases)} updated field: qr_last_updated_time")
-    
+
     def sync_notes(self, qradar_client, server, filter_notes, case_server_dict):
         """
         Sync QRadar offense notes with SOAR incident

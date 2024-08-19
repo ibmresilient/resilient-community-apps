@@ -207,7 +207,7 @@ class ArielSearch(SearchWaitCommand):
         ret = {}
         if response.status_code in [200, 206]:
             events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
-            ret = {"events": [{key: f"{event[key]}" for key in event} for event in events if isinstance(event, dict)]}
+            ret = {"events": [{key: f"{event[key]}" for key in event if event.get(key)} for event in events if isinstance(event, dict)]}
 
         return ret
 

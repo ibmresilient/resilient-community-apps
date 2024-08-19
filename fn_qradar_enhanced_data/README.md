@@ -19,12 +19,8 @@
 - [Function - QRadar Get Offense MITRE Reference](#function---qradar-get-offense-mitre-reference)
 - [Function - QRadar Offense Summary](#function---qradar-offense-summary)
 - [Function - QRadar Top Events](#function---qradar-top-events)
-- [Script - Create Artifact from Assets info](#script---create-artifact-from-assets-info)
-- [Script - Create Artifact from Destination IP info](#script---create-artifact-from-destination-ip-info)
-- [Script - Create Artifact from Events info](#script---create-artifact-from-events-info)
-- [Script - Create Artifact from Flows info](#script---create-artifact-from-flows-info)
-- [Script - Create Artifact from Source IP info](#script---create-artifact-from-source-ip-info)
 - [Script - Set Incident Last Updated Time](#script---set-incident-last-updated-time)
+  - [Custom Layouts](#custom-layouts)
 - [Data Table - QR Assets](#data-table---qr-assets)
 - [Data Table - QR Categories](#data-table---qr-categories)
 - [Data Table - QR Destination IPs (First 10)](#data-table---qr-destination-ips-first-10)
@@ -34,7 +30,7 @@
 - [Data Table - QR Triggered Rules](#data-table---qr-triggered-rules)
 - [Data Table - QRadar Rules and MITRE Tactics and Techniques](#data-table---qradar-rules-and-mitre-tactics-and-techniques)
 - [Custom Fields](#custom-fields)
-- [Rules](#rules)
+- [Custom Artifact Types](#custom-artifact-types)
 - [Playbooks](#playbooks)
 - [Version 2.0.0 Changes](#version-200-changes)
     - [QRadar API Searches](#qradar-api-searches)
@@ -49,6 +45,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.5.0 | 06/2024| Create more artifacts from QRadar offense top events. Convert rules/workflows to playbooks. |
 | 2.4.1 | 05/2024 | Replace deprecated datetime call. |
 | 2.4.0 | 02/2024 | Update to poller to automatically account for time zone differences between SOAR and QRadar. Remove '.' from query name. |
 | 2.3.4 | 11/2023 | Bug fix for syncing note between QRadar and SOAR |
@@ -73,8 +70,20 @@
 
 ---
 
-## Overview
+### fn_qradar_enhanced_data 2.5.0 Changes
+In v2.5, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows.
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+
+---
+
+## Overview
 The QRadar Enhanced Offense Data Migration (EDM) app fetches a more complete view of data associated with a QRadar offense and provides live links within the SOAR case back to QRadar, thereby simplifying case management.
 
  ![screenshot: main](./doc/screenshots/main.png)
@@ -94,16 +103,16 @@ This app fetches the data associated with the QRadar Offense and provides live l
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
-If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `50.0.0`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `51.0.0.0.9340`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `50.0.0`.
+* SOAR platform >= `51.0.0.0.9340`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=50.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -121,7 +130,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.10`.
+* IBM Cloud Pak for Security >= `1.10.15`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -135,9 +144,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.9 and Python 3.11 are supported.
+Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=50.0.0
+* resilient_circuits>=51.0.0
 
 ### QRadar Requirements
 The app works with QRadar 7.4.0 or higher and requires the QRadar Analyst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
@@ -250,7 +259,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -262,7 +271,7 @@ inputs.qradar_note = note.text
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -944,7 +953,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -957,7 +966,7 @@ inputs.soar_table_name = "qradar_rules_and_mitre_tactics_and_techniques"
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -1057,39 +1066,51 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.qradar_offense_id = incident.properties.qradar_id
-inputs.qradar_query_type = "offenserules"
+inputs.qradar_query_type = "offensesummary"
 inputs.qradar_label = incident.properties.qradar_destination
-inputs.soar_table_name = "qr_triggered_rules"
-inputs.soar_incident_id = incident.id
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
-content = results.get("content")
+results = playbook.functions.results.offense_sum
+content = results.get("content", {})
 
 if content:
-  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}&page=1&pagesize=10\" target=\"_blank\">{2}</a>"
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
+  offenseid = content.get("offenseid")
+  offense = content.get("offense", {})
+  assignedTo = offense.get("assignedTo")
+  offenseSource = offense.get("offenseSource")
 
-  for event in content.get("rules_data"):
-    qradar_event = incident.addRow("qr_triggered_rules")
-    qradar_event.rule_name = link.format("rules", event.get("id"), event.get("name"))
-    qradar_event.rule_group = ", ".join(list(map(lambda x: x.get("name"), list(filter(lambda x: x.get("name") is not None, event.get("groups")))))) if len(event.get("groups")) > 0 else ""
-    qradar_event.rule_type = event.get("type")
-    qradar_event.enabled = "True" if event.get("enabled") else "False"
-    qradar_event.response = "Yes" if event.get("responses").get("newEvents") or event.get("responses").get("email") or event.get("responses").get("log") or event.get("responses").get("addToReferenceData") or event.get("responses").get("addToReferenceSet") or event.get("responses").get("removeFromReferenceData") or event.get("responses").get("removeFromReferenceSet") or event.get("responses").get("notify") or event.get("responses").get("notifySeverityOverride") or event.get("responses").get("selectiveForwardingResponse") or event.get("responses").get("customAction") else "No"
-    qradar_event.date_created = int(event.get("creationDate"))
-    qradar_event.last_modified = int(event.get("modificationDate"))
-    qradar_event.reported_time = content.get("current_time")
+  incident.qr_offense_index_type = offense.get("offenseType", {}).get("name")
+  incident.qr_offense_index_value = offenseSource
+  incident.qr_offense_source = offenseSource
+  incident.qr_source_ip_count = link.format(offenseid, "", offense.get("sourceCount"))
+  incident.qr_destination_ip_count = link.format(offenseid, "", int(offense.get("remoteDestinationCount")) + int(offense.get("localDestinationCount")))
+  incident.qr_event_count = link.format(offenseid, "/events?page=1&pagesize=10", offense.get("eventCount"))
+  incident.qr_flow_count =  link.format(offenseid, "/flows?page=1&pagesize=10", offense.get("flowCount"))
+  incident.qr_assigned = link.format("", "?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B{}&page=1&pagesize=10".format(assignedTo if assignedTo else ""), assignedTo) if assignedTo else "Unassigned"
+  incident.qr_magnitude = link.format(offenseid, "", offense.get("magnitude"))
+  incident.qr_credibility = link.format(offenseid, "", offense.get("credibility"))
+  incident.qr_severity = link.format(offenseid, "", offense.get("severity"))
+  incident.qr_relevance = link.format(offenseid, "", offense.get("relevance"))
+  incident.qr_offense_status = offense.get("status")
+  incident.qr_offense_domain = "Default Domain"
+  if offense.get("domain", {}):
+    incident.qr_offense_domain = offense.get("domain", {}).get("name")
+
+  incident.qr_offense_start_time = int(offense.get("startTime"))
+  incident.qr_offense_last_updated_time = int(offense.get("lastUpdatedTime"))
 ```
 
 </p>
@@ -1097,7 +1118,8 @@ if content:
 
 ---
 ## Function - QRadar Top Events
-Search QRadar Top events for the given Offense ID
+Search QRadar Top events for the given Offense ID.
+The sub-playbook that uses this function has the input "create_extra_artifacts" that is False by default. If this is enabled then artifacts will be created for top event properties. The artifacts will be file names, file paths, hashes, and commands.
 
  ![screenshot: fn-qradar-top-events ](./doc/screenshots/fn-qradar-top-events.png)
 
@@ -1118,11 +1140,11 @@ Search QRadar Top events for the given Offense ID
 | `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
-Note: This function uses the qradar_search_paramX input fields twice. 
-First, params 2 & 3 are used with `qradar_query` to build a temporary table of results. 
-Then fields 1, 4-6 are combined to return the limited results requested.  
+Note: This function uses the qradar_search_paramX input fields twice.
+First, params 2 & 3 are used with `qradar_query` to build a temporary table of results.
+Then fields 1, 4-6 are combined to return the limited results requested.
 When reusing these input fields be aware of these purposes.
- 
+
 </p>
 </details>
 
@@ -1133,126 +1155,182 @@ When reusing these input fields be aware of these purposes.
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": {
-    "current_time": 1666275957000,
+    "qrhost": "1.1.1.1",
+    "offenseid": "67",
     "events": [
       {
-        "MAX_starttime": "1666114282856.0",
-        "categorycount": "6.0",
-        "domain": "Default Domain",
-        "domainid": 0,
-        "eventcount": "728.0",
-        "macAddress": "",
-        "network": "",
-        "sourceip": "2.2.2.2",
-        "usernamecount": "1.0",
-        "vulnerabilityCount": 0
-      },
-      {
-        "MAX_starttime": "1666114280756.0",
-        "categorycount": "1.0",
-        "domain": "Default Domain",
-        "domainid": 0,
-        "eventcount": "7.0",
-        "macAddress": "",
-        "network": "",
+        "event_name": "Attachment Detection - Potentially Malicious URL",
+        "category_name": "Potential Web Vulnerability",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
         "sourceip": "3.3.3.3",
-        "usernamecount": "1.0",
-        "vulnerabilityCount": 0
+        "eventcount": "1",
+        "event_time": "1717078699748"
       },
       {
-        "MAX_starttime": "1666114279942.0",
-        "categorycount": "2.0",
-        "domain": "Default Domain",
-        "domainid": 0,
-        "eventcount": "14.0",
-        "macAddress": "",
-        "network": "",
-        "sourceip": "4.4.4.4",
-        "usernamecount": "1.0",
-        "vulnerabilityCount": 0
+        "event_name": "Attachment Detection - Phishing",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.3",
+        "eventcount": "1",
+        "event_time": "1717078700653"
       },
       {
-        "MAX_starttime": "1666114279022.0",
-        "categorycount": "2.0",
-        "domain": "Default Domain",
-        "domainid": 0,
-        "eventcount": "14.0",
-        "macAddress": "",
-        "network": "",
-        "sourceip": "5.5.5.5",
-        "usernamecount": "1.0",
-        "vulnerabilityCount": 0
+        "event_name": "Attachment Detection - Content violation",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.5",
+        "eventcount": "1",
+        "event_time": "1717078701655"
+      },
+      {
+        "event_name": "Attachment Detection - Phishing",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.4",
+        "eventcount": "1",
+        "event_time": "1717078704658"
+      },
+      {
+        "event_name": "Attachment Detection - Potentially Malicious URL",
+        "category_name": "Potential Web Vulnerability",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.7",
+        "eventcount": "1",
+        "event_time": "1717078705660"
+      },
+      {
+        "event_name": "Attachment Detection - Phishing",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.8",
+        "eventcount": "1",
+        "event_time": "1717078705660"
       }
     ],
-    "offenseid": "13",
-    "qrhost": "1.1.1.0"
-  },
-  "inputs": {
-    "qradar_label": "qradar_label1",
-    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60",
-    "qradar_query_type": "sourceip",
-    "qradar_search_param1": "sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)",
-    "qradar_search_param2": "WHERE INOFFENSE(%param3%)",
-    "qradar_search_param3": "13",
-    "qradar_search_param4": "GROUP BY sourceip",
-    "qradar_search_param5": "ORDER BY max(starttime) DESC",
-    "qradar_search_param6": "LIMIT 10",
-
-    "soar_incident_id": 2111,
-    "soar_table_name": "qr_top_source_ips"
-  },
-  "metrics": {
-    "execution_time_ms": 13137,
-    "host": "local",
-    "package": "unknown",
-    "package_version": "unknown",
-    "timestamp": "2022-10-20 10:25:58",
-    "version": "1.0"
+    "current_time": 1719237689000
   },
   "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+  "inputs": {
+    "qradar_search_param3": "67",
+    "qradar_search_param2": "WHERE INOFFENSE(%param3%)",
+    "qradar_search_param1": "QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, \"EC File Hash\", \"EC File Path\", \"EC Filename\", \"EC IMP Hash\", \"EC MD5 Hash\", \"EC ParentCommandLine\", \"EC Process CommandLine\", \"EC SHA1 Hash\", \"EC SHA256 Hash\", \"File Hash\", \"MD5 Hash\", \"SHA1 Hash\", \"SHA256 Hash\"",
+    "qradar_query_type": "topevents",
+    "qradar_search_param6": "LIMIT 10",
+    "soar_incident_id": 2105,
+    "soar_table_name": "qr_offense_top_events",
+    "qradar_search_param5": "ORDER BY starttime",
+    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60",
+    "qradar_label": "qradar_1_1_1_1_1103"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "unknown",
+    "host": "local",
+    "execution_time_ms": 2535,
+    "timestamp": "2024-06-24 10:01:29"
+  }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
+inputs.qradar_query = "SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60"
+inputs.qradar_search_param1 = 'QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, "EC File Hash", "EC File Path", "EC Filename", "EC IMP Hash", "EC MD5 Hash", "EC ParentCommandLine", "EC Process CommandLine", "EC SHA1 Hash", "EC SHA256 Hash", "File Hash", "MD5 Hash", "SHA1 Hash", "SHA256 Hash"'
+inputs.qradar_search_param2 = "WHERE INOFFENSE(%param3%)"
+inputs.qradar_search_param5 = "ORDER BY starttime"
+inputs.qradar_search_param6 = "LIMIT 10"
 inputs.qradar_search_param3 = incident.properties.qradar_id
-inputs.qradar_query_type = "categories"
+inputs.qradar_query_type = "topevents"
 inputs.qradar_label = incident.properties.qradar_destination
-inputs.soar_table_name = "qr_categories"
 inputs.soar_incident_id = incident.id
+inputs.soar_table_name = "qr_offense_top_events"
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
-content = results.get("content")
+result = playbook.functions.results.top_events
+content = result.get("content", {})
 
-if content:
-  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+incident.addNote(str(content.get("events", [])))
+if content and content.get("events", []):
+  link = "<a href=\"https://" + content.get('qrhost') + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
   offenseid = content.get("offenseid")
-  for event in content.get("events"):
-    categoryname = event.get("categoryname")
-    qradar_event = incident.addRow("qr_categories")
-    qradar_event.category_name = link.format(offenseid, "category_name", categoryname, categoryname)
-    qradar_event.magnitude = link.format(offenseid, "category_name", categoryname, event.get("magnitude"))
-    qradar_event.event_count = link.format(offenseid, "category_name", categoryname, event.get("eventcount"))
-    qradar_event.event_time = int(event.get("eventtime"))
-    qradar_event.sourceip_count = link.format(offenseid, "category_name", categoryname, event.get("sourceipcount"))
-    qradar_event.destinationip_count = link.format(offenseid, "category_name", categoryname, event.get("destinationipcount"))
+  artifact_creation_count = 0
+  for event in content.get("events", []):
+    event_name = event.get("event_name")
+
+    # Add Rows to data table
+    category_name = event.get("category_name")
+    sourceip = event.get("sourceip")
+    destinationip = event.get("destinationip")
+    logsourcename = event.get("logsourcename")
+    qradar_event = incident.addRow("qr_offense_top_events")
+    qradar_event.event_name = link.format(offenseid, "event_name", event_name, event_name)
+    qradar_event.category = link.format(offenseid, "category_name", category_name, category_name)
+    qradar_event.source_ip = link.format(offenseid, "sourceip", sourceip, sourceip)
+    qradar_event.destination_ip = link.format(offenseid, "destinationip", destinationip, destinationip)
+    qradar_event.log_source = link.format(offenseid, "log_source_name", logsourcename, logsourcename)
+    qradar_event.event_count = link.format(offenseid, "event_name", event_name, event.get("eventcount"))
+    qradar_event.event_time = int(event.get("event_time"))
+    qradar_event.magnitude = event.get("magnitude")
+    qradar_event.username = event.get("username")
     qradar_event.reported_time = content.get("current_time")
+
+    if getattr(playbook.inputs, "create_extra_artifacts", False):
+      # Create Artifacts
+      if event.get("EC File Hash"):
+        incident.addArtifact("ec_file_hash", event.get("EC File Hash"), f"Event Name: {event_name}")
+      if event.get("EC File Path"):
+        incident.addArtifact("ec_file_path", event.get("EC File Path"), f"Event Name: {event_name}")
+      if event.get("EC Filename"):
+        incident.addArtifact("ec_filename", event.get("EC Filename"), f"Event Name: {event_name}")
+      if event.get("EC IMP Hash"):
+        incident.addArtifact("ec_imp_hash", event.get("EC IMP Hash"), f"Event Name: {event_name}")
+      if event.get("EC MD5 Hash"):
+        incident.addArtifact("ec_md5_hash", event.get("EC MD5 Hash"), f"Event Name: {event_name}")
+      if event.get("EC ParentCommandLine"):
+        incident.addArtifact("ec_parentcommandline", event.get("EC ParentCommandLine"), f"Event Name: {event_name}")
+      if event.get("EC Process CommandLine"):
+        incident.addArtifact("ec_process_commandline", event.get("EC Process CommandLine"), f"Event Name: {event_name}")
+      if event.get("EC SHA1 Hash"):
+        incident.addArtifact("ec_sha1_hash", event.get("EC SHA1 Hash"), f"Event Name: {event_name}")
+      if event.get("EC SHA256 Hash"):
+        incident.addArtifact("ec_sha256_hash", event.get("EC SHA256 Hash"), f"Event Name: {event_name}")
+      if event.get("File Hash"):
+        incident.addArtifact("filehash", event.get("File Hash"), f"Event Name: {event_name}")
+      if event.get("MD5 Hash"):
+        incident.addArtifact("md5_hash", event.get("MD5 Hash"), f"Event Name: {event_name}")
+      if event.get("SHA1 Hash"):
+        incident.addArtifact("sha1_hash", event.get("SHA1 Hash"), f"Event Name: {event_name}")
+      if event.get("SHA256 Hash"):
+        incident.addArtifact("sha256_hash", event.get("SHA256 Hash"), f"Event Name: {event_name}")
 ```
 
 </p>
@@ -1260,152 +1338,6 @@ if content:
 
 ---
 
-## Script - Create Artifact from Assets info
-Create artifact from Assets info for the selected row
-
-**Object:** qr_assets
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If user has custom artifacts, and wants
-# to map them as well, please modify the following mapping dict.
-
-type_mapping = { "IP Address": "IP Address", "Name": "String" }
-
-for artifact_type in rule.properties.select_to_create_artifact_from_asset_info:
-  if artifact_type in type_mapping:
-    incident.addArtifact(type_mapping.get(artifact_type),
-      row.ip_address.get("content") if artifact_type == "IP Address" else row.asset_name.get("content"),
-      "QRadar Offense {}".format(artifact_type)
-    )
-```
-
-</p>
-</details>
-
----
-## Script - Create Artifact from Destination IP info
-Create artifact from Destination IP info for the selected row
-
-**Object:** qr_top_destination_ips
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-# We create artifacts for those observables according to how they can be mapped to
-# SOAR default artifacts. If user has custom artifacts, and wants
-# to map them as well, please modify the following mapping dict.
-import re
-
-type_mapping = { "Destination IP": "IP Address", }
-
-for artifact_type in rule.properties.select_to_create_artifact_from_destip:
-  if artifact_type in type_mapping:
-    incident.addArtifact(type_mapping.get(artifact_type),
-      re.sub("<[^<>]+>", "", row.destination_ip.get("content")),
-      "QRadar Offense {}".format(artifact_type)
-    )
-```
-
-</p>
-</details>
-
----
-## Script - Create Artifact from Events info
-Create artifact from the Events info of the selected row
-
-**Object:** qr_offense_top_events
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-# We create artifacts for those observables according to how they can be mapped to
-# SOAR default artifacts. If user has custom artifacts, and wants
-# to map them as well, please modify the following mapping dict.
-import re
-
-type_mapping = { "Source IP": "IP Address", "Destination IP": "IP Address", "Username": "User Account" }
-
-for artifact_type in rule.properties.select_to_create_artifact:
-  if artifact_type in type_mapping:
-    if artifact_type in ["Source IP", "Destination IP"]:
-      value = re.sub("<[^<>]+>", "", row.source_ip.get("content") if artifact_type == "Source IP" else row.destination_ip.get("content"))
-    else:
-      value = row.username
-
-    incident.addArtifact(type_mapping.get(artifact_type), value, "QRadar Offense {}".format(artifact_type))
-```
-
-</p>
-</details>
-
----
-## Script - Create Artifact from Flows info
-Create artifact from the Flows info of the selected row
-
-**Object:** qr_flows
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-# We create artifacts for those observables according to how they can be mapped to
-# SOAR default artifacts. If user has custom artifacts, and wants
-# to map them as well, please modify the following mapping dict.
-import re
-
-type_mapping = {
-  "Source IP": "IP Address",
-  "Destination IP": "IP Address",
-  "Source Port": "Port",
-  "Destination Port": "Port"
-}
-
-for artifact_type in rule.properties.select_to_create_artifact_from_flows_info:
-  if artifact_type in type_mapping:
-    incident.addArtifact(type_mapping.get(artifact_type),
-      re.sub("<[^<>]+>", "", row.source_ip.get("content") if artifact_type in ["Source IP", "Source Port"] else row.destination_ip.get("content")),
-      "QRadar Offense {}".format(artifact_type)
-    )
-```
-
-</p>
-</details>
-
----
-## Script - Create Artifact from Source IP info
-Create artifact from Source IP info for the selected row
-
-**Object:** qr_top_source_ips
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-# We create artifacts for those observables according to how they can be mapped to
-# SOAR default artifacts. If user has custom artifacts, and wants
-# to map them as well, please modify the following mapping dict.
-import re
-
-type_mapping = { "Source IP": "IP Address", "MAC": "MAC Address", }
-
-for artifact_type in rule.properties.select_to_create_artifact_from_sourceip:
-  if artifact_type in type_mapping:
-    incident.addArtifact(type_mapping.get(artifact_type),
-      row.mac if artifact_type == "MAC" else re.sub("<[^<>]+>", "", row.source_ip.get("content")),
-      "QRadar Offense {}".format(artifact_type)
-    )
-```
-
-</p>
-</details>
-
----
 ## Script - Set Incident Last Updated Time
 qr_last_updated_time will be set to equal create_date for the incident on incident creation. qr_last_updated_time will be set to equal current time when manual refresh rule is run.
 
@@ -1427,6 +1359,22 @@ else:
 
 </p>
 </details>
+
+---
+
+## Playbooks
+| Playbook Name | Description | Activation Type | Object | Status | Condition | 
+| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
+| Create Artifact from Assets info (PB) | Create artifact from Assets info for the selected row | Manual | qr_assets | `enabled` | `-` | 
+| Create artifact from Destination IP info (PB) | Create artifact from Destination IP info for the selected row | Manual | qr_top_destination_ips | `enabled` | `-` | 
+| Create Artifact from Events info (PB) | Create artifact from the Events info of the selected row | Manual | qr_offense_top_events | `enabled` | `-` | 
+| Create artifact from Source IP info (PB) | Create artifact from Source IP info for the selected row | Manual | qr_top_source_ips | `enabled` | `-` | 
+| Create Artifacts from Flows Info (PB) | Create artifact from the Flows info of the selected row | Manual | qr_flows | `enabled` | `-` | 
+| QRadar Create Note | Add a note from SOAR to its linked QRadar offense | Automatic | note | `disabled` | `incident.properties.qradar_id has_a_value AND note.text not_contains Added from QRadar AND object_added` | 
+| QRadar Enhanced Data (PB) | None | Automatic | incident | `disabled` | `incident.properties.qradar_destination has_a_value AND incident.properties.qradar_id has_a_value` | 
+| QRadar Enhanced Data Poller (PB) | None | Automatic | incident | `disabled` | `incident.properties.qr_last_updated_time changed AND incident.properties.qradar_destination has_a_value AND incident.properties.qradar_id has_a_value` | 
+| QRadar Enhanced Data Refresh (PB) | None | Manual | incident | `enabled` | `incident.properties.qradar_destination has_a_value AND incident.properties.qradar_id has_a_value` | 
+| QRadar Get MITRE Reference From Rules | Using the QRadar ID for the offense in question, this playbook will retrieve the related MITRE Tactics and Techniques from QRadar based on the defined rules. | Manual | incident | `enabled` | `incident.properties.qradar_id has_a_value` | 
 
 ---
 
@@ -1474,7 +1422,7 @@ qr_categories
 ---
 ## Data Table - QR Destination IPs (First 10)
 
- ![screenshot: dt-qr-destination-ips-first-10](./doc/screenshots/dt-qr-destination-ips-first-10-events.png)
+ ![screenshot: dt-qr-destination-ips-first-10](./doc/screenshots/dt-qr-destination-ips-first-10.png)
 
 #### API Name:
 qr_top_destination_ips
@@ -1537,7 +1485,7 @@ qr_flows
 ---
 ## Data Table - QR Source IPs (First 10)
 
- ![screenshot: dt-qr-source-ips-first-10](./doc/screenshots/dt-qr-source-ips-first-10-events.png)
+ ![screenshot: dt-qr-source-ips-first-10](./doc/screenshots/dt-qr-source-ips-first-10.png)
 
 #### API Name:
 qr_top_source_ips
@@ -1578,6 +1526,8 @@ qr_triggered_rules
 
 ---
 ## Data Table - QRadar Rules and MITRE Tactics and Techniques
+
+ ![screenshot: dt-qradar-rules-and-mitre-tactics-and-techniques](./doc/screenshots/dt-qradar-rules-and-mitre-tactics-and-techniques.png)
 
 #### API Name:
 qradar_rules_and_mitre_tactics_and_techniques
@@ -1622,28 +1572,22 @@ qradar_rules_and_mitre_tactics_and_techniques
 
 ---
 
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Create Artifact from Assets info | qr_assets | `-` |
-| Create artifact from Destination IP info | qr_top_destination_ips | `-` |
-| Create Artifact from Events info | qr_offense_top_events | `-` |
-| Create artifact from Source IP info | qr_top_source_ips | `-` |
-| Create Artifacts from Flows Info  | qr_flows | `-` |
-| QRadar Enhanced Data | incident | `qradar_triggered_rules` |
-| QRadar Enhanced Data Poller | incident | `qradar_triggered_rules` |
-| QRadar Enhanced Data Refresh | incident | `qradar_triggered_rules` |
-
-The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
-
----
-
-## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| QRadar Create Note | Add a note from SOAR to its linked QRadar offense | note | `enabled` |
-| QRadar Get MITRE Reference From Rules | Using the QRadar ID for the offense in question, this playbook will retrieve the related MITRE Tactics and Techniques from QRadar based on the defined rules. | incident | `enabled` |
+## Custom Artifact Types
+| Display Name | API Access Name | Description |
+| ------------ | --------------- | ----------- |
+| EC File Hash | `ec_file_hash` |  |
+| EC File Path | `ec_file_path` |  |
+| EC Filename | `ec_filename` |  |
+| EC IMP Hash | `ec_imp_hash` |  |
+| EC MD5 Hash | `ec_md5_hash` |  |
+| EC ParentCommandLine | `ec_parentcommandline` |  |
+| EC Process CommandLine | `ec_process_commandline` |  |
+| EC SHA1 Hash | `ec_sha1_hash` |  |
+| EC SHA256 Hash | `ec_sha256_hash` |  |
+| File Hash | `filehash` |  |
+| MD5 Hash | `md5_hash` |  |
+| SHA1 Hash | `sha1_hash` |  |
+| SHA256 Hash | `sha256_hash` |  |
 
 ---
 

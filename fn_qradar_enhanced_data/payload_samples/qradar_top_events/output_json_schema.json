@@ -23,34 +23,28 @@
           "items": {
             "type": "object",
             "properties": {
+              "event_name": {
+                "type": "string"
+              },
+              "category_name": {
+                "type": "string"
+              },
+              "logsourcename": {
+                "type": "string"
+              },
+              "magnitude": {
+                "type": "string"
+              },
+              "destinationip": {
+                "type": "string"
+              },
               "sourceip": {
                 "type": "string"
               },
               "eventcount": {
                 "type": "string"
               },
-              "categorycount": {
-                "type": "string"
-              },
-              "usernamecount": {
-                "type": "string"
-              },
-              "MAX_starttime": {
-                "type": "string"
-              },
-              "domainid": {
-                "type": "integer"
-              },
-              "vulnerabilityCount": {
-                "type": "integer"
-              },
-              "macAddress": {
-                "type": "string"
-              },
-              "network": {
-                "type": "string"
-              },
-              "domain": {
+              "event_time": {
                 "type": "string"
               }
             }
@@ -77,9 +71,6 @@
         "qradar_query_type": {
           "type": "string"
         },
-        "qradar_search_param7": {
-          "type": "string"
-        },
         "qradar_search_param6": {
           "type": "string"
         },
@@ -90,9 +81,6 @@
           "type": "string"
         },
         "qradar_search_param5": {
-          "type": "string"
-        },
-        "qradar_search_param4": {
           "type": "string"
         },
         "qradar_query": {
