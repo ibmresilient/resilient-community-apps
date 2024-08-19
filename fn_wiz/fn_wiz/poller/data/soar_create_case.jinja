@@ -1,0 +1,32 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {% set severity_mapping = '''{
+    "INFORMATIONAL": "Low", 
+    "LOW": "Low", 
+    "MEDIUM": "Medium", 
+    "HIGH": "High",
+    "CRITICAL": "High"
+  }'''
+  %}
+  "name": "Wiz Issue - {{ sourceRule.name }}: {{ id }}",
+  "description": "{{ sourceRule.controlDescription | replace('"', '\\"') }}",
+  "discovered_date": {{ createdAt| soar_datetimeformat(split_at='.') }},
+  "start_date": {{ createdAt| soar_datetimeformat(split_at='.') }},
+  "plan_status": "A",
+  "severity_code": "{{ severity | soar_substitute(severity_mapping) }}",
+  "properties": {
+    "wiz_issue_id": "{{ id }}",
+    "wiz_issue_status": "{{ status }}",
+    "wiz_description": "{{ sourceRule.controlDescription | replace('"', '\\"') }}"
+  },
+
+  {# add comments as necessary #}
+  "comments": [
+    {
+      "text": {
+        "format": "html",
+        "content": "<b>Created by Wiz:</b> {{ entity_url }}"
+      }
+    }
+  ]
+}
