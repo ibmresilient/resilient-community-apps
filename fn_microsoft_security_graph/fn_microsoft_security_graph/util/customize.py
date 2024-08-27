@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.2.0.974
+# Generated with resilient-sdk v51.0.2.2.1096
 
 """Generate the SOAR customizations required for fn_microsoft_security_graph"""
 
