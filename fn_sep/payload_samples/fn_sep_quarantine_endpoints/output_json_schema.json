@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -20,9 +20,7 @@
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -31,6 +29,9 @@
         },
         "sep_undo": {
           "type": "boolean"
+        },
+        "sep_hardwarekey": {
+          "type": "string"
         },
         "sep_computer_ids": {
           "type": "string"

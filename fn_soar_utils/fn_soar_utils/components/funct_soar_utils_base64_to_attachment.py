@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
-import base64
-import logging
-import json
-import mimetypes
+from base64 import b64decode
+from logging import getLogger
+from json import dumps
+from mimetypes import guess_type
 from io import BytesIO
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import write_file_attachment
@@ -19,7 +19,7 @@ class FunctionComponent(ResilientComponent):
     def _base64_to_attachment_function(self, event, *args, **kwargs):
         """Function: """
         try:
-            log = logging.getLogger(__name__)
+            log = getLogger(__name__)
 
             # Get the function parameters:
             # artifact_file_type:
@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
             content_type = kwargs.get("soar_utils_content_type")  # text
 
             content_type = content_type \
-                           or mimetypes.guess_type(file_name or "")[0] \
+                           or guess_type(file_name or "")[0] \
                            or "application/octet-stream"
 
             log.info("incident_id: %s", incident_id)
@@ -41,12 +41,12 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Writing attachment...")
 
-            datastream = BytesIO(base64.b64decode(base64content.encode("utf-8")))
+            datastream = BytesIO(b64decode(base64content.encode("utf-8")))
 
             client = self.rest_client()
             new_attachment  = write_file_attachment(client, file_name, datastream, incident_id, task_id, content_type)
 
-            log.info(json.dumps(new_attachment))
+            log.info(dumps(new_attachment))
             yield FunctionResult(new_attachment)
         except Exception:
             yield FunctionError()

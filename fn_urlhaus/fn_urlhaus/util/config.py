@@ -14,7 +14,7 @@ def config_section_data():
 url=https://urlhaus-api.abuse.ch/v1
 # these are needed for submitting malware urls
 submit_url=https://urlhaus.abuse.ch/api/
-#  twitter api key
+#  urlhaus api key
 submit_api_key=
 """
     return config_data

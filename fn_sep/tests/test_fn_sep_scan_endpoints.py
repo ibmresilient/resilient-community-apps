@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Tests for fn_sep_scan_endpoints function."""
 from __future__ import print_function
 import pytest
 from unittest.mock import patch
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock_artifacts import mocked_sep_client, get_mock_config
 
@@ -70,7 +70,7 @@ class TestFnSepScanEndpoints:
         }
         results = call_fn_sep_scan_endpoints_function(circuits_app, function_params)
         assert_keys_in(results, *keys)
-        content = results["content"]
+        content = results.get("content", {})
         assert_keys_in(content, *keys_2)
-        assert expected_results_1 == content["commandID_computer"]
-        assert expected_results_2 == content["commandID_group"]
+        assert expected_results_1 == content.get("commandID_computer")
+        assert expected_results_2 == content.get("commandID_group")

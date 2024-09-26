@@ -8,7 +8,9 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {},
+    "reason": {
+      "type": "string"
+    },
     "content": {
       "type": "object",
       "properties": {
@@ -39,9 +41,6 @@
                     "type": "string"
                   },
                   "@vsys": {
-                    "type": "string"
-                  },
-                  "description": {
                     "type": "string"
                   },
                   "static": {

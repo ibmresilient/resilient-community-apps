@@ -1,106 +1,66 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
-""" Resilient functions component to run a Symantec SEPM query - get fingerprint list. """
+""" SOAR functions component to run a Symantec SEPM query - get fingerprint list. """
 
-# Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
-import json
-import logging
+from resilient_lib import validate_fields
+from fn_sep.lib.sep_client import Sepclient, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.sep_client import Sepclient
-from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+FN_NAME = "fn_sep_add_fingerprint_list"
 
-LOG = logging.getLogger(__name__)
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_sep_add_fingerprint_list' of
-    package fn_sep.
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'fn_sep_add_fingerprint_list' of package fn_sep.
 
     The Function takes the following parameters:
             sep_fingerprintlist_name, sep_description, sep_domainid, sep_hash_value
 
-    An example of a set of query parameter might look like the following:
-            sep_fingerprintlist_name = 'Blacklist'
-            sep_description = 'List of Hashes of type Malware MD5 Hash'
-            sep_domainid = 'A9B4B7160946C25D24B6AA458EF5557F'
-            sep_hash_value = 'A9B4B7160946C25D24B6AA458EF5557F'
-
-    The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
-    returns a result in JSON format similar to the following.
-    {
-        'inputs': {u'sep_description': u'Hash of type Malware MD5 Hash',
-                   u'sep_fingerprintlist_name': u'Blacklist',
-                   u'sep_hash_value': u'482F9B6E0CC4C1DBBD772AAAF088CB3A',
-                   u'sep_domainid': u'A9B4B7160946C25D24B6AA458EF5557F'
-                   },
-        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 12:02:37', 'package_version': '1.0.0',
-                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1417
-                    },
-        'success': True,
-        'content': {u'id': u'AB29BEA5333C488694B9533E65858BF2'},
-        'raw': '{"id": "AB29BEA5333C488694B9533E65858BF2"}',
-        'reason': None,
-        'version': '1.0'
-    }
+    The function will execute a REST api get request against a SYMANTEC SEPM server for information on endpoints and
+    returns a result in JSON format.
     """
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
-
-    @function("fn_sep_add_fingerprint_list")
-    def _fn_sep_add_fingerprint_list_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Add a hash to a new fingerprint list."""
         try:
-            params = transform_kwargs(kwargs) if kwargs else {}
-
-            # Instantiate result payload object
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            # Validate the required inputs
+            validate_fields(["sep_fingerprintlist_name", "sep_description", "sep_domainid",
+                             "sep_hash_value"], fn_inputs)
 
             # Get the function parameters:
-            sep_fingerprintlist_name = kwargs.get("sep_fingerprintlist_name")  # text
-            sep_description = kwargs.get("sep_description")  # text
-            sep_domainid = kwargs.get("sep_domainid")  # text
-            sep_hash_value = kwargs.get("sep_hash_value")  # text
+            sep_fingerprintlist_name = getattr(fn_inputs, "sep_fingerprintlist_name", None)  # text
+            sep_description = getattr(fn_inputs, "sep_description", None)  # text
+            sep_domainid = getattr(fn_inputs, "sep_domainid", None)  # text
+            sep_hash_value = getattr(fn_inputs, "sep_hash_value", None)  # text
 
-            LOG.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
-            LOG.info("sep_description: %s", sep_description)
-            LOG.info("sep_domainid: %s", sep_domainid)
-            LOG.info("sep_hash_value: %s", sep_hash_value)
+            self.LOG.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
+            self.LOG.info("sep_description: %s", sep_description)
+            self.LOG.info("sep_domainid: %s", sep_domainid)
+            self.LOG.info("sep_hash_value: %s", sep_hash_value)
 
-            validate_fields(["sep_fingerprintlist_name", "sep_description", "sep_domainid",
-                             "sep_hash_value"], kwargs)
+            yield self.status_message("Running Symantec SEP Add Fingerprint List action ...")
 
-            yield StatusMessage("Running Symantec SEP Add Fingerprint List action ...")
+            sep = Sepclient(self.options)
 
-            sep = Sepclient(self.options, params)
+            results = sep.add_fingerprint_list(fingerprintlist_name=sep_fingerprintlist_name,
+                                               description=sep_description,
+                                               domainid=sep_domainid,
+                                               hash_value=sep_hash_value)
 
-            rtn = sep.add_fingerprint_list(**params)
-
-            if "errors" in rtn and rtn["errors"][0]["error_code"] == 409:
+            if isinstance(results, dict) and results.get("errors") and results.get("errors", [])[0].get("error_code") == 409:
                 # If this error was trapped user probably tried to re-add a hash to a fingerprint list.
-                yield StatusMessage(
-                    u"Got a 409 error while attempting to get a fingerprint list for fingerprint name '{0}' "
-                    "because of a possible invalid or deleted id.".format(sep_fingerprintlist_name))
+                yield self.status_message(
+                    f"Got a 409 error while attempting to get a fingerprint list for fingerprint name '{sep_fingerprintlist_name}' "
+                    "because of a possible invalid or deleted id.")
             else:
-                yield StatusMessage(u"Returning 'Symantec SEP Add Fingerprint List' results for fingerprint name '{}'."
-                                    .format(sep_fingerprintlist_name))
-
-            results = rp.done(True, rtn)
-
-            LOG.debug(json.dumps(results["content"]))
+                yield self.status_message(f"Returning 'Symantec SEP Add Fingerprint List' results for fingerprint name '{sep_fingerprintlist_name}'.")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            LOG.exception("Exception in Resilient Function for Symantec SEP.")
+            self.LOG.exception("Exception in SOAR function for Symantec SEP.")
             yield FunctionError()

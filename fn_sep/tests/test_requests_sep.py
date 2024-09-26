@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Test requests functionality."""
@@ -117,7 +117,7 @@ class TestSEPRequests:
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
         assert_keys_in(results.json(), *keys)
-        assert expected_results == len(results.json()["content"])
+        assert expected_results == len(results.json().get("content"))
 
     """Test patch method function"""
     @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
@@ -133,8 +133,8 @@ class TestSEPRequests:
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
         assert_keys_in(results.json()[0], *keys)
-        assert expected_results[0] == int(results.json()[0]["responseCode"])
-        assert expected_results[1] == results.json()[0]["responseMessage"]
+        assert expected_results[0] == int(results.json()[0].get("responseCode"))
+        assert expected_results[1] == results.json()[0].get("responseMessage")
 
     """Test post method function"""
     @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
@@ -147,7 +147,7 @@ class TestSEPRequests:
         method = req_data.pop("method")
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
-        assert expected_results == results.json()["commandID"]
+        assert expected_results == results.json().get("commandID")
 
     """Test put method function"""
     @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
@@ -155,7 +155,6 @@ class TestSEPRequests:
         (get_req_data("put"), "")
     ])
     def test_put_method(self, mock_post, req_data, expected_results):
-        keys = ["responseCode", "responseMessage"]
 
         req_sep = RequestsSep(get_config(), FUNCTION_PARAMS)
         method = req_data.pop("method")
@@ -169,7 +168,6 @@ class TestSEPRequests:
         (get_req_data("delete"), "")
     ])
     def test_delete_method(self, mock_post, req_data, expected_results):
-        keys = ["responseCode", ""]
 
         req_sep = RequestsSep(get_config(), FUNCTION_PARAMS)
         method = req_data.pop("method")
@@ -183,7 +181,6 @@ class TestSEPRequests:
         (get_req_data("get_content"), b"Test data")
     ])
     def test_get_content(self, mock_post, req_data, expected_results):
-        keys = ["responseCode", ""]
 
         req_sep = RequestsSep(get_config(), FUNCTION_PARAMS)
         method = req_data.pop("method")

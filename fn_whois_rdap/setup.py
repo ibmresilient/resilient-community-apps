@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2019, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
@@ -20,16 +20,20 @@ def snake_to_camel(word):
 
 setup(
     name='fn_whois_rdap',
-    version='1.0.5',
+    version='1.0.6',
     license='MIT',
     author='IBM SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Retrieving registry information for IP, URL or DNS Artifacts",
     long_description="""This integration retrieves registry information (via the RDAP or legacy WHOIS protocol) for IP, URL or DNS Artifacts.
     This information can be used as threat enrichment and intelligence on suspicious address. The information is added directly to artifact description
-    with a timestame and keys to other useful metadata. """,
+    with a timestamp and keys to other useful metadata. 
+<br>
+Links:
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=44.1.0',
+        'resilient_circuits>=51.0.0',
         'ipwhois==1.1.0',
         'tldextract~=3.0; python_version>="3.0"',
         'tldextract~=2.2; python_version<"3.0"',

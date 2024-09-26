@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# Generated with resilient-sdk v50.1.262
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.2.1096
 
-"""Generate the Resilient customizations required for fn_sep"""
+"""Generate the SOAR customizations required for fn_sep"""
 
 import base64
 import os
@@ -46,65 +46,8 @@ def codegen_reload_data():
             u"sep_get_firewall_policy",
             u"sep_get_policy_summary"
         ],
-        "workflows": [
-            u"example_sep__get_exception_policy",
-            u"example_sep__get_firewall_policy",
-            u"example_sep__get_policy_summary",
-            u"example_sep_cancel_a_command",
-            u"exmple_sep__get_critical_events",
-            u"wf_sep_add_fingerprint_list",
-            u"wf_sep_assign_fingerprint_list_to_lockdown_group",
-            u"wf_sep_delete_fingerprint_list",
-            u"wf_sep_delete_hash_from_fingerprint_list",
-            u"wf_sep_get_blacklist_information",
-            u"wf_sep_get_endpoint_details",
-            u"wf_sep_get_endpoint_details_for_artifact",
-            u"wf_sep_get_endpoints_status",
-            u"wf_sep_get_endpoints_status_details",
-            u"wf_sep_get_endpoints_status_refresh",
-            u"wf_sep_get_file_content_as_base64_string",
-            u"wf_sep_get_groups_information",
-            u"wf_sep_get_quarantine_status",
-            u"wf_sep_get_remediation_status",
-            u"wf_sep_get_scan_results",
-            u"wf_sep_get_upload_status",
-            u"wf_sep_initiate_eoc_scan_for_artifact",
-            u"wf_sep_move_endpoint",
-            u"wf_sep_quarantine_endpoint",
-            u"wf_sep_remediate_artifact_on_endpoint",
-            u"wf_sep_upload_file_to_sepm"
-        ],
-        "actions": [
-            u"Example: SEP - Add Artifact from Scan Result",
-            u"Example: SEP - Add Hash to Blacklist",
-            u"Example: SEP - Assign Blacklist to lockdown group",
-            u"Example: SEP - Cancel a Command",
-            u"Example: SEP - Delete Blacklist",
-            u"Example: SEP - Delete Hash from Blacklist",
-            u"Example: SEP - Get Blacklist information",
-            u"Example: SEP - Get Critical Events",
-            u"Example: SEP - Get Endpoint Details",
-            u"Example: SEP - Get Endpoint Details for artifact",
-            u"Example: SEP - Get Endpoints status summary",
-            u"Example: SEP - Get Endpoints status summary (refresh)",
-            u"Example: SEP - Get Exceptions Policy",
-            u"Example: SEP - Get File Content as Base64 string",
-            u"Example: SEP - Get Firewall Policy",
-            u"Example: SEP - Get Groups information",
-            u"Example: SEP - Get Non-Compliant Endpoints status details",
-            u"Example: SEP - Get Policy Summary",
-            u"Example: SEP - Get Quarantine status",
-            u"Example: SEP - Get Remediation status",
-            u"Example: SEP - Get Scan results",
-            u"Example: SEP - Get Upload status",
-            u"Example: SEP - Initiate EOC Scan for Artifact",
-            u"Example: SEP - Move Endpoint",
-            u"Example: SEP - Parse notification",
-            u"Example: SEP - Quarantine Endpoint",
-            u"Example: SEP - Remediate Artifact on Endpoint",
-            u"Example: SEP - Un-Quarantine Endpoint",
-            u"Example: SEP - Upload file to SEPM server"
-        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -122,7 +65,36 @@ def codegen_reload_data():
             u"scr_sep_add_artifact_from_scan_results",
             u"scr_sep_parse_email_notification"
         ],
-        "playbooks": [],
+        "playbooks": [
+            u"sep_add_artifact_from_scan_result",
+            u"sep_add_hash_to_blacklist",
+            u"sep_assign_blacklist_to_lockdown_group",
+            u"sep_cancel_a_command",
+            u"sep_delete_blacklist",
+            u"sep_delete_hash_from_blacklist",
+            u"sep_get_blacklist_information",
+            u"sep_get_critical_events",
+            u"sep_get_endpoint_details",
+            u"sep_get_endpoint_details_for_artifact",
+            u"sep_get_endpoints_status_summary",
+            u"sep_get_endpoints_status_summary_refresh",
+            u"sep_get_exceptions_policy",
+            u"sep_get_file_content_as_base64_string",
+            u"sep_get_firewall_policy",
+            u"sep_get_groups_information",
+            u"sep_get_noncompliant_endpoints_status_details",
+            u"sep_get_policy_summary",
+            u"sep_get_quarantine_status",
+            u"sep_get_remediation_status",
+            u"sep_get_scan_results",
+            u"sep_get_upload_status",
+            u"sep_initiate_eoc_scan_for_artifact",
+            u"sep_move_endpoint",
+            u"sep_quarantine_endpoint",
+            u"sep_remediate_artifact_on_endpoint",
+            u"sep_unquarantine_endpoint",
+            u"sep_upload_file_to_sepm_server"
+        ]
     }
 
 
@@ -131,7 +103,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
@@ -156,63 +128,35 @@ def customization_data(client=None):
         - sep_get_exceptions_policy
         - sep_get_firewall_policy
         - sep_get_policy_summary
-    - Workflows:
-        - example_sep__get_exception_policy
-        - example_sep__get_firewall_policy
-        - example_sep__get_policy_summary
-        - example_sep_cancel_a_command
-        - exmple_sep__get_critical_events
-        - wf_sep_add_fingerprint_list
-        - wf_sep_assign_fingerprint_list_to_lockdown_group
-        - wf_sep_delete_fingerprint_list
-        - wf_sep_delete_hash_from_fingerprint_list
-        - wf_sep_get_blacklist_information
-        - wf_sep_get_endpoint_details
-        - wf_sep_get_endpoint_details_for_artifact
-        - wf_sep_get_endpoints_status
-        - wf_sep_get_endpoints_status_details
-        - wf_sep_get_endpoints_status_refresh
-        - wf_sep_get_file_content_as_base64_string
-        - wf_sep_get_groups_information
-        - wf_sep_get_quarantine_status
-        - wf_sep_get_remediation_status
-        - wf_sep_get_scan_results
-        - wf_sep_get_upload_status
-        - wf_sep_initiate_eoc_scan_for_artifact
-        - wf_sep_move_endpoint
-        - wf_sep_quarantine_endpoint
-        - wf_sep_remediate_artifact_on_endpoint
-        - wf_sep_upload_file_to_sepm
-    - Rules:
-        - Example: SEP - Add Artifact from Scan Result
-        - Example: SEP - Add Hash to Blacklist
-        - Example: SEP - Assign Blacklist to lockdown group
-        - Example: SEP - Cancel a Command
-        - Example: SEP - Delete Blacklist
-        - Example: SEP - Delete Hash from Blacklist
-        - Example: SEP - Get Blacklist information
-        - Example: SEP - Get Critical Events
-        - Example: SEP - Get Endpoint Details
-        - Example: SEP - Get Endpoint Details for artifact
-        - Example: SEP - Get Endpoints status summary
-        - Example: SEP - Get Endpoints status summary (refresh)
-        - Example: SEP - Get Exceptions Policy
-        - Example: SEP - Get File Content as Base64 string
-        - Example: SEP - Get Firewall Policy
-        - Example: SEP - Get Groups information
-        - Example: SEP - Get Non-Compliant Endpoints status details
-        - Example: SEP - Get Policy Summary
-        - Example: SEP - Get Quarantine status
-        - Example: SEP - Get Remediation status
-        - Example: SEP - Get Scan results
-        - Example: SEP - Get Upload status
-        - Example: SEP - Initiate EOC Scan for Artifact
-        - Example: SEP - Move Endpoint
-        - Example: SEP - Parse notification
-        - Example: SEP - Quarantine Endpoint
-        - Example: SEP - Remediate Artifact on Endpoint
-        - Example: SEP - Un-Quarantine Endpoint
-        - Example: SEP - Upload file to SEPM server
+    - Playbooks:
+        - sep_add_artifact_from_scan_result
+        - sep_add_hash_to_blacklist
+        - sep_assign_blacklist_to_lockdown_group
+        - sep_cancel_a_command
+        - sep_delete_blacklist
+        - sep_delete_hash_from_blacklist
+        - sep_get_blacklist_information
+        - sep_get_critical_events
+        - sep_get_endpoint_details
+        - sep_get_endpoint_details_for_artifact
+        - sep_get_endpoints_status_summary
+        - sep_get_endpoints_status_summary_refresh
+        - sep_get_exceptions_policy
+        - sep_get_file_content_as_base64_string
+        - sep_get_firewall_policy
+        - sep_get_groups_information
+        - sep_get_noncompliant_endpoints_status_details
+        - sep_get_policy_summary
+        - sep_get_quarantine_status
+        - sep_get_remediation_status
+        - sep_get_scan_results
+        - sep_get_upload_status
+        - sep_initiate_eoc_scan_for_artifact
+        - sep_move_endpoint
+        - sep_quarantine_endpoint
+        - sep_remediate_artifact_on_endpoint
+        - sep_unquarantine_endpoint
+        - sep_upload_file_to_sepm_server
     - Data Tables:
         - sep_critical_events
         - sep_endpoint_details

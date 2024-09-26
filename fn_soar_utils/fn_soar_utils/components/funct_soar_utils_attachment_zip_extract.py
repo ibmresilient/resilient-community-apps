@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
-import logging
-import os
-import tempfile
-import zipfile
-import base64
-import datetime
+from logging import getLogger
+from os import unlink
+from tempfile import NamedTemporaryFile
+from zipfile import ZipFile, LargeZipFile, BadZipfile
+from base64 import b64encode
+from datetime import datetime
 from fn_soar_utils.util.soar_utils_common import b_to_s, s_to_b
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import get_file_attachment
-
+from resilient_lib import get_file_attachment, validate_fields
 
 def epoch_millis(zipdate):
     """Produce milliseconds timestamp from a datetime-tuple"""
-    epoch = datetime.datetime.utcfromtimestamp(0)
-    dtime = datetime.datetime(*zipdate)
-    return int((dtime - epoch).total_seconds() * 1000)
-
+    try:
+        return datetime(*zipdate).timestamp() * 1000
+    except Exception:
+        return
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'attachment_zip_extract"""
@@ -29,7 +28,8 @@ class FunctionComponent(ResilientComponent):
     def _attachment_zip_extract_function(self, event, *args, **kwargs):
         """Function: Extract a file from a zipfile attachment, producing a base64 string."""
         try:
-            log = logging.getLogger(__name__)
+            validate_fields(["attachment_id", "soar_utils_file_path"], kwargs)
+            log = getLogger(__name__)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -38,12 +38,8 @@ class FunctionComponent(ResilientComponent):
             file_path = kwargs.get("soar_utils_file_path")  # text
             zipfile_password = kwargs.get("soar_utils_zipfile_password")  # text
 
-            if incident_id is None and task_id is None:
+            if not incident_id and not task_id:
                 raise FunctionError("Error: incident_id or task_id must be specified.")
-            if attachment_id is None:
-                raise FunctionError("Error: attachment_id must be specified.")
-            if file_path is None:
-                raise FunctionError("Error: file_path must be specified.")
 
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
@@ -56,12 +52,12 @@ class FunctionComponent(ResilientComponent):
             data = get_file_attachment(client, incident_id, task_id=task_id, attachment_id=attachment_id)
 
             results = {}
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            with NamedTemporaryFile(delete=False) as temp_file:
                 try:
                     temp_file.write(data)
                     temp_file.close()
                     # Examine with zip
-                    zfile = zipfile.ZipFile(temp_file.name, "r")
+                    zfile = ZipFile(temp_file.name, "r")
                     # Read the metadata, since it may be useful
                     zinfo = zfile.getinfo(file_path)
                     # Don't include zinfo.extra since it's not a string
@@ -81,15 +77,15 @@ class FunctionComponent(ResilientComponent):
                                        "compress_size": zinfo.compress_size,
                                        "file_size": zinfo.file_size}
                     # Extract the file we want
-                    b64data = base64.b64encode(zfile.read(file_path, s_to_b(zipfile_password)))
+                    b64data = b64encode(zfile.read(file_path, s_to_b(zipfile_password)))
                     results["content"] = b_to_s(b64data)
-                except (KeyError, zipfile.LargeZipFile, zipfile.BadZipfile) as exc:
+                except (KeyError, LargeZipFile, BadZipfile):
                     # results["error"] = str(exc)
                     # To help debug, list the contents
                     log.info(zfile.namelist())
                     raise
                 finally:
-                    os.unlink(temp_file.name)
+                    unlink(temp_file.name)
             # Produce a FunctionResult with the return value
             yield FunctionResult(results)
         except Exception:

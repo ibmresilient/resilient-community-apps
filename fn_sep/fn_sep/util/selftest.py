@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
 """Function implementation
    test with: resilient-circuits selftest -l fn_sep
 """
-
 import logging
 from fn_sep.lib.sep_client import Sepclient
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """
@@ -20,13 +18,8 @@ def selftest_function(opts):
     options = opts.get("fn_sep", {})
     try:
         sep = Sepclient(options, None)
-
         r = sep.get_computers(pagesize=5)
-
-        if r:
-            return {"state": "success"}
-        else:
-            return {"state": "failure"}
+        return {"state": "success"} if r else {"state": "failure"}
 
     except Exception as e:
         return {"state": "failure", "status_code": e}

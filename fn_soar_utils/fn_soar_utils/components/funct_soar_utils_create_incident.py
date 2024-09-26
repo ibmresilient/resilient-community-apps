@@ -1,23 +1,18 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-import json
-import sys
-if sys.version_info[0] >= 3:
-    from json.decoder import JSONDecodeError as ValueError
-
+from logging import getLogger
+from json import loads
+from json.decoder import JSONDecodeError as ValueError
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields
 from fn_soar_utils.util.soar_utils_common import PACKAGE_NAME
 
 FN_NAME = "soar_utils_create_incident"
-
 INCIDENT_URL = "/incidents"
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'soar_utils_create_incident''"""
@@ -36,14 +31,14 @@ class FunctionComponent(ResilientComponent):
     def _soar_utils_create_incident_function(self, event, *args, **kwargs):
         """Function: Create an incident from a function"""
         try:
-            LOG = logging.getLogger(__name__)
+            LOG = getLogger(__name__)
             rc = RequestsCommon(self.opts, self.fn_options)
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting '{0}' running in workflow '{1}'".format(FN_NAME, wf_instance_id))
+            yield StatusMessage(f"Starting '{FN_NAME}' running in workflow '{wf_instance_id}'")
 
             fn_inputs = validate_fields(
                 ["soar_utils_create_fields"],
@@ -56,16 +51,16 @@ class FunctionComponent(ResilientComponent):
             rest_client = self.rest_client()
             incident = reason = None
             try:
-                create_fields = json.loads(fn_inputs['soar_utils_create_fields'])
+                create_fields = loads(fn_inputs['soar_utils_create_fields'])
                 incident = rest_client.post(INCIDENT_URL, create_fields)
-            except ValueError as jerr:
-                reason = "Failure parsing 'soar_utils_create_fields': {}\n{}".format(fn_inputs['soar_utils_create_fields'], str(jerr))
+            except ValueError as err:
+                reason = f"Failure parsing 'soar_utils_create_fields': {fn_inputs['soar_utils_create_fields']}\n{str(err)}"
                 LOG.error(reason)
             except SimpleHTTPException as err:
-                reason = "Failure creating incident: {}".format(str(err))
+                reason = f"Failure creating incident: {str(err)}"
                 LOG.error(reason)
 
-            yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
+            yield StatusMessage(f"Finished '{FN_NAME}' that was running in workflow '{wf_instance_id}'")
 
             results = rp.done(False if reason else True, incident, reason=reason)
 

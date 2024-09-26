@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
-import logging
-import json
-import re
+from logging import getLogger
+from json import loads
+from re import compile
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'soar_utils_soar_search"""
@@ -23,16 +22,16 @@ class FunctionComponent(ResilientComponent):
             soar_search_template = self.get_textarea_param(kwargs.get("soar_search_template"))  # textarea
             soar_search_query = kwargs.get("soar_search_query")  # text
 
-            log = logging.getLogger(__name__)
+            log = getLogger(__name__)
             log.info("soar_search_template: %s", soar_search_template)
             log.info("soar_search_query: %s", soar_search_query)
 
             # ensure the input is properly escaped
-            p = re.compile('(\[|\]|\(|\)\||\+|\-|\^|{|}|&|!|:|\?|\\|\\/)')
+            p = compile('(\[|\]|\(|\)\||\+|\-|\^|{|}|&|!|:|\?|\\|\\/)')
             soar_search_query = p.sub(r'\\\1', soar_search_query)
 
             # Read the search template as JSON
-            template = json.loads(soar_search_template)
+            template = loads(soar_search_template)
 
             # Add in the search query
             template["query"] = soar_search_query

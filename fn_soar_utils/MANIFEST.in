@@ -1,7 +1,6 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
 recursive-include fn_soar_utils/util *
 include fn_soar_utils/LICENSE
 include doc/*.md

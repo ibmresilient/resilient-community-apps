@@ -9,3 +9,12 @@ class MockedResponse:
 
     def json(self):
         return {"mock": "data"}
+
+class MockedResponseFailure:
+    def __init__(self):
+        self.success = True
+        self.status_code = 200
+        self.text = "mock data"
+
+    def json(self):
+        return {"query_status": "invalid url", "mock": "data"}

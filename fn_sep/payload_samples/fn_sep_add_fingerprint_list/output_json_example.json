@@ -1,23 +1,23 @@
 {
-  "version": "1.0",
+  "version": 2.0,
   "success": true,
   "reason": null,
   "content": {
-    "id": "id"
+    "id": "44BB68279D984220AD60A069DCF6079F"
   },
-  "raw": "{\"id\": \"id\"}",
+  "raw": null,
   "inputs": {
-    "sep_domainid": "domainid",
-    "sep_hash_value": "hash_value",
-    "sep_fingerprintlist_name": "Test Blacklist 13",
-    "sep_description": "This is test of adding files in blacklist."
+    "sep_domainid": "6E70F043092E5BB93F74FD57C083F99E",
+    "sep_hash_value": "e4ac4548eeebdba19817b5c47322f0c95a17a9ef6af4099088d6e552f34038d9",
+    "sep_fingerprintlist_name": "Blacklist2",
+    "sep_description": "Fingerprint list 'Blacklist2'"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-sep",
-    "package_version": "1.0.1",
-    "host": "host",
-    "execution_time_ms": 2322,
-    "timestamp": "2023-01-06 06:33:51"
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 226915,
+    "timestamp": "2024-07-15 08:34:13"
   }
 }

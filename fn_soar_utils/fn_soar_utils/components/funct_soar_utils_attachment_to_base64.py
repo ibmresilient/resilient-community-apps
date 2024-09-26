@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
-import logging
-import base64
-import json
+from logging import getLogger
+from base64 import b64encode
+from json import dumps
 from resilient_circuits import (
     ResilientComponent,
     function,
@@ -15,7 +15,7 @@ from resilient_circuits import (
     FunctionError,
 )
 from fn_soar_utils.util.soar_utils_common import b_to_s
-from resilient_lib import get_file_attachment, get_file_attachment_metadata
+from resilient_lib import get_file_attachment, get_file_attachment_metadata, validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'attachment_base64"""
@@ -24,7 +24,8 @@ class FunctionComponent(ResilientComponent):
     def _attachment_to_base64_function(self, event, *args, **kwargs):
         """Function: Produce base64 content of a file attachment."""
         try:
-            log = logging.getLogger(__name__)
+            validate_fields(["incident_id"], kwargs)
+            log = getLogger(__name__)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -37,14 +38,12 @@ class FunctionComponent(ResilientComponent):
             log.info("attachment_id: %s", attachment_id)
             log.info("artifact_id: %s", artifact_id)
 
-            if incident_id is None:
-                raise FunctionError("Error: incident_id must be specified.")
-            elif attachment_id is None and artifact_id is None:
+            if not attachment_id and not artifact_id:
                 raise FunctionError("Error: attachment_id or artifact_id must be specified.")
             else:
-                yield StatusMessage("> Function inputs OK")
+                yield StatusMessage("Function inputs OK")
 
-            yield StatusMessage("> Reading attachment...")
+            yield StatusMessage("Reading attachment...")
 
             client = self.rest_client()
             data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
@@ -55,11 +54,11 @@ class FunctionComponent(ResilientComponent):
                 "content_type": metadata["content_type"],
                 "size": metadata["size"],
                 "created": metadata["created"],
-                "content": b_to_s(base64.b64encode(data)),
+                "content": b_to_s(b64encode(data)),
             }
-            yield StatusMessage("> Complete...")
+            yield StatusMessage("Complete...")
             # Produce a FunctionResult with the return value
-            log.debug(json.dumps(results, indent=2))
+            log.debug(dumps(results, indent=2))
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()

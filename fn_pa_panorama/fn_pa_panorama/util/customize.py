@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.1.0.695
+# Generated with resilient-sdk v51.0.2.2.1096
 
 """Generate the SOAR customizations required for fn_pa_panorama"""
 
@@ -26,6 +26,7 @@ def codegen_reload_data():
             u"palo_alto_panorama"
         ],
         "functions": [
+            u"panorama_commit",
             u"panorama_create_address",
             u"panorama_edit_address_group",
             u"panorama_edit_users_in_a_group",
@@ -58,12 +59,13 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 50.0.9097
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
         - palo_alto_panorama
     - Functions:
+        - panorama_commit
         - panorama_create_address
         - panorama_edit_address_group
         - panorama_edit_users_in_a_group

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
-import logging
-import tempfile
-import os
-import json
-import base64
-import mimetypes
+from logging import getLogger
+from tempfile import NamedTemporaryFile
+from os import unlink
+from json import dumps
+from base64 import b64encode
+from mimetypes import guess_type
 from fn_soar_utils.util.soar_utils_common import s_to_b
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
@@ -21,7 +21,7 @@ class FunctionComponent(ResilientComponent):
     def _base64_to_artifact_function(self, event, *args, **kwargs):
         """Function: """
         try:
-            log = logging.getLogger(__name__)
+            log = getLogger(__name__)
 
             # Get the function parameters:
             # artifact_file_type:
@@ -34,7 +34,7 @@ class FunctionComponent(ResilientComponent):
             description = self.get_textarea_param(kwargs.get("soar_utils_description"))  # textarea
 
             content_type = content_type \
-                           or mimetypes.guess_type(file_name or "")[0] \
+                           or guess_type(file_name or "")[0] \
                            or "application/octet-stream"
 
             log.info("incident_id: %s", incident_id)
@@ -53,13 +53,13 @@ class FunctionComponent(ResilientComponent):
                     break
 
             yield StatusMessage("Writing artifact...")
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            with NamedTemporaryFile(delete=False) as temp_file:
                 try:
-                    temp_file.write(base64.b64encode(s_to_b(base64content)))
+                    temp_file.write(b64encode(s_to_b(base64content)))
                     temp_file.close()
                     # Create a new artifact
                     client = self.rest_client()
-                    artifact_uri = "/incidents/{}/artifacts/files".format(incident_id)
+                    artifact_uri = f"/incidents/{incident_id}/artifacts/files"
                     new_artifact = client.post_artifact_file(artifact_uri,
                                                              artifact_type_id,
                                                              temp_file.name,
@@ -67,12 +67,12 @@ class FunctionComponent(ResilientComponent):
                                                              value=file_name,
                                                              mimetype=content_type)
                 finally:
-                    os.unlink(temp_file.name)
+                    unlink(temp_file.name)
 
             # Produce a FunctionResult with the return value
             if isinstance(new_artifact, list):
                 new_artifact = new_artifact[0]
-            log.info(json.dumps(new_artifact))
+            log.info(dumps(new_artifact))
             yield FunctionResult(new_artifact)
         except Exception:
             yield FunctionError()

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Tests for fn_sep_get_groups function."""
 from __future__ import print_function
 import pytest
 from unittest.mock import patch
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock_artifacts import mocked_sep_client, get_mock_config
 
@@ -64,9 +64,8 @@ class TestFnSepGetGroups:
         }
         results = call_fn_sep_get_groups_function(circuits_app, function_params)
         assert_keys_in(results, *keys)
-        content = results["content"]
-        content_2 = content["content"]
+        content = results.get("content", {})
         assert_keys_in(content, *keys_2)
-        assert expected_results == content["numberOfElements"]
-        assert expected_results == content["totalElements"]
-        assert expected_results == len(content_2)
+        assert expected_results == content.get("numberOfElements")
+        assert expected_results == content.get("totalElements")
+        assert expected_results == len(content.get("content"))

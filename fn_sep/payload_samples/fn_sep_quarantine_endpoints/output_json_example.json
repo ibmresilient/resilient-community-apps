@@ -1,23 +1,24 @@
 {
-  "version": "1.0",
+  "version": 2.0,
   "success": true,
   "reason": null,
   "content": {
-    "commandID_group": "commandID_group",
-    "commandID_computer": "commandID_computer"
+    "commandID_group": "89637CF1D7204D028522C81C4389301B",
+    "commandID_computer": "1CA9D4F37DD94CA88A9D93D09402E3D3"
   },
-  "raw": "{\"commandID_group\": \"commandID_group\", \"commandID_computer\": \"commandID_computer\"}",
+  "raw": null,
   "inputs": {
-    "sep_group_ids": "sep_group_ids",
-    "sep_undo": true,
-    "sep_computer_ids": "sep_computer_ids"
+    "sep_group_ids": "E5E684A6092E5BB90F46E84BB6F35BBC",
+    "sep_undo": false,
+    "sep_hardwarekey": "8DACE2559C1C951E09CC0BF71D973BB7",
+    "sep_computer_ids": "01ECF4E8092E5BB91E4D52E45C3ABE4D"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-sep",
-    "package_version": "1.0.1",
-    "host": "host",
-    "execution_time_ms": 2090,
-    "timestamp": "2023-01-06 10:10:20"
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1016,
+    "timestamp": "2024-08-21 08:40:30"
   }
 }

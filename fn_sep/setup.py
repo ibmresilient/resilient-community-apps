@@ -20,22 +20,23 @@ def snake_to_camel(word):
 setup(
     name='fn_sep',
     display_name='Symantec Endpoint Protection',
-    version='1.1.1',
+    version='1.2.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Symantec Endpoint Protection Integration for IBM SOAR",
-    long_description="Integration with Symantec Endpoint Protection to facilitate manual enrichment and targeted "
-                     "remediation actions. Teams can investigate an attack by hunting for IOCs or suspect Endpoints "
-                     "across an enterprise, and quickly respond to attacks by executing endpoint remediation actions, "
-                     "such as deleting or blacklisting suspicious files from within the IBM SOAR platform.",
+    long_description="""Integration with Symantec Endpoint Protection to facilitate manual enrichment and targeted 
+                    remediation actions. Teams can investigate an attack by hunting for IOCs or suspect Endpoints 
+                    across an enterprise, and quickly respond to attacks by executing endpoint remediation actions, 
+                    such as deleting or blacklisting suspicious files from within the IBM SOAR platform.""",
     install_requires=[
-        'resilient_circuits>=46.0.0',
-        'resilient_lib>=46.0.0',
+        'resilient_circuits>=51.0.0',
+        'resilient_lib>=51.0.0',
         'defusedxml==0.7.1'
     ],
     packages=find_packages(),
+    python_requires='>=3.9',
     include_package_data=True,
     platforms='any',
     classifiers=[

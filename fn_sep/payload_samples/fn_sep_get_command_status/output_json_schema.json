@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -17,12 +17,8 @@
           "items": {
             "type": "object",
             "properties": {
-              "beginTime": {
-                "type": "string"
-              },
-              "lastUpdateTime": {
-                "type": "string"
-              },
+              "beginTime": {},
+              "lastUpdateTime": {},
               "computerName": {
                 "type": "string"
               },
@@ -41,15 +37,9 @@
               "subStateId": {
                 "type": "integer"
               },
-              "subStateDesc": {
-                "type": "string"
-              },
-              "binaryFileId": {
-                "type": "string"
-              },
-              "resultInXML": {
-                "type": "string"
-              },
+              "subStateDesc": {},
+              "binaryFileId": {},
+              "resultInXML": {},
               "computerId": {
                 "type": "string"
               },
@@ -59,22 +49,7 @@
             }
           }
         },
-        "totalPages": {
-          "type": "integer"
-        },
-        "firstPage": {
-          "type": "boolean"
-        },
-        "lastPage": {
-          "type": "boolean"
-        },
-        "totalElements": {
-          "type": "integer"
-        },
         "size": {
-          "type": "integer"
-        },
-        "number": {
           "type": "integer"
         },
         "sort": {
@@ -94,7 +69,22 @@
             }
           }
         },
+        "totalElements": {
+          "type": "integer"
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "totalPages": {
+          "type": "integer"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
         "numberOfElements": {
+          "type": "integer"
+        },
+        "number": {
           "type": "integer"
         },
         "total_match_count": {
@@ -129,9 +119,7 @@
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -140,6 +128,9 @@
         },
         "sep_commandid": {
           "type": "string"
+        },
+        "sep_incident_id": {
+          "type": "integer"
         }
       }
     },

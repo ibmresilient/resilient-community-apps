@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Test helper functions"""
 import pytest
 from fn_sep.lib.helpers import *
@@ -24,7 +24,7 @@ def convert_value_to_none(v):
 
 def add_readable_timestamps(rtn):
     now = time.time()
-    for i in range(len(rtn["content"])):
+    for i in range(len(rtn.get("content"))):
         for f in ["lastScanTime", "lastUpdateTime", "lastVirusTime"]:
             try:
                 secs = int(rtn["content"][i][f]) / 1000
@@ -68,7 +68,7 @@ class TestSepHelpersGetEndpointsStatus:
 
         keys = ["disabled", "hi_failed", "non_compliant", "offline", "out_of_date", "total", "up_to_date"]
 
-        response = get_endpoints_status(rtn)
+        response, _ = get_endpoints_status(rtn)
         assert_keys_in(response, *keys)
         for i in range(len(keys)):
             assert expected_results[i] == response[keys[i]]
@@ -108,8 +108,8 @@ class TestHelpersCreateAttachment:
 
         results = create_attachment(mocked_res_client("post_attachment", file_name, params["incident_id"]), file_name, file_content, params)
         assert_keys_in(results, *keys)
-        assert results["name"] == file_name
-        assert results["inc_id"] == params["incident_id"]
+        assert results.get("name") == file_name
+        assert results.get("inc_id") == params.get("incident_id")
 
 class TestHelpersGenerateResultCvs:
     """ Tests for the generate_result_cvs function"""

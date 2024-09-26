@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2019, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 
 
 import socket

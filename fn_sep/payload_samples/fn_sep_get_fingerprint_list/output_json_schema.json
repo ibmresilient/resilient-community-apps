@@ -12,29 +12,14 @@
     "content": {
       "type": "object",
       "properties": {
-        "id": {
+        "errorCode": {
           "type": "string"
         },
-        "name": {
+        "appErrorCode": {
           "type": "string"
         },
-        "hashType": {
+        "errorMessage": {
           "type": "string"
-        },
-        "source": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "groupIds": {
-          "type": "array"
         }
       }
     },
@@ -48,9 +33,6 @@
           "type": "string"
         },
         "sep_fingerprintlist_name": {
-          "type": "string"
-        },
-        "sep_fingerprintlist_id": {
           "type": "string"
         }
       }

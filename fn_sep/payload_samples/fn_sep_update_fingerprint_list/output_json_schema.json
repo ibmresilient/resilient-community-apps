@@ -10,12 +10,7 @@
     },
     "reason": {},
     "content": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "type": "string"
-        }
-      }
+      "type": "string"
     },
     "raw": {
       "type": "string"
@@ -30,6 +25,9 @@
           "type": "string"
         },
         "sep_fingerprintlist_name": {
+          "type": "string"
+        },
+        "sep_fingerprintlist_content": {
           "type": "string"
         },
         "sep_description": {

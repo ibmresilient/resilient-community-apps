@@ -1,135 +1,62 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
-""" Resilient functions component to run a Symantec SEPM query - get groups. """
+""" SOAR functions component to run a Symantec SEPM query - get groups. """
 
-# Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
-import json
-import logging
+from fn_sep.lib.sep_client import Sepclient, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
+from fn_sep.lib.helpers import transform_kwargs
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload
-from fn_sep.lib.sep_client import Sepclient
-from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+FN_NAME = "fn_sep_get_groups"
 
-LOG = logging.getLogger(__name__)
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_sep_get_groups' of package fn_sep.
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'fn_sep_get_groups' of package fn_sep.
     The function can be used to query to get information on groups.
 
     The Function takes the following parameter:
-        sep_domain, sep_fullpathname, sep_mode, sep_order, sep_pageindex, sep_pagesize, sep_sort,
-
-        An example of a set of query parameter might look like the following:
-                sep_domain = None
-                sep_fullpathname = None
-                sep_mode = None
-                sep_order = None
-                sep_pageindex = None
-                sep_pagesize = None
-                sep_sort = None
+        sep_domain, sep_fullpathname, sep_mode, sep_order, sep_pageindex, sep_pagesize, sep_sort.
 
     The function will execute a REST api get request against a SYMANTEC SEPM server for information on group and
-    returns a result in JSON format similar to the following.
-
-    {
-        "inputs": {"sep_domain": null, "sep_fullpathname": null, "sep_mode": null, "sep_order: null,
-                   "sep_pageindex": null, "sep_pagesize": null, "sep_sort": null},
-        "metrics": {'package': 'fn-sep', 'timestamp': '2019-03-01 12:46:27', 'package_version': '1.0.0',
-        "host": 'myhost, 'version': '1.0', 'execution_time_ms': 1085},
-        "success': True,
-        'content': {
-                      "sort": [
-                        {
-                          "direction": "ASC",
-                          "property": "NAME",
-                          "ascending": true
-                        }
-                      ],
-                      "number": 0,
-                      "firstPage": true,
-                       "group_name", "group_id", "group_description", "fullPathName"]
-                      "content": [
-                        {
-                          ...
-                          "domain": {
-                            "id": "908090000946C25D330E919313D23887",
-                            "name": "Default"
-                          },
-                          ...
-                          "description": "",
-                          ...
-                          "fullPathName": "My Company\\Default Group",
-                          ...
-                          "id": "4CBD63EE0946C25D1011DB1872A1736A",
-                          ...
-                          "name": "Default Group"
-                        },
-                        {
-                          ...
-                        }
-                      ],
-                      "lastPage": true,
-                      "totalPages": 1,
-                      "size": 25,
-                      "totalElements": 2,
-                      "numberOfElements": 2
-        },
-        "raw": '<<a string representation of content.>>',
-        "reason": None, 'version': '1.0'
-    }
+    returns a result in JSON format.
     """
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
-
-    @function("fn_sep_get_groups")
-    def _fn_sep_get_groups_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Gets a group list."""
         try:
-            params = transform_kwargs(kwargs) if kwargs else {}
-            # Instantiate result payload object.
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            params = transform_kwargs(fn_inputs._asdict()) if fn_inputs._asdict() else {}
 
             # Get the function parameters:
-            sep_domain = kwargs.get("sep_domain")  # text
-            sep_fullpathname = kwargs.get("sep_fullpathname")  # text
-            sep_mode = kwargs.get("sep_mode")  # text
-            sep_order = kwargs.get("sep_order")  # text
-            sep_pageindex = kwargs.get("sep_pageindex")  # number
-            sep_pagesize = kwargs.get("sep_pagesize")  # number
-            sep_sort = kwargs.get("sep_sort")  # text
+            sep_domain = getattr(fn_inputs, "sep_domain", None)  # text
+            sep_fullpathname = getattr(fn_inputs, "sep_fullpathname", None)  # text
+            sep_mode = getattr(fn_inputs, "sep_mode", None)  # text
+            sep_order = getattr(fn_inputs, "sep_order", None)  # text
+            sep_pageindex = getattr(fn_inputs, "sep_pageindex", None)  # number
+            sep_pagesize = getattr(fn_inputs, "sep_pagesize", None)  # number
+            sep_sort = getattr(fn_inputs, "sep_sort", None)  # text
 
-            LOG.info("sep_domain: %s", sep_domain)
-            LOG.info("sep_fullpathname: %s", sep_fullpathname)
-            LOG.info("sep_mode: %s", sep_mode)
-            LOG.info("sep_order: %s", sep_order)
-            LOG.info("sep_pageindex: %s", sep_pageindex)
-            LOG.info("sep_pagesize: %s", sep_pagesize)
-            LOG.info("sep_sort: %s", sep_sort)
+            self.LOG.info("sep_domain: %s", sep_domain)
+            self.LOG.info("sep_fullpathname: %s", sep_fullpathname)
+            self.LOG.info("sep_mode: %s", sep_mode)
+            self.LOG.info("sep_order: %s", sep_order)
+            self.LOG.info("sep_pageindex: %s", sep_pageindex)
+            self.LOG.info("sep_pagesize: %s", sep_pagesize)
+            self.LOG.info("sep_sort: %s", sep_sort)
 
-            yield StatusMessage("Running Symantec SEP Get Groups query...")
+            yield self.status_message("Running Symantec SEP Get Groups query...")
 
-            sep = Sepclient(self.options, params)
+            sep = Sepclient(self.options)
 
-            rtn = sep.get_paginated_results(sep.get_groups, **params)
+            results = sep.get_paginated_results(sep.get_groups, **params)
 
-            results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'Symantec SEP Get Groups' results")
-
-            LOG.debug(json.dumps(results["content"]))
+            yield self.status_message("Returning 'Symantec SEP Get Groups' results")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            LOG.exception("Exception in Resilient Function for Symantec SEP.")
+            self.LOG.exception("Exception in SOAR function for Symantec SEP.")
             yield FunctionError()

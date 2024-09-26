@@ -14,6 +14,7 @@
   - [Install](#install)
   - [Panorama API permissions](#panorama-api-permissions)
   - [App Configuration](#app-configuration)
+- [Function - Panorama Commit](#function---panorama-commit)
 - [Function - Panorama Create Address](#function---panorama-create-address)
 - [Function - Panorama Edit Address Group](#function---panorama-edit-address-group)
 - [Function - Panorama Edit Users in a Group](#function---panorama-edit-users-in-a-group)
@@ -30,6 +31,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.5.0 | 08/2024 | Add function to commit changes. Update example playbooks to auto commit. |
 | 1.4.0 | 02/2024 | Add ability to use location=device-group |
 | 1.3.0 | 04/2023 | Convert from rules/workflows to playbooks and update Panorama api version to v9.1 |
 | 1.2.0 | 10/2022 | Multi-tenancy support added |
@@ -65,6 +67,7 @@ This integration contains Functions to interact with address groups, addresses, 
 * Get addresses from Panorama and PanOS
 * Get users from Panorama
 * Create a new address in Panorama and PanOS
+* Commit changes to Panorama and PanOS
 
 ---
 
@@ -75,13 +78,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `49.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `49.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=49.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -113,8 +116,8 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-lib>=49.0.0
-* resilient_circuits>=49.0.0
+* resilient-lib>=51.0.0
+* resilient_circuits>=51.0.0
 * xmltodict>=0.12.0
 
 ---
@@ -152,7 +155,97 @@ For enterprises with more than one Panorama instance, each instance will have it
 
 Be aware that modifications to the workflows will be needed to correctly pass this label through the `panorama_label` function input field if the Panorama server/servers in the app.config have labels.
 
-If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `panorama_label` function input field.
+If you have existing custom playbooks, see [Creating playbooks when server/servers in app.config are labeled](#creating-playbooks-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `panorama_label` function input field.
+
+---
+
+## Function - Panorama Commit
+Commit changes that have been made on the Panorama server
+
+ ![screenshot: fn-panorama-commit ](./doc/screenshots/fn-panorama-commit.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `panorama_label` | `text` | No | `-` | Label of the server to use |
+| `panorama_location` | `select` | Yes | `-` | The location of the entry |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "@code": "19",
+    "@status": "success",
+    "result": {
+      "job": "8",
+      "msg": {
+        "line": "Commit job enqueued with jobid 8"
+      }
+    }
+  },
+  "inputs": {
+    "panorama_label": "panOS",
+    "panorama_location": "vsys"
+  },
+  "metrics": {
+    "execution_time_ms": 1245,
+    "host": "local",
+    "package": "fn-pa-panorama",
+    "package_version": "1.5.0",
+    "timestamp": "2024-08-09 09:01:22",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+inputs.panorama_location = "vsys"
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+note = ""
+results = playbook.functions.results.commit_output
+edit_addresses = playbook.functions.results.edit_addresses_results
+if edit_addresses.get("success"):
+  note += f"Panorama IP Address: {artifact.value} was unblocked.\n"
+else:
+  note += f"Panorama Unblock IP address failed with reason: {edit_addresses.get('reason')}\n"
+
+if results.get("success"):
+  note += str(results.get("content", {}).get("result", {}).get("msg", {}).get("line"))
+
+incident.addNote(note)
+```
+
+</p>
+</details>
 
 ---
 

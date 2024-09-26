@@ -148,6 +148,21 @@ class PanoramaClient:
         response.raise_for_status()
         return response.text
 
+    def commit_changes(self):
+        """Commit changes made to the Panorama server
+
+        Returns:
+            _type_: _description_
+        """
+        response = self.rc.execute(
+            "POST",
+            f"{self.host}/api?type=commit&cmd=<commit></commit>",
+            verify=self.verify,
+            headers=self.header,
+            proxies=self.proxies
+        )
+        response.raise_for_status()
+        return response.text
 
 class PanoramaServers():
     """ Get multiple servers from the app.config """

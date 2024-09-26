@@ -12,7 +12,14 @@
       "certificates": [],
       "applications": [],
       "blacklistrules": [],
-      "applications_to_monitor": [],
+      "applications_to_monitor": [
+        {
+          "rulestate": {
+            "enabled": true
+          },
+          "name": "net.exe"
+        }
+      ],
       "mac": {
         "files": []
       },
@@ -21,68 +28,37 @@
         "extension_list": null
       },
       "extension_list": null,
-      "knownrisks": [
-        {
-          "rulestate": {
-            "enabled": true
-          },
-          "threat": {
-            "id": "id",
-            "name": "name"
-          },
-          "action": "IGNORE"
-        },
-        {
-          "rulestate": {
-            "enabled": true
-          },
-          "threat": {
-            "id": "id",
-            "name": "name"
-          },
-          "action": "IGNORE"
-        },
-        {
-          "rulestate": {
-            "enabled": true
-          },
-          "threat": {
-            "id": "id",
-            "name": "name"
-          },
-          "action": "IGNORE"
-        }
-      ],
+      "knownrisks": [],
       "tamper_files": [],
       "dns_and_host_applications": [],
       "dns_and_host_blacklistrules": []
     },
     "lockedoptions": {
-      "knownrisk": false,
-      "extension": false,
-      "file": false,
-      "domain": false,
+      "knownrisk": true,
+      "extension": true,
+      "file": true,
+      "domain": true,
       "securityrisk": false,
-      "sonar": false,
-      "application": false,
-      "dnshostfile": false,
-      "certificate": false
+      "sonar": true,
+      "application": true,
+      "dnshostfile": true,
+      "certificate": true
     },
     "enabled": true,
-    "desc": "test",
-    "name": "name",
-    "lastmodifiedtime": 1671002049331
+    "desc": "Created automatically during product installation.",
+    "name": "Exceptions policy",
+    "lastmodifiedtime": 1720451135816
   },
   "raw": null,
   "inputs": {
-    "sep_exceptions_id": "sep_exceptions_id"
+    "sep_exceptions_id": "523B0176092E5BB97F83814D1657F3A4"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-sep",
-    "package_version": "1.0.1",
-    "host": "host",
-    "execution_time_ms": 2262,
-    "timestamp": "2023-01-05 10:28:10"
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 1294,
+    "timestamp": "2024-07-10 10:45:19"
   }
 }

@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -313,6 +313,9 @@
               "avDefsetVersion": {
                 "type": "string"
               },
+              "behavioralAnalysisDefsetVersion": {
+                "type": "string"
+              },
               "avDefsetSequence": {
                 "type": "string"
               },
@@ -494,22 +497,7 @@
             }
           }
         },
-        "totalPages": {
-          "type": "integer"
-        },
-        "firstPage": {
-          "type": "boolean"
-        },
-        "lastPage": {
-          "type": "boolean"
-        },
-        "totalElements": {
-          "type": "integer"
-        },
         "size": {
-          "type": "integer"
-        },
-        "number": {
           "type": "integer"
         },
         "sort": {
@@ -529,16 +517,34 @@
             }
           }
         },
+        "totalElements": {
+          "type": "integer"
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "totalPages": {
+          "type": "integer"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
         "numberOfElements": {
+          "type": "integer"
+        },
+        "number": {
           "type": "integer"
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "sep_computername": {
+          "type": "string"
+        }
+      }
     },
     "metrics": {
       "type": "object",

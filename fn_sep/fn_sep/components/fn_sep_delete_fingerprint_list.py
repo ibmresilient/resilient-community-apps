@@ -1,92 +1,56 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
-""" Resilient functions component to run a Symantec SEPM action - delete fingerprint list. """
+""" SOAR functions component to run a Symantec SEPM action - delete fingerprint list. """
 
-# Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST action against a SYMANTEC SEPM server.
-import json
-import logging
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.sep_client import Sepclient
-from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+from resilient_lib import validate_fields
+from fn_sep.lib.sep_client import Sepclient, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 
-LOG = logging.getLogger(__name__)
+FN_NAME = "fn_sep_delete_fingerprint_list"
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_sep_delete_fingerprint_list' of
-    package fn_sep.
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'fn_sep_delete_fingerprint_list' of package fn_sep.
 
     The Function takes the following parameters:
             sep_fingerprintlist_id
 
-    An example of a set of query parameter might look like the following:
-            sep_fingerprintlist_id = '2728515A08A4481B8207623558254F60'
-
     The function will execute a REST api get request against a SYMANTEC SEPM server for information on endpoints and
-    returns a result in JSON format similar to the following.
-
-    {
-        'inputs': {u'sep_fingerprintlist_id': u'2728515A08A4481B8207623558254F60'},
-        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 11:49:38', 'package_version': '1.0.0',
-                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1137
-                    },
-         'success': True,
-         'content': '',
-         'raw': '""',
-         'reason': None,
-         'version': '1.0'
-    }
+    returns a result in JSON format.
     """
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
-
-    @function("fn_sep_delete_fingerprint_list")
-    def _fn_sep_delete_fingerprint_list_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Delete  a file fingerprint list."""
         try:
-            params = transform_kwargs(kwargs) if kwargs else {}
-
-            # Instantiate result payload object
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            # Validate the required inputs
+            validate_fields(["sep_fingerprintlist_id"], fn_inputs)
 
             # Get the function parameters:
-            sep_fingerprintlist_id = kwargs.get("sep_fingerprintlist_id")  # text
+            sep_fingerprintlist_id = getattr(fn_inputs, "sep_fingerprintlist_id", None)  # text
 
-            LOG.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
+            self.LOG.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
 
-            validate_fields(["sep_fingerprintlist_id"], kwargs)
+            yield self.status_message("Running Symantec SEP Delete Fingerprint List action ...")
 
-            yield StatusMessage("Running Symantec SEP Delete Fingerprint List action ...")
+            sep = Sepclient(self.options)
+            results = sep.delete_fingerprint_list(fingerprintlist_id=sep_fingerprintlist_id)
 
-            sep = Sepclient(self.options, params)
-            rtn = sep.delete_fingerprint_list(**params)
-
-            results = rp.done(True, rtn)
-
-            if "errors" in rtn and rtn["errors"][0]["error_code"] == 410:
+            if isinstance(results, dict) and results.get("errors", []) and results.get("errors", [])[0].get("error_code") == 410:
                 # If this error was trapped user probably tried to get information on invalid connector guid.
-                yield StatusMessage(
-                    "Got a 410 error while attempting to delete fingerprint list fingerprint id  '{0}' "
-                    "because of a possible deleted id.".format(params["sep_fingerprintlist_id"]))
+                yield self.status_message(
+                    f"""Got a 410 error while attempting to delete fingerprint list fingerprint id  '{sep_fingerprintlist_id}' 
+                    because of a possible deleted id.""")
             else:
-                yield StatusMessage("Returning 'Symantec SEP Delete Fingerprint List' results for fingerprint id '{}'."
-                                    .format(sep_fingerprintlist_id))
-
-            LOG.debug(json.dumps(results["content"]))
+                yield self.status_message(f"Returning 'Symantec SEP Delete Fingerprint List' results for fingerprint id '{sep_fingerprintlist_id}'.")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            LOG.exception("Exception in Resilient Function for Symantec SEP.")
+            self.LOG.exception("Exception in SOAR function for Symantec SEP.")
             yield FunctionError()

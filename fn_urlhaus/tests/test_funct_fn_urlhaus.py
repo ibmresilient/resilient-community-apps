@@ -6,7 +6,7 @@ import pytest
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from fn_urlhaus.util.helper import CONFIG_DATA_SECTION
-from shared_mock_data import MockedResponse
+from shared_mock_data import MockedResponse, MockedResponseFailure
 from mock import patch
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
@@ -52,14 +52,17 @@ class TestFnUrlhaus:
         assert func is not None
 
     def test_bad_url(self, circuits_app):
+        with patch("fn_urlhaus.components.funct_fn_urlhaus.RequestsCommon.execute_call_v2") as mock_post:
+            mock_post.return_value = MockedResponseFailure()
 
-        function_params = {
-            "urlhaus_artifact_value": "123",
-            "urlhaus_artifact_type": "URL"
-        }
+            function_params = {
+                "urlhaus_artifact_value": "123",
+                "urlhaus_artifact_type": "URL"
+            }
 
-        with pytest.raises(Exception, match=r"Not Found for url"):
-            call_fn_urlhaus_function(circuits_app, function_params)
+            #with pytest.raises(Exception, match=r"Not Found for url"):
+            response = call_fn_urlhaus_function(circuits_app, function_params)
+            assert not response.get("success")
 
     def test_fields_defined(self, circuits_app):
         with patch("fn_urlhaus.components.funct_fn_urlhaus.RequestsCommon.execute_call_v2"):

@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields
-from fn_urlhaus.util.helper import CONFIG_DATA_SECTION, make_api_call
+from fn_urlhaus.util.helper import CONFIG_DATA_SECTION, make_api_call, QUERY_STATUS_OK
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 
@@ -54,9 +54,12 @@ class FunctionComponent(ResilientComponent):
 
             res_json = res.json()
 
+            reason = res_json.get("query_status")
+            success = bool(reason == QUERY_STATUS_OK)
+
             yield StatusMessage("Query Status: {0}".format(res_json.get("query_status")))
 
-            results = rp.done(success=True, content=res_json)
+            results = rp.done(success=success, content=res_json, reason=reason)
 
             log.info("Complete")
 

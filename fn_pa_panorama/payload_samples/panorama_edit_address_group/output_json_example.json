@@ -10,17 +10,17 @@
   "raw": null,
   "inputs": {
     "panorama_name_parameter": "Blocked Group",
-    "panorama_request_body": "{\n  \"entry\": {\n    \"@name\": \"Blocked Group\",\n    \"description\": \"None\",\n    \"static\": {\n      \"member\": [\"208.113.204.14\", \"Test\", \"34.73.29.154\", \"84.50.148.237\"]\n    }\n  }\n}",
+    "panorama_request_body": "{\"entry\": {\"@name\": \"Blocked Group\", \"description\": null, \"static\": {\"member\": [\"1.2.3.4\", \"42.36.75.4\", \"test.com\"]}}}",
     "panorama_location": "vsys",
     "panorama_vsys": "vsys1",
-    "panorama_label": "panorama_label1"
+    "panorama_label": "panOS"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-pa-panorama",
-    "package_version": "1.3.0",
-    "host": "localhost",
-    "execution_time_ms": 522,
-    "timestamp": "2023-04-25 11:04:34"
+    "package_version": "1.5.0",
+    "host": "local",
+    "execution_time_ms": 2028,
+    "timestamp": "2024-08-09 09:01:19"
   }
 }

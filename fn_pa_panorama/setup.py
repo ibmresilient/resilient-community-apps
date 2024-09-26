@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_pa_panorama',
-    version='1.4.0',
+    version='1.5.0',
     license='MIT',
     author='IBM QRadar SOAR',
     display_name="Palo Alto Networks Panorama Integration for SOAR",
@@ -28,8 +28,8 @@ setup(
                      addresses, and user groups within Palo Alto Panorama. This integration can be
                      configured to work with one or multiple Panorama instances.""",
     install_requires=[
-        'resilient_circuits>=49.0.0',
-        'resilient-lib>=49.0.0',
+        'resilient_circuits>=51.0.0',
+        'resilient-lib>=51.0.0',
         'xmltodict>=0.12.0'
     ],
     packages=find_packages(),

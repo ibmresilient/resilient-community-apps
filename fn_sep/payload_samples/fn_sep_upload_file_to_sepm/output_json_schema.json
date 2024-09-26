@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -17,21 +17,21 @@
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "sep_md5": {
           "type": "string"
         },
+        "sep_sha256": {},
         "sep_file_path": {
           "type": "string"
         },
         "sep_source": {
           "type": "string"
         },
+        "sep_sha1": {},
         "sep_computer_ids": {
           "type": "string"
         }

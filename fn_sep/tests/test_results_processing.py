@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Test results processing functionality."""
@@ -32,7 +32,7 @@ class TestGetOverallProgress:
 
     """Test get_overall_progress function"""
     @pytest.mark.parametrize("rtn, expected_results", [
-        (get_command_status(), "In progress"),
+        (get_command_status(), "Waiting/Not received"),
         (get_command_status_remediation(), "Completed"),
     ])
     def test_get_overall_progress(self, rtn, expected_results):
@@ -42,16 +42,15 @@ class TestGetOverallProgress:
 
 class TestParseScanResults:
 
-
     """Test parse_scan_results scan function"""
     @pytest.mark.parametrize("rtn, status_type, expected_results", [
         (get_command_status(), "scan", {'match_count': 0, 'remediation_count': 0, 'PARTIAL_MATCHES': [], 'HASH_MATCHES': [], 'artifact_type': '',
      'FULL_MATCHES': [], 'artifact_value': '', 'fail_remediation_count': 0, 'remediate_artifact_value': '', 'MATCH': False})
     ])
     def test_parse_scan_results_scan(self, rtn, status_type, expected_results):
-        for c in rtn["content"]:
-            if c["resultInXML"] is not None:
-                xml = c["resultInXML"]
+        for c in rtn.get("content"):
+            if c.get("resultInXML") is not None:
+                xml = c.get("resultInXML")
                 results = parse_scan_results(xml, status_type)
                 assert expected_results == results
 
@@ -60,14 +59,14 @@ class TestParseScanResults:
         (get_command_status_remediation(), "scan", {'match_count': 10, 'remediation_count': 0,  'fail_remediation_count': 9, 'MATCH': True}),
     ])
     def test_parse_scan_results_remediation(self, rtn, scan_type, expected_results):
-        for c in rtn["content"]:
-            if c["resultInXML"] is not None:
-                xml = c["resultInXML"]
+        for c in rtn.get("content"):
+            if c.get("resultInXML") is not None:
+                xml = c.get("resultInXML")
                 results = parse_scan_results(xml, scan_type)
-                assert expected_results["MATCH"] == results["MATCH"]
-                assert expected_results["match_count"] == results["match_count"]
-                assert expected_results["remediation_count"] == results["remediation_count"]
-                assert expected_results["fail_remediation_count"] == results["fail_remediation_count"]
+                assert expected_results.get("MATCH") == results.get("MATCH")
+                assert expected_results.get("match_count") == results.get("match_count")
+                assert expected_results.get("remediation_count") == results.get("remediation_count")
+                assert expected_results.get("fail_remediation_count") == results.get("fail_remediation_count")
 
 class TestFilterHits:
 
@@ -79,15 +78,15 @@ class TestFilterHits:
     def test_filter_hits(self, rtn, status_type, expected_results):
 
         filter_hits(rtn, status_type)
-        assert expected_results == len(rtn["content"])
-        assert expected_results == rtn["totalElements"]
+        assert expected_results == len(rtn.get("content"))
+        assert expected_results == rtn.get("totalElements")
 
 
 class TestProcessResults:
 
     """Test process_results function"""
     @pytest.mark.parametrize("rtn, status_type, expected_results", [
-        (get_command_status(), "scan", "In progress"),
+        (get_command_status(), "scan", "Waiting/Not received"),
         (get_command_status_remediation(), "remediation", "Completed"),
     ])
     def test_process_results(self, rtn, status_type, expected_results):
@@ -101,4 +100,4 @@ class TestProcessResults:
         results = process_results(rtn, get_config(), status_type, None)
         assert_keys_in(results, *keys)
         assert_keys_in(results, *keys_2)
-        assert expected_results == results["overall_command_state"]
+        assert expected_results == results.get("overall_command_state")

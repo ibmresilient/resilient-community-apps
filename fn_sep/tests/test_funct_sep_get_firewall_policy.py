@@ -59,8 +59,8 @@ class TestSepGetFirewallPolicy:
         "sep_firewall_id": "sample text"
     }
 
-    expected_results_2 =False
-    
+    expected_results_2 = False
+
     @patch('fn_sep.components.funct_sep_get_firewall_policy.Symantec_SEP', MockClient)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),

@@ -1,87 +1,57 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
-""" Resilient functions component to run a Symantec SEPM action - quarantine endpoint. """
+""" SOAR functions component to run a Symantec SEPM action - quarantine endpoint. """
 
-# Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST action against a SYMANTEC SEPM server.import json
-import logging
-import json
+from resilient_lib import validate_fields
+from fn_sep.lib.sep_client import Sepclient, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.sep_client import Sepclient
-from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+FN_NAME = "fn_sep_quarantine_endpoints"
 
-LOG = logging.getLogger(__name__)
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_sep_quarantine_endpoints' of package fn_sep.
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'fn_sep_quarantine_endpoints' of package fn_sep.
 
     The Function takes the following parameter:
             sep_group_ids, sep_computer_ids, sep_undo
 
-    An example of a set of query parameter might look like the following:
-            sep_group_ids = None
-            sep_computer_ids = '89AD1BBB0946C25D25E6C0984E971D8A'
-            sep_undo = False
-
-    The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
-    returns a result in JSON format similar to the following.
-    {
-        'inputs': {u'sep_undo': False, u'sep_computer_ids': u'89AD1BBB0946C25D25E6C0984E971D8A'},
-        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 14:42:09', 'package_version': '1.0.0',
-                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1102
-                   }, 'success': True,
-        'content': {u'commandID_computer': u'79AD5636B73A4C0D828938AE1E5B2C13'},
-        'raw': '{"commandID_computer": "79AD5636B73A4C0D828938AE1E5B2C13"}',
-        'reason': None,
-        'version': '1.0'
-    }
+    The function will execute a REST api get request against a SYMANTEC SEPM server for information on endpoints and
+    returns a result in JSON format.
     """
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
-
-    @function("fn_sep_quarantine_endpoints")
-    def _fn_sep_quarantine_endpoints_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Quarantine/unquarantine Symantec Endpoint Protection endpoints."""
         try:
-            params = transform_kwargs(kwargs) if kwargs else {}
-            # Instantiate result payload object.
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
-
+            # validate required parameters
+            validate_fields(["sep_group_ids", "sep_computer_ids", "sep_hardwarekey"], fn_inputs)
             # Get the function parameters:
-            sep_group_ids = kwargs.get("sep_group_ids")  # text
-            sep_computer_ids = kwargs.get("sep_computer_ids")  # text
-            sep_undo = kwargs.get("sep_undo")  # boolean
+            sep_group_ids = getattr(fn_inputs, "sep_group_ids", None)  # text
+            sep_computer_ids = getattr(fn_inputs, "sep_computer_ids", None)  # text
+            sep_hardwareKeys = getattr(fn_inputs, "sep_hardwarekey", None)
+            sep_undo = getattr(fn_inputs, "sep_undo", None)  # boolean
 
-            LOG.info("sep_group_ids: %s", sep_group_ids)
-            LOG.info("sep_computer_ids: %s", sep_computer_ids)
-            LOG.info("sep_undo: %s", sep_undo)
+            self.LOG.info("sep_group_ids: %s", sep_group_ids)
+            self.LOG.info("sep_computer_ids: %s", sep_computer_ids)
+            self.LOG.info("sep_hardwarekey: %s", sep_hardwareKeys)
+            self.LOG.info("sep_undo: %s", sep_undo)
 
-            validate_fields(["sep_undo"], kwargs)
+            validate_fields(["sep_undo"], fn_inputs)
 
-            yield StatusMessage("Running Symantec SEP Quarantine Endpoint or group...")
+            yield self.status_message("Running Symantec SEP Quarantine Endpoint or group...")
 
-            sep = Sepclient(self.options, params)
+            sep = Sepclient(self.options)
 
-            rtn = sep.quarantine_endpoints(**params)
+            rtn = sep.quarantine_endpoints(group_ids=sep_group_ids, computer_ids=sep_computer_ids, undo=sep_undo, hardware_keys=sep_hardwareKeys)
 
-            results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'Symantec SEP Quarantine Endpoint' or group results")
-
-            LOG.debug(json.dumps(results["content"]))
+            yield self.status_message("Returning 'Symantec SEP Quarantine Endpoint' or group results")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(rtn)
         except Exception:
-            LOG.exception("Exception in Resilient Function for Symantec SEP.")
+            self.LOG.exception("Exception in SOAR function for Symantec SEP.")
             yield FunctionError()

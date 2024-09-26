@@ -29,12 +29,11 @@ def call_whois_query_function(circuits, function_params, timeout=10):
 
 
 class TestWhoisQuery:
-    #@pytest.mark.livetest These are livetest but not marking due to failing build
-
+    @pytest.mark.livetest
     @pytest.mark.parametrize("whois_query, expected_results", [
         ("ibm.com", {"success" : True}),
         ("https://www.ibm.com", {"success" : True})
-])
+    ])
     def test_success(self, circuits_app, whois_query, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
@@ -42,3 +41,8 @@ class TestWhoisQuery:
         }
         results = call_whois_query_function(circuits_app, function_params)
         assert results["success"] == True
+
+    def test_failure(self, circuits_app):
+        # this is intended to allow the builds to succeed
+        with pytest.raises(Exception):
+            _results = call_whois_query_function(circuits_app, {})

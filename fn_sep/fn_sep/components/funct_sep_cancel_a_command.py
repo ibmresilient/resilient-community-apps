@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """AppFunction implementation"""
 
-import json
+from json import dumps
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
-from fn_sep.lib.symantec_sep_client import Symantec_SEP
+from fn_sep.lib.symantec_sep_client import Symantec_SEP, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_sep"
 FN_NAME = "sep_cancel_a_command"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'sep_cancel_a_command'"""
@@ -24,29 +22,24 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.sep_command_id
         """
-
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         try:
+            # Validate required inputs
             validate_fields(['sep_command_id'], fn_inputs)
-
+            # Create connection to Symantec server
             sep_client = Symantec_SEP(self.options, self.rc)
 
-            input_data = fn_inputs._asdict()
-
-            url = f"/command-queue/{input_data['sep_command_id']}/cancel"
-            method = "POST"
-                
-            response,err = sep_client.make_api_call(method, url,use_callback=True)
+            response, err = sep_client.make_api_call("POST",
+                                                     f"/command-queue/{fn_inputs.sep_command_id}/cancel",
+                                                     use_callback=True)
 
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
-            if err == None:
-                yield FunctionResult(response)
-            else:
+            if err:
                 raise ValueError(err)
 
+            yield FunctionResult(response)
+
         except Exception as err_message:
-            response = {}
-            yield self.status_message("Error in Symantec SEP integration: {err}.".format(err=err_message))
-            err_message = json.dumps(err_message, default=str)
-            yield FunctionResult(response, success=False, reason=err_message)
+            yield self.status_message(f"Error in Symantec SEP integration: {err_message}.")
+            yield FunctionResult({}, success=False, reason=dumps(err_message, default=str))

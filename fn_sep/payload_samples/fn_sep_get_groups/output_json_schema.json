@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -59,9 +59,7 @@
                   "id": {
                     "type": "string"
                   },
-                  "name": {
-                    "type": "string"
-                  }
+                  "name": {}
                 }
               },
               "policyInheritanceEnabled": {
@@ -70,22 +68,10 @@
             }
           }
         },
-        "totalPages": {
-          "type": "integer"
-        },
-        "firstPage": {
-          "type": "boolean"
-        },
-        "lastPage": {
-          "type": "boolean"
-        },
-        "totalElements": {
+        "number": {
           "type": "integer"
         },
         "size": {
-          "type": "integer"
-        },
-        "number": {
           "type": "integer"
         },
         "sort": {
@@ -105,16 +91,34 @@
             }
           }
         },
+        "totalElements": {
+          "type": "integer"
+        },
+        "totalPages": {
+          "type": "integer"
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer"
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "sep_domain": {
+          "type": "string"
+        },
+        "sep_fullpathname": {
+          "type": "string"
+        }
+      }
     },
     "metrics": {
       "type": "object",

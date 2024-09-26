@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2019, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """Function implementation"""
 
 import logging
@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
 
             # get proxies
             proxies = RequestsCommon(self.opts, self.options).get_proxies()
-            
+
             if not input_is_ip and real_domain:
                 ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
                 whois_response = helper.get_whois_registry_info(u"{}".format(ip_from_domain), proxies=proxies)

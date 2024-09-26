@@ -40,7 +40,23 @@
               "type": "array"
             },
             "applications_to_monitor": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rulestate": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "mac": {
               "type": "object",
@@ -61,34 +77,7 @@
             },
             "extension_list": {},
             "knownrisks": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "rulestate": {
-                    "type": "object",
-                    "properties": {
-                      "enabled": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  "threat": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "action": {
-                    "type": "string"
-                  }
-                }
-              }
+              "type": "array"
             },
             "tamper_files": {
               "type": "array"

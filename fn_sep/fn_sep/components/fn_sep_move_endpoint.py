@@ -1,82 +1,51 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
-""" Resilient functions component to run a Symantec SEPM action - move endpoint. """
+""" SOAR functions component to run a Symantec SEPM action - move endpoint. """
 
-# Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST update against a SYMANTEC SEPM server.import json
-import json
-import logging
+from resilient_lib import validate_fields
+from fn_sep.lib.sep_client import Sepclient, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.sep_client import Sepclient
-from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+FN_NAME = "fn_sep_move_endpoint"
 
-LOG = logging.getLogger(__name__)
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_sep_move_endpoint' of package fn_sep.
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'fn_sep_move_endpoint' of package fn_sep.
 
     The Function takes the following parameter:
-            sep_hardwarekey, sep_group_id'
-
-    An example of a set of query parameter might look like the following:
-            sep_hardwarekey = "DC7D24D6465566D2941F35BC8D17801E"
-            sep_group_id' = "8E20F39B0946C25D118925C2E28C2D59"
+            sep_hardwarekey, sep_group_id
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
-    returns a result in JSON format similar to the following.
-    {
-        "inputs": {'sep_hardwarekey': 'DC7D24D6465566D2941F35BC8D17801E', 'sep_group_id': '8E20F39B0946C25D118925C2E28C2D59'},
-        "metrics": {'package': 'fn-sep', 'timestamp': '2019-03-07 11:39:14', 'package_version': '1.0.0',
-        "host": 'myhost', 'version': '1.0', 'execution_time_ms': 9555},
-        "success": True,
-        "content": [{'responseMessage': 'OK', 'responseCode': '200'}],
-        "raw": '<<a string representation of content.>>',
-        "reason": None, 'version': '1.0'
-    }
+    returns a result in JSON format.
     """
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
-
-    @function("fn_sep_move_endpoint")
-    def _fn_sep_move_endpoint_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Checks and moves a client computer to a specified group."""
         try:
-            params = transform_kwargs(kwargs) if kwargs else {}
-            # Instantiate result payload object.
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
-            sep_groupid = kwargs.get("sep_groupid")  # text
-            sep_hardwarekey = kwargs.get("sep_hardwarekey")  # text
+            sep_groupid = getattr(fn_inputs, "sep_groupid", None)  # text
+            sep_hardwarekey = getattr(fn_inputs, "sep_hardwarekey", None)  # text
 
-            LOG.info("sep_groupid: %s", sep_groupid)
-            LOG.info("sep_hardwarekey: %s", sep_hardwarekey)
+            self.LOG.info("sep_groupid: %s", sep_groupid)
+            self.LOG.info("sep_hardwarekey: %s", sep_hardwarekey)
 
-            validate_fields(["sep_groupid", "sep_hardwarekey"], kwargs)
+            validate_fields(["sep_groupid", "sep_hardwarekey"], fn_inputs)
 
-            yield StatusMessage("Running Symantec SEP Move Endpoint action...")
+            yield self.status_message("Running Symantec SEP Move Endpoint action...")
 
-            sep = Sepclient(self.options, params)
-            rtn = sep.move_endpoint(**params)
+            sep = Sepclient(self.options)
+            rtn = sep.move_endpoint(groupid=sep_groupid, hardwarekey=sep_hardwarekey)
 
-            results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'Symantec SEP Move Endpoint' results")
-
-            LOG.debug(json.dumps(results["content"]))
+            yield self.status_message("Returning 'Symantec SEP Move Endpoint' results")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(rtn)
         except Exception:
-            LOG.exception("Exception in Resilient Function for Symantec SEP.")
+            self.LOG.exception("Exception in SOAR function for Symantec SEP.")
             yield FunctionError()

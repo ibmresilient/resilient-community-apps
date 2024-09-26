@@ -1,6 +1,7 @@
 from __future__ import print_function
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from resilient_circuits.action_message import FunctionException_
 import pytest
 
 
@@ -26,8 +27,7 @@ def call_rdap_query_function(circuits, function_params, timeout=10):
 
 
 class TestRdapQuery:
-    #@pytest.mark.livetest These are livetest but not marking due to failing build
-    
+    @pytest.mark.livetest
     @pytest.mark.parametrize("rdap_depth, rdap_query, expected_results", [
         (0, "ibm.com", {"success" : True}),
         (1, "www.ibm.com", {"success" : True})
@@ -40,3 +40,8 @@ class TestRdapQuery:
         }
         results = call_rdap_query_function(circuits_app, function_params)
         assert results["success"] == True
+
+    def test_failure(self, circuits_app):
+        # this is intended to allow the builds to succeed
+        with pytest.raises(Exception):
+            _results = call_rdap_query_function(circuits_app, {})

@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Symantec SEP client support classes. """
 
-import logging, json
-from resilient_lib import RequestsCommon, validate_fields
+from logging import getLogger
+from json import loads
+from resilient_lib import RequestsCommon
 from urllib.parse import urljoin
 from fn_sep.lib.sep_client import Sepclient
 
-LOG = logging.getLogger(__name__)
-
+LOG = getLogger(__name__)
+PACKAGE_NAME = "fn_sep"
 
 class Symantec_SEP:
-    """
-    Client class for Symantec SEP.
-    """
-
+    """ Client class for Symantec SEP. """
     def __init__(self, function_options: dict, request_common: RequestsCommon) -> None:
         """
         Class constructor.
@@ -26,13 +24,13 @@ class Symantec_SEP:
             The class represents common functions around the use of the requests package for REST based APIs
         :type request_common: RequestsCommon
         """
-        self.request_common=request_common
+        self.request_common = request_common
 
-        sep_object=Sepclient(function_options)
+        sep_object = Sepclient(function_options)
 
         self.headers = sep_object._headers
-        self.base_url=sep_object.base_url
-        self.base_path=sep_object.base_path
+        self.base_url = sep_object.base_url
+        self.base_path = sep_object.base_path
 
     def transform_inputs(self, input_dict: dict) -> dict:
         """
@@ -41,7 +39,7 @@ class Symantec_SEP:
             - Removes common prefix 'Symantec_SEP_' from all keys in 'input_dict'.
             - Strip whitespaces from beginning and end of string parameters in 'input_dict'.
 
-        :param input_dict: Resilient Function input parameters.
+        :param input_dict: SOAR Function input parameters.
         :type input_dict: dict
         :return: Processed input parameters for Symantec SEP api.
         :rtype: dict
@@ -53,11 +51,10 @@ class Symantec_SEP:
         }
         return params
 
-
     def make_api_call(self, method: str, url: str, use_callback=False, query_params: dict=None, payload_data: dict=False, message: str='OK') -> dict:
         """This function is used to call a specific API and return the response.
 
-        :param method: specific method for the API call (GET,POST,PUT,DELETE)
+        :param method: specific method for the API call (GET, POST, PUT, DELETE)
         :type method: str
         :param url: specific url to hit the API
         :type url: str
@@ -71,28 +68,22 @@ class Symantec_SEP:
         :return: returns the json response
         :rtype: dict
         """
-        
-        path = f'{self.base_path}{url}'
-        url = urljoin(self.base_url, path)
+        err = None
+        url = urljoin(self.base_url, f'{self.base_path}{url}')
 
         if use_callback:
-            response,err = self.request_common.execute(
-                method, url=url, params=query_params, json=payload_data, headers=self.headers, verify=False,callback=callback)
-            if err==None and not bool(response):
+            response, err = self.request_common.execute(
+                method, url=url, params=query_params, json=payload_data, headers=self.headers, verify=False, callback=callback)
+            if err == None and not bool(response):
                 response = {"message": message}
-            return response, err
-        
+
         else:
             response = self.request_common.execute(
                 method, url=url, params=query_params, json=payload_data, headers=self.headers, verify=False)
             if response.ok:
-                if not response.content :
-                    response = {"message": message}
-                else:
-                    response = response.json()
+               response = response.json() if response.content else {"message": message}
 
-        return response
-
+        return response, err
 
 def callback(response):
     """This function fetches original API returned error message.
@@ -101,21 +92,20 @@ def callback(response):
     error_msg = None
     content = None
     if response.status_code >= 300:
-        msg = json.loads(response.content.decode('utf-8'))
+        msg = loads(response.content.decode('utf-8'))
         if 'errorMessage' in msg:
-            msg = msg['errorMessage']
+            msg = msg.get('errorMessage')
         elif 'message' in msg:
-            msg = msg['message']  
+            msg = msg.get('message')
 
         error_msg = f"Status Code: {response.status_code}, ErrorMessage: {msg}"
 
     else:
+        content = ""
         try:
             if response.content:
-                content = json.loads(response.content.decode("utf-8"))
-            else:
-                content=""
-        except:
+                content = loads(response.content.decode("utf-8"))
+        except Exception:
             content = ""
 
     return content, error_msg

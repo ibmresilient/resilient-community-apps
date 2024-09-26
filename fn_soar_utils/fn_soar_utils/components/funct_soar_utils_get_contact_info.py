@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-
+from logging import getLogger
+from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'fn_get_contact_info'.
@@ -23,20 +23,18 @@ class FunctionComponent(ResilientComponent):
     def _fn_get_contact_info_function(self, event, *args, **kwargs):
         """Function: Retrieve contact information for an incidents owner and members or those from a task"""
         try:
+            validate_fields(["incident_id"], kwargs)
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
 
-            log = logging.getLogger(__name__)
+            log = getLogger(__name__)
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
 
-            if incident_id is None:
-                raise ValueError("incident_id is required")
-
             yield StatusMessage("starting...")
             res_client = self.rest_client()
-            if incident_id and task_id is None:
+            if incident_id and not task_id:
                 results = self.get_contact_info_by_incident(res_client, incident_id)
             else:
                 results = self.get_contact_info_by_task(res_client, incident_id, task_id)
@@ -53,9 +51,8 @@ class FunctionComponent(ResilientComponent):
         :param incident_id:
         :return: json owner and member information
         """
-
         # get the incident's members
-        incident_info = res_client.get('/incidents/{}'.format(incident_id))
+        incident_info = res_client.get(f'/incidents/{incident_id}')
 
         result = {
             "owner": self.get_contact_info_for_uid(res_client, incident_info.get("owner_id")),
@@ -75,7 +72,7 @@ class FunctionComponent(ResilientComponent):
         """
 
         # get task information
-        task_info = res_client.get('/tasks/{}'.format(task_id))
+        task_info = res_client.get(f'/tasks/{task_id}')
 
         result = {
             "owner": self.get_contact_info_for_uid(res_client, task_info.get("owner_id"))
@@ -86,7 +83,7 @@ class FunctionComponent(ResilientComponent):
             members = self.get_members_contact_info(res_client, task_info.get("members"))
         else:
             # get the incident's members
-            incident_info = res_client.get('/incidents/{}'.format(incident_id))
+            incident_info = res_client.get(f'/incidents/{incident_id}')
             members = self.get_members_contact_info(res_client, incident_info.get("members"))
 
         result['members'] = members
@@ -117,19 +114,16 @@ class FunctionComponent(ResilientComponent):
             :return: JSON contact information
         """
         try:
-            user_data = res_client.get('/users/{}'.format(uid))
-            result = {  "fname": user_data.get("fname"),
-                        "lname": user_data.get("lname"),
-                        "title": user_data.get("title"),
-                        "display_name": user_data.get("display_name"),
-                        "email": user_data.get("email"),
-                        "phone": user_data.get("phone"),
-                        "cell": user_data.get("cell")
-                        }
+            user_data = res_client.get(f'/users/{uid}')
+            return {"fname": user_data.get("fname", None),
+                "lname": user_data.get("lname", None),
+                "title": user_data.get("title", None),
+                "display_name": user_data.get("display_name", None),
+                "email": user_data.get("email", None),
+                "phone": user_data.get("phone", None),
+                "cell": user_data.get("cell", None)}
         except Exception:
-            return None
-
-        return result
+            return
 
     def get_group_info_for_uid(self, res_client, uid):
         """
@@ -138,8 +132,8 @@ class FunctionComponent(ResilientComponent):
         :return: JSON group information
         """
         try:
-            user_data = res_client.get('/groups/{}'.format(uid))
-            result = {
+            user_data = res_client.get(f'/groups/{uid}')
+            return {
                 "fname": None,
                 "lname": None,
                 "title": None,
@@ -149,6 +143,4 @@ class FunctionComponent(ResilientComponent):
                 "cell": None
             }
         except Exception:
-            return None
-
-        return result
+            return

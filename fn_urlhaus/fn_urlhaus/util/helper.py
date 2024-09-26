@@ -5,6 +5,7 @@ from resilient_lib import IntegrationError
 
 CONFIG_DATA_SECTION = "fn_urlhaus"
 
+QUERY_STATUS_OK = "ok"
 
 # convert artifact type to type of API call to make
 TYPE_MAP = {

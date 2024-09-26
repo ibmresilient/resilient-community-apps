@@ -1,5 +1,11 @@
-include fn_whois_rdap/README.md
-include fn_whois_rdap/doc/README.md
-include fn_whois_rdap/util/*
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+include icons/*.png
+include tox.ini
 include fn_whois_rdap/LICENSE
-include fn_whois_rdap/doc/*
+recursive-include fn_whois_rdap/util *
+recursive-include payload_samples *
+recursive-include doc *
+recursive-include tests/ *
+global-exclude *.bak

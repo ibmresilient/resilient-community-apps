@@ -50,33 +50,38 @@
             }
           }
         },
-        "number": {
-          "type": "integer"
-        },
-        "size": {
-          "type": "integer"
-        },
-        "sort": {},
-        "numberOfElements": {
+        "totalPages": {
           "type": "integer"
         },
         "lastPage": {
           "type": "boolean"
-        },
-        "totalPages": {
-          "type": "integer"
         },
         "firstPage": {
           "type": "boolean"
         },
         "totalElements": {
           "type": "integer"
-        }
+        },
+        "numberOfElements": {
+          "type": "integer"
+        },
+        "number": {
+          "type": "integer"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "sort": {}
       }
     },
     "raw": {},
     "inputs": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "sep_domainid": {
+          "type": "string"
+        }
+      }
     },
     "metrics": {
       "type": "object",

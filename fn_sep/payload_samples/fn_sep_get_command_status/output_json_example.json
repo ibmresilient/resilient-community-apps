@@ -1,31 +1,26 @@
 {
-  "version": "1.0",
+  "version": 2.0,
   "success": true,
   "reason": null,
   "content": {
     "content": [
       {
-        "beginTime": "2023-01-06T09:51:09Z",
-        "lastUpdateTime": "2023-01-06T09:51:09Z",
-        "computerName": "computerName",
-        "computerIp": "000.00.00.00",
+        "beginTime": null,
+        "lastUpdateTime": null,
+        "computerName": "WIN-N5KGH4CP3N3",
+        "computerIp": "9.37.29.102",
         "domainName": "Default",
-        "currentLoginUserName": "Testuser",
-        "stateId": 3,
+        "currentLoginUserName": "Administrator",
+        "stateId": 0,
         "subStateId": 0,
-        "subStateDesc": "C:\\Users\\Public\\Documents\\sample.exe",
-        "binaryFileId": "binaryFileId",
-        "resultInXML": "",
-        "computerId": "computerId",
-        "hardwareKey": "hardwareKey"
+        "subStateDesc": null,
+        "binaryFileId": null,
+        "resultInXML": null,
+        "computerId": "01ECF4E8092E5BB91E4D52E45C3ABE4D",
+        "hardwareKey": "8DACE2559C1C951E09CC0BF71D973BB7"
       }
     ],
-    "totalPages": 1,
-    "firstPage": true,
-    "lastPage": true,
-    "totalElements": 1,
     "size": 20,
-    "number": 0,
     "sort": [
       {
         "direction": "ASC",
@@ -33,29 +28,35 @@
         "ascending": true
       }
     ],
+    "totalElements": 1,
+    "firstPage": true,
+    "totalPages": 1,
+    "lastPage": true,
     "numberOfElements": 1,
+    "number": 0,
     "total_match_count": 0,
     "total_match_ep_count": 0,
     "total_remediation_count": 0,
     "total_fail_remediation_count": 0,
     "total_remediation_ep_count": 0,
-    "total_not_completed": 0,
+    "total_not_completed": 1,
     "total_ep_count": 1,
     "scan_artifact_value": "",
     "remediate_artifact_value": "",
-    "overall_command_state": "Completed"
+    "overall_command_state": "In progress"
   },
-  "raw": "{\"content\": [{\"beginTime\": \"2023-01-06T09:51:09Z\", \"lastUpdateTime\": \"2023-01-06T09:51:09Z\", \"computerName\": \"EC2AMAZ-O9BT872\", \"computerIp\": \"172.31.37.22\", \"domainName\": \"Default\", \"currentLoginUserName\": \"Administrator\", \"stateId\": 3, \"subStateId\": 0, \"subStateDesc\": \"C:\\\\Users\\\\Public\\\\Documents\\\\sample.exe\", \"binaryFileId\": \"F1568E3BAC1F211B397E2DAC71FD6BF7\", \"resultInXML\": \"\", \"computerId\": \"CD08C63EAC1F211B1B6FD4039B293000\", \"hardwareKey\": \"E4A30FDB287F7B23F9BF22166FD54BF1\"}], \"totalPages\": 1, \"firstPage\": true, \"lastPage\": true, \"totalElements\": 1, \"size\": 20, \"number\": 0, \"sort\": [{\"direction\": \"ASC\", \"property\": \"Begintime\", \"ascending\": true}], \"numberOfElements\": 1, \"total_match_count\": 0, \"total_match_ep_count\": 0, \"total_remediation_count\": 0, \"total_fail_remediation_count\": 0, \"total_remediation_ep_count\": 0, \"total_not_completed\": 0, \"total_ep_count\": 1, \"scan_artifact_value\": \"\", \"remediate_artifact_value\": \"\", \"overall_command_state\": \"Completed\"}",
+  "raw": null,
   "inputs": {
     "sep_status_type": "quarantine",
-    "sep_commandid": "commandid"
+    "sep_commandid": "1CA9D4F37DD94CA88A9D93D09402E3D3",
+    "sep_incident_id": 2133
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-sep",
-    "package_version": "1.0.1",
-    "host": "host",
-    "execution_time_ms": 2060,
-    "timestamp": "2023-01-06 13:56:03"
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 765,
+    "timestamp": "2024-08-21 08:40:33"
   }
 }

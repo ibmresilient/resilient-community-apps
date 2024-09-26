@@ -26,18 +26,12 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-### v1.0.2
-* Added App Host support
-
-### v1.0.1
-* Minor bug fix
-
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| v1.0.3  | 09/2024 | Refresh for SOAR v51.0.0 |
+| v1.0.2  | 09/2020 | Added App Host support |
+| v1.0.1  | 03/2020 | Minor bug fix |
+| v1.0.0  | 03/2019 | Initial Release |
 
 ---
 
@@ -58,8 +52,8 @@ Look up supported artifacts in URLhaus to get more enrichment information and su
 <!--
   List any Requirements
 -->
-* Resilient platform >= `v35.0.0`
-* An Integration Server running `resilient_circuits>=33.0.0`
+* Resilient platform >= `v51.0.0`
+* An Integration Server running `resilient_circuits>=40.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
       * Org Data: Read, Edit
@@ -157,20 +151,7 @@ There are several ways to verify the successful operation of a function.
 
 ---
 
-<!--
-  If necessary, use this section to describe how to configure your security application to work with the integration.
-  Delete this section if the user does not need to perform any configuration procedures on your product.
-
-## Configure <Product_Name>
-
-* Step One
-* Step Two
-* Step Three
-
----
--->
-
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_urlhaus | 1.0.2 | Resilient Labs | https://ibm.biz/resilientcommunity |
+| fn_urlhaus | 1.0.3 | IBM SOAR | https://ibm.biz/resilientcommunity |
