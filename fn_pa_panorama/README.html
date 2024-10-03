@@ -227,6 +227,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_algosec/README.html">IBM SOAR integration for AlgoSec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
@@ -342,6 +343,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sumo_logic/README.html">Sumo Logic Cloud SIEM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">Task Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner</a></li>
@@ -358,7 +360,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">Watson Translate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">Whois RDAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn_whois_rdap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">SOAR Wiki</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">IBM XForce Collections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
@@ -436,6 +438,7 @@
 <li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
 </ul>
 </li>
+<li><p><a class="reference internal" href="#function---panorama-commit"><span class="xref myst">Function - Panorama Commit</span></a></p></li>
 <li><p><a class="reference internal" href="#function---panorama-create-address"><span class="xref myst">Function - Panorama Create Address</span></a></p></li>
 <li><p><a class="reference internal" href="#function---panorama-edit-address-group"><span class="xref myst">Function - Panorama Edit Address Group</span></a></p></li>
 <li><p><a class="reference internal" href="#function---panorama-edit-users-in-a-group"><span class="xref myst">Function - Panorama Edit Users in a Group</span></a></p></li>
@@ -460,27 +463,31 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.4.0</p></td>
+<tr class="row-even"><td><p>1.5.0</p></td>
+<td><p>08/2024</p></td>
+<td><p>Add function to commit changes. Update example playbooks to auto commit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.4.0</p></td>
 <td><p>02/2024</p></td>
 <td><p>Add ability to use location=device-group</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.3.0</p></td>
+<tr class="row-even"><td><p>1.3.0</p></td>
 <td><p>04/2023</p></td>
 <td><p>Convert from rules/workflows to playbooks and update Panorama api version to v9.1</p></td>
 </tr>
-<tr class="row-even"><td><p>1.2.0</p></td>
+<tr class="row-odd"><td><p>1.2.0</p></td>
 <td><p>10/2022</p></td>
 <td><p>Multi-tenancy support added</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>04/2021</p></td>
 <td><p>Support for different API versions. See app.config <code class="docutils literal notranslate"><span class="pre">api_version</span></code> setting</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>07/2019</p></td>
 <td><p>App Host support</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>10/2020</p></td>
 <td><p>Initial release</p></td>
 </tr>
@@ -505,7 +512,7 @@
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><strong>SOAR Components to Integrate with the Panorama Platform</strong></p>
-<p><img alt="screenshot: main" src="../_images/main39.png" /></p>
+<p><img alt="screenshot: main" src="../_images/main40.png" /></p>
 <p>This integration contains Functions to interact with address groups, addresses, and user groups within Palo Alto Panorama. This integration can be configured to work with one or multiple Panorama instances.</p>
 <section id="key-features">
 <h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
@@ -515,6 +522,7 @@
 <li><p>Get addresses from Panorama and PanOS</p></li>
 <li><p>Get users from Panorama</p></li>
 <li><p>Create a new address in Panorama and PanOS</p></li>
+<li><p>Commit changes to Panorama and PanOS</p></li>
 </ul>
 </section>
 </section>
@@ -527,14 +535,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">49.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=49.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -587,8 +595,8 @@
 <p>Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient-lib&gt;=49.0.0</p></li>
-<li><p>resilient_circuits&gt;=49.0.0</p></li>
+<li><p>resilient-lib&gt;=51.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 <li><p>xmltodict&gt;=0.12.0</p></li>
 </ul>
 </section>
@@ -675,9 +683,109 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>Starting in version 1.2.0, more than one Panorama instance can be configured for SOAR case data synchronization. For enterprises with only one Panorama instance, your app.config file will continue to define the Panorama instance under the <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama]</span></code> section header.</p>
 <p>For enterprises with more than one Panorama instance, each instance will have it’s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama:panorama_label1]</span></code> where <code class="docutils literal notranslate"><span class="pre">panorama_label1</span></code> represents any label helpful to define your Panorama environment.</p>
 <p>Be aware that modifications to the workflows will be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field if the Panorama server/servers in the app.config have labels.</p>
-<p>If you have existing custom workflows, see <a class="reference internal" href="#creating-workflows-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating workflows when server/servers in app.config are labeled</span></a> for more information about changing them to reference the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field.</p>
+<p>If you have existing custom playbooks, see <a class="reference internal" href="#creating-playbooks-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating playbooks when server/servers in app.config are labeled</span></a> for more information about changing them to reference the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field.</p>
 </section>
 </section>
+</section>
+<hr class="docutils" />
+<section id="function-panorama-commit">
+<h2>Function - Panorama Commit<a class="headerlink" href="#function-panorama-commit" title="Link to this heading">¶</a></h2>
+<p>Commit changes that have been made on the Panorama server</p>
+<p><img alt="screenshot: fn-panorama-commit " src="../_images/fn-panorama-commit.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_label</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Label of the server to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">panorama_location</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>The location of the entry</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;job&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="s2">&quot;Commit job enqueued with jobid 8&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panOS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1245</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.5.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-09 09:01:22&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">commit_output</span>
+<span class="n">edit_addresses</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">edit_addresses_results</span>
+<span class="k">if</span> <span class="n">edit_addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Panorama IP Address: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was unblocked.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Panorama Unblock IP address failed with reason: </span><span class="si">{</span><span class="n">edit_addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">note</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;msg&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">))</span>
+
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
 </section>
 <hr class="docutils" />
 <section id="function-panorama-create-address">
@@ -1816,6 +1924,7 @@ input field <code class="docutils literal notranslate"><span class="pre">panoram
 </li>
 </ul>
 </li>
+<li><a class="reference internal" href="#function-panorama-commit">Function - Panorama Commit</a></li>
 <li><a class="reference internal" href="#function-panorama-create-address">Function - Panorama Create Address</a></li>
 <li><a class="reference internal" href="#function-panorama-edit-address-group">Function - Panorama Edit Address Group</a></li>
 <li><a class="reference internal" href="#function-panorama-edit-users-in-a-group">Function - Panorama Edit Users in a Group</a></li>

@@ -227,6 +227,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_algosec/README.html">IBM SOAR integration for AlgoSec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
@@ -342,6 +343,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sumo_logic/README.html">Sumo Logic Cloud SIEM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">Task Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner</a></li>
@@ -358,7 +360,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_watson_translate/README.html">Watson Translate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">Whois RDAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">fn_whois_rdap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">SOAR Wiki</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">IBM XForce Collections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
@@ -519,7 +521,7 @@
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p><strong>The app queries Elasticsearch using SOAR incident or artifact data.</strong></p>
-<p><img alt="screenshot: main" src="../_images/main12.png" /></p>
+<p><img alt="screenshot: main" src="../_images/main13.png" /></p>
 <p>Allows users of the SOAR to connect to and query an ElasticSearch database. Users can specify the location of a remote ElasticSearch instance and query this instance for data within SOAR.</p>
 <p>Queries provided to the function must be properly formed to work. Please review the <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html">ElasticSearch documentation</a> for examples on how to form your query. A number of example queries are available when setting up the function in a workflow.</p>
 <p><strong>Important caveat: Your ElasticSearch library version must match the major ElasticSearch version since changes might be introduced with each release. This app supports the recent version changes.</strong></p>
