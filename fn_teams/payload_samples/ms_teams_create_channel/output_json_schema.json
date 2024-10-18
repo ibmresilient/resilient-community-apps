@@ -39,6 +39,9 @@
         "membershipType": {
           "type": "string"
         },
+        "isArchived": {
+          "type": "boolean"
+        },
         "status_code": {
           "type": "integer"
         },

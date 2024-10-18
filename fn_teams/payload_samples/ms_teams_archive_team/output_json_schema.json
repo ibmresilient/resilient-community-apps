@@ -12,9 +12,6 @@
     "content": {
       "type": "object",
       "properties": {
-        "@odata.context": {
-          "type": "string"
-        },
         "id": {
           "type": "string"
         },
@@ -90,14 +87,15 @@
           "type": "string"
         },
         "theme": {},
+        "uniqueName": {},
         "visibility": {
           "type": "string"
         },
         "onPremisesProvisioningErrors": {
           "type": "array"
         },
-        "status_code": {
-          "type": "integer"
+        "serviceProvisioningErrors": {
+          "type": "array"
         },
         "message": {
           "type": "string"
@@ -111,13 +109,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_groupteam_id": {
-          "type": "string"
-        },
         "archive_operation": {
-          "type": "string"
-        },
-        "ms_group_mail_nickname": {
           "type": "string"
         },
         "ms_groupteam_name": {

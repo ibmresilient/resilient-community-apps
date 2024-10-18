@@ -24,6 +24,7 @@
     - [Setting up Incoming Webhooks (Both Permissions)](#setting-up-incoming-webhooks-both-permissions)
     - [Setting up Delegated permissions (Delegated permissions)](#setting-up-delegated-permissions-delegated-permissions)
     - [App Configuration (Both Permissions)](#app-configuration-both-permissions)
+    - [MS Teams Workflows](#ms-teams-workflows)
   - [Function - MS Teams: Archive Team](#function---ms-teams-archive-team)
   - [Function - MS Teams: Create Channel](#function---ms-teams-create-channel)
   - [Function - MS Teams: Create group](#function---ms-teams-create-group)
@@ -32,8 +33,11 @@
   - [Function - MS Teams: Delete Group](#function---ms-teams-delete-group)
   - [Function - MS Teams: Enable Team](#function---ms-teams-enable-team)
   - [Function - MS Teams: Post Message](#function---ms-teams-post-message)
+  - [Function - MS Teams: Post Message for Workflows](#function---ms-teams-post-message-for-workflows)
   - [Function - MS Teams: Read Message](#function---ms-teams-read-message)
-  - [Rules](#rules)
+  - [Custom Layouts](#custom-layouts)
+    - [Data Table - MS Teams Approval Process](#data-table---ms-teams-approval-process)
+  - [Playbooks](#playbooks)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
@@ -41,10 +45,17 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.0.0 | 08/2024 | Added Approval Request process and ability to work with MS Teams Workflows. |
 | 2.1.0 | 05/2023 | Add playbooks and removed workflows|
 | 2.0.1 | 12/2022 | Bug fix in workflows for MS Teams: Enable Teams for Groups and MS Teams: Read messages |
 | 2.0.0 | 12/2022 | Added support for creating and deleting MS Groups, Teams and Channels |
 | 1.0.0 | 10/2019 | Post Incident/task information to MS Teams |
+
+### 3.0.0 Changes
+<!-->
+In v3.0, an approval request process has been added to make requests for process changes. Added is a datatable to track approval request with a poller to review changes in MS Teams based on approval or rejection replies. See [V3.0 Changes for poller](#v30-changes-for-poller) for additional changes needed to the app.config file to enable this capability.
+-->
+v3.0 supports MS Teams Workflows and Adaptive Cards. See the section [Setting up Workflows](#ms-teams-workflows) for more information needed to configure this capability.
 
 ### 2.1.0 Changes
 In v2.1, the existing rules and workflows have been replaced with playbooks.
@@ -58,7 +69,6 @@ You can continue to use the rules/workflows.
 But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ---
-
 
 ![screenshot: main.png](./doc/screenshots/main.png)
 
@@ -80,8 +90,9 @@ Microsoft 365 Groups are created with resources that members of the group share,
 * It is now possible to create Groups, Teams, and Channels with members who are not a part of an incident or task but who have a functioning MS account that is a part of the same organization.
 * Post information about the Incident or task directly to a MS Channel.
 * Example rules/workflows are included that perform the aforementioned operations and store related information as a incident or a task note.
-
-
+<!--
+* In v3.0, support for approval requests including poller to received approval replies.
+-->
 ---
 
 ## Requirements
@@ -91,11 +102,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `45.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -103,7 +114,8 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Incident | Read |
+  | Incident | Read, Write |
+  | Incident Private Tasks | Read
   | Group | Read |
   | Users | Read |
 
@@ -117,7 +129,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 ### Cloud Pak for Security
 
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.9.
+* IBM Cloud Pak for Security >= 1.10.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -131,13 +143,13 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 3.6 and Python 3.9 are supported.
+Both Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
-* msal ~= 1.19
-* pymsteams ~= 0.2.1
-* resilient_circuits>=45.0.0
+* msal ~= 1.30
+* pymsteams ~= 0.2.3
+* resilient_circuits>=50.0.0
 
-### Endpoint Developed With
+### Endpoint Developed With MS Teams
 
 This app has been implemented using:
 | Product Name | API URL | API Version |
@@ -155,11 +167,11 @@ This application needs an access token from the Microsoft identity platform for 
 The access token includes details about the application and the permission it has to use the Microsoft Graph resources and APIs. The app needs to be registered with the Microsoft identity platform and given permission to access the required Microsoft Graph resources by a user or an administrator in order to obtain an access token.
 
 ### Register a new application using the Azure portal
- The application must be registered with the identity provider for the identity provider to be aware that a specific app is attempting to access user information. The configuration necessary for the application to interface with the Microsoft identity platform is then made available when it registers with Azure Active Directory (Azure AD). You can learn more about this at [learn.microsoft.com/application-model](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-model)
+ The application must be registered with the identity provider for the identity provider to be aware that a specific app is attempting to access user information. The configuration necessary for the application to interface with the Microsoft identity platform is then made available when it registers with Microsoft Entra ID (formally Azure AD). You can learn more about this at [learn.microsoft.com/application-model](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-model)
 
 * Sign in to the [Azure portal](https://portal.azure.com) using either an enterprise account.
 * If your account gives you access to more than one tenant, select your account in the top right corner, and set your portal session to the Azure AD tenant that you want.
-* In the left-hand navigation pane, select the `Azure Active Directory service`, and then select `App registrations` > `New registration`.
+* In the left-hand navigation pane, select the `Microsoft Entra ID`, and then select `App registrations` > `New registration`.
 * When the Register an application page appears, enter your application's registration information:
     * `Name` - Enter a meaningful application name that will be displayed to users of the app.
     * `Supported account types` - Select which accounts you would like your application to support.
@@ -239,6 +251,8 @@ This type of permission is optional and is only required for the **Read Channel 
 The **SOAR Platform** can share content in Microsoft channels using an incoming webhook.
 The webhooks are utilized as tracking and notifying mechanisms. The webhooks offer a specific URL that can be used to transmit a JSON payload along with a card-format message. To configure webhooks for a channel, please refer to this documentation [Create Incoming Webhooks](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
 
+*Note*: Webhooks are now replaced by MS Teams Workflows. Refer to [MS Teams Workflows](#ms-teams-workflows) on how to start using this new capability. 
+
 
 ### Setting up Delegated permissions (Delegated permissions)
 
@@ -277,9 +291,193 @@ The following table provides the settings you need to configure the app. These s
 | **secret_value** | Yes | oCN****************** | Certificate & secrets -> `Secret Value` |
 | **refresh_token** | Optional | eyxn****************** | Required only for delegated permissions |
 | **<channel_name>** | Optional | ****.webhook.office.com/webhookb2/ | Webhook URL for a channel |
+| **selftest** | Optional | https://teams.microsoft.com/l/channel/xxx | Webhook URL for channel connectors to test posting of messages.  **This capability is deprecated and selftest_workflows should be used starting with V3.0** |
+| **selftest_workflows** | Optional | https://azure.com/workflows/xxx | Webhook URL for Teams Workflows to test posting of messages. |
+| ***<webhook label>** | Optional | https://azure.com/workflows/xxx | Additional webhook URLs. Reference the `webhook label` used when post messaging via the functions which use the `teams_channel` input field. |
 
+### MS Teams Workflows
+In V3.0, messages can be sent via the MS Teams Workflows capability. Although a powerful way to set up complex capabilities, the basic enablement can be performed via these steps:
+
+1. Within the MS Teams app (either Windows or Mac), select the Workflows app
+![screenshot: Workflows app](./doc/screenshots/workflows_app.png)
+2. Add a workflow for `Post to a channel when a webhook request is received`
+![screenshot: Adding a Workflow](./doc/screenshots/adding_a_workflow.png)
+3. At the minimum, the workflow will have steps to send Adaptive Cards to a channel
+![screenshot: Workflow Steps](./doc/screenshots/workflow_steps.png)
+![screenshot: Workflow Detail](./doc/screenshots/workflow_detail.png)
+
+The webhook request step contains the URL required to send Adaptive Cards to a teams channel. 
+Copy this value and add it your app.config settings using a label of your choosing. This label will then be referred to in any message sent to the MS Teams channel via this Workflow.
+
+![screenshot: Approval Playbook](./doc/screenshots/approval_playbook.png)
+
+<!--
+#### V3.0 Changes for poller
+If running the poller for approval requests, a new app.config section has been added, `fn_teams_approval_process`. If the `poller_interval` is non-zero, then the poller will 
+execute, looking for pending approvals. 
+
+If upgrading from a previous version of the MS Teams app, add the following section data
+to your app.config and modify the approval_words and rejection_words as necessary.
+
+```
+[fn_teams_approval_process]
+# if using the Approval Request process, enable the poller to check for approval request updates
+# in seconds
+#poller_interval=60
+# Comma separated list of case-insensitive approval words
+approval_words=accept, accepted, approve, approved, ok
+# Comma separated list of case-insensitive rejection words
+rejection_words=reject, rejected, deny, denied, no
+```
+-->
 ---
 
+## Function - MS Teams Post Message for Workflows
+Post a message to a Microsoft Teams channel intended for Workflows
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `2095` | Incident id from which artifacts are to be fetched |
+| `task_id` | `number` | No | `-` | - |
+| `teams_channel` | `text` | Yes | `-` | Lookup value to channel to post a message |
+| `teams_payload` | `text` | Yes | `-` | string-encoded json of teams conversation message: See [Adaptive Cards]](https://adaptivecards.io/) |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {'status_code': 202}, 
+  'inputs': { ... }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+import json
+import datetime
+
+ADAPTIVE_CARD_TYPE = "AdaptiveCard"
+ADAPTIVE_CARD_VERSION = "1.4"
+
+def create_textblock(text, 
+                     style="Default", 
+                     font_type="Default",
+                     font_size="Default", 
+                     font_weight="Default", 
+                     color="Default",
+                     is_visible=True):
+  return {
+    "type": "TextBlock",
+    "text": text,
+    "wrap": True,
+    "weight": font_weight,
+    "size": font_size,
+    "color": color,
+    "style": style,
+    "isVisible": is_visible
+  }
+  
+def create_factset(separator=False, facts=[], is_visible=True):
+  return {
+    "type": "FactSet",
+    "facts": facts,
+    "separator": separator,
+    "isVisible": is_visible
+  }
+  
+def create_fact(title, value):
+  return {
+    "title": title,
+    "value": value
+  }
+
+
+# S T A R T
+
+body = [
+  create_textblock(f"SOAR Incident {incident.id}", font_weight="bolder", color="Attention"),
+  create_factset(facts=[
+    create_fact("Title", incident.name),
+    create_fact("Description", incident.description.content.replace('"', '\\"') if incident.description else "-"),
+    create_fact("Owner", incident.owner_id),
+    create_fact("Types", ", ".join(str(x) for x in incident.incident_type_ids)),
+    create_fact("NIST Attack Vectors", ", ".join(str(x) for x in incident.nist_attack_vectors)),
+    create_fact("Create Date", datetime.datetime.fromtimestamp(incident.create_date/1000).strftime('%c')),
+    create_fact("Date Occurred", datetime.datetime.fromtimestamp(incident.start_date/1000).strftime('%c') if incident.start_date else "-"),
+    create_fact("Discovered Date", datetime.datetime.fromtimestamp(incident.discovered_date/1000).strftime('%c')),
+    create_fact("Confirmed", incident.confirmed),
+    create_fact("Severity", incident.severity_code)
+  ])
+]
+
+if playbook.inputs.teams_additional_comments:
+  body.append(create_textblock(playbook.inputs.teams_additional_comments.content))
+
+adaptive_card = {
+  "contentType": "application/vnd.microsoft.card.adaptive",
+  "content": {
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": ADAPTIVE_CARD_TYPE,
+    "version": ADAPTIVE_CARD_VERSION,
+    "body": body,
+    "actions": []
+  }
+}
+
+inputs.incident_id = incident.id
+inputs.teams_payload = json.dumps(adaptive_card)
+inputs.teams_channel = playbook.inputs.teams_channel
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+import time
+results = playbook.functions.results.ms_teams_post_result
+
+if results["success"]:
+  #
+  row = incident.addRow("msteams_approval_process")
+  row["date"] = int(time.time()*1000)
+  row["status"] = "Pending"
+  row["channel"] = playbook.inputs.teams_channel
+  row["expiration"] = playbook.inputs.approval_expiration
+  row["message"] =playbook.inputs.approval_message
+  row["soar_message_id"] = playbook.properties.soar_message_id.message_id
+  row["group"] = playbook.inputs.teams_group
+  row["task_id"] = task.id
+  row["task_name"] = task.name
+else:
+  incident.addNote(f"MS Teams approval post to channel {playbook.inputs.teams_channel} failed with: {results.reason}")
+```
+
+</p>
+</details>
+
+---
 
 ## Function - MS Teams: Archive Team
 This function allows for archiving or unarchiving a Microsoft Team. The `archive_operation` input parameter specifies if the team is to be archived or unarchived. Archiving does not delete the MS Team. To identify the team for archival or unarchival, one of the following inputs can be used:
@@ -291,9 +489,6 @@ This function allows for archiving or unarchiving a Microsoft Team. The `archive
 **<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over `ms_groupteam_name`, and the `ms_groupteam_id` parameter will take precedence over the other two options.
 
 ![screenshot: action_archive_team.png](./doc/screenshots/action_archive_team.png)
-
-![screenshot: wf_archive_team.png](./doc/screenshots/wf_archive_team.png)
-
 
 
 <details><summary>Inputs:</summary>
@@ -336,7 +531,7 @@ results = {
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "tasktesting@swivrllc.onmicrosoft.com",
+    "mail": "tasktesting@example.com",
     "mailEnabled": true,
     "mailNickname": "tasktesting",
     "membershipRule": null,
@@ -350,7 +545,7 @@ results = {
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:tasktesting@swivrllc.onmicrosoft.com"
+      "SMTP:tasktesting@example.com"
     ],
     "renewedDateTime": "2023-05-15T17:39:58Z",
     "resourceBehaviorOptions": [
@@ -463,8 +658,6 @@ To create a Channel for an MS Team, 3 key attributes are required, namely: teamI
 
 ![screenshot: action_create_channel.png](./doc/screenshots/action_create_channel.png)
 
-![screenshot: wf_create_channel.png](./doc/screenshots/wf_create_channel.png)
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -490,21 +683,21 @@ results = {
   "success": true,
   "reason": null,
   "content": {
-    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('322d20bf-450e-46d6-9338-f7e3b66a064c')/channels/$entity",
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('33333-450e-46d6-9338-f7e3b66a064c')/channels/$entity",
     "id": "19:c875f7333fb843aeacb01d1cbfa52ae5@thread.tacv2",
     "createdDateTime": "2023-05-15T18:26:57.6422279Z",
     "displayName": "test 1234",
     "description": "test 1234",
     "isFavoriteByDefault": false,
     "email": "",
-    "webUrl": "https://teams.microsoft.com/l/channel/19%3ac875f7333fb843aeacb01d1cbfa52ae5%40thread.tacv2/test+1234?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b",
+    "webUrl": "https://teams.microsoft.com/l/channel/19%3ac875f7333fb843aeacb01d1cbfa52ae5%40thread.tacv2/test+1234?groupId=33333-450e-46d6-9338-f7e3b66a064c&tenantId=55555-b889-434d-802d-13b87c68047b",
     "membershipType": "standard",
     "status_code": 201,
     "message": "Successfully created channel: test 1234"
   },
   "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
+    "ms_groupteam_id": "33333-450e-46d6-9338-f7e3b66a064c",
     "ms_channel_name": "test 1234",
     "ms_description": "test 1234"
   },
@@ -586,8 +779,6 @@ The function is developed to automatically add all members of an incident or a t
 
 ![screenshot: action_create_group.png](./doc/screenshots/action_create_group.png)
 
-![screenshot: wf_create_group.png](./doc/screenshots/wf_create_group.png)
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -628,7 +819,7 @@ results = {
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "test1@swivrllc.onmicrosoft.com",
+    "mail": "test1@example.com",
     "mailEnabled": true,
     "mailNickname": "test1",
     "membershipRule": null,
@@ -642,7 +833,7 @@ results = {
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:test1@swivrllc.onmicrosoft.com"
+      "SMTP:test1@example.com"
     ],
     "renewedDateTime": "2023-05-15T18:13:38Z",
     "resourceBehaviorOptions": [],
@@ -659,7 +850,7 @@ results = {
   "inputs": {
     "incident_id": 2122,
     "additional_members": "",
-    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
+    "ms_owners_list": "markscherfling@example.com",
     "ms_group_name": "test1",
     "ms_group_mail_nickname": "test1",
     "add_members_from": "None",
@@ -758,8 +949,6 @@ The function is developed to automatically add all members of an incident or a t
 
 ![screenshot: action_create_team.png](./doc/screenshots/action_create_team.png)
 
-![screenshot: wf_create_team.png](./doc/screenshots/wf_create_team.png)
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -803,7 +992,7 @@ results = {
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "tasktesting@swivrllc.onmicrosoft.com",
+    "mail": "tasktesting@example.com",
     "mailEnabled": true,
     "mailNickname": "tasktesting",
     "membershipRule": null,
@@ -817,7 +1006,7 @@ results = {
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:tasktesting@swivrllc.onmicrosoft.com"
+      "SMTP:tasktesting@example.com"
     ],
     "renewedDateTime": "2023-05-15T17:39:58Z",
     "resourceBehaviorOptions": [
@@ -842,7 +1031,7 @@ results = {
     "ms_team_name": "task testing",
     "incident_id": 2120,
     "additional_members": "",
-    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
+    "ms_owners_list": "markscherfling@example.com",
     "add_members_from": "None",
     "task_id": 126,
     "ms_description": "task testing"
@@ -940,8 +1129,6 @@ This function deletes a MS Channel. A MS Team can be assigned to multiple channe
 
 ![screenshot: action_delete_channel.png](./doc/screenshots/action_delete_channel.png)
 
-![screenshot: wf_delete_channel.png](./doc/screenshots/wf_delete_channel.png)
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -971,7 +1158,7 @@ results = {
   },
   "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
+    "ms_groupteam_id": "33333-450e-46d6-9338-f7e3b66a064c",
     "ms_channel_name": "Incident 2121 testing channels"
   },
   "metrics": {
@@ -1043,8 +1230,6 @@ This function deletes a MS Group. To identify this Group, one of the following i
 **<ins>Note</ins>**: When multiple parameters are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over the `ms_group_name`, and the `ms_group_id` parameter will take precedence over the other two.
 
 ![screenshot: action_delete_group.png](./doc/screenshots/action_delete_group.png)
-
-![screenshot: wf_delete_group.png](./doc/screenshots/wf_delete_group.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1149,8 +1334,6 @@ To identify the Group, one of the following inputs can be used:
 
 ![screenshot: action_enable_teams.png](./doc/screenshots/action_enable_teams.png)
 
-![screenshot: wf_enable_team.png](./doc/screenshots/wf_enable_team.png)
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -1187,7 +1370,7 @@ results = {
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "test1@swivrllc.onmicrosoft.com",
+    "mail": "test1@example.com",
     "mailEnabled": true,
     "mailNickname": "test1",
     "membershipRule": null,
@@ -1201,7 +1384,7 @@ results = {
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:test1@swivrllc.onmicrosoft.com"
+      "SMTP:test1@example.com"
     ],
     "renewedDateTime": "2023-05-15T18:13:38Z",
     "resourceBehaviorOptions": [],
@@ -1289,8 +1472,6 @@ incident.addNote(note)
 This application posts Incident or Task details to a MS Teams channel.  The channel name, specified by the `teams_channel` parameter, is used to lookup the appropriate channel webhook url maintained in app.config.
 
 ![screenshot: output_post_teams.png](./doc/screenshots/output_post_teams.png)
-
-![screenshot: wf_post_message.png](./doc/screenshots/wf_post_message.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1413,7 +1594,6 @@ Read messages from a Teams Channel
 
 ![screenshot: action_read_message.png](./doc/screenshots/action_read_message.png)
 
-![screenshot: wf_read_message.png](./doc/screenshots/wf_read_message.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1455,7 +1635,7 @@ results = {
       "chatId": null,
       "importance": "normal",
       "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3Aa62cab990d8648b6a9047787e030fa7e%40thread.tacv2/1684173756348?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b&createdTime=1684173756348&parentMessageId=1684173756348",
+      "webUrl": "https://teams.microsoft.com/l/message/19%3Aa62cab990d8648b6a9047787e030fa7e%40thread.tacv2/1684173756348?groupId=33333-450e-46d6-9338-f7e3b66a064c&tenantId=55555-b889-434d-802d-13b87c68047b&createdTime=1684173756348&parentMessageId=1684173756348",
       "policyViolation": null,
       "eventDetail": null,
       "from": {
@@ -1466,7 +1646,7 @@ results = {
           "id": "43dd7b73-6a70-475e-88c3-609a9f30b514",
           "displayName": "Mark Scherfling",
           "userIdentityType": "aadUser",
-          "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b"
+          "tenantId": "55555-b889-434d-802d-13b87c68047b"
         }
       },
       "body": {
@@ -1474,7 +1654,7 @@ results = {
         "content": "hello world"
       },
       "channelIdentity": {
-        "teamId": "322d20bf-450e-46d6-9338-f7e3b66a064c",
+        "teamId": "33333-450e-46d6-9338-f7e3b66a064c",
         "channelId": "19:a62cab990d8648b6a9047787e030fa7e@thread.tacv2"
       },
       "attachments": [],
@@ -1484,7 +1664,7 @@ results = {
   ],
   "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
+    "ms_groupteam_id": "33333-450e-46d6-9338-f7e3b66a064c",
     "ms_channel_name": "Incident 2121 testing channels"
   },
   "metrics": {
@@ -1569,32 +1749,65 @@ incident.addNote(note)
 
 ---
 
-
 ## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| MS Teams: Archive Team From Task (PB) | None | task | `enabled` |
-| MS Teams: Archive Team (PB) | None | incident | `enabled` |
-| MS Teams: Create Channel From Task (PB) | None | task | `enabled` |
-| MS Teams: Create Channel (PB) | None | incident | `enabled` |
-| MS Teams: Create Group From Task (PB) | None | task | `enabled` |
-| MS Teams: Create Group (PB) | None | incident | `enabled` |
-| MS Teams: Create Team From Task (PB) | None | task | `enabled` |
-| MS Teams: Create Team (PB) | None | incident | `enabled` |
-| MS Teams: Delete Channel From Task (PB) | None | task | `enabled` |
-| MS Teams: Delete Channel (PB) | None | incident | `enabled` |
-| MS Teams: Delete Group From Task (PB) | None | task | `enabled` |
-| MS Teams: Delete Group (PB) | None | incident | `enabled` |
-| MS Teams: Enable Teams for Group From Task (PB) | None | task | `enabled` |
-| MS Teams: Enable Teams for Group (PB) | None | incident | `enabled` |
-| MS Teams: Post Incident Information (PB) | None | incident | `enabled` |
-| MS Teams: Post Task Information (PB) | None | task | `enabled` |
-| MS Teams: Read Channel Messages From task (PB) | None | task | `enabled` |
-| MS Teams: Read Channel Messages (PB) | None | incident | `enabled` |
-
+| Playbook Name | Description | Activation Type | Object | Status | Condition | 
+| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
+| MS Teams: Archive Team From Task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Archive Team (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Create Channel From Task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Create Channel (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Create Group From Task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Create Group (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Create Team From Task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Create Team (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Delete Channel From Task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Delete Channel (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Delete Group From Task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Delete Group (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Enable Teams for Group From Task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Enable Teams for Group (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Post Incident Information (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Post Message for Workflows | Post a message to a Teams channel using the new Workflows model | Manual | incident | `enabled` | `-` | 
+| MS Teams: Post Chat Message (using Workflows) | incident | `enabled` | `-` |
+| MS Teams: Post Chat Task Message (using Workflows) | task | `enabled` | `-` |
+| MS Teams: Post Task Information (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Read Channel Messages From task (PB) | None | Manual | task | `enabled` | `-` | 
+| MS Teams: Read Channel Messages (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: Send Approval Request | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | incident | `enabled` | `-` | 
+| MS Teams: Send Approval Request for Tasks | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | task | `enabled` | `-` | 
 
 ---
+<!--
+## Custom Layouts
+When the poller is enabled, a tab is enabled automatically: MS Teams Approval Process. This tab containers the Approval Request datatable which is used track pending requests as well as the responses received from MS Teams.
 
+## Data Table - MS Teams Approval Process
+
+ ![screenshot: dt-ms-teams-approval-process](./doc/screenshots/dt-ms-teams-approval-process.png)
+
+#### API Name:
+msteams_approval_process
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Date | `date` | `datetimepicker` | Date the Approval request was submitted |
+| Status | `status` | `text` | 'Pending', 'Approved', 'Rejected', 'Invalid', 'Expired' |
+| Responder | `responder` | `text` | Name of person who responded to the approval request|
+| Response Date | `response_date` | `datetimepicker` | Date when response was received |
+| Response Comments | `response_comments` | `text` | Any additional comments added from the Responder|
+| Group | `group` | `text` | Group for the channel where the Approval Request was submitted |
+| Channel | `channel` | `text` | Channel where the Approval Request was submitted |
+| Message | `message` | `text` | Message added with the Approval Request |
+| Expiration | `expiration` | `datetimepicker` | Date when the approval will have expired |
+| Task Name | `task_name` | `text` | If associated with a Task, the task name |
+| Task Id | `task_id` | `text` |  If associated with a Task, the task_id |
+| Channel Id | `channel_id` | `text` | Id of the channel for quick lookup |
+| Group Id | `group_id` | `text` | Id of the group for quick lookup |
+| Message Id | `message_id` | `text` | Id of the message for quick lookup |
+| SOAR Message Id | `soar_message_id` | `text` | Internal Id of used to locate the approval request message |
+-->
+---
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

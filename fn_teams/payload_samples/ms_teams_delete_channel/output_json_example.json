@@ -4,19 +4,19 @@
   "reason": null,
   "content": {
     "status_code": 204,
-    "message": "Successfully deleted channel: Incident 2121 testing channels"
+    "message": "Successfully deleted channel: demoChannel"
   },
   "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-    "ms_channel_name": "Incident 2121 testing channels"
+    "ms_groupteam_id": "b4829344-e28d-4c8e-bb2a-c470e0bb1ee3",
+    "ms_channel_name": "demoChannel"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 3172,
-    "timestamp": "2023-05-15 14:09:04"
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1827,
+    "timestamp": "2024-08-15 11:55:04"
   }
 }

@@ -21,7 +21,7 @@ def patch_archive_unarchive_team(method, url, headers, callback):
         url=url,
         headers=headers,
         callback=callback)
-    
+
     if method == "get":
         if "groups" in url:
             assert "https://graph.microsoft.com/v1.0/groups" in url
@@ -32,11 +32,11 @@ def patch_archive_unarchive_team(method, url, headers, callback):
 
 
 @patch('resilient_lib.RequestsCommon.execute', side_effect=patch_archive_unarchive_team)
-def test_delete_group(patch, required_parameters):
+def test_read_messages(patch, required_parameters):
     mi = MessageClient(required_parameters.get("rc"))
 
     dual_headers ={
         "application" : {'Authorization': 'Bearer id123', 'Content-type': 'application/json'},
         "delegated"   : {'Authorization': 'Bearer id123', 'Content-type': 'application/json'}}
-    options = {"channel_name" : "Unittest Group1", "group_id" : "1234"}
+    options = {"channel_id" : "abc", "group_id" : "1234"}
     mi.read_messages(dual_headers, options)

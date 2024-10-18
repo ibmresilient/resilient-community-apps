@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 """Function implementation
    test with: resilient-circuits selftest -l fn_teams
 """
@@ -12,15 +12,19 @@ from resilient_lib import IntegrationError, RequestsCommon
 
 from fn_teams.lib import constants
 from fn_teams.lib.microsoft_authentication import MicrosoftAuthentication
+from fn_teams.lib.microsoft_messages import MessageClient
 
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
+LOG = logging.getLogger(__name__)
+LOG.setLevel(logging.INFO)
+LOG.addHandler(logging.StreamHandler())
 
 # channel reference for testing
 SELF_TEST = "selftest"
+SELF_TEST_WORKFLOWS = "selftest_workflows"
 APPLICATION_PERMISSION_TEST = "application_id"
 DELEGATED_PERMISSION_TEST = "refresh_token"
+
+SELFTEST_MSG = "SOAR SelfTest"
 
 def selftest_function(opts):
     """
@@ -31,7 +35,7 @@ def selftest_function(opts):
     TEST 1: Authentication: Application Permission
         This tests the ability of the application to interface with the
         endpoint and to create groups, teams and channels.
-    
+
     TEST 2: Authentication: Delegation Permission
         This tests the ability of the application to interface with the
         endpoint and to read messages.
@@ -43,22 +47,23 @@ def selftest_function(opts):
     Self Objects:
     -------------
         rc      <rc> : Resilient wrapper for Requests object
-        log <logger> : Resilient wrapper for logger object
+        LOG <logger> : Resilient wrapper for logger object
 
     Returns:
     --------
         result <dict> : Test state and reason
     """
-    err_reason, authenticated = "", False
-    test_pass_1, test_pass_2, test_pass_3 = False, False, False
+    err_reason = ""
+    all_tests = True
 
 
     options = opts.get("fn_teams", {})
     rc = RequestsCommon(opts, options)
 
     # TEST 1: Teams Authentication: Application permissions
-    log.info("Testing Application permissions")
+    LOG.info("Testing Application permissions")
     if APPLICATION_PERMISSION_TEST in options:
+        authenticated = False
         try:
             authenticator = MicrosoftAuthentication(rc, options)
             header = authenticator.authenticate_application_permissions()
@@ -66,45 +71,66 @@ def selftest_function(opts):
             err_reason += constants.MSG_APP_AUTHENTICATION_PASSED
 
         except IntegrationError as err:
-            log.error(str(err))
+            LOG.error(str(err))
+            authenticated = False
             err_reason += constants.MSG_APP_AUTHENTICATION_FAILED.format(str(err))
 
         if authenticated:
-            log.info("Testing Application scopes")
+            LOG.info("Testing Application scopes")
             try:
                 rc.execute(method="get",
                     url=parse.urljoin(constants.BASE_URL, constants.URL_LIST_USERS),
                     headers=header)
                 err_reason += constants.MSG_LIST_USER_PASSED
-                test_pass_1 = True
 
             except IntegrationError as err:
-                log.error(str(err))
+                LOG.error(str(err))
                 err_reason += constants.MSG_LIST_USER_FAILED.format(str(err))
-                test_pass_1 = False
+                all_tests &= False
     else:
-        log.warn(constants.WARN_NO_APP_PERMISSION)
+        LOG.warning(constants.WARN_NO_APP_PERMISSION)
 
     # TEST 2: Teams Authentication: Delegated permissions
     if DELEGATED_PERMISSION_TEST in options:
-        log.info("Testing Delegated permissions")
+        LOG.info("Testing Delegated permissions")
         refresh_token = options.get(DELEGATED_PERMISSION_TEST)
         try:
             authenticator = MicrosoftAuthentication(rc, options)
             header = authenticator.authenticate_delegated_permissions(refresh_token)
-            test_pass_2 = True
             err_reason += constants.MSG_DEL_AUTHENTICATION_PASSED
 
         except IntegrationError as err:
-            log.error(str(err))
+            LOG.error(str(err))
             err_reason += constants.MSG_DEL_AUTHENTICATION_FAILED.format(str(err))
+            all_tests &= False
     else:
         # Test 2 is skipped if refresh_token is not found in app.conf
-        log.warn(constants.WARN_NO_DEL_PERMISSION)
+        LOG.warning(constants.WARN_NO_DEL_PERMISSION)
+
+    test_pass_3, err_reason_test_3 = test_post_channel(rc, opts, options)
+    err_reason += err_reason_test_3
+    all_tests &= test_pass_3
+
+    test_pass_4, err_reason_test_4 = test_post_workflows(rc, options)
+    err_reason += err_reason_test_4
+    all_tests &= test_pass_4
+
+    if all_tests:
+        return {
+            "state" : "success",
+            "reason": err_reason}
+
+    return {
+        "state": "failure",
+        "reason": err_reason}
+
+def test_post_channel(rc, opts, options):
+    err_reason = ""
+    test_pass = True
 
     if options.get(SELF_TEST):
         # TEST 3: Teams POST MESSAGE (Skipped if selftest option not found in app.conf)
-        log.info("Testing webhooks")
+        LOG.info("Testing webhooks")
         webhook = options.get(SELF_TEST)
         try:
             proxy = rc.get_proxies() if rc.get_proxies() else {}
@@ -114,26 +140,72 @@ def selftest_function(opts):
                 https_proxy=opts.get('proxy_http', proxy.get('https')),
                 http_timeout=60)
 
-            card.title("SOAR SelfTest")
+            card.title(SELFTEST_MSG)
             card.text(datetime.ctime(datetime.now()))
             card.send()
 
             err_reason += constants.MSG_POST_MSG_PASSED
-            test_pass_3 = True
 
         except IntegrationError as err:
-            log.error(str(err))
+            LOG.error(str(err))
             err_reason += constants.MSG_POST_MSG_FAILED.format(str(err))
-            test_pass_3 = False
-    else:
-        # Test 3 is skipped if selftest option is not found in app.conf
-        log.warn(constants.WARN_NO_WEBHOOKS_FOUND)
+            test_pass = False
 
-    if test_pass_1 or test_pass_2 or test_pass_3:
-        return {
-            "state" : "success",
-            "reason": err_reason}
+    return (test_pass, err_reason)
 
+def test_post_workflows(rc, options):
+    err_reason = ""
+    test_pass = True
+
+    if options.get(SELF_TEST_WORKFLOWS):
+        # TEST 4: Teams POST MESSAGE WORKFLOWS (Skipped if selftest_workflows option not found in app.conf)
+        LOG.info("Testing workflows")
+        webhook = options.get(SELF_TEST_WORKFLOWS)
+        message_client = MessageClient(rc)
+
+        body = {
+            "type": "TextBlock",
+            "text": SELFTEST_MSG,
+            "isVisible": True
+        }
+
+        teams_payload = return_test_adaptive_card(body)
+
+        proxies = rc.get_proxies()
+
+        try:
+            results = message_client.post_message_workflow(
+                webhook,
+                teams_payload,
+                proxies
+            )
+
+            if results.get("status_code") and int(results["status_code"]/100) == 2:
+                err_reason = constants.MSG_POST_WORKFLOW_PASSED
+            else:
+                err_reason = constants.MSG_POST_WORKFLOW_FAILED.format(results["status_code"]/100)
+                test_pass = False
+        except Exception as err:
+            test_pass = False
+            err_reason = constants.MSG_POST_WORKFLOW_FAILED.format(str(err))
+
+    return (test_pass, err_reason)
+
+def return_test_adaptive_card(body):
+    """return format for adaptive card
+
+    :param body: body of message to send as an adaptive card
+    :type body: dict
+    :return: adaptive card
+    :rtype: dict
+    """
     return {
-        "state": "failure",
-        "reason": err_reason}
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "content": {
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "type": "AdaptiveCard",
+            "version": "1.4",
+            "body": [body],
+            "actions": []
+        }
+    }

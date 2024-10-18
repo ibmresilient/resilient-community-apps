@@ -52,7 +52,7 @@ class TestTeamsPostMessage:
     ])
     def test_success(self, circuits_app, incident_id, task_id, teams_channel, teams_payload, teams_mrkdown, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "incident_id": incident_id,
             "task_id": task_id,
             "teams_channel": teams_channel,

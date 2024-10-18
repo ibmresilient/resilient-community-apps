@@ -78,10 +78,14 @@
           "type": "string"
         },
         "theme": {},
+        "uniqueName": {},
         "visibility": {
           "type": "string"
         },
         "onPremisesProvisioningErrors": {
+          "type": "array"
+        },
+        "serviceProvisioningErrors": {
           "type": "array"
         },
         "teamsEnabled": {
@@ -99,13 +103,10 @@
         "incident_id": {
           "type": "integer"
         },
-        "additional_members": {
+        "ms_group_name": {
           "type": "string"
         },
         "ms_owners_list": {
-          "type": "string"
-        },
-        "ms_group_name": {
           "type": "string"
         },
         "ms_group_mail_nickname": {
@@ -114,7 +115,6 @@
         "add_members_from": {
           "type": "string"
         },
-        "task_id": {},
         "ms_description": {
           "type": "string"
         }

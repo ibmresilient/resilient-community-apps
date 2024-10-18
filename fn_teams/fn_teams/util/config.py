@@ -11,10 +11,8 @@ def config_section_data():
     """
     return u"""[fn_teams]
 #
-# <channel_name> = <channel webhook url> 
-# (<channel_name> and the <teams_channel> input for the MS Teams: Post Message function must be the same.
-#
-# selftest = <selftest channel webhook url>
+# Use in function 'MS Teams: Post Message' with the input field: team_channel
+# <team_channel> = <channel webhook url>
 #
 # directory_id and application_id can be found at
 #    portal.azure.com > App registrations > Integration Name > Overview
@@ -28,6 +26,17 @@ def config_section_data():
 directory_id = <Directory (tenant) ID>
 application_id = <Application (client) ID>
 secret_value = <Secret Value>
-# refresh_token = <Refresh token> 
-
+# refresh_token = <Refresh token>
+# selftest = <selftest channel webhook url>
+# selftest_workflows = <selftest channel webhook url and Teams Workflows>
 """
+
+# not v3.0
+# [fn_teams_approval_process]
+# # if using the Approval Request process, enable the poller to check for approval request updates
+# # in seconds
+# #poller_interval=60
+# # Comma separated list of case-insensitive approval words
+# approval_words=accept, accepted, approve, approved, ok
+# # Comma separated list of case-insensitive rejection words
+# rejection_words=reject, rejected, deny, denied, no

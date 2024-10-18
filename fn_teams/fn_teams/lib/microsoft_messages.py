@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """ Helper function for funct_ms_teams_post_message"""
-import json, logging
+import json
+import logging
 import pymsteams
 from urllib import parse
 
-from resilient_lib import (build_resilient_url, build_incident_url, 
+from resilient_lib import (build_resilient_url, build_incident_url,
                            build_task_url, IntegrationError, MarkdownParser)
 from fn_teams.lib import constants, microsoft_commons
 
-
+ADAPTIVE_CARD_TYPE = "AdaptiveCard"
+ADAPTIVE_CARD_VERSION = "1.4"
 class MessageClient:
     """
         This application allows for posting Incident/Task details to a MS Teams channel.
@@ -24,7 +26,7 @@ class MessageClient:
         Args:
         -----
             rc <obj> : request_common object from AppFunctionComponent
-        
+
         Returns:
         --------
             status  <bool> : True/False
@@ -41,7 +43,7 @@ class MessageClient:
         options:  (options from app.conf file)
         --------
             host <str> : Host URL of the SOAR Instance
-            port <int> : Port number 
+            port <int> : Port number
 
         kwargs:
         -------
@@ -115,7 +117,7 @@ class MessageClient:
         teams_payload = kwargs.get("teams_payload")
         teams_mrkdown = kwargs.get("teams_mrkdown")
 
-        incident_url = build_incident_url( 
+        incident_url = build_incident_url(
             build_resilient_url(
                 options.get('host'),
                 options.get('port')),
@@ -155,8 +157,76 @@ class MessageClient:
             card.addSection(cardsection)
         return card
 
+    def post_message_workflow(self, channel_url, adaptive_card, proxies):
+        workflow_payload = {
+            "type":"message",
+            "attachments": [
+                adaptive_card
+            ]
+        }
 
-    def read_messages(self, dual_headers, options):
+        self.log.debug(f"workflow_payload: {workflow_payload}")
+
+        response_handler = microsoft_commons.ResponseHandler()
+        response = self.rc.execute(
+            "post",
+            url=channel_url,
+            json= workflow_payload,
+            proxies=proxies,
+            callback=response_handler.check_response
+        )
+
+        return response
+
+    def build_workflow_adaptive_card(self, options, fn_inputs, adaptive_card, org_id):
+        """build out additional information for the adaptive card including:
+             * link to SOAR incident
+             * link to SOAR incident task (if task_id is specified)
+
+        :param options: app.config settings
+        :type options: dict
+        :param fn_inputs: input parameters from the function call
+        :type fn_inputs: dict
+        :param adaptive_card: fn_inputs.teams_payload content
+        :type adaptive_card: dict
+        :param org_id: SOAR org_id
+        :type org_id: int
+        :return: updated adaptive_card
+        :rtype: dict
+        """
+
+        # get url information for either incident or incident task
+        incident_url = None
+        if fn_inputs.get("task_id"):
+            incident_url = build_task_url(
+                build_resilient_url(
+                    options.get("host"),
+                    options.get("port")),
+                org_id=org_id,
+                task_id=fn_inputs.get("task_id"),
+                incident_id=fn_inputs.get("incident_id")
+            )
+            case_type = constants.TASK.title()
+        elif fn_inputs.get("incident_id"):
+            incident_url = build_incident_url(
+                build_resilient_url(
+                    options.get("host"),
+                    options.get("port")),
+                orgId=org_id,
+                incidentId=fn_inputs.get("incident_id")
+            )
+            case_type = constants.INCIDENT.title()
+
+        if incident_url and isinstance(adaptive_card["content"]["body"], list):
+            adaptive_card["content"]["body"] = \
+            [{
+                "type": "TextBlock",
+                "text": f"View SOAR [{case_type}]({incident_url})"
+            }] + adaptive_card["content"]["body"]
+
+        return adaptive_card
+
+    def read_messages(self, dual_headers, options, replies=False):
         """
         The Graph API's read message method is one of Microsoft's protected APIs since
         it has access to sensitive data. The user must grant this application permission
@@ -166,7 +236,7 @@ class MessageClient:
         on the channel or the replies to a specific message. The function can retrieve all
         replies to a certain message if it is given the message id for that message. The
         function will dump all messages in that channel back into SOAR if the channel name
-        attribute is given. 
+        attribute is given.
 
         options:
         --------
@@ -174,9 +244,8 @@ class MessageClient:
             channel_id             <str> : Id of the channel, the message belongs
             group_id               <str> : Id of the group, the channel belongs
             channel_name           <str> : Name of the MS Channel to be deleted
-            ms_description         <str> : Description for the Channel
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group
+            group_name             <str> : Name of the Microsoft Group
 
         Returns:
         --------
@@ -186,33 +255,78 @@ class MessageClient:
                               fails
         """
         response_handler = microsoft_commons.ResponseHandler()
+        channel_finder = microsoft_commons.MSFinder(
+                rc=self.rc,
+                rh=response_handler,
+                headers=dual_headers.get("application"))
 
-        if "message_id" in options:
+        if options.get("channel_name") and not options.get("channel_id"):
+            channel = channel_finder.find_channel(options)
+            options["group_id"] = channel.get("group_id")
+            options["channel_id"] = channel.get("id")
+
+        if not options.get("group_id"):
+            options["group_id"] = channel_finder.find_group_id(options)
+
+        if options.get("message_id"):
             url = parse.urljoin(
                 constants.BASE_URL,
-                constants.URL_CHANNEL_MSG_REPLY.format(
+                constants.URL_CHANNEL_MSG.format(
                     options.get("group_id"),
                     options.get("channel_id"),
                     options.get("message_id")))
 
-        else:
-            channel_finder = microsoft_commons.MSFinder(
-                rc=self.rc,
-                rh=response_handler,
-                headers=dual_headers.get("application"))
-            channel = channel_finder.find_channel(options)
+            if replies:
+                url = f"{url}/replies"
 
+            results = self.rc.execute("get",
+                                        url=url,
+                                        headers=dual_headers.get("delegated"),
+                                        callback=response_handler.check_response)
+            if results:
+                results = [results] # make it look like the other API call for all messages
+        else:
             url = parse.urljoin(
                 constants.BASE_URL,
-                constants.URL_CHANNEL_MSG.format(
-                    channel.get("group_id"),
-                    channel.get("id")))
+                constants.URL_CHANNEL_ALL_MESSAGES.format(
+                    options.get("group_id"),
+                    options.get("channel_id")))
 
+            results = self._follow_next_link("get",
+                                            url,
+                                            dual_headers.get("delegated"),
+                                            response_handler.check_response)
+
+        self.log.debug(results)
+        return results
+
+    def _follow_next_link(self, method, url, headers, callback):
+        """api calls which are paged will specify a url to get the next page. This routine
+            if recursively called, if additional API calls are needed.
+
+        :param method: "GET", "POST", etc
+        :type method: str
+        :param url: URL to execute
+        :type url: str
+        :param headers: headers to pass with the API call
+        :type headers: dict
+        :param callback: call back routine to review results of API call
+        :type callback: function
+        :return: Response of API call
+        :rtype: dict
+        """
         response = self.rc.execute(
-            "get",
+            method,
             url=url,
-            headers=dual_headers.get("delegated"),
-            callback=response_handler.check_response)
+            headers=headers,
+            callback=callback)
 
-        self.log.info(response)
-        return response.get("value")
+        results = response.get("value")
+
+        if response.get("@odata.nextLink"):
+            results.extend(self._follow_next_link(method,
+                                                response["@odata.nextLink"],
+                                                headers,
+                                                callback))
+
+        return results

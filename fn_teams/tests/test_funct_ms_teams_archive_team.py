@@ -90,17 +90,17 @@ def test_delete_group(patch, required_parameters):
         "operation" : "unarchive",
         "group_id": "40bd9442-ca0f-4c7c-ba64-5e0fa56f3fb9"})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         ti.archive_unarchive_team({
         "operation" : "archive",
         "group_mail_nickname" : ""})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         ti.archive_unarchive_team({
         "operation" : "unarchive",
         "group_name" : ""})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         ti.archive_unarchive_team({
         "operation" : "archive",
         "group_id" : ""})

@@ -2,59 +2,72 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": [
-    {
-      "id": "1684173756348",
-      "replyToId": null,
-      "etag": "1684173756348",
-      "messageType": "message",
-      "createdDateTime": "2023-05-15T18:02:36.348Z",
-      "lastModifiedDateTime": "2023-05-15T18:02:36.348Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3Aa62cab990d8648b6a9047787e030fa7e%40thread.tacv2/1684173756348?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b&createdTime=1684173756348&parentMessageId=1684173756348",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "application": null,
-        "device": null,
-        "user": {
-          "@odata.type": "#microsoft.graph.teamworkUserIdentity",
-          "id": "43dd7b73-6a70-475e-88c3-609a9f30b514",
-          "displayName": "Mark Scherfling",
-          "userIdentityType": "aadUser",
-          "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b"
-        }
-      },
-      "body": {
-        "contentType": "text",
-        "content": "hello world"
-      },
-      "channelIdentity": {
-        "teamId": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-        "channelId": "19:a62cab990d8648b6a9047787e030fa7e@thread.tacv2"
-      },
-      "attachments": [],
-      "mentions": [],
-      "reactions": []
-    }
-  ],
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('322d20bf-450e-46d6-9338-f7e3b66a064c')/channels('19%3A2sZyMM-U3RLyCM_-GCDBQFLyWIfUcSWvH6bzWI8OzKk1%40thread.tacv2')/messages/$entity",
+    "id": "1723667505171",
+    "replyToId": null,
+    "etag": "1723667505171",
+    "messageType": "message",
+    "createdDateTime": "2024-08-14T20:31:45.171Z",
+    "lastModifiedDateTime": "2024-08-14T20:31:45.171Z",
+    "lastEditedDateTime": null,
+    "deletedDateTime": null,
+    "subject": null,
+    "summary": null,
+    "chatId": null,
+    "importance": "normal",
+    "locale": "en-us",
+    "webUrl": "https://teams.microsoft.com/l/message/19%3A2sZyMM-U3RLyCM_-GCDBQFLyWIfUcSWvH6bzWI8OzKk1%40thread.tacv2/1723667505171?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b&createdTime=1723667505171&parentMessageId=1723667505171",
+    "policyViolation": null,
+    "eventDetail": null,
+    "from": {
+      "device": null,
+      "user": null,
+      "application": {
+        "@odata.type": "#microsoft.graph.teamworkApplicationIdentity",
+        "id": "358f0194-6b0e-4dd3-af35-c24fe8a9ec87",
+        "displayName": "Workflows",
+        "applicationIdentityType": "bot"
+      }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<attachment id=\"b48de9d48b884136af0e029b78be53b9\"></attachment>"
+    },
+    "channelIdentity": {
+      "teamId": "322d20bf-450e-46d6-9338-f7e3b66a064c",
+      "channelId": "19:2sZyMM-U3RLyCM_-GCDBQFLyWIfUcSWvH6bzWI8OzKk1@thread.tacv2"
+    },
+    "attachments": [
+      {
+        "id": "b48de9d48b884136af0e029b78be53b9",
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": null,
+        "content": "{\r\n  \"type\": \"AdaptiveCard\",\r\n  \"body\": [\r\n    {\r\n      \"text\": \"View SOAR [Incident](https://9.30.108.190:443/#incidents/2710?orgId=202)\",\r\n      \"type\": \"TextBlock\"\r\n    },\r\n    {\r\n      \"text\": \"IBM SOAR Approval Request submitted by Resilient Sysadmin (a@example.com)\",\r\n      \"wrap\": true,\r\n      \"type\": \"TextBlock\"\r\n    },\r\n    {\r\n      \"color\": \"accent\",\r\n      \"text\": \"test for tasks\",\r\n      \"wrap\": true,\r\n      \"type\": \"TextBlock\"\r\n    },\r\n    {\r\n      \"items\": [\r\n        {\r\n          \"size\": \"medium\",\r\n          \"text\": \"Please select an option:\",\r\n          \"weight\": \"bolder\",\r\n          \"separator\": true,\r\n          \"type\": \"TextBlock\"\r\n        },\r\n        {\r\n          \"choices\": [\r\n            {\r\n              \"title\": \"Approve\",\r\n              \"value\": \"approve\"\r\n            },\r\n            {\r\n              \"title\": \"Reject\",\r\n              \"value\": \"reject\"\r\n            }\r\n          ],\r\n          \"value\": \"approve\",\r\n          \"id\": \"approval_selection\",\r\n          \"type\": \"Input.ChoiceSet\"\r\n        },\r\n        {\r\n          \"isMultiline\": true,\r\n          \"placeholder\": \"Add additional comments\",\r\n          \"id\": \"approval_comments\",\r\n          \"type\": \"Input.Text\"\r\n        },\r\n        {\r\n          \"text\": \"This approval will expire on 2024-08-15 05:00:00\",\r\n          \"wrap\": true,\r\n          \"type\": \"TextBlock\"\r\n        }\r\n      ],\r\n      \"type\": \"Container\"\r\n    },\r\n    {\r\n      \"actions\": [\r\n        {\r\n          \"data\": {\r\n            \"soar_message_id\": \"88f08ba24333-779b07d3f7e9-64362a24d2d7-e519ad8f4d15-240f8aed2eb822e8\"\r\n          },\r\n          \"title\": \"Submit\",\r\n          \"type\": \"Action.Submit\"\r\n        },\r\n        {\r\n          \"card\": {\r\n            \"type\": \"AdaptiveCard\",\r\n            \"body\": [\r\n              {\r\n                \"facts\": [\r\n                  {\r\n                    \"title\": \"Title\",\r\n                    \"value\": \"Sentinel Incident 5577 - Suspicious authentication activity\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Description\",\r\n                    \"value\": \"Although none of them succeeded, some of them used accounts were recognized by the host. This resembles a dictionary attack, in which an attacker performs numerous authentication attempts using a dictionary of predefined account names and passwords in order to find valid credentials to access the host. This indicates that some of your host account names might exist in a well-known account name dictionary.\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Owner\",\r\n                    \"value\": \"Default Group\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Types\",\r\n                    \"value\": \"\"\r\n                  },\r\n                  {\r\n                    \"title\": \"NIST Attack Vectors\",\r\n                    \"value\": \"\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Create Date\",\r\n                    \"value\": \"Wed Aug 14 08:12:44 2024\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Date Occurred\",\r\n                    \"value\": \"Wed Aug 14 07:00:00 2024\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Discovered Date\",\r\n                    \"value\": \"Wed Aug 14 08:12:23 2024\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Confirmed\",\r\n                    \"value\": \"False\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Severity\",\r\n                    \"value\": \"Medium\"\r\n                  }\r\n                ],\r\n                \"type\": \"FactSet\"\r\n              },\r\n              {\r\n                \"facts\": [\r\n                  {\r\n                    \"title\": \"Task\",\r\n                    \"value\": \"test post workflows\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Task Owner\"\r\n                  },\r\n                  {\r\n                    \"title\": \"Task Due Date\"\r\n                  }\r\n                ],\r\n                \"separator\": true,\r\n                \"type\": \"FactSet\"\r\n              }\r\n            ],\r\n            \"version\": \"1.4\"\r\n          },\r\n          \"title\": \"SOAR Incident Details 2710\",\r\n          \"id\": \"soar2710\",\r\n          \"type\": \"Action.ShowCard\"\r\n        }\r\n      ],\r\n      \"type\": \"ActionSet\"\r\n    },\r\n    {\r\n      \"items\": [\r\n        {\r\n          \"size\": \"small\",\r\n          \"text\": \"Mark Scherfling used a Workflow template to send this card. [Get template](https://teams.microsoft.com/l/task/c3a1996d-db0f-4857-a6ea-7aabf0266b00?url=https%3A%2F%2Fmake.powerautomate.com%2Fteams%2Fstore%2FflowCreation%3FtemplateId%3Dd271a6f01c2545a28348d8f2cddf4c8f%26campaign%3DWorkflowGetTemplateFooter%26theme%3D{theme}%26locale%3D{locale}%26appSessionId%3D{appSessionId}&launchAgent=workflowsFooter&deeplinkId=d271a6f01c2545a28348d8f2cddf4c8f)\",\r\n          \"weight\": \"lighter\",\r\n          \"wrap\": true,\r\n          \"type\": \"TextBlock\"\r\n        }\r\n      ],\r\n      \"separator\": true,\r\n      \"type\": \"Container\"\r\n    }\r\n  ],\r\n  \"version\": \"1.2\"\r\n}",
+        "name": null,
+        "thumbnailUrl": null,
+        "teamsAppId": null
+      }
+    ],
+    "mentions": [],
+    "reactions": [],
+    "status_code": 200
+  },
   "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-    "ms_channel_name": "Incident 2121 testing channels"
+    "ms_groupteam_id": null,
+    "ms_message_id": "1723667505171",
+    "ms_channel_name": "testit",
+    "ms_group_mail_nickname": null,
+    "ms_groupteam_name": "swivrllc",
+    "ms_channel_id": null
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 3707,
-    "timestamp": "2023-05-15 14:06:30"
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 2264,
+    "timestamp": "2024-08-15 13:43:22"
   }
 }

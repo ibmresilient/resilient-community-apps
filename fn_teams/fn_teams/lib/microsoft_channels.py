@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 ''' Helper function for funct_ms_teams_create_teams'''
 
@@ -43,21 +43,24 @@ class ChannelInterface:
         class from microsoft_commons is being used. A team or a group can be located using
         any one of the 3 mentioned attributes.
 
-            -> ms_groupteam_id
-            -> ms_group_mail_nickname
-            -> ms_groupteam_name
+            -> group_id
+            -> group_mail_nickname
+            -> group_name
 
         Note: If multiple options are provided to locate the Graph Object then
-        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes the
-        other two options. 
+        ms_group_mail_nickname supersedes group_name and group_id supersedes the
+        other two options.
 
         options:
         --------
-            displayName            <str> : Name of the MS Channel to be created
-            description            <str> : Description of the Channel being created
-            ms_description         <str> : Desciption for the Channel
-            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group
+            displayName         <str> : Name of the MS Channel to be created
+            description         <str> : Description of the Channel being created
+            group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            group_name          <str> : Name of the Microsoft Group
+            group_id            <str> : The group unique Id
+
+        one of group_name_nickname, group_name or group_id is required
+
 
         Returns:
         --------
@@ -70,12 +73,7 @@ class ChannelInterface:
             rc=self.rc,
             rh=self.response_handler,
             headers=self.headers)
-        group_details = group_finder.find_group(options)
-
-        if len(group_details) > 1:
-            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
-
-        group_id = group_details[0].get("id")
+        group_id = group_finder.find_group_id(options)
 
         url = parse.urljoin(
             constants.BASE_URL,
@@ -101,8 +99,8 @@ class ChannelInterface:
             response["message"] = constants.INFO_SUCCESSFULLY_CREATED_CHANNEL.format(
                 options.get("displayName"))
             return response
-        else:
-            raise IntegrationError(constants.ERROR_COULDNOT_CREATE_CHANNEL)
+
+        raise IntegrationError(constants.ERROR_COULDNOT_CREATE_CHANNEL)
 
 
     def delete_channel(self, options):
@@ -116,20 +114,20 @@ class ChannelInterface:
         group or team for which the channel is associated, one of the following options
         can be used:
 
-            -> ms_groupteam_id
-            -> ms_group_mail_nickname
-            -> ms_groupteam_name
+            -> group_id
+            -> group_mail_nickname
+            -> group_name
 
         Note: If multiple options are provided to locate the Graph Object then
-        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes the
-        other two options. 
+        ms_group_mail_nickname supersedes ms_group_name and group_id supersedes the
+        other two options.
 
         options:
         --------
-            channel_name           <str> : Name of the MS Channel to be deleted
-            ms_description         <str> : Desciption for the Channel
-            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group
+            channel_name        <str> : Name of the MS Channel to be deleted
+            group_id            <str> : The group unique Id
+            group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            group_name          <str> : Name of the Microsoft Group
 
         Returns:
         --------
@@ -161,5 +159,5 @@ class ChannelInterface:
                 .INFO_SUCCESSFULLY_DELETED_CHANNEL
                 .format(channel.get("displayName")))
             return response
-        else:
-            raise IntegrationError(constants.ERROR_COULDNOT_DELETE_CHANNEL)
+
+        raise IntegrationError(constants.ERROR_COULDNOT_DELETE_CHANNEL)

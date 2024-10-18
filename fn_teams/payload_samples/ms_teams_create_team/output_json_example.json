@@ -4,24 +4,24 @@
   "reason": null,
   "content": {
     "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
-    "id": "87fd1ea0-6a3f-4078-b271-e4f8e6f8469e",
+    "id": "54da6ae1-05bb-4fa4-9823-5ad73078552f",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2023-05-15T17:39:58Z",
+    "createdDateTime": "2024-08-14T15:26:32Z",
     "creationOptions": [
       "Team",
       "ExchangeProvisioningFlags:3552"
     ],
-    "description": "task testing",
-    "displayName": "task testing",
+    "description": "new team for archival",
+    "displayName": "testTeamForArchival",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "tasktesting@swivrllc.onmicrosoft.com",
+    "mail": "testTeamForArchival@example.com",
     "mailEnabled": true,
-    "mailNickname": "tasktesting",
+    "mailNickname": "testTeamForArchival",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -33,9 +33,9 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:tasktesting@swivrllc.onmicrosoft.com"
+      "SMTP:testTeamForArchival@example.com"
     ],
-    "renewedDateTime": "2023-05-15T17:39:58Z",
+    "renewedDateTime": "2024-08-14T15:26:32Z",
     "resourceBehaviorOptions": [
       "HideGroupInOutlook",
       "SubscribeMembersToCalendarEventsDisabled",
@@ -45,30 +45,30 @@
       "Team"
     ],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-2281512608-1081633343-4175720882-2655451366",
+    "securityIdentifier": "S-1-12-1-1423600353-1336149435-3613008792-794130480",
     "theme": null,
+    "uniqueName": null,
     "visibility": "Private",
     "onPremisesProvisioningErrors": [],
+    "serviceProvisioningErrors": [],
     "status_code": 200,
     "teamsEnabled": true,
     "unfoundUsers": null
   },
   "raw": null,
   "inputs": {
-    "ms_team_name": "task testing",
-    "incident_id": 2120,
-    "additional_members": "",
-    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
+    "ms_team_name": "testTeamForArchival",
+    "incident_id": 2710,
+    "ms_owners_list": "MarkScherfling@example.com",
     "add_members_from": "None",
-    "task_id": 126,
-    "ms_description": "task testing"
+    "ms_description": "new team for archival"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 50594,
-    "timestamp": "2023-05-15 13:40:47"
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 5804,
+    "timestamp": "2024-08-14 11:26:35"
   }
 }

@@ -1,6 +1,7 @@
 
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import validate_fields, IntegrationError
@@ -52,14 +53,14 @@ class FunctionComponent(AppFunctionComponent):
          """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
-        
+
         validate_fields([
             "incident_id",
             "ms_group_name",
+            "ms_group_mail_nickname",
             "ms_owners_list",
-            "ms_description",
             "add_members_from",
-            "ms_group_mail_nickname"], fn_inputs)
+            ], fn_inputs)
 
         required_parameters = {}
         required_parameters["rc"] = self.rc
@@ -84,7 +85,6 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
         except IntegrationError as err:
-            self.LOG.error(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
             yield self.status_message(constants.STATUS_AUTHENTICATION_FAILED)
             authenticated = False
             yield FunctionResult({}, success=False, reason=str(err))

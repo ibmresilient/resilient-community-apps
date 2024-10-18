@@ -81,10 +81,14 @@
           "type": "string"
         },
         "theme": {},
+        "uniqueName": {},
         "visibility": {
           "type": "string"
         },
         "onPremisesProvisioningErrors": {
+          "type": "array"
+        },
+        "serviceProvisioningErrors": {
           "type": "array"
         },
         "status_code": {

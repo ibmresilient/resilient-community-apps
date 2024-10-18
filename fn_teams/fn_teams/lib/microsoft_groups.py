@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 #(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-import json, logging
+import json
+import logging
 
 from urllib import parse
 from resilient_lib import IntegrationError
@@ -22,7 +23,7 @@ class GroupsInterface:
             ms_group_name          <str> : Name of the Microsoft Group to be created
             ms_owners_list         <str> : List of owners email addresses
             add_members_from       <str> : Specifies if members to be added form incident or task
-            additional_mambers     <str> : List of email addresses of additional members to be added
+            additional_members     <str> : List of email addresses of additional members to be added
             ms_group_description   <str> : Description for the group to be created
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
 
@@ -97,12 +98,12 @@ class GroupsInterface:
         """
         Retrieves all the user information from the SOAR instance and validates if these users'
         email addresses are associated with a valid Microsoft account. They are then segerated
-        segregated into owners and members and their general information is saved in a 
+        segregated into owners and members and their general information is saved in a
         dictionary.
 
         Inputs:
         -------
-            owners_list  <str> : owners email addresses in a comma 
+            owners_list  <str> : owners email addresses in a comma
             members_list <list> : List of members email addresses
 
         Updates:
@@ -133,7 +134,7 @@ class GroupsInterface:
             if len(group_owners) > 0:
                 self.log.debug(json.dumps(group_members, indent=2))
         else:
-            self.log.warn(constants.WARN_NO_OWNER_EMAIL_ID_PROVIDED)
+            self.log.warning(constants.WARN_NO_OWNER_EMAIL_ID_PROVIDED)
 
         if members_list:
             for member in members_list:
@@ -149,7 +150,7 @@ class GroupsInterface:
             if len(group_members) > 0:
                 self.log.debug(json.dumps(group_members, indent=2))
         else:
-            self.log.warn(constants.WARN_NO_MEMBER_EMAIL_ID_PROVIDED)
+            self.log.warning(constants.WARN_NO_MEMBER_EMAIL_ID_PROVIDED)
 
         self.response_handler.clear_exempt_codes(default=True)
         return group_owners, group_members, unfound_user
@@ -260,7 +261,7 @@ class GroupsInterface:
         Microsoft Groups can be deleted using this function. Either the group_name or the
         group_mail_nickname must be provided. Since group_mail_nickname is a unique value
         where no two groups can have the same ID, this is recommended to be used for
-        deletion. Do note that the function is designed in a way that it prioritizes 
+        deletion. Do note that the function is designed in a way that it prioritizes
         group_mail_nickname over group_name, so when both values are provided, the function
         automatically chooses the group_mailNickname to locate and delete the group
 

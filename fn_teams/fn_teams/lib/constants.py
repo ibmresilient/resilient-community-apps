@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 # Teams Authentication
 PACKAGE_NAME  = "fn_teams"
@@ -40,7 +40,7 @@ TITLE = "title"
 INCIDENT = "Incident"
 TIMEOUT = 60
 TASK_FRAGMENT = "?task={}"
-ERROR_UNABLE_TO_FIND_CHANNEL = "Unable to find channel name {} in app.config"
+ERROR_UNABLE_TO_FIND_CHANNEL = "Unable to find channel label (teams_channel): {} in app.config"
 SUCCESSFULLY_POSTED_MESSAGE = "Information successfully posted in channel {}"
 
 # MS GROUPS API call
@@ -75,8 +75,10 @@ URL_TEAMS_STANDARD_TEMPLATE = "/v1.0/teamsTemplates('standard')"
 # MS CHANNELS API call
 URL_LIST_CHANNEL = URL_TEAMS + "/{}/channels"
 URL_LOCATE_CHANNEL = URL_LIST_CHANNEL + "/{}"
-URL_CHANNEL_MSG = URL_LOCATE_CHANNEL + "/messages"
-URL_CHANNEL_MSG_REPLY = URL_CHANNEL_MSG + "/{}/replies"
+URL_CHANNEL_ALL_MESSAGES = URL_LOCATE_CHANNEL + "/messages"
+URL_CHANNEL_MSG = URL_CHANNEL_ALL_MESSAGES + "/{}"
+URL_CHANNEL_MSG_REPLY = URL_CHANNEL_ALL_MESSAGES + "/{}/replies"
+URL_CHANNEL_CHAT_MESSAGE = URL_TEAMS + "/{team_id}/channels/{channel_id}/messages"
 
 TEAMS_FROM_GROUP_CONFIGURATION = {
     "visibility": "Private",
@@ -114,6 +116,7 @@ INFO_SUCCESSFULLY_ARCHIVED = "Successfully archived Team: {}"
 INFO_SUCCESSFULLY_UNARCHIVED = "Successfully unarchived Team: {}"
 INFO_SUCCESSFULLY_CREATED_CHANNEL = "Successfully created channel: {}"
 INFO_SUCCESSFULLY_DELETED_CHANNEL = "Successfully deleted channel: {}"
+INFO_SUCCESSFULLY_SENT_CHAT = "Successfully sent chat message to channel: {}"
 
 DEBUG_BEARER_ID = "Bearer ID {}"
 DEBUG_SKIPPING_USER = " User information already exist"
@@ -145,6 +148,7 @@ ERROR_COULDNOT_FIND_CHANNEL = "Unable to locate channel: {}"
 ERROR_COULDNOT_DELETE_CHANNEL = "Unable to delete channel"
 ERROR_UNABLE_TO_AUTHENTICATE = "Unable to authenticate: {} {}"
 ERROR_NO_REFRESH_TOKEN = "Unable to find refresh_token in app.conf"
+ERROR_COULDNOT_SEND_CHAT = "Unable to send chat message to channel: {}"
 
 STATUS_STARTING_APP = "Starting App Function: {}"
 STATUS_GENERATE_HEADER = "Retrieving AccessToken for this session"
@@ -162,6 +166,8 @@ MSG_LIST_USER_PASSED = "TEST LIST_USERS: Passed! "
 MSG_LIST_USER_FAILED = "TEST LIST_USERS: failed! {} "
 MSG_POST_MSG_PASSED = "TEST POST_MESSAGE: Passed! "
 MSG_POST_MSG_FAILED = "TEST POST_MESSAGE: Failed! {} "
+MSG_POST_WORKFLOW_PASSED = "TEST POST_MESSAGE_WORKFLOWS: Passed! "
+MSG_POST_WORKFLOW_FAILED = "TEST POST_MESSAGE_WORKFLOWS: Failed! {} "
 WARN_NO_WEBHOOKS_FOUND = "No webhook found for selftest. Skipping webhook test"
 WARN_NO_APP_PERMISSION = "No Application token found. Skipping application permission test"
 WARN_NO_DEL_PERMISSION = "No refresh token found. Skipping delegated permission test"

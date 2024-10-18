@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 ''' Helper function for funct_ms_teams_create_teams'''
 
-import json, re, logging
+import json
+import re
+import logging
 
 from urllib import parse
 from retry.api import retry_call
@@ -75,9 +77,9 @@ class TeamsInterface:
                     constants.URL_USERS_QUERY.format("".join(["('", response.get("id"), "')"])))}
         if owner:
             raise IntegrationError(constants.WARN_DIDNOT_FIND_USER.format(email_id))
-        else:
-            self.users_not_found.append(email_id)
-            self.log.warn(constants.WARN_DIDNOT_FIND_USER.format(email_id))
+
+        self.users_not_found.append(email_id)
+        self.log.warning(constants.WARN_DIDNOT_FIND_USER.format(email_id))
 
 
     def _get_all_emails(self, owners_list, task_id, incident_id, add_members_from, additional_members):
@@ -118,7 +120,7 @@ class TeamsInterface:
             _user = self._build_member_format(member)
             if _user:
                 member_list.append(_user)
-        
+
         self.response_handler.clear_exempt_codes(default=True)
         self.log.info("Successfully gathered Users' information")
         return owners_list, member_list
@@ -135,7 +137,7 @@ class TeamsInterface:
         -----
             team_id <str> : Id of the team to which users are to be added
             members <list>: Request body list
-        
+
         Returns:
         --------
             None
@@ -234,7 +236,7 @@ class TeamsInterface:
             raise IndentationError(constants.ERROR_COULDNOT_CREATE_TEAM)
         _team_id = re.search(constants.TEAM_ID_REGEX, _team_id).group(1)
 
-        if len(members_email_list) > 0: 
+        if len(members_email_list) > 0:
             self._add_members(_team_id, members_email_list)
 
         group_finder = microsoft_commons.MSFinder(
@@ -259,7 +261,7 @@ class TeamsInterface:
     def enable_team_group(self, options):
         '''
         Creates a MS Team from an existing MS Group. Major attributes like the members, description
-        etc, is inherited from the Group. While creating a MS Team, certain configurations are 
+        etc, is inherited from the Group. While creating a MS Team, certain configurations are
         required and so the Microsoft recommended bare minimum settings is used create a team.
         These settings are available in the constants folder. To locate the group, one of the
         following inputs can be used:
@@ -321,23 +323,23 @@ class TeamsInterface:
 
     def archive_unarchive_team(self, options):
         '''
-        Allows for archiving or unarchiving a MS Team for a MS Group. Archiving doesnt delete
+        Allows for archiving or unarchiving a MS Team for a MS Group. Archiving doesn't delete
         the MS Team. To locate the team, one of the following inputs can be used:
 
-            -> ms_group_id
-            -> ms_group_mail_nickname
-            -> ms_group_name
+            -> group_id
+            -> group_mail_nickname
+            -> group_name
 
         Note: If multiple options are provided to locate the Graph Object then
-        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes
+        ms_group_mail_nickname supersedes group_name and group_id supersedes
         the other two options
 
         Inputs:
         -------
-            operation              <str> : The operation to be performed (Archive/Unarchive)
-            ms_group_id            <str> : The unique Id generated while creating a group
-            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group
+            operation           <str> : The operation to be performed (Archive/Unarchive)
+            group_id            <str> : The unique Id generated while creating a group
+            group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            group_name          <str> : Name of the Microsoft Group
 
         Returns:
         --------
@@ -350,10 +352,6 @@ class TeamsInterface:
             rh=self.response_handler,
             headers=self.headers)
         group_details = group_finder.find_group(options)
-
-        if len(group_details) > 1:
-            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
-
         team_id = group_details[0].get("id")
 
         if operation == "archive":
@@ -381,11 +379,9 @@ class TeamsInterface:
             if operation == "archive":
                 group_details["message"] = constants.INFO_SUCCESSFULLY_ARCHIVED.format(
                     group_details.get("displayName"))
-                group_details.update({
-                    "teamsEnabled" : "Archived"})
+                group_details["teamsEnabled"] = "Archived"
             else:
                 group_details["message"] = constants.INFO_SUCCESSFULLY_UNARCHIVED.format(
                     group_details.get("displayName"))
-                group_details.update({
-                    "teamsEnabled" : "Unarchived"})
+                group_details["teamsEnabled"] = "Unarchived"
         return group_details

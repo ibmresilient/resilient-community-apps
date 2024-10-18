@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 ''' (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved. '''
 
 import logging
@@ -11,6 +11,8 @@ from resilient_lib import IntegrationError, validate_fields
 
 from fn_teams.lib import constants
 
+LOG = logging.getLogger(__name__)
+
 class MicrosoftAuthentication:
     """
         This application generates an access token using the the MSAL class to interface with
@@ -19,7 +21,7 @@ class MicrosoftAuthentication:
         form of a dictionary: requiredParameters. The below mentioned inputs need to be available
         in the requiredParameters dictionary for the authenticator to work. All required credentials
         for an integration can be found at:
-        
+
             portal.azure.com > App registrations > Integration Name
 
         Inputs:
@@ -40,7 +42,6 @@ class MicrosoftAuthentication:
         validate_fields(["application_id", "secret_value", "directory_id"], app_config)
 
         self.rc  = request_common
-        self.LOG = logging.getLogger(__name__)
         self.required_parameters = {}
 
         self.required_parameters["scope"] = constants.DEFAULT_SCOPE
@@ -78,13 +79,13 @@ class MicrosoftAuthentication:
             parse.urljoin(constants.BASE_URL, constants.DEFAULT_SCOPE)])
 
         if "access_token" in response:
-            self.LOG.info(constants.INFO_RETRIEVED_BEARER_ID)
+            LOG.info(constants.INFO_RETRIEVED_BEARER_ID)
             return response['access_token']
 
         msg = constants.ERROR_UNABLE_TO_AUTHENTICATE.format(
             response.get('error'),
             response.get('error_description'))
-        self.LOG.error(msg)
+        LOG.error(msg)
         raise IntegrationError(msg)
 
 
@@ -102,7 +103,7 @@ class MicrosoftAuthentication:
         '''
         if not bearer_id:
             raise IntegrationError("Bearer ID not specified")
-        self.LOG.debug(constants.DEBUG_BEARER_ID.format(bearer_id))
+        LOG.debug(constants.DEBUG_BEARER_ID.format(bearer_id))
 
         return {
             "Authorization" : constants.BEARER.format(bearer_id),
@@ -158,14 +159,14 @@ class MicrosoftAuthentication:
         msg = constants.ERROR_UNABLE_TO_AUTHENTICATE.format(
             response.get('error'),
             response.get('error_description'))
-        self.LOG.error(msg)
+        LOG.error(msg)
         raise IntegrationError(msg)
 
 
     def authenticate_delegated_permissions(self, refresh_token:str = None):
 
         if refresh_token:
-            self.LOG.info("Refreshing existing access token")
+            LOG.info("Refreshing existing access token")
             tokens = self._generate_delegation_tokens(constants.DELEGATED_GRANT_REFRESH, refresh_token)
         else:
             raise IntegrationError(constants.ERROR_NO_REFRESH_TOKEN)

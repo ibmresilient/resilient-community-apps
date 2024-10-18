@@ -67,12 +67,12 @@ def test_delete_group(patch, required_parameters):
         "channel_name" : "Unittest Group1",
         "group_name" : "Unittest Group1"})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         ci.delete_channel({
             "channel_name" : "Unittest Group1",
             "group_mail_nickname" : ""})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         ci.delete_channel({
             "channel_name" : "Unittest Group1",
             "group_name" : ""})

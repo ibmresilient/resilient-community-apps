@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import IntegrationError, validate_fields
@@ -56,41 +56,38 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
 
+        validate_fields(["refresh_token"], self.options)
+
         options = {}
         if getattr(fn_inputs, 'ms_message_id', ""):
-            validate_fields(["ms_channel_id", "ms_groupteam_id"], fn_inputs)
             options["message_id"] = fn_inputs.ms_message_id
-            options["channel_id"] = fn_inputs.ms_channel_id
-            options["group_id"]   = fn_inputs.ms_groupteam_id
 
-        elif getattr(fn_inputs, 'ms_channel_name', ""):
+        if getattr(fn_inputs, 'ms_channel_name', ""):
             options["channel_name"] = fn_inputs.ms_channel_name
-
-            if getattr(fn_inputs, 'ms_groupteam_id', ""):
-                options.update(
-                    {"group_id" : fn_inputs.ms_groupteam_id})
-            elif getattr(fn_inputs, 'ms_group_mail_nickname', ""):
-                options.update(
-                    {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname})
-            elif getattr(fn_inputs, 'ms_groupteam_name', ""):
-                options.update(
-                    {"group_name" : fn_inputs.ms_groupteam_name})
-            else:
-                raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
+        elif getattr(fn_inputs, 'ms_channel_id', ""):
+            options["channel_id"] = fn_inputs.ms_channel_id
         else:
-            raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
+            raise IntegrationError("One of: ms_channel_name or ms_channel_id is required")
+
+        if getattr(fn_inputs, 'ms_groupteam_id', ""):
+            options["group_id"] = fn_inputs.ms_groupteam_id
+        elif getattr(fn_inputs, 'ms_group_mail_nickname', ""):
+            options["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname
+        elif getattr(fn_inputs, 'ms_groupteam_name', ""):
+            options["group_name"] = fn_inputs.ms_groupteam_name
+        else:
+            raise IntegrationError("One of: ms_groupteam_id, ms_groupteam_name or group_mail_nickname is required")
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
             authenticator = MicrosoftAuthentication(self.rc, self.options)
             dual_headers = {}
-            dual_headers["delegated"]   = authenticator.authenticate_delegated_permissions(self.options.get("refresh_token"))
             dual_headers["application"] = authenticator.authenticate_application_permissions()
+            dual_headers["delegated"]   = authenticator.authenticate_delegated_permissions(self.options.get("refresh_token"))
             authenticated = True
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
         except IntegrationError as err:
-            self.LOG.error(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
             yield self.status_message(constants.STATUS_AUTHENTICATION_FAILED)
             authenticated = False
             yield FunctionResult({}, success=False, reason=str(err))

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import validate_fields, IntegrationError
@@ -75,7 +76,6 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
         except IntegrationError as err:
-            self.LOG.error(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
             yield self.status_message(constants.STATUS_AUTHENTICATION_FAILED)
             authenticated = False
             yield FunctionResult({}, success=False, reason=str(err))

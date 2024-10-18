@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import IntegrationError, validate_fields
@@ -23,9 +23,9 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        This application allows for archiving or unarchivig a Microsoft Team using the
+        This application allows for archiving or unarchiving a Microsoft Team using the
         Microsoft Graph API. This provides SOAR with the ability to archive an existing
-        MS Team or unarchive a previously archived MS Team within a SOAR incident or a 
+        MS Team or unarchive a previously archived MS Team within a SOAR incident or a
         task. "archive_operation" specifies if the team is to be archived or unarchived.
         To locate this team for the archival/unarchival operation, one of the following
         inputs can be used:
@@ -68,7 +68,6 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
         except IntegrationError as err:
-            self.LOG.error(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
             yield self.status_message(constants.STATUS_AUTHENTICATION_FAILED)
             authenticated = False
             yield FunctionResult({}, success=False, reason=str(err))
@@ -92,7 +91,7 @@ class FunctionComponent(AppFunctionComponent):
                      "operation"  : fn_inputs.archive_operation})
 
             else:
-                raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
+                raise IntegrationError(f"{constants.ERROR_INVALID_OPTION_PASSED}. Required one of 'ms_groupteam_id', 'ms_group_mail_nickname', 'ms_groupteam_name'.")
             try:
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:

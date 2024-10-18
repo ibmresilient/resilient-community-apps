@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction Common utilities"""
-import json, logging
+import json
+import logging
 from urllib import parse
 
 from resilient_lib import IntegrationError
@@ -14,10 +15,10 @@ log = logging.getLogger(__name__)
 
 class ResponseHandler:
     """
-    Handles the responses received from the Webex endpoint.
+    Handles the responses received from the teams endpoint.
     Used as a callback function for request_common.execute
 
-    The behaviour of the response received can be customized by allowing
+    The behavior of the response received can be customized by allowing
     certain response codes to pass through and not raise an exception.
 
     Input:
@@ -46,19 +47,19 @@ class ResponseHandler:
 
     def _monitor_status(self):
         """
-        Monitors the response recieved from the endpoint and generates a custom message
-        for the webex application.
+        Monitors the response received from the endpoint and generates a custom message
+        for the teams application.
 
         Raises:
         -------
-            IntegrationError : If the recieved response is None, raises this error. This
-                               could be due to an invalid call methord being passed.
+            IntegrationError : If the received response is None, raises this error. This
+                               could be due to an invalid call method being passed.
         """
         if self.response is None:
             raise IntegrationError(constants.MSG_RESPONSE_NONE)
         if self.response.status_code in self.empty_response_codes:
             self.msg = constants.MSG_RESPONSE_204
-        elif "error" in self.response.json():
+        elif self.response.content and "error" in self.response.json():
             response = self.response.json()
             error = " ".join([
                 response.get('error').get('message'),
@@ -93,14 +94,17 @@ class ResponseHandler:
 
         Returns:
         --------
-            (<dict>): If the methord doesnot raise an error, it the returns the response
+            (<dict>): If the method does not raise an error, it the returns the response
                       in the form of a dictionary.
         """
         if self.return_raw:
             return self.response
 
         if not self.msg:
-            res = self.response.json()
+            if self.response.content:
+                res = self.response.json()
+            else:
+                res = {}
             res["status_code"] = self.response.status_code
             return res
 
@@ -110,14 +114,16 @@ class ResponseHandler:
 
         if self.response.status_code in self.empty_response_codes:
             res = {}
-        else:
+        elif self.response.content:
             res = self.response.json()
+        else:
+            res = {}
         res["status_code"] = self.response.status_code
         if self.msg:
             res["message"] = self.msg
         return res
 
- 
+
     def set_return_raw(self, value: bool=False):
         """
         Allows for returning the response object as is without performing any response
@@ -240,7 +246,7 @@ class MSFinder():
 
         Returns:
         --------
-            response <dict> : Informatoin of the MS Group, User, Team or Channel fetchec from the
+            response <dict> : Information of the MS Group, User, Team or Channel fetched from the
                               endpoint
     """
     def __init__(self, rc, rh, headers):
@@ -256,24 +262,21 @@ class MSFinder():
         CRUD operations on such groups, especially Update and delete could be extremely dangerous
         as users can accidentally be added to another group or worse, the entire group being
         deleted. To overcome this problem, this function is used. A MS group can be located using
-        any one of the 3 mentioned attributes. 
+        any one of the 3 mentioned attributes.
 
-            -> ms_group_id            : This is a unique ID generted while creating a group.
-            -> ms_group_mail_nickname : Unique mail address thats automatically assigned
-            -> ms_group_name          : Name of the group ( THIS IS NOT UNIQUE! )
+            -> group_id            : This is a unique ID generated while creating a group.
+            -> group_mail_nickname : Unique mail address thats automatically assigned
+            -> group_name          : Name of the group ( THIS IS NOT UNIQUE! )
 
-        If multiple options are provided to locate the Graph Object then ms_group_mail_nickname
-        supersedes ms_groupteam_name and ms_groupteam_id supersedes the other two options. 
-
-        If ms_group_name attribute is used to locate a group, the could exists multiple groups with
+        If group_name attribute is used to locate a group, multiple groups could exist with
         the same name. If multiple groups are identified with the same name, all the group information
-        is retured as a response.
+        is returned as a response.
 
         options:
         --------
-            ms_description         <str> : Desciption for the Channel
-            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group
+            group_id         <str> : Description for the Channel
+            group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            group_name          <str> : Name of the Microsoft Group
 
         Returns:
         --------
@@ -282,13 +285,13 @@ class MSFinder():
                               operation fails
         """
 
-        if "group_id" in options:
+        if options.get("group_id"):
             log.info(constants.INFO_FIND_GROUP_BY_ID)
             _id = options.get("group_id")
             error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group ID", _id)
             _query = f"/{_id}"
 
-        elif "group_mail_nickname" in options:
+        elif options.get("group_mail_nickname"):
             log.info(constants.INFO_FIND_GROUP_BY_MAIL)
             _name = options.get("group_mail_nickname")
             if "@" in _name:
@@ -296,14 +299,14 @@ class MSFinder():
             error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
             _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
 
-        elif "group_name" in options:
+        elif options.get("group_name"):
             log.info(constants.INFO_FIND_GROUP_BY_NAME)
             _name = options.get("group_name")
             error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
             _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
 
         else:
-            raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
+            raise IntegrationError(f"{constants.ERROR_INVALID_OPTION_PASSED}:{str(options)}")
 
         url = parse.urljoin(
             constants.BASE_URL,
@@ -317,11 +320,11 @@ class MSFinder():
 
         log.debug(json.dumps(response, indent=2))
 
-        if "group_id" in options and response.get("status_code") == 200:
+        if options.get("group_id") and response.get("status_code") == 200:
             log.info(constants.INFO_FOUND_GROUP)
             return [response]
 
-        elif len(response.get("value")) > 0 :
+        if len(response.get("value")) > 0 :
             log.info(constants.INFO_FOUND_GROUP)
             return response.get("value")
 
@@ -333,7 +336,7 @@ class MSFinder():
         """
         Locates the user on the endpoint using the email address of the user. Then fetches
         all relevant information from the endpoint and returns it as a dictionary. If the
-        user is no found in the endpoint, the function simply logs a warning.
+        user is not found in the endpoint, the function simply logs a warning.
 
         Arguments:
         ----------
@@ -356,9 +359,31 @@ class MSFinder():
 
         if "mail" in response:
             return response
-        else:
-            log.warn(constants.WARN_DIDNOT_FIND_USER.format(user_id))
 
+        log.warning(constants.WARN_DIDNOT_FIND_USER.format(user_id))
+
+    def find_group_id(self, options):
+        """find the group id for a given group
+
+        :param options: dictionary of value to identify the group
+        :type options: dict
+        options:
+        ----------
+            group_id            <str> : optional Group group_id
+            group_mail_nickname <str> : optional Mail nickname for the Group (Must be unique)
+            group_name          <str> : optional name of the Microsoft Group
+        either group_id, group_mail_nickname or group_name are required
+        :raises IntegrationError: Error if group not found
+        :return: group_id
+        :rtype: str
+        """
+
+        group_details = self.find_group(options)
+
+        if len(group_details) > 1:
+            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
+
+        return group_details[0].get("id")
 
     def find_channel(self, options):
         """
@@ -372,9 +397,11 @@ class MSFinder():
         options:
         ----------
             channel_name  <str> : Name of the channel to be located
-            ms_description         <str> : Desciption for the Channel
-            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group
+            group_id            <str> : optional Group group_id
+            group_mail_nickname <str> : optional Mail nickname for the Group (Must be unique)
+            group_name          <str> : optional name of the Microsoft Group
+
+        either group_id, group_mail_nickname or group_name are required
 
         Returns:
         --------
@@ -382,18 +409,12 @@ class MSFinder():
         """
 
         channel_name = options.get("channel_name").strip()
-        group_details = self.find_group(options)
-
-        if len(group_details) > 1:
-            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
-
-        group_detail = group_details[0]
-        group_id = group_detail.get("id")
+        group_id = self.find_group_id(options)
 
         url = parse.urljoin(
             constants.BASE_URL,
             constants.URL_LIST_CHANNEL.format(group_id))
-        
+
         response = self.rc.execute(
             method="get",
             url=url,
@@ -401,7 +422,7 @@ class MSFinder():
             callback=self.rh.check_response)
 
         channel_list = response.get("value")
-        
+
         # filtering out the required channel using the displayName attribute
         channel_details = list(filter(
             lambda channel: channel.get("displayName") == channel_name, channel_list))
@@ -463,7 +484,7 @@ def is_group_member(incident_member_id, org_member_list, org_group_list):
 
 def generate_member_list(**kwargs):
     """
-    Generates a list of email addresses of the members of a SOAR instance. The main 
+    Generates a list of email addresses of the members of a SOAR instance. The main
     goal is to extract user email addresses from the SOAR instance for specific users.
     While querying an incident or a task for members, user ids are returned as appose to
     entire user data. These ids are then converted to useful information (in this case
@@ -507,7 +528,7 @@ def generate_member_list(**kwargs):
             incident_members = resclient.get(parse.urljoin(constants.RES_INCIDENT,
                 constants.MEMBERS_URL.format(incident_id)))
         if not incident_members.get("members") or len(incident_members.get("members")) == 0:
-            log.warn(constants.WARN_INCIDENT_NO_MEMBERS)
+            log.warning(constants.WARN_INCIDENT_NO_MEMBERS)
         else:
             for incident_member in incident_members.get("members"):
                 if is_direct_member(incident_member, org_member_list):
@@ -519,7 +540,7 @@ def generate_member_list(**kwargs):
                             incident_member, org_member_list, org_group_list))
         log.debug(email_ids)
     elif not additional_members:
-        log.warn(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
+        log.warning(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
 
     if additional_members:
         email_ids += (additional_members
@@ -529,3 +550,13 @@ def generate_member_list(**kwargs):
     email_ids = list(set(email_ids))
     log.info(constants.INFO_ADD_MEMEBERS.format(email_ids))
     return email_ids
+
+def get_principal_user(message):
+    """Return SOAR user and user email information from the original message queue message
+
+    :param message: message content
+    :type message: dict
+    :return: (user_name, user_email)
+    :rtype: (str, str)
+    """
+    return message.get("principal", {}).get("display_name"), message.get("principal", {}).get("name")

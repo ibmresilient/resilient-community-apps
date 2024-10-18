@@ -61,13 +61,13 @@ def test_delete_group(patch, required_parameters):
     gi.delete_group({
         "group_id": "40bd9442-ca0f-4c7c-ba64-5e0fa56f3fb9"})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         gi.delete_group({"group_mail_nickname" : ""})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         gi.delete_group({"group_name" : ""})
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(IntegrationError):
         gi.delete_group({"group_id" : ""})
 
     with pytest.raises(IntegrationError):

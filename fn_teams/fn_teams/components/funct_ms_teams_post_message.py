@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -49,19 +49,20 @@ class FunctionComponent(AppFunctionComponent):
             'incident_id',
             'teams_channel',
             'teams_payload'], fn_inputs)
-        
+
         teams_channel = fn_inputs.teams_channel
         try:
             message_client = MessageClient(self.rc)
+
             status = message_client.post_message(
-                self.opts,
-                teams_channel = teams_channel,
-                webhook_url = self.options.get(teams_channel.lower()),
-                teams_payload = fn_inputs.teams_payload,
-                org_id = self.rest_client().org_id,
-                incident_id = fn_inputs.incident_id,
-                task_id = getattr(fn_inputs, 'task_id', False),
-                teams_mrkdown = getattr(fn_inputs,'teams_mrkdown', False))
+                        self.opts,
+                        teams_channel = teams_channel,
+                        webhook_url = self.options.get(teams_channel.lower()),
+                        teams_payload = fn_inputs.teams_payload,
+                        org_id = self.rest_client().org_id,
+                        incident_id = fn_inputs.incident_id,
+                        task_id = getattr(fn_inputs, 'task_id', False),
+                        teams_mrkdown = getattr(fn_inputs,'teams_mrkdown', False))
 
             yield FunctionResult({
                 "message" : (constants

@@ -90,10 +90,14 @@
           "type": "string"
         },
         "theme": {},
+        "uniqueName": {},
         "visibility": {
           "type": "string"
         },
         "onPremisesProvisioningErrors": {
+          "type": "array"
+        },
+        "serviceProvisioningErrors": {
           "type": "array"
         },
         "status_code": {
@@ -115,17 +119,11 @@
         "incident_id": {
           "type": "integer"
         },
-        "additional_members": {
-          "type": "string"
-        },
         "ms_owners_list": {
           "type": "string"
         },
         "add_members_from": {
           "type": "string"
-        },
-        "task_id": {
-          "type": "integer"
         },
         "ms_description": {
           "type": "string"

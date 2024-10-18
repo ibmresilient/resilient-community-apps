@@ -3,21 +3,21 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad",
+    "id": "b4829344-e28d-4c8e-bb2a-c470e0bb1ee3",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2023-05-15T18:13:38Z",
+    "createdDateTime": "2024-08-15T15:31:51Z",
     "creationOptions": [],
-    "description": "test1",
-    "displayName": "test1",
+    "description": "this is a description",
+    "displayName": "demoGroup",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "test1@swivrllc.onmicrosoft.com",
+    "mail": "demoGroup_nickname@example.com",
     "mailEnabled": true,
-    "mailNickname": "test1",
+    "mailNickname": "demoGroup_nickname",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -29,36 +29,36 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:test1@swivrllc.onmicrosoft.com"
+      "SMTP:demoGroup_nickname@example.com"
     ],
-    "renewedDateTime": "2023-05-15T18:13:38Z",
+    "renewedDateTime": "2024-08-15T15:31:51Z",
     "resourceBehaviorOptions": [],
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-1021190593-1332575900-3624306361-2906506361",
+    "securityIdentifier": "S-1-12-1-3028456260-1284432525-1891904187-3810442208",
     "theme": null,
+    "uniqueName": null,
     "visibility": "Private",
     "onPremisesProvisioningErrors": [],
+    "serviceProvisioningErrors": [],
     "teamsEnabled": false,
     "unfoundUsers": []
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2122,
-    "additional_members": "",
-    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
-    "ms_group_name": "test1",
-    "ms_group_mail_nickname": "test1",
+    "incident_id": 2716,
+    "ms_group_name": "demoGroup",
+    "ms_owners_list": "MarkScherfling@example.com",
+    "ms_group_mail_nickname": "demoGroup_nickname",
     "add_members_from": "None",
-    "task_id": null,
-    "ms_description": "test1"
+    "ms_description": "this is a description"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 1560,
-    "timestamp": "2023-05-15 14:13:39"
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1706,
+    "timestamp": "2024-08-15 11:31:52"
   }
 }

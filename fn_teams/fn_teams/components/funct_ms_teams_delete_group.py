@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import IntegrationError
@@ -62,7 +62,6 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
         except IntegrationError as err:
-            self.LOG.error(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
             yield self.status_message(constants.STATUS_AUTHENTICATION_FAILED)
             authenticated = False
             yield FunctionResult({}, success=False, reason=str(err))
@@ -80,7 +79,7 @@ class FunctionComponent(AppFunctionComponent):
                     response = group_manager.delete_group(
                         {"group_name" : fn_inputs.ms_group_name})
                 else:
-                    raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
+                    raise IntegrationError(f"{constants.ERROR_INVALID_OPTION_PASSED}. Required one of 'ms_groupteam_id', 'ms_group_mail_nickname', 'ms_groupteam_name'.")
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:
                 yield FunctionResult({}, success=False, reason=str(err))

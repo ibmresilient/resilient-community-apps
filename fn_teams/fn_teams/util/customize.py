@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4368
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.2.1096
 
-"""Generate the Resilient customizations required for fn_teams"""
+"""Generate the SOAR customizations required for fn_teams"""
 
 import base64
 import os
@@ -21,8 +22,22 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_teams",
-        "message_destinations": [u"fn_teams"],
-        "functions": [u"ms_teams_archive_team", u"ms_teams_create_channel", u"ms_teams_create_group", u"ms_teams_create_team", u"ms_teams_delete_channel", u"ms_teams_delete_group", u"ms_teams_enable_team", u"ms_teams_post_message", u"ms_teams_read_message"],
+        "message_destinations": [
+            u"fn_teams"
+        ],
+        "functions": [
+            u"ms_teams_archive_team",
+            u"ms_teams_create_channel",
+            u"ms_teams_create_group",
+            u"ms_teams_create_team",
+            u"ms_teams_delete_channel",
+            u"ms_teams_delete_group",
+            u"ms_teams_enable_team",
+            u"ms_teams_post_message",
+            u"ms_teams_post_message_workflows",
+            u"ms_teams_read_message",
+            u"ms_teams_read_message_replies"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -31,7 +46,30 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"ms_teams_archive_team_from_task_pb", u"ms_teams_archive_team_pb", u"ms_teams_create_channel_from_task_pb", u"ms_teams_create_channel_pb", u"ms_teams_create_group_from_task_pb", u"ms_teams_create_group_pb", u"ms_teams_create_team_from_task_pb", u"ms_teams_create_team_pb", u"ms_teams_delete_channel_from_task_pb", u"ms_teams_delete_channel_pb", u"ms_teams_delete_group_from_task_pb", u"ms_teams_delete_group_pb", u"ms_teams_enable_teams_for_group_from_task_pb", u"ms_teams_enable_teams_for_group_pb", u"ms_teams_post_incident_information_pb", u"ms_teams_post_task_information_pb", u"ms_teams_read_channel_messages_from_task_pb", u"ms_teams_read_channel_messages_pb"]
+        "playbooks": [
+            u"ms_teams_archive_team_from_task_pb",
+            u"ms_teams_archive_team_pb",
+            u"ms_teams_create_channel_from_task_pb",
+            u"ms_teams_create_channel_pb",
+            u"ms_teams_create_group_from_task_pb",
+            u"ms_teams_create_group_pb",
+            u"ms_teams_create_team_from_task_pb",
+            u"ms_teams_create_team_pb",
+            u"ms_teams_delete_channel_from_task_pb",
+            u"ms_teams_delete_channel_pb",
+            u"ms_teams_delete_group_from_task_pb",
+            u"ms_teams_delete_group_pb",
+            u"ms_teams_enable_teams_for_group_from_task_pb",
+            u"ms_teams_enable_teams_for_group_pb",
+            u"ms_teams_post_chat_message_using_workflows",
+            u"ms_teams_post_chat_task_message_using_workflows",
+            u"ms_teams_post_incident_information_pb",
+            u"ms_teams_post_message_for_workflows",
+            u"ms_teams_post_task_information_for_workflows",
+            u"ms_teams_post_task_information_pb",
+            u"ms_teams_read_channel_messages_from_task_pb",
+            u"ms_teams_read_channel_messages_pb"
+        ]
     }
 
 
@@ -40,7 +78,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:
@@ -54,7 +92,9 @@ def customization_data(client=None):
         - ms_teams_delete_group
         - ms_teams_enable_team
         - ms_teams_post_message
+        - ms_teams_post_message_workflows
         - ms_teams_read_message
+        - ms_teams_read_message_replies
     - Playbooks:
         - ms_teams_archive_team_from_task_pb
         - ms_teams_archive_team_pb
@@ -70,7 +110,11 @@ def customization_data(client=None):
         - ms_teams_delete_group_pb
         - ms_teams_enable_teams_for_group_from_task_pb
         - ms_teams_enable_teams_for_group_pb
+        - ms_teams_post_chat_message_using_workflows
+        - ms_teams_post_chat_task_message_using_workflows
         - ms_teams_post_incident_information_pb
+        - ms_teams_post_message_for_workflows
+        - ms_teams_post_task_information_for_workflows
         - ms_teams_post_task_information_pb
         - ms_teams_read_channel_messages_from_task_pb
         - ms_teams_read_channel_messages_pb
