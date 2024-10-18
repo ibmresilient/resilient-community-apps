@@ -1,0 +1,13 @@
+{
+    "data": {
+      "updateIssue": {
+        "issue": {
+          "id": "fffc643f",
+          "note": "new_note",
+          "status": "REJECTED",
+          "dueAt": null,
+          "resolutionReason": "WONT_FIX"
+        }
+      }
+    }
+  }
