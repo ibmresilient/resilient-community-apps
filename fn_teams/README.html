@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="ThreatMiner" href="../fn_threatminer/README.html" /><link rel="prev" title="Task Utilities" href="../fn_task_utils/README.html" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Microsoft Teams - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
@@ -448,6 +448,7 @@
 <li><p><a class="reference internal" href="#setting-up-incoming-webhooks-both-permissions"><span class="xref myst">Setting up Incoming Webhooks (Both Permissions)</span></a></p></li>
 <li><p><a class="reference internal" href="#setting-up-delegated-permissions-delegated-permissions"><span class="xref myst">Setting up Delegated permissions (Delegated permissions)</span></a></p></li>
 <li><p><a class="reference internal" href="#app-configuration-both-permissions"><span class="xref myst">App Configuration (Both Permissions)</span></a></p></li>
+<li><p><a class="reference internal" href="#ms-teams-workflows"><span class="xref myst">MS Teams Workflows</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#function---ms-teams-archive-team"><span class="xref myst">Function - MS Teams: Archive Team</span></a></p></li>
@@ -458,8 +459,14 @@
 <li><p><a class="reference internal" href="#function---ms-teams-delete-group"><span class="xref myst">Function - MS Teams: Delete Group</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-enable-team"><span class="xref myst">Function - MS Teams: Enable Team</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-post-message"><span class="xref myst">Function - MS Teams: Post Message</span></a></p></li>
+<li><p><a class="reference internal" href="#function---ms-teams-post-message-for-workflows"><span class="xref myst">Function - MS Teams: Post Message for Workflows</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-read-message"><span class="xref myst">Function - MS Teams: Read Message</span></a></p></li>
-<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#data-table---ms-teams-approval-process"><span class="xref myst">Data Table - MS Teams Approval Process</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
@@ -481,19 +488,23 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-even"><td><p>3.0.0</p></td>
+<td><p>08/2024</p></td>
+<td><p>Added Approval Request process and ability to work with MS Teams Workflows.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>05/2023</p></td>
 <td><p>Add playbooks and removed workflows</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.1</p></td>
+<tr class="row-even"><td><p>2.0.1</p></td>
 <td><p>12/2022</p></td>
 <td><p>Bug fix in workflows for MS Teams: Enable Teams for Groups and MS Teams: Read messages</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.0</p></td>
+<tr class="row-odd"><td><p>2.0.0</p></td>
 <td><p>12/2022</p></td>
 <td><p>Added support for creating and deleting MS Groups, Teams and Channels</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>10/2019</p></td>
 <td><p>Post Incident/task information to MS Teams</p></td>
 </tr>
@@ -501,7 +512,14 @@
 </table>
 </div>
 <section id="changes">
-<h3>2.1.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
+<h3>3.0.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
+<!-->
+<p>In v3.0, an approval request process has been added to make requests for process changes. Added is a datatable to track approval request with a poller to review changes in MS Teams based on approval or rejection replies. See <a class="reference internal" href="#v30-changes-for-poller"><span class="xref myst">V3.0 Changes for poller</span></a> for additional changes needed to the app.config file to enable this capability.
+–&gt;
+v3.0 supports MS Teams Workflows and Adaptive Cards. See the section <a class="reference internal" href="#ms-teams-workflows"><span class="xref myst">Setting up Workflows</span></a> for more information needed to configure this capability.</p>
+</section>
+<section id="id1">
+<h3>2.1.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p>In v2.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
@@ -534,6 +552,9 @@ But migrating to playbooks provides greater functionality along with future app 
 <li><p>Post information about the Incident or task directly to a MS Channel.</p></li>
 <li><p>Example rules/workflows are included that perform the aforementioned operations and store related information as a incident or a task note.</p></li>
 </ul>
+<!--
+* In v3.0, support for approval requests including poller to received approval replies.
+-->
 </section>
 </section>
 <hr class="docutils" />
@@ -545,12 +566,12 @@ But migrating to playbooks provides greater functionality along with future app 
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
 <li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
@@ -569,12 +590,15 @@ But migrating to playbooks provides greater functionality along with future app 
 <td><p>Read</p></td>
 </tr>
 <tr class="row-even"><td><p>Incident</p></td>
+<td><p>Read, Write</p></td>
+</tr>
+<tr class="row-odd"><td><p>Incident Private Tasks</p></td>
 <td><p>Read</p></td>
 </tr>
-<tr class="row-odd"><td><p>Group</p></td>
+<tr class="row-even"><td><p>Group</p></td>
 <td><p>Read</p></td>
 </tr>
-<tr class="row-even"><td><p>Users</p></td>
+<tr class="row-odd"><td><p>Users</p></td>
 <td><p>Read</p></td>
 </tr>
 </tbody>
@@ -594,7 +618,7 @@ But migrating to playbooks provides greater functionality along with future app 
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= 1.9.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= 1.10.</p></li>
 <li><p>Cloud Pak is configured with an App Host.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -611,16 +635,16 @@ But migrating to playbooks provides greater functionality along with future app 
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Both Python 3.6 and Python 3.9 are supported.
+<p>Both Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>msal ~= 1.19</p></li>
-<li><p>pymsteams ~= 0.2.1</p></li>
-<li><p>resilient_circuits&gt;=45.0.0</p></li>
+<li><p>msal ~= 1.30</p></li>
+<li><p>pymsteams ~= 0.2.3</p></li>
+<li><p>resilient_circuits&gt;=50.0.0</p></li>
 </ul>
 </section>
-<section id="endpoint-developed-with">
-<h3>Endpoint Developed With<a class="headerlink" href="#endpoint-developed-with" title="Link to this heading">¶</a></h3>
+<section id="endpoint-developed-with-ms-teams">
+<h3>Endpoint Developed With MS Teams<a class="headerlink" href="#endpoint-developed-with-ms-teams" title="Link to this heading">¶</a></h3>
 <p>This app has been implemented using:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -654,11 +678,11 @@ Additional package dependencies may exist for each of these packages:</p>
 The access token includes details about the application and the permission it has to use the Microsoft Graph resources and APIs. The app needs to be registered with the Microsoft identity platform and given permission to access the required Microsoft Graph resources by a user or an administrator in order to obtain an access token.</p>
 <section id="register-a-new-application-using-the-azure-portal">
 <h3>Register a new application using the Azure portal<a class="headerlink" href="#register-a-new-application-using-the-azure-portal" title="Link to this heading">¶</a></h3>
-<p>The application must be registered with the identity provider for the identity provider to be aware that a specific app is attempting to access user information. The configuration necessary for the application to interface with the Microsoft identity platform is then made available when it registers with Azure Active Directory (Azure AD). You can learn more about this at <a class="reference external" href="https://learn.microsoft.com/en-us/azure/active-directory/develop/application-model">learn.microsoft.com/application-model</a></p>
+<p>The application must be registered with the identity provider for the identity provider to be aware that a specific app is attempting to access user information. The configuration necessary for the application to interface with the Microsoft identity platform is then made available when it registers with Microsoft Entra ID (formally Azure AD). You can learn more about this at <a class="reference external" href="https://learn.microsoft.com/en-us/azure/active-directory/develop/application-model">learn.microsoft.com/application-model</a></p>
 <ul class="simple">
 <li><p>Sign in to the <a class="reference external" href="https://portal.azure.com">Azure portal</a> using either an enterprise account.</p></li>
 <li><p>If your account gives you access to more than one tenant, select your account in the top right corner, and set your portal session to the Azure AD tenant that you want.</p></li>
-<li><p>In the left-hand navigation pane, select the <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span> <span class="pre">service</span></code>, and then select <code class="docutils literal notranslate"><span class="pre">App</span> <span class="pre">registrations</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">registration</span></code>.</p></li>
+<li><p>In the left-hand navigation pane, select the <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Entra</span> <span class="pre">ID</span></code>, and then select <code class="docutils literal notranslate"><span class="pre">App</span> <span class="pre">registrations</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">registration</span></code>.</p></li>
 <li><p>When the Register an application page appears, enter your application’s registration information:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> - Enter a meaningful application name that will be displayed to users of the app.</p></li>
@@ -835,6 +859,7 @@ The access token includes details about the application and the permission it ha
 <h3>Setting up Incoming Webhooks (Both Permissions)<a class="headerlink" href="#setting-up-incoming-webhooks-both-permissions" title="Link to this heading">¶</a></h3>
 <p>The <strong>SOAR Platform</strong> can share content in Microsoft channels using an incoming webhook.
 The webhooks are utilized as tracking and notifying mechanisms. The webhooks offer a specific URL that can be used to transmit a JSON payload along with a card-format message. To configure webhooks for a channel, please refer to this documentation <a class="reference external" href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook">Create Incoming Webhooks</a>.</p>
+<p><em>Note</em>: Webhooks are now replaced by MS Teams Workflows. Refer to <a class="reference internal" href="#ms-teams-workflows"><span class="xref myst">MS Teams Workflows</span></a> on how to start using this new capability.</p>
 </section>
 <section id="setting-up-delegated-permissions-delegated-permissions">
 <h3>Setting up Delegated permissions (Delegated permissions)<a class="headerlink" href="#setting-up-delegated-permissions-delegated-permissions" title="Link to this heading">¶</a></h3>
@@ -897,10 +922,227 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <td><p>****.webhook.office.com/webhookb2/</p></td>
 <td><p>Webhook URL for a channel</p></td>
 </tr>
+<tr class="row-odd"><td><p><strong>selftest</strong></p></td>
+<td class="text-center"><p>Optional</p></td>
+<td><p>https://teams.microsoft.com/l/channel/xxx</p></td>
+<td><p>Webhook URL for channel connectors to test posting of messages.  <strong>This capability is deprecated and selftest_workflows should be used starting with V3.0</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>selftest_workflows</strong></p></td>
+<td class="text-center"><p>Optional</p></td>
+<td><p>https://azure.com/workflows/xxx</p></td>
+<td><p>Webhook URL for Teams Workflows to test posting of messages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>*<strong><webhook label></strong></p></td>
+<td class="text-center"><p>Optional</p></td>
+<td><p>https://azure.com/workflows/xxx</p></td>
+<td><p>Additional webhook URLs. Reference the <code class="docutils literal notranslate"><span class="pre">webhook</span> <span class="pre">label</span></code> used when post messaging via the functions which use the <code class="docutils literal notranslate"><span class="pre">teams_channel</span></code> input field.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 </section>
+<section id="ms-teams-workflows">
+<h3>MS Teams Workflows<a class="headerlink" href="#ms-teams-workflows" title="Link to this heading">¶</a></h3>
+<p>In V3.0, messages can be sent via the MS Teams Workflows capability. Although a powerful way to set up complex capabilities, the basic enablement can be performed via these steps:</p>
+<ol class="arabic simple">
+<li><p>Within the MS Teams app (either Windows or Mac), select the Workflows app
+<img alt="screenshot: Workflows app" src="../_images/workflows_app.png" /></p></li>
+<li><p>Add a workflow for <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">channel</span> <span class="pre">when</span> <span class="pre">a</span> <span class="pre">webhook</span> <span class="pre">request</span> <span class="pre">is</span> <span class="pre">received</span></code>
+<img alt="screenshot: Adding a Workflow" src="../_images/adding_a_workflow.png" /></p></li>
+<li><p>At the minimum, the workflow will have steps to send Adaptive Cards to a channel
+<img alt="screenshot: Workflow Steps" src="../_images/workflow_steps.png" />
+<img alt="screenshot: Workflow Detail" src="../_images/workflow_detail.png" /></p></li>
+</ol>
+<p>The webhook request step contains the URL required to send Adaptive Cards to a teams channel.
+Copy this value and add it your app.config settings using a label of your choosing. This label will then be referred to in any message sent to the MS Teams channel via this Workflow.</p>
+<p><img alt="screenshot: Approval Playbook" src="../_images/approval_playbook.png" /></p>
+<!--
+#### V3.0 Changes for poller
+If running the poller for approval requests, a new app.config section has been added, `fn_teams_approval_process`. If the `poller_interval` is non-zero, then the poller will 
+execute, looking for pending approvals. 
+
+If upgrading from a previous version of the MS Teams app, add the following section data
+to your app.config and modify the approval_words and rejection_words as necessary.
+
+```
+[fn_teams_approval_process]
+# if using the Approval Request process, enable the poller to check for approval request updates
+# in seconds
+#poller_interval=60
+# Comma separated list of case-insensitive approval words
+approval_words=accept, accepted, approve, approved, ok
+# Comma separated list of case-insensitive rejection words
+rejection_words=reject, rejected, deny, denied, no
+```
+-->
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-ms-teams-post-message-for-workflows">
+<h2>Function - MS Teams Post Message for Workflows<a class="headerlink" href="#function-ms-teams-post-message-for-workflows" title="Link to this heading">¶</a></h2>
+<p>Post a message to a Microsoft Teams channel intended for Workflows</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
+<td><p>Incident id from which artifacts are to be fetched</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">teams_channel</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Lookup value to channel to post a message</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">teams_payload</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>string-encoded json of teams conversation message: See [Adaptive Cards]](https://adaptivecards.io/)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="mi">202</span><span class="p">},</span> 
+  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="n">ADAPTIVE_CARD_TYPE</span> <span class="o">=</span> <span class="s2">&quot;AdaptiveCard&quot;</span>
+<span class="n">ADAPTIVE_CARD_VERSION</span> <span class="o">=</span> <span class="s2">&quot;1.4&quot;</span>
+
+<span class="k">def</span> <span class="nf">create_textblock</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> 
+                     <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> 
+                     <span class="n">font_type</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span>
+                     <span class="n">font_size</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> 
+                     <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> 
+                     <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span>
+                     <span class="n">is_visible</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;TextBlock&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+    <span class="s2">&quot;wrap&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="n">font_weight</span><span class="p">,</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">font_size</span><span class="p">,</span>
+    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
+    <span class="s2">&quot;style&quot;</span><span class="p">:</span> <span class="n">style</span><span class="p">,</span>
+    <span class="s2">&quot;isVisible&quot;</span><span class="p">:</span> <span class="n">is_visible</span>
+  <span class="p">}</span>
+  
+<span class="k">def</span> <span class="nf">create_factset</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">facts</span><span class="o">=</span><span class="p">[],</span> <span class="n">is_visible</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;FactSet&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;facts&quot;</span><span class="p">:</span> <span class="n">facts</span><span class="p">,</span>
+    <span class="s2">&quot;separator&quot;</span><span class="p">:</span> <span class="n">separator</span><span class="p">,</span>
+    <span class="s2">&quot;isVisible&quot;</span><span class="p">:</span> <span class="n">is_visible</span>
+  <span class="p">}</span>
+  
+<span class="k">def</span> <span class="nf">create_fact</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span>
+  <span class="p">}</span>
+
+
+<span class="c1"># S T A R T</span>
+
+<span class="n">body</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">create_textblock</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SOAR Incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;bolder&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Attention&quot;</span><span class="p">),</span>
+  <span class="n">create_factset</span><span class="p">(</span><span class="n">facts</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Description&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Owner&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">owner_id</span><span class="p">),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Types&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="p">)),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;NIST Attack Vectors&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incident</span><span class="o">.</span><span class="n">nist_attack_vectors</span><span class="p">)),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Create Date&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">create_date</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span><span class="p">)),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Date Occurred&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">start_date</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">start_date</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Discovered Date&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">discovered_date</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span><span class="p">)),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Confirmed&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">confirmed</span><span class="p">),</span>
+    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Severity&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">)</span>
+  <span class="p">])</span>
+<span class="p">]</span>
+
+<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_additional_comments</span><span class="p">:</span>
+  <span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">create_textblock</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_additional_comments</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+
+<span class="n">adaptive_card</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;contentType&quot;</span><span class="p">:</span> <span class="s2">&quot;application/vnd.microsoft.card.adaptive&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;$schema&quot;</span><span class="p">:</span> <span class="s2">&quot;http://adaptivecards.io/schemas/adaptive-card.json&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">ADAPTIVE_CARD_TYPE</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">ADAPTIVE_CARD_VERSION</span><span class="p">,</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">,</span>
+    <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">teams_payload</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">adaptive_card</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ms_teams_post_result</span>
+
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
+  <span class="c1">#</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;msteams_approval_process&quot;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Pending&quot;</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;channel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">approval_expiration</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">approval_message</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;soar_message_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">soar_message_id</span><span class="o">.</span><span class="n">message_id</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_group</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;task_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MS Teams approval post to channel </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span><span class="si">}</span><span class="s2"> failed with: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</details>
 </section>
 <hr class="docutils" />
 <section id="function-ms-teams-archive-team">
@@ -913,7 +1155,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 </ul>
 <p><strong><ins>Note</ins></strong>: When multiple options are provided to locate the Graph object (Group or a Team), the <code class="docutils literal notranslate"><span class="pre">ms_group_mail_nickname</span></code> parameter will take precedence over <code class="docutils literal notranslate"><span class="pre">ms_groupteam_name</span></code>, and the <code class="docutils literal notranslate"><span class="pre">ms_groupteam_id</span></code> parameter will take precedence over the other two options.</p>
 <p><img alt="screenshot: action_archive_team.png" src="../_images/action_archive_team.png" /></p>
-<p><img alt="screenshot: wf_archive_team.png" src="../_images/wf_archive_team.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -982,7 +1223,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
       <span class="s2">&quot;Unified&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;isAssignableToRole&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;tasktesting@swivrllc.onmicrosoft.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;tasktesting@example.com&quot;</span><span class="p">,</span>
     <span class="s2">&quot;mailEnabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
     <span class="s2">&quot;mailNickname&quot;</span><span class="p">:</span> <span class="s2">&quot;tasktesting&quot;</span><span class="p">,</span>
     <span class="s2">&quot;membershipRule&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -996,7 +1237,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
     <span class="s2">&quot;preferredDataLocation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;preferredLanguage&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;proxyAddresses&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;SMTP:tasktesting@swivrllc.onmicrosoft.com&quot;</span>
+      <span class="s2">&quot;SMTP:tasktesting@example.com&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;renewedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-15T17:39:58Z&quot;</span><span class="p">,</span>
     <span class="s2">&quot;resourceBehaviorOptions&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -1101,7 +1342,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 </ul>
 <p><strong><ins>Note</ins></strong>: When multiple options are provided to locate the Graph object (Group or a Team), the <code class="docutils literal notranslate"><span class="pre">ms_group_mail_nickname</span></code> parameter will take precedence over <code class="docutils literal notranslate"><span class="pre">ms_groupteam_name</span></code>, and the <code class="docutils literal notranslate"><span class="pre">ms_groupteam_id</span></code> parameter will take precedence over the other two parameters.</p>
 <p><img alt="screenshot: action_create_channel.png" src="../_images/action_create_channel.png" /></p>
-<p><img alt="screenshot: wf_create_channel.png" src="../_images/wf_create_channel.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1160,21 +1400,21 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
   <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@odata.context&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/$metadata#teams(&#39;322d20bf-450e-46d6-9338-f7e3b66a064c&#39;)/channels/$entity&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@odata.context&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/$metadata#teams(&#39;33333-450e-46d6-9338-f7e3b66a064c&#39;)/channels/$entity&quot;</span><span class="p">,</span>
     <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;19:c875f7333fb843aeacb01d1cbfa52ae5@thread.tacv2&quot;</span><span class="p">,</span>
     <span class="s2">&quot;createdDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-15T18:26:57.6422279Z&quot;</span><span class="p">,</span>
     <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test 1234&quot;</span><span class="p">,</span>
     <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;test 1234&quot;</span><span class="p">,</span>
     <span class="s2">&quot;isFavoriteByDefault&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
     <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;webUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://teams.microsoft.com/l/channel/19</span><span class="si">%3a</span><span class="s2">c875f7333fb843aeacb01d1cbfa52ae5%40thread.tacv2/test+1234?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&amp;tenantId=50ad7d3e-b889-434d-802d-13b87c68047b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;webUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://teams.microsoft.com/l/channel/19</span><span class="si">%3a</span><span class="s2">c875f7333fb843aeacb01d1cbfa52ae5%40thread.tacv2/test+1234?groupId=33333-450e-46d6-9338-f7e3b66a064c&amp;tenantId=55555-b889-434d-802d-13b87c68047b&quot;</span><span class="p">,</span>
     <span class="s2">&quot;membershipType&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
     <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="mi">201</span><span class="p">,</span>
     <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Successfully created channel: test 1234&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ms_groupteam_id&quot;</span><span class="p">:</span> <span class="s2">&quot;322d20bf-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ms_groupteam_id&quot;</span><span class="p">:</span> <span class="s2">&quot;33333-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ms_channel_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test 1234&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ms_description&quot;</span><span class="p">:</span> <span class="s2">&quot;test 1234&quot;</span>
   <span class="p">},</span>
@@ -1248,7 +1488,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <p>This function creates a Microsoft Group with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation.</p>
 <p>The function is developed to automatically add all members of an incident or a task to the MS Group. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.</p>
 <p><img alt="screenshot: action_create_group.png" src="../_images/action_create_group.png" /></p>
-<p><img alt="screenshot: wf_create_group.png" src="../_images/wf_create_group.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1337,7 +1576,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
       <span class="s2">&quot;Unified&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;isAssignableToRole&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;test1@swivrllc.onmicrosoft.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;test1@example.com&quot;</span><span class="p">,</span>
     <span class="s2">&quot;mailEnabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
     <span class="s2">&quot;mailNickname&quot;</span><span class="p">:</span> <span class="s2">&quot;test1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;membershipRule&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1351,7 +1590,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
     <span class="s2">&quot;preferredDataLocation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;preferredLanguage&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;proxyAddresses&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;SMTP:test1@swivrllc.onmicrosoft.com&quot;</span>
+      <span class="s2">&quot;SMTP:test1@example.com&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;renewedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-15T18:13:38Z&quot;</span><span class="p">,</span>
     <span class="s2">&quot;resourceBehaviorOptions&quot;</span><span class="p">:</span> <span class="p">[],</span>
@@ -1368,7 +1607,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2122</span><span class="p">,</span>
     <span class="s2">&quot;additional_members&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ms_owners_list&quot;</span><span class="p">:</span> <span class="s2">&quot;markscherfling@swivrllc.onmicrosoft.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ms_owners_list&quot;</span><span class="p">:</span> <span class="s2">&quot;markscherfling@example.com&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ms_group_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ms_group_mail_nickname&quot;</span><span class="p">:</span> <span class="s2">&quot;test1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;add_members_from&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
@@ -1458,7 +1697,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <p>This function creates a Microsoft Team with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation.</p>
 <p>The function is developed to automatically add all members of an incident or a task to the MS Team. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.</p>
 <p><img alt="screenshot: action_create_team.png" src="../_images/action_create_team.png" /></p>
-<p><img alt="screenshot: wf_create_team.png" src="../_images/wf_create_team.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1545,7 +1783,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
       <span class="s2">&quot;Unified&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;isAssignableToRole&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;tasktesting@swivrllc.onmicrosoft.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;tasktesting@example.com&quot;</span><span class="p">,</span>
     <span class="s2">&quot;mailEnabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
     <span class="s2">&quot;mailNickname&quot;</span><span class="p">:</span> <span class="s2">&quot;tasktesting&quot;</span><span class="p">,</span>
     <span class="s2">&quot;membershipRule&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1559,7 +1797,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
     <span class="s2">&quot;preferredDataLocation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;preferredLanguage&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;proxyAddresses&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;SMTP:tasktesting@swivrllc.onmicrosoft.com&quot;</span>
+      <span class="s2">&quot;SMTP:tasktesting@example.com&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;renewedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-15T17:39:58Z&quot;</span><span class="p">,</span>
     <span class="s2">&quot;resourceBehaviorOptions&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -1584,7 +1822,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
     <span class="s2">&quot;ms_team_name&quot;</span><span class="p">:</span> <span class="s2">&quot;task testing&quot;</span><span class="p">,</span>
     <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2120</span><span class="p">,</span>
     <span class="s2">&quot;additional_members&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ms_owners_list&quot;</span><span class="p">:</span> <span class="s2">&quot;markscherfling@swivrllc.onmicrosoft.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ms_owners_list&quot;</span><span class="p">:</span> <span class="s2">&quot;markscherfling@example.com&quot;</span><span class="p">,</span>
     <span class="s2">&quot;add_members_from&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
     <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">126</span><span class="p">,</span>
     <span class="s2">&quot;ms_description&quot;</span><span class="p">:</span> <span class="s2">&quot;task testing&quot;</span>
@@ -1674,7 +1912,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 </ul>
 <p><strong><ins>Note</ins></strong>: When multiple options are provided to locate the Graph object (Group or a Team), the <code class="docutils literal notranslate"><span class="pre">ms_group_mail_nickname</span></code> parameter will take precedence over <code class="docutils literal notranslate"><span class="pre">ms_groupteam_name</span></code>, and the <code class="docutils literal notranslate"><span class="pre">ms_groupteam_id</span></code> parameter will take precedence over the other two.</p>
 <p><img alt="screenshot: action_delete_channel.png" src="../_images/action_delete_channel.png" /></p>
-<p><img alt="screenshot: wf_delete_channel.png" src="../_images/wf_delete_channel.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1732,7 +1969,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ms_groupteam_id&quot;</span><span class="p">:</span> <span class="s2">&quot;322d20bf-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ms_groupteam_id&quot;</span><span class="p">:</span> <span class="s2">&quot;33333-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ms_channel_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Incident 2121 testing channels&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1797,7 +2034,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 </ul>
 <p><strong><ins>Note</ins></strong>: When multiple parameters are provided to locate the Graph object (Group or a Team), the <code class="docutils literal notranslate"><span class="pre">ms_group_mail_nickname</span></code> parameter will take precedence over the <code class="docutils literal notranslate"><span class="pre">ms_group_name</span></code>, and the <code class="docutils literal notranslate"><span class="pre">ms_group_id</span></code> parameter will take precedence over the other two.</p>
 <p><img alt="screenshot: action_delete_group.png" src="../_images/action_delete_group.png" /></p>
-<p><img alt="screenshot: wf_delete_group.png" src="../_images/wf_delete_group.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1915,7 +2151,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 </ul>
 <p><strong><ins>Note</ins></strong>: When multiple parameters are provided to locate the Graph Group, the <code class="docutils literal notranslate"><span class="pre">ms_group_mail_nickname</span></code> parameter will take precedence over <code class="docutils literal notranslate"><span class="pre">ms_group_name</span></code> and the <code class="docutils literal notranslate"><span class="pre">ms_group_id</span></code> parameter will take precedence over the other two.</p>
 <p><img alt="screenshot: action_enable_teams.png" src="../_images/action_enable_teams.png" /></p>
-<p><img alt="screenshot: wf_enable_team.png" src="../_images/wf_enable_team.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -1975,7 +2210,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
       <span class="s2">&quot;Unified&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;isAssignableToRole&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;test1@swivrllc.onmicrosoft.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;test1@example.com&quot;</span><span class="p">,</span>
     <span class="s2">&quot;mailEnabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
     <span class="s2">&quot;mailNickname&quot;</span><span class="p">:</span> <span class="s2">&quot;test1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;membershipRule&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1989,7 +2224,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
     <span class="s2">&quot;preferredDataLocation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;preferredLanguage&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
     <span class="s2">&quot;proxyAddresses&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;SMTP:test1@swivrllc.onmicrosoft.com&quot;</span>
+      <span class="s2">&quot;SMTP:test1@example.com&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;renewedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-15T18:13:38Z&quot;</span><span class="p">,</span>
     <span class="s2">&quot;resourceBehaviorOptions&quot;</span><span class="p">:</span> <span class="p">[],</span>
@@ -2070,7 +2305,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <h2>Function - MS Teams: Post Message<a class="headerlink" href="#function-ms-teams-post-message" title="Link to this heading">¶</a></h2>
 <p>This application posts Incident or Task details to a MS Teams channel.  The channel name, specified by the <code class="docutils literal notranslate"><span class="pre">teams_channel</span></code> parameter, is used to lookup the appropriate channel webhook url maintained in app.config.</p>
 <p><img alt="screenshot: output_post_teams.png" src="../_images/output_post_teams.png" /></p>
-<p><img alt="screenshot: wf_post_message.png" src="../_images/wf_post_message.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -2218,7 +2452,6 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <h2>Function - MS Teams: Read Message<a class="headerlink" href="#function-ms-teams-read-message" title="Link to this heading">¶</a></h2>
 <p>Read messages from a Teams Channel</p>
 <p><img alt="screenshot: action_read_message.png" src="../_images/action_read_message.png" /></p>
-<p><img alt="screenshot: wf_read_message.png" src="../_images/wf_read_message.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -2297,7 +2530,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
       <span class="s2">&quot;chatId&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
       <span class="s2">&quot;importance&quot;</span><span class="p">:</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
       <span class="s2">&quot;locale&quot;</span><span class="p">:</span> <span class="s2">&quot;en-us&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;webUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://teams.microsoft.com/l/message/19%3Aa62cab990d8648b6a9047787e030fa7e%40thread.tacv2/1684173756348?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&amp;tenantId=50ad7d3e-b889-434d-802d-13b87c68047b&amp;createdTime=1684173756348&amp;parentMessageId=1684173756348&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;webUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://teams.microsoft.com/l/message/19%3Aa62cab990d8648b6a9047787e030fa7e%40thread.tacv2/1684173756348?groupId=33333-450e-46d6-9338-f7e3b66a064c&amp;tenantId=55555-b889-434d-802d-13b87c68047b&amp;createdTime=1684173756348&amp;parentMessageId=1684173756348&quot;</span><span class="p">,</span>
       <span class="s2">&quot;policyViolation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
       <span class="s2">&quot;eventDetail&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
       <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -2308,7 +2541,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
           <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;43dd7b73-6a70-475e-88c3-609a9f30b514&quot;</span><span class="p">,</span>
           <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Mark Scherfling&quot;</span><span class="p">,</span>
           <span class="s2">&quot;userIdentityType&quot;</span><span class="p">:</span> <span class="s2">&quot;aadUser&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;tenantId&quot;</span><span class="p">:</span> <span class="s2">&quot;50ad7d3e-b889-434d-802d-13b87c68047b&quot;</span>
+          <span class="s2">&quot;tenantId&quot;</span><span class="p">:</span> <span class="s2">&quot;55555-b889-434d-802d-13b87c68047b&quot;</span>
         <span class="p">}</span>
       <span class="p">},</span>
       <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -2316,7 +2549,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
         <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;hello world&quot;</span>
       <span class="p">},</span>
       <span class="s2">&quot;channelIdentity&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;teamId&quot;</span><span class="p">:</span> <span class="s2">&quot;322d20bf-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;teamId&quot;</span><span class="p">:</span> <span class="s2">&quot;33333-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
         <span class="s2">&quot;channelId&quot;</span><span class="p">:</span> <span class="s2">&quot;19:a62cab990d8648b6a9047787e030fa7e@thread.tacv2&quot;</span>
       <span class="p">},</span>
       <span class="s2">&quot;attachments&quot;</span><span class="p">:</span> <span class="p">[],</span>
@@ -2326,7 +2559,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
   <span class="p">],</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ms_groupteam_id&quot;</span><span class="p">:</span> <span class="s2">&quot;322d20bf-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ms_groupteam_id&quot;</span><span class="p">:</span> <span class="s2">&quot;33333-450e-46d6-9338-f7e3b66a064c&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ms_channel_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Incident 2121 testing channels&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -2411,104 +2644,208 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <thead>
 <tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
 <th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
 <th class="head"><p>Object</p></th>
 <th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>MS Teams: Archive Team From Task (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>task</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>MS Teams: Archive Team (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>MS Teams: Create Channel From Task (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>task</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>MS Teams: Create Channel (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>MS Teams: Create Group From Task (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>task</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>MS Teams: Create Group (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>MS Teams: Create Team From Task (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>task</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>MS Teams: Create Team (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>MS Teams: Delete Channel From Task (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>task</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>MS Teams: Delete Channel (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>MS Teams: Delete Group From Task (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>task</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>MS Teams: Delete Group (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>MS Teams: Enable Teams for Group From Task (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>task</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>MS Teams: Enable Teams for Group (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>MS Teams: Post Incident Information (PB)</p></td>
 <td><p>None</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>MS Teams: Post Task Information (PB)</p></td>
-<td><p>None</p></td>
-<td><p>task</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>MS Teams: Read Channel Messages From task (PB)</p></td>
-<td><p>None</p></td>
-<td><p>task</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>MS Teams: Read Channel Messages (PB)</p></td>
-<td><p>None</p></td>
+<tr class="row-odd"><td><p>MS Teams: Post Message for Workflows</p></td>
+<td><p>Post a message to a Teams channel using the new Workflows model</p></td>
+<td><p>Manual</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>MS Teams: Post Chat Message (using Workflows)</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>MS Teams: Post Chat Task Message (using Workflows)</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>MS Teams: Post Task Information (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>MS Teams: Read Channel Messages From task (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>MS Teams: Read Channel Messages (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>MS Teams: Send Approval Request</p></td>
+<td><p>Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the ‘MS Teams Approval Process’ datatable.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>MS Teams: Send Approval Request for Tasks</p></td>
+<td><p>Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the ‘MS Teams Approval Process’ datatable.</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<hr class="docutils" />
+<!--
+## Custom Layouts
+When the poller is enabled, a tab is enabled automatically: MS Teams Approval Process. This tab containers the Approval Request datatable which is used track pending requests as well as the responses received from MS Teams.
+
+## Data Table - MS Teams Approval Process
+
+ ![screenshot: dt-ms-teams-approval-process](./doc/screenshots/dt-ms-teams-approval-process.png)
+
+#### API Name:
+msteams_approval_process
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Date | `date` | `datetimepicker` | Date the Approval request was submitted |
+| Status | `status` | `text` | 'Pending', 'Approved', 'Rejected', 'Invalid', 'Expired' |
+| Responder | `responder` | `text` | Name of person who responded to the approval request|
+| Response Date | `response_date` | `datetimepicker` | Date when response was received |
+| Response Comments | `response_comments` | `text` | Any additional comments added from the Responder|
+| Group | `group` | `text` | Group for the channel where the Approval Request was submitted |
+| Channel | `channel` | `text` | Channel where the Approval Request was submitted |
+| Message | `message` | `text` | Message added with the Approval Request |
+| Expiration | `expiration` | `datetimepicker` | Date when the approval will have expired |
+| Task Name | `task_name` | `text` | If associated with a Task, the task name |
+| Task Id | `task_id` | `text` |  If associated with a Task, the task_id |
+| Channel Id | `channel_id` | `text` | Id of the channel for quick lookup |
+| Group Id | `group_id` | `text` | Id of the group for quick lookup |
+| Message Id | `message_id` | `text` | Id of the message for quick lookup |
+| SOAR Message Id | `soar_message_id` | `text` | Internal Id of used to locate the approval request message |
+-->
 </section>
 <hr class="docutils" />
 <section id="troubleshooting-support">
@@ -2579,7 +2916,8 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <li><a class="reference internal" href="#">Microsoft Teams</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#changes">2.1.0 Changes</a></li>
+<li><a class="reference internal" href="#changes">3.0.0 Changes</a></li>
+<li><a class="reference internal" href="#id1">2.1.0 Changes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
@@ -2591,7 +2929,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
 <li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
 <li><a class="reference internal" href="#python-environment">Python Environment</a></li>
-<li><a class="reference internal" href="#endpoint-developed-with">Endpoint Developed With</a></li>
+<li><a class="reference internal" href="#endpoint-developed-with-ms-teams">Endpoint Developed With MS Teams</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
@@ -2606,8 +2944,10 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <li><a class="reference internal" href="#setting-up-incoming-webhooks-both-permissions">Setting up Incoming Webhooks (Both Permissions)</a></li>
 <li><a class="reference internal" href="#setting-up-delegated-permissions-delegated-permissions">Setting up Delegated permissions (Delegated permissions)</a></li>
 <li><a class="reference internal" href="#app-configuration-both-permissions">App Configuration (Both Permissions)</a></li>
+<li><a class="reference internal" href="#ms-teams-workflows">MS Teams Workflows</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#function-ms-teams-post-message-for-workflows">Function - MS Teams Post Message for Workflows</a></li>
 <li><a class="reference internal" href="#function-ms-teams-archive-team">Function - MS Teams: Archive Team</a></li>
 <li><a class="reference internal" href="#function-ms-teams-create-channel">Function - MS Teams: Create Channel</a></li>
 <li><a class="reference internal" href="#function-ms-teams-create-group">Function - MS Teams: Create group</a></li>
@@ -2634,7 +2974,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
