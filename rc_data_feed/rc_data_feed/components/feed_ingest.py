@@ -83,7 +83,7 @@ class FeedComponent(ResilientComponent):
 
                 self.plugin_pool = PluginPool.get_instance(self.rest_client_helper,
                                                            int(opts.get("resilient", {}).get("num_workers", 0)),
-                                                           self.options.get("feed_names", None),
+                                                           self.options,
                                                            opts,
                                                            self.workspaces,
                                                            parallel_execution=str_to_bool(self.options.get("parallel_execution", 'false')))

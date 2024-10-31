@@ -19,16 +19,21 @@ def snake_to_camel(word):
 
 setup(
     name='fn_ansible_tower',
-    version='1.0.3',
+    version='1.0.4',
+    display_name='Ansible Tower for SOAR',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='IBM QRadar SOAR',
+    author_email='',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_ansible_tower'",
-    long_description="Get job templates, launch jobs, and get job results from Ansible Tower",
+    description="QRadar SOAR Integration for Ansible Tower/AWX",
+    long_description="""Get job templates, launch jobs, and get job results from Ansible Tower
+<br>
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_ansible_tower/README.html'>App Documentation</a></ul>""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib>=34.0.195'
+        'resilient_circuits>=50.0.0',
+        'resilient_lib>=50.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

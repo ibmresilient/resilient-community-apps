@@ -20,6 +20,7 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 setup(
     name="fn_aws_guardduty",
+    display_name="AWS GuardDuty",
     version="1.1.0",
     license="MIT",
     author="IBM SOAR",
@@ -30,12 +31,16 @@ setup(
         AWS GuardDuty findings within the IBM Resilient Platform.
         <br>
         The AWS GuardDuty Integration provides the following functionality:
-        <br>
+        <ul>
         * A poller which gathers current findings from GuardDuty and escalates to the Resilient platform as incidents.
-        <br>
+        </ul><ul>
         * A function to archive a GuardDuty finding when the corresponding Resilient incident is closed.
-        <br>
+        </ul><ul>
         * A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.
+        </ul><br>
+        Links:
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
         """,
     install_requires=[
         'resilient_circuits>=45.0.0',

@@ -29,11 +29,17 @@ WORKSPACE_VERIZON = {
 
 VERIZON_FEEDS = ','.join(['postgres_feed:label1', 'postgres_feed:label2', 'postgres_feed:label3', 'postgres_feed:label4', 'postgres_feed:label5', 'postgres_feed:label6', 'postgres_feed:label7', 'postgres_feed:label8', 'postgres_feed:label9', 'postgres_feed:label10', 'postgres_feed:label11'])
 
+OPTIONS = {
+    "feed_names": "",
+    "timeseries": "",
+    "timeseries_fields": ""
+}
+
 def test_is_workspace_valid_success():
 
     pool1 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       WORKSPACE_MAP,
                       False)
@@ -43,7 +49,7 @@ def test_is_workspace_valid_success():
 
     pool2 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       None,
                       False)
@@ -53,7 +59,7 @@ def test_is_workspace_valid_success():
 
     pool3 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       WORKSPACE_MAP_B,
                       False)
@@ -65,7 +71,7 @@ def test_is_workspace_valid_fail():
 
     pool1 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       WORKSPACE_MAP,
                       False)
@@ -76,7 +82,7 @@ def test_is_workspace_valid_fail():
 
     pool1 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       WORKSPACE_MAP_B,
                       False)
@@ -87,7 +93,7 @@ def test_is_verizon_valid_success():
 
     pool1 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       WORKSPACE_VERIZON,
                       False)
@@ -97,7 +103,7 @@ def test_is_verizon_valid_success():
 
     pool2 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       None,
                       False)
@@ -110,7 +116,7 @@ def test_is_verizon_valid_fail():
 
     pool1 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       WORKSPACE_VERIZON,
                       False)
@@ -121,7 +127,7 @@ def test_is_verizon_valid_fail():
 
     pool1 = PluginPool(None,
                       None,
-                      "",
+                      OPTIONS,
                       {},
                       WORKSPACE_VERIZON,
                       False)

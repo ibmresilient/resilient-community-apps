@@ -37,6 +37,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.2 | 10/2024 | Added retry logic to SOAR incident updates |
 | 2.1.1 | 07/2024 | Correction to documentation on template references |
 | 2.1.0 | 03/2024 | Add support for multi-tenancy. |
 | 2.0.0 | 01/2024 | <ul><li>Bug fix in jinja template, "incident_update_template.jinja", for escaping double quotation mark when rendering in json.</li><li>Update jinja templates to use values rather than IDs.</li><li>Add new setting in the app.config to set api-version.</li><li>Add the ability to use a jinja template as the poller incident filter.</li></ul> |

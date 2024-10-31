@@ -29,5 +29,12 @@ include_attachment_data=false
 workspaces=
 # support for parallel execution. Default is False
 parallel_execution = False
+# When to collect time-series data. Because of the extra API call needed to collect this data, it could be more impactful on SOAR when set to 'always'
+#  default is 'never'
+#timeseries = always | onclose | never
+# A comma separated list of time-series fields to collect. Custom select and boolean fields are also possible.
+#   Specify wildcard fields with '?' or '*'. ex. ts_* will collect all time-series fields starting with "ts_"
+#   default is all timeseries fields
+#timeseries_fields = owner_id, phase_id, severity_code, <custom_field>
 """
     return config_data

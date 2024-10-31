@@ -5,11 +5,12 @@
 
 from json import decoder, loads
 from logging import getLogger
+from retry import retry
 from threading import Thread
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date, poller,
-                           validate_fields, str_to_bool)
+                           validate_fields, str_to_bool, IntegrationError)
 
 from fn_microsoft_sentinel.lib.function_common import (
     DEFAULT_INCIDENT_CLOSE_TEMPLATE, DEFAULT_INCIDENT_CREATION_TEMPLATE,
@@ -73,8 +74,7 @@ class PollerComponent(AppFunctionComponent):
         # rest_client is used to make IBM SOAR API calls
         self.res_client = self.rest_client()
         self.soar_common = SOARCommon(self.res_client)
-        # Create api client
-        self.sentinel_client = SentinelAPI(self.opts, self.options)
+        
         self.resilient_common = ResilientCommon(self.rest_client())
 
         return True
@@ -94,6 +94,8 @@ class PollerComponent(AppFunctionComponent):
             # If using the new app.config with ms_sentinel_labels, then set SentinelAPI connection with profile/label data.
             if self.options.get("ms_sentinel_labels", None):
                 self.sentinel_client = SentinelAPI(self.opts, self.options, profile_data)
+            else:
+                self.sentinel_client = SentinelAPI(self.opts, self.options)
             result, status, _reason = self.sentinel_client.query_incidents(profile_data, kwargs.get("last_poller_time"))
             if status:
                 self._parse_results(result, profile_name, profile_data)
@@ -116,12 +118,11 @@ class PollerComponent(AppFunctionComponent):
         for sentinel_incident in result.get("value", []):
             # Determine if an incident already exists, used to know if create or update
             sentinel_incident_id, _sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
-            soar_incident, _ = self.soar_common.get_soar_case({"sentinel_incident_number": sentinel_incident_id}, open_cases=False)
 
             new_incident_filters = get_profile_filters(profile_data.get('new_incident_filters', None))
             result_soar_incident = self._create_update_incident(
                 profile_name, profile_data,
-                sentinel_incident, soar_incident,
+                sentinel_incident, sentinel_incident_id,
                 new_incident_filters
             )
 
@@ -150,15 +151,19 @@ class PollerComponent(AppFunctionComponent):
                 else:
                     LOG.error(f"Error getting comments: {reason}")
 
-    def _create_update_incident(self, profile_name, profile_data, sentinel_incident, soar_incident, new_incident_filters):
+    @retry(IntegrationError, delay=2, tries=3, backoff=2)
+    def _create_update_incident(self, profile_name, profile_data, sentinel_incident, sentinel_incident_id, new_incident_filters):
         """
         Perform the operations on the sentinel incident: create, update or close
         :param profile_name [str]: [incident profile]
         :param profile_data [dict]: [profile data]
-        :param soar_incident [dict]: [existing SOAR or none]
+        :param sentinel_incident [dict]: [associated Sentinel incident]
+        :param sentinel_incident_id [str]: [Sentinel id]
         :param new_incident_filters [dict]: [filter to apply to new incidents]
-        :return: soar_incident [dict]
+        :return: updated_soar_incident [dict]
         """
+        soar_incident, _ = self.soar_common.get_soar_case({"sentinel_incident_number": sentinel_incident_id}, open_cases=False)
+
         # Check if the close_soar_case setting was configured in the app.config. Default to True
         close_soar_case = str_to_bool(profile_data.get("close_soar_case", "true"))
         _sentinel_incident_name, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)

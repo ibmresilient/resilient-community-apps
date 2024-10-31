@@ -603,7 +603,7 @@ def mocked_get_paged_jobs():
                 "artifacts": {
 
                 },
-                "scm_revision": "347e44fea036c94d5f60e544de006453ee5c71ad",
+                "scm_revision": "xxxxyyyyzzzz",
                 "instance_group": 1,
                 "diff_mode": False,
                 "job_slice_number": 0,
@@ -752,7 +752,7 @@ def mocked_get_paged_jobs():
                 "artifacts": {
 
                 },
-                "scm_revision": "347e44fea036c94d5f60e544de006453ee5c71ad",
+                "scm_revision": "xxxxyyyyzzzz",
                 "instance_group": 1,
                 "diff_mode": False,
                 "job_slice_number": 0,
@@ -901,7 +901,7 @@ def mocked_get_paged_jobs():
                 "artifacts": {
 
                 },
-                "scm_revision": "347e44fea036c94d5f60e544de006453ee5c71ad",
+                "scm_revision": "xxxxyyyyzzzz",
                 "instance_group": 1,
                 "diff_mode": False,
                 "job_slice_number": 0,

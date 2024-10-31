@@ -7,7 +7,7 @@
   },
   "raw": "{\"status\": \"ok\"}",
   "inputs": {
-    "aws_gd_finding_id": "fec765d91888d9bbf6847953304233b8",
+    "aws_gd_finding_id": "xxxxyyyyzzzz",
     "aws_gd_region": "us-east-1",
     "aws_gd_detector_id": "48bbf98612290af2215c7a02b7ccbc82"
   },
@@ -15,7 +15,7 @@
     "version": "1.0",
     "package": "fn-aws-guardduty",
     "package_version": "1.1.0",
-    "host": "IBM-Allen-MacBookPro.local",
+    "host": "IBM-dummy-MacBookPro.local",
     "execution_time_ms": 2058,
     "timestamp": "2024-04-11 14:09:19"
   }

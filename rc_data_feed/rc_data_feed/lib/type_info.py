@@ -9,8 +9,9 @@ import logging
 import pytz
 import traceback
 from cachetools import cached, TTLCache
-from datetime import datetime
+from datetime import datetime, timezone
 from fnmatch import filter as fnmatch_filter
+from rc_data_feed.lib.constants import TIME_SERIES_PREFIX
 
 LOG = logging.getLogger(__name__)
 
@@ -112,7 +113,24 @@ class TypeInfo(object):
         """
         return self.get_type_name(self.type_id, pretty=True)
 
-    def get_all_fields(self, refresh):
+    def get_all_fields_for_timeseries(self, payload: dict, refresh: bool) -> list:
+        """uses get_all_fields functionality but adds schema information for timeseries data
+
+        :param payload: payload to transmit
+        :type payload: dict
+        :param refresh_bool: true/false whether to refresh the list of fields for this object type
+        :type refresh_bool: bool
+        :return: schema of type with field info
+        :rtype: list
+        """
+
+        all_fields = self.get_all_fields(refresh)
+
+        # the schema for time series data will be 'generated' so the data is accepted
+        time_series_schema = self.get_time_series_schema(payload)
+        return [*all_fields, *time_series_schema] # merge the lists
+
+    def get_all_fields(self, refresh: bool) -> list:
         """
         Gets the FieldDTO objects for the current context.  Note that this
         relies on self.type_id to know what the type is.  Only fields for that type
@@ -139,7 +157,7 @@ class TypeInfo(object):
         return fields
 
 
-    def add_schema_fields(self, fields, new_fields):
+    def add_schema_fields(self, fields: list, new_fields: list) -> list:
         """
         add fields which are not included in the types schema
         :param fields:
@@ -185,7 +203,7 @@ class TypeInfo(object):
 
         return type_dto['type_id'] == TypeInfo.DATATABLE_TYPE_ID
 
-    def flatten(self, payload, translate_func=None):
+    def flatten(self, payload: dict, translate_func: object=None):
         """
         Gets a simplified version of the payload.  Any select/multiselect field
         values will have their ID values replaced with the string labels.  There will
@@ -204,7 +222,7 @@ class TypeInfo(object):
         # get all of the fields from the types endpoint.  Note that this is cached
         # and we don't specify for it to be refreshed.
         #
-        all_fields = self.get_all_fields(refresh=False)
+        all_fields = self.get_all_fields_for_timeseries(payload, refresh=False)
 
         # We need just the names for a comparison.
         #
@@ -218,16 +236,36 @@ class TypeInfo(object):
         # been added and we'll refresh our list of fields.
         #
         if not set(message_field_names).issubset(set(all_field_names)):
-            all_fields = self.get_all_fields(refresh=True)
+            all_fields = self.get_all_fields_for_timeseries(payload, refresh=True)
 
         try:
             values = self._get_field_values(payload, all_fields, translate_func, bypass_error=False)
         except ValueError:
-            # this will trigger when a field ID is not found
-            all_fields = self.get_all_fields(refresh=True)
+            # this will trigger when a field ID is not found. Try getting a fresh copy of schema
+            all_fields = self.get_all_fields_for_timeseries(payload, refresh=True)
+
             values = self._get_field_values(payload, all_fields, translate_func, bypass_error=True)
 
         return values
+
+    def get_time_series_schema(self, payload: dict) -> list:
+        """create new incident schema information to mimic actual incident field schemas
+             All created fields have the "timeseries" hierarchy and type 'number' to represent
+             the duration length
+
+        :param payload: incident data
+        :type payload: dict
+        :return: new schema information for the timeseries fields present in payload
+        :rtype: list
+        """
+        result_time_series_schema = []
+
+        field_id = 20000 # fake ids for timeseries data
+        for ts_field in payload.get(TIME_SERIES_PREFIX, {}):
+            result_time_series_schema.append(self.make_field(0, field_id, TIME_SERIES_PREFIX, ts_field, "number"))
+            field_id += 1
+
+        return result_time_series_schema
 
     def filter_incident_fields(self, flattened_fields: dict, exclude_list: list) -> dict:
         """reduce the list of fields for a plugin to transmit to it's datasource
@@ -244,7 +282,7 @@ class TypeInfo(object):
         # find all the exclusion fields found in flattened_fields
         matches = [fnmatch_filter(flattened_field_keys, excl_pattern.strip().lower()) for excl_pattern in clean_exclude_list]
         found_excl_list = []
-        [found_excl_list.extend(match) for match in matches if match]
+        _ = [found_excl_list.extend(match) for match in matches if match]
         # filter out the exclusion keys found in flattened_fields
         reduced_field_keys = list(set(flattened_field_keys) - set(found_excl_list))
 
@@ -445,11 +483,9 @@ class TypeInfo(object):
         # wants it as seconds.  Then, convert to an ISO formatted string
         # representation.
         #
-        d = datetime.utcfromtimestamp(value/1000)
-        if field['input_type'] == 'datetimepicker':
-            d = pytz.timezone('UTC').localize(d)
+        d = datetime.fromtimestamp(value/1000, timezone.utc)
 
-        return d.isoformat()
+        return d.isoformat(timespec="seconds")
 
     @staticmethod
     def translate_value_list(type_info, field, value):
@@ -598,6 +634,7 @@ class FullTypeInfo(TypeInfo):
     """
     A TypeInfo object for situations where we need to load the type information
     from the REST API's GET /rest/orgs/:orgId/types endpoint.
+    Used by the Reload class.
     """
     def __init__(self, type_id, rest_client_helper, refresh, all_fields=None):
         """

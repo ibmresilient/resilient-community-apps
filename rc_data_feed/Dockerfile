@@ -9,5 +9,9 @@ FROM ${BASE_IMAGE_REPO}/ibmresilient/soarapps-base-docker-image:${BASE_IMAGE_TAG
 
 ARG APPLICATION=rc_data_feed
 
+USER 0
+RUN pip install --upgrade pip
+RUN yum -y update && yum clean all
+
 COPY ./dist /tmp/packages
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz

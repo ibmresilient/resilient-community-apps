@@ -11,5 +11,6 @@ ARG APPLICATION=fn_aws_guardduty
 
 COPY ./dist /tmp/packages
 USER 0
+RUN yum -y update && yum clean all
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 USER 1001

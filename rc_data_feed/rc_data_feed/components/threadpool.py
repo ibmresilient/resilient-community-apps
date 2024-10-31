@@ -5,12 +5,14 @@
 """Feed component implementation."""
 
 import logging
+from fnmatch import filter as fnmatch_filter
 from multiprocessing.pool import ThreadPool
 import traceback
 
 from pydoc import locate
 from resilient_lib import get_file_attachment
 from rc_data_feed.lib.feed import FeedContext, CriticalPluginError
+from rc_data_feed.lib.constants import TIME_SERIES_PREFIX
 
 LOG = logging.getLogger(__name__)
 
@@ -26,17 +28,19 @@ class PluginPool(object):
     def __init__(self,
                  rest_client_helper,
                  num_workers,
-                 feed_list,
+                 options,
                  opts,
                  workspaces,
                  parallel_execution=False):
 
         self.rest_client_helper = rest_client_helper
         self.num_workers = num_workers if num_workers else DEF_NUM_WORKERS
-        self.feed_outputs = self.build_feed_outputs(opts, feed_list)
+        self.feed_outputs = self.build_feed_outputs(opts, options.get("feed_names"))
         self.workspaces = workspaces
         self.parallel_execution = parallel_execution
         self.pool = None
+        self.timeseries = options.get("timeseries", "never")
+        self.timeseries_fields = [field.strip() for field in options.get("timeseries_fields", "*").split(",")]
 
         if self.parallel_execution:
             # increase the number of threads for handling event messages
@@ -49,7 +53,7 @@ class PluginPool(object):
     @staticmethod
     def get_instance(rest_client_helper,
                      num_workers,
-                     feed_list,
+                     options,
                      opts,
                      workspaces,
                      parallel_execution=False):
@@ -57,7 +61,7 @@ class PluginPool(object):
         if not PluginPool._instance:
             PluginPool._instance = PluginPool(rest_client_helper,
                                               num_workers,
-                                              feed_list,
+                                              options,
                                               opts,
                                               workspaces,
                                               parallel_execution=parallel_execution)
@@ -161,6 +165,14 @@ class PluginPool(object):
         if type_name == 'incident':
             payload['org_name'] = type_info.get_org_name(payload['org_id'])
 
+            # collect time series information for the incident?
+            if self.timeseries == "always" \
+                or (self.timeseries == "onclose" and payload.get("plan_status") == "C"):
+                inc_time_series = get_time_series_data(self.rest_client_helper.inst_rest_client,
+                                                       inc_id,
+                                                       self.timeseries_fields)
+                payload[TIME_SERIES_PREFIX] = inc_time_series
+
         # collect attachment data to pass on
         elif not is_deleted and incl_attachment_data \
                 and type_name == 'attachment':
@@ -191,3 +203,71 @@ class PluginPool(object):
             workspace = type_info.get_incident_workspace(inc_id)
 
         self.async_send_data(type_name, workspace, context, payload)
+
+def get_time_series_data(rest_client, inc_id, filter_list):
+    """get timeseries data for an incident, extracting only the fields requested
+
+    :param rest_client: class to make API calls back to SOAR
+    :type rest_client: object
+    :param inc_id: incident to collect timeseries data
+    :type inc_id: str
+    :param filter_list: list of fields to return timeseries data
+    :type filter_list: list
+    :return: list of timeseries data to return
+    :rtype: list
+    """
+    results = rest_client.post("/timers", [inc_id])
+    if results.get("entities"):
+        timer_fields = results["entities"][0].get("timer_fields", [])
+        # extract fields requested
+        if not filter_list:
+            return convert_timer_fields(timer_fields)
+
+        # get all field names
+        timer_field_dict = {timer_field.get("field_name"): timer_field for timer_field in timer_fields}
+
+        # extract fields requested
+        matches = [fnmatch_filter(timer_field_dict.keys(), filter_pattern) for filter_pattern in filter_list]
+        # consolidate returned lists
+        match_list = []
+        for match in matches:
+            match_list += match
+        match_list = list(set(match_list)) # dedup list
+
+        result = [timer_field_dict[matched_field] for matched_field in match_list if matched_field]
+        return convert_timer_fields(result)
+
+    return []
+
+def convert_timer_fields(time_field_list: list) -> dict:
+    """time-series fields need to be identified as 'new' incident fields since they
+       are a combination of state and duration values. This function rebuilds time-series
+       fields to represent these new fields.
+
+    :param time_field_list: timeseries fields for the active incident
+    :type time_field_list: list
+    :return: converted field name/state/duration data in 'new' fields.
+    :rtype: dict
+    """
+    result_list_of_dicts = [convert_timer_field(time_field_info) for time_field_info in time_field_list]
+    result = {}
+    for result_dict in result_list_of_dicts:
+        result.update(result_dict)
+
+    return result
+
+def convert_timer_field(time_field_info):
+    """flatten a timer field into a single value based on the selection fields or boolean states
+
+    :param time_field_info: a timer field with the different states and durations
+    :type time_field_info: dictionary
+    """
+    result_fields = {}
+    for field_value in time_field_info.get("field_values"):
+        ts_field_name = "__".join([TIME_SERIES_PREFIX,
+                                   f"{time_field_info.get('field_name')}",
+                                   f"{field_value.get('field_value')}"])
+        ts_field_name = ts_field_name.replace(" ", "_").replace("-", "_").lower()
+        result_fields[ts_field_name] = field_value.get('duration_in_seconds')
+
+    return result_fields

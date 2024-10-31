@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed',
     display_name='Data Feeder for SOAR',
-    version='3.2.1',
+    version='3.3.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -14,7 +14,7 @@ setup(
     description="QRadar SOAR integration for sending data feeds to other (BI) systems",
     long_description="QRadar SOAR integration for sending data feeds to other (BI) systems",
     install_requires=[
-        'resilient_circuits>=48.2',
+        'resilient_circuits>=51.0.0',
     ],
     packages=find_packages(),
     include_package_data=True,
