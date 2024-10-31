@@ -1,0 +1,20 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandID": "4C697374D15C433880A56800BAC25E56"
+  },
+  "raw": null,
+  "inputs": {
+    "sep_command_id": "367F5DE4A7F346E4A40B3475DFD93B06"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 1322,
+    "timestamp": "2024-07-17 10:59:14"
+  }
+}

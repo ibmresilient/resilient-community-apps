@@ -1,0 +1,608 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        },
+        "finding": {
+          "type": "object",
+          "properties": {
+            "AccountId": {
+              "type": "string"
+            },
+            "Arn": {
+              "type": "string"
+            },
+            "CreatedAt": {
+              "type": "string"
+            },
+            "Description": {
+              "type": "string"
+            },
+            "Id": {
+              "type": "string"
+            },
+            "Partition": {
+              "type": "string"
+            },
+            "Region": {
+              "type": "string"
+            },
+            "Resource": {
+              "type": "object",
+              "properties": {
+                "AccessKeyDetails": {
+                  "type": "object",
+                  "properties": {
+                    "AccessKeyId": {
+                      "type": "string"
+                    },
+                    "PrincipalId": {
+                      "type": "string"
+                    },
+                    "UserName": {
+                      "type": "string"
+                    },
+                    "UserType": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "ResourceType": {
+                  "type": "string"
+                }
+              }
+            },
+            "SchemaVersion": {
+              "type": "string"
+            },
+            "Service": {
+              "type": "object",
+              "properties": {
+                "Action": {
+                  "type": "object",
+                  "properties": {
+                    "ActionType": {
+                      "type": "string"
+                    },
+                    "AwsApiCallAction": {
+                      "type": "object",
+                      "properties": {
+                        "Api": {
+                          "type": "string"
+                        },
+                        "CallerType": {
+                          "type": "string"
+                        },
+                        "RemoteIpDetails": {
+                          "type": "object",
+                          "properties": {
+                            "City": {
+                              "type": "object",
+                              "properties": {
+                                "CityName": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "Country": {
+                              "type": "object",
+                              "properties": {
+                                "CountryName": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "GeoLocation": {
+                              "type": "object",
+                              "properties": {
+                                "Lat": {
+                                  "type": "number"
+                                },
+                                "Lon": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "IpAddressV4": {
+                              "type": "string"
+                            },
+                            "Organization": {
+                              "type": "object",
+                              "properties": {
+                                "Asn": {
+                                  "type": "string"
+                                },
+                                "AsnOrg": {
+                                  "type": "string"
+                                },
+                                "Isp": {
+                                  "type": "string"
+                                },
+                                "Org": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ServiceName": {
+                          "type": "string"
+                        },
+                        "AffectedResources": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                },
+                "Archived": {
+                  "type": "boolean"
+                },
+                "Count": {
+                  "type": "integer"
+                },
+                "DetectorId": {
+                  "type": "string"
+                },
+                "EventFirstSeen": {
+                  "type": "string"
+                },
+                "EventLastSeen": {
+                  "type": "string"
+                },
+                "ResourceRole": {
+                  "type": "string"
+                },
+                "ServiceName": {
+                  "type": "string"
+                },
+                "AdditionalInfo": {
+                  "type": "object",
+                  "properties": {
+                    "Value": {
+                      "type": "string"
+                    },
+                    "Type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "Severity": {
+              "type": "integer"
+            },
+            "Title": {
+              "type": "string"
+            },
+            "Type": {
+              "type": "string"
+            },
+            "UpdatedAt": {
+              "type": "string"
+            }
+          }
+        },
+        "region": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "object",
+              "properties": {
+                "format": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              }
+            },
+            "discovered_date": {
+              "type": "string"
+            },
+            "severity_code": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "aws_guardduty_finding_id": {
+                  "type": "string"
+                },
+                "aws_guardduty_finding_arn": {
+                  "type": "string"
+                },
+                "aws_guardduty_finding_type": {
+                  "type": "string"
+                },
+                "aws_guardduty_finding_updated_at": {
+                  "type": "string"
+                },
+                "aws_guardduty_region": {
+                  "type": "string"
+                },
+                "aws_guardduty_severity": {
+                  "type": "string"
+                },
+                "aws_guardduty_resource_type": {
+                  "type": "string"
+                },
+                "aws_guardduty_detector_id": {
+                  "type": "string"
+                },
+                "aws_guardduty_count": {
+                  "type": "string"
+                },
+                "aws_guardduty_archived": {
+                  "type": "string"
+                }
+              }
+            },
+            "artifacts": {
+              "type": "array"
+            },
+            "comments": {
+              "type": "array"
+            }
+          }
+        },
+        "data_tables": {
+          "type": "object",
+          "properties": {
+            "gd_finding_overview": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cells": {
+                    "type": "object",
+                    "properties": {
+                      "severity": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "query_execution_date": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "region": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "count": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "account_id": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "created_at": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "updated_at": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "gd_action_details": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cells": {
+                    "type": "object",
+                    "properties": {
+                      "action_type": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "query_execution_date": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "action_api": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "event_first_seen": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "event_last_seen": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "actor_caller_type": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "city_name": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "country_name": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "asn": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "asn_org": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "isp": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "org": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "service_name": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "remote_ip": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "gd_resource_affected": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cells": {
+                    "type": "object",
+                    "properties": {
+                      "resource_type": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "query_execution_date": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "resource_role": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "gd_s3_bucket_details": {
+              "type": "array"
+            },
+            "gd_instance_details": {
+              "type": "array"
+            },
+            "gd_access_key_details": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cells": {
+                    "type": "object",
+                    "properties": {
+                      "access_key_id": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "query_execution_date": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "principal_id": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "user_type": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "user_name": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "aws_gd_finding_id": {
+          "type": "string"
+        },
+        "aws_gd_region": {
+          "type": "string"
+        },
+        "aws_gd_detector_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
