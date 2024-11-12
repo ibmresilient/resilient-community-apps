@@ -16,7 +16,6 @@ Unless otherwise specified, contents of this repository are published under the 
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.3.0   | 09/2024 | Updated base rc_data_feed to 3.3.0. Support for time-series data. |
 | 1.2.0   | 04/2024 | Updated base rc_data_feed to 3.1.0. Added parallel execution. Added ability to exclude selective incident fields. |
 | 1.1.2   | 01/2024 | Updated base rc_data_feed to 3.0.0 |
 | 1.1.1   | 10/2022 | Fix to handle rare corrupt event.message |
@@ -43,17 +42,6 @@ To use this capability, add the following app.config setting, exclude_incident_f
 | parallel_execution | True, False | parallel execution for faster ingestion to Splunk |
 | exclude_incident_fields_file | /path/to/exclusion_file.txt | Specify incident fields, one per line, to exclude from the incident data sent to Splunk. Use wildcards such as '*' (multiple characters) or '?' (single character) to exclude patterns of fields. Ex. gdpr_*, custom_field_int |
 
-### 1.3.0 Changes
-Version 1.3.0 introduces incident time-series data fields. These custom select or boolean fields, as well as incident `Owner`, `Phase` and `Severity` fields which record the duration in seconds each field contains a particular value.
-For instance, how many seconds `Severity` has a value of `Low` and `Medium`, etc.
-
-To use this capability, add the following app.config settings to the `[feeds]` configuration section.
-
-| Key | Values | Description |
-| :-- | :----- | :---------- |
-| timeseries | always \| onclose \| never | When to collect time-series data. Because of the extra API call needed to collect this data, it could be more impactful on SOAR when set to 'always'. default is 'never' |
-| timeseries_fields | owner_id, phase_id, severity_code, <custom_field> | A comma separated list of time-series fields to collect. Custom select and boolean fields are also possible. Specify wildcard fields with '?' or '*'. ex. ts_* will collect all time-series fields starting with "ts_". default is all time-series fields |
-
 ## Compatibility
 SOAR: 45.0 or higher
 
@@ -77,7 +65,7 @@ Simply install the .zip file into the app. It includes:
 ```
 * Run the following commands to install the package:
 ```
-  unzip rc_data_feed-<version>.zip (must be at least version 3.3.0)
+  unzip rc_data_feed-<version>.zip (must be at least version 2.1.0)
   [sudo] pip install --upgrade rc_data_feed-<version>.tar.gz
   unzip rc_data_feed-plugin-splunkfeed-<version>.zip
   [sudo] pip install --upgrade rc_data_feed-plugin-splunkfeed-<version>.tar.gz
@@ -164,7 +152,6 @@ port | Ex. 8088 | The default is 8088 |
 
 ### Considerations
 * Enable the HTTP Event Collector within Splunk ES before using this data feed.
-* Do not use indexer acknowledgement
 * Splunk events are immutable. IBM SOAR object changes are represented as new events. No event deletion is possible.
 * Be aware that when using `reload=True`, all IBM SOAR records will be duplicated in Splunk each time resilient-circuits is re-started. Use the app.config setting `reload_types` to specify the data sent if you want to either limit the object types or to also include datatables.
 
