@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed_plugin_resilientfeed',
     display_name='Data Feeder for QRadar SOAR',
-    version='2.0.0',
+    version='2.1.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',

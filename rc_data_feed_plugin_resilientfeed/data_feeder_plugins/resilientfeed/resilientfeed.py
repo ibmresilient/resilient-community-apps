@@ -120,6 +120,12 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 # remove fields unrelated to creating/upgrading an object
                 cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
 
+                # convert artifact types so that always using the programmatic_name value
+                if type_name == "artifact":
+                    new_value = self.resilient_target.lookup_artifact_type(cleaned_payload["type"])
+                    LOG.debug(f"Artifact type: {cleaned_payload['type']} -> {new_value}")
+                    cleaned_payload["type"] = new_value
+
                 # perform the creation or update in the new resilient org
                 new_id, opr_type = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
                                                                             type_name, cleaned_payload, orig_type_id)

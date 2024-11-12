@@ -4,7 +4,8 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from rc_data_feed.components.threadpool import get_time_series_data, convert_timer_fields, convert_timer_field
+from rc_data_feed.components.threadpool import get_time_series_data
+from rc_data_feed.lib.type_info import convert_timer_fields, convert_timer_field
 
 MOCK_TIMER_DATA = {
   "entities": [

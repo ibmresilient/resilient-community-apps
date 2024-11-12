@@ -6,7 +6,7 @@
 import abc
 import json
 import logging
-import pytz
+import re
 import traceback
 from cachetools import cached, TTLCache
 from datetime import datetime, timezone
@@ -16,6 +16,8 @@ from rc_data_feed.lib.constants import TIME_SERIES_PREFIX
 LOG = logging.getLogger(__name__)
 
 INCIDENT_NOT_FOUND_ERROR = 404
+
+VALID_COLUMN_CHARS = re.compile("[^a-zA-Z0-9_]+")
 
 class TypeInfo(object):
     """
@@ -188,7 +190,7 @@ class TypeInfo(object):
         field = {
             "type_id": type_id,
             "id": field_id,
-            "name": field_name,
+            "name": VALID_COLUMN_CHARS.sub("_", field_name.lower()),
             "text": field_name,
             "prefix": prefix,
             "input_type": field_type,
@@ -687,3 +689,36 @@ def get_incident(rest_client_helper, inc_id):
     except Exception:
         traceback.print_exc()
         return None
+
+def convert_timer_fields(time_field_list: list) -> dict:
+    """time-series fields need to be identified as 'new' incident fields since they
+       are a combination of state and duration values. This function rebuilds time-series
+       fields to represent these new fields.
+
+    :param time_field_list: timeseries fields for the active incident
+    :type time_field_list: list
+    :return: converted field name/state/duration data in 'new' fields.
+    :rtype: dict
+    """
+    result_list_of_dicts = [convert_timer_field(time_field_info) for time_field_info in time_field_list]
+    result = {}
+    for result_dict in result_list_of_dicts:
+        result.update(result_dict)
+
+    return result
+
+def convert_timer_field(time_field_info):
+    """flatten a timer field into a single value based on the selection fields or boolean states
+
+    :param time_field_info: a timer field with the different states and durations
+    :type time_field_info: dictionary
+    """
+    result_fields = {}
+    for field_value in time_field_info.get("field_values"):
+        ts_field_name = "__".join([TIME_SERIES_PREFIX,
+                                   f"{time_field_info.get('field_name')}",
+                                   f"{field_value.get('field_value')}"])
+        ts_field_name = VALID_COLUMN_CHARS.sub("_", ts_field_name.lower())
+        result_fields[ts_field_name] = field_value.get('duration_in_seconds')
+
+    return result_fields

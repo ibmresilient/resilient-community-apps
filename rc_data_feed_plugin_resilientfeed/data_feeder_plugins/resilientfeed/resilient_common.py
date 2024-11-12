@@ -36,6 +36,8 @@ URI_LOOKUP_BY_TYPE = {
     "taskattachment": "/tasks/{}/attachments"
 }
 
+ARTIFACT_TYPES_URI = "/artifact_types"
+
 MAX_RETRY_TEMPLATE = "Max retry exceeded for type: %s %s->%s:%s to %s payload %s"
 
 LOG = logging.getLogger(__name__)
@@ -807,6 +809,58 @@ class Resilient(object):
         """
         uri = Resilient.GET_INCIDENT_TASKS_URI.format(sync_inc_id)
         return self.rest_client.get(uri)
+
+    def lookup_artifact_type(self, artifact_type, field_result="programmatic_name"):
+        """get an artifact field value based on it's artifact_type. Mostly used to
+             return the programmatic_name
+
+        :param artifact_type: lookup value
+        :type artifact_type: str
+        :param field_result: returned field value for artifact type, defaults to "programmatic_name"
+        :type field_result: str, optional
+        :return: returned field value or the original value if artifact_type is not found
+        :rtype: str or None
+        """
+        artifact_type_info = self.get_artifact_type_info()
+
+        for info in artifact_type_info.get("entities", []):
+            if info.get("name") == artifact_type:
+                return info.get(field_result)
+
+        return artifact_type
+
+    @cached(cache=TTLCache(maxsize=128, ttl=180))
+    def get_artifact_type_info(self):
+        """
+        get the artifacts types with the programmatic type
+        :return: list of artifact types
+
+        "entities": [
+            {
+                "id": 1132,
+                "name": "Access Method (Netskope)",
+                "desc": "The access method that triggered the event",
+                "reg_exp": null,
+                "programmatic_name": "access_method_netskope",
+                "uuid": "c9aa895e-469e-42ea-95f6-e047ba51e503",
+                "parse_as_csv": false,
+                "use_for_relationships": true,
+                "enabled": true,
+                "version": 0,
+                "tags": [
+                    {
+                        "tag_handle": 189,
+                        "value": null
+                    }
+                ],
+                "default_scan_option": "unsupported",
+                "file": false,
+                "multi_aware": false,
+                "system": false
+            }
+        ]
+        """
+        return self.rest_client.get(ARTIFACT_TYPES_URI)
 
     def get_incident_task(self, task_id):
         """ return the full task information for the target task"""
