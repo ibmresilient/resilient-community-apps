@@ -19,6 +19,7 @@ Unless otherwise specified, contents of this repository are published under the 
 ## History
 | Date | Version | Notes |
 | ---: | ------: | ----: |
+| 9/2024 | 2.1.0 | Custom artifact types supported |
 | 5/2024 | 2.0.0 | Bi-directional synchronization between _source_ and _destination_ SOAR organizations |
 | 4/2024 | 1.1.0 | Enhancements for datatable select/multi-select fields. Fixes for synchronizing task attachments and notes. Threaded updates for better performance. |
 
