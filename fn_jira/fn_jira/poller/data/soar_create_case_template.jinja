@@ -1,0 +1,29 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  "name": "{{ fields["summary"] }}",
+  "description": {% if renderedFields["description"] is none %} null {% else %} "{{ renderedFields["description"] }}" {% endif %},
+  "severity_code": "{{ fields["priority"]["name"] }}",
+  "create_date": {{ fields["created"] }},
+  "discovered_date": {{ fields["created"] }},
+  "plan_status": "A",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "jira_internal_url": "{{ internal_url }}",
+    "jira_issue_id": "{{ key }}",
+    "jira_server": "{{ jira_server }}",
+    "jira_url": "{{ url }}",
+    "jira_project_key": "{{ fields["project"]["key"] }}",
+    "jira_issue_status": "{{ fields["status"]["name"] }}",
+    "jira_issue_type": "{{ fields["issuetype"]["name"] }}",
+    "jira_linked_to_incident": true
+  },
+  {# add comments as necessary #}
+  "comments": [
+    {% for note in renderedFields["comment"] %}
+      { "text": { "format": "html", "content": "{{ note }}" }, "type": "incident" }
+      {% if not loop.last %}
+        ,
+      {% endif %}
+    {% endfor %}
+  ]
+}
