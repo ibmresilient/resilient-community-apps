@@ -32,7 +32,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
 
         self.pwd = options.get("pwd")
         self.uid = options.get("uid")
-        
+
         # retain a connection pool per thread
         self.THREAD_CONNECTION = {}
 
@@ -48,7 +48,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         # is there a connection pool for this thread?
         thread_id = threading.current_thread().ident
 
-        self._close_connection()            
+        self._close_connection()
 
         # pylint: disable=c-extension-no-member
         if dialect and isinstance(dialect, OracleDialect):

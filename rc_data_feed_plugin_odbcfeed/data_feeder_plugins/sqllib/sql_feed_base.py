@@ -6,7 +6,6 @@ import abc
 import logging
 import traceback
 
-from cachetools import cached, LRUCache
 from retry import retry
 from threading import Lock
 from typing import Tuple
@@ -123,7 +122,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
     @abc.abstractmethod
     def _execute_sql(self, cursor, sql, data=None):
         raise NotImplementedError
-    
+
     @abc.abstractmethod
     def _close_transaction(self):
         raise NotImplementedError
@@ -208,7 +207,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         self._execute_sql(cursor, ddl)
 
                         # add in the initial columns
-                        for k in column_spec.keys():
+                        for k in column_spec:
                             self.is_field_found(type_name, k, 'number')
 
                     for field in all_fields:
@@ -236,17 +235,17 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         cursor = None
                         # trigger a restart of this operation
                         raise RetrySendDataException
-                    else:
-                        try:
-                            if cursor:
-                                self._rollback_transaction(cursor)
-                        except Exception:
-                            pass # nosec
-                        finally:
-                            self._close_transaction()  # this will remove the connection from the thread
-                            cursor = None
-                        # end with this error
-                        raise err
+
+                    try:
+                        if cursor:
+                            self._rollback_transaction(cursor)
+                    except Exception:
+                        pass # nosec
+                    finally:
+                        self._close_transaction()  # this will remove the connection from the thread
+                        cursor = None
+                    # end with this error
+                    raise err
                 finally:
                     if cursor:
                         cursor.close()
@@ -289,22 +288,22 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
         # exclude the incident fields indicated in app.config exclude file
         if table_name == 'incident':
-            flat_payload_filtered = context.type_info.filter_incident_fields(flat_payload, 
+            flat_payload_filtered = context.type_info.filter_incident_fields(flat_payload,
                                                                              self.exclude_fields)
         else:
             flat_payload_filtered = flat_payload
 
-        all_fields = context.type_info.get_all_fields(refresh=False)
+        all_fields = context.type_info.get_all_fields_for_timeseries(payload, refresh=False)
+
         # trim all_fields to the flat_payload_filtered list
         all_fields_filtered = [item for item in all_fields if item["name"] in flat_payload_filtered]
+
         self._create_or_update_table(table_name, all_fields_filtered)
 
         all_field_names = [field['name'] for field in all_fields_filtered]
 
         # some data types, such as datetime, will need a conversion routine
-        all_field_types = {}
-        for field in all_fields_filtered:
-            all_field_types[field['name']] = field['input_type']
+        all_field_types = {field['name']: field['input_type'] for field in all_fields_filtered}
 
         if 'id' not in all_field_names:
             # id is not an explicit field - this happens for data tables.  Make sure it exists.

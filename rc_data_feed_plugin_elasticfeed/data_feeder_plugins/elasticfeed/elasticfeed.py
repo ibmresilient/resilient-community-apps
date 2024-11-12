@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Function implementation"""
 
-"""
-This module contains the ElasticFeedDestination for writing Resilient data
-to an Elasticseach index.
-"""
+###
+# This module contains the ElasticFeedDestination for writing Resilient data
+# to an Elasticseach index.
+###
 
 import base64
 import copy
@@ -123,7 +123,7 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
             }
         }
 
-        result = self.es.update(index=index, id=type_id, doc=update_payload)
+        _result = self.es.update(index=index, id=type_id, doc=update_payload)
 
 
     def _fn_elasticsearch_delete(self, index, object_type, type_id):
@@ -175,14 +175,16 @@ def translate_value_for_bytes(bytes_func):
     return translate_value
 
 def make_string(type_info, field, value):
-        """[convert byte array into base64 format required by the elastic]
+    """[convert byte array into base64 format required by the elastic]
 
-        Args:
-            value ([byte array]): [description]
+    Args:
+        value ([byte array]): [description]
 
-        Returns:
-            base64 converted format
-        """
+    Returns:
+        base64 converted format
+    """
 
-        if value:
-            return base64.b64encode(value).decode('utf-8')
+    if value:
+        return base64.b64encode(value).decode('utf-8')
+
+    return value
