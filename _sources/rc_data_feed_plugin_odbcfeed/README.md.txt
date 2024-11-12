@@ -1,6 +1,7 @@
 # Data Feeder for ODBC Databases
 
 ## Release Notes
+* v1.2.0 Support for incident timeseries data
 * v1.1.1 Refactored exclusion list logic
 * v1.1.0 Bug fixes for database re-connections attempts. Sync Incident function is now interruptible if the playbook/workflow is cancelled. Added ability to exclude fields from incident database table.
 * v1.0.8 Allow Data Sync function to continue without failing a workflow/playbook
@@ -30,6 +31,17 @@ Unless otherwise specified, contents of this repository are published under the 
 [LICENSE](LICENSE).
 
 ## Change log
+### Version 1.2.0 changes
+Version 1.2.0 introduces incident timeseries data fields. These custom select or boolean fields, as well as incident `Owner`, `Phase` and `Severity` fields which record the duration in seconds each field contains a particular value.
+For instance, how many seconds `Severity` has a value of `Low` and `Medium`, etc.
+
+To use this capability, add the following app.config settings to the `[feeds]` configuration section.
+
+| Key | Values | Description |
+| :-- | :----- | :---------- |
+| timeseries | always \| onclose \| never | When to collect time-series data. Because of the extra API call needed to collect this data, it could be more impactful on SOAR when set to 'always'. default is 'never' |
+| timeseries_fields | owner_id, phase_id, severity_code, <custom_field> | A comma separated list of time-series fields to collect. Custom select and boolean fields are also possible. Specify wildcard fields with '?' or '*'. ex. ts_* will collect all time-series fields starting with "ts_". default is all time-series fields |
+
 ### Version 1.1.0 changes
 Version 1.1.0 introduces the ability to exclude incident fields from the created `incident` database table.  Wildcards can be used to remove fields following a pattern. Ex. gdpr*.
 To use this capability, add the following app.config setting,exclude_incident_fields_file, to the particular database configuration section. 
