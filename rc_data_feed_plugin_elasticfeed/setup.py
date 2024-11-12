@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed_plugin_elasticfeed',
     display_name='Data Feeder for Elasticsearch',
-    version='1.2.0',
+    version='1.1.1',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='',
@@ -23,7 +23,7 @@ setup(
     <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
     <ul><a target='blank' href='https://github.com/ibmresilient/resilient-community-apps/blob/main/rc_data_feed_plugin_elasticfeed/README.md'>App Documentation</a></ul>""",
     install_requires=[
-        'rc_data_feed>=3.3.0',
+        'rc_data_feed>=2.2.1',
         'elasticsearch>=8.3',
         'resilient'
     ],

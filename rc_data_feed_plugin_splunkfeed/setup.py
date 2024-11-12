@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed_plugin_splunkfeed',
     display_name='Data Feeder for Splunk',
-    version='1.3.0',
+    version='1.2.0',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='',
@@ -23,7 +23,7 @@ setup(
 <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
 <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'rc_data_feed>=3.3.0',
+        'rc_data_feed>=3.1.0',
         'resilient'
     ],
     packages=find_packages(),

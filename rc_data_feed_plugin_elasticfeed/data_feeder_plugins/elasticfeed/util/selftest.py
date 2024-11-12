@@ -19,7 +19,7 @@ def selftest_function(opts):
         options = opts.get("elastic_feed", {})
         elastic = ElasticFeedDestination(None, options)
 
-        _info = elastic.es.ping()
+        info = elastic.es.ping()
 
         state = "success"
     except Exception as err:
