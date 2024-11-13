@@ -430,19 +430,23 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.1.1</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
+<td><p>09/2024</p></td>
+<td><p>Support for time series data</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.1</p></td>
 <td><p>01/2024</p></td>
 <td><p>Updated base image rc_data_feed to 3.0.0</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>07/2022</p></td>
 <td><p>New base images and functionality for attachments</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>08/2020</p></td>
 <td><p>App Host support</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>12/2019</p></td>
 <td><p>Initial release</p></td>
 </tr>
@@ -477,11 +481,37 @@
 </table>
 </div>
 </section>
+<section id="id1">
+<h3>1.2.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>Version 1.2.0 introduces incident timeseries data fields. These are custom select or boolean fields, as well as incident <code class="docutils literal notranslate"><span class="pre">Owner</span></code>, <code class="docutils literal notranslate"><span class="pre">Phase</span></code> and <code class="docutils literal notranslate"><span class="pre">Severity</span></code> fields, which record the duration in seconds each field contains a particular value.
+For instance, how many seconds <code class="docutils literal notranslate"><span class="pre">Severity</span></code> has a value of <code class="docutils literal notranslate"><span class="pre">Low</span></code> and <code class="docutils literal notranslate"><span class="pre">Medium</span></code>, etc.</p>
+<p>To use this capability, add the following app.config settings to the <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code> configuration section.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Key</p></th>
+<th class="head text-left"><p>Values</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>timeseries</p></td>
+<td class="text-left"><p>always | onclose | never</p></td>
+<td class="text-left"><p>When to collect time-series data. Because of the extra API call needed to collect this data, it could be more impactful on SOAR when set to ‘always’. default is ‘never’</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>timeseries_fields</p></td>
+<td class="text-left"><p>owner_id, phase_id, severity_code, &lt;custom_field&gt;</p></td>
+<td class="text-left"><p>A comma separated list of time-series fields to collect. Custom select and boolean fields are also possible. Specify wildcard fields with ‘?’ or ‘<em>’. ex. ts_</em> will collect all time-series fields starting with “ts_”. default is all timeseries fields</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 <section id="compatibility">
 <h2>Compatibility<a class="headerlink" href="#compatibility" title="Link to this heading">¶</a></h2>
-<p>SOAR Compatibilty: 30.0 or higher</p>
-<p>CP4S Compatibility: 1.4 or higher</p>
+<p>SOAR Compatibilty: 51.0.0 or higher</p>
+<p>CP4S Compatibility: 1.10 or higher</p>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
@@ -696,6 +726,7 @@ Consult section 7.2 of the rc-data-feed documentation for datatable limitations 
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#history">History</a><ul>
 <li><a class="reference internal" href="#changes">1.1.0 Changes</a></li>
+<li><a class="reference internal" href="#id1">1.2.0 Changes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#compatibility">Compatibility</a></li>
