@@ -10,6 +10,7 @@ Refer to the documentation on the Data Feed extension for uses cases support and
 ## History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.2.0   | 09/2024 | Support for time series data |
 | 1.1.1   | 01/2024 | Updated base image rc_data_feed to 3.0.0 |
 | 1.1.0   | 07/2022 | New base images and functionality for attachments |
 | 1.0.1   | 08/2020 | App Host support |
@@ -25,11 +26,21 @@ This release modified the base portion of the Data Feeder which is controlled by
 | workspaces | "Default Workspace": ["sqlserver_feed"], "workspace A": ["kafka_feed", "resilient_feed"] | This setting allows for the partitioning of Data Feeder execution among different workspaces. The format is to specify the workspace name with the data feeder components to associated with it: "workspace": ["app.config section_name"]. If unused, data from all workspaces is accessed. |
 | include_attachment_data | true/false | set to true if attachment data should be part of the sent payload. When 'true', the attachment's byte data is saved in base64 format. |
 
+### 1.2.0 Changes
+Version 1.2.0 introduces incident timeseries data fields. These are custom select or boolean fields, as well as incident `Owner`, `Phase` and `Severity` fields, which record the duration in seconds each field contains a particular value.
+For instance, how many seconds `Severity` has a value of `Low` and `Medium`, etc.
+
+To use this capability, add the following app.config settings to the `[feeds]` configuration section. 
+
+| Key | Values | Description |
+| :-- | :----- | :---------- |
+| timeseries | always \| onclose \| never | When to collect time-series data. Because of the extra API call needed to collect this data, it could be more impactful on SOAR when set to 'always'. default is 'never' |
+| timeseries_fields | owner_id, phase_id, severity_code, <custom_field> | A comma separated list of time-series fields to collect. Custom select and boolean fields are also possible. Specify wildcard fields with '?' or '*'. ex. ts_* will collect all time-series fields starting with "ts_". default is all timeseries fields |
+
 ## Compatibility
+SOAR Compatibilty: 51.0.0 or higher
 
-SOAR Compatibilty: 30.0 or higher
-
-CP4S Compatibility: 1.4 or higher
+CP4S Compatibility: 1.10 or higher
 
 
 ## License

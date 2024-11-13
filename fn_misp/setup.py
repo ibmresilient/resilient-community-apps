@@ -21,7 +21,7 @@ def snake_to_camel(word):
 setup(
     name='fn_misp',
     display_name='MISP Threat Sharing',
-    version='3.0.2',
+    version='3.0.3',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='',
@@ -38,7 +38,7 @@ setup(
                      The package is built in a flexible way so it can be used with any real playbook configuration. 
                      Sample playbooks are provided. 
                      Custom attribute types can be mapped from the playbook input script of the function. """,
-    install_requires=['resilient_circuits>=49.0',
+    install_requires=['resilient_circuits>=51.0',
                       'pymisp~=2.4; python_version>="3"',
                       'pymisp==2.4.119.1; python_version<"3"'
                       ],

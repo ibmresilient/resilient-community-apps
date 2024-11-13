@@ -31,6 +31,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.0.3 | 11/2024 | Add proxy support to selftest. |
 | 3.0.2 | 12/2023 | Bug fix for selftest. Update code to use latest format. Remove rules/workflows and add playbooks. |
 | 3.0.1 | MM/YYYY | App Host support. Proxy Support |
 | 3.0.0 | MM/YYYY | There have been significant changes to the app for version 3, the community built a python3 compatible version of the app. This meant there was 2 different version in circulation. This version of the app is designed to reunify the fn-misp apps. To support both python2 and python3 automatically - using the latest recommended libraries from the MISP community. Finally, the Lookup Att&ck function has been removed, as MISP now stores Att&ck information as Tags - this is returned via the search attribute function, so no special function is required. The old separate apps are packaged inside the app directory, marked as ARCHIVE. They are unsupported and just for code documentation purposes. |
