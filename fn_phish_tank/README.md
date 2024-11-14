@@ -45,9 +45,10 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.2 | 11/2024 | Rebuilt the app for server v40 | 
-| 1.0.1 | 06/2022 | Default URL fixes |
-| 1.0.0 | 07/2021 | Initial Release | 
+| 1.0.3 | 11/2024 | Rebuilt the app for SOAR v40 |
+| 1.0.2 | 04/2020 | Support for App Host |
+| 1.0.1 | 01/2020 | Default URL fixes |
+| 1.0.0 | 07/2019 | Initial Release | 
 
 ---
 

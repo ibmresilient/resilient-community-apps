@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_phish_tank',
     display_name='Phish Tank for SOAR',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='IBM SOAR',
     author_email='',
