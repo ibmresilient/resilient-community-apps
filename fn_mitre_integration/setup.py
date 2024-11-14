@@ -2,18 +2,32 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_mitre_integration',
-    version='2.0.2',
+    version='2.1.0',
     license='MIT License',
-    author='IBM Resilient',
+    author='IBM QRadar SOAR',
     author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for 'fn_mitre_integration'",
+    description="IBM SOAR Components for 'fn_mitre_integration'",
     long_description="fn_mitre_integration support retrieving information related to MITRE ATT&CK tactics and technique from MITRE STIX TAXII server.",
     install_requires=[
         'resilient_lib',
-        'resilient_circuits>=32.0.0',
+        'resilient_circuits>=51.0.0',
         'stix2',
         'taxii2-client>=2.0.0'
     ],
@@ -25,11 +39,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "MitreTechniqueInformationFunctionComponent = fn_mitre_integration.components.mitre_technique_information:FunctionComponent",
-            "MitreTacticInformationFunctionComponent = fn_mitre_integration.components.mitre_tactic_information:FunctionComponent",
-            "MitreTechniquesSoftwareFunctionComponent = fn_mitre_integration.components.mitre_techniques_software:FunctionComponent",
-            "MitreGroupsUsingTechniqueFunctionComponent = fn_mitre_integration.components.mitre_groups_using_technique:FunctionComponent",
-            "MitreGroupsTechniqueIntersectionFunctionComponent = fn_mitre_integration.components.mitre_groups_technique_intersection:FunctionComponent"
+             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+            "{}FunctionComponent = fn_mitre_integration.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_mitre_integration/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mitre_integration.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_mitre_integration.util.customize:customization_data"],

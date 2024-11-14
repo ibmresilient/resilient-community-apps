@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #
 """Function implementation"""
 
@@ -12,7 +12,7 @@ from resilient_lib import ResultPayload
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mitre_technique_information'
+    """Component that implements SOAR function 'mitre_technique_information'
 
     This function fetches the MITRE technique information from the
     MITRE STIX TAXII server.
@@ -75,11 +75,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("done...")
 
-            results = {
-                "mitre_techniques": techs
-            }
             # Produce a FunctionResult with the results
-            yield FunctionResult(result_payload.done(True, results))
+            yield FunctionResult(result_payload.done(True, {"mitre_techniques": techs}))
         except Exception as e:
             log.exception(str(e))
             yield FunctionError()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -9,7 +9,7 @@ from resilient_lib import ResultPayload
 from fn_mitre_integration.lib import mitre_attack, mitre_attack_utils
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mitre_groups_using_technique"""
+    """Component that implements SOAR function 'mitre_groups_using_technique"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -60,11 +60,8 @@ class FunctionComponent(ResilientComponent):
 
             groups = [x.dict_form() for x in groups]  # prepare the data for viewing
 
-            results = {
-                "mitre_groups": groups
-            }
             # Produce a FunctionResult with the results
-            yield FunctionResult(result_payload.done(True, results))
+            yield FunctionResult(result_payload.done(True, {"mitre_groups": groups}))
         except Exception as e:
             log.exception(str(e))
             yield FunctionError()

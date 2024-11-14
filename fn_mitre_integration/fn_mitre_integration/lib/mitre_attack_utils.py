@@ -1,13 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-#
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-#
-
-#
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #   Utils collection for MitreAttack
-#   --------------------------------
-#
 
 from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection
 from fn_mitre_integration.lib.mitre_attack import MitreAttackTactic, MitreAttackTechnique
@@ -23,7 +17,7 @@ def get_multiple_techniques(mitre_conn, mitre_technique_ids=None, mitre_techniqu
     :return: List of techniques
     :rtype: list(MitreAttackTechnique)
     """
-    if mitre_technique_ids is not None:
+    if mitre_technique_ids:
         # Try id first, because it's less ambiguous
         technique_ids = mitre_technique_ids.split(',')
         techniques = []
@@ -60,17 +54,17 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None, opts=None, fu
     tactics = []
 
     # Check ids first, as it takes priority in querying
-    if tactic_ids is not None:
+    if tactic_ids:
         t_ids = tactic_ids.split(',')
 
         for tid in t_ids:
             tactics_id = MitreAttackTactic.get_by_id(mitre_conn, tid)
-            if tactics_id is not None:
+            if tactics_id:
                 for tactic in tactics_id:
                     tactics.append(tactic.id)
             else:
                 raise ValueError("Tactics with id {} do not exist.".format(tid))
-    elif tactic_names is not None:
+    elif tactic_names:
         # It's possible for multiple tactics to have the same name
         # And we want to make sure that all of them are processed in that case
         tactic_names = tactic_names.split(',')
@@ -97,4 +91,3 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None, opts=None, fu
 
         ret.append(tactic_dict)
     return ret
-

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-#
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-#
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 # Current code is written to support v20, and importing from taxii2client directly returns v21 now
@@ -17,7 +16,7 @@ CODE_TAG = "tt"  # Some descriptions contain <code> html tag, which we update fo
 
 def sanitize_stix(text):
     """
-    Applies all the sanitizations that so far came up:
+    Applies all the sanitization that so far came up:
     - Replaces <code> tags with <tt>
     - Creates HTML links from Markdown
     :param text:
@@ -28,7 +27,7 @@ def sanitize_stix(text):
 
 def replace_markdown_links(text):
     """
-    STIX descriptions/mitigations contain links in a Markdown format, which isn't supported on Resilient Side.
+    STIX descriptions/mitigation's contain links in a Markdown format, which isn't supported on SOAR Side.
     We will take those, and convert them to HTML links
     :param text: text from stix
     :return: text with Markdown links converted to HTML links
@@ -130,13 +129,11 @@ class MitreAttackBase(object):
         :rtype: str
         """
         ext = doc.get("external_references")
-        if not ext:
-            return None
-        for i in ext:
-            name = i.get("external_id")
-            if name:
-                return name
-        return None
+        if ext:
+            for i in ext:
+                name = i.get("external_id")
+                if name:
+                    return name
 
     @classmethod
     def get_all(cls, conn):
@@ -161,16 +158,16 @@ class MitreAttackBase(object):
         :return: list of objects of the class requested
         """
         ext_id = id
-        if name is None and ext_id is None:
-            return None
+        if not name and not ext_id:
+            return
 
-        if ext_id is not None:
+        if ext_id:
             objs = cls.get_by_id(conn, ext_id)
         else:
             objs = cls.get_by_name(conn, name)
 
-        if objs is None:
-            return None
+        if not objs:
+            return
 
         if not isinstance(objs, list):
             objs = [objs]
@@ -194,7 +191,7 @@ class MitreAttackBase(object):
         name_filter = Filter("name", "=", name)
         items = conn.get_items([type_filter, name_filter])
         if not len(items):
-            return None
+            return
 
         return [cls(x) for x in items]  # create a list of class instances from query data
 
@@ -217,7 +214,7 @@ class MitreAttackBase(object):
         id_filter = Filter("external_references.external_id", "=", type_id)
         items = conn.get_items([type_filter, id_filter])
         if not len(items):
-            return None
+            return
 
         return [cls(item) for item in items]  # create a list of class instances from query data
 
@@ -264,10 +261,8 @@ class MitreAttackTactic(MitreAttackBase):
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("x_mitre_shortname", "=", name)
         items = conn.get_items([type_filter, name_filter])
-        if not items:
-            return None
-
-        return [cls(x) for x in items]  # create a list of class instances from query data
+        if items:
+            return [cls(x) for x in items]  # create a list of class instances from query data
 
     @classmethod
     def get_by_technique(cls, conn, technique):
@@ -285,10 +280,9 @@ class MitreAttackTactic(MitreAttackBase):
             if tactic:
                 items.extend(tactic)
 
-        if not items:
-            return None
-        # filter by correct collection otherwise
-        return list(filter(lambda x: x.collection == technique.collection, items))
+        if items:
+            # filter by correct collection otherwise
+            return list(filter(lambda x: x.collection == technique.collection, items))
 
 
 class MitreAttackTechnique(MitreAttackBase):
@@ -331,15 +325,14 @@ class MitreAttackTechnique(MitreAttackBase):
         :return: list of Technique instances related to tactic
         :rtype: list(MitreAttackTechnique)
         """
-        if tactic is None:
-            return None
+        if not tactic:
+            return
         kill_chain = tactic.name.replace(' ','-').lower()
         tact_filter = Filter("kill_chain_phases.phase_name", "=", kill_chain)
         tech_filter = Filter("type", "=", cls.MITRE_TYPE)
         techs = conn.get_items([tact_filter, tech_filter])
-        if not techs:
-            return None
-        return [cls(x) for x in techs]
+        if techs:
+            return [cls(x) for x in techs]
 
     def dict_form(self):
         refs = [{"url": r.get("url", "")} for r in self._stix["external_references"]]
@@ -359,20 +352,19 @@ class MitreAttackMitigation(MitreAttackBase):
     @classmethod
     def get_by_technique(cls, conn, technique):
         """
-        Gets mitigations that mitigates provided technique
+        Gets mitigation's that mitigates provided technique
         :param conn: connection object for making requests
         :type conn: MitreAttackConnection
         :param technique: technique to mitigate
         :type technique: MitreAttackTechnique
-        :return: List of mitigations for the given technique
+        :return: List of mitigation's for the given technique
         :rtype: list(MitreAttackMitigation)
         """
-        if technique is None:
-            return None
-        res = [cls(x) for x in conn.get_related_to(technique._stix, "mitigates", target_only=True)]
-        for mitigation in res:
-            mitigation.collection = technique.collection
-        return res
+        if technique:
+            res = [cls(x) for x in conn.get_related_to(technique._stix, "mitigates", target_only=True)]
+            for mitigation in res:
+                mitigation.collection = technique.collection
+            return res
 
     def dict_form(self):
         return {
@@ -398,9 +390,7 @@ class MitreAttackGroup(MitreAttackBase):
         :return: url string
         :rtype: str
         """
-        item_id = self.id
-        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
-        return url
+        return "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, self.id)
 
     @staticmethod
     def get_aliases(doc):
@@ -415,38 +405,35 @@ class MitreAttackGroup(MitreAttackBase):
         :return: list of Group instances
         :rtype: list(MitreAttackGroup)
         """
-        if technique is None:
-            return None
+        if technique:
+            groups = conn.get_related_to(technique._stix, "uses", target_only=True)
+            groups = filter(lambda x: x["type"] == cls.MITRE_TYPE, groups)
+            groups = [cls(x) for x in groups]
 
-        groups = conn.get_related_to(technique._stix, "uses", target_only=True)
-        groups = filter(lambda x: x["type"] == cls.MITRE_TYPE, groups)
-        groups = [cls(x) for x in groups]
+            for group in groups:
+                group.technique_id = technique.id
 
-        for group in groups:
-            group.technique_id = technique.id
-
-        return groups
+            return groups
 
     @classmethod
     def get_by_technique_intersection(cls, conn, techniques):
         """
         Given a list of techniques, find which groups use all of them.
-        :param conn: :param conn: connection object for making requests
+        :param conn: connection object for making requests
         :type conn: MitreAttackConnection
         :param techniques: techniques to intersect
         :type techniques: list(MitreAttackTechnique)
         :return:
         """
-        if not techniques:
-            return None
-        # get groups that each techniques is associated with
-        groups_per_technique = [cls.get_by_technique(conn, technique) for technique in techniques]
+        if techniques:
+            # get groups that each techniques is associated with
+            groups_per_technique = [cls.get_by_technique(conn, technique) for technique in techniques]
 
-        # get a list of ids of groups using all the techniques
-        intersection = cls.get_intersection_of_groups(groups_per_technique)
-        groups = [x for x in groups_per_technique[0] if x.id in intersection]
+            # get a list of ids of groups using all the techniques
+            intersection = cls.get_intersection_of_groups(groups_per_technique)
+            groups = [x for x in groups_per_technique[0] if x.id in intersection]
 
-        return groups
+            return groups
 
     @staticmethod
     def get_intersection_of_groups(groups_per_technique):
@@ -491,9 +478,7 @@ class MitreAttackSoftware(MitreAttackBase):
         :return: url string
         :rtype: str
         """
-        item_id = self.id
-        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
-        return url
+        return "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, self.id)
 
     def get_platforms(selfs, doc):
         """
@@ -521,17 +506,15 @@ class MitreAttackSoftware(MitreAttackBase):
         :return: list of Software instances
         :rtype: list(MitreAttackSoftware)
         """
-        if technique is None:
-            return None
+        if technique:
+            soft = conn.get_related_to(technique._stix, "uses", target_only=True)  # get stix objects
+            soft = filter(lambda x: x["type"] in cls.MITRE_TYPE, soft)  # filter to keep only software types
+            soft = [cls(x) for x in soft]  # initialize class instances
 
-        soft = conn.get_related_to(technique._stix, "uses", target_only=True)  # get stix objects
-        soft = filter(lambda x: x["type"] in cls.MITRE_TYPE, soft)  # filter to keep only software types
-        soft = [cls(x) for x in soft]  # initialize class instances
+            for s in soft:
+                s.technique_id = technique.id
 
-        for s in soft:
-            s.technique_id = technique.id
-
-        return soft
+            return soft
 
     def dict_form(self):
         return {
@@ -553,7 +536,9 @@ class MitreAttackConnection(object):
     def __init__(self, opts=None, function_opts=None):
         self.attack_server = None
         self.composite_ds = None
-        self.proxies = RequestsCommon(opts, function_opts).get_proxies()
+        rc = RequestsCommon(opts, function_opts)
+        self.verify = rc.get_verify()
+        self.proxies = rc.get_proxies()
 
     def connect_server(self, url=None):
         """
@@ -561,8 +546,12 @@ class MitreAttackConnection(object):
         :param url:
         :return:
         """
-        server_url = MITRE_TAXII_URL if url is None else url
-        self.attack_server = Server(server_url, proxies=self.proxies)
+        server_url = MITRE_TAXII_URL if not url else url
+        # If verify is a boolean (True/False), then input it as verify
+        if isinstance(self.verify, bool):
+            self.attack_server = Server(server_url, proxies=self.proxies, verify=self.verify)
+        else: # If verify is a path to a cert then input it as cert
+            self.attack_server = Server(server_url, proxies=self.proxies, cert=self.verify)
         api_root = self.attack_server.api_roots[0]
         # CompositeSource to query all the collections at once
         c_sources = [TAXIICollectionSource(collection) for collection in api_root.collections]
@@ -578,7 +567,7 @@ class MitreAttackConnection(object):
         :return: list of dictionaries representing stix objects
         :rtype: list(dict)
         """
-        if self.attack_server is None:
+        if not self.attack_server:
             self.connect_server()
         items = []
         for data_source in self.composite_ds.get_all_data_sources():
@@ -599,7 +588,7 @@ class MitreAttackConnection(object):
         classes using AttackMitre.
         :return: objects with the provided relationships
         """
-        if self.attack_server is None:
+        if not self.attack_server:
             self.connect_server()
         return self.composite_ds.related_to(*args, **kwargs)
 
@@ -617,10 +606,8 @@ class MitreAttackConnection(object):
         name_filter = Filter("name", "=", item_name)
         items = self.get_items([query_filter, name_filter])
 
-        if not len(items):
-            return None
-
-        return items
+        if len(items):
+            return items
 
 
 class MitreAttack(object):
@@ -637,16 +624,16 @@ class MitreAttack(object):
         :param ext_id: if of the technique to look up
         :return: List of dictionaries representing techniques that fit the query
         """
-        if name is None and ext_id is None:
-            return None
+        if not name and not ext_id:
+            return
         tech = None
-        if name is not None:
+        if name:
             tech = MitreAttackTechnique.get_by_name(self.conn, name)
         else:
             tech = MitreAttackTechnique.get_by_id(self.conn, ext_id)
 
-        if tech is None:
-            return None
+        if not tech:
+            return
 
         if not isinstance(tech, list):
             tech = [tech]
@@ -668,9 +655,8 @@ class MitreAttack(object):
 
     def get_tactic_url(self, name):
         tactic = MitreAttackTactic.get_by_name(self.conn, name)
-        if tactic is None:
-            return None
-        return tactic.get_url()
+        if tactic:
+            return tactic.get_url()
 
     def get_tactic_techniques(self, tactic_name=None, tactic_id=None):
         """
@@ -681,7 +667,7 @@ class MitreAttack(object):
         :return:
         """
         if not tactic_name and not tactic_id:
-            return None
+            return
         if tactic_id:
             tactic = MitreAttackTactic.get_by_id(self.conn, tactic_id)
         elif tactic_name:
@@ -692,9 +678,8 @@ class MitreAttack(object):
                     res.extend(self.get_tactic_techniques(tactic_id=t.id))
                 return res
 
-        if not tactic:
-            return None
-        return [repr(tech) for tech in MitreAttackTechnique.get_by_tactic(self.conn, tactic)]
+        if tactic:
+            return [repr(tech) for tech in MitreAttackTechnique.get_by_tactic(self.conn, tactic)]
 
     def get_technique_mitigations(self, tech_id=None, tech_name=None):
         """
@@ -706,9 +691,9 @@ class MitreAttack(object):
         :return:
         """
         tech = None
-        if tech_id is not None:
+        if tech_id:
             tech = MitreAttackTechnique.get_by_id(self.conn, tech_id)
-        elif tech_name is not None:
+        elif tech_name:
             tech = MitreAttackTechnique.get_by_name(self.conn, tech_name)
             if isinstance(tech, list):
                 res = []
@@ -717,10 +702,8 @@ class MitreAttack(object):
                 return res
 
         if not tech:
-            return None
+            return
 
         mitigations = MitreAttackMitigation.get_by_technique(self.conn, tech)
-        if not len(mitigations):
-            return None
-
-        return mitigations
+        if len(mitigations):
+            return mitigations

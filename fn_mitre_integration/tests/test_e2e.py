@@ -1,20 +1,9 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-
-from __future__ import print_function
-
-from resilient_circuits.action_message import FunctionException_, FunctionError_
-
-try:
-    from unittest.mock import patch
-except ImportError:
-    from mock import patch
 import pytest
 
 from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
-import json
-import os
+from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_mitre_integration"
 
@@ -76,7 +65,7 @@ class TestMITRE:
             "mitre_technique_id": tech_id,
             "mitre_technique_mitigation_only": False
         }
-    
+
         with pytest.raises(AssertionError):
             assert call_mitre_function(circuits_app, function_params, "mitre_technique_information")
 
@@ -109,7 +98,7 @@ class TestMITRE:
             "mitre_tactic_name": tact_name,
             "mitre_tactic_id": tact_id
         }
-    
+
         with pytest.raises(AssertionError):
             assert call_mitre_function(circuits_app, function_params, "mitre_tactic_information")
 
@@ -159,7 +148,7 @@ class TestMITRE:
             "mitre_technique_name": tech_name,
             "mitre_technique_id": tech_id
         }
-    
+
         with pytest.raises(AssertionError):
             assert call_mitre_function(circuits_app, function_params, "mitre_techniques_software")
 
@@ -192,7 +181,7 @@ class TestMITRE:
             "mitre_technique_name": tech_name,
             "mitre_technique_id": tech_id
         }
-    
+
         result = call_mitre_function(circuits_app, function_params, "mitre_groups_using_technique")
         assert len(result["content"]["mitre_groups"]) == 0
 
@@ -208,7 +197,6 @@ class TestMITRE:
             "mitre_technique_name": tech_name,
             "mitre_technique_id": tech_id
         }
-    
+
         with pytest.raises(AssertionError):
             assert call_mitre_function(circuits_app, function_params, "mitre_groups_using_technique")
-

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """
 Note that the mitre_attack class encapsulates the
@@ -13,14 +13,12 @@ from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection, MitreAt
 from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques, get_multiple_techniques
 import requests
 import pytest
-import mock
 from .mock_stix import MitreQueryMocker, MockCollection
 from mock import patch
 import re
 from stix2 import CompositeDataSource, TAXIICollectionSource
 
 MAXIMUM_N_TECHNIQUES_WITHOUT_MITIGATION = 5
-
 
 def url_get(url):
     ret = False
@@ -297,7 +295,7 @@ class TestMitreGroup(object):
         """
         test_list is a list of lists.
         Each sublist is the groups that use a technique.
-        Groupswith id 42 and 123 are in every sublist.
+        Groups with id 42 and 123 are in every sublist.
         """
         GROUP = self.MockGroupID
         test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3), GROUP(123), GROUP(122)],

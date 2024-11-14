@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 #
 """Function implementation"""
 
@@ -12,13 +12,11 @@ from resilient_lib import ResultPayload
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mitre_tactic_information
+    """Component that implements SOAR function 'mitre_tactic_information
 
         This function takes a tactic name or id and returns techniques this
         tactic uses
-
     """
-
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
@@ -56,11 +54,8 @@ class FunctionComponent(ResilientComponent):
                                                                     function_opts=self.options)
             yield StatusMessage("done...")
 
-            results = {
-                "mitre_tactics": tactics
-            }
             # Produce a FunctionResult with the results
-            yield FunctionResult(result_payload.done(True, results))
+            yield FunctionResult(result_payload.done(True, {"mitre_tactics": tactics}))
         except Exception as e:
             log.exception(str(e))
             yield FunctionError()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -10,9 +10,8 @@ from fn_mitre_integration.lib import mitre_attack
 from resilient_lib import ResultPayload
 
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mitre_techniques_software"""
+    """Component that implements SOAR function 'mitre_techniques_software"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -51,7 +50,7 @@ For each, it will create a row in the corresponding data table for MITRE softwar
 
             mitre_conn = mitre_attack.MitreAttackConnection(self.opts, self.options)
 
-            if mitre_technique_id is not None:
+            if mitre_technique_id:
                 # Try id first, because it's less ambiguous
                 technique_ids = mitre_technique_id.split(',')
                 techniques = []
@@ -82,11 +81,8 @@ For each, it will create a row in the corresponding data table for MITRE softwar
                 yield StatusMessage("Done. Returning results.")
 
             software = [x.dict_form() for x in software]  # prepare the data for viewing
-            results = {
-                "mitre_software": software
-            }
             # Produce a FunctionResult with the results
-            yield FunctionResult(result_payload.done(True, results))
+            yield FunctionResult(result_payload.done(True, {"mitre_software": software}))
         except Exception as e:
             log.exception(str(e))
             yield FunctionError()
