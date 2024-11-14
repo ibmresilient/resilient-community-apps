@@ -1,0 +1,87 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {% set severity_mapping = '''{
+    "CRITICAL": "High", 
+    "HIGH": "High", 
+    "MEDIUM": "Medium", 
+    "LOW": "Low", 
+    "DEFAULT": "Low"
+  }'''
+  %}
+  {# modify to specify your specific **data** fields #}
+  "name": "Google SCC Finding - {{ category }}",
+  {# `description` is also available without hyperlinks added #}
+  "description": "{{ linkified_description | replace('"', '\\"') }}",
+  "discovered_date": {{ create_time| soar_datetimeformat(split_at='.') }},
+  "start_date": {{ create_time | soar_datetimeformat(split_at='.') }},
+  "plan_status": "A",
+  "severity_code": "{{ severity | soar_substitute(severity_mapping) }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "google_scc_id": "{{ finding_id }}",
+    "google_scc_name": "{{ name }}",
+    "google_scc_type": "{{ resource['type_'] }}",
+    "google_scc_resource_name": "{{ resource['name'] }}",
+    "google_scc_resource_display_name": "{{ resource['display_name'] }}",
+    "google_scc_project_name": "{{ resource['project_name'] }}",
+    "google_scc_project_display_name": "{{ resource['project_display_name'] }}",
+    "google_scc_url": "<a target='_blank' href='{{ finding_url }}'>SCC Finding</a>",
+
+    {# the properties below are checked for updated in the update template #}
+    "google_scc_class": "<span class='label' rel='tooltip' title='{{ finding_class }}'>{{ finding_class }}</span>",
+    "google_scc_compliance_standards": "{% for standard in source_properties['compliance_standards'] %}
+<span class='label' rel='tooltip' title='{{ standard|upper }}'>{{ standard|upper }} : {{ source_properties['compliance_standards'][standard][0]['ids'][0] }}</span> 
+      {% endfor %}",
+    "google_scc_next_steps": "{{ next_steps }}",
+    "google_scc_security_marks": "{% for mark_key in security_marks['marks'] %}
+<span class='label' rel='tooltip' title='{{ mark_key }}'>{{ mark_key }} : {{ security_marks['marks'][mark_key] }}</span> 
+      {% endfor %}",
+    "google_scc_remediation_link": "<b>{{ resource['display_name'] }}</b><br> <a target='_blank' href='{{ external_uri }}'>{{ resource['name'] }}</a>",
+    "google_scc_category": "<span class='label' rel='tooltip' title='{{ category }}'>{{ category }}</span>",
+    "google_scc_recommendation": "{{ linkified_recommendation | replace('"', '\\"') }}",
+    "google_scc_vulnerability": "{{ vulnerability['cve'] if vulnerability['cve'] }}",
+    "google_scc_state": "{{ state }}"
+  },
+  {# add comments as necessary #}
+  "comments": [
+    {% if notes %}
+    {
+      "text": {
+        "format": "html",
+        "content": "Created by <b>Google Cloud Security Command Center</b><br><br>{{ notes | replace('"', '\\"') }}"
+      }
+    }
+    {% else %}
+    {
+      "text": {
+        "format": "html",
+        "content": "Created by <b>Google Cloud Security Command Center</b>"
+      }
+    }
+    {% endif %}
+  ],
+  {# add artifacts as necessary #}
+  "artifacts": [
+    {% for ip in indicator["ip_addresses"] %}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ ip }}"
+      }
+      {% if not loop.last %},{% endif %}
+    {% endfor %}
+
+    {% if indicator["domains"]%},{% endif %}
+
+    {% for domain in indicator["domains"] %}
+      {
+        "type": {
+          "name": "DNS Name"
+        },
+        "value": "{{ domain }}"
+      }
+      {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
