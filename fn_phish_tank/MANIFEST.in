@@ -1,5 +1,7 @@
 include README.md
-include fn_phish_tank/util/*
+include Dockerfile
+include MANIFEST.in
+include apikey_permissions.txt
 include fn_phish_tank/LICENSE
-include doc/*.md
-include doc/screenshots/*
+recursive-include fn_phish_tank/util *
+recursive-include doc *

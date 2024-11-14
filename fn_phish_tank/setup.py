@@ -6,14 +6,19 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_phish_tank',
-    version='1.0.1',
+    display_name='Phish Tank for SOAR',
+    version='1.0.2',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='http://ibm.biz/resilientcommunity',
-    description="PhishTank Lookup URL Function for IBM Resilient",
+    author='IBM SOAR',
+    author_email='',
+    url='http://ibm.biz/soarcommunity',
+    description="PhishTank Lookup URL Function for IBM QRadar SOAR",
     long_description="""Searches the PhishTank database (https://www.phishtank.com/) to determine if a URL is a phishing URL or not. 
-    The information returned from PhishTank is used to update the Artifacts description and add a note to the incident.""",
+    The information returned from PhishTank is used to update the Artifacts description and add a note to the incident.
+<br>
+Links:
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'python-dateutil>=2.8.0',
