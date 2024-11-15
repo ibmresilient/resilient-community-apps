@@ -40,6 +40,8 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.extrahop_limit_search_duration
             -   fn_inputs.extrahop_limit_bytes
             -   fn_inputs.extrahop_ip1
+            -   fn_inputs.extrahop_decrypt_files
+            -   fn_inputs.extrahop_include_secrets
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -68,13 +70,20 @@ class FunctionComponent(AppFunctionComponent):
                 # Reassemble filename to include date and time to make it more unique.
                 filename = "{0}_{1}{2}".format(fn, datetime.now().strftime("%Y%m%d%H%M%S"), ext)
                 datastream = BytesIO(response.content)
-                write_file_attachment(self.rest_client(), filename, datastream, fn_inputs.incident_id,
-                                      task_id=None, content_type=None)
-                result = {"attachment": "<b>{0}</b>".format(filename)}
+                try:
+                    write_file_attachment(self.rest_client(), filename, datastream, fn_inputs.incident_id,
+                                          task_id=None, content_type=None)
+                    result = {"attachment": "<b>{0}</b>".format(filename)}
+                except Exception as err:
+                    self.LOG.error(f"Unable to create attachment for file: {filename}")
+                    self.LOG.exception(err)
+                    result = {"error": f"{err}"}
             else:
                 self.LOG.error("File name not found in 'Content-Disposition' response headers.")
-
                 result = {"error": "Missing response header"}
+        else:
+            content = response.content.decode()
+            result = {"error": f"{content}"}
 
         # Return filename in result
         results = {"result": result}

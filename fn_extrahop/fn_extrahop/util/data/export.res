@@ -3,7 +3,8 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1684239904465,
+  "case_matching_profiles": [],
+  "export_date": 1731601640495,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/soar_inc_owner_id",
       "hide_notification": false,
-      "id": 394,
+      "id": 540,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -46,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_tag_name",
       "hide_notification": false,
-      "id": 395,
+      "id": 541,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -75,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_always_return_body",
       "hide_notification": false,
-      "id": 396,
+      "id": 542,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -104,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_unassign",
       "hide_notification": false,
-      "id": 397,
+      "id": 543,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -133,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_assign",
       "hide_notification": false,
-      "id": 398,
+      "id": 544,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -162,7 +163,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_active_from",
       "hide_notification": false,
-      "id": 399,
+      "id": 545,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -191,7 +192,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_update_time",
       "hide_notification": false,
-      "id": 400,
+      "id": 546,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -220,7 +221,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_note",
       "hide_notification": false,
-      "id": 401,
+      "id": 547,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -249,7 +250,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_port2",
       "hide_notification": false,
-      "id": 402,
+      "id": 548,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -278,7 +279,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_offset",
       "hide_notification": false,
-      "id": 403,
+      "id": 549,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -307,7 +308,7 @@
       "deprecated": false,
       "export_key": "__function/soar_inc_resolution_id",
       "hide_notification": false,
-      "id": 404,
+      "id": 550,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -336,7 +337,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_limit_search_duration",
       "hide_notification": false,
-      "id": 405,
+      "id": 551,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -365,7 +366,7 @@
       "deprecated": false,
       "export_key": "__function/soar_inc_plan_status",
       "hide_notification": false,
-      "id": 406,
+      "id": 552,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -392,9 +393,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/extrahop_include_secrets",
+      "hide_notification": false,
+      "id": 610,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_include_secrets",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "extrahop_include_secrets",
+      "tooltip": "Whether or not to include TLS secrets together with packet data in .pcapng files. Only valid if \"output\" is \"pcapng\".",
+      "type_id": 11,
+      "uuid": "eaa56896-130a-42dd-87b3-fec3c0f7ed56",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/extrahop_limit_bytes",
       "hide_notification": false,
-      "id": 407,
+      "id": 553,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -423,7 +453,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_activitymap_id",
       "hide_notification": false,
-      "id": 408,
+      "id": 554,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -452,7 +482,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_device_ids",
       "hide_notification": false,
-      "id": 409,
+      "id": 555,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -481,7 +511,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_ip1",
       "hide_notification": false,
-      "id": 410,
+      "id": 556,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -510,7 +540,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_sort",
       "hide_notification": false,
-      "id": 411,
+      "id": 557,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -539,7 +569,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_search_filter",
       "hide_notification": false,
-      "id": 412,
+      "id": 558,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -568,7 +598,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_participants",
       "hide_notification": false,
-      "id": 413,
+      "id": 559,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -597,7 +627,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_bpf",
       "hide_notification": false,
-      "id": 414,
+      "id": 560,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -626,7 +656,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_detection_id",
       "hide_notification": false,
-      "id": 415,
+      "id": 561,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -655,7 +685,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_search_type",
       "hide_notification": false,
-      "id": 416,
+      "id": 562,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -682,9 +712,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/extrahop_decrypt_files",
+      "hide_notification": false,
+      "id": 609,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_decrypt_files",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "extrahop_decrypt_files",
+      "tooltip": "Specifies whether to decrypt extracted files with stored secrets. This option is valid only if the output parameter is extract.",
+      "type_id": 11,
+      "uuid": "3cb5e440-0361-4870-9692-2025e4cc2507",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/extrahop_ip2",
       "hide_notification": false,
-      "id": 417,
+      "id": 563,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -713,7 +772,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 277,
+      "id": 564,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -743,7 +802,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_value",
       "hide_notification": false,
-      "id": 418,
+      "id": 565,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -772,7 +831,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_tag_id",
       "hide_notification": false,
-      "id": 419,
+      "id": 566,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -801,7 +860,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_mod_time",
       "hide_notification": false,
-      "id": 420,
+      "id": 567,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -830,7 +889,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_limit",
       "hide_notification": false,
-      "id": 421,
+      "id": 568,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -859,7 +918,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_active_until",
       "hide_notification": false,
-      "id": 422,
+      "id": 569,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -888,7 +947,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_port1",
       "hide_notification": false,
-      "id": 423,
+      "id": 570,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -917,7 +976,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_output",
       "hide_notification": false,
-      "id": 424,
+      "id": 571,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -946,7 +1005,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_device_id",
       "hide_notification": false,
-      "id": 425,
+      "id": 572,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -975,7 +1034,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_site_name",
       "hide_notification": false,
-      "id": 316,
+      "id": 462,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1005,7 +1064,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_mod_time",
       "hide_notification": false,
-      "id": 317,
+      "id": 463,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1035,7 +1094,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_update_time",
       "hide_notification": false,
-      "id": 318,
+      "id": 464,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1064,7 +1123,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_detection_link",
       "hide_notification": false,
-      "id": 319,
+      "id": 465,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1094,7 +1153,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_site_uuid",
       "hide_notification": false,
-      "id": 320,
+      "id": 466,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1124,7 +1183,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_update_notification",
       "hide_notification": false,
-      "id": 321,
+      "id": 467,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1153,7 +1212,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_status",
       "hide_notification": false,
-      "id": 322,
+      "id": 468,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1183,7 +1242,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_console_url",
       "hide_notification": false,
-      "id": 323,
+      "id": 469,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1213,7 +1272,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_detection_updated",
       "hide_notification": false,
-      "id": 324,
+      "id": 470,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1243,7 +1302,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_ticket_id",
       "hide_notification": false,
-      "id": 325,
+      "id": 471,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1273,7 +1332,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_detection_id",
       "hide_notification": false,
-      "id": 326,
+      "id": 472,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1303,7 +1362,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_end_time",
       "hide_notification": false,
-      "id": 327,
+      "id": 473,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1333,7 +1392,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_risk_score",
       "hide_notification": false,
-      "id": 328,
+      "id": 474,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1363,7 +1422,7 @@
       "deprecated": false,
       "export_key": "incident/extrahop_assignee",
       "hide_notification": false,
-      "id": 329,
+      "id": 475,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1397,7 +1456,7 @@
   ],
   "functions": [
     {
-      "created_date": 1682614135053,
+      "created_date": 1727294358183,
       "description": {
         "content": "Add a note to an ExtraHop detection. Parameters detection_id, note. (Optional) update_time.",
         "format": "text"
@@ -1405,20 +1464,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) add detection note",
       "export_key": "funct_extrahop_rx_add_detection_note",
-      "id": 6,
+      "id": 26,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135101,
+      "last_modified_time": 1727294358183,
       "name": "funct_extrahop_rx_add_detection_note",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"extrahop_update_time\": 0, \"extrahop_note\": \"\\nIBM SOAR 10/04/2023 15:36:28\\n[SOAR Case - 3080](https://host0.ibm.com:443/#incidents/3080)\\nIBM SOAR 10/04/2023 14:00:50\\n[SOAR Case - 3390](https://host1.ibm.com:443/#incidents/3390)\\nIBM SOAR 2023-04-10 14:18:35\\n[SOAR case - \u00273390\u0027](Closed with resolution summary: \u0027Not an issue\u0027)\", \"extrahop_detection_id\": 4294967305}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 4470, \"timestamp\": \"2023-04-10 14:18:48\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_update_time\": {\"type\": \"integer\"}, \"extrahop_note\": {\"type\": \"string\"}, \"extrahop_detection_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "58307d38-9975-4209-a8af-e68cb85f59f4",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "2cd40098-aebb-4efd-8b30-eca7edfb8438",
@@ -1448,7 +1511,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135108,
+      "created_date": 1727294358289,
       "description": {
         "content": "Assign a tag to a list of devices ids forExtrahop Reveal(x). Parameters tag_id. devices_ids.",
         "format": "text"
@@ -1456,20 +1519,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) assign tag",
       "export_key": "funct_extrahop_rx_assign_tag",
-      "id": 7,
+      "id": 27,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135153,
+      "last_modified_time": 1727294358289,
       "name": "funct_extrahop_rx_assign_tag",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"extrahop_device_ids\": \"4294967313\", \"extrahop_tag_id\": 21}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 4046, \"timestamp\": \"2023-04-10 14:21:27\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_device_ids\": {\"type\": \"string\"}, \"extrahop_tag_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "f0d2fc8c-20ab-440c-b4f5-46776a0b561e",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "5da7da21-5ae6-424a-9b37-c2d6eb0fc501",
@@ -1491,7 +1558,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135158,
+      "created_date": 1727294358400,
       "description": {
         "content": "Create a new tag for  Extrahop Reveal(x).  Parameter tag_name.",
         "format": "text"
@@ -1499,20 +1566,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) create tag",
       "export_key": "funct_extrahop_rx_create_tag",
-      "id": 8,
+      "id": 28,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135200,
+      "last_modified_time": 1727294358400,
       "name": "funct_extrahop_rx_create_tag",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"extrahop_tag_name\": \"SOAR-Testing-tag\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 7343, \"timestamp\": \"2023-04-10 13:43:35\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_tag_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "d566e4b3-6692-4599-a351-7530cdb4874e",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "9274ccb1-cebb-4be8-b7f1-f768f0eabbcf",
@@ -1526,7 +1597,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135205,
+      "created_date": 1727294358502,
       "description": {
         "content": "Get activitymap information from Extrahop Reveal(x). Optional parameter activitymap_id.",
         "format": "text"
@@ -1534,20 +1605,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get activitymaps",
       "export_key": "funct_extrahop_rx_get_activitymaps",
-      "id": 9,
+      "id": 29,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135246,
+      "last_modified_time": 1727294358502,
       "name": "funct_extrahop_rx_get_activitymaps",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"id\": 1, \"name\": \"My-activity-map\", \"short_code\": \"6Tk88\", \"description\": \"testing SOAR app\", \"weighting\": \"bytes\", \"owner\": \"owner@example.com\", \"mode\": \"2dforce\", \"mod_time\": 1680790675151, \"show_alert_status\": false, \"walks\": [{\"origins\": [{\"object_type\": \"device\", \"object_id\": 4294967298}], \"steps\": [{\"relationships\": [{\"protocol\": \"any\", \"role\": \"any\"}]}, {\"relationships\": [{\"protocol\": \"aaa\", \"role\": \"server\"}]}]}], \"rights\": [\"view\"]}, {\"id\": 2, \"name\": \"My-activity-map-2\", \"short_code\": \"mnKTM\", \"description\": \"Testing SOAR app\", \"weighting\": \"bytes\", \"owner\": \"owner@example.com\", \"mode\": \"2dforce\", \"mod_time\": 1680790704719, \"show_alert_status\": false, \"walks\": [{\"origins\": [{\"object_type\": \"device_group\", \"object_id\": 100}], \"steps\": [{\"relationships\": [{\"protocol\": \"any\", \"role\": \"any\"}]}]}], \"rights\": [\"view\"]}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 2996, \"timestamp\": \"2023-04-10 13:42:33\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"short_code\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"weighting\": {\"type\": \"string\"}, \"owner\": {\"type\": \"string\"}, \"mode\": {\"type\": \"string\"}, \"mod_time\": {\"type\": \"integer\"}, \"show_alert_status\": {\"type\": \"boolean\"}, \"walks\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"origins\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"object_type\": {\"type\": \"string\"}, \"object_id\": {\"type\": \"integer\"}}}}, \"steps\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"relationships\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"protocol\": {\"type\": \"string\"}, \"role\": {\"type\": \"string\"}}}}}}}}}}, \"rights\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "18aa0964-745b-4329-a04b-a92f5f3fab40",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "f1d0366d-e216-4071-8070-c67fe27f834b",
@@ -1561,7 +1636,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135253,
+      "created_date": 1727294358648,
       "description": {
         "content": "Get a note from an ExtraHop detection. Parameter detection_id.",
         "format": "text"
@@ -1569,20 +1644,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get detection note",
       "export_key": "funct_extrahop_rx_get_detection_note",
-      "id": 10,
+      "id": 30,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135294,
+      "last_modified_time": 1727294358648,
       "name": "funct_extrahop_rx_get_detection_note",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": {\"author\": \"rest_api_id_33ovi...\", \"update_time\": 1681150711820, \"note\": \"\\nIBM SOAR 10/04/2023 15:36:28\\n[SOAR Case - 3080](https://host0.ibm.com:443/#incidents/3080)\\nIBM SOAR 10/04/2023 14:00:50\\n[SOAR Case - 3390](https://host1.ibm.com:443/#incidents/3390)\"}}, \"raw\": null, \"inputs\": {\"extrahop_detection_id\": 4294967305}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 447, \"timestamp\": \"2023-04-10 14:18:35\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"object\", \"properties\": {\"author\": {\"type\": \"string\"}, \"update_time\": {\"type\": \"integer\"}, \"note\": {\"type\": \"string\"}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_detection_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "e5d62abb-bce4-46f6-a686-1b112a735219",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "2cd40098-aebb-4efd-8b30-eca7edfb8438",
@@ -1596,7 +1675,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135297,
+      "created_date": 1727294358752,
       "description": {
         "content": "Get detections information from Extrahop Reveal(x). Optional parameter extrahop_detection_id.",
         "format": "text"
@@ -1604,20 +1683,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get detections",
       "export_key": "funct_extrahop_rx_get_detections",
-      "id": 11,
+      "id": 31,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135337,
+      "last_modified_time": 1727294358752,
       "name": "funct_extrahop_rx_get_detections",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": {\"id\": 4294967305, \"start_time\": 1681140240000, \"update_time\": 1681140270000, \"end_time\": 1681140270000, \"mod_time\": 1681144146129, \"title\": \"HTTP Request to a Suspicious Host\", \"description\": \"[pc3](#/metrics/devices/44522fe6bb834d83a3b0a142b7da750a.0e3da802a0b30000/overview?from=1681140240\u0026interval_type=DT\u0026until=1681140270) sent an HTTP request that included a suspicious host in the request header. This host is considered suspicious based on threat intelligence found in your ExtraHop system. Confirm whether [pc3](#/metrics/devices/44522fe6bb834d83a3b0a142b7da750a.0e3da802a0b30000/overview?from=1681140240\u0026interval_type=DT\u0026until=1681140270) is the victim of a malware or phishing attack.\\n\\nSuspicious hostname linked to this detection:\\n* zupertech.com\", \"categories\": [\"sec\", \"sec.caution\"], \"risk_score\": 60, \"type\": \"ti_http_host\", \"properties\": {\"host\": \"zupertech.com\"}, \"participants\": [{\"role\": \"offender\", \"object_id\": 4294967310, \"object_type\": \"device\", \"id\": 1285, \"external\": false}], \"ticket_id\": \"3390\", \"assignee\": \"admin@example.com\", \"status\": \"closed\", \"resolution\": \"action_taken\", \"mitre_tactics\": [{\"id\": \"TA0001\", \"name\": \"Initial Access\", \"url\": \"https://attack.mitre.org/tactics/TA0001\"}, {\"id\": \"TA0010\", \"name\": \"Exfiltration\", \"url\": \"https://attack.mitre.org/tactics/TA0010\"}, {\"id\": \"TA0011\", \"name\": \"Command and Control\", \"url\": \"https://attack.mitre.org/tactics/TA0011\"}], \"mitre_techniques\": [{\"id\": \"T1041\", \"name\": \"Exfiltration Over C2 Channel\", \"url\": \"https://attack.mitre.org/techniques/T1041\", \"legacy_ids\": [\"T1041\"]}, {\"id\": \"T1189\", \"name\": \"Drive-by Compromise\", \"url\": \"https://attack.mitre.org/techniques/T1189\", \"legacy_ids\": [\"T1189\"]}, {\"id\": \"T1566\", \"name\": \"Phishing\", \"url\": \"https://attack.mitre.org/techniques/T1566\", \"legacy_ids\": [\"T1192\"]}, {\"id\": \"T1573\", \"name\": \"Encrypted Channel\", \"url\": \"https://attack.mitre.org/techniques/T1573\", \"legacy_ids\": [\"T1024\", \"T1032\", \"T1079\"]}], \"appliance_id\": 1, \"is_user_created\": false}}, \"raw\": null, \"inputs\": {\"extrahop_detection_id\": 4294967305}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 459, \"timestamp\": \"2023-04-10 14:18:51\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"start_time\": {\"type\": \"integer\"}, \"update_time\": {\"type\": \"integer\"}, \"end_time\": {\"type\": \"integer\"}, \"mod_time\": {\"type\": \"integer\"}, \"title\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"categories\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"risk_score\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"properties\": {\"type\": \"object\", \"properties\": {\"host\": {\"type\": \"string\"}}}, \"participants\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"role\": {\"type\": \"string\"}, \"object_id\": {\"type\": \"integer\"}, \"object_type\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"external\": {\"type\": \"boolean\"}}}}, \"ticket_id\": {\"type\": \"string\"}, \"assignee\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"resolution\": {\"type\": \"string\"}, \"mitre_tactics\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}}}}, \"mitre_techniques\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"legacy_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}}, \"appliance_id\": {\"type\": \"integer\"}, \"is_user_created\": {\"type\": \"boolean\"}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_detection_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "fc71fc68-991e-4825-bc07-2191e58745f3",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "2cd40098-aebb-4efd-8b30-eca7edfb8438",
@@ -1639,7 +1722,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135341,
+      "created_date": 1727294358865,
       "description": {
         "content": "Get devices information from Extrahop Reveal(x). Optional parameters  device_id, active_from, active_util, limit and offset.",
         "format": "text"
@@ -1647,20 +1730,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get devices",
       "export_key": "funct_extrahop_rx_get_devices",
-      "id": 12,
+      "id": 32,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135382,
+      "last_modified_time": 1727294358865,
       "name": "funct_extrahop_rx_get_devices",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"mod_time\": 1681149516194, \"node_id\": 1, \"id\": 4294967315, \"extrahop_id\": \"0e2c7dd42fa50000\", \"discovery_id\": \"0e2c7dd42fa50000\", \"display_name\": \"oasis.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139880000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:2C:7D:D4:2F:A5\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.88.218\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e2c7dd42fa50000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"oasis.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149635562, \"node_id\": 1, \"id\": 4294967316, \"extrahop_id\": \"0e627f3316130000\", \"discovery_id\": \"0e627f3316130000\", \"display_name\": \"db1.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139700000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:62:7F:33:16:13\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.1.7\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e627f3316130000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"db1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"db_server\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"db_server\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681139913474, \"node_id\": 1, \"id\": 4294967308, \"extrahop_id\": \"~aws.ec2.imds---\", \"discovery_id\": \"~aws.ec2.imds---\", \"display_name\": \"aws.ec2.imds\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139670000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": null, \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": null, \"device_class\": \"custom\", \"default_name\": \"Custom ~aws.ec2.imds---\", \"custom_name\": \"aws.ec2.imds\", \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"custom\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"custom\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681139763633, \"node_id\": 1, \"id\": 4294967298, \"extrahop_id\": \"~aws.vpc.dns----\", \"discovery_id\": \"~aws.vpc.dns----\", \"display_name\": \"aws.vpc.dns\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139670000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": null, \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": null, \"device_class\": \"custom\", \"default_name\": \"Custom ~aws.vpc.dns----\", \"custom_name\": \"aws.vpc.dns\", \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"custom\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"custom\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681139913487, \"node_id\": 1, \"id\": 4294967312, \"extrahop_id\": \"~aws.vpc.ntp----\", \"discovery_id\": \"~aws.vpc.ntp----\", \"display_name\": \"aws.vpc.ntp\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139640000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": null, \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": null, \"device_class\": \"custom\", \"default_name\": \"Custom ~aws.vpc.ntp----\", \"custom_name\": \"aws.vpc.ntp\", \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"custom\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"custom\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149396781, \"node_id\": 1, \"id\": 4294967297, \"extrahop_id\": \"0eb9806c43070000\", \"discovery_id\": \"0eb9806c43070000\", \"display_name\": \"Device 0eb9806c43070000\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139640000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:B9:80:6C:43:07\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": \"fe80::cb9:80ff:fe6c:4307\", \"device_class\": \"gateway\", \"default_name\": \"Device 0eb9806c43070000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"gateway\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"gateway\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681148735347, \"node_id\": 1, \"id\": 4294967314, \"extrahop_id\": \"0e915f41761b0000\", \"discovery_id\": \"0e915f41761b0000\", \"display_name\": \"Device 0e915f41761b0000\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:91:5F:41:76:1B\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.0.1\", \"ipaddr6\": null, \"device_class\": \"gateway\", \"default_name\": \"Device 0e915f41761b0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"gateway\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"gateway\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149485578, \"node_id\": 1, \"id\": 4294967313, \"extrahop_id\": \"0e9ded7f42090000\", \"discovery_id\": \"0e9ded7f42090000\", \"display_name\": \"dc1.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:9D:ED:7F:42:09\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": \"2600:1f10:44c7:3300:383d:6cd4:d4d5:3019\", \"device_class\": \"node\", \"default_name\": \"Device 0e9ded7f42090000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"DC1\", \"dns_name\": \"dc1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"domain_controller\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"domain_controller\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149485572, \"node_id\": 1, \"id\": 4294967311, \"extrahop_id\": \"0eda16c895d50000\", \"discovery_id\": \"0eda16c895d50000\", \"display_name\": \"web1.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:DA:16:C8:95:D5\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.1.64\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0eda16c895d50000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"web1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"http_server\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"http_server\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149427474, \"node_id\": 1, \"id\": 4294967310, \"extrahop_id\": \"0e3da802a0b30000\", \"discovery_id\": \"0e3da802a0b30000\", \"display_name\": \"pc3\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:3D:A8:02:A0:B3\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.0.161\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e3da802a0b30000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"pc3\", \"netbios_name\": \"\", \"dns_name\": \"pc3.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"pc\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"pc\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149427468, \"node_id\": 1, \"id\": 4294967309, \"extrahop_id\": \"0e6f5c9ccbcb0000\", \"discovery_id\": \"0e6f5c9ccbcb0000\", \"display_name\": \"pc2\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:6F:5C:9C:CB:CB\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.0.189\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e6f5c9ccbcb0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"pc2\", \"netbios_name\": \"PC2\", \"dns_name\": \"pc2.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"pc\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"pc\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149396796, \"node_id\": 1, \"id\": 4294967307, \"extrahop_id\": \"0e9d01dde7450000\", \"discovery_id\": \"0e9d01dde7450000\", \"display_name\": \"ssh1.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:9D:01:DD:E7:45\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.100.187\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e9d01dde7450000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"ssh1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149396791, \"node_id\": 1, \"id\": 4294967306, \"extrahop_id\": \"0e299a804a4d0000\", \"discovery_id\": \"0e299a804a4d0000\", \"display_name\": \"ftp1.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:29:9A:80:4A:4D\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.100.57\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e299a804a4d0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"ftp1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149366180, \"node_id\": 1, \"id\": 4294967305, \"extrahop_id\": \"0ecacf92cfcf0000\", \"discovery_id\": \"0ecacf92cfcf0000\", \"display_name\": \"ip-10-1-100-212\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:CA:CF:92:CF:CF\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.100.212\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0ecacf92cfcf0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"ip-10-1-100-212\", \"netbios_name\": \"\", \"dns_name\": \"vpn.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149366175, \"node_id\": 1, \"id\": 4294967304, \"extrahop_id\": \"0ea63eed67fd0000\", \"discovery_id\": \"0ea63eed67fd0000\", \"display_name\": \"Device 0ea63eed67fd0000\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:A6:3E:ED:67:FD\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.100.1\", \"ipaddr6\": null, \"device_class\": \"gateway\", \"default_name\": \"Device 0ea63eed67fd0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"gateway\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"gateway\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149335495, \"node_id\": 1, \"id\": 4294967303, \"extrahop_id\": \"0e8d65dcbfe70000\", \"discovery_id\": \"0e8d65dcbfe70000\", \"display_name\": \"ip-10-1-100-35\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:8D:65:DC:BF:E7\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.100.35\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e8d65dcbfe70000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"ip-10-1-100-35\", \"netbios_name\": \"\", \"dns_name\": \"echo1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"http_server\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"http_server\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681139793788, \"node_id\": 1, \"id\": 4294967302, \"extrahop_id\": \"0ec8fcdae52b0000\", \"discovery_id\": \"0ec8fcdae52b0000\", \"display_name\": \"Device 0ec8fcdae52b0000\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:C8:FC:DA:E5:2B\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": \"fe80::cc8:fcff:feda:e52b\", \"device_class\": \"gateway\", \"default_name\": \"Device 0ec8fcdae52b0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"gateway\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"gateway\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149635567, \"node_id\": 1, \"id\": 4294967301, \"extrahop_id\": \"0e2d40a873950000\", \"discovery_id\": \"0e2d40a873950000\", \"display_name\": \"web3.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:2D:40:A8:73:95\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": \"2600:1f10:44c7:3300:f8b2:7031:96bb:ee9f\", \"device_class\": \"node\", \"default_name\": \"Device 0e2d40a873950000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"web3.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"http_server\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"http_server\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149635572, \"node_id\": 1, \"id\": 4294967300, \"extrahop_id\": \"0e5c9467324b0000\", \"discovery_id\": \"0e5c9467324b0000\", \"display_name\": \"pc1\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:5C:94:67:32:4B\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.0.6\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e5c9467324b0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"pc1\", \"netbios_name\": \"\", \"dns_name\": \"pc1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"pc\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"pc\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149635557, \"node_id\": 1, \"id\": 4294967299, \"extrahop_id\": \"0e7ff45eb0ed0000\", \"discovery_id\": \"0e7ff45eb0ed0000\", \"display_name\": \"web2.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:7F:F4:5E:B0:ED\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.1.94\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e7ff45eb0ed0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"web2.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"http_server\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"http_server\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681149577486, \"node_id\": 1, \"id\": 4294967296, \"extrahop_id\": \"0e3332e223c10000\", \"discovery_id\": \"0e3332e223c10000\", \"display_name\": \"jump.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681139610000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:33:32:E2:23:C1\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": \"2600:1f10:44c7:3304:2e55:c0b1:7f5f:4a5\", \"device_class\": \"node\", \"default_name\": \"Device 0e3332e223c10000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"jump.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 1, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": false, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 555, \"timestamp\": \"2023-04-10 14:00:55\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"mod_time\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"integer\"}, \"id\": {\"type\": \"integer\"}, \"extrahop_id\": {\"type\": \"string\"}, \"discovery_id\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}, \"description\": {}, \"user_mod_time\": {\"type\": \"integer\"}, \"discover_time\": {\"type\": \"integer\"}, \"vlanid\": {\"type\": \"integer\"}, \"parent_id\": {}, \"macaddr\": {\"type\": [\"null\", \"string\"]}, \"vendor\": {}, \"is_l3\": {\"type\": \"boolean\"}, \"ipaddr4\": {\"type\": [\"null\", \"string\"]}, \"ipaddr6\": {\"type\": [\"null\", \"string\"]}, \"device_class\": {\"type\": \"string\"}, \"default_name\": {\"type\": \"string\"}, \"custom_name\": {\"type\": [\"null\", \"string\"]}, \"cdp_name\": {\"type\": \"string\"}, \"dhcp_name\": {\"type\": \"string\"}, \"netbios_name\": {\"type\": \"string\"}, \"dns_name\": {\"type\": \"string\"}, \"custom_type\": {\"type\": \"string\"}, \"auto_role\": {\"type\": \"string\"}, \"analysis_level\": {\"type\": \"integer\"}, \"analysis\": {\"type\": \"string\"}, \"role\": {\"type\": \"string\"}, \"on_watchlist\": {\"type\": \"boolean\"}, \"last_seen_time\": {}, \"model\": {}, \"model_override\": {}, \"custom_make\": {}, \"custom_model\": {}, \"critical\": {\"type\": \"boolean\"}, \"custom_criticality\": {}, \"cloud_instance_id\": {}, \"cloud_instance_type\": {}, \"cloud_instance_description\": {}, \"cloud_instance_name\": {}, \"cloud_account\": {}, \"vpc_id\": {}, \"subnet_id\": {}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "75447029-32ca-4363-b753-bc970cee66d5",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "77f58f54-c4a9-4720-ab05-34e2beb94521",
@@ -1722,7 +1809,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135386,
+      "created_date": 1727294358965,
       "description": {
         "content": "Get tags information from Extrahop Reveal(x) . Optional parameter tag_id.",
         "format": "text"
@@ -1730,20 +1817,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get tags",
       "export_key": "funct_extrahop_rx_get_tags",
-      "id": 13,
+      "id": 33,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135429,
+      "last_modified_time": 1727294358965,
       "name": "funct_extrahop_rx_get_tags",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"mod_time\": 1681148615537, \"id\": 21, \"name\": \"SOAR-Testing-tag\"}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 628, \"timestamp\": \"2023-04-10 14:21:21\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"mod_time\": {\"type\": \"integer\"}, \"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "55ced5bd-cd23-4212-b661-956fed40722b",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "5da7da21-5ae6-424a-9b37-c2d6eb0fc501",
@@ -1757,7 +1848,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135432,
+      "created_date": 1727294359092,
       "description": {
         "content": "Retrieve all devices that are in the watchlist from Extrahop Reveal(x).",
         "format": "text"
@@ -1765,25 +1856,29 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get watchlist",
       "export_key": "funct_extrahop_rx_get_watchlist",
-      "id": 14,
+      "id": 34,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135471,
+      "last_modified_time": 1727294359092,
       "name": "funct_extrahop_rx_get_watchlist",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"mod_time\": 1681647107939, \"node_id\": 1, \"id\": 4294967313, \"extrahop_id\": \"~aws.vpc.ntp----\", \"discovery_id\": \"~aws.vpc.ntp----\", \"display_name\": \"aws.vpc.ntp\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681158480000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": null, \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": null, \"device_class\": \"custom\", \"default_name\": \"Custom ~aws.vpc.ntp----\", \"custom_name\": \"aws.vpc.ntp\", \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"custom\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"custom\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681752256777, \"node_id\": 1, \"id\": 4294967298, \"extrahop_id\": \"0e627f3316130000\", \"discovery_id\": \"0e627f3316130000\", \"display_name\": \"db1.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681158510000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:62:7F:33:16:13\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.1.7\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e627f3316130000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"db1.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"db_server\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"db_server\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681752406778, \"node_id\": 1, \"id\": 4294967311, \"extrahop_id\": \"0e3da802a0b30000\", \"discovery_id\": \"0e3da802a0b30000\", \"display_name\": \"pc3\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681158480000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:3D:A8:02:A0:B3\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.0.161\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 0e3da802a0b30000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"pc3\", \"netbios_name\": \"PC3\", \"dns_name\": \"pc3.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"pc\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"pc\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681752437427, \"node_id\": 1, \"id\": 4294967316, \"extrahop_id\": \"0e2c7dd42fa50000\", \"discovery_id\": \"0e2c7dd42fa50000\", \"display_name\": \"oasis.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681158720000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:2C:7D:D4:2F:A5\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": \"2600:1f10:44c7:3304:1bb4:204b:45f3:30a0\", \"device_class\": \"node\", \"default_name\": \"Device 0e2c7dd42fa50000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"oasis.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681752198592, \"node_id\": 1, \"id\": 4294967296, \"extrahop_id\": \"0e3332e223c10000\", \"discovery_id\": \"0e3332e223c10000\", \"display_name\": \"jump.i.rx.tours\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681158450000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:33:32:E2:23:C1\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": null, \"ipaddr6\": \"fe80::c33:32ff:fee2:23c1\", \"device_class\": \"node\", \"default_name\": \"Device 0e3332e223c10000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"jump.i.rx.tours\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}, {\"mod_time\": 1681716728051, \"node_id\": 1, \"id\": 4294967315, \"extrahop_id\": \"0e915f41761b0000\", \"discovery_id\": \"0e915f41761b0000\", \"display_name\": \"Device 0e915f41761b0000\", \"description\": null, \"user_mod_time\": 0, \"discover_time\": 1681158480000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"0E:91:5F:41:76:1B\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"10.1.0.1\", \"ipaddr6\": null, \"device_class\": \"gateway\", \"default_name\": \"Device 0e915f41761b0000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"gateway\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"gateway\", \"on_watchlist\": true, \"last_seen_time\": null, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_description\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"laptop.local\", \"execution_time_ms\": 688, \"timestamp\": \"2023-04-17 13:27:24\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"mod_time\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"integer\"}, \"id\": {\"type\": \"integer\"}, \"extrahop_id\": {\"type\": \"string\"}, \"discovery_id\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}, \"description\": {}, \"user_mod_time\": {\"type\": \"integer\"}, \"discover_time\": {\"type\": \"integer\"}, \"vlanid\": {\"type\": \"integer\"}, \"parent_id\": {}, \"macaddr\": {\"type\": [\"null\", \"string\"]}, \"vendor\": {}, \"is_l3\": {\"type\": \"boolean\"}, \"ipaddr4\": {\"type\": [\"null\", \"string\"]}, \"ipaddr6\": {\"type\": [\"null\", \"string\"]}, \"device_class\": {\"type\": \"string\"}, \"default_name\": {\"type\": \"string\"}, \"custom_name\": {\"type\": [\"null\", \"string\"]}, \"cdp_name\": {\"type\": \"string\"}, \"dhcp_name\": {\"type\": \"string\"}, \"netbios_name\": {\"type\": \"string\"}, \"dns_name\": {\"type\": \"string\"}, \"custom_type\": {\"type\": \"string\"}, \"auto_role\": {\"type\": \"string\"}, \"analysis_level\": {\"type\": \"integer\"}, \"analysis\": {\"type\": \"string\"}, \"role\": {\"type\": \"string\"}, \"on_watchlist\": {\"type\": \"boolean\"}, \"last_seen_time\": {}, \"model\": {}, \"model_override\": {}, \"custom_make\": {}, \"custom_model\": {}, \"critical\": {\"type\": \"boolean\"}, \"custom_criticality\": {}, \"cloud_instance_id\": {}, \"cloud_instance_type\": {}, \"cloud_instance_description\": {}, \"cloud_instance_name\": {}, \"cloud_account\": {}, \"vpc_id\": {}, \"subnet_id\": {}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "4d5690ce-998c-4fbb-bf25-765800aaa246",
-      "version": 1,
+      "version": 0,
       "view_items": [],
       "workflows": []
     },
     {
-      "created_date": 1682614135474,
+      "created_date": 1727294359185,
       "description": {
         "content": "Search for detections information from Extrahop Reveal(x). Optional parameters search_filter, active_from, active_util, limit, offset, mod_time, update_time and sort.",
         "format": "text"
@@ -1791,20 +1886,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) search detections",
       "export_key": "funct_extrahop_rx_search_detections",
-      "id": 15,
+      "id": 35,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135512,
+      "last_modified_time": 1727294359185,
       "name": "funct_extrahop_rx_search_detections",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"id\": 4294967308, \"start_time\": 1681160178555, \"update_time\": 1681749150000, \"mod_time\": 1681749167977, \"title\": \"SMBv1 Connection\", \"description\": \"[pc2](#/metrics/devices/44522fe6bb834d83a3b0a142b7da750a.0e6f5c9ccbcb0000/overview?from=1681160178\u0026interval_type=DT\u0026until=1681749330) established a Server Message Block (SMB) connection with the SMBv1 dialect. This deprecated dialect of the SMB/CIFS protocol is known to be vulnerable to attacks.\", \"categories\": [\"sec\", \"sec.hardening\"], \"risk_score\": 30, \"type\": \"smbv1_connection_individual\", \"properties\": {}, \"participants\": [{\"role\": \"offender\", \"object_id\": 4294967310, \"object_type\": \"device\", \"object_value\": \"10.1.0.189\", \"hostname\": \"pc2.i.rx.tours\", \"id\": 1336, \"external\": false}], \"ticket_id\": \"2118\", \"assignee\": null, \"status\": \"in_progress\", \"resolution\": null, \"mitre_tactics\": [], \"mitre_techniques\": [], \"appliance_id\": 1, \"is_user_created\": false}]}, \"raw\": null, \"inputs\": {\"extrahop_search_filter\": \"{\\\"filter\\\": {\\\"status\\\": [\\\"in_progress\\\"]}}\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"laptop.local\", \"execution_time_ms\": 907, \"timestamp\": \"2023-04-17 12:37:03\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"start_time\": {\"type\": \"integer\"}, \"update_time\": {\"type\": \"integer\"}, \"mod_time\": {\"type\": \"integer\"}, \"title\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"categories\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"risk_score\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"properties\": {\"type\": \"object\"}, \"participants\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"role\": {\"type\": \"string\"}, \"object_id\": {\"type\": \"integer\"}, \"object_type\": {\"type\": \"string\"}, \"object_value\": {\"type\": \"string\"}, \"hostname\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"external\": {\"type\": \"boolean\"}}}}, \"ticket_id\": {\"type\": \"string\"}, \"assignee\": {}, \"status\": {\"type\": \"string\"}, \"resolution\": {}, \"mitre_tactics\": {\"type\": \"array\"}, \"mitre_techniques\": {\"type\": \"array\"}, \"appliance_id\": {\"type\": \"integer\"}, \"is_user_created\": {\"type\": \"boolean\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_search_filter\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "b70037a5-fcaf-4e78-a1e2-6acdc4dff239",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "0c8318d9-cc79-4f1b-b500-ea84d2b40371",
@@ -1874,7 +1973,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135516,
+      "created_date": 1727294359285,
       "description": {
         "content": "Search for devices information from Extrahop Reveal(x). Optional parameters search_filter, active_from, active_util, limit and offset.",
         "format": "text"
@@ -1882,20 +1981,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) search devices",
       "export_key": "funct_extrahop_rx_search_devices",
-      "id": 16,
+      "id": 36,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135554,
+      "last_modified_time": 1727294359285,
       "name": "funct_extrahop_rx_search_devices",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"analysis_level\": 1, \"custom_model\": null, \"dns_name\": \"pc3.i.rx.tours\", \"ipaddr6\": null, \"custom_criticality\": null, \"custom_name\": null, \"cdp_name\": \"\", \"vendor\": null, \"ipaddr4\": \"10.1.0.161\", \"vlanid\": 0, \"macaddr\": \"0E:3D:A8:02:A0:B3\", \"auto_role\": \"pc\", \"dhcp_name\": \"pc3\", \"default_name\": \"Device 0e3da802a0b30000\", \"vpc_id\": null, \"custom_type\": \"\", \"subnet_id\": null, \"cloud_account\": null, \"custom_make\": null, \"user_mod_time\": 0, \"discover_time\": 1681158480000, \"mod_time\": 1681751806994, \"role\": \"pc\", \"display_name\": \"pc3\", \"last_seen_time\": null, \"on_watchlist\": false, \"critical\": false, \"discovery_id\": \"0e3da802a0b30000\", \"node_id\": 1, \"extrahop_id\": \"0e3da802a0b30000\", \"cloud_instance_name\": null, \"cloud_instance_description\": null, \"cloud_instance_type\": null, \"cloud_instance_id\": null, \"model_override\": null, \"model\": null, \"netbios_name\": \"PC3\", \"device_class\": \"node\", \"is_l3\": false, \"parent_id\": null, \"description\": null, \"id\": 4294967311, \"analysis\": \"advanced\"}]}, \"raw\": null, \"inputs\": {\"extrahop_search_filter\": \"{\\\"filter\\\": {\\\"field\\\": \\\"ipaddr\\\", \\\"operand\\\": \\\"10.1.0.161\\\", \\\"operator\\\": \\\"=\\\"}}\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"laptop.local\", \"execution_time_ms\": 812, \"timestamp\": \"2023-04-17 13:17:05\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"analysis_level\": {\"type\": \"integer\"}, \"custom_model\": {}, \"dns_name\": {\"type\": \"string\"}, \"ipaddr6\": {}, \"custom_criticality\": {}, \"custom_name\": {}, \"cdp_name\": {\"type\": \"string\"}, \"vendor\": {}, \"ipaddr4\": {\"type\": \"string\"}, \"vlanid\": {\"type\": \"integer\"}, \"macaddr\": {\"type\": \"string\"}, \"auto_role\": {\"type\": \"string\"}, \"dhcp_name\": {\"type\": \"string\"}, \"default_name\": {\"type\": \"string\"}, \"vpc_id\": {}, \"custom_type\": {\"type\": \"string\"}, \"subnet_id\": {}, \"cloud_account\": {}, \"custom_make\": {}, \"user_mod_time\": {\"type\": \"integer\"}, \"discover_time\": {\"type\": \"integer\"}, \"mod_time\": {\"type\": \"integer\"}, \"role\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}, \"last_seen_time\": {}, \"on_watchlist\": {\"type\": \"boolean\"}, \"critical\": {\"type\": \"boolean\"}, \"discovery_id\": {\"type\": \"string\"}, \"node_id\": {\"type\": \"integer\"}, \"extrahop_id\": {\"type\": \"string\"}, \"cloud_instance_name\": {}, \"cloud_instance_description\": {}, \"cloud_instance_type\": {}, \"cloud_instance_id\": {}, \"model_override\": {}, \"model\": {}, \"netbios_name\": {\"type\": \"string\"}, \"device_class\": {\"type\": \"string\"}, \"is_l3\": {\"type\": \"boolean\"}, \"parent_id\": {}, \"description\": {}, \"id\": {\"type\": \"integer\"}, \"analysis\": {\"type\": \"string\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_search_filter\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "e7384abd-0046-4b46-97af-d34d8cc9c711",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "0c8318d9-cc79-4f1b-b500-ea84d2b40371",
@@ -1941,28 +2044,32 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135558,
+      "created_date": 1727294359388,
       "description": {
-        "content": "Search for and download packets stored on the ExtraHop Reveal(x) system.\nValid output types are: pcap, keylog_txt or zip.",
+        "content": "Search for and download packets stored on the ExtraHop Reveal(x) system.\nSupported output formats: pcap, keylog_txt, pcapng, zip, extract.",
         "format": "text"
       },
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) search packets",
       "export_key": "funct_extrahop_rx_search_packets",
-      "id": 17,
+      "id": 37,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684182121850,
+      "last_modified_time": 1731600695196,
       "name": "funct_extrahop_rx_search_packets",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": {\"attachment\": \"\u003cb\u003eextrahop 2023-03-31 21.00.00 to 2023-04-08 21.00.00 PDT_20230410140142.pcap\u003c/b\u003e\"}}, \"raw\": null, \"inputs\": {\"extrahop_port1\": null, \"extrahop_ip2\": null, \"extrahop_ip1\": null, \"extrahop_port2\": null, \"incident_id\": 3389, \"extrahop_limit_search_duration\": null, \"extrahop_active_from\": 1680321600000, \"extrahop_bpf\": \"host dc1.attack.local\", \"extrahop_output\": \"pcap\", \"extrahop_limit_bytes\": null, \"extrahop_active_until\": 1681012800000}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 28890, \"timestamp\": \"2023-04-10 14:01:44\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"object\", \"properties\": {\"attachment\": {\"type\": \"string\"}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_port1\": {}, \"extrahop_ip2\": {}, \"extrahop_ip1\": {}, \"extrahop_port2\": {}, \"incident_id\": {\"type\": \"integer\"}, \"extrahop_limit_search_duration\": {}, \"extrahop_active_from\": {\"type\": \"integer\"}, \"extrahop_bpf\": {\"type\": \"string\"}, \"extrahop_output\": {\"type\": \"string\"}, \"extrahop_limit_bytes\": {}, \"extrahop_active_until\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "f551a853-62d0-468d-9e36-df5904c5bf96",
-      "version": 2,
+      "version": 3,
       "view_items": [
         {
           "content": "509d6b58-e4b5-4150-b1d0-6843c6dcfb8d",
@@ -2059,12 +2166,28 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "3cb5e440-0361-4870-9692-2025e4cc2507",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "eaa56896-130a-42dd-87b3-fec3c0f7ed56",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": []
     },
     {
-      "created_date": 1682614135604,
+      "created_date": 1727294359489,
       "description": {
         "content": "Update a detection in Extrahop Reveal(x). Required parameter incident_id, detection_id, owner_id, plan_status, resolution. Optional parameters participants.",
         "format": "text"
@@ -2072,20 +2195,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) update detection",
       "export_key": "funct_extrahop_rx_update_detection",
-      "id": 18,
+      "id": 38,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684182121850,
+      "last_modified_time": 1727294359489,
       "name": "funct_extrahop_rx_update_detection",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"incident_id\": 3390, \"soar_inc_owner_id\": \"admin@example.com\", \"soar_inc_resolution_id\": \"Resolved\", \"extrahop_detection_id\": 4294967305, \"soar_inc_plan_status\": \"C\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 635, \"timestamp\": \"2023-04-10 14:18:31\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"soar_inc_owner_id\": {\"type\": \"string\"}, \"soar_inc_resolution_id\": {\"type\": \"string\"}, \"extrahop_detection_id\": {\"type\": \"integer\"}, \"soar_inc_plan_status\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "8ee5a0dc-d7d9-4d02-85a3-55d340a43aa0",
-      "version": 2,
+      "version": 0,
       "view_items": [
         {
           "content": "509d6b58-e4b5-4150-b1d0-6843c6dcfb8d",
@@ -2139,7 +2266,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682614135646,
+      "created_date": 1727294359587,
       "description": {
         "content": "Add or remove devices from the watchlist on Extrahop Reveal(x). Required parameter assign or unassign comma-seperated list of devices.",
         "format": "text"
@@ -2147,20 +2274,24 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) update watchlist",
       "export_key": "funct_extrahop_rx_update_watchlist",
-      "id": 19,
+      "id": 39,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682614135687,
+      "last_modified_time": 1727294359587,
       "name": "funct_extrahop_rx_update_watchlist",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"extrahop_assign\": \"4294967313\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"MBP\", \"execution_time_ms\": 974, \"timestamp\": \"2023-04-10 13:52:55\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_assign\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "b8d33930-3417-436e-82a1-267a5dc9fa91",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "a4628ae7-81c6-4208-ba4f-e71295f3c117",
@@ -2184,13 +2315,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 72,
+  "id": 100,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1684239902494,
+      "create_date": 1731601638537,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2199,18 +2330,15 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1684239902494,
+      "update_date": 1731601638537,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [
-        "e7783527-f5dd-419f-95db-4362658d5612"
-      ],
+      "api_keys": [],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_extrahop",
@@ -2230,10 +2358,10 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6d040a83_81fa_4926_8599_2c1574810089\" isExecutable=\"true\" name=\"playbook_6d040a83_81fa_4926_8599_2c1574810089\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0h32f9q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ex14i0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0h32f9q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop Reveal(x): Add Artifact\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5af171a3-4eac-4172-815b-31f8fad15523\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0h32f9q\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ex14i0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ex14i0\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6d040a83_81fa_4926_8599_2c1574810089\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ex14i0\" id=\"Flow_0ex14i0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0h32f9q\" id=\"Flow_0h32f9q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"217.85000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6d040a83_81fa_4926_8599_2c1574810089\" isExecutable=\"true\" name=\"playbook_6d040a83_81fa_4926_8599_2c1574810089\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0h32f9q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ex14i0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0h32f9q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop Reveal(x): Add Artifact\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5af171a3-4eac-4172-815b-31f8fad15523\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0h32f9q\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ex14i0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ex14i0\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6d040a83_81fa_4926_8599_2c1574810089\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ex14i0\" id=\"Flow_0ex14i0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0h32f9q\" id=\"Flow_0h32f9q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"217.85000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614135932,
+      "create_date": 1727294360533,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -2250,7 +2378,7 @@
       "field_type_handle": "playbook_6d040a83_81fa_4926_8599_2c1574810089",
       "fields_type": {
         "actions": [],
-        "display_name": "Extrahop Reveal(x): Add Artifact",
+        "display_name": "ExtraHop Reveal(x): Add Artifact (PB)",
         "export_key": "playbook_6d040a83_81fa_4926_8599_2c1574810089",
         "fields": {
           "extrahop_artifact_type": {
@@ -2263,7 +2391,7 @@
             "deprecated": false,
             "export_key": "playbook_6d040a83_81fa_4926_8599_2c1574810089/extrahop_artifact_type",
             "hide_notification": false,
-            "id": 426,
+            "id": 573,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2278,7 +2406,7 @@
             "templates": [],
             "text": "Artifact type",
             "tooltip": "SOAR artifact type.",
-            "type_id": 1017,
+            "type_id": 1030,
             "uuid": "6df913b0-a663-40cd-9b9e-18c04616f927",
             "values": [
               {
@@ -2288,7 +2416,7 @@
                 "label": "IP Address (v4)",
                 "properties": null,
                 "uuid": "b913cf6c-b7f6-4286-a2ab-6d0984e31d39",
-                "value": 78
+                "value": 202
               },
               {
                 "default": false,
@@ -2297,7 +2425,7 @@
                 "label": "IP Address (v6)",
                 "properties": null,
                 "uuid": "5d579a15-3427-4c28-898a-ffd2e6cec80c",
-                "value": 79
+                "value": 203
               },
               {
                 "default": false,
@@ -2306,7 +2434,7 @@
                 "label": "DNS Name",
                 "properties": null,
                 "uuid": "8b5d7143-64e3-4240-8009-c46097a57679",
-                "value": 80
+                "value": 204
               },
               {
                 "default": false,
@@ -2315,7 +2443,7 @@
                 "label": "MAC Address",
                 "properties": null,
                 "uuid": "a8f16f06-0470-43aa-94bb-9029c6aedf68",
-                "value": 81
+                "value": 205
               }
             ]
           }
@@ -2340,7 +2468,7 @@
         "uuid": "8190c9ed-770f-4bdb-8fa1-7e734d886c7a"
       },
       "has_logical_errors": false,
-      "id": 12,
+      "id": 23,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2349,18 +2477,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683303669019,
+      "last_modified_time": 1727294361572,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614136012,
+          "created_date": 1727294360809,
           "description": "Add artifact from the ExtraHop Devices data table.",
           "enabled": false,
           "export_key": "ExtraHop Reveal(x): Add Artifact",
-          "id": 13,
+          "id": 37,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614136025,
+          "last_modified_time": 1727294360809,
           "name": "ExtraHop Reveal(x): Add Artifact",
           "object_type": "extrahop_devices",
           "playbook_handle": "extrahop_rx_add_artifact",
@@ -2413,7 +2541,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "playbook_6d040a83-81fa-4926-8599-2c1574810089",
-        "id": 14,
+        "id": 25,
         "name": "playbook_6d040a83-81fa-4926-8599-2c1574810089",
         "type": "playbook",
         "uuid": "ffd4eb2d-218d-4566-a427-4d07cff34efc"
@@ -2421,15 +2549,15 @@
       "tags": [],
       "type": "default",
       "uuid": "6d040a83-81fa-4926-8599-2c1574810089",
-      "version": 8
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e\" isExecutable=\"true\" name=\"playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0dgiw5w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.extrahop_tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_tags_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dgiw5w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zw0jl9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0dgiw5w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1qd1ojd\u003c/incoming\u003e\u003cincoming\u003eFlow_0znu1u4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write get tags result to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"243406ca-f0c8-45cc-b936-96d38a03b4d9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0zw0jl9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0gp8feg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0zw0jl9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cexclusiveGateway default=\"Flow_0znu1u4\" id=\"ConditionPoint_4\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0gp8feg\u003c/incoming\u003e\u003coutgoing\u003eFlow_0o3lfmw\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0znu1u4\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_0gp8feg\" sourceRef=\"ScriptTask_3\" targetRef=\"ConditionPoint_4\"/\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Extrahop Reveal(x) assign tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f0d2fc8c-20ab-440c-b4f5-46776a0b561e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"tag_name = playbook.inputs.extrahop_tag_name\\nget_tags_content = playbook.functions.results.get_tags_results.get(\\\"content\\\", {})\\ninputs.extrahop_device_ids = str(row.devs_id)\\nif tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\\ninputs.extrahop_tag_id = None\\nfor tag in get_tags_content.get(\\\"result\\\", []):\\n    if tag_name == tag.get(\\\"name\\\", None):\\n        inputs.extrahop_tag_id = tag.get(\\\"id\\\", None)\\n        break\\nif not inputs.extrahop_tag_id:\\n    raise ValueError(\\\"Tag {} not found.\\\".format(tag_name))\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_tag_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0o3lfmw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0f9h78q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write assign tag results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6addbf3e-d947-48f9-8718-d0942f5dd422\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0f9h78q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qd1ojd\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0f9h78q\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_1qd1ojd\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_0o3lfmw\" name=\"ExtraHop: Test if tag exists\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_5\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test if tag exists\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"tag_exists\\\") else False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0znu1u4\" name=\"Else\" sourceRef=\"ConditionPoint_4\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0znu1u4\" id=\"Flow_0znu1u4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"466\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"635\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"635\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"804\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"748\" y=\"603\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0o3lfmw\" id=\"Flow_0o3lfmw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"466\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"538\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"84\" x=\"619\" y=\"479\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qd1ojd\" id=\"Flow_1qd1ojd_di\"\u003e\u003comgdi:waypoint x=\"600\" y=\"752\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"778\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"778\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"804\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0f9h78q\" id=\"Flow_0f9h78q_di\"\u003e\u003comgdi:waypoint x=\"600\" y=\"622\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"668\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gp8feg\" id=\"Flow_0gp8feg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zw0jl9\" id=\"Flow_0zw0jl9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dgiw5w\" id=\"Flow_0dgiw5w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"804.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_4\" id=\"ConditionPoint_4_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"414.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"502\" y=\"538.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"502\" y=\"668.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e\" isExecutable=\"true\" name=\"playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0dgiw5w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.extrahop_tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_tags_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dgiw5w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zw0jl9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0dgiw5w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1qd1ojd\u003c/incoming\u003e\u003cincoming\u003eFlow_0znu1u4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write get tags result to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"243406ca-f0c8-45cc-b936-96d38a03b4d9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0zw0jl9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0gp8feg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0zw0jl9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cexclusiveGateway default=\"Flow_0znu1u4\" id=\"ConditionPoint_4\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0gp8feg\u003c/incoming\u003e\u003coutgoing\u003eFlow_0o3lfmw\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0znu1u4\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_0gp8feg\" sourceRef=\"ScriptTask_3\" targetRef=\"ConditionPoint_4\"/\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Extrahop Reveal(x) assign tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f0d2fc8c-20ab-440c-b4f5-46776a0b561e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"tag_name = playbook.inputs.extrahop_tag_name\\nget_tags_content = playbook.functions.results.get_tags_results.get(\\\"content\\\", {})\\ninputs.extrahop_device_ids = str(row.devs_id)\\nif tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\\ninputs.extrahop_tag_id = None\\nfor tag in get_tags_content.get(\\\"result\\\", []):\\n    if tag_name == tag.get(\\\"name\\\", None):\\n        inputs.extrahop_tag_id = tag.get(\\\"id\\\", None)\\n        break\\nif not inputs.extrahop_tag_id:\\n    raise ValueError(\\\"Tag {} not found.\\\".format(tag_name))\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"assign_tag_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0o3lfmw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0f9h78q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write assign tag results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6addbf3e-d947-48f9-8718-d0942f5dd422\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0f9h78q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qd1ojd\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0f9h78q\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_1qd1ojd\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_0o3lfmw\" name=\"ExtraHop: Test if tag exists\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_5\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test if tag exists\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"tag_exists\\\") else False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0znu1u4\" name=\"Else\" sourceRef=\"ConditionPoint_4\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0znu1u4\" id=\"Flow_0znu1u4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"466\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"635\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"635\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"804\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"748\" y=\"603\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0o3lfmw\" id=\"Flow_0o3lfmw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"466\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"538\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"84\" x=\"619\" y=\"479\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qd1ojd\" id=\"Flow_1qd1ojd_di\"\u003e\u003comgdi:waypoint x=\"600\" y=\"752\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"778\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"778\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"804\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0f9h78q\" id=\"Flow_0f9h78q_di\"\u003e\u003comgdi:waypoint x=\"600\" y=\"622\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"668\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gp8feg\" id=\"Flow_0gp8feg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zw0jl9\" id=\"Flow_0zw0jl9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dgiw5w\" id=\"Flow_0dgiw5w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"804.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_4\" id=\"ConditionPoint_4_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"414.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"502\" y=\"538.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"502\" y=\"668.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614136303,
+      "create_date": 1727294361515,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -2446,7 +2574,7 @@
       "field_type_handle": "playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Assign Tag",
+        "display_name": "ExtraHop Reveal(x): Assign Tag (PB)",
         "export_key": "playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e",
         "fields": {
           "extrahop_tag_name": {
@@ -2459,7 +2587,7 @@
             "deprecated": false,
             "export_key": "playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e/extrahop_tag_name",
             "hide_notification": false,
-            "id": 427,
+            "id": 574,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2474,7 +2602,7 @@
             "templates": [],
             "text": "Tag name",
             "tooltip": "The string value for an Extrahop  tag name.",
-            "type_id": 1018,
+            "type_id": 1031,
             "uuid": "f3fc1a76-77cd-4a5b-bc2b-b834d9e192a9",
             "values": []
           }
@@ -2499,7 +2627,7 @@
         "uuid": "e3c85ad4-a9b9-4d25-832f-d09aa3f0254d"
       },
       "has_logical_errors": false,
-      "id": 13,
+      "id": 24,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2508,18 +2636,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684170748131,
+      "last_modified_time": 1727294362680,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614136426,
+          "created_date": 1727294361810,
           "description": "Write assign tag results to a note",
           "enabled": false,
           "export_key": "ExtraHop: Write assign tag results to a note",
-          "id": 14,
+          "id": 38,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684170743584,
+          "last_modified_time": 1727294361810,
           "name": "ExtraHop: Write assign tag results to a note",
           "object_type": "extrahop_devices",
           "playbook_handle": "extrahop_rx_assign_tag",
@@ -2530,14 +2658,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614136443,
+          "created_date": 1727294361864,
           "description": "Write a note indicating results of call to get tags ",
           "enabled": false,
           "export_key": "ExtraHop: Write get tags result to note",
-          "id": 15,
+          "id": 39,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684170684890,
+          "last_modified_time": 1727294361864,
           "name": "ExtraHop: Write get tags result to note",
           "object_type": "extrahop_devices",
           "playbook_handle": "extrahop_rx_assign_tag",
@@ -2576,7 +2704,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_c093f124-3628-4e8d-9b8c-9e177a86fc1e",
-        "id": 15,
+        "id": 26,
         "name": "playbook_c093f124_3628_4e8d_9b8c_9e177a86fc1e",
         "type": "playbook",
         "uuid": "1a702797-148c-4efa-88bb-2c8b2ca0073f"
@@ -2584,15 +2712,15 @@
       "tags": [],
       "type": "default",
       "uuid": "c093f124-3628-4e8d-9b8c-9e177a86fc1e",
-      "version": 7
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2d053a84_c79b_442f_96d0_16e2b20572ce\" isExecutable=\"true\" name=\"playbook_2d053a84_c79b_442f_96d0_16e2b20572ce\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1838pgs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) create tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d566e4b3-6692-4599-a351-7530cdb4874e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_tag_name = playbook.inputs.extrahop_tag_name\\nif inputs.extrahop_tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_tag_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1838pgs\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tegrcw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1838pgs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"result_name\":\"get_tags_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ejjj8r\u003c/incoming\u003e\u003coutgoing\u003eFlow_12ybp0b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1rdpopq\u003c/incoming\u003e\u003cincoming\u003eFlow_131cprg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_12ybp0b\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_5\"/\u003e\u003csequenceFlow id=\"Flow_0tegrcw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"ExtraHop: Write Created Tag to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"23317038-e95b-478a-8f1f-7a301e08f383\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12ybp0b\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rdpopq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1rdpopq\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_4\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write create tag results to Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5b151783-8106-42c4-af6a-c6a60feed650\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tegrcw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0pm76pg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0pm76pg\" sourceRef=\"ScriptTask_6\" targetRef=\"ConditionPoint_7\"/\u003e\u003cexclusiveGateway default=\"Flow_131cprg\" id=\"ConditionPoint_7\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0pm76pg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ejjj8r\u003c/outgoing\u003e\u003coutgoing\u003eFlow_131cprg\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_1ejjj8r\" name=\"ExtraHop test if tag was created\" sourceRef=\"ConditionPoint_7\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop test if tag was created\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"tag_created\\\") else False\\n\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_131cprg\" name=\"Else\" sourceRef=\"ConditionPoint_7\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2d053a84_c79b_442f_96d0_16e2b20572ce\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_131cprg\" id=\"Flow_131cprg_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"120\"/\u003e\u003comgdi:waypoint x=\"770\" y=\"120\"/\u003e\u003comgdi:waypoint x=\"770\" y=\"390\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"778\" y=\"110\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ejjj8r\" id=\"Flow_1ejjj8r_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"138\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"81\" x=\"625\" y=\"99\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0pm76pg\" id=\"Flow_0pm76pg_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"22.350006103515625\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"34.350006103515625\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rdpopq\" id=\"Flow_1rdpopq_di\"\u003e\u003comgdi:waypoint x=\"590\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"353\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"353\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tegrcw\" id=\"Flow_0tegrcw_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-102\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-61.649993896484375\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12ybp0b\" id=\"Flow_12ybp0b_di\"\u003e\u003comgdi:waypoint x=\"590\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1838pgs\" id=\"Flow_1838pgs_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-214\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-186\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"-266\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"-186\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"492\" y=\"138\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"492\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"641.5\" y=\"-61.649993896484375\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_7\" id=\"ConditionPoint_7_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"618.5\" y=\"34.350006103515625\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2d053a84_c79b_442f_96d0_16e2b20572ce\" isExecutable=\"true\" name=\"playbook_2d053a84_c79b_442f_96d0_16e2b20572ce\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1838pgs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) create tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d566e4b3-6692-4599-a351-7530cdb4874e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_tag_name = playbook.inputs.extrahop_tag_name\\nif inputs.extrahop_tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_tag_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1838pgs\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tegrcw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1838pgs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"result_name\":\"get_tags_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ejjj8r\u003c/incoming\u003e\u003coutgoing\u003eFlow_12ybp0b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1rdpopq\u003c/incoming\u003e\u003cincoming\u003eFlow_131cprg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_12ybp0b\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_5\"/\u003e\u003csequenceFlow id=\"Flow_0tegrcw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"ExtraHop: Write Created Tag to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"23317038-e95b-478a-8f1f-7a301e08f383\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12ybp0b\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rdpopq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1rdpopq\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_4\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write create tag results to Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5b151783-8106-42c4-af6a-c6a60feed650\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tegrcw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0pm76pg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0pm76pg\" sourceRef=\"ScriptTask_6\" targetRef=\"ConditionPoint_7\"/\u003e\u003cexclusiveGateway default=\"Flow_131cprg\" id=\"ConditionPoint_7\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0pm76pg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ejjj8r\u003c/outgoing\u003e\u003coutgoing\u003eFlow_131cprg\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_1ejjj8r\" name=\"ExtraHop test if tag was created\" sourceRef=\"ConditionPoint_7\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop test if tag was created\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"tag_created\\\") else False\\n\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_131cprg\" name=\"Else\" sourceRef=\"ConditionPoint_7\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2d053a84_c79b_442f_96d0_16e2b20572ce\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_131cprg\" id=\"Flow_131cprg_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"120\"/\u003e\u003comgdi:waypoint x=\"770\" y=\"120\"/\u003e\u003comgdi:waypoint x=\"770\" y=\"390\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"778\" y=\"110\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ejjj8r\" id=\"Flow_1ejjj8r_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"138\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"81\" x=\"625\" y=\"99\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0pm76pg\" id=\"Flow_0pm76pg_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"22.350006103515625\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"34.350006103515625\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rdpopq\" id=\"Flow_1rdpopq_di\"\u003e\u003comgdi:waypoint x=\"590\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"353\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"353\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tegrcw\" id=\"Flow_0tegrcw_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-102\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-61.649993896484375\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12ybp0b\" id=\"Flow_12ybp0b_di\"\u003e\u003comgdi:waypoint x=\"590\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"590\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1838pgs\" id=\"Flow_1838pgs_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-214\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-186\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"-266\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"-186\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"492\" y=\"138\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"492\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"641.5\" y=\"-61.649993896484375\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_7\" id=\"ConditionPoint_7_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"618.5\" y=\"34.350006103515625\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614136760,
+      "create_date": 1727294362629,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -2609,7 +2737,7 @@
       "field_type_handle": "playbook_2d053a84_c79b_442f_96d0_16e2b20572ce",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Create Tag",
+        "display_name": "ExtraHop Reveal(x): Create Tag (PB)",
         "export_key": "playbook_2d053a84_c79b_442f_96d0_16e2b20572ce",
         "fields": {
           "extrahop_tag_name": {
@@ -2622,7 +2750,7 @@
             "deprecated": false,
             "export_key": "playbook_2d053a84_c79b_442f_96d0_16e2b20572ce/extrahop_tag_name",
             "hide_notification": false,
-            "id": 428,
+            "id": 575,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2637,7 +2765,7 @@
             "templates": [],
             "text": "Tag name",
             "tooltip": "String value ExtraHop tag name.",
-            "type_id": 1019,
+            "type_id": 1032,
             "uuid": "55dfa08d-5e8b-4b73-97a3-c265ebdbcb15",
             "values": []
           },
@@ -2651,7 +2779,7 @@
             "deprecated": false,
             "export_key": "playbook_2d053a84_c79b_442f_96d0_16e2b20572ce/tag_name",
             "hide_notification": false,
-            "id": 429,
+            "id": 576,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2666,7 +2794,7 @@
             "templates": [],
             "text": "Tag name",
             "tooltip": "String value for ExtraHop name.",
-            "type_id": 1019,
+            "type_id": 1032,
             "uuid": "31508099-684e-48db-800f-642f9a0653ba",
             "values": []
           }
@@ -2691,7 +2819,7 @@
         "uuid": "1bfe366c-5186-4715-8cfb-3cb994b45ae3"
       },
       "has_logical_errors": false,
-      "id": 14,
+      "id": 25,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2700,18 +2828,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684170805247,
+      "last_modified_time": 1727294363598,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614136867,
+          "created_date": 1727294362940,
           "description": "",
           "enabled": false,
           "export_key": "ExtraHop: Write create tag results to Note",
-          "id": 16,
+          "id": 40,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684170802502,
+          "last_modified_time": 1727294362940,
           "name": "ExtraHop: Write create tag results to Note",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_create_tag",
@@ -2722,14 +2850,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614136883,
+          "created_date": 1727294362988,
           "description": "Write the created tag to the ExtraHop Tags data table.",
           "enabled": false,
           "export_key": "ExtraHop: Write Created Tag to Data Table",
-          "id": 17,
+          "id": 41,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614136898,
+          "last_modified_time": 1727294362988,
           "name": "ExtraHop: Write Created Tag to Data Table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_create_tag",
@@ -2768,7 +2896,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2d053a84-c79b-442f-96d0-16e2b20572ce",
-        "id": 16,
+        "id": 27,
         "name": "playbook_2d053a84_c79b_442f_96d0_16e2b20572ce",
         "type": "playbook",
         "uuid": "d2596a0a-da56-4e21-aaa6-b6ac46fa3622"
@@ -2776,15 +2904,15 @@
       "tags": [],
       "type": "default",
       "uuid": "2d053a84-c79b-442f-96d0-16e2b20572ce",
-      "version": 7
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\" isExecutable=\"true\" name=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fjylzl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get activitymaps\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"18aa0964-745b-4329-a04b-a92f5f3fab40\"\u003e{\"inputs\":{},\"result_name\":\"get_activitymap_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fjylzl\u003c/incoming\u003e\u003coutgoing\u003eFlow_05obrjo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fjylzl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03zfxza\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write activity map data to data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"8e4eedec-d8b6-4e09-9449-d147dfa808c3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05obrjo\u003c/incoming\u003e\u003coutgoing\u003eFlow_03zfxza\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05obrjo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_03zfxza\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03zfxza\" id=\"Flow_03zfxza_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05obrjo\" id=\"Flow_05obrjo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fjylzl\" id=\"Flow_1fjylzl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\" isExecutable=\"true\" name=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fjylzl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get activitymaps\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"18aa0964-745b-4329-a04b-a92f5f3fab40\"\u003e{\"inputs\":{},\"result_name\":\"get_activitymap_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fjylzl\u003c/incoming\u003e\u003coutgoing\u003eFlow_05obrjo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fjylzl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03zfxza\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write activity map data to data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"8e4eedec-d8b6-4e09-9449-d147dfa808c3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05obrjo\u003c/incoming\u003e\u003coutgoing\u003eFlow_03zfxza\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05obrjo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_03zfxza\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03zfxza\" id=\"Flow_03zfxza_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05obrjo\" id=\"Flow_05obrjo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fjylzl\" id=\"Flow_1fjylzl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614137208,
+      "create_date": 1727294363614,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -2801,7 +2929,7 @@
       "field_type_handle": "playbook_da14a796_624e_4f7e_ac7b_568577625279",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Get Activity Maps",
+        "display_name": "ExtraHop Reveal(x): Get Activity Maps (PB)",
         "export_key": "playbook_da14a796_624e_4f7e_ac7b_568577625279",
         "fields": {},
         "for_actions": false,
@@ -2824,7 +2952,7 @@
         "uuid": "02eef962-6970-4893-b595-75793a5e13e1"
       },
       "has_logical_errors": false,
-      "id": 15,
+      "id": 26,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2833,18 +2961,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683125153596,
+      "last_modified_time": 1727294364486,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614137280,
+          "created_date": 1727294363806,
           "description": "Write Activity map data to the ExtraHop Activitymap data table in SOAR.",
           "enabled": false,
           "export_key": "ExtraHop: Write activity map data to data table",
-          "id": 18,
+          "id": 42,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1683125149721,
+          "last_modified_time": 1727294363806,
           "name": "ExtraHop: Write activity map data to data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_get_activity_maps",
@@ -2874,7 +3002,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_da14a796-624e-4f7e-ac7b-568577625279",
-        "id": 17,
+        "id": 28,
         "name": "playbook_da14a796_624e_4f7e_ac7b_568577625279",
         "type": "playbook",
         "uuid": "2edf58c0-8338-414d-996f-61b7df27b504"
@@ -2882,15 +3010,15 @@
       "tags": [],
       "type": "default",
       "uuid": "da14a796-624e-4f7e-ac7b-568577625279",
-      "version": 7
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e\" isExecutable=\"true\" name=\"playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0z92x48\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"result_name\":\"get_tags_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0z92x48\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rja85i\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0z92x48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vollhc\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write tag data to Tags data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7e065477-02b1-441b-8aa4-1733f77eaff7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rja85i\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vollhc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0rja85i\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1vollhc\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vollhc\" id=\"Flow_1vollhc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rja85i\" id=\"Flow_0rja85i_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0z92x48\" id=\"Flow_0z92x48_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e\" isExecutable=\"true\" name=\"playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0z92x48\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"result_name\":\"get_tags_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0z92x48\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rja85i\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0z92x48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vollhc\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write tag data to Tags data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7e065477-02b1-441b-8aa4-1733f77eaff7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rja85i\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vollhc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0rja85i\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1vollhc\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vollhc\" id=\"Flow_1vollhc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rja85i\" id=\"Flow_0rja85i_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0z92x48\" id=\"Flow_0z92x48_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614137555,
+      "create_date": 1727294364504,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -2907,7 +3035,7 @@
       "field_type_handle": "playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e",
       "fields_type": {
         "actions": [],
-        "display_name": "Extrahop Reveal(x): Get Tags",
+        "display_name": "ExtraHop Reveal(x): Get Tags (PB)",
         "export_key": "playbook_0d7e4ce2_e19f_49da_9a7e_4e6a56471e1e",
         "fields": {},
         "for_actions": false,
@@ -2930,7 +3058,7 @@
         "uuid": "05e5f374-3078-4f68-855e-1ba0c07856cf"
       },
       "has_logical_errors": false,
-      "id": 16,
+      "id": 27,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2939,18 +3067,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683303699298,
+      "last_modified_time": 1727294365352,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614137623,
+          "created_date": 1727294364727,
           "description": "Write the tags information from ExtraHop to the ExtraHop Tags data table.",
           "enabled": false,
           "export_key": "ExtraHop: Write tag data to Tags data table",
-          "id": 19,
+          "id": 43,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614137644,
+          "last_modified_time": 1727294364727,
           "name": "ExtraHop: Write tag data to Tags data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_get_tags",
@@ -2980,7 +3108,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "playbook_0d7e4ce2-e19f-49da-9a7e-4e6a56471e1e",
-        "id": 18,
+        "id": 29,
         "name": "playbook_0d7e4ce2-e19f-49da-9a7e-4e6a56471e1e",
         "type": "playbook",
         "uuid": "01753f7e-5111-4bb5-a0bd-e5535f2b74c7"
@@ -2988,15 +3116,15 @@
       "tags": [],
       "type": "default",
       "uuid": "0d7e4ce2-e19f-49da-9a7e-4e6a56471e1e",
-      "version": 8
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_59e30e64_5c38_4907_8753_12c4346249a4\" isExecutable=\"true\" name=\"playbook_59e30e64_5c38_4907_8753_12c4346249a4\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_05k8pgb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get watchlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4d5690ce-998c-4fbb-bf25-765800aaa246\"\u003e{\"inputs\":{},\"result_name\":\"get_watchlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05k8pgb\u003c/incoming\u003e\u003coutgoing\u003eFlow_1w3qhgj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_05k8pgb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_07slw49\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write get watchlist results to data table and note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5729f3a2-c5bf-447a-98e0-9b05f578bb8b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1w3qhgj\u003c/incoming\u003e\u003coutgoing\u003eFlow_07slw49\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1w3qhgj\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_07slw49\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_59e30e64_5c38_4907_8753_12c4346249a4\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07slw49\" id=\"Flow_07slw49_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w3qhgj\" id=\"Flow_1w3qhgj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05k8pgb\" id=\"Flow_05k8pgb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_59e30e64_5c38_4907_8753_12c4346249a4\" isExecutable=\"true\" name=\"playbook_59e30e64_5c38_4907_8753_12c4346249a4\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_05k8pgb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get watchlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4d5690ce-998c-4fbb-bf25-765800aaa246\"\u003e{\"inputs\":{},\"result_name\":\"get_watchlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05k8pgb\u003c/incoming\u003e\u003coutgoing\u003eFlow_1w3qhgj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_05k8pgb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_07slw49\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write get watchlist results to data table and note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5729f3a2-c5bf-447a-98e0-9b05f578bb8b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1w3qhgj\u003c/incoming\u003e\u003coutgoing\u003eFlow_07slw49\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1w3qhgj\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_07slw49\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_59e30e64_5c38_4907_8753_12c4346249a4\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07slw49\" id=\"Flow_07slw49_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w3qhgj\" id=\"Flow_1w3qhgj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05k8pgb\" id=\"Flow_05k8pgb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614137906,
+      "create_date": 1727294365372,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -3013,7 +3141,7 @@
       "field_type_handle": "playbook_59e30e64_5c38_4907_8753_12c4346249a4",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Get Watchlist",
+        "display_name": "ExtraHop Reveal(x): Get Watchlist (PB)",
         "export_key": "playbook_59e30e64_5c38_4907_8753_12c4346249a4",
         "fields": {},
         "for_actions": false,
@@ -3036,7 +3164,7 @@
         "uuid": "d584e618-f9a1-4103-b0ac-dda4a14c707f"
       },
       "has_logical_errors": false,
-      "id": 17,
+      "id": 28,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -3045,18 +3173,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683043436013,
+      "last_modified_time": 1727294366253,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614137981,
+          "created_date": 1727294365572,
           "description": "Write get watchlist results to ExtraHop Watchlist data table and to a note",
           "enabled": false,
           "export_key": "ExtraHop: Write get watchlist results to data table and note",
-          "id": 20,
+          "id": 44,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614138001,
+          "last_modified_time": 1727294365572,
           "name": "ExtraHop: Write get watchlist results to data table and note",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_get_watchlist",
@@ -3086,7 +3214,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_59e30e64-5c38-4907-8753-12c4346249a4",
-        "id": 19,
+        "id": 30,
         "name": "playbook_59e30e64_5c38_4907_8753_12c4346249a4",
         "type": "playbook",
         "uuid": "c6b5aa49-7ee4-4d28-b7fb-59c8412b15ef"
@@ -3094,15 +3222,15 @@
       "tags": [],
       "type": "default",
       "uuid": "59e30e64-5c38-4907-8753-12c4346249a4",
-      "version": 6
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\" isExecutable=\"true\" name=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1idwdho\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_1idwdho\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_8\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cmkvlw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xxpt0q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"result_name\":\"get_devices_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q0cr0x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xe1ibz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14gql9f\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"ExtraHop: Write Detection to data table and update custom fields\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f362b21d-354c-4b6f-b8b9-8a9c7ccfdcf0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xxpt0q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q0cr0x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xxpt0q\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_5\"/\u003e\u003csequenceFlow id=\"Flow_1q0cr0x\" sourceRef=\"ScriptTask_5\" targetRef=\"ServiceTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1xe1ibz\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Devices information to Devices data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3b4e5ca1-6717-4ae8-b3c1-7d26f525976f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xe1ibz\u003c/incoming\u003e\u003coutgoing\u003eFlow_14gql9f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14gql9f\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1idwdho\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cmkvlw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0cmkvlw\" sourceRef=\"ScriptTask_8\" targetRef=\"ServiceTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cmkvlw\" id=\"Flow_0cmkvlw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-128\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14gql9f\" id=\"Flow_14gql9f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xe1ibz\" id=\"Flow_1xe1ibz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q0cr0x\" id=\"Flow_1q0cr0x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"156\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xxpt0q\" id=\"Flow_1xxpt0q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"2\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1idwdho\" id=\"Flow_1idwdho_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-254\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-212\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"-306\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"28.350006103515625\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"268.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-212.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\" isExecutable=\"true\" name=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1idwdho\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_1idwdho\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_8\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cmkvlw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xxpt0q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"result_name\":\"get_devices_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q0cr0x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xe1ibz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14gql9f\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"ExtraHop: Write Detection to data table and update custom fields\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f362b21d-354c-4b6f-b8b9-8a9c7ccfdcf0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xxpt0q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q0cr0x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xxpt0q\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_5\"/\u003e\u003csequenceFlow id=\"Flow_1q0cr0x\" sourceRef=\"ScriptTask_5\" targetRef=\"ServiceTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1xe1ibz\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Devices information to Devices data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3b4e5ca1-6717-4ae8-b3c1-7d26f525976f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xe1ibz\u003c/incoming\u003e\u003coutgoing\u003eFlow_14gql9f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14gql9f\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1idwdho\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cmkvlw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0cmkvlw\" sourceRef=\"ScriptTask_8\" targetRef=\"ServiceTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cmkvlw\" id=\"Flow_0cmkvlw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-128\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14gql9f\" id=\"Flow_14gql9f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xe1ibz\" id=\"Flow_1xe1ibz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q0cr0x\" id=\"Flow_1q0cr0x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"156\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xxpt0q\" id=\"Flow_1xxpt0q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"2\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1idwdho\" id=\"Flow_1idwdho_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-254\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-212\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"-306\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"28.350006103515625\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"268.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-212.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614138285,
+      "create_date": 1727294366272,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -3142,7 +3270,7 @@
         "uuid": "5c134f9d-5814-45e9-a2eb-30192cd51616"
       },
       "has_logical_errors": false,
-      "id": 18,
+      "id": 29,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -3151,18 +3279,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684159861633,
+      "last_modified_time": 1727294367290,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614138361,
+          "created_date": 1727294366477,
           "description": "Write the detection information to the ExtraHop Detections data table and update custom fields",
           "enabled": false,
           "export_key": "ExtraHop: Write Detection to data table and update custom fields",
-          "id": 21,
+          "id": 45,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1683906709407,
+          "last_modified_time": 1727294366477,
           "name": "ExtraHop: Write Detection to data table and update custom fields",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_refresh_case",
@@ -3173,14 +3301,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614138385,
+          "created_date": 1727294366531,
           "description": "Write results from the get devices function to the ExtraHop Devices data table.",
           "enabled": false,
           "export_key": "ExtraHop: Write Devices information to Devices data table",
-          "id": 22,
+          "id": 46,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614138409,
+          "last_modified_time": 1727294366531,
           "name": "ExtraHop: Write Devices information to Devices data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_refresh_case",
@@ -3219,7 +3347,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_e2e29388-e089-4000-9d3b-56f822e5120f",
-        "id": 20,
+        "id": 31,
         "name": "playbook_e2e29388_e089_4000_9d3b_56f822e5120f",
         "type": "playbook",
         "uuid": "2de673f0-b95c-4c41-8ae8-255e9e7d1b32"
@@ -3227,15 +3355,15 @@
       "tags": [],
       "type": "default",
       "uuid": "e2e29388-e089-4000-9d3b-56f822e5120f",
-      "version": 9
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 19,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\" isExecutable=\"true\" name=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_12g9q7h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_12g9q7h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_9\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_search_detections pre processing script ##\\n# funct_extrahop_rx_get_detections\\n# Some of the search parameters cannot be used if a single detection ID is specifiedself.\\n# Those parameters are listed in search_filters\\nsearch_filters =  [ \\n    \\\"extrahop_detection_risk_score_min\\\", \\\"extrahop_detection_category\\\", \\n    \\\"extrahop_detection_types\\\", \\\"extrahop_detection_assignee\\\", \\n    \\\"extrahop_detection_ticket_id\\\", \\\"extrahop_detection_status\\\", \\n    \\\"extrahop_detection_resolution\\\"\\n]\\n\\n\\nfor p in search_filters:\\n    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):\\n        raise ValueError(\\\"A search filter {0} and Detection ID are not allowed at the same time.\\\".format(p))\\n\\ninputs.extrahop_detection_id = playbook.inputs.extrahop_detection_id\\n\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nj8k3k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xdfy3x\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cexclusiveGateway default=\"Flow_1ih6tfv\" id=\"ConditionPoint_4\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_18e2kku\u003c/incoming\u003e\u003coutgoing\u003eFlow_1nj8k3k\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1ih6tfv\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Extrahop Reveal(x) search detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b70037a5-fcaf-4e78-a1e2-6acdc4dff239\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##\\n# Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. \\n# Reverse the dict keys and values\\nCATEGORY_MAP = {v: k for k, v in playbook.properties.category_map.items()}\\nTYPE_MAP = {v: k for k, v in playbook.properties.type_map.items()}\\nDOT_PARAMS = [\\n    \\\"me\\\",\\n    \\\"none\\\"\\n]\\n\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        if isinstance(prop, int):\\n            return prop\\n        elif isinstance(prop, list):\\n            return [\u0027{}\u0027.format(\u0027.\u0027 + i if i in DOT_PARAMS else i) for i in prop]\\n        else:\\n            result = \u0027{}\u0027.format(\u0027.\u0027 + prop if prop in DOT_PARAMS else prop)\\n        if type == \\\"list\\\":\\n            return [result]\\n\\n        return result\\n\\n    else:\\n        return None\\n\\n\\nfilter = {}\\nsearch_filter = {}\\ncategory = None\\ndetection_types = None\\nif playbook.inputs.extrahop_detection_category:\\n    category = CATEGORY_MAP[playbook.inputs.extrahop_detection_category]\\nif hasattr(playbook.inputs, \\\"extrahop_detection_types\\\"):\\n    detection_types = [TYPE_MAP[d] for d in playbook.inputs.extrahop_detection_types]\\n\\nfilter_props = {\\n    \\\"risk_score_min\\\": get_prop(playbook.inputs.extrahop_detection_risk_score_min),\\n    \\\"types\\\": get_prop(detection_types),\\n    \\\"category\\\": get_prop(category),\\n    \\\"assignee\\\": get_prop(playbook.inputs.extrahop_detection_assignee, \\\"list\\\"),\\n    \\\"ticket_id\\\": get_prop(playbook.inputs.extrahop_detection_ticket_id, \\\"list\\\"),\\n    \\\"status\\\": get_prop(playbook.inputs.get(\\\"extrahop_detection_status\\\") if hasattr(playbook.inputs, \\\"extrahop_detection_status\\\") else None),\\n    \\\"resolution\\\": get_prop(playbook.inputs.get(\\\"extrahop_detection_resolution\\\") if hasattr(playbook.inputs, \\\"extrahop_detection_resolution\\\") else None)\\n}\\n\\nfilter = {k: v for k, v in filter_props.items() if v}\\n\\nif filter:\\n    if playbook.properties.extrahop_detection_id:\\n        raise ValueError(\\\"The search filter and Detection ID are not allowed at the same time.\\\")\\n\\n    search_filter = {\\n        \\\"filter\\\": filter\\n    }\\n    inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n\\nif playbook.inputs.extrahop_active_from:\\n    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\nif playbook.inputs.extrahop_active_until:\\n    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\\nif playbook.inputs.extrahop_offset:\\n    inputs.extrahop_offset = playbook.inputs.extrahop_offset\\nif playbook.inputs.extrahop_update_time:\\n    inputs.extrahop_update_time = playbook.inputs.extrahop_update_time\\nif playbook.inputs.extrahop_mod_time:\\n    inputs.extrahop_mod_time = playbook.inputs.extrahop_mod_time\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ih6tfv\u003c/incoming\u003e\u003coutgoing\u003eFlow_079lkci\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Detection to Detections Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c4c8659c-d796-4f23-8b2b-39140cbdcb57\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xdfy3x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1samx6c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xdfy3x\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003cendEvent id=\"EndPoint_7\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1samx6c\u003c/incoming\u003e\u003cincoming\u003eFlow_0aebqau\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1samx6c\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop: Write Search Detections results to Detections data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dbfd3d53-b97b-493d-aa0f-96a7cbd3014d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_079lkci\u003c/incoming\u003e\u003coutgoing\u003eFlow_0aebqau\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_079lkci\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_8\"/\u003e\u003csequenceFlow id=\"Flow_0aebqau\" sourceRef=\"ScriptTask_8\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12g9q7h\u003c/incoming\u003e\u003coutgoing\u003eFlow_18e2kku\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_18e2kku\" sourceRef=\"ScriptTask_9\" targetRef=\"ConditionPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_1nj8k3k\" name=\"ExtraHop: Test Detection ID is set\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test Detection ID is set\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if playbook.inputs.extrahop_detection_id:\\n  result = True\\nelse:\\n  result = False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_1ih6tfv\" name=\"Else\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ih6tfv\" id=\"Flow_1ih6tfv_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"346\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"377\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"377\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"408\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"803\" y=\"359\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nj8k3k\" id=\"Flow_1nj8k3k_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"346\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"408\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"75\" x=\"588\" y=\"360\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18e2kku\" id=\"Flow_18e2kku_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"294\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0aebqau\" id=\"Flow_0aebqau_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"612\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_079lkci\" id=\"Flow_079lkci_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"528\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1samx6c\" id=\"Flow_1samx6c_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"612\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"640\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"640\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xdfy3x\" id=\"Flow_1xdfy3x_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"528\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12g9q7h\" id=\"Flow_12g9q7h_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"635\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"411.5\" y=\"408.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_4\" id=\"ConditionPoint_4_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"607.5\" y=\"294.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"408.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"411.5\" y=\"528.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_7\" id=\"EndPoint_7_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"653.5\" y=\"664.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"528.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"631\" y=\"157.64999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\" isExecutable=\"true\" name=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_12g9q7h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_12g9q7h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_9\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_search_detections pre processing script ##\\n# funct_extrahop_rx_get_detections\\n# Some of the search parameters cannot be used if a single detection ID is specifiedself.\\n# Those parameters are listed in search_filters\\nsearch_filters =  [ \\n    \\\"extrahop_detection_risk_score_min\\\", \\\"extrahop_detection_category\\\", \\n    \\\"extrahop_detection_types\\\", \\\"extrahop_detection_assignee\\\", \\n    \\\"extrahop_detection_ticket_id\\\", \\\"extrahop_detection_status\\\", \\n    \\\"extrahop_detection_resolution\\\"\\n]\\n\\n\\nfor p in search_filters:\\n    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):\\n        raise ValueError(\\\"A search filter {0} and Detection ID are not allowed at the same time.\\\".format(p))\\n\\ninputs.extrahop_detection_id = playbook.inputs.extrahop_detection_id\\n\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nj8k3k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xdfy3x\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cexclusiveGateway default=\"Flow_1ih6tfv\" id=\"ConditionPoint_4\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_18e2kku\u003c/incoming\u003e\u003coutgoing\u003eFlow_1nj8k3k\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1ih6tfv\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Extrahop Reveal(x) search detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b70037a5-fcaf-4e78-a1e2-6acdc4dff239\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##\\n# Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. \\n# Reverse the dict keys and values\\nCATEGORY_MAP = {v: k for k, v in playbook.properties.category_map.items()}\\nTYPE_MAP = {v: k for k, v in playbook.properties.type_map.items()}\\nDOT_PARAMS = [\\n    \\\"me\\\",\\n    \\\"none\\\"\\n]\\n\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        if isinstance(prop, int):\\n            return prop\\n        elif isinstance(prop, list):\\n            return [\u0027{}\u0027.format(\u0027.\u0027 + i if i in DOT_PARAMS else i) for i in prop]\\n        else:\\n            result = \u0027{}\u0027.format(\u0027.\u0027 + prop if prop in DOT_PARAMS else prop)\\n        if type == \\\"list\\\":\\n            return [result]\\n\\n        return result\\n\\n    else:\\n        return None\\n\\n\\nfilter = {}\\nsearch_filter = {}\\ncategory = None\\ndetection_types = None\\nif playbook.inputs.extrahop_detection_category:\\n    category = CATEGORY_MAP[playbook.inputs.extrahop_detection_category]\\nif hasattr(playbook.inputs, \\\"extrahop_detection_types\\\"):\\n    detection_types = [TYPE_MAP[d] for d in playbook.inputs.extrahop_detection_types]\\n\\nfilter_props = {\\n    \\\"risk_score_min\\\": get_prop(playbook.inputs.extrahop_detection_risk_score_min),\\n    \\\"types\\\": get_prop(detection_types),\\n    \\\"category\\\": get_prop(category),\\n    \\\"assignee\\\": get_prop(playbook.inputs.extrahop_detection_assignee, \\\"list\\\"),\\n    \\\"ticket_id\\\": get_prop(playbook.inputs.extrahop_detection_ticket_id, \\\"list\\\"),\\n    \\\"status\\\": get_prop(playbook.inputs.get(\\\"extrahop_detection_status\\\") if hasattr(playbook.inputs, \\\"extrahop_detection_status\\\") else None),\\n    \\\"resolution\\\": get_prop(playbook.inputs.get(\\\"extrahop_detection_resolution\\\") if hasattr(playbook.inputs, \\\"extrahop_detection_resolution\\\") else None)\\n}\\n\\nfilter = {k: v for k, v in filter_props.items() if v}\\n\\nif filter:\\n    if playbook.properties.extrahop_detection_id:\\n        raise ValueError(\\\"The search filter and Detection ID are not allowed at the same time.\\\")\\n\\n    search_filter = {\\n        \\\"filter\\\": filter\\n    }\\n    inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n\\nif playbook.inputs.extrahop_active_from:\\n    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\nif playbook.inputs.extrahop_active_until:\\n    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\\nif playbook.inputs.extrahop_offset:\\n    inputs.extrahop_offset = playbook.inputs.extrahop_offset\\nif playbook.inputs.extrahop_update_time:\\n    inputs.extrahop_update_time = playbook.inputs.extrahop_update_time\\nif playbook.inputs.extrahop_mod_time:\\n    inputs.extrahop_mod_time = playbook.inputs.extrahop_mod_time\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ih6tfv\u003c/incoming\u003e\u003coutgoing\u003eFlow_079lkci\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Detection to Detections Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c4c8659c-d796-4f23-8b2b-39140cbdcb57\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xdfy3x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1samx6c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xdfy3x\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003cendEvent id=\"EndPoint_7\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1samx6c\u003c/incoming\u003e\u003cincoming\u003eFlow_0aebqau\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1samx6c\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop: Write Search Detections results to Detections data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dbfd3d53-b97b-493d-aa0f-96a7cbd3014d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_079lkci\u003c/incoming\u003e\u003coutgoing\u003eFlow_0aebqau\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_079lkci\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_8\"/\u003e\u003csequenceFlow id=\"Flow_0aebqau\" sourceRef=\"ScriptTask_8\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12g9q7h\u003c/incoming\u003e\u003coutgoing\u003eFlow_18e2kku\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_18e2kku\" sourceRef=\"ScriptTask_9\" targetRef=\"ConditionPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_1nj8k3k\" name=\"ExtraHop: Test Detection ID is set\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test Detection ID is set\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if playbook.inputs.extrahop_detection_id:\\n  result = True\\nelse:\\n  result = False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_1ih6tfv\" name=\"Else\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ih6tfv\" id=\"Flow_1ih6tfv_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"346\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"377\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"377\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"408\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"803\" y=\"359\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nj8k3k\" id=\"Flow_1nj8k3k_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"346\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"408\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"75\" x=\"588\" y=\"360\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18e2kku\" id=\"Flow_18e2kku_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"294\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0aebqau\" id=\"Flow_0aebqau_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"612\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_079lkci\" id=\"Flow_079lkci_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"528\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1samx6c\" id=\"Flow_1samx6c_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"612\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"640\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"640\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xdfy3x\" id=\"Flow_1xdfy3x_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"528\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12g9q7h\" id=\"Flow_12g9q7h_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"635\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"411.5\" y=\"408.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_4\" id=\"ConditionPoint_4_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"607.5\" y=\"294.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"408.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"411.5\" y=\"528.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_7\" id=\"EndPoint_7_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"653.5\" y=\"664.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"528.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"631\" y=\"157.64999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614138723,
+      "create_date": 1727294367312,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -3265,7 +3393,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_active_from",
             "hide_notification": false,
-            "id": 430,
+            "id": 577,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -3280,7 +3408,7 @@
             "templates": [],
             "text": "Active from",
             "tooltip": "(Optional) The beginning timestamp for the request.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "8b564a68-44df-4f5d-b019-c860ec610aa0",
             "values": []
           },
@@ -3294,7 +3422,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_active_until",
             "hide_notification": false,
-            "id": 431,
+            "id": 578,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -3309,7 +3437,7 @@
             "templates": [],
             "text": "Active until",
             "tooltip": " (Optional) The ending timestamp for the request. ",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "db7c2e4f-b062-4295-870f-bc8a8d5b71aa",
             "values": []
           },
@@ -3323,7 +3451,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_assignee",
             "hide_notification": false,
-            "id": 432,
+            "id": 579,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3338,7 +3466,7 @@
             "templates": [],
             "text": "Assignee",
             "tooltip": "Optional: Detection search filter assignee. Note :  To search by the  app \u2018ExtraHop user\u2019 use \u2018me\u2019",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "9839a13e-65c3-4b57-8916-e44c12a4cd55",
             "values": []
           },
@@ -3352,7 +3480,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_category",
             "hide_notification": false,
-            "id": 433,
+            "id": 580,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -3367,7 +3495,7 @@
             "templates": [],
             "text": "Category",
             "tooltip": "Optional:  Detection search filter category. Note: Performance categories not included in the selection list.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "e9bcffe7-e0fe-4fe7-933f-25f2508f54b0",
             "values": [
               {
@@ -3377,7 +3505,7 @@
                 "label": "Security",
                 "properties": null,
                 "uuid": "b9ff30fb-c096-48db-b02d-7f8fc7fd8893",
-                "value": 82
+                "value": 206
               },
               {
                 "default": false,
@@ -3386,7 +3514,7 @@
                 "label": "Actions on Objective",
                 "properties": null,
                 "uuid": "f9fd6b71-2468-48e1-9942-ff6a84e6515e",
-                "value": 83
+                "value": 207
               },
               {
                 "default": false,
@@ -3395,7 +3523,7 @@
                 "label": "Botnet",
                 "properties": null,
                 "uuid": "729fb966-d703-450e-813f-f04c9e95195b",
-                "value": 84
+                "value": 208
               },
               {
                 "default": false,
@@ -3404,7 +3532,7 @@
                 "label": "Caution",
                 "properties": null,
                 "uuid": "5436a4d3-34f8-4f06-bd0b-8b9e9aca2607",
-                "value": 85
+                "value": 209
               },
               {
                 "default": false,
@@ -3413,7 +3541,7 @@
                 "label": "Command \u0026 Control",
                 "properties": null,
                 "uuid": "3f7a39dd-2ef4-4d0f-9992-460c365fecb8",
-                "value": 86
+                "value": 210
               },
               {
                 "default": false,
@@ -3422,7 +3550,7 @@
                 "label": "Cryptocurrency Mining",
                 "properties": null,
                 "uuid": "c47e5376-5cc1-45a3-b923-a34097bda8da",
-                "value": 87
+                "value": 211
               },
               {
                 "default": false,
@@ -3431,7 +3559,7 @@
                 "label": "Denial of Service",
                 "properties": null,
                 "uuid": "aed59f7b-e809-49f9-9b0f-368ef2cb66f5",
-                "value": 88
+                "value": 212
               },
               {
                 "default": false,
@@ -3440,7 +3568,7 @@
                 "label": "Exfiltration",
                 "properties": null,
                 "uuid": "4a02aa6a-4a18-4c22-8dd0-d069f9a7db43",
-                "value": 89
+                "value": 213
               },
               {
                 "default": false,
@@ -3449,7 +3577,7 @@
                 "label": "Exploitation",
                 "properties": null,
                 "uuid": "f42771b3-44ad-4f9a-a6be-8627c8be2f83",
-                "value": 90
+                "value": 214
               },
               {
                 "default": false,
@@ -3458,7 +3586,7 @@
                 "label": "Hardening",
                 "properties": null,
                 "uuid": "b3e8df06-8815-409d-9d1f-07b8f3723f3e",
-                "value": 91
+                "value": 215
               },
               {
                 "default": false,
@@ -3467,7 +3595,7 @@
                 "label": "Lateral Movement",
                 "properties": null,
                 "uuid": "d1c0653c-6754-42f4-834c-68e73dee91b8",
-                "value": 92
+                "value": 216
               },
               {
                 "default": false,
@@ -3476,7 +3604,7 @@
                 "label": "Ransomware",
                 "properties": null,
                 "uuid": "e8841971-b978-4b59-b335-63b8a41a2996",
-                "value": 93
+                "value": 217
               },
               {
                 "default": false,
@@ -3485,7 +3613,7 @@
                 "label": "Reconnaissance",
                 "properties": null,
                 "uuid": "e2cc6a52-39b1-4dc1-8857-cfa7b799b0af",
-                "value": 94
+                "value": 218
               }
             ]
           },
@@ -3499,7 +3627,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_id",
             "hide_notification": false,
-            "id": 434,
+            "id": 581,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3514,7 +3642,7 @@
             "templates": [],
             "text": "Detection ID",
             "tooltip": "Optional: ExtraHop Detection ID.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "68dfde82-2777-44ff-9b1c-66206e6cf4fb",
             "values": []
           },
@@ -3528,7 +3656,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_resolution",
             "hide_notification": false,
-            "id": 435,
+            "id": 582,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -3543,7 +3671,7 @@
             "templates": [],
             "text": "Resolution",
             "tooltip": "Optional: Detection search filter resolution.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "bb9d2b1f-2c27-475c-953a-fa1f9371e93a",
             "values": [
               {
@@ -3553,7 +3681,7 @@
                 "label": "none",
                 "properties": null,
                 "uuid": "20ac23d8-4b4e-4fef-958e-76c4d2ded45d",
-                "value": 95
+                "value": 219
               },
               {
                 "default": false,
@@ -3562,7 +3690,7 @@
                 "label": "action_taken",
                 "properties": null,
                 "uuid": "203e0c04-e96c-4187-b961-63a88603445f",
-                "value": 96
+                "value": 220
               },
               {
                 "default": false,
@@ -3571,7 +3699,7 @@
                 "label": "no_action_taken",
                 "properties": null,
                 "uuid": "cb5160bc-cc56-48a0-9952-cae76ee2450e",
-                "value": 97
+                "value": 221
               }
             ]
           },
@@ -3585,7 +3713,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_risk_score_min",
             "hide_notification": false,
-            "id": 436,
+            "id": 583,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -3600,7 +3728,7 @@
             "templates": [],
             "text": "Risk Score minimum",
             "tooltip": "Optional: Detection search filter riskscore minimum.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "84d3179b-ee43-4c66-9d58-79108e064b28",
             "values": []
           },
@@ -3614,7 +3742,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_status",
             "hide_notification": false,
-            "id": 437,
+            "id": 584,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -3629,7 +3757,7 @@
             "templates": [],
             "text": "Status",
             "tooltip": "Optional: Detection search filter status.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "f81e0586-882a-4e18-aa41-b69584e14c2b",
             "values": [
               {
@@ -3639,7 +3767,7 @@
                 "label": "none",
                 "properties": null,
                 "uuid": "e8c7884c-b55a-4f95-99e2-3618d2894765",
-                "value": 98
+                "value": 222
               },
               {
                 "default": false,
@@ -3648,7 +3776,7 @@
                 "label": "new",
                 "properties": null,
                 "uuid": "ec0f558c-c539-4ff1-b651-147b4164e1fb",
-                "value": 99
+                "value": 223
               },
               {
                 "default": false,
@@ -3657,7 +3785,7 @@
                 "label": "in_progress",
                 "properties": null,
                 "uuid": "caab88a3-41e1-4f2b-b55b-3d8209aca8bc",
-                "value": 100
+                "value": 224
               },
               {
                 "default": false,
@@ -3666,7 +3794,7 @@
                 "label": "closed",
                 "properties": null,
                 "uuid": "b41b8f8a-e931-4525-b4fc-f18e00dadf79",
-                "value": 101
+                "value": 225
               },
               {
                 "default": false,
@@ -3675,7 +3803,7 @@
                 "label": "acknowledged",
                 "properties": null,
                 "uuid": "59fd2250-f29c-43d8-bae2-fbf6b8b63c5b",
-                "value": 102
+                "value": 226
               }
             ]
           },
@@ -3689,7 +3817,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_ticket_id",
             "hide_notification": false,
-            "id": 438,
+            "id": 585,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3704,7 +3832,7 @@
             "templates": [],
             "text": "Ticket ID",
             "tooltip": "Optional: Detection search filter SOAR case  ID.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "6df24fd5-fec6-4dd1-9ccf-1f8df2a5beeb",
             "values": []
           },
@@ -3718,7 +3846,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_detection_types",
             "hide_notification": false,
-            "id": 439,
+            "id": 586,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -3733,7 +3861,7 @@
             "templates": [],
             "text": "Types",
             "tooltip": "(Optional): Detection search filter types.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "5e1cefce-f12b-49cd-b12d-05ccc9f1e4f2",
             "values": [
               {
@@ -3743,7 +3871,7 @@
                 "label": "AAA Auth Errors",
                 "properties": null,
                 "uuid": "a6a49523-2b25-4dbb-94d6-6b5d7e1e0462",
-                "value": 103
+                "value": 227
               },
               {
                 "default": false,
@@ -3752,7 +3880,7 @@
                 "label": "Spike in AAA Failed Login Attempts",
                 "properties": null,
                 "uuid": "6c3f8e1f-47ed-4853-a7f4-1521146d8e2a",
-                "value": 104
+                "value": 228
               },
               {
                 "default": false,
@@ -3761,7 +3889,7 @@
                 "label": "Database Data Staging",
                 "properties": null,
                 "uuid": "8e39d687-3698-44ee-b68e-56b14331450e",
-                "value": 105
+                "value": 229
               },
               {
                 "default": false,
@@ -3770,7 +3898,7 @@
                 "label": "Data Exfiltration to S3 Bucket",
                 "properties": null,
                 "uuid": "500a42fe-54d8-4783-8eb7-05dbad4275b9",
-                "value": 106
+                "value": 230
               },
               {
                 "default": false,
@@ -3779,7 +3907,7 @@
                 "label": "Unusual User Creation",
                 "properties": null,
                 "uuid": "c82c6197-f7d8-49fb-8885-652a857435cc",
-                "value": 107
+                "value": 231
               },
               {
                 "default": false,
@@ -3788,7 +3916,7 @@
                 "label": "New Printer Driver Installation Request",
                 "properties": null,
                 "uuid": "c64d0353-caae-4652-8eab-45a7441ca8ba",
-                "value": 108
+                "value": 232
               },
               {
                 "default": false,
@@ -3797,7 +3925,7 @@
                 "label": "Anonymous FTP Auth Enabled",
                 "properties": null,
                 "uuid": "f36896d5-4c79-4f7e-9b32-e9a3fc72816b",
-                "value": 109
+                "value": 233
               },
               {
                 "default": false,
@@ -3806,7 +3934,7 @@
                 "label": "Apache HTTP Server Path Traversal Exploit",
                 "properties": null,
                 "uuid": "8622ef22-e026-4f98-9e1c-cc2ceeebaf92",
-                "value": 110
+                "value": 234
               },
               {
                 "default": false,
@@ -3815,7 +3943,7 @@
                 "label": "Apache Struts 2 Exploit Attempt",
                 "properties": null,
                 "uuid": "7ac5e492-1999-4b1a-874e-46880787e0d0",
-                "value": 111
+                "value": 235
               },
               {
                 "default": false,
@@ -3824,7 +3952,7 @@
                 "label": "Attempted Connections Dropped",
                 "properties": null,
                 "uuid": "53d3fc45-7ebe-4910-a62a-661fca6517ed",
-                "value": 112
+                "value": 236
               },
               {
                 "default": false,
@@ -3833,7 +3961,7 @@
                 "label": "AWS Instance Metadata Service (IMDS) Proxy",
                 "properties": null,
                 "uuid": "53a89397-b120-4bb4-8c82-d7d231505d22",
-                "value": 113
+                "value": 237
               },
               {
                 "default": false,
@@ -3842,7 +3970,7 @@
                 "label": "AWS Cloud Service Enumeration",
                 "properties": null,
                 "uuid": "b28e2006-1eeb-4ac1-a146-bc877d2efb56",
-                "value": 114
+                "value": 238
               },
               {
                 "default": false,
@@ -3851,7 +3979,7 @@
                 "label": "BitTorrent Activity",
                 "properties": null,
                 "uuid": "5ea41b5a-1952-42a7-95c7-14f55d2b2dfa",
-                "value": 115
+                "value": 239
               },
               {
                 "default": false,
@@ -3860,7 +3988,7 @@
                 "label": "Suspicious SSL/TLS Certificates",
                 "properties": null,
                 "uuid": "d0346eb1-c7db-47a6-ad4f-92a141c6b2c9",
-                "value": 116
+                "value": 240
               },
               {
                 "default": false,
@@ -3869,7 +3997,7 @@
                 "label": "BloodHound Enumeration Activity",
                 "properties": null,
                 "uuid": "ca0b0a8a-465e-49b8-92bd-30c9584d8db9",
-                "value": 117
+                "value": 241
               },
               {
                 "default": false,
@@ -3878,7 +4006,7 @@
                 "label": "Command-and-Control Beaconing",
                 "properties": null,
                 "uuid": "7a84da6e-8aae-4f5a-bd94-5279d4cb7ad0",
-                "value": 118
+                "value": 242
               },
               {
                 "default": false,
@@ -3887,7 +4015,7 @@
                 "label": "Call Does Not Exist Error",
                 "properties": null,
                 "uuid": "a00f79a0-812f-47a3-ba8a-68dcc977395c",
-                "value": 119
+                "value": 243
               },
               {
                 "default": false,
@@ -3896,7 +4024,7 @@
                 "label": "SMB/CIFS Transaction Delays",
                 "properties": null,
                 "uuid": "6bd33554-a99d-4f42-a8e4-ae01c3e03f44",
-                "value": 120
+                "value": 244
               },
               {
                 "default": false,
@@ -3905,7 +4033,7 @@
                 "label": "Cisco CDP Exploit Attempt",
                 "properties": null,
                 "uuid": "99da9b45-a945-4537-b87f-3630ad25e299",
-                "value": 121
+                "value": 245
               },
               {
                 "default": false,
@@ -3914,7 +4042,7 @@
                 "label": "Citrix Issues",
                 "properties": null,
                 "uuid": "50ee2919-f2ff-438d-97bb-3fcaa65109ae",
-                "value": 122
+                "value": 246
               },
               {
                 "default": false,
@@ -3923,7 +4051,7 @@
                 "label": "Cobalt Strike DNS Beaconing",
                 "properties": null,
                 "uuid": "930ddd48-5450-43f8-a3a0-505ed3f8a7d2",
-                "value": 123
+                "value": 247
               },
               {
                 "default": false,
@@ -3932,7 +4060,7 @@
                 "label": "Cobalt Strike C\u0026C HTTP Connection",
                 "properties": null,
                 "uuid": "641cf94a-0565-48db-a486-d2e01461394f",
-                "value": 124
+                "value": 248
               },
               {
                 "default": false,
@@ -3941,7 +4069,7 @@
                 "label": "Cobalt Strike C\u0026C SSL/TLS Connection",
                 "properties": null,
                 "uuid": "8698bbce-9710-4a36-9b17-82ceef43e5a0",
-                "value": 125
+                "value": 249
               },
               {
                 "default": false,
@@ -3950,7 +4078,7 @@
                 "label": "Suspicious File Download on Critical Server",
                 "properties": null,
                 "uuid": "674f2288-6668-4890-ae32-4f13ee076afc",
-                "value": 126
+                "value": 250
               },
               {
                 "default": false,
@@ -3959,7 +4087,7 @@
                 "label": "Cryptocurrency Mining",
                 "properties": null,
                 "uuid": "a6b59ae0-7fb7-42ae-a0ea-5b6ea38e29dd",
-                "value": 127
+                "value": 251
               },
               {
                 "default": false,
@@ -3968,7 +4096,7 @@
                 "label": "DNS Request for a Cryptocurrency Mining Pool",
                 "properties": null,
                 "uuid": "6f320c36-dc28-4f22-babe-b11823cd8f35",
-                "value": 128
+                "value": 252
               },
               {
                 "default": false,
@@ -3977,7 +4105,7 @@
                 "label": "SSL/TLS Connection to a Cryptocurrency Mining Pool",
                 "properties": null,
                 "uuid": "90163a86-3cf9-4e6e-bcc6-5900ed4a318b",
-                "value": 129
+                "value": 253
               },
               {
                 "default": false,
@@ -3986,7 +4114,7 @@
                 "label": "Custom",
                 "properties": null,
                 "uuid": "8d973549-e77a-46ce-b7ae-b7c557afe63c",
-                "value": 130
+                "value": 254
               },
               {
                 "default": false,
@@ -3995,7 +4123,7 @@
                 "label": "CVE-2017-12635 Apache CouchDB Exploit Attempt",
                 "properties": null,
                 "uuid": "e5b3b656-927d-4856-9f68-f4fd2557e8f9",
-                "value": 131
+                "value": 255
               },
               {
                 "default": false,
@@ -4004,7 +4132,7 @@
                 "label": "CVE-2018-1111 Red Hat DHCP Exploit Attempt",
                 "properties": null,
                 "uuid": "e3b4d113-810e-4708-987f-2f09a2302132",
-                "value": 132
+                "value": 256
               },
               {
                 "default": false,
@@ -4013,7 +4141,7 @@
                 "label": "CVE-2018-13379 Fortinet FortiOS Exploit",
                 "properties": null,
                 "uuid": "af0b6247-b974-41ad-b951-fb2203314234",
-                "value": 133
+                "value": 257
               },
               {
                 "default": false,
@@ -4022,7 +4150,7 @@
                 "label": "CVE-2018-15961 Adobe ColdFusion Exploit Attempt",
                 "properties": null,
                 "uuid": "7d66c2f9-b5e8-435c-8d9f-807986fe812d",
-                "value": 134
+                "value": 258
               },
               {
                 "default": false,
@@ -4031,7 +4159,7 @@
                 "label": "Drupal Exploit Attempt",
                 "properties": null,
                 "uuid": "f8146e96-ebc6-4aea-8820-dcc5c29b69f8",
-                "value": 135
+                "value": 259
               },
               {
                 "default": false,
@@ -4040,7 +4168,7 @@
                 "label": "CVE-2019-0193 Apache Solr Exploit Attempt",
                 "properties": null,
                 "uuid": "3503e31f-b7fb-4304-b76c-ac45680b618c",
-                "value": 136
+                "value": 260
               },
               {
                 "default": false,
@@ -4049,7 +4177,7 @@
                 "label": "CVE-2019-0604 Microsoft SharePoint Exploit Attempt",
                 "properties": null,
                 "uuid": "6d4ece82-93a9-4c64-8c65-cf943248f846",
-                "value": 137
+                "value": 261
               },
               {
                 "default": false,
@@ -4058,7 +4186,7 @@
                 "label": "CVE-2019-0708 RDP Exploit Attempt",
                 "properties": null,
                 "uuid": "a77487ce-143d-428f-9011-b2c96959eaf1",
-                "value": 138
+                "value": 262
               },
               {
                 "default": false,
@@ -4067,7 +4195,7 @@
                 "label": "CVE-2019-10149 Exim Exploit Attempt",
                 "properties": null,
                 "uuid": "e0db2ea0-60c4-40be-b0ed-8f28fcb93c6f",
-                "value": 139
+                "value": 263
               },
               {
                 "default": false,
@@ -4076,7 +4204,7 @@
                 "label": "CVE-2019-11510 Pulse Connect Secure Exploit Attempt",
                 "properties": null,
                 "uuid": "ba4292cd-327f-407f-a5b4-e57904c38f74",
-                "value": 140
+                "value": 264
               },
               {
                 "default": false,
@@ -4085,7 +4213,7 @@
                 "label": "CVE-2019-11580: Atlassian Crowd Vulnerability",
                 "properties": null,
                 "uuid": "ec0ebe53-25ca-4394-833a-88f46efc6302",
-                "value": 141
+                "value": 265
               },
               {
                 "default": false,
@@ -4094,7 +4222,7 @@
                 "label": "CVE-2019-15846 Exim Exploit Attempt",
                 "properties": null,
                 "uuid": "a3c78c58-d335-4435-b745-d6b685262392",
-                "value": 142
+                "value": 266
               },
               {
                 "default": false,
@@ -4103,7 +4231,7 @@
                 "label": "CVE-2019-17558 Apache Solr Exploit",
                 "properties": null,
                 "uuid": "73471f99-d26a-4b52-903e-1e5f5871e9ab",
-                "value": 143
+                "value": 267
               },
               {
                 "default": false,
@@ -4112,7 +4240,7 @@
                 "label": "CVE-2019-19781 Citrix ADC and Gateway Exploit",
                 "properties": null,
                 "uuid": "f15f3987-614a-46a2-9cd0-87de01c1a29e",
-                "value": 144
+                "value": 268
               },
               {
                 "default": false,
@@ -4121,7 +4249,7 @@
                 "label": "CVE-2019-19781 Citrix ADC and Gateway Scan",
                 "properties": null,
                 "uuid": "ec39831e-ff87-4579-8313-58e832312950",
-                "value": 145
+                "value": 269
               },
               {
                 "default": false,
@@ -4130,7 +4258,7 @@
                 "label": "Oracle WebLogic Exploit",
                 "properties": null,
                 "uuid": "79f36010-a9e5-4856-a22f-692b96685d4c",
-                "value": 146
+                "value": 270
               },
               {
                 "default": false,
@@ -4139,7 +4267,7 @@
                 "label": "CVE-2019-8394 Zoho ManageEngine Exploit Attempt",
                 "properties": null,
                 "uuid": "c97dbf3d-b079-4dd2-9bde-7a4f5da02f28",
-                "value": 147
+                "value": 271
               },
               {
                 "default": false,
@@ -4148,7 +4276,7 @@
                 "label": "CVE-2019-9670 Synacor Zimbra Collaboration Suite Exploit Attempt",
                 "properties": null,
                 "uuid": "d923b6d3-b50a-4b23-86a2-d47056cc108b",
-                "value": 148
+                "value": 272
               },
               {
                 "default": false,
@@ -4157,7 +4285,7 @@
                 "label": "CVE-2020-0601 Windows CryptoAPI ECC Validation Vulnerability",
                 "properties": null,
                 "uuid": "602152d1-4084-4c2e-b78b-d4ad40b52443",
-                "value": 149
+                "value": 273
               },
               {
                 "default": false,
@@ -4166,7 +4294,7 @@
                 "label": "CVE-2020-0796 Windows 10 SMBv3 Exploit Attempt",
                 "properties": null,
                 "uuid": "dfd14a8c-2a48-4bf2-8743-00a6ef2ea944",
-                "value": 150
+                "value": 274
               },
               {
                 "default": false,
@@ -4175,7 +4303,7 @@
                 "label": "CVE-2020-10189 Zoho ManageEngine Exploit",
                 "properties": null,
                 "uuid": "841687ae-61f7-4525-b6c9-81427cba194f",
-                "value": 151
+                "value": 275
               },
               {
                 "default": false,
@@ -4184,7 +4312,7 @@
                 "label": "CVE-2020-11651 Salt Exploit Attempt",
                 "properties": null,
                 "uuid": "31f0fc98-a83c-47c4-b71d-9f32f93ae05a",
-                "value": 152
+                "value": 276
               },
               {
                 "default": false,
@@ -4193,7 +4321,7 @@
                 "label": "CVE-2020-12695 UPnP Exploit Attempt",
                 "properties": null,
                 "uuid": "d1c3665d-b6e0-4eb5-8aa3-0c71bab9dc20",
-                "value": 153
+                "value": 277
               },
               {
                 "default": false,
@@ -4202,7 +4330,7 @@
                 "label": "CVE-2020-1301 SMBv1 Exploit",
                 "properties": null,
                 "uuid": "d701a032-342e-4354-ba99-9513eb53d946",
-                "value": 154
+                "value": 278
               },
               {
                 "default": false,
@@ -4211,7 +4339,7 @@
                 "label": "CVE-2020-1350 SIGRed Exploit Attempt",
                 "properties": null,
                 "uuid": "12530ec7-793a-47f5-bd96-6a044db847b2",
-                "value": 155
+                "value": 279
               },
               {
                 "default": false,
@@ -4220,7 +4348,7 @@
                 "label": "CVE-2020-1472 Zerologon Scan",
                 "properties": null,
                 "uuid": "9c012439-a732-408c-93e7-76025a17873b",
-                "value": 156
+                "value": 280
               },
               {
                 "default": false,
@@ -4229,7 +4357,7 @@
                 "label": "CVE-2020-1472 Zerologon Exploit Attempt",
                 "properties": null,
                 "uuid": "628d03e8-1a92-4d6a-942f-e95f6ff4b21c",
-                "value": 157
+                "value": 281
               },
               {
                 "default": false,
@@ -4238,7 +4366,7 @@
                 "label": "CVE-2020-15505 MobileIron Core and Connector Exploit Attempt",
                 "properties": null,
                 "uuid": "dc8c0c2e-acd0-46c5-a099-260f02f50f6f",
-                "value": 158
+                "value": 282
               },
               {
                 "default": false,
@@ -4247,7 +4375,7 @@
                 "label": "CVE-2020-16898 Windows TCP/IP Stack Exploit Attempt",
                 "properties": null,
                 "uuid": "3f6291e7-4a77-44ea-a80b-4ae312f05baf",
-                "value": 159
+                "value": 283
               },
               {
                 "default": false,
@@ -4256,7 +4384,7 @@
                 "label": "CVE-2020-16899 Windows TCP/IP Stack Exploit Attempt",
                 "properties": null,
                 "uuid": "8ba6b1a6-9c9c-4f57-90bd-8fe76a9f513c",
-                "value": 160
+                "value": 284
               },
               {
                 "default": false,
@@ -4265,7 +4393,7 @@
                 "label": "CVE-2020-17051 Windows NFS Exploit Attempt",
                 "properties": null,
                 "uuid": "031eba56-b8eb-4412-b462-19f523c25827",
-                "value": 161
+                "value": 285
               },
               {
                 "default": false,
@@ -4274,7 +4402,7 @@
                 "label": "CVE-2020-1938 Ghostcat Exploit",
                 "properties": null,
                 "uuid": "1d9fad66-a5e1-4eca-b3c7-e94dbc43025d",
-                "value": 162
+                "value": 286
               },
               {
                 "default": false,
@@ -4283,7 +4411,7 @@
                 "label": "CVE-2020-25577 FreeBSD Exploit Attempt",
                 "properties": null,
                 "uuid": "13a46277-ad0c-481d-b7bf-8dfaeaa8ae02",
-                "value": 163
+                "value": 287
               },
               {
                 "default": false,
@@ -4292,7 +4420,7 @@
                 "label": "CVE-2020-25583 FreeBSD Exploit Attempt",
                 "properties": null,
                 "uuid": "44d2e4e3-cb46-44ec-aaf2-c98dfd2b6b7e",
-                "value": 164
+                "value": 288
               },
               {
                 "default": false,
@@ -4301,7 +4429,7 @@
                 "label": "CVE-2020-3952 VMware vCenter Exploit",
                 "properties": null,
                 "uuid": "459996df-b2f4-4dcc-95d1-1213a2f9c5d5",
-                "value": 165
+                "value": 289
               },
               {
                 "default": false,
@@ -4310,7 +4438,7 @@
                 "label": "CVE-2020-5902 F5 BIG-IP Exploit",
                 "properties": null,
                 "uuid": "e264f94e-eb34-40b6-84de-b378cc1baeaf",
-                "value": 166
+                "value": 290
               },
               {
                 "default": false,
@@ -4319,7 +4447,7 @@
                 "label": "CVE-2020-6207 SAP Solution Manager Exploit Attempt",
                 "properties": null,
                 "uuid": "374c949b-f803-4748-b1de-42edd43cf39d",
-                "value": 167
+                "value": 291
               },
               {
                 "default": false,
@@ -4328,7 +4456,7 @@
                 "label": "CVE-2020-6287 SAP RECON Vulnerability",
                 "properties": null,
                 "uuid": "02a81c73-b6d4-46af-a226-1cc7a6f762fd",
-                "value": 168
+                "value": 292
               },
               {
                 "default": false,
@@ -4337,7 +4465,7 @@
                 "label": "CVE-2020-7247 OpenSMTPD Exploit Attempt",
                 "properties": null,
                 "uuid": "38a48308-62b0-4ccd-9cce-a3f0eabfcf26",
-                "value": 169
+                "value": 293
               },
               {
                 "default": false,
@@ -4346,7 +4474,7 @@
                 "label": "CVE-2021-1497 Cisco HyperFlex HX Exploit Attempt",
                 "properties": null,
                 "uuid": "d438978d-a1e1-4237-a652-553a390c50b3",
-                "value": 170
+                "value": 294
               },
               {
                 "default": false,
@@ -4355,7 +4483,7 @@
                 "label": "CVE-2021-1498 Cisco HyperFlex HX Exploit Attempt",
                 "properties": null,
                 "uuid": "0a111356-ce9d-47a6-8fc5-e957765f5fce",
-                "value": 171
+                "value": 295
               },
               {
                 "default": false,
@@ -4364,7 +4492,7 @@
                 "label": "CVE-2021-21972 VMware vCenter Exploit",
                 "properties": null,
                 "uuid": "814ad424-625c-4aa5-b0f5-56134d31bedf",
-                "value": 172
+                "value": 296
               },
               {
                 "default": false,
@@ -4373,7 +4501,7 @@
                 "label": "CVE-2021-21972 VMware vCenter Scan",
                 "properties": null,
                 "uuid": "33dbe6bc-9c2e-4c0b-a345-96fb1f2b8a22",
-                "value": 173
+                "value": 297
               },
               {
                 "default": false,
@@ -4382,7 +4510,7 @@
                 "label": "CVE-2021-21974 VMware ESXi OpenSLP Exploit Attempt",
                 "properties": null,
                 "uuid": "e692998d-5983-4d7c-b424-1a84b2bc720a",
-                "value": 174
+                "value": 298
               },
               {
                 "default": false,
@@ -4391,7 +4519,7 @@
                 "label": "CVE-2021-21985 VMware vCenter Exploit",
                 "properties": null,
                 "uuid": "f8eacea8-0e79-4649-8032-1502576c5f6f",
-                "value": 175
+                "value": 299
               },
               {
                 "default": false,
@@ -4400,7 +4528,7 @@
                 "label": "CVE-2021-22005 VMware vCenter Exploit",
                 "properties": null,
                 "uuid": "b5f15d8d-7d38-4f7b-a765-3c7b25b3cada",
-                "value": 176
+                "value": 300
               },
               {
                 "default": false,
@@ -4409,7 +4537,7 @@
                 "label": "CVE-2021-22006 VMware vCenter Exploit",
                 "properties": null,
                 "uuid": "14625dde-256c-4615-addf-b92f738ec1d6",
-                "value": 177
+                "value": 301
               },
               {
                 "default": false,
@@ -4418,7 +4546,7 @@
                 "label": "CVE-2021-22205 GitLab CE and EE Exploit Attempt",
                 "properties": null,
                 "uuid": "184e3367-e654-491e-b451-dd2db675f9f0",
-                "value": 178
+                "value": 302
               },
               {
                 "default": false,
@@ -4427,7 +4555,7 @@
                 "label": "CVE-2021-22893 Pulse Connect Secure Exploit Attempt",
                 "properties": null,
                 "uuid": "013eb174-c8dd-4f2d-b043-40722143e791",
-                "value": 179
+                "value": 303
               },
               {
                 "default": false,
@@ -4436,7 +4564,7 @@
                 "label": "CVE-2021-22986 F5 BIG-IP and BIG-IQ Exploit",
                 "properties": null,
                 "uuid": "976280c3-4a62-407e-a01e-4bfc2eccb5eb",
-                "value": 180
+                "value": 304
               },
               {
                 "default": false,
@@ -4445,7 +4573,7 @@
                 "label": "CVE-2021-22991 F5 BIG-IP Exploit",
                 "properties": null,
                 "uuid": "4e1840ea-4d40-4fe6-8c1c-b7783658a194",
-                "value": 181
+                "value": 305
               },
               {
                 "default": false,
@@ -4454,7 +4582,7 @@
                 "label": "CVE-2021-26084 Atlassian Confluence Exploit Attempt",
                 "properties": null,
                 "uuid": "f05f5874-ee6e-49ab-86c5-942bcff2d203",
-                "value": 182
+                "value": 306
               },
               {
                 "default": false,
@@ -4463,7 +4591,7 @@
                 "label": "CVE-2021-26432 Windows NFS ONCRPC Exploit Attempt",
                 "properties": null,
                 "uuid": "0a9878f6-5850-4161-b264-e01809e23eac",
-                "value": 183
+                "value": 307
               },
               {
                 "default": false,
@@ -4472,7 +4600,7 @@
                 "label": "CVE-2021-26877 Windows DNS Server Exploit Attempt",
                 "properties": null,
                 "uuid": "649b91f7-4fc7-48a5-85ad-c5df27deca4a",
-                "value": 184
+                "value": 308
               },
               {
                 "default": false,
@@ -4481,7 +4609,7 @@
                 "label": "CVE-2021-26897 Windows DNS Server Exploit Attempt",
                 "properties": null,
                 "uuid": "b872f7e2-bbce-4026-8ff2-03b9c744f0fc",
-                "value": 185
+                "value": 309
               },
               {
                 "default": false,
@@ -4490,7 +4618,7 @@
                 "label": "CVE-2021-28324 Windows 10 SMBv3 Exploit Attempt",
                 "properties": null,
                 "uuid": "8d7a1f90-c687-41e9-91a8-f1b79eb50602",
-                "value": 186
+                "value": 310
               },
               {
                 "default": false,
@@ -4499,7 +4627,7 @@
                 "label": "CVE-2021-31166 Windows HTTP Stack Exploit Attempt",
                 "properties": null,
                 "uuid": "9a596501-ddb3-4bdd-8e8e-3309f1bd7175",
-                "value": 187
+                "value": 311
               },
               {
                 "default": false,
@@ -4508,7 +4636,7 @@
                 "label": "CVE-2021-31181 Microsoft SharePoint Exploit Attempt",
                 "properties": null,
                 "uuid": "d583b30a-ae36-4251-9c98-5be1c156af8d",
-                "value": 188
+                "value": 312
               },
               {
                 "default": false,
@@ -4517,7 +4645,7 @@
                 "label": "CVE-2021-34467 Microsoft SharePoint Exploit Attempt",
                 "properties": null,
                 "uuid": "6517e2d4-d5ae-4752-9ad6-85d0b0cd9e9b",
-                "value": 189
+                "value": 313
               },
               {
                 "default": false,
@@ -4526,7 +4654,7 @@
                 "label": "CVE-2021-34473 Microsoft Exchange Server Exploit",
                 "properties": null,
                 "uuid": "4f380924-ad3e-41e5-9902-8111749b8e0b",
-                "value": 190
+                "value": 314
               },
               {
                 "default": false,
@@ -4535,7 +4663,7 @@
                 "label": "CVE-2021-34527 Windows Print Spooler Exploit Attempt",
                 "properties": null,
                 "uuid": "4a66b6f6-f15f-4220-afde-5176218f0e4e",
-                "value": 191
+                "value": 315
               },
               {
                 "default": false,
@@ -4544,7 +4672,7 @@
                 "label": "CVE-2021-35394 Realtek SDK Exploit Attempt",
                 "properties": null,
                 "uuid": "c213e754-378d-41a6-9754-bc5f90c40a04",
-                "value": 192
+                "value": 316
               },
               {
                 "default": false,
@@ -4553,7 +4681,7 @@
                 "label": "CVE-2021-35395 Realtek SDK Exploit Attempt",
                 "properties": null,
                 "uuid": "a2dcfaf7-7e87-4044-9d95-f3aafa8b03f1",
-                "value": 193
+                "value": 317
               },
               {
                 "default": false,
@@ -4562,7 +4690,7 @@
                 "label": "CVE-2021-38647 OMIGOD Exploit",
                 "properties": null,
                 "uuid": "58962b75-d247-4e0a-aa83-726d5208835a",
-                "value": 194
+                "value": 318
               },
               {
                 "default": false,
@@ -4571,7 +4699,7 @@
                 "label": "CVE-2021-42321 Microsoft Exchange Exploit Attempt",
                 "properties": null,
                 "uuid": "7695c6ba-744c-44fc-ac2a-677771971bb3",
-                "value": 195
+                "value": 319
               },
               {
                 "default": false,
@@ -4580,7 +4708,7 @@
                 "label": "CVE-2021-43798 Grafana Exploit Attempt",
                 "properties": null,
                 "uuid": "f27e5dee-fb56-4c76-ab85-1a5747cf9ad9",
-                "value": 196
+                "value": 320
               },
               {
                 "default": false,
@@ -4589,7 +4717,7 @@
                 "label": "Log4Shell JNDI Injection Attempt",
                 "properties": null,
                 "uuid": "798b7aeb-d5e8-4159-864c-5aa9f64ab015",
-                "value": 197
+                "value": 321
               },
               {
                 "default": false,
@@ -4598,7 +4726,7 @@
                 "label": "Outbound Log4Shell Activity",
                 "properties": null,
                 "uuid": "1f90b019-ef6b-41c4-84a1-0d296f0745e3",
-                "value": 198
+                "value": 322
               },
               {
                 "default": false,
@@ -4607,7 +4735,7 @@
                 "label": "CVE-2022-0543 Redis Exploit",
                 "properties": null,
                 "uuid": "44718321-cb3f-4f65-977a-506ae6367c1e",
-                "value": 199
+                "value": 323
               },
               {
                 "default": false,
@@ -4616,7 +4744,7 @@
                 "label": "CVE-2022-1388 F5 BIG-IP Exploit",
                 "properties": null,
                 "uuid": "1b5cf75f-e7b3-400d-af45-7b68f118ebd9",
-                "value": 200
+                "value": 324
               },
               {
                 "default": false,
@@ -4625,7 +4753,7 @@
                 "label": "CVE-2022-21907 Windows HTTP Stack Exploit Attempt",
                 "properties": null,
                 "uuid": "dc245e40-c1ed-488f-a2f2-840bb66cfb3b",
-                "value": 201
+                "value": 325
               },
               {
                 "default": false,
@@ -4634,7 +4762,7 @@
                 "label": "CVE-2022-22947 Spring Cloud Gateway Exploit Attempt",
                 "properties": null,
                 "uuid": "32cdcb93-33e0-4a43-a0a0-5766265e4a68",
-                "value": 202
+                "value": 326
               },
               {
                 "default": false,
@@ -4643,7 +4771,7 @@
                 "label": "CVE-2022-22963 Spring Cloud Function Exploit Attempt",
                 "properties": null,
                 "uuid": "7fb65425-6427-4963-bbf4-b691e75de4f2",
-                "value": 203
+                "value": 327
               },
               {
                 "default": false,
@@ -4652,7 +4780,7 @@
                 "label": "Database Brute Force",
                 "properties": null,
                 "uuid": "b710c7b1-c1e5-45e3-b3ee-b0731560743e",
-                "value": 204
+                "value": 328
               },
               {
                 "default": false,
@@ -4661,7 +4789,7 @@
                 "label": "Database Enumeration",
                 "properties": null,
                 "uuid": "2589b4ab-e065-481b-a342-cd7a19220161",
-                "value": 205
+                "value": 329
               },
               {
                 "default": false,
@@ -4670,7 +4798,7 @@
                 "label": "Database Issues",
                 "properties": null,
                 "uuid": "cf09a70e-998a-40e7-a2af-8088c16509bb",
-                "value": 206
+                "value": 330
               },
               {
                 "default": false,
@@ -4679,7 +4807,7 @@
                 "label": "Database Takeover Attack",
                 "properties": null,
                 "uuid": "f57e39e4-0064-481d-9533-2f10d3d983f8",
-                "value": 207
+                "value": 331
               },
               {
                 "default": false,
@@ -4688,7 +4816,7 @@
                 "label": "Database Transaction Failures",
                 "properties": null,
                 "uuid": "0d28c26a-d800-43de-94ee-e7fe91e73e79",
-                "value": 208
+                "value": 332
               },
               {
                 "default": false,
@@ -4697,7 +4825,7 @@
                 "label": "VPN Client Data Exfiltration",
                 "properties": null,
                 "uuid": "187ad120-54bb-4fb7-8015-e12bffb29f05",
-                "value": 209
+                "value": 333
               },
               {
                 "default": false,
@@ -4706,7 +4834,7 @@
                 "label": "Data Exfiltration",
                 "properties": null,
                 "uuid": "67fda260-8d3d-4263-86c7-ed5fb2a78b62",
-                "value": 210
+                "value": 334
               },
               {
                 "default": false,
@@ -4715,7 +4843,7 @@
                 "label": "Data Transfer Issues",
                 "properties": null,
                 "uuid": "57f5d661-7423-47c3-ac21-6b7cf07f3145",
-                "value": 211
+                "value": 335
               },
               {
                 "default": false,
@@ -4724,7 +4852,7 @@
                 "label": "Poor Database Performance",
                 "properties": null,
                 "uuid": "23e35f6a-68cd-4f3e-a2fe-9362d7959a3b",
-                "value": 212
+                "value": 336
               },
               {
                 "default": false,
@@ -4733,7 +4861,7 @@
                 "label": "DCOM Remote Command Launch",
                 "properties": null,
                 "uuid": "46b93ae3-3fea-4b5f-8f6f-78e8f201626d",
-                "value": 213
+                "value": 337
               },
               {
                 "default": false,
@@ -4742,7 +4870,7 @@
                 "label": "DCShadow Attack",
                 "properties": null,
                 "uuid": "0c2c58c7-6c0c-45fb-8df6-0742528fee44",
-                "value": 214
+                "value": 338
               },
               {
                 "default": false,
@@ -4751,7 +4879,7 @@
                 "label": "DCSync Attack",
                 "properties": null,
                 "uuid": "c57f05b9-1208-4c0a-838c-076f8bfb57ec",
-                "value": 215
+                "value": 339
               },
               {
                 "default": false,
@@ -4760,7 +4888,7 @@
                 "label": "Delayed Citrix Data Transfer",
                 "properties": null,
                 "uuid": "f31b21e8-2cfe-43db-bfcf-64789fdc1bd4",
-                "value": 216
+                "value": 340
               },
               {
                 "default": false,
@@ -4769,7 +4897,7 @@
                 "label": "Delayed Database Data Transfer",
                 "properties": null,
                 "uuid": "c24d9b35-8b45-4dba-8996-96e7fc1e4a01",
-                "value": 217
+                "value": 341
               },
               {
                 "default": false,
@@ -4778,7 +4906,7 @@
                 "label": "Delayed Data Transfer",
                 "properties": null,
                 "uuid": "7abedb53-082c-4207-98b4-bf211c3d2a4c",
-                "value": 218
+                "value": 342
               },
               {
                 "default": false,
@@ -4787,7 +4915,7 @@
                 "label": "Delayed Email Data Transfer",
                 "properties": null,
                 "uuid": "e4faecf8-da3d-4772-a596-158c815302f0",
-                "value": 219
+                "value": 343
               },
               {
                 "default": false,
@@ -4796,7 +4924,7 @@
                 "label": "Delayed FTP Data Transfer",
                 "properties": null,
                 "uuid": "7b8a78d4-d6f9-470a-83ac-9ddba63fbf94",
-                "value": 220
+                "value": 344
               },
               {
                 "default": false,
@@ -4805,7 +4933,7 @@
                 "label": "Delayed HTTP Data Transfer",
                 "properties": null,
                 "uuid": "a30463f8-3adb-4902-8914-eee0b7a25edf",
-                "value": 221
+                "value": 345
               },
               {
                 "default": false,
@@ -4814,7 +4942,7 @@
                 "label": "Delayed IP Address Configuration",
                 "properties": null,
                 "uuid": "c6f94f11-8803-4365-8ce2-6fc269080a0d",
-                "value": 222
+                "value": 346
               },
               {
                 "default": false,
@@ -4823,7 +4951,7 @@
                 "label": "Delayed Kerberos Auth",
                 "properties": null,
                 "uuid": "b3a89dbf-4fb2-4a21-bae6-b1d055e8a5f9",
-                "value": 223
+                "value": 347
               },
               {
                 "default": false,
@@ -4832,7 +4960,7 @@
                 "label": "Delayed Kerberos Data Transfer",
                 "properties": null,
                 "uuid": "758235f0-fd12-4874-baa8-98fa85b4f699",
-                "value": 224
+                "value": 348
               },
               {
                 "default": false,
@@ -4841,7 +4969,7 @@
                 "label": "Delayed LDAP Auth",
                 "properties": null,
                 "uuid": "c6be6ddb-08be-47c3-b102-92110e12c5ce",
-                "value": 225
+                "value": 349
               },
               {
                 "default": false,
@@ -4850,7 +4978,7 @@
                 "label": "Delayed LDAP Data Transfer",
                 "properties": null,
                 "uuid": "96e09d84-d403-402f-973c-8ea51f05acdc",
-                "value": 226
+                "value": 350
               },
               {
                 "default": false,
@@ -4859,7 +4987,7 @@
                 "label": "Delayed Memcache Data Transfer",
                 "properties": null,
                 "uuid": "d5fa3f11-f624-4cfd-9697-5432bbbb5471",
-                "value": 227
+                "value": 351
               },
               {
                 "default": false,
@@ -4868,7 +4996,7 @@
                 "label": "Delayed Redis Data Transfer",
                 "properties": null,
                 "uuid": "0bc347a4-c2bf-4a7b-9d6e-00c9f6e7203a",
-                "value": 228
+                "value": 352
               },
               {
                 "default": false,
@@ -4877,7 +5005,7 @@
                 "label": "Delayed Web Services",
                 "properties": null,
                 "uuid": "60c1b742-d9db-4f39-8c7e-2e8e44b56a54",
-                "value": 229
+                "value": 353
               },
               {
                 "default": false,
@@ -4886,7 +5014,7 @@
                 "label": "Delayed WiFi Auth",
                 "properties": null,
                 "uuid": "5de8ddfe-8327-4ec2-a256-7c8c410945b8",
-                "value": 230
+                "value": 354
               },
               {
                 "default": false,
@@ -4895,7 +5023,7 @@
                 "label": "DHCP Decline Error",
                 "properties": null,
                 "uuid": "dad202a8-7f85-4898-ac7a-63ab1510c332",
-                "value": 231
+                "value": 355
               },
               {
                 "default": false,
@@ -4904,7 +5032,7 @@
                 "label": "DHCP Errors",
                 "properties": null,
                 "uuid": "b5d62c8c-3726-41ca-8caa-35408feb2673",
-                "value": 232
+                "value": 356
               },
               {
                 "default": false,
@@ -4913,7 +5041,7 @@
                 "label": "DHCP Issues",
                 "properties": null,
                 "uuid": "e71a6773-e431-4568-8234-080469d39489",
-                "value": 233
+                "value": 357
               },
               {
                 "default": false,
@@ -4922,7 +5050,7 @@
                 "label": "DHCP Restart Error",
                 "properties": null,
                 "uuid": "682ce915-bc8d-41fa-bd13-3e46adde119f",
-                "value": 234
+                "value": 358
               },
               {
                 "default": false,
@@ -4931,7 +5059,7 @@
                 "label": "DNS Brute Force",
                 "properties": null,
                 "uuid": "b97cd0d7-b5e5-445e-8f56-bbfdbdddd77c",
-                "value": 235
+                "value": 359
               },
               {
                 "default": false,
@@ -4940,7 +5068,7 @@
                 "label": "DNS Errors",
                 "properties": null,
                 "uuid": "18eb44b1-2e59-4ecf-9c26-777ffe4a18cc",
-                "value": 236
+                "value": 360
               },
               {
                 "default": false,
@@ -4949,7 +5077,7 @@
                 "label": "DNS Internal Reverse Lookup Scan",
                 "properties": null,
                 "uuid": "abaf2915-07e7-44f3-8fef-7a6c8cb1ced1",
-                "value": 237
+                "value": 361
               },
               {
                 "default": false,
@@ -4958,7 +5086,7 @@
                 "label": "DNS Issues",
                 "properties": null,
                 "uuid": "35338884-f82c-437e-bc3d-9a035136e19d",
-                "value": 238
+                "value": 362
               },
               {
                 "default": false,
@@ -4967,7 +5095,7 @@
                 "label": "DNS Lookup Failures",
                 "properties": null,
                 "uuid": "3131e535-6516-41d8-90ea-6a08e619932a",
-                "value": 239
+                "value": 363
               },
               {
                 "default": false,
@@ -4976,7 +5104,7 @@
                 "label": "DNS Rebinding",
                 "properties": null,
                 "uuid": "19373b33-58d4-40c8-8aab-9c4cb092e7a7",
-                "value": 240
+                "value": 364
               },
               {
                 "default": false,
@@ -4985,7 +5113,7 @@
                 "label": "DNS Request Timeouts",
                 "properties": null,
                 "uuid": "e23863ec-9383-4526-afb2-f26d4eeb1af1",
-                "value": 241
+                "value": 365
               },
               {
                 "default": false,
@@ -4994,7 +5122,7 @@
                 "label": "DNS Timeouts",
                 "properties": null,
                 "uuid": "d0e8fe03-572b-4759-8176-0403e9a2685d",
-                "value": 242
+                "value": 366
               },
               {
                 "default": false,
@@ -5003,7 +5131,7 @@
                 "label": "DNS Tunnel",
                 "properties": null,
                 "uuid": "3535b4b7-9749-4fe6-88eb-8e4b433b38f5",
-                "value": 243
+                "value": 367
               },
               {
                 "default": false,
@@ -5012,7 +5140,7 @@
                 "label": "DNS Zone Transfer",
                 "properties": null,
                 "uuid": "e45288be-20e6-4ddb-8129-6c3d893bc5d8",
-                "value": 244
+                "value": 368
               },
               {
                 "default": false,
@@ -5021,7 +5149,7 @@
                 "label": "Domain Fronting",
                 "properties": null,
                 "uuid": "55ed0390-4bf0-4fd5-bd2b-d622519b4b93",
-                "value": 245
+                "value": 369
               },
               {
                 "default": false,
@@ -5030,7 +5158,7 @@
                 "label": "Domain Generation Algorithm",
                 "properties": null,
                 "uuid": "6a839bb6-ae76-4df1-a1e0-cbeef69496bb",
-                "value": 246
+                "value": 370
               },
               {
                 "default": false,
@@ -5039,7 +5167,7 @@
                 "label": "DGA Domain Resolution",
                 "properties": null,
                 "uuid": "834090a4-216e-4e1b-a1ef-7a3fdfea2f08",
-                "value": 247
+                "value": 371
               },
               {
                 "default": false,
@@ -5048,7 +5176,7 @@
                 "label": "DGA Domain Queries",
                 "properties": null,
                 "uuid": "7e0d4374-716a-4422-a0ed-ffe1b9ef376c",
-                "value": 248
+                "value": 372
               },
               {
                 "default": false,
@@ -5057,7 +5185,7 @@
                 "label": "Domain Trust Enumeration",
                 "properties": null,
                 "uuid": "855477df-71ec-47e7-a15e-7656af102643",
-                "value": 249
+                "value": 373
               },
               {
                 "default": false,
@@ -5066,7 +5194,7 @@
                 "label": "Domain Trusts Enumeration",
                 "properties": null,
                 "uuid": "e59334ce-98c7-46ae-8912-54cb2455cf07",
-                "value": 250
+                "value": 374
               },
               {
                 "default": false,
@@ -5075,7 +5203,7 @@
                 "label": "DoublePulsar RDP Implant",
                 "properties": null,
                 "uuid": "f8efac7f-34a4-4113-98c5-b6a68dbc24c6",
-                "value": 251
+                "value": 375
               },
               {
                 "default": false,
@@ -5084,7 +5212,7 @@
                 "label": "DoublePulsar RDP Scan",
                 "properties": null,
                 "uuid": "52efd96d-78b1-4c40-8bb0-2869245c32e5",
-                "value": 252
+                "value": 376
               },
               {
                 "default": false,
@@ -5093,7 +5221,7 @@
                 "label": "DoublePulsar SMB/CIFS Implant Activity",
                 "properties": null,
                 "uuid": "bab0c7a6-d912-4854-8588-d676235f5de7",
-                "value": 253
+                "value": 377
               },
               {
                 "default": false,
@@ -5102,7 +5230,7 @@
                 "label": "DoublePulsar SMB/CIFS Scan",
                 "properties": null,
                 "uuid": "d8a1233c-d747-42af-aec4-a7dc8ec8219a",
-                "value": 254
+                "value": 378
               },
               {
                 "default": false,
@@ -5111,7 +5239,7 @@
                 "label": "Email Errors",
                 "properties": null,
                 "uuid": "d13635d3-78e0-4a06-875b-303bd3e7ef75",
-                "value": 255
+                "value": 379
               },
               {
                 "default": false,
@@ -5120,7 +5248,7 @@
                 "label": "Email Issues",
                 "properties": null,
                 "uuid": "9be1c84f-453a-425e-8430-9e0567171bf6",
-                "value": 256
+                "value": 380
               },
               {
                 "default": false,
@@ -5129,7 +5257,7 @@
                 "label": "Email Mailbox Unavailable Error",
                 "properties": null,
                 "uuid": "3bca3636-0847-47d4-9c95-7a46b41eedfb",
-                "value": 257
+                "value": 381
               },
               {
                 "default": false,
@@ -5138,7 +5266,7 @@
                 "label": "Email Service Unavailable Error",
                 "properties": null,
                 "uuid": "d463da50-a198-4e5a-bf82-f0bcb5465197",
-                "value": 258
+                "value": 382
               },
               {
                 "default": false,
@@ -5147,7 +5275,7 @@
                 "label": "Empire C\u0026C HTTP Connection",
                 "properties": null,
                 "uuid": "bad55f2a-e557-4a5d-89b2-31cf4d197756",
-                "value": 259
+                "value": 383
               },
               {
                 "default": false,
@@ -5156,7 +5284,7 @@
                 "label": "Empire C\u0026C SSL/TLS Connection",
                 "properties": null,
                 "uuid": "a5f7daa0-392d-4f0f-931a-9b5b93de9955",
-                "value": 260
+                "value": 384
               },
               {
                 "default": false,
@@ -5165,7 +5293,7 @@
                 "label": "EternalBlue Exploit",
                 "properties": null,
                 "uuid": "d7faf8e8-73fa-4d2c-9d09-cc6ece500017",
-                "value": 261
+                "value": 385
               },
               {
                 "default": false,
@@ -5174,7 +5302,7 @@
                 "label": "Overlapping IP Fragmentation",
                 "properties": null,
                 "uuid": "46c7bd98-db92-4833-8318-1cad939ebc01",
-                "value": 262
+                "value": 386
               },
               {
                 "default": false,
@@ -5183,7 +5311,7 @@
                 "label": "Experimental Detection",
                 "properties": null,
                 "uuid": "41f905be-ff14-4647-b29c-e9913aadd2e0",
-                "value": 263
+                "value": 387
               },
               {
                 "default": false,
@@ -5192,7 +5320,7 @@
                 "label": "Experimental Detection for Protocol Activity",
                 "properties": null,
                 "uuid": "bd37f1d6-048e-4b7a-853b-33080518a3f0",
-                "value": 264
+                "value": 388
               },
               {
                 "default": false,
@@ -5201,7 +5329,7 @@
                 "label": "Experimental Detection for a Single Metric",
                 "properties": null,
                 "uuid": "9832fec5-8d3d-4f53-872d-0dd905238251",
-                "value": 265
+                "value": 389
               },
               {
                 "default": false,
@@ -5210,7 +5338,7 @@
                 "label": "Experimental Detection for a Single Source",
                 "properties": null,
                 "uuid": "d3d4ccb9-f37f-4e18-a698-61f16b6b5376",
-                "value": 266
+                "value": 390
               },
               {
                 "default": false,
@@ -5219,7 +5347,7 @@
                 "label": "Expired SSL Server Certificates",
                 "properties": null,
                 "uuid": "b16046ec-cca5-4fad-bfc8-9863ad1ec51f",
-                "value": 267
+                "value": 391
               },
               {
                 "default": false,
@@ -5228,7 +5356,7 @@
                 "label": "Request to External Database Server",
                 "properties": null,
                 "uuid": "47976eac-996a-44a5-8ab3-9e4a99ffcb41",
-                "value": 268
+                "value": 392
               },
               {
                 "default": false,
@@ -5237,7 +5365,7 @@
                 "label": "Unusual Executable File Download",
                 "properties": null,
                 "uuid": "5875f8ab-920d-419d-8373-31d297ead75f",
-                "value": 269
+                "value": 393
               },
               {
                 "default": false,
@@ -5246,7 +5374,7 @@
                 "label": "Request to External LDAP Server",
                 "properties": null,
                 "uuid": "c9490661-42a6-47e5-bbe6-01a1bf5b4f12",
-                "value": 270
+                "value": 394
               },
               {
                 "default": false,
@@ -5255,7 +5383,7 @@
                 "label": "Request to External NFS Server",
                 "properties": null,
                 "uuid": "0a4d5b7a-8b07-466b-9425-a54027307bb1",
-                "value": 271
+                "value": 395
               },
               {
                 "default": false,
@@ -5264,7 +5392,7 @@
                 "label": "New SSH Device",
                 "properties": null,
                 "uuid": "7c64ed95-0ec8-426a-a617-c0ffb824b223",
-                "value": 272
+                "value": 396
               },
               {
                 "default": false,
@@ -5273,7 +5401,7 @@
                 "label": "File Access Failure",
                 "properties": null,
                 "uuid": "09e9f61a-0271-45ca-a89b-2ccc42483b39",
-                "value": 273
+                "value": 397
               },
               {
                 "default": false,
@@ -5282,7 +5410,7 @@
                 "label": "FTP Access Denied Error",
                 "properties": null,
                 "uuid": "bb62a159-826a-42f0-9089-77d0f1b3e09d",
-                "value": 274
+                "value": 398
               },
               {
                 "default": false,
@@ -5291,7 +5419,7 @@
                 "label": "FTP Bad Syntax Error",
                 "properties": null,
                 "uuid": "3ab7c47c-edbf-424e-a46d-91d524c9daae",
-                "value": 275
+                "value": 399
               },
               {
                 "default": false,
@@ -5300,7 +5428,7 @@
                 "label": "FTP Brute Force",
                 "properties": null,
                 "uuid": "b6752d6c-12e6-47cc-9289-786fbb5ce8da",
-                "value": 276
+                "value": 400
               },
               {
                 "default": false,
@@ -5309,7 +5437,7 @@
                 "label": "FTP Errors",
                 "properties": null,
                 "uuid": "c2a3369f-928a-49be-b994-54a084856edc",
-                "value": 277
+                "value": 401
               },
               {
                 "default": false,
@@ -5318,7 +5446,7 @@
                 "label": "FTP File Transfer Issues",
                 "properties": null,
                 "uuid": "3d81825e-1e20-4cbc-a7ed-cfc55336ab3d",
-                "value": 278
+                "value": 402
               },
               {
                 "default": false,
@@ -5327,7 +5455,7 @@
                 "label": "FTP Not Logged in Error",
                 "properties": null,
                 "uuid": "b9f84d88-a327-4bf9-be7e-ba25fd9edcfa",
-                "value": 279
+                "value": 403
               },
               {
                 "default": false,
@@ -5336,7 +5464,7 @@
                 "label": "Hacking Tool Domain Access",
                 "properties": null,
                 "uuid": "60a4d456-fe1c-455c-b84a-cc583ffcbea4",
-                "value": 280
+                "value": 404
               },
               {
                 "default": false,
@@ -5345,7 +5473,7 @@
                 "label": "High Citrix Latency",
                 "properties": null,
                 "uuid": "013e04ef-2978-4ded-b9e1-5325e7649561",
-                "value": 281
+                "value": 405
               },
               {
                 "default": false,
@@ -5354,7 +5482,7 @@
                 "label": "HTTP 400 Status Codes",
                 "properties": null,
                 "uuid": "47f6b10e-a169-4511-a4d9-6cae12c5e8bc",
-                "value": 282
+                "value": 406
               },
               {
                 "default": false,
@@ -5363,7 +5491,7 @@
                 "label": "HTTP Bad Requests",
                 "properties": null,
                 "uuid": "6f77512c-361f-4785-bc94-bb426f6a5609",
-                "value": 283
+                "value": 407
               },
               {
                 "default": false,
@@ -5372,7 +5500,7 @@
                 "label": "HTTP Desync Attack",
                 "properties": null,
                 "uuid": "cdae54ff-bccf-4fa4-bc4f-9793e4cf47bc",
-                "value": 284
+                "value": 408
               },
               {
                 "default": false,
@@ -5381,7 +5509,7 @@
                 "label": "HTTP Errors",
                 "properties": null,
                 "uuid": "00317ace-e703-42c6-a7fc-0b24a8a9f31b",
-                "value": 285
+                "value": 409
               },
               {
                 "default": false,
@@ -5390,7 +5518,7 @@
                 "label": "HTTP Forbidden",
                 "properties": null,
                 "uuid": "35cc28d3-1148-42ea-af7f-eea09fa2e36f",
-                "value": 286
+                "value": 410
               },
               {
                 "default": false,
@@ -5399,7 +5527,7 @@
                 "label": "HTTP Gateway Timeout Error",
                 "properties": null,
                 "uuid": "d79cd541-1ff7-47f4-8405-caae2f5d923e",
-                "value": 287
+                "value": 411
               },
               {
                 "default": false,
@@ -5408,7 +5536,7 @@
                 "label": "HTTP Internal Error",
                 "properties": null,
                 "uuid": "45983ee4-ee9f-46f4-a696-7f131ce79448",
-                "value": 288
+                "value": 412
               },
               {
                 "default": false,
@@ -5417,7 +5545,7 @@
                 "label": "HTTP Method Scan",
                 "properties": null,
                 "uuid": "7b1958f6-a702-4e82-a785-cde7eb177857",
-                "value": 289
+                "value": 413
               },
               {
                 "default": false,
@@ -5426,7 +5554,7 @@
                 "label": "HTTP Not Found",
                 "properties": null,
                 "uuid": "bc7ce71d-19b6-42b9-a0d7-9eed93470317",
-                "value": 290
+                "value": 414
               },
               {
                 "default": false,
@@ -5435,7 +5563,7 @@
                 "label": "HTTP Path Traversal",
                 "properties": null,
                 "uuid": "f852c7a1-df1a-4d3f-9314-78c8e4e831f0",
-                "value": 291
+                "value": 415
               },
               {
                 "default": false,
@@ -5444,7 +5572,7 @@
                 "label": "Credentials Sent over HTTP",
                 "properties": null,
                 "uuid": "9a6114dd-73f9-4bcf-9390-f2bc269d73b7",
-                "value": 292
+                "value": 416
               },
               {
                 "default": false,
@@ -5453,7 +5581,7 @@
                 "label": "Credentials Received over HTTP",
                 "properties": null,
                 "uuid": "216eee72-0826-4f5b-9845-3050d8556e97",
-                "value": 293
+                "value": 417
               },
               {
                 "default": false,
@@ -5462,7 +5590,7 @@
                 "label": "HTTP Service Unavailable Error",
                 "properties": null,
                 "uuid": "34666803-a14f-4e5a-ad20-aa99f16d16ea",
-                "value": 294
+                "value": 418
               },
               {
                 "default": false,
@@ -5471,7 +5599,7 @@
                 "label": "ICMP Tunnel",
                 "properties": null,
                 "uuid": "bc4fb186-cfcf-45dd-b9b3-a41faeed5282",
-                "value": 295
+                "value": 419
               },
               {
                 "default": false,
@@ -5480,7 +5608,7 @@
                 "label": "Inbound Connection from a Cobalt Strike IP Address",
                 "properties": null,
                 "uuid": "497529be-1ef7-4d6b-a4f6-aa2b00a89755",
-                "value": 296
+                "value": 420
               },
               {
                 "default": false,
@@ -5489,7 +5617,7 @@
                 "label": "Inbound Tor Node Connections",
                 "properties": null,
                 "uuid": "f0f1cdba-5f6b-4fe9-81e2-715ebfe4c5b5",
-                "value": 297
+                "value": 421
               },
               {
                 "default": false,
@@ -5498,7 +5626,7 @@
                 "label": "Unusual Interactive Traffic from a Remote Desktop",
                 "properties": null,
                 "uuid": "e9074ae5-5a75-47ee-800f-f6c4edd578ca",
-                "value": 298
+                "value": 422
               },
               {
                 "default": false,
@@ -5507,7 +5635,7 @@
                 "label": "Unusual Interactive Traffic from an External Endpoint",
                 "properties": null,
                 "uuid": "841ae233-2eb0-4801-a789-9fe1333e3018",
-                "value": 299
+                "value": 423
               },
               {
                 "default": false,
@@ -5516,7 +5644,7 @@
                 "label": "Remote Control SSH Traffic",
                 "properties": null,
                 "uuid": "96c1141a-ac07-4bc4-a6c2-70d5b1ddac3c",
-                "value": 300
+                "value": 424
               },
               {
                 "default": false,
@@ -5525,7 +5653,7 @@
                 "label": "Interrupted Citrix Data Transfer",
                 "properties": null,
                 "uuid": "be9bb254-2ff8-42e0-9471-192f40d28e07",
-                "value": 301
+                "value": 425
               },
               {
                 "default": false,
@@ -5534,7 +5662,7 @@
                 "label": "Default Kali Linux SSH Keys",
                 "properties": null,
                 "uuid": "cdb7826a-2625-4e16-8549-d219b983b8aa",
-                "value": 302
+                "value": 426
               },
               {
                 "default": false,
@@ -5543,7 +5671,7 @@
                 "label": "REvil C\u0026C Activity (Kaseya Supply Chain)",
                 "properties": null,
                 "uuid": "0abd9530-5575-4120-99d0-ca27fb1d3e67",
-                "value": 303
+                "value": 427
               },
               {
                 "default": false,
@@ -5552,7 +5680,7 @@
                 "label": "REvil Suspicious Connection (Kaseya Supply Chain)",
                 "properties": null,
                 "uuid": "bea4b2b3-5b20-464a-9b24-1475c7a79618",
-                "value": 304
+                "value": 428
               },
               {
                 "default": false,
@@ -5561,7 +5689,7 @@
                 "label": "Kaseya VSA Activity",
                 "properties": null,
                 "uuid": "1f2a2a0b-bbdf-484f-b990-33bdba0d8eb1",
-                "value": 305
+                "value": 429
               },
               {
                 "default": false,
@@ -5570,7 +5698,7 @@
                 "label": "Kerberos Attack Tool Activity",
                 "properties": null,
                 "uuid": "b217b5d4-2eff-44f9-9293-804c425bef14",
-                "value": 306
+                "value": 430
               },
               {
                 "default": false,
@@ -5579,7 +5707,7 @@
                 "label": "Kerberos Auth Errors",
                 "properties": null,
                 "uuid": "c5d88762-bbba-405d-bfae-d1d9d7f4cfc7",
-                "value": 307
+                "value": 431
               },
               {
                 "default": false,
@@ -5588,7 +5716,7 @@
                 "label": "Kerberos Auth Issues",
                 "properties": null,
                 "uuid": "401c321d-63be-4644-b76e-96ff1abb47c8",
-                "value": 308
+                "value": 432
               },
               {
                 "default": false,
@@ -5597,7 +5725,7 @@
                 "label": "Kerberos Brute Force",
                 "properties": null,
                 "uuid": "5407e51b-876a-46fa-ba21-bb5413092033",
-                "value": 309
+                "value": 433
               },
               {
                 "default": false,
@@ -5606,7 +5734,7 @@
                 "label": "Kerberos Duplicate Sessions Errors",
                 "properties": null,
                 "uuid": "633d073d-e6e8-46b6-b471-011e107c59d3",
-                "value": 310
+                "value": 434
               },
               {
                 "default": false,
@@ -5615,7 +5743,7 @@
                 "label": "Kerberos Expired Password Errors",
                 "properties": null,
                 "uuid": "657a975d-b660-43fc-bbf0-5d399ca34ddb",
-                "value": 311
+                "value": 435
               },
               {
                 "default": false,
@@ -5624,7 +5752,7 @@
                 "label": "Kerberos Golden Ticket Attack",
                 "properties": null,
                 "uuid": "98fff98f-8efc-4cd7-8696-b429056334cb",
-                "value": 312
+                "value": 436
               },
               {
                 "default": false,
@@ -5633,7 +5761,7 @@
                 "label": "Kerberos Invalid Ticket Errors",
                 "properties": null,
                 "uuid": "ace01db3-eb0b-4f57-a1ea-9c47404ad375",
-                "value": 313
+                "value": 437
               },
               {
                 "default": false,
@@ -5642,7 +5770,7 @@
                 "label": "Kerberos Policy Errors",
                 "properties": null,
                 "uuid": "98d5c7f2-faec-403d-977b-0494d5305e3d",
-                "value": 314
+                "value": 438
               },
               {
                 "default": false,
@@ -5651,7 +5779,7 @@
                 "label": "Kerberos Revoked Credentials Errors",
                 "properties": null,
                 "uuid": "91655108-ebd0-4dcb-bff9-37bd899bae8a",
-                "value": 315
+                "value": 439
               },
               {
                 "default": false,
@@ -5660,7 +5788,7 @@
                 "label": "Kerberos Service Unknown Errors",
                 "properties": null,
                 "uuid": "228e08b3-6a40-4cf4-8455-519955b5f763",
-                "value": 316
+                "value": 440
               },
               {
                 "default": false,
@@ -5669,7 +5797,7 @@
                 "label": "Kerberos Silver Ticket Attack",
                 "properties": null,
                 "uuid": "0b483d9a-28f8-4c02-8e52-81905bca975c",
-                "value": 317
+                "value": 441
               },
               {
                 "default": false,
@@ -5678,7 +5806,7 @@
                 "label": "Kerberos Sync Errors",
                 "properties": null,
                 "uuid": "b3035209-8166-4c72-b80d-9898723570ae",
-                "value": 318
+                "value": 442
               },
               {
                 "default": false,
@@ -5687,7 +5815,7 @@
                 "label": "Kerberos Ticket Errors",
                 "properties": null,
                 "uuid": "40ebb8ca-c8a7-4dae-a78d-b9731a8e63a8",
-                "value": 319
+                "value": 443
               },
               {
                 "default": false,
@@ -5696,7 +5824,7 @@
                 "label": "Kerberos Unknown Service Errors",
                 "properties": null,
                 "uuid": "bd8a69ab-0fe9-437f-ba85-45f83d81d293",
-                "value": 320
+                "value": 444
               },
               {
                 "default": false,
@@ -5705,7 +5833,7 @@
                 "label": "Kerberos User Enumeration",
                 "properties": null,
                 "uuid": "d3ffb3bc-f111-4db1-8dd1-56d0a4afedc4",
-                "value": 321
+                "value": 445
               },
               {
                 "default": false,
@@ -5714,7 +5842,7 @@
                 "label": "Kerberos Wrong Password Errors",
                 "properties": null,
                 "uuid": "4870e377-a189-4320-afc3-5d3b560700ad",
-                "value": 322
+                "value": 446
               },
               {
                 "default": false,
@@ -5723,7 +5851,7 @@
                 "label": "AS-REP Roasting Activity",
                 "properties": null,
                 "uuid": "8cb8c63c-12a6-43b3-9265-47d3203cf894",
-                "value": 323
+                "value": 447
               },
               {
                 "default": false,
@@ -5732,7 +5860,7 @@
                 "label": "LDAP Auth Error",
                 "properties": null,
                 "uuid": "6c6161d2-b21d-41a2-bab4-bc73f9ca5a05",
-                "value": 324
+                "value": 448
               },
               {
                 "default": false,
@@ -5741,7 +5869,7 @@
                 "label": "LDAP Auth Errors",
                 "properties": null,
                 "uuid": "ae27045b-0fd3-41bc-8dad-6b3ef623dd15",
-                "value": 325
+                "value": 449
               },
               {
                 "default": false,
@@ -5750,7 +5878,7 @@
                 "label": "LDAP Auth Issues",
                 "properties": null,
                 "uuid": "52a733e2-ba96-4da9-9324-c0fd1312ff7e",
-                "value": 326
+                "value": 450
               },
               {
                 "default": false,
@@ -5759,7 +5887,7 @@
                 "label": "LDAP Wildcard Query",
                 "properties": null,
                 "uuid": "b1bf0fbd-e336-4f4c-975e-711dcbdfa295",
-                "value": 327
+                "value": 451
               },
               {
                 "default": false,
@@ -5768,7 +5896,7 @@
                 "label": "LDAP Computer Enumeration",
                 "properties": null,
                 "uuid": "9918774a-75df-42a9-b38a-e67487b22e47",
-                "value": 328
+                "value": 452
               },
               {
                 "default": false,
@@ -5777,7 +5905,7 @@
                 "label": "LDAP GPO Enumeration",
                 "properties": null,
                 "uuid": "d3f0c8b2-7e8f-402d-b2b2-f9122ae8ccfc",
-                "value": 329
+                "value": 453
               },
               {
                 "default": false,
@@ -5786,7 +5914,7 @@
                 "label": "LDAP Invalid Credentials Error",
                 "properties": null,
                 "uuid": "b11d6b05-366d-4e8f-a876-0369a1bad94a",
-                "value": 330
+                "value": 454
               },
               {
                 "default": false,
@@ -5795,7 +5923,7 @@
                 "label": "All Object Enumeration",
                 "properties": null,
                 "uuid": "4174b315-6a32-4954-91b0-9a7b30ceb8c7",
-                "value": 331
+                "value": 455
               },
               {
                 "default": false,
@@ -5804,7 +5932,7 @@
                 "label": "LDAP Operational Error",
                 "properties": null,
                 "uuid": "59b5cf85-d4f4-42c7-8345-41bcce738a1d",
-                "value": 332
+                "value": 456
               },
               {
                 "default": false,
@@ -5813,7 +5941,7 @@
                 "label": "LDAP Protocol Error",
                 "properties": null,
                 "uuid": "8748aa54-744a-4f6b-abc3-a23a9f322841",
-                "value": 333
+                "value": 457
               },
               {
                 "default": false,
@@ -5822,7 +5950,7 @@
                 "label": "LDAP SPN Scan",
                 "properties": null,
                 "uuid": "65897cbe-f594-4601-a1a9-3df431b71ce5",
-                "value": 334
+                "value": 458
               },
               {
                 "default": false,
@@ -5831,7 +5959,7 @@
                 "label": "LLMNR Poisoning",
                 "properties": null,
                 "uuid": "0b252914-05d5-4eac-b13d-81af14fc8f9d",
-                "value": 335
+                "value": 459
               },
               {
                 "default": false,
@@ -5840,7 +5968,7 @@
                 "label": "Windows Account Enumeration",
                 "properties": null,
                 "uuid": "e50b781f-2891-4e6f-9b28-657c72840ef6",
-                "value": 336
+                "value": 460
               },
               {
                 "default": false,
@@ -5849,7 +5977,7 @@
                 "label": "Memcache Errors",
                 "properties": null,
                 "uuid": "56b0278a-8a1e-4edd-91f9-99c311a043d8",
-                "value": 337
+                "value": 461
               },
               {
                 "default": false,
@@ -5858,7 +5986,7 @@
                 "label": "Memcache Issues",
                 "properties": null,
                 "uuid": "067585f0-34ce-490d-ab39-c6c4dd58e779",
-                "value": 338
+                "value": 462
               },
               {
                 "default": false,
@@ -5867,7 +5995,7 @@
                 "label": "Meterpreter C\u0026C Session",
                 "properties": null,
                 "uuid": "2e12884c-2326-493e-ae1d-55fdb25d7e7b",
-                "value": 339
+                "value": 463
               },
               {
                 "default": false,
@@ -5876,7 +6004,7 @@
                 "label": "Microsoft Exchange Server SSRF and RCE Exploit",
                 "properties": null,
                 "uuid": "4cd5005a-101f-49d1-ae9a-a1677a3b1a5c",
-                "value": 340
+                "value": 464
               },
               {
                 "default": false,
@@ -5885,7 +6013,7 @@
                 "label": "Metasploit C\u0026C SSL/TLS Connection",
                 "properties": null,
                 "uuid": "f435ec63-92b0-45f7-90a0-2a32d404db45",
-                "value": 341
+                "value": 465
               },
               {
                 "default": false,
@@ -5894,7 +6022,7 @@
                 "label": "Unusual Remote Admin Connection Requests",
                 "properties": null,
                 "uuid": "fd7a7249-c5c3-4533-8e77-e67772681b82",
-                "value": 342
+                "value": 466
               },
               {
                 "default": false,
@@ -5903,7 +6031,7 @@
                 "label": "Alias Member Enumeration",
                 "properties": null,
                 "uuid": "d94fc746-aaf0-40f2-8042-f847d3b20611",
-                "value": 343
+                "value": 467
               },
               {
                 "default": false,
@@ -5912,7 +6040,7 @@
                 "label": "Domain Controller Enumeration",
                 "properties": null,
                 "uuid": "df72e498-39b1-4c38-89b3-b647b520b8e1",
-                "value": 344
+                "value": 468
               },
               {
                 "default": false,
@@ -5921,7 +6049,7 @@
                 "label": "Group Member Enumeration",
                 "properties": null,
                 "uuid": "9c796d06-25f5-4158-bdd6-e414842f9685",
-                "value": 345
+                "value": 469
               },
               {
                 "default": false,
@@ -5930,7 +6058,7 @@
                 "label": "Logged-On User Enumeration",
                 "properties": null,
                 "uuid": "c83c5920-59e3-4644-a7fa-8e3abe71d93f",
-                "value": 346
+                "value": 470
               },
               {
                 "default": false,
@@ -5939,7 +6067,7 @@
                 "label": "User Session Enumeration",
                 "properties": null,
                 "uuid": "b4d59d86-2c31-4f0f-ae24-9dc7bc89b97a",
-                "value": 347
+                "value": 471
               },
               {
                 "default": false,
@@ -5948,7 +6076,7 @@
                 "label": "Network Share Enumeration",
                 "properties": null,
                 "uuid": "bc7adc00-0803-4f26-9946-ef3bafb2084a",
-                "value": 348
+                "value": 472
               },
               {
                 "default": false,
@@ -5957,7 +6085,7 @@
                 "label": "RDP Session Enumeration",
                 "properties": null,
                 "uuid": "aefba7e5-0ed2-4a1f-ab57-66edd8e5fe63",
-                "value": 349
+                "value": 473
               },
               {
                 "default": false,
@@ -5966,7 +6094,7 @@
                 "label": "Windows Registry Enumeration",
                 "properties": null,
                 "uuid": "051908e8-3a5c-4256-b2f0-061fcfdffb5a",
-                "value": 350
+                "value": 474
               },
               {
                 "default": false,
@@ -5975,7 +6103,7 @@
                 "label": "Scheduled Task Activity (ATSVC)",
                 "properties": null,
                 "uuid": "8363c64e-be12-4771-a0e8-ce0c3aeaf1c4",
-                "value": 351
+                "value": 475
               },
               {
                 "default": false,
@@ -5984,7 +6112,7 @@
                 "label": "Scheduled Task Activity (ITaskSchedulerService)",
                 "properties": null,
                 "uuid": "887ac19b-a2c2-4475-8e31-e7f6dcc71a02",
-                "value": 352
+                "value": 476
               },
               {
                 "default": false,
@@ -5993,7 +6121,7 @@
                 "label": "Multiple Email Errors",
                 "properties": null,
                 "uuid": "2cb8e56a-7668-4aa5-9761-377e180a77f4",
-                "value": 353
+                "value": 477
               },
               {
                 "default": false,
@@ -6002,7 +6130,7 @@
                 "label": "Multiple FTP Errors",
                 "properties": null,
                 "uuid": "62babf08-dfae-4717-95ba-5365511c76c6",
-                "value": 354
+                "value": 478
               },
               {
                 "default": false,
@@ -6011,7 +6139,7 @@
                 "label": "Multiple Kerberos Authentication Errors",
                 "properties": null,
                 "uuid": "dffa9845-23fe-438a-b29c-173c9fdf1f0e",
-                "value": 355
+                "value": 479
               },
               {
                 "default": false,
@@ -6020,7 +6148,7 @@
                 "label": "Multiple LDAP Auth Errors",
                 "properties": null,
                 "uuid": "d4263222-3b6f-447e-bde3-e38dcebfadb5",
-                "value": 356
+                "value": 480
               },
               {
                 "default": false,
@@ -6029,7 +6157,7 @@
                 "label": "Multiple SMB/CIFS Errors",
                 "properties": null,
                 "uuid": "79657aae-d212-4aa9-85c2-58a5b2dc25df",
-                "value": 357
+                "value": 481
               },
               {
                 "default": false,
@@ -6038,7 +6166,7 @@
                 "label": "NBT-NS Poisoning",
                 "properties": null,
                 "uuid": "274159f9-742b-4ff9-93d2-4ae47e74427b",
-                "value": 358
+                "value": 482
               },
               {
                 "default": false,
@@ -6047,7 +6175,7 @@
                 "label": "Network Privilege Escalation",
                 "properties": null,
                 "uuid": "998de766-6361-4b74-b941-11b9f7fec9cb",
-                "value": 359
+                "value": 483
               },
               {
                 "default": false,
@@ -6056,7 +6184,7 @@
                 "label": "New Active Directory Web Service (ADWS) Activity",
                 "properties": null,
                 "uuid": "876e3341-4e4f-45ae-a883-e66dec6fe4de",
-                "value": 360
+                "value": 484
               },
               {
                 "default": false,
@@ -6065,7 +6193,7 @@
                 "label": "New DHCP Activity",
                 "properties": null,
                 "uuid": "6ab4239e-9389-4ab4-b345-92f3827f8ff0",
-                "value": 361
+                "value": 485
               },
               {
                 "default": false,
@@ -6074,7 +6202,7 @@
                 "label": "New DNS over HTTPS (DoH) Activity",
                 "properties": null,
                 "uuid": "d8f8cda0-fb42-46e1-95d7-1745c72326a0",
-                "value": 362
+                "value": 486
               },
               {
                 "default": false,
@@ -6083,7 +6211,7 @@
                 "label": "New External Connection",
                 "properties": null,
                 "uuid": "33868126-8a56-4681-8631-502728880a31",
-                "value": 363
+                "value": 487
               },
               {
                 "default": false,
@@ -6092,7 +6220,7 @@
                 "label": "New External Database Connection",
                 "properties": null,
                 "uuid": "edd34cc9-2e0c-471f-a8b2-a4a878339af9",
-                "value": 364
+                "value": 488
               },
               {
                 "default": false,
@@ -6101,7 +6229,7 @@
                 "label": "New External IIOP Connection",
                 "properties": null,
                 "uuid": "1824c204-3743-4d9c-8beb-afed99d54beb",
-                "value": 365
+                "value": 489
               },
               {
                 "default": false,
@@ -6110,7 +6238,7 @@
                 "label": "New External LDAP Connection",
                 "properties": null,
                 "uuid": "598b159c-9956-4859-9f90-db280f6869a8",
-                "value": 366
+                "value": 490
               },
               {
                 "default": false,
@@ -6119,7 +6247,7 @@
                 "label": "New External NFS Connection",
                 "properties": null,
                 "uuid": "48f12427-5fba-417c-a998-558dca91d597",
-                "value": 367
+                "value": 491
               },
               {
                 "default": false,
@@ -6128,7 +6256,7 @@
                 "label": "New External RDP Connection",
                 "properties": null,
                 "uuid": "98900317-eb3d-4594-a248-fd9f714ab7ed",
-                "value": 368
+                "value": 492
               },
               {
                 "default": false,
@@ -6137,7 +6265,7 @@
                 "label": "New External Java RMI Connection",
                 "properties": null,
                 "uuid": "c6f1348b-9174-4835-99ab-eb9386f848fb",
-                "value": 369
+                "value": 493
               },
               {
                 "default": false,
@@ -6146,7 +6274,7 @@
                 "label": "New External SSH Connection",
                 "properties": null,
                 "uuid": "292789c0-b055-4ed0-acba-13619c54d067",
-                "value": 370
+                "value": 494
               },
               {
                 "default": false,
@@ -6155,7 +6283,7 @@
                 "label": "New External Telnet Connection",
                 "properties": null,
                 "uuid": "196a566b-cf91-4d6b-9e8f-9ff76ed01f83",
-                "value": 371
+                "value": 495
               },
               {
                 "default": false,
@@ -6164,7 +6292,7 @@
                 "label": "New External VNC Connection",
                 "properties": null,
                 "uuid": "5a6a0de9-0f14-4724-b074-bd5e521ab3c4",
-                "value": 372
+                "value": 496
               },
               {
                 "default": false,
@@ -6173,7 +6301,7 @@
                 "label": "New External IoT Connection",
                 "properties": null,
                 "uuid": "10951c51-4437-4906-a317-5cb0bc17b1bc",
-                "value": 373
+                "value": 497
               },
               {
                 "default": false,
@@ -6182,7 +6310,7 @@
                 "label": "New Local DNS Server Activity",
                 "properties": null,
                 "uuid": "79cec18c-25bb-4a98-b713-0116184c13c9",
-                "value": 374
+                "value": 498
               },
               {
                 "default": false,
@@ -6191,7 +6319,7 @@
                 "label": "New SMB/CIFS Executable File Transfer",
                 "properties": null,
                 "uuid": "fbac9047-cae2-4b0c-a09d-8cf1add7eaa1",
-                "value": 375
+                "value": 499
               },
               {
                 "default": false,
@@ -6200,7 +6328,7 @@
                 "label": "New Telnet Activity",
                 "properties": null,
                 "uuid": "d598f86e-ef0a-422b-b555-0ea4b54e64a4",
-                "value": 376
+                "value": 500
               },
               {
                 "default": false,
@@ -6209,7 +6337,7 @@
                 "label": "NFS File Access Failure",
                 "properties": null,
                 "uuid": "87281fff-0c24-4a24-81c3-8ac4db5e214f",
-                "value": 377
+                "value": 501
               },
               {
                 "default": false,
@@ -6218,7 +6346,7 @@
                 "label": "NTLM Relay Attack",
                 "properties": null,
                 "uuid": "7d3af6d6-090f-4665-8d13-148ae68eb65b",
-                "value": 378
+                "value": 502
               },
               {
                 "default": false,
@@ -6227,7 +6355,7 @@
                 "label": "NTLMv1 Authentication",
                 "properties": null,
                 "uuid": "57ad3590-c6e4-4284-88bd-6397d3685e3b",
-                "value": 379
+                "value": 503
               },
               {
                 "default": false,
@@ -6236,7 +6364,7 @@
                 "label": "Numerous Emails",
                 "properties": null,
                 "uuid": "0d5be70b-668a-4d3a-a572-4338688b80ee",
-                "value": 380
+                "value": 504
               },
               {
                 "default": false,
@@ -6245,7 +6373,7 @@
                 "label": "Confirmed OnePercent Group Ransomware IOC",
                 "properties": null,
                 "uuid": "3d5ce49e-b5f6-466e-953c-0ba9d9629547",
-                "value": 381
+                "value": 505
               },
               {
                 "default": false,
@@ -6254,7 +6382,7 @@
                 "label": "Outbound Connection to a Cobalt Strike IP Address",
                 "properties": null,
                 "uuid": "4ccdbd4d-525b-4ed6-93e5-6eb12c800ce9",
-                "value": 382
+                "value": 506
               },
               {
                 "default": false,
@@ -6263,7 +6391,7 @@
                 "label": "New Outbound SOCKS Connection",
                 "properties": null,
                 "uuid": "778c3f91-b87a-4472-af0b-3e0a25089a21",
-                "value": 383
+                "value": 507
               },
               {
                 "default": false,
@@ -6272,7 +6400,7 @@
                 "label": "Outbound Tor Node Connections",
                 "properties": null,
                 "uuid": "21fb9745-7884-4fcd-881d-309772900741",
-                "value": 384
+                "value": 508
               },
               {
                 "default": false,
@@ -6281,7 +6409,7 @@
                 "label": "Overwhelmed Citrix Data Transfer",
                 "properties": null,
                 "uuid": "57362f62-11bf-4f0b-9ba6-24832e1c84ec",
-                "value": 385
+                "value": 509
               },
               {
                 "default": false,
@@ -6290,7 +6418,7 @@
                 "label": "Overwhelmed Database Data Transfer",
                 "properties": null,
                 "uuid": "30da2ab1-5892-4313-a7bf-3b9eb8efea07",
-                "value": 386
+                "value": 510
               },
               {
                 "default": false,
@@ -6299,7 +6427,7 @@
                 "label": "Overwhelmed Data Transfer",
                 "properties": null,
                 "uuid": "0257c741-ba10-4521-9620-8b4cd535b68e",
-                "value": 387
+                "value": 511
               },
               {
                 "default": false,
@@ -6308,7 +6436,7 @@
                 "label": "Overwhelmed Email Data Transfer",
                 "properties": null,
                 "uuid": "b9faa61f-2868-43ac-97a0-4584daddf3cb",
-                "value": 388
+                "value": 512
               },
               {
                 "default": false,
@@ -6317,7 +6445,7 @@
                 "label": "Overwhelmed FTP Data Transfer",
                 "properties": null,
                 "uuid": "a9b536dd-2958-4e35-8e28-4cd2d86620e9",
-                "value": 389
+                "value": 513
               },
               {
                 "default": false,
@@ -6326,7 +6454,7 @@
                 "label": "Overwhelmed HTTP Data Transfer",
                 "properties": null,
                 "uuid": "8c6a830e-4534-409a-ac8c-cd289a00f137",
-                "value": 390
+                "value": 514
               },
               {
                 "default": false,
@@ -6335,7 +6463,7 @@
                 "label": "Overwhelmed Kerberos Data Transfer",
                 "properties": null,
                 "uuid": "22945b9f-9397-4f0a-a34a-d18f7ce9ac8f",
-                "value": 391
+                "value": 515
               },
               {
                 "default": false,
@@ -6344,7 +6472,7 @@
                 "label": "Overwhelmed LDAP Data Transfer",
                 "properties": null,
                 "uuid": "b4db3805-ac22-48af-9681-5be0e0fa07fd",
-                "value": 392
+                "value": 516
               },
               {
                 "default": false,
@@ -6353,7 +6481,7 @@
                 "label": "Overwhelmed Memcache Data Transfer",
                 "properties": null,
                 "uuid": "294d6ff1-e90a-4fc0-a61e-02ec8f1cee32",
-                "value": 393
+                "value": 517
               },
               {
                 "default": false,
@@ -6362,7 +6490,7 @@
                 "label": "Overwhelmed Redis Data Transfer",
                 "properties": null,
                 "uuid": "20df12f7-4d80-416e-ac47-5a046d2af3d8",
-                "value": 394
+                "value": 518
               },
               {
                 "default": false,
@@ -6371,7 +6499,7 @@
                 "label": "Ping Scan",
                 "properties": null,
                 "uuid": "6c6d9ae6-7b6e-4ef0-8eee-8aa41ccad1c7",
-                "value": 395
+                "value": 519
               },
               {
                 "default": false,
@@ -6380,7 +6508,7 @@
                 "label": "Poor AAA Performance",
                 "properties": null,
                 "uuid": "5b8ded43-2f85-4c01-83fa-c11018a8a16a",
-                "value": 396
+                "value": 520
               },
               {
                 "default": false,
@@ -6389,7 +6517,7 @@
                 "label": "Poor DHCP Performance",
                 "properties": null,
                 "uuid": "86b09124-eb82-4d91-8104-46e544050090",
-                "value": 397
+                "value": 521
               },
               {
                 "default": false,
@@ -6398,7 +6526,7 @@
                 "label": "Poor HTTP Performance",
                 "properties": null,
                 "uuid": "58673c3d-7204-490c-8d29-01c5377f39f2",
-                "value": 398
+                "value": 522
               },
               {
                 "default": false,
@@ -6407,7 +6535,7 @@
                 "label": "HTTP Tunnel",
                 "properties": null,
                 "uuid": "db9b7ff3-c8c7-435e-bb35-599b7089b4d7",
-                "value": 399
+                "value": 523
               },
               {
                 "default": false,
@@ -6416,7 +6544,7 @@
                 "label": "Remote Service Launch",
                 "properties": null,
                 "uuid": "0b853a5a-f565-4685-92ef-474731cd4ab8",
-                "value": 400
+                "value": 524
               },
               {
                 "default": false,
@@ -6425,7 +6553,7 @@
                 "label": "Ransomware Activity",
                 "properties": null,
                 "uuid": "10ebb566-cd65-47ab-9d96-27509f4a8b9b",
-                "value": 401
+                "value": 525
               },
               {
                 "default": false,
@@ -6434,7 +6562,7 @@
                 "label": "Rare Database Table Access",
                 "properties": null,
                 "uuid": "61dc9853-b3a3-409c-a923-882a07d7a20c",
-                "value": 402
+                "value": 526
               },
               {
                 "default": false,
@@ -6443,7 +6571,7 @@
                 "label": "Rare SSH Port",
                 "properties": null,
                 "uuid": "444b7c0f-2afa-42c3-8835-b6f4e2b64404",
-                "value": 403
+                "value": 527
               },
               {
                 "default": false,
@@ -6452,7 +6580,7 @@
                 "label": "RDP Brute Force",
                 "properties": null,
                 "uuid": "94681804-7370-456c-aa3d-5c4d4cf47458",
-                "value": 404
+                "value": 528
               },
               {
                 "default": false,
@@ -6461,7 +6589,7 @@
                 "label": "Inbound Remote Desktop Traffic from an Unusual Location",
                 "properties": null,
                 "uuid": "25c2686a-4012-4055-98ea-e952e217993f",
-                "value": 405
+                "value": 529
               },
               {
                 "default": false,
@@ -6470,7 +6598,7 @@
                 "label": "Redis Errors",
                 "properties": null,
                 "uuid": "e18ded45-a980-41dd-a4f8-955f8abf218d",
-                "value": 406
+                "value": 530
               },
               {
                 "default": false,
@@ -6479,7 +6607,7 @@
                 "label": "Redis Issues",
                 "properties": null,
                 "uuid": "b010476b-5493-4a08-b0b9-827d40b035ab",
-                "value": 407
+                "value": 531
               },
               {
                 "default": false,
@@ -6488,7 +6616,7 @@
                 "label": "Remote Registry Modification",
                 "properties": null,
                 "uuid": "f9488091-f470-4920-82e5-b5bc89823c5e",
-                "value": 408
+                "value": 532
               },
               {
                 "default": false,
@@ -6497,7 +6625,7 @@
                 "label": "Reverse SSH Connection",
                 "properties": null,
                 "uuid": "9a4bb741-6dda-40b9-aa96-e1a900a67a6a",
-                "value": 409
+                "value": 533
               },
               {
                 "default": false,
@@ -6506,7 +6634,7 @@
                 "label": "VNC Brute Force",
                 "properties": null,
                 "uuid": "1ca241b6-52ec-4ff7-9e74-c43b628f9326",
-                "value": 410
+                "value": 534
               },
               {
                 "default": false,
@@ -6515,7 +6643,7 @@
                 "label": "CVE-2020-11901 Ripple20 Exploit Attempt",
                 "properties": null,
                 "uuid": "df85be7c-51d9-49a0-addf-14fba7a9ab31",
-                "value": 411
+                "value": 535
               },
               {
                 "default": false,
@@ -6524,7 +6652,7 @@
                 "label": "Ripple20 ICMP Scan",
                 "properties": null,
                 "uuid": "f96f86a1-c2d4-4d52-b927-e63f94dab0b8",
-                "value": 412
+                "value": 536
               },
               {
                 "default": false,
@@ -6533,7 +6661,7 @@
                 "label": "Treck TCP/IP Network Stack Detected",
                 "properties": null,
                 "uuid": "ed27be05-03ba-4895-941b-4fe619fc3757",
-                "value": 413
+                "value": 537
               },
               {
                 "default": false,
@@ -6542,7 +6670,7 @@
                 "label": "Ripple20 IP in IP Exploit Attempt",
                 "properties": null,
                 "uuid": "98bf6c3d-5ea6-4f6d-80eb-3f76c89efbac",
-                "value": 414
+                "value": 538
               },
               {
                 "default": false,
@@ -6551,7 +6679,7 @@
                 "label": "Remote Log Deletion",
                 "properties": null,
                 "uuid": "e27a2566-84b8-479c-9693-80462da4330f",
-                "value": 415
+                "value": 539
               },
               {
                 "default": false,
@@ -6560,7 +6688,7 @@
                 "label": "Remote System Shutdown",
                 "properties": null,
                 "uuid": "a780ae69-f891-4738-8a93-4ada09672ec7",
-                "value": 416
+                "value": 540
               },
               {
                 "default": false,
@@ -6569,7 +6697,7 @@
                 "label": "Domain Admin Enumeration",
                 "properties": null,
                 "uuid": "43f12ef4-b882-4da3-a80e-cf703746ecd7",
-                "value": 417
+                "value": 541
               },
               {
                 "default": false,
@@ -6578,7 +6706,7 @@
                 "label": "Domain Group Enumeration",
                 "properties": null,
                 "uuid": "9c80bd2f-2c43-4d45-a8ba-30989c86f27d",
-                "value": 418
+                "value": 542
               },
               {
                 "default": false,
@@ -6587,7 +6715,7 @@
                 "label": "Domain User Enumeration",
                 "properties": null,
                 "uuid": "60fb890d-809a-4293-888e-5a9b36de9cb2",
-                "value": 419
+                "value": 543
               },
               {
                 "default": false,
@@ -6596,7 +6724,7 @@
                 "label": "Domain Workstation Enumeration",
                 "properties": null,
                 "uuid": "e2809f70-f273-41ad-ae44-d10cd512dae0",
-                "value": 420
+                "value": 544
               },
               {
                 "default": false,
@@ -6605,7 +6733,7 @@
                 "label": "Local Admin Enumeration",
                 "properties": null,
                 "uuid": "d8fe4249-7318-46fb-99bc-6f15a71fa765",
-                "value": 421
+                "value": 545
               },
               {
                 "default": false,
@@ -6614,7 +6742,7 @@
                 "label": "Local User Enumeration",
                 "properties": null,
                 "uuid": "1638b41e-7395-487a-8865-c355659666c4",
-                "value": 422
+                "value": 546
               },
               {
                 "default": false,
@@ -6623,7 +6751,7 @@
                 "label": "Scheduled Task Enumeration",
                 "properties": null,
                 "uuid": "cbeddda5-cdce-452b-bb21-68036563a599",
-                "value": 423
+                "value": 547
               },
               {
                 "default": false,
@@ -6632,7 +6760,7 @@
                 "label": "Unusual Sensitive Data Transfer",
                 "properties": null,
                 "uuid": "f5dcc8aa-1b92-4d22-a22f-d90b42e677bd",
-                "value": 424
+                "value": 548
               },
               {
                 "default": false,
@@ -6641,7 +6769,7 @@
                 "label": "Shellshock DHCP Exploit Attempt",
                 "properties": null,
                 "uuid": "c8694723-e159-4141-9918-c73ac5c48629",
-                "value": 425
+                "value": 549
               },
               {
                 "default": false,
@@ -6650,7 +6778,7 @@
                 "label": "Shellshock HTTP Exploit Attempt",
                 "properties": null,
                 "uuid": "0fb16889-6578-4bfa-9197-2792da2e4b6c",
-                "value": 426
+                "value": 550
               },
               {
                 "default": false,
@@ -6659,7 +6787,7 @@
                 "label": "SIP Brute Force",
                 "properties": null,
                 "uuid": "867e114b-d6f2-457f-8d67-ef9baecbddb6",
-                "value": 427
+                "value": 551
               },
               {
                 "default": false,
@@ -6668,7 +6796,7 @@
                 "label": "File Transfer to Windows Autostart Path",
                 "properties": null,
                 "uuid": "1e478af9-c1c8-4a2a-85de-98f93734eb77",
-                "value": 428
+                "value": 552
               },
               {
                 "default": false,
@@ -6677,7 +6805,7 @@
                 "label": "SMB/CIFS Access Denied Errors",
                 "properties": null,
                 "uuid": "921d82fa-50c7-43f2-8c10-ad1a88332aa2",
-                "value": 429
+                "value": 553
               },
               {
                 "default": false,
@@ -6686,7 +6814,7 @@
                 "label": "SMB/CIFS Brute Force",
                 "properties": null,
                 "uuid": "d30604e2-9c57-4ded-92dd-1853f6e60efe",
-                "value": 430
+                "value": 554
               },
               {
                 "default": false,
@@ -6695,7 +6823,7 @@
                 "label": "SMB/CIFS Errors",
                 "properties": null,
                 "uuid": "7cdf103a-2f22-470d-bd73-bbf76aec4a4e",
-                "value": 431
+                "value": 555
               },
               {
                 "default": false,
@@ -6704,7 +6832,7 @@
                 "label": "SMB/CIFS File Access Failure",
                 "properties": null,
                 "uuid": "f19a0778-8908-4429-8507-39c245177ffe",
-                "value": 432
+                "value": 556
               },
               {
                 "default": false,
@@ -6713,7 +6841,7 @@
                 "label": "SMB/CIFS Privileged Pipe",
                 "properties": null,
                 "uuid": "9bc2cdea-acb8-4c9f-907a-6d9fc6a69814",
-                "value": 433
+                "value": 557
               },
               {
                 "default": false,
@@ -6722,7 +6850,7 @@
                 "label": "SMB/CIFS Share Enumeration",
                 "properties": null,
                 "uuid": "9290af91-b6d8-45dd-b095-870d12af7da4",
-                "value": 434
+                "value": 558
               },
               {
                 "default": false,
@@ -6731,7 +6859,7 @@
                 "label": "SMB/CIFS Account Errors",
                 "properties": null,
                 "uuid": "e28b4e8e-fecb-4629-b029-44e6e411da52",
-                "value": 435
+                "value": 559
               },
               {
                 "default": false,
@@ -6740,7 +6868,7 @@
                 "label": "SMB/CIFS Named Pipe Beaconing",
                 "properties": null,
                 "uuid": "133cd373-96ec-4edd-9547-290e00ea8d53",
-                "value": 436
+                "value": 560
               },
               {
                 "default": false,
@@ -6749,7 +6877,7 @@
                 "label": "Unusual Email Domain Length",
                 "properties": null,
                 "uuid": "05c14fb6-fc32-4e83-b40e-0e4dc9e8ac04",
-                "value": 437
+                "value": 561
               },
               {
                 "default": false,
@@ -6758,7 +6886,7 @@
                 "label": "Poor SMTP Server Performance",
                 "properties": null,
                 "uuid": "b1272dea-fece-496d-983a-931440c0f527",
-                "value": 438
+                "value": 562
               },
               {
                 "default": false,
@@ -6767,7 +6895,7 @@
                 "label": "SMTP Syntax Error",
                 "properties": null,
                 "uuid": "0db65d4f-4a4c-4e11-9d5c-64a6ab5aa5ae",
-                "value": 439
+                "value": 563
               },
               {
                 "default": false,
@@ -6776,7 +6904,7 @@
                 "label": "Spike in Email Traffic Volume",
                 "properties": null,
                 "uuid": "6cbc8259-1fc4-45f3-b53f-e7e4fbabb759",
-                "value": 440
+                "value": 564
               },
               {
                 "default": false,
@@ -6785,7 +6913,7 @@
                 "label": "Spike in LDAP Requests",
                 "properties": null,
                 "uuid": "cacef3c8-2dde-41bc-aa45-f110720aee15",
-                "value": 441
+                "value": 565
               },
               {
                 "default": false,
@@ -6794,7 +6922,7 @@
                 "label": "Spike in RDP Sessions",
                 "properties": null,
                 "uuid": "a38c94a4-7079-4cd4-9344-651ba8774781",
-                "value": 442
+                "value": 566
               },
               {
                 "default": false,
@@ -6803,7 +6931,7 @@
                 "label": "Spike in VNC Sessions",
                 "properties": null,
                 "uuid": "4ea8a93d-7aa1-44d7-9027-fb04ebdd8f40",
-                "value": 443
+                "value": 567
               },
               {
                 "default": false,
@@ -6812,7 +6940,7 @@
                 "label": "Transaction Delays",
                 "properties": null,
                 "uuid": "756f6c90-03cb-4502-bf92-0a29c7d685c6",
-                "value": 444
+                "value": 568
               },
               {
                 "default": false,
@@ -6821,7 +6949,7 @@
                 "label": "Spike in SSH Sessions",
                 "properties": null,
                 "uuid": "7c008420-4483-4023-82f2-58c2cbd930ba",
-                "value": 445
+                "value": 569
               },
               {
                 "default": false,
@@ -6830,7 +6958,7 @@
                 "label": "Spike in Telnet Connections",
                 "properties": null,
                 "uuid": "41621ef6-dd3e-46a9-b072-2e1cc3968dbf",
-                "value": 446
+                "value": 570
               },
               {
                 "default": false,
@@ -6839,7 +6967,7 @@
                 "label": "Spoofed SSL/TLS Certificate",
                 "properties": null,
                 "uuid": "643ea333-8a10-4d7e-a92d-ad00c26b8037",
-                "value": 447
+                "value": 571
               },
               {
                 "default": false,
@@ -6848,7 +6976,7 @@
                 "label": "CVE-2022-22965 Spring4Shell Exploit Attempt",
                 "properties": null,
                 "uuid": "79c20ee4-501e-4a71-8f8f-60eb9ef521ac",
-                "value": 448
+                "value": 572
               },
               {
                 "default": false,
@@ -6857,7 +6985,7 @@
                 "label": "SQL Injection (SQLi) Attack",
                 "properties": null,
                 "uuid": "c18e3072-624d-438d-a822-e2f4a3df9821",
-                "value": 449
+                "value": 573
               },
               {
                 "default": false,
@@ -6866,7 +6994,7 @@
                 "label": "SSH Brute Force",
                 "properties": null,
                 "uuid": "819320c2-2976-42a0-a32f-e1f87754dbae",
-                "value": 450
+                "value": 574
               },
               {
                 "default": false,
@@ -6875,7 +7003,7 @@
                 "label": "Inbound SSH Traffic from an Unusual Location",
                 "properties": null,
                 "uuid": "8d116978-2637-4d7c-8dd8-d430706436c2",
-                "value": 451
+                "value": 575
               },
               {
                 "default": false,
@@ -6884,7 +7012,7 @@
                 "label": "Outbound SSH Traffic to an Unusual Location",
                 "properties": null,
                 "uuid": "b1d8a718-a829-4ad2-bd98-cb1e6f65a278",
-                "value": 452
+                "value": 576
               },
               {
                 "default": false,
@@ -6893,7 +7021,7 @@
                 "label": "SSL Scan",
                 "properties": null,
                 "uuid": "3a0b81ea-9fc4-4042-ae55-63d0a3b8a19c",
-                "value": 453
+                "value": 577
               },
               {
                 "default": false,
@@ -6902,7 +7030,7 @@
                 "label": "Stalled Data Transfer",
                 "properties": null,
                 "uuid": "de6ef518-96a9-4358-8328-664779f8fa64",
-                "value": 454
+                "value": 578
               },
               {
                 "default": false,
@@ -6911,7 +7039,7 @@
                 "label": "Sudden Decrease in Application Bandwidth",
                 "properties": null,
                 "uuid": "38d07546-124a-4585-9806-312e78cb5281",
-                "value": 455
+                "value": 579
               },
               {
                 "default": false,
@@ -6920,7 +7048,7 @@
                 "label": "Sudden Decrease in Device Bandwidth",
                 "properties": null,
                 "uuid": "2ddf149f-91b7-427b-87ca-e8acf9db74f5",
-                "value": 456
+                "value": 580
               },
               {
                 "default": false,
@@ -6929,7 +7057,7 @@
                 "label": "Sudden Decrease in Network Bandwidth",
                 "properties": null,
                 "uuid": "24747dd6-f375-4b86-9ab9-f22b73ed921e",
-                "value": 457
+                "value": 581
               },
               {
                 "default": false,
@@ -6938,7 +7066,7 @@
                 "label": "SUNBURST C\u0026C Activity",
                 "properties": null,
                 "uuid": "a7b5305b-f796-4b51-9fe9-e958bb750c7d",
-                "value": 458
+                "value": 582
               },
               {
                 "default": false,
@@ -6947,7 +7075,7 @@
                 "label": "SUPERNOVA Web Shell",
                 "properties": null,
                 "uuid": "7b54cde3-cfaf-42b2-9897-4a73bc6d41ed",
-                "value": 459
+                "value": 583
               },
               {
                 "default": false,
@@ -6956,7 +7084,7 @@
                 "label": "Suspicious SMB/CIFS Resource Accessed",
                 "properties": null,
                 "uuid": "cc27c4e0-4ba3-4f19-bdb4-f0c7a6b58398",
-                "value": 460
+                "value": 584
               },
               {
                 "default": false,
@@ -6965,7 +7093,7 @@
                 "label": "Suspicious External File Download",
                 "properties": null,
                 "uuid": "df729e9e-e02b-4c18-b8e7-7a5ca01b2367",
-                "value": 461
+                "value": 585
               },
               {
                 "default": false,
@@ -6974,7 +7102,7 @@
                 "label": "Suspicious Internal File Download",
                 "properties": null,
                 "uuid": "2f5befcb-50ef-4115-9c10-82c8efc022a8",
-                "value": 462
+                "value": 586
               },
               {
                 "default": false,
@@ -6983,7 +7111,7 @@
                 "label": "FTP Data Staging",
                 "properties": null,
                 "uuid": "76bf8299-c59f-4e06-a8ee-c254b65d0a89",
-                "value": 463
+                "value": 587
               },
               {
                 "default": false,
@@ -6992,7 +7120,7 @@
                 "label": "Suspicious FTP Download",
                 "properties": null,
                 "uuid": "41b83b13-4a7d-4307-87b9-cf5d3a8ffe36",
-                "value": 464
+                "value": 588
               },
               {
                 "default": false,
@@ -7001,7 +7129,7 @@
                 "label": "Unusual HTML Application (HTA) File Download",
                 "properties": null,
                 "uuid": "7a993611-896e-4cac-866b-b9d2ae6569cd",
-                "value": 465
+                "value": 589
               },
               {
                 "default": false,
@@ -7010,7 +7138,7 @@
                 "label": "Suspicious HTTP File Received",
                 "properties": null,
                 "uuid": "6434a875-2b02-4996-a374-1e4fdc72900d",
-                "value": 466
+                "value": 590
               },
               {
                 "default": false,
@@ -7019,7 +7147,7 @@
                 "label": "Non-standard HTTP Port",
                 "properties": null,
                 "uuid": "7d1cc522-0cee-4590-a58b-624a5dda0754",
-                "value": 467
+                "value": 591
               },
               {
                 "default": false,
@@ -7028,7 +7156,7 @@
                 "label": "Suspicious JA3 Fingerprint",
                 "properties": null,
                 "uuid": "5f9bc5ea-7c1b-4f93-9012-85e63599715e",
-                "value": 468
+                "value": 592
               },
               {
                 "default": false,
@@ -7037,7 +7165,7 @@
                 "label": "Suspicious New Device Detected",
                 "properties": null,
                 "uuid": "db42b9ce-faa8-4dd3-8321-8d0a74c8d3d9",
-                "value": 469
+                "value": 593
               },
               {
                 "default": false,
@@ -7046,7 +7174,7 @@
                 "label": "NFS Data Staging",
                 "properties": null,
                 "uuid": "5091161c-328f-49b7-8c00-7afb2f656370",
-                "value": 470
+                "value": 594
               },
               {
                 "default": false,
@@ -7055,7 +7183,7 @@
                 "label": "Suspicious NFS File Reads",
                 "properties": null,
                 "uuid": "10ac9c6b-203c-4ad4-8c3c-87e61593a237",
-                "value": 471
+                "value": 595
               },
               {
                 "default": false,
@@ -7064,7 +7192,7 @@
                 "label": "Suspicious NFS File Share Access",
                 "properties": null,
                 "uuid": "c07a77ba-1373-4ddb-b875-002e0d5cc04b",
-                "value": 472
+                "value": 596
               },
               {
                 "default": false,
@@ -7073,7 +7201,7 @@
                 "label": "RDP Attack Tool Activity",
                 "properties": null,
                 "uuid": "2c9db990-14af-4a16-93e4-96d39ab063ef",
-                "value": 473
+                "value": 597
               },
               {
                 "default": false,
@@ -7082,7 +7210,7 @@
                 "label": "SMB/CIFS Data Staging",
                 "properties": null,
                 "uuid": "25060b83-52ef-4062-a733-04f80a551c28",
-                "value": 474
+                "value": 598
               },
               {
                 "default": false,
@@ -7091,7 +7219,7 @@
                 "label": "Suspicious SMB/CIFS File Reads",
                 "properties": null,
                 "uuid": "c3c08071-ed40-4999-808d-0a203aac2bf1",
-                "value": 475
+                "value": 599
               },
               {
                 "default": false,
@@ -7100,7 +7228,7 @@
                 "label": "Suspicious SMB/CIFS File Share Access",
                 "properties": null,
                 "uuid": "cefa815e-6187-4989-8a5d-53ed6cc6f037",
-                "value": 476
+                "value": 600
               },
               {
                 "default": false,
@@ -7109,7 +7237,7 @@
                 "label": "Unusual SMB/CIFS Executable File Transfer",
                 "properties": null,
                 "uuid": "02f9c37a-4222-48be-bbd5-554c8e3b29fb",
-                "value": 477
+                "value": 601
               },
               {
                 "default": false,
@@ -7118,7 +7246,7 @@
                 "label": "Suspicious SMB/CIFS Named Pipe",
                 "properties": null,
                 "uuid": "2629c26b-de27-4a9d-b142-52743b1d4c01",
-                "value": 478
+                "value": 602
               },
               {
                 "default": false,
@@ -7127,7 +7255,7 @@
                 "label": "Suspicious Top-level Domain",
                 "properties": null,
                 "uuid": "87b4cd49-d1a9-4e80-9df0-952cfcb60d86",
-                "value": 479
+                "value": 603
               },
               {
                 "default": false,
@@ -7136,7 +7264,7 @@
                 "label": "Suspicious User Agent",
                 "properties": null,
                 "uuid": "4ef8a7d2-f2a3-447e-9e52-0f17c7a1c730",
-                "value": 480
+                "value": 604
               },
               {
                 "default": false,
@@ -7145,7 +7273,7 @@
                 "label": "TCP NULL, FIN, or XMAS Scan",
                 "properties": null,
                 "uuid": "63294a02-d123-4333-a0d9-140a9f1a11ca",
-                "value": 481
+                "value": 605
               },
               {
                 "default": false,
@@ -7154,7 +7282,7 @@
                 "label": "TCP SYN Scan",
                 "properties": null,
                 "uuid": "4f026db9-d9e1-4f1e-8341-5ba7a6e5bbe3",
-                "value": 482
+                "value": 606
               },
               {
                 "default": false,
@@ -7163,7 +7291,7 @@
                 "label": "TCP Stack Exploit Attempt (Client)",
                 "properties": null,
                 "uuid": "d46233fd-d77d-4ce0-ae11-72ace610bbc5",
-                "value": 483
+                "value": 607
               },
               {
                 "default": false,
@@ -7172,7 +7300,7 @@
                 "label": "TCP Stack Exploit Attempt (Server)",
                 "properties": null,
                 "uuid": "35e69a30-4f12-4951-842c-d042b4127a9a",
-                "value": 484
+                "value": 608
               },
               {
                 "default": false,
@@ -7181,7 +7309,7 @@
                 "label": "Telnet Password",
                 "properties": null,
                 "uuid": "f07b04d7-9376-403d-ae06-b195615837c8",
-                "value": 485
+                "value": 609
               },
               {
                 "default": false,
@@ -7190,7 +7318,7 @@
                 "label": "DNS Client Request to a Suspicious Host",
                 "properties": null,
                 "uuid": "d6ab432d-a204-45bc-8a9d-fff9d698f5eb",
-                "value": 486
+                "value": 610
               },
               {
                 "default": false,
@@ -7199,7 +7327,7 @@
                 "label": "HTTP Client Request to a Suspicious Host",
                 "properties": null,
                 "uuid": "37727f1d-56fb-4c09-9e5a-faf5a8aaa683",
-                "value": 487
+                "value": 611
               },
               {
                 "default": false,
@@ -7208,7 +7336,7 @@
                 "label": "HTTP Client Request to a Suspicious URI",
                 "properties": null,
                 "uuid": "175a471a-6933-4908-8e7a-b232ee6f1618",
-                "value": 488
+                "value": 612
               },
               {
                 "default": false,
@@ -7217,7 +7345,7 @@
                 "label": "SSL/TLS Connection to a Suspicious Host",
                 "properties": null,
                 "uuid": "dba2f370-6b8e-4e17-afc7-5530325e6a7c",
-                "value": 489
+                "value": 613
               },
               {
                 "default": false,
@@ -7226,7 +7354,7 @@
                 "label": "Inbound Suspicious Connections",
                 "properties": null,
                 "uuid": "0a5948f3-b74d-4674-9c4a-86bb3d4d116c",
-                "value": 490
+                "value": 614
               },
               {
                 "default": false,
@@ -7235,7 +7363,7 @@
                 "label": "Outbound Suspicious Connection",
                 "properties": null,
                 "uuid": "62cb006b-b8f3-4853-9fab-774b0b129465",
-                "value": 491
+                "value": 615
               },
               {
                 "default": false,
@@ -7244,7 +7372,7 @@
                 "label": "Apache Tomcat JSP Exploit Attempt",
                 "properties": null,
                 "uuid": "d7a05901-8f25-49a9-91cb-7ac65278dae7",
-                "value": 492
+                "value": 616
               },
               {
                 "default": false,
@@ -7253,7 +7381,7 @@
                 "label": "UDP Port Scan",
                 "properties": null,
                 "uuid": "c4502eff-d071-44d4-a302-6b4525b669ba",
-                "value": 493
+                "value": 617
               },
               {
                 "default": false,
@@ -7262,7 +7390,7 @@
                 "label": "Unapproved Cloud Service Access",
                 "properties": null,
                 "uuid": "ba4aba66-2d6d-4bb7-ad2a-4a7fdf60c0ca",
-                "value": 494
+                "value": 618
               },
               {
                 "default": false,
@@ -7271,7 +7399,7 @@
                 "label": "Unauthorized Caller Error",
                 "properties": null,
                 "uuid": "a8febf07-1833-4d2c-9529-73693cd629b4",
-                "value": 495
+                "value": 619
               },
               {
                 "default": false,
@@ -7280,7 +7408,7 @@
                 "label": "Unconventional Data Transfer",
                 "properties": null,
                 "uuid": "c3644443-137f-4c6d-8349-606624dfbb30",
-                "value": 496
+                "value": 620
               },
               {
                 "default": false,
@@ -7289,7 +7417,7 @@
                 "label": "Unconventional External Connection",
                 "properties": null,
                 "uuid": "bac5c46c-5776-4d73-bc5f-183e9c13aa9e",
-                "value": 497
+                "value": 621
               },
               {
                 "default": false,
@@ -7298,7 +7426,7 @@
                 "label": "Unconventional Internal Connection",
                 "properties": null,
                 "uuid": "8ba0683e-6450-438f-9d7d-c2c5a8d4481a",
-                "value": 498
+                "value": 622
               },
               {
                 "default": false,
@@ -7307,7 +7435,7 @@
                 "label": "Unconventional Protocol Communication",
                 "properties": null,
                 "uuid": "696f8b16-127d-4e29-8d03-8c749fe208ae",
-                "value": 499
+                "value": 623
               },
               {
                 "default": false,
@@ -7316,7 +7444,7 @@
                 "label": "Unconventional RDP Behavior",
                 "properties": null,
                 "uuid": "d65e8fe9-436e-4356-a8fd-f6fee684fbe2",
-                "value": 500
+                "value": 624
               },
               {
                 "default": false,
@@ -7325,7 +7453,7 @@
                 "label": "Unconventional RDP Data Transfer",
                 "properties": null,
                 "uuid": "fbfb025e-384a-4adf-9061-88ea94a2fbee",
-                "value": 501
+                "value": 625
               },
               {
                 "default": false,
@@ -7334,7 +7462,7 @@
                 "label": "Unconventional VNC Behavior",
                 "properties": null,
                 "uuid": "77c2e68f-c6ba-4d66-8d5a-80b00dcf4212",
-                "value": 502
+                "value": 626
               },
               {
                 "default": false,
@@ -7343,7 +7471,7 @@
                 "label": "Unconventional VNC Data Transfer",
                 "properties": null,
                 "uuid": "e30f966a-ff57-4ef1-ac3f-b083be180b68",
-                "value": 503
+                "value": 627
               },
               {
                 "default": false,
@@ -7352,7 +7480,7 @@
                 "label": "Unconventional SMB/CIFS Data Transfer",
                 "properties": null,
                 "uuid": "2268db9b-f3ae-4fa8-9380-4eea6afa0b55",
-                "value": 504
+                "value": 628
               },
               {
                 "default": false,
@@ -7361,7 +7489,7 @@
                 "label": "Unconventional SSH Behavior",
                 "properties": null,
                 "uuid": "04dda2eb-e71e-4e3a-a329-128234013205",
-                "value": 505
+                "value": 629
               },
               {
                 "default": false,
@@ -7370,7 +7498,7 @@
                 "label": "Unconventional SSH Data Transfer",
                 "properties": null,
                 "uuid": "3e9403c6-82fa-446c-98e6-1e95f380c099",
-                "value": 506
+                "value": 630
               },
               {
                 "default": false,
@@ -7379,7 +7507,7 @@
                 "label": "Unconventional Telnet Data Transfer",
                 "properties": null,
                 "uuid": "41f8e86f-e0ff-4354-b8ec-ac4fe00a81f9",
-                "value": 507
+                "value": 631
               },
               {
                 "default": false,
@@ -7388,7 +7516,7 @@
                 "label": "Unencrypted Zoom Data",
                 "properties": null,
                 "uuid": "1ba50f95-bc48-497e-953c-ff3b78b98b7a",
-                "value": 508
+                "value": 632
               },
               {
                 "default": false,
@@ -7397,7 +7525,7 @@
                 "label": "Unexpected Dropped Connections",
                 "properties": null,
                 "uuid": "ec5c121e-bf93-4603-9e18-346fdd98aeb0",
-                "value": 509
+                "value": 633
               },
               {
                 "default": false,
@@ -7406,7 +7534,7 @@
                 "label": "Unexpected Service Access",
                 "properties": null,
                 "uuid": "5b0987ae-4903-4abe-9a21-59586d4bef33",
-                "value": 510
+                "value": 634
               },
               {
                 "default": false,
@@ -7415,7 +7543,7 @@
                 "label": "Unknown Public DNS Server",
                 "properties": null,
                 "uuid": "8fea1ac0-7f8f-4602-8ab1-8b19f211d309",
-                "value": 511
+                "value": 635
               },
               {
                 "default": false,
@@ -7424,7 +7552,7 @@
                 "label": "Data Exfiltration to Unknown S3 Bucket",
                 "properties": null,
                 "uuid": "a3dac469-1819-42d9-8e63-e818b0b844ab",
-                "value": 512
+                "value": 636
               },
               {
                 "default": false,
@@ -7433,7 +7561,7 @@
                 "label": "Unsafe LDAP Authentication",
                 "properties": null,
                 "uuid": "4abb65c4-b41c-4e0a-824b-bbb3f497576d",
-                "value": 513
+                "value": 637
               },
               {
                 "default": false,
@@ -7442,7 +7570,7 @@
                 "label": "Unusual IoT Protocol Activity",
                 "properties": null,
                 "uuid": "2f3c7d01-ba8b-4b2f-98ee-f74daace8455",
-                "value": 514
+                "value": 638
               },
               {
                 "default": false,
@@ -7451,7 +7579,7 @@
                 "label": "Unusual Kerberos Fingerprint",
                 "properties": null,
                 "uuid": "17195b00-13a5-4316-a2b2-47a785bd44ef",
-                "value": 515
+                "value": 639
               },
               {
                 "default": false,
@@ -7460,7 +7588,7 @@
                 "label": "Unusual Protocol for Enterprise Software",
                 "properties": null,
                 "uuid": "034113d1-75dc-404e-ab96-90c9e9441d50",
-                "value": 516
+                "value": 640
               },
               {
                 "default": false,
@@ -7469,7 +7597,7 @@
                 "label": "Unusual Download from S3 Bucket",
                 "properties": null,
                 "uuid": "636fbfcc-357d-4613-bd61-5ba07a8d9252",
-                "value": 517
+                "value": 641
               },
               {
                 "default": false,
@@ -7478,7 +7606,7 @@
                 "label": "Unusual Login Time",
                 "properties": null,
                 "uuid": "77b85a0e-e685-4a3a-918f-198fef0e83ce",
-                "value": 518
+                "value": 642
               },
               {
                 "default": false,
@@ -7487,7 +7615,7 @@
                 "label": "Inbound VNC Traffic from an Unusual Location",
                 "properties": null,
                 "uuid": "d3edec91-c7cc-4210-99cf-1d134bb4b4a1",
-                "value": 519
+                "value": 643
               },
               {
                 "default": false,
@@ -7496,7 +7624,7 @@
                 "label": "VoIP Call Failure",
                 "properties": null,
                 "uuid": "161c0a76-8a5f-4080-84c1-a5ca279ee5b0",
-                "value": 520
+                "value": 644
               },
               {
                 "default": false,
@@ -7505,7 +7633,7 @@
                 "label": "VoIP Unavailability Error",
                 "properties": null,
                 "uuid": "53b7b863-8965-4dd8-b6bb-ba94e5d1456c",
-                "value": 521
+                "value": 645
               },
               {
                 "default": false,
@@ -7514,7 +7642,7 @@
                 "label": "VPN Gateway Access from an Unusual Location",
                 "properties": null,
                 "uuid": "61634936-e689-4b94-82a6-2b24dc00ee63",
-                "value": 522
+                "value": 646
               },
               {
                 "default": false,
@@ -7523,7 +7651,7 @@
                 "label": "Weak Cipher Suites",
                 "properties": null,
                 "uuid": "6aec3b9c-be79-4801-8c7e-7cb088beef76",
-                "value": 523
+                "value": 647
               },
               {
                 "default": false,
@@ -7532,7 +7660,7 @@
                 "label": "Weak Kerberos Encryption",
                 "properties": null,
                 "uuid": "263aafd2-2c7b-4521-aa07-d17c11e938a5",
-                "value": 524
+                "value": 648
               },
               {
                 "default": false,
@@ -7541,7 +7669,7 @@
                 "label": "Web Directory Scan",
                 "properties": null,
                 "uuid": "dba5f568-2492-40e9-b20f-dd97bd79f8fc",
-                "value": 525
+                "value": 649
               },
               {
                 "default": false,
@@ -7550,7 +7678,7 @@
                 "label": "Web Issues",
                 "properties": null,
                 "uuid": "616f23d9-ed32-42ca-af1c-7821214bf910",
-                "value": 526
+                "value": 650
               },
               {
                 "default": false,
@@ -7559,7 +7687,7 @@
                 "label": "Oracle WebLogic Administration Console Exploit Attempt",
                 "properties": null,
                 "uuid": "ba983458-81d1-41d1-b1b3-8d6f3deea918",
-                "value": 527
+                "value": 651
               },
               {
                 "default": false,
@@ -7568,7 +7696,7 @@
                 "label": "Oracle WebLogic Deserialization Exploit Attempt",
                 "properties": null,
                 "uuid": "bef1c759-bd1a-4b19-9ad0-3c6cfcdfb7f1",
-                "value": 528
+                "value": 652
               },
               {
                 "default": false,
@@ -7577,7 +7705,7 @@
                 "label": "Web Service Issues",
                 "properties": null,
                 "uuid": "1a2013cb-d7fd-4a12-8d33-65976425767f",
-                "value": 529
+                "value": 653
               },
               {
                 "default": false,
@@ -7586,7 +7714,7 @@
                 "label": "WiFi Auth Issues",
                 "properties": null,
                 "uuid": "757c36e7-0c73-4192-b54b-ab56ab78758a",
-                "value": 530
+                "value": 654
               },
               {
                 "default": false,
@@ -7595,7 +7723,7 @@
                 "label": "New WMI Method Launch",
                 "properties": null,
                 "uuid": "6918920d-c14a-472e-affb-385feb829d03",
-                "value": 531
+                "value": 655
               },
               {
                 "default": false,
@@ -7604,7 +7732,7 @@
                 "label": "New WMI Process Creation",
                 "properties": null,
                 "uuid": "01048e47-f630-47dc-a7a9-a548282b6d37",
-                "value": 532
+                "value": 656
               },
               {
                 "default": false,
@@ -7613,7 +7741,7 @@
                 "label": "New WMI Enumeration Query",
                 "properties": null,
                 "uuid": "891cd1f2-2a4b-491b-a5b6-ad054f8ba5c7",
-                "value": 533
+                "value": 657
               },
               {
                 "default": false,
@@ -7622,7 +7750,7 @@
                 "label": "WordPress Brute Force",
                 "properties": null,
                 "uuid": "3bd13337-4836-43f5-a3f3-45b65e370b35",
-                "value": 534
+                "value": 658
               },
               {
                 "default": false,
@@ -7631,7 +7759,7 @@
                 "label": "PowerShell Remoting Activity",
                 "properties": null,
                 "uuid": "2fd2b1d7-97ef-4bd2-b4c7-dc5eb6f7dd6b",
-                "value": 535
+                "value": 659
               },
               {
                 "default": false,
@@ -7640,7 +7768,7 @@
                 "label": "Cross-Site Scripting (XSS) Attack",
                 "properties": null,
                 "uuid": "6553fb42-8ada-4c38-a253-8249238b27b6",
-                "value": 536
+                "value": 660
               }
             ]
           },
@@ -7654,7 +7782,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_limit",
             "hide_notification": false,
-            "id": 440,
+            "id": 587,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -7669,7 +7797,7 @@
             "templates": [],
             "text": "Limit",
             "tooltip": "(Optional) Limit the number of detections returned to the specified maximum number.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "3e902d46-f92e-43eb-91be-cc3589e33724",
             "values": []
           },
@@ -7683,7 +7811,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_mod_time",
             "hide_notification": false,
-            "id": 441,
+            "id": 588,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -7698,7 +7826,7 @@
             "templates": [],
             "text": "Mod time",
             "tooltip": "(Optional) Return detections that were modified on or after the specified date, expressed in milliseconds since the epoch.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "baa7d484-467f-40dc-9dca-fbed5345c713",
             "values": []
           },
@@ -7712,7 +7840,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_offset",
             "hide_notification": false,
-            "id": 442,
+            "id": 589,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -7727,7 +7855,7 @@
             "templates": [],
             "text": "Offset",
             "tooltip": "(Optional) Skip the specified number of detections. This parameter is often combined with the limit parameter to paginate result sets.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "a31bee64-87b8-447a-95c6-ec763968b770",
             "values": []
           },
@@ -7741,7 +7869,7 @@
             "deprecated": false,
             "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff/extrahop_update_time",
             "hide_notification": false,
-            "id": 443,
+            "id": 590,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -7756,7 +7884,7 @@
             "templates": [],
             "text": "Update time",
             "tooltip": "(Optional) Returns detections related to events that occurred after the specified date, expressed in milliseconds since the epoch. Note that ExtraHop Machine Learning Services analyze historical data to generate detections, and so there is a time delay between when the events that cause those detections occur and when the detections are generated. If you search for detections in the same update_time window multiple times, the later search might return detections that were not returned by the earlier search.",
-            "type_id": 1024,
+            "type_id": 1037,
             "uuid": "94a7df6f-7c75-42f5-8d37-a2173e9d1b9c",
             "values": []
           }
@@ -7781,7 +7909,7 @@
         "uuid": "65678f34-4393-409b-aa29-d0577d36e66b"
       },
       "has_logical_errors": false,
-      "id": 19,
+      "id": 30,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -7790,18 +7918,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684239695418,
+      "last_modified_time": 1727294369490,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614139236,
+          "created_date": 1727294368559,
           "description": "Get the detection with specified detection ID.",
           "enabled": false,
           "export_key": "ExtraHop: Get Detection",
-          "id": 23,
+          "id": 47,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614139259,
+          "last_modified_time": 1727294368559,
           "name": "ExtraHop: Get Detection",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_search_detections",
@@ -7812,14 +7940,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614139262,
+          "created_date": 1727294368621,
           "description": "Add results of the Get Detection function to the Dections data table.",
           "enabled": false,
           "export_key": "ExtraHop: Get Detections Add to Detections Data table",
-          "id": 24,
+          "id": 48,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614139287,
+          "last_modified_time": 1727294368621,
           "name": "ExtraHop: Get Detections Add to Detections Data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_search_detections",
@@ -7830,14 +7958,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614139290,
+          "created_date": 1727294368696,
           "description": "Write the detection information from get detection to the ExtraHop Detections data table.",
           "enabled": false,
           "export_key": "ExtraHop: Write Detection to Detections Data Table",
-          "id": 25,
+          "id": 49,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684239692429,
+          "last_modified_time": 1727294368696,
           "name": "ExtraHop: Write Detection to Detections Data Table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_search_detections",
@@ -7848,14 +7976,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614139312,
+          "created_date": 1727294368783,
           "description": "Write Search Detections results to Detections data table",
           "enabled": false,
           "export_key": "ExtraHop: Write Search Detections results to Detections data table",
-          "id": 26,
+          "id": 50,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684165480985,
+          "last_modified_time": 1727294368783,
           "name": "ExtraHop: Write Search Detections results to Detections data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_search_detections",
@@ -8006,7 +8134,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_cfc50f7d-71b7-449f-a9cd-69f5d04a75ff",
-        "id": 21,
+        "id": 32,
         "name": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff",
         "type": "playbook",
         "uuid": "933e57a0-ebbe-4c6b-a7dd-ba4555315895"
@@ -8014,15 +8142,15 @@
       "tags": [],
       "type": "default",
       "uuid": "cfc50f7d-71b7-449f-a9cd-69f5d04a75ff",
-      "version": 23
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 67,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\" isExecutable=\"true\" name=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1lahcrd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cexclusiveGateway default=\"Flow_14x0mxz\" id=\"ConditionPoint_1\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1lahcrd\u003c/incoming\u003e\u003coutgoing\u003eFlow_14x0mxz\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0ao8l0s\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_1lahcrd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ConditionPoint_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"search_filters =  [ \\n    \\\"extrahop_device_field\\\",\\n    \\\"extrahop_device_operand\\\",\\n    \\\"extrahop_device_operator\\\"\\n]\\nfor p in search_filters:\\n    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):\\n        raise ValueError(\\\"A search filter and Device ID are not allowed at the same time.\\\")\\n        \\nif playbook.inputs.extrahop_device_id:\\n    inputs.extrahop_device_id = playbook.inputs.extrahop_device_id\\n    \\nif playbook.inputs.extrahop_active_from:\\n    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\nif playbook.inputs.extrahop_active_until:\\n    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\\nif playbook.inputs.extrahop_offset:\\n    inputs.extrahop_offset = playbook.inputs.extrahop_offset\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_devices_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ao8l0s\u003c/incoming\u003e\u003coutgoing\u003eFlow_05j2dab\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) search devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e7384abd-0046-4b46-97af-d34d8cc9c711\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_search_devices pre processing script ##\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        return \u0027{}\u0027.format(prop)\\n    else:\\n        return None\\n\\n\\ndef main():\\n    filter = {}\\n\\n    search_filter = {}\\n    filter_props = {\\n        \\\"field\\\": get_prop(playbook.inputs.extrahop_device_field),\\n        \\\"operand\\\": get_prop(playbook.inputs.extrahop_device_operand),\\n        \\\"operator\\\": get_prop(playbook.inputs.extrahop_device_operator)\\n    }\\n    filter = {k: v for k, v in filter_props.items() if v}\\n\\n    if filter and playbook.inputs.extrahop_device_id:\\n        raise ValueError(\\\"The device ID and search filter shouldn\u0027t be set at the same time.\\\")\\n\\n    if filter:\\n        missing_props = []\\n        for f in [\\\"field\\\", \\\"operand\\\", \\\"operator\\\"]:\\n            if not filter.get(f, None):\\n                missing_props.append(f)\\n        if missing_props:\\n            raise ValueError(\\\"The filter is missing properties: \u0027{}\u0027.\\\".format(\\\", \\\".join(missing_props)))\\n\\n        search_filter = {\\n            \\\"filter\\\": filter\\n        }\\n\\n    if playbook.inputs.extrahop_device_id:\\n        search_filter = {\\n            \\\"filter\\\": {\\n                \\\"field\\\": \\\"discovery_id\\\",\\n                \\\"operator\\\": \\\"=\\\",\\n                \\\"operand\\\": str(playbook.inputs.extrahop_device_id)\\n            }\\n        }\\n    if search_filter:\\n        inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n    if playbook.inputs.extrahop_active_from:\\n        inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\n    if playbook.inputs.extrahop_active_until:\\n        inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\n    if playbook.inputs.extrahop_limit:\\n        inputs.extrahop_limit = playbook.inputs.extrahop_limit\\n    if playbook.inputs.extrahop_offset:\\n        inputs.extrahop_offset = playbook.inputs.extrahop_offset\\n\\n    if inputs == {}:\\n      raise ValueError(\\\"At least one search criteria is required to search devices. inputs = {0}\\\".format(inputs))\\n\\nmain()\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"device_search_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14x0mxz\u003c/incoming\u003e\u003coutgoing\u003eFlow_09y8l76\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"ExtraHop: Write Get Devices to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"afb734d7-29b8-411a-a975-71d81ac76bb8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05j2dab\u003c/incoming\u003e\u003coutgoing\u003eFlow_0il7twe\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05j2dab\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0il7twe\u003c/incoming\u003e\u003cincoming\u003eFlow_0bc3x0c\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0il7twe\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_5\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write search devices results to data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d3fc8864-27c3-4c76-ac33-a469b0874f63\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09y8l76\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bc3x0c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09y8l76\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0bc3x0c\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_0ao8l0s\" name=\"ExtraHop: Test if search filters are NOT set\" sourceRef=\"ConditionPoint_1\" targetRef=\"ServiceTask_2\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test if search filters are NOT set\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if playbook.inputs.extrahop_device_field or playbook.inputs.extrahop_device_operator or playbook.inputs.extrahop_device_operand:\\n  result = False\\nelse:\\n  result = True\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_14x0mxz\" name=\"Else\" sourceRef=\"ConditionPoint_1\" targetRef=\"ServiceTask_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14x0mxz\" id=\"Flow_14x0mxz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"268\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"779\" y=\"204\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ao8l0s\" id=\"Flow_0ao8l0s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"268\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"85\" x=\"607\" y=\"202\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bc3x0c\" id=\"Flow_0bc3x0c_di\"\u003e\u003comgdi:waypoint x=\"860\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09y8l76\" id=\"Flow_09y8l76_di\"\u003e\u003comgdi:waypoint x=\"860\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0il7twe\" id=\"Flow_0il7twe_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05j2dab\" id=\"Flow_05j2dab_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lahcrd\" id=\"Flow_1lahcrd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_1\" id=\"ConditionPoint_1_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"124\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\" isExecutable=\"true\" name=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1lahcrd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cexclusiveGateway default=\"Flow_14x0mxz\" id=\"ConditionPoint_1\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1lahcrd\u003c/incoming\u003e\u003coutgoing\u003eFlow_14x0mxz\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0ao8l0s\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_1lahcrd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ConditionPoint_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"search_filters =  [ \\n    \\\"extrahop_device_field\\\",\\n    \\\"extrahop_device_operand\\\",\\n    \\\"extrahop_device_operator\\\"\\n]\\nfor p in search_filters:\\n    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):\\n        raise ValueError(\\\"A search filter and Device ID are not allowed at the same time.\\\")\\n        \\nif playbook.inputs.extrahop_device_id:\\n    inputs.extrahop_device_id = playbook.inputs.extrahop_device_id\\n    \\nif playbook.inputs.extrahop_active_from:\\n    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\nif playbook.inputs.extrahop_active_until:\\n    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\\nif playbook.inputs.extrahop_offset:\\n    inputs.extrahop_offset = playbook.inputs.extrahop_offset\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_devices_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ao8l0s\u003c/incoming\u003e\u003coutgoing\u003eFlow_05j2dab\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) search devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e7384abd-0046-4b46-97af-d34d8cc9c711\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_search_devices pre processing script ##\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        return \u0027{}\u0027.format(prop)\\n    else:\\n        return None\\n\\n\\ndef main():\\n    filter = {}\\n\\n    search_filter = {}\\n    filter_props = {\\n        \\\"field\\\": get_prop(playbook.inputs.extrahop_device_field),\\n        \\\"operand\\\": get_prop(playbook.inputs.extrahop_device_operand),\\n        \\\"operator\\\": get_prop(playbook.inputs.extrahop_device_operator)\\n    }\\n    filter = {k: v for k, v in filter_props.items() if v}\\n\\n    if filter and playbook.inputs.extrahop_device_id:\\n        raise ValueError(\\\"The device ID and search filter shouldn\u0027t be set at the same time.\\\")\\n\\n    if filter:\\n        missing_props = []\\n        for f in [\\\"field\\\", \\\"operand\\\", \\\"operator\\\"]:\\n            if not filter.get(f, None):\\n                missing_props.append(f)\\n        if missing_props:\\n            raise ValueError(\\\"The filter is missing properties: \u0027{}\u0027.\\\".format(\\\", \\\".join(missing_props)))\\n\\n        search_filter = {\\n            \\\"filter\\\": filter\\n        }\\n\\n    if playbook.inputs.extrahop_device_id:\\n        search_filter = {\\n            \\\"filter\\\": {\\n                \\\"field\\\": \\\"discovery_id\\\",\\n                \\\"operator\\\": \\\"=\\\",\\n                \\\"operand\\\": str(playbook.inputs.extrahop_device_id)\\n            }\\n        }\\n    if search_filter:\\n        inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n    if playbook.inputs.extrahop_active_from:\\n        inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\n    if playbook.inputs.extrahop_active_until:\\n        inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\n    if playbook.inputs.extrahop_limit:\\n        inputs.extrahop_limit = playbook.inputs.extrahop_limit\\n    if playbook.inputs.extrahop_offset:\\n        inputs.extrahop_offset = playbook.inputs.extrahop_offset\\n\\n    if inputs == {}:\\n      raise ValueError(\\\"At least one search criteria is required to search devices. inputs = {0}\\\".format(inputs))\\n\\nmain()\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"device_search_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14x0mxz\u003c/incoming\u003e\u003coutgoing\u003eFlow_09y8l76\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"ExtraHop: Write Get Devices to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"afb734d7-29b8-411a-a975-71d81ac76bb8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05j2dab\u003c/incoming\u003e\u003coutgoing\u003eFlow_0il7twe\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05j2dab\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0il7twe\u003c/incoming\u003e\u003cincoming\u003eFlow_0bc3x0c\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0il7twe\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_5\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write search devices results to data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d3fc8864-27c3-4c76-ac33-a469b0874f63\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09y8l76\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bc3x0c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09y8l76\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0bc3x0c\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_0ao8l0s\" name=\"ExtraHop: Test if search filters are NOT set\" sourceRef=\"ConditionPoint_1\" targetRef=\"ServiceTask_2\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test if search filters are NOT set\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if playbook.inputs.extrahop_device_field or playbook.inputs.extrahop_device_operator or playbook.inputs.extrahop_device_operand:\\n  result = False\\nelse:\\n  result = True\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_14x0mxz\" name=\"Else\" sourceRef=\"ConditionPoint_1\" targetRef=\"ServiceTask_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14x0mxz\" id=\"Flow_14x0mxz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"268\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"779\" y=\"204\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ao8l0s\" id=\"Flow_0ao8l0s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"268\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"85\" x=\"607\" y=\"202\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bc3x0c\" id=\"Flow_0bc3x0c_di\"\u003e\u003comgdi:waypoint x=\"860\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09y8l76\" id=\"Flow_09y8l76_di\"\u003e\u003comgdi:waypoint x=\"860\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0il7twe\" id=\"Flow_0il7twe_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05j2dab\" id=\"Flow_05j2dab_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lahcrd\" id=\"Flow_1lahcrd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_1\" id=\"ConditionPoint_1_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"124\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614139667,
+      "create_date": 1727294369511,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -8052,7 +8180,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_active_from",
             "hide_notification": false,
-            "id": 444,
+            "id": 591,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -8067,7 +8195,7 @@
             "templates": [],
             "text": "Active from",
             "tooltip": "(Optional) The beginning timestamp for the request.",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "4609a11a-7bb8-4a6a-a492-03b00a8953e1",
             "values": []
           },
@@ -8081,7 +8209,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_active_until",
             "hide_notification": false,
-            "id": 445,
+            "id": 592,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -8096,7 +8224,7 @@
             "templates": [],
             "text": "Active until",
             "tooltip": " (Optional) The ending timestamp for the request. ",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "d9580fd9-e9f0-4aa7-9095-ff1874ca5d92",
             "values": []
           },
@@ -8110,7 +8238,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_device_field",
             "hide_notification": false,
-            "id": 446,
+            "id": 593,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -8125,7 +8253,7 @@
             "templates": [],
             "text": "Filter: Field",
             "tooltip": "Optional:  Device search filter field.",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "5686d2f5-35d1-47ab-b07c-88c5a94324f8",
             "values": [
               {
@@ -8135,7 +8263,7 @@
                 "label": "activity",
                 "properties": null,
                 "uuid": "f7891731-6651-4cbb-9df7-3ae5cb728f9b",
-                "value": 542
+                "value": 661
               },
               {
                 "default": false,
@@ -8144,7 +8272,7 @@
                 "label": "cdp_name",
                 "properties": null,
                 "uuid": "db6203ea-9a0b-4dba-98b4-d9409b75311f",
-                "value": 550
+                "value": 662
               },
               {
                 "default": false,
@@ -8153,7 +8281,7 @@
                 "label": "cloud_account",
                 "properties": null,
                 "uuid": "71f8aba7-10d2-4499-b355-347259235a50",
-                "value": 558
+                "value": 663
               },
               {
                 "default": false,
@@ -8162,7 +8290,7 @@
                 "label": "custom_name",
                 "properties": null,
                 "uuid": "086f9980-24c3-4044-9cae-14ae9052f764",
-                "value": 551
+                "value": 664
               },
               {
                 "default": false,
@@ -8171,7 +8299,7 @@
                 "label": "dhcp_name",
                 "properties": null,
                 "uuid": "eb695866-6db1-46f9-b9e3-35b9eecdbfbe",
-                "value": 548
+                "value": 665
               },
               {
                 "default": false,
@@ -8180,7 +8308,7 @@
                 "label": "discovery_id",
                 "properties": null,
                 "uuid": "07f126ed-0712-464a-98bc-a88f6d635b6f",
-                "value": 537
+                "value": 666
               },
               {
                 "default": false,
@@ -8189,7 +8317,7 @@
                 "label": "discover_time",
                 "properties": null,
                 "uuid": "e0e81d74-85e9-4bfc-a789-f42a4f316a9b",
-                "value": 545
+                "value": 667
               },
               {
                 "default": false,
@@ -8198,7 +8326,7 @@
                 "label": "dns_name",
                 "properties": null,
                 "uuid": "11697606-e828-498d-a017-b35c55bd061d",
-                "value": 547
+                "value": 668
               },
               {
                 "default": false,
@@ -8207,7 +8335,7 @@
                 "label": "emacaddr",
                 "properties": null,
                 "uuid": "7ea8ecf3-8042-4126-9975-c9d18e022c92",
-                "value": 580
+                "value": 669
               },
               {
                 "default": false,
@@ -8216,7 +8344,7 @@
                 "label": "is_active",
                 "properties": null,
                 "uuid": "e51b8900-f3aa-4761-88f9-64e195bc8b67",
-                "value": 561
+                "value": 670
               },
               {
                 "default": false,
@@ -8225,7 +8353,7 @@
                 "label": "is_critical",
                 "properties": null,
                 "uuid": "dae0ce4a-4e5b-45aa-aaaa-1a85cc69f8fc",
-                "value": 554
+                "value": 671
               },
               {
                 "default": false,
@@ -8234,7 +8362,7 @@
                 "label": "instance_id",
                 "properties": null,
                 "uuid": "bb6c0b7a-fa93-40f5-99f2-e839a16f9133",
-                "value": 555
+                "value": 672
               },
               {
                 "default": false,
@@ -8243,7 +8371,7 @@
                 "label": "instance_name",
                 "properties": null,
                 "uuid": "4dca9571-c596-4456-be35-eb5423799ee6",
-                "value": 556
+                "value": 673
               },
               {
                 "default": false,
@@ -8252,7 +8380,7 @@
                 "label": "instance_type",
                 "properties": null,
                 "uuid": "f004052d-b74e-467f-897d-711c28f2077e",
-                "value": 557
+                "value": 674
               },
               {
                 "default": false,
@@ -8261,7 +8389,7 @@
                 "label": "ipaddr",
                 "properties": null,
                 "uuid": "c9af2ac7-ca4a-4652-8feb-3399d879a697",
-                "value": 538
+                "value": 675
               },
               {
                 "default": false,
@@ -8270,7 +8398,7 @@
                 "label": "model",
                 "properties": null,
                 "uuid": "65661a38-43db-4953-914e-5e6c11395777",
-                "value": 553
+                "value": 676
               },
               {
                 "default": false,
@@ -8279,7 +8407,7 @@
                 "label": "netbios_name",
                 "properties": null,
                 "uuid": "2fb2cb9e-bee5-4858-80f9-67be6812bdc5",
-                "value": 549
+                "value": 677
               },
               {
                 "default": false,
@@ -8288,7 +8416,7 @@
                 "label": "node",
                 "properties": null,
                 "uuid": "c614c12a-89dd-42b7-8c9b-ab6749fa555b",
-                "value": 543
+                "value": 678
               },
               {
                 "default": false,
@@ -8297,7 +8425,7 @@
                 "label": "role",
                 "properties": null,
                 "uuid": "e475adc1-450b-4af2-83dd-4ddd0679f223",
-                "value": 546
+                "value": 679
               },
               {
                 "default": false,
@@ -8306,7 +8434,7 @@
                 "label": "software",
                 "properties": null,
                 "uuid": "9829c4a2-40b7-4e37-9a51-085c95384f6d",
-                "value": 552
+                "value": 680
               },
               {
                 "default": false,
@@ -8315,7 +8443,7 @@
                 "label": "subnet_id",
                 "properties": null,
                 "uuid": "2963dec0-f12a-478a-9cf6-36b52db913c3",
-                "value": 560
+                "value": 681
               },
               {
                 "default": false,
@@ -8324,7 +8452,7 @@
                 "label": "tag",
                 "properties": null,
                 "uuid": "387f4f3e-bfdd-46da-9f73-dd49a340acb3",
-                "value": 541
+                "value": 682
               },
               {
                 "default": false,
@@ -8333,7 +8461,7 @@
                 "label": "vendor",
                 "properties": null,
                 "uuid": "737921b5-2e67-4eaf-9b33-f35bd6433e57",
-                "value": 540
+                "value": 683
               },
               {
                 "default": false,
@@ -8342,7 +8470,7 @@
                 "label": "vlan",
                 "properties": null,
                 "uuid": "27c07193-6e7a-4634-9552-258c161911f5",
-                "value": 544
+                "value": 684
               },
               {
                 "default": false,
@@ -8351,7 +8479,7 @@
                 "label": "vpc_id",
                 "properties": null,
                 "uuid": "7fb2d05c-9900-4a45-a438-0b27bec87c8a",
-                "value": 559
+                "value": 685
               }
             ]
           },
@@ -8365,7 +8493,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_device_id",
             "hide_notification": false,
-            "id": 447,
+            "id": 594,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8380,7 +8508,7 @@
             "templates": [],
             "text": "Device ID",
             "tooltip": "Optional: ExtraHop Device REST api ID.",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "b1b50c80-5dab-453c-9e47-255624913358",
             "values": []
           },
@@ -8394,7 +8522,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_device_operand",
             "hide_notification": false,
-            "id": 448,
+            "id": 595,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8409,7 +8537,7 @@
             "templates": [],
             "text": "Filter: Operand",
             "tooltip": "Optional:  Device search filter operand. String or Number or Object",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "76e8ba7b-41be-4bd2-a8c8-bfa1d5f904e8",
             "values": []
           },
@@ -8423,7 +8551,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_device_operator",
             "hide_notification": false,
-            "id": 449,
+            "id": 596,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -8438,7 +8566,7 @@
             "templates": [],
             "text": "Filter: Operator",
             "tooltip": "Optional:  Device search filter operator",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "cce3152c-150b-4244-8a81-576149c190f4",
             "values": [
               {
@@ -8448,7 +8576,7 @@
                 "label": "\u003e",
                 "properties": null,
                 "uuid": "de12fb2f-8573-4854-8b9b-ab9dfdcbe583",
-                "value": 562
+                "value": 686
               },
               {
                 "default": false,
@@ -8457,7 +8585,7 @@
                 "label": "\u003c",
                 "properties": null,
                 "uuid": "7ff48fcf-9a9a-440c-89d4-c59227bdb63c",
-                "value": 563
+                "value": 687
               },
               {
                 "default": false,
@@ -8466,7 +8594,7 @@
                 "label": "\u003c=",
                 "properties": null,
                 "uuid": "c8c6bb42-8af8-464e-9a87-fa704bfc6b24",
-                "value": 564
+                "value": 688
               },
               {
                 "default": false,
@@ -8475,7 +8603,7 @@
                 "label": "\u003e=",
                 "properties": null,
                 "uuid": "83a574de-8704-4974-9cfb-cc067fcb672c",
-                "value": 565
+                "value": 689
               },
               {
                 "default": false,
@@ -8484,7 +8612,7 @@
                 "label": "=",
                 "properties": null,
                 "uuid": "90db9be9-263f-44a3-b453-e888becfc7fb",
-                "value": 566
+                "value": 690
               },
               {
                 "default": false,
@@ -8493,7 +8621,7 @@
                 "label": "!=",
                 "properties": null,
                 "uuid": "1895c215-8797-4317-9b2d-32a7f6343380",
-                "value": 567
+                "value": 691
               },
               {
                 "default": false,
@@ -8502,7 +8630,7 @@
                 "label": "startswith",
                 "properties": null,
                 "uuid": "daacf62d-36b1-4d5d-84ba-c35a7efaadbc",
-                "value": 568
+                "value": 692
               },
               {
                 "default": false,
@@ -8511,7 +8639,7 @@
                 "label": "and",
                 "properties": null,
                 "uuid": "f757b9fa-3370-4c3f-91d6-914c6b43b089",
-                "value": 569
+                "value": 693
               },
               {
                 "default": false,
@@ -8520,7 +8648,7 @@
                 "label": "or",
                 "properties": null,
                 "uuid": "32c3a4c8-0806-4af0-a7b6-7fcd64a59e6e",
-                "value": 570
+                "value": 694
               },
               {
                 "default": false,
@@ -8529,7 +8657,7 @@
                 "label": "not",
                 "properties": null,
                 "uuid": "74f0f7c0-feea-4fe8-a6cc-4c25f424eb49",
-                "value": 571
+                "value": 695
               },
               {
                 "default": false,
@@ -8538,7 +8666,7 @@
                 "label": "exists",
                 "properties": null,
                 "uuid": "de2f1c19-dcc6-4bb7-b474-59780048485f",
-                "value": 572
+                "value": 696
               },
               {
                 "default": false,
@@ -8547,7 +8675,7 @@
                 "label": "not_exists",
                 "properties": null,
                 "uuid": "3917f9a5-1085-4dc5-9ab8-cd91cab1e7cf",
-                "value": 573
+                "value": 697
               },
               {
                 "default": false,
@@ -8556,7 +8684,7 @@
                 "label": "~",
                 "properties": null,
                 "uuid": "16831b4d-bd73-4d55-88ed-1c8c90b4c959",
-                "value": 574
+                "value": 698
               },
               {
                 "default": false,
@@ -8565,7 +8693,7 @@
                 "label": "!~",
                 "properties": null,
                 "uuid": "53390ebf-7706-4c06-892b-996edd34f5df",
-                "value": 575
+                "value": 699
               }
             ]
           },
@@ -8579,7 +8707,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_limit",
             "hide_notification": false,
-            "id": 450,
+            "id": 597,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -8594,7 +8722,7 @@
             "templates": [],
             "text": "Limit",
             "tooltip": "(Optional) Limit the number of devices returned to the specified maximum number.",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "33582a00-6664-48ef-8b5b-589cae77e7e9",
             "values": []
           },
@@ -8608,7 +8736,7 @@
             "deprecated": false,
             "export_key": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a/extrahop_offset",
             "hide_notification": false,
-            "id": 451,
+            "id": 598,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -8623,7 +8751,7 @@
             "templates": [],
             "text": "Offset",
             "tooltip": "(Optional) Skip the specified number of devices. This parameter is often combined with the limit parameter to paginate result sets.",
-            "type_id": 1025,
+            "type_id": 1038,
             "uuid": "96efa7a3-d611-4157-bf5e-097d98d9b60d",
             "values": []
           }
@@ -8648,7 +8776,7 @@
         "uuid": "99ef9e38-1219-456e-8295-3d7313fb495d"
       },
       "has_logical_errors": false,
-      "id": 20,
+      "id": 31,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -8657,18 +8785,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684165612771,
+      "last_modified_time": 1727294371107,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614140004,
+          "created_date": 1727294370330,
           "description": "Write the results of Get Devices to the ExtraHop Devices data table.",
           "enabled": false,
           "export_key": "ExtraHop: Write Get Devices to Data Table",
-          "id": 27,
+          "id": 51,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684165610120,
+          "last_modified_time": 1727294370330,
           "name": "ExtraHop: Write Get Devices to Data Table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_search_devices",
@@ -8679,14 +8807,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614140029,
+          "created_date": 1727294370389,
           "description": "Write the search devices results to the ExtraHop Devices data table.",
           "enabled": false,
           "export_key": "ExtraHop: Write search devices results to data table",
-          "id": 28,
+          "id": 52,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684165585198,
+          "last_modified_time": 1727294370389,
           "name": "ExtraHop: Write search devices results to data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_search_devices",
@@ -8797,7 +8925,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8ea4f516-9223-41fd-9dfe-189b20c8db8a",
-        "id": 22,
+        "id": 33,
         "name": "playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a",
         "type": "playbook",
         "uuid": "86ca25d3-6e20-4b2a-9dc3-77e947c4ced9"
@@ -8805,15 +8933,15 @@
       "tags": [],
       "type": "default",
       "uuid": "8ea4f516-9223-41fd-9dfe-189b20c8db8a",
-      "version": 71
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e\" isExecutable=\"true\" name=\"playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fdu4b3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) search packets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f551a853-62d0-468d-9e36-df5904c5bf96\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\nif artifact.type == \\\"IP Address\\\" or artifact.type == \\\"DNS Name\\\":\\n    inputs.extrahop_bpf = \\\"host {}\\\".format(artifact.value)\\nelif artifact.type == \\\"MAC Address\\\":\\n    inputs.extrahop_bpf = \\\"ether host {}\\\".format(artifact.value)\\ninputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\ninputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\ninputs.extrahop_output = playbook.inputs.extrahop_output\\ninputs.extrahop_limit_search_duration = playbook.inputs.extrahop_limit_search_duration\\ninputs.extrahop_limit_bytes = playbook.inputs.extrahop_limit_bytes\\ninputs.extrahop_ip1 = playbook.inputs.extrahop_ip1\\ninputs.extrahop_port1 = playbook.inputs.extrahop_port1\\ninputs.extrahop_ip2 = playbook.inputs.extrahop_ip2\\ninputs.extrahop_port2 = playbook.inputs.extrahop_port2\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_packets_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fdu4b3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1um7cud\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fdu4b3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ExtraHop: Write search packet results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a349626e-cae5-4f09-8ccc-caebe0f991ae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1um7cud\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b4rk7s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1um7cud\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0b4rk7s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0b4rk7s\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b4rk7s\" id=\"Flow_0b4rk7s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1um7cud\" id=\"Flow_1um7cud_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fdu4b3\" id=\"Flow_1fdu4b3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 18,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e\" isExecutable=\"true\" name=\"playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fdu4b3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) search packets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f551a853-62d0-468d-9e36-df5904c5bf96\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\nif artifact.type == \\\"IP Address\\\":\\n    inputs.extrahop_bpf = \\\"host {}\\\".format(artifact.value)\\nelif artifact.type == \\\"MAC Address\\\":\\n    inputs.extrahop_bpf = \\\"ether host {}\\\".format(artifact.value)\\ninputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\ninputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\ninputs.extrahop_output = playbook.inputs.extrahop_output\\ninputs.extrahop_limit_search_duration = playbook.inputs.extrahop_limit_search_duration\\ninputs.extrahop_limit_bytes = playbook.inputs.extrahop_limit_bytes\\ninputs.extrahop_ip1 = playbook.inputs.extrahop_ip1\\ninputs.extrahop_port1 = playbook.inputs.extrahop_port1\\ninputs.extrahop_ip2 = playbook.inputs.extrahop_ip2\\ninputs.extrahop_port2 = playbook.inputs.extrahop_port2\\nif inputs.extrahop_output == \\\"extract\\\":\\n    inputs.extrahop_decrypt_files = playbook.inputs.extrahop_decrypt_files\\nelif inputs.extrahop_output == \\\"pcapng\\\":\\n    inputs.extrahop_include_secrets = playbook.inputs.extrahop_include_secrets\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_packets_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fdu4b3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1um7cud\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fdu4b3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ExtraHop: Write search packet results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a349626e-cae5-4f09-8ccc-caebe0f991ae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1um7cud\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b4rk7s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1um7cud\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0b4rk7s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0b4rk7s\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b4rk7s\" id=\"Flow_0b4rk7s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1um7cud\" id=\"Flow_1um7cud_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fdu4b3\" id=\"Flow_1fdu4b3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614140382,
+      "create_date": 1727294371125,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -8830,7 +8958,7 @@
       "field_type_handle": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Search Packets",
+        "display_name": "ExtraHop Reveal(x): Search Packets (PB)",
         "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e",
         "fields": {
           "extrahop_active_from": {
@@ -8843,7 +8971,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_active_from",
             "hide_notification": false,
-            "id": 452,
+            "id": 599,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -8853,12 +8981,13 @@
             "placeholder": "",
             "prefix": null,
             "read_only": false,
+            "required": "always",
             "rich_text": false,
             "tags": [],
             "templates": [],
             "text": "Active from",
-            "tooltip": "(Optional) The beginning timestamp for the request.",
-            "type_id": 1026,
+            "tooltip": "(Always) The beginning timestamp for the request.",
+            "type_id": 1039,
             "uuid": "2bffda81-8e07-4ad8-a71b-0e8d427ee17e",
             "values": []
           },
@@ -8872,7 +9001,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_active_until",
             "hide_notification": false,
-            "id": 453,
+            "id": 600,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -8887,8 +9016,66 @@
             "templates": [],
             "text": "Active until",
             "tooltip": " (Optional) The ending timestamp for the request. ",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "636461e2-e7e7-4c8e-bec7-63acaf5c042f",
+            "values": []
+          },
+          "extrahop_decrypt_files": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_decrypt_files",
+            "hide_notification": false,
+            "id": 611,
+            "input_type": "boolean",
+            "internal": false,
+            "is_tracked": false,
+            "name": "extrahop_decrypt_files",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Decrypt files",
+            "tooltip": "Specifies whether to decrypt extracted files with stored secrets. This option is valid only if the output parameter is extract.",
+            "type_id": 1039,
+            "uuid": "39f64897-c3c7-407b-9cd6-24f1c4a20c59",
+            "values": []
+          },
+          "extrahop_include_secrets": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_include_secrets",
+            "hide_notification": false,
+            "id": 612,
+            "input_type": "boolean",
+            "internal": false,
+            "is_tracked": false,
+            "name": "extrahop_include_secrets",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Include secrets",
+            "tooltip": "Whether or not to include TLS secrets together with packet data in .pcapng files. Only valid if \"output\" is \"pcapng\".",
+            "type_id": 1039,
+            "uuid": "a7921c1e-c91b-4d90-99f5-a3f4f9e06855",
             "values": []
           },
           "extrahop_ip1": {
@@ -8901,7 +9088,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_ip1",
             "hide_notification": false,
-            "id": 454,
+            "id": 601,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8916,7 +9103,7 @@
             "templates": [],
             "text": "Ip1",
             "tooltip": "(Optional) Return packets sent to or received by the specified IP address.",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "a55750f9-9d7f-49ca-b89b-52adb5943a10",
             "values": []
           },
@@ -8930,7 +9117,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_ip2",
             "hide_notification": false,
-            "id": 455,
+            "id": 602,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8945,7 +9132,7 @@
             "templates": [],
             "text": "Ip2",
             "tooltip": "(Optional) Return packets sent to or received by the specified IP address.",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "d069b9cb-38f1-4602-89b5-cd67effa2d41",
             "values": []
           },
@@ -8959,7 +9146,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_limit_bytes",
             "hide_notification": false,
-            "id": 456,
+            "id": 603,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -8974,7 +9161,7 @@
             "templates": [],
             "text": "Limit bytes",
             "tooltip": "The maximum number of bytes to return.",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "2923c9fe-df41-4ca1-b4e0-51d156818a28",
             "values": []
           },
@@ -8988,7 +9175,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_limit_search_duration",
             "hide_notification": false,
-            "id": 457,
+            "id": 604,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9003,7 +9190,7 @@
             "templates": [],
             "text": "Limit search duration",
             "tooltip": "The maximum amount of time to run the packet search.The default unit is milliseconds, but other units can be specified with a unit suffix. ",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "cf90475b-e80e-459a-a129-ffd6764e05a6",
             "values": []
           },
@@ -9017,7 +9204,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_output",
             "hide_notification": false,
-            "id": 458,
+            "id": 605,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -9032,17 +9219,44 @@
             "templates": [],
             "text": "Output",
             "tooltip": "(Optional) The output format. * `pcap` - .pcap file * `keylog_txt` - A keylog.txt file that can be loaded in wireshark to decode ssl packets. * `zip` - A zip file containing both a packets.pcap and keylog.txt.",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "b86a35aa-1d00-4a60-b0a7-dbd577746335",
             "values": [
               {
                 "default": false,
                 "enabled": true,
                 "hidden": false,
+                "label": "extract",
+                "properties": null,
+                "uuid": "753630c9-7c58-4bf6-8168-455b26e933c7",
+                "value": 752
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "keylog_txt",
+                "properties": null,
+                "uuid": "0b49bed7-65e7-4613-81ad-8638aa442d6c",
+                "value": 753
+              },
+              {
+                "default": true,
+                "enabled": true,
+                "hidden": false,
                 "label": "pcap",
                 "properties": null,
                 "uuid": "c6440536-8c44-4fde-a64b-1d868c99aee1",
-                "value": 576
+                "value": 700
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "pcapng",
+                "properties": null,
+                "uuid": "bda34c69-83df-4766-bfce-0ebd27c284e0",
+                "value": 754
               },
               {
                 "default": false,
@@ -9051,7 +9265,7 @@
                 "label": "zip",
                 "properties": null,
                 "uuid": "389f2f6b-e472-4507-bf4c-b4a6fab51fda",
-                "value": 577
+                "value": 701
               }
             ]
           },
@@ -9065,7 +9279,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_port1",
             "hide_notification": false,
-            "id": 459,
+            "id": 606,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9080,7 +9294,7 @@
             "templates": [],
             "text": "Port1",
             "tooltip": "(Optional) Return packets sent from or received on the specified port.",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "87265eea-a09e-4a3e-9049-38cebbaf3a3a",
             "values": []
           },
@@ -9094,7 +9308,7 @@
             "deprecated": false,
             "export_key": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e/extrahop_port2",
             "hide_notification": false,
-            "id": 460,
+            "id": 607,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -9109,7 +9323,7 @@
             "templates": [],
             "text": "Port2",
             "tooltip": "(Optional)  Return packets sent from or received on the specified port.",
-            "type_id": 1026,
+            "type_id": 1039,
             "uuid": "65f78ed9-f59d-40bc-a8f0-f57277130187",
             "values": []
           }
@@ -9134,7 +9348,7 @@
         "uuid": "22bc28a2-20c8-4d7a-85a9-577b46c3ba60"
       },
       "has_logical_errors": false,
-      "id": 21,
+      "id": 32,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -9143,18 +9357,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683043637623,
+      "last_modified_time": 1731537223899,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614140730,
+          "created_date": 1727294371911,
           "description": "Write results from search packets to a SOAR note.",
           "enabled": false,
           "export_key": "ExtraHop: Write search packet results to a note",
-          "id": 29,
+          "id": 53,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614140761,
+          "last_modified_time": 1727294371911,
           "name": "ExtraHop: Write search packet results to a note",
           "object_type": "artifact",
           "playbook_handle": "extrahop_rx_search_packets",
@@ -9167,13 +9381,6 @@
       "manual_settings": {
         "activation_conditions": {
           "conditions": [
-            {
-              "evaluation_id": null,
-              "field_name": "artifact.type",
-              "method": "equals",
-              "type": null,
-              "value": "DNS Name"
-            },
             {
               "evaluation_id": null,
               "field_name": "artifact.type",
@@ -9263,6 +9470,22 @@
             "show_if": null,
             "show_link_header": false,
             "step_label": null
+          },
+          {
+            "content": "39f64897-c3c7-407b-9cd6-24f1c4a20c59",
+            "element": "field_uuid",
+            "field_type": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "a7921c1e-c91b-4d90-99f5-a3f4f9e06855",
+            "element": "field_uuid",
+            "field_type": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
           }
         ]
       },
@@ -9271,7 +9494,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_30e09a4d-c99b-4198-92ff-7e6714123d9e",
-        "id": 23,
+        "id": 34,
         "name": "playbook_30e09a4d_c99b_4198_92ff_7e6714123d9e",
         "type": "playbook",
         "uuid": "11426217-dfad-4d25-af68-a618ea9f62e1"
@@ -9279,7 +9502,7 @@
       "tags": [],
       "type": "default",
       "uuid": "30e09a4d-c99b-4198-92ff-7e6714123d9e",
-      "version": 7
+      "version": 21
     },
     {
       "activation_details": {
@@ -9305,10 +9528,10 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b84c6f4a_c20a_41af_93f7_8cbd113bed4f\" isExecutable=\"true\" name=\"playbook_b84c6f4a_c20a_41af_93f7_8cbd113bed4f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_02u5scp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_02u5scp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_7\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14q7f8n\u003c/incoming\u003e\u003coutgoing\u003eFlow_06o77z9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"result_name\":\"get_devices_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ks6f1s\u003c/incoming\u003e\u003coutgoing\u003eFlow_0p8uamq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"ExtraHop: Write get detections to data table \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"92607f61-4eaf-432f-93de-bd756086071d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06o77z9\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ks6f1s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06o77z9\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_1ks6f1s\" sourceRef=\"ScriptTask_4\" targetRef=\"ServiceTask_3\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01ymzfg\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Get Devices data to Devices data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fa066547-acff-45cb-9512-7b13b0d8d487\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0p8uamq\u003c/incoming\u003e\u003coutgoing\u003eFlow_01ymzfg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0p8uamq\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_01ymzfg\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_5\"/\u003e\u003cscriptTask id=\"ScriptTask_7\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02u5scp\u003c/incoming\u003e\u003coutgoing\u003eFlow_14q7f8n\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14q7f8n\" sourceRef=\"ScriptTask_7\" targetRef=\"ServiceTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b84c6f4a_c20a_41af_93f7_8cbd113bed4f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14q7f8n\" id=\"Flow_14q7f8n_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-58\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01ymzfg\" id=\"Flow_01ymzfg_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0p8uamq\" id=\"Flow_0p8uamq_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ks6f1s\" id=\"Flow_1ks6f1s_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06o77z9\" id=\"Flow_06o77z9_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"72\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02u5scp\" id=\"Flow_02u5scp_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-194\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-142\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"616\" y=\"-246\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.042\" y=\"-11.649993896484375\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"611.5\" y=\"118.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"611.5\" y=\"348.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_7\" id=\"ScriptTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"-142.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b84c6f4a_c20a_41af_93f7_8cbd113bed4f\" isExecutable=\"true\" name=\"playbook_b84c6f4a_c20a_41af_93f7_8cbd113bed4f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_02u5scp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_02u5scp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_7\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14q7f8n\u003c/incoming\u003e\u003coutgoing\u003eFlow_06o77z9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"result_name\":\"get_devices_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ks6f1s\u003c/incoming\u003e\u003coutgoing\u003eFlow_0p8uamq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"ExtraHop: Write get detections to data table \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"92607f61-4eaf-432f-93de-bd756086071d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06o77z9\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ks6f1s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06o77z9\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_1ks6f1s\" sourceRef=\"ScriptTask_4\" targetRef=\"ServiceTask_3\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01ymzfg\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Get Devices data to Devices data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fa066547-acff-45cb-9512-7b13b0d8d487\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0p8uamq\u003c/incoming\u003e\u003coutgoing\u003eFlow_01ymzfg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0p8uamq\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_01ymzfg\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_5\"/\u003e\u003cscriptTask id=\"ScriptTask_7\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02u5scp\u003c/incoming\u003e\u003coutgoing\u003eFlow_14q7f8n\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14q7f8n\" sourceRef=\"ScriptTask_7\" targetRef=\"ServiceTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b84c6f4a_c20a_41af_93f7_8cbd113bed4f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14q7f8n\" id=\"Flow_14q7f8n_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-58\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01ymzfg\" id=\"Flow_01ymzfg_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0p8uamq\" id=\"Flow_0p8uamq_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ks6f1s\" id=\"Flow_1ks6f1s_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06o77z9\" id=\"Flow_06o77z9_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"72\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02u5scp\" id=\"Flow_02u5scp_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-194\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-142\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"616\" y=\"-246\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.042\" y=\"-11.649993896484375\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"611.5\" y=\"118.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"611.5\" y=\"348.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_7\" id=\"ScriptTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"-142.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614141262,
+      "create_date": 1727294372977,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -9348,7 +9571,7 @@
         "uuid": "aeae1e3a-2bc0-4fe0-b87e-6de592ef8d96"
       },
       "has_logical_errors": false,
-      "id": 22,
+      "id": 33,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -9357,18 +9580,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684170866074,
+      "last_modified_time": 1727294373965,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614141370,
+          "created_date": 1727294373223,
           "description": "Write the get detections data to the ExtraHop Detections data table and create artifacts.",
           "enabled": false,
           "export_key": "ExtraHop: Write get detections to data table ",
-          "id": 30,
+          "id": 54,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684170863606,
+          "last_modified_time": 1727294373223,
           "name": "ExtraHop: Write get detections to data table ",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_update_case",
@@ -9379,14 +9602,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614141395,
+          "created_date": 1727294373276,
           "description": "Write the results from get devices function to the ExtraHop Devices data table.",
           "enabled": false,
           "export_key": "ExtraHop: Write Get Devices data to Devices data table",
-          "id": 31,
+          "id": 55,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614141423,
+          "last_modified_time": 1727294373276,
           "name": "ExtraHop: Write Get Devices data to Devices data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_update_case",
@@ -9401,7 +9624,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "playbook_b84c6f4a-c20a-41af-93f7-8cbd113bed4f",
-        "id": 24,
+        "id": 35,
         "name": "playbook_b84c6f4a-c20a-41af-93f7-8cbd113bed4f",
         "type": "playbook",
         "uuid": "e2e13ebf-fd7c-4748-810a-025ed7a5b8d6"
@@ -9409,7 +9632,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b84c6f4a-c20a-41af-93f7-8cbd113bed4f",
-      "version": 7
+      "version": 3
     },
     {
       "activation_details": {
@@ -9435,10 +9658,10 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d3190e18_1015_4a40_83a9_99434785f8c5\" isExecutable=\"true\" name=\"playbook_d3190e18_1015_4a40_83a9_99434785f8c5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19nd71p\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) update detection\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8ee5a0dc-d7d9-4d02-85a3-55d340a43aa0\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\\ninputs.incident_id = incident.id\\ninputs.soar_inc_owner_id = incident.owner_id\\ninputs.soar_inc_plan_status = incident.plan_status\\ninputs.soar_inc_resolution_id = incident.resolution_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_detection_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19nd71p\u003c/incoming\u003e\u003coutgoing\u003eFlow_03rv409\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19nd71p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17nxaxp\u003c/incoming\u003e\u003cincoming\u003eFlow_08o1f7z\u003c/incoming\u003e\u003cincoming\u003eFlow_1ojxpli\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get detection note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e5d62abb-bce4-46f6-a686-1b112a735219\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detection_note_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_107fsn8\u003c/incoming\u003e\u003coutgoing\u003eFlow_17119c3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Extrahop Reveal(x) add detection note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"58307d38-9975-4209-a8af-e68cb85f59f4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_update_detection pre processing script ##\\nimport re\\ninputs.extrahop_detection_id = incident.properties.extrahop_detection_id\\n\\nUPD_DET_DATETIME = playbook.functions.results.get_detection_note_result.metrics.get(\\\"timestamp\\\", None)\\nSUMMARY = re.sub(\u0027\u0026lt;[^\u0026lt;]+?\u0026gt;\u0027, \u0027\u0027, incident.resolution_summary.content)\\n\\n\\ndef get_current_note():\\n    # Get old note\\n    note = \u0027\u0027\\n    get_detection_note_content = playbook.functions.results.get_detection_note_result.content\\n    note_obj = get_detection_note_content.get(\\\"result\\\", {})\\n    if not note_obj:\\n        raise ValueError(\\\"Existing ExtraHop detection note not found.\\\")\\n    note = note_obj.get(\\\"note\\\", None)\\n    return note\\n\\n\\ndef make_summary_note():\\n    # Make a  note.\\n    summary_note = \\\"IBM SOAR {}\\\\n\\\".format(UPD_DET_DATETIME)\\n    summary_note += \\\"[SOAR case - \u0027{}\u0027](Closed with resolution summary: \u0027{}\u0027)\\\" \\\\\\n    .format(incident.id, SUMMARY)\\n    return summary_note\\n\\n# Processing\\ndef main():\\n    detection_note = get_current_note()\\n    inputs.extrahop_note = \u0027\\\\n\u0027.join([detection_note if detection_note else \\\"\\\", make_summary_note()])\\n    inputs.extrahop_update_time = 0\\nmain()\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_detection_note_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0x4st5q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1caalr4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ej2526\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rfs8bz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Update Detection\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5aaa361b-cfff-494e-89e6-388b297dd14e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03rv409\u003c/incoming\u003e\u003coutgoing\u003eFlow_08b7i1t\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_03rv409\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_6\"/\u003e\u003cexclusiveGateway default=\"Flow_17nxaxp\" id=\"ConditionPoint_7\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_08b7i1t\u003c/incoming\u003e\u003coutgoing\u003eFlow_107fsn8\u003c/outgoing\u003e\u003coutgoing\u003eFlow_17nxaxp\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_08b7i1t\" sourceRef=\"ScriptTask_6\" targetRef=\"ConditionPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop: Write Get Detection Note status to SOAR Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3d3c5f14-e461-4c7d-809e-34d353d11c08\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17119c3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0s8ochr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17119c3\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_8\"/\u003e\u003cexclusiveGateway default=\"Flow_08o1f7z\" id=\"ConditionPoint_9\" resilient:documentation=\"ExtraHop: Get note OK\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0s8ochr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0x4st5q\u003c/outgoing\u003e\u003coutgoing\u003eFlow_08o1f7z\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_0s8ochr\" sourceRef=\"ScriptTask_8\" targetRef=\"ConditionPoint_9\"/\u003e\u003cscriptTask id=\"ScriptTask_10\" name=\"ExtraHop: Write Add Detection Note to Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"69947220-d5a0-4e55-bd96-5572a68758eb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1caalr4\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ej2526\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1caalr4\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_10\"/\u003e\u003csequenceFlow id=\"Flow_0ej2526\" sourceRef=\"ScriptTask_10\" targetRef=\"ServiceTask_5\"/\u003e\u003cscriptTask id=\"ScriptTask_11\" name=\"ExtraHop: Update Detection fields \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cba3213e-4e15-444c-ba12-afc3aa91ff66\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rfs8bz\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ojxpli\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0rfs8bz\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_11\"/\u003e\u003csequenceFlow id=\"Flow_1ojxpli\" sourceRef=\"ScriptTask_11\" targetRef=\"EndPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_0x4st5q\" name=\"ExtraHop: Test Get Note OK\" sourceRef=\"ConditionPoint_9\" targetRef=\"ServiceTask_4\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test Get Note OK\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"get_note_ok\\\") else False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_08o1f7z\" name=\"Else\" sourceRef=\"ConditionPoint_9\" targetRef=\"EndPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_107fsn8\" name=\"ExtraHop: Test Update Detection OK\" sourceRef=\"ConditionPoint_7\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test Update Detection OK\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"update_detection_ok\\\") else False\\n\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_17nxaxp\" name=\"Else\" sourceRef=\"ConditionPoint_7\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d3190e18_1015_4a40_83a9_99434785f8c5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08o1f7z\" id=\"Flow_08o1f7z_di\"\u003e\u003comgdi:waypoint x=\"656\" y=\"740\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"740\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"1134\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"867.9999999999998\" y=\"718\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0x4st5q\" id=\"Flow_0x4st5q_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"766\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"808\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"75\" x=\"442\" y=\"794\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17nxaxp\" id=\"Flow_17nxaxp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"426\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"1134\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"868\" y=\"433\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_107fsn8\" id=\"Flow_107fsn8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"426\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"478\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"75\" x=\"502\" y=\"400\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ojxpli\" id=\"Flow_1ojxpli_di\"\u003e\u003comgdi:waypoint x=\"608\" y=\"1160\"/\u003e\u003comgdi:waypoint x=\"784\" y=\"1160\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rfs8bz\" id=\"Flow_0rfs8bz_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"1018\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"998\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"998\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"1033\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"1033\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"1118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ej2526\" id=\"Flow_0ej2526_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"992\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"1018\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1caalr4\" id=\"Flow_1caalr4_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"808\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"908\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0s8ochr\" id=\"Flow_0s8ochr_di\"\u003e\u003comgdi:waypoint x=\"500\" y=\"682\"/\u003e\u003comgdi:waypoint x=\"500\" y=\"698\"/\u003e\u003comgdi:waypoint x=\"486\" y=\"698\"/\u003e\u003comgdi:waypoint x=\"486\" y=\"714\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17119c3\" id=\"Flow_17119c3_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"478\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"458\"/\u003e\u003comgdi:waypoint x=\"500\" y=\"458\"/\u003e\u003comgdi:waypoint x=\"500\" y=\"598\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08b7i1t\" id=\"Flow_08b7i1t_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"342\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"374\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03rv409\" id=\"Flow_03rv409_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"258\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19nd71p\" id=\"Flow_19nd71p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"138\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"138\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"784\" y=\"1134\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"808\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"1018\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"258\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_7\" id=\"ConditionPoint_7_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"373.8500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"402\" y=\"598\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_9\" id=\"ConditionPoint_9_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"291.6\" x=\"364\" y=\"714\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_10\" id=\"ScriptTask_10_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"907.8500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_11\" id=\"ScriptTask_11_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"1118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d3190e18_1015_4a40_83a9_99434785f8c5\" isExecutable=\"true\" name=\"playbook_d3190e18_1015_4a40_83a9_99434785f8c5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19nd71p\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) update detection\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8ee5a0dc-d7d9-4d02-85a3-55d340a43aa0\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\\ninputs.incident_id = incident.id\\ninputs.soar_inc_owner_id = incident.owner_id\\ninputs.soar_inc_plan_status = incident.plan_status\\ninputs.soar_inc_resolution_id = incident.resolution_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_detection_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19nd71p\u003c/incoming\u003e\u003coutgoing\u003eFlow_03rv409\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19nd71p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17nxaxp\u003c/incoming\u003e\u003cincoming\u003eFlow_08o1f7z\u003c/incoming\u003e\u003cincoming\u003eFlow_1ojxpli\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get detection note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e5d62abb-bce4-46f6-a686-1b112a735219\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detection_note_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_107fsn8\u003c/incoming\u003e\u003coutgoing\u003eFlow_17119c3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Extrahop Reveal(x) add detection note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"58307d38-9975-4209-a8af-e68cb85f59f4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_update_detection pre processing script ##\\nimport re\\ninputs.extrahop_detection_id = incident.properties.extrahop_detection_id\\n\\nUPD_DET_DATETIME = playbook.functions.results.get_detection_note_result.metrics.get(\\\"timestamp\\\", None)\\nSUMMARY = re.sub(\u0027\u0026lt;[^\u0026lt;]+?\u0026gt;\u0027, \u0027\u0027, incident.resolution_summary.content)\\n\\n\\ndef get_current_note():\\n    # Get old note\\n    note = \u0027\u0027\\n    get_detection_note_content = playbook.functions.results.get_detection_note_result.content\\n    note_obj = get_detection_note_content.get(\\\"result\\\", {})\\n    if not note_obj:\\n        raise ValueError(\\\"Existing ExtraHop detection note not found.\\\")\\n    note = note_obj.get(\\\"note\\\", None)\\n    return note\\n\\n\\ndef make_summary_note():\\n    # Make a  note.\\n    summary_note = \\\"IBM SOAR {}\\\\n\\\".format(UPD_DET_DATETIME)\\n    summary_note += \\\"[SOAR case - \u0027{}\u0027](Closed with resolution summary: \u0027{}\u0027)\\\" \\\\\\n    .format(incident.id, SUMMARY)\\n    return summary_note\\n\\n# Processing\\ndef main():\\n    detection_note = get_current_note()\\n    inputs.extrahop_note = \u0027\\\\n\u0027.join([detection_note if detection_note else \\\"\\\", make_summary_note()])\\n    inputs.extrahop_update_time = 0\\nmain()\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_detection_note_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0x4st5q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1caalr4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ej2526\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rfs8bz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Update Detection\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5aaa361b-cfff-494e-89e6-388b297dd14e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03rv409\u003c/incoming\u003e\u003coutgoing\u003eFlow_08b7i1t\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_03rv409\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_6\"/\u003e\u003cexclusiveGateway default=\"Flow_17nxaxp\" id=\"ConditionPoint_7\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_08b7i1t\u003c/incoming\u003e\u003coutgoing\u003eFlow_107fsn8\u003c/outgoing\u003e\u003coutgoing\u003eFlow_17nxaxp\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_08b7i1t\" sourceRef=\"ScriptTask_6\" targetRef=\"ConditionPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop: Write Get Detection Note status to SOAR Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3d3c5f14-e461-4c7d-809e-34d353d11c08\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17119c3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0s8ochr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17119c3\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_8\"/\u003e\u003cexclusiveGateway default=\"Flow_08o1f7z\" id=\"ConditionPoint_9\" resilient:documentation=\"ExtraHop: Get note OK\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0s8ochr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0x4st5q\u003c/outgoing\u003e\u003coutgoing\u003eFlow_08o1f7z\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_0s8ochr\" sourceRef=\"ScriptTask_8\" targetRef=\"ConditionPoint_9\"/\u003e\u003cscriptTask id=\"ScriptTask_10\" name=\"ExtraHop: Write Add Detection Note to Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"69947220-d5a0-4e55-bd96-5572a68758eb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1caalr4\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ej2526\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1caalr4\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_10\"/\u003e\u003csequenceFlow id=\"Flow_0ej2526\" sourceRef=\"ScriptTask_10\" targetRef=\"ServiceTask_5\"/\u003e\u003cscriptTask id=\"ScriptTask_11\" name=\"ExtraHop: Update Detection fields \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cba3213e-4e15-444c-ba12-afc3aa91ff66\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rfs8bz\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ojxpli\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0rfs8bz\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_11\"/\u003e\u003csequenceFlow id=\"Flow_1ojxpli\" sourceRef=\"ScriptTask_11\" targetRef=\"EndPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_0x4st5q\" name=\"ExtraHop: Test Get Note OK\" sourceRef=\"ConditionPoint_9\" targetRef=\"ServiceTask_4\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test Get Note OK\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"get_note_ok\\\") else False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_08o1f7z\" name=\"Else\" sourceRef=\"ConditionPoint_9\" targetRef=\"EndPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_107fsn8\" name=\"ExtraHop: Test Update Detection OK\" sourceRef=\"ConditionPoint_7\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test Update Detection OK\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"update_detection_ok\\\") else False\\n\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_17nxaxp\" name=\"Else\" sourceRef=\"ConditionPoint_7\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d3190e18_1015_4a40_83a9_99434785f8c5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08o1f7z\" id=\"Flow_08o1f7z_di\"\u003e\u003comgdi:waypoint x=\"656\" y=\"740\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"740\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"1134\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"867.9999999999998\" y=\"718\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0x4st5q\" id=\"Flow_0x4st5q_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"766\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"808\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"75\" x=\"442\" y=\"794\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17nxaxp\" id=\"Flow_17nxaxp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"426\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"1134\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"868\" y=\"433\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_107fsn8\" id=\"Flow_107fsn8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"426\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"450\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"478\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"75\" x=\"502\" y=\"400\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ojxpli\" id=\"Flow_1ojxpli_di\"\u003e\u003comgdi:waypoint x=\"608\" y=\"1160\"/\u003e\u003comgdi:waypoint x=\"784\" y=\"1160\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rfs8bz\" id=\"Flow_0rfs8bz_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"1018\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"998\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"998\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"1033\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"1033\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"1118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ej2526\" id=\"Flow_0ej2526_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"992\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"1018\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1caalr4\" id=\"Flow_1caalr4_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"808\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"908\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0s8ochr\" id=\"Flow_0s8ochr_di\"\u003e\u003comgdi:waypoint x=\"500\" y=\"682\"/\u003e\u003comgdi:waypoint x=\"500\" y=\"698\"/\u003e\u003comgdi:waypoint x=\"486\" y=\"698\"/\u003e\u003comgdi:waypoint x=\"486\" y=\"714\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17119c3\" id=\"Flow_17119c3_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"478\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"458\"/\u003e\u003comgdi:waypoint x=\"500\" y=\"458\"/\u003e\u003comgdi:waypoint x=\"500\" y=\"598\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08b7i1t\" id=\"Flow_08b7i1t_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"342\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"374\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03rv409\" id=\"Flow_03rv409_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"258\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19nd71p\" id=\"Flow_19nd71p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"138\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"138\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"784\" y=\"1134\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"808\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"1018\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"258\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_7\" id=\"ConditionPoint_7_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"373.8500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"402\" y=\"598\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_9\" id=\"ConditionPoint_9_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"291.6\" x=\"364\" y=\"714\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_10\" id=\"ScriptTask_10_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"907.8500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_11\" id=\"ScriptTask_11_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"1118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614141829,
+      "create_date": 1727294373981,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -9478,7 +9701,7 @@
         "uuid": "f8a9d95f-2a79-4ecb-af00-f83f237f9035"
       },
       "has_logical_errors": false,
-      "id": 23,
+      "id": 34,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -9487,18 +9710,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683043677475,
+      "last_modified_time": 1727294375300,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614141929,
+          "created_date": 1727294374211,
           "description": "Write update detection results to a note in SOAR.",
           "enabled": false,
           "export_key": "ExtraHop: Update Detection",
-          "id": 32,
+          "id": 56,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614141953,
+          "last_modified_time": 1727294374211,
           "name": "ExtraHop: Update Detection",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_update_detection",
@@ -9509,14 +9732,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614141955,
+          "created_date": 1727294374264,
           "description": "Update ExtraHop detections data in custom fields and write status to SOAR note.",
           "enabled": false,
           "export_key": "ExtraHop: Update Detection fields ",
-          "id": 33,
+          "id": 57,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614141982,
+          "last_modified_time": 1727294374264,
           "name": "ExtraHop: Update Detection fields ",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_update_detection",
@@ -9527,14 +9750,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614141985,
+          "created_date": 1727294374325,
           "description": "Write the results from Add Detection Note to a note in SOAR.",
           "enabled": false,
           "export_key": "ExtraHop: Write Add Detection Note to Note",
-          "id": 34,
+          "id": 58,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614142010,
+          "last_modified_time": 1727294374325,
           "name": "ExtraHop: Write Add Detection Note to Note",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_update_detection",
@@ -9545,14 +9768,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614142013,
+          "created_date": 1727294374383,
           "description": "Write Get Detection Note resulta to a note in SOAR.",
           "enabled": false,
           "export_key": "ExtraHop: Write Get Detection Note status to SOAR Note",
-          "id": 35,
+          "id": 59,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614142036,
+          "last_modified_time": 1727294374383,
           "name": "ExtraHop: Write Get Detection Note status to SOAR Note",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_update_detection",
@@ -9567,7 +9790,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "playbook_d3190e18-1015-4a40-83a9-99434785f8c5",
-        "id": 25,
+        "id": 36,
         "name": "playbook_d3190e18-1015-4a40-83a9-99434785f8c5",
         "type": "playbook",
         "uuid": "065692f8-4f0c-4305-8741-2d0519f54d19"
@@ -9575,15 +9798,15 @@
       "tags": [],
       "type": "default",
       "uuid": "d3190e18-1015-4a40-83a9-99434785f8c5",
-      "version": 6
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2cb29594_32d5_4d5f_afff_283ade592ed1\" isExecutable=\"true\" name=\"playbook_2cb29594_32d5_4d5f_afff_283ade592ed1\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_02qv284\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) update watchlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8d33930-3417-436e-82a1-267a5dc9fa91\"\u003e{\"inputs\":{},\"pre_processing_script\":\"dev_id = row.devs_id\\naction = playbook.inputs.extrahop_watchlist_action\\nif action == \\\"add\\\":\\n    inputs.extrahop_assign = str(dev_id)\\nelif action == \\\"remove\\\":\\n    inputs.extrahop_unassign = str(dev_id)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_watchlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02qv284\u003c/incoming\u003e\u003coutgoing\u003eFlow_136l567\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_02qv284\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ExtraHop: Write update watchlist results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0bafbea2-78df-472d-9839-974979331a95\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_136l567\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ys4ien\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_136l567\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0l97l5x\u003c/incoming\u003e\u003cincoming\u003eFlow_0ckywww\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ys4ien\" sourceRef=\"ScriptTask_2\" targetRef=\"ConditionPoint_5\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_device_id = row.devs_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_devices_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1bzxvf2\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xmoy89\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cexclusiveGateway default=\"Flow_0l97l5x\" id=\"ConditionPoint_5\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0ys4ien\u003c/incoming\u003e\u003coutgoing\u003eFlow_1bzxvf2\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0l97l5x\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Update Devices data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b8dd846f-fae8-4a96-bb2d-c49abc739fea\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xmoy89\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ckywww\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xmoy89\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0ckywww\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_1bzxvf2\" name=\"ExtraHop: Test if watchlist was updated\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_4\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test if watchlist was updated\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"watchlist_updated\\\") else False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0l97l5x\" name=\"Else\" sourceRef=\"ConditionPoint_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2cb29594_32d5_4d5f_afff_283ade592ed1\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l97l5x\" id=\"Flow_0l97l5x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"476\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"575\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"575\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"774\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"719\" y=\"557\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bzxvf2\" id=\"Flow_1bzxvf2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"476\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"518\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"84\" x=\"609\" y=\"479\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ckywww\" id=\"Flow_0ckywww_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"722\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"748\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"748\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"774\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xmoy89\" id=\"Flow_0xmoy89_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"602\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"638\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ys4ien\" id=\"Flow_0ys4ien_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_136l567\" id=\"Flow_136l567_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02qv284\" id=\"Flow_02qv284_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"774.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"482\" y=\"518.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_5\" id=\"ConditionPoint_5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"424.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"482\" y=\"638.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2cb29594_32d5_4d5f_afff_283ade592ed1\" isExecutable=\"true\" name=\"playbook_2cb29594_32d5_4d5f_afff_283ade592ed1\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_02qv284\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) update watchlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8d33930-3417-436e-82a1-267a5dc9fa91\"\u003e{\"inputs\":{},\"pre_processing_script\":\"dev_id = row.devs_id\\naction = playbook.inputs.extrahop_watchlist_action\\nif action == \\\"add\\\":\\n    inputs.extrahop_assign = str(dev_id)\\nelif action == \\\"remove\\\":\\n    inputs.extrahop_unassign = str(dev_id)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_watchlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02qv284\u003c/incoming\u003e\u003coutgoing\u003eFlow_136l567\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_02qv284\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ExtraHop: Write update watchlist results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0bafbea2-78df-472d-9839-974979331a95\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_136l567\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ys4ien\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_136l567\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0l97l5x\u003c/incoming\u003e\u003cincoming\u003eFlow_0ckywww\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ys4ien\" sourceRef=\"ScriptTask_2\" targetRef=\"ConditionPoint_5\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_device_id = row.devs_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_devices_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1bzxvf2\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xmoy89\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cexclusiveGateway default=\"Flow_0l97l5x\" id=\"ConditionPoint_5\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0ys4ien\u003c/incoming\u003e\u003coutgoing\u003eFlow_1bzxvf2\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0l97l5x\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Update Devices data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b8dd846f-fae8-4a96-bb2d-c49abc739fea\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xmoy89\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ckywww\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xmoy89\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0ckywww\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_1bzxvf2\" name=\"ExtraHop: Test if watchlist was updated\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_4\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test if watchlist was updated\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = True if hasattr(playbook.properties, \\\"watchlist_updated\\\") else False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0l97l5x\" name=\"Else\" sourceRef=\"ConditionPoint_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2cb29594_32d5_4d5f_afff_283ade592ed1\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l97l5x\" id=\"Flow_0l97l5x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"476\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"575\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"575\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"774\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"719\" y=\"557\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bzxvf2\" id=\"Flow_1bzxvf2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"476\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"497\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"518\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"84\" x=\"609\" y=\"479\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ckywww\" id=\"Flow_0ckywww_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"722\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"748\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"748\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"774\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xmoy89\" id=\"Flow_0xmoy89_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"602\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"638\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ys4ien\" id=\"Flow_0ys4ien_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_136l567\" id=\"Flow_136l567_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02qv284\" id=\"Flow_02qv284_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"774.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"482\" y=\"518.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_5\" id=\"ConditionPoint_5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"424.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"482\" y=\"638.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682614142461,
+      "create_date": 1727294375323,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -9600,7 +9823,7 @@
       "field_type_handle": "playbook_2cb29594_32d5_4d5f_afff_283ade592ed1",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Update Watchlist",
+        "display_name": "ExtraHop Reveal(x): Update Watchlist (PB)",
         "export_key": "playbook_2cb29594_32d5_4d5f_afff_283ade592ed1",
         "fields": {
           "extrahop_watchlist_action": {
@@ -9613,7 +9836,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb29594_32d5_4d5f_afff_283ade592ed1/extrahop_watchlist_action",
             "hide_notification": false,
-            "id": 461,
+            "id": 608,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -9628,7 +9851,7 @@
             "templates": [],
             "text": "Watchlist action",
             "tooltip": "Add or remove device to or from the watchlist.",
-            "type_id": 1029,
+            "type_id": 1042,
             "uuid": "f4f8d96b-2ce5-44f0-92f7-e13d50642b0f",
             "values": [
               {
@@ -9638,7 +9861,7 @@
                 "label": "add",
                 "properties": null,
                 "uuid": "070c902f-61bb-40aa-8558-75dcd4947f2b",
-                "value": 578
+                "value": 702
               },
               {
                 "default": false,
@@ -9647,7 +9870,7 @@
                 "label": "remove",
                 "properties": null,
                 "uuid": "ee4da3ce-9d51-4bd1-8c97-afed392308e7",
-                "value": 579
+                "value": 703
               }
             ]
           }
@@ -9672,7 +9895,7 @@
         "uuid": "530811a2-6ba4-4b93-839a-3fa55186479b"
       },
       "has_logical_errors": false,
-      "id": 24,
+      "id": 35,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -9681,18 +9904,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683043704264,
+      "last_modified_time": 1727294376661,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682614142611,
+          "created_date": 1727294375635,
           "description": "Update the ExtraHop Devices data table watchlist column in SOAR. ",
           "enabled": false,
           "export_key": "ExtraHop: Update Devices data table",
-          "id": 36,
+          "id": 60,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614142637,
+          "last_modified_time": 1727294375635,
           "name": "ExtraHop: Update Devices data table",
           "object_type": "extrahop_devices",
           "playbook_handle": "extrahop_rx_update_watchlist",
@@ -9703,14 +9926,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682614142640,
+          "created_date": 1727294375697,
           "description": "Write update watchlist results to a note in SOAR.",
           "enabled": false,
           "export_key": "ExtraHop: Write update watchlist results to a note",
-          "id": 37,
+          "id": 61,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614142666,
+          "last_modified_time": 1727294375697,
           "name": "ExtraHop: Write update watchlist results to a note",
           "object_type": "extrahop_devices",
           "playbook_handle": "extrahop_rx_update_watchlist",
@@ -9741,7 +9964,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2cb29594-32d5-4d5f-afff-283ade592ed1",
-        "id": 26,
+        "id": 37,
         "name": "playbook_2cb29594_32d5_4d5f_afff_283ade592ed1",
         "type": "playbook",
         "uuid": "d95192a1-a01b-40b6-8baf-2e7f7ca74506"
@@ -9749,7 +9972,7 @@
       "tags": [],
       "type": "default",
       "uuid": "2cb29594-32d5-4d5f-afff-283ade592ed1",
-      "version": 6
+      "version": 4
     }
   ],
   "regulators": null,
@@ -9757,32 +9980,14 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1682614133788,
-      "description": "Add Devices data table field as a SOAR artifact.",
-      "enabled": false,
-      "export_key": "ExtraHop script: add artifact from device",
-      "id": 11,
-      "language": "python3",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1682614133810,
-      "name": "ExtraHop script: add artifact from device",
-      "object_type": "incident",
-      "playbook_handle": null,
-      "programmatic_name": "scr_sep_add_artifact_from_scan_results",
-      "script_text": "# Create a SOAR artifact based on a dropdown which selects the corresponding data-table field.\nARTIFACT_TYPE = playbook.inputs.extrahop_artifact_type.replace(\" (v4)\" ,\"\").replace(\" (v6)\" ,\"\")\n\nPARAMS = {\n    \"IP Address\": row.ipaddr4,\n    \"DNS Name\": row.dns_name,\n    \"MAC Address\": row.macaddr\n}\n# Both IP address V4 or V6 will be added as type \"IP Address\".\nif \"v6\" in rule.properties.extrahop_artifact_type:\n    PARAMS.update({\"IP Address\": row.ipaddr6})\n\ndef addArtifact(artifact_type, artifact_value, description):\n    \"\"\"This method adds new artifacts to the incident derived from matches of the the regular expression\n\n    :param artifact_type: The type of the artifact.\n    :param artifact_value: - The value of the artifact.\n    :param description: - the description of the artifact.\n    \"\"\"\n    incident.addArtifact(artifact_type, artifact_value, description)\n\ndef validate_fields(fields, params):\n    \"\"\"\n    Ensure required fields are present. Throw ValueError if not\n    :param fields: Required fields.\n    :param params: Data-table fields as parameters.\n    :return: no return\n    \"\"\"\n    for f in fields:\n        if f not in params or not params.get(f) or params.get(f) == \u0027\u0027:\n            raise ValueError(str(\u0027Required data-table field is missing or empty for artifact type: \u0027 + f))\n\n\n# Processing starts here\ndesc = \u0027\u0027\nvalidate_fields([ARTIFACT_TYPE], PARAMS)\ndesc = \"Artifact from Device detected in the ExtraHop environment. Device name \u0027{}\u0027, Device ID \u0027{}\u0027.\".format(row.default_name, row.devs_id)\naddArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)\n",
-      "tags": [],
-      "uuid": "b22a440f-5bd8-4d14-a34e-9fe51dad99fb"
-    },
-    {
-      "actions": [],
-      "created_date": 1682614133814,
+      "created_date": 1727294355784,
       "description": "Set ExtraHop detection properties as workflow property dicts.",
       "enabled": false,
       "export_key": "ExtraHop script: detection property helper",
-      "id": 12,
+      "id": 36,
       "language": "python3",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1682614133833,
+      "last_modified_time": 1727294355784,
       "name": "ExtraHop script: detection property helper",
       "object_type": "incident",
       "playbook_handle": null,
@@ -9793,10 +9998,14 @@
     }
   ],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
+    "build_number": 9340,
+    "f": 0,
+    "m": 0,
+    "major": 0,
     "minor": 0,
-    "version": "46.0.8131"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.0.0.9340"
   },
   "tags": [],
   "task_order": [],
@@ -9817,7 +10026,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/ams_description",
           "hide_notification": false,
-          "id": 330,
+          "id": 476,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -9834,7 +10043,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "c2b5859c-61be-4e53-9560-3677fe57c0ff",
           "values": [],
           "width": 88
@@ -9849,7 +10058,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/ams_id",
           "hide_notification": false,
-          "id": 331,
+          "id": 477,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -9866,7 +10075,7 @@
           "templates": [],
           "text": "ID",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "39022bfb-713f-43f7-ac47-f17d6a857f8a",
           "values": [],
           "width": 18
@@ -9881,7 +10090,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/ams_name",
           "hide_notification": false,
-          "id": 332,
+          "id": 478,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -9898,7 +10107,7 @@
           "templates": [],
           "text": "Name",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "41121269-26c3-4cbd-8131-d65339a7455e",
           "values": [],
           "width": 44
@@ -9913,7 +10122,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/mod_time",
           "hide_notification": false,
-          "id": 333,
+          "id": 479,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -9930,7 +10139,7 @@
           "templates": [],
           "text": "Mod time",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "fe23b5ca-c021-4c66-9f86-ea1f29265bb1",
           "values": [],
           "width": 34
@@ -9945,7 +10154,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/mode",
           "hide_notification": false,
-          "id": 334,
+          "id": 480,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -9962,7 +10171,7 @@
           "templates": [],
           "text": "Mode",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "779f44c3-eb2d-41fe-b570-1b5195847dec",
           "values": [],
           "width": 41
@@ -9977,7 +10186,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/owner",
           "hide_notification": false,
-          "id": 335,
+          "id": 481,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -9994,7 +10203,7 @@
           "templates": [],
           "text": "Owner",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "309b4088-7cc0-4ff3-96f6-e9d9de24b965",
           "values": [],
           "width": 50
@@ -10009,7 +10218,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/query_execution_date",
           "hide_notification": false,
-          "id": 336,
+          "id": 482,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10026,7 +10235,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "cbe6cb23-7dbb-468b-a3ae-097fede6a055",
           "values": [],
           "width": 75
@@ -10041,7 +10250,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/rights",
           "hide_notification": false,
-          "id": 337,
+          "id": 483,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10058,7 +10267,7 @@
           "templates": [],
           "text": "Rights",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "d0ee5116-6629-4ca4-b87b-89ac91240207",
           "values": [],
           "width": 48
@@ -10073,7 +10282,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/short_code",
           "hide_notification": false,
-          "id": 338,
+          "id": 484,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10090,7 +10299,7 @@
           "templates": [],
           "text": "Short code",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "438e0eec-1608-462e-89c0-bcac47d1e2d4",
           "values": [],
           "width": 42
@@ -10105,7 +10314,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/show_alert_status",
           "hide_notification": false,
-          "id": 339,
+          "id": 485,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10122,7 +10331,7 @@
           "templates": [],
           "text": "Show alert status",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "ed6be14d-c73d-43ad-bcc0-22650a4811b2",
           "values": [],
           "width": 47
@@ -10137,7 +10346,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/walks",
           "hide_notification": false,
-          "id": 340,
+          "id": 486,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -10154,7 +10363,7 @@
           "templates": [],
           "text": "Walks",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "004aa07c-fcf4-40b8-93d5-3e9b965c092f",
           "values": [],
           "width": 47
@@ -10169,7 +10378,7 @@
           "deprecated": false,
           "export_key": "extrahop_activitymaps/weighting",
           "hide_notification": false,
-          "id": 341,
+          "id": 487,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10186,7 +10395,7 @@
           "templates": [],
           "text": "Weighting",
           "tooltip": "",
-          "type_id": 1012,
+          "type_id": 1025,
           "uuid": "48a3c9a6-2502-40db-9dce-71a0715c48b4",
           "values": [],
           "width": 77
@@ -10226,7 +10435,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/appliance_id",
           "hide_notification": false,
-          "id": 342,
+          "id": 488,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10243,7 +10452,7 @@
           "templates": [],
           "text": "Appliance ID",
           "tooltip": "The identifier for a sensor.",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "e07d8028-42a2-4e38-8b55-06485e4aba47",
           "values": [],
           "width": 77
@@ -10258,7 +10467,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/assignee",
           "hide_notification": false,
-          "id": 343,
+          "id": 489,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10275,7 +10484,7 @@
           "templates": [],
           "text": "Assignee",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "3ae88e4a-bed0-4120-9af0-908cb0cdb75a",
           "values": [],
           "width": 69
@@ -10290,7 +10499,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/categories",
           "hide_notification": false,
-          "id": 344,
+          "id": 490,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10307,7 +10516,7 @@
           "templates": [],
           "text": "Categories",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "6ebb268c-f45a-4fc9-9259-d0e389302d76",
           "values": [],
           "width": 82
@@ -10322,7 +10531,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/det_description",
           "hide_notification": false,
-          "id": 345,
+          "id": 491,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10339,7 +10548,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "7a0898df-d4cb-4b2a-8270-97f08ebeab5a",
           "values": [],
           "width": 305
@@ -10354,7 +10563,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/det_id",
           "hide_notification": false,
-          "id": 346,
+          "id": 492,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10371,7 +10580,7 @@
           "templates": [],
           "text": "Detection ID",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "337912b5-f97b-4746-b1c8-1b915d82b2d0",
           "values": [],
           "width": 74
@@ -10386,7 +10595,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/detection_url",
           "hide_notification": false,
-          "id": 347,
+          "id": 493,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -10403,7 +10612,7 @@
           "templates": [],
           "text": "Detection URL",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "def6c0a2-9ccd-4efb-ba3f-2c4338c2f45f",
           "values": [],
           "width": 74
@@ -10418,7 +10627,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/end_time",
           "hide_notification": false,
-          "id": 348,
+          "id": 494,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -10435,7 +10644,7 @@
           "templates": [],
           "text": "End time",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "a5b713fc-f606-4f33-80e1-30faef26f6ae",
           "values": [],
           "width": 70
@@ -10450,7 +10659,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/is_user_created",
           "hide_notification": false,
-          "id": 349,
+          "id": 495,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10467,7 +10676,7 @@
           "templates": [],
           "text": "Is user created",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "0b055da1-91f0-4437-be4b-3899ece4c732",
           "values": [],
           "width": 58
@@ -10482,7 +10691,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/mitre_tactics",
           "hide_notification": false,
-          "id": 350,
+          "id": 496,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -10499,7 +10708,7 @@
           "templates": [],
           "text": "Mitre tactics",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "dd7b464d-629f-4a6d-adb3-ce035dd1f7f4",
           "values": [],
           "width": 188
@@ -10514,7 +10723,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/mitre_techniques",
           "hide_notification": false,
-          "id": 351,
+          "id": 497,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -10531,7 +10740,7 @@
           "templates": [],
           "text": "Mitre techniques",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "feb16d57-13de-42c0-a9bd-78308de095de",
           "values": [],
           "width": 182
@@ -10546,7 +10755,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/mod_time",
           "hide_notification": false,
-          "id": 352,
+          "id": 498,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -10563,7 +10772,7 @@
           "templates": [],
           "text": "Mod time",
           "tooltip": "Returns detections that were updated after the specified date, expressed in milliseconds since the epoch.",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "3bb1af84-faf2-4e89-a0ca-a677c39aa9b0",
           "values": [],
           "width": 34
@@ -10578,7 +10787,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/participants",
           "hide_notification": false,
-          "id": 353,
+          "id": 499,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -10595,7 +10804,7 @@
           "templates": [],
           "text": "Participants",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "039c878d-c07e-440b-9bab-fc7d87de4921",
           "values": [],
           "width": 148
@@ -10610,7 +10819,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/properties",
           "hide_notification": false,
-          "id": 354,
+          "id": 500,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -10627,7 +10836,7 @@
           "templates": [],
           "text": "Properties",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "4a88b4aa-6141-4872-b5e5-4cd69c1b8506",
           "values": [],
           "width": 171
@@ -10642,7 +10851,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/query_execution_date",
           "hide_notification": false,
-          "id": 355,
+          "id": 501,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10659,7 +10868,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "c3476aba-a7e1-4f01-bfd0-8ab3fd6f98b1",
           "values": [],
           "width": 119
@@ -10674,7 +10883,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/resolution",
           "hide_notification": false,
-          "id": 356,
+          "id": 502,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10691,7 +10900,7 @@
           "templates": [],
           "text": "Resolution",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "cbb2a8e0-b616-464a-a386-5eaa8cbeb151",
           "values": [],
           "width": 81
@@ -10706,7 +10915,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/risk_score",
           "hide_notification": false,
-          "id": 357,
+          "id": 503,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10723,7 +10932,7 @@
           "templates": [],
           "text": "Risk score",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "2f42568a-0acd-449f-8ce0-0f6bd46c2712",
           "values": [],
           "width": 41
@@ -10738,7 +10947,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/start_time",
           "hide_notification": false,
-          "id": 358,
+          "id": 504,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -10755,7 +10964,7 @@
           "templates": [],
           "text": "Start time",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "c775c66c-912e-4114-9074-8d34cdbb4b1a",
           "values": [],
           "width": 72
@@ -10770,7 +10979,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/status",
           "hide_notification": false,
-          "id": 359,
+          "id": 505,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10787,7 +10996,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "fd8fa146-2f02-42a7-be7a-95d0ffaa1ccc",
           "values": [],
           "width": 49
@@ -10802,7 +11011,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/ticket_id",
           "hide_notification": false,
-          "id": 360,
+          "id": 506,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10819,7 +11028,7 @@
           "templates": [],
           "text": "Ticket ID",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "2947aabf-4274-48cc-b5cb-76ec2816a5ad",
           "values": [],
           "width": 47
@@ -10834,7 +11043,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/ticket_url",
           "hide_notification": false,
-          "id": 361,
+          "id": 507,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -10851,7 +11060,7 @@
           "templates": [],
           "text": "Ticket URL",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "065d5317-5a89-4834-8a72-8ff9658d9563",
           "values": [],
           "width": 47
@@ -10866,7 +11075,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/title",
           "hide_notification": false,
-          "id": 362,
+          "id": 508,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10883,7 +11092,7 @@
           "templates": [],
           "text": "Title",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "85a98923-5167-4f7b-8a6c-3d2c96c0cdf6",
           "values": [],
           "width": 95
@@ -10898,7 +11107,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/type",
           "hide_notification": false,
-          "id": 363,
+          "id": 509,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -10915,7 +11124,7 @@
           "templates": [],
           "text": "Type",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "3e8d5dcd-2a86-47b0-bd51-8396d8404244",
           "values": [],
           "width": 120
@@ -10930,7 +11139,7 @@
           "deprecated": false,
           "export_key": "extrahop_detections/update_time",
           "hide_notification": false,
-          "id": 364,
+          "id": 510,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -10947,7 +11156,7 @@
           "templates": [],
           "text": "Update time",
           "tooltip": "Returns detections related to events that occurred after the specified date, expressed in milliseconds since the epoch. Note that ExtraHop Machine Learning Services analyze historical data to generate detections, and so there is a time delay between when the events that cause those detections occur and when the detections are generated. If you search for detections in the same update_time window multiple times, the later search might return detections that were not returned by the earlier search.",
-          "type_id": 1013,
+          "type_id": 1026,
           "uuid": "39aae273-6425-4e18-8dbe-9c3ed08517c5",
           "values": [],
           "width": 70
@@ -10987,7 +11196,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/activity",
           "hide_notification": false,
-          "id": 365,
+          "id": 511,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11004,7 +11213,7 @@
           "templates": [],
           "text": "Activity",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "fb3dd873-04ee-4836-9a4e-e51408568069",
           "values": [],
           "width": 59
@@ -11019,7 +11228,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/default_name",
           "hide_notification": false,
-          "id": 366,
+          "id": 512,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11036,7 +11245,7 @@
           "templates": [],
           "text": "Default name",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "e0a7c1d0-9c01-4f1f-8902-341c0bfcaee4",
           "values": [],
           "width": 80
@@ -11051,7 +11260,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/device_url",
           "hide_notification": false,
-          "id": 367,
+          "id": 513,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -11068,7 +11277,7 @@
           "templates": [],
           "text": "Device URL",
           "tooltip": "Linkback to  device on ExtraHop.",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "0da6b049-e577-4395-8b95-a574ac532713",
           "values": [],
           "width": 79
@@ -11083,7 +11292,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/devs_description",
           "hide_notification": false,
-          "id": 368,
+          "id": 514,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11100,7 +11309,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "b2041256-ddea-4577-803b-a18389a4d876",
           "values": [],
           "width": 88
@@ -11115,7 +11324,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/devs_id",
           "hide_notification": false,
-          "id": 369,
+          "id": 515,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -11132,7 +11341,7 @@
           "templates": [],
           "text": "Device ID",
           "tooltip": "REST API ID",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "66e37627-60ba-40f8-9535-103a05dae36f",
           "values": [],
           "width": 63
@@ -11147,7 +11356,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/discover_time",
           "hide_notification": false,
-          "id": 370,
+          "id": 516,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -11164,7 +11373,7 @@
           "templates": [],
           "text": "Discovery time",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "ed736af9-e6ba-494a-b53a-379d9737e598",
           "values": [],
           "width": 151
@@ -11179,7 +11388,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/display_name",
           "hide_notification": false,
-          "id": 371,
+          "id": 517,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11196,7 +11405,7 @@
           "templates": [],
           "text": "Display name",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "2afb30e5-422f-4663-810f-fe8b965a482c",
           "values": [],
           "width": 81
@@ -11211,7 +11420,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/dns_name",
           "hide_notification": false,
-          "id": 372,
+          "id": 518,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11228,7 +11437,7 @@
           "templates": [],
           "text": "DNS name",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "88e6cf47-4b8e-4dce-adde-206212ed97b9",
           "values": [],
           "width": 83
@@ -11243,7 +11452,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/extrahop_id",
           "hide_notification": false,
-          "id": 373,
+          "id": 519,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11260,7 +11469,7 @@
           "templates": [],
           "text": "ExtraHop  ID",
           "tooltip": "ExtraHop Discovery ID",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "2ce02cd6-4559-42de-b65f-84f63237528f",
           "values": [],
           "width": 75
@@ -11275,7 +11484,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/ipaddr4",
           "hide_notification": false,
-          "id": 374,
+          "id": 520,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11292,7 +11501,7 @@
           "templates": [],
           "text": "IPaddr4",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "9c3eed4d-a6a6-40ac-bf9b-cf92a19c71e2",
           "values": [],
           "width": 83
@@ -11307,7 +11516,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/ipaddr6",
           "hide_notification": false,
-          "id": 375,
+          "id": 521,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11324,7 +11533,7 @@
           "templates": [],
           "text": "IPaddr6",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "61994faf-d774-4e3d-a2d7-51c0ace7a18a",
           "values": [],
           "width": 88
@@ -11339,7 +11548,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/last_seen_time",
           "hide_notification": false,
-          "id": 376,
+          "id": 522,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -11356,7 +11565,7 @@
           "templates": [],
           "text": "Last seen time",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "9614750e-7922-4373-ae1f-92e4b514d677",
           "values": [],
           "width": 153
@@ -11371,7 +11580,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/macaddr",
           "hide_notification": false,
-          "id": 377,
+          "id": 523,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11388,7 +11597,7 @@
           "templates": [],
           "text": "MACaddr",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "c0a1d534-8346-4082-aec8-fbcbd4c01845",
           "values": [],
           "width": 79
@@ -11403,7 +11612,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/mod_time",
           "hide_notification": false,
-          "id": 378,
+          "id": 524,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -11420,7 +11629,7 @@
           "templates": [],
           "text": "Modification time",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "116c7c43-0207-4303-9a1f-9cfb404cf08c",
           "values": [],
           "width": 148
@@ -11435,7 +11644,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/on_watchlist",
           "hide_notification": false,
-          "id": 379,
+          "id": 525,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11452,7 +11661,7 @@
           "templates": [],
           "text": "On watchlist",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "5b6864c2-5177-45d7-8a46-c85721e569f1",
           "values": [],
           "width": 71
@@ -11467,7 +11676,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/query_execution_date",
           "hide_notification": false,
-          "id": 380,
+          "id": 526,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11484,7 +11693,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "9100b462-eafd-4a19-9c0f-9380a168e8d7",
           "values": [],
           "width": 75
@@ -11499,7 +11708,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/role",
           "hide_notification": false,
-          "id": 381,
+          "id": 527,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11516,7 +11725,7 @@
           "templates": [],
           "text": "Role",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "e337a0f0-19c9-461e-878d-0968c0a55260",
           "values": [],
           "width": 96
@@ -11531,7 +11740,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/user_mod_time",
           "hide_notification": false,
-          "id": 382,
+          "id": 528,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -11548,7 +11757,7 @@
           "templates": [],
           "text": "User modification time",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "db0e30a4-43ab-4845-abd2-1644b0170b43",
           "values": [],
           "width": 153
@@ -11563,7 +11772,7 @@
           "deprecated": false,
           "export_key": "extrahop_devices/vendor",
           "hide_notification": false,
-          "id": 383,
+          "id": 529,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11580,7 +11789,7 @@
           "templates": [],
           "text": "Vendor",
           "tooltip": "",
-          "type_id": 1014,
+          "type_id": 1027,
           "uuid": "bb6fa4e4-6ea3-45b9-9a07-cd7096c78051",
           "values": [],
           "width": 54
@@ -11620,7 +11829,7 @@
           "deprecated": false,
           "export_key": "extrahop_tags/mod_time",
           "hide_notification": false,
-          "id": 384,
+          "id": 530,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -11637,7 +11846,7 @@
           "templates": [],
           "text": "Mod time",
           "tooltip": "Tag modification time",
-          "type_id": 1015,
+          "type_id": 1028,
           "uuid": "6c839252-80ed-4451-84a1-2a008a539f66",
           "values": [],
           "width": 145
@@ -11652,7 +11861,7 @@
           "deprecated": false,
           "export_key": "extrahop_tags/query_execution_date",
           "hide_notification": false,
-          "id": 385,
+          "id": 531,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11669,7 +11878,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1015,
+          "type_id": 1028,
           "uuid": "ec8fcd62-3285-411d-abc2-6e0a92ec9a14",
           "values": [],
           "width": 167
@@ -11684,7 +11893,7 @@
           "deprecated": false,
           "export_key": "extrahop_tags/tag",
           "hide_notification": false,
-          "id": 386,
+          "id": 532,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11701,7 +11910,7 @@
           "templates": [],
           "text": "Tag",
           "tooltip": "Tag name",
-          "type_id": 1015,
+          "type_id": 1028,
           "uuid": "842086e3-6e1a-4d5c-bed6-5bd33f313c08",
           "values": [],
           "width": 137
@@ -11716,7 +11925,7 @@
           "deprecated": false,
           "export_key": "extrahop_tags/tag_id",
           "hide_notification": false,
-          "id": 387,
+          "id": 533,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11733,7 +11942,7 @@
           "templates": [],
           "text": "ID",
           "tooltip": "Tag ID",
-          "type_id": 1015,
+          "type_id": 1028,
           "uuid": "10a76105-22ed-4191-9154-30f37908f537",
           "values": [],
           "width": 98
@@ -11773,7 +11982,7 @@
           "deprecated": false,
           "export_key": "extrahop_watchlist/display_name",
           "hide_notification": false,
-          "id": 388,
+          "id": 534,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11790,7 +11999,7 @@
           "templates": [],
           "text": "Display name",
           "tooltip": "",
-          "type_id": 1016,
+          "type_id": 1029,
           "uuid": "0da314e0-a21b-4022-be04-5f25dd66baad",
           "values": [],
           "width": 140
@@ -11805,7 +12014,7 @@
           "deprecated": false,
           "export_key": "extrahop_watchlist/extrahop_id",
           "hide_notification": false,
-          "id": 389,
+          "id": 535,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11822,7 +12031,7 @@
           "templates": [],
           "text": "ExtraHop ID",
           "tooltip": "",
-          "type_id": 1016,
+          "type_id": 1029,
           "uuid": "ef6bdb00-9852-4c35-b06e-7b73233d5e61",
           "values": [],
           "width": 156
@@ -11837,7 +12046,7 @@
           "deprecated": false,
           "export_key": "extrahop_watchlist/ipaddr4",
           "hide_notification": false,
-          "id": 390,
+          "id": 536,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11854,7 +12063,7 @@
           "templates": [],
           "text": "IPaddr4",
           "tooltip": "",
-          "type_id": 1016,
+          "type_id": 1029,
           "uuid": "db777ffc-8430-4b3c-a411-385320425bf7",
           "values": [],
           "width": 84
@@ -11869,7 +12078,7 @@
           "deprecated": false,
           "export_key": "extrahop_watchlist/ipaddr6",
           "hide_notification": false,
-          "id": 391,
+          "id": 537,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11886,7 +12095,7 @@
           "templates": [],
           "text": "IPaddr6",
           "tooltip": "",
-          "type_id": 1016,
+          "type_id": 1029,
           "uuid": "fcb8e407-4077-46d7-ba71-5ec6ec800d6e",
           "values": [],
           "width": 83
@@ -11901,7 +12110,7 @@
           "deprecated": false,
           "export_key": "extrahop_watchlist/macaddr",
           "hide_notification": false,
-          "id": 392,
+          "id": 538,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11918,7 +12127,7 @@
           "templates": [],
           "text": "MACaddr",
           "tooltip": "",
-          "type_id": 1016,
+          "type_id": 1029,
           "uuid": "67a77a85-93b4-4fc5-a27c-0749d959ab15",
           "values": [],
           "width": 128
@@ -11933,7 +12142,7 @@
           "deprecated": false,
           "export_key": "extrahop_watchlist/query_execution_date",
           "hide_notification": false,
-          "id": 393,
+          "id": 539,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -11950,7 +12159,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1016,
+          "type_id": 1029,
           "uuid": "a95bfd25-6f88-4193-8781-f3797e20c0e7",
           "values": [],
           "width": 147

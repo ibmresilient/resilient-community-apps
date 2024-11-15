@@ -28,7 +28,9 @@
       "properties": {
         "extrahop_port1": {},
         "extrahop_ip2": {},
-        "extrahop_ip1": {},
+        "extrahop_ip1": {
+          "type": "string"
+        },
         "extrahop_port2": {},
         "incident_id": {
           "type": "integer"
@@ -43,10 +45,11 @@
         "extrahop_output": {
           "type": "string"
         },
+        "extrahop_include_secrets": {
+          "type": "boolean"
+        },
         "extrahop_limit_bytes": {},
-        "extrahop_active_until": {
-          "type": "integer"
-        }
+        "extrahop_active_until": {}
       }
     },
     "metrics": {

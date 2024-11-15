@@ -1,9 +1,8 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
-recursive-include fn_extrahop/util *
 recursive-include fn_extrahop/lib *
+recursive-include fn_extrahop/util *
 include fn_extrahop/LICENSE
 include doc/*.md
 include doc/screenshots/*

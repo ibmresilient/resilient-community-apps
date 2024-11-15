@@ -23,33 +23,19 @@ def snake_to_camel(word):
 setup(
     name="fn_extrahop",
     display_name="ExtraHop for IBM SOAR",
-    version="1.1.0",
+    version="1.2.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://ibm.com/mysupport",
-    description="Resilient Circuits Components for 'fn_extrahop'",
-    long_description="""The ExtraHop App for SOAR to facilitate manual enrichment and 
-        remediation actions against an ExtraHop environment in the IBM SOAR Platform.
-        <br>
-        The ExtraHop App provides the following functionality:
-        <br>
-        * A poller which gathers current detections from ExtraHop and escalates to the SOAR platform as incidents.
-        <br>
-        * Functions to get, search and update detections.
-        <br>
-        * Functions to get and update detection notes.
-        <br>
-        * Functions to get and search devices.
-        <br>
-        * Functions to get, create and assign tags.
-        <br>
-        * Functions get and set the watchlist.
-        <br>
-        * A function to get activitymaps.
-    """,
+    description="IBM SOAR app for ExtraHop",
+    long_description="""Provide bidirectional synchronization and functions for ExtraHop <br>
+
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_extrahop/README.html'>App Documentation</a></ul>""",
     install_requires=[
-        "resilient-circuits>=48.0.0",
+        "resilient-circuits>=51.0.2.2.0",
         "retry2 ~= 0.9"
     ],
     python_requires='>=3.6',

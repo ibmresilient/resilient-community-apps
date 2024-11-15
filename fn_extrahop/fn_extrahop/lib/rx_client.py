@@ -14,6 +14,10 @@ from resilient_lib import validate_fields
 
 LOG = logging.getLogger(__name__)
 
+DEFAULT_LIMIT_SEARCH_DURATION = "5m"
+SECONDS_IN_MINUTE = 60
+MAX_TIMEOUT_IN_SECONDS = 5 * SECONDS_IN_MINUTE
+
 
 class AuthenticationError(Exception):
     """Trap authentication errors for reauthenticating"""
@@ -454,7 +458,8 @@ class RxClient():
         return r
 
     def search_packets(self, output=None, always_return_body=False, active_from=None, active_until=None, limit_bytes=None,
-                       limit_search_duration=None, bpf=None, ip1=None, port1=None, ip2=None, port2=None):
+                       limit_search_duration=None, bpf=None, ip1=None, port1=None, ip2=None, port2=None, decrypt_files=None,
+                       include_secrets=None):
         """Search for and download packets stored on the ExtraHop system
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
@@ -467,12 +472,16 @@ class RxClient():
         :param active_until: (Optional) Get packets that ended before the specified timestamp (in millisecs).
         Default 0 (int)
         :param limit_bytes: (Optional) The maximum number of bytes to return. (str).
-        :param limit_search_duration: (Optional) The maximum amount of time to run the packet search. (int).
+        :param limit_search_duration: (Optional) The maximum amount of time to run the packet search. (str).
         :param bpf:  (Optional) The Berkeley Packet Filter (BPF) syntax for the packet search. (str)
         :param ip1: (Optional) Returns packets sent to or received by the specified IP address. (str)
         :param port1: (Optional) Returns packets sent from or received on the specified port. (str)
         :param ip2: (Optional) Returns packets sent to or received by the specified IP address.
         :param port2: (Optional) Returns packets sent from or received on the specified port.
+        :param decrypt_files: (Optional) Specifies whether to decrypt extracted files with stored secrets. 
+                                         This option is valid only if the `output` parameter is `extract`.
+        :param include_secrets: (Optional) Specifies whether to include secrets in the PCAPNG file. 
+                                           This option is valid only if `output` is set to `pcapng`.
         :return Result in json format.`
         """
         uri = self._endpoints["search_packets"]
@@ -480,10 +489,14 @@ class RxClient():
 
         params["from"] = active_from if active_from else 0
         params["until"] = active_until if active_until else 0
-        params["limit_search_duration"] = int(limit_search_duration) if limit_search_duration else 0
+        params["limit_search_duration"] = limit_search_duration if limit_search_duration else DEFAULT_LIMIT_SEARCH_DURATION
         params["always_return_body"] = "{}".format(always_return_body).lower()
         if output:
             params["output"] = output
+            if output == "extract" and decrypt_files:
+                params["decrypt_files"] = "true"
+            elif output == "pcapng" and include_secrets:
+                params["include_secrets"] = "true"
         if limit_bytes:
             params["limit_bytes"] = int(limit_bytes)
         if bpf:
@@ -497,7 +510,8 @@ class RxClient():
         if port2:
             params["port2"] = port2
 
-        r = self.api_call("get", uri, headers=self._headers, params=params)
+        timeout = convert_time_string_to_timeout(params["limit_search_duration"])
+        r = self.api_call("get", uri, headers=self._headers, params=params, timeout=timeout)
 
         return r
 
@@ -600,3 +614,47 @@ def validate_settings(fn_opts):
         validate_fields([
             {"name": "extrahop_cafile", "placeholder": "<path to cert file>|false"}],
             fn_opts)
+
+def convert_time_string_to_timeout(time_string)->int:
+    """ Convert ExtraHop time string to timeout in seconds.
+        Search packets endpoint has a parameter limit_search_duration which can be specified 
+        as times string as documented in the REST API docs here:
+        https://docs.extrahop.com/9.7/rest-api-guide/#supported-time-units-
+        Use this function to compute the timeout value.  The MAX default value is 5 minutes.
+        If no time unit is specified, then the time is milliseconds.
+    Args:
+        time_string (str): ExtraHop time value
+    Raises:
+        ValueError: invalid time string format
+        ValueError: invalid time string format
+
+    Returns:
+        int: time string converted to time in seconds
+    """
+    if time_string.isdigit():
+        # time string is in milliseconds by default
+        time_in_seconds = (int(time_string) / 1000) * 1000
+    else:
+        # Parse time string time value which should be integer.
+        try:
+            time_value = int(time_string[:-1])
+        except:
+            raise ValueError("Invalid time string format: time value should be integer. For example: 50s, or 2m")
+
+        # Get the time units from input string.
+        time_unit = time_string.rstrip()[-1].lower()
+
+        # Compute the total time to sleep in seconds
+        if time_unit == 's':
+            time_in_seconds = time_value
+        elif time_unit == 'm':
+            time_in_seconds = time_value * SECONDS_IN_MINUTE
+        elif time_unit in ['h', 'd', 'w']:
+            time_in_seconds = MAX_TIMEOUT_IN_SECONDS
+        else:
+            raise ValueError("Invalid time string format: should end in 's' for seconds, 'm for minutes, 'h' for hours or 'd' for days")
+
+    if time_in_seconds > MAX_TIMEOUT_IN_SECONDS:
+        time_in_seconds = MAX_TIMEOUT_IN_SECONDS
+    return time_in_seconds
+
