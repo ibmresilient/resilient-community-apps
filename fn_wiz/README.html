@@ -472,19 +472,31 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>11/2024</p></td>
+<td><p>Added wiz_issue_type incident field</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>08/2024</p></td>
 <td><p>Optimize pulling vulnerabilities</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>04/2024</p></td>
 <td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<section id="id1">
+<h3>1.1.0<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>The Wiz issue type will now display on the Wiz incident tab in SOAR. Upgrading from
+previous versions of this app may not update the SOAR tab and may require the tab to be
+edited manually to display the Wiz issue type. In this case, use the SOAR Customization Settings to edit the Wiz tab to include the <code class="docutils literal notranslate"><span class="pre">wiz_issue_type</span></code> incident field.</p>
 </section>
-<hr class="docutils" />
+</section>
+<section id="id2">
+<h2><img alt="screenshot: main" src="../_images/issue_type.png" /><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+</section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <!--
@@ -1583,12 +1595,12 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <section id="data-table-wiz-vulnerabilities-table">
 <h2>Data Table - Wiz Vulnerabilities Table<a class="headerlink" href="#data-table-wiz-vulnerabilities-table" title="Link to this heading">¶</a></h2>
 <p><img alt="screenshot: dt-wiz-vulnerabilities-table" src="../_images/dt-wiz-vulnerabilities-table.png" /></p>
-<section id="id1">
-<h3>API Name:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="id3">
+<h3>API Name:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>wiz_vulnerabilities_table</p>
 </section>
-<section id="id2">
-<h3>Columns:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<section id="id4">
+<h3>Columns:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -1757,7 +1769,11 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
             <ul>
 <li><a class="reference internal" href="#">Wiz</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#id1">1.1.0</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2"></a></li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
@@ -1795,8 +1811,8 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 </ul>
 </li>
 <li><a class="reference internal" href="#data-table-wiz-vulnerabilities-table">Data Table - Wiz Vulnerabilities Table</a><ul>
-<li><a class="reference internal" href="#id1">API Name:</a></li>
-<li><a class="reference internal" href="#id2">Columns:</a></li>
+<li><a class="reference internal" href="#id3">API Name:</a></li>
+<li><a class="reference internal" href="#id4">Columns:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
