@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 import logging
@@ -19,6 +19,7 @@ class WizTab(Tab):
 
     CONTAINS = [
         Field("wiz_issue_id"),
+        Field("wiz_issue_type"),
         Field("wiz_issue_status"),
         Field("wiz_description"),
         Datatable("wiz_vulnerabilities_table"),

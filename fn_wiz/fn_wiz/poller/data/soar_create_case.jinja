@@ -17,6 +17,7 @@
   "properties": {
     "wiz_issue_id": "{{ id }}",
     "wiz_issue_status": "{{ status }}",
+    "wiz_issue_type": "{{ type }}",
     "wiz_description": "{{ sourceRule.controlDescription | replace('"', '\\"') }}"
   },
 
@@ -25,7 +26,7 @@
     {
       "text": {
         "format": "html",
-        "content": "<b>Created by Wiz:</b> {{ entity_url }}"
+        "content": "<b>Created by Wiz:</b> <a target='_blank' href='{{ entity_url }}'>Wiz Issue URL</a>"
       }
     }
   ]

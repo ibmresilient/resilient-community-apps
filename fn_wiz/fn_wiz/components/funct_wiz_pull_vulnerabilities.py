@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 # Generated with resilient-sdk v51.0.1.0.695
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import IntegrationError
 from fn_wiz.lib.app_common import (AppCommon, PACKAGE_NAME, MAX_VULN_RESULTS)
 from json import loads, JSONDecodeError
 
@@ -66,7 +67,7 @@ class FunctionComponent(AppFunctionComponent):
             response = app_common.get_vulnerabilities_by_project(project_ids_alph, num_results)
 
         else:
-            # Because we at least always initialize the num_results, we are unlikely to reach this block. 
+            # Because we at least always initialize the num_results, we are unlikely to reach this block.
             # But keeping it for troubleshooting purposes.
             self.LOG.warning("Missing parameters to query for vulnerabilities")
 

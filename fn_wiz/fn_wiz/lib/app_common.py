@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 # Generated with resilient-sdk v51.0.1.0.695
 
 import logging
@@ -84,7 +84,7 @@ class AppCommon():
         header['Authorization'] = f"Bearer {token}"
 
         return header
-    
+
     def _generate_auth_token(self):
         """
         An Bearer token is required to make API calls. These tokens expire daily, so it is recommended to generate a token
@@ -110,14 +110,14 @@ class AppCommon():
                                data=payload,
                                headers=headers,
                                verify=self.verify)
-        
+
         response_json = response.json()
 
         return response_json.get('access_token')
 
     @staticmethod
     def check_error(response: dict):
-        """ Since Wiz returns 200 status codes even if there is an error, we have to manually check if the 
+        """ Since Wiz returns 200 status codes even if there is an error, we have to manually check if the
                 response that came back from the API contains an error
 
         :param response: response that we have to check from API
@@ -128,10 +128,10 @@ class AppCommon():
         if len(errors) == 1:
             msg = errors[0].get('message', "")
             LOG.error("Received an error from Wiz API: %s", msg)
-            
+
             # Raise an error that can be caught in the function code
             raise IntegrationError(msg)
-        
+
         if len(errors) > 1:
             raise IntegrationError(f"Unexpected number of errors returned {len(errors)}")
 
@@ -148,7 +148,7 @@ class AppCommon():
         :type payload: dict|None
         :return: requests.Response object returned from the endpoint call
         :rtype: ``requests.Response``
-        """    
+        """
 
         # Generate Bearer token with
         token = self._generate_auth_token()
@@ -158,14 +158,14 @@ class AppCommon():
                                json=payload,
                                headers=self._make_headers(token),
                                verify=self.verify)
-        
+
         resp_json = response.json()
 
         self.check_error(resp_json)
 
         return resp_json
 
-    
+
     def _api_call_paged_issues(self, variables: dict):
         """
         Make API calls to the endpoint solution and paginate if necessary.
@@ -204,13 +204,13 @@ class AppCommon():
             page_info = response.get('data', {}).get('issues', {}).get('pageInfo', {})
             has_next_page = page_info.get('hasNextPage', False)
             end_cursor = page_info.get('endCursor', None)
-        
+
         return entities
 
-    
+
     def query_changed_entities_since_ts(self, timestamp: int):
         """
-        Get issues since last poller run where the statusChangedAt date has been updated since the last poll. This 
+        Get issues since last poller run where the statusChangedAt date has been updated since the last poll. This
         will include any newly created issues.
 
         :param timestamp: datetime when the last poller ran
@@ -231,11 +231,11 @@ class AppCommon():
                     }
                 }
             }
-    
+
         entities = self._api_call_paged_issues(variables)
 
         LOG.debug("Found %s issues where statusChangedAt has been updated since %s", len(entities), timestamp)
-        
+
         return entities
 
     def make_linkback_url(self, entity_id: str, linkback_url: str):
@@ -293,7 +293,7 @@ class AppCommon():
         """
         Get all recent vulnerabilities -- top MAX_RESULTS of High and Critical Severity, in order of most recent
         """
-        
+
         # get all vulnerabilities (max 500)
         variables = {
             "first": num_results,
@@ -309,7 +309,7 @@ class AppCommon():
                 "query": GRAPHQL_PULL_VULNERABILITIES,
                 "variables": variables
             }
-        
+
         vulnerabilities = []
 
         LOG.info("Querying for vulnerabilities from Wiz with variables: %s", variables)
@@ -320,7 +320,7 @@ class AppCommon():
         vulnerabilities = response.get('data', {}).get('vulnerabilityFindings', {}).get('nodes', [])
 
         LOG.debug("Found %s vulnerabilities.", len(vulnerabilities))
-        
+
         return vulnerabilities
 
     @cached(TTLCache(maxsize=1024, ttl=CACHE_TTL), key=lambda _, project_ids, num_results: f'{",".join(project_ids)}:{num_results}' )
@@ -343,7 +343,7 @@ class AppCommon():
         if num_results > MAX_RESULTS:
             raise IntegrationError(f"Requested number of results exceeds maximum ({MAX_RESULTS}) as allowed by Wiz API. \
                                    Please update function input 'wiz_num_results' to a lower value.")
-        
+
         vulnerabilities = self.get_vulnerabilities()    # should be cached
         associated_vulns = []       # vulnerabilities to be returned back to the playbook
 
@@ -359,17 +359,18 @@ class AppCommon():
 
             # Pull out vulnerabilities that have project ids that match the project_ids passed in
             for vuln in vulnerabilities:
-                vuln_projects = {p.get("id","") for p in vuln.get("projects", [])}  # set comprehension to get project IDs for this vulnerability
-                if vuln_projects & project_ids:
-                    # If any of the project Ids provided via the function inputs are found in the vulnerability, then add the vulnerability to our running list
-                    associated_vulns.append(vuln)
+                if vuln.get("projects"):
+                    vuln_projects = {p.get("id","") for p in vuln["projects"]}  # set comprehension to get project IDs for this vulnerability
+                    if vuln_projects & project_ids:
+                        # If any of the project Ids provided via the function inputs are found in the vulnerability, then add the vulnerability to our running list
+                        associated_vulns.append(vuln)
 
-                # if we only want the first "num_results", when we hit this number, return
-                if len(associated_vulns) == num_results:
-                    break
-        
+                    # if we only want the first "num_results", when we hit this number, return
+                    if len(associated_vulns) == num_results:
+                        break
+
             LOG.debug("Found %s vulnerabilities associated with projects %s.", len(associated_vulns), project_ids)
-            
+
         return associated_vulns
 
     def get_vulnerabilities_custom(self, custom_filter: dict):
@@ -392,13 +393,13 @@ class AppCommon():
                                     wiz_filter_query input: {custom_filter}. Please revise the filter \
                                     input to include the 'first' parameter with a value < {MAX_RESULTS} to indicate max number \
                                     of results to retrieve from Wiz.")
-        
+
         # If the `first` parameter is provided, we can pass the filter to Wiz as the `variables`
         query = {
                 "query": GRAPHQL_PULL_VULNERABILITIES,
                 "variables": custom_filter
             }
-        
+
         vulnerabilities = []
 
         LOG.info("Querying for vulnerabilities from Wiz with custom filter for variables: %s", custom_filter)
@@ -409,12 +410,12 @@ class AppCommon():
         vulnerabilities = response.get('data', {}).get('vulnerabilityFindings', {}).get('nodes', [])
 
         LOG.debug("Found %s vulnerabilities for wiz_query_filter %s", len(vulnerabilities), custom_filter)
-        
+
         return vulnerabilities
 
     def update_issue(self, query, issue_id: str):
         """Posts an update query to Wiz - is used in case of updating issue status or adding notes to an issue
-        
+
         :param query: GraphQL query with variables based on update action
         :type query: dict
         :param issue_id: Wiz issue id to update
@@ -425,7 +426,7 @@ class AppCommon():
         LOG.debug("update_issue: Querying to update Wiz issue %s with variables: %s", issue_id, query.get('variables'))
 
         response = self._api_call("POST", self.graphql_api_url, query)
-        
+
         issue = response.get('data', {}).get('updateIssue', {}).get('issue', {})
         return issue
 
@@ -434,7 +435,7 @@ class AppCommon():
 
         :param issue_id: Wiz Issue ID
         :type issue_id: str
-        :param note_text: SOAR note content to get added to the Issue as a comment 
+        :param note_text: SOAR note content to get added to the Issue as a comment
         :type note_text: str
         """
 
@@ -473,7 +474,7 @@ class AppCommon():
         if reason == "Resolved":
             LOG.warning("Cannot update Wiz issue to be 'Resolved'. Wiz issue can only be closed if case is closed for reason: \
                         'Unresolved', 'Duplicate', 'Not an Issue'.")
-            
+
             raise IntegrationError("Cannot update Wiz issue to be 'Resolved'")
 
         LOG.debug("Updating status of Wiz issue %s to be 'REJECTED'", issue_id)
@@ -511,7 +512,7 @@ def _get_verify_ssl(app_configs):
     verify = app_configs.get("verify")
 
     # because verify can be either a boolean or a path,
-    # we need to check if it is a string with a boolean 
+    # we need to check if it is a string with a boolean
     # value first then, and only then, we convert it to a bool
     # NOTE: that this will then only support "true" or "false"
     # (case-insensitive) rather than the normal "true", "yes", etc...

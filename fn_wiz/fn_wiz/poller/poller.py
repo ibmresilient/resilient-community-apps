@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 # Generated with resilient-sdk v51.0.1.0.695
 """Poller implementation"""
 
@@ -56,7 +56,7 @@ def init_app(rc, options):
 
 def query_entities(app_common, last_poller_time):
     """
-    Method call to query the endpoint solution for newly created or 
+    Method call to query the endpoint solution for newly created or
     modified entities for synchronization with IBM SOAR
 
     :param app_common: class for app API calls
@@ -74,7 +74,7 @@ def query_entities(app_common, last_poller_time):
     #   query_entities_since_ts(last_poller_time, *args, **kwargs)
 
     query_results = app_common.query_changed_entities_since_ts(last_poller_time)
- 
+
     return query_results
 
 
@@ -98,8 +98,8 @@ def is_entity_closed(entity):
     :return: true/false if entity is closed
     :rtype: bool
     """
-    
-    return True if entity.get(ENTITY_CLOSE_FIELD, None) in ENTITY_CLOSED_STATUSES else False
+
+    return bool(entity.get(ENTITY_CLOSE_FIELD, None) in ENTITY_CLOSED_STATUSES)
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -266,6 +266,6 @@ class PollerComponent(AppFunctionComponent):
 
             except Exception as err:
                 LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
-        
+
         LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
                     cases_insert, cases_closed, cases_updated)

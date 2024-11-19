@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1716566095995,
+  "export_date": 1731954320888,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/wiz_num_results",
       "hide_notification": false,
-      "id": 326,
+      "id": 376,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/wiz_issue_id",
       "hide_notification": false,
-      "id": 327,
+      "id": 377,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -77,7 +77,7 @@
       "deprecated": false,
       "export_key": "__function/wiz_soar_note",
       "hide_notification": false,
-      "id": 328,
+      "id": 378,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -107,7 +107,7 @@
       "deprecated": false,
       "export_key": "__function/wiz_resolution_summary",
       "hide_notification": false,
-      "id": 334,
+      "id": 379,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -136,7 +136,7 @@
       "deprecated": false,
       "export_key": "__function/wiz_resolution_reason",
       "hide_notification": false,
-      "id": 329,
+      "id": 380,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -166,7 +166,7 @@
       "deprecated": false,
       "export_key": "__function/wiz_project_ids",
       "hide_notification": false,
-      "id": 330,
+      "id": 381,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -195,7 +195,7 @@
       "deprecated": false,
       "export_key": "__function/wiz_query_filter",
       "hide_notification": false,
-      "id": 332,
+      "id": 382,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -224,7 +224,7 @@
       "deprecated": false,
       "export_key": "incident/wiz_issue_status",
       "hide_notification": false,
-      "id": 310,
+      "id": 360,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -254,7 +254,7 @@
       "deprecated": false,
       "export_key": "incident/wiz_issue_id",
       "hide_notification": false,
-      "id": 311,
+      "id": 361,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -284,7 +284,7 @@
       "deprecated": false,
       "export_key": "incident/wiz_description",
       "hide_notification": false,
-      "id": 333,
+      "id": 362,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -318,7 +318,7 @@
   ],
   "functions": [
     {
-      "created_date": 1713779227282,
+      "created_date": 1731937742265,
       "description": {
         "content": "Query Wiz for vulnerability data. Default query searches for OPEN vulnerabilities that have \"HIGH\" and \"CRITICAL\" Vendor Severity.",
         "format": "text"
@@ -326,22 +326,24 @@
       "destination_handle": "fn_wiz",
       "display_name": "Wiz: Pull Vulnerabilities",
       "export_key": "wiz_pull_vulnerabilities",
-      "id": 1,
+      "id": 3,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1714578211760,
+      "last_modified_time": 1731937742265,
       "name": "wiz_pull_vulnerabilities",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"response\": [{\"id\": \"1234567-abcdefg\", \"portalUrl\": \"https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~\u0027ID))\", \"name\": \"CWE-89\", \"CVEDescription\": \"The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.\", \"CVSSSeverity\": \"NONE\", \"score\": 0, \"exploitabilityScore\": 0, \"impactScore\": 0, \"dataSourceName\": \"Wiz Demo\", \"hasExploit\": null, \"hasCisaKevExploit\": false, \"status\": \"OPEN\", \"vendorSeverity\": \"CRITICAL\", \"firstDetectedAt\": \"2024-04-15T11:12:05.228481Z\", \"lastDetectedAt\": \"2024-04-15T11:12:05.228481Z\", \"resolvedAt\": null, \"description\": \"The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by \u0027use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`.\", \"remediation\": \"The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate...\", \"detailedName\": \"GET /WebGoat/SqlInjectionMitigations/servers?column=id\", \"version\": null, \"fixedVersion\": null, \"detectionMethod\": \"EXTERNAL_NETWORK_SCAN\", \"link\": \"https:/test/com\", \"locationPath\": null, \"resolutionReason\": null, \"epssSeverity\": null, \"epssPercentile\": 0, \"epssProbability\": 0, \"validatedInRuntime\": null, \"layerMetadata\": null, \"projects\": [{\"id\": \"1234567-abcdefg\", \"name\": \"Project 2\", \"slug\": \"project-2\", \"businessUnit\": \"\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}, {\"id\": \"1234567-abcdefg\", \"name\": \"project 4\", \"slug\": \"project-4\", \"businessUnit\": \"Dev\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}, {\"id\": \"1234567-abcdefg\", \"name\": \"Project1\", \"slug\": \"project1\", \"businessUnit\": \"Dev\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}], \"ignoreRules\": null, \"vulnerableAsset\": {\"id\": \"1234567-abcdefg\", \"type\": \"VIRTUAL_MACHINE\", \"name\": \"Demo vulns findings\", \"region\": \"us-east-2\", \"providerUniqueId\": \"arn:aws:instance/abcedefg\", \"cloudProviderURL\": \"https://test-console.aws.amazon.com/ec2/v2/home?#instanceDetailsid=0\", \"cloudPlatform\": \"AWS\", \"status\": \"Active\", \"subscriptionName\": \"wiz-integrations\", \"subscriptionExternalId\": \"998231069301\", \"subscriptionId\": \"abcdefg-12345\", \"tags\": {\"Name\": \"Demo vulns findings\"}, \"hasLimitedInternetExposure\": true, \"hasWideInternetExposure\": true, \"isAccessibleFromVPN\": null, \"isAccessibleFromOtherVnets\": null, \"isAccessibleFromOtherSubscriptions\": null, \"operatingSystem\": \"Linux\", \"ipAddresses\": [\"1.1.1.1\", \"2.2.2.2\"]}}, {\"id\": \"1234567-abcdefg\", \"portalUrl\": \"https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~\u0027ID))\", \"name\": \"CWE-89\", \"CVEDescription\": \"The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.\", \"CVSSSeverity\": \"NONE\", \"score\": 0, \"exploitabilityScore\": 0, \"impactScore\": 0, \"dataSourceName\": \"Wiz Demo\", \"hasExploit\": null, \"hasCisaKevExploit\": false, \"status\": \"OPEN\", \"vendorSeverity\": \"CRITICAL\", \"firstDetectedAt\": \"2024-04-15T11:12:05.226955Z\", \"lastDetectedAt\": \"2024-04-15T11:12:05.226955Z\", \"resolvedAt\": null, \"description\": \"The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by \u0027use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`.\", \"remediation\": \"The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate...\", \"detailedName\": \"GET /WebGoat/SqlInjectionMitigations/servers?column=id\", \"version\": null, \"fixedVersion\": null, \"detectionMethod\": \"EXTERNAL_NETWORK_SCAN\", \"link\": \"https:/test/com\", \"locationPath\": null, \"resolutionReason\": null, \"epssSeverity\": null, \"epssPercentile\": 0, \"epssProbability\": 0, \"validatedInRuntime\": null, \"layerMetadata\": null, \"projects\": [{\"id\": \"1234567-abcdefg\", \"name\": \"Project 2\", \"slug\": \"project-2\", \"businessUnit\": \"\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}, {\"id\": \"1234567-abcdefg\", \"name\": \"project 4\", \"slug\": \"project-4\", \"businessUnit\": \"Dev\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}, {\"id\": \"1234567-abcdefg\", \"name\": \"Project1\", \"slug\": \"project1\", \"businessUnit\": \"Dev\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}], \"ignoreRules\": null, \"vulnerableAsset\": {\"id\": \"1234567-abcdefg\", \"type\": \"CONTAINER_IMAGE\", \"name\": \"test-aws.amazonaws.com/eks/kube-proxy@sha256:7d1eabcdefg\", \"region\": \"us-east-1\", \"providerUniqueId\": \"\", \"cloudProviderURL\": null, \"cloudPlatform\": \"AWS\", \"status\": \"Active\", \"subscriptionName\": null, \"subscriptionExternalId\": \"6024000000000\", \"subscriptionId\": \"e644fdd8-abcdefg\", \"tags\": {\"io.cri-containerd.image\": \"managed\"}, \"hasLimitedInternetExposure\": null, \"hasWideInternetExposure\": null, \"isAccessibleFromVPN\": null, \"isAccessibleFromOtherVnets\": null, \"isAccessibleFromOtherSubscriptions\": null, \"imageId\": \"sha256:7d1eabcdefg\"}}], \"projects\": [\"83b76efe-a7b6-5762-8a53-8e8f59e68bd8\", \"af52828c-4eb1-5c4e-847c-ebc3a5ead531\", \"d6ac50bb-aec0-52fc-80ab-bacd7b02f178\"]}, \"raw\": null, \"inputs\": {\"wiz_project_ids\": \"83b76efe-a7b6-5762-8a53-8e8f59e68bd8,af52828c-4eb1-5c4e-847c-ebc3a5ead531,d6ac50bb-aec0-52fc-80ab-bacd7b02f178\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-wiz\", \"package_version\": \"1.0.1982\", \"host\": \"e35c5a28-689e-4f7f-b84e-4eced01ba15f-55b865fcb6-pnkfz\", \"execution_time_ms\": 3713, \"timestamp\": \"2024-04-15 11:57:40\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"response\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"portalUrl\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"CVEDescription\": {\"type\": \"string\"}, \"CVSSSeverity\": {\"type\": \"string\"}, \"score\": {\"type\": \"number\"}, \"exploitabilityScore\": {\"type\": \"number\"}, \"impactScore\": {\"type\": \"number\"}, \"dataSourceName\": {\"type\": [\"null\", \"string\"]}, \"hasExploit\": {\"type\": [\"boolean\", \"null\"]}, \"hasCisaKevExploit\": {\"type\": \"boolean\"}, \"status\": {\"type\": \"string\"}, \"vendorSeverity\": {\"type\": \"string\"}, \"firstDetectedAt\": {\"type\": \"string\"}, \"lastDetectedAt\": {\"type\": \"string\"}, \"resolvedAt\": {}, \"description\": {\"type\": \"string\"}, \"remediation\": {\"type\": \"string\"}, \"detailedName\": {\"type\": \"string\"}, \"version\": {\"type\": [\"null\", \"string\"]}, \"fixedVersion\": {\"type\": [\"null\", \"string\"]}, \"detectionMethod\": {\"type\": \"string\"}, \"link\": {\"type\": \"string\"}, \"locationPath\": {}, \"resolutionReason\": {}, \"epssSeverity\": {\"type\": [\"null\", \"string\"]}, \"epssPercentile\": {\"type\": \"number\"}, \"epssProbability\": {\"type\": \"number\"}, \"validatedInRuntime\": {}, \"layerMetadata\": {}, \"projects\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"slug\": {\"type\": \"string\"}, \"businessUnit\": {\"type\": \"string\"}, \"riskProfile\": {\"type\": \"object\", \"properties\": {\"businessImpact\": {\"type\": \"string\"}}}}}}, \"ignoreRules\": {}, \"vulnerableAsset\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"region\": {\"type\": \"string\"}, \"providerUniqueId\": {\"type\": \"string\"}, \"cloudProviderURL\": {\"type\": [\"null\", \"string\"]}, \"cloudPlatform\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"subscriptionName\": {\"type\": [\"null\", \"string\"]}, \"subscriptionExternalId\": {\"type\": \"string\"}, \"subscriptionId\": {\"type\": \"string\"}, \"tags\": {\"type\": \"object\", \"properties\": {\"Name\": {\"type\": \"string\"}, \"io.cri-containerd.image\": {\"type\": \"string\"}}}, \"hasLimitedInternetExposure\": {\"type\": [\"boolean\", \"null\"]}, \"hasWideInternetExposure\": {\"type\": [\"boolean\", \"null\"]}, \"isAccessibleFromVPN\": {}, \"isAccessibleFromOtherVnets\": {}, \"isAccessibleFromOtherSubscriptions\": {}, \"operatingSystem\": {\"type\": \"string\"}, \"ipAddresses\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"imageId\": {\"type\": \"string\"}}}}}}, \"projects\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"wiz_project_ids\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "124ecedc-0933-479a-bf9d-5e6f6e3af6d5",
-      "version": 2,
+      "version": 0,
       "view_items": [
         {
           "content": "82f65c98-798c-40d8-8db9-a068cb9808d7",
@@ -371,7 +373,7 @@
       "workflows": []
     },
     {
-      "created_date": 1713779227346,
+      "created_date": 1731937742479,
       "description": {
         "content": "Enrich case data with issue data",
         "format": "text"
@@ -379,19 +381,21 @@
       "destination_handle": "fn_wiz",
       "display_name": "Wiz: Query Issue",
       "export_key": "wiz_query_issue",
-      "id": 2,
+      "id": 4,
       "last_modified_by": {
-        "display_name": "ALl permissions",
-        "id": 7,
-        "name": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1713779227346,
+      "last_modified_time": 1731937742479,
       "name": "wiz_query_issue",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"response\": {\"id\": \"dec4dad8-abcdefg\", \"sourceRule\": {\"__typename\": \"Control\", \"id\": \"60873d6d-abcdefg\", \"name\": \"All Findings\", \"controlDescription\": \"\", \"resolutionRecommendation\": \"\", \"securitySubCategories\": null}, \"createdAt\": \"2024-04-15T10:16:14.443631Z\", \"updatedAt\": \"2024-04-15T11:55:20.484648Z\", \"dueAt\": null, \"type\": \"TOXIC_COMBINATION\", \"resolvedAt\": null, \"statusChangedAt\": \"2024-04-15T10:14:50.891007Z\", \"projects\": [{\"id\": \"83b76efe-abcdefg\", \"name\": \"Project 2\", \"slug\": \"project-2\", \"businessUnit\": \"\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}, {\"id\": \"af52828c-abcdefg\", \"name\": \"project 4\", \"slug\": \"project-4\", \"businessUnit\": \"Dev\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}, {\"id\": \"d6ac50bb-abcdefg\", \"name\": \"Project1\", \"slug\": \"project1\", \"businessUnit\": \"Dev\", \"riskProfile\": {\"businessImpact\": \"MBI\"}}], \"status\": \"OPEN\", \"severity\": \"INFORMATIONAL\", \"entitySnapshot\": {\"id\": \"fa059989-abcdefg\", \"type\": \"SECURITY_TOOL_FINDING\", \"nativeType\": \"\", \"name\": \"CVE-2023-5528\", \"status\": null, \"cloudPlatform\": null, \"cloudProviderURL\": \"\", \"providerId\": \"vulnerability##592f0bdc-ab9b##\", \"region\": \"\", \"resourceGroupExternalId\": \"\", \"subscriptionExternalId\": \"\", \"subscriptionName\": \"\", \"subscriptionTags\": null, \"tags\": {}, \"createdAt\": null, \"externalId\": \"vulnerability##592f0bdc-ab9b##\"}, \"serviceTickets\": [], \"notes\": [{\"createdAt\": \"2024-04-15T11:55:20.461314Z\", \"updatedAt\": \"2024-04-15T11:55:20.46232Z\", \"text\": \"Note from SOAR: test note\", \"user\": null, \"serviceAccount\": {\"name\": \"ibm-soar\"}}]}}, \"raw\": null, \"inputs\": {\"wiz_issue_id\": \"dec4dad8-abcdefg\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-wiz\", \"package_version\": \"1.0.1982\", \"host\": \"e35c5a28-abcdefg\", \"execution_time_ms\": 668, \"timestamp\": \"2024-04-15 11:57:34\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"response\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"sourceRule\": {\"type\": \"object\", \"properties\": {\"__typename\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"controlDescription\": {\"type\": \"string\"}, \"resolutionRecommendation\": {\"type\": \"string\"}, \"securitySubCategories\": {}}}, \"createdAt\": {\"type\": \"string\"}, \"updatedAt\": {\"type\": \"string\"}, \"dueAt\": {}, \"type\": {\"type\": \"string\"}, \"resolvedAt\": {}, \"statusChangedAt\": {\"type\": \"string\"}, \"projects\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"slug\": {\"type\": \"string\"}, \"businessUnit\": {\"type\": \"string\"}, \"riskProfile\": {\"type\": \"object\", \"properties\": {\"businessImpact\": {\"type\": \"string\"}}}}}}, \"status\": {\"type\": \"string\"}, \"severity\": {\"type\": \"string\"}, \"entitySnapshot\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"nativeType\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"status\": {}, \"cloudPlatform\": {}, \"cloudProviderURL\": {\"type\": \"string\"}, \"providerId\": {\"type\": \"string\"}, \"region\": {\"type\": \"string\"}, \"resourceGroupExternalId\": {\"type\": \"string\"}, \"subscriptionExternalId\": {\"type\": \"string\"}, \"subscriptionName\": {\"type\": \"string\"}, \"subscriptionTags\": {}, \"tags\": {\"type\": \"object\"}, \"createdAt\": {}, \"externalId\": {\"type\": \"string\"}}}, \"serviceTickets\": {\"type\": \"array\"}, \"notes\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"createdAt\": {\"type\": \"string\"}, \"updatedAt\": {\"type\": \"string\"}, \"text\": {\"type\": \"string\"}, \"user\": {}, \"serviceAccount\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}}}}}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"wiz_issue_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "31695a54-304d-4f0b-985e-98d8ebb539bf",
       "version": 0,
@@ -408,7 +412,7 @@
       "workflows": []
     },
     {
-      "created_date": 1713779227392,
+      "created_date": 1731937742574,
       "description": {
         "content": "Send notes from SOAR case to Wiz issue",
         "format": "text"
@@ -416,19 +420,21 @@
       "destination_handle": "fn_wiz",
       "display_name": "Wiz: Send SOAR Notes",
       "export_key": "wiz_send_soar_notes",
-      "id": 3,
+      "id": 5,
       "last_modified_by": {
-        "display_name": "ALl permissions",
-        "id": 7,
-        "name": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1713779227392,
+      "last_modified_time": 1731937742574,
       "name": "wiz_send_soar_notes",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"response\": {\"id\": \"dec4dad8-abcdefg\", \"note\": \"\", \"status\": \"OPEN\", \"dueAt\": null, \"resolutionReason\": null}, \"message\": \"Successfully updated issue.\"}, \"raw\": null, \"inputs\": {\"wiz_issue_id\": \"dec4dad8-abcdefg\", \"wiz_soar_note\": \"\u003cdiv class=\\\"soar-rte-content\\\"\u003e\u003cp\u003etest\u003c/p\u003e\u003c/div\u003e\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-wiz\", \"package_version\": \"1.0.1982\", \"host\": \"e35c5a28-abcdefg\", \"execution_time_ms\": 2034, \"timestamp\": \"2024-04-15 11:58:17\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"response\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"note\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"dueAt\": {}, \"resolutionReason\": {}}}, \"message\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"wiz_issue_id\": {\"type\": \"string\"}, \"wiz_soar_note\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "ddf384b4-3436-4f45-95e3-228d55fb7637",
       "version": 0,
@@ -453,7 +459,7 @@
       "workflows": []
     },
     {
-      "created_date": 1713779227438,
+      "created_date": 1731937742666,
       "description": {
         "content": "Update Wiz issue status if case status changed",
         "format": "text"
@@ -461,22 +467,24 @@
       "destination_handle": "fn_wiz",
       "display_name": "Wiz: Sync Status",
       "export_key": "wiz_sync_status",
-      "id": 4,
+      "id": 6,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1716561661602,
+      "last_modified_time": 1731937742666,
       "name": "wiz_sync_status",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"response\": {\"id\": \"dec4dad8-abcdefg\", \"note\": \"\", \"status\": \"REJECTED\", \"dueAt\": null, \"resolutionReason\": \"WONT_FIX\"}, \"message\": \"Successfully updated issue.\"}, \"raw\": null, \"inputs\": {\"wiz_issue_id\": \"dec4dad8-abcdefg\", \"wiz_resolution_reason\": \"Not an Issue\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-wiz\", \"package_version\": \"1.0.1982\", \"host\": \"e35c5a28-4eabcdefg\", \"execution_time_ms\": 1383, \"timestamp\": \"2024-04-15 11:58:34\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"response\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"note\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"dueAt\": {}, \"resolutionReason\": {\"type\": \"string\"}}}, \"message\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"wiz_issue_id\": {\"type\": \"string\"}, \"wiz_resolution_reason\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "fa25185e-8150-487d-b070-688992b78c8e",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "8489af53-4bd8-46eb-8a83-3ed924c61b90",
@@ -508,13 +516,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 19,
+  "id": 3,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1716566094253,
+      "create_date": 1731954318761,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -523,7 +531,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1716566094253,
+      "update_date": 1731954318761,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -532,8 +540,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "e729d29c-a0eb-412f-ad91-2b6e0529ea0e"
+        "20a45f5e-1ebb-4c8e-9ffb-641c85a8169e"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -573,15 +580,15 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 16,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b36d9eac_9320_4f7f_b5ed_59933aec69b2\" isExecutable=\"true\" name=\"playbook_b36d9eac_9320_4f7f_b5ed_59933aec69b2\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1ijgcvx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Wiz: Query Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"31695a54-304d-4f0b-985e-98d8ebb539bf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.wiz_issue_id = incident.properties.wiz_issue_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"query_issue_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ijgcvx\u003c/incoming\u003e\u003coutgoing\u003eFlow_04422z6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1ijgcvx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_04422z6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_8\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1abiwjc\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Wiz: Pull Vulnerabilities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"124ecedc-0933-479a-bf9d-5e6f6e3af6d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"\\\"\\\"\\\"\\nPull out project ids associated with the given issue. We can use this to query Wiz for vulnerabilities data.\\n\\\"\\\"\\\"\\n\\nresults = playbook.functions.results.query_issue_results\\n\\nproject_ids = []\\nif not results.success:\\n  incident.addNote(\\\"\u0026lt;b\u0026gt;Wiz: Populate Case:\u0026lt;/b\u0026gt; Unable to get issue data to retrieve projects.\\\")\\nelse:\\n  projects = results.get(\\\"content\\\", {}).get(\\\"response\\\", {}).get(\\\"projects\\\", [])\\n  if projects:\\n    inputs.wiz_project_ids = \\\",\\\".join([p.get(\\\"id\\\") for p in projects])\\n  \\n# OPTIONAL: Specify the maximum desired number of results, returns max of 50 results by default\\n# inputs.wiz_num_results = \\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"vulnerability_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ncoseb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tihdpj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0tihdpj\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_9\"/\u003e\u003cscriptTask id=\"ScriptTask_7\" name=\"Create Artifacts from Projects\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"939142ef-3610-4d0b-bb91-a4f99d5a37cb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hv7mi8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ncoseb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ncoseb\" sourceRef=\"ScriptTask_7\" targetRef=\"ServiceTask_5\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"Populate Projects Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4c144b81-9d68-44c5-bf71-790481da0f7c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04422z6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hv7mi8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1hv7mi8\" sourceRef=\"ScriptTask_8\" targetRef=\"ScriptTask_7\"/\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"Wiz: Populate Vulnerabilities Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"350f11de-1515-4d59-bf9a-de801acb3acc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tihdpj\u003c/incoming\u003e\u003coutgoing\u003eFlow_1abiwjc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1abiwjc\" sourceRef=\"ScriptTask_9\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b36d9eac_9320_4f7f_b5ed_59933aec69b2\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1abiwjc\" id=\"Flow_1abiwjc_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"772\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"844\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hv7mi8\" id=\"Flow_1hv7mi8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ncoseb\" id=\"Flow_1ncoseb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"558\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tihdpj\" id=\"Flow_0tihdpj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"642\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"665\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"665\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"688\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04422z6\" id=\"Flow_04422z6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ijgcvx\" id=\"Flow_1ijgcvx_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"558\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_7\" id=\"ScriptTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"277.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.4118852459017\" y=\"687.8196721311475\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1713779227822,
+      "create_date": 1731937743294,
       "creator_principal": {
-        "display_name": "ALl permissions",
-        "id": 7,
-        "name": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_b36d9eac_9320_4f7f_b5ed_59933aec69b2",
       "description": {
@@ -616,27 +623,27 @@
         "uuid": "7e81cf0d-35af-41a1-bab0-199359fce062"
       },
       "has_logical_errors": false,
-      "id": 1,
+      "id": 3,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1716223338247,
+      "last_modified_time": 1731937745139,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1713779227926,
+          "created_date": 1731937743441,
           "description": "Create artifacts for each project found in the Wiz issue",
           "enabled": false,
           "export_key": "Create Artifacts from Projects",
           "id": 4,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1715957206288,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937743441,
           "name": "Create Artifacts from Projects",
           "object_type": "incident",
           "playbook_handle": "wiz_populate_case",
@@ -647,14 +654,14 @@
         },
         {
           "actions": [],
-          "created_date": 1713779227951,
+          "created_date": 1731937743495,
           "description": "Populate Projects Data Table with more detailed data on projects related to Wiz Issue",
           "enabled": false,
           "export_key": "Populate Projects Data Table",
           "id": 5,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1714382325557,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937743495,
           "name": "Populate Projects Data Table",
           "object_type": "incident",
           "playbook_handle": "wiz_populate_case",
@@ -665,14 +672,14 @@
         },
         {
           "actions": [],
-          "created_date": 1713779227979,
+          "created_date": 1731937743544,
           "description": "Post a note to explain why we skipped querying for vulnerabilities in this playbook",
           "enabled": false,
           "export_key": "Post note ",
           "id": 6,
           "language": "python3",
-          "last_modified_by": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-          "last_modified_time": 1713779227979,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937743544,
           "name": "Post note ",
           "object_type": "incident",
           "playbook_handle": "wiz_populate_case",
@@ -683,14 +690,14 @@
         },
         {
           "actions": [],
-          "created_date": 1714140682510,
+          "created_date": 1731937743585,
           "description": "Populate Vulnerabilities Data Table containing vulnerability data",
           "enabled": false,
           "export_key": "Wiz: Populate Vulnerabilities Data Table",
-          "id": 12,
+          "id": 7,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1716223078480,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937743585,
           "name": "Wiz: Populate Vulnerabilities Data Table",
           "object_type": "incident",
           "playbook_handle": "wiz_populate_case",
@@ -701,14 +708,14 @@
         },
         {
           "actions": [],
-          "created_date": 1713779228003,
+          "created_date": 1731937743626,
           "description": "",
           "enabled": false,
           "export_key": "Wiz: Write Query Results",
-          "id": 7,
+          "id": 8,
           "language": "python3",
-          "last_modified_by": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-          "last_modified_time": 1713779228003,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937743626,
           "name": "Wiz: Write Query Results",
           "object_type": "incident",
           "playbook_handle": "wiz_populate_case",
@@ -723,7 +730,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b36d9eac-9320-4f7f-b5ed-59933aec69b2",
-        "id": 1,
+        "id": 6,
         "name": "playbook_b36d9eac_9320_4f7f_b5ed_59933aec69b2",
         "type": "playbook",
         "uuid": "9e9a1e1d-3e24-46ab-89a9-a0ebf5b83f4b"
@@ -731,19 +738,19 @@
       "tags": [],
       "type": "default",
       "uuid": "b36d9eac-9320-4f7f-b5ed-59933aec69b2",
-      "version": 19
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 17,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fe76b6f2_0873_4248_8c25_b36d00f4a263\" isExecutable=\"true\" name=\"playbook_fe76b6f2_0873_4248_8c25_b36d00f4a263\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_14p22hp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Wiz: Pull Vulnerabilities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"124ecedc-0933-479a-bf9d-5e6f6e3af6d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.wiz_query_filter = playbook.inputs.wiz_query_filter.get(\\\"content\\\", None)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"vulnerability_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14p22hp\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m28nva\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_14p22hp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0m28nva\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ataukx\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Wiz: Populate Vulnerabilities Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6f84e0b4-9b62-4ab8-b461-e755877137ea\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m28nva\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ataukx\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ataukx\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fe76b6f2_0873_4248_8c25_b36d00f4a263\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ataukx\" id=\"Flow_0ataukx_di\"\u003e\u003comgdi:waypoint x=\"810\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"810\" y=\"553\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m28nva\" id=\"Flow_0m28nva_di\"\u003e\u003comgdi:waypoint x=\"810\" y=\"342\"/\u003e\u003comgdi:waypoint x=\"810\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14p22hp\" id=\"Flow_14p22hp_di\"\u003e\u003comgdi:waypoint x=\"810\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"810\" y=\"258\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"716\" y=\"134\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"712\" y=\"258\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"743.75\" y=\"553.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"711.5\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1714048033260,
+      "create_date": 1731937745081,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_fe76b6f2_0873_4248_8c25_b36d00f4a263",
@@ -769,7 +776,7 @@
             "deprecated": false,
             "export_key": "playbook_fe76b6f2_0873_4248_8c25_b36d00f4a263/wiz_query_filter",
             "hide_notification": false,
-            "id": 331,
+            "id": 383,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -785,7 +792,7 @@
             "templates": [],
             "text": "Wiz Query Filter",
             "tooltip": "Dictionary that represents \u0027variables\u0027 object that gets passed with the Wiz query to filter results. Required \u0027first\u0027 parameter.",
-            "type_id": 1006,
+            "type_id": 1005,
             "uuid": "4c42407c-1eb4-4fc5-8188-30c9d2f5b09c",
             "values": []
           }
@@ -810,27 +817,27 @@
         "uuid": "18b70b81-0308-4380-85d3-e15ee8b77bf9"
       },
       "has_logical_errors": false,
-      "id": 5,
+      "id": 4,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1716305176727,
+      "last_modified_time": 1731937746458,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1714140355103,
+          "created_date": 1731937745294,
           "description": "Add rows from vulnerabilities query to data table",
           "enabled": false,
           "export_key": "Wiz: Populate Vulnerabilities Data Table",
-          "id": 11,
+          "id": 9,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1716305172603,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937745294,
           "name": "Wiz: Populate Vulnerabilities Data Table",
           "object_type": "incident",
           "playbook_handle": "wiz_pull_vulnerabilities",
@@ -869,7 +876,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_fe76b6f2-0873-4248-8c25-b36d00f4a263",
-        "id": 5,
+        "id": 7,
         "name": "playbook_fe76b6f2_0873_4248_8c25_b36d00f4a263",
         "type": "playbook",
         "uuid": "af704fae-aa28-459a-97b7-76236162d683"
@@ -877,20 +884,20 @@
       "tags": [],
       "type": "default",
       "uuid": "fe76b6f2-0873-4248-8c25-b36d00f4a263",
-      "version": 21
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 11,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1664264e_748a_4611_8362_cab9471c7c70\" isExecutable=\"true\" name=\"playbook_1664264e_748a_4611_8362_cab9471c7c70\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0gdcw1n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Wiz: Pull Vulnerabilities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"124ecedc-0933-479a-bf9d-5e6f6e3af6d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Get id for this specific project in the data table row\\ninputs.wiz_project_ids = row.project_id\\n\\n# OPTIONAL: Specify the maximum desired number of results, returns max of 50 results by default\\n# inputs.wiz_num_results = \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"vulnerability_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0gdcw1n\u003c/incoming\u003e\u003coutgoing\u003eFlow_1u5mk0u\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0gdcw1n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1u5mk0u\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_5\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0h97st4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"Wiz: Populate Vulnerabilities Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"593ac12d-f61a-434b-a75f-85de69cbcd38\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1u5mk0u\u003c/incoming\u003e\u003coutgoing\u003eFlow_0h97st4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0h97st4\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1664264e_748a_4611_8362_cab9471c7c70\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0h97st4\" id=\"Flow_0h97st4_di\"\u003e\u003comgdi:waypoint x=\"704\" y=\"155\"/\u003e\u003comgdi:waypoint x=\"704\" y=\"224\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1u5mk0u\" id=\"Flow_1u5mk0u_di\"\u003e\u003comgdi:waypoint x=\"703\" y=\"2\"/\u003e\u003comgdi:waypoint x=\"703\" y=\"71\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gdcw1n\" id=\"Flow_0gdcw1n_di\"\u003e\u003comgdi:waypoint x=\"703\" y=\"-154\"/\u003e\u003comgdi:waypoint x=\"703\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"612\" y=\"-206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"605\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"637\" y=\"224\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"604.825\" y=\"70.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1713779228709,
+      "create_date": 1731937746422,
       "creator_principal": {
-        "display_name": "ALl permissions",
-        "id": 7,
-        "name": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_1664264e_748a_4611_8362_cab9471c7c70",
       "description": {
@@ -925,27 +932,27 @@
         "uuid": "c9170e8c-095b-4b95-ba73-8f7465ae3bdf"
       },
       "has_logical_errors": false,
-      "id": 2,
+      "id": 5,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1716306360020,
+      "last_modified_time": 1731937747560,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1713779228803,
+          "created_date": 1731937746539,
           "description": "Add rows to Vulnerabilities Data table based n results from Wiz query",
           "enabled": false,
           "export_key": "Wiz: Populate Vulnerabilities Data Table",
-          "id": 8,
+          "id": 10,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1716306153437,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937746539,
           "name": "Wiz: Populate Vulnerabilities Data Table",
           "object_type": "wiz_projects_table",
           "playbook_handle": "wiz_pull_vulnerabilities_by_project",
@@ -967,7 +974,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1664264e-748a-4611-8362-cab9471c7c70",
-        "id": 2,
+        "id": 8,
         "name": "playbook_1664264e_748a_4611_8362_cab9471c7c70",
         "type": "playbook",
         "uuid": "8798414d-4adb-41b0-aea7-4ce69102007c"
@@ -975,7 +982,7 @@
       "tags": [],
       "type": "default",
       "uuid": "1664264e-748a-4611-8362-cab9471c7c70",
-      "version": 15
+      "version": 4
     },
     {
       "activation_details": {
@@ -1011,12 +1018,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5721b7e7_b324_411c_b79b_2bb58cb3f357\" isExecutable=\"true\" name=\"playbook_5721b7e7_b324_411c_b79b_2bb58cb3f357\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_06747tx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Wiz: Send SOAR Notes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ddf384b4-3436-4f45-95e3-228d55fb7637\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.wiz_issue_id = incident.properties.wiz_issue_id\\ninputs.wiz_soar_note = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"notes_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06747tx\u003c/incoming\u003e\u003coutgoing\u003eFlow_0dumywe\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_06747tx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_05er5e3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0dumywe\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Add failure note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5ddddb97-27e5-46f8-82de-1fd5d51bcf01\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dumywe\u003c/incoming\u003e\u003coutgoing\u003eFlow_05er5e3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05er5e3\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5721b7e7_b324_411c_b79b_2bb58cb3f357\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05er5e3\" id=\"Flow_05er5e3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-158\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-116\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dumywe\" id=\"Flow_0dumywe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-278\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-242\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06747tx\" id=\"Flow_06747tx_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-404\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-362\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"-456\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.783\" y=\"-361.8500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"-116\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-242.14999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1713779229297,
+      "create_date": 1731937747518,
       "creator_principal": {
-        "display_name": "ALl permissions",
-        "id": 7,
-        "name": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_5721b7e7_b324_411c_b79b_2bb58cb3f357",
       "description": {
@@ -1051,27 +1058,27 @@
         "uuid": "fc4aa2e6-d4f9-4ee5-8e5d-047c0df869e6"
       },
       "has_logical_errors": false,
-      "id": 3,
+      "id": 6,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "ALl permissions",
-        "id": 7,
-        "name": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1713779229847,
+      "last_modified_time": 1731937748448,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1713779229391,
+          "created_date": 1731937747650,
           "description": "Add note to incident if syncing notes failed",
           "enabled": false,
           "export_key": "Add failure note",
-          "id": 9,
+          "id": 11,
           "language": "python3",
-          "last_modified_by": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-          "last_modified_time": 1713779229391,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937747650,
           "name": "Add failure note",
           "object_type": "note",
           "playbook_handle": "wiz_sync_notes_to_issue",
@@ -1086,7 +1093,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_5721b7e7-b324-411c-b79b-2bb58cb3f357",
-        "id": 3,
+        "id": 9,
         "name": "playbook_5721b7e7_b324_411c_b79b_2bb58cb3f357",
         "type": "playbook",
         "uuid": "39f9f800-b7e3-4bc6-8911-1f4e3e8a3c5e"
@@ -1127,15 +1134,15 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 4,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b61b27f8_e7cb_4b60_b9b9_9eebc88282aa\" isExecutable=\"true\" name=\"playbook_b61b27f8_e7cb_4b60_b9b9_9eebc88282aa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0b4mhce\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Wiz: Sync Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fa25185e-8150-487d-b070-688992b78c8e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.wiz_issue_id = incident.properties.wiz_issue_id\\ninputs.wiz_resolution_reason = incident.resolution_id\\ninputs.wiz_resolution_summary = incident.resolution_summary.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"status_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0b4mhce\u003c/incoming\u003e\u003coutgoing\u003eFlow_02gumnb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0b4mhce\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14cev3i\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_02gumnb\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Add note with results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"39805b12-c8ae-49df-a5a5-305b9058aa74\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02gumnb\u003c/incoming\u003e\u003coutgoing\u003eFlow_14cev3i\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14cev3i\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b61b27f8_e7cb_4b60_b9b9_9eebc88282aa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14cev3i\" id=\"Flow_14cev3i_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"132\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"204\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02gumnb\" id=\"Flow_02gumnb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-28\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"48\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b4mhce\" id=\"Flow_0b4mhce_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-184\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-112\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"-236\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"-112\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655.292\" y=\"203.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.292\" y=\"47.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1713779229821,
+      "create_date": 1731937748411,
       "creator_principal": {
-        "display_name": "ALl permissions",
-        "id": 7,
-        "name": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_b61b27f8_e7cb_4b60_b9b9_9eebc88282aa",
       "description": {
@@ -1170,27 +1177,27 @@
         "uuid": "eaa5f0b6-031c-43d4-9166-10f19226a38e"
       },
       "has_logical_errors": false,
-      "id": 4,
+      "id": 7,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1716565849118,
+      "last_modified_time": 1731937749209,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1713779229916,
+          "created_date": 1731937748528,
           "description": "Add a note to SOAR case to indicate success or failure in updating Wiz issue",
           "enabled": false,
           "export_key": "Add note with results",
-          "id": 10,
+          "id": 12,
           "language": "python3",
-          "last_modified_by": "1ceafacd-2d55-41a7-b95f-e8bc52eb9ec5",
-          "last_modified_time": 1713779229916,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731937748528,
           "name": "Add note with results",
           "object_type": "incident",
           "playbook_handle": "wiz_sync_status",
@@ -1205,7 +1212,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b61b27f8-e7cb-4b60-b9b9-9eebc88282aa",
-        "id": 4,
+        "id": 10,
         "name": "playbook_b61b27f8_e7cb_4b60_b9b9_9eebc88282aa",
         "type": "playbook",
         "uuid": "8ed45449-9154-4a9c-84a4-8da79c59a158"
@@ -1213,17 +1220,21 @@
       "tags": [],
       "type": "default",
       "uuid": "b61b27f8-e7cb-4b60-b9b9-9eebc88282aa",
-      "version": 6
+      "version": 4
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 9097,
-    "major": 50,
+    "build_number": 9339,
+    "f": 0,
+    "m": 0,
+    "major": 0,
     "minor": 0,
-    "version": "50.0.9097"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -1244,7 +1255,7 @@
           "deprecated": false,
           "export_key": "wiz_projects_table/business_unit",
           "hide_notification": false,
-          "id": 313,
+          "id": 363,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1261,7 +1272,7 @@
           "templates": [],
           "text": "Business Unit",
           "tooltip": "Business unit related to project",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "64e39948-eb74-4cfb-b1bd-187fd681593c",
           "values": [],
           "width": 136
@@ -1276,7 +1287,7 @@
           "deprecated": false,
           "export_key": "wiz_projects_table/date_added",
           "hide_notification": false,
-          "id": 314,
+          "id": 364,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1293,7 +1304,7 @@
           "templates": [],
           "text": "Date Added",
           "tooltip": "Timestamp of date when row was added to data table",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "c39d2e9b-70e6-4969-a0af-488c82038689",
           "values": [],
           "width": 191
@@ -1308,7 +1319,7 @@
           "deprecated": false,
           "export_key": "wiz_projects_table/project_id",
           "hide_notification": false,
-          "id": 315,
+          "id": 365,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1326,7 +1337,7 @@
           "templates": [],
           "text": "Project ID",
           "tooltip": "ID hash of a project",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "3cec2b2d-a6c5-43ce-9fb0-3fd0d9ee3747",
           "values": [],
           "width": 285
@@ -1341,7 +1352,7 @@
           "deprecated": false,
           "export_key": "wiz_projects_table/project_name",
           "hide_notification": false,
-          "id": 316,
+          "id": 366,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1359,7 +1370,7 @@
           "templates": [],
           "text": "Project Name",
           "tooltip": "Name of project",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "994c6f89-0295-4e1e-9438-173b0dac6ebf",
           "values": [],
           "width": 147
@@ -1399,7 +1410,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/affected_projects",
           "hide_notification": false,
-          "id": 317,
+          "id": 367,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1416,7 +1427,7 @@
           "templates": [],
           "text": "Affected Projects",
           "tooltip": "Project names where vulnerability has been identified",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "eed2a314-d99c-482b-8c12-5ddc2e95d059",
           "values": [],
           "width": 154
@@ -1431,7 +1442,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/date_added",
           "hide_notification": false,
-          "id": 318,
+          "id": 368,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1448,7 +1459,7 @@
           "templates": [],
           "text": "Date Added",
           "tooltip": "Timestamp that the row was added to the data table",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "7817051b-a312-4f4f-8a54-d92503bfd12b",
           "values": [],
           "width": 198
@@ -1463,7 +1474,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/remediation",
           "hide_notification": false,
-          "id": 319,
+          "id": 369,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1480,7 +1491,7 @@
           "templates": [],
           "text": "Remediation",
           "tooltip": "Suggested remediation by Wiz",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "87cd7117-9242-41ea-a80e-19b1a9590f48",
           "values": [],
           "width": 180
@@ -1495,7 +1506,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/vendor_severity",
           "hide_notification": false,
-          "id": 320,
+          "id": 370,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1512,7 +1523,7 @@
           "templates": [],
           "text": "Vendor Severity",
           "tooltip": "Vendor Severity Score",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "d6954a60-3ea1-4630-b34f-33b78a064a02",
           "values": [],
           "width": 143
@@ -1527,7 +1538,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/vulnerability_description",
           "hide_notification": false,
-          "id": 321,
+          "id": 371,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1544,7 +1555,7 @@
           "templates": [],
           "text": "Vulnerability Description",
           "tooltip": "Description of identified vulnerability",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "83efafbd-6f17-490a-b957-5986d93281e1",
           "values": [],
           "width": 350
@@ -1559,7 +1570,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/vulnerability_name",
           "hide_notification": false,
-          "id": 322,
+          "id": 372,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1576,7 +1587,7 @@
           "templates": [],
           "text": "Vulnerability Name",
           "tooltip": "Name of identified vulnerability",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "fd8d3985-76d1-4d45-a37f-a739735750d0",
           "values": [],
           "width": 169
@@ -1591,7 +1602,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/vulnerable_asset_id",
           "hide_notification": false,
-          "id": 323,
+          "id": 373,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1608,7 +1619,7 @@
           "templates": [],
           "text": "Vulnerable Asset ID",
           "tooltip": "Vulnerable asset affected by vulnerability",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "de31fceb-0a9a-413a-8b01-9b77ae6b0d34",
           "values": [],
           "width": 240
@@ -1623,7 +1634,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/vulnerable_asset_os",
           "hide_notification": false,
-          "id": 324,
+          "id": 374,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1640,7 +1651,7 @@
           "templates": [],
           "text": "Vulnerable Asset Operating System",
           "tooltip": "Operating system of asset affected by vulnerability",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "70751988-f600-4647-b010-b986c756d70a",
           "values": [],
           "width": 292
@@ -1655,7 +1666,7 @@
           "deprecated": false,
           "export_key": "wiz_vulnerabilities_table/vulnerable_asset_type",
           "hide_notification": false,
-          "id": 325,
+          "id": 375,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1672,7 +1683,7 @@
           "templates": [],
           "text": "Vulnerable Asset Type",
           "tooltip": "Type of asset affected by vulnerability",
-          "type_id": 1001,
+          "type_id": 1003,
           "uuid": "dcc5b9f8-0a27-4c12-a090-fff97259f2aa",
           "values": [],
           "width": 193

@@ -25,7 +25,7 @@ def snake_to_camel(word):
 setup(
     name="fn_wiz",
     display_name="Wiz",
-    version="1.0.1",
+    version="1.1.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -33,7 +33,10 @@ setup(
     description="IBM SOAR app for synchronization with Wiz issue, project, and vulnerability data",
     long_description="""Synchronize IBM SOAR cases with Wiz issues and enrich cases with project and vulnerability data.
 This app creates, updates, and closes SOAR cases based on Wiz Issues. Updates Wiz issues based on changes to corresponding SOAR cases.
-Links: <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul><ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
+<br>
+Links: 
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         "resilient-circuits>=51.0.1.0.0"
     ],
