@@ -1,0 +1,13 @@
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+recursive-include fn_qradar_integration/util *
+include fn_qradar_integration/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+include tox.ini
+recursive-include tests/ *
+recursive-include payload_samples/*/ *.json
+
+exclude *.bak
