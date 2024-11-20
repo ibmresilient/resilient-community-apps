@@ -36,7 +36,8 @@ def codegen_reload_data():
         "incident_fields": [
             u"wiz_description",
             u"wiz_issue_id",
-            u"wiz_issue_status"
+            u"wiz_issue_status",
+            u"wiz_issue_type"
         ],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -81,6 +82,7 @@ def customization_data(client=None):
         - wiz_description
         - wiz_issue_id
         - wiz_issue_status
+        - wiz_issue_type
     - Data Tables:
         - wiz_projects_table
         - wiz_vulnerabilities_table
