@@ -35,11 +35,11 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 11/2024 | Added wiz_issue_type incident field |
+| 1.1.0, 1.1.1 | 11/2024 | Added wiz_issue_type incident field |
 | 1.0.1 | 08/2024 | Optimize pulling vulnerabilities |
 | 1.0.0 | 04/2024 | Initial Release |
 
-### 1.1.0 
+### Version 1.1.0, 1.1.1 
 The Wiz issue type will now display on the Wiz incident tab in SOAR. Upgrading from 
 previous versions of this app may not update the SOAR tab and may require the tab to be 
 edited manually to display the Wiz issue type. In this case, use the SOAR Customization Settings to edit the Wiz tab to include the `wiz_issue_type` incident field. 
