@@ -45,7 +45,8 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.5.0 | 06/2024| Create more artifacts from QRadar offense top events. Convert rules/workflows to playbooks. |
+| 2.5.1 | 11/2024 | Fixed bug in QRadar Enhanced Data Playbook. |
+| 2.5.0 | 06/2024 | Create more artifacts from QRadar offense top events. Convert rules/workflows to playbooks. |
 | 2.4.1 | 05/2024 | Replace deprecated datetime call. |
 | 2.4.0 | 02/2024 | Update to poller to automatically account for time zone differences between SOAR and QRadar. Remove '.' from query name. |
 | 2.3.4 | 11/2023 | Bug fix for syncing note between QRadar and SOAR |

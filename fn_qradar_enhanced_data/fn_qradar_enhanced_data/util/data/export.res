@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1723555396060,
+  "export_date": 1731937259373,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param2",
       "hide_notification": false,
-      "id": 5584,
+      "id": 5780,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param3",
       "hide_notification": false,
-      "id": 5585,
+      "id": 5781,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -76,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_offense_id",
       "hide_notification": false,
-      "id": 5586,
+      "id": 5782,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param6",
       "hide_notification": false,
-      "id": 5587,
+      "id": 5783,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param4",
       "hide_notification": false,
-      "id": 5588,
+      "id": 5784,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -163,7 +163,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_note",
       "hide_notification": false,
-      "id": 5589,
+      "id": 5785,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -193,7 +193,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param1",
       "hide_notification": false,
-      "id": 5590,
+      "id": 5786,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -222,7 +222,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query_type",
       "hide_notification": false,
-      "id": 5591,
+      "id": 5787,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -251,7 +251,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query",
       "hide_notification": false,
-      "id": 5592,
+      "id": 5788,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -265,22 +265,13 @@
       "tags": [],
       "templates": [
         {
-          "id": 4,
+          "id": 5,
           "name": "search events for offense_id",
           "template": {
             "content": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES",
             "format": "text"
           },
           "uuid": "2b88eb5c-504a-4950-8674-0cf8f56f1a83"
-        },
-        {
-          "id": 5,
-          "name": "search events for username",
-          "template": {
-            "content": "SELECT %param1% FROM events WHERE username=%param2% LAST %param3% MINUTES",
-            "format": "text"
-          },
-          "uuid": "34fa3300-c28c-4346-8d3b-745a1afa75dc"
         },
         {
           "id": 6,
@@ -290,6 +281,15 @@
             "format": "text"
           },
           "uuid": "dcbdb7c8-2068-4e97-8127-57131cbdccbf"
+        },
+        {
+          "id": 7,
+          "name": "search events for username",
+          "template": {
+            "content": "SELECT %param1% FROM events WHERE username=%param2% LAST %param3% MINUTES",
+            "format": "text"
+          },
+          "uuid": "34fa3300-c28c-4346-8d3b-745a1afa75dc"
         }
       ],
       "text": "qradar_query",
@@ -308,7 +308,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param5",
       "hide_notification": false,
-      "id": 5593,
+      "id": 5789,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -337,7 +337,7 @@
       "deprecated": false,
       "export_key": "__function/soar_table_name",
       "hide_notification": false,
-      "id": 5594,
+      "id": 5790,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -366,7 +366,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_label",
       "hide_notification": false,
-      "id": 5595,
+      "id": 5791,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -395,7 +395,7 @@
       "deprecated": false,
       "export_key": "__function/soar_incident_id",
       "hide_notification": false,
-      "id": 5596,
+      "id": 5792,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -424,7 +424,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_status",
       "hide_notification": false,
-      "id": 5487,
+      "id": 5688,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -453,7 +453,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_last_updated_time",
       "hide_notification": false,
-      "id": 5488,
+      "id": 5689,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -482,7 +482,7 @@
       "deprecated": false,
       "export_key": "incident/qr_flow_count",
       "hide_notification": false,
-      "id": 5489,
+      "id": 5690,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -511,7 +511,7 @@
       "deprecated": false,
       "export_key": "incident/qradar_id",
       "hide_notification": false,
-      "id": 5490,
+      "id": 5691,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -541,7 +541,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_index_type",
       "hide_notification": false,
-      "id": 5491,
+      "id": 5692,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -570,7 +570,7 @@
       "deprecated": false,
       "export_key": "incident/qr_assigned",
       "hide_notification": false,
-      "id": 5492,
+      "id": 5693,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -599,7 +599,7 @@
       "deprecated": false,
       "export_key": "incident/qr_source_ip_count",
       "hide_notification": false,
-      "id": 5493,
+      "id": 5694,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -628,7 +628,7 @@
       "deprecated": false,
       "export_key": "incident/qr_credibility",
       "hide_notification": false,
-      "id": 5494,
+      "id": 5695,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -657,7 +657,7 @@
       "deprecated": false,
       "export_key": "incident/qr_relevance",
       "hide_notification": false,
-      "id": 5495,
+      "id": 5696,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -686,7 +686,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_index_value",
       "hide_notification": false,
-      "id": 5496,
+      "id": 5697,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -715,7 +715,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_start_time",
       "hide_notification": false,
-      "id": 5497,
+      "id": 5698,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -744,7 +744,7 @@
       "deprecated": false,
       "export_key": "incident/qr_severity",
       "hide_notification": false,
-      "id": 5498,
+      "id": 5699,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -773,7 +773,7 @@
       "deprecated": false,
       "export_key": "incident/qr_last_updated_time",
       "hide_notification": false,
-      "id": 5499,
+      "id": 5700,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -802,7 +802,7 @@
       "deprecated": false,
       "export_key": "incident/qradar_destination",
       "hide_notification": false,
-      "id": 5500,
+      "id": 5701,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -831,7 +831,7 @@
       "deprecated": false,
       "export_key": "incident/qr_event_count",
       "hide_notification": false,
-      "id": 5501,
+      "id": 5702,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -860,7 +860,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_domain",
       "hide_notification": false,
-      "id": 5502,
+      "id": 5703,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -889,7 +889,7 @@
       "deprecated": false,
       "export_key": "incident/qr_destination_ip_count",
       "hide_notification": false,
-      "id": 5503,
+      "id": 5704,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -918,7 +918,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_source",
       "hide_notification": false,
-      "id": 5504,
+      "id": 5705,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -947,7 +947,7 @@
       "deprecated": false,
       "export_key": "incident/qr_magnitude",
       "hide_notification": false,
-      "id": 5505,
+      "id": 5706,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -980,7 +980,7 @@
   ],
   "functions": [
     {
-      "created_date": 1717523870065,
+      "created_date": 1729091228555,
       "description": {
         "content": "Create a note on the linked QRadar offense.",
         "format": "text"
@@ -988,14 +988,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Create Note",
       "export_key": "qradar_create_note",
-      "id": 100,
+      "id": 128,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1717523870065,
+      "last_modified_time": 1729091228555,
       "name": "qradar_create_note",
       "output_description": {
         "content": null,
@@ -1033,7 +1033,7 @@
       "workflows": []
     },
     {
-      "created_date": 1717523870136,
+      "created_date": 1729091228615,
       "description": {
         "content": "Get the MITRE Tactics and Techniques in relation to the rules that were fired to cause the offense in QRadar.",
         "format": "text"
@@ -1041,14 +1041,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Get Offense MITRE Reference",
       "export_key": "qradar_get_offense_mitre_reference",
-      "id": 101,
+      "id": 129,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1717523870136,
+      "last_modified_time": 1729091228615,
       "name": "qradar_get_offense_mitre_reference",
       "output_description": {
         "content": null,
@@ -1094,7 +1094,7 @@
       "workflows": []
     },
     {
-      "created_date": 1717523870212,
+      "created_date": 1729091228676,
       "description": {
         "content": "Fetch QRadar Offense Details",
         "format": "text"
@@ -1102,14 +1102,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Offense Summary",
       "export_key": "qradar_offense_summary",
-      "id": 102,
+      "id": 130,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1717523870212,
+      "last_modified_time": 1729091228676,
       "name": "qradar_offense_summary",
       "output_description": {
         "content": null,
@@ -1163,7 +1163,7 @@
       "workflows": []
     },
     {
-      "created_date": 1717523870287,
+      "created_date": 1729091228737,
       "description": {
         "content": "Search QRadar Top events for the given Offense ID",
         "format": "text"
@@ -1171,14 +1171,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Top Events",
       "export_key": "qradar_top_events",
-      "id": 103,
+      "id": 131,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1717523870287,
+      "last_modified_time": 1729091228737,
       "name": "qradar_top_events",
       "output_description": {
         "content": null,
@@ -1282,7 +1282,7 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 91,
+  "id": 90,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [
@@ -1523,7 +1523,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1723555394724,
+      "create_date": 1731937257942,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1532,7 +1532,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1723555394724,
+      "update_date": 1731937257942,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1548,7 +1548,7 @@
       "programmatic_name": "fn_qradar_enhanced_data",
       "tags": [],
       "users": [
-        "e@example.com"
+        "f@example.com"
       ],
       "uuid": "2aafea6c-1710-4b20-98a7-3b495b210d44"
     }
@@ -1560,14 +1560,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461\" isExecutable=\"true\" name=\"playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0z4owrm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0z4owrm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_19nh03c\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Create Artifact from Assets info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2e3b5849-dd9f-447b-8e7e-6352f03400e0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0z4owrm\u003c/incoming\u003e\u003coutgoing\u003eFlow_19nh03c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_19nh03c\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19nh03c\" id=\"Flow_19nh03c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"344\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0z4owrm\" id=\"Flow_0z4owrm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"344\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718803947993,
+      "create_date": 1729091229313,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461",
@@ -1593,7 +1593,7 @@
             "deprecated": false,
             "export_key": "playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461/select_to_create_artifact_from_asset_info",
             "hide_notification": false,
-            "id": 5658,
+            "id": 5793,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -1608,7 +1608,7 @@
             "templates": [],
             "text": "Select to create artifact from asset info",
             "tooltip": "",
-            "type_id": 1148,
+            "type_id": 1149,
             "uuid": "3d376bf5-4fe5-410f-8376-08379db4999f",
             "values": [
               {
@@ -1618,7 +1618,7 @@
                 "label": "Name",
                 "properties": null,
                 "uuid": "c17f6366-5726-4128-ba18-ba7590605346",
-                "value": 1943
+                "value": 1439
               },
               {
                 "default": false,
@@ -1627,7 +1627,7 @@
                 "label": "IP Address",
                 "properties": null,
                 "uuid": "abf8cd25-fe8d-47f4-be11-c12e2dd808cb",
-                "value": 1944
+                "value": 1440
               }
             ]
           }
@@ -1652,27 +1652,27 @@
         "uuid": "e8727f01-77e3-4228-b29e-6e07f13e96f2"
       },
       "has_logical_errors": false,
-      "id": 126,
+      "id": 103,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554461472,
+      "last_modified_time": 1731936939316,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718804255715,
+          "created_date": 1729091229490,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Assets info PB",
-          "id": 129,
+          "id": 124,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718809887646,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091229490,
           "name": "Create Artifact from Assets info PB",
           "object_type": "qr_assets",
           "playbook_handle": "create_artifact_from_assets_info_pb",
@@ -1703,7 +1703,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8f357d68-b01e-4d26-b47a-d7ce1099a461",
-        "id": 130,
+        "id": 108,
         "name": "playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461",
         "type": "playbook",
         "uuid": "247d7e65-e0a4-436f-8936-1538d214f1de"
@@ -1711,19 +1711,19 @@
       "tags": [],
       "type": "default",
       "uuid": "8f357d68-b01e-4d26-b47a-d7ce1099a461",
-      "version": 12
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54\" isExecutable=\"true\" name=\"playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1xe132a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Destination IP info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c5c66c31-6c93-4b9d-a7e9-d59355ea4222\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xe132a\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ukkslb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xe132a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ukkslb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ukkslb\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ukkslb\" id=\"Flow_1ukkslb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"354\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xe132a\" id=\"Flow_1xe132a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"354\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718804324808,
+      "create_date": 1729091229946,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54",
@@ -1749,7 +1749,7 @@
             "deprecated": false,
             "export_key": "playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54/select_to_create_artifact_from_destination_info",
             "hide_notification": false,
-            "id": 5659,
+            "id": 5794,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -1764,7 +1764,7 @@
             "templates": [],
             "text": "Select to create artifact from destination info",
             "tooltip": "",
-            "type_id": 1149,
+            "type_id": 1150,
             "uuid": "721a9b42-c589-4b3c-b532-877649d6780b",
             "values": [
               {
@@ -1774,7 +1774,7 @@
                 "label": "Destination IP",
                 "properties": null,
                 "uuid": "72a9b7bc-f6ef-44ad-82b3-5ed136689bda",
-                "value": 1945
+                "value": 1441
               }
             ]
           }
@@ -1799,27 +1799,27 @@
         "uuid": "6bb7a75b-e93f-4f89-9f6f-8496fd448ab4"
       },
       "has_logical_errors": false,
-      "id": 127,
+      "id": 104,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554461974,
+      "last_modified_time": 1731936939816,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718804490149,
+          "created_date": 1729091230125,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Destination IP info PB",
-          "id": 130,
+          "id": 125,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718810077526,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091230125,
           "name": "Create Artifact from Destination IP info PB",
           "object_type": "qr_top_destination_ips",
           "playbook_handle": "create_artifact_from_destination_ip_info_pb",
@@ -1850,7 +1850,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_609015b6-02d6-4051-ae3d-db5d28d4ed54",
-        "id": 131,
+        "id": 109,
         "name": "playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54",
         "type": "playbook",
         "uuid": "065ddef4-7104-4afc-bdff-e6650bc6af98"
@@ -1858,19 +1858,19 @@
       "tags": [],
       "type": "default",
       "uuid": "609015b6-02d6-4051-ae3d-db5d28d4ed54",
-      "version": 11
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c\" isExecutable=\"true\" name=\"playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1s8h9p6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Events info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"51eb78a0-7e9a-489b-9471-a0ba2fe71582\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1s8h9p6\u003c/incoming\u003e\u003coutgoing\u003eFlow_0y0526u\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1s8h9p6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0y0526u\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0y0526u\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0y0526u\" id=\"Flow_0y0526u_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1s8h9p6\" id=\"Flow_1s8h9p6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718804579264,
+      "create_date": 1729091230576,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c",
@@ -1896,7 +1896,7 @@
             "deprecated": false,
             "export_key": "playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c/select_to_create_artifact_from_events_info",
             "hide_notification": false,
-            "id": 5660,
+            "id": 5795,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -1912,7 +1912,7 @@
             "templates": [],
             "text": "Select to create artifact from events info",
             "tooltip": "",
-            "type_id": 1150,
+            "type_id": 1151,
             "uuid": "34a37d1d-415b-4b20-9cc5-6d0561080fbf",
             "values": [
               {
@@ -1922,7 +1922,7 @@
                 "label": "Source IP",
                 "properties": null,
                 "uuid": "8114dd45-623e-4567-8465-a7bde651f91e",
-                "value": 1946
+                "value": 1442
               },
               {
                 "default": false,
@@ -1931,7 +1931,7 @@
                 "label": "Destination IP",
                 "properties": null,
                 "uuid": "20cc3400-6676-4570-94ae-c9fa282a56d8",
-                "value": 1947
+                "value": 1443
               },
               {
                 "default": false,
@@ -1940,7 +1940,7 @@
                 "label": "Username",
                 "properties": null,
                 "uuid": "ba5a2b37-066c-4444-bc22-ebb06fd0322d",
-                "value": 1948
+                "value": 1444
               }
             ]
           }
@@ -1965,27 +1965,27 @@
         "uuid": "f23ff144-8166-4441-8bda-d9d19b241095"
       },
       "has_logical_errors": false,
-      "id": 128,
+      "id": 105,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554462495,
+      "last_modified_time": 1731936940287,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718804808935,
+          "created_date": 1729091230747,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Events info PB",
-          "id": 131,
+          "id": 126,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718809861767,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091230747,
           "name": "Create Artifact from Events info PB",
           "object_type": "qr_offense_top_events",
           "playbook_handle": "create_artifact_from_events_info_pb",
@@ -2016,7 +2016,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_92e5c6a7-db11-47e1-a8db-81a9a54ab50c",
-        "id": 132,
+        "id": 110,
         "name": "playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c",
         "type": "playbook",
         "uuid": "b6378186-5813-4c78-97cc-4efb558e85b2"
@@ -2024,19 +2024,19 @@
       "tags": [],
       "type": "default",
       "uuid": "92e5c6a7-db11-47e1-a8db-81a9a54ab50c",
-      "version": 13
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd\" isExecutable=\"true\" name=\"playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1cksz18\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Source IP info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6f06944e-0bbc-4e82-bf7b-1e3bb7ea5968\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cksz18\u003c/incoming\u003e\u003coutgoing\u003eFlow_0h36vny\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cksz18\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0h36vny\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0h36vny\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cksz18\" id=\"Flow_1cksz18_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0h36vny\" id=\"Flow_0h36vny_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"344\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"344\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718804860048,
+      "create_date": 1729091231217,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd",
@@ -2062,7 +2062,7 @@
             "deprecated": false,
             "export_key": "playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd/select_to_create_artifact_from_source_info",
             "hide_notification": false,
-            "id": 5661,
+            "id": 5796,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -2077,7 +2077,7 @@
             "templates": [],
             "text": "Select to create artifact from source info",
             "tooltip": "",
-            "type_id": 1151,
+            "type_id": 1152,
             "uuid": "040e09c9-0059-4dcb-b113-a8fa5a56f1c7",
             "values": [
               {
@@ -2087,7 +2087,7 @@
                 "label": "Source IP",
                 "properties": null,
                 "uuid": "a3e5c0f4-e207-424d-93e9-83e57e1276ca",
-                "value": 1949
+                "value": 1445
               },
               {
                 "default": false,
@@ -2096,7 +2096,7 @@
                 "label": "MAC",
                 "properties": null,
                 "uuid": "a25009fd-1a01-4d92-a1e2-862467ba0c6c",
-                "value": 1950
+                "value": 1446
               }
             ]
           }
@@ -2121,27 +2121,27 @@
         "uuid": "cb0c38c2-cd20-43de-894a-a864ff86b23a"
       },
       "has_logical_errors": false,
-      "id": 129,
+      "id": 106,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554462945,
+      "last_modified_time": 1731936940757,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718804979367,
+          "created_date": 1729091231407,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Source IP info PB",
-          "id": 132,
+          "id": 127,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718804979367,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091231407,
           "name": "Create Artifact from Source IP info PB",
           "object_type": "qr_top_source_ips",
           "playbook_handle": "create_artifact_from_source_ip_info_pb",
@@ -2172,7 +2172,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1fecf133-3ace-4cc1-b18c-5c33892511fd",
-        "id": 133,
+        "id": 111,
         "name": "playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd",
         "type": "playbook",
         "uuid": "de49b3e9-b037-415d-8d5b-bda2190e8365"
@@ -2180,19 +2180,19 @@
       "tags": [],
       "type": "default",
       "uuid": "1fecf133-3ace-4cc1-b18c-5c33892511fd",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179\" isExecutable=\"true\" name=\"playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vmkv1a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Flows info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"41cfe9e2-e24f-4c90-b40c-bb4c47160a48\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vmkv1a\u003c/incoming\u003e\u003coutgoing\u003eFlow_09nwlym\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0vmkv1a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_09nwlym\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_09nwlym\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vmkv1a\" id=\"Flow_0vmkv1a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09nwlym\" id=\"Flow_09nwlym_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"364\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"364\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718805033587,
+      "create_date": 1729091231896,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179",
@@ -2218,7 +2218,7 @@
             "deprecated": false,
             "export_key": "playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179/select_to_create_artifact_from_flows_info",
             "hide_notification": false,
-            "id": 5662,
+            "id": 5797,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -2234,7 +2234,7 @@
             "templates": [],
             "text": "Select to create artifact from flows info",
             "tooltip": "",
-            "type_id": 1152,
+            "type_id": 1153,
             "uuid": "3f61927d-bb23-4e3a-9764-e9d4ed8e54c7",
             "values": [
               {
@@ -2244,7 +2244,7 @@
                 "label": "Source IP",
                 "properties": null,
                 "uuid": "c7fe827f-1e93-4f06-8b6b-597f0ac7d4dd",
-                "value": 1951
+                "value": 1447
               },
               {
                 "default": false,
@@ -2253,7 +2253,7 @@
                 "label": "Source Port",
                 "properties": null,
                 "uuid": "c0a79680-662a-4802-b92d-4c9516428d24",
-                "value": 1952
+                "value": 1448
               },
               {
                 "default": false,
@@ -2262,7 +2262,7 @@
                 "label": "Destination IP",
                 "properties": null,
                 "uuid": "f5e2cf28-1892-48fc-a178-599654d5b200",
-                "value": 1953
+                "value": 1449
               },
               {
                 "default": false,
@@ -2271,7 +2271,7 @@
                 "label": "Destination Port",
                 "properties": null,
                 "uuid": "bc210807-69df-49c3-9333-ea86362dbb16",
-                "value": 1954
+                "value": 1450
               }
             ]
           }
@@ -2296,27 +2296,27 @@
         "uuid": "735fbe78-62e2-4d99-a77b-44d8036bf8e8"
       },
       "has_logical_errors": false,
-      "id": 130,
+      "id": 107,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554463395,
+      "last_modified_time": 1731936941310,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718805161605,
+          "created_date": 1729091232074,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Flows info PB",
-          "id": 133,
+          "id": 128,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718805161605,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091232074,
           "name": "Create Artifact from Flows info PB",
           "object_type": "qr_flows",
           "playbook_handle": "create_artifacts_from_flows_info_pb",
@@ -2347,7 +2347,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2d820c89-e1a6-47b9-86f9-20bf55ff1179",
-        "id": 134,
+        "id": 112,
         "name": "playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179",
         "type": "playbook",
         "uuid": "2a0495e2-1151-4bae-9936-01ea6594ceec"
@@ -2355,19 +2355,19 @@
       "tags": [],
       "type": "default",
       "uuid": "2d820c89-e1a6-47b9-86f9-20bf55ff1179",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" isExecutable=\"true\" name=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rzigwb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offenserules\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_triggered_rules\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rules_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rzigwb\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vs868k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rzigwb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of fetching contributing rules for Offense\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1284c670-0874-49f6-820b-a03590e4eb1a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vs868k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1nz6rrc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1vs868k\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"results = playbook.functions.results.rules_result\\nif results.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nz6rrc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1nz6rrc\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nz6rrc\" id=\"Flow_1nz6rrc_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vs868k\" id=\"Flow_1vs868k_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rzigwb\" id=\"Flow_0rzigwb_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718299200270,
+      "create_date": 1729091232518,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683",
@@ -2408,22 +2408,22 @@
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554463850,
+      "last_modified_time": 1731936941776,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718299281638,
+          "created_date": 1729091232689,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 100,
+          "id": 129,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718808171286,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091232689,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_fetching_contributing_rules_for_offense",
@@ -2448,7 +2448,7 @@
       },
       "tag": {
         "display_name": "Playbook_15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683",
-        "id": 112,
+        "id": 113,
         "name": "playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683",
         "type": "playbook",
         "uuid": "3d7fd62b-4843-4aa3-a472-6754ce65cc47"
@@ -2456,19 +2456,19 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683",
-      "version": 14
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" isExecutable=\"true\" name=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rxvtqb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query_type = \\\"offenseassets\\\"\\ninputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_assets\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"asset_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rxvtqb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k74puk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rxvtqb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of searching and returning Assets information\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"bb0b466c-8efd-41ad-aff8-47b108aa0d51\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0k74puk\u003c/incoming\u003e\u003coutgoing\u003eFlow_0dsr6d0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0k74puk\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"results = playbook.functions.results.asset_result\\nif results.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dsr6d0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0dsr6d0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dsr6d0\" id=\"Flow_0dsr6d0_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k74puk\" id=\"Flow_0k74puk_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rxvtqb\" id=\"Flow_0rxvtqb_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718299451798,
+      "create_date": 1729091233174,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_74bc42a0_f254_483c_933a_3af988578a5b",
@@ -2509,22 +2509,22 @@
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554464286,
+      "last_modified_time": 1731936942234,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718299474615,
+          "created_date": 1729091233307,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 101,
+          "id": 130,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718808198998,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091233307,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_assets_information",
@@ -2549,7 +2549,7 @@
       },
       "tag": {
         "display_name": "Playbook_74bc42a0-f254-483c-933a-3af988578a5b",
-        "id": 113,
+        "id": 114,
         "name": "playbook_74bc42a0_f254_483c_933a_3af988578a5b",
         "type": "playbook",
         "uuid": "c50c9c75-fec4-4a24-9d3c-770a6ec35404"
@@ -2557,19 +2557,19 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "74bc42a0-f254-483c-933a-3af988578a5b",
-      "version": 11
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 16,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" isExecutable=\"true\" name=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kz4h5r\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0u21q6n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"CATEGORYNAME(category) as categoryname,magnitude as magnitude,SUM(eventcount) as eventcount,max(starttime) as eventtime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY category,magnitude\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(starttime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"categories_events_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kz4h5r\u003c/incoming\u003e\u003coutgoing\u003eFlow_0vxphlt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"CATEGORYNAME(category) as categoryname,COUNT(*) as flowcount,max(lastpackettime) as lastpackettime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY category\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY lastpackettime DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"categories_flows_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0u21q6n\u003c/incoming\u003e\u003coutgoing\u003eFlow_03g44tq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kz4h5r\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0u21q6n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Example of searching and returning Categories Events\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d250ebff-fae8-4513-ba26-6fa9951e2923\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vxphlt\u003c/incoming\u003e\u003coutgoing\u003eFlow_0p6itp5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0vxphlt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Example of searching and returning Categories Flows\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a19a08f5-df64-4578-86af-84fa9dca6755\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03g44tq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0e75ukj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_03g44tq\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"cat_events = playbook.functions.results.categories_events_result\\ncat_flows = playbook.functions.results.categories_flows_result\\nif cat_events.get(\\\"success\\\") and cat_flows.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1iubvai\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0p6itp5\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_0e75ukj\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_6\"/\u003e\u003cparallelGateway id=\"CollectionPoint_6\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_0e75ukj\u003c/incoming\u003e\u003cincoming\u003eFlow_0p6itp5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1iubvai\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1iubvai\" sourceRef=\"CollectionPoint_6\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1iubvai\" id=\"Flow_1iubvai_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"536\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e75ukj\" id=\"Flow_0e75ukj_di\"\u003e\u003comgdi:waypoint x=\"870\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0p6itp5\" id=\"Flow_0p6itp5_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03g44tq\" id=\"Flow_03g44tq_di\"\u003e\u003comgdi:waypoint x=\"870\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vxphlt\" id=\"Flow_0vxphlt_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0u21q6n\" id=\"Flow_0u21q6n_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kz4h5r\" id=\"Flow_1kz4h5r_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"772\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"327.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"772\" y=\"327.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_6\" id=\"CollectionPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"661\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718290487077,
+      "create_date": 1729091233731,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9",
@@ -2605,27 +2605,27 @@
         "uuid": "ebe4c9cd-6f44-41f5-896f-c5fc46a64999"
       },
       "has_logical_errors": false,
-      "id": 107,
+      "id": 110,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554464752,
+      "last_modified_time": 1731936942830,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718291583293,
+          "created_date": 1729091233860,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 98,
+          "id": 131,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718807817594,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091233860,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_categories",
@@ -2636,14 +2636,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718291610589,
+          "created_date": 1729091233892,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 99,
+          "id": 132,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718807843301,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091233892,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_categories",
@@ -2668,7 +2668,7 @@
       },
       "tag": {
         "display_name": "Playbook_6d8976e3-5771-4a6a-8619-65e29c94eed9",
-        "id": 111,
+        "id": 115,
         "name": "playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9",
         "type": "playbook",
         "uuid": "77f0a8b2-4c45-40c7-88bc-9150692a56e4"
@@ -2676,19 +2676,19 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "6d8976e3-5771-4a6a-8619-65e29c94eed9",
-      "version": 23
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 12,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" isExecutable=\"true\" name=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1e9m9kh\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1nzsuss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,SUM(eventcount) as eventcount,max(starttime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY destinationip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(starttime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_info_events\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1e9m9kh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lvgfmd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,COUNT(*) as flowcount,max(lastpackettime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY destinationip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(lastpackettime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_info_flows\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nzsuss\u003c/incoming\u003e\u003coutgoing\u003eFlow_00as3zm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1e9m9kh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1nzsuss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Example of searching and returning Destination IPs information Events\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aedaf4a3-0d54-4e18-aeaa-d944e6c7dd9c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lvgfmd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1yqidn1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1lvgfmd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Example of searching and returning Destination IPs information Flows\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f0b59612-50d8-4966-a8e7-731f555cb2bd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00as3zm\u003c/incoming\u003e\u003coutgoing\u003eFlow_0d4zuxa\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_00as3zm\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"ip_events = playbook.functions.results.ip_info_events\\nip_flows = playbook.functions.results.ip_info_flows\\nif ip_flows.get(\\\"success\\\") and ip_events.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1myaml9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cparallelGateway id=\"CollectionPoint_6\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_1yqidn1\u003c/incoming\u003e\u003cincoming\u003eFlow_0d4zuxa\u003c/incoming\u003e\u003coutgoing\u003eFlow_1myaml9\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1yqidn1\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_0d4zuxa\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_1myaml9\" sourceRef=\"CollectionPoint_6\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1myaml9\" id=\"Flow_1myaml9_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"566\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0d4zuxa\" id=\"Flow_0d4zuxa_di\"\u003e\u003comgdi:waypoint x=\"792\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yqidn1\" id=\"Flow_1yqidn1_di\"\u003e\u003comgdi:waypoint x=\"668\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00as3zm\" id=\"Flow_00as3zm_di\"\u003e\u003comgdi:waypoint x=\"890\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"890\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lvgfmd\" id=\"Flow_1lvgfmd_di\"\u003e\u003comgdi:waypoint x=\"570\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nzsuss\" id=\"Flow_1nzsuss_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"890\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"890\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1e9m9kh\" id=\"Flow_1e9m9kh_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"472\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"792\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"472\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"792\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_6\" id=\"CollectionPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"661\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718299660212,
+      "create_date": 1729091234381,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_81555e02_228c_4202_8a10_bc394439ee7e",
@@ -2724,27 +2724,27 @@
         "uuid": "eeffa75c-39e9-4570-be32-11752149a4a7"
       },
       "has_logical_errors": false,
-      "id": 110,
+      "id": 111,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554465223,
+      "last_modified_time": 1731936943276,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718299729165,
+          "created_date": 1729091234529,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Destination IPs information Events",
-          "id": 102,
+          "id": 133,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718808121382,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091234529,
           "name": "Example of searching and returning Destination IPs information Events",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_destination_ips_information",
@@ -2755,14 +2755,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718299755122,
+          "created_date": 1729091234564,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Destination IPs information Flows",
-          "id": 103,
+          "id": 134,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718808143041,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091234564,
           "name": "Example of searching and returning Destination IPs information Flows",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_destination_ips_information",
@@ -2787,7 +2787,7 @@
       },
       "tag": {
         "display_name": "Playbook_81555e02-228c-4202-8a10-bc394439ee7e",
-        "id": 114,
+        "id": 116,
         "name": "playbook_81555e02_228c_4202_8a10_bc394439ee7e",
         "type": "playbook",
         "uuid": "c064a604-ea38-436a-9ead-c0e935a96198"
@@ -2795,19 +2795,19 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "81555e02-228c-4202-8a10-bc394439ee7e",
-      "version": 17
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" isExecutable=\"true\" name=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1md6klr\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0raux16\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY sourceip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(starttime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_events\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1md6klr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xsd95l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"sourceip as sourceip,COUNT(*) as flowcount,UNIQUECOUNT(category) as categorycount,max(lastpackettime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY sourceip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(lastpackettime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_flows\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0raux16\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qm3ox6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1md6klr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0raux16\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Example of searching and returning Source IPs information Events\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"eccc97e8-850a-4575-8007-e52231c20967\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xsd95l\u003c/incoming\u003e\u003coutgoing\u003eFlow_1dnjsha\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xsd95l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Example of searching and returning Source IPs information Flows\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3e0ef2eb-39f4-4678-a2a6-5b41c0907fae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qm3ox6\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tl5t3e\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0qm3ox6\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cparallelGateway id=\"CollectionPoint_5\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_1dnjsha\u003c/incoming\u003e\u003cincoming\u003eFlow_0tl5t3e\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ytbef9\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1dnjsha\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_5\"/\u003e\u003cendEvent id=\"EndPoint_6\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"ip_event = playbook.functions.results.ip_events\\nip_flow = playbook.functions.results.ip_flows\\nif ip_flow.get(\\\"success\\\") and ip_event.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ytbef9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ytbef9\" sourceRef=\"CollectionPoint_5\" targetRef=\"EndPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_0tl5t3e\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tl5t3e\" id=\"Flow_0tl5t3e_di\"\u003e\u003comgdi:waypoint x=\"782\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ytbef9\" id=\"Flow_1ytbef9_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"536\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"604\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dnjsha\" id=\"Flow_1dnjsha_di\"\u003e\u003comgdi:waypoint x=\"658\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qm3ox6\" id=\"Flow_0qm3ox6_di\"\u003e\u003comgdi:waypoint x=\"880\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xsd95l\" id=\"Flow_0xsd95l_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0raux16\" id=\"Flow_0raux16_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1md6klr\" id=\"Flow_1md6klr_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"782\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"782\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_5\" id=\"CollectionPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"661\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_6\" id=\"EndPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"604\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718300281860,
+      "create_date": 1729091235012,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055",
@@ -2843,27 +2843,27 @@
         "uuid": "26c811fc-2328-49a3-8437-3b6dfd940bc3"
       },
       "has_logical_errors": false,
-      "id": 111,
+      "id": 112,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554465720,
+      "last_modified_time": 1731936943735,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718300340083,
+          "created_date": 1729091235144,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Source IPs information Events",
-          "id": 104,
+          "id": 135,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718807890567,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091235144,
           "name": "Example of searching and returning Source IPs information Events",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_source_ips_information",
@@ -2874,14 +2874,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718300365045,
+          "created_date": 1729091235178,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Source IPs information Flows",
-          "id": 105,
+          "id": 136,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718807919032,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091235178,
           "name": "Example of searching and returning Source IPs information Flows",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_source_ips_information",
@@ -2906,7 +2906,7 @@
       },
       "tag": {
         "display_name": "Playbook_0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055",
-        "id": 115,
+        "id": 117,
         "name": "playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055",
         "type": "playbook",
         "uuid": "4bc2a36e-94a7-43a6-a60d-6a2c0a26e2da"
@@ -2914,19 +2914,19 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055",
-      "version": 14
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" isExecutable=\"true\" name=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07h9hx7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"APPLICATIONNAME(applicationid) as \u0027Application\u0027, sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as \u0027Protocol\u0027, firstpackettime AS \u0027FirstPacketTime\u0027, sourcebytes, sourcepackets, destinationbytes, destinationpackets\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"flows\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_flows\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"flows_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07h9hx7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1y82wf6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07h9hx7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of searching QRadar Flows using offense id\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4dd9795a-5f33-4cb6-86d6-09d7711b67c6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1y82wf6\u003c/incoming\u003e\u003coutgoing\u003eFlow_01uqsz8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1y82wf6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"result = playbook.functions.results.flows_result\\nif result.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01uqsz8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_01uqsz8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01uqsz8\" id=\"Flow_01uqsz8_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y82wf6\" id=\"Flow_1y82wf6_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07h9hx7\" id=\"Flow_07h9hx7_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718300813597,
+      "create_date": 1729091235617,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_6b337d24_fec4_4983_b755_95372c280f41",
@@ -2962,27 +2962,27 @@
         "uuid": "93d1c97c-9f88-4313-94f8-b155b8d9af31"
       },
       "has_logical_errors": false,
-      "id": 112,
+      "id": 113,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554466176,
+      "last_modified_time": 1731936944200,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718300955930,
+          "created_date": 1729091235758,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching QRadar Flows using offense id",
-          "id": 106,
+          "id": 137,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718807962221,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091235758,
           "name": "Example of searching QRadar Flows using offense id",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_qradar_flows_using_offense_id",
@@ -3007,7 +3007,7 @@
       },
       "tag": {
         "display_name": "Playbook_6b337d24-fec4-4983-b755-95372c280f41",
-        "id": 116,
+        "id": 118,
         "name": "playbook_6b337d24_fec4_4983_b755_95372c280f41",
         "type": "playbook",
         "uuid": "d50c1973-d42c-4b79-9ce3-3ce1ce266a26"
@@ -3015,19 +3015,19 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "6b337d24-fec4-4983-b755-95372c280f41",
-      "version": 13
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 47,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" isExecutable=\"true\" name=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1rl5xew\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \u0027QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, \\\"EC File Hash\\\", \\\"EC File Path\\\", \\\"EC Filename\\\", \\\"EC IMP Hash\\\", \\\"EC MD5 Hash\\\", \\\"EC ParentCommandLine\\\", \\\"EC Process CommandLine\\\", \\\"EC SHA1 Hash\\\", \\\"EC SHA256 Hash\\\", \\\"File Hash\\\", \\\"MD5 Hash\\\", \\\"SHA1 Hash\\\", \\\"SHA256 Hash\\\"\u0027\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY starttime\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"topevents\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_offense_top_events\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"top_events\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1rl5xew\u003c/incoming\u003e\u003coutgoing\u003eFlow_16s8zue\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1rl5xew\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of searching QRadar Top Events using offense id\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"900b6b22-8bca-477e-b35a-353596f91c1b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_16s8zue\u003c/incoming\u003e\u003coutgoing\u003eFlow_0jwrwa7\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_16s8zue\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"result = playbook.functions.results.top_events\\nif result.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True, \\\"events\\\": result.get(\\\"content\\\", {}).get(\\\"events\\\", [])}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jwrwa7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0jwrwa7\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jwrwa7\" id=\"Flow_0jwrwa7_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16s8zue\" id=\"Flow_16s8zue_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rl5xew\" id=\"Flow_1rl5xew_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718301171871,
+      "create_date": 1729091236249,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_17b16e52_e57e_4c19_b018_45a246aedcee",
@@ -3053,7 +3053,7 @@
             "deprecated": false,
             "export_key": "playbook_17b16e52_e57e_4c19_b018_45a246aedcee/create_extra_artifacts",
             "hide_notification": false,
-            "id": 5677,
+            "id": 5798,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3068,7 +3068,7 @@
             "templates": [],
             "text": "Create extra artifacts",
             "tooltip": "Default to False. If True will create artifacts from Top Event data",
-            "type_id": 1135,
+            "type_id": 1160,
             "uuid": "47e1f5df-1b0f-45a0-a0ab-a381e102c615",
             "values": []
           }
@@ -3093,27 +3093,27 @@
         "uuid": "29803cde-178a-4245-90f1-f754def92fbf"
       },
       "has_logical_errors": false,
-      "id": 113,
+      "id": 114,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723555336524,
+      "last_modified_time": 1731936944633,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718301339744,
+          "created_date": 1729091236439,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching QRadar Top Events using offense id",
-          "id": 107,
+          "id": 138,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1723555334847,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091236439,
           "name": "Example of searching QRadar Top Events using offense id",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_qradar_top_events_using_offense_id",
@@ -3147,7 +3147,7 @@
       },
       "tag": {
         "display_name": "Playbook_17b16e52-e57e-4c19-b018-45a246aedcee",
-        "id": 117,
+        "id": 119,
         "name": "playbook_17b16e52_e57e_4c19_b018_45a246aedcee",
         "type": "playbook",
         "uuid": "20a6beb7-0bba-4e84-8422-7b4bad48c9ed"
@@ -3155,7 +3155,7 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "17b16e52-e57e-4c19-b018-45a246aedcee",
-      "version": 53
+      "version": 5
     },
     {
       "activation_details": {
@@ -3188,14 +3188,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 4,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67\" isExecutable=\"true\" name=\"playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0oemhms\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Create Note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d5aadb23-eaf0-4c95-835b-3534e98ce268\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_label = incident.properties.qradar_destination\\ninputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_note = note.text\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"created_note\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0oemhms\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fuxomq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0oemhms\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fuxomq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fuxomq\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0oemhms\" id=\"Flow_0oemhms_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fuxomq\" id=\"Flow_1fuxomq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"354\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"354\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1717523874174,
+      "create_date": 1729091236903,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67",
@@ -3231,23 +3231,23 @@
         "uuid": "919ef069-aad9-46a4-b975-dd2a7db1d64e"
       },
       "has_logical_errors": false,
-      "id": 89,
+      "id": 115,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554467075,
+      "last_modified_time": 1731936945033,
       "local_scripts": [],
       "name": "qradar_create_note",
       "object_type": "note",
       "status": "disabled",
       "tag": {
         "display_name": "Playbook_0f2b0cd5-7d03-439d-ad69-3d7b2ecb7e67",
-        "id": 91,
+        "id": 120,
         "name": "playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67",
         "type": "playbook",
         "uuid": "15a7d426-585b-477b-a26b-c6ada1986562"
@@ -3255,19 +3255,19 @@
       "tags": [],
       "type": "default",
       "uuid": "0f2b0cd5-7d03-439d-ad69-3d7b2ecb7e67",
-      "version": 6
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" isExecutable=\"true\" name=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0gy5l46\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offensesummary\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"offense_sum\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0gy5l46\u003c/incoming\u003e\u003coutgoing\u003eFlow_03t7t48\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0gy5l46\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"QRadar Offense Summary\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"896629ee-bb65-4fb1-9a8b-42056bd48730\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03t7t48\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k52sfk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_03t7t48\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"result = playbook.functions.results.offense_sum\\nif result.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0k52sfk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0k52sfk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k52sfk\" id=\"Flow_0k52sfk_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03t7t48\" id=\"Flow_03t7t48_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gy5l46\" id=\"Flow_0gy5l46_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718301562413,
+      "create_date": 1729091237358,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc",
@@ -3303,27 +3303,27 @@
         "uuid": "cfe5dba3-3cd8-4b37-a2d9-adf7be9da1a6"
       },
       "has_logical_errors": false,
-      "id": 114,
+      "id": 116,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554467527,
+      "last_modified_time": 1731936945516,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718301630844,
+          "created_date": 1729091237489,
           "description": "",
           "enabled": false,
           "export_key": "QRadar Offense Summary",
-          "id": 108,
+          "id": 139,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718808042723,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091237489,
           "name": "QRadar Offense Summary",
           "object_type": "incident",
           "playbook_handle": "subplaybook_qradar_offense_summary",
@@ -3348,7 +3348,7 @@
       },
       "tag": {
         "display_name": "Playbook_fd2f3d93-4196-4a7d-bd01-603bec3bd4bc",
-        "id": 118,
+        "id": 121,
         "name": "playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc",
         "type": "playbook",
         "uuid": "94156553-c75d-4188-9a02-c6dd8eb28459"
@@ -3356,7 +3356,7 @@
       "tags": [],
       "type": "subplaybook",
       "uuid": "fd2f3d93-4196-4a7d-bd01-603bec3bd4bc",
-      "version": 10
+      "version": 4
     },
     {
       "activation_details": {
@@ -3389,14 +3389,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 49,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\" isExecutable=\"true\" name=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1w32fdi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Set Incident Last Updated Time\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e93008f7-1249-46a8-8d7e-75c0dc862f4f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1w32fdi\u003c/incoming\u003e\u003coutgoing\u003eFlow_1j8wekl\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1qogjxl\u003c/outgoing\u003e\u003coutgoing\u003eFlow_16p7e6j\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1jpelse\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1dpygbl\u003c/outgoing\u003e\u003coutgoing\u003eFlow_10cpwpx\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0w37i0u\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0eku1so\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1w32fdi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1j8wekl\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_11\"/\u003e\u003ccallActivity calledElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"CallActivity_8\" name=\"Example of searching and returning Categories\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Categories\" uuid=\"6d8976e3-5771-4a6a-8619-65e29c94eed9\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"category_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qogjxl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1tkueav\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_1qogjxl\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_8\"/\u003e\u003ccallActivity calledElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"CallActivity_9\" name=\"Example of fetching contributing rules for Offense\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of fetching contributing rules for Offense\" uuid=\"15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"rule_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_16p7e6j\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xcc2pv\u003c/outgoing\u003e\u003c/callActivity\u003e\u003cendEvent id=\"EndPoint_10\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xi3bui\u003c/incoming\u003e\u003c/endEvent\u003e\u003ccallActivity calledElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"CallActivity_11\" name=\"Example of searching and returning Assets information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Assets information\" uuid=\"74bc42a0-f254-483c-933a-3af988578a5b\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"asset_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1j8wekl\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xi3bui\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"CallActivity_12\" name=\"Example of searching and returning Destination IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Destination IPs information\" uuid=\"81555e02-228c-4202-8a10-bc394439ee7e\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"dest_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1jpelse\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kb6x67\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0xcc2pv\" sourceRef=\"CallActivity_9\" targetRef=\"EndPoint_19\"/\u003e\u003csequenceFlow id=\"Flow_16p7e6j\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_9\"/\u003e\u003csequenceFlow id=\"Flow_1jpelse\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_12\"/\u003e\u003csequenceFlow id=\"Flow_1kb6x67\" sourceRef=\"CallActivity_12\" targetRef=\"EndPoint_18\"/\u003e\u003ccallActivity calledElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"CallActivity_13\" name=\"Example of searching and returning Source IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Source IPs information\" uuid=\"0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"source_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1dpygbl\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rb9jiz\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_1dpygbl\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_13\"/\u003e\u003ccallActivity calledElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"CallActivity_14\" name=\"Example of searching QRadar Flows using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Flows using offense id\" uuid=\"6b337d24-fec4-4983-b755-95372c280f41\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"flow_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10cpwpx\u003c/incoming\u003e\u003coutgoing\u003eFlow_15wyi0x\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_10cpwpx\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_14\"/\u003e\u003ccallActivity calledElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"CallActivity_15\" name=\"Example of searching QRadar Top Events using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Top Events using offense id\" uuid=\"17b16e52-e57e-4c19-b018-45a246aedcee\"\u003e{\"inputs\":{\"47e1f5df-1b0f-45a0-a0ab-a381e102c615\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false}}},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"events_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0w37i0u\u003c/incoming\u003e\u003coutgoing\u003eFlow_1id6wfo\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0w37i0u\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_15\"/\u003e\u003ccallActivity calledElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"CallActivity_16\" name=\"QRadar Offense Summary\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"QRadar Offense Summary\" uuid=\"fd2f3d93-4196-4a7d-bd01-603bec3bd4bc\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"offense_sum\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eku1so\u003c/incoming\u003e\u003coutgoing\u003eFlow_1nh7elw\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0eku1so\" sourceRef=\"ScriptTask_1\" targetRef=\"CallActivity_16\"/\u003e\u003cendEvent id=\"EndPoint_17\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1id6wfo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1id6wfo\" sourceRef=\"CallActivity_15\" targetRef=\"EndPoint_17\"/\u003e\u003cendEvent id=\"EndPoint_18\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kb6x67\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_19\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xcc2pv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xi3bui\" sourceRef=\"CallActivity_11\" targetRef=\"EndPoint_10\"/\u003e\u003cendEvent id=\"EndPoint_20\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1tkueav\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1tkueav\" sourceRef=\"CallActivity_8\" targetRef=\"EndPoint_20\"/\u003e\u003cendEvent id=\"EndPoint_21\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rb9jiz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rb9jiz\" sourceRef=\"CallActivity_13\" targetRef=\"EndPoint_21\"/\u003e\u003cendEvent id=\"EndPoint_22\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_15wyi0x\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_23\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1nh7elw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1nh7elw\" sourceRef=\"CallActivity_16\" targetRef=\"EndPoint_23\"/\u003e\u003csequenceFlow id=\"Flow_15wyi0x\" sourceRef=\"CallActivity_14\" targetRef=\"EndPoint_22\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15wyi0x\" id=\"Flow_15wyi0x_di\"\u003e\u003comgdi:waypoint x=\"1320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nh7elw\" id=\"Flow_1nh7elw_di\"\u003e\u003comgdi:waypoint x=\"1520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rb9jiz\" id=\"Flow_0rb9jiz_di\"\u003e\u003comgdi:waypoint x=\"1120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tkueav\" id=\"Flow_1tkueav_di\"\u003e\u003comgdi:waypoint x=\"920\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xi3bui\" id=\"Flow_0xi3bui_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1id6wfo\" id=\"Flow_1id6wfo_di\"\u003e\u003comgdi:waypoint x=\"120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eku1so\" id=\"Flow_0eku1so_di\"\u003e\u003comgdi:waypoint x=\"819\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w37i0u\" id=\"Flow_0w37i0u_di\"\u003e\u003comgdi:waypoint x=\"623\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10cpwpx\" id=\"Flow_10cpwpx_di\"\u003e\u003comgdi:waypoint x=\"819\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dpygbl\" id=\"Flow_1dpygbl_di\"\u003e\u003comgdi:waypoint x=\"819\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kb6x67\" id=\"Flow_1kb6x67_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jpelse\" id=\"Flow_1jpelse_di\"\u003e\u003comgdi:waypoint x=\"623\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16p7e6j\" id=\"Flow_16p7e6j_di\"\u003e\u003comgdi:waypoint x=\"623\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xcc2pv\" id=\"Flow_0xcc2pv_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qogjxl\" id=\"Flow_1qogjxl_di\"\u003e\u003comgdi:waypoint x=\"819\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1j8wekl\" id=\"Flow_1j8wekl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w32fdi\" id=\"Flow_1w32fdi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"108\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"108\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_8\" id=\"CallActivity_8_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"822\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_9\" id=\"CallActivity_9_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_10\" id=\"EndPoint_10_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_11\" id=\"CallActivity_11_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"623\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_12\" id=\"CallActivity_12_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_13\" id=\"CallActivity_13_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1022\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_14\" id=\"CallActivity_14_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_15\" id=\"CallActivity_15_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"22\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_16\" id=\"CallActivity_16_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_17\" id=\"EndPoint_17_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"54\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_18\" id=\"EndPoint_18_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"253.75\" y=\"534.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_19\" id=\"EndPoint_19_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"453.75\" y=\"534.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_20\" id=\"EndPoint_20_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"854.25\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_21\" id=\"EndPoint_21_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1054.25\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_22\" id=\"EndPoint_22_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1253.5\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_23\" id=\"EndPoint_23_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1453.75\" y=\"534.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\" isExecutable=\"true\" name=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0tere45\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1ug3ws9\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1owrcrp\u003c/outgoing\u003e\u003coutgoing\u003eFlow_13fo83w\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1bdxbid\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0946o6n\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1uuvx4g\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1lrwxts\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Set Incident Last Updated Time\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e93008f7-1249-46a8-8d7e-75c0dc862f4f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_047n2ld\u003c/incoming\u003e\u003coutgoing\u003eFlow_0hmqrec\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003ccallActivity calledElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"CallActivity_8\" name=\"Example of searching and returning Categories\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Categories\" uuid=\"6d8976e3-5771-4a6a-8619-65e29c94eed9\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"category_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ug3ws9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b6kdam\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"CallActivity_9\" name=\"Example of fetching contributing rules for Offense\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of fetching contributing rules for Offense\" uuid=\"15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"rule_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0946o6n\u003c/incoming\u003e\u003coutgoing\u003eFlow_14xoj1q\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"CallActivity_11\" name=\"Example of searching and returning Assets information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Assets information\" uuid=\"74bc42a0-f254-483c-933a-3af988578a5b\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"asset_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tere45\u003c/incoming\u003e\u003coutgoing\u003eFlow_1p4bxrq\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"CallActivity_12\" name=\"Example of searching and returning Destination IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Destination IPs information\" uuid=\"81555e02-228c-4202-8a10-bc394439ee7e\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"dest_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1uuvx4g\u003c/incoming\u003e\u003coutgoing\u003eFlow_05o2gd7\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"CallActivity_13\" name=\"Example of searching and returning Source IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Source IPs information\" uuid=\"0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"source_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1owrcrp\u003c/incoming\u003e\u003coutgoing\u003eFlow_14p0u08\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"CallActivity_14\" name=\"Example of searching QRadar Flows using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Flows using offense id\" uuid=\"6b337d24-fec4-4983-b755-95372c280f41\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"flow_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13fo83w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ruxs41\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"CallActivity_15\" name=\"Example of searching QRadar Top Events using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Top Events using offense id\" uuid=\"17b16e52-e57e-4c19-b018-45a246aedcee\"\u003e{\"inputs\":{\"47e1f5df-1b0f-45a0-a0ab-a381e102c615\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false}}},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"events_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lrwxts\u003c/incoming\u003e\u003coutgoing\u003eFlow_105ur8e\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"CallActivity_16\" name=\"QRadar Offense Summary\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"QRadar Offense Summary\" uuid=\"fd2f3d93-4196-4a7d-bd01-603bec3bd4bc\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"offense_sum\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1bdxbid\u003c/incoming\u003e\u003coutgoing\u003eFlow_09tm8w0\u003c/outgoing\u003e\u003c/callActivity\u003e\u003cparallelGateway id=\"CollectionPoint_17\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_1p4bxrq\u003c/incoming\u003e\u003cincoming\u003eFlow_14xoj1q\u003c/incoming\u003e\u003cincoming\u003eFlow_0b6kdam\u003c/incoming\u003e\u003cincoming\u003eFlow_14p0u08\u003c/incoming\u003e\u003cincoming\u003eFlow_0ruxs41\u003c/incoming\u003e\u003cincoming\u003eFlow_09tm8w0\u003c/incoming\u003e\u003cincoming\u003eFlow_05o2gd7\u003c/incoming\u003e\u003cincoming\u003eFlow_105ur8e\u003c/incoming\u003e\u003coutgoing\u003eFlow_047n2ld\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1p4bxrq\" sourceRef=\"CallActivity_11\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_14xoj1q\" sourceRef=\"CallActivity_9\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_0b6kdam\" sourceRef=\"CallActivity_8\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_14p0u08\" sourceRef=\"CallActivity_13\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_0ruxs41\" sourceRef=\"CallActivity_14\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_09tm8w0\" sourceRef=\"CallActivity_16\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_05o2gd7\" sourceRef=\"CallActivity_12\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_105ur8e\" sourceRef=\"CallActivity_15\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_047n2ld\" sourceRef=\"CollectionPoint_17\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_18\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0hmqrec\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0hmqrec\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_18\"/\u003e\u003csequenceFlow id=\"Flow_0tere45\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_11\"/\u003e\u003csequenceFlow id=\"Flow_1ug3ws9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_8\"/\u003e\u003csequenceFlow id=\"Flow_1owrcrp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_13\"/\u003e\u003csequenceFlow id=\"Flow_13fo83w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_14\"/\u003e\u003csequenceFlow id=\"Flow_1bdxbid\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_16\"/\u003e\u003csequenceFlow id=\"Flow_0946o6n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_9\"/\u003e\u003csequenceFlow id=\"Flow_1uuvx4g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_12\"/\u003e\u003csequenceFlow id=\"Flow_1lrwxts\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_15\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1p4bxrq\" id=\"Flow_1p4bxrq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14xoj1q\" id=\"Flow_14xoj1q_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b6kdam\" id=\"Flow_0b6kdam_di\"\u003e\u003comgdi:waypoint x=\"920\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14p0u08\" id=\"Flow_14p0u08_di\"\u003e\u003comgdi:waypoint x=\"1120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ruxs41\" id=\"Flow_0ruxs41_di\"\u003e\u003comgdi:waypoint x=\"1320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09tm8w0\" id=\"Flow_09tm8w0_di\"\u003e\u003comgdi:waypoint x=\"1520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05o2gd7\" id=\"Flow_05o2gd7_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_105ur8e\" id=\"Flow_105ur8e_di\"\u003e\u003comgdi:waypoint x=\"120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_047n2ld\" id=\"Flow_047n2ld_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"626\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"708\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hmqrec\" id=\"Flow_0hmqrec_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"792\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"884\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tere45\" id=\"Flow_0tere45_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"96\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"209\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"209\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ug3ws9\" id=\"Flow_1ug3ws9_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1owrcrp\" id=\"Flow_1owrcrp_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13fo83w\" id=\"Flow_13fo83w_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1310\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1310\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bdxbid\" id=\"Flow_1bdxbid_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0946o6n\" id=\"Flow_0946o6n_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1uuvx4g\" id=\"Flow_1uuvx4g_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lrwxts\" id=\"Flow_1lrwxts_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_8\" id=\"CallActivity_8_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"822\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_9\" id=\"CallActivity_9_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_12\" id=\"CallActivity_12_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_13\" id=\"CallActivity_13_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1022\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_14\" id=\"CallActivity_14_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_15\" id=\"CallActivity_15_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"22\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_16\" id=\"CallActivity_16_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"708\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_17\" id=\"CollectionPoint_17_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"652\" y=\"574\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_11\" id=\"CallActivity_11_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"623\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_18\" id=\"EndPoint_18_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"884\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"44\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718289898608,
+      "create_date": 1729091237990,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_f2aa7df1_5524_4927_9511_327bc5b5d293",
@@ -3432,27 +3432,27 @@
         "uuid": "5443807d-590a-4a48-b1fc-a3885c8ef6db"
       },
       "has_logical_errors": false,
-      "id": 105,
+      "id": 117,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723555384350,
+      "last_modified_time": 1731937205970,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718290218676,
+          "created_date": 1729091238129,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 94,
+          "id": 140,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718290261370,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091238129,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3463,14 +3463,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718290374797,
+          "created_date": 1729091238162,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 95,
+          "id": 141,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718290374797,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091238162,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3481,14 +3481,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718290762405,
+          "created_date": 1729091238203,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 96,
+          "id": 142,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718290869141,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091238203,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3499,14 +3499,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718291121608,
+          "created_date": 1729091238243,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 97,
+          "id": 143,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718291121608,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091238243,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3521,7 +3521,7 @@
       "status": "disabled",
       "tag": {
         "display_name": "Playbook_f2aa7df1-5524-4927-9511-327bc5b5d293",
-        "id": 109,
+        "id": 122,
         "name": "playbook_f2aa7df1_5524_4927_9511_327bc5b5d293",
         "type": "playbook",
         "uuid": "d8a940bc-d89b-472c-87b2-85781ecbb265"
@@ -3529,7 +3529,7 @@
       "tags": [],
       "type": "default",
       "uuid": "f2aa7df1-5524-4927-9511-327bc5b5d293",
-      "version": 60
+      "version": 9
     },
     {
       "activation_details": {
@@ -3562,14 +3562,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 17,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a\" isExecutable=\"true\" name=\"playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_17trg9o\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1ydnvpa\u003c/outgoing\u003e\u003coutgoing\u003eFlow_13k7fsi\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0kks5mg\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1cpslke\u003c/outgoing\u003e\u003coutgoing\u003eFlow_17kupc9\u003c/outgoing\u003e\u003coutgoing\u003eFlow_06u7ufw\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0dx6gsy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003ccallActivity calledElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"CallActivity_8\" name=\"Example of searching and returning Categories\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Categories\" uuid=\"6d8976e3-5771-4a6a-8619-65e29c94eed9\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"category_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cpslke\u003c/incoming\u003e\u003coutgoing\u003eFlow_1jvjak2\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_1jvjak2\" sourceRef=\"CallActivity_8\" targetRef=\"EndPoint_21\"/\u003e\u003ccallActivity calledElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"CallActivity_9\" name=\"Example of fetching contributing rules for Offense\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of fetching contributing rules for Offense\" uuid=\"15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"rule_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13k7fsi\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xcc2pv\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"CallActivity_11\" name=\"Example of searching and returning Assets information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Assets information\" uuid=\"74bc42a0-f254-483c-933a-3af988578a5b\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"asset_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kks5mg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q1mf45\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_1q1mf45\" sourceRef=\"CallActivity_11\" targetRef=\"EndPoint_20\"/\u003e\u003ccallActivity calledElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"CallActivity_12\" name=\"Example of searching and returning Destination IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Destination IPs information\" uuid=\"81555e02-228c-4202-8a10-bc394439ee7e\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"dest_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ydnvpa\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kb6x67\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0xcc2pv\" sourceRef=\"CallActivity_9\" targetRef=\"EndPoint_19\"/\u003e\u003csequenceFlow id=\"Flow_1kb6x67\" sourceRef=\"CallActivity_12\" targetRef=\"EndPoint_18\"/\u003e\u003ccallActivity calledElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"CallActivity_13\" name=\"Example of searching and returning Source IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Source IPs information\" uuid=\"0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"source_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17kupc9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0e5it92\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0e5it92\" sourceRef=\"CallActivity_13\" targetRef=\"EndPoint_22\"/\u003e\u003ccallActivity calledElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"CallActivity_14\" name=\"Example of searching QRadar Flows using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Flows using offense id\" uuid=\"6b337d24-fec4-4983-b755-95372c280f41\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"flow_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06u7ufw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b64vku\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0b64vku\" sourceRef=\"CallActivity_14\" targetRef=\"EndPoint_23\"/\u003e\u003ccallActivity calledElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"CallActivity_15\" name=\"Example of searching QRadar Top Events using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Top Events using offense id\" uuid=\"17b16e52-e57e-4c19-b018-45a246aedcee\"\u003e{\"inputs\":{\"47e1f5df-1b0f-45a0-a0ab-a381e102c615\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false}}},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"events_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17trg9o\u003c/incoming\u003e\u003coutgoing\u003eFlow_025ngd1\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_025ngd1\" sourceRef=\"CallActivity_15\" targetRef=\"EndPoint_17\"/\u003e\u003ccallActivity calledElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"CallActivity_16\" name=\"QRadar Offense Summary\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"QRadar Offense Summary\" uuid=\"fd2f3d93-4196-4a7d-bd01-603bec3bd4bc\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"offense_sum\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dx6gsy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qca2lt\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0qca2lt\" sourceRef=\"CallActivity_16\" targetRef=\"EndPoint_24\"/\u003e\u003csequenceFlow id=\"Flow_17trg9o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_15\"/\u003e\u003csequenceFlow id=\"Flow_1ydnvpa\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_12\"/\u003e\u003csequenceFlow id=\"Flow_13k7fsi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_9\"/\u003e\u003csequenceFlow id=\"Flow_0kks5mg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_11\"/\u003e\u003csequenceFlow id=\"Flow_1cpslke\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_8\"/\u003e\u003csequenceFlow id=\"Flow_17kupc9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_13\"/\u003e\u003csequenceFlow id=\"Flow_06u7ufw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_14\"/\u003e\u003csequenceFlow id=\"Flow_0dx6gsy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_16\"/\u003e\u003cendEvent id=\"EndPoint_17\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_025ngd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_18\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kb6x67\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_19\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xcc2pv\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_20\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1q1mf45\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_21\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1jvjak2\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_22\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0e5it92\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_23\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0b64vku\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_24\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0qca2lt\u003c/incoming\u003e\u003c/endEvent\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dx6gsy\" id=\"Flow_0dx6gsy_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06u7ufw\" id=\"Flow_06u7ufw_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17kupc9\" id=\"Flow_17kupc9_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cpslke\" id=\"Flow_1cpslke_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kks5mg\" id=\"Flow_0kks5mg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13k7fsi\" id=\"Flow_13k7fsi_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ydnvpa\" id=\"Flow_1ydnvpa_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17trg9o\" id=\"Flow_17trg9o_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qca2lt\" id=\"Flow_0qca2lt_di\"\u003e\u003comgdi:waypoint x=\"1520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_025ngd1\" id=\"Flow_025ngd1_di\"\u003e\u003comgdi:waypoint x=\"120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b64vku\" id=\"Flow_0b64vku_di\"\u003e\u003comgdi:waypoint x=\"1320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e5it92\" id=\"Flow_0e5it92_di\"\u003e\u003comgdi:waypoint x=\"1120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kb6x67\" id=\"Flow_1kb6x67_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xcc2pv\" id=\"Flow_0xcc2pv_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q1mf45\" id=\"Flow_1q1mf45_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jvjak2\" id=\"Flow_1jvjak2_di\"\u003e\u003comgdi:waypoint x=\"920\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_8\" id=\"CallActivity_8_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"822\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_9\" id=\"CallActivity_9_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_11\" id=\"CallActivity_11_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"623\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_12\" id=\"CallActivity_12_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_13\" id=\"CallActivity_13_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1022\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_14\" id=\"CallActivity_14_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_15\" id=\"CallActivity_15_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"22\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_16\" id=\"CallActivity_16_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_17\" id=\"EndPoint_17_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"54.25\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_18\" id=\"EndPoint_18_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"254.25\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_19\" id=\"EndPoint_19_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"454.25\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_20\" id=\"EndPoint_20_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655.25\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_21\" id=\"EndPoint_21_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"854.25\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_22\" id=\"EndPoint_22_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1053.75\" y=\"493.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_23\" id=\"EndPoint_23_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1254\" y=\"493.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_24\" id=\"EndPoint_24_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1454\" y=\"493.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718302061725,
+      "create_date": 1729091238787,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a",
@@ -3605,27 +3605,27 @@
         "uuid": "1941fea1-a7a4-47d9-8066-851aed04e3ef"
       },
       "has_logical_errors": false,
-      "id": 116,
+      "id": 118,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554468531,
+      "last_modified_time": 1731936946434,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718302061878,
+          "created_date": 1729091238927,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 109,
+          "id": 144,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718302061878,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091238927,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3636,14 +3636,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718302061894,
+          "created_date": 1729091238972,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 110,
+          "id": 145,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718302061894,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091238972,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3654,14 +3654,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718302061913,
+          "created_date": 1729091239017,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 111,
+          "id": 146,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718302061913,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091239017,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3672,14 +3672,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718302061929,
+          "created_date": 1729091239054,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 112,
+          "id": 147,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718302061929,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091239054,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3694,7 +3694,7 @@
       "status": "disabled",
       "tag": {
         "display_name": "Playbook_ea22a0cb-b81e-429f-8cb0-2b391250ac8a",
-        "id": 120,
+        "id": 123,
         "name": "playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a",
         "type": "playbook",
         "uuid": "fcf6204d-b09d-4cab-8430-00dc82a09224"
@@ -3702,19 +3702,19 @@
       "tags": [],
       "type": "default",
       "uuid": "ea22a0cb-b81e-429f-8cb0-2b391250ac8a",
-      "version": 19
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 14,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_97afb768_e2d6_4fc6_b25b_5745661215c0\" isExecutable=\"true\" name=\"playbook_97afb768_e2d6_4fc6_b25b_5745661215c0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_154wj3c\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1a91zx0\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1wi2r7c\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0e0qro3\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0mufpsw\u003c/outgoing\u003e\u003coutgoing\u003eFlow_07z3adg\u003c/outgoing\u003e\u003coutgoing\u003eFlow_11nkv3p\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1nek7xe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003ccallActivity calledElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"CallActivity_8\" name=\"Example of searching and returning Categories\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Categories\" uuid=\"6d8976e3-5771-4a6a-8619-65e29c94eed9\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"category_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mufpsw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1jvjak2\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_1jvjak2\" sourceRef=\"CallActivity_8\" targetRef=\"EndPoint_21\"/\u003e\u003ccallActivity calledElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"CallActivity_9\" name=\"Example of fetching contributing rules for Offense\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of fetching contributing rules for Offense\" uuid=\"15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"rule_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wi2r7c\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xcc2pv\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"CallActivity_11\" name=\"Example of searching and returning Assets information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Assets information\" uuid=\"74bc42a0-f254-483c-933a-3af988578a5b\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"asset_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0e0qro3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q1mf45\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_1q1mf45\" sourceRef=\"CallActivity_11\" targetRef=\"EndPoint_20\"/\u003e\u003ccallActivity calledElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"CallActivity_12\" name=\"Example of searching and returning Destination IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Destination IPs information\" uuid=\"81555e02-228c-4202-8a10-bc394439ee7e\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"dest_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1a91zx0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kb6x67\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0xcc2pv\" sourceRef=\"CallActivity_9\" targetRef=\"EndPoint_19\"/\u003e\u003csequenceFlow id=\"Flow_1kb6x67\" sourceRef=\"CallActivity_12\" targetRef=\"EndPoint_18\"/\u003e\u003ccallActivity calledElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"CallActivity_13\" name=\"Example of searching and returning Source IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Source IPs information\" uuid=\"0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"source_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07z3adg\u003c/incoming\u003e\u003coutgoing\u003eFlow_0e5it92\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0e5it92\" sourceRef=\"CallActivity_13\" targetRef=\"EndPoint_22\"/\u003e\u003ccallActivity calledElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"CallActivity_14\" name=\"Example of searching QRadar Flows using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Flows using offense id\" uuid=\"6b337d24-fec4-4983-b755-95372c280f41\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"flow_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11nkv3p\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b64vku\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0b64vku\" sourceRef=\"CallActivity_14\" targetRef=\"EndPoint_23\"/\u003e\u003ccallActivity calledElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"CallActivity_15\" name=\"Example of searching QRadar Top Events using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Top Events using offense id\" uuid=\"17b16e52-e57e-4c19-b018-45a246aedcee\"\u003e{\"inputs\":{\"47e1f5df-1b0f-45a0-a0ab-a381e102c615\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false}}},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"events_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_154wj3c\u003c/incoming\u003e\u003coutgoing\u003eFlow_025ngd1\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_025ngd1\" sourceRef=\"CallActivity_15\" targetRef=\"EndPoint_17\"/\u003e\u003ccallActivity calledElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"CallActivity_16\" name=\"QRadar Offense Summary\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"QRadar Offense Summary\" uuid=\"fd2f3d93-4196-4a7d-bd01-603bec3bd4bc\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"offense_sum\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nek7xe\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qca2lt\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_0qca2lt\" sourceRef=\"CallActivity_16\" targetRef=\"EndPoint_24\"/\u003e\u003cendEvent id=\"EndPoint_17\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_025ngd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_18\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kb6x67\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_19\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xcc2pv\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_20\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1q1mf45\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_21\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1jvjak2\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_22\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0e5it92\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_23\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0b64vku\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_24\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0qca2lt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_154wj3c\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_15\"/\u003e\u003csequenceFlow id=\"Flow_1a91zx0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_12\"/\u003e\u003csequenceFlow id=\"Flow_1wi2r7c\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_9\"/\u003e\u003csequenceFlow id=\"Flow_0e0qro3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_11\"/\u003e\u003csequenceFlow id=\"Flow_0mufpsw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_8\"/\u003e\u003csequenceFlow id=\"Flow_07z3adg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_13\"/\u003e\u003csequenceFlow id=\"Flow_11nkv3p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_14\"/\u003e\u003csequenceFlow id=\"Flow_1nek7xe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_16\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_97afb768_e2d6_4fc6_b25b_5745661215c0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nek7xe\" id=\"Flow_1nek7xe_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11nkv3p\" id=\"Flow_11nkv3p_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07z3adg\" id=\"Flow_07z3adg_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mufpsw\" id=\"Flow_0mufpsw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e0qro3\" id=\"Flow_0e0qro3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wi2r7c\" id=\"Flow_1wi2r7c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1a91zx0\" id=\"Flow_1a91zx0_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_154wj3c\" id=\"Flow_154wj3c_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qca2lt\" id=\"Flow_0qca2lt_di\"\u003e\u003comgdi:waypoint x=\"1520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_025ngd1\" id=\"Flow_025ngd1_di\"\u003e\u003comgdi:waypoint x=\"120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b64vku\" id=\"Flow_0b64vku_di\"\u003e\u003comgdi:waypoint x=\"1320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e5it92\" id=\"Flow_0e5it92_di\"\u003e\u003comgdi:waypoint x=\"1120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kb6x67\" id=\"Flow_1kb6x67_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xcc2pv\" id=\"Flow_0xcc2pv_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q1mf45\" id=\"Flow_1q1mf45_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jvjak2\" id=\"Flow_1jvjak2_di\"\u003e\u003comgdi:waypoint x=\"920\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_8\" id=\"CallActivity_8_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"822\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_9\" id=\"CallActivity_9_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_11\" id=\"CallActivity_11_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"623\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_12\" id=\"CallActivity_12_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_13\" id=\"CallActivity_13_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1022\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_14\" id=\"CallActivity_14_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_15\" id=\"CallActivity_15_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"22\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_16\" id=\"CallActivity_16_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_17\" id=\"EndPoint_17_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"53.5\" y=\"503.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_18\" id=\"EndPoint_18_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"253.5\" y=\"503.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_19\" id=\"EndPoint_19_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"453.5\" y=\"503.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_20\" id=\"EndPoint_20_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"503.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_21\" id=\"EndPoint_21_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"853.5\" y=\"503.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_22\" id=\"EndPoint_22_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1053.75\" y=\"504.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_23\" id=\"EndPoint_23_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1254\" y=\"504.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_24\" id=\"EndPoint_24_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1454\" y=\"504.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1718721210996,
+      "create_date": 1729091239486,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_97afb768_e2d6_4fc6_b25b_5745661215c0",
@@ -3750,27 +3750,27 @@
         "uuid": "3625d5a3-1071-40a0-a972-c8f22b347a7e"
       },
       "has_logical_errors": false,
-      "id": 125,
+      "id": 119,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554469011,
+      "last_modified_time": 1731936946893,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1718721211125,
+          "created_date": 1729091239631,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 125,
+          "id": 148,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718721211125,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091239631,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -3781,14 +3781,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718721211140,
+          "created_date": 1729091239667,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 126,
+          "id": 149,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718721211140,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091239667,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -3799,14 +3799,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718721211159,
+          "created_date": 1729091239709,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 127,
+          "id": 150,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718721211159,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091239709,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -3817,14 +3817,14 @@
         },
         {
           "actions": [],
-          "created_date": 1718721211176,
+          "created_date": 1729091239751,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 128,
+          "id": 151,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1718721211176,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091239751,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -3861,7 +3861,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_97afb768-e2d6-4fc6-b25b-5745661215c0",
-        "id": 129,
+        "id": 124,
         "name": "playbook_97afb768_e2d6_4fc6_b25b_5745661215c0",
         "type": "playbook",
         "uuid": "6dd99e51-697d-4913-986a-edaf21428177"
@@ -3869,19 +3869,19 @@
       "tags": [],
       "type": "default",
       "uuid": "97afb768-e2d6-4fc6-b25b-5745661215c0",
-      "version": 17
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b37b226b_96da_46f4_9a3a_612fd163a60f\" isExecutable=\"true\" name=\"playbook_b37b226b_96da_46f4_9a3a_612fd163a60f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xbvn9v\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Get Offense MITRE Reference\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c72d73d8-29de-4166-875e-427e3add0859\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qradar_rules_and_mitre_tactics_and_techniques\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"mitre_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xbvn9v\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lwt5p9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0xbvn9v\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ed3e5055-1172-4b64-a2f4-11fcd73a7ba6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lwt5p9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b5w7u9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1lwt5p9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0b5w7u9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0b5w7u9\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b37b226b_96da_46f4_9a3a_612fd163a60f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b5w7u9\" id=\"Flow_0b5w7u9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lwt5p9\" id=\"Flow_1lwt5p9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xbvn9v\" id=\"Flow_0xbvn9v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1717523874858,
+      "create_date": 1729091240237,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_b37b226b_96da_46f4_9a3a_612fd163a60f",
@@ -3917,27 +3917,27 @@
         "uuid": "273277e0-d4d5-43e0-9583-c85db65683e7"
       },
       "has_logical_errors": false,
-      "id": 90,
+      "id": 120,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "e@example.com",
+        "id": 39,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1723554469341,
+      "last_modified_time": 1731936947211,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1717523875057,
+          "created_date": 1729091240425,
           "description": "",
           "enabled": false,
           "export_key": "Post-process",
-          "id": 82,
+          "id": 152,
           "language": "python3",
-          "last_modified_by": "e@example.com",
-          "last_modified_time": 1717523875057,
+          "last_modified_by": "f@example.com",
+          "last_modified_time": 1729091240425,
           "name": "Post-process",
           "object_type": "incident",
           "playbook_handle": "qradar_get_qradar_rule_mitre_reference",
@@ -3967,7 +3967,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b37b226b-96da-46f4-9a3a-612fd163a60f",
-        "id": 92,
+        "id": 125,
         "name": "playbook_b37b226b_96da_46f4_9a3a_612fd163a60f",
         "type": "playbook",
         "uuid": "0842e195-3bfa-4cae-a518-2d03dae7d543"
@@ -3975,7 +3975,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b37b226b-96da-46f4-9a3a-612fd163a60f",
-      "version": 6
+      "version": 4
     }
   ],
   "regulators": null,
@@ -3983,14 +3983,14 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1717523868995,
+      "created_date": 1729091227654,
       "description": "qr_last_updated_time will be set to equal create_date for the incident on incident creation. qr_last_updated_time will be set to equal current time when manual refresh rule is run.",
       "enabled": false,
       "export_key": "Set Incident Last Updated Time",
-      "id": 81,
+      "id": 123,
       "language": "python3",
-      "last_modified_by": "e@example.com",
-      "last_modified_time": 1717523868995,
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1729091227654,
       "name": "Set Incident Last Updated Time",
       "object_type": "incident",
       "playbook_handle": null,
@@ -4029,7 +4029,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_tactic",
           "hide_notification": false,
-          "id": 5507,
+          "id": 5708,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4046,7 +4046,7 @@
           "templates": [],
           "text": "MITRE Tactic",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "0cde50a2-cec3-4686-b931-db09c5cc9c27",
           "values": [],
           "width": 50
@@ -4061,7 +4061,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_tactic_id",
           "hide_notification": false,
-          "id": 5508,
+          "id": 5709,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4078,7 +4078,7 @@
           "templates": [],
           "text": "MITRE Tactic ID",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "76455b2d-2229-4861-b69b-610548615025",
           "values": [],
           "width": 50
@@ -4093,7 +4093,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_technique",
           "hide_notification": false,
-          "id": 5509,
+          "id": 5710,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4110,7 +4110,7 @@
           "templates": [],
           "text": "MITRE Technique",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "249003bb-ce9b-4811-9c82-38b8fa00a8b6",
           "values": [],
           "width": 78
@@ -4125,7 +4125,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_technique_id",
           "hide_notification": false,
-          "id": 5510,
+          "id": 5711,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4142,7 +4142,7 @@
           "templates": [],
           "text": "MITRE Technique ID",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "71386a2f-010b-497b-854b-c4f6a1a701b9",
           "values": [],
           "width": 78
@@ -4157,7 +4157,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/rule_id",
           "hide_notification": false,
-          "id": 5511,
+          "id": 5712,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4174,7 +4174,7 @@
           "templates": [],
           "text": "Rule ID",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "853fde37-417b-434a-9351-faf84f1665bf",
           "values": [],
           "width": 34
@@ -4189,7 +4189,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/rule_identifier",
           "hide_notification": false,
-          "id": 5512,
+          "id": 5713,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4206,7 +4206,7 @@
           "templates": [],
           "text": "Rule Identifier",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "182b592a-c169-49e7-9d43-d6aa215f479a",
           "values": [],
           "width": 73
@@ -4221,7 +4221,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/rule_name",
           "hide_notification": false,
-          "id": 5513,
+          "id": 5714,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4238,7 +4238,7 @@
           "templates": [],
           "text": "Rule Name",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "46247059-8d98-4ed5-974d-6a39e50fe14b",
           "values": [],
           "width": 44
@@ -4253,7 +4253,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/tactic_confidence_level",
           "hide_notification": false,
-          "id": 5514,
+          "id": 5715,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4270,7 +4270,7 @@
           "templates": [],
           "text": "Tactic Confidence Level",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "69932faf-d86d-4b87-afc5-01008b09b417",
           "values": [],
           "width": 86
@@ -4285,7 +4285,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/technique_confidence_level",
           "hide_notification": false,
-          "id": 5515,
+          "id": 5716,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4302,7 +4302,7 @@
           "templates": [],
           "text": "Technique Confidence Level",
           "tooltip": "",
-          "type_id": 1102,
+          "type_id": 1141,
           "uuid": "a1c065c6-3cab-4580-9079-a40368e2f952",
           "values": [],
           "width": 86
@@ -4342,7 +4342,7 @@
           "deprecated": false,
           "export_key": "qr_assets/aggregated_cvss",
           "hide_notification": false,
-          "id": 5516,
+          "id": 5717,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4358,7 +4358,7 @@
           "templates": [],
           "text": "Aggregated CVSS",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "be15635a-30b4-4691-bc27-e329350abc30",
           "values": [],
           "width": 126
@@ -4373,7 +4373,7 @@
           "deprecated": false,
           "export_key": "qr_assets/asset_id",
           "hide_notification": false,
-          "id": 5517,
+          "id": 5718,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4389,7 +4389,7 @@
           "templates": [],
           "text": "ID",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "70698b55-f7b6-4f60-94a2-1498a289d946",
           "values": [],
           "width": 45
@@ -4404,7 +4404,7 @@
           "deprecated": false,
           "export_key": "qr_assets/asset_name",
           "hide_notification": false,
-          "id": 5518,
+          "id": 5719,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4420,7 +4420,7 @@
           "templates": [],
           "text": "Name",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "b8fe29dc-e586-41c8-8e94-b37b79039c9a",
           "values": [],
           "width": 79
@@ -4435,7 +4435,7 @@
           "deprecated": false,
           "export_key": "qr_assets/ip_address",
           "hide_notification": false,
-          "id": 5519,
+          "id": 5720,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4451,7 +4451,7 @@
           "templates": [],
           "text": "IP Address",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "0b010be5-cc51-45c0-b9c0-35ede0fc3824",
           "values": [],
           "width": 86
@@ -4466,7 +4466,7 @@
           "deprecated": false,
           "export_key": "qr_assets/last_user",
           "hide_notification": false,
-          "id": 5520,
+          "id": 5721,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4482,7 +4482,7 @@
           "templates": [],
           "text": "Last User",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "9847f9a2-6558-4317-b587-7e66237fe75e",
           "values": [],
           "width": 76
@@ -4497,7 +4497,7 @@
           "deprecated": false,
           "export_key": "qr_assets/last_user_seen",
           "hide_notification": false,
-          "id": 5521,
+          "id": 5722,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4513,7 +4513,7 @@
           "templates": [],
           "text": "Last User Seen",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "145809c5-d9b0-416c-9e96-a165d1166e05",
           "values": [],
           "width": 38
@@ -4528,7 +4528,7 @@
           "deprecated": false,
           "export_key": "qr_assets/operating_system",
           "hide_notification": false,
-          "id": 5522,
+          "id": 5723,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4544,7 +4544,7 @@
           "templates": [],
           "text": "OS ID",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "917685ae-7b50-4644-a874-eda876771767",
           "values": [],
           "width": 134
@@ -4559,7 +4559,7 @@
           "deprecated": false,
           "export_key": "qr_assets/reported_time",
           "hide_notification": false,
-          "id": 5523,
+          "id": 5724,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4575,7 +4575,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "b938fb36-8494-4c31-a27c-74b9f1afb125",
           "values": [],
           "width": 70
@@ -4590,7 +4590,7 @@
           "deprecated": false,
           "export_key": "qr_assets/vulnerabilities",
           "hide_notification": false,
-          "id": 5524,
+          "id": 5725,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4606,7 +4606,7 @@
           "templates": [],
           "text": "Vulnerabilities",
           "tooltip": "",
-          "type_id": 1103,
+          "type_id": 1142,
           "uuid": "4ebea1ce-5d34-4c32-9db4-9a4c290a8e73",
           "values": [],
           "width": 112
@@ -4646,7 +4646,7 @@
           "deprecated": false,
           "export_key": "qr_categories/category_name",
           "hide_notification": false,
-          "id": 5525,
+          "id": 5726,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4662,7 +4662,7 @@
           "templates": [],
           "text": "Category Name",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "d9477e59-fdf3-4df0-8037-a51da1407d7b",
           "values": [],
           "width": 133
@@ -4677,7 +4677,7 @@
           "deprecated": false,
           "export_key": "qr_categories/destinationip_count",
           "hide_notification": false,
-          "id": 5526,
+          "id": 5727,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4693,7 +4693,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "9495b67a-31ff-4543-8bb3-613bf92c7fa3",
           "values": [],
           "width": 107
@@ -4708,7 +4708,7 @@
           "deprecated": false,
           "export_key": "qr_categories/event_count",
           "hide_notification": false,
-          "id": 5527,
+          "id": 5728,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4724,7 +4724,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "0dd8491f-4b7f-4fbc-b7c1-c0c466141dc0",
           "values": [],
           "width": 92
@@ -4739,7 +4739,7 @@
           "deprecated": false,
           "export_key": "qr_categories/event_time",
           "hide_notification": false,
-          "id": 5528,
+          "id": 5729,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4755,7 +4755,7 @@
           "templates": [],
           "text": "Event Time",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "19531e88-f976-4068-9b60-7e957bf0315b",
           "values": [],
           "width": 116
@@ -4770,7 +4770,7 @@
           "deprecated": false,
           "export_key": "qr_categories/flow_count",
           "hide_notification": false,
-          "id": 5529,
+          "id": 5730,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4786,7 +4786,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "ed9161b6-f730-4778-8e43-cd1ba49aa14f",
           "values": [],
           "width": 45
@@ -4801,7 +4801,7 @@
           "deprecated": false,
           "export_key": "qr_categories/last_packet_time",
           "hide_notification": false,
-          "id": 5530,
+          "id": 5731,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4817,7 +4817,7 @@
           "templates": [],
           "text": "Last Packet Time",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "7242842a-0ed7-45bd-9801-dbe328b0126b",
           "values": [],
           "width": 52
@@ -4832,7 +4832,7 @@
           "deprecated": false,
           "export_key": "qr_categories/magnitude",
           "hide_notification": false,
-          "id": 5531,
+          "id": 5732,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4848,7 +4848,7 @@
           "templates": [],
           "text": "Magnitude",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "98724adf-ef07-4acf-b9fd-da6cf3e827d0",
           "values": [],
           "width": 89
@@ -4863,7 +4863,7 @@
           "deprecated": false,
           "export_key": "qr_categories/reported_time",
           "hide_notification": false,
-          "id": 5532,
+          "id": 5733,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4879,7 +4879,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "e80372ea-904d-48e7-b50f-cd1608dead47",
           "values": [],
           "width": 70
@@ -4894,7 +4894,7 @@
           "deprecated": false,
           "export_key": "qr_categories/sourceip_count",
           "hide_notification": false,
-          "id": 5533,
+          "id": 5734,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4910,7 +4910,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1104,
+          "type_id": 1143,
           "uuid": "44d3f83f-597c-4ecd-ab72-0d57269f591d",
           "values": [],
           "width": 94
@@ -4950,7 +4950,7 @@
           "deprecated": false,
           "export_key": "qr_flows/application",
           "hide_notification": false,
-          "id": 5534,
+          "id": 5735,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4966,7 +4966,7 @@
           "templates": [],
           "text": "Application",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "55ebd534-30f5-472c-8692-7bd9a5a849d3",
           "values": [],
           "width": 88
@@ -4981,7 +4981,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_bytes",
           "hide_notification": false,
-          "id": 5535,
+          "id": 5736,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -4997,7 +4997,7 @@
           "templates": [],
           "text": "Destination Bytes",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "d70568fe-21f6-4008-bab3-0f3fb1e89cf4",
           "values": [],
           "width": 88
@@ -5012,7 +5012,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_ip",
           "hide_notification": false,
-          "id": 5536,
+          "id": 5737,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5028,7 +5028,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "e9e41246-f362-418a-a0f1-e7e0d80e3572",
           "values": [],
           "width": 88
@@ -5043,7 +5043,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_packets",
           "hide_notification": false,
-          "id": 5537,
+          "id": 5738,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5059,7 +5059,7 @@
           "templates": [],
           "text": "Destination Packets",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "d7ca79dc-840d-4e0d-8be0-bb45c8be4494",
           "values": [],
           "width": 88
@@ -5074,7 +5074,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_port",
           "hide_notification": false,
-          "id": 5538,
+          "id": 5739,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5090,7 +5090,7 @@
           "templates": [],
           "text": "Destination Port",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "367cd2f3-1f57-48ad-b06e-ec6d6d884b8e",
           "values": [],
           "width": 88
@@ -5105,7 +5105,7 @@
           "deprecated": false,
           "export_key": "qr_flows/first_packet_time",
           "hide_notification": false,
-          "id": 5539,
+          "id": 5740,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5121,7 +5121,7 @@
           "templates": [],
           "text": "First Packet Time",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "fbeaa822-58b2-4ffd-b56a-3309acb865cf",
           "values": [],
           "width": 52
@@ -5136,7 +5136,7 @@
           "deprecated": false,
           "export_key": "qr_flows/protocol",
           "hide_notification": false,
-          "id": 5540,
+          "id": 5741,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5152,7 +5152,7 @@
           "templates": [],
           "text": "Protocol",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "942b9607-fe2c-400e-971d-982f64d00dd4",
           "values": [],
           "width": 64
@@ -5167,7 +5167,7 @@
           "deprecated": false,
           "export_key": "qr_flows/reported_time",
           "hide_notification": false,
-          "id": 5541,
+          "id": 5742,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5183,7 +5183,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "8120eaab-790e-4c45-80c4-95135d737818",
           "values": [],
           "width": 70
@@ -5198,7 +5198,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_bytes",
           "hide_notification": false,
-          "id": 5542,
+          "id": 5743,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5214,7 +5214,7 @@
           "templates": [],
           "text": "Source Bytes",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "e6db7fbe-9a3e-416a-96af-b7637634519d",
           "values": [],
           "width": 53
@@ -5229,7 +5229,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_ip",
           "hide_notification": false,
-          "id": 5543,
+          "id": 5744,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5245,7 +5245,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "a949ff96-e8d1-470f-b2ec-1e6168d32165",
           "values": [],
           "width": 53
@@ -5260,7 +5260,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_packets",
           "hide_notification": false,
-          "id": 5544,
+          "id": 5745,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5276,7 +5276,7 @@
           "templates": [],
           "text": "Source Packets",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "ddc62352-55d4-4d7d-adeb-9b7283b2448f",
           "values": [],
           "width": 60
@@ -5291,7 +5291,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_port",
           "hide_notification": false,
-          "id": 5545,
+          "id": 5746,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5307,7 +5307,7 @@
           "templates": [],
           "text": "Source Port",
           "tooltip": "",
-          "type_id": 1105,
+          "type_id": 1144,
           "uuid": "c90c239d-e1da-4429-a32a-9323fc3ca16d",
           "values": [],
           "width": 53
@@ -5347,7 +5347,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/category",
           "hide_notification": false,
-          "id": 5546,
+          "id": 5747,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5364,7 +5364,7 @@
           "templates": [],
           "text": "Category",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "2ab36024-0e8a-4962-8f2f-f05b4b62fcdf",
           "values": [],
           "width": 142
@@ -5379,7 +5379,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/destination_ip",
           "hide_notification": false,
-          "id": 5547,
+          "id": 5748,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5396,7 +5396,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "c335a25f-91a9-4119-8a72-affe0ee09528",
           "values": [],
           "width": 155
@@ -5411,7 +5411,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_count",
           "hide_notification": false,
-          "id": 5548,
+          "id": 5749,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5428,7 +5428,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "8eeb2a3b-50c8-42e7-907a-1ba44901bc61",
           "values": [],
           "width": 93
@@ -5443,7 +5443,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_name",
           "hide_notification": false,
-          "id": 5549,
+          "id": 5750,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5460,7 +5460,7 @@
           "templates": [],
           "text": "Event Name",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "c45d91a0-373b-4386-8866-cf61558e782e",
           "values": [],
           "width": 248
@@ -5475,7 +5475,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_time",
           "hide_notification": false,
-          "id": 5550,
+          "id": 5751,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5492,7 +5492,7 @@
           "templates": [],
           "text": "Event Time",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "d0a29a03-f140-495f-94c8-e86cc0d4b8c5",
           "values": [],
           "width": 85
@@ -5507,7 +5507,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/log_source",
           "hide_notification": false,
-          "id": 5551,
+          "id": 5752,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5524,7 +5524,7 @@
           "templates": [],
           "text": "Log Source",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "c3b2de7d-16b0-4db3-9c57-8cf9c5968e62",
           "values": [],
           "width": 228
@@ -5539,7 +5539,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/magnitude",
           "hide_notification": false,
-          "id": 5552,
+          "id": 5753,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5556,7 +5556,7 @@
           "templates": [],
           "text": "Magnitude",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "cfb099aa-be4c-4e58-9dbe-6526957ee3a4",
           "values": [],
           "width": 81
@@ -5571,7 +5571,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/reported_time",
           "hide_notification": false,
-          "id": 5553,
+          "id": 5754,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5588,7 +5588,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "09f90681-325f-45e3-b1b2-6d0fa3b7312d",
           "values": [],
           "width": 112
@@ -5603,7 +5603,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/source_ip",
           "hide_notification": false,
-          "id": 5554,
+          "id": 5755,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5620,7 +5620,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "7ff661a9-2b89-4f5b-bc55-e91df4aeaea3",
           "values": [],
           "width": 146
@@ -5635,7 +5635,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/username",
           "hide_notification": false,
-          "id": 5555,
+          "id": 5756,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5652,7 +5652,7 @@
           "templates": [],
           "text": "Username",
           "tooltip": "",
-          "type_id": 1106,
+          "type_id": 1145,
           "uuid": "670ee674-e080-44ae-876c-4991fdaf2e27",
           "values": [],
           "width": 105
@@ -5692,7 +5692,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/category_count",
           "hide_notification": false,
-          "id": 5556,
+          "id": 5757,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5708,7 +5708,7 @@
           "templates": [],
           "text": "Category Count",
           "tooltip": "",
-          "type_id": 1107,
+          "type_id": 1146,
           "uuid": "d7fe1951-6136-46b2-8389-62525ada5c40",
           "values": [],
           "width": 108
@@ -5723,7 +5723,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/destination_ip",
           "hide_notification": false,
-          "id": 5557,
+          "id": 5758,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5739,7 +5739,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1107,
+          "type_id": 1146,
           "uuid": "2bb02d45-dd54-4d55-be57-c96bf74dda27",
           "values": [],
           "width": 122
@@ -5754,7 +5754,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/event_count",
           "hide_notification": false,
-          "id": 5558,
+          "id": 5759,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5770,7 +5770,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1107,
+          "type_id": 1146,
           "uuid": "7bbc0dcc-82a7-4907-82b1-1e6f6cedcf73",
           "values": [],
           "width": 82
@@ -5785,7 +5785,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/flow_count",
           "hide_notification": false,
-          "id": 5559,
+          "id": 5760,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5801,7 +5801,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1107,
+          "type_id": 1146,
           "uuid": "312615da-c065-4a0b-9e59-d3ac344fb32e",
           "values": [],
           "width": 374
@@ -5816,7 +5816,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/reported_time",
           "hide_notification": false,
-          "id": 5560,
+          "id": 5761,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5832,7 +5832,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1107,
+          "type_id": 1146,
           "uuid": "ae412689-6c07-47ab-8750-03c468692882",
           "values": [],
           "width": 70
@@ -5872,7 +5872,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/category_count",
           "hide_notification": false,
-          "id": 5561,
+          "id": 5762,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5888,7 +5888,7 @@
           "templates": [],
           "text": "Category Count",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "ec8d00a0-ab2b-4f08-bdf3-717c5b1ba908",
           "values": [],
           "width": 109
@@ -5903,7 +5903,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/domain",
           "hide_notification": false,
-          "id": 5562,
+          "id": 5763,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5919,7 +5919,7 @@
           "templates": [],
           "text": "Domain",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "2d51d52d-ad65-4263-909e-68242d4befd1",
           "values": [],
           "width": 78
@@ -5934,7 +5934,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/event_count",
           "hide_notification": false,
-          "id": 5563,
+          "id": 5764,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5950,7 +5950,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "7a6917ee-041e-45a8-a6f3-4d9fa7d46621",
           "values": [],
           "width": 106
@@ -5965,7 +5965,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/flow_count",
           "hide_notification": false,
-          "id": 5564,
+          "id": 5765,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5981,7 +5981,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "d6aa26ad-5d57-4aa3-9c5d-84d4a9fc48f8",
           "values": [],
           "width": 45
@@ -5996,7 +5996,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/mac",
           "hide_notification": false,
-          "id": 5565,
+          "id": 5766,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6012,7 +6012,7 @@
           "templates": [],
           "text": "MAC",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "ad4d32ee-0900-41d0-a86c-95b82d8f8cdf",
           "values": [],
           "width": 77
@@ -6027,7 +6027,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/network",
           "hide_notification": false,
-          "id": 5566,
+          "id": 5767,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6043,7 +6043,7 @@
           "templates": [],
           "text": "Network",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "899cf2a4-c347-46bc-8b00-a3721c537def",
           "values": [],
           "width": 65
@@ -6058,7 +6058,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/reported_time",
           "hide_notification": false,
-          "id": 5567,
+          "id": 5768,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6074,7 +6074,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "95e4152a-c0ee-4827-a055-f29144ad1a62",
           "values": [],
           "width": 70
@@ -6089,7 +6089,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/source_ip",
           "hide_notification": false,
-          "id": 5568,
+          "id": 5769,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6105,7 +6105,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "8e61b967-7937-4038-ae97-1d3682735173",
           "values": [],
           "width": 113
@@ -6120,7 +6120,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/usernames",
           "hide_notification": false,
-          "id": 5569,
+          "id": 5770,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6136,7 +6136,7 @@
           "templates": [],
           "text": "Usernames",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "3d8c9e6c-c5c9-48c6-84d5-b3a8905e3a03",
           "values": [],
           "width": 99
@@ -6151,7 +6151,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/vulnerability_count",
           "hide_notification": false,
-          "id": 5570,
+          "id": 5771,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -6167,7 +6167,7 @@
           "templates": [],
           "text": "Vulnerability Count",
           "tooltip": "",
-          "type_id": 1108,
+          "type_id": 1147,
           "uuid": "a6f51997-4742-4093-b7f6-a2f7650076f4",
           "values": [],
           "width": 131
@@ -6207,7 +6207,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/date_created",
           "hide_notification": false,
-          "id": 5571,
+          "id": 5772,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6223,7 +6223,7 @@
           "templates": [],
           "text": "Date Created",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "10916f01-0d40-49d4-aa23-ee292a881abd",
           "values": [],
           "width": 60
@@ -6238,7 +6238,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/enabled",
           "hide_notification": false,
-          "id": 5572,
+          "id": 5773,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6254,7 +6254,7 @@
           "templates": [],
           "text": "Enabled",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "51cd6776-43b2-4845-bcdb-aea84ffccd18",
           "values": [],
           "width": 62
@@ -6269,7 +6269,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/last_modified",
           "hide_notification": false,
-          "id": 5573,
+          "id": 5774,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6285,7 +6285,7 @@
           "templates": [],
           "text": "Last Modified",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "f1bac767-7798-4572-a86b-2f0bc0a851a1",
           "values": [],
           "width": 67
@@ -6300,7 +6300,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/reported_time",
           "hide_notification": false,
-          "id": 5574,
+          "id": 5775,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6316,7 +6316,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "bd13ffd1-b303-4b86-9eef-b8a44702cd80",
           "values": [],
           "width": 70
@@ -6331,7 +6331,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/response",
           "hide_notification": false,
-          "id": 5575,
+          "id": 5776,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6347,7 +6347,7 @@
           "templates": [],
           "text": "Response",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "34ff5942-6417-424e-bbdb-a6fa3f32774e",
           "values": [],
           "width": 74
@@ -6362,7 +6362,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_group",
           "hide_notification": false,
-          "id": 5576,
+          "id": 5777,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6378,7 +6378,7 @@
           "templates": [],
           "text": "Rule Group",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "71634383-1e15-4f00-9f74-adeb79d5f1e9",
           "values": [],
           "width": 47
@@ -6393,7 +6393,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_name",
           "hide_notification": false,
-          "id": 5577,
+          "id": 5778,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6409,7 +6409,7 @@
           "templates": [],
           "text": "Rule Name",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "c516c54d-af5f-47f5-a82f-16d0ac196323",
           "values": [],
           "width": 286
@@ -6424,7 +6424,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_type",
           "hide_notification": false,
-          "id": 5578,
+          "id": 5779,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6440,7 +6440,7 @@
           "templates": [],
           "text": "Rule Type",
           "tooltip": "",
-          "type_id": 1109,
+          "type_id": 1148,
           "uuid": "2cc90f9c-3579-48d0-8445-e93090d0e48a",
           "values": [],
           "width": 71
