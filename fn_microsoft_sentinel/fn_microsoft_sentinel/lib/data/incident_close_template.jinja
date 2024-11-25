@@ -1,0 +1,27 @@
+{
+  {# JINJA template for closing a new SOAR incident from a Sentinel incident. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed by Sentinel",
+  "properties": {
+    "sentinel_incident_status": "{{ properties.status }}"
+    {% if properties.classification %}
+      ,"sentinel_incident_classification": "{{ properties.classification }}"
+    {% endif %}
+    {% if properties.classificationReason %}
+      ,"sentinel_incident_classification_reason": "{{ properties.classificationReason }}"
+    {% endif %}
+    {% if properties.classificationComment %}
+      ,"sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\\"') }}"
+    {% endif %}
+    {% if properties.owner.assignedTo %}
+      ,"sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}"
+    {% endif %}
+    {% if properties.labels %}
+      ,"sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}"
+    {% endif %}
+    {% if properties.additionalData.tactics %}
+      ,"sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    {% endif %}
+  }
+}
