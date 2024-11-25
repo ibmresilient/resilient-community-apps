@@ -1,9 +1,431 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+"""Generate Mock responses to simulate Cisco Umbrella Investigate for Unix tests """
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-"""Generate Mock responses to simulate Cisco Umbrella Investigate fro Unix tests """
-import re
+PACKAGE_NAME = "fn_cisco_umbrella_inv"
+whois_history_return = [
+    {
+        "administrativeContactFax": "",
+        "whoisServers": "",
+        "addresses": [
+            "1600 amphitheatre parkway",
+            "please contact contact-admin@google.com, 1600 amphitheatre parkway",
+            "2400 e. bayshore pkwy"
+        ],
+        "administrativeContactName": "DNS Admin",
+        "zoneContactEmail": "",
+        "billingContactFax": "",
+        "administrativeContactTelephoneExt": "",
+        "administrativeContactEmail": "dns-admin@google.com",
+        "technicalContactEmail": "dns-admin@google.com",
+        "technicalContactFax": "16506181499",
+        "nameServers": [
+            "ns1.google.com",
+            "ns2.google.com",
+            "ns3.google.com",
+            "ns4.google.com"
+        ],
+        "zoneContactName": "",
+        "billingContactPostalCode": "",
+        "zoneContactFax": "",
+        "registrantTelephoneExt": "",
+        "zoneContactFaxExt": "",
+        "technicalContactTelephoneExt": "",
+        "billingContactCity": "",
+        "zoneContactStreet": [],
+        "created": "",
+        "administrativeContactCity": "Mountain View",
+        "registrantName": "Dns Admin",
+        "zoneContactCity": "",
+        "domainName": "google.com",
+        "zoneContactPostalCode": "",
+        "administrativeContactFaxExt": "",
+        "technicalContactCountry": "UNITED STATES",
+        "registrarIANAID": "292",
+        "updated": "2011-07-20 00:00:00 UTC",
+        "administrativeContactStreet": [
+            "1600 amphitheatre parkway"
+        ],
+        "billingContactEmail": "",
+        "status": [
+            "clientDeleteProhibited",
+            "clientTransferProhibited",
+            "clientUpdateProhibited",
+            "serverDeleteProhibited",
+            "serverTransferProhibited",
+            "serverUpdateProhibited"
+        ],
+        "registrantCity": "Mountain View",
+        "billingContactCountry": "",
+        "expires": "2020-09-14 00:00:00 UTC",
+        "technicalContactStreet": [ "2400 e. bayshore pkwy" ],
+        "registrantOrganization": "Google Inc.",
+        "billingContactStreet": [],
+        "registrarName": "MARKMONITOR INC.",
+        "registrantPostalCode": "94043",
+        "zoneContactTelephone": "",
+        "registrantEmail": "dns-admin@google.com",
+        "technicalContactFaxExt": "",
+        "technicalContactOrganization": "Google Inc.",
+        "emails": [ "dns-admin@google.com" ],
+        "registrantStreet": [
+            "please contact contact-admin@google.com",
+            "1600 amphitheatre parkway"
+        ],
+        "technicalContactTelephone": "16503300100",
+        "technicalContactState": "CA",
+        "technicalContactCity": "Mountain View",
+        "registrantFax": "16506188571",
+        "registrantCountry": "UNITED STATES",
+        "billingContactFaxExt": "",
+        "timestamp": 0,
+        "zoneContactOrganization": "",
+        "administrativeContactCountry": "UNITED STATES",
+        "billingContactName": "",
+        "registrantState": "CA",
+        "registrantTelephone": "16502530000",
+        "administrativeContactState": "CA",
+        "registrantFaxExt": "",
+        "technicalContactPostalCode": "94043",
+        "rawBase64": "",
+        "zoneContctTelephoneExt": "",
+        "administrativeContactOrganization": "Google Inc.",
+        "billingContactTelephone": "",
+        "billingContactTelephoneExt": "",
+        "zoneContactState": "",
+        "administrativeContactTelephone": "16506234000",
+        "billingContactOrganization": "",
+        "technicalContactName": "DNS Admin",
+        "administrativeContactPostalCode": "94043",
+        "zoneContactCountry": "",
+        "billingContactState": ""
+    }
+]
+categorization_return = {
+    "amazon.com": {
+        "status": 1,
+        "security_categories": [ "150" ],
+        "content_categories": [ "8" ]
+    }
+}
+cooccurrences_return = {
+    "pfs2": [
+        "download.example.com",
+        "query.example.com"
+    ],
+    "found": True
+}
+related_return = {
+    "tb1": [
+        {
+            "domain": "www.example1.com",
+            "score": 10
+        },
+        {
+            "domain": "info.example2.com",
+            "score": 9
+        },
+        {
+            "domain": "support.example.com",
+            "score": 3
+        }
+    ],
+    "found": True
+}
+security_return = {
+    "dga_score": 38.301771886101335,
+    "perplexity": 0.4540313302593146,
+    "entropy": 2.5216406363433186,
+    "securerank2": -1.3135141095601992,
+    "pagerank": 0.0262532,
+    "asn_score": -29.75810625887133,
+    "prefix_score": -64.9070502788884,
+    "rip_score": -75.64720536038982,
+    "popularity": 25.335450495507196,
+    "geodiversity": [ 0.24074075, 0.018518519 ],
+    "geodiversity_normalized": [
+        0.3761535390278368,
+        0.0005015965168831449
+    ],
+    "tld_geodiversity": [ 0 ],
+    "geoscore": 0,
+    "ks_test": 0,
+    "attack": "",
+    "threat_type": "",
+    "found": True
+}
+whois_email_return = {
+    "totalResults": 500,
+    "moreDataAvailable": True,
+    "limit": 500,
+    "sortField": "updated",
+    "domains": [
+        {
+            "domain": "0emm.com",
+            "current": True
+        },
+        {
+            "domain": "10tothe100.net",
+            "current": True
+        },
+        {
+            "domain": "youtubube.com",
+            "current": True
+        },
+        {
+            "domain": "zagat.net",
+            "current": True
+        },
+        {
+            "domain": "zagatnyc.com",
+            "current": True
+        },
+        {
+            "domain": "zavers.com",
+            "current": True
+        }
+    ]
+}
+whois_nameserver_return = {
+    "totalResults": 500,
+    "moreDataAvailable": True,
+    "limit": 500,
+    "sortField": "updated",
+    "domains": [
+        {
+            "domain": "46645.biz",
+            "current": True
+        },
+        {
+            "domain": "800google411.net",
+            "current": True
+        },
+        {
+            "domain": "zagatnyc.com",
+            "current": True
+        },
+        {
+            "domain": "zavers.com",
+            "current": True
+        }
+    ]
+}
+search_return = {
+    "expression": "exa[a-z]ple.com",
+    "totalResults": 1,
+    "moreDataAvailable": False,
+    "limit": 1000,
+    "matches": [
+        {
+            "name": "example",
+            "firstSeen": 1432330927421,
+            "firstSeenISO": "2015-05-22T21:42:07.421Z",
+            "securityCategories": [ "Botnet" ]
+        }
+    ]
+}
+samples_return = {
+    "query": "google.com",
+    "totalResults": 10,
+    "moreDataAvailable": True,
+    "limit": 10,
+    "offset": 0,
+    "samples": [
+        {
+            "sha256": "e9d3470c37dada28d5a32fb53a243c5b20def35bb01abf8f5403182cc2b91fdd",
+            "sha1": "de182fdcc3c0d473b90a0df0ad14c2074d1e7c50",
+            "md5": "282f80e8a2cf9e0e0dd72093787d99c6",
+            "magicType": "PE32 executable (GUI) Intel 80386, for MS Windows",
+            "threatScore": 100,
+            "size": 192512,
+            "firstSeen": 1460108539000,
+            "lastSeen": 1460108539000,
+            "visible": True,
+            "avresults": [
+                {
+                    "signature": "Win.Trojan.Ramnit",
+                    "product": "ClamAV"
+                },
+                {
+                    "signature": "Win.Trojan.Parite",
+                    "product": "ClamAV"
+                }
+            ]
+        }
+    ]
+}
+sample_artifact_return = {
+    "totalResults": 10,
+    "moreDataAvailable": True,
+    "limit": 100,
+    "offset": 0,
+    "artifacts": [
+        {
+            "sha256": "fd6c69c345f1e32924f0a5bb7393e191b393a78d58e2c6413b03ced7482f2320",
+            "sha1": "b4fa74a6f4dab3a7ba702b6c8c129f889db32ca6",
+            "md5": "ff5e1f27193ce51eec318714ef038bef",
+            "magicType": "PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed",
+            "size": 56320,
+            "firstSeen": 1460108539000,
+            "lastSeen": 1460108539000,
+            "visible": False,
+            "avresults": [
+                {
+                    "signature": "Win.Trojan.Ramnit",
+                    "product": "ClamAV"
+                },
+                {
+                    "signature": "Win.Trojan.Parite",
+                    "product": "ClamAV"
+                }
+            ]
+        }
+    ],
+    "samples": []
+}
+sample_connections_return = {
+    "totalResults": 2,
+    "moreDataAvailable": True,
+    "limit": 2,
+    "offset": 0,
+    "connections": [
+        {
+            "name": "google.com",
+            "firstSeen": 1456268452000,
+            "lastSeen": 1456268452000,
+            "securityCategories": [ "Botnet", "Malware" ],
+            "attacks": [],
+            "threatTypes": [],
+            "type": "HOST",
+            "ips": [ "172.217.1.78" ],
+            "urls": [
+                "http://goo.gl/PDIfV"
+            ]
+        },
+        {
+            "name": "rtvwerjyuver.com",
+            "firstSeen": 1456268452000,
+            "lastSeen": 1456268452000,
+            "securityCategories": [ "Botnet", "Malware" ],
+            "attacks": [],
+            "threatTypes": [],
+            "type": "HOST",
+            "ips": [],
+            "urls": []
+        }
+    ]
+}
+sample_return = {
+    "sha256": "e9d3470c37dada28d5a32fb53a243c5b20def35bb01abf8f5403182cc2b91fdd",
+    "sha1": "de182fdcc3c0d473b90a0df0ad14c2074d1e7c50",
+    "md5": "282f80e8a2cf9e0e0dd72093787d99c6",
+    "magicType": "PE32 executable (GUI) Intel 80386, for MS Windows",
+    "threatScore": 100,
+    "size": 192512,
+    "firstSeen": 1460108539000,
+    "lastSeen": 1460108539000,
+    "visible": True,
+    "avresults": [
+        {
+            "signature": "Win.Trojan.Ramnit",
+            "product": "ClamAV"
+        },
+        {
+            "signature": "Win.Trojan.Parite",
+            "product": "ClamAV"
+        }
+    ]
+}
+bgp_routes_ip_return = {
+    "creation_date": "2002-08-01",
+    "ir": 2,
+    "description": "CHINANET-BACKBONE No.31,Jin-rong Street,CN 86400",
+    "asn": "4134",
+    "cidr": "123.172.0.0/15"
+}
+bgp_routes_asn_return = {
+    "cidr": [ "98.143.32.0/20" ],
+    "geo": {
+        "name": "United States",
+        "id": 10
+    }
+}
+timeline_return = [
+    {
+        "categories": [ "Malware" ],
+        "attacks": [ "Trojan" ],
+        "threatTypes": [],
+        "timestamp": 1561574807853
+    },
+    {
+        "categories": [ "8", "150" ],
+        "attacks": [ "Trojan" ],
+        "threatTypes": [],
+        "timestamp": 1559545774604
+    }
+]
+domains_volume_return = {
+    "dates": [
+        "1510873200000",
+        "1510959600000"
+    ],
+    "queries": [
+        "1378426",
+        "1361934",
+        "1308188",
+        "1238823",
+        "1245126",
+        "1215994",
+        "1256917",
+        "1200190",
+        "1245963",
+        "1355719",
+        "1332685",
+        "1319825",
+        "1362464",
+        "1457174",
+        "1695448"
+    ]
+}
+sample_behaviors_return = {
+    "totalResults": 2,
+    "moreDataAvailable": True,
+    "limit": 2,
+    "offset": 0,
+    "behaviors": [
+        {
+            "name": "pe-packed-upx",
+            "title": "Executable Packed with UPX",
+            "hits": 2,
+            "confidence": 30,
+            "severity": 30,
+            "tags": [
+                "packer",
+                "crypter",
+                "encoding",
+                "PE"
+            ],
+            "threat": 9,
+            "category": [ "attribute" ]
+        },
+        {
+            "name": "pe-header-timestamp-null",
+            "title": "PE COFF Header Timestamp is Not Set",
+            "hits": 2,
+            "confidence": 60,
+            "severity": 5,
+            "tags": [
+                "file",
+                "attributes",
+                "anomaly",
+                "PE"
+            ],
+            "threat": 3,
+            "category": [ "attribute" ]
+        }
+    ]
+}
 
 RESPONSES = dict(dns_rr_hist_ip={u'rrs': [{u'ttl': 3600, u'type': u'A', u'class': u'IN', u'rr': u'dual46.gp1.wac.v2cdn.net.', u'name': u'93.184.216.119'},
                                           {u'ttl': 86400, u'type': u'A', u'class': u'IN', u'rr': u'mail.funken-flug.com.', u'name': u'93.184.216.119'}],
@@ -20,31 +442,12 @@ RESPONSES = dict(dns_rr_hist_ip={u'rrs': [{u'ttl': 3600, u'type': u'A', u'class'
                                     u'rrs_tf': [{u'first_seen': u'2018-01-04', u'rrs': [{u'ttl': 86400, u'type': u'A', u'class': u'IN', u'rr': u'93.184.216.34',
                                                  u'name': u'example.com.'}], u'last_seen': u'2018-04-05'}]
                 },
-                domain_co_occurrences={ u'found': True, u'domain_name': u'googlevideo.com',
-                                        u'pfs2': [[u'gowatchfreemovies.to', 0.14300200812663327],
-                                                  [u'www.mc-skv.com', 0.12482579576302438],
-                                                  [u'r5---sn-n4v7sn7l.googlevideo.com', 0.0064511764392265955],
-                                                  [u'sage200.co.uk', 0.006262067692875829],
-                                                  [u'demon.co.uk', 0.005126508408778887]]
-                },
-                domain_security_info = {u'geodiversity_normalized': [[u'??', 0.5554201725159715], [u'DZ', 0.00018227600641865165]],
-                           u'geodiversity': [[u'US', 0.4624],[u'LK', 0.0001]],
-                           u'dga_score': 0.0, u'rip_score': 0.0, u'asn_score': -0.03238785566453197, u'securerank2': 100.0,
-                           u'popularity': 100.0, u'geoscore': 0.0, u'ks_test': 0.0, u'attack': u'', u'pagerank': 40.09394,
-                           u'entropy': 2.521640636343318, u'prefix_score': 0.0, u'perplexity': 0.2327827581680193,
-                           u'found': True, u'fastflux': False, u'threat_type': u'', u'tld_geodiversity': []
-                },
                 domain_status_and_category_cat =  {"133": u'Safe for Kids',
                                "132": u'SaaS and B2B',
                                "131": u'Real Estate',
                                "130": u'Professional Networking',
                                "137": u'Society and Culture',
                                "141": u'Organisation Email'
-                },
-                domain_status_and_category_dom = {u'amazon.com': {u'status': 1,
-                                                                  u'content_categories': [u'Ecommerce/Shopping'],
-                                                                  u'security_categories': []
-                                                                 }
                 },
                 ip_latest_malicious_domains = [
                     {
@@ -56,12 +459,6 @@ RESPONSES = dict(dns_rr_hist_ip={u'rrs': [{u'ttl': 3600, u'type': u'A', u'class'
                         u'name': u'cxhyly.com'
                     }
                 ],
-                umbrella_pattern_search = {u'matches': [{u'securityCategories': [], u'firstSeen': 1521407460000, u'name': u'paypal.com-webcsr.me',
-                                                         u'firstSeenISO': u'2018-03-18T21:11:00.000Z'}, {u'securityCategories': [],
-                                                         u'firstSeen': 1521167520000, u'name': u'paypalz.co.uk.userwww.bbmno2i54b0.hartleyformz.com',
-                                                         u'firstSeenISO': u'2018-03-16T02:32:00.000Z'}],
-                                                         u'limit': 10, u'totalResults': 10, u'expression': u'paypal.*', u'moreDataAvailable': True
-                },
                 timeline = [{u'threatTypes': [],
                              u'timestamp_converted': u'2017-06-14 23:21:34',
                              u'attacks': [],
@@ -76,299 +473,65 @@ RESPONSES = dict(dns_rr_hist_ip={u'rrs': [{u'ttl': 3600, u'type': u'A', u'class'
                 umbrella_classifiers_info = {
                     u'firstQueried': 1479496560000
                 },
-                umbrella_related_domains = {u'tb1': [[u'www.domain.com', 8],
-                                            [u'secure.statcounter.com', 4],
-                                            [u'static.addtoany.com', 4],
-                                            [u'image.tmdb.org', 3],
-                                            [u'0.gravatar.com', 3],
-                                            [u'1.gravatar.com', 3],
-                                            [u'2.gravatar.com', 3],
-                                            [u'api.bltd.ovh', 3],
-                                            [u'static.vnpt.vn', 3]],
-                                  u'found': True
-                },
-                umbrella_domain_volume = {u'dates': [1524589200000, 1524679200000],
-                                          u'queries': [2610011, 2576588, 2518676, 2361999, 2161170, 1992158, 1835777, 1847458, 1809848,
-                                                       1791200, 1784312, 1776649, 1830100, 1939211, 2023009, 2075916, 2042269, 2065889,
-                                                       2137081, 2442077, 2618018, 2690130, 2726822, 2650116, 0, 0]
-                },
-                umbrella_domain_whois_info_domain = [{u'registrantFaxExt': None, u'administrativeContactPostalCode': u'95134',
-                          u'zoneContactCity': None, u'addresses': [u'170 w. tasman drive', u'170 west tasman drive'],
-                          u'billingContactState': None, u'technicalContactStreet': [u'170 w. tasman drive'],
-                          u'auditUpdatedDate': u'2018-04-22 20:55:22.000 UTC', u'administrativeContactCity': u'San Jose',
-                          u'administrativeContactEmail': u'infosec@cisco.com', u'technicalContactFax': u'14085267373',
-                          u'technicalContactTelephone': u'14085279223', u'billingContactEmail': None,
-                          u'technicalContactPostalCode': u'95134', u'registrantOrganization': u'Cisco Technology Inc.',
-                          u'zoneContactPostalCode': None, u'registrantState': u'CA',
-                          u'administrativeContactName': u'Info Sec', u'billingContactFaxExt': None,
-                          u'billingContactCity': None, u'technicalContactEmail': u'dns-info@CISCO.COM',
-                          u'registrantCountry': u'UNITED STATES', u'technicalContactFaxExt': None,
-                          u'registrantName': u'Info Sec', u'registrantEmail': u'infosec@cisco.com',
-                          u'billingContactCountry': None, u'billingContactName': None,
-                          u'registrarName': u'CSC CORPORATE DOMAINS, INC.', u'technicalContactTelephoneExt': None,
-                          u'administrativeContactFax': None, u'zoneContactFax': None, u'zoneContactFaxExt': None,
-                          u'registrantCity': u'San Jose', u'administrativeContactTelephoneExt': None,
-                          u'status': [u'clientTransferProhibited serverDeleteProhibited serverTransferProhibited serverUpdateProhibited'],
-                          u'updated': u'2017-05-11', u'expires': u'2018-05-15', u'whoisServers': u'whois.corporatedomains.com',
-                          u'zoneContactEmail': None, u'technicalContactState': u'CA',
-                          u'nameServers': [u'ns1.cisco.com', u'ns2.cisco.com', u'ns3.cisco.com'], u'timestamp': None,
-                          u'recordExpired': False, u'registrantFax': u'14085264575',
-                          u'administrativeContactStreet': [u'170 west tasman drive'],
-                          u'registrantTelephoneExt': None, u'billingContactFax': None,
-                          u'technicalContactOrganization': u'Cisco Technology Inc.',
-                          u'administrativeContactState': u'CA', u'zoneContactOrganization': None,
-                          u'billingContactPostalCode': None, u'zoneContactStreet': [],
-                          u'zoneContactName': None, u'registrantPostalCode': u'95134',
-                          u'billingContactTelephone': None, u'emails': [u'dns-info@cisco.com', u'infosec@cisco.com'],
-                          u'registrantTelephone': u'14085273842', u'administrativeContactCountry': u'UNITED STATES',
-                          u'technicalContactCity': u'San Jose', u'administrativeContactTelephone': u'14085273842',
-                          u'created': u'1987-05-14', u'registrantStreet': [u'170 west tasman drive'],
-                          u'domainName': u'cisco.com', u'technicalContactCountry': u'UNITED STATES',
-                          u'billingContactStreet': [], u'timeOfLatestRealtimeCheck': 1524501072693, u'zoneContactState': None,
-                          u'administrativeContactOrganization': u'Cisco Technology Inc.', u'administrativeContactFaxExt': None,
-                          u'billingContactTelephoneExt': None, u'zoneContactTelephone': None, u'technicalContactName':
-                          u'Network Services', u'zoneContactTelephoneExt': None, u'billingContactOrganization': None,
-                          u'registrarIANAID': u'299', u'zoneContactCountry': None, u'hasRawText': True
-                }],
-                umbrella_domain_whois_info_emails = {u'test@example.com': {u'sortField': u'created',
-                                                                       u'limit': 2, u'moreDataAvailable': True,
-                                                                       u'offset': 0, u'domains': [{u'current': True, u'domain': u'ev-dragon.com'}],
-                                                     u'totalResults': 1
-                                                    }
-                },
-                umbrella_domain_whois_info_ns = {u'ns1.google.com': {u'sortField': u'created',
-                                                                         u'limit': 2,
-                                                                         u'moreDataAvailable': True,
-                                                                         u'offset': 0,
-                                                                         u'domains': [{u'current': True,
-                                                                                       u'domain': u'blogspot.jp'}],
-                                                                         u'totalResults': 1
-                                                                         }
-                },
-                umbrella_ip_as_info_ip_address = [{u'description': u'EDGECAST - MCI Communications Services, Inc. d/b/a Verizon Business, US 86400',
-                                                   u'cidr': u'93.184.216.0/24',
-                                                   u'ir': 3,
-                                                   u'asn': 15133,
-                                                   u'creation_date': u'2007-03-19'}
-                ],
-                umbrella_ip_as_info_asn = [{u'cidr': u'212.47.32.0/19',
-                                            u'geo': {u'country_name': u'Italy',
-                                                     u'country_code': u'IT'
-                                                    }
-                                           }
-                ],
-                umbrella_threat_grid_sample_basic = { u'magicType': u'PE32 executable (GUI) Intel 80386 (stripped to external PDB), for MS Windows',
-                                                      u'behaviors': [{u'category': [u'file'],
-                                                                u'hits': 1,
-                                                                u'severity': 90,
-                                                                u'title': u'Process Modified a File in a System Directory',
-                                                                u'tags': [u'executable', u'file', u'process'],
-                                                                u'confidence': 100,
-                                                                u'threat': 90,
-                                                                u'name': u'modified-file-in-system-dir'}
-                                                            ],
-                                                      u'sha1': u'00bf659061121200c1e5469fbe31d100418b149e',
-                                                      u'size': 228864,
-                                                      u'threatScore': 100,
-                                                      u'connections': {u'connections': [{  u'threatTypes': [],
-                                                                                        u'popularity1Month': None,
-                                                                                        u'name': u'195.22.28.198',
-                                                                                        u'attacks': [],
-                                                                                        u'popularity3Month': None,
-                                                                                        u'popularity': None,
-                                                                                        u'firstQueried': None,
-                                                                                        u'popularityWeek': None,
-                                                                                        u'securityCategories': [],
-                                                                                        u'ips': [],
-                                                                                        u'lastCommit': None,
-                                                                                        u'urls': [], u'type': u'IP',
-                                                                                        u'firstSeen': 1460762759000,
-                                                                                        u'lastSeen': 1460762759000
-                                                                                     }
-                                                                                    ],
-                                                                       u'totalResults': 5,
-                                                                       u'limit': 5,
-                                                                       u'moreDataAvailable': True,
-                                                                       u'offset': 0
-                                                                      },
-                                                                      u'visible': True,
-                                                                      u'lastSeen': 1460762759000,
-                                                                      u'samples': {u'totalResults': 0,
-                                                                                   u'limit': 5,
-                                                                                   u'moreDataAvailable': False,
-                                                                                   u'samples': [], u'offset': 0
-                                                                                  },
-                                                      u'sha256': u'414e38ed0b5d507734361c2ba94f734252ca33b8259ca32334f32c4dba69b01c',
-                                                      u'avresults': [],
-                                                      u'firstSeen': 1460762759000,
-                                                      u'md5': u'6d8b70d20b1182546bc58ce7f90549d7'
-                 },
-                 umbrella_threat_grid_sample_samples = {  u'totalResults': 2,
-                                                          u'limit': 2,
-                                                          u'moreDataAvailable': True,
-                                                          u'samples': [{u'magicType': u'PE32 executable (GUI) Intel 80386, for MS Windows',
-                                                                        u'behaviors': [],
-                                                                        u'direction': u'IN',
-                                                                        u'sha1': u'6d33e9091193b24cef05a6f1b4d7a8ae92dd530a',
-                                                                        u'size': 103424,
-                                                                        u'threatScore': 90,
-                                                                        u'visible': True,
-                                                                        u'lastSeen': 1461433810000,
-                                                                        u'sha256': u'f73322d64517785b6ce41523882e3b03ff8c77704302a6282a90f2bfc14abbef',
-                                                                        u'avresults': [],
-                                                                        u'firstSeen': 1461433810000,
-                                                                        u'md5': u'be036d05dd75e65561d961b84ca42253'
-                                                                        },
-                                                                       {
-                                                                        u'magicType': u'PE32 executable (GUI) Intel 80386, for MS Windows',
-                                                                        u'behaviors': [],
-                                                                        u'direction': u'IN',
-                                                                        u'sha1': u'2daa7d45e9ff11c830dc33df002648f6afbcd6e3',
-                                                                        u'size': 534308,
-                                                                        u'threatScore': 24,
-                                                                        u'visible': True,
-                                                                        u'lastSeen': 1462230655000,
-                                                                        u'sha256': u'bb36f5fa0519bcfc82bb180187b9d47621634c71a19796831c87148ceb3b364c',
-                                                                        u'avresults': [],
-                                                                        u'firstSeen': 1462230655000,
-                                                                        u'md5': u'af3d619e1419b293c499e671a3da5b8e'
-                                                                       }
-                                                                      ],
-                                                          u'offset': 0
-                 },
-                 umbrella_threat_grid_sample_behaviors = [{u'category': [u'persistence'],
-                                                          u'hits': 1,
-                                                          u'severity': 80,
-                                                          u'title': u'Process Modified Autorun Registry Key Value',
-                                                          u'tags': [u'process', u'autorun', u'registry'],
-                                                          u'confidence': 60,
-                                                          u'threat': 48,
-                                                          u'name': u'registry-autorun-key-modified'
-                                                         },
-                                                         {u'category': [u'forensics'],
-                                                           u'hits': 200,
-                                                           u'severity': 80,
-                                                           u'title': u'Artifact Flagged by Antivirus',
-                                                           u'tags': [u'file'],
-                                                           u'confidence': 90,
-                                                           u'threat': 72,
-                                                           u'name': u'antivirus-flagged-artifact'
-                                                         }
-                 ],
-                 umbrella_threat_grid_sample_connections = {u'connections': [{u'threatTypes': [],
-                                                                              u'popularity1Month': None,
-                                                                              u'name': u'16.126.17.103',
-                                                                              u'attacks': [],
-                                                                              u'popularity3Month': None,
-                                                                              u'popularity': None,
-                                                                              u'firstQueried': None,
-                                                                              u'popularityWeek': None,
-                                                                              u'securityCategories': [],
-                                                                              u'ips': [],
-                                                                              u'lastCommit': None,
-                                                                              u'urls': [],
-                                                                              u'type': u'IP',
-                                                                              u'firstSeen': 1503550227000,
-                                                                              u'lastSeen': 1503550227000
-                                                                             },
-                                                                             {u'threatTypes': [],
-                                                                              u'popularity1Month': None,
-                                                                              u'name': u'207.71.100.129',
-                                                                              u'attacks': [],
-                                                                              u'popularity3Month': None,
-                                                                              u'popularity': None,
-                                                                              u'firstQueried': None,
-                                                                              u'popularityWeek': None,
-                                                                              u'securityCategories': [],
-                                                                              u'ips': [],
-                                                                              u'lastCommit': None,
-                                                                              u'urls': [],
-                                                                              u'type': u'IP',
-                                                                              u'firstSeen': 1503550227000,
-                                                                              u'lastSeen': 1503550227000
-                                                                             }
-                                                                            ],
-                                                            u'totalResults': 2,
-                                                            u'limit': 2,
-                                                            u'moreDataAvailable': True,
-                                                            u'offset': 0
-                 },
-
-                 umbrella_threat_grid_samples = {u'limit': 2,
-                                                u'moreDataAvailable': True,
-                                                u'samples': [{u'magicType': u'PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed',
-                                                                u'behaviors': [],
-                                                                u'sha1': u'ccdeb2319d6b924e359f563527404a0af3d1ac54',
-                                                                u'size': 22020, u'threatScore': 100,
-                                                                u'visible': False, u'lastSeen': 1518410873000,
-                                                                u'sha256': u'65f33f9e6d16918ba72bc20bcd85ebd75bc735df5666a843cab9c6dec9c0b1c1',
-                                                                u'avresults': [{u'product': u'ClamAV', u'signature': u'Win.Worm.Mydoom'}],
-                                                                u'firstSeen': 1518410872000, u'md5': u'0c340a220817e157346bef7976a0d0b6'},
-                                                            ],
-                                                u'offset': 0,
-                                                u'query': u'cisco.com', u'totalResults': 2
-                 }
 )
 
-def mocked_response(*args, **kwargs):
+def mock_client():
+    class MockClient(object):
+        """ Create mock connection """
 
-    """Function will be used by the mock to replace investigate.Investigate.get"""
-
-    class MockResponse:
-        def __init__(self, json_data, status_code):
-            self.json_data = json_data
-            self.status_code = status_code
-
-        def json(self):
-            return self.json_data
-
-        def raise_for_status(self):
+        def __init__(self, options=None, rc=None) -> None:
+            """ Mock """
             pass
 
-    if re.search("^dnsdb\/ip\/.+\/.+\.json", args[0]):
-        return MockResponse(RESPONSES["dns_rr_hist_ip"], 200)
-    elif re.search("^dnsdb\/name\/.+\/.+\.json", args[0]):
-        return MockResponse(RESPONSES["dns_rr_hist_domain"], 200)
-    elif re.search("^recommendations\/name\/.+\.json", args[0]):
-        return MockResponse(RESPONSES["domain_co_occurrences"], 200)
-    elif re.search("^security\/name\/.+\.json", args[0]):
-        return MockResponse(RESPONSES["domain_security_info"], 200)
-    elif re.search("^domains\/categories\/", args[0]):
-        return MockResponse(RESPONSES["domain_status_and_category_cat"], 200)
-    elif re.search("^domains\/categorization\/", args[0]):
-        return MockResponse(RESPONSES["domain_status_and_category_dom"], 200)
-    elif re.search("^ips\/.+\/latest_domains", args[0]):
-        return MockResponse(RESPONSES["ip_latest_malicious_domains"], 200)
-    elif re.search("^search\/", args[0]):
-        return MockResponse(RESPONSES["umbrella_pattern_search"], 200)
-    elif re.search("^timeline/", args[0]):
-        return MockResponse(RESPONSES["timeline"], 200)
-    elif re.search("^url\/.+\/classifiers", args[0]):
-        return MockResponse(RESPONSES["umbrella_classifiers_classifiers"], 200)
-    elif re.search("^url\/.+\/info", args[0]):
-        return MockResponse(RESPONSES["umbrella_classifiers_info"], 200)
-    elif re.search("^links\/name\/.+\.json", args[0]):
-        return MockResponse(RESPONSES["umbrella_related_domains"], 200)
-    elif re.search("^domains\/volume\/", args[0]):
-        return MockResponse(RESPONSES["umbrella_domain_volume"], 200)
-    elif re.search("^whois\/emails\/", args[0]):
-        return MockResponse(RESPONSES["umbrella_domain_whois_info_emails"], 200)
-    elif re.search("^whois\/nameservers\/", args[0]):
-        return MockResponse(RESPONSES["umbrella_domain_whois_info_ns"], 200)
-    elif re.search("^whois\/", args[0]):
-        return MockResponse(RESPONSES["umbrella_domain_whois_info_domain"], 200)
-    elif re.search("^bgp_routes\/ip\/.+\/.+\.json", args[0]):
-        return MockResponse(RESPONSES["umbrella_ip_as_info_ip_address"], 200)
-    elif re.search("^bgp_routes\/asn\/.+\/.+\.json", args[0]):
-        return MockResponse(RESPONSES["umbrella_ip_as_info_asn"], 200)
-    elif re.search("^sample\/.+\/samples", args[0]):
-        return MockResponse(RESPONSES["umbrella_threat_grid_sample_samples"], 200)
-    elif re.search("^sample\/.+\/behaviors", args[0]):
-        return MockResponse(RESPONSES["umbrella_threat_grid_sample_behaviors"], 200)
-    elif re.search("^sample\/.+\/connections", args[0]):
-        return MockResponse(RESPONSES["umbrella_threat_grid_sample_connections"], 200)
-    elif re.search("^sample\/", args[0]):
-        return MockResponse(RESPONSES["umbrella_threat_grid_sample_basic"], 200)
-    elif re.search("^samples\/", args[0]):
-        return MockResponse(RESPONSES["umbrella_threat_grid_samples"], 200)
-    return MockResponse(None, 404)
+        def make_api_call(self, method: str=None, uri: str=None, params: dict=None, data: dict=None):
+            """ Mock make API call """
+            if "domains/categorization" in uri:
+                return categorization_return
+            elif "recommendations/name/" in uri:
+                return cooccurrences_return
+            elif "dnsdb/name/" in uri:
+                return RESPONSES.get("dns_rr_hist_domain")
+            elif "dnsdb/ip/" in uri:
+                return RESPONSES.get("dns_rr_hist_ip")
+            elif "/latest_domains" in uri:
+                return RESPONSES.get("ip_latest_malicious_domains")
+            elif "links/name/" in uri:
+                return related_return
+            elif "security/name/" in uri:
+                return security_return
+            elif "whois/emails/" in uri:
+                return whois_email_return
+            elif "whois/nameservers/" in uri:
+                return whois_nameserver_return
+            elif "/history" in uri:
+                return whois_history_return
+            elif "search/" in uri:
+                return search_return
+            elif "samples/" in uri:
+                return samples_return
+            elif "/artifacts" in uri:
+                return sample_artifact_return
+            elif "/connections" in uri:
+                return sample_connections_return
+            elif "/behaviors" in uri:
+                return sample_behaviors_return
+            elif "sample/" in uri:
+                return sample_return
+            elif "bgp_routes/ip/" in uri:
+                return bgp_routes_ip_return
+            elif "bgp_routes/asn/" in uri:
+                return bgp_routes_asn_return
+            elif "timeline/" in uri:
+                return timeline_return
+            elif "domains/volume/" in uri:
+                return domains_volume_return
+            elif "domains/categories/" in uri:
+                return RESPONSES.get("domain_status_and_category_cat")
+            elif "/classifiers" in uri:
+                return RESPONSES.get("umbrella_classifiers_classifiers")
+            elif "/info" in uri:
+                return RESPONSES.get("umbrella_classifiers_info")
+            else:
+                return {}
+
+    return MockClient()

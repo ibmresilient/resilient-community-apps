@@ -1,57 +1,110 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """ Helper functions for Resilient circuits Functions supporting Cisco Umbrella Investigate """
 
 from __future__ import print_function
-import logging
-import datetime
-import re
-import os
-import json
-from resilient_lib import RequestsCommon
+from logging import getLogger
+from datetime import datetime, timedelta, timezone
+from time import mktime
+from re import compile, error, split, match, IGNORECASE, search
+from os import remove
+from json import dump
+from urllib.parse import urljoin
+from urllib.parse import urlparse, quote_plus
+from re import compile
 
-try:
-    from urllib.parse import urlparse, quote_plus
-except:
-    from urlparse import urlparse
-    from urllib import quote_plus
-
-LOG = logging.getLogger(__name__)
-IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
+PACKAGE_NAME = "fn_cisco_umbrella_inv"
+LOG = getLogger(__name__)
+IP_PATTERN = compile(r"^(\d{1,3}\.){3}\d{1,3}$")
 DOMAIN_REGEX = "((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}"
-DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX))
-EMAIl_PATTERN = re.compile(r"(^[a-zA-Z0-9_.+-]+@{}$)".format(DOMAIN_REGEX))
-UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
-TIMEDELTA_PATTERN =  re.compile(r"^-*(\d+)(seconds|minutes|hours|days|weeks)$")
-MD5_PATTERN = re.compile(r"^[a-fA-F0-9]{32}$")
-SHA1_PATTERN = re.compile(r"\b[a-fA-F0-9]{40}$")
-SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
-MANDATORY_CONFIG_PARAMS = ["api_token", "base_url", "results_limit"]
+DOMAIN_PATTERN = compile(r"^\b{}\b$".format(DOMAIN_REGEX))
+EMAIl_PATTERN = compile(r"(^[a-zA-Z0-9_.+-]+@{}$)".format(DOMAIN_REGEX))
+UUID_PATTERN = compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+TIMEDELTA_PATTERN = compile(r"^-*(\d+)(seconds|minutes|hours|days|weeks)$")
+MD5_PATTERN = compile(r"^[a-fA-F0-9]{32}$")
+SHA1_PATTERN = compile(r"\b[a-fA-F0-9]{40}$")
+SHA256_PATTERN = compile(r"\b[a-fA-F0-9]{64}$")
+URIs = {
+    "categorization":       "domains/categorization",
+    "cooccurrences":        "recommendations/name/{}.json",
+    "domain_rr_history":    "dnsdb/name/{}/{}.json", #
+    "ip_rr_history":        "dnsdb/ip/{}/{}.json",
+    "latest_domains":       "ips/{}/latest_domains",
+    "related":              "links/name/{}",
+    "security":             "security/name/{}",
+    "whois_email":          "whois/emails/{}",
+    "whois_ns":             "whois/nameservers/{}",
+    "whois_domain_history": "whois/{}/history",
+    "search":               "search/{}",
+    "samples":              "samples/{}",
+    "sample":               "sample/{}",
+    "sample_artifacts":     "sample/{}/artifacts",
+    "sample_connections":   "sample/{}/connections",
+    "as_for_ip":            "bgp_routes/ip/{}/as_for_ip.json",
+    "prefixes_for_asn":     "bgp_routes/asn/{}/prefixes_for_asn.json",
+    "timeline":             "timeline/{}",
+    "domain_volume":        "domains/volume/{}",
+    "categories": "domains/categories/",
+    "classifiers_classifiers": "url/{}/classifiers",
+    "classifiers_info": "url/{}/info",
+    "sample_behaviors": "sample/{}/behaviors"
+}
+SUPPORTED_DNS_TYPES = ["A", "NS", "MX", "TXT","CNAME"]
+UNSUPPORTED_DNS_QUERY = ValueError(f"supported query types are: {SUPPORTED_DNS_TYPES}")
+DOMAIN_ERR = ValueError("domains must be a string or a list of strings")
+SEARCH_ERR = ValueError("Start argument must be a datetime or a timedelta")
+IP_ERR = ValueError("invalid IP address")
 
-def validate_opts(func):
-    """"Check options set correctly.
+class investigateClient():
+    # Make API calls to Cisco Umbrella Investigate
+    def __init__(self, options, rc):
+        self.base_url = options.get("base_url", None)
+        self.results_limit = options.get("results_limit", None)
+        self.verify = rc.get_verify()
+        self.proxies = rc.get_proxies()
+        self.rc = rc
+        self.header = {"Authorization": f"Bearer {options.get('api_token', None)}"}
 
-    :param func: Resilient Function instance reference
+    def make_api_call(self, method: str, uri: str, params: dict=None, data: dict=None):
+        """Make a REST API call to the Cisco Umbrella Investigate server
 
-     """
-    for param in MANDATORY_CONFIG_PARAMS:
-        param_value = func.options.get(param, None)
+        Args:
+            method (str): GET, POST, PUT, DELETE, etc...
+            uri (str): API uri that can be found in the URIs variable
+            params (dict, optional): Dictionary of params to pass to API call. Defaults to None.
+            data (dict, optional): Dictionary of data to pass to API call. Defaults to None.
 
-        if param_value is None:
-            raise Exception("Mandatory config setting '{}' not set.".format(param))
-        if not param_value:
-            raise ValueError("Invalid value for config setting '{}'.".format(param))
+        Returns:
+            Json return from the API call
+        """
+        return self.rc.execute(method,
+                               urljoin(self.base_url, uri),
+                               params=params if params else None,
+                               data=data if data else None,
+                               proxies=self.proxies,
+                               headers=self.header,
+                               verify=self.verify).json()
 
+def get_time_input(time_input):
+    """ Return the correct time """
+    if not time_input:
+        time_input = timedelta(days=30)
+    if isinstance(time_input, timedelta):
+        return int(mktime((datetime.now(timezone.utc) - time_input).timetuple()) * 1000)
+    elif isinstance(time_input, datetime):
+        return int(mktime(time_input.timetuple()) * 1000)
+    elif isinstance(time_input, int) and (datetime.now()-datetime.fromtimestamp(time_input/1000)).days < 30:
+        return int(time_input)
+    else:
+        raise SEARCH_ERR
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
 
-    :param regex: url paramter value
+    :param regex: url parameter value
     :return : boolean
-
     """
     try:
         result = urlparse(url)
@@ -67,25 +120,21 @@ def validate_regex(regex):
 
     :param regex: Regex parameter value
     :return : boolean
-
     """
     try:
-        re.compile(regex)
-        valid_regex = True
-    except re.error:
+        compile(regex)
+        return True
+    except error:
         LOG.debug("regex: %s", regex)
-        valid_regex = False
-    return valid_regex
+        return False
 
 def validate_domains(doms):
     """"Validate domain string(s) are in a valid format.
 
     :param doms: Domain(s) parameter value
     :return : boolean
-
-     """
-
-    for d in re.split('\s+|,', doms):
+    """
+    for d in split('\s+|,', doms):
         if not DOMAIN_PATTERN.match(d):
             return False
     return True
@@ -95,10 +144,8 @@ def validate_emails(emails):
 
     :param emails: Email(s) parameter value
     :return : boolean
-
-     """
-
-    for d in re.split('\s+|,', emails):
+    """
+    for d in split('\s+|,', emails):
         if not EMAIl_PATTERN.match(d):
             return False
     return True
@@ -108,9 +155,7 @@ def validate_is_int(val):
 
     :param val: Value to test
     :return : boolean
-
-     """
-
+    """
     try:
         int(val)
         return True
@@ -118,54 +163,53 @@ def validate_is_int(val):
         return False
 
 def validate_params(params):
-    """"Check parameter fields for Resilient Function and validate that they are in correct format.
+    """"Check parameter fields for SOAR Function and validate that they are in correct format.
 
-    :param params: Dictionary of Resilient Function parameters.
-
-     """
-    if params is None:
+    :param params: Dictionary of SOAR Function parameters.
+    """
+    if not params:
         raise Exception("Error missing parameter 'params'")
 
     # If any entry has "None" string change to None value.
     for k, v in params.items():
-        if type(v) == str and v.lower() == 'none':
+        if isinstance(v, str) and v.lower() == 'none':
             params[k] = None
 
     # Now do some validation on input parameters.
     for (k, v) in params.copy().items():
-        if re.match("^resource$", k) and v is not None:
+        if match("^resource$", k) and v:
             if not IP_PATTERN.match(v) and not validate_url(v) \
                 and not validate_domains(v) and not validate_emails(v) \
                     and not validate_is_int(v):
                 raise ValueError("Invalid value for function parameter 'resource'.")
         # Domain name and name server should be in similar format use same validator.
-        if re.match("^domain", k) and v is not None and not validate_domains(v):
-            raise ValueError("Invalid value for function parameter '{}'.".format(k))
-        if re.match("^ipaddr$", k) and v is not None and not IP_PATTERN.match(v):
+        if match("^domain", k) and v and not validate_domains(v):
+            raise ValueError(f"Invalid value for function parameter '{k}'.")
+        if match("^ipaddr$", k) and v and not IP_PATTERN.match(v):
             raise ValueError("Invalid value for function parameter 'ipaddr'.")
-        if re.match("^regex$", k) and v is not None and not validate_regex(v):
+        if match("^regex$", k) and v and not validate_regex(v):
             raise ValueError("Invalid value for function parameter 'regex'.")
-        if re.match("^(limit|start_epoch|stop_epoch)$", k) and v is not None and not type(v) == int:
-            raise ValueError("Invalid value for function parameter '{}'.".format(k))
-        if re.match("^(start_relative|stop_relative)$", k) and v is not None and not (TIMEDELTA_PATTERN.match(v) or \
-            re.match("^Now$", v, re.IGNORECASE)):
-            raise ValueError("Invalid value for function parameter '{}'. ".format(k))
-        if re.match("^(start|stop)", k) and v is None:
+        if match("^(limit|start_epoch|stop_epoch)$", k) and v and not isinstance(v, int):
+            raise ValueError(f"Invalid value for function parameter '{k}'.")
+        if match("^(start_relative|stop_relative)$", k) and v and not (TIMEDELTA_PATTERN.match(v) or \
+            match("^Now$", v, IGNORECASE)):
+            raise ValueError(f"Invalid value for function parameter '{k}'. ")
+        if match("^(start|stop)", k) and not v:
             params.pop(k)
             # The regex pattern re.split('_', k)[0] splits [start|stop]_[epoch|relative] on '_' and selects 1st value
-        elif re.match("^(start|stop)", k) and v is not None and re.split('_', k)[0] not in params:
-            params[re.split('_', k)[0]] = params.pop(k)
-        elif re.match("^(start|stop)", k) and v is not None and re.split('_', k)[0] in params:
-            raise ValueError("Duplicate parameter {} since the parameter {} already set.".format(k, re.split('_', k)[0]))
-        if re.match("^(showlabels|include_category)", k) and v is not None and not type(v) == bool:
-            raise ValueError("Invalid value for function parameter '{}'".format(k))
-        if re.match("^hash$", k) and v is not None:
+        elif match("^(start|stop)", k) and v and split('_', k)[0] not in params:
+            params[split('_', k)[0]] = params.pop(k)
+        elif match("^(start|stop)", k) and v and split('_', k)[0] in params:
+            raise ValueError(f"Duplicate parameter {k} since the parameter {split('_', k)[0]} already set.")
+        if match("^(showlabels|include_category)", k) and v and not isinstance(v, bool):
+            raise ValueError(f"Invalid value for function parameter '{k}'")
+        if match("^hash$", k) and v:
             if not MD5_PATTERN.match(v) and not SHA1_PATTERN.match(v) \
                 and not SHA256_PATTERN.match(v):
                 raise ValueError("Invalid value for function parameter 'hash'.")
 
 def set_result(process_result, key_name, val):
-    """"Setup string or list attribute for the Resilient Function for types:
+    """"Setup string or list attribute for the SOAR Function for types:
 
         domain or domains,
         email or emails,
@@ -174,28 +218,29 @@ def set_result(process_result, key_name, val):
     :param process_result: Processing result dict.
     :param key_name: Parameter Key name
     :param val: Value for parameter to be processed.
-
     """
-    if (re.search('[\s+|,]', val)):
+    if (search('[\s+|,]', val)):
         # Assume multiple domains will be a list
         # Split on white spaces or commas e.g '"domain1.com" "domain2.com"' or '"domain1.com","domain2.com"'
-        process_result["_"+key_name] = re.split('\s+|,', val)
+        process_result["_"+key_name] = split('\s+|,', val)
     else:
         # Assume single domain  will be a string
         process_result["_"+key_name] = str(val)
 
 def process_params(params, process_result):
-    """"Process Resilient Function parameter fields doing any necessary transformations.
+    """"Process SOAR Function parameter fields doing any necessary transformations.
 
-    :param params: Dictionary of Resilient Function parameters.
+    :param params: Dictionary of SOAR Function parameters.
     :param process_result: Processing result dict.
-
-     """
-    if params is None:
+    """
+    if not params:
         raise Exception("Error missing parameter 'params'")
 
+    # Validate the params
+    validate_params(params)
+
     for (k, v) in params.items():
-        if (re.match("^resource$", k)) and v is not None:
+        if (match("^resource$", k)) and v:
             if IP_PATTERN.match(v) or validate_domains(v) or validate_emails(v) \
                     or validate_is_int(v):
                 # Assume "resource" param is a domain name, nameserver, ip address, email address or asn.
@@ -212,94 +257,70 @@ def process_params(params, process_result):
                 # Assume "resource" param is a url.
                 process_result["_res"] = quote_plus(v)
                 process_result["_res_type"] = "url"
-        if (re.match("^domain", k)) and v is not None:
+        if (match("^domain", k)) and v:
             set_result(process_result, k, v)
-        if (re.match("^ipaddr$", k)) and v is not None:
+        if (match("^ipaddr$", k)) and v:
             process_result["_ipaddr"] = str(v)
-        if (re.match("^regex$", k)) and v is not None:
+        if (match("^regex$", k)) and v:
             process_result["_regex"] = str(v)
-        if (re.match("^hash$", k)) and v is not None:
+        if (match("^hash$", k)) and v:
             process_result["_hash"] = str(v)
-        if re.match("^(start|stop)$", k) and v is not None:
-            if type(v) == int:
-                params[k] = datetime.datetime.fromtimestamp(v / 1e3)
+        if match("^(start|stop)$", k) and v:
+            if isinstance(v, int):
+                params[k] = datetime.fromtimestamp(v / 1e3)
             else:
-                if re.match("^Now$", v, re.IGNORECASE):
-                    params[k] = datetime.datetime.now()
+                if match("^Now$", v, IGNORECASE):
+                    params[k] = datetime.now()
                 else:
                     # Split value using regex e.g. -30days, m splits as m.group(1) = -30, m.group(2) = days
                     m = TIMEDELTA_PATTERN.search(v)
-                    params[k] = datetime.timedelta(**{str(m.group(2)): int(m.group(1))})
+                    params[k] = timedelta(**{str(m.group(2)): int(m.group(1))})
 
 def omit_params(params, omit_list):
     """"Filter out 'omit_list' list of parameters from the 'params' dict keys.
 
-    :param params: Resilient Function parameters dictionary
+    :param params: SOAR Function parameters dictionary
     :param omit_list: List of parameter keys to remove
     :return: Updated parameter dictionary
-
     """
-    if params is None:
+    if not params:
         raise Exception("Error missing parameter 'params'")
-    if omit_list is None:
+    if not omit_list:
         raise Exception("Error missing parameter 'omit_set'")
     if not isinstance(omit_list, str) and not isinstance(omit_list, list):
         raise ValueError("omit_list argument must be a string or list")
-    params = {k: v for (k, v) in params.items() if not k in omit_list}
-    return params
-
-def is_none(param):
-    """Test if a parameter is None value or string 'None'.
-
-    :param param: Parameter to test
-    :return: Boolen value
-
-    """
-
-    if param is None or (type(param) == str and param.lower() == 'none'):
-        return True
-    else:
-        return False
+    return {k: v for (k, v) in params.items() if k not in omit_list}
 
 def create_attachment(func_ref, func_name, artifact_value, params, rtn, query_execution_time):
-    """"Create an attachment and post to Resilient platform.
+    """"Create an attachment and post to SOAR platform.
 
-    :param func_ref: Resilient Function instance reference
-    :param func_name: Resilient Function name
-    :param artifact_value: Resilient artifact value
-    :param params: Resilient Function parameters dictionary
+    :param func_ref: SOAR Function instance reference
+    :param func_name: SOAR Function name
+    :param artifact_value: SOAR artifact value
+    :param params: SOAR Function parameters dictionary
     :param rtn: Result returned from external source
     :param query_execution_time: External time of query
     :return att_report: Updated attachment report dictionary
-
     """
-    file_name = func_name + " [{0}: {1}].txt" \
-        .format(params['artifact_type'], artifact_value)
+    file_name = f"{func_name} [{params.get('artifact_type')}: {artifact_value}].txt"
 
     try:
         rest_client = func_ref.rest_client()
 
         # Create the temporary file save results in json format.
         with open(file_name, 'w') as outfile:
-            json.dump(rtn, outfile)
+            dump(rtn, outfile)
 
-        # Post file to Resilient
-        att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(params["incident_id"]),
-                                                      file_name,
-                                                      file_name,
-                                                      "text/plain",
-                                                      "")
-        LOG.info("New attachment added to incident %s", params["incident_id"])
+        # Post file to SOAR
+        att_report = rest_client.post_attachment(f"/incidents/{params.get('incident_id')}/attachments",
+            file_name, file_name, "text/plain", "")
+        LOG.info("New attachment added to incident %s", params.get("incident_id"))
 
         # Delete the temporary file.
-        os.remove(file_name)
+        remove(file_name)
 
     except Exception as ex:
         LOG.error(ex)
         raise ex
 
     return att_report
-
-def get_proxies(opts, options):
-    rc = RequestsCommon(opts, options)
-    return rc.get_proxies()

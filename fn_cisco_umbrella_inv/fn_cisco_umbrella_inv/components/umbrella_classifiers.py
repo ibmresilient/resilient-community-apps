@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-
-""" Resilient functions component to run an Umbrella investigate Query - Classifiers against a Cisco Umbrella server """
+""" SOAR functions component to run an Umbrella investigate Query - Classifiers against a Cisco Umbrella server """
 
 # Set up:
 # Destination: a Queue named "umbrella_investigate".
 # Manual Action: Execute a REST query against a Cisco Umbrella server.
-import logging
-import json
-from datetime import datetime, time
+from datetime import datetime
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none, get_proxies
+from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
+from fn_cisco_umbrella_inv.util.helpers import process_params, PACKAGE_NAME,\
+    investigateClient, URIs
+from resilient_lib import validate_fields
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'umbrella_classifiers' of
-    package fn_cisco_umbrella_inv.
+FN_NAME = "umbrella_classifiers"
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'umbrella_classifiers' of
+    package fn_cisco_umbrella_inv. This function can only be used with legacy version of Cisco Umbrella Investigate.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
         umbinv_domain, umbinv_classifiers_endpoint
@@ -27,106 +27,81 @@ class FunctionComponent(ResilientComponent):
 
             umbinv_domain = "cosmos.furnipict.com"
 
-    The Investigate Query will executs a REST call against the Cisco Umbrell Investigate server and returns a result in
+    The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result in
     JSON format similar to the following.
-
 
         {'domain_name': 'cosmos.furnipict.com',
          'query_execution_time': '2018-06-18 11:53:01'
-         'classifiers_info': {u'first_queried_converted': u'2016-11-18 19:16:00', u'firstQueried': 1479496560000},
-         'classifiers_classifiers': {u'securityCategories': [u'Malware'], u'attacks': [u'Neutrino'],
-                                     u'threatTypes': [u'Exploit Kit']}
+         'classifiers_info': {'first_queried_converted': '2016-11-18 19:16:00', 'firstQueried': 1479496560000},
+         'classifiers_classifiers': {'securityCategories': ['Malware'], 'attacks': ['Neutrino'],
+                                     'threatTypes': ['Exploit Kit']}
         }
     """
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_cisco_umbrella_inv", {})
-        validate_opts(self)
-        self.proxies = get_proxies(opts, self.options)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        # Validate required settings in the app.config
+        validate_fields(["api_token", "base_url", "results_limit"], self.options)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_cisco_umbrella_inv", {})
-        validate_opts(self)
-        self.proxies = get_proxies(opts, self.options)
-
-    @function("umbrella_classifiers")
-    def _umbrella_classifiers_function(self, event, *args, **kwargs):
-        """Function: Resilient Function : Cisco Umbrella Investigate for  Classifiers."""
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: SOAR Function: Cisco Umbrella Investigate for Classifiers."""
         try:
+            # Validate required input fields
+            validate_fields(["umbinv_domain"], fn_inputs)
             # Get the function parameters:
-            umbinv_domain = kwargs.get("umbinv_domain") # text
+            umbinv_domain = fn_inputs.umbinv_domain  # text
+            self.LOG.info("umbinv_domain: %s", umbinv_domain)
 
-            log = logging.getLogger(__name__)
-
-            log.info("umbinv_domain: %s", umbinv_domain)
-
-            if is_none(umbinv_domain):
-                raise ValueError("Required parameter 'umbinv_domain' not set.")
-
-            yield StatusMessage("Starting...")
-            domain = None
+            yield self.status_message(f"Starting App Function: '{FN_NAME}'")
             process_result = {}
-            params = {"domain": umbinv_domain.strip()}
+            process_params({"domain": umbinv_domain.strip()}, process_result)
 
-            validate_params(params)
-            process_params(params, process_result)
-
+            domain = None
             if "_domain" not in process_result:
                  raise ValueError("Parameter 'umbinv_domain' was not processed correctly")
-            else:
-                domain = process_result.pop("_domain")
+            domain = process_result.pop("_domain")
 
-            api_token = self.options.get("api_token")
-            base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token, base_url, proxies=self.proxies)
+            invClient = investigateClient(self.options, self.rc)
 
-            yield StatusMessage("Running Cisco Investigate query...")
-            classifiers_res = True
-            info_res = True
+            yield self.status_message("Running Cisco Investigate query...")
+            classifiers_res, info_res = True, True
+
             # Run against 'classifiers' endpoint
-            rtn_classifiers = rinv.classifiers_classifiers(domain)
+            rtn_classifiers = invClient.make_api_call("GET", URIs.get("classifiers_classifiers").format(domain))
             # Run against 'info' endpoint
-            rtn_info = rinv.classifiers_info(domain)
+            rtn_info = invClient.make_api_call("GET", URIs.get("classifiers_info").format(domain))
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            if ("securityCategories" in rtn_classifiers and not rtn_classifiers["securityCategories"]) and \
-                    ("attacks" in rtn_classifiers and not rtn_classifiers["attacks"]) and \
-                    ("threatTypes" in rtn_classifiers and not rtn_classifiers["threatTypes"]):
+            if ("securityCategories" in rtn_classifiers and not rtn_classifiers.get("securityCategories")) and \
+                    ("attacks" in rtn_classifiers and not rtn_classifiers.get("attacks")) and \
+                    ("threatTypes" in rtn_classifiers and not rtn_classifiers.get("threatTypes")):
                 classifiers_res = False
 
-            if "firstQueried" in rtn_info and rtn_info["firstQueried"] is None:
+            if "firstQueried" in rtn_info and not rtn_info.get("firstQueried"):
                 info_res = False
             else:
                 # Make 'firstQueried' more readable
-                fq = rtn_info["firstQueried"]
+                fq = rtn_info.get("firstQueried")
                 try:
-                    secs = int(fq) / 1000
-                    fq_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                    fq_readable = datetime.fromtimestamp(int(fq) / 1000).strftime('%Y-%m-%d %H:%M:%S')
                     rtn_info["first_queried_converted"] = fq_readable
                 except ValueError:
-                    yield FunctionError('timestamp value incorrectly specified')
+                    yield FunctionResult({}, success=False, reason='timestamp value incorrectly specified')
 
+            results = {}
             if not classifiers_res and not info_res:
-                log.debug(json.dumps(rtn_classifiers))
-                log.debug(json.dumps(rtn_info))
-                results = {}
-                yield StatusMessage("No Results returned for domain '{}'.".format(domain))
+                yield self.status_message(f"No Results returned for domain '{domain}'.")
             else:
                 # Add "query_execution_time" and "domain_name" to result to facilitate post-processing.
-                results = {"classifiers_classifiers": json.loads(json.dumps(rtn_classifiers)),
-                            "classifiers_info": json.loads(json.dumps(rtn_info)),
+                results = {"classifiers_classifiers": rtn_classifiers,
+                            "classifiers_info": rtn_info,
                             "domain_name": domain,
                             "query_execution_time": query_execution_time}
-                yield StatusMessage("Returning 'classifiers and info' results for domain '{}'.".format(domain))
+                yield self.status_message(f"Returning 'classifiers and info' results for domain '{domain}'.")
 
-            yield StatusMessage("done...")
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            log.exception("Exception in Resilient Function.")
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

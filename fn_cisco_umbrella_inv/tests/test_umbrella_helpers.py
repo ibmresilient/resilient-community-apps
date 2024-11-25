@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Test helper functions"""
 import pytest
 from fn_cisco_umbrella_inv.util.helpers import *
@@ -9,10 +9,6 @@ from fn_cisco_umbrella_inv.util.helpers import *
 """
 Suites of tests to test the Umbrella Investigate Helper functions
 """
-
-class Func(object):
-    def __init__(self, options={}):
-        self.options = options
 
 class TestUmbrellaHelpersProcessParams:
     """Test process_params function"""
@@ -197,55 +193,6 @@ class TestUmbrellaHelpersOmitParams:
         results =  omit_params(dict(params), omit_list)
         assert (expected_results == results)
 
-class TestUmbrellaHelpersValidateOpts:
-    """Test validate_opts function"""
-    @pytest.mark.parametrize("base_url, expected_results", [
-        ("https://investigate.api.umbrella.com/", "Mandatory config setting 'api_token' not set.")
-    ])
-    def test_validate_opts_empty_token(self, base_url, expected_results):
-        func = Func({
-            "base_url": base_url
-        })
-        with pytest.raises(Exception) as e:
-            validate_opts(func)
-        assert str(e.value) == expected_results
-
-    @pytest.mark.parametrize("api_token, base_url, expected_results", [
-        ("abcd1234-a123-123a-123a-123456abcde", "https://investigate.api.umbrella.com/", "Invalid format for config setting 'api_token'.")
-    ])
-    def test_validate_opts_wrong_token(self, api_token, base_url, expected_results):
-        func = Func({
-            "api_token": api_token,
-            "base_url": base_url
-        })
-        with pytest.raises(ValueError) as e:
-            validate_opts(func)
-        assert str(e.value) == expected_results
-
-    @pytest.mark.parametrize("api_token, expected_results", [
-        ("abcd1234-a123-123a-123a-123456abcdef", "Mandatory config setting 'base_url' not set.")
-    ])
-    def test_validate_opts_empty_token(self, api_token, expected_results):
-        func = Func({
-            "api_token": api_token,
-        })
-        with pytest.raises(Exception) as e:
-            validate_opts(func)
-        assert str(e.value) == expected_results
-
-    @pytest.mark.parametrize("api_token, base_url, results_limit, expected_results", [
-        ("abcd1234-a123-123a-123a-123456abcdef", '', 200, "Invalid value for config setting 'base_url'.")
-    ])
-    def test_validate_opts_wrong_token(self, api_token, base_url, results_limit, expected_results):
-        func = Func({
-            "api_token": api_token,
-            "base_url": base_url,
-            "results_limit": results_limit
-        })
-        with pytest.raises(ValueError) as e:
-            validate_opts(func)
-        assert str(e.value) == expected_results
-
 class TestUmbrellaHelpersIsNone:
     """Test init_env function"""
 
@@ -263,5 +210,5 @@ class TestUmbrellaHelpersIsNone:
             del param
         else:
             param = param_value
-        results = is_none(param)
+        results = str(param).lower() == "none"
         assert results == expected_results

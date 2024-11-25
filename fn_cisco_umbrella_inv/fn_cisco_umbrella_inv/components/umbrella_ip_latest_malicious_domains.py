@@ -1,104 +1,85 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-
-""" Resilient functions component to run an Umbrella investigate Query - Latest Malicious Domains for an IP against a
+""" SOAR functions component to run an Umbrella investigate Query - Latest Malicious Domains for an IP against a
 Cisco Umbrella server """
 
 # Set up:
 # Destination: a Queue named "umbrella_investigate".
 # Manual Action: Execute a REST query against a Cisco Umbrella server.
-import json
-import logging
 from datetime import datetime
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none, get_proxies
+from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
+from fn_cisco_umbrella_inv.util.helpers import process_params, PACKAGE_NAME,\
+    investigateClient, URIs, IP_PATTERN, IP_ERR
+from resilient_lib import validate_fields
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'umbrella_ip_latest_malicious_domains' of
+FN_NAME = "umbrella_ip_latest_malicious_domains"
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'umbrella_ip_latest_malicious_domains' of
     package fn_cisco_umbrella_inv.
+    This function can only be used with legacy version of Cisco Umbrella Investigate.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
         umbinv_ipaddr
 
     An example of a set of query parameter might look like the following:
-
-            umbinv_ipaddr = "218.23.28.135"
+        umbinv_ipaddr = "218.23.28.135"
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
 
         {'ip_address': '104.27.163.228',
          'query_execution_time': '2018-05-02 16:22:14',
-        'latest_malicious_domains': [u'textspeier.de']
+        'latest_malicious_domains': ['textspeier.de']
         }
-
     """
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_cisco_umbrella_inv", {})
-        validate_opts(self)
-        self.proxies = get_proxies(opts, self.options)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_cisco_umbrella_inv", {})
-        self.proxies = get_proxies(opts, self.options)
-
-    @function("umbrella_ip_latest_malicious_domains")
-    def _umbrella_ip_latest_malicious_domains_function(self, event, *args, **kwargs):
-        """Function: Resilient Function : Cisco Umbrella Investigate for Latest Malicious Domains for an IP."""
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: SOAR Function: Cisco Umbrella Investigate for Latest Malicious Domains for an IP."""
         try:
+            # Validate required input fields
+            validate_fields(["umbinv_ipaddr"], fn_inputs)
             # Get the function parameters:
-            umbinv_ipaddr = kwargs.get("umbinv_ipaddr")  # text
+            umbinv_ipaddr = fn_inputs.umbinv_ipaddr  # text
+            self.LOG.info("umbinv_ipaddr: %s", umbinv_ipaddr)
 
-            log = logging.getLogger(__name__)
-            log.info("umbinv_ipaddr: %s", umbinv_ipaddr)
-
-            if is_none(umbinv_ipaddr):
-                raise ValueError("Required parameter 'umbinv_ipaddr' not set")
-
-            yield StatusMessage("Starting...")
+            yield self.status_message(f"Starting App Function: '{FN_NAME}'")
             ipaddr = None
             process_result = {}
-            params = {"ipaddr": umbinv_ipaddr.strip()}
-
-            validate_params(params)
-            process_params(params, process_result)
+            process_params({"ipaddr": umbinv_ipaddr.strip()}, process_result)
 
             if "_ipaddr" not in process_result:
                  raise ValueError("Parameter 'ipaddr' was not processed correctly")
             else:
                 ipaddr = process_result.pop("_ipaddr")
 
+            invClient = investigateClient(self.options, self.rc)
 
-            api_token = self.options.get("api_token")
-            base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token, base_url, proxies=self.proxies)
+            yield self.status_message("Running Cisco Investigate query...")
+            if not IP_PATTERN.match(ipaddr):
+                raise IP_ERR
+            resp = invClient.make_api_call("GET", URIs.get("latest_domains").format(ipaddr))
+            rtn = [ d.get("name") for d in resp if d.get("name") ]
 
-            yield StatusMessage("Running Cisco Investigate query...")
-            rtn = rinv.latest_domains(ipaddr)
+            results = {}
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             if len(rtn) == 0:
-                log.debug(json.dumps(rtn))
-                yield StatusMessage("No Results returned for ip address '{}'.".format(ipaddr))
-                results = {}
+                yield self.status_message(f"No Results returned for ip address '{ipaddr}'.")
             else:
                 # Add  "query_execution_time" and "ip_address" to result to facilitate post-processing.
-                results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": ipaddr,
+                results = {"latest_malicious_domains": rtn, "ip_address": ipaddr,
                            "query_execution_time": query_execution_time}
-                yield StatusMessage("Returning 'latest_malicious_domains' results for ip address '{}'.".format(ipaddr))
+                yield self.status_message(f"Returning 'latest_malicious_domains' results for ip address '{ipaddr}'.")
 
-            yield StatusMessage("Done...")
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            log.exception("Exception in Resilient Function.")
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

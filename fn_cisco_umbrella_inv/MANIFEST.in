@@ -1,3 +1,13 @@
 include README.md
-include fn_cisco_umbrella_inv/util/*
+include Dockerfile
+include apikey_permissions.txt
+recursive-include fn_cisco_umbrella_inv/util *
 include fn_cisco_umbrella_inv/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

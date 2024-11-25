@@ -1,0 +1,448 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "domain_whois": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "administrativeContactFax": {},
+              "whoisServers": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "addresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "administrativeContactName": {
+                "type": "string"
+              },
+              "zoneContactEmail": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "billingContactFax": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "administrativeContactTelephoneExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "administrativeContactEmail": {
+                "type": "string"
+              },
+              "technicalContactEmail": {
+                "type": "string"
+              },
+              "technicalContactFax": {
+                "type": "string"
+              },
+              "nameServers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "zoneContactName": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "billingContactPostalCode": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "zoneContactFax": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "registrantTelephoneExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "zoneContactFaxExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "technicalContactTelephoneExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "billingContactCity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "zoneContactStreet": {
+                "type": "array"
+              },
+              "created": {
+                "type": "string"
+              },
+              "administrativeContactCity": {
+                "type": "string"
+              },
+              "registrantName": {
+                "type": "string"
+              },
+              "zoneContactCity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "domainName": {
+                "type": "string"
+              },
+              "zoneContactPostalCode": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "administrativeContactFaxExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "technicalContactCountry": {
+                "type": "string"
+              },
+              "registrarIANAID": {
+                "type": "string"
+              },
+              "updated": {
+                "type": "string"
+              },
+              "administrativeContactStreet": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "billingContactEmail": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "status": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "registrantCity": {
+                "type": "string"
+              },
+              "billingContactCountry": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "expires": {
+                "type": "string"
+              },
+              "technicalContactStreet": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "registrantOrganization": {
+                "type": "string"
+              },
+              "billingContactStreet": {
+                "type": "array"
+              },
+              "registrarName": {
+                "type": "string"
+              },
+              "registrantPostalCode": {
+                "type": "string"
+              },
+              "zoneContactTelephone": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "registrantEmail": {
+                "type": "string"
+              },
+              "technicalContactFaxExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "technicalContactOrganization": {
+                "type": "string"
+              },
+              "emails": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "registrantStreet": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "technicalContactTelephone": {
+                "type": "string"
+              },
+              "technicalContactState": {
+                "type": "string"
+              },
+              "technicalContactCity": {
+                "type": "string"
+              },
+              "registrantFax": {
+                "type": "string"
+              },
+              "registrantCountry": {
+                "type": "string"
+              },
+              "billingContactFaxExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "timestamp": {},
+              "zoneContactOrganization": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "administrativeContactCountry": {
+                "type": "string"
+              },
+              "billingContactName": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "registrantState": {
+                "type": "string"
+              },
+              "registrantTelephone": {
+                "type": "string"
+              },
+              "administrativeContactState": {
+                "type": "string"
+              },
+              "registrantFaxExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "technicalContactPostalCode": {
+                "type": "string"
+              },
+              "zoneContactTelephoneExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "administrativeContactOrganization": {
+                "type": "string"
+              },
+              "billingContactTelephone": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "billingContactTelephoneExt": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "zoneContactState": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "administrativeContactTelephone": {
+                "type": "string"
+              },
+              "billingContactOrganization": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "technicalContactName": {
+                "type": "string"
+              },
+              "administrativeContactPostalCode": {
+                "type": "string"
+              },
+              "zoneContactCountry": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "billingContactState": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "auditUpdatedDate": {
+                "type": "string"
+              },
+              "recordExpired": {
+                "type": "boolean"
+              },
+              "timeOfLatestRealtimeCheck": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "hasRawText": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "ns_whois": {
+          "type": "object",
+          "properties": {
+            "ibm.com": {
+              "type": "object",
+              "properties": {
+                "totalResults": {
+                  "type": "integer"
+                },
+                "offset": {
+                  "type": "integer"
+                },
+                "moreDataAvailable": {
+                  "type": "boolean"
+                },
+                "limit": {
+                  "type": "integer"
+                },
+                "sortField": {
+                  "type": "string"
+                },
+                "domains": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "domain": {
+                        "type": "string"
+                      },
+                      "current": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "resource": {
+          "type": "string"
+        },
+        "resource_type": {
+          "type": "string"
+        },
+        "query_execution_time": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "umbinv_offset": {
+          "type": "integer"
+        },
+        "umbinv_limit": {},
+        "umbinv_resource": {
+          "type": "string"
+        },
+        "umbinv_sortby": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
