@@ -37,6 +37,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.3 | 12/2024 | Bug fix for Sentinel URL entities. |
 | 2.1.2 | 10/2024 | Added retry logic to SOAR incident updates |
 | 2.1.1 | 07/2024 | Correction to documentation on template references |
 | 2.1.0 | 03/2024 | Add support for multi-tenancy. |
