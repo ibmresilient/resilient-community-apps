@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "nir": null,
+    "asn_registry": "ripencc",
+    "asn": "8075",
+    "asn_cidr": "172.200.0.0/13",
+    "asn_country_code": "GB",
+    "asn_date": "2002-02-13",
+    "asn_description": "MICROSOFT-CORP-MSN-AS-BLOCK, US",
+    "query": "172.206.147.25",
+    "nets": [
+      {
+        "cidr": "172.128.0.0/10, 172.192.0.0/12, 172.208.0.0/13",
+        "name": "UK-MICROSOFT-20000324",
+        "handle": "MRPA3-RIPE",
+        "range": "172.128.0.0 - 172.215.255.255",
+        "description": "Microsoft Corporation AS8075\nTo report suspected security issues specific to\ntraffic emanating from Microsoft online services,\nincluding the distribution of malicious content\nor other illicit or illegal material through a\nMicrosoft online service, please submit reports\nto:\n* https://cert.microsoft.com\nFor SPAM and other abuse issues, such as Microsoft\nAccounts, please contact:\n* abuse@microsoft.com\nTo report security vulnerabilities in Microsoft\nproducts and services, please contact:\n* secure@microsoft.com\nFor legal and law enforcement-related requests,\nplease contact:\n* msndcc@microsoft.com\nFor routing, peering or DNS issues, please\ncontact:\n* IOC@microsoft.com",
+        "country": "GB",
+        "state": null,
+        "city": null,
+        "address": "One Microsoft Way\nWA 98052\nRedmond\nUNITED STATES",
+        "postal_code": null,
+        "emails": [
+          "abuse@microsoft.com",
+          "secure@microsoft.com",
+          "msndcc@microsoft.com",
+          "IOC@microsoft.com"
+        ],
+        "created": "2024-05-16T09:38:13Z",
+        "updated": "2024-05-16T09:38:13Z"
+      },
+      {
+        "cidr": "172.200.0.0/13",
+        "name": null,
+        "handle": null,
+        "range": "172.200.0.0 - 172.207.255.255",
+        "description": "Microsoft",
+        "country": null,
+        "state": null,
+        "city": null,
+        "address": null,
+        "postal_code": null,
+        "emails": null,
+        "created": "2022-07-08T19:11:00Z",
+        "updated": "2022-07-08T19:11:00Z"
+      }
+    ],
+    "raw": null,
+    "referral": null,
+    "raw_referral": null,
+    "dns_zone": "25.147.206.172.origin.asn.cymru.com",
+    "display_content": "{ \"dns_zone\":\"25.147.206.172.origin.asn.cymru.com\" }"
+  },
+  "raw": "",
+  "inputs": {
+    "whois_query": "172.206.147.25"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-whois-rdap",
+    "package_version": "1.0.5",
+    "host": "my.app.host",
+    "execution_time_ms": 1307,
+    "timestamp": "2024-09-24 13:57:53"
+  }
+}
