@@ -1,4 +1,4 @@
-# About MxToolBox
+# MxToolBox
 
 The MxToolBox API is a RESTful Web Service allowing MxToolbox customers to query the status of their monitors and run lookups (blacklist, smtp, mx, etc.).
 
