@@ -1,4 +1,4 @@
-## Guardium Integration Application for IBM Resilient.
+# Guardium Integration
 ## Table of Contents - 
  - [About this package](#about-this-package)    
  - [Prerequisites](#prerequisites)    
