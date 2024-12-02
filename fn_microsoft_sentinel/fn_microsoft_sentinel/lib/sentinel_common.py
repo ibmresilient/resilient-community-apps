@@ -3,12 +3,12 @@
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 from calendar import timegm
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from logging import getLogger
 from time import strptime
 from uuid import uuid1
 
-from resilient_lib import IntegrationError, RequestsCommon, str_to_bool, readable_datetime
+from resilient_lib import IntegrationError, RequestsCommon, str_to_bool
 from simplejson.errors import JSONDecodeError
 
 from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
@@ -558,7 +558,7 @@ def convert_entity_type(entity_type, entity_value):
 
     # If the artifact type is URL and the entity_value does not start with either https:// or http://, then change
     # soar_artifact_type to equal URI Path. SOAR artifact types of URL have to start with either http:// or https://.
-    if soar_artifact_type == "URL" and not entity_value.startswith("https://", "http://"):
+    if soar_artifact_type == "URL" and not entity_value.startswith(("https://", "http://")):
         soar_artifact_type = "URI Path"
 
     return soar_artifact_type, entity_value

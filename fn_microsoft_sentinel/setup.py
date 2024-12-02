@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name="fn_microsoft_sentinel",
     display_name="Microsoft Sentinel",
-    version="2.1.2",
+    version="2.1.3",
     license="MIT",
     author="IBM QRadar SOAR",
     url="https://github.com/ibmresilient/resilient-community-apps/tree/main/fn_microsoft_sentinel",
