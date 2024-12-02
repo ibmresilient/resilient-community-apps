@@ -6,7 +6,7 @@
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Have I Been Pwned" href="../fn_hibp/README.html" /><link rel="prev" title="Guardium Insights Integration" href="../fn_guardium_insights_integration/README.html" />
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
-        <title>Guardium Integration Application for IBM Resilient. - QRadar SOAR Apps</title>
+        <title>Guardium Integration - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -181,7 +181,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -266,19 +266,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">gRPC Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_guardium_insights_integration/README.html">Guardium Insights Integration</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Guardium Integration Application for IBM Resilient.</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#table-of-contents">Table of Contents -</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#about-this-package">About this package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#use-cases">Use Cases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#configuration">Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#resilient-configurations">Resilient Configurations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#rules">Rules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#run-application">Run Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#application-usage-and-details">Application Usage and Details</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#guardium-4a-list-parameter-names-by-report-name">Guardium: 4A. List Parameter Names By Report Name :</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#guardium-4b-search-all-guardium-reports">Guardium: 4B. Search All Guardium Reports :</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Guardium Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Have I Been Pwned</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">HTML to PDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
@@ -405,17 +393,16 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="guardium-integration-application-for-ibm-resilient">
-<h1>Guardium Integration Application for IBM Resilient.<a class="headerlink" href="#guardium-integration-application-for-ibm-resilient" title="Link to this heading">¶</a></h1>
-</section>
+          <section id="guardium-integration">
+<h1>Guardium Integration<a class="headerlink" href="#guardium-integration" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
-<h1>Table of Contents -<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h1>
+<h2>Table of Contents -<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#about-this-package"><span class="xref myst">About this package</span></a></p></li>
 <li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
@@ -428,7 +415,7 @@
 </ul>
 </section>
 <section id="about-this-package">
-<h1>About this package<a class="headerlink" href="#about-this-package" title="Link to this heading">¶</a></h1>
+<h2>About this package<a class="headerlink" href="#about-this-package" title="Link to this heading">¶</a></h2>
 <p><strong>This package provides the following features to the Resilient platform.</strong></p>
 <ol class="arabic simple">
 <li><p>Run Active Risk Spotter - Risky Users Scores.</p></li>
@@ -441,14 +428,14 @@
 </ol>
 </section>
 <section id="use-cases">
-<h1>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h1>
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Enrich existing Resilient incidents with reporting data from Guardium Data Protection. These incidents do not have to be created by Guardium as there will be instances where Guardium data (for example, risky user names/IPs, risky database tables, sources of sensitive data, user anomalies) could be useful for an investigation, playbook and/or remediation.</p></li>
 <li><p>Blocking a risky user or IP address in databases using Guardium Data Protection’s blocking feature. A Resilient user needs to make sure to block the right user name or IP address and not the connection between an application and the database, which can stop the application from running.</p></li>
 </ol>
 </section>
 <section id="prerequisites">
-<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h1>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Resilient platform &gt;= v34.0.5261</p></li>
 <li><p>Integrations Server running Resilient Circuits &gt;= v35.0.203</p></li>
@@ -461,7 +448,7 @@
 </ul>
 </section>
 <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework.</p>
 <ul class="simple">
 <li><p>Download the .tar.gz file from the App Exchange and extract it.</p></li>
@@ -475,7 +462,7 @@
 </ul>
 </section>
 <section id="configuration">
-<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h1>
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
 <p>Run the following command to generate the <code class="docutils literal notranslate"><span class="pre">[fn_guardium_integration]</span></code> configuration section in the Resilient app.config file:
 <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config[-u/-c]</span></code></p>
 <p>The following Guardium Integration configuration data is added:</p>
@@ -560,9 +547,9 @@
 </ol>
 </section>
 <section id="resilient-configurations">
-<h1>Resilient Configurations<a class="headerlink" href="#resilient-configurations" title="Link to this heading">¶</a></h1>
+<h2>Resilient Configurations<a class="headerlink" href="#resilient-configurations" title="Link to this heading">¶</a></h2>
 <section id="add-results-table">
-<h2>Add Results table<a class="headerlink" href="#add-results-table" title="Link to this heading">¶</a></h2>
+<h3>Add Results table<a class="headerlink" href="#add-results-table" title="Link to this heading">¶</a></h3>
 <p>To add data tables to incident tabs, use the following steps.</p>
 <ol class="arabic">
 <li><p>Log in to the Resilient platform and navigate to the Customization Settings tab.
@@ -576,7 +563,7 @@
 </ol>
 </section>
 <section id="add-customized-incident-fields">
-<h2>Add Customized Incident Fields<a class="headerlink" href="#add-customized-incident-fields" title="Link to this heading">¶</a></h2>
+<h3>Add Customized Incident Fields<a class="headerlink" href="#add-customized-incident-fields" title="Link to this heading">¶</a></h3>
 <p>To add custom incident fields to incident tabs, use the following steps.</p>
 <ol class="arabic">
 <li><p>Navigate to Customization Settings tab.
@@ -590,7 +577,7 @@
 </section>
 </section>
 <section id="rules">
-<h1>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h1>
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
 <p>Rules configurations are listed below, please verify Resilient rules section after package customization.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -650,28 +637,28 @@
 </div>
 </section>
 <section id="run-application">
-<h1>Run Application<a class="headerlink" href="#run-application" title="Link to this heading">¶</a></h1>
+<h2>Run Application<a class="headerlink" href="#run-application" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Start Resilient Circuits by executing the following command.
 <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code></p></li>
 </ul>
 </section>
 <section id="application-usage-and-details">
-<h1>Application Usage and Details<a class="headerlink" href="#application-usage-and-details" title="Link to this heading">¶</a></h1>
+<h2>Application Usage and Details<a class="headerlink" href="#application-usage-and-details" title="Link to this heading">¶</a></h2>
 <section id="guardium-generate-client-secret">
-<h2>Guardium: Generate Client Secret:<a class="headerlink" href="#guardium-generate-client-secret" title="Link to this heading">¶</a></h2>
+<h3>Guardium: Generate Client Secret:<a class="headerlink" href="#guardium-generate-client-secret" title="Link to this heading">¶</a></h3>
 <section id="function-guardium-generate-client-secret">
-<h3>Function Guardium Generate Client Secret<a class="headerlink" href="#function-guardium-generate-client-secret" title="Link to this heading">¶</a></h3>
+<h4>Function Guardium Generate Client Secret<a class="headerlink" href="#function-guardium-generate-client-secret" title="Link to this heading">¶</a></h4>
 <p>The function should only be executed after a fresh installation of the Guardium integration or after upgrading the Guardium system.
 The function generates the Guardium client secret and client ID. The function also detects the Guardium system unit type (standalone or central manager type) and updates the search function remote datasource option as per the available Guardium hosts.
 The system details acquired by the function are used to generate a Guardium access token. This is used in successive API calls from the Resilient integration.
 The Resilient field, <strong>guardium_system_reference</strong>, is used to store the client secret data.</p>
 </section>
 <section id="function-workflow">
-<h3>Function Workflow:<a class="headerlink" href="#function-workflow" title="Link to this heading">¶</a></h3>
+<h4>Function Workflow:<a class="headerlink" href="#function-workflow" title="Link to this heading">¶</a></h4>
 </section>
 <section id="example-generate-guardium-client-secret">
-<h3>Example: Generate Guardium Client Secret<a class="headerlink" href="#example-generate-guardium-client-secret" title="Link to this heading">¶</a></h3>
+<h4>Example: Generate Guardium Client Secret<a class="headerlink" href="#example-generate-guardium-client-secret" title="Link to this heading">¶</a></h4>
 <p>This workflow can be invoked from any Resilient incident action menu.</p>
 <p><img alt="screenshot" src="../_images/client_secret_workflow.png" /></p>
 <p><img alt="screenshot" src="../_images/client_secret_1.png" /></p>
@@ -682,17 +669,17 @@ The Resilient field, <strong>guardium_system_reference</strong>, is used to stor
 </section>
 </section>
 <section id="guardium-run-active-risk-spotter-risky-users-scores">
-<h2>1. Guardium: Run Active Risk Spotter - Risky Users Scores:<a class="headerlink" href="#guardium-run-active-risk-spotter-risky-users-scores" title="Link to this heading">¶</a></h2>
+<h3>1. Guardium: Run Active Risk Spotter - Risky Users Scores:<a class="headerlink" href="#guardium-run-active-risk-spotter-risky-users-scores" title="Link to this heading">¶</a></h3>
 <section id="function-guardium-search-report">
-<h3>Function Guardium Search Report<a class="headerlink" href="#function-guardium-search-report" title="Link to this heading">¶</a></h3>
+<h4>Function Guardium Search Report<a class="headerlink" href="#function-guardium-search-report" title="Link to this heading">¶</a></h4>
 <p>This function is used to run the <code class="docutils literal notranslate"><span class="pre">active</span> <span class="pre">risk</span> <span class="pre">spotter</span> <span class="pre">-</span> <span class="pre">risky</span> <span class="pre">users</span> <span class="pre">scores</span></code> report. Risk scores are 0-10 with 10 being the most risky.
 Learn more here: https://www.ibm.com/support/knowledgecenter/SSMPHH_11.1.0/com.ibm.guardium.doc/protect/risk_spotter_results.html</p>
 </section>
 <section id="id1">
-<h3>Function Workflow:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<h4>Function Workflow:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
 </section>
 <section id="example-guardium-run-active-risk-spotter">
-<h3>Example: Guardium Run Active Risk Spotter:<a class="headerlink" href="#example-guardium-run-active-risk-spotter" title="Link to this heading">¶</a></h3>
+<h4>Example: Guardium Run Active Risk Spotter:<a class="headerlink" href="#example-guardium-run-active-risk-spotter" title="Link to this heading">¶</a></h4>
 <p>This workflow can be invoked from any Resilient incident action menu.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code> -  Report start Date &amp; Time.
 <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code> - Report end Date &amp; Time.
@@ -704,17 +691,17 @@ Learn more here: https://www.ibm.com/support/knowledgecenter/SSMPHH_11.1.0/com.i
 </section>
 </section>
 <section id="guardium-2-search-for-entitlements-to-sensitive-objects">
-<h2>Guardium: 2. Search for Entitlements to Sensitive Objects:<a class="headerlink" href="#guardium-2-search-for-entitlements-to-sensitive-objects" title="Link to this heading">¶</a></h2>
+<h3>Guardium: 2. Search for Entitlements to Sensitive Objects:<a class="headerlink" href="#guardium-2-search-for-entitlements-to-sensitive-objects" title="Link to this heading">¶</a></h3>
 <section id="function-guardium-search-sensitive-object">
-<h3>Function Guardium Search Sensitive Object<a class="headerlink" href="#function-guardium-search-sensitive-object" title="Link to this heading">¶</a></h3>
+<h4>Function Guardium Search Sensitive Object<a class="headerlink" href="#function-guardium-search-sensitive-object" title="Link to this heading">¶</a></h4>
 <p>This function retrieves the sensitive objects. The returned report contains user entitlements to sensitive objects, which is useful for breach investigation and remediation.
 Guardium search results from Access category are filtered by incident field values from <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">User</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">IP</span></code> and Guardium <code class="docutils literal notranslate"><span class="pre">Sensitive</span> <span class="pre">objects</span></code> group elements.</p>
 </section>
 <section id="id2">
-<h3>Function Workflow:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<h4>Function Workflow:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 </section>
 <section id="example-guardium-search-sensitive-objects">
-<h3>Example: Guardium Search Sensitive Objects<a class="headerlink" href="#example-guardium-search-sensitive-objects" title="Link to this heading">¶</a></h3>
+<h4>Example: Guardium Search Sensitive Objects<a class="headerlink" href="#example-guardium-search-sensitive-objects" title="Link to this heading">¶</a></h4>
 <p>This workflow can be invoked from any Resilient incident action menu except for incidents of type <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Outliers</span></code>.
 <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code> -  Report start Date &amp; Time.
 <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code> - Report end Date &amp; Time.</p>
@@ -725,18 +712,18 @@ Guardium search results from Access category are filtered by incident field valu
 </section>
 </section>
 <section id="guardium-3-search-for-user-outlier-details">
-<h2>Guardium: 3. Search for User Outlier Details:<a class="headerlink" href="#guardium-3-search-for-user-outlier-details" title="Link to this heading">¶</a></h2>
+<h3>Guardium: 3. Search for User Outlier Details:<a class="headerlink" href="#guardium-3-search-for-user-outlier-details" title="Link to this heading">¶</a></h3>
 <section id="function-guardium-search-outlier-details">
-<h3>Function Guardium Search Outlier Details<a class="headerlink" href="#function-guardium-search-outlier-details" title="Link to this heading">¶</a></h3>
+<h4>Function Guardium Search Outlier Details<a class="headerlink" href="#function-guardium-search-outlier-details" title="Link to this heading">¶</a></h4>
 <p>This function retrieves the outlier details.
 This report allows a user to enrich a Resilient incident with user outlier data (for instance: SQL errors, password errors, excessive download size).
 Guardium Search results from Outlier category are filtered by incident field values from <code class="docutils literal notranslate"><span class="pre">Database</span></code>, <code class="docutils literal notranslate"><span class="pre">Server</span></code>, <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">User</span></code>, and <code class="docutils literal notranslate"><span class="pre">Date</span> <span class="pre">Discovered</span></code>.</p>
 </section>
 <section id="id3">
-<h3>Function Workflow:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<h4>Function Workflow:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
 </section>
 <section id="example-guardium-search-outlier-details">
-<h3>Example: Guardium Search Outlier Details<a class="headerlink" href="#example-guardium-search-outlier-details" title="Link to this heading">¶</a></h3>
+<h4>Example: Guardium Search Outlier Details<a class="headerlink" href="#example-guardium-search-outlier-details" title="Link to this heading">¶</a></h4>
 <p>This workflow can be invoked from any Resilient incident action menu except for incidents of type <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Policy</span> <span class="pre">Violations</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">From</span></code> -  Report start Date &amp; Time.
 <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Period</span> <span class="pre">To</span></code> - Report end Date &amp; Time.</p>
@@ -748,17 +735,17 @@ Guardium Search results from Outlier category are filtered by incident field val
 </section>
 </section>
 <section id="guardium-4a-list-parameter-names-by-report-name">
-<h1>Guardium: 4A. List Parameter Names By Report Name :<a class="headerlink" href="#guardium-4a-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h1>
+<h2>Guardium: 4A. List Parameter Names By Report Name :<a class="headerlink" href="#guardium-4a-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h2>
 <section id="function-guardium-list-parameter-names-by-report-name">
-<h2>Function Guardium List Parameter Names by Report Name<a class="headerlink" href="#function-guardium-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h2>
+<h3>Function Guardium List Parameter Names by Report Name<a class="headerlink" href="#function-guardium-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h3>
 <p>This function is used to get the additional parameters required to run Guardium reports.
 The function is used prior to executing a Guardium report to get a list of the required parameters for the execution.</p>
 </section>
 <section id="id4">
-<h2>Function Workflow:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<h3>Function Workflow:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 </section>
 <section id="example-guardium-list-parameter-names-by-report-name">
-<h2>Example: Guardium List Parameter Names by Report Name<a class="headerlink" href="#example-guardium-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h2>
+<h3>Example: Guardium List Parameter Names by Report Name<a class="headerlink" href="#example-guardium-list-parameter-names-by-report-name" title="Link to this heading">¶</a></h3>
 <p>This workflow can be invoked from any incident action menu. Select any report from the drop-down menu to retrieve the required list of Guardium parameters.</p>
 <p><img alt="screenshot" src="../_images/list_report.png" /></p>
 <p><img alt="screenshot" src="../_images/run_list_params.png" /></p>
@@ -767,17 +754,17 @@ The function is used prior to executing a Guardium report to get a list of the r
 </section>
 </section>
 <section id="guardium-4b-search-all-guardium-reports">
-<h1>Guardium: 4B. Search All Guardium Reports :<a class="headerlink" href="#guardium-4b-search-all-guardium-reports" title="Link to this heading">¶</a></h1>
+<h2>Guardium: 4B. Search All Guardium Reports :<a class="headerlink" href="#guardium-4b-search-all-guardium-reports" title="Link to this heading">¶</a></h2>
 <section id="id5">
-<h2>Function Guardium Search Report<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<h3>Function Guardium Search Report<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>This function is used to search Guardium reports. The function has access to all default Guardium reports.
 This option is for a user who is familiar with Guardium. It allows the user to choose from any of Guardium’s 600+ out of the box reports which can be used for enrichment of Resilient data. This option is under the pre-canned options as it requires knowledge of Guardium to choose the most useful reports.</p>
 </section>
 <section id="id6">
-<h2>Function Workflow:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<h3>Function Workflow:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 </section>
 <section id="example-guardium-search-report">
-<h2>Example: Guardium Search Report<a class="headerlink" href="#example-guardium-search-report" title="Link to this heading">¶</a></h2>
+<h3>Example: Guardium Search Report<a class="headerlink" href="#example-guardium-search-report" title="Link to this heading">¶</a></h3>
 <p>This workflow can be invoked from any incident action menu.</p>
 <p><img alt="screenshot" src="../_images/search.png" /></p>
 <p><img alt="screenshot" src="../_images/run_search.png" /></p>
@@ -785,23 +772,24 @@ This option is for a user who is familiar with Guardium. It allows the user to c
 <p>The returned results are used to refresh the data table <code class="docutils literal notranslate"><span class="pre">Guardium</span> <span class="pre">Search</span> <span class="pre">Report</span> <span class="pre">Data</span></code>.</p>
 </section>
 <section id="guardium-5-block-user-from-data-source">
-<h2>Guardium: 5. Block User from Data Source:<a class="headerlink" href="#guardium-5-block-user-from-data-source" title="Link to this heading">¶</a></h2>
+<h3>Guardium: 5. Block User from Data Source:<a class="headerlink" href="#guardium-5-block-user-from-data-source" title="Link to this heading">¶</a></h3>
 <section id="function-guardium-block-user">
-<h3>Function Guardium block user<a class="headerlink" href="#function-guardium-block-user" title="Link to this heading">¶</a></h3>
+<h4>Function Guardium block user<a class="headerlink" href="#function-guardium-block-user" title="Link to this heading">¶</a></h4>
 <p>This function can be used to block user access to the Database.</p>
 </section>
 </section>
 <section id="id7">
-<h2>Function Workflow:<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<h3>Function Workflow:<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 </section>
 <section id="example-guardium-block-user-access-to-db">
-<h2>Example: Guardium Block User Access to DB<a class="headerlink" href="#example-guardium-block-user-access-to-db" title="Link to this heading">¶</a></h2>
+<h3>Example: Guardium Block User Access to DB<a class="headerlink" href="#example-guardium-block-user-access-to-db" title="Link to this heading">¶</a></h3>
 <p>This workflow can be invoked from any incident actions menu.</p>
 <p><img alt="screenshot" src="../_images/block.png" /></p>
 <p><img alt="screenshot" src="../_images/run_block.png" /></p>
 <p><img alt="screenshot" src="../_images/res_block.png" /></p>
 <p>A note is added to the incident with result of workflow.</p>
 <p>:copyright:IBM Corp. 2010, 2020. All Rights Reserved.</p>
+</section>
 </section>
 </section>
 
@@ -848,8 +836,84 @@ This option is for a user who is familiar with Guardium. It allows the user to c
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Guardium Integration</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents -</a></li>
+<li><a class="reference internal" href="#about-this-package">About this package</a></li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#resilient-configurations">Resilient Configurations</a><ul>
+<li><a class="reference internal" href="#add-results-table">Add Results table</a></li>
+<li><a class="reference internal" href="#add-customized-incident-fields">Add Customized Incident Fields</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#run-application">Run Application</a></li>
+<li><a class="reference internal" href="#application-usage-and-details">Application Usage and Details</a><ul>
+<li><a class="reference internal" href="#guardium-generate-client-secret">Guardium: Generate Client Secret:</a><ul>
+<li><a class="reference internal" href="#function-guardium-generate-client-secret">Function Guardium Generate Client Secret</a></li>
+<li><a class="reference internal" href="#function-workflow">Function Workflow:</a></li>
+<li><a class="reference internal" href="#example-generate-guardium-client-secret">Example: Generate Guardium Client Secret</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#guardium-run-active-risk-spotter-risky-users-scores">1. Guardium: Run Active Risk Spotter - Risky Users Scores:</a><ul>
+<li><a class="reference internal" href="#function-guardium-search-report">Function Guardium Search Report</a></li>
+<li><a class="reference internal" href="#id1">Function Workflow:</a></li>
+<li><a class="reference internal" href="#example-guardium-run-active-risk-spotter">Example: Guardium Run Active Risk Spotter:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#guardium-2-search-for-entitlements-to-sensitive-objects">Guardium: 2. Search for Entitlements to Sensitive Objects:</a><ul>
+<li><a class="reference internal" href="#function-guardium-search-sensitive-object">Function Guardium Search Sensitive Object</a></li>
+<li><a class="reference internal" href="#id2">Function Workflow:</a></li>
+<li><a class="reference internal" href="#example-guardium-search-sensitive-objects">Example: Guardium Search Sensitive Objects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#guardium-3-search-for-user-outlier-details">Guardium: 3. Search for User Outlier Details:</a><ul>
+<li><a class="reference internal" href="#function-guardium-search-outlier-details">Function Guardium Search Outlier Details</a></li>
+<li><a class="reference internal" href="#id3">Function Workflow:</a></li>
+<li><a class="reference internal" href="#example-guardium-search-outlier-details">Example: Guardium Search Outlier Details</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#guardium-4a-list-parameter-names-by-report-name">Guardium: 4A. List Parameter Names By Report Name :</a><ul>
+<li><a class="reference internal" href="#function-guardium-list-parameter-names-by-report-name">Function Guardium List Parameter Names by Report Name</a></li>
+<li><a class="reference internal" href="#id4">Function Workflow:</a></li>
+<li><a class="reference internal" href="#example-guardium-list-parameter-names-by-report-name">Example: Guardium List Parameter Names by Report Name</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#guardium-4b-search-all-guardium-reports">Guardium: 4B. Search All Guardium Reports :</a><ul>
+<li><a class="reference internal" href="#id5">Function Guardium Search Report</a></li>
+<li><a class="reference internal" href="#id6">Function Workflow:</a></li>
+<li><a class="reference internal" href="#example-guardium-search-report">Example: Guardium Search Report</a></li>
+<li><a class="reference internal" href="#guardium-5-block-user-from-data-source">Guardium: 5. Block User from Data Source:</a><ul>
+<li><a class="reference internal" href="#function-guardium-block-user">Function Guardium block user</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">Function Workflow:</a></li>
+<li><a class="reference internal" href="#example-guardium-block-user-access-to-db">Example: Guardium Block User Access to DB</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
