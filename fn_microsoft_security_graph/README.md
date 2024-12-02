@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Microsoft Security Graph Integration for SOAR
+# Microsoft Security Graph
 
 
 ## Table of Contents

@@ -1,4 +1,4 @@
-# IBM SOAR integration for AlgoSec
+# AlgoSec
 
 
 ## Table of Contents
