@@ -1,4 +1,4 @@
-# fn_cisco_umbrella_inv
+# Cisco Umbrella Investigate
 
 
 ## Table of Contents
