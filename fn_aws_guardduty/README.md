@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_aws_guardduty
+# AWS GuardDuty
 
 
 ## Table of Contents
