@@ -1,4 +1,4 @@
-# IBM SOAR LDAP Utilities
+# LDAP Utilities
 
 ## Table of Contents
 - [Release Notes](#release-notes)
