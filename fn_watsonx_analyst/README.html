@@ -1,0 +1,1357 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="Cisco Webex" href="../fn_webex/README.html" /><link rel="prev" title="VMRay Sandbox Analyzer" href="../fn_vmray_analyzer/README.html" />
+
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+        <title>watsonx.ai for SOAR Analysts - QRadar SOAR Apps</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=afe95b24" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">QRadar SOAR Apps</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">QRadar SOAR Apps</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">New and Recently Updated Apps</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fn_service_now/README.html">ServiceNow</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of ServiceNow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/install_guide/README.html">ServiceNow Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/customize_snow_guide/README.html">ServiceNow Customization Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/customize_resilient_guide/README.html">SOAR Customization Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">Remedy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmware_cbc/README.html">VMware Carbon Black Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">AWS IAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_symantec_dlp/README.html">Symantec DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_resilientfeed/README.html">Data Feeder for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiz/README.html">Wiz</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">App Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/python_api.html">IBM SOAR Python Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_algosec/README.html">AlgoSec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">Ansible Tower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_guardduty/README.html">AWS GuardDuty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_aws_utilities/README.html">AWS Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_axonius/README.html">Axonius</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_azure_automation_utilities/README.html">Azure Automation Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bigfix/README.html">BigFix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_bmc_helix/README.html">BMC Helix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_calendar_invite/README.html">Calendar Invite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_amp4ep/README.html">Cisco Secure Endpoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_asa/README.html">Cisco ASA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_enforcement/README.html">Cisco Umbrella Enforcement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cisco_umbrella_inv/README.html">Cisco Umbrella Investigate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_clamav/README.html">ClamAV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cloud_foundry/README.html">Cloud Foundry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_components/README.html">App Host Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_webex_meeting/README.html">Cisco WebEx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_create_zoom_meeting/README.html">Zoom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_cve_search/README.html">CVE Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_darktrace/README.html">Darktrace <!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_datatable_utils/README.html">Datatable Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_elasticsearch/README.html">ElasticSearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_email_header_validation/README.html">Email Header Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange/README.html">Microsoft Exchange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">Microsoft Exchange Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_extrahop/README.html">ExtraHop for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_geocoding/README.html">Google Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">Google Cloud DLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">gRPC Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_guardium_insights_integration/README.html">Guardium Insights Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_guardium_integration/README.html">Guardium Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Have I Been Pwned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">HTML to PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">IPInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_isitphishing/README.html">IsItPhishing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_joe_sandbox_analysis/README.html">Joe Sandbox Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_kafka/README.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ldap_utilities/README.html">LDAP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_maas360/README.html">MaaS360</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mandiant/README.html">Mandiant Threat Intelligence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_atd/README.html">McAfee ATD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_epo/README.html">McAfee ePO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_esm/README.html">McAfee ESM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_opendxl/README.html">McAfee OpenDXL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mcafee_tie/README.html">McAfee TIE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_defender/README.html">Microsoft Defender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_security_graph/README.html">Microsoft Security Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_microsoft_sentinel/README.html">Microsoft Sentinel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_misp/README.html">MISP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mitre_integration/README.html">MITRE ATT&amp;CK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_mxtoolbox/README.html">MxToolBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">ODBC Query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">Palo Alto Panorama</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pagerduty/README.html">PagerDuty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">Phish Tank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_playbook_utils/README.html">Playbook Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_tap/README.html">Proofpoint TAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_proofpoint_trap/README.html">Proofpoint TRAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_pulsedive/README.html">Pulsedive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_advisor/README.html">QRadar Advisor Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_qradar_integration/README.html">QRadar Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_query_tor_network/README.html">TOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_randori/README.html">Randori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rapid7_insight_idr/README.html">Rapid7 InsightIDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_reaqta/README.html">QRadar EDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_relations/README.html">Parent/Child Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rest_api/README.html">REST API Functions for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">RSA NetWitness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_secureworks_ctp/README.html">Secureworks CTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shadowserver/README.html">Shadowserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_sumo_logic/README.html">Sumo Logic Cloud SIEM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">Task Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Twilio SMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_twitter_most_popular/README.html">Twitter Search API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">watsonx.ai for SOAR Analysts<!-- omit in toc --></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">Whois RDAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_wiki/README.html">SOAR Wiki</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_xforce/README.html">IBM XForce Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_yeti/README.html">Yeti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access Functions for IBM SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_odbcfeed/README.html">Data Feeder for ODBC Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-haveibeenpwned/README.html">Have I Been Pwned Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-mcafeetie/README.html">McAfee TIE Threat Searcher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="watsonx-ai-for-soar-analysts">
+<h1>watsonx.ai for SOAR Analysts<!-- omit in toc --><a class="headerlink" href="#watsonx-ai-for-soar-analysts" title="Link to this heading">¶</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#watsonxai-subscription-and-project"><span class="xref myst">Watsonx.ai Subscription and Project</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#1-watsonxai-project-id"><span class="xref myst">1. Watsonx.ai Project ID</span></a></p></li>
+<li><p><a class="reference internal" href="#2-ibm-cloud-iam-api-key"><span class="xref myst">2. IBM Cloud IAM API Key</span></a></p></li>
+<li><p><a class="reference internal" href="#3-watsonxai-endpoint-url"><span class="xref myst">3. Watsonx.ai Endpoint URL</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
+<li><p><a class="reference internal" href="#qradar-suite"><span class="xref myst">QRadar Suite</span></a></p></li>
+<li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
+<li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installing-the-app"><span class="xref myst">Installing the App</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#install"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#configuring-the-app"><span class="xref myst">Configuring the App</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#adding-the-secrets-to-the-app-configuration"><span class="xref myst">Adding the secrets to the App Configuration</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#custom-field-label-replacing"><span class="xref myst">Custom Field Label Replacing</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#how-to-use"><span class="xref myst">How to use</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#note-conversation"><span class="xref myst">Note Conversation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#data-made-available-to-the-llm"><span class="xref myst">Data made available to the LLM</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#scan-artifact"><span class="xref myst">Scan Artifact</span></a></p></li>
+<li><p><a class="reference internal" href="#extending-watsonxai"><span class="xref myst">Extending watsonx.ai</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#using-other-models"><span class="xref myst">Using other models</span></a></p></li>
+<li><p><a class="reference internal" href="#create-your-own-ai-solution"><span class="xref myst">Create your own AI Solution</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#prompting-guide"><span class="xref myst">Prompting Guide</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#response-quality"><span class="xref myst">Response Quality</span></a></p></li>
+<li><p><a class="reference internal" href="#conversations-in-the-notes-tab"><span class="xref myst">Conversations in the Notes tab</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#function---watsonxai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#function---watsonxai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
+<li><p><a class="reference internal" href="#function---watsonxai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
+<li><p><a class="reference internal" href="#script---watsonxai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
+<li><p><a class="reference internal" href="#script---watsonxai-update-artifact-description-with-assessment"><span class="xref myst">Script - watsonx.ai Update Artifact Description with Assessment</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
+<li><p><a class="reference internal" href="#feedback"><span class="xref myst">Feedback</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>12/2024</p></td>
+<td><p>Initial “<strong>Early Access</strong>” release. Uses watsonx.ai SaaS Version <code class="docutils literal notranslate"><span class="pre">2023-05-29</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p><strong>Leverage generative AI with watsonx.ai for artifact scanning, incident summarization and Q&amp;A, and generic watsonx.ai text generation.</strong></p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Incident question and answers: ask watsonx.ai questions about incidents. Ask it to summarise and analyse incidents and artifacts.</p></li>
+<li><p>Artifact analysis: Use watsonx.ai powered playbooks to quickly generate a report on an artifact, as a preliminary assessment.</p></li>
+</ul>
+<p><img alt="" src="../_images/overview.png" /></p>
+</section>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Either <a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR Platform</span></a> or <a class="reference internal" href="#qradar-suite"><span class="xref myst">IBM QRadar Suite</span></a> installed.</p></li>
+<li><p>A subscription to watsonx.ai.</p>
+<ul>
+<li><p>A watsonx.ai Project ID</p></li>
+<li><p>An IBM Cloud IAM API Key</p></li>
+<li><p>A watsonx.ai <a class="reference external" href="https://cloud.ibm.com/apidocs/watsonx-ai#endpoint-url">Endpoint URL</a></p></li>
+</ul>
+</li>
+</ul>
+<section id="watsonx-ai-subscription-and-project">
+<h3>Watsonx.ai Subscription and Project<a class="headerlink" href="#watsonx-ai-subscription-and-project" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>You will need to sign up to a watsonx subscription.</p></li>
+<li><p>You can do so at https://dataplatform.cloud.ibm.com/registration/stepone?context=wx.</p></li>
+<li><p>For testing in a non-production environment you can use a free trial subscription to watsonx.ai.</p></li>
+<li><p>Using this account, create a project on the watsonx.ai platform.</p></li>
+</ul>
+<blockquote>
+<div><p>[!IMPORTANT]
+These instructions work as of 2024-11-25. These steps may become outdated due to changes made outside of this app.</p>
+</div></blockquote>
+<section id="watsonx-ai-project-id">
+<h4>1. Watsonx.ai Project ID<a class="headerlink" href="#watsonx-ai-project-id" title="Link to this heading">¶</a></h4>
+<p>Navigate to the Projects page
+<img alt="" src="../_images/watsonx-ai-04-nav-to-projects.png" /></p>
+<p>If you have not created a project yet, you can create one now, using the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Project</span> <span class="pre">+</span></code> button on the top-right.
+<img alt="" src="../_images/watsonx-ai-06-new-project.png" /></p>
+<p>Navigate to your project.</p>
+<p>Under the <code class="docutils literal notranslate"><span class="pre">Manage</span></code> tab, on the <code class="docutils literal notranslate"><span class="pre">General</span></code> section, copy the Project ID, you will need this later when configuring the app.
+<img alt="" src="../_images/watsonx-ai-05-copy-project-id.png" /></p>
+</section>
+<section id="ibm-cloud-iam-api-key">
+<h4>2. IBM Cloud IAM API Key<a class="headerlink" href="#ibm-cloud-iam-api-key" title="Link to this heading">¶</a></h4>
+<p>To use watsonx.ai from the <em>watsonx.ai for SOAR</em> app, you’ll need an IBM Cloud IAM API Key. To generate an API key, click on the menu icon in the top left of the watsonx.ai dashboard and open <em>Access (IAM)</em> under the <em>Administration</em> menu.</p>
+<p><img alt="screenshot: watsonx-api-1" src="../_images/watsonx-ai-03-key1.png" /></p>
+<p>The <em>Access IAM</em> dashboard will open…</p>
+<ol class="arabic simple">
+<li><p>Choose <em>API Keys</em> from the navigation section then…</p></li>
+<li><p>Click the <em>Create +</em> button to create a new API key.</p></li>
+</ol>
+<p><img alt="screenshot: watsonx-api-1" src="../_images/watsonx-ai-key2.png" /></p>
+<p>Take note of the API key as this will also be used during app configuration.</p>
+</section>
+<section id="watsonx-ai-endpoint-url">
+<h4>3. Watsonx.ai Endpoint URL<a class="headerlink" href="#watsonx-ai-endpoint-url" title="Link to this heading">¶</a></h4>
+<p>The endpoint will depend on which region your watsonx.ai project was created in. You can see which region you’re using in the watsonx.ai dashboard in the dropdown at the top-right, next to the user icon.</p>
+<p>Find the relevant Endpoint for your region at https://cloud.ibm.com/apidocs/watsonx-ai#endpoint-url.</p>
+<blockquote>
+<div><p>[!IMPORTANT]
+Don’t use the prompt and/or notebooks endpoint.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
+<ul class="simple">
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.0</span></code>.</p></li>
+<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.2.0.0</span></code>.</p></li>
+<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p></li>
+</ul>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Permissions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Org Data</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-even"><td><p>Incident</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Playbook</p></td>
+<td><p>Read</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following SOAR platform guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
+<li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
+</ul>
+<p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
+<section id="qradar-suite">
+<h3>QRadar Suite<a class="headerlink" href="#qradar-suite" title="Link to this heading">¶</a></h3>
+<p>If you are deploying to IBM QRadar Suite, the requirements are:</p>
+<ul class="simple">
+<li><p>IBM QRadar Suite &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.16</span></code>.</p></li>
+<li><p>QRadar Suite is configured with an Edge Gateway.</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+</ul>
+<p>The following QRadar Suite guides provide additional information:</p>
+<ul class="simple">
+<li><p><em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration &amp; Automation &gt; <strong>Orchestration and Automation Apps</strong>.</p></li>
+<li><p><em>System Administrator Guide</em>: provides information to install, configure, and deploy apps. From the IBM QRadar Suite Documentation table of contents, select Case Management and Orchestration &amp; Automation &gt; <strong>System administrator</strong>.</p></li>
+</ul>
+<p>These guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM QRadar Suite version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
+</section>
+<section id="proxy-server">
+<h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
+<p>The app <strong>does not</strong> support a proxy server.</p>
+</section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
+<p>This app runs on Python 3.12.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>tiktoken==0.8.0</p></li>
+<li><p>resilient-circuits&gt;=51.0.2.0.0</p></li>
+<li><p>scikit-learn==1.5.2</p></li>
+</ul>
+</section>
+</section>
+<section id="installing-the-app">
+<h2>Installing the App<a class="headerlink" href="#installing-the-app" title="Link to this heading">¶</a></h2>
+<section id="install">
+<h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>To install or uninstall an app or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an app on <em>IBM Qradar Suite</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
+</ul>
+</section>
+<section id="configuring-the-app">
+<h3>Configuring the App<a class="headerlink" href="#configuring-the-app" title="Link to this heading">¶</a></h3>
+<p>The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>watsonx_api_key</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>0123-4567-89ab-cdef</p></td>
+<td><p>Your watsonx.ai API key - see <a class="reference internal" href="#2-ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>watsonx_endpoint</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://us-south.ml.cloud.ibm.com</span></code></p></td>
+<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#3-watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>watsonx_project_id</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>0123-4567-89ab-cdef</p></td>
+<td><p>The watsonx.ai project id - see <a class="reference internal" href="#3-watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Project ID</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="adding-the-secrets-to-the-app-configuration">
+<h4>Adding the secrets to the App Configuration<a class="headerlink" href="#adding-the-secrets-to-the-app-configuration" title="Link to this heading">¶</a></h4>
+<p>After installing the app, you must configure it as follows:</p>
+<p>Under the <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> tab in App Details, you can add the following watsonx secrets using the values you got in the <a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a> section. (<code class="docutils literal notranslate"><span class="pre">API_KEY_SECRET</span></code> is the API key being used to authenticate the app. You don’t need to change this.)</p>
+<p><img alt="" src="../_images/app-secrets.png" /></p>
+</section>
+</section>
+<section id="custom-field-label-replacing">
+<h3>Custom Field Label Replacing<a class="headerlink" href="#custom-field-label-replacing" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>This integration recognises Incident data via their API names. If a custom incident field’s API name doesn’t adequately explain the purpose of the field, an LLM may not be able to interpret the data very well.</p></li>
+<li><p>To help address this, you can configure the app to replace these fields with other labels you provide at the bottom of the app.config:</p></li>
+</ul>
+<blockquote>
+<div><p>App.config</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">watsonx_property_labels</span><span class="p">]</span>
+<span class="n">fn_something_custom_field_report</span><span class="o">=</span><span class="s2">&quot;Incident report&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="how-to-use">
+<h2>How to use<a class="headerlink" href="#how-to-use" title="Link to this heading">¶</a></h2>
+<section id="note-conversation">
+<h3>Note Conversation<a class="headerlink" href="#note-conversation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span></code> at the start of an incident note to query watsonx.ai. (e.g., <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">summarize</span> <span class="pre">this</span> <span class="pre">incident</span></code>).</p></li>
+<li><p>If you want to investigate an artifact’s contents, enclose its name in square brackets in your query (e.g., <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">tell</span> <span class="pre">me</span> <span class="pre">whether</span> <span class="pre">[artifact</span> <span class="pre">name]</span> <span class="pre">seems</span> <span class="pre">like</span> <span class="pre">it</span> <span class="pre">could</span> <span class="pre">be</span> <span class="pre">malicious</span></code>).</p>
+<ul>
+<li><p>If this artifact has an attachment, the attachment’s contents will also be added to context. If looking for specific information in the contents, provide the <strong>actual words</strong> that will be in the contents to get the best output. E.g.:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">do</span> <span class="pre">the</span> <span class="pre">warnings</span> <span class="pre">in</span> <span class="pre">[app.log]</span> <span class="pre">seem</span> <span class="pre">to</span> <span class="pre">indicate</span> <span class="pre">security</span> <span class="pre">issues?</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">Are</span> <span class="pre">there</span> <span class="pre">any</span> <span class="pre">associated</span> <span class="pre">Indicators</span> <span class="pre">of</span> <span class="pre">Compromise</span> <span class="pre">(IOCs)</span> <span class="pre">with</span> <span class="pre">[bad_script.sh]?</span></code></p></li>
+</ul>
+</li>
+</ul>
+<section id="data-made-available-to-the-llm">
+<h4>Data made available to the LLM<a class="headerlink" href="#data-made-available-to-the-llm" title="Link to this heading">¶</a></h4>
+<p>Incident:</p>
+<ul class="simple">
+<li><p>Name</p></li>
+<li><p>Description</p></li>
+<li><p>Start date</p></li>
+<li><p>Discovered date</p></li>
+<li><p>Address (address, city, state, country, zip)</p></li>
+<li><p>Incident workspace</p></li>
+<li><p>Incident creator</p></li>
+<li><p>Incident reporter</p></li>
+<li><p>Incident members</p></li>
+<li><p>Negative PR likelihood</p></li>
+<li><p>Regulatory assessments</p></li>
+<li><p>Incident disposition (confirmed / unconfirmed)</p></li>
+<li><p>Custom incident properties</p></li>
+</ul>
+<p>Artifacts:</p>
+<ul class="simple">
+<li><p>Value (name)</p></li>
+<li><p>Description</p></li>
+<li><p>Date added</p></li>
+<li><p>Date updated</p></li>
+<li><p>Number of related incidents</p></li>
+<li><p>*Artifact contents</p></li>
+</ul>
+<p>Playbook Executions:</p>
+<ul class="simple">
+<li><p>Playbook name</p></li>
+<li><p>Playbook description</p></li>
+<li><p>Elapsed time</p></li>
+<li><p>Execution state (running, error, completed, canceled, suspended)</p></li>
+<li><p>Object name (e.g. incident’s name)</p></li>
+</ul>
+<p>Phases &amp; Tasks:</p>
+<ul class="simple">
+<li><p>Phase name</p></li>
+<li><p>Task name</p></li>
+<li><p>Task description</p></li>
+<li><p>Task status (complete or incomplete)</p></li>
+<li><p>Task status (active or inactive)</p></li>
+<li><p>Task required or not</p></li>
+</ul>
+<p>*Only in note conversations with an artifact name in square brackets.</p>
+</section>
+</section>
+<section id="scan-artifact">
+<h3>Scan Artifact<a class="headerlink" href="#scan-artifact" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>On the artifacts tab, from the Actions menu, choose watsonx.ai Scan Artifact. This may be used to check what is in a particular file, and whether the file contains evidence of malicous activity.</p></li>
+</ul>
+<blockquote>
+<div><p>[!WARNING]
+Scanning artifacts with large files will use many tokens. Because of this, use Scan Artifact <em>sparingly</em> on a trial watsonx.ai account.</p>
+</div></blockquote>
+</section>
+<section id="extending-watsonx-ai">
+<h3>Extending watsonx.ai<a class="headerlink" href="#extending-watsonx-ai" title="Link to this heading">¶</a></h3>
+<section id="using-other-models">
+<h4>Using other models<a class="headerlink" href="#using-other-models" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>We supply watsonx.ai for SOAR analysts with a selection of models we’ve found to work well for this use-case.</p></li>
+<li><p>To use a different model, available to your region and project, you can modify the Function Field <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code> and you can add additional Model IDs to choose from in your playbooks.</p>
+<ul>
+<li><p>To add a model ID, under Customization Settings, in the Functions tab, enter a function’s edit page. Under the <code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Input</span> <span class="pre">Field</span></code> section, click the pencil icon on the field <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code>. Click on <code class="docutils literal notranslate"><span class="pre">Add/Edit</span> <span class="pre">Values</span></code>, then add a new line with the model ID at the bottom, before clicking the green check mark at the top. Then hit save, the new model should be available in the watsonx.ai functions.</p></li>
+<li><p>To find Model IDs, you can follow the documentation to fetch models from the API <a class="reference external" href="https://cloud.ibm.com/apidocs/watsonx-ai#list-foundation-model-specs">here</a>.</p></li>
+<li><p>Alternatively, when using the Prompt Lab in watsonx.ai, you can use the dropdown to choose a different model (1 in the below screenshot). When satisified with the model choice, you can click the button to show the <code class="docutils literal notranslate"><span class="pre">cURL</span></code> request. In the JSON body of this request will be a <code class="docutils literal notranslate"><span class="pre">model_id</span></code> field. Copy the value for that field.</p></li>
+<li><p><img alt="" src="../_images/watsonx-ai-02-choose-model.png" /></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="create-your-own-ai-solution">
+<h4>Create your own AI Solution<a class="headerlink" href="#create-your-own-ai-solution" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Using the <a class="reference internal" href="#function---watsonxai-text-generation"><span class="xref myst">watsonx.ai Text Generation Playbook</span></a>, you can pass any system prompt, and user prompt to watsonx.ai, and get a response in a playbook. Using this, you can use playbook logic to create automations using artificial intelligence.</p></li>
+</ul>
+</section>
+</section>
+<section id="prompting-guide">
+<h3>Prompting Guide<a class="headerlink" href="#prompting-guide" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>When querying, you should try to use words that will appear in the data, so that the search will find good matches. See the Note Conversation examples above in <a class="reference internal" href="#note-conversation"><span class="xref myst">Note Conversation</span></a>.</p></li>
+<li><p>When replying to a note and querying watsonx, all parent notes in the reply chain will be added to the LLM’s context. Text from notes in other root note reply chains, or</p></li>
+<li><p>Also, when querying watsonx in a reply note, previous notes <strong>in the reply chain</strong> will be added to the context, which can help when getting more detail on specific topics.</p>
+<ul>
+<li><p>If the previous notes in the reply chain derail the conversation, you can start a new Note conversation by creating a new “root” Note.</p></li>
+</ul>
+</li>
+</ul>
+<section id="response-quality">
+<h4>Response Quality<a class="headerlink" href="#response-quality" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Quality of response can differ between LLMs specifically when the input context is larger than 4KB limit. There are some models that cannot exceed the limit of 4KB context size.</p></li>
+<li><p>Most of the Note Conversation answers are returned in about ~6 seconds. However, it’s also important to note that large artifacts would also take more time to process.</p></li>
+</ul>
+</section>
+<section id="conversations-in-the-notes-tab">
+<h4>Conversations in the Notes tab<a class="headerlink" href="#conversations-in-the-notes-tab" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Asking very specific and clearly defined questions can improve the quality of the generated responses. When querying LLMs, it’s essential to be as clear and specific as possible about the information or task you want the model to address. This will help the model to generate more accurate and relevant responses.</p>
+<ul>
+<li><p>For example, summarizing an incident for a CTO would be a different response than summarizing an incident for a Security analyst.</p></li>
+<li><p>Another example would be if you do not want to include some artifact types in your queries then it should be specifically mentioned.</p></li>
+<li><p>Another example would be finding names of libraries in a python artifact.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">what</span> <span class="pre">python</span> <span class="pre">libraries</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">imported</span> <span class="pre">in</span> <span class="pre">[artifact_name.py]?</span> <span class="pre">Do</span> <span class="pre">not</span> <span class="pre">share</span> <span class="pre">the</span> <span class="pre">code</span> <span class="pre">but</span> <span class="pre">only</span> <span class="pre">the</span> <span class="pre">names</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">libraries</span> <span class="pre">that</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">imported.</span> <span class="pre">Do</span> <span class="pre">not</span> <span class="pre">share</span> <span class="pre">the</span> <span class="pre">methods</span> <span class="pre">or</span> <span class="pre">functions</span> <span class="pre">of</span> <span class="pre">those</span> <span class="pre">libraries.</span> <span class="pre">Generally,</span> <span class="pre">libraries</span> <span class="pre">are</span> <span class="pre">imported</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">syntax</span> <span class="pre">```import</span> <span class="pre">&lt;library</span> <span class="pre">name&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p>If the initial results are unsatisfactory, consider refining your question.</p>
+<ul>
+<li><p>You can refine your query by continuing the conversation in replies.</p></li>
+</ul>
+</li>
+<li><p>Only <em>English</em> is supported in the early access release.</p>
+<ul>
+<li><p>Prompts can be written in other languages, and responses can be generated in other languages, like for example; German, French, Spanish, and Portuguese.</p></li>
+<li><p><strong>This behavior is sporadic and is highly dependent on the LLM you pick for the <a class="reference internal" href="#function---watsonxai-converse-via-notes"><span class="xref myst">Converse via Notes Function</span></a></strong>.</p></li>
+<li><p>Through prompting, this behavior can be encouraged more - <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">...</span> <span class="pre">et</span> <span class="pre">répond</span> <span class="pre">en</span> <span class="pre">français</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="function-watsonx-ai-converse-via-notes">
+<h2>Function - watsonx.ai Converse via Notes<a class="headerlink" href="#function-watsonx-ai-converse-via-notes" title="Link to this heading">¶</a></h2>
+<p>Allow conversation in an incident’s Notes tab. Previous notes in a reply chain will be included as context to the LLM.</p>
+<p><img alt="screenshot: fn-watsonx-converse-via-notes " src="../_images/incident_qna.png" />
+<img alt="screenshot: fn-watsonx-converse-via-notes " src="../_images/artifact_qna.png" /></p>
+<p><strong>You can click on the dropdowns below to see more details.</strong></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
+<td><p>You can use Data Navigator for this</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ibm/granite-3-2b-instruct</span></code></p></td>
+<td><p>Which watsonx.ai generative AI model to use to perform the task?</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_note_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">225</span></code></p></td>
+<td><p>ID for the Incident note to respond to.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;generated_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Output from watsonx.ai will be here&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;the HTML tag used as a disclosure for AI-generated content&lt;/p&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;metadata&quot;</span><span class="p">:</span>  <span class="p">{</span>
+    <span class="s2">&quot;model_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;stop_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;EOS token&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-07-21T16:52:32.190Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;generated_token_count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;input_token_count&quot;</span><span class="p">:</span> <span class="mi">10</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_note_id</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+  <span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-watsonx-ai-scan-artifact">
+<h2>Function - watsonx.ai Scan Artifact<a class="headerlink" href="#function-watsonx-ai-scan-artifact" title="Link to this heading">¶</a></h2>
+<p>Use watsonx.ai to scan an artifact, and assess whether the artifact indicates any malicious activity. Design to work with log files, scripts (e.g. Bash, Python, Lua, Powershell, Perl).</p>
+<p><img alt="screenshot: fn-watsonx-scan-artifact " src="../_images/scan_artifact_action.png" />
+<img alt="screenshot: fn-watsonx-scan-artifact " src="../_images/scan_artifact_result.png" /></p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_artifact_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p>You can use data navigator to add this.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_incident_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
+<td><p>You can use Data Navigator for this</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ibm/granite-3-2b-instruct</span></code></p></td>
+<td><p>Which watsonx.ai generative AI model to use to perform the task?</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;generated_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Output from watsonx.ai will be here&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;the HTML tag used as a disclosure for AI-generated content&lt;/p&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;metadata&quot;</span><span class="p">:</span>  <span class="p">{</span>
+    <span class="s2">&quot;model_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;stop_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;EOS token&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-07-21T16:52:32.190Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;generated_token_count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;input_token_count&quot;</span><span class="p">:</span> <span class="mi">10</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_artifact_id</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">id</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+
+<span class="n">isHtml</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
+  <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
+  
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="s2">&quot;Failed to generate artifact summary, please check app logs for more details.&quot;</span><span class="p">)</span>
+ 
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-watsonx-ai-text-generation">
+<h2>Function - watsonx.ai Text Generation<a class="headerlink" href="#function-watsonx-ai-text-generation" title="Link to this heading">¶</a></h2>
+<p>Perform Text Generation against watsonx.ai. Can replace ‘{}’ in prompts with comma-separated strings in <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_arguments</span></code>.</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_arguments</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">foo,bar,foobar</span></code></p></td>
+<td><p>Comma-separated arguments to replace ‘{}’s in the prompt</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ibm/granite-3-2b-instruct</span></code></p></td>
+<td><p>Which watsonx.ai generative AI model to use to perform the task?</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_prompt</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Tell</span> <span class="pre">me</span> <span class="pre">about</span> <span class="pre">this</span> <span class="pre">incident.</span></code></p></td>
+<td><p>What you are asking the LLM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_system_prompt</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">are</span> <span class="pre">a</span> <span class="pre">helpful</span> <span class="pre">AI</span> <span class="pre">assistant</span> <span class="pre">knowledgeable</span> <span class="pre">in</span> <span class="pre">cyber</span> <span class="pre">security.</span> <span class="pre">You</span> <span class="pre">are</span> <span class="pre">inoffensive,</span> <span class="pre">and</span> <span class="pre">respond</span> <span class="pre">clearly,</span> <span class="pre">and</span> <span class="pre">concisely.</span></code></p></td>
+<td><p>Optional grounding prompt</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;generated_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Output from watsonx.ai will be here&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;the HTML tag used as a disclosure for AI-generated content&lt;/p&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;metadata&quot;</span><span class="p">:</span>  <span class="p">{</span>
+    <span class="s2">&quot;model_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;stop_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;EOS token&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-07-21T16:52:32.190Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;generated_token_count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;input_token_count&quot;</span><span class="p">:</span> <span class="mi">10</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_system_prompt</span> <span class="o">=</span> <span class="s2">&quot;You are watsonx, an experienced cybersecurity analyst with over 25 years&#39; experience resolving incidents. You are helpful, and do not stray into off-topic conversations.&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_prompt</span> <span class="o">=</span> <span class="s2">&quot;What remediation steps should be followed for a </span><span class="si">{}</span><span class="s2"> incident? Explain your reasoning for each remediation step.&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_arguments</span> <span class="o">=</span> <span class="s2">&quot;DDOS Attack&quot;</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+
+<span class="n">isHtml</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
+  <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
+  
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="s2">&quot;Failed to generate artifact summary, please check app logs for more details.&quot;</span><span class="p">)</span>
+ 
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-watsonx-ai-respond-to-note">
+<h2>Script - watsonx.ai Respond to note<a class="headerlink" href="#script-watsonx-ai-respond-to-note" title="Link to this heading">¶</a></h2>
+<p><strong>Object:</strong> note</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+  <span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-watsonx-ai-update-artifact-description-with-assessment">
+<h2>Script - watsonx.ai Update Artifact Description with Assessment<a class="headerlink" href="#script-watsonx-ai-update-artifact-description-with-assessment" title="Link to this heading">¶</a></h2>
+<p><strong>Object:</strong> artifact</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+
+<span class="n">isHtml</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
+  <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
+  
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="s2">&quot;Failed to generate artifact summary, please check app logs for more details.&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>watsonx.ai Note Conversation</p></td>
+<td><p>This playbook is triggered when a user writes a note that contains “&#64;watsonx” at the start of the note. A reply will be generated by IBM watsonx.ai generative AI, and added as a reply to the first note.</p></td>
+<td><p>Automatic</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">note.text</span> <span class="pre">contains</span> <span class="pre">&#64;watsonx</span> <span class="pre">AND</span> <span class="pre">object_added</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>watsonx.ai Retry Note Conversation</p></td>
+<td><p>If a response fails to be generated, you can use this playbook on a note with a query for <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span></code> to try again.</p></td>
+<td><p>Manual</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>watsonx.ai Scan Artifact</p></td>
+<td><p>watsonx.ai reads the contents of the provided artifact if an attachment is supplied.  Then, watsonx.ai gives a summary of the contents, and threat scores.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="feedback">
+<h2>Feedback<a class="headerlink" href="#feedback" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>While every effort has been made to ensure the quality of this initial release we do appreciate that our customers have modified the data model that is shipped ootb with SOAR. A lot of your most important data may be in fields we know nothing about and so have not been able to test against. Its in this context we’re releasing this app as “early access” rather than intended for immediate production usage.</p></li>
+<li><p>We have further work we wish to do to support your custom data, but we would greatly appreciate any feedback you can provide on where it works and where it doesn’t. Please provide feedback through any IBM contact you have, or reach out via the <a class="reference external" href="https://ibm.biz/soarcommunity">Community Site</a>.</p></li>
+</ul>
+</section>
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
+<p>If one of the actions fails, the following steps may help:</p>
+<ul class="simple">
+<li><p>Check the playbook progress on the incident - the playbook may have failed. If so, the error message in the function’s response may help you interpret the problem.</p></li>
+<li><p>If the error message does not provide enough information, you can download the apps’ logs from Administrator Settings -&gt; Apps page. Go to the details of the app, and click “Download Logs.”</p></li>
+<li><p>Additionally, SOAR’s <code class="docutils literal notranslate"><span class="pre">client.log</span></code> log file may give some extra information.</p></li>
+</ul>
+<p>Otherwise, refer to watsonx.ai’s <a class="reference external" href="https://dataplatform.cloud.ibm.com/docs/content/wsj/troubleshoot/troubleshoot.html?context=wx&amp;amp;audience=wdp">Troubleshooting Docs</a></p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
+<p>This is an IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../fn_webex/README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Cisco Webex</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../fn_vmray_analyzer/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">VMRay Sandbox Analyzer</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">watsonx.ai for SOAR Analysts<!-- omit in toc --></a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents<!-- omit in toc --></a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#watsonx-ai-subscription-and-project">Watsonx.ai Subscription and Project</a><ul>
+<li><a class="reference internal" href="#watsonx-ai-project-id">1. Watsonx.ai Project ID</a></li>
+<li><a class="reference internal" href="#ibm-cloud-iam-api-key">2. IBM Cloud IAM API Key</a></li>
+<li><a class="reference internal" href="#watsonx-ai-endpoint-url">3. Watsonx.ai Endpoint URL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#qradar-suite">QRadar Suite</a></li>
+<li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installing-the-app">Installing the App</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#configuring-the-app">Configuring the App</a><ul>
+<li><a class="reference internal" href="#adding-the-secrets-to-the-app-configuration">Adding the secrets to the App Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-field-label-replacing">Custom Field Label Replacing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-use">How to use</a><ul>
+<li><a class="reference internal" href="#note-conversation">Note Conversation</a><ul>
+<li><a class="reference internal" href="#data-made-available-to-the-llm">Data made available to the LLM</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#scan-artifact">Scan Artifact</a></li>
+<li><a class="reference internal" href="#extending-watsonx-ai">Extending watsonx.ai</a><ul>
+<li><a class="reference internal" href="#using-other-models">Using other models</a></li>
+<li><a class="reference internal" href="#create-your-own-ai-solution">Create your own AI Solution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prompting-guide">Prompting Guide</a><ul>
+<li><a class="reference internal" href="#response-quality">Response Quality</a></li>
+<li><a class="reference internal" href="#conversations-in-the-notes-tab">Conversations in the Notes tab</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-watsonx-ai-converse-via-notes">Function - watsonx.ai Converse via Notes</a></li>
+<li><a class="reference internal" href="#function-watsonx-ai-scan-artifact">Function - watsonx.ai Scan Artifact</a></li>
+<li><a class="reference internal" href="#function-watsonx-ai-text-generation">Function - watsonx.ai Text Generation</a></li>
+<li><a class="reference internal" href="#script-watsonx-ai-respond-to-note">Script - watsonx.ai Respond to note</a></li>
+<li><a class="reference internal" href="#script-watsonx-ai-update-artifact-description-with-assessment">Script - watsonx.ai Update Artifact Description with Assessment</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#feedback">Feedback</a></li>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/custom.js?v=a365c389"></script>
+    </body>
+</html>
