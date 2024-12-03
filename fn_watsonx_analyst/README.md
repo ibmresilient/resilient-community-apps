@@ -74,7 +74,6 @@
 - For testing in a non-production environment you can use a free trial subscription to watsonx.ai.
 - Using this account, create a project on the watsonx.ai platform.
 
-> [!IMPORTANT]
 > These instructions work as of 2024-11-25. These steps may become outdated due to changes made outside of this app.
 
 #### 1. Watsonx.ai Project ID
@@ -109,7 +108,7 @@ Take note of the API key as this will also be used during app configuration.
 The endpoint will depend on which region your watsonx.ai project was created in. You can see which region you're using in the watsonx.ai dashboard in the dropdown at the top-right, next to the user icon.
 
 Find the relevant Endpoint for your region at https://cloud.ibm.com/apidocs/watsonx-ai#endpoint-url.
-> [!IMPORTANT]
+
 > Don't use the prompt and/or notebooks endpoint.
 
 
@@ -256,7 +255,6 @@ Phases & Tasks:
 
 - On the artifacts tab, from the Actions menu, choose watsonx.ai Scan Artifact. This may be used to check what is in a particular file, and whether the file contains evidence of malicous activity.
 
-> [!WARNING]
 > Scanning artifacts with large files will use many tokens. Because of this, use Scan Artifact *sparingly* on a trial watsonx.ai account.
 
 ### Extending watsonx.ai
@@ -591,7 +589,7 @@ else:
 
 - While every effort has been made to ensure the quality of this initial release we do appreciate that our customers have modified the data model that is shipped ootb with SOAR. A lot of your most important data may be in fields we know nothing about and so have not been able to test against. Its in this context we're releasing this app as "early access" rather than intended for immediate production usage.
 
-- We have further work we wish to do to support your custom data, but we would greatly appreciate any feedback you can provide on where it works and where it doesn't. Please provide feedback through any IBM contact you have, or reach out via the [Community Site](https://ibm.biz/soarcommunity).
+- We have further work we wish to do to support your custom data, but we would greatly appreciate any feedback you can provide on where it works and where it doesn't. Please provide feedback through any IBM contact you have, or give feedback via the [Ideas Portal](https://ideas.ibm.com/new-idea?product=6524766443936374487).
 
 
 ## Troubleshooting & Support
