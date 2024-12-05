@@ -1,0 +1,24 @@
+{
+    "version": 2.0,
+    "success": true,
+    "reason": null,
+    "content": {
+        "domain_name": "cosmos.furnipict.com",
+        "query_execution_time": "2018-06-18 11:53:01",
+        "classifiers_info": {
+            "first_queried_converted": "2016-11-18 19:16:00",
+            "firstQueried": 1479496560000
+        },
+        "classifiers_classifiers": {
+            "securityCategories": [
+                "Malware"
+            ],
+            "attacks": [
+                "Neutrino"
+            ],
+            "threatTypes": [
+                "Exploit Kit"
+            ]
+        }
+    }
+}
