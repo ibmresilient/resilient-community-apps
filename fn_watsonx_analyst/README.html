@@ -415,9 +415,9 @@
 <ul>
 <li><p><a class="reference internal" href="#watsonxai-subscription-and-project"><span class="xref myst">Watsonx.ai Subscription and Project</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#1-watsonxai-project-id"><span class="xref myst">1. Watsonx.ai Project ID</span></a></p></li>
-<li><p><a class="reference internal" href="#2-ibm-cloud-iam-api-key"><span class="xref myst">2. IBM Cloud IAM API Key</span></a></p></li>
-<li><p><a class="reference internal" href="#3-watsonxai-endpoint-url"><span class="xref myst">3. Watsonx.ai Endpoint URL</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonxai-project-id"><span class="xref myst">Watsonx.ai Project ID</span></a></p></li>
+<li><p><a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">Watsonx.ai Endpoint URL</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
@@ -485,7 +485,11 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
+<td><p>12/2024</p></td>
+<td><p>Bugfix for SOAR versions &lt;= 51.0.2.1 and &gt;= 51.0.4.1 for Note Conversation Function.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>12/2024</p></td>
 <td><p>Initial “<strong>Early Access</strong>” release. Uses watsonx.ai SaaS Version <code class="docutils literal notranslate"><span class="pre">2023-05-29</span></code></p></td>
 </tr>
@@ -530,7 +534,7 @@
 <div><p>These instructions work as of 2024-11-25. These steps may become outdated due to changes made outside of this app.</p>
 </div></blockquote>
 <section id="watsonx-ai-project-id">
-<h4>1. Watsonx.ai Project ID<a class="headerlink" href="#watsonx-ai-project-id" title="Link to this heading">¶</a></h4>
+<h4>Watsonx.ai Project ID<a class="headerlink" href="#watsonx-ai-project-id" title="Link to this heading">¶</a></h4>
 <p>Navigate to the Projects page
 <img alt="" src="../_images/watsonx-ai-04-nav-to-projects.png" /></p>
 <p>If you have not created a project yet, you can create one now, using the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Project</span> <span class="pre">+</span></code> button on the top-right.
@@ -540,7 +544,7 @@
 <img alt="" src="../_images/watsonx-ai-05-copy-project-id.png" /></p>
 </section>
 <section id="ibm-cloud-iam-api-key">
-<h4>2. IBM Cloud IAM API Key<a class="headerlink" href="#ibm-cloud-iam-api-key" title="Link to this heading">¶</a></h4>
+<h4>IBM Cloud IAM API Key<a class="headerlink" href="#ibm-cloud-iam-api-key" title="Link to this heading">¶</a></h4>
 <p>To use watsonx.ai from the <em>watsonx.ai for SOAR</em> app, you’ll need an IBM Cloud IAM API Key. To generate an API key, click on the menu icon in the top left of the watsonx.ai dashboard and open <em>Access (IAM)</em> under the <em>Administration</em> menu.</p>
 <p><img alt="screenshot: watsonx-api-1" src="../_images/watsonx-ai-03-key1.png" /></p>
 <p>The <em>Access IAM</em> dashboard will open…</p>
@@ -552,7 +556,7 @@
 <p>Take note of the API key as this will also be used during app configuration.</p>
 </section>
 <section id="watsonx-ai-endpoint-url">
-<h4>3. Watsonx.ai Endpoint URL<a class="headerlink" href="#watsonx-ai-endpoint-url" title="Link to this heading">¶</a></h4>
+<h4>Watsonx.ai Endpoint URL<a class="headerlink" href="#watsonx-ai-endpoint-url" title="Link to this heading">¶</a></h4>
 <p>The endpoint will depend on which region your watsonx.ai project was created in. You can see which region you’re using in the watsonx.ai dashboard in the dropdown at the top-right, next to the user icon.</p>
 <p>Find the relevant Endpoint for your region at https://cloud.ibm.com/apidocs/watsonx-ai#endpoint-url.</p>
 <blockquote>
@@ -661,17 +665,17 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-even"><td><p><strong>watsonx_api_key</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p>0123-4567-89ab-cdef</p></td>
-<td><p>Your watsonx.ai API key - see <a class="reference internal" href="#2-ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></td>
+<td><p>Your watsonx.ai API key - see <a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>watsonx_endpoint</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://us-south.ml.cloud.ibm.com</span></code></p></td>
-<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#3-watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a></p></td>
+<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>watsonx_project_id</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p>0123-4567-89ab-cdef</p></td>
-<td><p>The watsonx.ai project id - see <a class="reference internal" href="#3-watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Project ID</span></a></p></td>
+<td><p>The watsonx.ai project id - see <a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Project ID</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1282,9 +1286,9 @@ Additional package dependencies may exist for each of these packages:</p>
 </li>
 <li><a class="reference internal" href="#requirements">Requirements</a><ul>
 <li><a class="reference internal" href="#watsonx-ai-subscription-and-project">Watsonx.ai Subscription and Project</a><ul>
-<li><a class="reference internal" href="#watsonx-ai-project-id">1. Watsonx.ai Project ID</a></li>
-<li><a class="reference internal" href="#ibm-cloud-iam-api-key">2. IBM Cloud IAM API Key</a></li>
-<li><a class="reference internal" href="#watsonx-ai-endpoint-url">3. Watsonx.ai Endpoint URL</a></li>
+<li><a class="reference internal" href="#watsonx-ai-project-id">Watsonx.ai Project ID</a></li>
+<li><a class="reference internal" href="#ibm-cloud-iam-api-key">IBM Cloud IAM API Key</a></li>
+<li><a class="reference internal" href="#watsonx-ai-endpoint-url">Watsonx.ai Endpoint URL</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
