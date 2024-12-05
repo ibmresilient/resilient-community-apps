@@ -11,7 +11,7 @@ from pytz import timezone
 import pytz
 from tzlocal.windows_tz import win_tz
 from resilient_lib import OAuth2ClientCredentialsSession
-from requests.packages.urllib3.util import Retry
+from urllib3.util import Retry
 from requests.adapters import HTTPAdapter
 from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib import get_file_attachment_metadata
@@ -245,6 +245,7 @@ class MSGraphHelper(object):
         :param email_address: email address of the user's mailbox from which to delete the message
         :param message_id: message id of the message to be deleted
         :param mail_folder: mailFolder id of the folder containing the message to be deleted
+        :param dest_folder: mailFolder id (string) of the folder to move the message to 
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
         mail_folder_string = self.build_folder_string(mail_folder)
@@ -254,7 +255,7 @@ class MSGraphHelper(object):
 
         response = self.ms_graph_session.post(ms_graph_users_url,
                                               headers={'Content-Type': 'application/json'},
-                                              json={'destinationId': dest_folder['name']})
+                                              json={'destinationId': dest_folder})
 
         self.check_ms_graph_response_code(response.status_code)
 

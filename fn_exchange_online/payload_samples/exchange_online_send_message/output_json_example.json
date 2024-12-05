@@ -8,10 +8,10 @@
   },
   "raw": "{\"value\": true, \"failed_attachments\": null}",
   "inputs": {
-    "exo_recipients": "soartester@reshydradev.onmicrosoft.com",
+    "exo_recipients": "soartester@mytenant.onmicrosoft.com",
     "incident_id": 2099,
     "exo_message_subject": "test123456",
-    "exo_email_address": "soartester@reshydradev.onmicrosoft.com",
+    "exo_email_address": "soartester@mytenant.onmicrosoft.com",
     "exo_attachment_names": null,
     "exo_message_body": "test123456"
   },
@@ -19,7 +19,7 @@
     "version": "1.0",
     "package": "fn-exchange-online",
     "package_version": "1.4.0",
-    "host": "Henry's IBM 16 inch Macbook Pro",
+    "host": "myLaptop",
     "execution_time_ms": 2834,
     "timestamp": "2023-06-15 15:56:30"
   }

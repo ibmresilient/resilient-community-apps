@@ -10,7 +10,7 @@
     ],
     "delete_results": [
       {
-        "email_address": "soartester@reshydradev.onmicrosoft.com",
+        "email_address": "soartester@mytenant.onmicrosoft.com",
         "deleted_list": [
           {
             "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\"",
@@ -22,7 +22,7 @@
             "sender": {
               "emailAddress": {
                 "name": "SOAR tester",
-                "address": "soartester@reshydradev.onmicrosoft.com"
+                "address": "soartester@mytenant.onmicrosoft.com"
               }
             }
           }
@@ -31,15 +31,15 @@
       }
     ]
   },
-  "raw": "{\"incident_id\": 2115, \"exo_query_output_format\": [\"Exchange Online data table\", \"Incident note\"], \"delete_results\": [{\"email_address\": \"soartester@reshydradev.onmicrosoft.com\", \"deleted_list\": [{\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAApGgUgAAA=\", \"receivedDateTime\": \"2023-05-30T07:49:26Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGgUgAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@reshydradev.onmicrosoft.com\"}}}], \"not_deleted_list\": []}]}",
+  "raw": "{\"incident_id\": 2115, \"exo_query_output_format\": [\"Exchange Online data table\", \"Incident note\"], \"delete_results\": [{\"email_address\": \"soartester@mytenant.onmicrosoft.com\", \"deleted_list\": [{\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAApGgUgAAA=\", \"receivedDateTime\": \"2023-05-30T07:49:26Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGgUgAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}], \"not_deleted_list\": []}]}",
   "inputs": {
-    "exo_query_messages_results": "{\"incident_id\": 2115, \"exo_query_output_format\": [\"Exchange Online data table\", \"Incident note\"], \"email_results\": [{\"email_address\": \"soartester@reshydradev.onmicrosoft.com\", \"status_code\": 200, \"email_list\": [{\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAApGgUgAAA=\", \"receivedDateTime\": \"2023-05-30T07:49:26Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGgUgAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@reshydradev.onmicrosoft.com\"}}}]}]}"
+    "exo_query_messages_results": "{\"incident_id\": 2115, \"exo_query_output_format\": [\"Exchange Online data table\", \"Incident note\"], \"email_results\": [{\"email_address\": \"soartester@mytenant.onmicrosoft.com\", \"status_code\": 200, \"email_list\": [{\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAApGgUgAAA=\", \"receivedDateTime\": \"2023-05-30T07:49:26Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGgUgAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}]}]}"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-exchange-online",
     "package_version": "1.4.0",
-    "host": "Henry's IBM 16 inch Macbook Pro",
+    "host": "myLaptop",
     "execution_time_ms": 1423,
     "timestamp": "2023-05-30 15:49:57"
   }

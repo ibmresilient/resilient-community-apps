@@ -30,6 +30,9 @@
         "exo_email_address": {
           "type": "string"
         },
+        "exo_messages_id": {
+          "type": "string"
+        },
         "exo_destination_mailfolder_id": {
           "type": "object",
           "properties": {
@@ -40,9 +43,6 @@
               "type": "string"
             }
           }
-        },
-        "exo_messages_id": {
-          "type": "string"
         }
       }
     },

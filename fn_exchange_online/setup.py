@@ -20,18 +20,25 @@ def snake_to_camel(word):
 setup(
     name='fn_exchange_online',
     display_name='Microsoft Exchange Online',
-    version='1.4.1',
+    version='1.4.2',
     license='MIT',
     author='IBM SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
-    description="Integrate with Microsoft Exchange Online email and meeting functionality",
-    long_description="IBM SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from IBM SOAR.",
+    description="IBM SOAR app - Microsoft Exchange Online email and meeting functionality",
+    long_description="""IBM SOAR app for Microsoft Exchange Online provides the capability to access and manipulate \
+        Microsoft Exchange Online (Outlook) messages from IBM SOAR.<br>
+
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://github.com/ibmresilient/resilient-community-apps/blob/main/fn_sumo_logic/README.md'>App Documentation</a></ul>""",
+
     install_requires=[
-        'resilient_circuits>=49.0.0',
+        'resilient_circuits>=51.0.0',
         'pytz>=2019.3',
         'tzlocal>=2.0.0'
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
