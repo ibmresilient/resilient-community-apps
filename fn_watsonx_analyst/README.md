@@ -6,9 +6,9 @@
   - [Key Features](#key-features)
 - [Requirements](#requirements)
   - [Watsonx.ai Subscription and Project](#watsonxai-subscription-and-project)
-    - [1. Watsonx.ai Project ID](#1-watsonxai-project-id)
-    - [2. IBM Cloud IAM API Key](#2-ibm-cloud-iam-api-key)
-    - [3. Watsonx.ai Endpoint URL](#3-watsonxai-endpoint-url)
+    - [Watsonx.ai Project ID](#watsonxai-project-id)
+    - [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key)
+    - [Watsonx.ai Endpoint URL](#watsonxai-endpoint-url)
   - [SOAR platform](#soar-platform)
   - [QRadar Suite](#qradar-suite)
   - [Proxy Server](#proxy-server)
@@ -43,8 +43,9 @@
 
 ## Release Notes
 
-| Version | Date    | Notes                                                                   |
-|---------|---------|-------------------------------------------------------------------------|
+| Version | Date    | Notes                                                                         |
+|---------|---------|-------------------------------------------------------------------------------|
+| 1.0.1   | 12/2024 | Bugfix for SOAR versions <= 51.0.2.1 and >= 51.0.4.1 for Note Conversation Function. |
 | 1.0.0   | 12/2024 | Initial "**Early Access**" release. Uses watsonx.ai SaaS Version `2023-05-29` |
 
 ---
@@ -76,7 +77,7 @@
 
 > These instructions work as of 2024-11-25. These steps may become outdated due to changes made outside of this app.
 
-#### 1. Watsonx.ai Project ID
+#### Watsonx.ai Project ID
 Navigate to the Projects page 
 ![](doc/images/watsonx-ai-04-nav-to-projects.png)
 
@@ -88,7 +89,7 @@ Navigate to your project.
 Under the `Manage` tab, on the `General` section, copy the Project ID, you will need this later when configuring the app.
 ![](doc/images/watsonx-ai-05-copy-project-id.png)
 
-#### 2. IBM Cloud IAM API Key
+#### IBM Cloud IAM API Key
 
 To use watsonx.ai from the _watsonx.ai for SOAR_ app, you'll need an IBM Cloud IAM API Key. To generate an API key, click on the menu icon in the top left of the watsonx.ai dashboard and open *Access (IAM)* under the *Administration* menu.
 
@@ -103,7 +104,7 @@ The *Access IAM* dashboard will open...
 
 Take note of the API key as this will also be used during app configuration.
 
-#### 3. Watsonx.ai Endpoint URL
+#### Watsonx.ai Endpoint URL
 
 The endpoint will depend on which region your watsonx.ai project was created in. You can see which region you're using in the watsonx.ai dashboard in the dropdown at the top-right, next to the user icon.
 
@@ -174,9 +175,9 @@ The following table provides the settings you need to configure the app. These s
 
 | Config                 | Required | Example                             | Description                                                                        |
 |------------------------|:--------:|-------------------------------------|------------------------------------------------------------------------------------|
-| **watsonx_api_key**    |   Yes    | 0123-4567-89ab-cdef                 | Your watsonx.ai API key - see [IBM Cloud IAM API Key](#2-ibm-cloud-iam-api-key)    |
-| **watsonx_endpoint**   |   Yes    | `https://us-south.ml.cloud.ibm.com` | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#3-watsonxai-endpoint-url)  |
-| **watsonx_project_id** |   Yes    | 0123-4567-89ab-cdef                 | The watsonx.ai project id - see [watsonx.ai Project ID](#3-watsonxai-endpoint-url) |
+| **watsonx_api_key**    |   Yes    | 0123-4567-89ab-cdef                 | Your watsonx.ai API key - see [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key)    |
+| **watsonx_endpoint**   |   Yes    | `https://us-south.ml.cloud.ibm.com` | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#watsonxai-endpoint-url)  |
+| **watsonx_project_id** |   Yes    | 0123-4567-89ab-cdef                 | The watsonx.ai project id - see [watsonx.ai Project ID](#watsonxai-endpoint-url) |
 
 
 #### Adding the secrets to the App Configuration

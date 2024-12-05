@@ -1,7 +1,12 @@
 from enum import Enum
+import logging
+from typing import List
 
 from resilient import SimpleClient
 
+from fn_watsonx_analyst.types.pbx_detail import PBExecDetail
+
+log = logging.getLogger(__name__)
 
 class RestUrls(Enum):
     """Enum to determine which URL and method to use for each request"""
@@ -32,6 +37,8 @@ class RestUrls(Enum):
         "POST",
         "/playbooks/execution/workspace/{workspace_id}/query_paged?include_activity_error_msg=false",
     ]
+    PLAYBOOK_EXECUTIONS_1 = ["POST", "/playbooks/execution/workspace{workspace_id}/{inc_id}/query_paged"] # From SOAR v51.0.4.1
+    PLAYBOOK_EXECUTIONS_2 = ["POST", "/playbooks/execution/incident/{inc_id}/query_paged?include_activity_error_msg=false"] # Up to & including SOAR v51.0.2.1
 
 
 class RestHelper:
@@ -111,6 +118,8 @@ class RestHelper:
         Kwargs should generally have at least the incident ID.
         """
 
+        log.info("Making %s request for %s", url.value[0], url.name )
+
         match url.value[0]:
             case "GET":
                 match url:
@@ -123,28 +132,48 @@ class RestHelper:
                         try:
                             return data.decode("utf-8")
                         except:
+                            log.warning("Unknown encoding for artifact contents.")
                             return data
                 return res_client.get(url.value[1].format(**kwargs))
 
             case "POST":
+                length = kwargs.get("length", 100)
+
                 match url:
+                    case RestUrls.PLAYBOOK_EXECUTIONS | RestUrls.PLAYBOOK_EXECUTIONS_1 | RestUrls.PLAYBOOK_EXECUTIONS_2:
+                        options = [RestUrls.PLAYBOOK_EXECUTIONS, RestUrls.PLAYBOOK_EXECUTIONS_1, RestUrls.PLAYBOOK_EXECUTIONS_2]
+                        for option in options:
+                            try:
+                                return res_client.post(
+                                    option.value[1].format(**kwargs),
+                                    self.__get_paged_query(
+                                        option, kwargs.get("inc_id", None), length, kwargs.get("art_name", None)
+                                    ), **kwargs
+                                )["data"]
+
+                            except Exception:
+                                # ignore and try next
+                                pass
+                        return []
+
                     case (
                         RestUrls.ARTIFACT_BY_NAME
                         | RestUrls.GET_ARTIFACTS
-                        | RestUrls.PLAYBOOK_EXECUTIONS
                         | RestUrls.INC_ART_ID
                     ):
-                        length = kwargs.get("length", 100)
-                        res = res_client.post(
-                            url.value[1].format(**kwargs),
-                            self.__get_paged_query(
-                                url,
-                                kwargs.get("inc_id", None),
-                                length,
-                                kwargs.get("art_name", None),
-                            ),
-                        )["data"]
-                        return res
+                        try:
+                            res = res_client.post(
+                                url.value[1].format(**kwargs),
+                                self.__get_paged_query(
+                                    url,
+                                    kwargs.get("inc_id", None),
+                                    length,
+                                    kwargs.get("art_name", None),
+                                ),
+                            )["data"]
+                            return res
+                        except Exception:
+                            raise Exception("Error fetching %s data from SOAR.", url.name)
 
                 return res_client.post(url.value[1].format(**kwargs))
             case "PUT":
