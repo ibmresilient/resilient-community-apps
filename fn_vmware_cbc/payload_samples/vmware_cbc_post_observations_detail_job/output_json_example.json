@@ -1,0 +1,144 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "results": [
+      {
+        "alert_category": [
+          "THREAT"
+        ],
+        "alert_id": [
+          "3680c6ba-c645-6779-3976-f9ed69326ca1"
+        ],
+        "backend_timestamp": "2024-06-12T14:35:37.015Z",
+        "device_external_ip": "170.225.223.22",
+        "device_group_id": 0,
+        "device_id": 212389492,
+        "device_installed_by": "Administrator",
+        "device_internal_ip": "9.30.34.190",
+        "device_location": "OFFSITE",
+        "device_name": "cb-win221",
+        "device_os": "WINDOWS",
+        "device_os_version": "Windows Server 2022 x64",
+        "device_policy": "standard",
+        "device_policy_id": 493371,
+        "device_sensor_version": "4.0.0.1292",
+        "device_target_priority": "MEDIUM",
+        "device_timestamp": "2024-06-12T14:32:57.641Z",
+        "document_guid": "djeE5vZFSoS1Xar6Gn_S1A",
+        "enriched": true,
+        "enriched_event_type": "FILE_CREATE",
+        "event_attack_stage": [
+          "DELIVER_EXPLOIT"
+        ],
+        "event_description": "The file \"<share><link hash=\"761de33e1c3d08865f5f2d0cfc84c3b5401c7915a2953ca6b8c2fddbb007556b\">c:\\users\\administrator\\downloads\\temp4\\340s.exe\\340s.exe</link></share>\" was first detected on a local disk. The device was off the corporate network using the public address 170.225.223.22 (located in San Jose CA, United States). The file is not signed. The file was created by the application \"<share><link hash=\"f6ec44f025c67ab18170da47c1c610a94a9c84741f3cdfceb20cee565579868a\">c:\\program files\\confer\\repmgr.exe</link></share>\".",
+        "event_id": "cda5cca328c811efb47ec103488c1130",
+        "event_threat_score": [
+          3
+        ],
+        "event_type": "filemod",
+        "file_scan_result": "/ZBot",
+        "filemod_action": "ACTION_FILE_CREATE",
+        "filemod_hash": [
+          "48cd89827939b3a8976d9bb0993bc338",
+          "761de33e1c3d08865f5f2d0cfc84c3b5401c7915a2953ca6b8c2fddbb007556b"
+        ],
+        "filemod_issuer": [
+          "jhjkkkaaaaaaaaaaa"
+        ],
+        "filemod_name": "c:\\users\\administrator\\downloads\\temp4\\340s.exe\\340s.exe",
+        "filemod_publisher": [
+          "jhjkkkaaaaaaaaaaa"
+        ],
+        "filemod_publisher_state": [
+          "FILE_SIGNATURE_STATE_SIGNED"
+        ],
+        "filemod_reputation": "KNOWN_MALWARE",
+        "ingress_time": 1718202925831,
+        "legacy": true,
+        "observation_description": "A known virus (Trojan: ZBot) was detected in file c:\\users\\administrator\\downloads\\temp4\\340s.exe\\340s.exe.",
+        "observation_id": "cda5cca328c811efb47ec103488c1130:3680c6ba-c645-6779-3976-f9ed69326ca1",
+        "observation_type": "CB_ANALYTICS",
+        "org_id": "7M9FP6WE",
+        "parent_effective_reputation": "TRUSTED_WHITE_LIST",
+        "parent_effective_reputation_source": "CLOUD",
+        "parent_guid": "7M9FP6WE-0ca8ce74-00000318-00000000-1daac4e9610e992",
+        "parent_hash": [
+          "7477c64706110f4d0652b28c6618b8b83d27fef94ca9d112965f8c9a62ca3d7e"
+        ],
+        "parent_issuer": [
+          "Microsoft Windows Production PCA 2011"
+        ],
+        "parent_name": "c:\\windows\\system32\\services.exe",
+        "parent_pid": 792,
+        "parent_publisher": [
+          "Microsoft Windows Publisher"
+        ],
+        "parent_publisher_state": [
+          "FILE_SIGNATURE_STATE_VERIFIED",
+          "FILE_SIGNATURE_STATE_SIGNED"
+        ],
+        "parent_reputation": "TRUSTED_WHITE_LIST",
+        "parent_user_id": "S-1-5-18",
+        "parent_username": "NT AUTHORITY\\SYSTEM",
+        "process_cmdline": [
+          "\"C:\\Program Files\\Confer\\RepMgr.exe\""
+        ],
+        "process_cmdline_length": [
+          36
+        ],
+        "process_effective_reputation": "IGNORE",
+        "process_effective_reputation_source": "IGNORE",
+        "process_guid": "7M9FP6WE-0ca8ce74-00000460-00000000-1daac5135bc76a4",
+        "process_hash": [
+          "8a87acebc21e2cc5eeb24af602b32b30",
+          "f6ec44f025c67ab18170da47c1c610a94a9c84741f3cdfceb20cee565579868a"
+        ],
+        "process_issuer": [
+          "Sectigo RSA Code Signing CA 2"
+        ],
+        "process_name": "c:\\program files\\confer\\repmgr.exe",
+        "process_pid": [
+          1120
+        ],
+        "process_publisher": [
+          "Carbon Black, Inc."
+        ],
+        "process_publisher_state": [
+          "FILE_SIGNATURE_STATE_VERIFIED",
+          "FILE_SIGNATURE_STATE_SIGNED"
+        ],
+        "process_reputation": "TRUSTED_WHITE_LIST",
+        "process_sha256": "f6ec44f025c67ab18170da47c1c610a94a9c84741f3cdfceb20cee565579868a",
+        "process_start_time": "2024-05-22T14:06:15.472Z",
+        "process_user_id": "S-1-5-18",
+        "process_username": [
+          "NT AUTHORITY\\SYSTEM"
+        ],
+        "ttp": [
+          "DETECTED_MALWARE_APP"
+        ]
+      }
+    ],
+    "num_found": 1,
+    "num_available": 1,
+    "approximate_unaggregated": 1,
+    "num_aggregated": 1,
+    "contacted": 21,
+    "completed": 21,
+    "message": ""
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_observations": "{\"alert_id\": \"3680c6ba-c645-6779-3976-f9ed69326ca1\"}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 95538,
+    "timestamp": "2024-06-17 11:25:10"
+  }
+}

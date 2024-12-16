@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_text": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "model_id": {
+          "type": "string"
+        },
+        "stop_reason": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "generated_token_count": {
+          "type": "number"
+        },
+        "input_token_count": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
