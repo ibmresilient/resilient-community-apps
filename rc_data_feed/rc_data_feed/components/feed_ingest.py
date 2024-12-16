@@ -65,8 +65,6 @@ class FeedComponent(ResilientComponent):
         try:
             self.options = opts.get("feeds", {})
 
-            self.channel = "actions." + self.options.get("queue", "feed_data")
-
             if self.options.get("feed_names") is None:
                 LOG.error("No feed_names are specified")
             else:
@@ -90,6 +88,9 @@ class FeedComponent(ResilientComponent):
 
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
+
+                # set the channel to receive messages
+                self.channel = "actions." + self.options.get("queue", "feed_data")
 
                 # determine the reload options to follow
                 if str_to_bool(self.options.get('reload', 'false')) and not is_this_a_selftest(self):

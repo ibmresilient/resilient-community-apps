@@ -10,6 +10,7 @@ import sqlite3
 import pyodbc
 import sys
 import sqlparams
+from datetime import datetime, timezone
 from six import string_types
 from rc_data_feed.lib.type_info import TypeInfo
 
@@ -194,7 +195,7 @@ class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
 class SqliteDialect(SqlDialect):
     RESERVE_LIST = []
     def __init__(self):
-        self.mapped_translate_value = translate_value_for_blob(SqliteDialect.make_blob)
+        self.mapped_translate_value = local_translate_value({"blob": SqliteDialect.make_blob})
 
     """
     Dialect for SQLite database...note only use this if you are using the
@@ -268,7 +269,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
                     ]
 
     def __init__(self):
-        self.mapped_translate_value = translate_value_for_blob(PostgreSQL96Dialect.make_blob)
+        self.mapped_translate_value = local_translate_value({"blob": PostgreSQL96Dialect.make_blob})
 
     def get_column_type(self, input_type):  # pylint: disable=no-self-use
         """
@@ -364,7 +365,9 @@ class MySqlDialect(ODBCDialectBase):
                     'unlock', 'unsigned', 'update', 'usage', 'use', 'user_resources', 'using', 'values', 'varbinary', 'varchar', 'varcharacter',
                     'varying', 'warnings', 'when', 'where', 'with', 'write', 'xor', 'year_month', 'zerofill']
     def __init__(self):
-        self.mapped_translate_value = translate_value_for_blob(MySqlDialect.make_blob)
+        self.mapped_translate_value = local_translate_value({"blob": MySqlDialect.make_blob, 
+                                                             "datetimepicker": MySqlDialect.translate_value_datetimepicker,
+                                                             "datepicker": MySqlDialect.translate_value_datetimepicker})
 
     def get_upsert(self, table_name, field_names, field_types):
         """
@@ -498,6 +501,17 @@ class MySqlDialect(ODBCDialectBase):
     @staticmethod
     def make_blob(type_info, field, value):
         return value
+    
+    @staticmethod
+    def translate_value_datetimepicker(type_info, field, value):
+        # Server returns date as milliseconds since epoch (1/1/1970), but Python
+        # wants it as seconds.  Then, convert to an ISO formatted string
+        # representation. Modification is to remove rz offset information
+        #
+        d = datetime.fromtimestamp(value/1000, timezone.utc)
+
+        # strip tz information
+        return d.isoformat(timespec="seconds").replace("+00:00", "")
 
 class SqlServerDialect(ODBCDialectBase):
     RESERVE_LIST = ['absolute', 'action', 'ada', 'add', 'all', 'allocate', 'alter', 'and', 'any', 'are', 'as', 'asc',
@@ -905,17 +919,19 @@ END; """
     def get_sqlparams_helper(self):
         return None
 
-def translate_value_for_blob(blob_func):
+def local_translate_value(mapping_dict):
     """[define mappings for Resilient fields to db fields]
 
     Args:
-        blob_func ([method]): [method to run when encountering a blob field type]
+        mapping_dict ([dict]): [mapping to different field types which should be added
+            or overwritten]
 
     Returns:
         [object]: [translated field ready for the specific db]
     """
     mapping = TypeInfo.get_default_mapping()
-    mapping['blob'] = blob_func
+    for k, v in mapping_dict.items():
+        mapping[k] = v
 
     def translate_value(type_info, field, value):
         chged_value = copy.copy(value)

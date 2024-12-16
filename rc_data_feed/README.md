@@ -36,6 +36,7 @@ Newly added fields and data tables are created in the destination database (for 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.3.1   | 12/2024 | Fix for race condition with PluginPool |
 | 3.3.0   | 9/2024 | Support for incident time series data |
 | 3.2.1   | 6/2024 | Fix for exclusion list logic |
 | 3.2.0   | 5/2024 | Added ability to trap critical plugin errors |
