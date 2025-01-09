@@ -1,6 +1,7 @@
 # Data Feeder for ODBC Databases
 
 ## Release Notes
+* v1.2.1 (12/24) Fix for race condition initializing PluginPool
 * v1.2.0 Support for incident timeseries data
 * v1.1.1 Refactored exclusion list logic
 * v1.1.0 Bug fixes for database re-connections attempts. Sync Incident function is now interruptible if the playbook/workflow is cancelled. Added ability to exclude fields from incident database table.

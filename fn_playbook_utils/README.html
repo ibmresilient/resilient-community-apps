@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Playbook Utils - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -1833,7 +1833,7 @@ Specify the workflow incident id range or date range</p>
 <span class="n">object_stats</span> <span class="o">=</span> <span class="p">{</span> <span class="nb">object</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="nb">object</span> <span class="ow">in</span> <span class="n">OBJECT_TYPES</span> <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">update_workflow_stats</span><span class="p">(</span><span class="n">workflow_name</span><span class="p">,</span> <span class="n">workflow_id</span><span class="p">,</span> <span class="n">workflow_type</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_workflow_stats</span><span class="p">(</span><span class="n">workflow_name</span><span class="p">,</span> <span class="n">workflow_id</span><span class="p">,</span> <span class="n">workflow_type</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;[tracking frequency of workflows by workflow id]</span>
 
 <span class="sd">  Args:</span>
@@ -1850,7 +1850,7 @@ Specify the workflow incident id range or date range</p>
 
   <span class="n">wf_stats</span><span class="p">[</span><span class="n">workflow_id</span><span class="p">][</span><span class="s1">&#39;workflows&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="k">def</span> <span class="nf">update_object_stats</span><span class="p">(</span><span class="n">workflow_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span> <span class="n">object_type</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_object_stats</span><span class="p">(</span><span class="n">workflow_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span> <span class="n">object_type</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;[track what workflows are run on a given attachment, task or artifact]</span>
 
 <span class="sd">  Args:</span>
@@ -1865,7 +1865,7 @@ Specify the workflow incident id range or date range</p>
 
   <span class="n">object_stats</span><span class="p">[</span><span class="n">object_type</span><span class="p">][</span><span class="n">object_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">workflow_name</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">sort_wf_stats</span><span class="p">(</span><span class="n">wf_stats</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_wf_stats</span><span class="p">(</span><span class="n">wf_stats</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;[sort worflow stats by most frequent]</span>
 
 <span class="sd">  Args:</span>
@@ -1880,7 +1880,7 @@ Specify the workflow incident id range or date range</p>
 
   <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">wf_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">wf</span><span class="p">:</span> <span class="n">wf</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">count_items_in_tuple_list</span><span class="p">(</span><span class="n">tuple_list</span><span class="p">,</span> <span class="n">ndx</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_items_in_tuple_list</span><span class="p">(</span><span class="n">tuple_list</span><span class="p">,</span> <span class="n">ndx</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;[count the repeat items in the workflow list and dedup the list]</span>
 <span class="sd">  &quot;&quot;&quot;</span>
   <span class="c1"># count the list</span>
@@ -1897,7 +1897,7 @@ Specify the workflow incident id range or date range</p>
     
   <span class="k">return</span> <span class="n">counted_objects</span>
 
-<span class="k">def</span> <span class="nf">sort_object_stats</span><span class="p">(</span><span class="n">object_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_object_stats</span><span class="p">(</span><span class="n">object_list</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;[sort workflow frequency by specific artifact, task, incident, attachment]</span>
 
 <span class="sd">  Args:</span>
@@ -2089,7 +2089,7 @@ This script relies on the workflow property: playbook_data</p>
 <p><strong>Object:</strong> incident</p>
 <details><summary>Script Text:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">java.util</span> <span class="kn">import</span> <span class="n">Date</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">java.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Date</span>
 
 <span class="n">current_dt</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span>
 
@@ -2102,7 +2102,7 @@ This script relies on the workflow property: playbook_data</p>
   <span class="s1">&#39;playbook&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s2">&quot;&lt;a href=&#39;/#playbooks/designer/</span><span class="si">{1}</span><span class="s2">&#39;&gt;</span><span class="si">{3}</span><span class="s2">&lt;/a&gt;&quot;</span>
 <span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">make_url</span><span class="p">(</span><span class="n">org_id</span><span class="p">,</span> <span class="n">inc_id</span><span class="p">,</span> <span class="n">element_type</span><span class="p">,</span> <span class="n">element_id</span><span class="p">,</span> <span class="n">element_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_url</span><span class="p">(</span><span class="n">org_id</span><span class="p">,</span> <span class="n">inc_id</span><span class="p">,</span> <span class="n">element_type</span><span class="p">,</span> <span class="n">element_id</span><span class="p">,</span> <span class="n">element_name</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">element_type</span> <span class="ow">in</span> <span class="n">URL_MAP</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">URL_MAP</span><span class="p">[</span><span class="n">element_type</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inc_id</span><span class="p">,</span> <span class="n">element_id</span><span class="p">,</span> <span class="n">org_id</span><span class="p">,</span> <span class="n">element_name</span><span class="p">)</span>
 
@@ -2156,7 +2156,7 @@ This script relies on the workflow property: workflow_data</p>
 <p><strong>Object:</strong> incident</p>
 <details><summary>Script Text:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">java.util</span> <span class="kn">import</span> <span class="n">Date</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">java.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Date</span>
 
 <span class="n">current_dt</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span>
 
@@ -2169,7 +2169,7 @@ This script relies on the workflow property: workflow_data</p>
   <span class="s1">&#39;playbook&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s2">&quot;&lt;a href=&#39;/#playbooks/designer/</span><span class="si">{1}</span><span class="s2">&#39;&gt;</span><span class="si">{3}</span><span class="s2">&lt;/a&gt;&quot;</span>
 <span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">make_url</span><span class="p">(</span><span class="n">org_id</span><span class="p">,</span> <span class="n">inc_id</span><span class="p">,</span> <span class="n">element_type</span><span class="p">,</span> <span class="n">element_id</span><span class="p">,</span> <span class="n">element_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_url</span><span class="p">(</span><span class="n">org_id</span><span class="p">,</span> <span class="n">inc_id</span><span class="p">,</span> <span class="n">element_type</span><span class="p">,</span> <span class="n">element_id</span><span class="p">,</span> <span class="n">element_name</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">element_type</span> <span class="ow">in</span> <span class="n">URL_MAP</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">URL_MAP</span><span class="p">[</span><span class="n">element_type</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inc_id</span><span class="p">,</span> <span class="n">element_id</span><span class="p">,</span> <span class="n">org_id</span><span class="p">,</span> <span class="n">element_name</span><span class="p">)</span>
 

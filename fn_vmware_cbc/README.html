@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>VMware Carbon Black Cloud - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -1066,7 +1066,7 @@ Here are 3 polling filter criteria examples that add or update CBC alerts in SOA
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span> <span class="k">as</span> <span class="n">url_encode</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">quote</span> <span class="k">as</span> <span class="n">url_encode</span>
 
 <span class="c1"># Map VMware CBC workflow closure_reason values SOAR resolution id values.</span>
 <span class="n">MAPPING_CLOSURE_REASON</span> <span class="o">=</span> <span class="p">{</span>
@@ -1777,7 +1777,7 @@ Here are 3 polling filter criteria examples that add or update CBC alerts in SOA
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">post_note_to_alert_results</span>
 
@@ -1984,7 +1984,7 @@ Here are 3 polling filter criteria examples that add or update CBC alerts in SOA
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">vmware_cbc_alert_id</span><span class="p">:</span>
   <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;VMware CBC alert ID is required!&quot;</span><span class="p">)</span>
@@ -2090,7 +2090,7 @@ Here are 3 polling filter criteria examples that add or update CBC alerts in SOA
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">row</span><span class="o">.</span><span class="n">cbc_process_sha256</span><span class="p">:</span>
   <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;SHA256 is required to override reputation&quot;</span><span class="p">)</span>
@@ -2116,7 +2116,7 @@ Here are 3 polling filter criteria examples that add or update CBC alerts in SOA
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">override_reputation_results</span>
 
@@ -2412,7 +2412,7 @@ Typically, a function will create workflow property and this script will run aft
 <span class="sd">  When using playbook.functions.results.convert_json_to_rich_text with standard function results, all the defaults for padding, separator, etc. are used.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># needed for python 3</span>
 <span class="k">try</span><span class="p">:</span>
@@ -2425,17 +2425,17 @@ Typically, a function will create workflow property and this script will run aft
 
 <span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+&#39;</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">ConvertJson</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConvertJson</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to hold the conversion parameters and perform the conversion&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span> <span class="o">=</span> <span class="n">omit_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sort_keys</span> <span class="o">=</span> <span class="n">sort_keys</span>
 
 
-    <span class="k">def</span> <span class="nf">format_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">format_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
 <span class="sd">          Find embedded urls (http(s)) and add html anchor tags to display as links</span>
 <span class="sd">          Args:</span>
@@ -2458,7 +2458,7 @@ Typically, a function will create workflow property and this script will run aft
 
         <span class="k">return</span> <span class="n">formatted_item</span>
 
-    <span class="k">def</span> <span class="nf">expand_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
 <span class="sd">          convert items to html, adding indents to nested dictionaries.</span>
 <span class="sd">          Args:</span>
@@ -2499,7 +2499,7 @@ Typically, a function will create workflow property and this script will run aft
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">convert_json_to_rich_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert_json_to_rich_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
 <span class="sd">          Walk dictionary tree and convert to html for better display</span>
 <span class="sd">          Args:</span>
@@ -2541,7 +2541,7 @@ Typically, a function will create workflow property and this script will run aft
                 <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span>
             <span class="p">)</span>  <span class="c1"># tighten up result</span>
 
-    <span class="k">def</span> <span class="nf">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        apply the separator to the data</span>
 <span class="sd">        :param separator: None, str or list such as [&#39;&lt;span&gt;&#39;, &#39;&lt;/span&gt;&#39;]</span>
@@ -2561,13 +2561,13 @@ Typically, a function will create workflow property and this script will run aft
 
         <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">make_unicode</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_unicode</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="s1">&#39;None&#39;</span>
 
     <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">playbook</span> <span class="ow">and</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span>
     <span class="k">elif</span> <span class="n">playbook</span> <span class="ow">and</span> <span class="n">playbook</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -2577,7 +2577,7 @@ Typically, a function will create workflow property and this script will run aft
 
     <span class="k">return</span> <span class="kc">None</span>
 
-<span class="k">def</span> <span class="nf">get_properties</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_properties</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Logic to collect the json and parameters from a workflow property.</span>
 <span class="sd">    Args:</span>
@@ -2647,7 +2647,7 @@ Typically, a function will create workflow property and this script will run aft
 <p><strong>Object:</strong> incident</p>
 <details><summary>Script Text:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_alert_by_id_results</span>
 
@@ -2721,15 +2721,15 @@ Typically, a function will create workflow property and this script will run aft
 <p><strong>Object:</strong> Incident</p>
 <details><summary>Script Text:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="k">def</span> <span class="nf">hash_is_sha256</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hash_is_sha256</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">==</span> <span class="mi">64</span>
 
-<span class="k">def</span> <span class="nf">hash_is_sha1</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hash_is_sha1</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">==</span> <span class="mi">40</span>
 
-<span class="k">def</span> <span class="nf">hash_is_md5</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hash_is_md5</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span> <span class="o">==</span> <span class="mi">32</span>
 
 

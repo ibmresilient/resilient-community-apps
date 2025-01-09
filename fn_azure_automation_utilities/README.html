@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Azure Automation Utilities - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -816,7 +816,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">account_results</span>
 <span class="n">public_network_access</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;azure_automation_account_public_network_access&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">disable_local_auth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;azure_automation_account_disable_local_auth&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -957,7 +957,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_results</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">azure_automation_create_ui_tab</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1124,7 +1124,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">schedule</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">azure_automation_create_ui_tab</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1224,7 +1224,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">account_delete</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -1329,7 +1329,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_cred</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -1435,7 +1435,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_runbook</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">azure_automation_create_ui_tab</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1529,7 +1529,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_schedule</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -1796,10 +1796,10 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">account_info</span>
 
-<span class="k">def</span> <span class="nf">add_to_row</span><span class="p">(</span><span class="n">account</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_to_row</span><span class="p">(</span><span class="n">account</span><span class="p">):</span>
   <span class="n">account_id</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
   <span class="n">resourceGroup_start</span> <span class="o">=</span> <span class="n">account_id</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;resourceGroups/&quot;</span><span class="p">)</span><span class="o">+</span><span class="mi">15</span>
   <span class="n">resource_group</span> <span class="o">=</span> <span class="n">account_id</span><span class="p">[</span><span class="n">resourceGroup_start</span><span class="p">:</span><span class="n">account_id</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;/providers&quot;</span><span class="p">,</span> <span class="n">resourceGroup_start</span><span class="p">)]</span>
@@ -1908,7 +1908,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">registration_info</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -2017,11 +2017,11 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">cred</span>
 
 <span class="c1"># Add credential information to data table</span>
-<span class="k">def</span> <span class="nf">add_to_row</span><span class="p">(</span><span class="n">credential</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_to_row</span><span class="p">(</span><span class="n">credential</span><span class="p">):</span>
   <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;azure_automation_credentials&quot;</span><span class="p">)</span>
   <span class="n">row</span><span class="p">[</span><span class="s2">&quot;credential_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credential</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
   <span class="n">row</span><span class="p">[</span><span class="s2">&quot;credential_username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credential</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;userName&quot;</span><span class="p">)</span>
@@ -2157,7 +2157,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">job_results</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">azure_automation_create_ui_tab</span> <span class="o">=</span> <span class="kc">True</span>
@@ -2439,7 +2439,7 @@ Retrieve a list of activities in the module identified by module name.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">module_activity</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -2569,7 +2569,7 @@ List Dsc node reports by node id.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">node_report</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -2694,11 +2694,11 @@ List Dsc node reports by node id.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">runbook_results</span>
 
 <span class="c1"># Add runbooks info to the data table</span>
-<span class="k">def</span> <span class="nf">add_to_row</span><span class="p">(</span><span class="n">runbook</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_to_row</span><span class="p">(</span><span class="n">runbook</span><span class="p">):</span>
   <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;azure_automation_runbooks&quot;</span><span class="p">)</span>
   <span class="n">row</span><span class="p">[</span><span class="s2">&quot;runbook_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">runbook</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
   <span class="n">row</span><span class="p">[</span><span class="s2">&quot;runbook_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">runbook</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;runbookType&quot;</span><span class="p">)</span>
@@ -2825,11 +2825,11 @@ List Dsc node reports by node id.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_schedule</span>
 
 <span class="c1"># Add schedule information to data table</span>
-<span class="k">def</span> <span class="nf">row_to_add</span><span class="p">(</span><span class="n">schedule</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">row_to_add</span><span class="p">(</span><span class="n">schedule</span><span class="p">):</span>
   <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;azure_automation_schedules&quot;</span><span class="p">)</span>
   <span class="n">row</span><span class="p">[</span><span class="s2">&quot;schedule_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">schedule</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
   <span class="n">row</span><span class="p">[</span><span class="s2">&quot;schedule_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">schedule</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -2970,7 +2970,7 @@ List Dsc node reports by node id.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">statistics</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -3076,7 +3076,7 @@ List Dsc node reports by node id.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">registration_key</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>

@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Data Feeder for ODBC Databases - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -405,6 +405,7 @@
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <ul class="simple">
+<li><p>v1.2.1 (12/24) Fix for race condition initializing PluginPool</p></li>
 <li><p>v1.2.0 Support for incident timeseries data</p></li>
 <li><p>v1.1.1 Refactored exclusion list logic</p></li>
 <li><p>v1.1.0 Bug fixes for database re-connections attempts. Sync Incident function is now interruptible if the playbook/workflow is cancelled. Added ability to exclude fields from incident database table.</p></li>
@@ -839,7 +840,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 <section id="modify-dialect-encoding">
 <h4>Modify dialect encoding<a class="headerlink" href="#modify-dialect-encoding" title="Link to this heading">¶</a></h4>
 <p>Each SQL dialect modifies the database connection with the encoding used to read and write data. The configure_connection() function makes these changes and in all cases, sets the encoding to UTF-8. In some cases, the format of the encoding parameters may change between python environments and the following logic can be used to account for those different environments:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">configure_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
     <span class="n">connection</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_WCHAR</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1">## pylint: disable=c-extension-no-member</span>
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c1">## to set encoding on python 2</span>
         <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
@@ -852,7 +853,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 <section id="modify-data-type-mapping">
 <h4>Modify data type mapping<a class="headerlink" href="#modify-data-type-mapping" title="Link to this heading">¶</a></h4>
 <p>Each SQL dialect contains a mapping table to convert Resilient data types to your dialect’s datastore. See the function get_column_type() for how mapping is presently done.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_column_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_type</span><span class="p">):</span>  <span class="c1">## pylint: disable=no-self-use</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_column_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_type</span><span class="p">):</span>  <span class="c1">## pylint: disable=no-self-use</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gets the DB column type for the specified Resilient &#39;input type&#39;</span>
 
@@ -878,7 +879,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 <p>Text data types can be challenging for some databases based on the data length limits. In those cases, use a constant to define the limit and truncate your data using that value. Be aware that character limits do not account for Unicode characters which are double-byte. This means that a data limit of 64k characters actually translates to 32k Unicode characters.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MAX_MARIADB_TEXT</span> <span class="o">=</span> <span class="mi">32000</span>
 
-<span class="k">def</span> <span class="nf">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_names</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_names</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="c1">## Need to get a list that contains all the values in the same order as parameter_names.</span>
     <span class="n">bind_parameters</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 

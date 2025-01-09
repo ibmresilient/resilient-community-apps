@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Technical Workshop Guide: resilient-circuits - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -481,7 +481,7 @@
 </div>
 </li>
 <li><p>Test success with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">systems</span><span class="p">;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">systems</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
@@ -1106,7 +1106,7 @@ To install <strong>without an Internet Connection:</strong></p>
   <span class="s2">&quot;sql_column_5&quot;</span><span class="p">]</span>
   
 <span class="c1"># Processing</span>
-<span class="kn">from</span> <span class="nn">java.util</span> <span class="kn">import</span> <span class="n">Date</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">java.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Date</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">entries</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
@@ -1369,7 +1369,7 @@ $ pip install future
 <li><p>Create a new file in the VSCode. Call it <strong>grr_test.py</strong> and save it in the home directory
 <img alt="screenshot" src="../_images/65.png" /></p></li>
 <li><p>First we need to <strong>import the GRR Library</strong>, then need to <strong>define our connection params</strong>. Then using the docs we can see we need to <strong>create a <code class="docutils literal notranslate"><span class="pre">grrapi</span> <span class="pre">object</span></code></strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">grr_api_client</span> <span class="kn">import</span> <span class="n">api</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grr_api_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">api</span>
 
 <span class="n">grr_server</span><span class="o">=</span><span class="s2">&quot;http://localhost:8000&quot;</span>
 <span class="n">grr_user</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span>
@@ -1436,20 +1436,20 @@ $ pip install future
 <span class="c1"># pragma pylint: disable=unused-argument, no-self-use</span>
 <span class="sd">&quot;&quot;&quot;Function implementation&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">resilient_circuits</span> <span class="kn">import</span> <span class="n">ResilientComponent</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">StatusMessage</span><span class="p">,</span> <span class="n">FunctionResult</span><span class="p">,</span> <span class="n">FunctionError</span>
-<span class="kn">from</span> <span class="nn">grr_api_client</span> <span class="kn">import</span> <span class="n">api</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">resilient_circuits</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResilientComponent</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">StatusMessage</span><span class="p">,</span> <span class="n">FunctionResult</span><span class="p">,</span> <span class="n">FunctionError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">grr_api_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">api</span>
 
-<span class="k">class</span> <span class="nc">FunctionComponent</span><span class="p">(</span><span class="n">ResilientComponent</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FunctionComponent</span><span class="p">(</span><span class="n">ResilientComponent</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Component that implements Resilient function(s)&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opts</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opts</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;constructor provides access to the configuration options&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FunctionComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fn_grr&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
     <span class="nd">@function</span><span class="p">(</span><span class="s2">&quot;grr_search&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">_grr_search_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_grr_search_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function: A function to search for GRR Agent&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Get the function parameters:</span>
@@ -1627,10 +1627,10 @@ $ pip install future
 
 <span class="sd">&quot;&quot;&quot;Generate a default configuration-file section for fn_grr&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_function</span>
 
 
-<span class="k">def</span> <span class="nf">config_section_data</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">config_section_data</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Produce the default configuration section for app.config,</span>
 <span class="sd">      when called by `resilient-circuits config [-c|-u]`</span>
 <span class="sd">    &quot;&quot;&quot;</span>

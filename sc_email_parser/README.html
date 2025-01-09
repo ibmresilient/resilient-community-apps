@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>IBM SOAR example email message parsing script - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -672,9 +672,9 @@ Please note that, compared to version v1 of the script, the allowlist variable l
 <p>Scenario: Emails arriving in a particular mailbox reflect individuals forwarding suspected phishing messages. The scripts operating on these email messages should, in addition to the generic processing, record the reporter’s email address as possibly having been the target of a phishing attack, and record the sender of the forwarded phishing email as suspicious.</p>
 <p>A solution:
 Add the following script to the IBM SOAR platform:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
-<span class="k">def</span> <span class="nf">addArtifact</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">artifactType</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addArtifact</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">artifactType</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;This method adds new artifacts to the incident derived from matches of the the regular expression</span>
 <span class="sd">  parameter within the email body contents.</span>
 <span class="sd">  Parameter &quot;regex&quot; - a regular expression to match against the email body contents.</span>

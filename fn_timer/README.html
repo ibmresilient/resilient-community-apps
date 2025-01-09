@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Timer Function - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -633,7 +633,7 @@ in the function.</p>
 <p>Notice in the <strong>Inputs</strong> section above that one option is to use <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code>. This setting is useful for setting a timer that will expire at a specific date and time in the future. The example workflow included with this app gives a very useful way to use this with playbook or rule activation forms where the SOAR built-in type datetimepicker is used to visually select a time on a calendar at which the timer will expire. This, along with <code class="docutils literal notranslate"><span class="pre">timer_time</span></code> will fit most use cases for this function.</p>
 <p>There may be times, however, where you may want to describe a timer that will expire at a set time from when the playbook is executed with more precision than is permitted using <code class="docutils literal notranslate"><span class="pre">timer_time</span></code>. In busy timer environments, the function itself may take a few seconds to start in the app, thus losing precision from the <code class="docutils literal notranslate"><span class="pre">timer_time</span></code> input. In these cases, it is recommended to use an approach like the one below which marks the time at the point that the input script is run and uses the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module in Python to create a “time delta” to describe a time in the future relative to input script runtime that can be used for the <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code> function input value. (Note that this requires some conversion to fit the expected datetimepicker format.)</p>
 <p><strong>Example</strong>: set a timer to expire in <em>2 days, 4 minutes, and 5 seconds</em> after the input script is run using <code class="docutils literal notranslate"><span class="pre">timer_epoch</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 
 <span class="c1"># Get current time</span>
 <span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>

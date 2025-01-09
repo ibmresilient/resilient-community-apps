@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>ExtraHop for IBM SOAR - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -996,14 +996,14 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  ExtraHop - pb_extrahop_rx_update_detection pre processing script ##</span>
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">extrahop_detection_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_detection_id</span>
 
 <span class="n">UPD_DET_DATETIME</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_detection_note_result</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">SUMMARY</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&lt;[^&lt;]+?&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">get_current_note</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_current_note</span><span class="p">():</span>
     <span class="c1"># Get old note</span>
     <span class="n">note</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">get_detection_note_content</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_detection_note_result</span><span class="o">.</span><span class="n">content</span>
@@ -1014,7 +1014,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
     <span class="k">return</span> <span class="n">note</span>
 
 
-<span class="k">def</span> <span class="nf">make_summary_note</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_summary_note</span><span class="p">():</span>
     <span class="c1"># Make a  note.</span>
     <span class="n">summary_note</span> <span class="o">=</span> <span class="s2">&quot;IBM SOAR </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">UPD_DET_DATETIME</span><span class="p">)</span>
     <span class="n">summary_note</span> <span class="o">+=</span> <span class="s2">&quot;[SOAR case - &#39;</span><span class="si">{}</span><span class="s2">&#39;](Closed with resolution summary: &#39;</span><span class="si">{}</span><span class="s2">&#39;)&quot;</span> \
@@ -1022,7 +1022,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
     <span class="k">return</span> <span class="n">summary_note</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">detection_note</span> <span class="o">=</span> <span class="n">get_current_note</span><span class="p">()</span>
     <span class="n">inputs</span><span class="o">.</span><span class="n">extrahop_note</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">detection_note</span> <span class="k">if</span> <span class="n">detection_note</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">make_summary_note</span><span class="p">()])</span>
     <span class="n">inputs</span><span class="o">.</span><span class="n">extrahop_update_time</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1043,7 +1043,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">detection_id</span> <span class="o">=</span> <span class="n">INPUTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;extrahop_detection_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
@@ -1188,7 +1188,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span>
     <span class="n">tag_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">extrahop_tag_name</span>
     <span class="n">tag</span> <span class="o">=</span> <span class="n">INPUTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;extrahop_tag_name&quot;</span><span class="p">)</span>
@@ -1514,7 +1514,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <span class="n">DATA_TBL_FIELDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ams_description&quot;</span><span class="p">,</span> <span class="s2">&quot;ams_id&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="s2">&quot;ams_name&quot;</span><span class="p">,</span> <span class="s2">&quot;owner&quot;</span><span class="p">,</span> <span class="s2">&quot;rights&quot;</span><span class="p">,</span> <span class="s2">&quot;short_code&quot;</span><span class="p">,</span>
                    <span class="s2">&quot;show_alert_status&quot;</span><span class="p">,</span> <span class="s2">&quot;walks&quot;</span><span class="p">,</span> <span class="s2">&quot;weighting&quot;</span><span class="p">]</span>
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">ams</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">)</span>
@@ -1671,7 +1671,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -1893,7 +1893,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="n">LINKBACK_URL</span> <span class="o">=</span> <span class="s2">&quot;/extrahop/#/detections/detail/</span><span class="si">{}</span><span class="s2">&quot;</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">process_dets</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_dets</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
     <span class="n">detection_url</span> <span class="o">=</span> <span class="n">make_linkback_url</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
     <span class="n">detection_url_html</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&lt;div&gt;&lt;b&gt;&lt;a target=&quot;blank&quot; href=&quot;</span><span class="si">{0}</span><span class="s1">&quot;&gt;</span><span class="si">{1}</span><span class="s1">&lt;/a&gt;&lt;/b&gt;&lt;/div&gt;&#39;</span> \
         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">detection_url</span><span class="p">,</span> <span class="n">det</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
@@ -1936,7 +1936,7 @@ The following screenshots show an example of the data table updated by the funct
     <span class="c1"># Add participant artifacts</span>
     <span class="n">add_participants_artifacts</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;det_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">det</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;participants&quot;</span><span class="p">,</span> <span class="p">[]))</span>
 
-<span class="k">def</span> <span class="nf">make_json_string</span><span class="p">(</span><span class="n">detection_json</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_json_string</span><span class="p">(</span><span class="n">detection_json</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
 
 <span class="sd">    Args:</span>
@@ -1957,7 +1957,7 @@ The following screenshots show an example of the data table updated by the funct
         
     <span class="k">return</span> <span class="n">tbl</span>
 
-<span class="k">def</span> <span class="nf">make_list_string</span><span class="p">(</span><span class="n">detection_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_list_string</span><span class="p">(</span><span class="n">detection_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
 
 <span class="sd">    Args:</span>
@@ -1982,7 +1982,7 @@ The following screenshots show an example of the data table updated by the funct
 
     <span class="k">return</span> <span class="n">tbl</span>
 
-<span class="k">def</span> <span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">det_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">det_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a url to link back to the detection.</span>
 
 <span class="sd">    Args:</span>
@@ -1993,7 +1993,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_console_url</span> <span class="o">+</span> <span class="n">LINKBACK_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">det_id</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Add new artifacts to the incident.</span>
 
 <span class="sd">    :param artifact_type: The type of the artifact.</span>
@@ -2002,7 +2002,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">add_properties_artifacts</span><span class="p">(</span><span class="n">properties</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_properties_artifacts</span><span class="p">(</span><span class="n">properties</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Add IP Address artifacts of the detections properties.</span>
 
 <span class="sd">    Args:</span>
@@ -2016,7 +2016,7 @@ The following screenshots show an example of the data table updated by the funct
             <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
                 <span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="s2">&quot;Suspicious IP address found by ExtraHop.&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">add_participants_artifacts</span><span class="p">(</span><span class="n">det_id</span><span class="p">,</span> <span class="n">participants</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_participants_artifacts</span><span class="p">(</span><span class="n">det_id</span><span class="p">,</span> <span class="n">participants</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Add artifacts of the participants </span>
 
 <span class="sd">    Args:</span>
@@ -2035,7 +2035,7 @@ The following screenshots show an example of the data table updated by the funct
                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">det_id</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;role&quot;</span><span class="p">)))</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">detection_id</span> <span class="o">=</span> <span class="n">INPUTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;extrahop_detection_id&quot;</span><span class="p">)</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
@@ -3159,7 +3159,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="n">LINKBACK_URL</span> <span class="o">=</span> <span class="s2">&quot;/extrahop/#/metrics/devices/</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">dev_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">dev_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a url to link back to the endpoint alert, case, etc.</span>
 
 <span class="sd">    Args:</span>
@@ -3170,7 +3170,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_console_url</span> <span class="o">+</span> <span class="n">LINKBACK_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_site_uuid</span><span class="p">,</span> <span class="n">dev_id</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">process_devs</span><span class="p">(</span><span class="n">dev</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_devs</span><span class="p">(</span><span class="n">dev</span><span class="p">):</span>
     <span class="c1"># Process a device result.</span>
     <span class="n">newrow</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="n">DATA_TABLE</span><span class="p">)</span>
     <span class="n">newrow</span><span class="o">.</span><span class="n">query_execution_date</span> <span class="o">=</span> <span class="n">QUERY_EXECUTION_DATE</span>
@@ -3196,7 +3196,7 @@ The following screenshots show an example of the data table updated by the funct
         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="n">device_url</span><span class="p">,</span> <span class="n">dev</span><span class="p">[</span><span class="s2">&quot;extrahop_id&quot;</span><span class="p">])</span>
     <span class="n">newrow</span><span class="o">.</span><span class="n">device_url</span> <span class="o">=</span> <span class="n">device_url_html</span>
 
-<span class="k">def</span> <span class="nf">get_dev_ids</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_dev_ids</span><span class="p">():</span>
     <span class="c1"># Get participant dev ids    </span>
     <span class="n">dev_ids</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">get_devices_content</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_detections_results</span><span class="o">.</span><span class="n">content</span>
@@ -3335,7 +3335,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">tag_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">extrahop_tag_name</span>
     <span class="n">tag_id</span> <span class="o">=</span> <span class="kc">None</span>
@@ -3721,7 +3721,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="n">DATA_TBL_FIELDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;display_name&quot;</span><span class="p">,</span> <span class="s2">&quot;ipaddr4&quot;</span><span class="p">,</span> <span class="s2">&quot;ipaddr6&quot;</span><span class="p">,</span> <span class="s2">&quot;macaddr&quot;</span><span class="p">,</span> <span class="s2">&quot;extrahop_id&quot;</span><span class="p">]</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">devs</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">[])</span>
@@ -3925,7 +3925,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">get_prop</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_prop</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">prop</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">prop</span>
@@ -3991,7 +3991,7 @@ The following screenshots show an example of the data table updated by the funct
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 <span class="c1">#  Globals</span>
 <span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;funct_extrahop_rx_search_detections&quot;</span>
 <span class="n">PB_NAME</span> <span class="o">=</span> <span class="s2">&quot;Extrahop Revealx search detections&quot;</span>
@@ -4008,7 +4008,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="n">LINKBACK_URL</span> <span class="o">=</span> <span class="s2">&quot;/extrahop/#/detections/detail/</span><span class="si">{}</span><span class="s2">&quot;</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">process_dets</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_dets</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
     <span class="n">detection_url</span> <span class="o">=</span> <span class="n">make_linkback_url</span><span class="p">(</span><span class="n">det</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
     <span class="n">detection_url_html</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&lt;div&gt;&lt;b&gt;&lt;a target=&quot;blank&quot; href=&quot;</span><span class="si">{0}</span><span class="s1">&quot;&gt;</span><span class="si">{1}</span><span class="s1">&lt;/a&gt;&lt;/b&gt;&lt;/div&gt;&#39;</span> \
         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">detection_url</span><span class="p">,</span> <span class="n">det</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
@@ -4038,7 +4038,7 @@ The following screenshots show an example of the data table updated by the funct
     <span class="n">newrow</span><span class="o">.</span><span class="n">mitre_tactics</span> <span class="o">=</span> <span class="n">make_list_string</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mitre_tactics&quot;</span><span class="p">,</span> <span class="p">[]))</span>
     <span class="n">newrow</span><span class="o">.</span><span class="n">mitre_techniques</span> <span class="o">=</span> <span class="n">make_list_string</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mitre_techniques&quot;</span><span class="p">,</span> <span class="p">[]))</span>
 
-<span class="k">def</span> <span class="nf">make_properties_string</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_properties_string</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
 
 <span class="sd">    Args:</span>
@@ -4060,7 +4060,7 @@ The following screenshots show an example of the data table updated by the funct
         
     <span class="k">return</span> <span class="n">tbl</span>
 
-<span class="k">def</span> <span class="nf">make_list_string</span><span class="p">(</span><span class="n">detection_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_list_string</span><span class="p">(</span><span class="n">detection_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
 
 <span class="sd">    Args:</span>
@@ -4086,7 +4086,7 @@ The following screenshots show an example of the data table updated by the funct
     <span class="k">return</span> <span class="n">tbl</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">det_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">det_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a url to link back to the detection.</span>
 
 <span class="sd">    Args:</span>
@@ -4097,7 +4097,7 @@ The following screenshots show an example of the data table updated by the funct
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_console_url</span> <span class="o">+</span> <span class="n">LINKBACK_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">det_id</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">format_input_params</span><span class="p">(</span><span class="n">input_params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">format_input_params</span><span class="p">(</span><span class="n">input_params</span><span class="p">):</span>
     <span class="n">input_params_formatted</span> <span class="o">=</span><span class="s1">&#39;&#39;</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">input_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&quot;extrahop_active_until&quot;</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&quot;extrahop_active_from&quot;</span><span class="p">:</span>
@@ -4106,7 +4106,7 @@ The following screenshots show an example of the data table updated by the funct
     <span class="k">return</span> <span class="n">input_params_formatted</span>
     
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">input_params_formatted</span> <span class="o">=</span> <span class="n">format_input_params</span><span class="p">(</span><span class="n">INPUTS</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
@@ -4283,14 +4283,14 @@ The following screenshots show an example of the data table updated by the funct
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  ExtraHop - pb_extrahop_rx_search_devices pre processing script ##</span>
 
-<span class="k">def</span> <span class="nf">get_prop</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_prop</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">prop</span><span class="p">:</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="nb">filter</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">search_filter</span> <span class="o">=</span> <span class="p">{}</span>
@@ -4347,7 +4347,7 @@ The following screenshots show an example of the data table updated by the funct
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  ExtraHop - pb_extrahop_rx_search_devices post processing script ##</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 <span class="c1">#  Globals</span>
 <span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;funct_extrahop_rx_search_devices&quot;</span>
 <span class="n">PB_NAME</span> <span class="o">=</span> <span class="s2">&quot;Extrahop Reveal(x): Search Devices&quot;</span>
@@ -4361,7 +4361,7 @@ The following screenshots show an example of the data table updated by the funct
 
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">dev_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_linkback_url</span><span class="p">(</span><span class="n">dev_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a url to link back to the endpoint alert, case, etc.</span>
 
 <span class="sd">    Args:</span>
@@ -4373,7 +4373,7 @@ The following screenshots show an example of the data table updated by the funct
     <span class="k">return</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_console_url</span> <span class="o">+</span> <span class="n">LINKBACK_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_site_uuid</span><span class="p">,</span> <span class="n">dev_id</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">process_devs</span><span class="p">(</span><span class="n">dev</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_devs</span><span class="p">(</span><span class="n">dev</span><span class="p">):</span>
     <span class="c1"># Process a device result.</span>
     <span class="n">newrow</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="n">DATA_TABLE</span><span class="p">)</span>
     <span class="n">newrow</span><span class="o">.</span><span class="n">query_execution_date</span> <span class="o">=</span> <span class="n">QUERY_EXECUTION_DATE</span>
@@ -4399,7 +4399,7 @@ The following screenshots show an example of the data table updated by the funct
         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="n">device_url</span><span class="p">,</span> <span class="n">dev</span><span class="p">[</span><span class="s2">&quot;extrahop_id&quot;</span><span class="p">])</span>
     <span class="n">newrow</span><span class="o">.</span><span class="n">device_url</span> <span class="o">=</span> <span class="n">device_url_html</span>
 
-<span class="k">def</span> <span class="nf">format_input_params</span><span class="p">(</span><span class="n">input_params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">format_input_params</span><span class="p">(</span><span class="n">input_params</span><span class="p">):</span>
     <span class="n">input_params_formatted</span> <span class="o">=</span><span class="s1">&#39;&#39;</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">input_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&quot;extrahop_active_until&quot;</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&quot;extrahop_active_from&quot;</span><span class="p">:</span>
@@ -4407,7 +4407,7 @@ The following screenshots show an example of the data table updated by the funct
         <span class="n">input_params_formatted</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">input_params_formatted</span>
     
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">input_params_formatted</span> <span class="o">=</span> <span class="n">format_input_params</span><span class="p">(</span><span class="n">INPUTS</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
@@ -4642,7 +4642,7 @@ Supported output formats: pcap, keylog_txt, pcapng, zip, extract.</p>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">)</span>
@@ -4789,7 +4789,7 @@ Supported output formats: pcap, keylog_txt, pcapng, zip, extract.</p>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -4903,7 +4903,7 @@ Supported output formats: pcap, keylog_txt, pcapng, zip, extract.</p>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">CONTENT</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span>
@@ -4958,7 +4958,7 @@ Supported output formats: pcap, keylog_txt, pcapng, zip, extract.</p>
 <span class="k">if</span> <span class="s2">&quot;v6&quot;</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">extrahop_artifact_type</span><span class="p">:</span>
     <span class="n">PARAMS</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;IP Address&quot;</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">ipaddr6</span><span class="p">})</span>
 
-<span class="k">def</span> <span class="nf">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This method adds new artifacts to the incident derived from matches of the the regular expression</span>
 
 <span class="sd">    :param artifact_type: The type of the artifact.</span>
@@ -4967,7 +4967,7 @@ Supported output formats: pcap, keylog_txt, pcapng, zip, extract.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">validate_fields</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_fields</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Ensure required fields are present. Throw ValueError if not</span>
 <span class="sd">    :param fields: Required fields.</span>

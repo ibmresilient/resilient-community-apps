@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>AWS IAM - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -866,7 +866,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># Get a list of all enabled filters.</span>
 <span class="n">ENABLED_FILTERS</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_iam_user_filter</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">aws_iam_group_filter</span><span class="p">,</span> 
@@ -874,7 +874,7 @@ Additional package dependencies may exist for each of these packages:</p>
                    <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">is_regex</span><span class="p">(</span><span class="n">regex_str</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_regex</span><span class="p">(</span><span class="n">regex_str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;Test if sting is a correctly formed regular expression.</span>
 
 <span class="sd">    :param regex_str: Regular expression string.</span>
@@ -887,7 +887,7 @@ Additional package dependencies may exist for each of these packages:</p>
         <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Test any enabled filters to ensure they are valid regular expressions.</span>
     <span class="k">for</span> <span class="n">ef</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ENABLED_FILTERS</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_regex</span><span class="p">(</span><span class="n">ef</span><span class="p">):</span>
@@ -910,7 +910,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  AWS IAM - fn_aws_iam_list_users script ##</span>
 <span class="c1">#  Globals</span>
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="c1"># List of fields in datatable fn_aws_iam_list_users script</span>
 <span class="n">DATA_TBL_FIELDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;query_execution_time&quot;</span><span class="p">,</span> <span class="s2">&quot;UserName&quot;</span><span class="p">,</span> <span class="s2">&quot;Arn&quot;</span><span class="p">,</span> <span class="s2">&quot;DefaultUser&quot;</span><span class="p">,</span> <span class="s2">&quot;CreateDate&quot;</span><span class="p">,</span> <span class="s2">&quot;LoginProfileExists&quot;</span><span class="p">,</span> 
                    <span class="s2">&quot;AccessKeyIds&quot;</span><span class="p">,</span> <span class="s2">&quot;Policies&quot;</span><span class="p">,</span> <span class="s2">&quot;Tags&quot;</span><span class="p">,</span> <span class="s2">&quot;Groups&quot;</span><span class="p">]</span>
@@ -922,7 +922,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">check_add_quotes</span><span class="p">(</span><span class="n">tag_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_add_quotes</span><span class="p">(</span><span class="n">tag_name</span><span class="p">):</span>
     <span class="c1"># Using regex</span>
     <span class="c1"># If spaces in tag name add quotes</span>
     <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s&quot;</span><span class="p">,</span> <span class="n">tag_name</span><span class="p">):</span>
@@ -930,35 +930,35 @@ Additional package dependencies may exist for each of these packages:</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">tag_name</span>
 
-<span class="k">def</span> <span class="nf">process_access_key_ids</span><span class="p">(</span><span class="n">access_key_id_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_access_key_ids</span><span class="p">(</span><span class="n">access_key_id_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
     <span class="n">access_key_ids</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">ak_id</span> <span class="ow">in</span> <span class="n">access_key_id_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ak_id</span><span class="p">[</span><span class="s2">&quot;AccessKeyId&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">access_key_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ak_id</span><span class="p">[</span><span class="s2">&quot;AccessKeyId&quot;</span><span class="p">])</span>
     <span class="n">row</span><span class="o">.</span><span class="n">AccessKeyIds</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">access_key_ids</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">process_policies</span><span class="p">(</span><span class="n">policy_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_policies</span><span class="p">(</span><span class="n">policy_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
     <span class="n">policies</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">pol</span> <span class="ow">in</span> <span class="n">policy_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">pol</span><span class="p">[</span><span class="s2">&quot;PolicyName&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">policies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pol</span><span class="p">[</span><span class="s2">&quot;PolicyName&quot;</span><span class="p">])</span>
     <span class="n">row</span><span class="o">.</span><span class="n">Policies</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">policies</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">process_groups</span><span class="p">(</span><span class="n">group_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_groups</span><span class="p">(</span><span class="n">group_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
     <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">grp</span> <span class="ow">in</span> <span class="n">group_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">grp</span><span class="p">[</span><span class="s2">&quot;GroupName&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grp</span><span class="p">[</span><span class="s2">&quot;GroupName&quot;</span><span class="p">])</span>
     <span class="n">row</span><span class="o">.</span><span class="n">Groups</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">process_tags</span><span class="p">(</span><span class="n">tag_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_tags</span><span class="p">(</span><span class="n">tag_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
     <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tag_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">tag</span><span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">])</span>
     <span class="n">row</span><span class="o">.</span><span class="n">Tags</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">check_add_quotes</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span>
     <span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_user_filter&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_group_filter&quot;</span><span class="p">],</span>  
                            <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_policy_filter&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_access_key_filter&quot;</span><span class="p">]]</span> 
@@ -1117,7 +1117,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  AWS IAM - fn_aws_iam_list_users script ##</span>
 <span class="c1">#  Globals</span>
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="c1"># List of fields in datatable fn_aws_iam_list_users script main</span>
 <span class="n">DATA_TBL_FIELDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;query_execution_time&quot;</span><span class="p">,</span> <span class="s2">&quot;UserName&quot;</span><span class="p">,</span> <span class="s2">&quot;AccessKeyId&quot;</span><span class="p">,</span> <span class="s2">&quot;CreateDate&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">,</span> <span class="s2">&quot;DefaultKey&quot;</span><span class="p">]</span>
 <span class="c1"># List of fields in datatable fn_aws_iam_list_users script last used access keys.</span>
@@ -1129,7 +1129,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">process_access_keys</span><span class="p">(</span><span class="n">access_key_id_list</span><span class="p">,</span> <span class="n">user_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_access_keys</span><span class="p">(</span><span class="n">access_key_id_list</span><span class="p">,</span> <span class="n">user_name</span><span class="p">):</span>
     <span class="n">access_key_ids</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">ak_id</span> <span class="ow">in</span> <span class="n">access_key_id_list</span><span class="p">:</span>
         <span class="n">newrow</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;aws_iam_access_keys&quot;</span><span class="p">)</span>
@@ -1144,7 +1144,7 @@ Additional package dependencies may exist for each of these packages:</p>
             <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">DATA_TBL_FIELDS_LUAK</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">luak</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">newrow</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">luak</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span>
     <span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_user_filter&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_group_filter&quot;</span><span class="p">],</span>
                            <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_policy_filter&quot;</span><span class="p">],</span> <span class="n">INPUTS</span><span class="p">[</span><span class="s2">&quot;aws_iam_access_key_filter&quot;</span><span class="p">]]</span>
@@ -1295,7 +1295,7 @@ and then attempt to delete the user.</p>
 <span class="n">CONTENT</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">CONTENT</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
@@ -1399,7 +1399,7 @@ and then attempt to delete the user.</p>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
 
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">access_key_ids</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1514,7 +1514,7 @@ and then attempt to delete the user.</p>
 <span class="n">CONTENT</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">CONTENT</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
@@ -1667,7 +1667,7 @@ and then attempt to delete the user.</p>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">deleted</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1792,7 +1792,7 @@ and then attempt to delete the user.</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
 
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1900,7 +1900,7 @@ and then attempt to delete the user.</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">added</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2029,7 +2029,7 @@ and then attempt to delete the user.</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">added</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2147,7 +2147,7 @@ and then attempt to delete the user.</p>
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">policy_names</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2265,7 +2265,7 @@ and then attempt to delete the user.</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">added</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2402,7 +2402,7 @@ required to be set.</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">added</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2516,7 +2516,7 @@ For more information on this workflow, reference section <a class="reference int
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">DEBUG_SCRIPT</span><span class="o">=</span><span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: There were &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; &#39;SSH Public keys&#39; returned for user &quot;</span> \
@@ -2635,7 +2635,7 @@ For more information on this workflow, reference section <a class="reference int
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">DEBUG_SCRIPT</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">deleted</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2755,7 +2755,7 @@ For more information on this workflow, reference section <a class="reference int
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">DEBUG_SCRIPT</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: There were &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; &#39;Service specific credentials&#39; returned for user &quot;</span> \
@@ -2872,7 +2872,7 @@ For more information on this workflow reference section <a class="reference inte
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">DEBUG_SCRIPT</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">deleted</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -3000,7 +3000,7 @@ For more information on this workflow reference section <a class="reference inte
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">DEBUG_SCRIPT</span><span class="o">=</span><span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: There were &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; &#39;Signing Certificates&#39; returned for user &quot;</span> \
@@ -3118,7 +3118,7 @@ For more information on this workflow, reference section <a class="reference int
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">DEBUG_SCRIPT</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">deleted</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -3229,7 +3229,7 @@ For more information on this workflow, reference section <a class="reference int
 <span class="n">INPUTS</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 <span class="n">DEBUG_SCRIPT</span><span class="o">=</span><span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;AWS IAM Integration: Workflow &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;: There were &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; &#39;Active NFA devices&#39; returned for user &quot;</span> \
@@ -3346,7 +3346,7 @@ For more information on this workflow, reference section <a class="reference int
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">DEBUG_SCRIPT</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">deactivated</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -3466,7 +3466,7 @@ For more information on this workflow, reference section <a class="reference int
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">DEBUG_SCRIPT</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">deleted</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no_such_entity</span> <span class="o">=</span> <span class="mi">0</span>
@@ -3615,7 +3615,7 @@ Set the appropriate values for the fields and click Execute.</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">CONTENT</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
@@ -3724,7 +3724,7 @@ Set the appropriate values for the fields and click Execute.</p>
 <span class="n">QUERY_EXECUTION_DATE</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">note_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">CONTENT</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">CONTENT</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>

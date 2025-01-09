@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Jira - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -1376,7 +1376,7 @@ See example workflow for configuration of function pre-processor and post-proces
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Jira Open Issue [Incident] pre-processing script</span>
-<span class="k">def</span> <span class="nf">list_to_json_str</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_to_json_str</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Function that converts a list into a JSON string.</span>
 <span class="sd">  Supports types: basestring, unicode, bool, int, list and dicts.</span>
@@ -1411,7 +1411,7 @@ See example workflow for configuration of function pre-processor and post-proces
 
   <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="n">list_as_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="sa">u</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Function that converts a dictionary into a JSON string.</span>
 <span class="sd">  Supports types: basestring, unicode, bool, int, list and nested dicts.</span>
@@ -1580,7 +1580,7 @@ See example workflow for configuration of function pre-processor and post-proces
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Jira Transition Issue pre-processing script</span>
-<span class="k">def</span> <span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that converts a dictionary into a JSON string.</span>
 <span class="sd">     Supports types: str, bool, int and nested dicts.</span>
 <span class="sd">     Does not support lists.</span>

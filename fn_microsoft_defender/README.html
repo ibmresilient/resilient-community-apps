@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Microsoft Defender - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -1061,7 +1061,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="n">msg</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Defender Action </span><span class="si">{}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Action: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Machine: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Comment: </span><span class="si">{}</span><span class="s2">&quot;</span>\
    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;successful&quot;</span> <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span> <span class="k">else</span> <span class="s2">&quot;unsuccessful&quot;</span><span class="p">,</span>
@@ -1169,7 +1169,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">machine</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]:</span>
@@ -1296,10 +1296,10 @@ customize their close incident process with different required fields. In this e
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">mk_note</span><span class="p">(</span><span class="n">list_of_notes</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_note</span><span class="p">(</span><span class="n">list_of_notes</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;---&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">note</span><span class="p">)</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">list_of_notes</span><span class="p">])</span>
 
-<span class="k">def</span> <span class="nf">format_line</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">format_line</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
 <span class="n">vulnerabilities</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
@@ -1441,7 +1441,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">Date</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="n">row</span><span class="p">[</span><span class="s1">&#39;report_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span>
@@ -1662,7 +1662,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">Date</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">):</span>
@@ -1792,7 +1792,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="n">row</span><span class="p">[</span><span class="s1">&#39;report_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
@@ -2160,7 +2160,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="n">row</span><span class="p">[</span><span class="s1">&#39;report_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
@@ -2350,7 +2350,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">Date</span>
 
 <span class="n">msg</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Action </span><span class="si">{}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Action: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Artifact: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Title: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Comment: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Severity: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Expiration: </span><span class="si">{}</span><span class="s2">&quot;</span>\
    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;successful&quot;</span> <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span> <span class="k">else</span> <span class="s2">&quot;unsuccessful&quot;</span><span class="p">,</span>
@@ -2629,7 +2629,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">&quot;value&quot;: [</span>
@@ -2727,7 +2727,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">Date</span>
 
 <span class="n">msg</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Defender Action </span><span class="si">{}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Action: Delete Indicator</span><span class="se">\n</span><span class="s2">Indicator: </span><span class="si">{}</span><span class="s2">&quot;</span>\
    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;successful&quot;</span> <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span> <span class="k">else</span> <span class="s2">&quot;unsuccessful&quot;</span><span class="p">,</span>
@@ -2925,7 +2925,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Date</span> <span class="k">as</span> <span class="nn">Date</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">Date</span>
 
 <span class="n">now</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span>
 
@@ -3038,7 +3038,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">&quot;value&quot;: [</span>
 <span class="sd">    {</span>
@@ -3410,7 +3410,7 @@ customize their close incident process with different required fields. In this e
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Action: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Comment: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Status: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Start Date: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>

@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Trusteer Pinpoint Detect - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -1109,10 +1109,10 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <details><summary>Script Text:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">calendar</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="c1"># The new incident owner - the email address of a user or the name of a group and cannot be blank.</span>
 <span class="c1"># Change this value to reflect who will be the owner of the incident before running the script.</span>
@@ -1408,7 +1408,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
     <span class="s2">&quot;ZMB&quot;</span><span class="p">:</span> <span class="s2">&quot;Zambia&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ZWE&quot;</span><span class="p">:</span> <span class="s2">&quot;Zimbabwe&quot;</span>
 <span class="p">}</span>
-<span class="k">class</span> <span class="nc">EmailProcessor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EmailProcessor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; A class that facilitates processing the body contents of an email message.</span>
 <span class="sd">    Once the EmailProcessor class has been instantiated, the other methods can be used to add artifacts to the</span>
 <span class="sd">    incident.</span>
@@ -1418,7 +1418,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
     <span class="n">email_contents</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">email_contents_json</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The EmailProcessor constructor.</span>
 <span class="sd">        As initialization it retrieves the email body as both text and HTML.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1429,7 +1429,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add_info_to_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_info_to_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Make sure the feed type is correct.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FEED_ITEM_TYPE</span><span class="p">)</span> <span class="o">!=</span> <span class="n">TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Only Feed item type: </span><span class="si">%s</span><span class="s2"> is supported!&quot;</span><span class="p">,</span> <span class="n">TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED</span><span class="p">)</span>
@@ -1451,7 +1451,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
         <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">trusteer_ppd_puid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PERMANENT_USER_ID</span><span class="p">)</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">trusteer_ppd_application_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">APPLICATION_ID</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">update_alert_data_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_alert_data_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Add a new row to the Trusteer Alert data table</span>
         <span class="n">alert_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">&#39;trusteer_ppd_dt_trusteer_alerts&#39;</span><span class="p">)</span>
         <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_date_added</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> 
@@ -1470,7 +1470,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RISK_SCORE</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">:</span>
             <span class="n">alert_row</span><span class="o">.</span><span class="n">trusteer_ppd_dt_risk_score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RISK_SCORE</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Add any Trusteer information (not in the data table) as artifacts here.</span>
         <span class="n">artifact_description</span> <span class="o">=</span> <span class="s2">&quot;Trusteer PPD created artifact.&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">USER_AGENT_STRING</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">USER_AGENT_STRING</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">):</span>
@@ -1483,18 +1483,18 @@ List any user permissions that are needed to use this endpoint. For example, lis
             <span class="n">artifact_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DETECTED_AT</span><span class="p">)</span>
             <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;URL&quot;</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
             
-    <span class="k">def</span> <span class="nf">add_incident_note</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_incident_note</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Add a note containing the email contents</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Email from Trusteer Pinpoint Detect:&lt;br&gt; </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email_contents</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">get_trusteer_ppd_puid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_trusteer_ppd_puid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">trusteer_ppd_puid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">email_contents_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PERMANENT_USER_ID</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">trusteer_ppd_puid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Email message has no  Pinpoint Detect Permanent User ID!&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">trusteer_ppd_puid</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">build_dict</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_dict</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Builds a dictionary from either the key, value pairs in the email</span>
 <span class="sd">        One key, value pair per line, so split on end of line character.</span>
@@ -1510,7 +1510,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
                     <span class="n">temp_dict</span><span class="p">[</span><span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">keyval</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">temp_dict</span>
 
-    <span class="k">def</span> <span class="nf">processAttachments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">processAttachments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; A method to process the email attachments, if present. Each non-inline email attachment is added as an</span>
 <span class="sd">        attachment to the incident, and its name is added as an artifact. Inline attachments are assumed to be unimportant.</span>
 <span class="sd">        No return value.</span>
@@ -1522,7 +1522,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
                     <span class="s2">&quot;Email Attachment Name&quot;</span><span class="p">,</span> <span class="n">attachment</span><span class="o">.</span><span class="n">suggested_filename</span><span class="p">,</span> <span class="s2">&quot;Trusteer PPD created artifact.&quot;</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">soar_severity</span><span class="p">(</span><span class="n">risk_score</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">soar_severity</span><span class="p">(</span><span class="n">risk_score</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">risk_score</span> <span class="ow">and</span> <span class="n">risk_score</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">:</span>
             <span class="n">risk_score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">risk_score</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">risk_score</span> <span class="o">&lt;=</span> <span class="mi">200</span><span class="p">:</span>
@@ -1535,7 +1535,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
             <span class="k">return</span> <span class="kc">None</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">soar_datetimeformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S UTC&quot;</span><span class="p">,</span> <span class="n">split_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">soar_datetimeformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S UTC&quot;</span><span class="p">,</span> <span class="n">split_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
 
@@ -1546,7 +1546,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
         <span class="k">return</span> <span class="n">calendar</span><span class="o">.</span><span class="n">timegm</span><span class="p">(</span><span class="n">utc_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
         <span class="n">msg_id</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1">#represent the header keys as lower case for matching</span>
         <span class="n">header_keys</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
@@ -1563,17 +1563,17 @@ List any user permissions that are needed to use this endpoint. For example, lis
             <span class="k">return</span> <span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">save_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
         <span class="c1"># extract the message ID and retain</span>
         <span class="n">msg_id</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_message_id</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">msg_id</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="p">,</span> <span class="s1">&#39;email_message_id&#39;</span><span class="p">):</span>
             <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">email_message_id</span> <span class="o">=</span> <span class="n">msg_id</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">add_email_conversation</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">msg_body</span><span class="p">,</span> <span class="n">msg_attachments</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_email_conversation</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">msg_body</span><span class="p">,</span> <span class="n">msg_attachments</span><span class="p">):</span>
         <span class="c1"># attempt to add to incident datatable, if present</span>
       
-        <span class="k">def</span> <span class="nf">handle_list</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">handle_list</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
             <span class="c1"># convert a list to comma separate list, if neccessary</span>
             <span class="k">if</span> <span class="n">value</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                 <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>

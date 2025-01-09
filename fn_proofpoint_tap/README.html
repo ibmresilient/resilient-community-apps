@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Proofpoint TAP - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -869,9 +869,9 @@ List any steps that are needed to configure the endpoint to use this app.
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="k">def</span> <span class="nf">add_row_to_campaign_object_dt</span><span class="p">(</span><span class="n">object_type</span><span class="p">,</span> <span class="n">object_id</span><span class="p">,</span> <span class="n">object_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">type_of_threat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subtype_of_threat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threat_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_row_to_campaign_object_dt</span><span class="p">(</span><span class="n">object_type</span><span class="p">,</span> <span class="n">object_id</span><span class="p">,</span> <span class="n">object_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">type_of_threat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subtype_of_threat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threat_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
   <span class="n">object_dt</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;proofpoint_tap_campaign_object_dt&quot;</span><span class="p">)</span>
   <span class="n">object_dt</span><span class="o">.</span><span class="n">proofpoint_tap_object_timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
   <span class="n">object_dt</span><span class="o">.</span><span class="n">proofpoint_tap_campaign_id</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>

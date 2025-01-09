@@ -7,7 +7,7 @@
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Symantec Endpoint Protection - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -2083,7 +2083,7 @@ Note: Currently only supports MD5 hash type.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
 
 <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_critical_events_info_results</span>
@@ -2301,7 +2301,7 @@ Note: Currently only supports MD5 hash type.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_exceptions_policy_results</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -6222,7 +6222,7 @@ Note: Currently only supports MD5 hash type.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_firewall_policy_results</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -6769,7 +6769,7 @@ Note: Currently only supports MD5 hash type.</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_policy_summary_results</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
@@ -7150,7 +7150,7 @@ Note: Currently only supports MD5 hash type.</p>
 <span class="n">ARTIFACT_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">,</span> <span class="s1">&#39;file_path&#39;</span><span class="p">,</span> <span class="s1">&#39;md5&#39;</span><span class="p">,</span> <span class="s1">&#39;sha1&#39;</span><span class="p">,</span> <span class="s1">&#39;sha256&#39;</span><span class="p">]</span>
 <span class="n">COMPUTER_IDS</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">def</span> <span class="nf">set_inputs</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">md5</span><span class="p">,</span> <span class="n">sha1</span><span class="p">,</span> <span class="n">sha256</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_inputs</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">md5</span><span class="p">,</span> <span class="n">sha1</span><span class="p">,</span> <span class="n">sha256</span><span class="p">):</span>
   <span class="k">global</span> <span class="n">COMPUTER_IDS</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">sep_file_path</span> <span class="o">=</span> <span class="n">fn</span> <span class="k">if</span> <span class="n">fp</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">fp</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">sep_md5</span> <span class="o">=</span> <span class="n">md5</span>
@@ -7504,7 +7504,7 @@ The supported artifact types supported are: “File Path”, “Malware SHA-256 
 <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This method adds new artifacts to the incident derived from matches of the the regular expression</span>
 
 <span class="sd">    :param artifact_type: The type of the artifact.</span>
@@ -7514,7 +7514,7 @@ The supported artifact types supported are: “File Path”, “Malware SHA-256 
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">validate_fields</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_fields</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Ensure required fields are present. Throw ValueError if not</span>
 <span class="sd">    :param fields: Required fields.</span>
@@ -7526,7 +7526,7 @@ The supported artifact types supported are: “File Path”, “Malware SHA-256 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Required data-table field is missing or empty for artifact type: &#39;</span> <span class="o">+</span> <span class="n">f</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">desc</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
     <span class="n">validate_fields</span><span class="p">([</span><span class="s2">&quot;System Name&quot;</span><span class="p">,</span> <span class="n">ARTIFACT_TYPE</span><span class="p">],</span> <span class="n">PARAMS</span><span class="p">)</span>
@@ -7554,13 +7554,13 @@ The supported artifact types supported are: “File Path”, “Malware SHA-256 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Symantec SEP email notification parsing script.</span>
 <span class="c1"># This is a a follow-on from the generic parsing script which is used specifically to parse for Symantec SEP notifications.</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># Dict to capture suspicious file details to add to data-table.</span>
 <span class="n">FILE_PATH_LIST</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">COMPUTER_NAME</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">add_artifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_artifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Add new artifacts to the incident.</span>
 <span class="sd">    :param artifact_type: The type of the artifact.</span>
 <span class="sd">    :param artifact_value: - The value of the artifact.</span>
@@ -7568,7 +7568,7 @@ The supported artifact types supported are: “File Path”, “Malware SHA-256 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">add_artifact_from_email</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">artifact_type</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_artifact_from_email</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">artifact_type</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This method adds new artifacts to the incident derived from matches of the the regular expression</span>
 <span class="sd">    parameter within the email body contents.</span>
 <span class="sd">    :param regex: - A regular expression to match against the email body contents.</span>
@@ -7597,7 +7597,7 @@ The supported artifact types supported are: “File Path”, “Malware SHA-256 
 <span class="c1">###</span>
 <span class="c1"># Mainline starts here</span>
 <span class="c1">###</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Add &quot;Phishing&quot; as an incident type for the associated incident</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Phishing&quot;</span><span class="p">)</span>
 
