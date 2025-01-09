@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
                 rc=rc
             )
 
-            if "denied" in res.text:
+            if "unknown_api_key" in res.text:
                 raise IntegrationError("Failed to submit artifact. API Key invalid")
 
             yield StatusMessage(u"Response from URLhaus: {0}".format(res.text))
