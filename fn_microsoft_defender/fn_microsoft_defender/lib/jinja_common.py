@@ -89,9 +89,10 @@ def jinja_regex_sub(value, repl, pattern):
     :return: transformed string
     :rtype: str
     """
-    if isinstance(pattern, re.Pattern):
-        return pattern.sub(repl, value)
-    return re.sub(pattern, repl, value)
+    if isinstance(pattern, str):
+        return re.sub(pattern, repl, value)
+    
+    return pattern.sub(repl, value)
 
 def jinja_sanitize_url(value):
     """custom filter just for url sanitization
