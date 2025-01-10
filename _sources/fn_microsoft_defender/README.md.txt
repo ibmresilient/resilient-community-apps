@@ -53,6 +53,7 @@
 | 1.2.0 | 8/2023 | Add playbooks |
 | 1.2.1 | 5/2024 | Fix for defender_find_machines_by_file function |
 | 1.2.2 | 5/2024 | Fix for playbook script common name issue |
+| 1.2.3 | 12/2024 | Fix for FQDN URL artifacts with square brackets and quotes. |
 
 ### 1.2.0 Changes
 In v1.2, the existing rules and workflows have been replaced with playbooks.
