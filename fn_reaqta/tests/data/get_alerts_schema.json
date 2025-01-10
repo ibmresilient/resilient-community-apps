@@ -1,0 +1,767 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "localId": {
+              "type": "string"
+            },
+            "endpointId": {
+              "type": "string"
+            },
+            "triggerCondition": {
+              "type": "integer"
+            },
+            "endpoint": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "machineId": {
+                  "type": "string"
+                },
+                "osType": {
+                  "type": "integer"
+                },
+                "cpuVendor": {
+                  "type": "integer"
+                },
+                "arch": {
+                  "type": "integer"
+                },
+                "cpuDescr": {
+                  "type": "string"
+                },
+                "kernel": {
+                  "type": "string"
+                },
+                "os": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "domain": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "integer"
+                },
+                "registrationTime": {
+                  "type": "string"
+                },
+                "agentVersion": {
+                  "type": "string"
+                },
+                "componentsVersions": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "version": {
+                          "type": "string"
+                        },
+                        "build": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                        "build"
+                      ]
+                    }
+                  ]
+                },
+                "isVirtualMachine": {
+                  "type": "boolean"
+                },
+                "isDomainController": {
+                  "type": "boolean"
+                },
+                "isServer": {
+                  "type": "boolean"
+                },
+                "sessionStart": {
+                  "type": "string"
+                },
+                "sessionEnd": {
+                  "type": "string"
+                },
+                "lastSeenAt": {
+                  "type": "string"
+                },
+                "disconnectionReason": {
+                  "type": "integer"
+                },
+                "localAddr": {
+                  "type": "string"
+                },
+                "hvStatus": {
+                  "type": "integer"
+                },
+                "macs": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "isolated": {
+                  "type": "boolean"
+                },
+                "connected": {
+                  "type": "boolean"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "groups": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ]
+                    }
+                  ]
+                },
+                "avInstalled": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "machineId",
+                "osType",
+                "cpuVendor",
+                "arch",
+                "cpuDescr",
+                "kernel",
+                "os",
+                "name",
+                "state",
+                "registrationTime",
+                "agentVersion",
+                "componentsVersions",
+                "isVirtualMachine",
+                "isDomainController",
+                "isServer",
+                "sessionStart",
+                "sessionEnd",
+                "lastSeenAt",
+                "disconnectionReason",
+                "localAddr",
+                "hvStatus",
+                "macs",
+                "isolated",
+                "connected",
+                "tags",
+                "groups",
+                "avInstalled"
+              ]
+            },
+            "triggerEvents": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    },
+                    "localId": {
+                      "type": "string"
+                    },
+                    "endpointId": {
+                      "type": "string"
+                    },
+                    "receivedAt": {
+                      "type": "string"
+                    },
+                    "happenedAt": {
+                      "type": "string"
+                    },
+                    "relevance": {
+                      "type": "integer"
+                    },
+                    "severity": {
+                      "type": "string"
+                    },
+                    "trigger": {
+                      "type": "boolean"
+                    },
+                    "manuallyAdded": {
+                      "type": "boolean"
+                    },
+                    "process": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "parentId": {
+                          "type": "string"
+                        },
+                        "endpointId": {
+                          "type": "string"
+                        },
+                        "program": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string"
+                            },
+                            "filename": {
+                              "type": "string"
+                            },
+                            "md5": {
+                              "type": "string"
+                            },
+                            "sha1": {
+                              "type": "string"
+                            },
+                            "sha256": {
+                              "type": "string"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "arch": {
+                              "type": "string"
+                            },
+                            "fsName": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "filename",
+                            "md5",
+                            "sha1",
+                            "sha256",
+                            "size",
+                            "arch",
+                            "fsName"
+                          ]
+                        },
+                        "user": {
+                          "type": "string"
+                        },
+                        "pid": {
+                          "type": "integer"
+                        },
+                        "startTime": {
+                          "type": "string"
+                        },
+                        "ppid": {
+                          "type": "integer"
+                        },
+                        "pstartTime": {
+                          "type": "string"
+                        },
+                        "userSID": {
+                          "type": "string"
+                        },
+                        "privilegeLevel": {
+                          "type": "string"
+                        },
+                        "noGui": {
+                          "type": "boolean"
+                        },
+                        "logonId": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "parentId",
+                        "endpointId",
+                        "program",
+                        "user",
+                        "pid",
+                        "startTime",
+                        "ppid",
+                        "pstartTime",
+                        "userSID",
+                        "privilegeLevel",
+                        "noGui",
+                        "logonId"
+                      ]
+                    },
+                    "eventType": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "cmdLine": {
+                          "type": "string"
+                        },
+                        "cmdLineArgs": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "_t": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "_t"
+                      ]
+                    },
+                    "happenedAt_ts": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "category",
+                    "localId",
+                    "endpointId",
+                    "receivedAt",
+                    "happenedAt",
+                    "relevance",
+                    "severity",
+                    "trigger",
+                    "manuallyAdded",
+                    "process",
+                    "eventType",
+                    "data"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    },
+                    "localId": {
+                      "type": "string"
+                    },
+                    "endpointId": {
+                      "type": "string"
+                    },
+                    "receivedAt": {
+                      "type": "string"
+                    },
+                    "happenedAt": {
+                      "type": "string"
+                    },
+                    "relevance": {
+                      "type": "integer"
+                    },
+                    "severity": {
+                      "type": "string"
+                    },
+                    "trigger": {
+                      "type": "boolean"
+                    },
+                    "manuallyAdded": {
+                      "type": "boolean"
+                    },
+                    "process": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "parentId": {
+                          "type": "string"
+                        },
+                        "endpointId": {
+                          "type": "string"
+                        },
+                        "program": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string"
+                            },
+                            "filename": {
+                              "type": "string"
+                            },
+                            "md5": {
+                              "type": "string"
+                            },
+                            "sha1": {
+                              "type": "string"
+                            },
+                            "sha256": {
+                              "type": "string"
+                            },
+                            "certInfo": {
+                              "type": "object",
+                              "properties": {
+                                "signer": {
+                                  "type": "string"
+                                },
+                                "issuer": {
+                                  "type": "string"
+                                },
+                                "trusted": {
+                                  "type": "boolean"
+                                },
+                                "expired": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "required": [
+                                "signer",
+                                "issuer",
+                                "trusted",
+                                "expired"
+                              ]
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "arch": {
+                              "type": "string"
+                            },
+                            "fsName": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "filename",
+                            "md5",
+                            "sha1",
+                            "sha256",
+                            "certInfo",
+                            "size",
+                            "arch",
+                            "fsName"
+                          ]
+                        },
+                        "user": {
+                          "type": "string"
+                        },
+                        "pid": {
+                          "type": "integer"
+                        },
+                        "startTime": {
+                          "type": "string"
+                        },
+                        "ppid": {
+                          "type": "integer"
+                        },
+                        "pstartTime": {
+                          "type": "string"
+                        },
+                        "userSID": {
+                          "type": "string"
+                        },
+                        "privilegeLevel": {
+                          "type": "string"
+                        },
+                        "noGui": {
+                          "type": "boolean"
+                        },
+                        "logonId": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "parentId",
+                        "endpointId",
+                        "program",
+                        "user",
+                        "pid",
+                        "startTime",
+                        "ppid",
+                        "pstartTime",
+                        "userSID",
+                        "privilegeLevel",
+                        "noGui",
+                        "logonId"
+                      ]
+                    },
+                    "eventType": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "behaviourType": {
+                          "type": "integer"
+                        },
+                        "_t": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "behaviourType",
+                        "_t"
+                      ]
+                    },
+                    "happenedAt_ts": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "category",
+                    "localId",
+                    "endpointId",
+                    "receivedAt",
+                    "happenedAt",
+                    "relevance",
+                    "severity",
+                    "trigger",
+                    "manuallyAdded",
+                    "process",
+                    "eventType",
+                    "data"
+                  ]
+                }
+              ]
+            },
+            "totalEventCount": {
+              "type": "integer"
+            },
+            "byTypeEventCount": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "integer"
+                    },
+                    "count": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "count"
+                  ]
+                }
+              ]
+            },
+            "impact": {
+              "type": "integer"
+            },
+            "severity": {
+              "type": "string"
+            },
+            "closed": {
+              "type": "boolean"
+            },
+            "activityState": {
+              "type": "string"
+            },
+            "terminationReason": {
+              "type": "integer"
+            },
+            "receivedAt": {
+              "type": "string"
+            },
+            "happenedAt": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "array",
+              "items": {}
+            },
+            "endpointState": {
+              "type": "object",
+              "properties": {
+                "osType": {
+                  "type": "integer"
+                },
+                "cpuVendor": {
+                  "type": "integer"
+                },
+                "arch": {
+                  "type": "integer"
+                },
+                "cpuDescr": {
+                  "type": "string"
+                },
+                "kernel": {
+                  "type": "string"
+                },
+                "os": {
+                  "type": "string"
+                },
+                "hvStatus": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "domain": {
+                  "type": "string"
+                },
+                "isolated": {
+                  "type": "boolean"
+                },
+                "localAddr": {
+                  "type": "string"
+                },
+                "macs": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "componentsVersions": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "version": {
+                          "type": "string"
+                        },
+                        "build": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                        "build"
+                      ]
+                    }
+                  ]
+                },
+                "endpointVersion": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "groups": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "osType",
+                "cpuVendor",
+                "arch",
+                "cpuDescr",
+                "kernel",
+                "os",
+                "hvStatus",
+                "name",
+                "isolated",
+                "localAddr",
+                "macs",
+                "componentsVersions",
+                "endpointVersion",
+                "tags",
+                "groups"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "localId",
+            "endpointId",
+            "triggerCondition",
+            "endpoint",
+            "triggerEvents",
+            "totalEventCount",
+            "byTypeEventCount",
+            "impact",
+            "severity",
+            "closed",
+            "activityState",
+            "receivedAt",
+            "happenedAt",
+            "tags",
+            "endpointState"
+          ]
+        }
+      ]
+    },
+    "nextPage": {
+      "type": "string"
+    },
+    "remainingItems": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "result",
+    "nextPage",
+    "remainingItems"
+  ]
+}
