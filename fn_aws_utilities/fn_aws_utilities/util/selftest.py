@@ -1,23 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-Function implementation test.
-Usage: 
-    resilient-circuits selftest -l fn-aws-utilities
-    resilient-circuits selftest --print-env -l fn-aws-utilities
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
-"""
-
 import logging
 from fn_aws_utilities.util.aws_lambda_api import AWSLambda
 

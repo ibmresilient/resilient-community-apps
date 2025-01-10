@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_aws_utilities",
     display_name="AWS Utilities",
-    version="1.1.0",
+    version="1.1.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -41,10 +41,10 @@ setup(
         <br>
         * Send SMS using AWS SNS""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'boto3'
     ],
-    python_requires='>=3',
+    python_requires='>=3.9',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

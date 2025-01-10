@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from fn_aws_utilities.util.aws_step_function_api import AwsStepFunction
 from fn_aws_utilities.util.aws_config import AWSConfig
-import datetime
-
+from datetime import datetime
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_get_step_function_execution"""
+    """Component that implements SOAR function 'fn_get_step_function_execution"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -28,8 +28,8 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             config = AWSConfig(self.options)
 
-            execution_arn = kwargs.get("execution_arn")  # text
-            if execution_arn is None or execution_arn == "":
+            execution_arn = kwargs.get("execution_arn", None)  # text
+            if not execution_arn:
                 yield FunctionError("execution_arn is a required argument.")
 
             step_function_api = AwsStepFunction(config.my_aws_access_key_id,
@@ -38,11 +38,11 @@ class FunctionComponent(ResilientComponent):
 
             result = step_function_api.get_execution_result(execution_arn)
 
-            if result.get("startDate") is not None and type(result["startDate"]) == datetime.datetime:
-                result["startDate"] = result["startDate"].strftime("%Y-%m-%d %H:%M:%S")  # datetime is not serializable
+            if result.get("startDate", None) and type(result.get("startDate", None)) == datetime:
+                result["startDate"] = result.get("startDate", None).strftime("%Y-%m-%d %H:%M:%S")  # datetime is not serializable
 
-            if result.get("stopDate") is not None and type(result["stopDate"]) == datetime.datetime:
-                result["stopDate"] = result["stopDate"].strftime("%Y-%m-%d %H:%M:%S")  # datetime is not serializable
+            if result.get("stopDate", None) and type(result.get("stopDate", None)) == datetime:
+                result["stopDate"] = result.get("stopDate", None).strftime("%Y-%m-%d %H:%M:%S")  # datetime is not serializable
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result)

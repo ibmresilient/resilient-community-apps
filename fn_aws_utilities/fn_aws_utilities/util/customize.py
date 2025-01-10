@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.4.0.1351
 
-"""Generate the Resilient customizations required for fn_aws_utilities"""
+"""Generate the SOAR customizations required for fn_aws_utilities"""
 
 import base64
 import os
@@ -20,15 +22,34 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_aws_utilities",
-        "message_destinations": [u"fn_aws_utilities"],
-        "functions": [u"fn_get_step_function_execution", u"fn_invoke_lambda", u"fn_invoke_step_function", u"fn_send_sms_via_sns"],
-        "workflows": [u"example_invoke_aws_lambda_python_addition", u"example_invoke_step_function_asynchronous", u"example_invoke_step_function_synchronous", u"example_send_sms_incident"],
-        "actions": [u"Example: Invoke AWS Lambda: Python Addition", u"Example: Invoke AWS Step Function: Asynchronous", u"Example: Invoke AWS Step Function: Synchronous", u"Example: Send AWS SMS"],
+        "message_destinations": [
+            u"fn_aws_utilities"
+        ],
+        "functions": [
+            u"fn_get_step_function_execution",
+            u"fn_invoke_lambda",
+            u"fn_invoke_step_function",
+            u"fn_send_sms_via_sns"
+        ],
+        "workflows": [
+            u"example_invoke_aws_lambda_python_addition",
+            u"example_invoke_step_function_asynchronous",
+            u"example_invoke_step_function_synchronous",
+            u"example_send_sms_incident"
+        ],
+        "actions": [
+            u"Example: Invoke AWS Lambda: Python Addition",
+            u"Example: Invoke AWS Step Function: Asynchronous",
+            u"Example: Invoke AWS Step Function: Synchronous",
+            u"Example: Send AWS SMS"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,7 +58,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 41.0.6783
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

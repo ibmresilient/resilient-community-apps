@@ -1,5 +1,13 @@
 from datetime import datetime
 
+# Mock app.config settings
+mock_config = """[fn_aws_utilities]
+aws_access_key_id=1234abcd
+aws_secret_access_key=098765mnbvcx
+# aws region identifier
+aws_region_name=us-east-1
+aws_sms_topic_name=test"""
+
 mock_constants = {
     "DATE_TIME_MOCK_OBJ": datetime(2015, 1, 1)
 }

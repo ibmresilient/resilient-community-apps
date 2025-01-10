@@ -13,17 +13,24 @@ LOG = logging.getLogger(__name__)
 
 DUPLICATE_COMMAS = re.compile(r',(\s*,)+')
 LEADING_COMMAS = re.compile(r'\[\s*,')
+
+SANITIZE_URL = re.compile(r"[\[\]\"']") # remove square brackets and quotes
+
 class JinjaEnvironment():
     def __init__(self):
         # Add the timestamp-parse function to the global JINJA environment
         env = environment()
         env.globals.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_substitute": jinja_resilient_substitute
+            "resilient_substitute": jinja_resilient_substitute,
+            "regex_sub": jinja_regex_sub,
+            "sanitize_url": jinja_sanitize_url
             })
         env.filters.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_substitute": jinja_resilient_substitute
+            "resilient_substitute": jinja_resilient_substitute,
+            "regex_sub": jinja_regex_sub,
+            "sanitize_url": jinja_sanitize_url
             })
 
     def make_payload_from_template(self, template_override, default_template, payload):
@@ -69,6 +76,33 @@ class JinjaEnvironment():
         LOG.debug(u"Incident template file: %s", template_file_path)
         with open(template_file_path, "r") as definition:
             return definition.read()
+        
+def jinja_regex_sub(value, repl, pattern):
+    """custom filter to run the regex substitute function
+
+    :param pattern: pattern to execute. Can be a compiled patter or string
+    :type pattern: Union[re.Patter, str]
+    :param repl: replacement for found characters
+    :type repl: str
+    :param value: string to perform substitutes
+    :type value: str
+    :return: transformed string
+    :rtype: str
+    """
+    if isinstance(pattern, re.Pattern):
+        return pattern.sub(repl, value)
+    return re.sub(pattern, repl, value)
+
+def jinja_sanitize_url(value):
+    """custom filter just for url sanitization
+
+    :param value: url to sanitize
+    :type value: str
+    :return: cleaned url
+    :rtype: url
+    """
+    return jinja_regex_sub(value, "", SANITIZE_URL)
+
 
 def jinja_resilient_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
     """custom jinja filter to convert UTC dates to epoch format

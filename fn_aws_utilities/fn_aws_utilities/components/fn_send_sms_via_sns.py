@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
-import json
 from fn_aws_utilities.util.aws_sns_api import AwsSns
 from fn_aws_utilities.util.aws_config import AWSConfig
-import re
-
+from re import sub
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_send_sms_via_sns"""
+    """Component that implements SOAR function 'fn_send_sms_via_sns"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -31,15 +28,15 @@ class FunctionComponent(ResilientComponent):
             config = AWSConfig(self.options)
 
             # Get the function parameters:
-            phone_numbers_csv = kwargs.get("phone_numbers")  # text
-            msg_body = kwargs.get("msg_body")  # text
+            phone_numbers_csv = kwargs.get("phone_numbers", None)  # text
+            msg_body = kwargs.get("msg_body", None)  # text
 
             try:
                 phone_numbers_unstripped = [s.strip() for s in
                                             phone_numbers_csv.split(',')]  # Split commas ignoring any whitespace
                 phone_numbers = []
                 for phone_number_unstripped in phone_numbers_unstripped:
-                    phone_numbers.append(re.sub("[^0-9]", "", phone_number_unstripped))  # Strip all non-numeric chars
+                    phone_numbers.append(sub("[^0-9]", "", phone_number_unstripped))  # Strip all non-numeric chars
             except Exception:
                 raise FunctionError("Invalid phone numbers provided, failed to decode.")
 
@@ -51,6 +48,6 @@ class FunctionComponent(ResilientComponent):
             results = sns.send_text_via_sns(msg_body, phone_numbers)
 
             # Produce a FunctionResult with the results
-            yield FunctionResult({"message_id": results.get("MessageId")})
+            yield FunctionResult({"message_id": results.get("MessageId", None)})
         except Exception:
             yield FunctionError()

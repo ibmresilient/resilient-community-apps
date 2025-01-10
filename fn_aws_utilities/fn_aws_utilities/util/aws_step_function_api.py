@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 import logging
-import uuid
 from fn_aws_utilities.util.aws_common import AWSCommon
 import time
-
 
 class AwsStepFunction(AWSCommon):
     def __init__(self, aws_access_key_id, aws_secret_access_key, region_name):
@@ -27,10 +25,9 @@ class AwsStepFunction(AWSCommon):
 
     def invoke_step_function(self, step_function_name, async_bool, payload):
         """Invoke a step function aka a state machine"""
-        next_token = None
-        state_machine_arn = None
+        next_token, state_machine_arn = None, None
         while True:
-            if next_token is None:  # If there are any more state machines we're missing
+            if not next_token:  # If there are any more state machines we're missing
                 state_machine_query = self.aws_client.list_state_machines(maxResults=100)  # can't do more than 100
             else:
                 state_machine_query = self.aws_client.list_state_machines(maxResults=100, nextToken=next_token)
@@ -42,15 +39,15 @@ class AwsStepFunction(AWSCommon):
                     state_machine_arn = state_machine.get("stateMachineArn")
                     break
 
-            if state_machine_arn is not None:  # if we found the arn
+            if state_machine_arn:  # if we found the arn
                 break
 
             next_token = state_machine_query.get("nextToken")
 
-            if next_token is None:  # If we reached the end of the step functions list, and still haven't found it
+            if not next_token:  # If we reached the end of the step functions list, and still haven't found it
                 raise Exception("Unable to find the step function by that name")
 
-        if state_machine_arn is None:
+        if not state_machine_arn:
             raise ValueError("Could not find state machine")
 
         log = logging.getLogger(__name__)
@@ -71,12 +68,12 @@ class AwsStepFunction(AWSCommon):
 
         execution_status = execution_description.get("status")
 
-        if async_bool is False:
-            while execution_description.get("output") is None:
+        if not async_bool:
+            while not execution_description.get("output"):
                 execution_description = self.aws_client.describe_execution(executionArn=execution_arn)
                 execution_status = execution_description.get("status")
                 if execution_status != "RUNNING" and execution_status != "SUCCEEDED":
-                    raise Exception("Function did not complete successfully, status: {}.".format(execution_status))
+                    raise Exception(f"Function did not complete successfully, status: {execution_status}.")
 
                 log.info('Execution not complete, sleeping for 10 seconds')
                 time.sleep(10)  # Free up the CPU and don't spam API calls
@@ -85,6 +82,6 @@ class AwsStepFunction(AWSCommon):
 
         # There is no default state "STARTING", only running, so no need to loop to make sure it has started
         if execution_status != "RUNNING" and execution_status != "SUCCEEDED":
-            raise Exception("Function did not complete successfully, status: {}.".format(execution_status))
+            raise Exception(f"Function did not complete successfully, status: {execution_status}.")
 
         return execution_description

@@ -3,15 +3,15 @@
 
 from mock import patch
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from .mock_artifacts import mocked_aws_sns
+from .mock_artifacts import mocked_aws_sns, mock_config
 
 PACKAGE_NAME = "fn_aws_utilities"
 FUNCTION_NAME = "fn_send_sms_via_sns"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Get mock app.config
+config_data = mock_config
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

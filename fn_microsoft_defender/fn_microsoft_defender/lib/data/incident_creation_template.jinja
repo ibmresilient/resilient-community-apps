@@ -80,7 +80,7 @@
         "type": {
           "name": "URL"
         },
-        "value": "{{ fixed_url }}",
+        "value": "{{ fixed_url| sanitize_url }}",
         "description": {
           "format": "text",
           "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"

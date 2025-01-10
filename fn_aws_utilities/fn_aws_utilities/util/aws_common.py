@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 import boto3
 import boto3.session
-
 
 class AWSCommon:
     def __init__(self, service_name, aws_access_key_id, aws_secret_access_key, region_name):

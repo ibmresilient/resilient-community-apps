@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-import logging
 from fn_aws_utilities.util.aws_common import AWSCommon
-from botocore.exceptions import ClientError
 
 class AWSLambda(AWSCommon):
     def __init__(self, aws_access_key_id, aws_secret_access_key, region_name):
