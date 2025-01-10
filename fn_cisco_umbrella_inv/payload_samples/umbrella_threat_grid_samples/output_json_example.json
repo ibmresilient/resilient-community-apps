@@ -1,0 +1,431 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "thread_grid_samples": {
+      "totalResults": 10614,
+      "moreDataAvailable": true,
+      "offset": 0,
+      "query": "1.1.1.1",
+      "limit": 2,
+      "samples": [
+        {
+          "sha256": "08483c38fee1dff34d52c23143ac5c3c5f91e00ca6032d4f4e28d1defaa673bf",
+          "sha1": "166fbeea622e95bee0549274d8f70f42ca856cb1",
+          "md5": "86e788dc3e886821eb103c8b9115e9fb",
+          "magicType": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
+          "threatScore": 100,
+          "size": 19908237,
+          "firstSeen": null,
+          "lastSeen": null,
+          "visible": true,
+          "avresults": [
+            {
+              "signature": "Trojan.GenericKD.31010556",
+              "product": "ALYac"
+            },
+            {
+              "signature": "Win32:Malware-gen",
+              "product": "AVG"
+            },
+            {
+              "signature": "Trojan.GenericKD.31010556",
+              "product": "Ad-Aware"
+            },
+            {
+              "signature": "Trojan/MSIL.Agent",
+              "product": "Antiy-AVL"
+            },
+            {
+              "signature": "Trojan.Generic.D1D92EFC",
+              "product": "Arcabit"
+            },
+            {
+              "signature": "Win32:Malware-gen",
+              "product": "Avast"
+            },
+            {
+              "signature": "TR/Dropper.Gen",
+              "product": "Avira"
+            },
+            {
+              "signature": "Win32.Trojan.WisdomEyes.16070401.9500.9999",
+              "product": "Baidu"
+            },
+            {
+              "signature": "Trojan.GenericKD.31010556",
+              "product": "BitDefender"
+            },
+            {
+              "signature": "Trojan.IGENERIC",
+              "product": "CAT-QuickHeal"
+            },
+            {
+              "signature": "malicious_confidence_100% (D)",
+              "product": "CrowdStrike"
+            },
+            {
+              "signature": "malicious.a622e9",
+              "product": "Cybereason"
+            },
+            {
+              "signature": "Unsafe",
+              "product": "Cylance"
+            },
+            {
+              "signature": "Trojan.DownLoader19.14585",
+              "product": "DrWeb"
+            },
+            {
+              "signature": "a variant of MSIL/Kryptik.OQC",
+              "product": "ESET-NOD32"
+            },
+            {
+              "signature": "Trojan.GenericKD.31010556 (B)",
+              "product": "Emsisoft"
+            },
+            {
+              "signature": "malicious (high confidence)",
+              "product": "Endgame"
+            },
+            {
+              "signature": "Trojan.GenericKD.31010556",
+              "product": "F-Secure"
+            },
+            {
+              "signature": "W32/Agent.CDBQ!tr",
+              "product": "Fortinet"
+            },
+            {
+              "signature": "Trojan.GenericKD.31010556",
+              "product": "GData"
+            },
+            {
+              "signature": "heuristic",
+              "product": "Invincea"
+            },
+            {
+              "signature": "Trojan ( 005354f61 )",
+              "product": "K7AntiVirus"
+            },
+            {
+              "signature": "Trojan ( 005354f61 )",
+              "product": "K7GW"
+            },
+            {
+              "signature": "HEUR:Trojan.MSIL.Agent.gen",
+              "product": "Kaspersky"
+            },
+            {
+              "signature": "malware (ai score=85)",
+              "product": "MAX"
+            },
+            {
+              "signature": "Trojan.GenericKD.31010556",
+              "product": "MicroWorld-eScan"
+            },
+            {
+              "signature": "Backdoor:MSIL/Boilod.A",
+              "product": "Microsoft"
+            },
+            {
+              "signature": "Trj/CI.A",
+              "product": "Panda"
+            },
+            {
+              "signature": "HEUR/QVM03.0.6D5C.Malware.Gen",
+              "product": "Qihoo-360"
+            },
+            {
+              "signature": "Backdoor.Boilod!8.529C (CLOUD)",
+              "product": "Rising"
+            },
+            {
+              "signature": "static engine - malicious",
+              "product": "SentinelOne"
+            },
+            {
+              "signature": "ML.Attribute.HighConfidence",
+              "product": "Symantec"
+            },
+            {
+              "signature": "TROJ_GEN.R038C0DFQ18",
+              "product": "TrendMicro"
+            },
+            {
+              "signature": "TROJ_GEN.R038C0DFQ18",
+              "product": "TrendMicro-HouseCall"
+            },
+            {
+              "signature": "TScope.Trojan.MSIL",
+              "product": "VBA32"
+            },
+            {
+              "signature": "Trojan.Agent!YwL/ULzEjtw",
+              "product": "Yandex"
+            },
+            {
+              "signature": "Trojan.Agent.Win32.902336",
+              "product": "Zillya"
+            },
+            {
+              "signature": "HEUR:Trojan.MSIL.Agent.gen",
+              "product": "ZoneAlarm"
+            }
+          ]
+        },
+        {
+          "sha256": "230a07cb6383b97017bc41a846c52ec79c0c33208055e93c6ba9bdceedca4038",
+          "sha1": "f6224cef252aee32c881a2939ed6b85b043d4b52",
+          "md5": "d90ef473ca59cb7355071318caa12949",
+          "magicType": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
+          "threatScore": 100,
+          "size": 517120,
+          "firstSeen": null,
+          "lastSeen": null,
+          "visible": true,
+          "avresults": [
+            {
+              "signature": "Gen:Variant.Barys.11488",
+              "product": "ALYac"
+            },
+            {
+              "signature": "Malicious",
+              "product": "APEX"
+            },
+            {
+              "signature": "Win32:DropperX-gen [Drp]",
+              "product": "AVG"
+            },
+            {
+              "signature": "suspicious",
+              "product": "Acronis"
+            },
+            {
+              "signature": "Gen:Variant.Barys.11488",
+              "product": "Ad-Aware"
+            },
+            {
+              "signature": "Trojan/Win32.RL_Agent.R363954",
+              "product": "AhnLab-V3"
+            },
+            {
+              "signature": "Trojan:MSIL/Injector.9b956192",
+              "product": "Alibaba"
+            },
+            {
+              "signature": "Trojan/Generic.ASMalwS.1CF942C",
+              "product": "Antiy-AVL"
+            },
+            {
+              "signature": "Win32:DropperX-gen [Drp]",
+              "product": "Avast"
+            },
+            {
+              "signature": "TR/Dropper.MSIL.Gen",
+              "product": "Avira"
+            },
+            {
+              "signature": "MSIL.Trojan.Kryptik.c",
+              "product": "Baidu"
+            },
+            {
+              "signature": "Gen:Variant.Barys.11488",
+              "product": "BitDefender"
+            },
+            {
+              "signature": "AI:Packer.5645E7FF1F",
+              "product": "BitDefenderTheta"
+            },
+            {
+              "signature": "Backdoor.AndromFC.S14878452",
+              "product": "CAT-QuickHeal"
+            },
+            {
+              "signature": "Win.Dropper.ImminentMonitorRAT-7583202-0",
+              "product": "ClamAV"
+            },
+            {
+              "signature": "TrojWare.MSIL.Disfa.B@6ljz7b",
+              "product": "Comodo"
+            },
+            {
+              "signature": "win/malicious_confidence_100% (D)",
+              "product": "CrowdStrike"
+            },
+            {
+              "signature": "malicious.3ca59c",
+              "product": "Cybereason"
+            },
+            {
+              "signature": "Unsafe",
+              "product": "Cylance"
+            },
+            {
+              "signature": "Malicious (score: 100)",
+              "product": "Cynet"
+            },
+            {
+              "signature": "W32/MSIL_Kryptik.ESW.gen!Eldorado",
+              "product": "Cyren"
+            },
+            {
+              "signature": "Trojan.DownLoader17.15248",
+              "product": "DrWeb"
+            },
+            {
+              "signature": "a variant of MSIL/Kryptik.EAN",
+              "product": "ESET-NOD32"
+            },
+            {
+              "signature": "malicious (high confidence)",
+              "product": "Elastic"
+            },
+            {
+              "signature": "Gen:Variant.Barys.11488 (B)",
+              "product": "Emsisoft"
+            },
+            {
+              "signature": "Generic.mg.d90ef473ca59cb73",
+              "product": "FireEye"
+            },
+            {
+              "signature": "MSIL/Kryptik.EAN!tr",
+              "product": "Fortinet"
+            },
+            {
+              "signature": "Gen:Variant.Barys.11488",
+              "product": "GData"
+            },
+            {
+              "signature": "Ransom.Win32.Obfuscator.vl!n",
+              "product": "Gridinsoft"
+            },
+            {
+              "signature": "Trojan-Spy.Agent",
+              "product": "Ikarus"
+            },
+            {
+              "signature": "Trojan ( 700000121 )",
+              "product": "K7AntiVirus"
+            },
+            {
+              "signature": "Trojan ( 700000121 )",
+              "product": "K7GW"
+            },
+            {
+              "signature": "Trojan.MSIL.Agent.foxa",
+              "product": "Kaspersky"
+            },
+            {
+              "signature": "Win32.Troj.Undef.(kcloud)",
+              "product": "Kingsoft"
+            },
+            {
+              "signature": "Trojan.Win32.Generic.lu1m",
+              "product": "Lionic"
+            },
+            {
+              "signature": "malware (ai score=82)",
+              "product": "MAX"
+            },
+            {
+              "signature": "Generic.Trojan.Malicious.DDS",
+              "product": "Malwarebytes"
+            },
+            {
+              "signature": "Trojan.Malware.300983.susgen",
+              "product": "MaxSecure"
+            },
+            {
+              "signature": "Trojan-FMFV!D90EF473CA59",
+              "product": "McAfee"
+            },
+            {
+              "signature": "BehavesLike.Win32.Generic.hc",
+              "product": "McAfee-GW-Edition"
+            },
+            {
+              "signature": "Gen:Variant.Barys.11488",
+              "product": "MicroWorld-eScan"
+            },
+            {
+              "signature": "Trojan:MSIL/AgentTesla.HD!MTB",
+              "product": "Microsoft"
+            },
+            {
+              "signature": "Trojan.Win32.Dwn.dzugvc",
+              "product": "NANO-Antivirus"
+            },
+            {
+              "signature": "generic.ml",
+              "product": "Paloalto"
+            },
+            {
+              "signature": "Trj/GdSda.A",
+              "product": "Panda"
+            },
+            {
+              "signature": "Suspicious.Win32.Save.a",
+              "product": "Sangfor"
+            },
+            {
+              "signature": "Static AI - Malicious PE",
+              "product": "SentinelOne"
+            },
+            {
+              "signature": "ML/PE-A",
+              "product": "Sophos"
+            },
+            {
+              "signature": "ML.Attribute.HighConfidence",
+              "product": "Symantec"
+            },
+            {
+              "signature": "Win32.Trojan.Generic.Wpte",
+              "product": "Tencent"
+            },
+            {
+              "signature": "Trojan.Win32.Generic!BT",
+              "product": "VIPRE"
+            },
+            {
+              "signature": "Trojan.Agent!xtIC/Jzqxiw",
+              "product": "Yandex"
+            },
+            {
+              "signature": "Trojan.Kryptik.Win32.980350",
+              "product": "Zillya"
+            },
+            {
+              "signature": "Trojan.MSIL.Agent.foxa",
+              "product": "ZoneAlarm"
+            },
+            {
+              "signature": "Unsafe.AI_Score_99%",
+              "product": "eGambit"
+            }
+          ]
+        }
+      ]
+    },
+    "resource_name": "1.1.1.1",
+    "query_execution_time": "2024-11-19 09:38:00"
+  },
+  "raw": null,
+  "inputs": {
+    "umbinv_offset": 0,
+    "umbinv_limit": 2,
+    "umbinv_resource": "1.1.1.1",
+    "umbinv_sortby": "score"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-umbrella-inv",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 7790,
+    "timestamp": "2024-11-19 09:38:00"
+  }
+}
