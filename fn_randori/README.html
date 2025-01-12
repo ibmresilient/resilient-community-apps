@@ -425,6 +425,11 @@
 <li><p><a class="reference internal" href="#randori"><span class="xref myst">Randori</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#-100--122022--initial-release-"><span class="xref myst">| 1.0.0 | 12/2022 | Initial Release |</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#110-changes"><span class="xref myst">1.1.0 Changes</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
@@ -504,13 +509,22 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>12/2024</p></td>
+<td><p>Add support for Randori API key authentication</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>12/2022</p></td>
 <td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<hr class="docutils" />
+<section id="changes">
+<h3>1.1.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
+<p>This version adds support for the new Randori API authentication mechanism using an API key to generate a temporary JSON Web Token (JWT) for authentication rather than a long-lasting API token.  The API token will be deprecated 1/2025, so it is strongly advised to move to the API key as soon as possible. Use <code class="docutils literal notranslate"><span class="pre">api_key</span></code> parameter in the app configuration file rather than <code class="docutils literal notranslate"><span class="pre">api_token</span></code>.</p>
+</section>
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -565,14 +579,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.7899</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=47.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -631,10 +645,10 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.6 and 3.9 are supported.
+<p>Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient-circuits&gt;=47.0.0</p></li>
+<li><p>resilient-circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 <section id="randori-development-version">
@@ -691,57 +705,62 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>api_token</strong></p></td>
+<tr class="row-even"><td><p><strong>api_key</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
-<td><p><em>Randori API token.</em></p></td>
+<td><p><em>Randori API key.  Use API key if available.</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>api_version</strong></p></td>
+<tr class="row-odd"><td><p><strong>api_token</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></td>
+<td><p><em>Randori API token - will be deprecated soon. Use api_key if available.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>api_version</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">v1</span></code></p></td>
 <td><p><em>Randori REST API version.</em></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>endpoint_url</strong></p></td>
+<tr class="row-odd"><td><p><strong>endpoint_url</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://app.randori.io</span></code></p></td>
 <td><p><em>Randori endpoint URL.</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>polling_interval</strong></p></td>
+<tr class="row-even"><td><p><strong>polling_interval</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">600</span></code></p></td>
 <td><p><em>Poller interval time in seconds. Value of zero to turn poller off.</em></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>polling_lookback</strong></p></td>
+<tr class="row-odd"><td><p><strong>polling_lookback</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">1200</span></code></p></td>
 <td><p><em>Number of minutes to look back for target updates. Value is only used on the first time polling when the app starts.</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>organization_name</strong></p></td>
+<tr class="row-even"><td><p><strong>organization_name</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">organization-name</span></code></p></td>
 <td><p><em>Your organization name in Randori.</em></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>verify</strong></p></td>
+<tr class="row-odd"><td><p><strong>verify</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 <td><p><em>Boolean indicating whether to verify the Randori client certificate.</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>polling_filters</strong></p></td>
+<tr class="row-even"><td><p><strong>polling_filters</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>(“target_temptation”,”greater_or_equal”,40)</p></td>
 <td><p><em>Query filters: Comma separated tuples (“field”,”operator”,”value)</em></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>soar_create_case_template</strong></p></td>
+<tr class="row-odd"><td><p><strong>soar_create_case_template</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>/path/soar_create_case_template.jinja</p></td>
 <td><p><em>Path to custom create case jinja template.</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>soar_close_case_template</strong></p></td>
+<tr class="row-even"><td><p><strong>soar_close_case_template</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>/path/soar_close_case_template.jinja</p></td>
 <td><p><em>Path to custom close case jinja template.</em></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>soar_update_case_template</strong></p></td>
+<tr class="row-odd"><td><p><strong>soar_update_case_template</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>/path/soar_close_case_template.jinja</p></td>
 <td><p><em>Path to custom update case jinja template.</em></p></td>
@@ -763,7 +782,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 </section>
 <section id="poller-considerations">
 <h2>Poller Considerations<a class="headerlink" href="#poller-considerations" title="Link to this heading">¶</a></h2>
-<p>The poller is just one way to escalate Randori Targets to SOAR cases. It’s also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field <code class="docutils literal notranslate"><span class="pre">randori_target_id</span></code>, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.</p>
+<p>The poller is just one way to escalate Randori Targets to SOAR cases. It’s also possible to send target information to a SIEM, such as IBM QRadar, which would then correlate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field <code class="docutils literal notranslate"><span class="pre">randori_target_id</span></code>, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.</p>
 <p>
 <p>When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to <code class="docutils literal notranslate"><span class="pre">polling_interval=0</span></code>.</p>
 <p>
@@ -2414,7 +2433,10 @@ Here is an polling filter example that adds or updates targets that have a "targ
             <ul>
 <li><a class="reference internal" href="#">Randori</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents <!-- omit in toc --></a></li>
-<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#changes">1.1.0 Changes</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>

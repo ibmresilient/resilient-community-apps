@@ -21,6 +21,8 @@
 ## Table of Contents <!-- omit in toc -->
 - [Randori](#randori)
   - [Release Notes](#release-notes)
+  - [| 1.0.0 | 12/2022 | Initial Release |](#-100--122022--initial-release-)
+    - [1.1.0 Changes](#110-changes)
   - [Overview](#overview)
     - [Key Features](#key-features)
   - [Requirements](#requirements)
@@ -65,7 +67,12 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 12/2022 | Initial Release | 
+| 1.1.0 | 12/2024 | Add support for Randori API key authentication |
+| 1.0.0 | 12/2022 | Initial Release |
+---
+
+### 1.1.0 Changes
+This version adds support for the new Randori API authentication mechanism using an API key to generate a temporary JSON Web Token (JWT) for authentication rather than a long-lasting API token.  The API token will be deprecated 1/2025, so it is strongly advised to move to the API key as soon as possible. Use `api_key` parameter in the app configuration file rather than `api_token`.
 
 ---
 
@@ -116,13 +123,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=47.0.0`.
+* Integration server is running `resilient-circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -155,9 +162,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 and 3.9 are supported.
+Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits>=47.0.0
+* resilient-circuits>=51.0.0
 
 ### Randori Development Version
 
@@ -186,7 +193,8 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `xxx` | *Randori API token.* |
+| **api_key** | Yes | `xxx` | *Randori API key.  Use API key if available.* |
+| **api_token** | Yes | `xxx` | *Randori API token - will be deprecated soon. Use api_key if available.* |
 | **api_version** | Yes | `v1` | *Randori REST API version.* |
 | **endpoint_url** | Yes | `https://app.randori.io` | *Randori endpoint URL.* |
 | **polling_interval** | Yes | `600` | *Poller interval time in seconds. Value of zero to turn poller off.* |
@@ -210,7 +218,7 @@ The following Randori Tab custom layout is included in the app:
 
 ## Poller Considerations
 
-The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
+The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then correlate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
 <p>
 
 When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `polling_interval=0`.
