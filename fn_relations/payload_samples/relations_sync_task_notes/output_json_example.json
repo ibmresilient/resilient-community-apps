@@ -1,0 +1,26 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "new_note": {
+      "text": {
+        "format": "html",
+        "content": "Note from Child Incident: <a href=\"#incidents/2100\" target=\"_blank\">2100</a><br>Task: <a href=\"#incidents/2100?taskId=62&tabName=comments\" target=\"_blank\">Task 60 from Parent: parent1 task</a><br>Note ID: 257<br>On Date: 01/17/2024 11:29:07<br>By: Resilient Sysadmin<br><br><div class=\"rte\"><div>new notes from child1-2</div></div>"
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "relations_note_id": 257,
+    "task_id": 62
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-relations",
+    "package_version": "3.1.0",
+    "host": "localhost",
+    "execution_time_ms": 1171,
+    "timestamp": "2024-01-17 11:29:09"
+  }
+}
