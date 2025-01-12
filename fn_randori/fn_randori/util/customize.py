@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.2.1096
 
-"""Generate the Resilient customizations required for fn_randori"""
+"""Generate the SOAR customizations required for fn_randori"""
 
 import base64
 import os
@@ -20,17 +22,61 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_randori",
-        "message_destinations": [u"fn_randori"],
-        "functions": [u"randori_clear_data_table", u"randori_get_detections_of_target", u"randori_get_paths", u"randori_get_target", u"randori_send_note_as_comment_to_target", u"randori_update_notes_from_randori_target", u"randori_update_target_impact_score", u"randori_update_target_status"],
+        "message_destinations": [
+            u"fn_randori"
+        ],
+        "functions": [
+            u"randori_clear_data_table",
+            u"randori_get_detections_of_target",
+            u"randori_get_paths",
+            u"randori_get_target",
+            u"randori_send_note_as_comment_to_target",
+            u"randori_update_notes_from_randori_target",
+            u"randori_update_target_impact_score",
+            u"randori_update_target_status"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_authority", u"randori_target_characteristic_tags", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_name", u"randori_target_perspective_name", u"randori_target_status", u"randori_target_tech_category", u"randori_target_temptation", u"randori_target_user_tags", u"randori_target_vendor", u"randori_target_version"],
+        "incident_fields": [
+            u"randori_target_affiliation_state",
+            u"randori_target_authority",
+            u"randori_target_characteristic_tags",
+            u"randori_target_id",
+            u"randori_target_impact_score",
+            u"randori_target_link",
+            u"randori_target_name",
+            u"randori_target_perspective_name",
+            u"randori_target_status",
+            u"randori_target_tech_category",
+            u"randori_target_temptation",
+            u"randori_target_user_tags",
+            u"randori_target_vendor",
+            u"randori_target_version"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"randori_detections_dt", u"randori_discovery_path_dt"],
+        "datatables": [
+            u"randori_detections_dt",
+            u"randori_discovery_path_dt"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"randori_add_artifacts_of_detections", u"randori_add_detections_to_detections_data_table", u"randori_add_target_notes", u"randori_automatic_update_discovery_path_data_table", u"randori_close_target", u"randori_create_artifacts_from_detection", u"randori_send_soar_note_to_randori_target", u"randori_update_detections_data_table", u"randori_update_discovery_path_data_table", u"randori_update_target_data_in_soar", u"randori_update_target_impact_score_in_randori", u"randori_update_target_in_soar", u"randori_update_target_notes", u"randori_update_target_status_in_randori"]
+        "playbooks": [
+            u"randori_add_artifacts_of_detections",
+            u"randori_add_detections_to_detections_data_table",
+            u"randori_add_target_notes",
+            u"randori_automatic_update_discovery_path_data_table",
+            u"randori_close_target",
+            u"randori_create_artifacts_from_detection",
+            u"randori_send_soar_note_to_randori_target",
+            u"randori_update_detections_data_table",
+            u"randori_update_discovery_path_data_table",
+            u"randori_update_target_data_in_soar",
+            u"randori_update_target_impact_score_in_randori",
+            u"randori_update_target_in_soar",
+            u"randori_update_target_notes",
+            u"randori_update_target_status_in_randori"
+        ]
     }
 
 
@@ -39,7 +85,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 51.0.0.0.9340
 
     Contents:
     - Message Destinations:

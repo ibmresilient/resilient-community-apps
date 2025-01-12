@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import json
-import datetime
+from datetime import datetime, timedelta
 from base64 import b64encode
 import logging
 from urllib.parse import urljoin
@@ -44,13 +44,18 @@ GET_SINGLE_DETECTION_FOR_TARGET_URI = "/recon/api/{api_version}/single-detection
 GET_VALIDATE_URI = "/auth/api/{api_version}/validate"
 PATCH_TARGET_URI = "/recon/api/{api_version}/target"
 POST_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
+POST_LOGIN_API_KEY_URI = "/auth/api/{api_version}/login-api-key"
 
 TARGET_LIMIT = 2000
 COMMENT_LIMIT = 100
 
 IBM_SOAR = "IBM SOAR" # common label
-SOAR_HEADER = "Created by {}".format(IBM_SOAR)
+SOAR_HEADER = f"Created by {IBM_SOAR}"
 ENTITY_COMMENT_HEADER = "Created by Randori"
+
+# The Randori authorization token is viable for 24 hours, but regenerate after 
+# 12 hours so there is no issue with it not being viable.
+AUTH_TOKEN_EXPIRY_TIME_IN_HOURS = 12
 
 class AppCommon():
     def __init__(self, rc: RequestsCommon, package_name: str, app_configs: dict) -> None:
@@ -68,14 +73,17 @@ class AppCommon():
         self.package_name = package_name
 
         # required configs
-        self.api_token = app_configs.get("api_token")
+        self.api_token = app_configs.get("api_token", None)
+        self.api_key = app_configs.get("api_key", None)
         self.endpoint_url = app_configs.get("endpoint_url")
         self.api_version = app_configs.get("api_version")
         self.organization_name = app_configs.get("organization_name")
         self.verify = _get_verify_ssl(app_configs)
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
+        self.auth_token_expiry_time = datetime.now()
+        self.auth_token = None
 
-        self.header = self._make_header(self.api_token)
+        self.header = self._make_header(generate_auth_token=False)
 
     def _get_uri(self, cmd: str) -> str:
         """
@@ -88,20 +96,60 @@ class AppCommon():
         """
         return urljoin(self.endpoint_url, cmd.format(api_version=self.api_version))
 
-    def _make_header(self, token: str) -> dict:
-        """Build API header using authorization token
-
-        :param token: authorization token
-        :type token: str
+    def _make_header(self, generate_auth_token:bool) -> dict:
+        """Build API header using API token or API key
+           NOTE: Generated auth token is only passed in the header when calling GET method to Randori API
+        :param generate_auth_token: whether to generate an auth token (only True with calls using GET method)
+        :type generate_auth_token: bool
         :return: complete header
         :rtype: dict
         """
-
         header = HEADER.copy()
+        if self.api_key:
+            if generate_auth_token:
+                token = self._generate_auth_token(self.api_key)
+            else:
+                token = self.api_key
+        elif self.api_token:
+            token = self.api_token
+        else:
+            raise ValueError("No API token or API key provided")
+
         # modify to represent how to build the header
         header['Authorization'] = f"Bearer {token}"
 
         return header
+
+    def _generate_auth_token(self, api_key: str) -> str:
+        """ Generate authorization token from Randori API key
+            Generated auth token is only passed in the header when calling GET method to Randori API
+        Args:
+            api_key (str): Randori API key
+
+        Returns:
+            str: Randori JWT authorization token
+        """
+        now = datetime.now()
+
+        # If current token expiry time is less than 24 hours,
+        # then use the current authorization token.
+        if self.auth_token and now < self.auth_token_expiry_time:
+            return self.auth_token
+
+        self.auth_token_expiry_time = now + timedelta(hours=AUTH_TOKEN_EXPIRY_TIME_IN_HOURS)
+
+        url = self._get_uri(POST_LOGIN_API_KEY_URI)
+        data = {"api_key": f"{api_key}"}
+
+        response = self.rc.execute("POST",
+                                   url=url,
+                                   json=data,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response_json = response.json()
+
+        self.auth_token = response_json.get("authorization")
+        return self.auth_token
 
     def query_entities_since_ts(self, timestamp: datetime, *_args, **_kwargs) -> list:
         """
@@ -176,7 +224,7 @@ class AppCommon():
             response = self.rc.execute("GET",
                                    url=self._get_uri(GET_ALL_DETECTIONS_FOR_TARGET_URI),
                                    params=params,
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
             response_json = response.json()
             if response_json.get('count')  <= 0:
@@ -262,7 +310,7 @@ class AppCommon():
         response = self.rc.execute("GET",
                                    url=url,
                                    params=params,
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
         response_json = response.json()
 
@@ -271,32 +319,44 @@ class AppCommon():
         return comment_list
 
     def post_target_comment(self, target_id: str, comment_text: str, comment_header: str) -> dict:
-        """
-        Call Randori endpoint to post a commment for the specified target.
+        """ Post a comment to the specified target.
+
+        Args:
+            target_id (str): Randori target id
+            comment_text (str): Comment text
+            comment_header (str): Comment header
+
+        Returns:
+            dict: Results of posting the comment to Randori target
         """
 
         url = self._get_uri(POST_COMMENT_URI.format(api_version=self.api_version, target_id=target_id))
         if comment_header:
-            comment_text = "{}:  {}".format(comment_header, comment_text)
+            comment_text = f"{comment_header}:  {comment_text}"
         data = {'comment': comment_text}
 
         response = self.rc.execute("POST",
                                    url=url,
                                    json=data,
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
         response_json = response.json()
 
         return response_json
 
     def get_target(self, target_id: str) -> dict:
-        """
-        Call Randori endpoint to validate the connection to Randori from SOAR.
+        """ Get the specified target from Randori
+
+        Args:
+            target_id (str): Randori target id
+
+        Returns:
+            dict: Information on the target from Randori
         """
         url = GET_SINGLE_TARGET_URI.format(api_version=self.api_version, target_id=target_id)
         response = self.rc.execute("GET",
                                    self._get_uri(url),
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
         return response.json()
 
@@ -352,7 +412,7 @@ class AppCommon():
         response = self.rc.execute("PATCH",
                                    self._get_uri(PATCH_TARGET_URI),
                                    data=data_string,
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
         return response.json()
 
@@ -384,7 +444,7 @@ class AppCommon():
         response = self.rc.execute("PATCH",
                                    self._get_uri(PATCH_TARGET_URI),
                                    data=status_string,
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
         return response.json()
 
@@ -394,18 +454,18 @@ class AppCommon():
         """
         response = self.rc.execute("GET",
                                    self._get_uri(GET_VALIDATE_URI),
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
         return response.json()
 
     def format_randori_comment(self, comment: dict) -> str:
-        """_summary_
+        """ Format a comment from Randori to be displayed in IBM SOAR.
 
         Args:
-            comment (_type_): Randori comment (json object)
+            comment (str): Randori comment (json object)
 
         Returns:
-            _type_: _description_
+            str: Randori comment formatted for IBM SOAR
         """
         comment_text = comment.get('comment',"")
         if comment_text:
@@ -413,8 +473,8 @@ class AppCommon():
             name = comment.get('name',"")
             text = f"{comment_text}<br><br>Created at: {created_at}<br>By: {name}"
             return text
-        else:
-            return None
+
+        return None
 
     def get_paths(self, target_id: str) -> dict:
         """
@@ -428,7 +488,7 @@ class AppCommon():
         response = self.rc.execute("GET",
                                    url=url,
                                    params=params,
-                                   headers=self.header,
+                                   headers=self._make_header(generate_auth_token=True),
                                    verify=self.verify)
         return response.json()
 

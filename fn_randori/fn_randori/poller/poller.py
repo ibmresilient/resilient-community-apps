@@ -114,7 +114,6 @@ class PollerComponent(AppFunctionComponent):
                            "polling_lookback",
                            "endpoint_url",
                            "verify",
-                           "api_token",
                            "api_version",
                            "organization_name"]
 

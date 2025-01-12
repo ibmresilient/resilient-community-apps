@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_randori",
     display_name="Randori",
-    version="1.0.0",
+    version="1.1.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -33,9 +33,10 @@ setup(
          on user-defined query parameters and create and update cases in SOAR.<br>
 
         <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
-        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://github.com/ibmresilient/resilient-community-apps/blob/main/fn_randori/README.md'>App Documentation</a></ul>""",
     install_requires=[
-        "resilient-circuits>=46.0.0"
+        "resilient-circuits>=51.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

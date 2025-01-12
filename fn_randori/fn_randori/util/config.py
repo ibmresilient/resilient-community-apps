@@ -11,8 +11,12 @@ def config_section_data():
     config_data = None
 
     config_data = u"""[fn_randori]
-# Randori API token
-api_token=xxx
+# Enter a Randori API key or a Randori API token.
+# Randori API Token will be deprecated 1/2025, use API key if it is available.
+# Randori API key
+api_key=xxx
+# Randori API token - deprecated soon
+# api_token=xxx
 # Randori REST API endpoint
 endpoint_url=https://app.randori.io
 # Randori organization name

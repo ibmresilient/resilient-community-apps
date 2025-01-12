@@ -3,19 +3,19 @@
 
 import json
 import os
-import datetime
-from sys import api_version
 from unittest import mock
 
 import pytest
 import requests_mock
 from fn_randori.lib.app_common import (AppCommon, PACKAGE_NAME, 
                                        GET_VALIDATE_URI,
-                                       GET_ALL_DETECTIONS_FOR_TARGET_URI)
+                                       GET_ALL_DETECTIONS_FOR_TARGET_URI,
+                                       POST_LOGIN_API_KEY_URI)
 from resilient_lib import RequestsCommon
 
 APP_CONFIG = {
     "api_token": "abcd-efgh",
+    "api_key": "xxxx-yyyy",
     "api_version": "v1",
     "endpoint_url": "https://fake.app.randori.io",
     "organization_name": "my-randori-organization",
@@ -27,11 +27,14 @@ APP_CONFIG = {
 BASE_MOCK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mock_data")
 PATH_VALIDATE_MOCK = os.path.join(BASE_MOCK_PATH, "GET_validate.json")
 PATH_DETECTIONS_MOCK = os.path.join(BASE_MOCK_PATH, "GET_detections.json")
+PATH_AUTH_LOGIN_MOCK = os.path.join(BASE_MOCK_PATH, "POST_auth_login.json")
 URI_GET_VALIDATE="{}{}".format(APP_CONFIG.get("endpoint_url"),
                                GET_VALIDATE_URI.format(api_version="v1"))
 URI_GET_DETECTIONS="{}{}{}".format(APP_CONFIG.get("endpoint_url"),
                                    GET_ALL_DETECTIONS_FOR_TARGET_URI.format(api_version="v1"), 
                                    "?q=eyJjb25kaXRpb24iOiAiQU5EIiwgInJ1bGVzIjogW119&limit=2000&offset=0")
+URI_POST_AUTH_LOGIN="{}{}".format(APP_CONFIG.get("endpoint_url"),
+                                  POST_LOGIN_API_KEY_URI.format(api_version="v1"))
 
 def load_json(path_file):
     with open(path_file, "r") as json_file:
@@ -49,6 +52,8 @@ def mock_api():
                               json=load_json(PATH_VALIDATE_MOCK), status_code=200)
         mock_api.register_uri("GET", url=URI_GET_DETECTIONS,
                               json=load_json(PATH_DETECTIONS_MOCK), status_code=200)
+        mock_api.register_uri("POST", url=URI_POST_AUTH_LOGIN,
+                              json=load_json(PATH_AUTH_LOGIN_MOCK), status_code=200)
         yield mock_api
 
 
@@ -58,15 +63,18 @@ def app_common():
     yield AppCommon(rc, PACKAGE_NAME, APP_CONFIG)
 
 def test_make_headers(app_common: AppCommon):
-    headers = app_common._make_header("api_token")
+    headers = app_common._make_header(generate_auth_token=False)
 
-    assert headers == { 'Content-Type': 'application/json',  'Authorization': "Bearer api_token" }
+    assert headers == { 'Content-Type': 'application/json',  'Authorization': "Bearer xxxx-yyyy" }
+
+def test_generate_auth_token(mock_api: requests_mock.Mocker, app_common: AppCommon):
+    resp_token = app_common._generate_auth_token("xxxx-yyyy")
+    assert resp_token == "xx-yy-zz"
 
 def test_get_validate(mock_api: requests_mock.Mocker, app_common: AppCommon):
     resp = app_common.get_validate()
 
     assert resp
-    assert mock_api.called_once
     assert resp["username"] == "user@example.com"
     assert "authenticated" in resp["perms"]
 
@@ -77,6 +85,5 @@ def test_get_detections_for_target(mock_api: requests_mock.Mocker, app_common: A
     }
     resp = app_common.get_detections_for_target(query)
     assert resp
-    assert mock_api.called_once
     assert resp[0]["priority_score"] == 146.4
     assert resp[0]["target_first_seen"] == "2022-07-07T07:19:09.157578+00:00"
