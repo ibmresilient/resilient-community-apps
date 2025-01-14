@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     display_name='Scheduler',
     name='fn_scheduler',
-    version='2.1.1',
+    version='2.1.2',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -30,7 +30,10 @@ setup(
             1) Scheduling a rule/playbook<br>
             2) Listing scheduled jobs<br>
             3) Pause and resume scheduled job<br>
-            4) Removing a scheduled job""",
+            4) Removing a scheduled job<br>
+<br>
+<br><ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<br><ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         'resilient_circuits>=46.0.0',
         'pytz',

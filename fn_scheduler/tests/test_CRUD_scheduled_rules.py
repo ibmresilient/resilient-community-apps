@@ -20,7 +20,7 @@ FUNCTION_NAME = "list_scheduled_rules"
 # Use mock configuration data
 config_data = """[{0}]
 thread_max=20
-timezone=utc
+timezone=UTC
 datastore_dir=/tmp""".format(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)

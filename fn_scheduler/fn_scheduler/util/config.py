@@ -10,8 +10,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_scheduler]
-# timezone. ex: utc, America/New_York
-timezone=utc
+# timezone. ex: UTC, America/New_York
+timezone=UTC
 # number of rules which can run in parallel
 thread_max=20
 # directory for the sqlite persistent db
