@@ -45,6 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.2   | Jan. 2024 | Refresh python packages SQLAlchemy and psycopg |
 | 2.1.1   | Jul. 2023 | Added optional dependency postgresql to SQLalchemy |
 | 2.1.0   | Apr. 2023 | Migrated all workflows to playbooks |
 | 2.0.0   | May  2022 | Support for Playbooks. Added support for Datatables |
@@ -179,7 +180,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled Playbooks/rules should follow.* |
+| **timezone** | Yes | `UTC` | *Specify the timezone (ex. America/New_York) which scheduled Playbooks/rules should follow.* |
 | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered Playbooks/rules run for a very short time to kick off a IBM SOAR rule.* |
 | **datastore_dir** | No | `/path/to/sqlite_folder` | *Specify a data path for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
 | **db_url** | No | postgresql+pypostgresql://res_test:res_test@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
