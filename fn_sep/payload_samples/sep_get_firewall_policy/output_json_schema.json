@@ -1,0 +1,565 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "sources": {},
+        "configuration": {
+          "type": "object",
+          "properties": {
+            "enforced_rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "severity": {
+                    "type": "integer"
+                  },
+                  "action": {
+                    "type": "string"
+                  },
+                  "connections": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "direction_id": {
+                          "type": "integer"
+                        },
+                        "ether_type_id": {
+                          "type": "integer"
+                        },
+                        "ports": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "start": {
+                                "type": "integer"
+                              },
+                              "end": {},
+                              "location": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "protocol_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "ip_fragmented_only": {
+                          "type": "boolean"
+                        },
+                        "icmp_types": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "icmp_type_ranges": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "start": {
+                                "type": "integer"
+                              },
+                              "end": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "icmp_codes": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "icmp_code_ranges": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "start": {
+                                "type": "integer"
+                              },
+                              "end": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "svc_name": {
+                          "type": "string"
+                        },
+                        "svc_uid": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "hosts": {},
+                  "adapters": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "uid": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "applications": {},
+                  "rulestate": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "desc": {},
+                  "log_action": {
+                    "type": "integer"
+                  },
+                  "packet_capture": {
+                    "type": "boolean"
+                  },
+                  "email_alert": {
+                    "type": "boolean"
+                  },
+                  "screen_saver": {
+                    "type": "string"
+                  },
+                  "time_slots": {}
+                }
+              }
+            },
+            "baseline_rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "severity": {
+                    "type": "integer"
+                  },
+                  "action": {
+                    "type": "string"
+                  },
+                  "connections": {},
+                  "hosts": {},
+                  "adapters": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "uid": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "applications": {},
+                  "rulestate": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "desc": {},
+                  "log_action": {
+                    "type": "integer"
+                  },
+                  "packet_capture": {
+                    "type": "boolean"
+                  },
+                  "email_alert": {
+                    "type": "boolean"
+                  },
+                  "screen_saver": {
+                    "type": "string"
+                  },
+                  "time_slots": {}
+                }
+              }
+            },
+            "ignore_parent_rules": {},
+            "smart_dhcp": {
+              "type": "boolean"
+            },
+            "smart_dns": {
+              "type": "boolean"
+            },
+            "smart_wins": {
+              "type": "boolean"
+            },
+            "token_ring_traffic": {
+              "type": "boolean"
+            },
+            "netbios_protection": {
+              "type": "boolean"
+            },
+            "reverse_dns": {
+              "type": "boolean"
+            },
+            "port_scan": {
+              "type": "boolean"
+            },
+            "dos": {
+              "type": "boolean"
+            },
+            "antimac_spoofing": {
+              "type": "boolean"
+            },
+            "autoblock": {
+              "type": "boolean"
+            },
+            "autoblock_duration": {
+              "type": "integer"
+            },
+            "stealth_web": {
+              "type": "boolean"
+            },
+            "antiIP_spoofing": {
+              "type": "boolean"
+            },
+            "hide_os": {
+              "type": "boolean"
+            },
+            "windows_firewall": {
+              "type": "string"
+            },
+            "windows_firewall_notification": {
+              "type": "boolean"
+            },
+            "endpoint_notification": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "endpoint_notification_message": {},
+                "ask_enabled": {
+                  "type": "boolean"
+                },
+                "endpoint_notification_ask_message": {}
+              }
+            },
+            "p2p_auth": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "excludeHosts": {},
+                "max_auth_attempts": {},
+                "time_between_auth_attempts": {},
+                "time_before_re_auth": {},
+                "time_for_remote_blocked": {},
+                "session_timeout": {},
+                "hosts": {}
+              }
+            },
+            "mac": {
+              "type": "object",
+              "properties": {
+                "enforced_rules": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "uid": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "severity": {
+                        "type": "integer"
+                      },
+                      "action": {
+                        "type": "string"
+                      },
+                      "connections": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "enabled": {
+                              "type": "boolean"
+                            },
+                            "direction_id": {
+                              "type": "integer"
+                            },
+                            "ports": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "start": {
+                                    "type": "integer"
+                                  },
+                                  "end": {},
+                                  "location": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "protocol_ids": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "icmp_types": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "icmp_type_ranges": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "start": {
+                                    "type": "integer"
+                                  },
+                                  "end": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            },
+                            "icmp_codes": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "icmp_code_ranges": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "start": {
+                                    "type": "integer"
+                                  },
+                                  "end": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "hosts": {},
+                      "adapters": {},
+                      "applications": {},
+                      "rulestate": {
+                        "type": "object",
+                        "properties": {
+                          "enabled": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "desc": {},
+                      "log_action": {
+                        "type": "integer"
+                      },
+                      "packet_capture": {
+                        "type": "boolean"
+                      },
+                      "email_alert": {
+                        "type": "boolean"
+                      },
+                      "screen_saver": {
+                        "type": "string"
+                      },
+                      "time_slots": {}
+                    }
+                  }
+                },
+                "baseline_rules": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "uid": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "severity": {
+                        "type": "integer"
+                      },
+                      "action": {
+                        "type": "string"
+                      },
+                      "connections": {},
+                      "hosts": {},
+                      "adapters": {},
+                      "applications": {},
+                      "rulestate": {
+                        "type": "object",
+                        "properties": {
+                          "enabled": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "desc": {},
+                      "log_action": {
+                        "type": "integer"
+                      },
+                      "packet_capture": {
+                        "type": "boolean"
+                      },
+                      "email_alert": {
+                        "type": "boolean"
+                      },
+                      "screen_saver": {
+                        "type": "string"
+                      },
+                      "time_slots": {}
+                    }
+                  }
+                },
+                "ignore_parent_rules": {},
+                "smart_dhcp": {
+                  "type": "boolean"
+                },
+                "smart_dns": {
+                  "type": "boolean"
+                },
+                "port_scan": {
+                  "type": "boolean"
+                },
+                "dos": {
+                  "type": "boolean"
+                },
+                "antimac_spoofing": {
+                  "type": "boolean"
+                },
+                "autoblock": {
+                  "type": "boolean"
+                },
+                "autoblock_duration": {
+                  "type": "integer"
+                },
+                "endpoint_notification": {
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean"
+                    },
+                    "endpoint_notification_message": {},
+                    "ask_enabled": {},
+                    "endpoint_notification_ask_message": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lastmodifiedtime": {
+          "type": "integer"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sep_firewall_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "task_at_id": null,
+    "vers": 9,
+    "name": "thumbnail.jpeg",
+    "task_id": null,
+    "created": 1563376723766,
+    "inc_owner": 71,
+    "task_members": null,
+    "task_custom": null,
+    "task_name": null,
+    "inc_name": "Get example outputs fn-utilities",
+    "creator_id": 38,
+    "content_type": "image/jpeg",
+    "inc_id": 2095,
+    "size": 123852,
+    "type": "incident",
+    "id": 7,
+    "uuid": "5a31ce96-954a-4d3f-a193-a83618055d22"
+}

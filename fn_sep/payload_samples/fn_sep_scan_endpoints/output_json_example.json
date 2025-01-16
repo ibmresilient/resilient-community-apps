@@ -1,0 +1,27 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandID_computer": "A0B9FC7873584EEAA44E1C3F78882D28"
+  },
+  "raw": null,
+  "inputs": {
+    "sep_md5": null,
+    "sep_scan_action": null,
+    "sep_sha256": "1ac32478198ae72153801c58d2e437f27827f434fd810ae8d6ec6bc8f54350fb",
+    "sep_file_path": null,
+    "sep_sha1": null,
+    "sep_scan_type": "QUICK_SCAN",
+    "sep_description": "Scan eoc for suspicious hash of type Malware SHA-256 Hash and value 1ac32478198ae72153801c58d2e437f27827f434fd810ae8d6ec6bc8f54350fb in the SEP environment.",
+    "sep_computer_ids": "01ECF4E8092E5BB91E4D52E45C3ABE4D"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1002,
+    "timestamp": "2024-08-16 08:46:57"
+  }
+}
