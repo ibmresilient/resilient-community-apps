@@ -19,17 +19,20 @@ def snake_to_camel(word):
 
 setup(
     name='fn_mitre_integration',
-    version='2.1.0',
+    version='2.2.0',
     license='MIT License',
     author='IBM QRadar SOAR',
     author_email='support@resilientsystems.com',
     description="IBM SOAR Components for 'fn_mitre_integration'",
-    long_description="fn_mitre_integration support retrieving information related to MITRE ATT&CK tactics and technique from MITRE STIX TAXII server.",
+    long_description="""Retrieve information related to MITRE ATT&CK tactics and techniques from MITRE's STIX TAXII server.
+<br>
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         'resilient_lib',
         'resilient_circuits>=51.0.0',
         'stix2',
-        'taxii2-client>=2.0.0'
+        'taxii2-client>=2.3.0'
     ],
     packages=find_packages(),
     include_package_data=True,

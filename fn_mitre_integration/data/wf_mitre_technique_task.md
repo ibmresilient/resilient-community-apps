@@ -64,7 +64,7 @@ for technique in techniques:
     mitigation_text = []
     for mitigation in mitigations:
       mitigation_text.append(u"""
-      <h3>{0}</h3>
+      <b>{0}</b>
       <p>{1}</p>
       """.format(mitigation["name"], mitigation["description"]))
     mitigation_text = "".join(mitigation_text)

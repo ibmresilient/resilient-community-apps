@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -39,8 +39,8 @@ class FunctionComponent(ResilientComponent):
                                            mitre_technique_id=mitre_technique_id)
 
             if not mitre_technique_id and not mitre_technique_name:
-                raise ValueError("At least one of the inputs(mitre_technique_name or mitre_technique_id) "
-                                 "should be provided.")
+                raise ValueError("At least one of the inputs (mitre_technique_name or mitre_technique_id) "
+                                 "are required.")
 
             yield StatusMessage("Getting technique information...")
 

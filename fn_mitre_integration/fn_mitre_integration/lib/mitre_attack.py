@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 # Current code is written to support v20, and importing from taxii2client directly returns v21 now
-from taxii2client.v20 import Server
+from taxii2client.v21 import Server
 import re
 from resilient_lib import RequestsCommon
 
-MITRE_TAXII_URL = "https://cti-taxii.mitre.org/taxii/"
+MITRE_TAXII_URL = "https://attack-taxii.mitre.org/taxii2/"
 MITRE_BASE_URL = "https://attack.mitre.org"
+
 CODE_TAG = "tt"  # Some descriptions contain <code> html tag, which we update for platform's rich text
 
 
@@ -190,7 +191,7 @@ class MitreAttackBase(object):
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("name", "=", name)
         items = conn.get_items([type_filter, name_filter])
-        if not len(items):
+        if not items:
             return
 
         return [cls(x) for x in items]  # create a list of class instances from query data
@@ -213,7 +214,7 @@ class MitreAttackBase(object):
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         id_filter = Filter("external_references.external_id", "=", type_id)
         items = conn.get_items([type_filter, id_filter])
-        if not len(items):
+        if not items:
             return
 
         return [cls(item) for item in items]  # create a list of class instances from query data
@@ -480,7 +481,7 @@ class MitreAttackSoftware(MitreAttackBase):
         """
         return "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, self.id)
 
-    def get_platforms(selfs, doc):
+    def get_platforms(self, doc):
         """
         Gets the software platforms from STIX document
         :param doc: Stix document
@@ -606,7 +607,7 @@ class MitreAttackConnection(object):
         name_filter = Filter("name", "=", item_name)
         items = self.get_items([query_filter, name_filter])
 
-        if len(items):
+        if items:
             return items
 
 
@@ -705,5 +706,5 @@ class MitreAttack(object):
             return
 
         mitigations = MitreAttackMitigation.get_by_technique(self.conn, tech)
-        if len(mitigations):
+        if mitigations:
             return mitigations

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 """Function implementation
    test with: resilient-circuits selftest -l fn_mitre_integration
 """

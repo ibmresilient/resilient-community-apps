@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 #   Utils collection for MitreAttack
 
 from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection
@@ -73,9 +73,9 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None, opts=None, fu
             tactics_named = MitreAttackTactic.get_by_name(mitre_conn, t_name)
             if not tactics_named:
                 raise ValueError("Tactics with name {} do not exist.".format(t_name))
-            else:
-                for tactic in tactics_named:
-                    tactics.append(tactic.id)
+
+            for tactic in tactics_named:
+                tactics.append(tactic.id)
 
     ret = []
     for tactic_id in tactics:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 """
 Note that the mitre_attack class encapsulates the
@@ -379,10 +379,8 @@ class TestMitre(object):
         assert t
         assert [x.get_tactic(self.mitre_conn) for x in t]
 
-        t = MitreAttackTechnique.get(self.mitre_conn, id="T1245")  # From Pre-Attack
-        assert t
-        assert [x.get_tactic(self.mitre_conn) for x in t]
-
+        t = MitreAttackTechnique.get(self.mitre_conn, id="T1245")  # doesn't exist
+        assert not t
 
     def test_mitre_attack_util(self):
         data_mocker = MitreQueryMocker()
