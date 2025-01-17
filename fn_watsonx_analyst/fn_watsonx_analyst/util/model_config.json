@@ -1,0 +1,62 @@
+[
+    {
+        "model_name": "ibm/granite-3-8b-instruct",
+        "context_length": 4096
+    },
+    {
+        "model_name": "ibm/granite-3-2b-instruct",
+        "context_length": 4096
+    },
+    {
+        "model_name": "ibm/granite-guardian-3-8b",
+        "context_length": 4096
+    },
+    {
+        "model_name": "ibm/granite-guardian-3-2b",
+        "context_length": 4096
+    },
+    {
+        "model_name": "ibm/granite-20b-multilingual",
+        "context_length": 8192
+    },
+    {
+        "model_name": "ibm/granite-13b-chat",
+        "context_length": 8192
+    },
+    {
+        "model_name": "ibm/granite-13b-instruct",
+        "context_length": 8192
+    },
+    {
+        "model_name": "meta-llama/llama-3-2-1b-instruct",
+        "context_length": 128000
+    },
+    {
+        "model_name": "meta-llama/llama-3-405b-instruct",
+        "context_length": 128000
+    },
+    {
+        "model_name": "meta-llama/llama-3-1-70b-instruct",
+        "context_length": 128000
+    },
+    {
+        "model_name": "meta-llama/llama-3-8b-instruct",
+        "context_length": 8192
+    },
+    {
+        "model_name": "meta-llama/llama-3-70b-instruct",
+        "context_length": 8192
+    },
+    {
+        "model_name": "mistralai/mistral-large",
+        "context_length": 32000
+    },
+    {
+        "model_name": "mistralai/mixtral-8x7b-instruct",
+        "context_length": 32768
+    },
+    {
+        "model_name": "google/flan-t5-xl-3b",
+        "context_length": 4096
+    }
+]

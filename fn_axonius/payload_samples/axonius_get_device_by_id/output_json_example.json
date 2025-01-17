@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "attachment_name": "Axonius-Device-Shirley-Quilliams-iMac.json"
+  },
+  "raw": null,
+  "inputs": {
+    "axonius_write_attachment": true,
+    "axonius_attachment_name": "Axonius-Device-Shirley-Quilliams-iMac.json",
+    "axonius_internal_axon_id": "0de1ff00569723b2d11ec84665c4bd06",
+    "axonius_incident_id": 2144,
+    "axonius_task_id": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-axonius",
+    "package_version": "1.0.0",
+    "host": "mylaptop",
+    "execution_time_ms": 92192,
+    "timestamp": "2024-03-12 13:24:06"
+  }
+}
