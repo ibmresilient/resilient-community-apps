@@ -488,23 +488,27 @@
 <td><p>—-</p></td>
 <td><p>—–</p></td>
 </tr>
-<tr class="row-even"><td><p>v1.1.0</p></td>
+<tr class="row-even"><td><p>v1.2.0</p></td>
+<td><p>12/2024</p></td>
+<td><p>Add automatic creation of access token using API Key and API Secret.</p></td>
+</tr>
+<tr class="row-odd"><td><p>v1.1.0</p></td>
 <td><p>10/2024</p></td>
 <td><p>Add verify to app.config. Update base_url in app.config to API V2. Convert to playbooks. Upgrade to use execute to make API calls.</p></td>
 </tr>
-<tr class="row-odd"><td><p>v1.0.3</p></td>
+<tr class="row-even"><td><p>v1.0.3</p></td>
 <td><p>September 2020</p></td>
 <td><p>Added proxy support</p></td>
 </tr>
-<tr class="row-even"><td><p>v1.0.2</p></td>
+<tr class="row-odd"><td><p>v1.0.2</p></td>
 <td><p>May 2020</p></td>
 <td><p>App Host support</p></td>
 </tr>
-<tr class="row-odd"><td><p>v1.0.1</p></td>
+<tr class="row-even"><td><p>v1.0.1</p></td>
 <td><p>August 2019</p></td>
 <td><p>Configuration settings checking less restrictive</p></td>
 </tr>
-<tr class="row-even"><td><p>v1.0.0</p></td>
+<tr class="row-odd"><td><p>v1.0.0</p></td>
 <td><p>June 2018</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -512,7 +516,7 @@
 </table>
 </div>
 <ul class="simple">
-<li><p>For customers upgrading from a previous release to 1.1.0 or greater, the app.config file must be manually edited to add new settings.</p></li>
+<li><p>For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -641,10 +645,20 @@ Additional package dependencies may exist for each of these packages:</p>
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p><strong>inv_api_key</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;api</span> <span class="pre">key&gt;</span></code></p></td>
+<td><p><em>The Cisco Umbrella Investigate API key to be used to created the access token. New to v1.2.0</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>inv_api_secret</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;api</span> <span class="pre">secret&gt;</span></code></p></td>
+<td><p><em>The Cisco Umbrella Investigate API secret to be used to created the access token. New to v1.2.0</em></p></td>
+</tr>
 <tr class="row-even"><td><p><strong>api_token</strong></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&lt;api</span> <span class="pre">token&gt;</span></code></p></td>
-<td><p><em>API token from Cisco Umbrella</em></p></td>
+<td><p><em>API token from Cisco Umbrella. This will soon be deprecated.</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>base_url</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
