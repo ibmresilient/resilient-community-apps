@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 from urllib.parse import quote_plus
 from datetime import datetime
@@ -72,21 +72,15 @@ class FunctionComponent(AppFunctionComponent):
 
             regex = None
             process_result = {}
-            params = {"regex": umbinv_regex.strip(), "start_epoch": umbinv_start_epoch,
-                "start_relative": umbinv_start_relative,
+            params = {"start_epoch": umbinv_start_epoch, "start_relative": umbinv_start_relative,
                 "limit": umbinv_limit, "include_category": umbinv_include_category}
             process_params(params, process_result)
-
-            if "_regex" not in process_result:
-               raise ValueError("Parameter 'umbinv_regex' was not processed correctly")
-            else:
-                regex = process_result.pop("_regex")
 
             invClient = investigateClient(self.options, self.rc)
 
             yield self.status_message("Running Cisco Investigate query...")
             rtn = invClient.make_api_call("GET",
-                                          URIs.get("search").format(quote_plus(regex)),
+                                          URIs.get("search").format(quote_plus(umbinv_regex.replace('\\\\', '\\'))),
                                           params={"start": get_time_input(params.get("start")),
                                                   "limit": umbinv_limit,
                                                   "includeCategory": str(umbinv_include_category).lower()})

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.2.2.1096
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.4.0.1351
 
 """Generate the SOAR customizations required for fn_cisco_umbrella_inv"""
 

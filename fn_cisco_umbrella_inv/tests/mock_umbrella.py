@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Generate Mock responses to simulate Cisco Umbrella Investigate for Unix tests """
 
 PACKAGE_NAME = "fn_cisco_umbrella_inv"

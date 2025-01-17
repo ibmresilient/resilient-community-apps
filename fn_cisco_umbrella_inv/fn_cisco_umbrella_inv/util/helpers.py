@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 """ Helper functions for Resilient circuits Functions supporting Cisco Umbrella Investigate """
 
-from __future__ import print_function
 from logging import getLogger
 from datetime import datetime, timedelta, timezone
 from time import mktime
 from re import compile, error, split, match, IGNORECASE, search
 from os import remove
 from json import dump
-from urllib.parse import urljoin
-from urllib.parse import urlparse, quote_plus
-from re import compile
+from urllib.parse import urlparse, quote_plus, urljoin
+from requests.auth import HTTPBasicAuth
 
 PACKAGE_NAME = "fn_cisco_umbrella_inv"
 LOG = getLogger(__name__)
@@ -65,9 +63,48 @@ class investigateClient():
         self.verify = rc.get_verify()
         self.proxies = rc.get_proxies()
         self.rc = rc
-        self.header = {"Authorization": f"Bearer {options.get('api_token', None)}"}
+        self.header = {'Accept': 'application/json'}
 
-    def make_api_call(self, method: str, uri: str, params: dict=None, data: dict=None):
+        # Get or create access token
+        token = None
+        self.api_token = options.get("api_token", None)
+        self.api_key = options.get("inv_api_key", None)
+        self.api_secret = options.get("inv_api_secret", None)
+        if self.api_token and self.api_token != "<api token>":
+            # use given access token
+            token = self.api_token
+        elif self.api_key and self.api_secret and self.api_key != "<cisco_umbrella_investigate_api_key>" and self.api_secret != "<cisco_umbrella_investigate_api_secret>":
+            # Create access token
+            token = self.create_access_token(self.api_key, self.api_secret)
+        else:
+            raise ValueError("Either an inv_api_key and inv_api_secret have to be given or an api_token has to be given.")
+        # Create authorization header
+        self.header["Authorization"] = f"Bearer {token}"
+
+    def create_access_token(self, api_key: str, api_secret: str):
+        """Create an access token using the given api_key and api_secret.
+        Args:
+            api_key (str): Cisco Umbrella Investigate API key.
+            api_secret (str): Umbrella Investigate API Secret
+
+        Returns:
+            str: Access token
+        """
+        resp = self.make_api_call("GET",
+            urljoin(self.base_url.replace("investigate", "auth"), "token"),
+            auth=HTTPBasicAuth(api_key, api_secret))
+        return resp.get("access_token", None)
+
+    def check_response(self, response):
+        # Handle 400 error codes. If a 400 or a 403 error is returned then the access token could have expired.
+        # If inv_api_key and inv_api_secret given in the app.config check response to determine if a new access token needs to be created.
+        if response.status_code >= 400 and response.status_code < 500 and not self.api_token:
+            # Return False, so the code knows to create a new access token and try the api call again.
+            return False
+        else:
+            return response
+
+    def make_api_call(self, method: str, uri: str, params: dict=None, data: dict=None, auth=None):
         """Make a REST API call to the Cisco Umbrella Investigate server
 
         Args:
@@ -75,17 +112,43 @@ class investigateClient():
             uri (str): API uri that can be found in the URIs variable
             params (dict, optional): Dictionary of params to pass to API call. Defaults to None.
             data (dict, optional): Dictionary of data to pass to API call. Defaults to None.
+            auth: HTTPBasicAuth object. Defaults to None.
 
         Returns:
-            Json return from the API call
+            json return from the API call
         """
-        return self.rc.execute(method,
-                               urljoin(self.base_url, uri),
-                               params=params if params else None,
-                               data=data if data else None,
-                               proxies=self.proxies,
-                               headers=self.header,
-                               verify=self.verify).json()
+        def api_call(callb: bool=True):
+            if callb:
+                return self.rc.execute(method,
+                    urljoin(self.base_url, uri),
+                    params=params if params else None,
+                    data=data if data else None,
+                    auth=auth,
+                    proxies=self.proxies,
+                    headers=self.header,
+                    verify=self.verify,
+                    callback=self.check_response)
+            else:
+                return self.rc.execute(method,
+                    urljoin(self.base_url, uri),
+                    params=params if params else None,
+                    data=data if data else None,
+                    auth=auth,
+                    proxies=self.proxies,
+                    headers=self.header,
+                    verify=self.verify)
+        # Make API call
+        if not self.api_token:
+            resp = api_call()
+        else:
+            resp = api_call(False)
+        # If resp equals False then the status_code was a 400
+        if not resp and not self.api_token:
+            # Create new access token and set it in the header
+            self.header = {"Authorization": f"Bearer {self.create_access_token(self.api_key, self.api_secret)}"}
+            # Make API call again using new access token
+            resp = api_call(False)
+        return resp.json()
 
 def get_time_input(time_input):
     """ Return the correct time """

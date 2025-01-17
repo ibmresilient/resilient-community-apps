@@ -9,7 +9,12 @@ def config_section_data():
     """
     return """[fn_cisco_umbrella_inv]
 base_url=https://api.umbrella.com/investigate/v2/
+# Either an inv_api_key and inv_api_secret have to be given or an api_token has to be given.
+# The Investigate API key and secret that will be used to create access tokens
+inv_api_key=<cisco_umbrella_investigate_api_key>
+inv_api_secret=<cisco_umbrella_investigate_api_secret>
 # The api_token will be supplied by Cisco will be in uuid format.
+# This will soon be deprecated.
 api_token=<api token>
 results_limit=200
 verify=True

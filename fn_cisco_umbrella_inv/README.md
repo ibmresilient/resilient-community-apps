@@ -59,13 +59,14 @@
 | ------- | ---- | ----- |
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v1.2.0 | 12/2024 | Add automatic creation of access token using API Key and API Secret. |
 | v1.1.0 | 10/2024 | Add verify to app.config. Update base_url in app.config to API V2. Convert to playbooks. Upgrade to use execute to make API calls. |
 | v1.0.3 | September 2020 | Added proxy support |
 | v1.0.2 | May 2020 | App Host support |
 | v1.0.1 | August 2019 | Configuration settings checking less restrictive |
 | v1.0.0 | June 2018 | Initial Release |
 
-* For customers upgrading from a previous release to 1.1.0 or greater, the app.config file must be manually edited to add new settings.
+* For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings.
 
 ---
 
@@ -158,7 +159,9 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `<api token>` | *API token from Cisco Umbrella* |
+| **inv_api_key** | No | `<api key>` | *The Cisco Umbrella Investigate API key to be used to created the access token. New to v1.2.0* |
+| **inv_api_secret** | No | `<api secret>` | *The Cisco Umbrella Investigate API secret to be used to created the access token. New to v1.2.0* |
+| **api_token** | No | `<api token>` | *API token from Cisco Umbrella. This will soon be deprecated.* |
 | **base_url** | Yes | `https://api.umbrella.com/investigate/v2/` | *Base URL for Cisco Umbrella investigate.* |
 | **results_limit** | Yes | `200` | *The max number of results that should be returned* |
 | **verify** | Yes | `True/False` | *True, False, or a path the a certificate file.* |

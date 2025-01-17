@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 """ SOAR functions component to run an Umbrella investigate Query - Classifiers against a Cisco Umbrella server """
 
@@ -40,7 +40,7 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         # Validate required settings in the app.config
-        validate_fields(["api_token", "base_url", "results_limit"], self.options)
+        validate_fields(["base_url", "results_limit"], self.options)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
