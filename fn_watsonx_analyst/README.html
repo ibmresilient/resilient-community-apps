@@ -418,6 +418,7 @@
 <li><p><a class="reference internal" href="#watsonxai-project-id"><span class="xref myst">Watsonx.ai Project ID</span></a></p></li>
 <li><p><a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></li>
 <li><p><a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">Watsonx.ai Endpoint URL</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonxai-free-credits"><span class="xref myst">Watsonx.ai Free Credits</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
@@ -468,6 +469,7 @@
 <li><p><a class="reference internal" href="#feedback"><span class="xref myst">Feedback</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
+<li><p><a class="reference internal" href="#not-authorized-to-use-watsonx-but-sure-configuration-is-correct"><span class="xref myst">Not authorized to use watsonx, but sure configuration is correct</span></a></p></li>
 <li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
 </ul>
 </li>
@@ -485,11 +487,15 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>12/2024</p></td>
+<td><p>Rich text output, request ID in logs, and a data processing fix for incidents with larger data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>12/2024</p></td>
 <td><p>Bugfix for SOAR versions &lt;= 51.0.2.1 and &gt;= 51.0.4.1 for Note Conversation Function.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>12/2024</p></td>
 <td><p>Initial “<strong>Early Access</strong>” release. Uses watsonx.ai SaaS Version <code class="docutils literal notranslate"><span class="pre">2023-05-29</span></code></p></td>
 </tr>
@@ -563,6 +569,10 @@
 <div><p>Don’t use the prompt and/or notebooks endpoint.</p>
 </div></blockquote>
 </section>
+<section id="watsonx-ai-free-credits">
+<h4>Watsonx.ai Free Credits<a class="headerlink" href="#watsonx-ai-free-credits" title="Link to this heading">¶</a></h4>
+<p>Lite accounts make it easy to get started with IBM Cloud® and try out services. When you’re ready to unlock the full IBM Cloud catalog, get extra free resources, and more, you can upgrade to a Pay-As-You-Go or Subscription account. By upgrading to Pay-As-You-Go account, you would recieve a $200 credit for 30 days. When you enter a credit card for a new Pay-As-You-Go account, you’ll receive a promotional credit to use on any IBM product including watsonx.ai. For more detials please refer <code class="docutils literal notranslate"><span class="pre">Promotional</span> <span class="pre">credit</span> <span class="pre">for</span> <span class="pre">upgrading</span> <span class="pre">your</span> <span class="pre">account</span></code> section <a class="reference external" href="https://cloud.ibm.com/docs/account?topic=account-upgrading-account#promotional-credit-for-upgrading-your-account">here</a>.</p>
+</section>
 </section>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
@@ -631,12 +641,14 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>This app runs on Python 3.12.
+<p>This app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>tiktoken==0.8.0</p></li>
 <li><p>resilient-circuits&gt;=51.0.2.0.0</p></li>
 <li><p>scikit-learn==1.5.2</p></li>
+<li><p>Markdown==3.7</p></li>
+<li><p>nh3==0.2.19</p></li>
 </ul>
 </section>
 </section>
@@ -665,17 +677,17 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-even"><td><p><strong>watsonx_api_key</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p>0123-4567-89ab-cdef</p></td>
-<td><p>Your watsonx.ai API key - see <a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></td>
+<td><p>Your watsonx.ai API key - see<a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>watsonx_endpoint</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://us-south.ml.cloud.ibm.com</span></code></p></td>
-<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a></p></td>
+<td><p>The watsonx.ai API URL - see<a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>watsonx_project_id</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p>0123-4567-89ab-cdef</p></td>
-<td><p>The watsonx.ai project id - see <a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Project ID</span></a></p></td>
+<td><p>The watsonx.ai project id - see<a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Project ID</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -715,6 +727,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">Are</span> <span class="pre">there</span> <span class="pre">any</span> <span class="pre">associated</span> <span class="pre">Indicators</span> <span class="pre">of</span> <span class="pre">Compromise</span> <span class="pre">(IOCs)</span> <span class="pre">with</span> <span class="pre">[bad_script.sh]?</span></code></p></li>
 </ul>
 </li>
+<li><p>Responses from the LLM that contain markdown, will have this markdown displayed in notes as rich text.</p></li>
 </ul>
 <section id="data-made-available-to-the-llm">
 <h4>Data made available to the LLM<a class="headerlink" href="#data-made-available-to-the-llm" title="Link to this heading">¶</a></h4>
@@ -724,13 +737,13 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>Description</p></li>
 <li><p>Start date</p></li>
 <li><p>Discovered date</p></li>
-<li><p>Address (address, city, state, country, zip)</p></li>
+<li><p>Address (address, city, country, zip)</p></li>
+<li><p>Incident state (open or closed)</p></li>
 <li><p>Incident workspace</p></li>
 <li><p>Incident creator</p></li>
 <li><p>Incident reporter</p></li>
 <li><p>Incident members</p></li>
 <li><p>Negative PR likelihood</p></li>
-<li><p>Regulatory assessments</p></li>
 <li><p>Incident disposition (confirmed / unconfirmed)</p></li>
 <li><p>Custom incident properties</p></li>
 </ul>
@@ -749,15 +762,14 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>Playbook description</p></li>
 <li><p>Elapsed time</p></li>
 <li><p>Execution state (running, error, completed, canceled, suspended)</p></li>
-<li><p>Object name (e.g. incident’s name)</p></li>
+<li><p>Object name (e.g. incident’s name, artifact’s name, etc.)</p></li>
 </ul>
 <p>Phases &amp; Tasks:</p>
 <ul class="simple">
 <li><p>Phase name</p></li>
 <li><p>Task name</p></li>
 <li><p>Task description</p></li>
-<li><p>Task status (complete or incomplete)</p></li>
-<li><p>Task status (active or inactive)</p></li>
+<li><p>Task statuses (complete or incomplete, and active or inactive)</p></li>
 <li><p>Task required or not</p></li>
 </ul>
 <p>*Only in note conversations with an artifact name in square brackets.</p>
@@ -1208,13 +1220,30 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <section id="troubleshooting-support">
 <h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
-<p>If one of the actions fails, the following steps may help:</p>
+<p>If any of the actions fail, the following steps may help:</p>
 <ul class="simple">
-<li><p>Check the playbook progress on the incident - the playbook may have failed. If so, the error message in the function’s response may help you interpret the problem.</p></li>
-<li><p>If the error message does not provide enough information, you can download the apps’ logs from Administrator Settings -&gt; Apps page. Go to the details of the app, and click “Download Logs.”</p></li>
-<li><p>Additionally, SOAR’s <code class="docutils literal notranslate"><span class="pre">client.log</span></code> log file may give some extra information.</p></li>
+<li><p>Check playbook progress on the incident</p>
+<ul>
+<li><p>The playbook may have failed. If so, the error message in the function’s response may help you interpret the problem.</p></li>
+</ul>
+</li>
+<li><p>Check app logs</p>
+<ul>
+<li><p>Download the apps’ logs from Administrator Settings -&gt; Apps page. Go to the details of the app, and click “Download Logs.”</p></li>
+<li><p>Function invocations will create a request ID, which can be used to identify logs for a specific invocation.</p></li>
+<li><p>Check SOAR’s <code class="docutils literal notranslate"><span class="pre">client.log</span></code> log file which may give some extra information.</p></li>
+</ul>
+</li>
+<li><p>If these do not give sufficient information, then you may enable debug level logging for the app by editing the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> and adding <code class="docutils literal notranslate"><span class="pre">loglevel</span> <span class="pre">=</span> <span class="pre">DEBUG</span></code> below the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section</p></li>
 </ul>
 <p>Otherwise, refer to watsonx.ai’s <a class="reference external" href="https://dataplatform.cloud.ibm.com/docs/content/wsj/troubleshoot/troubleshoot.html?context=wx&amp;amp;audience=wdp">Troubleshooting Docs</a></p>
+<section id="not-authorized-to-use-watsonx-but-sure-configuration-is-correct">
+<h3>Not authorized to use watsonx, but sure configuration is correct<a class="headerlink" href="#not-authorized-to-use-watsonx-but-sure-configuration-is-correct" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>You must have a	<strong>watsonx.ai Runtime</strong> service associated with your project (<code class="docutils literal notranslate"><span class="pre">WatsonMachineLearning</span></code>).</p></li>
+<li><p>Ensure that all configuration values are correct, and that configuration values are not enclosed in quotation marks (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>).</p></li>
+</ul>
+</section>
 <section id="for-support">
 <h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is an IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
@@ -1289,6 +1318,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><a class="reference internal" href="#watsonx-ai-project-id">Watsonx.ai Project ID</a></li>
 <li><a class="reference internal" href="#ibm-cloud-iam-api-key">IBM Cloud IAM API Key</a></li>
 <li><a class="reference internal" href="#watsonx-ai-endpoint-url">Watsonx.ai Endpoint URL</a></li>
+<li><a class="reference internal" href="#watsonx-ai-free-credits">Watsonx.ai Free Credits</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
@@ -1332,6 +1362,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#feedback">Feedback</a></li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#not-authorized-to-use-watsonx-but-sure-configuration-is-correct">Not authorized to use watsonx, but sure configuration is correct</a></li>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
 </ul>
 </li>
