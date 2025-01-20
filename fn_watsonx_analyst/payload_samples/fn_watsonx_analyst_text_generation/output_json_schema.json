@@ -4,6 +4,9 @@
     "generated_text": {
       "type": "string"
     },
+    "raw_output": {
+      "type": "string"
+    },
     "tag": {
       "type": "string"
     },

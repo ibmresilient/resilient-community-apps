@@ -50,11 +50,8 @@ sample_data = {
 
 
 def mock_request_post(
-    _self,
-    uri,
-    **kwargs
-):
-    happy_url: RestUrls = kwargs.get("happy_url", RestUrls.PLAYBOOK_EXECUTIONS)
+    _self, uri, _payload, _co3_context_token=None, _timeout=None, _headers=None, _skip_retry=None, **kwargs):
+    happy_url: RestUrls = kwargs.get("happy_path")
 
     if happy_url.value[1].format(**kwargs) == uri:
         return sample_data

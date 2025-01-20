@@ -1,4 +1,3 @@
-import logging
 from typing import List
 
 from resilient import SimpleClient
@@ -12,10 +11,11 @@ from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose, ModelTag
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
 from fn_watsonx_analyst.util.parallel.parallel import ParallelRunnableRunner
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
+from fn_watsonx_analyst.util.util import create_logger
 
 MAX_THRESHOLD = 2000000  # bytes
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 class ArtifactSummaryGenerator:
     """Generate a summary of an artifact in layers of summaries"""

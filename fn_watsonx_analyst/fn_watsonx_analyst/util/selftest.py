@@ -20,13 +20,12 @@ Return examples:
     }
 """
 
-import logging
-
 from requests import RequestException
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.errors import WatsonxApiException
+from fn_watsonx_analyst.util.util import create_logger
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 
 def selftest_function(opts):
@@ -36,6 +35,7 @@ def selftest_function(opts):
     """
 
     state = "failure"
+    # pylint: disable=line-too-long
     reason = "Check the configuration file for invalid syntax. Ensure that secrets are set for watsonx_endpoint, watsonx_project_id, and watsonx_api_key. Also ensure that the [watsonx_property_labels] section is in the config and valid."
 
     try:
@@ -60,8 +60,8 @@ def selftest_function(opts):
     except (ConnectionError, RequestException):
         reason = "Error when connecting to watsonx.ai, or bad configuration. " + reason
     except WatsonxApiException as e:
-        reason = e.msg + reason
+        reason = e.msg + " " + reason
     except Exception as e:
-        reason = "Unkown error" + str(e) + reason
+        reason = "/n".join(["Unknown error", str(e), reason])
 
     return {"state": state, "reason": reason}

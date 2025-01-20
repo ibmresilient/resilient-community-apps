@@ -1,10 +1,10 @@
 from functools import wraps
-import logging
 import time
 
 from fn_watsonx_analyst.util.errors import WatsonxTooManyRequestsException
+from fn_watsonx_analyst.util.util import create_logger
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 
 def retry_with_backoff(retries=3, delay=1.5, backoff=2):
@@ -19,7 +19,7 @@ def retry_with_backoff(retries=3, delay=1.5, backoff=2):
                 except WatsonxTooManyRequestsException as e:
                     exc = e
                     retries -= 1
-                    log.warning(f"Retrying request in {delay} seconds...")
+                    log.warning("Retrying request in %d seconds...", delay)
                     time.sleep(delay)
                     delay *= backoff
 

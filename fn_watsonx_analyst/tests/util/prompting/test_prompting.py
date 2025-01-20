@@ -59,6 +59,23 @@ class TestPrompting:
         )
         assert result.strip().startswith("<|system|>")
 
+
+    def test_code_results(self):
+        """Test to see if the prompt format is correct for code instruct models """
+        model = next((model for model in self.model_config if model['model_name'] == 'ibm/granite-8b-code-instruct'), None)
+        query = "Give me a code to loop from 1 to 3"
+        context = "In the age of information, data-driven decisions shape the world. Every click, like, and share becomes a data point in a vast digital ecosystem, where algorithms analyze human behavior to predict preferences"
+
+        result = Prompting.build_prompt(
+            self.prompting,
+            purpose=AiResponsePurpose.NOTE_CONVERSATION,
+            model=model["model_name"],
+            query=query,
+            context=context,
+        )
+        print(result)
+        assert result.strip().endswith("Answer:")
+
     def test_invalid_model(self):
         """Test to see if the method catches an invalid model ask"""
         model = next((model for model in self.model_config if model['model_name'] == 'google/bard'), None)

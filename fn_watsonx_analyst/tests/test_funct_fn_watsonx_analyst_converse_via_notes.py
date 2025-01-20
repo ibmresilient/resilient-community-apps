@@ -2,7 +2,6 @@
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 """Tests using pytest_resilient_circuits"""
-
 from unittest.mock import patch
 import pytest
 import helper
@@ -81,4 +80,4 @@ class TestFnWatsonxConverseViaNotes:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
         results = call_fn_watsonx_analyst_converse_via_notes_function(circuits_app, mock_inputs)
-        assert(results["content"]["generated_text"] == expected_results)
+        assert(results["content"]["raw_output"] == expected_results)

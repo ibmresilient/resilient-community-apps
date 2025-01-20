@@ -1,6 +1,7 @@
 # watsonx.ai for SOAR Analysts<!-- omit in toc -->
 
 ## Table of Contents<!-- omit in toc -->
+
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
@@ -9,6 +10,7 @@
     - [Watsonx.ai Project ID](#watsonxai-project-id)
     - [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key)
     - [Watsonx.ai Endpoint URL](#watsonxai-endpoint-url)
+    - [Watsonx.ai Free Credits](#watsonxai-free-credits)
   - [SOAR platform](#soar-platform)
   - [QRadar Suite](#qradar-suite)
   - [Proxy Server](#proxy-server)
@@ -36,17 +38,18 @@
 - [Playbooks](#playbooks)
 - [Feedback](#feedback)
 - [Troubleshooting \& Support](#troubleshooting--support)
+  - [Not authorized to use watsonx, but sure configuration is correct](#not-authorized-to-use-watsonx-but-sure-configuration-is-correct)
   - [For Support](#for-support)
-
 
 ---
 
 ## Release Notes
 
-| Version | Date    | Notes                                                                         |
-|---------|---------|-------------------------------------------------------------------------------|
-| 1.0.1   | 12/2024 | Bugfix for SOAR versions <= 51.0.2.1 and >= 51.0.4.1 for Note Conversation Function. |
-| 1.0.0   | 12/2024 | Initial "**Early Access**" release. Uses watsonx.ai SaaS Version `2023-05-29` |
+| Version | Date    | Notes                                                                                           |
+| ------- | ------- | ----------------------------------------------------------------------------------------------- |
+| 1.0.2   | 12/2024 | Rich text output, request ID in logs, and a data processing fix for incidents with larger data. |
+| 1.0.1   | 12/2024 | Bugfix for SOAR versions <= 51.0.2.1 and >= 51.0.4.1 for Note Conversation Function.            |
+| 1.0.0   | 12/2024 | Initial "**Early Access**" release. Uses watsonx.ai SaaS Version `2023-05-29`                   |
 
 ---
 
@@ -55,30 +58,32 @@
 **Leverage generative AI with watsonx.ai for artifact scanning, incident summarization and Q&A, and generic watsonx.ai text generation.**
 
 ### Key Features
+
 - Incident question and answers: ask watsonx.ai questions about incidents. Ask it to summarise and analyse incidents and artifacts.
 - Artifact analysis: Use watsonx.ai powered playbooks to quickly generate a report on an artifact, as a preliminary assessment.
 
 ![](doc/images/overview.png)
 
 ## Requirements
+
 - Either [SOAR Platform](#soar-platform) or [IBM QRadar Suite](#qradar-suite) installed.
 - A subscription to watsonx.ai.
   - A watsonx.ai Project ID
   - An IBM Cloud IAM API Key
   - A watsonx.ai [Endpoint URL](https://cloud.ibm.com/apidocs/watsonx-ai#endpoint-url)
 
-
 ### Watsonx.ai Subscription and Project
 
-- You will need to sign up to a watsonx subscription. 
-- You can do so at https://dataplatform.cloud.ibm.com/registration/stepone?context=wx.  
+- You will need to sign up to a watsonx subscription.
+- You can do so at https://dataplatform.cloud.ibm.com/registration/stepone?context=wx.
 - For testing in a non-production environment you can use a free trial subscription to watsonx.ai.
 - Using this account, create a project on the watsonx.ai platform.
 
 > These instructions work as of 2024-11-25. These steps may become outdated due to changes made outside of this app.
 
 #### Watsonx.ai Project ID
-Navigate to the Projects page 
+
+Navigate to the Projects page
 ![](doc/images/watsonx-ai-04-nav-to-projects.png)
 
 If you have not created a project yet, you can create one now, using the `New Project +` button on the top-right.
@@ -95,7 +100,7 @@ To use watsonx.ai from the _watsonx.ai for SOAR_ app, you'll need an IBM Cloud I
 
 ![screenshot: watsonx-api-1](./doc/images/watsonx-ai-03-key1.png)
 
-The *Access IAM* dashboard will open... 
+The *Access IAM* dashboard will open...
 
 1. Choose *API Keys* from the navigation section then...
 2. Click the *Create +* button to create a new API key.
@@ -112,30 +117,35 @@ Find the relevant Endpoint for your region at https://cloud.ibm.com/apidocs/wats
 
 > Don't use the prompt and/or notebooks endpoint.
 
+#### Watsonx.ai Free Credits
+
+Lite accounts make it easy to get started with IBM Cloud® and try out services. When you're ready to unlock the full IBM Cloud catalog, get extra free resources, and more, you can upgrade to a Pay-As-You-Go or Subscription account. By upgrading to Pay-As-You-Go account, you would recieve a $200 credit for 30 days. When you enter a credit card for a new Pay-As-You-Go account, you'll receive a promotional credit to use on any IBM product including watsonx.ai. For more detials please refer ```Promotional credit for upgrading your account``` section [here](https://cloud.ibm.com/docs/account?topic=account-upgrading-account#promotional-credit-for-upgrading-your-account).
 
 ### SOAR platform
+
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
+
 * SOAR platform >= `50.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
+
 * SOAR platform >= `50.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=51.0.2.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
 
 | Name     | Permissions |
-|----------|-------------|
+| -------- | ----------- |
 | Org Data | Read        |
 | Function | Read        |
 | Incident | Read        |
 | Playbook | Read        |
 
-
-
 The following SOAR platform guides provide additional information:
+
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
@@ -143,114 +153,127 @@ The following SOAR platform guides provide additional information:
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### QRadar Suite
+
 If you are deploying to IBM QRadar Suite, the requirements are:
+
 * IBM QRadar Suite >= `1.10.16`.
 * QRadar Suite is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following QRadar Suite guides provide additional information:
+
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM QRadar Suite Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM QRadar Suite version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
+
 The app **does not** support a proxy server.
 
 ### Python Environment
-This app runs on Python 3.12.
+
+This app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
-* tiktoken==0.8.0 
+
+* tiktoken==0.8.0
 * resilient-circuits>=51.0.2.0.0
 * scikit-learn==1.5.2
+* Markdown==3.7
+* nh3==0.2.19
 
 ## Installing the App
 
 ### Install
+
 * To install or uninstall an app or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an app on _IBM Qradar Suite_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### Configuring the App
+
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
-| Config                 | Required | Example                             | Description                                                                        |
-|------------------------|:--------:|-------------------------------------|------------------------------------------------------------------------------------|
-| **watsonx_api_key**    |   Yes    | 0123-4567-89ab-cdef                 | Your watsonx.ai API key - see [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key)    |
-| **watsonx_endpoint**   |   Yes    | `https://us-south.ml.cloud.ibm.com` | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#watsonxai-endpoint-url)  |
-| **watsonx_project_id** |   Yes    | 0123-4567-89ab-cdef                 | The watsonx.ai project id - see [watsonx.ai Project ID](#watsonxai-endpoint-url) |
-
+| Config                       | Required | Example                               | Description                                                                  |
+| ---------------------------- | :------: | ------------------------------------- | ---------------------------------------------------------------------------- |
+| **watsonx_api_key**    |   Yes   | 0123-4567-89ab-cdef                   | Your watsonx.ai API key - see[IBM Cloud IAM API Key](#ibm-cloud-iam-api-key)    |
+| **watsonx_endpoint**   |   Yes   | `https://us-south.ml.cloud.ibm.com` | The watsonx.ai API URL - see[watsonx.ai Endpoint URL](#watsonxai-endpoint-url)  |
+| **watsonx_project_id** |   Yes   | 0123-4567-89ab-cdef                   | The watsonx.ai project id - see[watsonx.ai Project ID](#watsonxai-endpoint-url) |
 
 #### Adding the secrets to the App Configuration
 
-After installing the app, you must configure it as follows: 
+After installing the app, you must configure it as follows:
 
-Under the `Configuration` tab in App Details, you can add the following watsonx secrets using the values you got in the [Requirements](#requirements) section. (`API_KEY_SECRET` is the API key being used to authenticate the app. You don't need to change this.) 
+Under the `Configuration` tab in App Details, you can add the following watsonx secrets using the values you got in the [Requirements](#requirements) section. (`API_KEY_SECRET` is the API key being used to authenticate the app. You don't need to change this.)
 
 ![](doc/images/app-secrets.png)
 
-
 ### Custom Field Label Replacing
+
 - This integration recognises Incident data via their API names. If a custom incident field's API name doesn't adequately explain the purpose of the field, an LLM may not be able to interpret the data very well.
 - To help address this, you can configure the app to replace these fields with other labels you provide at the bottom of the app.config:
->
->App.config
->```
->[watsonx_property_labels]
->fn_something_custom_field_report="Incident report"
->```
 
+> App.config
+>
+> ```
+> [watsonx_property_labels]
+> fn_something_custom_field_report="Incident report"
+> ```
 
 ## How to use
 
 ### Note Conversation
+
 - Use `@watsonx` at the start of an incident note to query watsonx.ai. (e.g., `@watsonx summarize this incident`).
 - If you want to investigate an artifact's contents, enclose its name in square brackets in your query (e.g., `@watsonx tell me whether [artifact name] seems like it could be malicious`).
   - If this artifact has an attachment, the attachment's contents will also be added to context. If looking for specific information in the contents, provide the **actual words** that will be in the contents to get the best output. E.g.:
   - `@watsonx do the warnings in [app.log] seem to indicate security issues?`.
   - `@watsonx Are there any associated Indicators of Compromise (IOCs) with [bad_script.sh]?`
-  
+- Responses from the LLM that contain markdown, will have this markdown displayed in notes as rich text.
+
 #### Data made available to the LLM
 
 Incident:
+
 - Name
 - Description
 - Start date
 - Discovered date
-- Address (address, city, state, country, zip)
+- Address (address, city, country, zip)
+- Incident state (open or closed)
 - Incident workspace
 - Incident creator
 - Incident reporter
 - Incident members
 - Negative PR likelihood
-- Regulatory assessments
 - Incident disposition (confirmed / unconfirmed)
 - Custom incident properties
 
 Artifacts:
+
 - Value (name)
 - Description
 - Date added
 - Date updated
 - Number of related incidents
 - \*Artifact contents
-  
+
 Playbook Executions:
+
 - Playbook name
 - Playbook description
 - Elapsed time
 - Execution state (running, error, completed, canceled, suspended)
-- Object name (e.g. incident's name)
+- Object name (e.g. incident's name, artifact's name, etc.)
 
 Phases & Tasks:
+
 - Phase name
 - Task name
 - Task description
-- Task status (complete or incomplete)
-- Task status (active or inactive)
+- Task statuses (complete or incomplete, and active or inactive)
 - Task required or not
 
 \*Only in note conversations with an artifact name in square brackets.
-
 
 ### Scan Artifact
 
@@ -273,12 +296,11 @@ Phases & Tasks:
 
 - Using the [watsonx.ai Text Generation Playbook](#function---watsonxai-text-generation), you can pass any system prompt, and user prompt to watsonx.ai, and get a response in a playbook. Using this, you can use playbook logic to create automations using artificial intelligence.
 
-
 ### Prompting Guide
 
 - When querying, you should try to use words that will appear in the data, so that the search will find good matches. See the Note Conversation examples above in [Note Conversation](#note-conversation).
-- When replying to a note and querying watsonx, all parent notes in the reply chain will be added to the LLM's context. Text from notes in other root note reply chains, or 
-- Also, when querying watsonx in a reply note, previous notes **in the reply chain** will be added to the context, which can help when getting more detail on specific topics. 
+- When replying to a note and querying watsonx, all parent notes in the reply chain will be added to the LLM's context. Text from notes in other root note reply chains, or
+- Also, when querying watsonx in a reply note, previous notes **in the reply chain** will be added to the context, which can help when getting more detail on specific topics.
   - If the previous notes in the reply chain derail the conversation, you can start a new Note conversation by creating a new "root" Note.
 
 #### Response Quality
@@ -310,11 +332,12 @@ Allow conversation in an incident's Notes tab. Previous notes in a reply chain w
  ![screenshot: fn-watsonx-converse-via-notes ](./doc/screenshots/artifact_qna.png)
 
 **You can click on the dropdowns below to see more details.**
+
 <details><summary>Inputs:</summary>
 <p>
 
-| Name                             |   Type   | Required | Example                     | Tooltip                                                          |
-|----------------------------------|:--------:|----------|-----------------------------|------------------------------------------------------------------|
+| Name                               |    Type    | Required | Example                       | Tooltip                                                          |
+| ---------------------------------- | :--------: | -------- | ----------------------------- | ---------------------------------------------------------------- |
 | `fn_watsonx_analyst_incident_id` | `number` | Yes      | `2095`                      | You can use Data Navigator for this                              |
 | `fn_watsonx_analyst_model_id`    | `select` | Yes      | `ibm/granite-3-2b-instruct` | Which watsonx.ai generative AI model to use to perform the task? |
 | `fn_watsonx_analyst_note_id`     | `number` | Yes      | `225`                       | ID for the Incident note to respond to.                          |
@@ -375,7 +398,9 @@ if generated_text != "":
 </details>
 
 ---
+
 ## Function - watsonx.ai Scan Artifact
+
 Use watsonx.ai to scan an artifact, and assess whether the artifact indicates any malicious activity. Design to work with log files, scripts (e.g. Bash, Python, Lua, Powershell, Perl).
 
 ![screenshot: fn-watsonx-scan-artifact ](./doc/screenshots/scan_artifact_action.png)
@@ -384,11 +409,11 @@ Use watsonx.ai to scan an artifact, and assess whether the artifact indicates an
 <details><summary>Inputs:</summary>
 <p>
 
-| Name                             |   Type   | Required | Example                     | Tooltip                                                          |
-|----------------------------------|:--------:|:--------:|-----------------------------|------------------------------------------------------------------|
-| `fn_watsonx_analyst_artifact_id` | `number` |   Yes    | `3`                         | You can use data navigator to add this.                          |
-| `fn_watsonx_analyst_incident_id` | `number` |   Yes    | `2095`                      | You can use Data Navigator for this                              |
-| `fn_watsonx_analyst_model_id`    | `select` |   Yes    | `ibm/granite-3-2b-instruct` | Which watsonx.ai generative AI model to use to perform the task? |
+| Name                               |    Type    | Required | Example                       | Tooltip                                                          |
+| ---------------------------------- | :--------: | :------: | ----------------------------- | ---------------------------------------------------------------- |
+| `fn_watsonx_analyst_artifact_id` | `number` |   Yes   | `3`                         | You can use data navigator to add this.                          |
+| `fn_watsonx_analyst_incident_id` | `number` |   Yes   | `2095`                      | You can use Data Navigator for this                              |
+| `fn_watsonx_analyst_model_id`    | `select` |   Yes   | `ibm/granite-3-2b-instruct` | Which watsonx.ai generative AI model to use to perform the task? |
 
 </p>
 </details>
@@ -452,18 +477,19 @@ else:
 </details>
 
 ---
-## Function - watsonx.ai Text Generation
-Perform Text Generation against watsonx.ai. Can replace '{}' in prompts with comma-separated strings in `fn_watsonx_analyst_arguments`.
 
+## Function - watsonx.ai Text Generation
+
+Perform Text Generation against watsonx.ai. Can replace '{}' in prompts with comma-separated strings in `fn_watsonx_analyst_arguments`.
 
 <details><summary>Inputs:</summary>
 <p>
 
-| Name                               |   Type   | Required | Example                                                                                                                    | Tooltip                                                          |
-|------------------------------------|:--------:|:--------:|----------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| Name                                 |    Type    | Required | Example                                                                                                                      | Tooltip                                                          |
+| ------------------------------------ | :--------: | :------: | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `fn_watsonx_analyst_arguments`     |  `text`  |    No    | `foo,bar,foobar`                                                                                                           | Comma-separated arguments to replace '{}'s in the prompt         |
-| `fn_watsonx_analyst_model_id`      | `select` |   Yes    | `ibm/granite-3-2b-instruct`                                                                                                | Which watsonx.ai generative AI model to use to perform the task? |
-| `fn_watsonx_analyst_prompt`        |  `text`  |   Yes    | `Tell me about this incident.`                                                                                             | What you are asking the LLM                                      |
+| `fn_watsonx_analyst_model_id`      | `select` |   Yes   | `ibm/granite-3-2b-instruct`                                                                                                | Which watsonx.ai generative AI model to use to perform the task? |
+| `fn_watsonx_analyst_prompt`        |  `text`  |   Yes   | `Tell me about this incident.`                                                                                             | What you are asking the LLM                                      |
 | `fn_watsonx_analyst_system_prompt` |  `text`  |    No    | `You are a helpful AI assistant knowledgeable in cyber security. You are inoffensive, and respond clearly, and concisely.` | Optional grounding prompt                                        |
 
 </p>
@@ -530,7 +556,6 @@ else:
 
 ## Script - watsonx.ai Respond to note
 
-
 **Object:** note
 
 <details><summary>Script Text:</summary>
@@ -550,8 +575,8 @@ if generated_text != "":
 </details>
 
 ---
-## Script - watsonx.ai Update Artifact Description with Assessment
 
+## Script - watsonx.ai Update Artifact Description with Assessment
 
 **Object:** artifact
 
@@ -580,28 +605,37 @@ else:
 ---
 
 ## Playbooks
-| Playbook Name                      | Description                                                                                                                                                                                                | Activation Type | Object   | Status    | Condition                                      | 
-|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|----------|-----------|------------------------------------------------| 
-| watsonx.ai Note Conversation       | This playbook is triggered when a user writes a note that contains "@watsonx" at the start of the note. A reply will be generated by IBM watsonx.ai generative AI, and added as a reply to the first note. | Automatic       | note     | `enabled` | `note.text contains @watsonx AND object_added` | 
-| watsonx.ai Retry Note Conversation | If a response fails to be generated, you can use this playbook on a note with a query for `@watsonx` to try again.                                                                                         | Manual          | note     | `enabled` | `-`                                            | 
-| watsonx.ai Scan Artifact           | watsonx.ai reads the contents of the provided artifact if an attachment is supplied.  Then, watsonx.ai gives a summary of the contents, and threat scores.                                                 | Manual          | artifact | `enabled` | `-`                                            | 
+
+| Playbook Name                      | Description                                                                                                                                                                                                | Activation Type | Object   | Status      | Condition                                        |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | -------- | ----------- | ------------------------------------------------ |
+| watsonx.ai Note Conversation       | This playbook is triggered when a user writes a note that contains "@watsonx" at the start of the note. A reply will be generated by IBM watsonx.ai generative AI, and added as a reply to the first note. | Automatic       | note     | `enabled` | `note.text contains @watsonx AND object_added` |
+| watsonx.ai Retry Note Conversation | If a response fails to be generated, you can use this playbook on a note with a query for `@watsonx` to try again.                                                                                       | Manual          | note     | `enabled` | `-`                                            |
+| watsonx.ai Scan Artifact           | watsonx.ai reads the contents of the provided artifact if an attachment is supplied.  Then, watsonx.ai gives a summary of the contents, and threat scores.                                                 | Manual          | artifact | `enabled` | `-`                                            |
 
 ## Feedback
 
 - While every effort has been made to ensure the quality of this initial release we do appreciate that our customers have modified the data model that is shipped ootb with SOAR. A lot of your most important data may be in fields we know nothing about and so have not been able to test against. Its in this context we're releasing this app as "early access" rather than intended for immediate production usage.
-
 - We have further work we wish to do to support your custom data, but we would greatly appreciate any feedback you can provide on where it works and where it doesn't. Please provide feedback through any IBM contact you have, or give feedback via the [Ideas Portal](https://ideas.ibm.com/new-idea?product=6524766443936374487).
-
 
 ## Troubleshooting & Support
 
-If one of the actions fails, the following steps may help:
+If any of the actions fail, the following steps may help:
 
-- Check the playbook progress on the incident - the playbook may have failed. If so, the error message in the function's response may help you interpret the problem.
-- If the error message does not provide enough information, you can download the apps' logs from Administrator Settings -> Apps page. Go to the details of the app, and click "Download Logs."
-- Additionally, SOAR's `client.log` log file may give some extra information.
+- Check playbook progress on the incident
+  - The playbook may have failed. If so, the error message in the function's response may help you interpret the problem.
+- Check app logs
+  - Download the apps’ logs from Administrator Settings -> Apps page. Go to the details of the app, and click “Download Logs.”
+  - Function invocations will create a request ID, which can be used to identify logs for a specific invocation.
+  - Check SOAR’s `client.log` log file which may give some extra information.
+- If these do not give sufficient information, then you may enable debug level logging for the app by editing the `app.config` and adding `loglevel = DEBUG` below the `[resilient]` section
 
 Otherwise, refer to watsonx.ai's [Troubleshooting Docs](https://dataplatform.cloud.ibm.com/docs/content/wsj/troubleshoot/troubleshoot.html?context=wx&audience=wdp)
- 
+
+### Not authorized to use watsonx, but sure configuration is correct
+- You must have a	**watsonx.ai Runtime** service associated with your project (`WatsonMachineLearning`).
+- Ensure that all configuration values are correct, and that configuration values are not enclosed in quotation marks (`""`).
+
+
 ### For Support
+
 This is an IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

@@ -78,4 +78,4 @@ class TestFnWatsonxTextGeneration:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
         results = call_fn_watsonx_analyst_text_generation_function(circuits_app, mock_inputs)
-        assert(results["content"]["generated_text"] == expected_results)
+        assert(results["content"]["raw_output"] == expected_results)

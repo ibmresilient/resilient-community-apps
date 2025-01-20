@@ -1,5 +1,4 @@
 import json
-import logging
 import time
 import os
 from typing import Literal
@@ -7,9 +6,11 @@ from typing import Literal
 import requests
 from resilient import SimpleClient
 
+from fn_watsonx_analyst.util.util import create_logger
+
 CacheObj = Literal["org", "watsonx_key"]
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 class PersistentCache:
     def __init__(self, cache_obj: CacheObj = "org"):

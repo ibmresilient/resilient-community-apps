@@ -1,4 +1,3 @@
-import logging
 from typing import Literal
 from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
@@ -6,8 +5,9 @@ from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from resilient import SimpleClient
 
 from fn_watsonx_analyst.util.parallel.parallel import ParallelRunnable
+from fn_watsonx_analyst.util.util import create_logger
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 class GenericSummarizer(ParallelRunnable):
 

@@ -4,7 +4,6 @@
 
 """AppFunction implementation"""
 
-import logging
 import re
 from typing import List, Optional
 
@@ -27,18 +26,19 @@ from fn_watsonx_analyst.util.errors import (
     WatsonxApiException,
     WatsonxTokenLimitExceededException,
 )
-
+from fn_watsonx_analyst.util.rich_text import RichTextHelper
+from fn_watsonx_analyst.util.util import create_logger, generate_request_id
 from fn_watsonx_analyst.util.prompting import Prompting
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
 
 PACKAGE_NAME = "fn_watsonx_analyst"
 FN_NAME = "fn_watsonx_analyst_converse_via_notes"
 
-log = logging.getLogger(__name__)
-
+log = create_logger(__name__)
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'fn_watsonx_analyst_converse_via_notes'"""
+
 
     note_map: dict
     res_client: SimpleClient
@@ -61,8 +61,10 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.fn_watsonx_analyst_model_id
             -   fn_inputs.fn_watsonx_analyst_model_id_override
         """
+        _ = generate_request_id()
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+
         results = {}
         note_id = getattr(fn_inputs, "fn_watsonx_analyst_note_id", None)
         inc_id = getattr(fn_inputs, "fn_watsonx_analyst_incident_id", None)
@@ -140,11 +142,10 @@ class FunctionComponent(AppFunctionComponent):
                 purpose = AiResponsePurpose.ARTIFACT_CONVERSATION
                 break
 
-            else:
-                log.warning(
-                    "Invalid artifact returned from API, or artifact does not have an attachment"
-                )
-                continue
+            log.warning(
+                "Invalid artifact returned from API, or artifact does not have an attachment"
+            )
+            continue
 
         if not chunks or not purpose:
             purpose = AiResponsePurpose.NOTE_CONVERSATION
@@ -192,8 +193,8 @@ class FunctionComponent(AppFunctionComponent):
             log.exception("API error when invoking note conversation")
             msg = e.msg
 
+        # pylint: disable=broad-exception-caught
         except Exception as e:
-            import traceback
             log.exception("Unkown error occured when invoking watsonx.ai.")
             msg = str(e)
 
@@ -233,9 +234,13 @@ def get_chat_response(
             messages,
             get_relevant_prompts=purpose == AiResponsePurpose.NOTE_CONVERSATION,
         )
-        return QueryHelper(res_client, model_id, opts).text_generation(
+
+        log.info("Attempting text generation")
+        output = QueryHelper(res_client, model_id, opts).text_generation(
             prompt, purpose=purpose
         )
+        return output
+
     except Exception as e:
         raise e
 

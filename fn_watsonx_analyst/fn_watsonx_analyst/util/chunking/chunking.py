@@ -2,17 +2,17 @@
 
 import json
 import random
-import logging
 from typing import List
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from fn_watsonx_analyst.types.incident_full_data import IncidentFullData
 import tiktoken
 
+from fn_watsonx_analyst.types.incident_full_data import IncidentFullData
+from fn_watsonx_analyst.util.util import create_logger
 from fn_watsonx_analyst.util.util import get_model_config
 
-logger = logging.getLogger(__name__)
-
+logger = create_logger(__name__)
 
 class Chunking:
     """Class for Chunking and picking most relevant chunk for GenAI use cases"""
@@ -20,7 +20,7 @@ class Chunking:
     def __init__(self) -> None:
         pass
 
-    def split_json_to_chunks(self, data: IncidentFullData) -> List[str]:
+    def split_json_to_chunks(self, data: IncidentFullData, max_tokens_per_chunk = 500) -> List[str]:
         """This is a custom chunking method of JSON payload for Case QnA via Notes
 
         Args:
@@ -34,161 +34,129 @@ class Chunking:
 
             # Helper function to filter out null fields
             def filter_null_fields(d):
-                try:
-                    return {k: v for k, v in d.items() if v is not None}
-                except Exception as e:
-                    logger.exception(
-                        "An error occurred while running filter_null_fields method in split_json_to_chunks method: %s",
-                        e,
-                    )
-                    raise
+                return {k: v for k, v in d.items() if v is not None}
 
-            # Chunk incident details
-            incident_chunk = {
-                "incident": filter_null_fields(
-                    {
-                        "name": data["incident"]["name"],
-                        "description": data["incident"]["description"],
-                        "addr": data["incident"].get("addr", None),
-                        "city": data["incident"].get("city", None),
-                        "start_date": data["incident"]["start_date"],
-                        "inc_start": data["incident"]["inc_start"],
-                        "discovered_date": data["incident"]["discovered_date"],
-                        "creator_principal": filter_null_fields(
-                            {
-                                "id": data["incident"]["creator_principal"]["id"],
-                                "type": data["incident"]["creator_principal"]["type"],
-                                "name": data["incident"]["creator_principal"]["name"],
-                                "display_name": data["incident"]["creator_principal"][
-                                    "display_name"
-                                ],
+            # Chunk incident details excluding description and properties
+            incident_data = filter_null_fields({
+                "name": data['incident'].get('name', None),
+                "addr": data['incident'].get('addr', None),
+                "city": data['incident'].get('city', None),
+                "start_date": data['incident'].get('start_date', None),
+                "inc_start": data['incident'].get('inc_start', None),
+                "discovered_date": data['incident'].get('discovered_date', None),
+                "creator_principal": filter_null_fields({
+                    "type": data['incident']['creator_principal'].get('type', None) if data['incident'].get('creator_principal') else None,
+                    "display_name": data['incident']['creator_principal'].get('display_name', None) if data['incident'].get('creator_principal') else None,
+                }),
+                "reporter": data['incident'].get('reporter', None),
+                "state": data['incident'].get('state', None),
+                "country": data['incident'].get('country', None),
+                "zip": data['incident'].get('zip', None),
+                "workspace": data['incident'].get('workspace', None),
+                "members": data['incident'].get('members', []),
+                "negative_pr_likely": data['incident'].get('negative_pr_likely', None),
+                "inc_last_modified_date": data['incident'].get('inc_last_modified_date', None),
+                "incident_disposition": data['incident'].get('incident_disposition', None)
+            })
+
+            description = data['incident'].get('description', None)
+            if description:  # Check if description is not None before processing
+                if self.estimate_tokens(description) > max_tokens_per_chunk:
+                    description_chunks = self.split_text_to_token_chunks(description, max_tokens_per_chunk)
+                    for idx, desc_chunk in enumerate(description_chunks):
+                        chunks.append(json.dumps({
+                            "incident_description": {
+                                "index": idx,
+                                "description": desc_chunk
                             }
-                        ),
-                        "reporter": data["incident"].get("reporter", None),
-                        "state": data["incident"].get("state", None),
-                        "country": data["incident"].get("country", None),
-                        "zip": data["incident"].get("zip", None),
-                        "workspace": data["incident"]["workspace"],
-                        "members": data["incident"].get("members", []),
-                        "negative_pr_likely": data["incident"].get(
-                            "negative_pr_likely", None
-                        ),
-                        "assessment": data["incident"]["assessment"],
-                        "properties": data["incident"].get("properties", {}),
-                        "inc_last_modified_date": data["incident"][
-                            "inc_last_modified_date"
-                        ],
-                        "incident_disposition": data["incident"][
-                            "incident_disposition"
-                        ],
-                    }
-                )
-            }
+                        }))
+                else:
+                    # Add the description as a single chunk if it fits
+                    incident_data["description"] = description
 
-            chunks.append(json.dumps(incident_chunk))
+            # Check if properties is not None before proceeding
+            properties = data['incident'].get('properties', {})
+            if properties:  # Only process if properties is not None or empty
+                flat_properties = self.flatten_dict(properties)
+
+                # Flatten the nested dictionary
+                chunk_index = 0
+                for key, value in flat_properties.items():
+                    if isinstance(value, str):  # Only split string values
+                        property_chunks = self.split_text_to_token_chunks(value, max_tokens_per_chunk)
+                        for prop_chunk in property_chunks:
+                            chunks.append(json.dumps({
+                                "properties": {
+                                    "index": chunk_index,
+                                    "properties": f"'{key}': '{prop_chunk}'"
+                                }
+                            }))
+                            chunk_index += 1
+                    else:
+                        # Handle non-string values as-is (e.g., None or numeric values)
+                        chunks.append(json.dumps({
+                            "properties": {
+                                "index": chunk_index,
+                                "properties": f"'{key}': {value}"
+                            }
+                        }))
+                        chunk_index += 1
+
+            chunks.append(json.dumps({"incident": incident_data}))
 
             # Chunk artifacts
-            for artifact in data["incident"]["artifacts"]:
-                logger.debug("Chunking artifact %s", artifact["value"])
+            for artifact in data['incident'].get('artifacts', []):
                 artifact_chunk = {
-                    "artifact": filter_null_fields(
-                        {
-                            "value": artifact["value"],
-                            "created": artifact.get("created", None),
-                            "last_modified_time": artifact.get(
-                                "last_modified_time", None
-                            ),
-                            "description": artifact.get("description", None),
-                            "type": artifact["type"],
-                            "related_incident_count": artifact.get(
-                                "related_incident_count", None
-                            ),
-                        }
-                    )
+                    "artifact": filter_null_fields({
+                        "value": artifact.get('value', None),
+                        "description": artifact.get('description', None),
+                        "type": artifact.get('type', None),
+                        "inc_name": artifact.get('inc_name', None),
+                        "related_incident_count": artifact.get('related_incident_count', None),
+                        "summary": artifact.get('summary', None)
+                    })
                 }
                 chunks.append(json.dumps(artifact_chunk))
 
             # Chunk playbook executions
-            for execution in data["incident"]["playbook_executions"]:
+            for execution in data['incident'].get('playbook_executions', []):
                 playbook_chunk = {
-                    "playbook_execution": filter_null_fields(
-                        {
-                            "status": execution["status"],
-                            "object": filter_null_fields(
-                                {
-                                    "parent": (
-                                        filter_null_fields(
-                                            {
-                                                "parent": execution["object"]
-                                                .get("parent", {})
-                                                .get("parent", None),
-                                                "object_id": execution["object"]
-                                                .get("parent", {})
-                                                .get("object_id", None),
-                                                "object_name": execution["object"]
-                                                .get("parent", {})
-                                                .get("object_name", None),
-                                                "type_id": execution["object"]
-                                                .get("parent", {})
-                                                .get("type_id", None),
-                                                "type_name": execution["object"]
-                                                .get("parent", {})
-                                                .get("type_name", None),
-                                            }
-                                        )
-                                        if execution["object"].get("parent")
-                                        else None
-                                    ),
-                                    "object_id": execution["object"].get(
-                                        "object_id", None
-                                    ),
-                                    "object_name": execution["object"].get(
-                                        "object_name", None
-                                    ),
-                                    "type_id": execution["object"].get("type_id", None),
-                                    "type_name": execution["object"].get(
-                                        "type_name", None
-                                    ),
-                                }
-                            ),
-                            "elapsed_time": execution["elapsed_time"],
-                            "playbook": filter_null_fields(
-                                {
-                                    "display_name": execution["playbook"][
-                                        "display_name"
-                                    ],
-                                    "description": execution["playbook"].get(
-                                        "description", None
-                                    ),
-                                }
-                            ),
-                        }
-                    )
+                    "playbook_execution": filter_null_fields({
+                        "status": execution.get('status', None),
+                        "object": filter_null_fields({
+                            "parent": filter_null_fields({
+                                "object_name": execution['object'].get('parent', {}).get('object_name', None),
+                                "type_name": execution['object'].get('parent', {}).get('type_name', None)
+                            }) if execution['object'].get('parent') else None,
+                            "object_name": execution['object'].get('object_name', None),
+                            "type_name": execution['object'].get('type_name', None)
+                        }),
+                        "elapsed_time": execution.get('elapsed_time', None),
+                        "playbook": filter_null_fields({
+                            "display_name": execution['playbook'].get('display_name', None),
+                            "description": execution['playbook'].get('description', None)
+                        })
+                    })
                 }
                 chunks.append(json.dumps(playbook_chunk))
 
             # Chunk tasks
-            for phase in data["incident"]["tasktree"]:
-                for task in phase["tasks"]:
+            for phase in data['incident'].get('tasktree', []):
+                for task in phase.get('tasks', []):
                     task_chunk = {
-                        "task": filter_null_fields(
-                            {
-                                "phase": phase["phase_name"],
-                                "name": task["name"],
-                                "active": task.get("active", None),
-                                "required": task.get("required", None),
-                                "complete": (
-                                    "complete" if task["complete"] else "incomplete"
-                                ),
-                            }
-                        )
+                        "task": filter_null_fields({
+                            "phase": phase.get('phase_name', None),
+                            "name": task.get('name', None),
+                            "active": task.get('active', None),
+                            "required": task.get('required', None),
+                            "complete": "complete" if task.get('complete', False) else "incomplete"
+                        })
                     }
                     chunks.append(json.dumps(task_chunk))
-
             return chunks
         except Exception as e:
             logger.exception(
-                "An error occurred while running split_json_to_chunks method: %s", e
+                "An error occurred while running pre-processing json data into chunks: %s", e
             )
             raise
 
@@ -221,7 +189,7 @@ class Chunking:
 
         except Exception as e:
             logger.exception(
-                "An error occurred while running max_tokens_for_model method: %s", e
+                "An error occurred while deciding max tokens for the model: %s", e
             )
             raise
 
@@ -258,7 +226,7 @@ class Chunking:
             return chunks
         except Exception as e:
             logger.exception(
-                "An error occurred while running split_data_into_token_chunks method: %s",
+                "An error occurred while pre-processing textual data into token chunks: %s",
                 e,
             )
             raise
@@ -273,7 +241,22 @@ class Chunking:
             return num_tokens
         except Exception as e:
             logger.exception(
-                "An error occurred while running estimate_tokens method: %s", e
+                "An error occurred while calculating tokens for a string text: %s", e
+            )
+            raise
+
+    def split_text_to_token_chunks(self, text: str, max_tokens: int) -> list:
+        """
+        Splits a given text into chunks based on token size and chunk size limit
+        """
+        try:
+            encoding = tiktoken.get_encoding("cl100k_base")
+            tokens = encoding.encode(text)
+            token_chunks = [tokens[i:i + max_tokens] for i in range(0, len(tokens), max_tokens)]
+            return [encoding.decode(chunk) for chunk in token_chunks]
+        except Exception as e:
+            logger.exception(
+                "An error occurred while splitting text into token chunks: %s", e
             )
             raise
 
@@ -325,7 +308,7 @@ class Chunking:
             return chunks
         except Exception as e:
             logger.exception(
-                "An error occurred while running split_data_into_token_chunks_overlap method: %s",
+                "An error occurred while creating overlapping chunks: %s",
                 e,
             )
             raise
@@ -339,7 +322,7 @@ class Chunking:
             return random.sample(chunks, k)
         except Exception as e:
             logger.exception(
-                "An error occurred while running random_chunks method: %s", e
+                "An error occurred while retieving random chunks: %s", e
             )
             raise
 
@@ -407,7 +390,7 @@ class Chunking:
             return selected_chunks
         except Exception as e:
             logger.exception(
-                "An error occurred while running retrieve_top_chunks_tfidf method: %s",
+                "An error occurred while retrieving top chunks using TF-IDF: %s",
                 e,
             )
             raise
@@ -438,7 +421,32 @@ class Chunking:
             return chunks
         except Exception as e:
             logger.exception(
-                "An error occurred while running split_json_to_chunks_prompts method: %s",
+                "An error occurred while retrieving best chunk prompts: %s",
+                e,
+            )
+            raise
+    def flatten_dict(self, d:dict, parent_key='', sep='.')->dict:
+        """Recursively flatten a nested dictionary and prepend parent keys to maintain hierarchy.
+        Args:
+            d (dict): give a dictionary
+            parent_key (str, optional): _description_. Defaults to ''.
+            sep (str, optional): _description_. Defaults to '.'.
+
+        Returns:
+            dict: flattens the nested dictionary and returns it.
+        """
+        try:
+            items = []
+            for k, v in d.items():
+                new_key = f"{parent_key}{sep}{k}" if parent_key else k
+                if isinstance(v, dict):
+                    items.extend(self.flatten_dict(v, new_key, sep=sep).items())
+                else:
+                    items.append((new_key, v))
+            return dict(items)
+        except Exception as e:
+            logger.exception(
+                "An error occurred while flattening a nested json: %s",
                 e,
             )
             raise

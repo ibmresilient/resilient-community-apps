@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
+# pylint: disable=line-too-long
 
 """AppFunction implementation"""
 
 import json
-import logging
+
 from resilient_circuits import (
     AppFunctionComponent,
     app_function,
@@ -22,11 +23,12 @@ from fn_watsonx_analyst.util.ContextHelper import ContextHelper, Templates
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.errors import WatsonxApiException
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
+from fn_watsonx_analyst.util.util import create_logger, generate_request_id
 
 PACKAGE_NAME = "fn_watsonx_analyst"
 FN_NAME = "fn_watsonx_analyst_scan_artifact"
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 
 class FunctionComponent(AppFunctionComponent):
@@ -47,6 +49,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.fn_watsonx_analyst_model_id_override
             -   fn_inputs.fn_watsonx_analyst_incident_id
         """
+        _ = generate_request_id()
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
@@ -71,9 +74,8 @@ class FunctionComponent(AppFunctionComponent):
         except Exception as e:
             log.exception("Unkown exception when invoking artifact scan.")
             err_msg += str(e)
-        
-        log.error(err_msg)
 
+        log.error(err_msg)
         yield FunctionError(err_msg)
 
 

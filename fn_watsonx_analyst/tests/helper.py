@@ -12,7 +12,8 @@ from fn_watsonx_analyst.util.ModelTag import ModelTag, AiResponsePurpose
 from fn_watsonx_analyst.types.ai_response import AIResponse
 
 sample_output = {
-    "generated_text": "Lorem ipsum",
+    "generated_text": "<p>Lorem ipsum</p>",
+    "raw_output": "Lorem ipsum",
     "metadata": {
         "model_tag": str(ModelTag("", AiResponsePurpose.NOTE_CONVERSATION))
     }

@@ -1,6 +1,5 @@
 import datetime
 from typing import List
-import logging
 import os
 import json
 import regex as re
@@ -8,9 +7,9 @@ import regex as re
 from fn_watsonx_analyst.types.message_payload import MessagePayload
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
+from fn_watsonx_analyst.util.util import create_logger
 
-logger = logging.getLogger(__name__)
-
+logger = create_logger(__name__)
 
 class Prompting:
 
@@ -148,6 +147,24 @@ class Prompting:
                 {context}
                 [INST] </s>
                 [INST] {query} [/INST]
+                """
+
+            elif(re.search(r'\bcode-instruct\b', model, re.IGNORECASE)):
+                # Prompt format for code instruct models
+                prompt = f"""
+                System:
+                {system_prompt}
+
+                {relevant_messages}
+               
+                {context}
+
+                Question: 
+                {query} 
+
+
+                Answer:
+                
                 """
 
             else:

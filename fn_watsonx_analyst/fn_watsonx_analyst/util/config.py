@@ -11,14 +11,15 @@ def config_section_data():
     for fn_watsonx_analyst when called by `resilient-circuits config [-c|-u]`
     """
     config_data = """[fn_watsonx_analyst]
-
+# Note: don't use quotes around values.
 watsonx_api_key=$WATSONX_API_KEY
 watsonx_project_id=$WATSONX_PROJECT_ID
 watsonx_endpoint=$WATSONX_ENDPOINT
 
 [watsonx_property_labels]
+# Note: don't use quotes around values.
 # Here you can add a replacement label for an Incident custom field/property, if the existing field name is misleading or unclear.
 # e.g.
-# fn_something_field_property="fn_something report"
+# fn_obscure_api_name=incident report
 """
     return config_data

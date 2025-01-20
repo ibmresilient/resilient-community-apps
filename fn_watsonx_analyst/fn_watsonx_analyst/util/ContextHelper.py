@@ -1,9 +1,7 @@
 import datetime
 from enum import Enum
-import logging
 import os
 from typing import List, Optional, Tuple
-import json
 
 from resilient import SimpleClient
 
@@ -14,6 +12,7 @@ from fn_watsonx_analyst.types.pbx_detail import PBExecDetail
 from fn_watsonx_analyst.types.phase import Phase, Task
 
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
+from fn_watsonx_analyst.util.util import create_logger
 
 
 class Templates(Enum):
@@ -44,7 +43,8 @@ class Templates(Enum):
     DEF_SYSTEM_PROMPT = "def_system_prompt"
 
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
+
 
 class ContextHelper:
     """
@@ -192,7 +192,7 @@ class ContextHelper:
 
             if inc["properties"]:
                 labels = self.__get_property_labels()
-                new_props = dict()
+                new_props = {}
                 for key, val in inc["properties"].items():
                     if key in labels.keys():
                         new_props[labels[key]] = val

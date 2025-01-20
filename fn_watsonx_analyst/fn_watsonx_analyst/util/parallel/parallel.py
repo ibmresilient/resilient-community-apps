@@ -1,10 +1,10 @@
-import logging
 from typing import List
 import concurrent
 
 from fn_watsonx_analyst.types.ai_response import AIResponse
+from fn_watsonx_analyst.util.util import create_logger
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 class ParallelRunnable:
     name: str = "unkown"

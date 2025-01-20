@@ -7,5 +7,6 @@ class AIResponse(TypedDict):
     """Type for an AI response object"""
 
     generated_text: str
+    raw_output: str
     tag: str
     metadata: AIMetadata

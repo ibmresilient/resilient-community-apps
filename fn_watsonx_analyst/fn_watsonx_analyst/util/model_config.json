@@ -28,6 +28,22 @@
         "context_length": 8192
     },
     {
+        "model_name": "ibm/granite-34b-code-instruct",
+        "context_length": 8192
+    },
+    {
+        "model_name": "ibm/granite-20b-code-instruct",
+        "context_length": 8192
+    },
+    {
+        "model_name": "ibm/granite-8b-code-instruct",
+        "context_length": 128000
+    },
+    {
+        "model_name": "ibm/granite-3b-code-instruct",
+        "context_length": 128000
+    },
+    {
         "model_name": "meta-llama/llama-3-2-1b-instruct",
         "context_length": 128000
     },

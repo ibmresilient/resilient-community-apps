@@ -1,12 +1,11 @@
 from enum import Enum
-import logging
-from typing import List
-
 from resilient import SimpleClient
 
-from fn_watsonx_analyst.types.pbx_detail import PBExecDetail
+from fn_watsonx_analyst.util.util import create_logger
 
-log = logging.getLogger(__name__)
+# pylint: disable=line-too-long
+
+log = create_logger(__name__)
 
 class RestUrls(Enum):
     """Enum to determine which URL and method to use for each request"""
@@ -172,8 +171,9 @@ class RestHelper:
                                 ),
                             )["data"]
                             return res
-                        except Exception:
-                            raise Exception("Error fetching %s data from SOAR.", url.name)
+                        except Exception as e:
+                            log.exception("Error fetching %s data from SOAR." % url.name, )
+                            # raise Exception("Error fetching %s data from SOAR.", url.name) from e
 
                 return res_client.post(url.value[1].format(**kwargs))
             case "PUT":

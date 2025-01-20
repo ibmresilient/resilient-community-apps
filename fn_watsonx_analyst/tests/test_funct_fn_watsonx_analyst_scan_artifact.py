@@ -58,17 +58,7 @@ class TestFnWatsonxScanArtifact:
         "fn_watsonx_analyst_system_prompt": "sample text"
     }
 
-    # artifact_prefix = "Artifact name: runme2.sh\n\n"
-    expected_results_1 = "Artifact name: runme2.sh\n\nLorem ipsum"
-
-    # mock_inputs_2 = {
-    #     "fn_watsonx_analyst_incident_id": 123,
-    #     "fn_watsonx_analyst_artifact_id": 123,
-    #     "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
-    #     "fn_watsonx_analyst_system_prompt": "sample text"
-    # }
-
-    # expected_results_2 = {"value": "xyz"}
+    expected_results_1 = "Artifact name: runme2.sh\n\n<p>Lorem ipsum</p>"
 
     @patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
     @patch("fn_watsonx_analyst.util.QueryHelper.QueryHelper.get_api_key", helper.mock_get_api_key)

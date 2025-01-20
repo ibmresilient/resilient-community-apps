@@ -1,6 +1,4 @@
-from http.client import HTTPException
 import json
-import logging
 import re
 from typing import List
 
@@ -25,9 +23,10 @@ from fn_watsonx_analyst.util.errors import (
 )
 from fn_watsonx_analyst.util.persistent_org_cache import PersistentCache
 from fn_watsonx_analyst.util.retry import retry_with_backoff
-from fn_watsonx_analyst.util.util import defang_text
+from fn_watsonx_analyst.util.util import create_logger, defang_text
+from fn_watsonx_analyst.util.rich_text import RichTextHelper
 
-log = logging.getLogger(__name__)
+log = create_logger(__name__)
 
 class QueryHelper:
     """
@@ -174,11 +173,12 @@ class QueryHelper:
                         body = response.json()
                         result = body["results"][0]
 
-                        defanged_text = defang_text(result["generated_text"])
+                        generated_text = defang_text(RichTextHelper.toHTML(result["generated_text"]))
                         model_tag = ModelTag(self.model_id, purpose)
 
                         output: AIResponse = {
-                            "generated_text": defanged_text,
+                            "generated_text": generated_text,
+                            "raw_output": result["generated_text"],
                             "metadata": {
                                 "created_at": model_tag.created_at,
                                 "input_token_count": result["input_token_count"],
