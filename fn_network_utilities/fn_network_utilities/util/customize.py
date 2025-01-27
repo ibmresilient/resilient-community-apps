@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2023. All Rights Reserved.
-# pragma pylint: disable=pointless-string-statement, line-too-long, wrong-import-order
-# Generated with resilient-sdk v50.0.151
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.2.2.1096
 
-"""Generate the Resilient customizations required for fn_network_utilities"""
+"""Generate the SOAR customizations required for fn_network_utilities"""
 
 import base64
 import os
@@ -60,7 +59,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

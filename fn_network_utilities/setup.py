@@ -23,14 +23,16 @@ def snake_to_camel(word):
 setup(
     name="fn_network_utilities",
     display_name="Network Utilities functions for SOAR",
-    version="1.1.0",
+    version="1.2.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://ibm.com/mysupport",
     description="Useful network related workflow/playbook functions for common automation and integration activities in the SOAR platform.",
     long_description="""This app contains useful functions that allows your workflows/playbooks to execute shell-scripts remotely and locally,
-     gain information about URLs, and extract SSL certificates from URLs.""",
+     gain information about URLs, and extract SSL certificates from URLs.
+     <br><ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+     <br><ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         'resilient-circuits',
         'pyOpenSSL',

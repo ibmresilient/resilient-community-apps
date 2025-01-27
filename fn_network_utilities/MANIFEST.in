@@ -1,7 +1,6 @@
 include README.md
 include Dockerfile
 include apikey_permissions.txt
-include entrypoint.sh
 recursive-include fn_network_utilities/util *
 recursive-include fn_network_utilities/data *
 include fn_network_utilities/LICENSE

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """
 Function implementation test.
@@ -28,7 +28,7 @@ LOG = logging.getLogger(__name__)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
+INCORRECT_REMOTE_ERROR = "Incorrect format for remote. Ex. {}, {} was specified"
 
 def selftest_function(opts):
     """
@@ -38,11 +38,11 @@ def selftest_function(opts):
     app_configs = opts.get("fn_network_utilities", {})
     try:
         if app_configs.get("shell_escaping") == "sh":
-            run_cmd = RunCmd(app_configs.get("remote_computer"), "ls", {})
+            run_cmd = RunCmd(app_configs.get("remote_computer", None), "ls", {}, app_configs.get("ssh_key_auth", None))
             run_cmd.run_remote_linux()
         else:
-            run_cmd = RunCmd(app_configs.get("remote_computer"), "dir", {})
-            run_cmd.run_windows_cmd(app_configs.get("remote_auth_transport"),
+            run_cmd = RunCmd(app_configs.get("remote_computer", None), "dir", {})
+            run_cmd.run_windows_cmd(app_configs.get("remote_auth_transport", None),
                                     app_configs.get("remote_powershell_extensions").strip(","))
         return {
             "state": "success",
@@ -55,7 +55,10 @@ def selftest_function(opts):
     }
 
 class RunCmd():
-    def __init__(self, remote, shell_command, rendered_shell_params):
+    def __init__(self, remote, shell_command, rendered_shell_params, ssh_key_auth):
+        if ssh_key_auth:
+            ssh_key_auth = False if ssh_key_auth.lower() == "false" else ssh_key_auth
+        self.ssh_key_auth = ssh_key_auth
         # Get remote credentials
         if remote:
             self.get_creds(remote)
@@ -70,19 +73,18 @@ class RunCmd():
 
     def get_creds(self, remote):
         server_splits = remote.rsplit('@', 1) # get last separator to avoid '@' in passwords
+        remote_format = "username@server or username:passphrase@server" if self.ssh_key_auth else "username:password@server"
         if len(server_splits) != 2:
-            raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             "'%s' was specified", remote)
+            raise ValueError(INCORRECT_REMOTE_ERROR.format(remote_format, remote))
 
         self.remote_server = server_splits[1]
 
         user_pswd_splits = server_splits[0].split(':')
-        if len(user_pswd_splits) != 2:
-            raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             "'%s' was specified", remote)
+        if not self.ssh_key_auth and len(user_pswd_splits) != 2:
+            raise ValueError(INCORRECT_REMOTE_ERROR.format(remote_format, remote))
 
         self.remote_user = user_pswd_splits[0]
-        self.remote_password = user_pswd_splits[1]
+        self.remote_password = user_pswd_splits[1] if len(user_pswd_splits) == 2 else None
 
 
     def run_remote_linux(self):
@@ -94,8 +96,10 @@ class RunCmd():
         # add to known hosts
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         try:
-            client.connect(hostname=self.remote_server, username=self.remote_user, 
-                           password=self.remote_password)
+            # Connect to the linux server via ssh. If ssh_key_auth equals True then key_filename=None and this will look for key files in the default location.
+            # If ssh_key_auth equals a path to a key file then key_filename=self.ssh_key_auth
+            client.connect(hostname=self.remote_server, username=self.remote_user,
+                        password=self.remote_password, key_filename=None if not self.ssh_key_auth else self.ssh_key_auth)
 
             stdin, stdout, stderr = client.exec_command(self.commandline) # nosec
             self.stdoutdata = stdout.read().decode()

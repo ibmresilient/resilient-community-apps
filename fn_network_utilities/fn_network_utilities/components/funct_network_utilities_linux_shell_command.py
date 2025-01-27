@@ -1,22 +1,29 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # pragma pylint: disable=line-too-long, wrong-import-order
 
 """AppFunction implementation"""
 
-import logging
-import time
-import json
-import paramiko
+import re
+from logging import getLogger
+from time import time
+from json import loads
+from paramiko import SSHClient, AutoAddPolicy, RSAKey
 from fn_network_utilities.util.utils_common import remove_punctuation, separate_params
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, render, b_to_s, str_to_bool
+from os.path import exists
+from io import StringIO
 
 PACKAGE_NAME = "fn_network_utilities"
 FN_NAME = "network_utilities_linux_shell_command"
 DEFAULT_TIMEOUT_SEC = 30
+INCORRECT_REMOTE_ERROR = "Incorrect format for remote. Ex. {}, {} was specified"
 
-LOG = logging.getLogger(__name__)
+# format of a PEM Private key (without newlines)
+PEM_PATTERN = re.compile(r"^(-{5}BEGIN .*PRIVATE KEY-{5}) (.*) (-{5}END .*PRIVATE KEY-{5})")
+
+LOG = getLogger(__name__)
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'network_utilities_linux_shell_command'"""
@@ -34,6 +41,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.network_utilities_shell_params
             -   fn_inputs.network_utilities_shell_command
             -   fn_inputs.network_utilities_remote_computer
+            -   fn_inputs.network_utilities_ssh_key_auth
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -43,6 +51,14 @@ class FunctionComponent(AppFunctionComponent):
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
         remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
         remote_sudo_password = getattr(fn_inputs, "network_utilities_send_sudo_password", None) #bool
+        ssh_key_auth_setting = getattr(fn_inputs, "network_utilities_ssh_key_auth", None) # str
+
+        ssh_key_auth_passphrase = None
+        ssh_key_auth = None
+        if ssh_key_auth_setting: # Get the key auth from the given app.config setting.
+            ssh_key_auth = self.options.get(ssh_key_auth_setting, None)
+            ssh_key_auth_passphrase = self.options.get(f"{ssh_key_auth_setting}_passphrase", None)
+
         timeout_linux = int(self.options.get("timeout_linux", DEFAULT_TIMEOUT_SEC))
 
         ad_hoc_shell = str_to_bool(self.options.get("allow_ad_hoc_execution", "False"))
@@ -97,15 +113,67 @@ class FunctionComponent(AppFunctionComponent):
         # Previous version required parenthesis around command, this is for backwards compatibility
         shell_command_base = remove_punctuation(shell_command_base, True)
 
-        run_cmd = RunCmd(remote, shell_command_base, rendered_shell_params, remote_sudo_password)
+        # Check if a path was given and if the path exists.
+        if ssh_key_auth and exists(ssh_key_auth):
+            # A path was given and it exists
+            run_cmd = RunCmd(remote,
+                             shell_command_base,
+                             rendered_shell_params,
+                             remote_sudo_password,
+                             ssh_key_auth=ssh_key_auth,
+                             ssh_key_auth_passphrase=ssh_key_auth_passphrase)
+
+        elif ssh_key_auth: # An app secret variable was given.
+            priv_ssh_key = rebuild_pem(ssh_key_auth)
+            pkey_encoded = RSAKey.from_private_key(StringIO(priv_ssh_key),
+                                                   password=ssh_key_auth_passphrase) # rebuilt the PEM format
+            run_cmd = RunCmd(remote,
+                             shell_command_base,
+                             rendered_shell_params,
+                             remote_sudo_password,
+                             pkey=pkey_encoded,
+                             ssh_key_auth_passphrase=ssh_key_auth_passphrase)
+
+        else: # ssh_key_auth was not given
+            run_cmd = RunCmd(remote,
+                             shell_command_base,
+                             rendered_shell_params,
+                             remote_sudo_password)
+
         run_cmd.run_remote_linux(timeout_linux)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(run_cmd.make_result())
 
+def rebuild_pem(pem_key):
+    """restore a PEM Private key with the correct newline format.
+        this is lost when a key is added as a secret
+
+    :param pem_key: pem private key without newlines
+    :type pem_key: str
+    :return: pem private key with newlines restored
+    :rtype: str
+    """
+    match = PEM_PATTERN.match(pem_key)
+    if match:
+        return '\n'.join([match.group(1), match.group(2).replace(" ", "\n"), match.group(3)])
+
+    return pem_key
+
 class RunCmd():
-    def __init__(self, remote, shell_command, rendered_shell_params, send_sudo_password: bool):
+    def __init__(self,
+                 remote,
+                 shell_command,
+                 rendered_shell_params,
+                 send_sudo_password: bool,
+                 ssh_key_auth=None,
+                 ssh_key_auth_passphrase=None,
+                 pkey=None):
+        # private key and creds
+        self.ssh_key_auth = ssh_key_auth
+        self.ssh_key_auth_passphrase = ssh_key_auth_passphrase
+        self.pkey = pkey
         # Get remote credentials
         if remote:
             self.get_creds(remote)
@@ -114,39 +182,43 @@ class RunCmd():
         self.rendered_shell_params = rendered_shell_params
         self.send_sudo_password = send_sudo_password
 
-        self.tstart = time.time()
+        self.tstart = time()
         self.retcode = None
         self.stdoutdata = None
         self.stderrdata = None
 
     def get_creds(self, remote):
         server_splits = remote.rsplit('@', 1) # get last separator to avoid '@' in passwords
+        remote_format = "username@server" if self.ssh_key_auth or self.pkey else "username:password@server"
         if len(server_splits) != 2:
-            raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             f"{remote} was specified")
+            raise ValueError(INCORRECT_REMOTE_ERROR.format(remote_format, remote))
 
         self.remote_server = server_splits[1]
 
         user_pswd_splits = server_splits[0].split(':')
-        if len(user_pswd_splits) != 2:
-            raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             f"{remote} was specified")
+        if not (self.ssh_key_auth or self.pkey) and len(user_pswd_splits) != 2:
+            raise ValueError(INCORRECT_REMOTE_ERROR.format(remote_format, remote))
 
         self.remote_user = user_pswd_splits[0]
-        self.remote_password = user_pswd_splits[1]
-
+        self.remote_password = user_pswd_splits[1] if len(user_pswd_splits) == 2 else None
 
     def run_remote_linux(self, timeout_linux):
         self.commandline = render(self.shell_command, self.rendered_shell_params)
         LOG.debug("Remote cmd: %s params %s", self.commandline, self.rendered_shell_params)
 
         # initialize the SSH client
-        client = paramiko.SSHClient()
+        client = SSHClient()
         # add to known hosts
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.set_missing_host_key_policy(AutoAddPolicy())
         try:
-            client.connect(hostname=self.remote_server, username=self.remote_user,
-                        password=self.remote_password)
+            # Connect to the linux server via ssh.
+            # If ssh_key_auth equals a path to a key file then key_filename=self.ssh_key_auth
+            client.connect(hostname=self.remote_server,
+                           username=self.remote_user,
+                            password=self.remote_password,
+                            key_filename=None if not self.ssh_key_auth else self.ssh_key_auth,
+                            pkey=self.pkey,
+                            passphrase=self.ssh_key_auth_passphrase)
 
             stdin, stdout, stderr = client.exec_command(self.commandline, timeout=timeout_linux) # nosec
             if self.send_sudo_password:
@@ -167,13 +239,13 @@ class RunCmd():
 
 
     def make_result(self):
-        self.tend = time.time()
+        self.tend = time()
 
         result = b_to_s(self.stdoutdata)
         result_json = None
         try:
             # Let's see if the output can be decoded as JSON
-            result_json = json.loads(result)
+            result_json = loads(result)
         except:
             pass
 
@@ -181,7 +253,7 @@ class RunCmd():
         output_json = None
         try:
             # Let's see if the output can be decoded as JSON
-            output_json = json.loads(output)
+            output_json = loads(output)
         except:
             pass
 
