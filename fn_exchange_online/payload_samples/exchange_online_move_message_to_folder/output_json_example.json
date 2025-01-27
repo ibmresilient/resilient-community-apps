@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "new_message_id": "AAMkAGJjNmZiMDVkLTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM_APU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA=",
+    "new_web_link": "https://outlook.office365.com/owa/?ItemID=AAMkAGJjNmZiMDVkLTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM%2BAPU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA%3D&exvsurl=1&viewmodel=ReadMessageItem"
+  },
+  "raw": "{\"new_message_id\": \"AAMkAGJjNmZiMDVkLTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM_APU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA=\", \"new_web_link\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGJjNmZiMDVkLTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM%2BAPU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\"}",
+  "inputs": {
+    "exo_mailfolders_id": null,
+    "exo_email_address": "tester@mytenant.onmicrosoft.com",
+    "exo_messages_id": "AAMkAGJjNmZiMDVkLTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM_APU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAAEMAAAZQHL8XTpvQ52trPtVkxJqAATJxo7YAAA=",
+    "exo_destination_mailfolder_id": {
+      "id": 805,
+      "name": "archive"
+    }
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-exchange-online",
+    "package_version": "1.4.1",
+    "host": "my.app.host",
+    "execution_time_ms": 3891,
+    "timestamp": "2024-12-03 11:11:15"
+  }
+}
