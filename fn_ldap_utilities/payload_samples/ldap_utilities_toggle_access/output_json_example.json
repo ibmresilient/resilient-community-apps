@@ -1,0 +1,23 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "user_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "user_status": "Enable"
+  },
+  "raw": null,
+  "inputs": {
+    "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_domain_name": "Domain2",
+    "ldap_toggle_access": "Enable"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.2",
+    "host": "local",
+    "execution_time_ms": 3714,
+    "timestamp": "2023-08-10 10:39:59"
+  }
+}
