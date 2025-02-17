@@ -41,6 +41,8 @@
 | 2.0.1 | 04/2020 | Support added for App Host |
 | 2.0.2 | 09/2020 | Added proxy support |
 | 2.1.0 | 10/2024 | Added verify support |
+| 2.2.0 | 01/2025 | Support for TAXII2.1 APIs |
+| 2.2.1 | 02/2025 | Version correction for SOAR 51.0.0 |
 
 ### v2.1.0
 
