@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_mitre_integration',
-    version='2.2.0',
+    version='2.2.1',
     license='MIT License',
     author='IBM QRadar SOAR',
     author_email='support@resilientsystems.com',

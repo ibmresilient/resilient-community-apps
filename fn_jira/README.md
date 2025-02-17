@@ -15,6 +15,7 @@
   - [Multi-tenancy](#multi-tenancy)
   - [Configuring OAuth](#configuring-oauth)
   - [Poller Considerations](#poller-considerations)
+    - [SOAR incident property requirements for poller updates](#soar-incident-property-requirements-for-poller-updates)
     - [Poller Templates for SOAR Cases](#poller-templates-for-soar-cases)
   - [Custom Layouts](#custom-layouts)
 - [Function - Jira Create Comment](#function---jira-create-comment)
@@ -33,6 +34,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.2.0 | 02/2025 | Add new app.config setting create_soar_incidents, that controls if the poller creates new SOAR cases or not. |
 | 3.1.0 | 03/2024 | Update to poller to automatically account for time zone differences between SOAR and Jira. |
 | 3.0.5 | 10/2023 | Bug fix for poller not closing SOAR incident |
 | 3.0.4 | 10/2023 | Bug fix for transitioning a Jira issue from SOAR |
@@ -52,6 +54,9 @@
 
 ### Version 3.1.0 Changes
 In version 3.1.0 the app.config setting 'timezone_offset' has been deprecated. Time zone differences between SOAR and Jira are now accounted for automatically.
+
+### Version 3.2.0 Changes
+In version 3.2.0 a new app.config setting 'create_soar_incidents' has been added. When upgrading from a pervious version, manually add this setting in the app.config.
 
 ---
 
@@ -82,13 +87,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `49.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `49.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=49.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -121,11 +126,11 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.6, 3.9 and 3.11 are supported.
+Python 3.9 and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * jira~=3.2
 * pyjwt~=2.4
-* resilient_circuits>=49.0.0
+* resilient_circuits>=51.0.0
 
 ---
 
@@ -145,6 +150,7 @@ The following table provides the settings you need to configure the app. These s
 | **access_token_secret** | Required for `OAUTH` | `<oauth access secret>` | Access token secret created through Jira OAuth 1.0a 3LO. Details below. |
 | **consumer_key_name** | Required for `OAUTH` | `<oauth consumer key>` | Consumer Key name created through Jira UI. Details below. |
 | **private_rsa_key_file_path** | Required for `OAUTH` | `/etc/jira_privatekey.pem` | Path to file containing private RSA key associated with the public key that was uploaded in the UI. Details below. |
+| **create_soar_incidents** | No | `true or false` | Defaults to true. If true the poller creates new SOAR incidents from Jira issues that match the given filters. |
 | **jira_dt_name** | No | `jira_task_references` | The datatable in which to store the data for synced SOAR tasks. Default is `jira_task_references`. If using a custom Datatable, this table *must* include the `task_id`, `jira_issue_id_col`, and `jira_link` columns. |
 | **access_token** | Required for `OAUTH` | `<oauth access token>` | Access token created through Jira OAuth 1.0a 3LO. Details below. |
 | **max_issues_returned** | Yes | `50` | Max number of issues that can be returned from Jira issue search. |
@@ -165,11 +171,11 @@ The following table provides the settings you need to configure the app. These s
 
 
 #### Multi-tenancy
-Starting in version 2.2.0, more than one Jira instance can be configured for SOAR. For enterprises with only one Jira instance, your app.config file will continue to define the Jira instance under the `[fn_jira]` section header.
+Starting in version 2.2.0, more than one Jira instance can be configured for SOAR. For enterprises with only one Jira instance, your app.config file continues to define the Jira instance under the `[fn_jira]` section header.
 
-For enterprises with more than one Jira instance, each instance will have it's own section header, such as `[fn_jira:jira_label1]` where `jira_label1` represents any label helpful to define you Jira environment. You cannot mix `[fn_jira]` and `[fn_jira:jira_label1]` sections headers.
+For enterprises with more than one Jira instance, each instance has it's own section header, such as `[fn_jira:jira_label1]` where `jira_label1` represents any label helpful to define you Jira environment. You cannot mix `[fn_jira]` and `[fn_jira:jira_label1]` sections headers.
 
-Be aware that modifications to the workflows will be needed to correctly pass this label through the `jira_label` function input field if the Jira server/servers in the app.config have labels.
+Be aware that modifications to the workflows is needed to correctly pass this label through the `jira_label` function input field if the Jira server/servers in the app.config have labels.
 
 If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `jira_label` function input field.
 
@@ -207,11 +213,13 @@ Once you've completed the linked step above, you can continue with the rest of J
 1. In App Host, upload the private key as a file by clicking **New File**. Paste the contents of the private key into the file and ensure that the path to the file is the same as what you wrote in your app.config.
 
 ### Poller Considerations
-If the poller is configured in the app.config, then SOAR cases that are linked to Jira issues will be updated when the linked Jira issue is changed.
-The Jira issues are found when running the Jira search using the filters given in the app.config. Only Jira issues that meet the search requirements and have been updated within the polling_lookback
-time frame will be returned from the search.
+If the poller is configured in the app.config, then SOAR cases that are linked to Jira issues are updated when the linked Jira issue is changed.
+The Jira issues are found when running the Jira search using the filters given in the app.config. Only Jira issues that meet the search requirements and have been updated within the polling_lookback time frame are returned from the search.
 
 Disable the poller by changing the app.config setting to `poller_interval=0`.
+
+#### SOAR incident property requirements for poller updates
+In order for the poller to update a SOAR incident, the SOAR incident property `jira_issue_id` is required to have a value. If the Jira servers are labeled in the app.config then the SOAR incident property jira_server is also required.
 
 #### Poller Templates for SOAR Cases
 It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.
@@ -1050,7 +1058,7 @@ max_issues_returned = 50
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates
-#  that are configured under the individual Jira servers will be ignored.
+#  that are configured under the individual Jira servers are ignored.
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=
@@ -1087,7 +1095,7 @@ max_issues_returned = 50
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates
-#  that are configured under the individual Jira servers will be ignored.
+#  that are configured under the individual Jira servers are ignored.
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=
@@ -1102,7 +1110,7 @@ inputs.jira_label = rule.properties.jira_label
 ```
 
 Example app.config server label: [fn_jira:jira_label1]
-  `jira_label1` will be set to `inputs.jira_label` in the above example.
+  `jira_label1` is set to `inputs.jira_label` in the above example.
 
 ## Configuring bidirectional sync
 In version 3.0.0 bidirectional sync between SOAR and Jira was introduced. When updating from a previous version to 3.0.0 the app.config must be manually edited to add the new settings that allow the poller to sync SOAR and Jira tickets.
@@ -1117,19 +1125,19 @@ polling_interval=0
 polling_lookback=60
 # Search filters for Jira issue to sync with SOAR cases.
 # If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
-#  that are configured under the individual Jira servers will be ignored
+#  that are configured under the individual Jira servers are ignored
 #poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search.
 # If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
-#  that are configured under the individual Jira servers will be ignored.
+#  that are configured under the individual Jira servers are ignored.
 max_issues_returned = 50
 # Proxies to use
 # If proxies are defined under [fn_jira:global_settings], then proxies defined
-#  under the individual Jira servers will be ignored
+#  under the individual Jira servers are ignored
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates
-#  that are configured under the individual Jira servers will be ignored.
+#  that are configured under the individual Jira servers are ignored.
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=

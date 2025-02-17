@@ -16,19 +16,21 @@ polling_interval=0
 polling_lookback=60
 # Search filters for Jira issue to sync with SOAR cases.
 # If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
-#  that are configured under the individual Jira servers will be ignored
+#  that are configured under the individual Jira servers are ignored
 #poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Defaults to true. Either true or false. If true the poller creates new SOAR incidents from Jira issues that match the given filters.
+create_soar_incidents = true
 # Max number of issues that can be returned from Jira issue search.
 # If max_issues_returned under [fn_jira:global_settings] is configured, then max_issues_returned
-#  that are configured under the individual Jira servers will be ignored.
+#  that are configured under the individual Jira servers are ignored.
 max_issues_returned = 50
 # Proxies to use
 # If proxies are defined under [fn_jira:global_settings], then proxies defined
-#  under the individual Jira servers will be ignored
+#  under the individual Jira servers are ignored
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under the individual Jira servers are configured, then templates
-#  that are configured under [fn_jira:global_settings] will be ignored.
+#  that are configured under [fn_jira:global_settings] are ignored.
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=

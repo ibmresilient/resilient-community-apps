@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Poller implementation"""
 
 from logging import getLogger
 from os import path
 from threading import Thread
-from datetime import timezone, timedelta, datetime
+from datetime import timezone, datetime
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
-from resilient_lib import (SOARCommon, get_last_poller_date, clean_html,
+from resilient_lib import (SOARCommon, get_last_poller_date, clean_html, str_to_bool,
                            make_payload_from_template, poller, validate_fields)
 
 from fn_jira.lib.app_common import AppCommon, add_task_to_case, add_to_case
@@ -301,8 +301,8 @@ class PollerComponent(AppFunctionComponent):
                             soar_cases_to_update.append([jira_issue, soar_case])
                             break
 
-        # Create new SOAR cases from Jira issues
-        if jira_issues_to_add_to_soar:
+        # Create new SOAR cases from Jira issues. Check if create_soar_incidents is set to true in the app.config
+        if jira_issues_to_add_to_soar and str_to_bool(self.global_settings.get("create_soar_incidents", 'true')):
             self.soar_create_case(jira_issues_to_add_to_soar)
 
         # Close SOAR cases that's linked Jira issue is closed
@@ -315,7 +315,6 @@ class PollerComponent(AppFunctionComponent):
 
         # Update SOAR cases with data from linked Jira issues
         if soar_cases_to_update:
-            # helper.update_soar_incident(self.rest_client(), soar_cases_to_update)
             self.soar_update_cases(soar_cases_to_update)
 
     def set_poller_templates(self, server_label, template_name):
@@ -345,7 +344,7 @@ class PollerComponent(AppFunctionComponent):
         for jira_issue in jira_issues_to_add_to_soar:
             jira_issue["renderedFields"]["description"] = jira_issue.get("renderedFields", {}).get("description").replace('"', "'")
             # Set comments to list of comments
-            jira_issue["renderedFields"]["comment"] = [comment.get("body", "").replace('"', "'") for comment in jira_issue.get("renderedFields", {}).get("comment").get("comments")]
+            jira_issue["renderedFields"]["comment"] = [comment.get("body", "").replace('"', "'") for comment in jira_issue.get("renderedFields", {}).get("comment").get("comments") if comment.get("body")]
 
             # Create payload for creating SOAR incident from template
             soar_create_payload = make_payload_from_template(
@@ -446,9 +445,9 @@ class PollerComponent(AppFunctionComponent):
         :return: None
         """
         # List of comments from the SOAR incident
-        soar_comments = [clean_html(comment.get("content", "").replace("Added from Jira", "")) for comment in soar.get("comments", [])]
+        soar_comments = [clean_html(comment.get("content", "").replace("Added from Jira", "")) for comment in soar.get("comments", []) if comment.get("content")]
         # List of comments from the Jira issue
-        jira_comments = [comment.get("body", "").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields", {}).get("comment").get("comments", [])]
+        jira_comments = [comment.get("body", "").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields", {}).get("comment").get("comments", []) if comment.get("body")]
 
         if jira_comments:
             for comment in jira_comments:
@@ -518,9 +517,9 @@ class PollerComponent(AppFunctionComponent):
         :return: None
         """
         # SOAR Task comments
-        task_comments = [clean_html(note.get("text").replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note.get("text")]
+        task_comments = [clean_html(note.get("text", "").replace("Added from Jira", "")) for note in task.get("notes", []) if note.get("text") and "Added Jira Issue:" not in note.get("text")]
         # Jira issue comments
-        jira_comments = [comment.get("body").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
+        jira_comments = [comment.get("body", "").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields").get("comment").get("comments", []) if comment.get("body")]
 
         # Update comments/notes
         if jira_comments:

@@ -1010,14 +1010,14 @@
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 25735,
+    "build_number": 9339,
     "f": 0,
-    "m": 5,
+    "m": 0,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.5.0.25735"
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
