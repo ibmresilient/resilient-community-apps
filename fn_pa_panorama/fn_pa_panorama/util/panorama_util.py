@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 from logging import getLogger
 from json import loads
@@ -12,15 +12,15 @@ DEFAULT_API_VERSION = "v9.1"
 URI_PATH = "restapi"
 PACKAGE_NAME = "fn_pa_panorama"
 
-
 class PanoramaClient:
     """Object to handle the communication and authentication between the integration and Panorama"""
 
-    def __init__(self, opts, pan_config, location, vsys=None, device_group=None):
-        pan_config["location"] = location
+    def __init__(self, opts, pan_config, location=None, vsys=None, device_group=None):
+        if location:
+            pan_config["location"] = location
 
         # validate config fields
-        validate_fields(["panorama_host", "api_key", "location"], pan_config)
+        validate_fields(["panorama_host", "api_key"], pan_config)
 
         api_version = pan_config.get("api_version", DEFAULT_API_VERSION)
         self.__key = pan_config["api_key"]
@@ -125,7 +125,10 @@ class PanoramaClient:
             f"{self.host}/api/",
             params=params,
             verify=self.verify,
-            headers=self.header
+            headers=self.header,
+            retry_delay=10,
+            retry_tries=3,
+            retry_exceptions=Exception
         )
         response.raise_for_status()
         return response.text
@@ -143,7 +146,10 @@ class PanoramaClient:
             f"{self.host}/api/?",
             params=params,
             verify=self.verify,
-            headers=self.header
+            headers=self.header,
+            retry_delay=10,
+            retry_tries=3,
+            retry_exceptions=Exception
         )
         response.raise_for_status()
         return response.text
@@ -152,7 +158,7 @@ class PanoramaClient:
         """Commit changes made to the Panorama server
 
         Returns:
-            _type_: _description_
+            str: API request response
         """
         response = self.rc.execute(
             "POST",
@@ -160,6 +166,69 @@ class PanoramaClient:
             verify=self.verify,
             headers=self.header,
             proxies=self.proxies
+        )
+        response.raise_for_status()
+        return response.text
+
+    def specific_device_group(self, device_group_name: str):
+        """Commit-all. Specific device group commit.
+        Args:
+            device_group_name (str): Panorama device group name
+
+        Returns:
+            str: API request response
+        """
+        response = self.rc.execute(
+            "POST",
+            f'{self.host}/api?type=commit&action=all&cmd=<commit-all><shared-policy><device-group><entry name="{device_group_name}"/></device-group></shared-policy></commit-all>',
+            verify=self.verify,
+            headers=self.header,
+            proxies=self.proxies,
+            retry_delay=10,
+            retry_tries=3,
+            retry_exceptions=Exception
+        )
+        response.raise_for_status()
+        return response.text
+
+    def specific_device_group_without_default_template(self, device_group_name: str):
+        """Commit-all. Specific device group commit without including default device/network template changes.
+        Args:
+            device_group_name (str): Panorama device group name
+
+        Returns:
+            str: API request response
+        """
+        response = self.rc.execute(
+            "POST",
+            f'{self.host}/api?type=commit&action=all&cmd=<commit-all><shared-policy><include-template>no</include-template><device-group><entry name="{device_group_name}"/></device-group></shared-policy></commit-all>',
+            verify=self.verify,
+            headers=self.header,
+            proxies=self.proxies,
+            retry_delay=10,
+            retry_tries=3,
+            retry_exceptions=Exception
+        )
+        response.raise_for_status()
+        return response.text
+
+    def get_job_status(self, jobId: int):
+        """Get the status of a job based on ID
+        Args:
+            jobId (str): Job ID
+
+        Returns:
+            str: API request response
+        """
+        response = self.rc.execute(
+            "GET",
+            f'{self.host}/api/?type=op&cmd=<show><jobs><id>{jobId}</id></jobs></show>',
+            verify=self.verify,
+            headers=self.header,
+            proxies=self.proxies,
+            retry_delay=10,
+            retry_tries=3,
+            retry_exceptions=Exception
         )
         response.raise_for_status()
         return response.text
@@ -230,7 +299,6 @@ class PanoramaServers():
         Return list of all server names
         """
         return self.server_name_list
-
 
 def get_server_settings(opts, panorama_label):
     """

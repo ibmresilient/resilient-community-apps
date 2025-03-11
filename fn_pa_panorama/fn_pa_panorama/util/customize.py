@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.2.2.1096
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.4.0.1351
 
 """Generate the SOAR customizations required for fn_pa_panorama"""
 
@@ -27,11 +27,13 @@ def codegen_reload_data():
         ],
         "functions": [
             u"panorama_commit",
+            u"panorama_commit_all",
             u"panorama_create_address",
             u"panorama_edit_address_group",
             u"panorama_edit_users_in_a_group",
             u"panorama_get_address_groups",
             u"panorama_get_addresses",
+            u"panorama_get_job_status",
             u"panorama_get_users_in_a_group"
         ],
         "workflows": [],
@@ -49,7 +51,9 @@ def codegen_reload_data():
             u"example_panorama_get_address_groups",
             u"example_panorama_unblock_dns_name",
             u"example_panorama_unblock_ip_address",
-            u"example_panorama_unblock_user"
+            u"example_panorama_unblock_user",
+            u"panorama_commit_all",
+            u"panorama_get_job_status"
         ]
     }
 
@@ -59,18 +63,20 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9340
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
         - palo_alto_panorama
     - Functions:
         - panorama_commit
+        - panorama_commit_all
         - panorama_create_address
         - panorama_edit_address_group
         - panorama_edit_users_in_a_group
         - panorama_get_address_groups
         - panorama_get_addresses
+        - panorama_get_job_status
         - panorama_get_users_in_a_group
     - Playbooks:
         - example_panorama_block_dns_name
@@ -80,6 +86,8 @@ def customization_data(client=None):
         - example_panorama_unblock_dns_name
         - example_panorama_unblock_ip_address
         - example_panorama_unblock_user
+        - panorama_commit_all
+        - panorama_get_job_status
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

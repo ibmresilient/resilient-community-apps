@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
 from xmltodict import parse
@@ -9,7 +9,6 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 
 FN_NAME = "panorama_get_users_in_a_group"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements Resilient function 'panorama_get_users_in_a_group"""
@@ -47,8 +46,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             # Get the users in a group in xml format
-            xml_response = panorama_util.get_users_in_a_group(
-                fn_inputs.panorama_user_group_xpath)
+            xml_response = panorama_util.get_users_in_a_group(fn_inputs.panorama_user_group_xpath)
         except KeyError:
             # No users returned
             yield self.status_message("No users returned.")
@@ -66,9 +64,9 @@ class FunctionComponent(AppFunctionComponent):
 
             members = results.get("response", {}).get("result", {}).get(
                 "entry", {}).get("user", {}).get("member", [])
-            # Create a list of the returned users
-            user_list = [m for m in members] if isinstance(members, list) else [
-                members.get("#text")]
+            if members:
+                # Create a list of the returned users
+                user_list = [m for m in members] if isinstance(members, list) else [members.get("#text")]
 
             yield self.status_message(f"{len(user_list)} users returned.")
 

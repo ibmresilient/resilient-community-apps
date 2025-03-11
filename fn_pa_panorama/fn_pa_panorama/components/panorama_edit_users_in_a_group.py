@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
 from xmltodict import parse
@@ -10,7 +10,6 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 
 FN_NAME = "panorama_edit_users_in_a_group"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements Resilient function 'panorama_edit_users_in_a_group"""
@@ -57,11 +56,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # Create connection to the user specific Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       get_server_settings(self.opts, getattr(
-                                           fn_inputs, "panorama_label", None)),
-                                       self.get_select_param(
-                                           getattr(fn_inputs, "panorama_location", None)),
-                                       None)
+            get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
+            self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
+            None)
         # Initialize function result variables
         results = {}
         success = True

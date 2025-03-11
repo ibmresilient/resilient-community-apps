@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 FN_NAME = "panorama_get_addresses"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements Resilient function 'panorama_get_addresses"""
