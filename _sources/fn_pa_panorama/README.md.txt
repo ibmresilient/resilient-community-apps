@@ -1,5 +1,4 @@
-# Palo Alto Panorama
-
+# Palo Alto Networks Panorama Integration for SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -15,11 +14,13 @@
   - [Panorama API permissions](#panorama-api-permissions)
   - [App Configuration](#app-configuration)
 - [Function - Panorama Commit](#function---panorama-commit)
+- [Function - Panorama Commit All](#function---panorama-commit-all)
 - [Function - Panorama Create Address](#function---panorama-create-address)
 - [Function - Panorama Edit Address Group](#function---panorama-edit-address-group)
 - [Function - Panorama Edit Users in a Group](#function---panorama-edit-users-in-a-group)
 - [Function - Panorama Get Address Groups](#function---panorama-get-address-groups)
 - [Function - Panorama Get Addresses](#function---panorama-get-addresses)
+- [Function - Panorama Get Job Status](#function---panorama-get-job-status)
 - [Function - Panorama Get Users in a Group](#function---panorama-get-users-in-a-group)
 - [Playbooks](#playbooks)
 - [How to configure to use a single Panorama Server](#How-to-configure-to-use-a-single-Panorama-Server)
@@ -31,6 +32,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.6.0 | 01/2025 | Add commit-all function. Add function to get status of a job ID. |
 | 1.5.0 | 08/2024 | Add function to commit changes. Update example playbooks to auto commit. |
 | 1.4.0 | 02/2024 | Add ability to use location=device-group |
 | 1.3.0 | 04/2023 | Convert from rules/workflows to playbooks and update Panorama api version to v9.1 |
@@ -68,6 +70,8 @@ This integration contains Functions to interact with address groups, addresses, 
 * Get users from Panorama
 * Create a new address in Panorama and PanOS
 * Commit changes to Panorama and PanOS
+* Commit and push all changes to a device group on Panorama
+* Get job status from job ID.
 
 ---
 
@@ -78,11 +82,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `51.0.0`.
+* SOAR platform >= `51.0.0.0.9339`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `51.0.0`.
+* SOAR platform >= `51.0.0.0.9339`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -114,7 +118,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.9 and Python 3.11 are supported.
+Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
 * resilient-lib>=51.0.0
 * resilient_circuits>=51.0.0
@@ -234,9 +238,9 @@ note = ""
 results = playbook.functions.results.commit_output
 edit_addresses = playbook.functions.results.edit_addresses_results
 if edit_addresses.get("success"):
-  note += f"Panorama IP Address: {artifact.value} was unblocked.\n"
+  note += f"Panorama DNS name: {artifact.value} was unblocked.\n"
 else:
-  note += f"Panorama Unblock IP address failed with reason: {edit_addresses.get('reason')}\n"
+  note += f"Panorama Unblock DNS failed with reason: {edit_addresses.get('reason')}\n"
 
 if results.get("success"):
   note += str(results.get("content", {}).get("result", {}).get("msg", {}).get("line"))
@@ -248,7 +252,92 @@ incident.addNote(note)
 </details>
 
 ---
+## Function - Panorama Commit All
+Commit and push changes to panorama firewall
 
+ ![screenshot: fn-panorama-commit-all ](./doc/screenshots/fn-panorama-commit-all.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `panorama_commit_without_default_template` | `boolean` | No | `-` | True - commit all without including default device/network template changes. |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
+| `panorama_label` | `text` | No | `-` | Label of the server to use |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "@code": "19",
+    "@status": "success",
+    "result": {
+      "job": "576",
+      "msg": {
+        "line": "Job enqueued with jobid 576"
+      }
+    }
+  },
+  "inputs": {
+    "panorama_commit_without_default_template": false,
+    "panorama_device_group": "group1",
+    "panorama_label": "panorama"
+  },
+  "metrics": {
+    "execution_time_ms": 13235,
+    "host": "local",
+    "package": "fn-pa-panorama",
+    "package_version": "1.6.0",
+    "timestamp": "2025-01-28 09:54:17",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.panorama_commit_without_default_template = getattr(playbook.inputs, "panorama_commit_without_default_templates", False)
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+inputs.panorama_device_group = getattr(playbook.inputs, "panorama_device_group_name", None)
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+from json import dumps
+results = playbook.functions.results.panorama_commit_all_return
+if results.get("success", None):
+  incident.addNote(f"Panorama: Commit All returned\n{dumps(results.get('content', {}), indent=4)}")
+else:
+  incident.addNote(f"Panorama: Commit All failed with reason: {results.get('reason', None)}")
+```
+
+</p>
+</details>
+
+---
 ## Function - Panorama Create Address
 Creates a new address object in Panorama.
 
@@ -259,12 +348,12 @@ Creates a new address object in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 | `panorama_label` | `text` | No | `-` | Label of the server to use |
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
 | `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
 | `panorama_request_body` | `textarea` | No | `-` | - |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
-| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -312,14 +401,20 @@ results = {
 ```python
 from json import dumps
 inputs.panorama_location = "vsys"
-inputs.panorama_vsys = "vsys1"
+
+if inputs.panorama_location in ["vsys", "panorama-pushed"]:
+  inputs.panorama_vsys = "vsys1"
+if inputs.panorama_location == "device-group":
+  # If `panorama_location` equals 'device-group' then set `panorama_device_group`
+  inputs.panorama_device_group = "group1"
+
 inputs.panorama_name_parameter = artifact.value
 
 body = {
   "entry": {
     "@name": artifact.value,
     "description": artifact.value,
-    "ip-netmask": artifact.value
+    "fqdn": artifact.value
   }
 }
 
@@ -352,12 +447,12 @@ Edits an address group in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 | `panorama_label` | `text` | No | `-` | Label of the server to use |
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
 | `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
 | `panorama_request_body` | `textarea` | No | `-` | - |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
-| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -375,18 +470,18 @@ results = {
     "msg": "command succeeded"
   },
   "inputs": {
-    "panorama_label": "panorama_label1",
+    "panorama_label": "panOS",
     "panorama_location": "vsys",
     "panorama_name_parameter": "Blocked Group",
-    "panorama_request_body": "{\n  \"entry\": {\n    \"@name\": \"Blocked Group\",\n    \"description\": \"None\",\n    \"static\": {\n      \"member\": [\"208.113.204.14\", \"Test\", \"34.73.29.154\", \"84.50.148.237\"]\n    }\n  }\n}",
+    "panorama_request_body": "{\"entry\": {\"@name\": \"Blocked Group\", \"description\": null, \"static\": {\"member\": [\"1.2.3.4\", \"42.36.75.4\", \"test.com\"]}}}",
     "panorama_vsys": "vsys1"
   },
   "metrics": {
-    "execution_time_ms": 522,
-    "host": "localhost",
+    "execution_time_ms": 2028,
+    "host": "local",
     "package": "fn-pa-panorama",
-    "package_version": "1.3.0",
-    "timestamp": "2023-04-25 11:04:34",
+    "package_version": "1.5.0",
+    "timestamp": "2024-08-09 09:01:19",
     "version": "1.0"
   },
   "raw": null,
@@ -406,30 +501,33 @@ results = {
 from json import dumps
 
 inputs.panorama_location = "vsys"
-inputs.panorama_vsys = "vsys1"
 
-ip_name = ""
+if inputs.panorama_location in ["vsys", "panorama-pushed"]:
+  inputs.panorama_vsys = "vsys1"
+if inputs.panorama_location == "device-group":
+  # If `panorama_location` equals 'device-group' then set `panorama_device_group`
+  inputs.panorama_device_group = "group1"
+
+dns_name = ""
 group = playbook.functions.results.get_groups_results.get("content", {}).get("result", {}).get("entry", [])
 if group:
   group = group[0]
 
-# If new address was created
-if playbook.functions.results.create_address_results:
-  ip_name = artifact.value
-# Else find it in the list of addresses
-else:
-  addresses = playbook.functions.results.get_addresses_results.get("content", {}).get("result", {}).get("entry")
-  for address in addresses:
-    if address.get("ip-netmask") == artifact.value:
-      ip_name = address.get("@name")
-      break
+addresses = playbook.functions.results.get_addresses_results.get("content", {}).get("result", {}).get("entry", [])
+for address in addresses:
+  if address.get("fqdn") == artifact.value:
+    dns_name = address.get("@name")
+    break
+
+if not dns_name:
+  helper.fail(f"The DNS address {artifact.value} was not found in the specified address group.")
 
 group_name = group.get("@name")
 des = group.get("description")
+member_list = group.get("static", {}).get("member")
 
-member_list = group.get("static", {}).get("member", [])
-if ip_name not in member_list:
-  member_list.append(ip_name)
+# Remove IP address from list
+member_list.remove(dns_name)
 
 inputs.panorama_name_parameter = group_name
 
@@ -437,6 +535,7 @@ inputs.panorama_name_parameter = group_name
 # body = {
 #   "entry": {
 #     "@name": group_name,
+#     "description": des,
 #     "static": {
 #       "member": dumps(member_list)
 #     }
@@ -446,6 +545,7 @@ inputs.panorama_name_parameter = group_name
 body = {
   "entry": {
     "@name": group_name,
+    "description": des,
     "static": {
       "member": member_list
     }
@@ -464,11 +564,11 @@ if getattr(playbook.inputs, "panorama_label", None):
 <p>
 
 ```python
-results = playbook.functions.results.edit_groups_results
+results = playbook.functions.results.edit_addresses_results
 if results.get("success"):
-  incident.addNote(f"Panorama IP Address: {artifact.value} was blocked.")
+  incident.addNote(f"Panorama DNS name: {artifact.value} was unblocked.")
 else:
-  incident.addNote(f"Panorama Block IP failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Unblock DNS failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -487,10 +587,10 @@ Edits users in a group in Panorama. This only works with Panorama and does not w
 | ---- | :--: | :------: | ------- | ------- |
 | `panorama_label` | `text` | No | `-` | Label of the server to use |
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
+| `panorama_user_group_name` | `text` | No | `-` | Name of the user group |
 | `panorama_user_group_xml` | `textarea` | No | `-` | xml structure indicating which users are members of the group |
 | `panorama_user_group_xpath` | `text` | No | `/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']` | xpath to the user group you want to use |
-| `panorama_users_list` | `text` | No | `["user1", "user2"]` | Python list of users |
-| `panorama_user_group_name` | `text` | `Blocked_Users` | Name od user group |
+| `panorama_users_list` | `text` | No | `-` | List of panorama users |
 
 </p>
 </details>
@@ -555,11 +655,13 @@ if len(users_list) == 1:
 elif len(users_list) > 1:
   # multiple users returned
   for user in users_list:
-    blocked_users.append(user.get("#text"))
+    blocked_users.append(str(user.get("#text")))
 
-# Add the user to the blocked list if they are not already there
-if artifact.value not in blocked_users:
-  blocked_users.append(artifact.value)
+# Remove the user from the blocked list if they are there
+if artifact.value in blocked_users:
+  blocked_users.remove(artifact.value)
+else:
+  helper.fail(f"The Panorama user(s): {artifact.value} is not found in the group: {group_name} and can not be removed from it.")
 
 # Updated function creates the xml request body for you
 inputs.panorama_users_list = str(blocked_users)
@@ -568,20 +670,22 @@ if getattr(playbook.inputs, "panorama_label", None):
   inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 
 # Giving the xml request body as an input still works
-# # Build xml which the function will send to Panorama
-# panorama_xml = f'''
-# <entry name="{str(group_name)}">
-#     <user>'''
+# panorama_xml = ""
+# # Set xml to empty users if list is empty
+# if len(users_list) == 0:
+#   panorama_xml = f'<entry name="{group_name}"/>'
 
-# # Add member nodes with the username to the xml string
-# for user in blocked_users:
-#   panorama_xml += f"\n      <member>{user}</member>"
+# # Multiple members, build xml which the function will send to Panorama
+# else:
+#   panorama_xml = f"<entry name='{group_name}'><user>"
 
-# # Add the ending of the xml to the string
-# panorama_xml += """
-#     </user>
-# </entry>
-# """
+#   # Add member nodes with the username to the xml string
+#   for user in blocked_users:
+#     panorama_xml += f"<member>{user}</member>"
+
+#   # Add the ending of the xml to the string
+#   panorama_xml += "</user></entry>"
+
 # inputs.panorama_user_group_xml = panorama_xml
 ```
 
@@ -594,9 +698,9 @@ if getattr(playbook.inputs, "panorama_label", None):
 ```python
 results = playbook.functions.results.edit_users_results
 if results.get("success"):
-  incident.addNote(f"Panorama User account: {artifact.value} was blocked.")
+  incident.addNote(f"Panorama User account: {artifact.value} was unblocked.")
 else:
-  incident.addNote(f"Panorama Block User failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Unblock User failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -613,11 +717,11 @@ List address groups in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 | `panorama_label` | `text` | No | `-` | Label of the server to use |
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
 | `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
-| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -640,14 +744,12 @@ results = {
           "@location": "vsys",
           "@name": "Blocked Group",
           "@vsys": "vsys1",
-          "description": "None",
           "static": {
             "member": [
-              "208.113.204.14",
-              "Test",
-              "34.73.29.154",
-              "84.50.148.237",
-              "5.6.7.4"
+              "1.2.3.4",
+              "42.36.75.4",
+              "test.com",
+              "1.1.1.1"
             ]
           }
         }
@@ -655,21 +757,21 @@ results = {
     }
   },
   "inputs": {
-    "panorama_label": "panorama_label1",
+    "panorama_label": "panOS",
     "panorama_location": "vsys",
     "panorama_name_parameter": "Blocked Group",
     "panorama_vsys": "vsys1"
   },
   "metrics": {
-    "execution_time_ms": 617,
-    "host": "localhost",
+    "execution_time_ms": 3285,
+    "host": "local",
     "package": "fn-pa-panorama",
-    "package_version": "1.3.0",
-    "timestamp": "2023-04-25 11:04:31",
+    "package_version": "1.5.0",
+    "timestamp": "2024-08-09 09:01:13",
     "version": "1.0"
   },
   "raw": null,
-  "reason": null,
+  "reason": "",
   "success": true,
   "version": 2.0
 }
@@ -685,7 +787,13 @@ results = {
 if getattr(playbook.inputs, "panorama_label", None):
   inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 inputs.panorama_location = "vsys"
-inputs.panorama_vsys = "vsys1"
+
+if inputs.panorama_location in ["vsys", "panorama-pushed"]:
+  inputs.panorama_vsys = "vsys1"
+if inputs.panorama_location == "device-group":
+  # If `panorama_location` equals 'device-group' then set `panorama_device_group`
+  inputs.panorama_device_group = "group1"
+
 inputs.panorama_name_parameter = "Blocked Group"
 ```
 
@@ -719,10 +827,10 @@ List addresses in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 | `panorama_label` | `text` | No | `-` | Label of the server to use |
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
 | `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
-| `panorama_device_group` | `text` | No | `-` | The name of the device-group when location type is 'device-group' |
 
 </p>
 </details>
@@ -738,21 +846,27 @@ results = {
     "@code": "19",
     "@status": "success",
     "result": {
-      "@count": "14",
-      "@total-count": "14",
+      "@count": "13",
+      "@total-count": "13",
       "entry": [
         {
           "@location": "vsys",
-          "@name": "Test",
+          "@name": "1.1.1.1",
           "@vsys": "vsys1",
           "ip-netmask": "1.1.1.1"
         },
         {
           "@location": "vsys",
-          "@name": "9.9.9.9",
+          "@name": "google",
           "@vsys": "vsys1",
-          "description": "9.9.9.9",
-          "ip-netmask": "9.9.9.9"
+          "fqdn": "www.google.com"
+        },
+        {
+          "@location": "vsys",
+          "@name": "2.2.2.2",
+          "@vsys": "vsys1",
+          "description": "2.2.2.2",
+          "ip-netmask": "2.2.2.2"
         },
         {
           "@location": "vsys",
@@ -763,99 +877,195 @@ results = {
         },
         {
           "@location": "vsys",
-          "@name": "8.8.8.8",
+          "@name": "www.ibm.com",
           "@vsys": "vsys1",
-          "description": "8.8.8.8",
-          "ip-netmask": "8.8.8.8"
+          "description": "www.ibm.com",
+          "fqdn": "www.ibm.com"
         },
         {
           "@location": "vsys",
-          "@name": "208.113.204.14",
+          "@name": "3.3.3.3",
           "@vsys": "vsys1",
-          "description": "Create from Resilient",
-          "ip-netmask": "208.113.204.14",
-          "tag": {
-            "member": [
-              "Prod"
-            ]
-          }
+          "description": "3.3.3.3",
+          "ip-netmask": "3.3.3.3"
         },
         {
           "@location": "vsys",
           "@name": "1.2.3.4",
           "@vsys": "vsys1",
           "description": "1.2.3.4",
-          "fqdn": "1.2.3.4"
+          "ip-netmask": "1.2.3.4"
         },
         {
           "@location": "vsys",
-          "@name": "11.22.33.44",
+          "@name": "test.com",
           "@vsys": "vsys1",
-          "ip-netmask": "11.22.33.44"
+          "description": "test.com",
+          "fqdn": "test.com"
         },
         {
           "@location": "vsys",
-          "@name": "Google.com",
+          "@name": "abc.com",
           "@vsys": "vsys1",
-          "description": "Google.com",
-          "fqdn": "Google.com"
+          "description": "abc.com",
+          "fqdn": "abc.com"
         },
         {
           "@location": "vsys",
-          "@name": "3.2.45.2",
+          "@name": "def.com",
           "@vsys": "vsys1",
-          "description": "3.2.45.2",
-          "ip-netmask": "3.2.45.2"
+          "description": "def.com",
+          "fqdn": "def.com"
         },
         {
           "@location": "vsys",
-          "@name": "12.34.32.123",
+          "@name": "123.123.123.123",
           "@vsys": "vsys1",
-          "description": "12.34.32.123",
-          "fqdn": "12.34.32.123"
+          "description": "123.123.123.123",
+          "fqdn": "123.123.123.123"
         },
         {
           "@location": "vsys",
-          "@name": "34.73.29.154",
+          "@name": "122.122.122.122",
           "@vsys": "vsys1",
-          "description": "34.73.29.154",
-          "fqdn": "34.73.29.154"
+          "description": "122.122.122.122",
+          "ip-netmask": "122.122.122.122"
         },
         {
           "@location": "vsys",
-          "@name": "5.5.5.5",
+          "@name": "42.36.75.4",
           "@vsys": "vsys1",
-          "description": "5.5.5.5",
-          "fqdn": "5.5.5.5"
-        },
-        {
-          "@location": "vsys",
-          "@name": "84.50.148.237",
-          "@vsys": "vsys1",
-          "description": "84.50.148.237",
-          "ip-netmask": "84.50.148.237"
-        },
-        {
-          "@location": "vsys",
-          "@name": "5.6.7.4",
-          "@vsys": "vsys1",
-          "description": "5.6.7.4",
-          "ip-netmask": "5.6.7.4"
+          "description": "42.36.75.4",
+          "ip-netmask": "42.36.75.4"
         }
       ]
     }
   },
   "inputs": {
-    "panorama_label": "panorama_label1",
+    "panorama_label": "panOS",
     "panorama_location": "vsys",
     "panorama_vsys": "vsys1"
   },
   "metrics": {
-    "execution_time_ms": 609,
-    "host": "localhost",
+    "execution_time_ms": 3280,
+    "host": "local",
     "package": "fn-pa-panorama",
-    "package_version": "1.3.0",
-    "timestamp": "2023-04-25 11:04:31",
+    "package_version": "1.5.0",
+    "timestamp": "2024-08-09 09:01:13",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": "",
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.panorama_location = "vsys"
+
+if inputs.panorama_location in ["vsys", "panorama-pushed"]:
+  inputs.panorama_vsys = "vsys1"
+if inputs.panorama_location == "device-group":
+  # If `panorama_location` equals 'device-group' then set `panorama_device_group`
+  inputs.panorama_device_group = "group1"
+
+if getattr(playbook.inputs, "panorama_label", None):
+  inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
+## Function - Panorama Get Job Status
+Get panorama job status from job ID.
+
+ ![screenshot: fn-panorama-get-job-status ](./doc/screenshots/fn-panorama-get-job-status.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `panorama_job_id` | `number` | No | `-` | The job ID to get the status of. |
+| `panorama_label` | `text` | No | `-` | Label of the server to use |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "@status": "success",
+    "result": {
+      "job": {
+        "description": null,
+        "devices": {
+          "entry": {
+            "details": {
+              "msg": "device 00000000000 not connected"
+            },
+            "devicename": null,
+            "multi-vsys": "no",
+            "result": "FAIL",
+            "serial-no": "00000000000",
+            "status": "not connected",
+            "tfin": "2025/01/28 06:54:04",
+            "tstart": "06:54:04",
+            "vsys": null
+          }
+        },
+        "dgname": "group1",
+        "id": "576",
+        "positionInQ": "0",
+        "progress": "100",
+        "push_type": "shared-policy",
+        "queued": "NO",
+        "result": "FAIL",
+        "sched": "None",
+        "status": "FIN",
+        "stoppable": "no",
+        "tdeq": "06:54:04",
+        "tenq": "2025/01/28 06:54:04",
+        "tfin": "2025/01/28 06:54:04",
+        "type": "CommitAll",
+        "user": "admin",
+        "warnings": null
+      }
+    }
+  },
+  "inputs": {
+    "panorama_job_id": 576,
+    "panorama_label": "panorama"
+  },
+  "metrics": {
+    "execution_time_ms": 530,
+    "host": "local",
+    "package": "fn-pa-panorama",
+    "package_version": "1.6.0",
+    "timestamp": "2025-01-28 10:40:31",
     "version": "1.0"
   },
   "raw": null,
@@ -872,10 +1082,9 @@ results = {
 <p>
 
 ```python
-inputs.panorama_location = "vsys"
-inputs.panorama_vsys = "vsys1"
 if getattr(playbook.inputs, "panorama_label", None):
   inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+inputs.panorama_job_id = getattr(playbook.inputs, "panorama_job_id", None)
 ```
 
 </p>
@@ -885,7 +1094,12 @@ if getattr(playbook.inputs, "panorama_label", None):
 <p>
 
 ```python
-None
+from json import dumps
+results = playbook.functions.results.panorama_job_status_return
+if results.get("success", None):
+  incident.addNote(f"Panorama: Get Job Status results:\n{dumps(results.get('content', {}), indent=4)}")
+else:
+  incident.addNote(f"Panorama: Get Job Status failed with reason:\n{results.get('reason', None)}")
 ```
 
 </p>
@@ -1029,15 +1243,17 @@ None
 
 
 ## Playbooks
-| Playbook Name | Description | Activation Type | Object | Status | Condition |
-| ------------- | ----------- | --------------- | ------ | ------ | --------- |
-| Panorama: Block DNS Name - Example (PB) | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` |
-| Panorama: Block IP Address - Example (PB) | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` |
-| Panorama: Block User - Example (PB) | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` |
-| Panorama: Get Address Groups - Example (PB) | Get address groups on the Panorama server | Manual | incident | `enabled` | `-` |
-| Panorama: Unblock DNS Name - Example (PB) | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` |
-| Panorama: Unblock IP Address - Example (PB) | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` |
-| Panorama: Unblock User - Example (PB) | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` |
+| Playbook Name | Description | Activation Type | Object | Status | Condition | 
+| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
+| Panorama: Block DNS Name - Example (PB) | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
+| Panorama: Block IP Address - Example (PB) | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| Panorama: Block User - Example (PB) | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. This only works with Panorama and does not work with PanOS. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
+| Panorama: Get Address Groups - Example (PB) | Get address groups on the Panorama server | Manual | incident | `enabled` | `-` | 
+| Panorama: Unblock DNS Name - Example (PB) | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
+| Panorama: Unblock IP Address - Example (PB) | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| Panorama: Unblock User - Example (PB) | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. This only works with Panorama and does not work with PanOS. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
+| Panorama: Commit All - Example (PB) | Commit all and push | Manual | incident | `enabled` | `-` | 
+| Panorama: Get Job Status - Example (PB) | Get status of a Panorama job from the job ID | Manual | incident | `enabled` | `-` | 
 
 ---
 
@@ -1084,6 +1300,6 @@ The activation field `panorama_label` is a text field in which the user enters t
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
-
+ 
 ### For Support
 This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
