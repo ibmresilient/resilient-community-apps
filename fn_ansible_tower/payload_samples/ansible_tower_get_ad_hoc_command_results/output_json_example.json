@@ -1,0 +1,419 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "summary": {
+      "id": 8,
+      "type": "ad_hoc_command",
+      "url": "/api/v2/ad_hoc_commands/8/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "stdout": "/api/v2/ad_hoc_commands/8/stdout/",
+        "execution_environment": "/api/v2/execution_environments/2/",
+        "inventory": "/api/v2/inventories/1/",
+        "credential": "/api/v2/credentials/3/",
+        "events": "/api/v2/ad_hoc_commands/8/events/",
+        "activity_stream": "/api/v2/ad_hoc_commands/8/activity_stream/",
+        "notifications": "/api/v2/ad_hoc_commands/8/notifications/",
+        "cancel": "/api/v2/ad_hoc_commands/8/cancel/",
+        "relaunch": "/api/v2/ad_hoc_commands/8/relaunch/"
+      },
+      "summary_fields": {
+        "inventory": {
+          "id": 1,
+          "name": "Demo Inventory",
+          "description": "",
+          "has_active_failures": true,
+          "total_hosts": 3,
+          "hosts_with_active_failures": 2,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "execution_environment": {
+          "id": 2,
+          "name": "AWX EE (latest)",
+          "description": "",
+          "image": "quay.io/ansible/awx-ee:latest"
+        },
+        "credential": {
+          "id": 3,
+          "name": "fyre",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false,
+          "kubernetes": false,
+          "credential_type_id": 1
+        },
+        "instance_group": {
+          "id": 2,
+          "name": "default",
+          "is_container_group": true
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "user_capabilities": {
+          "delete": true,
+          "start": true
+        }
+      },
+      "created": "2024-10-30T12:38:14.441833Z",
+      "modified": "2024-10-30T12:38:19.864865Z",
+      "name": "ping",
+      "launch_type": "manual",
+      "status": "successful",
+      "execution_environment": 2,
+      "failed": false,
+      "started": "2024-10-30T12:38:20.431933Z",
+      "finished": "2024-10-30T12:42:05.236998Z",
+      "canceled_on": null,
+      "elapsed": 224.805,
+      "job_args": "[\"ansible\", \"-u\", \"root\", \"--ask-pass\", \"9.30.253.145\", \"-i\", \"/runner/inventory/hosts\", \"-e\", \"@/runner/env/extravars\", \"-m\", \"ping\", \"-a\", \"data=\\\"here\\\"\"]",
+      "job_cwd": "/runner",
+      "job_env": {
+        "PWD": "/runner",
+        "HOME": "/runner",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "SHLVL": "0",
+        "HOSTNAME": "automation-job-8-np46w",
+        "LC_CTYPE": "C.UTF-8",
+        "INVENTORY_ID": "1",
+        "KUBERNETES_PORT": "tcp://10.96.0.1:443",
+        "AD_HOC_COMMAND_ID": "8",
+        "AWX_DEMO_WEB_PORT": "tcp://10.107.118.106:8080",
+        "INVENTORY_HOSTVARS": "True",
+        "RUNNER_OMIT_EVENTS": "False",
+        "ANSIBLE_FORCE_COLOR": "True",
+        "AWX_PRIVATE_DATA_DIR": "/tmp/awx_8_sgwcc49q",
+        "AWX_DEMO_SERVICE_PORT": "tcp://10.101.138.14:80",
+        "AWX_ISOLATED_DATA_DIR": "/runner/artifacts/8",
+        "ANSIBLE_BASE_TEAM_MODEL": "main.Team",
+        "ANSIBLE_SFTP_BATCH_MODE": "False",
+        "ANSIBLE_STDOUT_CALLBACK": "awx_display",
+        "KUBERNETES_PORT_443_TCP": "tcp://10.96.0.1:443",
+        "KUBERNETES_SERVICE_HOST": "10.96.0.1",
+        "KUBERNETES_SERVICE_PORT": "443",
+        "ANSIBLE_CALLBACK_PLUGINS": "/usr/local/lib/python3.11/site-packages/ansible_runner/display_callback/callback",
+        "ANSIBLE_HOST_KEY_CHECKING": "False",
+        "AWX_DEMO_WEB_SERVICE_HOST": "10.107.118.106",
+        "AWX_DEMO_WEB_SERVICE_PORT": "8080",
+        "PIP_BREAK_SYSTEM_PACKAGES": "1",
+        "RUNNER_ONLY_FAILED_EVENTS": "False",
+        "AWX_DEMO_WEB_PORT_8080_TCP": "tcp://10.107.118.106:8080",
+        "ANSIBLE_BASE_ROLE_PRECREATE": "{}",
+        "ANSIBLE_RETRY_FILES_ENABLED": "False",
+        "AWX_DEMO_SERVICE_PORT_80_TCP": "tcp://10.101.138.14:80",
+        "KUBERNETES_PORT_443_TCP_ADDR": "10.96.0.1",
+        "KUBERNETES_PORT_443_TCP_PORT": "443",
+        "ANSIBLE_BASE_ALL_REST_FILTERS": "('ansible_base.rest_filters.rest_framework.type_filter_backend.TypeFilterBackend', 'ansible_base.rest_filters.rest_framework.field_lookup_backend.FieldLookupBackend', 'rest_framework.filters.SearchFilter', 'ansible_base.rest_filters.rest_framework.order_backend.OrderByBackend')",
+        "ANSIBLE_BASE_CREATOR_DEFAULTS": "['change', 'delete', 'execute', 'use', 'adhoc', 'approve', 'update', 'view']",
+        "ANSIBLE_BASE_PERMISSION_MODEL": "main.Permission",
+        "ANSIBLE_LOAD_CALLBACK_PLUGINS": "1",
+        "AWX_DEMO_SERVICE_SERVICE_HOST": "10.101.138.14",
+        "AWX_DEMO_SERVICE_SERVICE_PORT": "80",
+        "KUBERNETES_PORT_443_TCP_PROTO": "tcp",
+        "KUBERNETES_SERVICE_PORT_HTTPS": "443",
+        "ANSIBLE_BASE_ROLE_CREATOR_NAME": "{cls.__name__} Creator",
+        "ANSIBLE_BASE_ALLOW_CUSTOM_ROLES": "True",
+        "ANSIBLE_BASE_ALLOW_TEAM_PARENTS": "True",
+        "ANSIBLE_BASE_CUSTOM_VIEW_PARENT": "awx.api.generics.APIView",
+        "ANSIBLE_BASE_ORGANIZATION_MODEL": "main.Organization",
+        "AWX_DEMO_WEB_PORT_8080_TCP_ADDR": "10.107.118.106",
+        "AWX_DEMO_WEB_PORT_8080_TCP_PORT": "8080",
+        "ANSIBLE_BASE_BYPASS_ACTION_FLAGS": "{}",
+        "AWX_DEMO_WEB_PORT_8080_TCP_PROTO": "tcp",
+        "ANSIBLE_BASE_ALLOW_TEAM_ORG_ADMIN": "False",
+        "ANSIBLE_BASE_ALLOW_TEAM_ORG_PERMS": "True",
+        "ANSIBLE_INVENTORY_UNPARSED_FAILED": "True",
+        "ANSIBLE_PARAMIKO_RECORD_HOST_KEYS": "False",
+        "AWX_DEMO_SERVICE_PORT_80_TCP_ADDR": "10.101.138.14",
+        "AWX_DEMO_SERVICE_PORT_80_TCP_PORT": "80",
+        "ANSIBLE_BASE_ALLOW_TEAM_ORG_MEMBER": "False",
+        "ANSIBLE_BASE_MANAGED_ROLE_REGISTRY": "{}",
+        "ANSIBLE_BASE_ROLE_SYSTEM_ACTIVATED": "True",
+        "AWX_DEMO_SERVICE_PORT_80_TCP_PROTO": "tcp",
+        "AWX_DEMO_SERVICE_SERVICE_PORT_HTTP": "80",
+        "ANSIBLE_BASE_BYPASS_SUPERUSER_FLAGS": "['is_superuser']",
+        "ANSIBLE_BASE_RESOURCE_CONFIG_MODULE": "awx.resource_api",
+        "ANSIBLE_BASE_ALLOW_CUSTOM_TEAM_ROLES": "False",
+        "ANSIBLE_BASE_CACHE_PARENT_PERMISSIONS": "True",
+        "ANSIBLE_BASE_ALLOW_SINGLETON_ROLES_API": "False",
+        "ANSIBLE_BASE_CHECK_RELATED_PERMISSIONS": "['use', 'change', 'view']",
+        "ANSIBLE_BASE_ALLOW_SINGLETON_TEAM_ROLES": "False",
+        "ANSIBLE_BASE_ALLOW_SINGLETON_USER_ROLES": "True",
+        "ANSIBLE_BASE_REST_FILTERS_RESERVED_NAMES": "('page', 'page_size', 'format', 'order', 'order_by', 'search', 'type', 'host_filter', 'count_disabled', 'no_truncate', 'limit', 'validate')",
+        "ANSIBLE_BASE_EVALUATIONS_IGNORE_CONFLICTS": "True",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT": "tcp://10.99.66.63:8443",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_HOST": "10.99.66.63",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_PORT": "8443",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP": "tcp://10.99.66.63:8443",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_ADDR": "10.99.66.63",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_PORT": "8443",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_PORT_HTTPS": "8443",
+        "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_PROTO": "tcp"
+      },
+      "job_explanation": "",
+      "execution_node": "",
+      "controller_node": "awx-demo-task-55c9cf6ccc-8slzb",
+      "result_traceback": "",
+      "event_processing_finished": true,
+      "launched_by": {
+        "id": 1,
+        "name": "admin",
+        "type": "user",
+        "url": "/api/v2/users/1/"
+      },
+      "work_unit_id": "jks66AT4",
+      "job_type": "run",
+      "inventory": 1,
+      "limit": "9.30.253.145",
+      "credential": 3,
+      "module_name": "ping",
+      "module_args": "data=\"here\"",
+      "forks": 0,
+      "verbosity": 0,
+      "extra_vars": "",
+      "become_enabled": false,
+      "diff_mode": false,
+      "host_status_counts": {
+        "ok": 1
+      }
+    },
+    "events": {
+      "count": 5,
+      "next": null,
+      "previous": null,
+      "results": [
+        {
+          "id": 18,
+          "type": "ad_hoc_command_event",
+          "url": "/api/v2/ad_hoc_command_events/18/",
+          "related": {
+            "ad_hoc_command": "/api/v2/ad_hoc_commands/8/"
+          },
+          "summary_fields": {},
+          "created": "2024-10-30T12:42:03.492563Z",
+          "modified": "2024-10-30T12:42:04.744156Z",
+          "ad_hoc_command": 8,
+          "event": "playbook_on_stats",
+          "counter": 5,
+          "event_display": "playbook_on_stats",
+          "event_data": {
+            "playbook": "__adhoc_playbook__",
+            "playbook_uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
+            "changed": {},
+            "dark": {},
+            "failures": {},
+            "ignored": {},
+            "ok": {
+              "9.30.253.145": 1
+            },
+            "processed": {
+              "9.30.253.145": 1
+            },
+            "rescued": {},
+            "skipped": {},
+            "artifact_data": {},
+            "uuid": "b1279383-63d0-4d33-9190-24e714064869",
+            "guid": "2f1a3f714b6342c1bd00d107bec4bafa"
+          },
+          "failed": false,
+          "changed": false,
+          "uuid": "b1279383-63d0-4d33-9190-24e714064869",
+          "host": null,
+          "host_name": "",
+          "stdout": "",
+          "start_line": 8,
+          "end_line": 8,
+          "verbosity": 0
+        },
+        {
+          "id": 17,
+          "type": "ad_hoc_command_event",
+          "url": "/api/v2/ad_hoc_command_events/17/",
+          "related": {
+            "ad_hoc_command": "/api/v2/ad_hoc_commands/8/",
+            "host": "/api/v2/hosts/3/"
+          },
+          "summary_fields": {
+            "host": {
+              "id": 3,
+              "name": "9.30.253.145",
+              "description": "apphost"
+            }
+          },
+          "created": "2024-10-30T12:42:03.377934Z",
+          "modified": "2024-10-30T12:42:04.678011Z",
+          "ad_hoc_command": 8,
+          "event": "runner_on_ok",
+          "counter": 4,
+          "event_display": "Host OK",
+          "event_data": {
+            "playbook": "__adhoc_playbook__",
+            "playbook_uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
+            "task": "ping",
+            "task_uuid": "6aaeb189-e5b8-e1d7-fdbd-000000000006",
+            "task_action": "ping",
+            "resolved_action": null,
+            "task_args": "",
+            "task_path": "",
+            "host": "9.30.253.145",
+            "remote_addr": "9.30.253.145",
+            "res": {
+              "ping": "here",
+              "invocation": {
+                "module_args": {
+                  "data": "here"
+                }
+              },
+              "ansible_facts": {
+                "discovered_interpreter_python": "/usr/libexec/platform-python"
+              },
+              "_ansible_no_log": false,
+              "changed": false
+            },
+            "start": "2024-10-30T12:41:57.100940+00:00",
+            "end": "2024-10-30T12:42:03.377211+00:00",
+            "duration": 6.276271,
+            "event_loop": null,
+            "uuid": "3e4c0c4c-dc29-4fd1-b450-f82014292d1a",
+            "guid": "2f1a3f714b6342c1bd00d107bec4bafa"
+          },
+          "failed": false,
+          "changed": false,
+          "uuid": "3e4c0c4c-dc29-4fd1-b450-f82014292d1a",
+          "host": 3,
+          "host_name": "9.30.253.145",
+          "stdout": "\u001b[0;32m9.30.253.145 | SUCCESS => {\u001b[0m\r\n\u001b[0;32m    \"ansible_facts\": {\u001b[0m\r\n\u001b[0;32m        \"discovered_interpreter_python\": \"/usr/libexec/platform-python\"\u001b[0m\r\n\u001b[0;32m    },\u001b[0m\r\n\u001b[0;32m    \"changed\": false,\u001b[0m\r\n\u001b[0;32m    \"ping\": \"here\"\u001b[0m\r\n\u001b[0;32m}\u001b[0m",
+          "start_line": 1,
+          "end_line": 8,
+          "verbosity": 0
+        },
+        {
+          "id": 16,
+          "type": "ad_hoc_command_event",
+          "url": "/api/v2/ad_hoc_command_events/16/",
+          "related": {
+            "ad_hoc_command": "/api/v2/ad_hoc_commands/8/",
+            "host": "/api/v2/hosts/3/"
+          },
+          "summary_fields": {
+            "host": {
+              "id": 3,
+              "name": "9.30.253.145",
+              "description": "apphost"
+            }
+          },
+          "created": "2024-10-30T12:41:57.101675Z",
+          "modified": "2024-10-30T12:42:00.899227Z",
+          "ad_hoc_command": 8,
+          "event": "runner_on_start",
+          "counter": 3,
+          "event_display": "runner_on_start",
+          "event_data": {
+            "playbook": "__adhoc_playbook__",
+            "playbook_uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
+            "task": "ping",
+            "task_uuid": "6aaeb189-e5b8-e1d7-fdbd-000000000006",
+            "task_action": "ping",
+            "resolved_action": null,
+            "task_args": "",
+            "task_path": "",
+            "host": "9.30.253.145",
+            "uuid": "d843fc27-70c3-43ee-8aa9-a2e281f48ff1",
+            "guid": "2f1a3f714b6342c1bd00d107bec4bafa"
+          },
+          "failed": false,
+          "changed": false,
+          "uuid": "d843fc27-70c3-43ee-8aa9-a2e281f48ff1",
+          "host": 3,
+          "host_name": "9.30.253.145",
+          "stdout": "",
+          "start_line": 1,
+          "end_line": 1,
+          "verbosity": 0
+        },
+        {
+          "id": 15,
+          "type": "ad_hoc_command_event",
+          "url": "/api/v2/ad_hoc_command_events/15/",
+          "related": {
+            "ad_hoc_command": "/api/v2/ad_hoc_commands/8/"
+          },
+          "summary_fields": {},
+          "created": "2024-10-30T12:41:52.976627Z",
+          "modified": "2024-10-30T12:41:58.751978Z",
+          "ad_hoc_command": 8,
+          "event": "verbose",
+          "counter": 1,
+          "event_display": "Verbose",
+          "event_data": {},
+          "failed": false,
+          "changed": false,
+          "uuid": "25c62273-41ca-4595-adc2-181669a780a8",
+          "host": null,
+          "host_name": "",
+          "stdout": "SSH password: ",
+          "start_line": 0,
+          "end_line": 1,
+          "verbosity": 0
+        },
+        {
+          "id": 14,
+          "type": "ad_hoc_command_event",
+          "url": "/api/v2/ad_hoc_command_events/14/",
+          "related": {
+            "ad_hoc_command": "/api/v2/ad_hoc_commands/8/"
+          },
+          "summary_fields": {},
+          "created": "2024-10-30T12:41:54.463838Z",
+          "modified": "2024-10-30T12:41:58.010044Z",
+          "ad_hoc_command": 8,
+          "event": "playbook_on_start",
+          "counter": 2,
+          "event_display": "playbook_on_start",
+          "event_data": {
+            "playbook": "__adhoc_playbook__",
+            "playbook_uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
+            "uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
+            "guid": "2f1a3f714b6342c1bd00d107bec4bafa"
+          },
+          "failed": false,
+          "changed": false,
+          "uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
+          "host": null,
+          "host_name": "",
+          "stdout": "",
+          "start_line": 1,
+          "end_line": 1,
+          "verbosity": 0
+        }
+      ]
+    }
+  },
+  "raw": "{\"summary\": {\"id\": 8, \"type\": \"ad_hoc_command\", \"url\": \"/api/v2/ad_hoc_commands/8/\", \"related\": {\"created_by\": \"/api/v2/users/1/\", \"stdout\": \"/api/v2/ad_hoc_commands/8/stdout/\", \"execution_environment\": \"/api/v2/execution_environments/2/\", \"inventory\": \"/api/v2/inventories/1/\", \"credential\": \"/api/v2/credentials/3/\", \"events\": \"/api/v2/ad_hoc_commands/8/events/\", \"activity_stream\": \"/api/v2/ad_hoc_commands/8/activity_stream/\", \"notifications\": \"/api/v2/ad_hoc_commands/8/notifications/\", \"cancel\": \"/api/v2/ad_hoc_commands/8/cancel/\", \"relaunch\": \"/api/v2/ad_hoc_commands/8/relaunch/\"}, \"summary_fields\": {\"inventory\": {\"id\": 1, \"name\": \"Demo Inventory\", \"description\": \"\", \"has_active_failures\": true, \"total_hosts\": 3, \"hosts_with_active_failures\": 2, \"total_groups\": 0, \"has_inventory_sources\": false, \"total_inventory_sources\": 0, \"inventory_sources_with_failures\": 0, \"organization_id\": 1, \"kind\": \"\"}, \"execution_environment\": {\"id\": 2, \"name\": \"AWX EE (latest)\", \"description\": \"\", \"image\": \"quay.io/ansible/awx-ee:latest\"}, \"credential\": {\"id\": 3, \"name\": \"fyre\", \"description\": \"\", \"kind\": \"ssh\", \"cloud\": false, \"kubernetes\": false, \"credential_type_id\": 1}, \"instance_group\": {\"id\": 2, \"name\": \"default\", \"is_container_group\": true}, \"created_by\": {\"id\": 1, \"username\": \"admin\", \"first_name\": \"\", \"last_name\": \"\"}, \"user_capabilities\": {\"delete\": true, \"start\": true}}, \"created\": \"2024-10-30T12:38:14.441833Z\", \"modified\": \"2024-10-30T12:38:19.864865Z\", \"name\": \"ping\", \"launch_type\": \"manual\", \"status\": \"successful\", \"execution_environment\": 2, \"failed\": false, \"started\": \"2024-10-30T12:38:20.431933Z\", \"finished\": \"2024-10-30T12:42:05.236998Z\", \"canceled_on\": null, \"elapsed\": 224.805, \"job_args\": \"[\\\"ansible\\\", \\\"-u\\\", \\\"root\\\", \\\"--ask-pass\\\", \\\"9.30.253.145\\\", \\\"-i\\\", \\\"/runner/inventory/hosts\\\", \\\"-e\\\", \\\"@/runner/env/extravars\\\", \\\"-m\\\", \\\"ping\\\", \\\"-a\\\", \\\"data=\\\\\\\"here\\\\\\\"\\\"]\", \"job_cwd\": \"/runner\", \"job_env\": {\"PWD\": \"/runner\", \"HOME\": \"/runner\", \"PATH\": \"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\", \"SHLVL\": \"0\", \"HOSTNAME\": \"automation-job-8-np46w\", \"LC_CTYPE\": \"C.UTF-8\", \"INVENTORY_ID\": \"1\", \"KUBERNETES_PORT\": \"tcp://10.96.0.1:443\", \"AD_HOC_COMMAND_ID\": \"8\", \"AWX_DEMO_WEB_PORT\": \"tcp://10.107.118.106:8080\", \"INVENTORY_HOSTVARS\": \"True\", \"RUNNER_OMIT_EVENTS\": \"False\", \"ANSIBLE_FORCE_COLOR\": \"True\", \"AWX_PRIVATE_DATA_DIR\": \"/tmp/awx_8_sgwcc49q\", \"AWX_DEMO_SERVICE_PORT\": \"tcp://10.101.138.14:80\", \"AWX_ISOLATED_DATA_DIR\": \"/runner/artifacts/8\", \"ANSIBLE_BASE_TEAM_MODEL\": \"main.Team\", \"ANSIBLE_SFTP_BATCH_MODE\": \"False\", \"ANSIBLE_STDOUT_CALLBACK\": \"awx_display\", \"KUBERNETES_PORT_443_TCP\": \"tcp://10.96.0.1:443\", \"KUBERNETES_SERVICE_HOST\": \"10.96.0.1\", \"KUBERNETES_SERVICE_PORT\": \"443\", \"ANSIBLE_CALLBACK_PLUGINS\": \"/usr/local/lib/python3.11/site-packages/ansible_runner/display_callback/callback\", \"ANSIBLE_HOST_KEY_CHECKING\": \"False\", \"AWX_DEMO_WEB_SERVICE_HOST\": \"10.107.118.106\", \"AWX_DEMO_WEB_SERVICE_PORT\": \"8080\", \"PIP_BREAK_SYSTEM_PACKAGES\": \"1\", \"RUNNER_ONLY_FAILED_EVENTS\": \"False\", \"AWX_DEMO_WEB_PORT_8080_TCP\": \"tcp://10.107.118.106:8080\", \"ANSIBLE_BASE_ROLE_PRECREATE\": \"{}\", \"ANSIBLE_RETRY_FILES_ENABLED\": \"False\", \"AWX_DEMO_SERVICE_PORT_80_TCP\": \"tcp://10.101.138.14:80\", \"KUBERNETES_PORT_443_TCP_ADDR\": \"10.96.0.1\", \"KUBERNETES_PORT_443_TCP_PORT\": \"443\", \"ANSIBLE_BASE_ALL_REST_FILTERS\": \"('ansible_base.rest_filters.rest_framework.type_filter_backend.TypeFilterBackend', 'ansible_base.rest_filters.rest_framework.field_lookup_backend.FieldLookupBackend', 'rest_framework.filters.SearchFilter', 'ansible_base.rest_filters.rest_framework.order_backend.OrderByBackend')\", \"ANSIBLE_BASE_CREATOR_DEFAULTS\": \"['change', 'delete', 'execute', 'use', 'adhoc', 'approve', 'update', 'view']\", \"ANSIBLE_BASE_PERMISSION_MODEL\": \"main.Permission\", \"ANSIBLE_LOAD_CALLBACK_PLUGINS\": \"1\", \"AWX_DEMO_SERVICE_SERVICE_HOST\": \"10.101.138.14\", \"AWX_DEMO_SERVICE_SERVICE_PORT\": \"80\", \"KUBERNETES_PORT_443_TCP_PROTO\": \"tcp\", \"KUBERNETES_SERVICE_PORT_HTTPS\": \"443\", \"ANSIBLE_BASE_ROLE_CREATOR_NAME\": \"{cls.__name__} Creator\", \"ANSIBLE_BASE_ALLOW_CUSTOM_ROLES\": \"True\", \"ANSIBLE_BASE_ALLOW_TEAM_PARENTS\": \"True\", \"ANSIBLE_BASE_CUSTOM_VIEW_PARENT\": \"awx.api.generics.APIView\", \"ANSIBLE_BASE_ORGANIZATION_MODEL\": \"main.Organization\", \"AWX_DEMO_WEB_PORT_8080_TCP_ADDR\": \"10.107.118.106\", \"AWX_DEMO_WEB_PORT_8080_TCP_PORT\": \"8080\", \"ANSIBLE_BASE_BYPASS_ACTION_FLAGS\": \"{}\", \"AWX_DEMO_WEB_PORT_8080_TCP_PROTO\": \"tcp\", \"ANSIBLE_BASE_ALLOW_TEAM_ORG_ADMIN\": \"False\", \"ANSIBLE_BASE_ALLOW_TEAM_ORG_PERMS\": \"True\", \"ANSIBLE_INVENTORY_UNPARSED_FAILED\": \"True\", \"ANSIBLE_PARAMIKO_RECORD_HOST_KEYS\": \"False\", \"AWX_DEMO_SERVICE_PORT_80_TCP_ADDR\": \"10.101.138.14\", \"AWX_DEMO_SERVICE_PORT_80_TCP_PORT\": \"80\", \"ANSIBLE_BASE_ALLOW_TEAM_ORG_MEMBER\": \"False\", \"ANSIBLE_BASE_MANAGED_ROLE_REGISTRY\": \"{}\", \"ANSIBLE_BASE_ROLE_SYSTEM_ACTIVATED\": \"True\", \"AWX_DEMO_SERVICE_PORT_80_TCP_PROTO\": \"tcp\", \"AWX_DEMO_SERVICE_SERVICE_PORT_HTTP\": \"80\", \"ANSIBLE_BASE_BYPASS_SUPERUSER_FLAGS\": \"['is_superuser']\", \"ANSIBLE_BASE_RESOURCE_CONFIG_MODULE\": \"awx.resource_api\", \"ANSIBLE_BASE_ALLOW_CUSTOM_TEAM_ROLES\": \"False\", \"ANSIBLE_BASE_CACHE_PARENT_PERMISSIONS\": \"True\", \"ANSIBLE_BASE_ALLOW_SINGLETON_ROLES_API\": \"False\", \"ANSIBLE_BASE_CHECK_RELATED_PERMISSIONS\": \"['use', 'change', 'view']\", \"ANSIBLE_BASE_ALLOW_SINGLETON_TEAM_ROLES\": \"False\", \"ANSIBLE_BASE_ALLOW_SINGLETON_USER_ROLES\": \"True\", \"ANSIBLE_BASE_REST_FILTERS_RESERVED_NAMES\": \"('page', 'page_size', 'format', 'order', 'order_by', 'search', 'type', 'host_filter', 'count_disabled', 'no_truncate', 'limit', 'validate')\", \"ANSIBLE_BASE_EVALUATIONS_IGNORE_CONFLICTS\": \"True\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT\": \"tcp://10.99.66.63:8443\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_HOST\": \"10.99.66.63\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_PORT\": \"8443\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP\": \"tcp://10.99.66.63:8443\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_ADDR\": \"10.99.66.63\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_PORT\": \"8443\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_PORT_HTTPS\": \"8443\", \"AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_PROTO\": \"tcp\"}, \"job_explanation\": \"\", \"execution_node\": \"\", \"controller_node\": \"awx-demo-task-55c9cf6ccc-8slzb\", \"result_traceback\": \"\", \"event_processing_finished\": true, \"launched_by\": {\"id\": 1, \"name\": \"admin\", \"type\": \"user\", \"url\": \"/api/v2/users/1/\"}, \"work_unit_id\": \"jks66AT4\", \"job_type\": \"run\", \"inventory\": 1, \"limit\": \"9.30.253.145\", \"credential\": 3, \"module_name\": \"ping\", \"module_args\": \"data=\\\"here\\\"\", \"forks\": 0, \"verbosity\": 0, \"extra_vars\": \"\", \"become_enabled\": false, \"diff_mode\": false, \"host_status_counts\": {\"ok\": 1}}, \"events\": {\"count\": 5, \"next\": null, \"previous\": null, \"results\": [{\"id\": 18, \"type\": \"ad_hoc_command_event\", \"url\": \"/api/v2/ad_hoc_command_events/18/\", \"related\": {\"ad_hoc_command\": \"/api/v2/ad_hoc_commands/8/\"}, \"summary_fields\": {}, \"created\": \"2024-10-30T12:42:03.492563Z\", \"modified\": \"2024-10-30T12:42:04.744156Z\", \"ad_hoc_command\": 8, \"event\": \"playbook_on_stats\", \"counter\": 5, \"event_display\": \"playbook_on_stats\", \"event_data\": {\"playbook\": \"__adhoc_playbook__\", \"playbook_uuid\": \"377ae56e-9d75-413c-9f83-f09d8db34c81\", \"changed\": {}, \"dark\": {}, \"failures\": {}, \"ignored\": {}, \"ok\": {\"9.30.253.145\": 1}, \"processed\": {\"9.30.253.145\": 1}, \"rescued\": {}, \"skipped\": {}, \"artifact_data\": {}, \"uuid\": \"b1279383-63d0-4d33-9190-24e714064869\", \"guid\": \"2f1a3f714b6342c1bd00d107bec4bafa\"}, \"failed\": false, \"changed\": false, \"uuid\": \"b1279383-63d0-4d33-9190-24e714064869\", \"host\": null, \"host_name\": \"\", \"stdout\": \"\", \"start_line\": 8, \"end_line\": 8, \"verbosity\": 0}, {\"id\": 17, \"type\": \"ad_hoc_command_event\", \"url\": \"/api/v2/ad_hoc_command_events/17/\", \"related\": {\"ad_hoc_command\": \"/api/v2/ad_hoc_commands/8/\", \"host\": \"/api/v2/hosts/3/\"}, \"summary_fields\": {\"host\": {\"id\": 3, \"name\": \"9.30.253.145\", \"description\": \"apphost\"}}, \"created\": \"2024-10-30T12:42:03.377934Z\", \"modified\": \"2024-10-30T12:42:04.678011Z\", \"ad_hoc_command\": 8, \"event\": \"runner_on_ok\", \"counter\": 4, \"event_display\": \"Host OK\", \"event_data\": {\"playbook\": \"__adhoc_playbook__\", \"playbook_uuid\": \"377ae56e-9d75-413c-9f83-f09d8db34c81\", \"task\": \"ping\", \"task_uuid\": \"6aaeb189-e5b8-e1d7-fdbd-000000000006\", \"task_action\": \"ping\", \"resolved_action\": null, \"task_args\": \"\", \"task_path\": \"\", \"host\": \"9.30.253.145\", \"remote_addr\": \"9.30.253.145\", \"res\": {\"ping\": \"here\", \"invocation\": {\"module_args\": {\"data\": \"here\"}}, \"ansible_facts\": {\"discovered_interpreter_python\": \"/usr/libexec/platform-python\"}, \"_ansible_no_log\": false, \"changed\": false}, \"start\": \"2024-10-30T12:41:57.100940+00:00\", \"end\": \"2024-10-30T12:42:03.377211+00:00\", \"duration\": 6.276271, \"event_loop\": null, \"uuid\": \"3e4c0c4c-dc29-4fd1-b450-f82014292d1a\", \"guid\": \"2f1a3f714b6342c1bd00d107bec4bafa\"}, \"failed\": false, \"changed\": false, \"uuid\": \"3e4c0c4c-dc29-4fd1-b450-f82014292d1a\", \"host\": 3, \"host_name\": \"9.30.253.145\", \"stdout\": \"\\u001b[0;32m9.30.253.145 | SUCCESS => {\\u001b[0m\\r\\n\\u001b[0;32m    \\\"ansible_facts\\\": {\\u001b[0m\\r\\n\\u001b[0;32m        \\\"discovered_interpreter_python\\\": \\\"/usr/libexec/platform-python\\\"\\u001b[0m\\r\\n\\u001b[0;32m    },\\u001b[0m\\r\\n\\u001b[0;32m    \\\"changed\\\": false,\\u001b[0m\\r\\n\\u001b[0;32m    \\\"ping\\\": \\\"here\\\"\\u001b[0m\\r\\n\\u001b[0;32m}\\u001b[0m\", \"start_line\": 1, \"end_line\": 8, \"verbosity\": 0}, {\"id\": 16, \"type\": \"ad_hoc_command_event\", \"url\": \"/api/v2/ad_hoc_command_events/16/\", \"related\": {\"ad_hoc_command\": \"/api/v2/ad_hoc_commands/8/\", \"host\": \"/api/v2/hosts/3/\"}, \"summary_fields\": {\"host\": {\"id\": 3, \"name\": \"9.30.253.145\", \"description\": \"apphost\"}}, \"created\": \"2024-10-30T12:41:57.101675Z\", \"modified\": \"2024-10-30T12:42:00.899227Z\", \"ad_hoc_command\": 8, \"event\": \"runner_on_start\", \"counter\": 3, \"event_display\": \"runner_on_start\", \"event_data\": {\"playbook\": \"__adhoc_playbook__\", \"playbook_uuid\": \"377ae56e-9d75-413c-9f83-f09d8db34c81\", \"task\": \"ping\", \"task_uuid\": \"6aaeb189-e5b8-e1d7-fdbd-000000000006\", \"task_action\": \"ping\", \"resolved_action\": null, \"task_args\": \"\", \"task_path\": \"\", \"host\": \"9.30.253.145\", \"uuid\": \"d843fc27-70c3-43ee-8aa9-a2e281f48ff1\", \"guid\": \"2f1a3f714b6342c1bd00d107bec4bafa\"}, \"failed\": false, \"changed\": false, \"uuid\": \"d843fc27-70c3-43ee-8aa9-a2e281f48ff1\", \"host\": 3, \"host_name\": \"9.30.253.145\", \"stdout\": \"\", \"start_line\": 1, \"end_line\": 1, \"verbosity\": 0}, {\"id\": 15, \"type\": \"ad_hoc_command_event\", \"url\": \"/api/v2/ad_hoc_command_events/15/\", \"related\": {\"ad_hoc_command\": \"/api/v2/ad_hoc_commands/8/\"}, \"summary_fields\": {}, \"created\": \"2024-10-30T12:41:52.976627Z\", \"modified\": \"2024-10-30T12:41:58.751978Z\", \"ad_hoc_command\": 8, \"event\": \"verbose\", \"counter\": 1, \"event_display\": \"Verbose\", \"event_data\": {}, \"failed\": false, \"changed\": false, \"uuid\": \"25c62273-41ca-4595-adc2-181669a780a8\", \"host\": null, \"host_name\": \"\", \"stdout\": \"SSH password: \", \"start_line\": 0, \"end_line\": 1, \"verbosity\": 0}, {\"id\": 14, \"type\": \"ad_hoc_command_event\", \"url\": \"/api/v2/ad_hoc_command_events/14/\", \"related\": {\"ad_hoc_command\": \"/api/v2/ad_hoc_commands/8/\"}, \"summary_fields\": {}, \"created\": \"2024-10-30T12:41:54.463838Z\", \"modified\": \"2024-10-30T12:41:58.010044Z\", \"ad_hoc_command\": 8, \"event\": \"playbook_on_start\", \"counter\": 2, \"event_display\": \"playbook_on_start\", \"event_data\": {\"playbook\": \"__adhoc_playbook__\", \"playbook_uuid\": \"377ae56e-9d75-413c-9f83-f09d8db34c81\", \"uuid\": \"377ae56e-9d75-413c-9f83-f09d8db34c81\", \"guid\": \"2f1a3f714b6342c1bd00d107bec4bafa\"}, \"failed\": false, \"changed\": false, \"uuid\": \"377ae56e-9d75-413c-9f83-f09d8db34c81\", \"host\": null, \"host_name\": \"\", \"stdout\": \"\", \"start_line\": 1, \"end_line\": 1, \"verbosity\": 0}]}}",
+  "inputs": {
+    "incident_id": 3543,
+    "tower_save_as": {
+      "id": 1007,
+      "name": "note"
+    },
+    "tower_job_id": 8
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ansible-tower",
+    "package_version": "1.0.4",
+    "host": "my.app.host",
+    "execution_time_ms": 6626,
+    "timestamp": "2024-10-30 12:44:13"
+  }
+}

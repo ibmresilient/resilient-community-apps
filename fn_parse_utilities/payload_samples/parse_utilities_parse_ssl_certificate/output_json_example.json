@@ -1,0 +1,15 @@
+{
+  "subject": "\"[(b'C', b'US'), (b'ST', b'California'), (b'L', b'San Francisco'), (b'O', b'Cloudflare, Inc.'), (b'CN', b'sni.cloudflaressl.com')]\"",
+  "notBefore": "2022-03-29 00:00:00",
+  "notAfter": "2023-03-29 23:59:59",
+  "issuer": "\"[(b'C', b'US'), (b'O', b'Cloudflare, Inc.'), (b'CN', b'Cloudflare Inc ECC CA-3')]\"",
+  "version": 2,
+  "expiration_status": "Valid",
+  "signature_algorithm": "b'ecdsa-with-SHA256'",
+  "public_key": "b'-----BEGIN PUBLIC KEY-----\\BgBGmQ==\\n-----END PUBLIC KEY-----\\n'",
+  "extensions": {
+    "subjectAltNames": "[\"sni.cloudflaressl.com\", \"*.adamtheautomator.com\", \"adamtheautomator.com\"]",
+    "basicConstraints": "false",
+    "issuerAltNames": "[]"
+  }
+}
