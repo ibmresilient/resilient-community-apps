@@ -28,6 +28,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v1.0.4  | 03/2025 | Converted example workflows to python3 |
 | v1.0.3  | 09/2024 | Refresh for SOAR v51.0.0 |
 | v1.0.2  | 09/2020 | Added App Host support |
 | v1.0.1  | 03/2020 | Minor bug fix |
@@ -53,7 +54,7 @@ Look up supported artifacts in URLhaus to get more enrichment information and su
   List any Requirements
 -->
 * Resilient platform >= `v51.0.0`
-* An Integration Server running `resilient_circuits>=40.0.0`
+* An Integration Server running `resilient_circuits>=51.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
       * Org Data: Read, Edit

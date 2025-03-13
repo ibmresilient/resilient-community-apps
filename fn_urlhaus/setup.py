@@ -5,8 +5,9 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='URLHaus',
     name='fn_urlhaus',
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -17,8 +18,8 @@ setup(
         <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
         <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=40.0',
-        'resilient-lib>=40.0'
+        'resilient_circuits>=51.0.0',
+        'resilient-lib>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
