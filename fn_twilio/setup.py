@@ -19,8 +19,9 @@ def snake_to_camel(word):
 
 
 setup(
+    display_name='Twilio',
     name='fn_twilio',
-    version='2.0.0',
+    version='2.0.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -28,7 +29,7 @@ setup(
     description="This package contains a function to send an SMS via the Twilio platform",
     long_description="The function uses the Twilio REST API to send an SMS message to a destination number(s)",
     install_requires=[
-        'resilient_circuits>=32.0.186',
+        'resilient_circuits>=51.0.0',
         'resilient-lib',
         'python-dateutil',
         'twilio>=6.21.0'

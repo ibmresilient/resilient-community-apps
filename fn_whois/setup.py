@@ -5,8 +5,9 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='Whois',
     name='fn_whois',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
@@ -14,7 +15,7 @@ setup(
     description="Resilient Circuits Components which provide an interface for searching the WHOIS database",
     long_description="A Resilient Circuits function which takes in an input of Domain, URL or IP and then attempts to gather registrar information by sending a WHOIS query",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'python-whois'
     ],
     packages=find_packages(),
