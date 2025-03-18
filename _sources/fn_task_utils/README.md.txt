@@ -15,6 +15,12 @@
   - [Support](#support)
 
 ---
+
+## Release Notes
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.3 | 03/2025 | Converted example workflows to python3 |
+
 ## Overview
 <!-- This description is taken from the in the "description" attribute setup.py file -->
 **Resilient Circuits Components for 'fn_task_utils**
