@@ -1,0 +1,3 @@
+include README.md
+include fn_google_cloud_functions/util/*
+include fn_google_cloud_functions/LICENSE
