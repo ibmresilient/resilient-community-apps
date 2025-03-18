@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: HTML2PDF",
-      "id": 14,
+      "id": 382,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: HTML2PDF",
@@ -23,8 +23,10 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1631563773751,
+  "case_matching_profiles": [],
+  "export_date": 1741883562180,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -36,7 +38,7 @@
       "deprecated": false,
       "export_key": "__function/html2pdf_data",
       "hide_notification": false,
-      "id": 228,
+      "id": 2754,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -66,7 +68,7 @@
       "deprecated": false,
       "export_key": "__function/html2pdf_data_type",
       "hide_notification": false,
-      "id": 229,
+      "id": 2755,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -96,7 +98,7 @@
       "deprecated": false,
       "export_key": "__function/html2pdf_stylesheet",
       "hide_notification": false,
-      "id": 230,
+      "id": 2756,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -129,14 +131,7 @@
   ],
   "functions": [
     {
-      "apps": [],
-      "created_date": 1631561531553,
-      "creator": {
-        "display_name": "Local Integration Server",
-        "id": 4,
-        "name": "ad261c1f-f1cc-4115-bbce-a151f88bac5e",
-        "type": "apikey"
-      },
+      "created_date": 1741610904538,
       "description": {
         "content": "Convert html text or a url reference to a base64 encoded pdf document.",
         "format": "text"
@@ -144,18 +139,22 @@
       "destination_handle": "fn_html2pdf",
       "display_name": "HTML to PDF",
       "export_key": "fn_html2pdf",
-      "id": 1,
+      "id": 259,
       "last_modified_by": {
-        "display_name": "Local Integration Server",
-        "id": 4,
-        "name": "ad261c1f-f1cc-4115-bbce-a151f88bac5e",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1631561531635,
+      "last_modified_time": 1741610904538,
       "name": "fn_html2pdf",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "cabfaa1b-1e97-4f96-b034-753ad6da512c",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "9d0e2887-91bc-45ec-831f-b51996e01fa6",
@@ -191,19 +190,20 @@
           "programmatic_name": "example_html2pdf",
           "tags": [],
           "uuid": null,
-          "workflow_id": 1
+          "workflow_id": 347
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 42,
+  "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1631563771906,
+      "create_date": 1741883559612,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -212,17 +212,16 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1631563771906,
+      "update_date": 1741883559612,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
       "api_keys": [
-        "ad261c1f-f1cc-4115-bbce-a151f88bac5e"
+        "dcef3324-c4a5-4aa1-9d50-45d380e5dc18"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -230,21 +229,28 @@
       "name": "fn_html2pdf",
       "programmatic_name": "fn_html2pdf",
       "tags": [],
-      "users": [],
+      "users": [
+        "shresh@example.com"
+      ],
       "uuid": "90986388-823f-4e24-a110-b2dcff60279b"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 6554,
-    "major": 40,
+    "build_number": 9339,
+    "f": 0,
+    "m": 0,
+    "major": 0,
     "minor": 0,
-    "version": "40.0.6554"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -254,22 +260,21 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
+        "version": 2,
         "workflow_id": "example_html2pdf",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_html2pdf\" isExecutable=\"true\" name=\"Example: HTML2PDF\"\u003e\u003cdocumentation\u003eConvert HTML coded string to base64 encoded PDF format\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0swz6ob\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_08npund\" name=\"HTML to PDF\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cabfaa1b-1e97-4f96-b034-753ad6da512c\"\u003e{\"inputs\":{\"9d0e2887-91bc-45ec-831f-b51996e01fa6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\u0026lt;table\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;td\u0026gt;a\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;b\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;td\u0026gt;c\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;d\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;/table\u0026gt;\"}},\"3b01d61f-cd93-47d7-ab4a-b32c2b8e1bfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"@page { size: landscape; }* { font-family: Arial; font-size: small; }table { border-collapse: collapse; }table, th, td { border: 1px solid black; }\"}},\"21ac2ac0-abc9-485a-a66e-5ab680415b40\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"string\"}}},\"post_processing_script\":\"# results in base64. see output property \u0027content\u0027:\\n# results.content\\n# or use workflow properties, such as \u0027pdf\u0027, when using this function with another function such as utilities: base64 to attachment:\\n# inputs.base64content = workflow.properties.pdf.content\",\"result_name\":\"pdf\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0swz6ob\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vpr79x\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0swz6ob\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_08npund\"/\u003e\u003cendEvent id=\"EndEvent_093wsxw\"\u003e\u003cincoming\u003eSequenceFlow_0vpr79x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vpr79x\" sourceRef=\"ServiceTask_08npund\" targetRef=\"EndEvent_093wsxw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1odmx2x\"\u003e\u003ctext\u003eResults in base64\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1g3h8m8\" sourceRef=\"ServiceTask_08npund\" targetRef=\"TextAnnotation_1odmx2x\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_08npund\" id=\"ServiceTask_08npund_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0swz6ob\" id=\"SequenceFlow_0swz6ob_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_093wsxw\" id=\"EndEvent_093wsxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"447\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"465\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vpr79x\" id=\"SequenceFlow_0vpr79x_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"402.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1odmx2x\" id=\"TextAnnotation_1odmx2x_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"133\" x=\"375\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1g3h8m8\" id=\"Association_1g3h8m8_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_html2pdf\" isExecutable=\"true\" name=\"Example: HTML2PDF\"\u003e\u003cdocumentation\u003eConvert HTML coded string to base64 encoded PDF format\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0swz6ob\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_08npund\" name=\"HTML to PDF\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cabfaa1b-1e97-4f96-b034-753ad6da512c\"\u003e{\"inputs\":{\"9d0e2887-91bc-45ec-831f-b51996e01fa6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\u0026lt;table\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;td\u0026gt;a\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;b\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;td\u0026gt;c\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;d\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;/table\u0026gt;\"}},\"3b01d61f-cd93-47d7-ab4a-b32c2b8e1bfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"@page { size: landscape; }* { font-family: Arial; font-size: small; }table { border-collapse: collapse; }table, th, td { border: 1px solid black; }\"}},\"21ac2ac0-abc9-485a-a66e-5ab680415b40\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"string\"}}},\"post_processing_script\":\"# results in base64. see output property \u0027content\u0027:\\n# results.content\\n# or use workflow properties, such as \u0027pdf\u0027, when using this function with another function such as utilities: base64 to attachment:\\n# inputs.base64content = workflow.properties.pdf.content\",\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"pdf\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0swz6ob\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vpr79x\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0swz6ob\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_08npund\"/\u003e\u003cendEvent id=\"EndEvent_093wsxw\"\u003e\u003cincoming\u003eSequenceFlow_0vpr79x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vpr79x\" sourceRef=\"ServiceTask_08npund\" targetRef=\"EndEvent_093wsxw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1odmx2x\"\u003e\u003ctext\u003eResults in base64\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1g3h8m8\" sourceRef=\"ServiceTask_08npund\" targetRef=\"TextAnnotation_1odmx2x\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_08npund\" id=\"ServiceTask_08npund_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0swz6ob\" id=\"SequenceFlow_0swz6ob_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_093wsxw\" id=\"EndEvent_093wsxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"447\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"465\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vpr79x\" id=\"SequenceFlow_0vpr79x_di\"\u003e\u003comgdi:waypoint x=\"358\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"447\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"402.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1odmx2x\" id=\"TextAnnotation_1odmx2x_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"133\" x=\"375\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1g3h8m8\" id=\"Association_1g3h8m8_di\"\u003e\u003comgdi:waypoint x=\"352\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"423\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
-      "creator_id": "ad261c1f-f1cc-4115-bbce-a151f88bac5e",
+      "content_version": 2,
       "description": "Convert HTML coded string to base64 encoded PDF format",
       "export_key": "example_html2pdf",
-      "last_modified_by": "ad261c1f-f1cc-4115-bbce-a151f88bac5e",
-      "last_modified_time": 1631561532559,
+      "last_modified_by": "shresh@example.com",
+      "last_modified_time": 1741620110409,
       "name": "Example: HTML2PDF",
       "object_type": "artifact",
       "programmatic_name": "example_html2pdf",
       "tags": [],
       "uuid": "b31e90f8-583c-45c0-a7c0-15d94b969b37",
-      "workflow_id": 1
+      "workflow_id": 347
     }
   ],
   "workspaces": []

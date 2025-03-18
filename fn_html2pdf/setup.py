@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_html2pdf',
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -30,7 +30,7 @@ setup(
     description="Convert HTML to a PDF",
     long_description="Convert HTML data into a base64 encoded PDF documnent. Alternatively, provide a URL to a website.",
     install_requires=[
-        'resilient_circuits>=42.0.0',
+        'resilient_circuits>=51.0.0',
         'pika',
         'weasyprint<53.0'
     ],

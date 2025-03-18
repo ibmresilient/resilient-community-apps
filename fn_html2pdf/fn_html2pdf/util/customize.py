@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.5.0.1475
 
-"""Generate the Resilient customizations required for fn_html2pdf"""
+"""Generate the SOAR customizations required for fn_html2pdf"""
 
 import base64
 import os
@@ -20,16 +22,25 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_html2pdf",
-        "message_destinations": [u"fn_html2pdf"],
-        "functions": [u"fn_html2pdf"],
-        "workflows": [u"example_html2pdf"],
-        "actions": [u"Example: HTML2PDF"],
+        "message_destinations": [
+            u"fn_html2pdf"
+        ],
+        "functions": [
+            u"fn_html2pdf"
+        ],
+        "workflows": [
+            u"example_html2pdf"
+        ],
+        "actions": [
+            u"Example: HTML2PDF"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -38,7 +49,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 40.0.6554
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
