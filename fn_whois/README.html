@@ -421,15 +421,22 @@
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
 <th class="head"><p>Comment</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.2</p></td>
-<td><p>Example rule support for DNS names, IP addresses and data presentation changes</p></td>
+<tr class="row-even"><td><p>1.0.3</p></td>
+<td><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1</p></td>
+<tr class="row-odd"><td><p>1.0.2</p></td>
+<td><p>Example rule support for DNS names, IP addresses and data presentation changes</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>App Host support added</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -526,7 +533,7 @@
 
 <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
   <span class="c1"># We have results</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; Results found: &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;whois_query&quot;</span><span class="p">])</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; Results found: &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;whois_query&quot;</span><span class="p">])</span>
 
   <span class="k">for</span> <span class="n">keyval</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">domain_details_keys</span><span class="p">,</span><span class="n">results</span><span class="o">.</span><span class="n">domain_details_values</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]:</span>
@@ -534,9 +541,9 @@
     <span class="k">else</span><span class="p">:</span>
       <span class="n">expanded_list</span> <span class="o">=</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt; </span><span class="si">{0}</span><span class="s2">&lt;/b&gt; : </span><span class="si">{1}</span><span class="s2"> &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">expanded_list</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt; </span><span class="si">{0}</span><span class="s2">&lt;/b&gt; : </span><span class="si">{1}</span><span class="s2"> &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">expanded_list</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; No results found&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;whois_query&quot;</span><span class="p">])</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; No results found&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;whois_query&quot;</span><span class="p">])</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>

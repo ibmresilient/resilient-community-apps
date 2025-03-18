@@ -13,10 +13,11 @@
 
 ## History
 
-| Version| Comment |
-| ------- | ------ |
-| 1.2 | Example rule support for DNS names, IP addresses and data presentation changes |
-| 1.1 | App Host support added |
+| Version | Date | Comment |
+| ------- | ------ | ------ |
+| 1.0.3 | 03/2025 | Converted example workflows to python3 |
+| 1.0.2 | Example rule support for DNS names, IP addresses and data presentation changes |
+| 1.0.1 | App Host support added |
 
 ![note created](./screenshots/whois_note.png)
 ![workflow](./screenshots/1.png)
@@ -95,7 +96,7 @@ def expand_list(list_value, separator=", "):
 
 if results["success"]:
   # We have results
-  noteText = u"""Whois Query ran against input <b>{0}</b><br> Results found: <br>""".format(results.inputs["whois_query"])
+  noteText = """Whois Query ran against input <b>{0}</b><br> Results found: <br>""".format(results.inputs["whois_query"])
 
   for keyval in zip(results.domain_details_keys,results.domain_details_values):
     if keyval[0] in ['status']:
@@ -103,9 +104,9 @@ if results["success"]:
     else:
       expanded_list = expand_list(keyval[1])
 
-    noteText += u"""<br><b> {0}</b> : {1} """.format(keyval[0].capitalize(), expanded_list)
+    noteText += """<br><b> {0}</b> : {1} """.format(keyval[0].capitalize(), expanded_list)
 else:
-  noteText = u"""Whois Query ran against input <b>{0}</b><br> No results found""".format(results.inputs["whois_query"])
+  noteText = """Whois Query ran against input <b>{0}</b><br> No results found""".format(results.inputs["whois_query"])
 incident.addNote(helper.createRichText(noteText))
 ```
 
