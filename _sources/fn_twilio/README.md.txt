@@ -1,6 +1,7 @@
 # Twilio SMS
 
 ## Table of Contents
+  - [Release Notes](#release-notes)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [app.config settings](#appconfig-settings)
@@ -16,10 +17,15 @@
 
  ![screenshot](./screenshots/sms_activity_log.png)
 
+## Release Notes
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 2.0.1 | 03/2025 | Converted example workflows to python3 |
+
 ## Prerequisites:
 ```
 Resilient version 33 or later
-resilient_circuits version 32 or later
+resilient_circuits version 51 or later
 twilio version 6.21.0 or later
 ```
 
@@ -102,31 +108,31 @@ The following is an example of setup of each parameter using a simple workflow p
 The message can be customised to suit your own use case.
 ```
 inputs.twilio_sms_destination = rule.properties.twilio_sms_destination
-inputs.twilio_sms_message = 'An incident ' + incident.name + ' (' + `incident.id` + ') with ' + incident.severity_code + ' priority may require your attention'
+inputs.twilio_sms_message = f'An incident {incident.name} ({incident.id}) with {incident.severity_code} priority may require your attention'
 ```
 
 ### Post-Process Script
 The results returned to Resilient can be used to determine the status for each destination.
 Below is an example post process script which adds a note for each destination.
 ```
-import java.util.Date as Date
+from datetime import datetime
 
 for entry in results["twilio_status"]:
-  if(entry.success == True):
-    note_text = u"""<b>Twilio SMS Message:</b> {0}
-              </br><b>sent to:</b> {1}""".format(results.inputs.twilio_sms_message,
-                                            entry.phone_number)
+  if entry.get("success"):
+    note_text = """<b>Twilio SMS Message:</b> {0}
+              </br><b>sent to:</b> {1}""".format(results.inputs.get("twilio_sms_message"),
+                                            entry.get("phone_number"))
 
     incident.addNote(helper.createRichText(note_text))
   else:
-    note_text = u"""<b>Unable to send Twilio SMS Message:</b> {0}
-              </br><b> to:</b> {1} ({2})""".format(results.inputs.twilio_sms_message,
-                                            entry.phone_number, entry.error_message)
+    note_text = """<b>Unable to send Twilio SMS Message:</b> {0}
+              </br><b> to:</b> {1} ({2})""".format(results.inputs.get("twilio_sms_message"),
+                                            entry.get("phone_number"), entry.get("error_message"))
 
     incident.addNote(helper.createRichText(note_text))
 
   row = incident.addRow("twilio_sms_log")
-  row['row_created'] = str(Date())
+  row['row_created'] = datetime.now().strftime('%d/%m/%y %H:%M:%S')
   row['status'] = entry.get("status") or "Failed"
   row['message_id'] = entry.get("messaging_service_sid")
   row['date_created'] = entry.get("date_created_ts")
@@ -191,12 +197,12 @@ inputs.twilio_date_sent = row['date_created']
 ### Post-Process Script
 Below is an example post process script which adds a row to the datatable for each response.
 ```
-import java.util.Date as Date
+from datetime import datetime
 
 if results.success:
   for entry in results.content:
     row = incident.addRow("twilio_sms_log")
-    row['row_created'] = str(Date())
+    row['row_created'] = datetime.now().strftime('%d/%m/%y %H:%M:%S')
     row['status'] = entry.get("status")
     row['message_id'] = entry.get("messaging_service_sid")
     row['date_created'] = entry.get("date_created_ts")
@@ -204,7 +210,7 @@ if results.success:
     row['phone_number'] = entry.get("phone_number")
     row["direction"] = entry.get("direction")
 else:
-  incident.addNote(u"Twilio Received Messages failed: {}".format(results.reason))
+  incident.addNote("Twilio Received Messages failed: {}".format(results.reason))
 ```
 
 ## Example: Twilio Receive Messages
@@ -266,12 +272,12 @@ inputs.twilio_wait_timeout = rule.properties.twilio_wait_timeout
 ### Post-Process Script
 Below is an example post process script which adds a row to the datatable for each response.
 ```
-import java.util.Date as Date
+from datetime import datetime
 
 if results.success:
   for entry in results.content:
     row = incident.addRow("twilio_sms_log")
-    row['row_created'] = str(Date())
+    row['row_created'] = datetime.now().strftime('%d/%m/%y %H:%M:%S')
     row['status'] = entry.get("status")
     row['message_id'] = entry.get("messaging_service_sid")
     row['date_created'] = entry.get("date_created_ts")
@@ -279,7 +285,7 @@ if results.success:
     row['phone_number'] = entry.get("phone_number")
     row["direction"] = entry.get("direction")
 else:
-  incident.addNote(u"Twilio Received Messages failed: {}".format(results.reason))
+  incident.addNote("Twilio Received Messages failed: {}".format(results.reason))
 ```
 
 ## Rules
