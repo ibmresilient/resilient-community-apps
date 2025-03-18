@@ -461,13 +461,17 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.0</p></td>
-<td><p>12/2018</p></td>
-<td><p>Initial Release</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
 </tr>
 <tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>01/2021</p></td>
 <td><p>App Host support</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>12/2018</p></td>
+<td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
@@ -512,7 +516,7 @@
 <ul>
 <li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">35.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=30.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -699,7 +703,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">):</span>
   <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;Pastebin Created&lt;/b&gt;</span>
 <span class="s2">                &lt;b&gt;Name:&lt;/b&gt; </span><span class="si">{0}</span>
-<span class="s2">                &lt;b&gt;Link:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{1}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_name</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">pastebin_link</span><span class="p">)</span>
+<span class="s2">                &lt;b&gt;Link:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{1}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pastebin_name&#39;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pastebin_link&#39;</span><span class="p">))</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>

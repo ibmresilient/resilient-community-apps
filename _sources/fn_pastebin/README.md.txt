@@ -39,8 +39,10 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 12/2018 | Initial Release |
+| 1.0.2 | 03/2025 | Converted example workflows to python3 |
 | 1.0.1 | 01/2021 | App Host support |
+| 1.0.0 | 12/2018 | Initial Release |
+
 
 ---
 
@@ -79,7 +81,7 @@ If deploying to a Resilient platform with an App Host, the requirements are:
 If deploying to a Resilient platform with an integration server, the requirements are:
 * Resilient platform >= `35.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -197,7 +199,7 @@ inputs.pastebin_expiration = "1H"
 if (results.success):
   noteText = """<br><b>Pastebin Created</b>
                 <b>Name:</b> {0}
-                <b>Link:</b> <a href='{1}'>{1}</a>""".format(results.inputs.pastebin_name, results.pastebin_link)
+                <b>Link:</b> <a href='{1}'>{1}</a>""".format(results.inputs.get('pastebin_name'), results.get('pastebin_link'))
   incident.addNote(helper.createRichText(noteText))
 ```
 
