@@ -40,6 +40,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.1 | 03/2025 | Converted example workflows to python3 |
 | 1.1.0 | 09/2021 | Added App Host support; Dropped Python 2.7 support
 | 1.0.0 | 09/2018 | Initial Release |
 
@@ -113,7 +114,7 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 Since v1.1.0 only Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * pika
-* resilient_circuits>=30.0.0
+* resilient_circuits>=51.0.0
 * weasyprint<53.0
 
 _Note: see the [Install](#install) section below if you are installing on an integration server as more os packages are required._
