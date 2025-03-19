@@ -480,47 +480,51 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.1.2</p></td>
+<tr class="row-even"><td><p>2.2.0</p></td>
+<td><p>Feb. 2025</p></td>
+<td><p>Support for MSSP Child orgs</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1.2</p></td>
 <td><p>Jan. 2024</p></td>
 <td><p>Refresh python packages SQLAlchemy and psycopg</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.1</p></td>
+<tr class="row-even"><td><p>2.1.1</p></td>
 <td><p>Jul. 2023</p></td>
 <td><p>Added optional dependency postgresql to SQLalchemy</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>Apr. 2023</p></td>
 <td><p>Migrated all workflows to playbooks</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.0</p></td>
+<tr class="row-even"><td><p>2.0.0</p></td>
 <td><p>May  2022</p></td>
 <td><p>Support for Playbooks. Added support for Datatables</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.2</p></td>
+<tr class="row-odd"><td><p>1.1.2</p></td>
 <td><p>Feb. 2022</p></td>
 <td><p>Use <code class="docutils literal notranslate"><span class="pre">APScheduler</span> <span class="pre">&lt;</span> <span class="pre">3.9</span></code> if <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">Version</span> <span class="pre">&lt;</span> <span class="pre">3.6</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.1</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
 <td><p>Aug. 2021</p></td>
 <td><p>remove SOAR credentials from saved rules in db</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>Apr. 2021</p></td>
 <td><p>app.config setting for optional note creation</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.3</p></td>
+<tr class="row-even"><td><p>1.0.3</p></td>
 <td><p>Oct. 2020</p></td>
 <td><p>Conditional PostgreSQL dependency</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.2</p></td>
+<tr class="row-odd"><td><p>1.0.2</p></td>
 <td><p>Sept. 2020</p></td>
 <td><p>PostgreSQL support</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>May 2020</p></td>
 <td><p>App Host support</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>Nov. 2019</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -531,7 +535,7 @@
 <h3>Migrating to v1.0.2<a class="headerlink" href="#migrating-to-v1-0-2" title="Link to this heading">¶</a></h3>
 <p>When migrating to v1.0.2 from a previous release, add the following setting to your <code class="docutils literal notranslate"><span class="pre">[fn_scheduler]</span></code> app.config section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># db url if using a postgreSQL DB. Use this with AppHost</span>
-<span class="c1"># db_url=postgresql://username:password@host:port/database (or) db_url=postgresql+pypostgresql://username:password@host:port/database</span>
+<span class="c1"># db_url=postgresql://username:password***@host:port/database (or) db_url=postgresql+pypostgresql://username:password***@host:port/database</span>
 
 </pre></div>
 </div>
@@ -619,10 +623,21 @@ But migrating to playbooks provides greater functionality along with future app 
 <tr class="row-odd"><td><p>Function</p></td>
 <td><p>Read</p></td>
 </tr>
+<tr class="row-even"><td><p>Playbook</p></td>
+<td><p>Read</p></td>
+</tr>
+<tr class="row-odd"><td><p>Incident</p></td>
+<td><p>Read all incidents</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 </li>
+</ul>
+<section id="notes">
+<h4>NOTES<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Versions of SOAR later than 51.0.0 may require additional permissions: Run All Invocations. If failures occur in rule/playbook execution, check to see if this permission exists and set for the Scheduler API key.</p></li>
 </ul>
 <p>The following SOAR platform guides provide additional information:</p>
 <ul class="simple">
@@ -631,6 +646,7 @@ But migrating to playbooks provides greater functionality along with future app 
 <li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
 </ul>
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+</section>
 </section>
 <section id="cloud-pak-for-security">
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
@@ -653,14 +669,14 @@ But migrating to playbooks provides greater functionality along with future app 
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Both Python 3.6 and Python 3.9 are supported.
+<p>Both Python 3.6, 3.9 and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>APScheduler &gt;= 3.9;python_version &gt;= ‘3.6’</p></li>
 <li><p>python-dateutil&gt;=2.8.1</p></li>
 <li><p>pytz</p></li>
-<li><p>resilient_circuits&gt;=46.0</p></li>
-<li><p>resilient_lib&gt;=46.0</p></li>
+<li><p>resilient_circuits&gt;=51.0</p></li>
+<li><p>resilient_lib&gt;=51.0</p></li>
 <li><p>SQLAlchemy&gt;=1.3.8</p></li>
 </ul>
 </section>
@@ -705,7 +721,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </tr>
 <tr class="row-odd"><td><p><strong>db_url</strong></p></td>
 <td class="text-center"><p>No</p></td>
-<td><p>postgresql+pypostgresql://res_test:res_test&#64;192.168.1.215:5432/res_test</p></td>
+<td><p>postgresql+pypostgresql://res_test:res_***&#64;192.168.1.215:5432/res_test</p></td>
 <td><p><em>Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.</em></p></td>
 </tr>
 <tr class="row-even"><td><p>disable_notes</p></td>
@@ -793,7 +809,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>row information for datatable rules</p></td>
+<td><p>row information for datatable rules. * This field is deprecated. The datatable row_id is automatically derived. *</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scheduler_label_prefix</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
@@ -831,9 +847,26 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p>Yes</p></td>
 <td><p>Yes if scheduling a playbook, No for a rule</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scheduler_rule_type</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident</span></code></p></td>
+<td><p>New to 2.2.0. Required for MSSP Child orgs. Name of rule type: incident, task, note, attachment, milestone, datatable</p></td>
+</tr>
 </tbody>
 </table>
 </div>
+<section id="id1">
+<h3>Notes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>When scheduling a job from a child org,</p>
+<ul>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">scheduler_rule_type</span></code> input parameters is required. If scheduling a job for a datatable, scheduler_rule_type is <code class="docutils literal notranslate"><span class="pre">datatable</span></code>.</p></li>
+<li><p>scheduling for an artifact, attachment, task, note, etc.,
+needs to be scheduled from the same intended artifact, attachment, task, note, etc.</p></li>
+</ul>
+</li>
+</ul>
 </p>
 </details>
 <details><summary>Outputs:</summary>
@@ -884,6 +917,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label_prefix</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_label_prefix&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_is_playbook</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_is_playbook&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_rule_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -922,6 +956,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
+</section>
 </section>
 <hr class="docutils" />
 <section id="function-scheduled-rule-modify">
@@ -1711,7 +1746,10 @@ Additional package dependencies may exist for each of these packages:</p>
 </li>
 <li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a><ul>
-<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a><ul>
+<li><a class="reference internal" href="#notes">NOTES</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
 <li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
 <li><a class="reference internal" href="#python-environment">Python Environment</a></li>
@@ -1724,7 +1762,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><a class="reference internal" href="#supported-scheduled-rules-playbooks">Supported Scheduled Rules/Playbooks</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#function-scheduled-rule-create">Function - Scheduled Rule Create</a></li>
+<li><a class="reference internal" href="#function-scheduled-rule-create">Function - Scheduled Rule Create</a><ul>
+<li><a class="reference internal" href="#id1">Notes</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#function-scheduled-rule-modify">Function - Scheduled Rule Modify</a></li>
 <li><a class="reference internal" href="#function-scheduled-rule-list">Function - Scheduled Rule List</a></li>
 <li><a class="reference internal" href="#function-scheduled-rule-pause">Function - Scheduled Rule Pause</a></li>
