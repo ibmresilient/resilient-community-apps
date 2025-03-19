@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "count": 1
+  },
+  "raw": null,
+  "inputs": {
+    "sumo_logic_insight_id": "2a8419c4-b84b-3b6c-8447-af4ccbfba9c6",
+    "sumo_logic_incident_id": 2167
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sumo-logic",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 6625,
+    "timestamp": "2024-08-01 14:26:04"
+  }
+}
