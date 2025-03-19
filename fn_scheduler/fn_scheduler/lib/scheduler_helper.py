@@ -5,6 +5,7 @@
 import threading
 from datetime import datetime
 from dateutil.relativedelta import *
+from dateutil import tz
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
@@ -46,6 +47,7 @@ class ResilientScheduler:
 
     def __init__(self, db_url, datastore_dir, threat_max, timezone, resilient_connection):
         self.timezone = timezone
+        self.tzinfo = tz.gettz(self.timezone)
         self._resilient_connection = resilient_connection
 
         url = db_url if db_url else 'sqlite:///{}/scheduler.sqlite'.format(datastore_dir)
@@ -80,7 +82,7 @@ class ResilientScheduler:
 
     def build_trigger(self, type, value):
         """
-        build a trigger for a schuduled job
+        build a trigger for a scheduled job
         :param type: cron, interval, delta, date
         :param value: value to convert for a scheduled job
         :return: appropriate trigger
@@ -98,14 +100,14 @@ class ResilientScheduler:
                                   timezone=self.timezone)
 
         elif type == "interval":
-            seconds = self.get_interval(value)
+            seconds = ResilientScheduler.get_interval(value, tzinfo=self.tzinfo)
             trigger = IntervalTrigger(seconds=seconds)
 
         elif type == "date":
             trigger = DateTrigger(run_date=value, timezone=self.timezone)
 
         elif type == "delta":
-            dt = self.get_interval(value, date=True)
+            dt = ResilientScheduler.get_interval(value, date=True, tzinfo=self.tzinfo)
             trigger = DateTrigger(run_date=dt, timezone=self.timezone)
 
         else:
@@ -114,7 +116,7 @@ class ResilientScheduler:
         return trigger
 
     @staticmethod
-    def get_interval(time_string, date=False):
+    def get_interval(time_string, date=False, tzinfo=None):
         """
         Parse the input time string into "time value" and "time unit" and compute the time in seconds.
         The input string will be in format time_value with the time unit character concatenated on the end.
@@ -133,7 +135,7 @@ class ResilientScheduler:
         # Get the time units from input string.
         time_unit = time_string.rstrip()[-1]
 
-        now_dt = datetime.now()
+        now_dt = datetime.now(tz=tzinfo)
 
         # Compute the total time to sleep in seconds
         if time_unit == 's':

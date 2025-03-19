@@ -8,8 +8,9 @@ from resilient_circuits import ResilientComponent, function, FunctionResult, Fun
 from resilient_lib import ResultPayload
 from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
-from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_name, validate_app_config
+from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_name, validate_app_config, reverse_lookup_object_type
 from fn_scheduler.lib.triggered_job import triggered_job
+from  apscheduler.job import Job
 
 LOG = logging.getLogger(__name__)
 
@@ -41,13 +42,14 @@ class FunctionComponent(ResilientComponent):
             scheduler_type = self.get_select_param(kwargs.get("scheduler_type"))  # select, values: "cron", "interval", "date"
             scheduler_type_value = kwargs.get("scheduler_type_value")  # text
             scheduler_rule_name = kwargs.get("scheduler_rule_name")  # text
+            scheduler_rule_type = self.get_select_param(kwargs.get("scheduler_rule_type")) # only needed for MSSPs
             scheduler_rule_parameters = kwargs.get("scheduler_rule_parameters")  # text
             scheduler_label_prefix = kwargs.get("scheduler_label_prefix")  # text
             scheduler_is_playbook = kwargs.get("scheduler_is_playbook", False) # boolean
 
             incident_id = kwargs.get("incident_id")  # number
             object_id = kwargs.get("object_id")  # number
-            # row_id is presently unavailable from a pre-proessing script.
+            # row_id is presently unavailable from a pre-processing script.
             # A future change to resilient is needed to allow this natively. Presently, supplying this information manually is needed
             row_id = kwargs.get("row_id") # number
 
@@ -67,6 +69,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("scheduler_type: %s", scheduler_type)
             LOG.info("scheduler_type_value: %s", scheduler_type_value)
             LOG.info("scheduler_rule_name: %s", scheduler_rule_name)
+            LOG.info("scheduler_rule_type: %s", scheduler_rule_type)
             LOG.info("scheduler_rule_parameters: %s", scheduler_rule_parameters)
             LOG.info("scheduler_label_prefix: %s", scheduler_label_prefix)
             LOG.info("scheduler_is_playbook: %s", scheduler_is_playbook)
@@ -85,19 +88,26 @@ class FunctionComponent(ResilientComponent):
             if not inc or inc['end_date'] is not None:
                 raise FunctionError("Incident is closed")
 
-            # get the rule id
-            rule_id, rule_object_type_id = get_rule_by_name(rest_client,
-                                                            scheduler_rule_name.strip(),
-                                                            scheduler_is_playbook)
-            if not rule_id:
-                raise ValueError(u"Rule/Playbook name not found: %s", scheduler_rule_name)
+            if scheduler_rule_type:
+                # if datatable is specified, use the object_id from the datatable
+                #   this function is being run from
+                if scheduler_rule_type.lower() == "datatable":
+                    rule_object_type_id = object_type_id
+                else:
+                    rule_object_type_id = reverse_lookup_object_type(scheduler_rule_type)
+            else:
+                # get the rule id
+                _rule_id, rule_object_type_id = get_rule_by_name(rest_client,
+                                                                scheduler_rule_name.strip(),
+                                                                scheduler_is_playbook)
 
             if object_type_id != rule_object_type_id:
                 raise ValueError(u"Rule/Playbook does not match the action object: %s", object_type_name)
 
             # validate that the rule is enabled for the object (incident, artifact, etc.)
-            if not validate_actions(rest_client, inc, incident_id, object_id,
-                                    object_type_name, row_id, scheduler_rule_name):
+            rule_id = validate_actions(rest_client, inc, incident_id, object_id,
+                                       object_type_name, row_id, scheduler_rule_name)
+            if not rule_id:
                 raise ValueError("Rule/Playbook '%s' for this %s not found or not enabled", scheduler_rule_name, object_type_name)
 
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
@@ -117,11 +127,11 @@ class FunctionComponent(ResilientComponent):
 
             # a d d   j o b
             scheduler = self.res_scheduler.scheduler
-            scheduled_job = scheduler.add_job(triggered_job,
-                                              trigger,
-                                              id=scheduler_label_prefix,
-                                              args=incident_data,
-                                              kwargs=rule_params)
+            scheduled_job: Job = scheduler.add_job(triggered_job,
+                                                    trigger,
+                                                    id=scheduler_label_prefix,
+                                                    args=incident_data,
+                                                    kwargs=rule_params)
 
             LOG.debug(u"Scheduled_job: {}".format(scheduled_job))
 
@@ -130,7 +140,10 @@ class FunctionComponent(ResilientComponent):
             # get a clean copy for the results
             created_job = self.res_scheduler.get_job_by_id(scheduler_label_prefix)
 
-            results = rc.done(True, ResilientScheduler.sanitize_job(created_job))
+            if created_job:
+                results = rc.done(True, ResilientScheduler.sanitize_job(created_job))
+            else:
+                results = rc.done(False, {}, reason="Scheduled job failed to persist. Check for correct timezone")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
@@ -161,7 +174,7 @@ def get_row_id_from_workflow(rest_client, workflow_instance_id):
     return None
 
 def validate_actions(rest_client, inc, incident_id, object_id, \
-                     object_type_name, row_id, scheduler_rule_name):
+                     object_type_name, row_id, scheduler_rule_name) -> int:
     """read the object and make sure the rule/playbook is active for it
 
     Args:
@@ -172,6 +185,8 @@ def validate_actions(rest_client, inc, incident_id, object_id, \
         object_type_name (str): name of object for the rule/playbook: incident, artifact, task, etc.
         row_id (int): if the object is a datatable, then row_id will point to the row
         scheduler_rule_name (str): name of rule/playbook
+
+        return the rule_id associated with the rule or playbook
     """
     if object_type_name == "incident":
         results = inc   # use existing incident
@@ -189,17 +204,29 @@ def validate_actions(rest_client, inc, incident_id, object_id, \
 
         results = rest_client.get(url)
 
+    LOG.debug(results)
     # find the rules/playbooks for a given row
-    rule_playbook_list = []
     if row_id:
         for row in results['rows']:
             if row['id'] == row_id:
-                rule_playbook_list = [action['name'] for action in row.get('actions', []) if action['enabled']]
-                rule_playbook_list.extend([playbk['display_name'] for playbk in row.get('playbooks', []) ])
-                break
-    else:
-        rule_playbook_list = [action['name'] for action in results.get('actions', []) if action['enabled']]
-        rule_playbook_list.extend([playbk['display_name'] for playbk in results.get('playbooks', []) ])
+                return get_id(row.get('actions', []), row.get('playbooks', []), scheduler_rule_name)
 
-    LOG.debug(results)
-    return bool(scheduler_rule_name in rule_playbook_list)
+    return get_id(results.get('actions', []), results.get('playbooks', []), scheduler_rule_name)
+
+def get_id(actions, playbooks, scheduler_rule_name) -> int:
+    """return the rule_id/playbook_id for a given rule/playbook name enabled for this object
+
+    :param actions: actions for this object
+    :type actions: dict
+    :param playbooks: playbooks for this object
+    :type playbooks: dict
+    :param scheduler_rule_name: rule/playbook name to lookup
+    :type scheduler_rule_name: str
+    :return: rule/playbook id, or None
+    :rtype: int
+    """
+    plbk_id_lookup = {playbk['display_name']: playbk['playbook_handle'] for playbk in playbooks}
+    rule_id_lookup = {action['name']: action['id'] for action in actions if action['enabled']}
+    id_lookup = {**plbk_id_lookup, **rule_id_lookup}
+
+    return id_lookup.get(scheduler_rule_name)

@@ -66,6 +66,9 @@ def triggered_job(incident_id, object_id, row_id,
         (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
         scheduler.scheduler.remove_job(scheduler_label)
         return
+    except Exception:
+        # child orgs cannot read playbooks. So allow for now
+        pass
 
     # build url for invoking a rule
     rule_type = lookup_object_type(rest_client, rule_object_type_id)

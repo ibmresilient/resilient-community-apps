@@ -45,6 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.0   | Feb. 2025 | Support for MSSP Child orgs |
 | 2.1.2   | Jan. 2024 | Refresh python packages SQLAlchemy and psycopg |
 | 2.1.1   | Jul. 2023 | Added optional dependency postgresql to SQLalchemy |
 | 2.1.0   | Apr. 2023 | Migrated all workflows to playbooks |
@@ -62,7 +63,7 @@ When migrating to v1.0.2 from a previous release, add the following setting to y
 
 ```
 # db url if using a postgreSQL DB. Use this with AppHost
-# db_url=postgresql://username:password@host:port/database (or) db_url=postgresql+pypostgresql://username:password@host:port/database
+# db_url=postgresql://username:password***@host:port/database (or) db_url=postgresql+pypostgresql://username:password***@host:port/database
 
 ```
 Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL.
@@ -106,7 +107,7 @@ Functions available include:
 1) Scheduling a Playbook/Rule
 2) Listing scheduled Playbooks/Rules
 3) Pause and resume scheduled Playbooks/Rules
-5) Removing a scheduled Playbook/Rule
+4) Removing a scheduled Playbook/Rule
 
 ![screenshot: main.png](./doc/screenshots/main.png)
 
@@ -134,6 +135,11 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Playbook | Read |
+  | Incident | Read all incidents |
+
+#### NOTES
+* Versions of SOAR later than 51.0.0 may require additional permissions: Run All Invocations. If failures occur in rule/playbook execution, check to see if this permission exists and set for the Scheduler API key.
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -158,13 +164,13 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 3.6 and Python 3.9 are supported.
+Both Python 3.6, 3.9 and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * APScheduler >= 3.9;python_version >= '3.6'
 * python-dateutil>=2.8.1
 * pytz
-* resilient_circuits>=46.0
-* resilient_lib>=46.0
+* resilient_circuits>=51.0
+* resilient_lib>=51.0
 * SQLAlchemy>=1.3.8
 
 ---
@@ -183,7 +189,7 @@ The following table provides the settings you need to configure the app. These s
 | **timezone** | Yes | `UTC` | *Specify the timezone (ex. America/New_York) which scheduled Playbooks/rules should follow.* |
 | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered Playbooks/rules run for a very short time to kick off a IBM SOAR rule.* |
 | **datastore_dir** | No | `/path/to/sqlite_folder` | *Specify a data path for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
-| **db_url** | No | postgresql+pypostgresql://res_test:res_test@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
+| **db_url** | No | postgresql+pypostgresql://res_test:res_***@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
 | disable_notes | No | True|False | Set to True to disable creating a note when a rule is triggered. Default is False |
 
 
@@ -242,13 +248,20 @@ Schedule a rule or playbook to run on a schedule. This rule/playbook will be exe
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | Incident Id where the rule will be executed |
 | `object_id` | `number` | No | `-` | ID for task, artifact, attachment, etc. |
-| `row_id` | `number` | No | `-` | row information for datatable rules |
+| `row_id` | `number` | No | `-` | row information for datatable rules. * This field is deprecated. The datatable row_id is automatically derived. * |
 | `scheduler_label_prefix` | `text` | Yes | `-` | Label to recall the created schedule. The incident id is appended to the name for uniqueness |
 | `scheduler_rule_name` | `text` | Yes | `-` | Name of rule/playbook to schedule |
 | `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule/playbook in field=value format separated by semicolons. These fields should match the api name for the rule's activity or playbook's activation input fields. Ex: `rule_activity_field1=value1;rule_activity_field2=value2` |
 | `scheduler_type` | `select` | Yes | `-` | type of schedule to create. cron, date, delta, or interval |
 | `scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy-mm-dd hh:mm:ss) or cron value |
 | `scheduler_is_playbook` | boolean | Yes | Yes | Yes if scheduling a playbook, No for a rule |
+| `scheduler_rule_type` | `text` | No | `incident` | New to 2.2.0. Required for MSSP Child orgs. Name of rule type: incident, task, note, attachment, milestone, datatable |
+
+### Notes
+* When scheduling a job from a child org, 
+   * the `scheduler_rule_type` input parameters is required. If scheduling a job for a datatable, scheduler_rule_type is `datatable`.
+   * scheduling for an artifact, attachment, task, note, etc., 
+needs to be scheduled from the same intended artifact, attachment, task, note, etc.
 
 </p>
 </details>
@@ -306,6 +319,7 @@ inputs.scheduler_rule_parameters = getattr(playbook.inputs, "schedule_rule_param
 inputs.scheduler_label_prefix = getattr(playbook.inputs, "schedule_label_prefix", None)
 inputs.incident_id = incident.id
 inputs.scheduler_is_playbook = getattr(playbook.inputs, "schedule_is_playbook", False)
+inputs.scheduler_rule_type = getattr(playbook.inputs, "schedule_rule_type", None)
 
 ```
 

@@ -14,6 +14,7 @@ if sys.version_info.major == 3:
 else:
     from mock import Mock, patch
 
+from dateutil import tz, relativedelta
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
@@ -245,3 +246,34 @@ class TestCreateAScheduledRule:
         }
         results = call_create_a_scheduled_rule_function(circuits_app, function_params)
         assert results['success']
+
+    @patch('fn_scheduler.lib.resilient_helper.get_rules')
+    @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
+    def test_tzinfo(self, mock_get_incident, mock_get_rules,
+                     circuits_app):
+        """ Test calling with sample values for the parameters """
+        setup_mock_incident(mock_get_incident)
+        setup_mock_actions(mock_get_rules)
+
+        rule_label = u"{}_{}".format("tz_info", yyyymmdd)
+
+        tzinfo_nyc = tz.gettz('UTC')
+
+        dt = ResilientScheduler.get_interval("2h", date=True, tzinfo=tzinfo_nyc)
+        scheduler_type_value = dt.strftime('%Y-%m-%d %H:%M:%S')
+
+        function_params = {
+            "scheduler_type": "date",
+            "scheduler_type_value": scheduler_type_value,
+            "scheduler_rule_name": "Test Rule",
+            "scheduler_rule_parameters": None,
+            "scheduler_label_prefix": rule_label,
+            "incident_id": 123,
+            "object_id": None,
+            "row_id": None
+        }
+        results = call_create_a_scheduled_rule_function(circuits_app, function_params)
+        assert results['success']
+        orig_time = datetime.datetime.strptime(scheduler_type_value, '%Y-%m-%d %H:%M:%S')
+        run_time = datetime.datetime.strptime(results.get("content").get("next_run_time"), '%b %d %Y %I:%M%p')
+        assert (orig_time - run_time).total_seconds() < 60

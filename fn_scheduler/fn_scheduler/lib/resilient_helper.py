@@ -7,6 +7,9 @@ from fn_scheduler.components import SECTION_SCHEDULER
 
 LOG = logging.getLogger(__name__)
 
+RULE_TYPE_LOOKUP = ["", "tasks", "notes", "milestones", "artifacts", "attachments", None, "organizations"]
+REVERSE_TYPE_LOOKUP = ["incident", "task", "note", "milestone", "artifact", "attachment", "", "organization"]
+
 def get_incident(rest_client, incident_id):
     """
     api call to get a resilient incident
@@ -113,7 +116,7 @@ def get_playbooks(rest_client):
         ]
     }
 
-    return rest_client.post(url, payload)
+    return rest_client.post(url, payload, skip_retry=[403]) # 403 - forbidden
 
 def add_comment(rest_client, incident_id, comment):
     """
@@ -139,11 +142,10 @@ def lookup_object_type(rest_client, type_id):
     :param type: internal number of object
     :return: object name or ValueError if not found
     """
-    lookup = ['', 'tasks', 'notes', 'milestones', 'artifacts', 'attachments', None, 'organizations']
 
-    if type_id <= len(lookup):
-        if lookup[type_id] is not None:
-            return lookup[type_id]
+    if type_id <= len(RULE_TYPE_LOOKUP):
+        if RULE_TYPE_LOOKUP[type_id] is not None:
+            return RULE_TYPE_LOOKUP[type_id]
     else:
         # check to see if a datatable
         url = "/types/{}".format(type_id)
@@ -153,6 +155,18 @@ def lookup_object_type(rest_client, type_id):
             return "table_data"
 
     raise ValueError("Rule type not supported")
+
+def reverse_lookup_object_type(object_type_name):
+    """ return the object_id based on it's name, such as incident or artifact 
+    TODO datatables
+    """
+    ndx = 0
+    for object_name in REVERSE_TYPE_LOOKUP:
+        if object_name == object_type_name.lower():
+            return ndx
+        ndx += 1
+
+    raise ValueError(f"Rule type name not supported: {object_type_name}")
 
 def validate_app_config(options):
     """

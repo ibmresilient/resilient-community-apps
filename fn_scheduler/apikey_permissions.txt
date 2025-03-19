@@ -70,6 +70,6 @@ read_all_incidents
 #read_stats
 #edit_workflow
 #read_all_action_invocations
-run_all_invocations
+#run_all_invocations
 edit_data
 read_playbook

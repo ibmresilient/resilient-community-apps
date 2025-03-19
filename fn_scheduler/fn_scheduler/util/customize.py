@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4368
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.2.1096
 
-"""Generate the Resilient customizations required for fn_scheduler"""
+"""Generate the SOAR customizations required for fn_scheduler"""
 
 import base64
 import os
@@ -33,6 +34,8 @@ def codegen_reload_data():
             u"scheduled_rule_pause",
             u"scheduled_rule_resume"
         ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -62,7 +65,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
