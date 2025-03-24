@@ -50,6 +50,7 @@
 | 1.1.0 | 06/2023 | Added support for OAuth, Client Side Authentication using certificates, JWT |
 | 1.2.0 | 11/2023 | Added support for Retry mechanism, attachments, query parameters and json formatted body for content-type/json (case-insensitive) |
 | 1.2.1 | 08/2024 | Rebuilt the app to use the latest STOMP package |
+| 1.3.0 | 03/2025 | Added `rest_api_verify_file` function parameter for server certificates |
 
 ---
 
@@ -515,7 +516,8 @@ Note:   The client authentication certificate and private key are commonly given
 | `rest_api_headers` | `textarea` | No | `-` | Request headers. See [Input Considerations](#input-considerations) for format |
 | `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. See [Input Considerations](#input-considerations) for format |
 | `rest_api_body` | `textarea` | No | `-` | Request body. See [Input Considerations](#input-considerations) for format |
-| `rest_api_verify` | `boolean` | Yes | `True` | Verify SSL certificate |
+| `rest_api_verify` | `boolean` | No | `True` | Verify SSL certificate |
+| `rest_api_verify_file` | `str` | No | `/path/to/server_certificate.pem` | Server certificate bundle. This file will overwrite the use of `rest_api_verify` |
 | `rest_api_timeout` | `number` | No | `60` | Request timeout in seconds |
 | `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 are allowed by default |
 | `rest_api_query_parameters` | `textarea` | No | `60` | Request  timeout in seconds |

@@ -482,6 +482,10 @@
 <td><p>08/2024</p></td>
 <td><p>Rebuilt the app to use the latest STOMP package</p></td>
 </tr>
+<tr class="row-even"><td><p>1.3.0</p></td>
+<td><p>03/2025</p></td>
+<td><p>Added <code class="docutils literal notranslate"><span class="pre">rest_api_verify_file</span></code> function parameter for server certificates</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1028,173 +1032,179 @@ JWT based authentication can be performed in 2 ways:</p>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_verify</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 <td><p>Verify SSL certificate</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_timeout</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_verify_file</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/path/to/server_certificate.pem</span></code></p></td>
+<td><p>Server certificate bundle. This file will overwrite the use of <code class="docutils literal notranslate"><span class="pre">rest_api_verify</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_timeout</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
 <td><p>Request timeout in seconds</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_allowed_status_codes</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_allowed_status_codes</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;305,</span> <span class="pre">404,</span> <span class="pre">500&quot;</span></code></p></td>
 <td><p>Comma separated list. All codes &lt; 300 are allowed by default</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_query_parameters</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_api_query_parameters</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
 <td><p>Request  timeout in seconds</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_tries</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_tries</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
 <td><p>The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_delay</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_delay</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
 <td><p>Initial delay in seconds between attempts. Default: 0</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_backoff</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rest_retry_backoff</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
 <td><p>Multiplier applied to delay in seconds between attempts. Default: 1 (no backoff)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_token_url</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_token_url</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://www.example.com/oauth/token</span></code></p></td>
 <td><p>URL for the Authorization server endpoint</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
 <td><p>ID of the incident in which the artifact or attachment is present</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">artifact_id</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">artifact_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
 <td><p>Used to identify the attachment that is to be sent with the REST request</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_id</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
 <td><p>Used to identify file-based artifact that is to be sent with the REST request</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">send_file_as_body</span> </code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">send_file_as_body</span> </code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>`False``</p></td>
 <td><p>Sends the attachment as request body instead of multipart/form-data</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_form_field_name</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">attachment_form_field_name</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">file</span></code></p></td>
 <td><p>the content-disposition header name for multipart/form-data</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_client_id</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_client_id</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Identifies the client application</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_client_secret</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_client_secret</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Authenticates the client application (required for certain grant types)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_redirect_uri</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_redirect_uri</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://www.example.com/redirect</span></code></p></td>
 <td><p>The redirect URI used during the authorization flow (for authorization code grant)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_scope</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_scope</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">read</span> <span class="pre">write</span> <span class="pre">delete</span> <span class="pre">offline_access</span></code></p></td>
 <td><p>Set of permissions granted by the resource owner (user) to the client application</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_code</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_code</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>The authorization code received during the authorization flow (for authorization code grant)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_access_token</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_access_token</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Resultant token of the Authentication process</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_refresh_token</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_refresh_token</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>The refresh token used to obtain a new access token (for refresh token grant)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_token_type</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth_token_type</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">Bearer</span></code></p></td>
 <td><p>Provides information to the client application about the token’s characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_headers</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_headers</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>headers of the JWT, contains metadata about the token</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_payload</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_payload</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Payload to be included in the token</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_key</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_key</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>key used for signing the JWT</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_algorithm</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_algorithm</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Encryption algorithm used for encoding the JWT. Defaults to “HS256” algorithm</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_token</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt_token</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>Fully complied JWT token, at times referenced as the Access_token</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_key</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_key</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>.key file contents to be pasted as plain text. To be provided with client_auth_cert</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_cert</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_cert</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 <td><p>.csr file contents to be pasted as plain text. Requires client_auth_key to function</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_pem</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">client_auth_pem</span></code></p></td>
 <td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
