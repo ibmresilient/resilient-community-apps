@@ -25,20 +25,12 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
-### v2.0.0
-* Added support for App Host
-* Changed message destination from `shodan` to `fn_shodan`
-* Changed app config section from `[shodan]` to `[fn_shodan]`
-* Added proxy support. Added the configs `http_proxy` and `https_proxy`
-* Added example Rule: `Example: Shodan Host Lookup`
-* Added example Workflow: `example_shodan_host_lookup`
-
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 2.0.1 | 03/2025 | Converted example workflows to python3 |
+| 2.0.0 | 09/2020 | Added support for App Host, Changed message destination from `shodan` to `fn_shodan`, Changed app config section from `[shodan]` to `[fn_shodan]`,
+                    Added proxy support. Added the configs `http_proxy` and `https_proxy`, Added example Rule: `Example: Shodan Host Lookup`, Added example Workflow: `example_shodan_host_lookup`|
+| 1.0.0 | 12/2018 | Initial Release |
 
 ---
 
@@ -64,7 +56,7 @@ You will need an API key for Shodan - https://developer.shodan.io/billing/signup
   List any Requirements 
 -->
 * Resilient platform >= `v35.0.0`
-* An Integration Server running `resilient_circuits>=33.0.0`
+* An Integration Server running `resilient_circuits>=51.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
       * Org Data: Read, Edit

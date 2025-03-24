@@ -429,27 +429,30 @@
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
-<section id="v2-0-0">
-<h3>v2.0.0<a class="headerlink" href="#v2-0-0" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Added support for App Host</p></li>
-<li><p>Changed message destination from <code class="docutils literal notranslate"><span class="pre">shodan</span></code> to <code class="docutils literal notranslate"><span class="pre">fn_shodan</span></code></p></li>
-<li><p>Changed app config section from <code class="docutils literal notranslate"><span class="pre">[shodan]</span></code> to <code class="docutils literal notranslate"><span class="pre">[fn_shodan]</span></code></p></li>
-<li><p>Added proxy support. Added the configs <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> and <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code></p></li>
-<li><p>Added example Rule: <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">Shodan</span> <span class="pre">Host</span> <span class="pre">Lookup</span></code></p></li>
-<li><p>Added example Workflow: <code class="docutils literal notranslate"><span class="pre">example_shodan_host_lookup</span></code></p></li>
-</ul>
-</section>
-<section id="v1-0-0">
-<h3>v1.0.0<a class="headerlink" href="#v1-0-0" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Initial Release</p></li>
-</ul>
-</section>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2.0.1</p></td>
+<td><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.0.0</p></td>
+<td><p>09/2020</p></td>
+<td><p>Added support for App Host, Changed message destination from <code class="docutils literal notranslate"><span class="pre">shodan</span></code> to <code class="docutils literal notranslate"><span class="pre">fn_shodan</span></code>, Changed app config section from <code class="docutils literal notranslate"><span class="pre">[shodan]</span></code> to <code class="docutils literal notranslate"><span class="pre">[fn_shodan]</span></code>,</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                Added proxy support. Added the configs `http_proxy` and `https_proxy`, Added example Rule: `Example: Shodan Host Lookup`, Added example Workflow: `example_shodan_host_lookup`|
+</pre></div>
+</div>
+<p>| 1.0.0 | 12/2018 | Initial Release |</p>
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -472,7 +475,7 @@
 -->
 <ul class="simple">
 <li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">v35.0.0</span></code></p></li>
-<li><p>An Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=33.0.0</span></code></p>
+<li><p>An Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code></p>
 <ul>
 <li><p>To set up an Integration Server see: <a class="reference external" href="https://ibm.biz/res-int-server-guide">ibm.biz/res-int-server-guide</a></p></li>
 <li><p>If using API Keys, minimum required permissions are:</p>
@@ -712,11 +715,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Shodan</a><ul>
-<li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#v2-0-0">v2.0.0</a></li>
-<li><a class="reference internal" href="#v1-0-0">v1.0.0</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 <li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#installation-app-host">Installation (App Host)</a></li>
