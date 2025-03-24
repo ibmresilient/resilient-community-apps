@@ -57,6 +57,8 @@ method  = ""
 url     = ""
 
 verify  = True
+# specify verify_file if server certificate needs to be specified
+verify_file = None # /path/to/server_certificate.pem
 
 params  = None
 
@@ -84,6 +86,9 @@ inputs.rest_api_url     = url
 
 # Indicates whether to verify SSL certificates (boolean).
 inputs.rest_api_verify  = verify if verify not in [None, ''] else True
+
+if verify_file:
+  inputs.rest_api_verify_file = verify_file
 
 # REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method
 inputs.rest_api_method  = method if method and method in REST_METHODS else REST_METHODS[0] 

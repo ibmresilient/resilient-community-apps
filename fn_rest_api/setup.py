@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_rest_api",
     display_name="REST API Functions for SOAR",
-    version="1.2.1", # note that this is the second release of 1.2.0 with a refreshed underlying resilient libraries
+    version="1.3.0", 
     license="MIT",
     author="IBM SOAR",
     author_email="",

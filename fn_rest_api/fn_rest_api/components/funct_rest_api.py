@@ -61,7 +61,9 @@ class FunctionComponent(AppFunctionComponent):
             .. note::
                 The value held in the app's config will be overwritten if a value is passed in by the call
                 to ``execute``.
-        :type fn_inputs.rest_api_verify: bool or str.
+        :type fn_inputs.rest_api_verify: bool.
+        :param fn_inputs.rest_api_verify_file: (Optional) path to a file containing a server PEM-encoded certificate bundle.
+        :type fn_inputs.rest_api_verify_file: str
         :param fn_inputs.rest_api_timeout: (Optional) Number of seconds to wait for the server to send data
             before sending a float or a timeout tuple (connect timeout, read timeout)
         :type fn_inputs.rest_api_timeout: float or tuple
@@ -187,8 +189,7 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
         validate_fields([
             "rest_api_method",
-            "rest_api_url",
-            "rest_api_verify"
+            "rest_api_url"
             ], fn_inputs)
 
         rest_options = rest_properties = oauth_properties = certs_path = {}
@@ -201,8 +202,12 @@ class FunctionComponent(AppFunctionComponent):
         rest_options = {
             "method"  : self.get_select_param(getattr(fn_inputs, "rest_api_method")),
             "url"     : getattr(fn_inputs, "rest_api_url"), # text
-            "verify"  : getattr(fn_inputs, "rest_api_verify"), # boolean
-            "timeout" : getattr(fn_inputs, "rest_api_timeout", 60)} # Default timeout to 60 seconds
+            "timeout" : getattr(fn_inputs, "rest_api_timeout", 60)
+        } # Default timeout to 60 seconds
+        if hasattr(fn_inputs, "rest_api_verify"):
+            rest_options["verify"] = fn_inputs.rest_api_verify
+        if getattr(fn_inputs, "rest_api_verify_file", None):
+            rest_options["verify"] = fn_inputs.rest_api_verify_file
 
         rest_properties = {
             "body"    : self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None)), # textarea

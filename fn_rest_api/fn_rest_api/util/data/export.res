@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1723470678179,
+  "export_date": 1742585776761,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/client_auth_key",
       "hide_notification": false,
-      "id": 876,
+      "id": 324,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_token",
       "hide_notification": false,
-      "id": 877,
+      "id": 325,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -76,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_algorithm",
       "hide_notification": false,
-      "id": 878,
+      "id": 326,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/rest_retry_tries",
       "hide_notification": false,
-      "id": 879,
+      "id": 327,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_method",
       "hide_notification": false,
-      "id": 880,
+      "id": 328,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -159,7 +159,7 @@
           "label": "GET",
           "properties": null,
           "uuid": "dbd52017-9fb5-430f-9791-90a86e0f8a7b",
-          "value": 521
+          "value": 52
         },
         {
           "default": false,
@@ -168,7 +168,7 @@
           "label": "HEAD",
           "properties": null,
           "uuid": "b8cc8517-0d5f-4cd9-958e-30fe0d2822ec",
-          "value": 522
+          "value": 53
         },
         {
           "default": false,
@@ -177,7 +177,7 @@
           "label": "POST",
           "properties": null,
           "uuid": "b4627fb2-de27-4776-b6e5-7cefb3823fad",
-          "value": 523
+          "value": 54
         },
         {
           "default": false,
@@ -186,7 +186,7 @@
           "label": "PUT",
           "properties": null,
           "uuid": "34e698d5-d533-4982-99ff-decc295efc77",
-          "value": 524
+          "value": 55
         },
         {
           "default": false,
@@ -195,7 +195,7 @@
           "label": "DELETE",
           "properties": null,
           "uuid": "9f0463a3-c12c-40a1-9add-4295566daea1",
-          "value": 525
+          "value": 56
         },
         {
           "default": false,
@@ -204,7 +204,7 @@
           "label": "OPTIONS",
           "properties": null,
           "uuid": "e0b8ac0a-1f29-471b-9fca-3b6b7e5031ba",
-          "value": 526
+          "value": 57
         },
         {
           "default": false,
@@ -213,7 +213,7 @@
           "label": "PATCH",
           "properties": null,
           "uuid": "e6857ebe-27f1-48bf-84b2-66481548306c",
-          "value": 527
+          "value": 58
         }
       ]
     },
@@ -227,7 +227,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_timeout",
       "hide_notification": false,
-      "id": 881,
+      "id": 329,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -256,7 +256,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 882,
+      "id": 330,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -285,7 +285,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_id",
       "hide_notification": false,
-      "id": 883,
+      "id": 331,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -312,9 +312,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/rest_api_verify_file",
+      "hide_notification": false,
+      "id": 2917,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "rest_api_verify_file",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "/path/to/server_certificate.pem",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "rest_api_verify_file",
+      "tooltip": "Server certificate in PEM format",
+      "type_id": 11,
+      "uuid": "c5580e89-e63b-47df-85d5-a1c9a1c4ff01",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/oauth_access_token",
       "hide_notification": false,
-      "id": 884,
+      "id": 332,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -343,7 +372,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_cookies",
       "hide_notification": false,
-      "id": 885,
+      "id": 333,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -382,7 +411,7 @@
       "deprecated": false,
       "export_key": "__function/send_file_as_body",
       "hide_notification": false,
-      "id": 886,
+      "id": 334,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -411,7 +440,7 @@
       "deprecated": false,
       "export_key": "__function/artifact_id",
       "hide_notification": false,
-      "id": 887,
+      "id": 335,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -440,7 +469,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_allowed_status_codes",
       "hide_notification": false,
-      "id": 888,
+      "id": 336,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -469,7 +498,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_query_parameters",
       "hide_notification": false,
-      "id": 889,
+      "id": 337,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -490,7 +519,7 @@
     },
     {
       "allow_default_value": false,
-      "blank_option": true,
+      "blank_option": false,
       "calculated": false,
       "changeable": true,
       "chosen": false,
@@ -498,7 +527,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_verify",
       "hide_notification": false,
-      "id": 890,
+      "id": 338,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -508,7 +537,6 @@
       "placeholder": "",
       "prefix": null,
       "read_only": false,
-      "required": "always",
       "rich_text": false,
       "tags": [],
       "templates": [],
@@ -528,7 +556,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_code",
       "hide_notification": false,
-      "id": 891,
+      "id": 339,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -557,7 +585,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_headers",
       "hide_notification": false,
-      "id": 892,
+      "id": 340,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -586,7 +614,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_grant_type",
       "hide_notification": false,
-      "id": 893,
+      "id": 341,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -615,7 +643,7 @@
       "deprecated": false,
       "export_key": "__function/client_auth_cert",
       "hide_notification": false,
-      "id": 894,
+      "id": 342,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -644,7 +672,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_client_secret",
       "hide_notification": false,
-      "id": 895,
+      "id": 343,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -673,7 +701,7 @@
       "deprecated": false,
       "export_key": "__function/rest_retry_delay",
       "hide_notification": false,
-      "id": 896,
+      "id": 344,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -702,7 +730,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_form_field_name",
       "hide_notification": false,
-      "id": 897,
+      "id": 345,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -731,7 +759,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_key",
       "hide_notification": false,
-      "id": 898,
+      "id": 346,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -760,7 +788,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_client_id",
       "hide_notification": false,
-      "id": 899,
+      "id": 347,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -789,7 +817,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_refresh_token",
       "hide_notification": false,
-      "id": 900,
+      "id": 348,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -818,7 +846,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_body",
       "hide_notification": false,
-      "id": 901,
+      "id": 349,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -847,7 +875,7 @@
       "deprecated": false,
       "export_key": "__function/client_auth_pem",
       "hide_notification": false,
-      "id": 902,
+      "id": 350,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -876,7 +904,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_token_type",
       "hide_notification": false,
-      "id": 903,
+      "id": 351,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -905,7 +933,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_redirect_uri",
       "hide_notification": false,
-      "id": 904,
+      "id": 352,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -934,7 +962,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_token_url",
       "hide_notification": false,
-      "id": 905,
+      "id": 353,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -963,7 +991,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_scope",
       "hide_notification": false,
-      "id": 906,
+      "id": 354,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -992,7 +1020,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 729,
+      "id": 355,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1021,7 +1049,7 @@
       "deprecated": false,
       "export_key": "__function/rest_retry_backoff",
       "hide_notification": false,
-      "id": 907,
+      "id": 356,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1050,7 +1078,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_payload",
       "hide_notification": false,
-      "id": 908,
+      "id": 357,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1079,7 +1107,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_headers",
       "hide_notification": false,
-      "id": 909,
+      "id": 358,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1108,7 +1136,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_url",
       "hide_notification": false,
-      "id": 910,
+      "id": 359,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1141,7 +1169,7 @@
   ],
   "functions": [
     {
-      "created_date": 1723470655067,
+      "created_date": 1731678192533,
       "description": {
         "content": "This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS.\n\nThe function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.",
         "format": "text"
@@ -1149,14 +1177,14 @@
       "destination_handle": "fn_rest_api",
       "display_name": "Call REST API",
       "export_key": "rest_api",
-      "id": 92,
+      "id": 2,
       "last_modified_by": {
-        "display_name": "SOAR_Apps_Dev",
-        "id": 8,
-        "name": "0624e4db-d2fa-4b7b-a678-77e3fe3edac2",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 20,
+        "name": "sysadmin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1723470655067,
+      "last_modified_time": 1742581462730,
       "name": "rest_api",
       "output_description": {
         "content": null,
@@ -1166,7 +1194,7 @@
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"ok\": {\"type\": \"boolean\"}, \"url\": {\"type\": \"string\"}, \"status_code\": {\"type\": \"integer\"}, \"reason\": {\"type\": \"string\"}, \"cookies\": {\"type\": \"object\", \"properties\": {\"sails.sid\": {\"type\": \"string\"}}}, \"headers\": {\"type\": \"object\", \"properties\": {\"Date\": {\"type\": \"string\"}, \"Content-Type\": {\"type\": \"string\"}, \"Content-Length\": {\"type\": \"string\"}, \"Connection\": {\"type\": \"string\"}, \"ETag\": {\"type\": \"string\"}, \"set-cookie\": {\"type\": \"string\"}}}, \"elapsed\": {\"type\": \"integer\"}, \"apparent_encoding\": {\"type\": \"string\"}, \"text\": {\"type\": \"string\"}, \"json\": {\"type\": \"object\", \"properties\": {\"args\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}}, \"headers\": {\"type\": \"object\", \"properties\": {\"x-forwarded-proto\": {\"type\": \"string\"}, \"x-forwarded-port\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"x-amzn-trace-id\": {\"type\": \"string\"}, \"content-length\": {\"type\": \"string\"}, \"user-agent\": {\"type\": \"string\"}, \"accept-encoding\": {\"type\": \"string\"}, \"accept\": {\"type\": \"string\"}, \"content-type\": {\"type\": \"string\"}, \"x-frooble\": {\"type\": \"string\"}, \"authorization\": {\"type\": \"string\"}}}, \"url\": {\"type\": \"string\"}}}, \"links\": {\"type\": \"object\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"rest_api_headers\": {\"type\": \"string\"}, \"rest_api_method\": {\"type\": \"string\"}, \"rest_api_verify\": {\"type\": \"boolean\"}, \"rest_api_allowed_status_codes\": {\"type\": \"string\"}, \"rest_api_url\": {\"type\": \"string\"}, \"rest_api_body\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "5f728e3d-a4a0-4c6f-9f09-04468edc4d10",
-      "version": 0,
+      "version": 8,
       "view_items": [
         {
           "content": "984922d9-24f1-444f-8967-8199742c8bf9",
@@ -1210,6 +1238,14 @@
         },
         {
           "content": "d978e98d-f0a9-407d-b797-e18f83d43e24",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "c5580e89-e63b-47df-85d5-a1c9a1c4ff01",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1462,13 +1498,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 182,
+  "id": 66,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1723470675701,
+      "create_date": 1742585774218,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1477,7 +1513,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1723470675701,
+      "update_date": 1742585774218,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1486,7 +1522,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "0624e4db-d2fa-4b7b-a678-77e3fe3edac2"
+        "1d3f5e18-f447-4cd6-bdc9-9fb9843bd257"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -1494,7 +1530,9 @@
       "name": "fn_rest_api",
       "programmatic_name": "fn_rest_api",
       "tags": [],
-      "users": [],
+      "users": [
+        "sysadmin@example.com"
+      ],
       "uuid": "f48d3cce-8d24-4afe-a79f-28df9c4c5b19"
     }
   ],
@@ -1505,15 +1543,15 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" isExecutable=\"true\" name=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0c2h19h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Call REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f728e3d-a4a0-4c6f-9f09-04468edc4d10\"\u003e{\"inputs\":{\"d978e98d-f0a9-407d-b797-e18f83d43e24\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"984922d9-24f1-444f-8967-8199742c8bf9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"dbd52017-9fb5-430f-9791-90a86e0f8a7b\"}},\"7d537dd9-c07d-4bb8-8135-e09eb4fe7896\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"db425783-b537-4b32-bd14-0aa247524857\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"c999b7b4-0638-4979-9676-043ea8550f52\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"30a4cbd0-09bd-488e-bde6-f1765a14aa8d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"a1f12637-495d-4de6-a332-130a497bda5c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d380e625-4828-4726-9f85-9d588aeeb159\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# ======================================================================================================================== #\\n#                                                    ===============                                                       #\\n#                                                     CALL REST API                                                        #\\n#                                                    ===============                                                       #\\n# ======================================================================================================================== #\\n\\n# This is a tool that can be used in the field of API (Application Programming Interface) development and testing. It\\n# provides a highly customizable interface for making HTTP requests, sending and receiving data, and testing APIs.\\n# With this, developers can easily create and manage API requests using a variety of HTTP methods such as GET, POST, PUT,\\n# DELETE, etc. Users can also specify request headers, parameters, and body content for different types of requests.\\n# It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side \\n# authentication.\\n\\nmethod  = \\\"\\\"\\n\\nurl     = \\\"\\\"\\n\\nverify  = True\\n\\nparams  = None\\n\\nheader  = None\\n\\nbody    = None\\n\\ncookie  = None\\n\\ntimeout = None\\n\\nretry_tries = None\\n\\nretry_delay = None\\n\\nretry_backoff = None\\n\\nallowed_status_code = \\\"200, 201, 202\\\"\\n\\nREST_METHODS = [\\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\", \\\"PATCH\\\"]\\n\\n\\n# Endpoint url\\ninputs.rest_api_url     = url\\n\\n# Indicates whether to verify SSL certificates (boolean).\\ninputs.rest_api_verify  = verify if verify not in [None, \u0027\u0027] else True\\n\\n# REST methods: \\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\" and \\\"PATCH\\\". Defaults to GET method\\ninputs.rest_api_method  = method if method and method in REST_METHODS else REST_METHODS[0] \\n\\n# Time in seconds to wait before timing-out request. Default: 60 seconds.\\ninputs.rest_api_timeout = timeout if timeout else None\\n\\n# Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_headers = header if header else None\\n\\n# Cookies for request. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_cookies = cookie if cookie else None\\n\\n# Request body. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_body    = body if body else None\\n\\n# Parameters used for API calls added to the URL. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_query_parameters = params\\n\\n\\n#                                                 =====================\\n#                                                  ALLOWED_STATUS_CODE \\n#                                                 =====================\\n\\n# Any status code below 300 is allowed by default. If you specify codes above 300, they are\\n# exempted from raising an exception and thereby returns the endpoint response. Multiple\\n# status codes can be specified as a string in a command separated fashion.\\n#\\n#    Example:\\n#    --------\\n#     inputs.rest_api_allowed_status_codes = \\\"305, 400, 404, 500\\\"\\n\\n\\n# Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default\\ninputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None\\n\\n#                                                       =======\\n#                                                        RETRY\\n#                                                       =======\\n\\n# This mechanism ensures the reliable exchange of data by automatically reattempting requests \\n# that have failed.\\n\\n# 1. RETRY_TRIES (rest_retry_tries):\\n#\\n#     This parameter defines the maximum number of retry attempts that will be made for a \\n#     failed request before the system ceases further retry efforts.\\n#     Default value : 1 (no retry)\\n\\n# 2. RETRY_DELAY (rest_retry_delay):\\n#\\n#     This parameter used to define the delay between retry attempts when a request fails and\\n#     the request retry mechanism is invoked. Default value : 1 (no delay)\\n\\n# 3. RETRY_BACKOFF (rest_retry_backoff):\\n#\\n#     This parameter is used to specify the multiplier applied to delay between attempts.\\n#     Default: 1 (no backoff). \\n#\\n#       Example:\\n#\\n#       For these values:\\n#         RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3\\n#\\n#       The retry mechanism attempts requests in the following manner:\\n#\\n#         - attempts request 1. if failed, attempts retry in 2 seconds.\\n#         - attempts request 2. if failed, attempts retry in 6 seconds.\\n#         - attempts request 3. if failed, attempts retry in 18 seconds.\\n#         - attempts request 4. if failed, raises exception or follows an \\n#                               alternative error-handling process.\\n\\n# You can find more information on this in the link below. https://github.com/eSAMTrade/retry#retry_call \\n\\n\\n# The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries.\\ninputs.rest_retry_tries   = retry_tries\\n\\n# Initial delay between attempts. Default: 1\\ninputs.rest_retry_delay   = retry_delay\\n\\n # Multiplier applied to delay between attempts. Default: 1 (no backoff)\\ninputs.rest_retry_backoff = retry_backoff\\n\\n#                                                    ================\\n#                                                       Attachment   \\n#                                                    ================\\n\\n# Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.\\n# The following fields can be used to find and locate the file to be sent.\\n\\n# Note: Only one file can be sent per request. If both attachment_id and artifact_id is provided,\\n#       the application will prioritize attachment over artifact\\n\\n# [Required] ID of the incident in which the artifact or attachment is present. dtype : int\\ninputs.incident_id   = incident.id\\n\\n# [Optional] ID of the incident in which the artifact or attachment is present. dtype : int\\ninputs.task_id = task.id if task else None\\n\\n# Used to identify the attachment that is to be sent with the REST request. dtype : int\\ninputs.attachment_id = None\\n\\n# Used to identify file-based artifact that is to be sent with the REST request. dtype : int\\ninputs.artifact_id   = None\\n\\n# REQUEST FORMAT\\n# --------------\\n\\n# The endpoint has the capability to receive a REST request containing a file attachment in various formats.\\n# The selection of the methodology for sending a file depends on the specific requirements of the endpoint.\\n\\n# 1. file bundled as a multipart/form-data:\\n#\\n#  This methodology sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the\\n#  request is a series of parts, each of which contains files that are base64 encoded. The body of the request is\\n#  divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.\\n#  Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,\\n#  along with the actual data itself. While the `type` is automatically assigned by the application, the `name`\\n#  is supposed to be provided by the user in the below field.\\n\\n#  Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type\\n#  is automatically set by the application, and a disposition name. This disposition name changes with regard to\\n#  the endpoint that is being used and is to be set by the user. Default value : \\\"file\\\"\\n\\ninputs.attachment_form_field_name = \\\"file\\\"\\n\\n# sends file as multipart/form-data\\ninputs.send_file_as_body = False\\n\\n\\n# 2. file bundled as request body:\\n#\\n#   This methodology sends the binary data of the file as REST request body. Certain endpoints require\\n#   files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False\\n\\n# Uncomment the following line to send file as REST request body\\n# inputs.send_file_as_body = True\\n\\n# Note: The body of the request has to be empty, i.e. inputs.rest_api_body = None, otherwise the application\\n#       will raise an error\\n\\n\\n\\n#                                                       =========\\n#                                                        SECRETS\\n#                                                       =========\\n\\n# SECRETS can be directly substituted into input parameters, there by avoiding\\n# the need to expose any sensitive information as plain text. This can be done by\\n# creating a SECRET under the application\u0027s configuration tab and referencing the \\n# same with a `$` sign followed by the SECRET\u0027s name enclosed within curly\\n# brace. PAM Credentials can also be referenced it a similar fashion.\\n#\\n#    Format:\\n#    -------\\n#      SECRETS : ${SECRET_NAME}\\n#      PAM     : ^{PAM_CREDENTIALS}\\n#\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#\\n#      inputs.rest_api_headers = json.dumps({\\n#        \\\"Content-Type\\\"  : \\\"application/json\\\",\\n#        \\\"X-Frooble\\\"     : \\\"Baz\\\",\\n#        \\\"Authorization\\\" : \\\"bearer ${API_TOKEN}\\\"\\n#      })\\n#\\n\\n#                                                  ====================                                                  \\n#                                                   DICT / JSON FORMAT                                                      \\n#                                                  ====================                                                  \\n\\n# Function inputs can only accept values that are either strings, numbers, or \\n# booleans, and they cannot accommodate more intricate data structures like lists\\n# or dictionaries. Nonetheless, specific REST request parameters necessitate input\\n# in the form of key-value pairs. To address this constraint, you can provide inputs\\n# for such parameters using one of the methods described below.\\n# \\n#     Supported fields\\n#     ----------------\\n#       - inputs.rest_api_headers\\n#       - inputs.rest_api_cookies\\n#       - inputs.rest_api_body \\n#       - inputs.rest_api_query_parameters\\n#       - inputs.jwt_headers\\n#       - inputs.jwt_payload\\n#\\n\\n# 1. JSON format:\\n#    ------------\\n#\\n#    Standard json file format. Supports complex data structures such as lists\\n#    or nested Key-value pairs.\\n#\\n#    Example:\\n#    --------\\n#      inputs.rest_api_body  = \\\"\\\"\\\"\\n#      \\\"name\\\" : \\\"user1\\\",\\n#      \\\"password\\\" : \\\"p@ssword1\\\",\\n#      \\\"role\\\" : \\\"admin\\\",\\n#      \\\"content\\\" : { \\\"site_url\\\" : \\\"www.example.com\\\", \\\"users\\\" : [\\\"user1\\\", \\\"user2\\\"] }\\n#      \\\"\\\"\\\"\\n\\n#    Hint:\\n#    -----\\n#\\n#    An easier way to feed inputs to the above mentioned fields would be using\\n#    python dictionaries. While the inputs don\u0027t directly support dict, the in-built \\n#    json package can be used to convert a python dict to json string.\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#     \\n#      inputs.rest_api_body  = {\\n#       \\\"name\\\"     : \\\"user1\\\",\\n#       \\\"password\\\" : \\\"p@ssword1\\\",\\n#       \\\"role\\\"     : \\\"admin\\\",\\n#       \\\"content\\\"  : { \\n#          \\\"site_url\\\" : \\\"www.example.com\\\",\\n#          \\\"users\\\"    : [\\\"user1\\\", \\\"user2\\\"]\\n#          }\\n#      }\\n#\\n#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string\\n\\n\\n# 2. New-line separated (Legacy)\\n#    ---------------------------\\n#\\n#    This format allows for specifying inputs as key-value pairs, separated\\n#    by a new line. It let\u0027s us create quick and easy inputs that is properly\\n#    formatted for the request. The primary purpose of this format is to retain\\n#    backwards compatibility.\\n#\\n#    Note: This format does not support complex data structures such as lists\\n#          or nested Key-value pairs.\\n#\\n#    Example:\\n#    -------- \\n#      inputs.rest_api_body = \\\"\\\"\\\"\\n#      name : user1\\n#      password : p@ssword1\\n#      role : admin\\n#      \\\"\\\"\\\"             \\n# \\n#      inputs.rest_api_headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n\\n#                                                     =============\\n#                                                      REUSABILITY\\n#                                                     =============\\n\\n# The function can be reused to make multiple requests to an endpoint or even access \\n# multiple endpoints. This can be achieved by simply modifying the pre-processing script\\n# as per the request and the endpoint.\\n\\n\\n\\n\\n# ======================================================================================================================== #\\n#                                                    ================                                                      #\\n#                                                     AUTHENTICATION                                                       #\\n#                                                    ================                                                      #\\n# ======================================================================================================================== #\\n\\n# The Call REST API function offers support for various authentication protocols that can be employed alongside the REST\\n# request. These authentication methods are entirely voluntary. If the endpoint does not necessitate any form of \\n# authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication\\n# process.\\n\\n# Note: All input parameters should either be set to None or must be removed if not being used for authentication.\\n\\n#                                                     ============= \\n#                                                       OAuth 2.0   \\n#                                                     ============= \\n\\n# OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint\\n# to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different\\n# flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and \\n# possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the \\n# Authentication flow, as mentioned below.\\n\\n# Note:   The exact implementation details of OAuth2 can vary depending on the\\n#         authorization server and the API you are integrating with. Make sure\\n#         to consult the OAuth2 documentation specific to the service you are\\n#         working with.\\n\\n# Method 1: REFRESH_TOKEN\\n#\\n#     It is a credential that is used to obtain a new access token from the\\n#     authorization server when the original access token expires. It is an integral\\n#     part of the OAuth 2.0 protocol and enables long-lived access to protected \\n#     resources without requiring the user to repeatedly authenticate. This can \\n#     be used for prolonged authentication as using a REFRESH_TOKEN generally extends\\n#     the validity of the token. Client ID, Client secret, Redirect URI and token URL\\n#     might also have to be provided.\\n#\\n#     Note: On successfully completing a `refresh-token` flow, the existing client properties are\\n#           updated with the newly fetched values. This means that this client can be used to fetch\\n#           new tokens and values virtually indefinitely.\\n\\n# Method 2: CLIENT-CREDENTIALS\\n#\\n#     Client Credentials Flow doesn\u0027t involve user authentication, and it is suitable\\n#     for scenarios where the client is a confidential client, meaning it can keep it\u0027s\\n#     client credentials (client ID and client secret) secure.\\n#\\n#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,\\n#           the existing client properties are updated with the newly fetched values. This means\\n#           the client goes from `Client-Credentials Flow` to `Refresh-Token flow` moving forward.\\n#           This means that this client can be used to fetch new tokens and values virtually\\n#           indefinitely.\\n\\n# Method 3: AUTHORIZATION (CODE):\\n#\\n#     The authorization server redirects the user back to address specified on the \\n#     redirect URI with an authorization CODE. This CODE is a temporary token\\n#     that represents the user\u0027s authorization and usually can be used only once.\\n#     This function exchanges the authorization code for an ACCESS_TOKEN (and \\n#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making\\n#     a request to the authorization server\u0027s token endpoint, providing the \\n#     authorization CODE, client ID, client secret, token URL and redirect URI.\\n#\\n#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,\\n#           the existing client properties are updated with the newly fetched values. This means\\n#           the client goes from `Authorization Flow` to `Refresh-Token flow` moving forward.\\n#           This means that this client can be used to fetch new tokens and values virtually\\n#           indefinitely.\\n\\n# Method 4: ACCESS_TOKEN\\n#\\n#      If an ACCESS_TOKEN is available, it can be directly used without having to \\n#      perform authentication. In order to use the ACCESS_TOKEN, all that is required\\n#      is the ACCESS_TOKEN \u0026amp; the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the\\n#      DEFAULT_TOKEN_TYPE (bearer) is used.\\n\\n# URL for the Authorization server endpoint\\ninputs.oauth_token_url     = None\\n\\n# Identifies the client application\\ninputs.oauth_client_id     = None\\n\\n# Authenticates the client application (required for certain grant types)\\ninputs.oauth_client_secret = None\\n\\n# The redirect URI used during the authorization flow (for authorization code grant)\\ninputs.oauth_redirect_uri  = None\\n\\n# Set of permissions granted by the resource owner (user) to the client application\\ninputs.oauth_scope         = None\\n\\n# Provides information to the client application about the token\u0027s characteristics. \\n# Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer\\ninputs.oauth_token_type    = None\\n\\n# Resultant token of the Authentication process\\ninputs.oauth_access_token  = None\\n\\n# The authorization code received during the authorization flow (for authorization code grant)\\ninputs.oauth_code          = None\\n\\n# The refresh token used to obtain a new access token (for refresh token grant)\\ninputs.oauth_refresh_token = None\\n\\n# Specifies methods through which applications can gain Access Tokens. \\n# Commonly used grant_types are : implicit, authorization_code, client_credentials, password.\\ninputs.oauth_grant_type    = None\\n\\n\\n\\n#                                     ==============================================          \\n#                                      Client-side authentication with certificates\\n#                                     ==============================================        \\n\\n# Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to\\n# verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS\\n# authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).\\n# However, with client-side authentication, the client also presents a digital certificate to the server for verification.\\n\\n# Note:   Client-side authentication with certificates provides an extra layer of\\n#         security by ensuring that the client is trusted and authenticated before\\n#         allowing access to sensitive resources or data. And so this can be used \\n#         in tandem with other authentication methods\\n\\n# 1. Client Authentication Certificate (client_auth_cert):\\n#\\n#    A client authentication certificate, also known as a client certificate,\\n#    is a digital certificate that is issued to the client (user or device) as\\n#    part of the mutual authentication process. It contains the client\u0027s public\\n#    key, identifying information (such as the client\u0027s name or ID), and is\\n#    signed by a trusted Certificate Authority (CA) or a self-signed certificate\\n#    if it is a closed system.\\n\\n# 2. Client Authentication Private Key (client_auth_key):\\n#\\n#    Private key is a cryptographic key that corresponds to the client\u0027s public\\n#    key in the client authentication certificate. The private key is securely\\n#    stored by the client and kept confidential. During the SSL/TLS handshake,\\n#    when the server sends a challenge to the client, the client uses its \\n#    private key to decrypt the challenge and generate a response. \\n#    The server then verifies this response to ensure that the client possesses\\n#    the corresponding private key and is thus authenticated.\\n\\n# 3. Client Authentication PEM (client_auth_pem): \\n# \\n#    This is simply the file format used to store both the client authentication\\n#    certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM\\n#    files are a common format for storing cryptographic objects, such as\\n#    certificates and private keys, in a human-readable and ASCII-encoded format.\\n\\n# Note:   The client authentication certificate and private key are commonly given\\n#         together, whereas the PEM file is typically provided separately as an \\n#         independent file.\\n\\n\\n# INPUT FORMAT:\\n# -------------\\n#\\n#    The information within these certificates can be directly copied and pasted as\\n#    plain text into the appropriate certificate type, enclosed within quotation marks.\\n#    When making an API call, the application should automatically generate the\\n#    certificates using the pasted content and will securely discard them upon execution.\\n#    The contents of the certificate/key must always be unencrypted.\\n#\\n#    All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the\\n#    same input format, as shown below.\\n#\\n#   inputs.client_auth_cert = \\\"\\\"\\\"\\n#       -----BEGIN CERTIFICATE-----\\n#       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G\\n#       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E\\n#       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56\\n#       FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5\\n#       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ\\n#       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ\\n#       Y20A9hExGKyHns4hW5KgvA==\\n#       -----END CERTIFICATE-----\\n#       \\\"\\\"\\\"\\n\\n# .CSR file contents to be pasted. Requires client_auth_key to function. Content must be unencrypted.\\ninputs.client_auth_cert = None\\n\\n# .KEY file contents to be pasted. To be provided with client_auth_cert. Content must be unencrypted.\\ninputs.client_auth_key  = None\\n\\n# .PEM file contents to be pasted. Standalone attribute, does not require the above two attribute. Content must be unencrypted.\\ninputs.client_auth_pem  = None\\n\\n#                                                         =======             \\n#                                                           JWT               \\n#                                                         =======             \\n\\n# JWT is also a supported form of authentication. The application has functionality builtin\\n# that allows for the creation, compilation, and manipulation of JWTs. It can accept several\\n# optional parameters to customize the authentication process.\\n\\n# JWT based authentication can be performed in 2 ways:\\n\\n# 1. This application can function with a predefined jwt token. A fully generated JWT \\n# token can be directly provided, and the application will automatically form the REST\\n# headers required for a request.\\n\\ninputs.jwt_token = None\\n\\n# 2. This application can also generate a jwt token. (Skip if you have already specified \\n# a jwt_token). The application can automatically compile a jwt token using certain \\n# parameters which can be provided in json string or line separated format (similar to\\n# REST body/header/cookies). These arguments are usually provided by the endpoint itself.\\n# The application should be able to create and sign a JWT and automatically incorporate it\\n# into the REST request.\\n\\n# headers of the JWT, contains metadata about the token.\\ninputs.jwt_headers   = None\\n\\n# Payload to be included in the token. \\ninputs.jwt_payload   = None\\n\\n# key used for signing the JWT.\\ninputs.jwt_key       = None\\n\\n# Encryption algorithm used for encoding the JWT. Defaults to \\\"HS256\\\" algorithm\\ninputs.jwt_algorithm = None\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rest_response\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c2h19h\u003c/incoming\u003e\u003coutgoing\u003eFlow_08s6wnz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0c2h19h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Process REST Response\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aa0a4d4f-19f0-472b-8c0e-a4b271013452\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08s6wnz\u003c/incoming\u003e\u003coutgoing\u003eFlow_150opgb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08s6wnz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_150opgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_150opgb\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_150opgb\" id=\"Flow_150opgb_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"674\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08s6wnz\" id=\"Flow_08s6wnz_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c2h19h\" id=\"Flow_0c2h19h_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"16\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"429\" y=\"-36\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"454\" y=\"674\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" isExecutable=\"true\" name=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0c2h19h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Call REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f728e3d-a4a0-4c6f-9f09-04468edc4d10\"\u003e{\"inputs\":{\"d978e98d-f0a9-407d-b797-e18f83d43e24\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"984922d9-24f1-444f-8967-8199742c8bf9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"dbd52017-9fb5-430f-9791-90a86e0f8a7b\"}},\"7d537dd9-c07d-4bb8-8135-e09eb4fe7896\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"db425783-b537-4b32-bd14-0aa247524857\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"c999b7b4-0638-4979-9676-043ea8550f52\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"30a4cbd0-09bd-488e-bde6-f1765a14aa8d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"a1f12637-495d-4de6-a332-130a497bda5c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d380e625-4828-4726-9f85-9d588aeeb159\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# ======================================================================================================================== #\\n#                                                    ===============                                                       #\\n#                                                     CALL REST API                                                        #\\n#                                                    ===============                                                       #\\n# ======================================================================================================================== #\\n\\n# This is a tool that can be used in the field of API (Application Programming Interface) development and testing. It\\n# provides a highly customizable interface for making HTTP requests, sending and receiving data, and testing APIs.\\n# With this, developers can easily create and manage API requests using a variety of HTTP methods such as GET, POST, PUT,\\n# DELETE, etc. Users can also specify request headers, parameters, and body content for different types of requests.\\n# It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side \\n# authentication.\\n\\nmethod  = \\\"\\\"\\n\\nurl     = \\\"\\\"\\n\\nverify  = True\\n# specify verify_file if server certificate needs to be specified\\nverify_file = None # /path/to/server_certificate.pem\\n\\nparams  = None\\n\\nheader  = None\\n\\nbody    = None\\n\\ncookie  = None\\n\\ntimeout = None\\n\\nretry_tries = None\\n\\nretry_delay = None\\n\\nretry_backoff = None\\n\\nallowed_status_code = \\\"200, 201, 202\\\"\\n\\nREST_METHODS = [\\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\", \\\"PATCH\\\"]\\n\\n\\n# Endpoint url\\ninputs.rest_api_url     = url\\n\\n# Indicates whether to verify SSL certificates (boolean).\\ninputs.rest_api_verify  = verify if verify not in [None, \u0027\u0027] else True\\n\\nif verify_file:\\n  inputs.rest_api_verify_file = verify_file\\n\\n# REST methods: \\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\" and \\\"PATCH\\\". Defaults to GET method\\ninputs.rest_api_method  = method if method and method in REST_METHODS else REST_METHODS[0] \\n\\n# Time in seconds to wait before timing-out request. Default: 60 seconds.\\ninputs.rest_api_timeout = timeout if timeout else None\\n\\n# Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_headers = header if header else None\\n\\n# Cookies for request. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_cookies = cookie if cookie else None\\n\\n# Request body. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_body    = body if body else None\\n\\n# Parameters used for API calls added to the URL. Refer to ``DICT/JSON FORMAT`` section for more information.\\ninputs.rest_api_query_parameters = params\\n\\n\\n#                                                 =====================\\n#                                                  ALLOWED_STATUS_CODE \\n#                                                 =====================\\n\\n# Any status code below 300 is allowed by default. If you specify codes above 300, they are\\n# exempted from raising an exception and thereby returns the endpoint response. Multiple\\n# status codes can be specified as a string in a command separated fashion.\\n#\\n#    Example:\\n#    --------\\n#     inputs.rest_api_allowed_status_codes = \\\"305, 400, 404, 500\\\"\\n\\n\\n# Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default\\ninputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None\\n\\n#                                                       =======\\n#                                                        RETRY\\n#                                                       =======\\n\\n# This mechanism ensures the reliable exchange of data by automatically reattempting requests \\n# that have failed.\\n\\n# 1. RETRY_TRIES (rest_retry_tries):\\n#\\n#     This parameter defines the maximum number of retry attempts that will be made for a \\n#     failed request before the system ceases further retry efforts.\\n#     Default value : 1 (no retry)\\n\\n# 2. RETRY_DELAY (rest_retry_delay):\\n#\\n#     This parameter used to define the delay between retry attempts when a request fails and\\n#     the request retry mechanism is invoked. Default value : 1 (no delay)\\n\\n# 3. RETRY_BACKOFF (rest_retry_backoff):\\n#\\n#     This parameter is used to specify the multiplier applied to delay between attempts.\\n#     Default: 1 (no backoff). \\n#\\n#       Example:\\n#\\n#       For these values:\\n#         RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3\\n#\\n#       The retry mechanism attempts requests in the following manner:\\n#\\n#         - attempts request 1. if failed, attempts retry in 2 seconds.\\n#         - attempts request 2. if failed, attempts retry in 6 seconds.\\n#         - attempts request 3. if failed, attempts retry in 18 seconds.\\n#         - attempts request 4. if failed, raises exception or follows an \\n#                               alternative error-handling process.\\n\\n# You can find more information on this in the link below. https://github.com/eSAMTrade/retry#retry_call \\n\\n\\n# The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries.\\ninputs.rest_retry_tries   = retry_tries\\n\\n# Initial delay between attempts. Default: 1\\ninputs.rest_retry_delay   = retry_delay\\n\\n # Multiplier applied to delay between attempts. Default: 1 (no backoff)\\ninputs.rest_retry_backoff = retry_backoff\\n\\n#                                                    ================\\n#                                                       Attachment   \\n#                                                    ================\\n\\n# Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.\\n# The following fields can be used to find and locate the file to be sent.\\n\\n# Note: Only one file can be sent per request. If both attachment_id and artifact_id is provided,\\n#       the application will prioritize attachment over artifact\\n\\n# [Required] ID of the incident in which the artifact or attachment is present. dtype : int\\ninputs.incident_id   = incident.id\\n\\n# [Optional] ID of the incident in which the artifact or attachment is present. dtype : int\\ninputs.task_id = task.id if task else None\\n\\n# Used to identify the attachment that is to be sent with the REST request. dtype : int\\ninputs.attachment_id = None\\n\\n# Used to identify file-based artifact that is to be sent with the REST request. dtype : int\\ninputs.artifact_id   = None\\n\\n# REQUEST FORMAT\\n# --------------\\n\\n# The endpoint has the capability to receive a REST request containing a file attachment in various formats.\\n# The selection of the methodology for sending a file depends on the specific requirements of the endpoint.\\n\\n# 1. file bundled as a multipart/form-data:\\n#\\n#  This methodology sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the\\n#  request is a series of parts, each of which contains files that are base64 encoded. The body of the request is\\n#  divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.\\n#  Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,\\n#  along with the actual data itself. While the `type` is automatically assigned by the application, the `name`\\n#  is supposed to be provided by the user in the below field.\\n\\n#  Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type\\n#  is automatically set by the application, and a disposition name. This disposition name changes with regard to\\n#  the endpoint that is being used and is to be set by the user. Default value : \\\"file\\\"\\n\\ninputs.attachment_form_field_name = \\\"file\\\"\\n\\n# sends file as multipart/form-data\\ninputs.send_file_as_body = False\\n\\n\\n# 2. file bundled as request body:\\n#\\n#   This methodology sends the binary data of the file as REST request body. Certain endpoints require\\n#   files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False\\n\\n# Uncomment the following line to send file as REST request body\\n# inputs.send_file_as_body = True\\n\\n# Note: The body of the request has to be empty, i.e. inputs.rest_api_body = None, otherwise the application\\n#       will raise an error\\n\\n\\n\\n#                                                       =========\\n#                                                        SECRETS\\n#                                                       =========\\n\\n# SECRETS can be directly substituted into input parameters, there by avoiding\\n# the need to expose any sensitive information as plain text. This can be done by\\n# creating a SECRET under the application\u0027s configuration tab and referencing the \\n# same with a `$` sign followed by the SECRET\u0027s name enclosed within curly\\n# brace. PAM Credentials can also be referenced it a similar fashion.\\n#\\n#    Format:\\n#    -------\\n#      SECRETS : ${SECRET_NAME}\\n#      PAM     : ^{PAM_CREDENTIALS}\\n#\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#\\n#      inputs.rest_api_headers = json.dumps({\\n#        \\\"Content-Type\\\"  : \\\"application/json\\\",\\n#        \\\"X-Frooble\\\"     : \\\"Baz\\\",\\n#        \\\"Authorization\\\" : \\\"bearer ${API_TOKEN}\\\"\\n#      })\\n#\\n\\n#                                                  ====================                                                  \\n#                                                   DICT / JSON FORMAT                                                      \\n#                                                  ====================                                                  \\n\\n# Function inputs can only accept values that are either strings, numbers, or \\n# booleans, and they cannot accommodate more intricate data structures like lists\\n# or dictionaries. Nonetheless, specific REST request parameters necessitate input\\n# in the form of key-value pairs. To address this constraint, you can provide inputs\\n# for such parameters using one of the methods described below.\\n# \\n#     Supported fields\\n#     ----------------\\n#       - inputs.rest_api_headers\\n#       - inputs.rest_api_cookies\\n#       - inputs.rest_api_body \\n#       - inputs.rest_api_query_parameters\\n#       - inputs.jwt_headers\\n#       - inputs.jwt_payload\\n#\\n\\n# 1. JSON format:\\n#    ------------\\n#\\n#    Standard json file format. Supports complex data structures such as lists\\n#    or nested Key-value pairs.\\n#\\n#    Example:\\n#    --------\\n#      inputs.rest_api_body  = \\\"\\\"\\\"\\n#      \\\"name\\\" : \\\"user1\\\",\\n#      \\\"password\\\" : \\\"p@ssword1\\\",\\n#      \\\"role\\\" : \\\"admin\\\",\\n#      \\\"content\\\" : { \\\"site_url\\\" : \\\"www.example.com\\\", \\\"users\\\" : [\\\"user1\\\", \\\"user2\\\"] }\\n#      \\\"\\\"\\\"\\n\\n#    Hint:\\n#    -----\\n#\\n#    An easier way to feed inputs to the above mentioned fields would be using\\n#    python dictionaries. While the inputs don\u0027t directly support dict, the in-built \\n#    json package can be used to convert a python dict to json string.\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#     \\n#      inputs.rest_api_body  = {\\n#       \\\"name\\\"     : \\\"user1\\\",\\n#       \\\"password\\\" : \\\"p@ssword1\\\",\\n#       \\\"role\\\"     : \\\"admin\\\",\\n#       \\\"content\\\"  : { \\n#          \\\"site_url\\\" : \\\"www.example.com\\\",\\n#          \\\"users\\\"    : [\\\"user1\\\", \\\"user2\\\"]\\n#          }\\n#      }\\n#\\n#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string\\n\\n\\n# 2. New-line separated (Legacy)\\n#    ---------------------------\\n#\\n#    This format allows for specifying inputs as key-value pairs, separated\\n#    by a new line. It let\u0027s us create quick and easy inputs that is properly\\n#    formatted for the request. The primary purpose of this format is to retain\\n#    backwards compatibility.\\n#\\n#    Note: This format does not support complex data structures such as lists\\n#          or nested Key-value pairs.\\n#\\n#    Example:\\n#    -------- \\n#      inputs.rest_api_body = \\\"\\\"\\\"\\n#      name : user1\\n#      password : p@ssword1\\n#      role : admin\\n#      \\\"\\\"\\\"             \\n# \\n#      inputs.rest_api_headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n\\n#                                                     =============\\n#                                                      REUSABILITY\\n#                                                     =============\\n\\n# The function can be reused to make multiple requests to an endpoint or even access \\n# multiple endpoints. This can be achieved by simply modifying the pre-processing script\\n# as per the request and the endpoint.\\n\\n\\n\\n\\n# ======================================================================================================================== #\\n#                                                    ================                                                      #\\n#                                                     AUTHENTICATION                                                       #\\n#                                                    ================                                                      #\\n# ======================================================================================================================== #\\n\\n# The Call REST API function offers support for various authentication protocols that can be employed alongside the REST\\n# request. These authentication methods are entirely voluntary. If the endpoint does not necessitate any form of \\n# authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication\\n# process.\\n\\n# Note: All input parameters should either be set to None or must be removed if not being used for authentication.\\n\\n#                                                     ============= \\n#                                                       OAuth 2.0   \\n#                                                     ============= \\n\\n# OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint\\n# to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different\\n# flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and \\n# possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the \\n# Authentication flow, as mentioned below.\\n\\n# Note:   The exact implementation details of OAuth2 can vary depending on the\\n#         authorization server and the API you are integrating with. Make sure\\n#         to consult the OAuth2 documentation specific to the service you are\\n#         working with.\\n\\n# Method 1: REFRESH_TOKEN\\n#\\n#     It is a credential that is used to obtain a new access token from the\\n#     authorization server when the original access token expires. It is an integral\\n#     part of the OAuth 2.0 protocol and enables long-lived access to protected \\n#     resources without requiring the user to repeatedly authenticate. This can \\n#     be used for prolonged authentication as using a REFRESH_TOKEN generally extends\\n#     the validity of the token. Client ID, Client secret, Redirect URI and token URL\\n#     might also have to be provided.\\n#\\n#     Note: On successfully completing a `refresh-token` flow, the existing client properties are\\n#           updated with the newly fetched values. This means that this client can be used to fetch\\n#           new tokens and values virtually indefinitely.\\n\\n# Method 2: CLIENT-CREDENTIALS\\n#\\n#     Client Credentials Flow doesn\u0027t involve user authentication, and it is suitable\\n#     for scenarios where the client is a confidential client, meaning it can keep it\u0027s\\n#     client credentials (client ID and client secret) secure.\\n#\\n#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,\\n#           the existing client properties are updated with the newly fetched values. This means\\n#           the client goes from `Client-Credentials Flow` to `Refresh-Token flow` moving forward.\\n#           This means that this client can be used to fetch new tokens and values virtually\\n#           indefinitely.\\n\\n# Method 3: AUTHORIZATION (CODE):\\n#\\n#     The authorization server redirects the user back to address specified on the \\n#     redirect URI with an authorization CODE. This CODE is a temporary token\\n#     that represents the user\u0027s authorization and usually can be used only once.\\n#     This function exchanges the authorization code for an ACCESS_TOKEN (and \\n#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making\\n#     a request to the authorization server\u0027s token endpoint, providing the \\n#     authorization CODE, client ID, client secret, token URL and redirect URI.\\n#\\n#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,\\n#           the existing client properties are updated with the newly fetched values. This means\\n#           the client goes from `Authorization Flow` to `Refresh-Token flow` moving forward.\\n#           This means that this client can be used to fetch new tokens and values virtually\\n#           indefinitely.\\n\\n# Method 4: ACCESS_TOKEN\\n#\\n#      If an ACCESS_TOKEN is available, it can be directly used without having to \\n#      perform authentication. In order to use the ACCESS_TOKEN, all that is required\\n#      is the ACCESS_TOKEN \u0026amp; the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the\\n#      DEFAULT_TOKEN_TYPE (bearer) is used.\\n\\n# URL for the Authorization server endpoint\\ninputs.oauth_token_url     = None\\n\\n# Identifies the client application\\ninputs.oauth_client_id     = None\\n\\n# Authenticates the client application (required for certain grant types)\\ninputs.oauth_client_secret = None\\n\\n# The redirect URI used during the authorization flow (for authorization code grant)\\ninputs.oauth_redirect_uri  = None\\n\\n# Set of permissions granted by the resource owner (user) to the client application\\ninputs.oauth_scope         = None\\n\\n# Provides information to the client application about the token\u0027s characteristics. \\n# Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer\\ninputs.oauth_token_type    = None\\n\\n# Resultant token of the Authentication process\\ninputs.oauth_access_token  = None\\n\\n# The authorization code received during the authorization flow (for authorization code grant)\\ninputs.oauth_code          = None\\n\\n# The refresh token used to obtain a new access token (for refresh token grant)\\ninputs.oauth_refresh_token = None\\n\\n# Specifies methods through which applications can gain Access Tokens. \\n# Commonly used grant_types are : implicit, authorization_code, client_credentials, password.\\ninputs.oauth_grant_type    = None\\n\\n\\n\\n#                                     ==============================================          \\n#                                      Client-side authentication with certificates\\n#                                     ==============================================        \\n\\n# Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to\\n# verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS\\n# authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).\\n# However, with client-side authentication, the client also presents a digital certificate to the server for verification.\\n\\n# Note:   Client-side authentication with certificates provides an extra layer of\\n#         security by ensuring that the client is trusted and authenticated before\\n#         allowing access to sensitive resources or data. And so this can be used \\n#         in tandem with other authentication methods\\n\\n# 1. Client Authentication Certificate (client_auth_cert):\\n#\\n#    A client authentication certificate, also known as a client certificate,\\n#    is a digital certificate that is issued to the client (user or device) as\\n#    part of the mutual authentication process. It contains the client\u0027s public\\n#    key, identifying information (such as the client\u0027s name or ID), and is\\n#    signed by a trusted Certificate Authority (CA) or a self-signed certificate\\n#    if it is a closed system.\\n\\n# 2. Client Authentication Private Key (client_auth_key):\\n#\\n#    Private key is a cryptographic key that corresponds to the client\u0027s public\\n#    key in the client authentication certificate. The private key is securely\\n#    stored by the client and kept confidential. During the SSL/TLS handshake,\\n#    when the server sends a challenge to the client, the client uses its \\n#    private key to decrypt the challenge and generate a response. \\n#    The server then verifies this response to ensure that the client possesses\\n#    the corresponding private key and is thus authenticated.\\n\\n# 3. Client Authentication PEM (client_auth_pem): \\n# \\n#    This is simply the file format used to store both the client authentication\\n#    certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM\\n#    files are a common format for storing cryptographic objects, such as\\n#    certificates and private keys, in a human-readable and ASCII-encoded format.\\n\\n# Note:   The client authentication certificate and private key are commonly given\\n#         together, whereas the PEM file is typically provided separately as an \\n#         independent file.\\n\\n\\n# INPUT FORMAT:\\n# -------------\\n#\\n#    The information within these certificates can be directly copied and pasted as\\n#    plain text into the appropriate certificate type, enclosed within quotation marks.\\n#    When making an API call, the application should automatically generate the\\n#    certificates using the pasted content and will securely discard them upon execution.\\n#    The contents of the certificate/key must always be unencrypted.\\n#\\n#    All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the\\n#    same input format, as shown below.\\n#\\n#   inputs.client_auth_cert = \\\"\\\"\\\"\\n#       -----BEGIN CERTIFICATE-----\\n#       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G\\n#       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E\\n#       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56\\n#       FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5\\n#       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ\\n#       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ\\n#       Y20A9hExGKyHns4hW5KgvA==\\n#       -----END CERTIFICATE-----\\n#       \\\"\\\"\\\"\\n\\n# .CSR file contents to be pasted. Requires client_auth_key to function. Content must be unencrypted.\\ninputs.client_auth_cert = None\\n\\n# .KEY file contents to be pasted. To be provided with client_auth_cert. Content must be unencrypted.\\ninputs.client_auth_key  = None\\n\\n# .PEM file contents to be pasted. Standalone attribute, does not require the above two attribute. Content must be unencrypted.\\ninputs.client_auth_pem  = None\\n\\n#                                                         =======             \\n#                                                           JWT               \\n#                                                         =======             \\n\\n# JWT is also a supported form of authentication. The application has functionality builtin\\n# that allows for the creation, compilation, and manipulation of JWTs. It can accept several\\n# optional parameters to customize the authentication process.\\n\\n# JWT based authentication can be performed in 2 ways:\\n\\n# 1. This application can function with a predefined jwt token. A fully generated JWT \\n# token can be directly provided, and the application will automatically form the REST\\n# headers required for a request.\\n\\ninputs.jwt_token = None\\n\\n# 2. This application can also generate a jwt token. (Skip if you have already specified \\n# a jwt_token). The application can automatically compile a jwt token using certain \\n# parameters which can be provided in json string or line separated format (similar to\\n# REST body/header/cookies). These arguments are usually provided by the endpoint itself.\\n# The application should be able to create and sign a JWT and automatically incorporate it\\n# into the REST request.\\n\\n# headers of the JWT, contains metadata about the token.\\ninputs.jwt_headers   = None\\n\\n# Payload to be included in the token. \\ninputs.jwt_payload   = None\\n\\n# key used for signing the JWT.\\ninputs.jwt_key       = None\\n\\n# Encryption algorithm used for encoding the JWT. Defaults to \\\"HS256\\\" algorithm\\ninputs.jwt_algorithm = None\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rest_response\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c2h19h\u003c/incoming\u003e\u003coutgoing\u003eFlow_08s6wnz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0c2h19h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Process REST Response\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aa0a4d4f-19f0-472b-8c0e-a4b271013452\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08s6wnz\u003c/incoming\u003e\u003coutgoing\u003eFlow_150opgb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08s6wnz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_150opgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_150opgb\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_150opgb\" id=\"Flow_150opgb_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"342\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08s6wnz\" id=\"Flow_08s6wnz_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"182\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"258\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c2h19h\" id=\"Flow_0c2h19h_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"16\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"98\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"429\" y=\"-36\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"98\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"258\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"454\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1723470655783,
+      "create_date": 1731678193314,
       "creator_principal": {
-        "display_name": "SOAR_Apps_Dev",
-        "id": 8,
-        "name": "0624e4db-d2fa-4b7b-a678-77e3fe3edac2",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
       "description": {
@@ -1548,27 +1586,27 @@
         "uuid": "8beb9082-8e46-4a00-8840-2c1fb31c6ef6"
       },
       "has_logical_errors": false,
-      "id": 38,
+      "id": 1,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "SOAR_Apps_Dev",
-        "id": 8,
-        "name": "0624e4db-d2fa-4b7b-a678-77e3fe3edac2",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 20,
+        "name": "sysadmin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1723470656626,
+      "last_modified_time": 1742585590082,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1723470655934,
+          "created_date": 1731678193552,
           "description": "Script to process Endpoint response.",
           "enabled": false,
           "export_key": "Process REST Response",
-          "id": 98,
+          "id": 2,
           "language": "python3",
-          "last_modified_by": "0624e4db-d2fa-4b7b-a678-77e3fe3edac2",
-          "last_modified_time": 1723470655934,
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1731678193552,
           "name": "Process REST Response",
           "object_type": "artifact",
           "playbook_handle": "rest_api_pb",
@@ -1590,7 +1628,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1570b076-796d-44b2-b916-10a69b2ffee8",
-        "id": 38,
+        "id": 3,
         "name": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
         "type": "playbook",
         "uuid": "c967a567-18ee-4258-a8f1-158662a2f30a"
@@ -1598,21 +1636,21 @@
       "tags": [],
       "type": "default",
       "uuid": "1570b076-796d-44b2-b916-10a69b2ffee8",
-      "version": 4
+      "version": 6
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 9340,
+    "build_number": 9339,
     "f": 0,
     "m": 0,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.0.0.9340"
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
