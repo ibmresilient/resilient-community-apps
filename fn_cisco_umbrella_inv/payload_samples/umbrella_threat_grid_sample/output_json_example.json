@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {},
+  "raw": null,
+  "inputs": {
+    "umbinv_offset": 0,
+    "umbinv_hash": "a0f2a3c1dcd5b1cac71bf0c03f2ff1bd",
+    "umbinv_limit": 2,
+    "umbinv_sample_endpoint": "basic"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-umbrella-inv",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 4530,
+    "timestamp": "2024-11-19 10:27:53"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "response": {
+      "id": "dec4dad8-abcdefg",
+      "sourceRule": {
+        "__typename": "Control",
+        "id": "60873d6d-abcdefg",
+        "name": "All Findings",
+        "controlDescription": "",
+        "resolutionRecommendation": "",
+        "securitySubCategories": null
+      },
+      "createdAt": "2024-04-15T10:16:14.443631Z",
+      "updatedAt": "2024-04-15T11:55:20.484648Z",
+      "dueAt": null,
+      "type": "TOXIC_COMBINATION",
+      "resolvedAt": null,
+      "statusChangedAt": "2024-04-15T10:14:50.891007Z",
+      "projects": [
+        {
+          "id": "83b76efe-abcdefg",
+          "name": "Project 2",
+          "slug": "project-2",
+          "businessUnit": "",
+          "riskProfile": {
+            "businessImpact": "MBI"
+          }
+        },
+        {
+          "id": "af52828c-abcdefg",
+          "name": "project 4",
+          "slug": "project-4",
+          "businessUnit": "Dev",
+          "riskProfile": {
+            "businessImpact": "MBI"
+          }
+        },
+        {
+          "id": "d6ac50bb-abcdefg",
+          "name": "Project1",
+          "slug": "project1",
+          "businessUnit": "Dev",
+          "riskProfile": {
+            "businessImpact": "MBI"
+          }
+        }
+      ],
+      "status": "OPEN",
+      "severity": "INFORMATIONAL",
+      "entitySnapshot": {
+        "id": "fa059989-abcdefg",
+        "type": "SECURITY_TOOL_FINDING",
+        "nativeType": "",
+        "name": "CVE-2023-5528",
+        "status": null,
+        "cloudPlatform": null,
+        "cloudProviderURL": "",
+        "providerId": "vulnerability##592f0bdc-ab9b##",
+        "region": "",
+        "resourceGroupExternalId": "",
+        "subscriptionExternalId": "",
+        "subscriptionName": "",
+        "subscriptionTags": null,
+        "tags": {},
+        "createdAt": null,
+        "externalId": "vulnerability##592f0bdc-ab9b##"
+      },
+      "serviceTickets": [],
+      "notes": [
+        {
+          "createdAt": "2024-04-15T11:55:20.461314Z",
+          "updatedAt": "2024-04-15T11:55:20.46232Z",
+          "text": "Note from SOAR: test note",
+          "user": null,
+          "serviceAccount": {
+            "name": "ibm-soar"
+          }
+        }
+      ]
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "wiz_issue_id": "dec4dad8-abcdefg"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-wiz",
+    "package_version": "1.0.1982",
+    "host": "e35c5a28-abcdefg",
+    "execution_time_ms": 668,
+    "timestamp": "2024-04-15 11:57:34"
+  }
+}
