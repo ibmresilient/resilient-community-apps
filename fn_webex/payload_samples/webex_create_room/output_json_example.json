@@ -1,0 +1,33 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "roomId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vZmU4ZjFmNTAtMWEwMy0xMWVkLWJiZDktMzcwMDcyNTIyMGJl",
+    "meetingLink": "https://examples-5xth.webex.com/m/a9a09646-9c84-4c9b-92f3-142faa4598ba",
+    "sipAddress": "25923177804@examples-5xth.webex.com",
+    "meetingNumber": "25923177804",
+    "meetingId": "725c8064c775432fb85ea16d7b7c85c7",
+    "callInTollFreeNumber": "",
+    "callInTollNumber": "+1-650-479-3208",
+    "attendees": "",
+    "status": true,
+    "roomName": "Incident Room"
+  },
+  "raw": null,
+  "inputs": {
+    "webex_incident_id": "2096",
+    "webex_room_name": "Incident room",
+    "webex_add_all_members": false,
+    "webex_team_id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1RFQU0vZmU4ZjFmNTAtMWEwMy0xMWVkLWJiZDktMzcwMDcyNTIyMGJl",
+    "webex_meeting_attendees": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-webex",
+    "package_version": "2.0.0",
+    "host": "AppHost",
+    "execution_time_ms": 9591,
+    "timestamp": "2022-08-12 07:00:17"
+  }
+}
