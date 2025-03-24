@@ -1,7 +1,7 @@
 include README.md
 include Dockerfile
 include entrypoint.sh
-include fn_shodan/util/*
+recursive-include fn_shodan/util *
 include fn_shodan/LICENSE
 include doc/*.md
 include doc/screenshots/*

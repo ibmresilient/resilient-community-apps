@@ -22,8 +22,9 @@ def snake_to_camel(word):
 
 
 setup(
+    display_name='Shodan',
     name="fn_shodan",
-    version="2.0.0",
+    version="2.0.1",
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -34,7 +35,7 @@ It will update the description of the artifact and add a note to the incident wi
 You will need an API key for Shodan - https://developer.shodan.io/billing/signup
 """,
     install_requires=[
-        "resilient_circuits>=33.0.0",
+        "resilient_circuits>=51.0.0",
         "resilient-lib>=37.2.215",
         "shodan>=1.23.0",
         "requests-file~=1.5; python_version<='3.6'"
