@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-"""Function implementation"""
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.5.0.1475
+
+"""AppFunction implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon
+from resilient_lib import validate_fields, ResultPayload
 from fn_greynoise.lib.common import call_greynoise
 
 SECTION_HEADER = "fn_greynoise"
@@ -15,21 +16,19 @@ HTTP_HEADERS = {
 }
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'greynoise_ip_query"""
+    """Component that implements function 'greynoise_ip_query_community'"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get(SECTION_HEADER, {})
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
         self.options = opts.get(SECTION_HEADER, {})
 
-    @function("greynoise_ip_query")
+    @function("greynoise_ip_query_community")
     def _greynoise_ip_query_function(self, event, *args, **kwargs):
         """Function: Perform IP Address analysis"""
         try:
@@ -56,7 +55,6 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("done...")
 
-            # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()

@@ -18,8 +18,9 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='Greynoise',
     name='fn_greynoise',
-    version='1.0.2',
+    version='1.1.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -27,7 +28,7 @@ setup(
     description="Resilient Circuits Components for 'fn_greynoise'",
     long_description="Collect analysis on IP Addresses using Greynoise",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'resilient_lib'
     ],
     packages=find_packages(),

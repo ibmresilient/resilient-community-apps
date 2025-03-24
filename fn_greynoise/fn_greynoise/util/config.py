@@ -11,8 +11,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_greynoise]
-url=https://api.greynoise.io/v2/noise
-api_key=
-"""
+        url=https://api.greynoise.io
+        api_key=
+    """
 
     return config_data

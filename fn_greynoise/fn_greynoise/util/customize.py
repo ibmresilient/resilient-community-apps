@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.2.2.1096
 
-"""Generate the Resilient customizations required for fn_greynoise"""
+"""Generate the SOAR customizations required for fn_greynoise"""
 
 import base64
 import os
@@ -20,15 +22,25 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_greynoise",
-        "message_destinations": [u"fn_greynoise"],
-        "functions": [u"greynoise_ip_query"],
-        "workflows": [u"example_greynoise_ip_query"],
-        "actions": [u"Example: GreyNoise IP Query"],
+        "message_destinations": [
+            u"fn_greynoise"
+        ],
+        "functions": [
+            u"greynoise_ip_query",
+            u"greynoise_ip_query_community"
+        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [
+            u"greynoise_ip_query",
+            u"greynoise_ip_query_community_example"
+        ]
     }
 
 
@@ -37,17 +49,17 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 36.0.5634
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
         - fn_greynoise
     - Functions:
         - greynoise_ip_query
-    - Workflows:
-        - example_greynoise_ip_query
-    - Rules:
-        - Example: GreyNoise IP Query
+        - greynoise_ip_query_community
+    - Playbooks:
+        - greynoise_ip_query
+        - greynoise_ip_query_community_example
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
