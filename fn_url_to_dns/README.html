@@ -440,22 +440,30 @@
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-<section id="v1-1-0">
-<h3>v1.1.0<a class="headerlink" href="#v1-1-0" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>App Host support</p></li>
-</ul>
-</section>
-<section id="v1-0-0">
-<h3>v1.0.0<a class="headerlink" href="#v1-0-0" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Initial Release</p></li>
-</ul>
-</section>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.1.1</p></td>
+<td><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.0</p></td>
+<td><p>10/2020</p></td>
+<td><p>App Host Support</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>12/2018</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -487,11 +495,11 @@
   List any Requirements
 -->
 <ul>
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">v36.0.5634</span></code></p></li>
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code></p></li>
 <li><p>An App Host or an Integration Server:</p>
 <ul>
 <li><p>To setup up an App Host see:  <a class="reference external" href="https://ibm.biz/res-app-host-setup">ibm.biz/res-app-host-setup</a></p></li>
-<li><p>An Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=30.0.0</span></code> (if using an Integration Server)</p>
+<li><p>An Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code> (if using an Integration Server)</p>
 <ul>
 <li><p>To set up an Integration Server see: <a class="reference external" href="https://ibm.biz/res-int-server-guide">ibm.biz/res-int-server-guide</a></p></li>
 <li><p>If using an API key account, minimum required permissions are:</p>
@@ -571,9 +579,26 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># TODO: Copy and paste an example of the Function Output within this code block.</span>
-    <span class="c1"># To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.</span>
-    <span class="c1"># The Function results will be printed in the logs: &quot;resilient-circuits run --loglevel=DEBUG&quot;</span>
+    <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;dns&quot;</span><span class="p">:</span> <span class="s2">&quot;www.example.com&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;urltodns_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.example.com/page.html&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-url-to-dns&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-03-25 17:33:50&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -693,11 +718,7 @@ The screenshot below shows the provided example rule:
             <ul>
 <li><a class="reference internal" href="#">URL to DNS</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#v1-1-0">v1.1.0</a></li>
-<li><a class="reference internal" href="#v1-0-0">v1.0.0</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
