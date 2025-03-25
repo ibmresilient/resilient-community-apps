@@ -28,14 +28,11 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-### v1.1.0
-* App Host support
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.1.1 | 03/2025 | Converted example workflows to python3 |
+| 1.1.0 | 10/2020 | App Host Support|
+| 1.0.0 | 12/2018 | Initial Release |
 
 ---
 
@@ -65,10 +62,10 @@ Resilient Circuits Components for 'fn_url_to_dns'
 <!--
   List any Requirements
 -->
-* Resilient platform >= `v36.0.5634`
+* Resilient platform >= `51.0.0`
 * An App Host or an Integration Server:
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-  * An Integration Server running `resilient_circuits>=30.0.0` (if using an Integration Server)
+  * An Integration Server running `resilient_circuits>=51.0.0` (if using an Integration Server)
     * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
     * If using an API key account, minimum required permissions are:
       | Name | Permissions |
@@ -111,9 +108,26 @@ None
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    {
+    "version": "1.0",
+    "success": true,
+    "reason": "",
+    "content": {
+      "dns": "www.example.com"
+    },
+    "raw": "",
+    "inputs": {
+      "urltodns_url": "https://www.example.com/page.html"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-url-to-dns",
+      "package_version": "1.1.1",
+      "host": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com",
+      "execution_time_ms": 2,
+      "timestamp": "2025-03-25 17:33:50"
+    }
+  }
 }
 ```
 
