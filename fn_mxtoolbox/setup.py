@@ -5,8 +5,9 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='MxToolBox',
     name='fn_mxtoolbox',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -18,7 +19,7 @@ setup(
     customers have created a dashboard on their site which shows
     the real-time status of their monitors.""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'resilient-lib'
     ],
     packages=find_packages(),

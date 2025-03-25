@@ -2,6 +2,20 @@
 
 The MxToolBox API is a RESTful Web Service allowing MxToolbox customers to query the status of their monitors and run lookups (blacklist, smtp, mx, etc.).
 
+## Table of Contents
+- [Release Notes](#release-notes)
+- [Using MxToolBox Function](#using-mxtoolbox-function)
+- [Environment](#environment)
+- [Resilient Configuration](#resilient-configuration) 
+
+## Release Notes
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.3 | 03/2025 | Converted example workflows to python3 |
+| 1.0.2 | 07/2020 | AppHost support, Proxy support, Selftest Support |
+| 1.0.1 | 03/2019 | Correction for resilient-lib library used |
+| 1.0.0 | 02/2019 | Initial Release |
+
 ## Using MxToolBox Function
 
 We have included one rule and one workflow as an example.
