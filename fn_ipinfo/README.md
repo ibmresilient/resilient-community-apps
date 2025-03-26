@@ -4,13 +4,34 @@
 
 ![screenshot](./screenshots/1.png)
 
-## app.config settings:
-The only config value required by this integration package is an access token for IP Info's API
+## Table of Contents
+- [Release Notes](#release-notes)
+- [App Config Settings](#app-configuration)
+- [Function Inputs](#function-inputs)
+- [Pre-Process Script](#pre-process-script)
+- [Post-Process Script](#post-process-script)
+- [Output](#output-)
+- [Rules](#rules)
+---
 
-```python
-[fn_ipinfo]
-ipinfo_access_token=123asb
-```
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release
+  notes of a previous release
+-->
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.2 | 03/2025 | Converted example workflows to python3 |
+| 1.0.1 | 07/2020 | App Host Support|
+| 1.0.0 | 12/2018 | Initial Release |
+
+## App Configuration:
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| ipinfo_access_token | Yes | 123asb | Access Token |
+
 
 ## Function Inputs:
 | Function Name | Type | Required | Example |

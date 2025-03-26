@@ -34,4 +34,4 @@ class IpInfoHelper():
         if sys.version_info > (3, 0):
             return ip
         else:
-            return unicode(ip)
+            return ip

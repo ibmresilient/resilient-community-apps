@@ -4,8 +4,9 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='IpInfo',
     name='fn_ipinfo',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
@@ -13,7 +14,7 @@ setup(
     description="Resilient Circuits Components for IPInfo IP Enrichment API",
     long_description="Contains a function which accepts an IP Address as an input and attempts to query IPInfo against this IP",
     install_requires=[
-        "resilient_circuits>=31.0.0",
+        "resilient_circuits>=51.0.0",
         "ipinfo<4.0.0 ; python_version<'3.0'",
         "ipinfo>=4.0.0 ; python_version>='3.0'",
         "ipaddress"
