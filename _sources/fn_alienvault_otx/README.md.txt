@@ -1,6 +1,7 @@
 # AlienVault OTX
 
 ## Table of Contents
+ - [Release Notes](#release-notes)
  - [About This Package](#about-this-package)
  - [Prerequisites](#prerequisites)
  - [Installation](#installation)
@@ -10,6 +11,15 @@
  - [Post-Process Script](#post-process-script)
  - [Rules](#rules)
  ---
+
+## Release Notes
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.2 | 03/2025 | Converted example workflows to python3 | 
+| 1.0.1 | 07/2020 | Convert to App Host|
+| 1.0.0 | 03/2019 | Initial Release |
+
+---
 
 ## About This Package:
 **This package contains a Resilient Function that allows you to search your Alien Vault OTX platform with the given query for Threat Intelligence data about a particular Threat Indicator**
@@ -38,8 +48,8 @@
 ![screenshot](./screenshots/4.png)
 
 ## Prerequisites:
-* Resilient Appliance >= v31.0.0
-* Integrations Server running resilient_circuits >= v30.0.0
+* Resilient Appliance >= 51.0.0
+* Integrations Server running resilient_circuits >= 51.0.0
 * Account with [Alien Vault OTX](https://otx.alienvault.com/)
 * A `DirectConnect OTX` API Key from Alien Vault
 
