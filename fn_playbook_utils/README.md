@@ -50,6 +50,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.2.1 | 03/2025 | Fixed Bug (Unicode Error) |
 | 1.2.0 | 09/2023 | Example rules/workflows converted to Playbooks |
 | 1.1.0 | 12/2022 | Playbook import/export |
 | 1.0.1 | 09/2021 | Datatable presentation fixes |
@@ -88,13 +89,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The IBM SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a IBM SOAR platform with an App Host, the requirements are:
-* IBM SOAR platform >= `45.0`.
+* IBM SOAR platform >= `51.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a IBM SOAR platform with an integration server, the requirements are:
-* IBM SOAR platform >= `45.0`.
+* IBM SOAR platform >= `51.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=46.0.0`.
+* Integration server is running `resilient-circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |

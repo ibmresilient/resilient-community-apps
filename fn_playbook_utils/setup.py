@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_playbook_utils",
     display_name="Playbook Utils",
-    version="1.2.0",
+    version="1.2.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -35,12 +35,12 @@ setup(
     <li>to mine information about workflow and playbook usage across incidents so that an enterprise can learn the best practices on past threat intelligence and actions performed.</li>
     </ul>""",
     install_requires=[
-        "resilient-circuits>=46.0.0",
-        "resilient>=47.1",
+        "resilient-circuits>=51.0.0",
+        "resilient>=51.0",
         "cachetools",
         "defusedxml"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.9',
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
