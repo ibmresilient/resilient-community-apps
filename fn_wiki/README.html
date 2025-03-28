@@ -442,19 +442,6 @@
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-</section>
-<section id="id1">
-<h2>Release Notes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-<section id="release-history">
-<h3>Release History<a class="headerlink" href="#release-history" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -464,18 +451,21 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.1</p></td>
-<td><p>6/2021</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>06/2021</p></td>
 <td><p>Incorrect bool to string value fix</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>11/2020</p></td>
 <td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</section>
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -507,11 +497,11 @@
   List any Requirements
 -->
 <ul>
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">v36.0.5634</span></code></p></li>
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code></p></li>
 <li><p>An App Host or an Integration Server:</p>
 <ul>
 <li><p>To setup up an App Host see:  <a class="reference external" href="https://ibm.biz/res-app-host-setup">ibm.biz/res-app-host-setup</a></p></li>
-<li><p>An Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=30.0.0</span></code> on Python 3.6 (if using an Integration Server)</p>
+<li><p>An Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code> on Python 3.9 or later (if using an Integration Server)</p>
 <ul>
 <li><p>To set up an Integration Server see: <a class="reference external" href="https://ibm.biz/res-int-server-guide">ibm.biz/res-int-server-guide</a></p></li>
 <li><p>If using an API key account, minimum required permissions are:</p>
@@ -591,9 +581,51 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># TODO: Copy and paste an example of the Function Output within this code block.</span>
-    <span class="c1"># To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.</span>
-    <span class="c1"># The Function results will be printed in the logs: &quot;resilient-circuits run --loglevel=DEBUG&quot;</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ &quot;</span><span class="p">,</span>
+      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;create_date&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;mentioned_widgets&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;delete&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;wiki_contents_as_json&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;wiki_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiki&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">357</span><span class="p">,</span>
+      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-03-27 12:40:58&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -608,13 +640,13 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Page: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Page: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">):</span>
-        <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">JSON contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">])</span>
+        <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">JSON contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> not found&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> not found&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 </pre></div>
@@ -665,9 +697,51 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># TODO: Copy and paste an example of the Function Output within this code block.</span>
-    <span class="c1"># To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.</span>
-    <span class="c1"># The Function results will be printed in the logs: &quot;resilient-circuits run --loglevel=DEBUG&quot;</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;create_date&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;mentioned_widgets&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;delete&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;wiki_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;wiki_body&quot;</span><span class="p">:</span> <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ &quot;</span><span class="p">,</span>
+      <span class="s2">&quot;wiki_create_if_missing&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiki&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">624</span><span class="p">,</span>
+      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-03-27 12:40:40&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -682,9 +756,9 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Page/Id: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Page/Id: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> created/updated</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> created/updated</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </p>
@@ -727,9 +801,28 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># TODO: Copy and paste an example of the Function Output within this code block.</span>
-    <span class="c1"># To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.</span>
-    <span class="c1"># The Function results will be printed in the logs: &quot;resilient-circuits run --loglevel=DEBUG&quot;</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ &quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;wiki_search_term&quot;</span><span class="p">:</span> <span class="s2">&quot;Σ Τ&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;wiki_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiki&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">363</span><span class="p">,</span>
+      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-03-27 12:41:13&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -744,11 +837,11 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Page/Id: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Page/Id: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">)))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">)))</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> not found&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> not found&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -853,10 +946,6 @@
 <li><a class="reference internal" href="#">SOAR Wiki</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a></li>
-<li><a class="reference internal" href="#id1">Release Notes</a><ul>
-<li><a class="reference internal" href="#release-history">Release History</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
