@@ -5,7 +5,7 @@ import json
 import re
 import datetime
 import requests
-from requests.packages.urllib3.util import Retry
+from urllib3.util import Retry
 from requests.adapters import HTTPAdapter
 
 TOTAL_RETRIES = 3
@@ -86,7 +86,7 @@ class ApiCallController(object):
                     elif search_type == "Threat CVE ID":
                         _indicator_full_url = _indicator_url.format("cve", search_value, search_section)
                     else:
-                        raise InvalidInputParam("%s is not a supported search type.", search_type)
+                        raise InvalidInputParam(f"{search_type} is not a supported search type.")
                 else:
                     raise InvalidInputParam("The value of Search section Parameter is invalid.")
             else:

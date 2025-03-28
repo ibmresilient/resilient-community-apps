@@ -6,8 +6,9 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='AlienVault OTX',
     name='fn_alienvault_otx',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -17,7 +18,7 @@ setup(
                         synchronize the threat Intelligence available on OTX. Using the API you can detect the threats 
                         targeting your environment.""",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
