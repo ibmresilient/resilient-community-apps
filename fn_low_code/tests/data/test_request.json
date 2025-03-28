@@ -1,0 +1,19 @@
+{
+    "request_payload": {
+        "server_url": "https://petstore.swagger.io/v2/user/createWithList",
+        "method": "POST",
+        "request_body": "[ { \"id\":12, \"email\":\"john3@email.com\", \"phone\":\"12345\", \"lastName\":\"Doe\", \"password\":\"12345\", \"username\":\"theUser\", \"firstName\":\"James\", \"userStatus\":1} ]",
+        "request_content_type": "application/json",
+        "response_content_type": "application/json",
+        "custom_params": {
+            "secureContext": "true"
+        },
+        "security": {
+            "scheme": "APIKEY",
+            "api_key_param_name": "api_key",
+            "api_key": "*****",
+            "api_key_in": "HEADER",
+            "generate_bearer_token": false
+        }
+    }
+}

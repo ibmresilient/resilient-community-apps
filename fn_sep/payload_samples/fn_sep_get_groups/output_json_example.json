@@ -1,0 +1,55 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "content": [
+      {
+        "id": "23899461092E5BB937223FCF3A0605E3",
+        "name": "Default Group",
+        "description": "",
+        "fullPathName": "My Company\\Default Group",
+        "numberOfPhysicalComputers": 1,
+        "numberOfRegisteredUsers": 1,
+        "createdBy": "AF3C39A10A320801000000DBF200C60A                                                                                                ",
+        "created": 1719408628197,
+        "lastModified": 1719408628197,
+        "policySerialNumber": "2389-07/09/2024 06:29:12 652",
+        "policyDate": 1720506552652,
+        "customIpsNumber": "",
+        "domain": {
+          "id": "6E70F043092E5BB93F74FD57C083F99E",
+          "name": null
+        },
+        "policyInheritanceEnabled": true
+      }
+    ],
+    "number": 0,
+    "size": 25,
+    "sort": [
+      {
+        "direction": "ASC",
+        "property": "NAME",
+        "ascending": true
+      }
+    ],
+    "totalElements": 1,
+    "totalPages": 1,
+    "firstPage": true,
+    "lastPage": true,
+    "numberOfElements": 1
+  },
+  "raw": null,
+  "inputs": {
+    "sep_domain": "6E70F043092E5BB93F74FD57C083F99E",
+    "sep_fullpathname": "My Company\\Default Group"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 1180,
+    "timestamp": "2024-07-18 10:48:52"
+  }
+}
