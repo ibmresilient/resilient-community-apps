@@ -19,8 +19,9 @@ def snake_to_camel(word):
 
 
 setup(
+    display_name='Wiki',
     name='fn_wiki',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='',
@@ -28,13 +29,13 @@ setup(
     description="function which looks for search term in a wiki and returns the line it contains ",
     long_description="Perform operations against the Resilient wiki: create or update pages, read wiki contents and perform lookups of content.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
-    python_requires='>=3',
+    python_requires='>=3.9',
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 3'

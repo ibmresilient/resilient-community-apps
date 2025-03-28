@@ -30,21 +30,11 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-### Release History
-
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.1 | 6/2021 | Incorrect bool to string value fix |
-| 1.0.0  | 11/2020 | Initial Release |
+| 1.0.2 | 03/2025 | Converted example workflows to python3 |
+| 1.0.1 | 06/2021 | Incorrect bool to string value fix |
+| 1.0.0 | 11/2020 | Initial Release |
 
 ---
 
@@ -74,10 +64,10 @@ Perform operations against the Resilient wiki: create or update pages, read wiki
 <!--
   List any Requirements
 -->
-* Resilient platform >= `v36.0.5634`
+* Resilient platform >= `51.0.0`
 * An App Host or an Integration Server:
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-  * An Integration Server running `resilient_circuits>=30.0.0` on Python 3.6 (if using an Integration Server)
+  * An Integration Server running `resilient_circuits>=51.0.0` on Python 3.9 or later (if using an Integration Server)
     * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
     * If using an API key account, minimum required permissions are:
       | Name | Permissions |
@@ -120,9 +110,51 @@ Return the contents of a wiki page based on the page's title or id. Optionally c
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  {
+    "version": "1.0",
+    "success": true,
+    "reason": "",
+    "content": {
+      "id": 1,
+      "title": "test page ΣΤ",
+      "children": [],
+      "text": "test of fn_wiki_create_updateΣ Τ ",
+      "creator": {
+        "id": 39,
+        "type": "user",
+        "name": "shresh@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "create_date": 1743079240704,
+      "last_modified_time": 1743079240704,
+      "last_modified_by": {
+        "id": 39,
+        "type": "user",
+        "name": "shresh@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "mentioned_widgets": [],
+      "perms": {
+        "update": true,
+        "delete": true
+      },
+      "parent": ""
+    },
+    "raw": "",
+    "inputs": {
+      "wiki_contents_as_json": false,
+      "wiki_path": "test page ΣΤ"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-wiki",
+      "package_version": "1.0.1",
+      "host": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com",
+      "execution_time_ms": 357,
+      "timestamp": "2025-03-27 12:40:58"
+    },
+    "title": "test page ΣΤ"
+  }
 }
 ```
 
@@ -143,13 +175,13 @@ None
 <p>
 
 ```python
-note = u"Page: '{}'".format(results.inputs.get('wiki_path'))
+note = "Page: '{}'".format(results.inputs.get('wiki_path'))
 if results.content:
-    note = u"{} contents:\n\n{}".format(note, results.content['text'])
+    note = "{} contents:\n\n{}".format(note, results.content['text'])
     if results.content.get('json'):
-        note = u"{} \nJSON contents:\n\n{}".format(note, results.content['json'])
+        note = "{} \nJSON contents:\n\n{}".format(note, results.content['json'])
 else:
-    note = u"{} not found".format(note)
+    note = "{} not found".format(note)
 
 incident.addNote(note)
 ```
@@ -179,9 +211,51 @@ Create or update a wiki page in Resilient based on the page's title or id. Optio
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  {
+    "version": "1.0",
+    "success": true,
+    "reason": "",
+    "content": {
+      "id": 1,
+      "title": "test page ΣΤ",
+      "children": [],
+      "text": "test of fn_wiki_create_updateΣ Τ",
+      "creator": {
+        "id": 39,
+        "type": "user",
+        "name": "shresh@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "create_date": 1743079240704,
+      "last_modified_time": 1743079240704,
+      "last_modified_by": {
+        "id": 39,
+        "type": "user",
+        "name": "shresh@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "mentioned_widgets": [],
+      "perms": {
+        "update": true,
+        "delete": true
+      },
+      "parent": ""
+    },
+    "raw": "",
+    "inputs": {
+      "wiki_path": "test page ΣΤ",
+      "wiki_body": "test of fn_wiki_create_updateΣ Τ ",
+      "wiki_create_if_missing": true
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-wiki",
+      "package_version": "1.0.1",
+      "host": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com",
+      "execution_time_ms": 624,
+      "timestamp": "2025-03-27 12:40:40"
+    }
+  }
 }
 ```
 
@@ -202,9 +276,9 @@ None
 <p>
 
 ```python
-note = u"Page/Id: '{}'".format(results.inputs.get('wiki_path'))
+note = "Page/Id: '{}'".format(results.inputs.get('wiki_path'))
 if results.content:
-    incident.addNote(u"{} created/updated\n\n{}".format(note, results.content['text']))
+    incident.addNote("{} created/updated\n\n{}".format(note, results.content['text']))
 ```
 
 </p>
@@ -231,9 +305,28 @@ Search a wiki page based on a search term and return the matching lines. The sea
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  {
+    "version": "1.0",
+    "success": true,
+    "reason": "",
+    "content": [
+      "test of fn_wiki_create_updateΣ Τ "
+    ],
+    "raw": "",
+    "inputs": {
+      "wiki_search_term": "Σ Τ",
+      "wiki_path": "test page ΣΤ"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-wiki",
+      "package_version": "1.0.1",
+      "host": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com",
+      "execution_time_ms": 363,
+      "timestamp": "2025-03-27 12:41:13"
+    },
+    "title": "test page ΣΤ"
+  }
 }
 ```
 
@@ -254,11 +347,11 @@ None
 <p>
 
 ```python
-note = u"Page/Id: '{}'".format(results.inputs.get('wiki_path'))
+note = "Page/Id: '{}'".format(results.inputs.get('wiki_path'))
 if results.content:
-    incident.addNote(u"{}\n\n{}".format(note, "\n".join(results.content)))
+    incident.addNote("{}\n\n{}".format(note, "\n".join(results.content)))
 else:
-    incident.addNote(u"{} not found".format(note))
+    incident.addNote("{} not found".format(note))
 ```
 
 </p>
