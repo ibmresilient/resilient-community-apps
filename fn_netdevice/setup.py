@@ -24,7 +24,7 @@ def snake_to_camel(word):
 setup(
     name='fn_netdevice',
     display_name="netMiko for SOAR",
-    version='1.1.1',
+    version='1.1.2',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -39,7 +39,7 @@ setup(
         * Result parsing using TextFSM templates
     """,
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'resilient-lib',
         'netmiko>=2.3.3'
     ],

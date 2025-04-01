@@ -19,8 +19,9 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='Whois RDAP',
     name='fn_whois_rdap',
-    version='1.0.6',
+    version='1.0.7',
     license='MIT',
     author='IBM SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps',

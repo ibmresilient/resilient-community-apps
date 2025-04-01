@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Execute Netdevice Configuration Changes",
-      "id": 60,
+      "id": 482,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Execute Netdevice Configuration Changes",
@@ -42,7 +42,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Execute Netdevice Queries",
-      "id": 61,
+      "id": 483,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Execute Netdevice Queries",
@@ -84,8 +84,10 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1633543245420,
+  "case_matching_profiles": [],
+  "export_date": 1743517339478,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -97,7 +99,7 @@
       "deprecated": false,
       "export_key": "__function/netdevice_send_cmd",
       "hide_notification": false,
-      "id": 336,
+      "id": 3425,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -126,7 +128,7 @@
       "deprecated": false,
       "export_key": "__function/netdevice_ids",
       "hide_notification": false,
-      "id": 335,
+      "id": 3426,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -156,7 +158,7 @@
       "deprecated": false,
       "export_key": "__function/netdevice_config_cmd",
       "hide_notification": false,
-      "id": 334,
+      "id": 3427,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -185,7 +187,7 @@
       "deprecated": false,
       "export_key": "__function/netdevice_use_textfsm",
       "hide_notification": false,
-      "id": 333,
+      "id": 3428,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -215,7 +217,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/device_ids",
       "hide_notification": false,
-      "id": 330,
+      "id": 3421,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -245,7 +247,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/send_command",
       "hide_notification": false,
-      "id": 332,
+      "id": 3422,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -275,7 +277,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/config_commands",
       "hide_notification": false,
-      "id": 329,
+      "id": 3423,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -305,7 +307,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/use_textfsm_template",
       "hide_notification": false,
-      "id": 331,
+      "id": 3424,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -339,14 +341,7 @@
   ],
   "functions": [
     {
-      "apps": [],
-      "created_date": 1633456088070,
-      "creator": {
-        "display_name": "Chris\u0027 Integration Server v40",
-        "id": 6,
-        "name": "05c96997-7401-4089-a039-df21d0e54b07",
-        "type": "apikey"
-      },
+      "created_date": 1743420887748,
       "description": {
         "content": "Use netMiko to attach to devices (such as firewalls) for command line configuration",
         "format": "text"
@@ -354,18 +349,22 @@
       "destination_handle": "fn_netdevice",
       "display_name": "fn_netdevice_config",
       "export_key": "fn_netdevice_config",
-      "id": 39,
+      "id": 326,
       "last_modified_by": {
-        "display_name": "Chris\u0027 Integration Server v40",
-        "id": 6,
-        "name": "05c96997-7401-4089-a039-df21d0e54b07",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1633456088144,
+      "last_modified_time": 1743420887748,
       "name": "fn_netdevice_config",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "9b3f31a0-3127-4cd1-92f8-5947d7492f28",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "ee4c2177-f11a-4412-bfc9-acff5ccef633",
@@ -393,19 +392,12 @@
           "programmatic_name": "example_execute_netdevice_configuration_commands",
           "tags": [],
           "uuid": null,
-          "workflow_id": 47
+          "workflow_id": 447
         }
       ]
     },
     {
-      "apps": [],
-      "created_date": 1633456088201,
-      "creator": {
-        "display_name": "Chris\u0027 Integration Server v40",
-        "id": 6,
-        "name": "05c96997-7401-4089-a039-df21d0e54b07",
-        "type": "apikey"
-      },
+      "created_date": 1743420887868,
       "description": {
         "content": "Use netMiko to attach to devices (such as firewalls) for command line querying",
         "format": "text"
@@ -413,18 +405,22 @@
       "destination_handle": "fn_netdevice",
       "display_name": "fn_netdevice_query",
       "export_key": "fn_netdevice_query",
-      "id": 40,
+      "id": 327,
       "last_modified_by": {
-        "display_name": "Chris\u0027 Integration Server v40",
-        "id": 6,
-        "name": "05c96997-7401-4089-a039-df21d0e54b07",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1633456088275,
+      "last_modified_time": 1743420887868,
       "name": "fn_netdevice_query",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "tags": [],
       "uuid": "dce788eb-ccc2-457d-a095-c9a894f078ef",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "ee4c2177-f11a-4412-bfc9-acff5ccef633",
@@ -460,19 +456,20 @@
           "programmatic_name": "example_execute_netdevice_command",
           "tags": [],
           "uuid": null,
-          "workflow_id": 48
+          "workflow_id": 446
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 6,
+  "id": 101,
+  "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1633543244203,
+      "create_date": 1743517336897,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -481,17 +478,16 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1633543244203,
+      "update_date": 1743517336897,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
       "api_keys": [
-        "05c96997-7401-4089-a039-df21d0e54b07"
+        "fb3149cd-22a6-4a4a-9ac4-e8ae7aafb506"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -499,21 +495,28 @@
       "name": "fn_netdevice",
       "programmatic_name": "fn_netdevice",
       "tags": [],
-      "users": [],
+      "users": [
+        "shresh@example.com"
+      ],
       "uuid": "d7eff2ce-40a1-4d17-8a31-22ac222d9f4e"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 6554,
-    "major": 40,
+    "build_number": 9339,
+    "f": 0,
+    "m": 0,
+    "major": 0,
     "minor": 0,
-    "version": "40.0.6554"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -523,42 +526,40 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "example_execute_netdevice_command",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_execute_netdevice_command\" isExecutable=\"true\" name=\"Example: Execute Netdevice Commands\"\u003e\u003cdocumentation\u003ePerform a query operation against a firewall device\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0hfll5l\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ul2g78\" name=\"fn_netdevice_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dce788eb-ccc2-457d-a095-c9a894f078ef\"\u003e{\"inputs\":{\"747f839f-7353-4944-a04c-b323bc13c717\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\"import re\\n\\npp = \u0027(\\\\\\\\x1b\\\\[\\\\w*\\\\d*(;\\\\d*)*m)\u0027\\n\\nnote = u\\\"\\\"\\nfor host in results[\u0027content\u0027]:\\n  note = note + u\\\"Host: {}\\\\n\\\".format(host)\\n  if results[\u0027content\u0027][host].get(\u0027send_result\u0027) and isinstance(results[\u0027content\u0027][host][\u0027send_result\u0027], list):\\n    note = note + u\\\"Cmd: {}\\\\nResult: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027send_command\u0027], results[\u0027content\u0027][host][\u0027send_result\u0027])\\n  else:\\n    note = note + u\\\"Cmd: {}\\\\nResult: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027send_command\u0027], re.sub(pp, \u0027\u0027, results[\u0027content\u0027][host].get(\u0027send_result\u0027, \u0027\u0027)))\\n  \\n  if results[\u0027content\u0027][host][\u0027status\u0027] == \u0027failure\u0027:\\n    note = note + u\\\"Failure: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027reason\u0027])\\n    \\n  note = note + \\\"\\\\n\\\"\\n    \\nnote_text = helper.createPlainText(note)\\nincident.addNote(note_text)\",\"pre_processing_script\":\"inputs.netdevice_ids = rule.properties.device_ids\\ninputs.netdevice_send_cmd = rule.properties.send_command\\ninputs.netdevice_use_textfsm = rule.properties.use_textfsm_template\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hfll5l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0mmjo5r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hfll5l\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ul2g78\"/\u003e\u003cendEvent id=\"EndEvent_0tu5uvj\"\u003e\u003cincoming\u003eSequenceFlow_0mmjo5r\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0mmjo5r\" sourceRef=\"ServiceTask_0ul2g78\" targetRef=\"EndEvent_0tu5uvj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0nh96ny\"\u003e\u003ctext\u003eGenerate a note with the results from the remove device operations\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_04peaj9\" sourceRef=\"ServiceTask_0ul2g78\" targetRef=\"TextAnnotation_0nh96ny\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ma6kb5\"\u003e\u003ctext\u003eUse activity fields from the rule as input\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14afefi\" sourceRef=\"ServiceTask_0ul2g78\" targetRef=\"TextAnnotation_1ma6kb5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ul2g78\" id=\"ServiceTask_0ul2g78_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hfll5l\" id=\"SequenceFlow_0hfll5l_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tu5uvj\" id=\"EndEvent_0tu5uvj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"422\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"440\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mmjo5r\" id=\"SequenceFlow_0mmjo5r_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0nh96ny\" id=\"TextAnnotation_0nh96ny_di\"\u003e\u003comgdc:Bounds height=\"69\" width=\"217\" x=\"353\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_04peaj9\" id=\"Association_04peaj9_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"136\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ma6kb5\" id=\"TextAnnotation_1ma6kb5_di\"\u003e\u003comgdc:Bounds height=\"57\" width=\"156\" x=\"130\" y=\"73\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14afefi\" id=\"Association_14afefi_di\"\u003e\u003comgdi:waypoint x=\"270\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"130\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "05c96997-7401-4089-a039-df21d0e54b07",
-      "description": "Perform a query operation against a firewall device",
-      "export_key": "example_execute_netdevice_command",
-      "last_modified_by": "05c96997-7401-4089-a039-df21d0e54b07",
-      "last_modified_time": 1633456089205,
-      "name": "Example: Execute Netdevice Commands",
-      "object_type": "incident",
-      "programmatic_name": "example_execute_netdevice_command",
-      "tags": [],
-      "uuid": "b54c5c9b-d708-4883-a2de-0ac7d355c00c",
-      "workflow_id": 48
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
+        "version": 2,
         "workflow_id": "example_execute_netdevice_configuration_commands",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_execute_netdevice_configuration_commands\" isExecutable=\"true\" name=\"Example: Execute Netdevice Configuration Commands\"\u003e\u003cdocumentation\u003ePerform a configuration operation against a firewall device\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0as3nu9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ls8mkh\" name=\"fn_netdevice_config\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9b3f31a0-3127-4cd1-92f8-5947d7492f28\"\u003e{\"inputs\":{},\"post_processing_script\":\"import re\\n\\npp = \u0027(\\\\\\\\x1b\\\\[\\\\w*\\\\d*(;\\\\d*)*m)\u0027\\n\\nnote = u\\\"\\\"\\nfor host in results[\u0027content\u0027]:\\n  note = note + u\\\"Host: {}\\\\n\\\".format(host)\\n  note = note + u\\\"Config Cmd: {}\\\\nResult: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027config_command\u0027], re.sub(pp, \u0027\u0027, results[\u0027content\u0027][host].get(\u0027config_result\u0027, \u0027\u0027)))\\n  \\n  if results[\u0027content\u0027][host][\u0027status\u0027] == \u0027failure\u0027:\\n    note = note + u\\\"Failure: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027reason\u0027])\\n    \\n  note = note + \\\"\\\\n\\\"\\n    \\nnote_text = helper.createPlainText(note)\\nincident.addNote(note_text)\",\"pre_processing_script\":\"inputs.netdevice_config_cmd = rule.properties.config_commands.content\\ninputs.netdevice_ids = rule.properties.device_ids\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0as3nu9\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xrhnb1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0as3nu9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ls8mkh\"/\u003e\u003cendEvent id=\"EndEvent_00afnxw\"\u003e\u003cincoming\u003eSequenceFlow_0xrhnb1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xrhnb1\" sourceRef=\"ServiceTask_1ls8mkh\" targetRef=\"EndEvent_00afnxw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dme5rj\"\u003e\u003ctext\u003e\u003c![CDATA[Generate a note with the results from the remove device operations\n\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_08oyz9c\" sourceRef=\"ServiceTask_1ls8mkh\" targetRef=\"TextAnnotation_1dme5rj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1155x3t\"\u003e\u003ctext\u003eUse activity fields from the rule as input\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17vpsa9\" sourceRef=\"ServiceTask_1ls8mkh\" targetRef=\"TextAnnotation_1155x3t\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ls8mkh\" id=\"ServiceTask_1ls8mkh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0as3nu9\" id=\"SequenceFlow_0as3nu9_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dme5rj\" id=\"TextAnnotation_1dme5rj_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181\" x=\"359\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_08oyz9c\" id=\"Association_08oyz9c_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"420\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1155x3t\" id=\"TextAnnotation_1155x3t_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"123\" x=\"146\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17vpsa9\" id=\"Association_17vpsa9_di\"\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"112\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00afnxw\" id=\"EndEvent_00afnxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"432\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xrhnb1\" id=\"SequenceFlow_0xrhnb1_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"432\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"395\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_execute_netdevice_configuration_commands\" isExecutable=\"true\" name=\"Example: Execute Netdevice Configuration Commands\"\u003e\u003cdocumentation\u003ePerform a configuration operation against a firewall device\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0as3nu9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ls8mkh\" name=\"fn_netdevice_config\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9b3f31a0-3127-4cd1-92f8-5947d7492f28\"\u003e{\"inputs\":{},\"post_processing_script\":\"import re\\n\\npp = \u0027(\\\\\\\\x1b\\\\[\\\\w*\\\\d*(;\\\\d*)*m)\u0027\\n\\nnote = \\\"\\\"\\nfor host in results[\u0027content\u0027]:\\n  note = note + \\\"Host: {}\\\\n\\\".format(host)\\n  note = note + \\\"Config Cmd: {}\\\\nResult: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027config_command\u0027], re.sub(pp, \u0027\u0027, results[\u0027content\u0027][host].get(\u0027config_result\u0027, \u0027\u0027)))\\n  \\n  if results[\u0027content\u0027][host][\u0027status\u0027] == \u0027failure\u0027:\\n    note = note + \\\"Failure: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027reason\u0027])\\n    \\n  note = note + \\\"\\\\n\\\"\\n    \\nnote_text = helper.createPlainText(note)\\nincident.addNote(note_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.netdevice_config_cmd = rule.properties.config_commands.content\\ninputs.netdevice_ids = rule.properties.device_ids\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0as3nu9\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xrhnb1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0as3nu9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ls8mkh\"/\u003e\u003cendEvent id=\"EndEvent_00afnxw\"\u003e\u003cincoming\u003eSequenceFlow_0xrhnb1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xrhnb1\" sourceRef=\"ServiceTask_1ls8mkh\" targetRef=\"EndEvent_00afnxw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dme5rj\"\u003e\u003ctext\u003eGenerate a note with the results from the remove device operations\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_08oyz9c\" sourceRef=\"ServiceTask_1ls8mkh\" targetRef=\"TextAnnotation_1dme5rj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1155x3t\"\u003e\u003ctext\u003eUse activity fields from the rule as input\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17vpsa9\" sourceRef=\"ServiceTask_1ls8mkh\" targetRef=\"TextAnnotation_1155x3t\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ls8mkh\" id=\"ServiceTask_1ls8mkh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0as3nu9\" id=\"SequenceFlow_0as3nu9_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dme5rj\" id=\"TextAnnotation_1dme5rj_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181\" x=\"359\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_08oyz9c\" id=\"Association_08oyz9c_di\"\u003e\u003comgdi:waypoint x=\"351\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"420\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1155x3t\" id=\"TextAnnotation_1155x3t_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"123\" x=\"146\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17vpsa9\" id=\"Association_17vpsa9_di\"\u003e\u003comgdi:waypoint x=\"274\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"228\" y=\"112\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00afnxw\" id=\"EndEvent_00afnxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"432\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xrhnb1\" id=\"SequenceFlow_0xrhnb1_di\"\u003e\u003comgdi:waypoint x=\"358\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"432\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"395\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
-      "creator_id": "05c96997-7401-4089-a039-df21d0e54b07",
+      "content_version": 2,
       "description": "Perform a configuration operation against a firewall device",
       "export_key": "example_execute_netdevice_configuration_commands",
-      "last_modified_by": "05c96997-7401-4089-a039-df21d0e54b07",
-      "last_modified_time": 1633456089018,
+      "last_modified_by": "shresh@example.com",
+      "last_modified_time": 1743421100868,
       "name": "Example: Execute Netdevice Configuration Commands",
       "object_type": "incident",
       "programmatic_name": "example_execute_netdevice_configuration_commands",
       "tags": [],
       "uuid": "9c07f8be-8f02-47a3-8976-36c5ea7757e8",
-      "workflow_id": 47
+      "workflow_id": 447
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "example_execute_netdevice_command",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_execute_netdevice_command\" isExecutable=\"true\" name=\"Example: Execute Netdevice Commands\"\u003e\u003cdocumentation\u003ePerform a query operation against a firewall device\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0hfll5l\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ul2g78\" name=\"fn_netdevice_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dce788eb-ccc2-457d-a095-c9a894f078ef\"\u003e{\"inputs\":{\"747f839f-7353-4944-a04c-b323bc13c717\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\"import re\\n\\npp = \u0027(\\\\\\\\x1b\\\\[\\\\w*\\\\d*(;\\\\d*)*m)\u0027\\n\\nnote = \\\"\\\"\\nfor host in results[\u0027content\u0027]:\\n  note = note + \\\"Host: {}\\\\n\\\".format(host)\\n  if results[\u0027content\u0027][host].get(\u0027send_result\u0027) and isinstance(results[\u0027content\u0027][host][\u0027send_result\u0027], list):\\n    note = note + \\\"Cmd: {}\\\\nResult: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027send_command\u0027], results[\u0027content\u0027][host][\u0027send_result\u0027])\\n  else:\\n    note = note + \\\"Cmd: {}\\\\nResult: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027send_command\u0027], re.sub(pp, \u0027\u0027, results[\u0027content\u0027][host].get(\u0027send_result\u0027, \u0027\u0027)))\\n  \\n  if results[\u0027content\u0027][host][\u0027status\u0027] == \u0027failure\u0027:\\n    note = note + \\\"Failure: {}\\\\n\\\".format(results[\u0027content\u0027][host][\u0027reason\u0027])\\n    \\n  note = note + \\\"\\\\n\\\"\\n    \\nnote_text = helper.createPlainText(note)\\nincident.addNote(note_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.netdevice_ids = rule.properties.device_ids\\ninputs.netdevice_send_cmd = rule.properties.send_command\\ninputs.netdevice_use_textfsm = rule.properties.use_textfsm_template\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hfll5l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0mmjo5r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hfll5l\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ul2g78\"/\u003e\u003cendEvent id=\"EndEvent_0tu5uvj\"\u003e\u003cincoming\u003eSequenceFlow_0mmjo5r\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0mmjo5r\" sourceRef=\"ServiceTask_0ul2g78\" targetRef=\"EndEvent_0tu5uvj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0nh96ny\"\u003e\u003ctext\u003eGenerate a note with the results from the remove device operations\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_04peaj9\" sourceRef=\"ServiceTask_0ul2g78\" targetRef=\"TextAnnotation_0nh96ny\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ma6kb5\"\u003e\u003ctext\u003eUse activity fields from the rule as input\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14afefi\" sourceRef=\"ServiceTask_0ul2g78\" targetRef=\"TextAnnotation_1ma6kb5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ul2g78\" id=\"ServiceTask_0ul2g78_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hfll5l\" id=\"SequenceFlow_0hfll5l_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tu5uvj\" id=\"EndEvent_0tu5uvj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"422\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"440\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mmjo5r\" id=\"SequenceFlow_0mmjo5r_di\"\u003e\u003comgdi:waypoint x=\"359\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"422\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0nh96ny\" id=\"TextAnnotation_0nh96ny_di\"\u003e\u003comgdc:Bounds height=\"69\" width=\"217\" x=\"353\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_04peaj9\" id=\"Association_04peaj9_di\"\u003e\u003comgdi:waypoint x=\"357\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"412\" y=\"136\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ma6kb5\" id=\"TextAnnotation_1ma6kb5_di\"\u003e\u003comgdc:Bounds height=\"57\" width=\"156\" x=\"130\" y=\"73\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14afefi\" id=\"Association_14afefi_di\"\u003e\u003comgdi:waypoint x=\"270\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"235\" y=\"130\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Perform a query operation against a firewall device",
+      "export_key": "example_execute_netdevice_command",
+      "last_modified_by": "shresh@example.com",
+      "last_modified_time": 1743421062515,
+      "name": "Example: Execute Netdevice Commands",
+      "object_type": "incident",
+      "programmatic_name": "example_execute_netdevice_command",
+      "tags": [],
+      "uuid": "b54c5c9b-d708-4883-a2de-0ac7d355c00c",
+      "workflow_id": 446
     }
   ],
   "workspaces": []

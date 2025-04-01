@@ -43,12 +43,13 @@
 ## Release Notes
 | Version| Date |Comment |
 | -------: | ---: | ------ |
-| 1.0.6 | 9/2024 | Refresh app for v51.0.0 |
-| 1.0.5 | 4/2022 | Bug fixes |
-| 1.0.4 | 6/2021 | Bug fix ipwhois version pin |
-| 1.0.3 | 8/2020 | Updated examples, proxy support added |
-| 1.0.2 | 4/2020 | Bug fixes |
-| 1.0.1 | 4/2020 | Support for App Host |
+| 1.0.7 | 03/2025 | Converted example workflows to python3 |
+| 1.0.6 | 09/2024 | Refresh app for v51.0.0 |
+| 1.0.5 | 04/2022 | Bug fixes |
+| 1.0.4 | 06/2021 | Bug fix ipwhois version pin |
+| 1.0.3 | 08/2020 | Updated examples, proxy support added |
+| 1.0.2 | 04/2020 | Bug fixes |
+| 1.0.1 | 04/2020 | Support for App Host |
 | 1.0.0 | 12/2019 | Initial release |
 
 ---
@@ -82,7 +83,7 @@ If deploying to a SOAR platform with an App Host, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `51.0.0.0.9340`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=44.1.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -500,18 +501,18 @@ def walk_dict(sub_dict):
   for key, value in sub_dict.items():
     if key not in ['display_content']:
       if isinstance(value, dict):
-        notes.append(u"<b>{}</b>: <div style='padding:10px'>{}</div>".format(key, walk_dict(value)))
+        notes.append("<b>{}</b>: <div style='padding:10px'>{}</div>".format(key, walk_dict(value)))
       else:
-        notes.append(u"<b>{}</b>: {}".format(key, expand_list(value)))
+        notes.append("<b>{}</b>: {}".format(key, expand_list(value)))
       
-  return u"<br>".join(notes)
+  return "<br>".join(notes)
     
 
-note = u"RDAP Whois for artifact: {}<br><br>".format(artifact.value)
+note = "RDAP Whois for artifact: {}<br><br>".format(artifact.value)
 if results["success"]:
   note = note + walk_dict(results["content"])
 else:
-  note = note + u"This Artifact has no ans accessible registry information"
+  note = note + "This Artifact has no ans accessible registry information"
 
 incident.addNote(helper.createRichText(note))
 
@@ -656,18 +657,18 @@ def walk_dict(sub_dict):
   for key, value in sub_dict.items():
     if key not in ['display_content']:
       if isinstance(value, dict):
-        notes.append(u"<b>{}</b>: <div style='padding:10px'>{}</div>".format(key, walk_dict(value)))
+        notes.append("<b>{}</b>: <div style='padding:10px'>{}</div>".format(key, walk_dict(value)))
       else:
-        notes.append(u"<b>{}</b>: {}".format(key, expand_list(value)))
+        notes.append("<b>{}</b>: {}".format(key, expand_list(value)))
       
-  return u"<br>".join(notes)
+  return "<br>".join(notes)
     
 
-note = u"Whois for artifact: {}<br><br>".format(artifact.value)
+note = "Whois for artifact: {}<br><br>".format(artifact.value)
 if results["success"]:
   note = note + walk_dict(results["content"])
 else:
-  note = note + u"This Artifact has no whois information"
+  note = note + "This Artifact has no whois information"
 
 incident.addNote(helper.createRichText(note))
 

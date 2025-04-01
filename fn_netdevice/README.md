@@ -41,9 +41,10 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 06/2019 | Initial Release |
+| 1.1.2 | 03/2025 | Converted example workflows to python3 |
+| 1.1.1 | 09/2022 | Bug fixes addressing issue when using use_commit=True |
 | 1.1.0 | 10/2021 | Add App Host Support |
-
+| 1.0.0 | 06/2019 | Initial Release |
 ---
 
 ## Overview
@@ -76,7 +77,7 @@ This implementation utilizes all the functionality of netMiko including:
 <!--
   List any Requirements
 -->
-* resilient_circuits>=30.0.0
+* resilient_circuits>=51.0.0
 <br>
 * resilient-lib
 <br>
@@ -88,13 +89,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -124,11 +125,11 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app does support a proxy server.
 
 ### Python Environment
-Only Python 3.6 is supported.
+Python 3.9 or later supported.
 Additional package dependencies may exist for each of these packages:
 * netmiko>=2.3.3
 * resilient-lib
-* resilient_circuits>=30.0.0
+* resilient_circuits>=51.0.0
 
 ---
 
@@ -206,13 +207,13 @@ import re
 
 pp = '(\\x1b\[\w*\d*(;\d*)*m)'
 
-note = u""
+note = ""
 for host in results['content']:
-  note = note + u"Host: {}\n".format(host)
-  note = note + u"Config Cmd: {}\nResult: {}\n".format(results['content'][host]['config_command'], re.sub(pp, '', results['content'][host].get('config_result', '')))
+  note = note + "Host: {}\n".format(host)
+  note = note + "Config Cmd: {}\nResult: {}\n".format(results['content'][host]['config_command'], re.sub(pp, '', results['content'][host].get('config_result', '')))
 
   if results['content'][host]['status'] == 'failure':
-    note = note + u"Failure: {}\n".format(results['content'][host]['reason'])
+    note = note + "Failure: {}\n".format(results['content'][host]['reason'])
 
   note = note + "\n"
 
@@ -273,16 +274,16 @@ import re
 
 pp = '(\\x1b\[\w*\d*(;\d*)*m)'
 
-note = u""
+note = ""
 for host in results['content']:
-  note = note + u"Host: {}\n".format(host)
+  note = note + "Host: {}\n".format(host)
   if results['content'][host].get('send_result') and isinstance(results['content'][host]['send_result'], list):
-    note = note + u"Cmd: {}\nResult: {}\n".format(results['content'][host]['send_command'], results['content'][host]['send_result'])
+    note = note + "Cmd: {}\nResult: {}\n".format(results['content'][host]['send_command'], results['content'][host]['send_result'])
   else:
-    note = note + u"Cmd: {}\nResult: {}\n".format(results['content'][host]['send_command'], re.sub(pp, '', results['content'][host].get('send_result', '')))
+    note = note + "Cmd: {}\nResult: {}\n".format(results['content'][host]['send_command'], re.sub(pp, '', results['content'][host].get('send_result', '')))
 
   if results['content'][host]['status'] == 'failure':
-    note = note + u"Failure: {}\n".format(results['content'][host]['reason'])
+    note = note + "Failure: {}\n".format(results['content'][host]['reason'])
 
   note = note + "\n"
 
