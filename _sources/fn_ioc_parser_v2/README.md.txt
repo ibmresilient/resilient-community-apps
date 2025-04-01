@@ -29,11 +29,12 @@
 -->
 
 ### History
-| Version| Comment |
-| ------- | ------ |
-| 1.0.2 | Updated Rules and Workflows |
-| 1.0.1 | Support for App Host, proxy support added |
-| 1.0.0 | Initial release
+| Version| Date | Comment |
+| ------- | ------ | ---- |
+| 1.0.3 | 04/2025 | Converted example workflows to python3 |
+| 1.0.2 | 08/2020 | Updated Rules and Workflows |
+| 1.0.1 | 04/2020 | Support for App Host, proxy support added |
+| 1.0.0 | 07/2019 | Initial release |
 
 ---
 
@@ -62,8 +63,8 @@ To install,
 <!--
   List any Requirements
 -->
-* Resilient platform >= `v35.2.32`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* Resilient platform >= `51.0.0`
+* An Integration Server running `resilient_circuits>=51.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
