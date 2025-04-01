@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "ok"
+  },
+  "raw": "{\"status\": \"ok\"}",
+  "inputs": {
+    "aws_gd_finding_id": "xxxxyyyyzzzz",
+    "aws_gd_region": "us-east-1",
+    "aws_gd_detector_id": "48bbf98612290af2215c7a02b7ccbc82"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "1.1.0",
+    "host": "IBM-dummy-MacBookPro.local",
+    "execution_time_ms": 2058,
+    "timestamp": "2024-04-11 14:09:19"
+  }
+}

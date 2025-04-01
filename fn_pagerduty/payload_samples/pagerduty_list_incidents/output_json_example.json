@@ -1,0 +1,283 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "incidents": [
+      {
+        "incident_number": 1,
+        "title": "Example Incident",
+        "description": "Example Incident",
+        "created_at": "2024-04-15T12:04:38Z",
+        "updated_at": "2024-04-15T12:05:05Z",
+        "status": "acknowledged",
+        "incident_key": "6a2982771c8e4cdf890142d7d678b475",
+        "service": {
+          "id": "P2BUF3J",
+          "type": "service_reference",
+          "summary": "Default Service",
+          "self": "https://api.pagerduty.com/services/P2BUF3J",
+          "html_url": "https://ibmtest-8.pagerduty.com/service-directory/P2BUF3J"
+        },
+        "assignments": [
+          {
+            "at": "2024-04-15T12:04:38Z",
+            "assignee": {
+              "id": "PZ8LY8P",
+              "type": "user_reference",
+              "summary": "John Doe",
+              "self": "https://api.pagerduty.com/users/PZ8LY8P",
+              "html_url": "https://ibmtest-8.pagerduty.com/users/PZ8LY8P"
+            }
+          }
+        ],
+        "assigned_via": "escalation_policy",
+        "last_status_change_at": "2024-04-15T12:05:04Z",
+        "resolved_at": null,
+        "first_trigger_log_entry": {
+          "id": "RQG4YTG7S22XOHNY12DLEXQKOT",
+          "type": "trigger_log_entry_reference",
+          "summary": "Triggered through the website.",
+          "self": "https://api.pagerduty.com/log_entries/RQG4YTG7S22XOHNY12DLEXQKOT",
+          "html_url": "https://ibmtest-8.pagerduty.com/incidents/Q2F1BG6LBQ69MG/log_entries/RQG4YTG7S22XOHNY12DLEXQKOT"
+        },
+        "alert_counts": {
+          "all": 0,
+          "triggered": 0,
+          "resolved": 0
+        },
+        "is_mergeable": true,
+        "escalation_policy": {
+          "id": "PNR45CQ",
+          "type": "escalation_policy_reference",
+          "summary": "Default",
+          "self": "https://api.pagerduty.com/escalation_policies/PNR45CQ",
+          "html_url": "https://ibmtest-8.pagerduty.com/escalation_policies/PNR45CQ"
+        },
+        "teams": [],
+        "pending_actions": [],
+        "acknowledgements": [
+          {
+            "at": "2024-04-15T12:05:04Z",
+            "acknowledger": {
+              "id": "PZ8LY8P",
+              "type": "user_reference",
+              "summary": "John Doe",
+              "self": "https://api.pagerduty.com/users/PZ8LY8P",
+              "html_url": "https://ibmtest-8.pagerduty.com/users/PZ8LY8P"
+            }
+          }
+        ],
+        "basic_alert_grouping": null,
+        "alert_grouping": null,
+        "last_status_change_by": {
+          "id": "PZ8LY8P",
+          "type": "user_reference",
+          "summary": "John Doe",
+          "self": "https://api.pagerduty.com/users/PZ8LY8P",
+          "html_url": "https://ibmtest-8.pagerduty.com/users/PZ8LY8P"
+        },
+        "priority": null,
+        "incidents_responders": [],
+        "responder_requests": [],
+        "subscriber_requests": [],
+        "urgency": "high",
+        "id": "Q2F1BG6LBQ69MG",
+        "type": "incident",
+        "summary": "[#1] Example Incident",
+        "self": "https://api.pagerduty.com/incidents/Q2F1BG6LBQ69MG",
+        "html_url": "https://ibmtest-8.pagerduty.com/incidents/Q2F1BG6LBQ69MG"
+      },
+      {
+        "incident_number": 2,
+        "title": "SOAR: Test123",
+        "description": "SOAR: Test123",
+        "created_at": "2024-04-15T18:20:42Z",
+        "updated_at": "2024-04-15T18:20:42Z",
+        "status": "triggered",
+        "incident_key": "RES-2122",
+        "service": {
+          "id": "P2BUF3J",
+          "type": "service_reference",
+          "summary": "Default Service",
+          "self": "https://api.pagerduty.com/services/P2BUF3J",
+          "html_url": "https://ibmtest-8.pagerduty.com/service-directory/P2BUF3J"
+        },
+        "assignments": [
+          {
+            "at": "2024-04-15T18:20:43Z",
+            "assignee": {
+              "id": "PZ8LY8P",
+              "type": "user_reference",
+              "summary": "John Doe",
+              "self": "https://api.pagerduty.com/users/PZ8LY8P",
+              "html_url": "https://ibmtest-8.pagerduty.com/users/PZ8LY8P"
+            }
+          }
+        ],
+        "assigned_via": "escalation_policy",
+        "last_status_change_at": "2024-04-15T18:20:42Z",
+        "resolved_at": null,
+        "first_trigger_log_entry": {
+          "id": "RO8RV55CPFX6921ZPS6KG9S9VD",
+          "type": "trigger_log_entry_reference",
+          "summary": "Triggered through the website.",
+          "self": "https://api.pagerduty.com/log_entries/RO8RV55CPFX6921ZPS6KG9S9VD",
+          "html_url": "https://ibmtest-8.pagerduty.com/incidents/Q2JZLNGU7QQGDP/log_entries/RO8RV55CPFX6921ZPS6KG9S9VD"
+        },
+        "alert_counts": {
+          "all": 0,
+          "triggered": 0,
+          "resolved": 0
+        },
+        "is_mergeable": true,
+        "escalation_policy": {
+          "id": "PNR45CQ",
+          "type": "escalation_policy_reference",
+          "summary": "Default",
+          "self": "https://api.pagerduty.com/escalation_policies/PNR45CQ",
+          "html_url": "https://ibmtest-8.pagerduty.com/escalation_policies/PNR45CQ"
+        },
+        "teams": [],
+        "pending_actions": [],
+        "acknowledgements": [],
+        "basic_alert_grouping": null,
+        "alert_grouping": null,
+        "last_status_change_by": {
+          "id": "P2BUF3J",
+          "type": "service_reference",
+          "summary": "Default Service",
+          "self": "https://api.pagerduty.com/services/P2BUF3J",
+          "html_url": "https://ibmtest-8.pagerduty.com/service-directory/P2BUF3J"
+        },
+        "priority": {
+          "id": "PODCA25",
+          "type": "priority",
+          "summary": "P3",
+          "self": "https://api.pagerduty.com/priorities/PODCA25",
+          "html_url": null,
+          "account_id": "PSHM5T7",
+          "color": "f9b406",
+          "created_at": "2024-04-15T11:57:37Z",
+          "description": "",
+          "name": "P3",
+          "order": 300000000,
+          "schema_version": 0,
+          "updated_at": "2024-04-15T11:57:37Z"
+        },
+        "incidents_responders": [],
+        "responder_requests": [],
+        "subscriber_requests": [],
+        "urgency": "high",
+        "id": "Q2JZLNGU7QQGDP",
+        "type": "incident",
+        "summary": "[#2] SOAR: Test123",
+        "self": "https://api.pagerduty.com/incidents/Q2JZLNGU7QQGDP",
+        "html_url": "https://ibmtest-8.pagerduty.com/incidents/Q2JZLNGU7QQGDP"
+      },
+      {
+        "incident_number": 3,
+        "title": "SOAR: Test1",
+        "description": "SOAR: Test1",
+        "created_at": "2024-04-16T14:16:44Z",
+        "updated_at": "2024-04-16T14:16:44Z",
+        "status": "triggered",
+        "incident_key": "RES-2123",
+        "service": {
+          "id": "P2BUF3J",
+          "type": "service_reference",
+          "summary": "Default Service",
+          "self": "https://api.pagerduty.com/services/P2BUF3J",
+          "html_url": "https://ibmtest-8.pagerduty.com/service-directory/P2BUF3J"
+        },
+        "assignments": [
+          {
+            "at": "2024-04-16T14:16:44Z",
+            "assignee": {
+              "id": "PZ8LY8P",
+              "type": "user_reference",
+              "summary": "John Doe",
+              "self": "https://api.pagerduty.com/users/PZ8LY8P",
+              "html_url": "https://ibmtest-8.pagerduty.com/users/PZ8LY8P"
+            }
+          }
+        ],
+        "assigned_via": "escalation_policy",
+        "last_status_change_at": "2024-04-16T14:16:44Z",
+        "resolved_at": null,
+        "first_trigger_log_entry": {
+          "id": "R0D5Q149ACTOT09DXWE8JNPYKA",
+          "type": "trigger_log_entry_reference",
+          "summary": "Triggered through the website.",
+          "self": "https://api.pagerduty.com/log_entries/R0D5Q149ACTOT09DXWE8JNPYKA",
+          "html_url": "https://ibmtest-8.pagerduty.com/incidents/Q06KVFVBOFHPI7/log_entries/R0D5Q149ACTOT09DXWE8JNPYKA"
+        },
+        "alert_counts": {
+          "all": 0,
+          "triggered": 0,
+          "resolved": 0
+        },
+        "is_mergeable": true,
+        "escalation_policy": {
+          "id": "PNR45CQ",
+          "type": "escalation_policy_reference",
+          "summary": "Default",
+          "self": "https://api.pagerduty.com/escalation_policies/PNR45CQ",
+          "html_url": "https://ibmtest-8.pagerduty.com/escalation_policies/PNR45CQ"
+        },
+        "teams": [],
+        "pending_actions": [],
+        "acknowledgements": [],
+        "basic_alert_grouping": null,
+        "alert_grouping": null,
+        "last_status_change_by": {
+          "id": "P2BUF3J",
+          "type": "service_reference",
+          "summary": "Default Service",
+          "self": "https://api.pagerduty.com/services/P2BUF3J",
+          "html_url": "https://ibmtest-8.pagerduty.com/service-directory/P2BUF3J"
+        },
+        "priority": {
+          "id": "PODCA25",
+          "type": "priority",
+          "summary": "P3",
+          "self": "https://api.pagerduty.com/priorities/PODCA25",
+          "html_url": null,
+          "account_id": "PSHM5T7",
+          "color": "f9b406",
+          "created_at": "2024-04-15T11:57:37Z",
+          "description": "",
+          "name": "P3",
+          "order": 300000000,
+          "schema_version": 0,
+          "updated_at": "2024-04-15T11:57:37Z"
+        },
+        "incidents_responders": [],
+        "responder_requests": [],
+        "subscriber_requests": [],
+        "urgency": "high",
+        "id": "Q06KVFVBOFHPI7",
+        "type": "incident",
+        "summary": "[#3] SOAR: Test1",
+        "self": "https://api.pagerduty.com/incidents/Q06KVFVBOFHPI7",
+        "html_url": "https://ibmtest-8.pagerduty.com/incidents/Q06KVFVBOFHPI7"
+      }
+    ],
+    "limit": 25,
+    "offset": 0,
+    "total": null,
+    "more": false
+  },
+  "raw": null,
+  "inputs": {
+    "pd_search_date": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 552,
+    "timestamp": "2024-04-16 10:19:08"
+  }
+}
