@@ -463,31 +463,35 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-right"><p>1.0.6</p></td>
-<td class="text-right"><p>9/2024</p></td>
+<tr class="row-even"><td class="text-right"><p>1.0.7</p></td>
+<td class="text-right"><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1.0.6</p></td>
+<td class="text-right"><p>09/2024</p></td>
 <td><p>Refresh app for v51.0.0</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>1.0.5</p></td>
-<td class="text-right"><p>4/2022</p></td>
+<tr class="row-even"><td class="text-right"><p>1.0.5</p></td>
+<td class="text-right"><p>04/2022</p></td>
 <td><p>Bug fixes</p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>1.0.4</p></td>
-<td class="text-right"><p>6/2021</p></td>
+<tr class="row-odd"><td class="text-right"><p>1.0.4</p></td>
+<td class="text-right"><p>06/2021</p></td>
 <td><p>Bug fix ipwhois version pin</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>1.0.3</p></td>
-<td class="text-right"><p>8/2020</p></td>
+<tr class="row-even"><td class="text-right"><p>1.0.3</p></td>
+<td class="text-right"><p>08/2020</p></td>
 <td><p>Updated examples, proxy support added</p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>1.0.2</p></td>
-<td class="text-right"><p>4/2020</p></td>
+<tr class="row-odd"><td class="text-right"><p>1.0.2</p></td>
+<td class="text-right"><p>04/2020</p></td>
 <td><p>Bug fixes</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>1.0.1</p></td>
-<td class="text-right"><p>4/2020</p></td>
+<tr class="row-even"><td class="text-right"><p>1.0.1</p></td>
+<td class="text-right"><p>04/2020</p></td>
 <td><p>Support for App Host</p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>1.0.0</p></td>
+<tr class="row-odd"><td class="text-right"><p>1.0.0</p></td>
 <td class="text-right"><p>12/2019</p></td>
 <td><p>Initial release</p></td>
 </tr>
@@ -529,7 +533,7 @@
 <ul>
 <li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0.0.9340</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=44.1.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -1002,18 +1006,18 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sub_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;display_content&#39;</span><span class="p">]:</span>
       <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       <span class="k">else</span><span class="p">:</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       
-  <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
     
 
-<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;RDAP Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;RDAP Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
   <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;This Artifact has no ans accessible registry information&quot;</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;This Artifact has no ans accessible registry information&quot;</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 
@@ -1164,18 +1168,18 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sub_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;display_content&#39;</span><span class="p">]:</span>
       <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       <span class="k">else</span><span class="p">:</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       
-  <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
     
 
-<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
   <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;This Artifact has no whois information&quot;</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;This Artifact has no whois information&quot;</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 

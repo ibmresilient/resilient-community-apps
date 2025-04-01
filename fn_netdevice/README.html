@@ -463,13 +463,21 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.0</p></td>
-<td><p>06/2019</p></td>
-<td><p>Initial Release</p></td>
+<tr class="row-even"><td><p>1.1.2</p></td>
+<td><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.1</p></td>
+<td><p>09/2022</p></td>
+<td><p>Bug fixes addressing issue when using use_commit=True</p></td>
+</tr>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>10/2021</p></td>
 <td><p>Add App Host Support</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.0</p></td>
+<td><p>06/2019</p></td>
+<td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
@@ -505,7 +513,7 @@
   List any Requirements
 -->
 <ul class="simple">
-<li><p>resilient_circuits&gt;=30.0.0
+<li><p>resilient_circuits&gt;=51.0.0
 <br></p></li>
 <li><p>resilient-lib
 <br></p></li>
@@ -518,14 +526,14 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 <p>The Resilient platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a Resilient platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">40.0.6554</span></code>.</p></li>
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a Resilient platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">40.0.6554</span></code>.</p></li>
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=30.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -575,12 +583,12 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Only Python 3.6 is supported.
+<p>Python 3.9 or later supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>netmiko&gt;=2.3.3</p></li>
 <li><p>resilient-lib</p></li>
-<li><p>resilient_circuits&gt;=30.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 </section>
@@ -721,13 +729,13 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="n">pp</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="se">\\</span><span class="s1">x1b\[\w*\d*(;\d*)*m)&#39;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;Host: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;Config Cmd: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Result: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;config_command&#39;</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;config_result&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;Host: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;Config Cmd: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Result: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;config_command&#39;</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;config_result&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
 
   <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;failure&#39;</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;Failure: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;reason&#39;</span><span class="p">])</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;Failure: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;reason&#39;</span><span class="p">])</span>
 
   <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
@@ -803,16 +811,16 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="n">pp</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="se">\\</span><span class="s1">x1b\[\w*\d*(;\d*)*m)&#39;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;Host: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;Host: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;send_result&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;send_result&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;Cmd: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Result: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;send_command&#39;</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;send_result&#39;</span><span class="p">])</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;Cmd: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Result: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;send_command&#39;</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;send_result&#39;</span><span class="p">])</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;Cmd: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Result: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;send_command&#39;</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;send_result&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;Cmd: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Result: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;send_command&#39;</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;send_result&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
 
   <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;failure&#39;</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;Failure: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;reason&#39;</span><span class="p">])</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;Failure: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="n">host</span><span class="p">][</span><span class="s1">&#39;reason&#39;</span><span class="p">])</span>
 
   <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
