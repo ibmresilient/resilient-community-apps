@@ -403,11 +403,79 @@
 <h1>Twitter Search API<a class="headerlink" href="#twitter-search-api" title="Link to this heading">¶</a></h1>
 <p><strong>This package contains one function which targets the Twitter Search API. Takes in an input of multiple possible hashtags and a number of Tweets to be returned and contacts the Twitter Search API to return the results. Requires Twitter Access Key and Secret to obtain a OAuth2 read-only token.</strong>
 <img alt="screenshot" src="../_images/114.png" /></p>
-<section id="app-config-settings">
-<h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">twitter_api_key</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span>
-<span class="n">twitter_api_secret</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">API_SECRET</span><span class="o">&gt;</span>
-</pre></div>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#function-inputs"><span class="xref myst">Function Inputs</span></a></p></li>
+<li><p><a class="reference internal" href="#function-output"><span class="xref myst">Function Output</span></a></p></li>
+<li><p><a class="reference internal" href="#pre-processing-script"><span class="xref myst">Pre-processing Script</span></a></p></li>
+<li><p><a class="reference internal" href="#post-processing-script"><span class="xref myst">Post-processing Script</span></a></p></li>
+<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+</ul>
+</section>
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>04/2020</p></td>
+<td><p>AppHost Support added</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>02/2019</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="app-configuration">
+<h2>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>twitter_api_key</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>&lt;API_KEY&gt;</p></td>
+<td><p>Generate by creating an account on twitter and go to developer portal</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>twitter_api_secret</strong></p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>&lt;API_SECRET&gt;</p></td>
+<td><p>Generate by creating an account on twitter and go to developer portal</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>http_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">http://your_proxy.com</span></code></p></td>
+<td><p><em>Optional http proxy URL</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>https_proxy</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://your_proxy.com</span></code></p></td>
+<td><p><em>Optional https proxy URL</em></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 <section id="function-inputs">
@@ -567,7 +635,9 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Twitter Search API</a><ul>
-<li><a class="reference internal" href="#app-config-settings">app.config settings:</a></li>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
 <li><a class="reference internal" href="#function-inputs">Function Inputs:</a></li>
 <li><a class="reference internal" href="#function-output">Function Output:</a></li>
 <li><a class="reference internal" href="#pre-process-script">Pre-Process Script:</a></li>
