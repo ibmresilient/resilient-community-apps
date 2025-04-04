@@ -4,15 +4,17 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='Twitter Search',
     name='fn_twitter_most_popular',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Twitter Search Function",
     long_description="A Resilient Circuits Function allowing you to search tweets with one or more tags",
     install_requires=[
-        "resilient_circuits>=30.0.0",
+        "resilient_circuits>=51.0.0",
         "twython < 3.8.0;python_version<'3.0'",
         "twython >= 3.8.0;python_version>='3.0'"
     ],
