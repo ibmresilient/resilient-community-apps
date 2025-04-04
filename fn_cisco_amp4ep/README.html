@@ -302,7 +302,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">Phish Tank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
@@ -345,7 +344,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts<!-- omit in toc --></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
@@ -406,6 +404,9 @@
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="#cisco-secure-endpoint"><span class="xref myst">Cisco Secure Endpoint</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
 <ul>
@@ -418,6 +419,12 @@
 <li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
 <li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
 <li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+<li><p><a class="reference internal" href="#development-version"><span class="xref myst">Development Version</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#permissions"><span class="xref myst">Permissions</span></a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
@@ -441,22 +448,65 @@
 <li><p><a class="reference internal" href="#function---amp-set-file-in-list"><span class="xref myst">Function - AMP: Set File in List</span></a></p></li>
 <li><p><a class="reference internal" href="#script---scr_amp_add_artifact_from_activity"><span class="xref myst">Script - scr_amp_add_artifact_from_activity</span></a></p></li>
 <li><p><a class="reference internal" href="#script---scr_amp_add_artifact_from_event"><span class="xref myst">Script - scr_amp_add_artifact_from_event</span></a></p></li>
-<li><p><a class="reference internal" href="#script---scr_amp_add_artifact_from_trajectory"><span class="xref myst">Script - scr_amp_add_artifact_from_trajectory</span></a></p>
-<ul>
+<li><p><a class="reference internal" href="#script---scr_amp_add_artifact_from_trajectory"><span class="xref myst">Script - scr_amp_add_artifact_from_trajectory</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-activity"><span class="xref myst">Data Table - Cisco AMP activity</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns"><span class="xref myst">Columns:</span></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-activity"><span class="xref myst">Data Table - Cisco AMP activity</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-computer-trajectory"><span class="xref myst">Data Table - Cisco AMP computer trajectory</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-computers"><span class="xref myst">Data Table - Cisco AMP computers</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-event-types"><span class="xref myst">Data Table - Cisco AMP event types</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-events"><span class="xref myst">Data Table - Cisco AMP events</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-file-list-files"><span class="xref myst">Data Table - Cisco AMP file list files</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-groups"><span class="xref myst">Data Table - Cisco AMP groups</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---cisco-amp-simple-custom-detections--file-lists"><span class="xref myst">Data Table - Cisco AMP Simple Custom Detections  file lists</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-computer-trajectory"><span class="xref myst">Data Table - Cisco AMP computer trajectory</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-1"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-1"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-computers"><span class="xref myst">Data Table - Cisco AMP computers</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-2"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-2"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-event-types"><span class="xref myst">Data Table - Cisco AMP event types</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-3"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-3"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-events"><span class="xref myst">Data Table - Cisco AMP events</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-4"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-4"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-file-list-files"><span class="xref myst">Data Table - Cisco AMP file list files</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-5"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-5"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-groups"><span class="xref myst">Data Table - Cisco AMP groups</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-6"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-6"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---cisco-amp-simple-custom-detections--file-lists"><span class="xref myst">Data Table - Cisco AMP Simple Custom Detections  file lists</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-7"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-7"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
-<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -965,7 +1015,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
           <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.amp.cisco.com/v1/groups/aaaaaaa-1111-bbbb-cccc-000000000000&quot;</span><span class="p">,</span>
           <span class="s2">&quot;trajectory&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.amp.cisco.com/v1/computers/aaaaaaa-1111-bbbb-cccc-000000000000/trajectory?q=0.0.0.0&quot;</span>
         <span class="p">},</span>
-        <span class="s2">&quot;windows_processor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;7f42db5a8e63019&quot;</span>
+        <span class="s2">&quot;windows_processor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;7f42*******e63019&quot;</span>
       <span class="p">},</span>
       <span class="p">{</span>
         <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>

@@ -302,7 +302,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">Phish Tank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
@@ -345,7 +344,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts<!-- omit in toc --></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
@@ -425,7 +423,14 @@
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#aws-guardduty"><span class="xref myst">AWS GuardDuty</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#aws-guardduty-app--110-changes"><span class="xref myst">AWS GuardDuty App  1.1.0 Changes</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
@@ -445,22 +450,56 @@
 <li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
 </ul>
 </li>
+<li><p><a class="reference internal" href="#poller---aws-guardduty-escalate-findings"><span class="xref myst">Poller - AWS GuardDuty: Escalate Findings</span></a></p></li>
 <li><p><a class="reference internal" href="#function---aws-guardduty-archive-finding"><span class="xref myst">Function - AWS GuardDuty: Archive finding</span></a></p></li>
-<li><p><a class="reference internal" href="#function---aws-guardduty-refresh-finding"><span class="xref myst">Function - AWS GuardDuty: Refresh Finding</span></a></p>
-<ul>
+<li><p><a class="reference internal" href="#function---aws-guardduty-refresh-finding"><span class="xref myst">Function - AWS GuardDuty: Refresh Finding</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-actionactor-details"><span class="xref myst">Data Table - GuardDuty Action/Actor Details</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns"><span class="xref myst">Columns:</span></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#data-table---guardduty-actionactor-details"><span class="xref myst">Data Table - GuardDuty Action/Actor Details</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---guardduty-finding-overview"><span class="xref myst">Data Table - GuardDuty Finding Overview</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---guardduty-resource---access-key-details"><span class="xref myst">Data Table - GuardDuty Resource - Access Key Details</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---guardduty-resource---instance-details"><span class="xref myst">Data Table - GuardDuty Resource - Instance Details</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---guardduty-resource---s3-bucket-details"><span class="xref myst">Data Table - GuardDuty Resource - S3 Bucket Details</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---guardduty-resource-affected"><span class="xref myst">Data Table - GuardDuty Resource Affected</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---guardduty-finding-overview"><span class="xref myst">Data Table - GuardDuty Finding Overview</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-1"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-1"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource---access-key-details"><span class="xref myst">Data Table - GuardDuty Resource - Access Key Details</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-2"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-2"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource---instance-details"><span class="xref myst">Data Table - GuardDuty Resource - Instance Details</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-3"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-3"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource---s3-bucket-details"><span class="xref myst">Data Table - GuardDuty Resource - S3 Bucket Details</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-4"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-4"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---guardduty-resource-affected"><span class="xref myst">Data Table - GuardDuty Resource Affected</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-5"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-5"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-artifact-types"><span class="xref myst">Custom Artifact Types</span></a></p></li>
-<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -809,8 +848,9 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">Result: {&#39;version&#39;: &#39;1.0&#39;, &#39;success&#39;: True, &#39;reason&#39;: None,</span>
 <span class="sd">         &#39;content&#39;: {&#39;status&#39;: &#39;ok&#39;},</span>
 <span class="sd">         &#39;raw&#39;: &#39;{&quot;status&quot;: &quot;ok&quot;}&#39;,</span>
-<span class="sd">         &#39;inputs&#39;: {&#39;aws_gd_finding_id&#39;: &#39;c2bb95a17b879bffc96c58f8a1689785&#39;, &#39;aws_gd_region&#39;: &#39;us-east-2&#39;,</span>
-<span class="sd">                    &#39;aws_gd_detector_id&#39;: &#39;32b7017d2019dfe922abc4e07c3fdded&#39;</span>
+<span class="sd">         &#39;inputs&#39;: {&#39;aws_gd_finding_id&#39;:      &#39;c2bb95a17*******96c58f8a1689785&#39;, </span>
+<span class="sd">         &#39;aws_gd_region&#39;: &#39;us-east-2&#39;,</span>
+<span class="sd">                    &#39;aws_gd_detector_id&#39;: &#39;32b7017d*******22abc4e07c3fdded&#39;</span>
 <span class="sd">                    },</span>
 <span class="sd">         &#39;metrics&#39;: {&#39;version&#39;: &#39;1.0&#39;, &#39;package&#39;: &#39;fn-aws-guardduty&#39;, &#39;package_version&#39;: &#39;1.0.0&#39;,</span>
 <span class="sd">         &#39;host&#39;: &#39;myhost.ibm.com&#39;, &#39;execution_time_ms&#39;: 1310, &#39;timestamp&#39;: &#39;2021-01-28 11:31:30&#39;</span>
@@ -823,7 +863,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">                     The request is rejected because the input detectorId is not owned by the current account.&#39;},</span>
 <span class="sd">                     &#39;raw&#39;: &#39;&lt;content_as_string&gt;&#39;,</span>
 <span class="sd">         &#39;inputs&#39;: {&#39;aws_gd_finding_id&#39;: &#39;c2bb95a17b879bffc96c58f8a1689784&#39;, &#39;aws_gd_region&#39;: &#39;us-east-2&#39;,</span>
-<span class="sd">                    &#39;aws_gd_detector_id&#39;: &#39;32b7017d2019dfe922abc4e07c3fdfff&#39;</span>
+<span class="sd">                    &#39;aws_gd_detector_id&#39;: &#39;32b7017*******22abc4e07c3fdfff&#39;</span>
 <span class="sd">                    },</span>
 <span class="sd">         &#39;metrics&#39;: {&#39;version&#39;: &#39;1.0&#39;, &#39;package&#39;: &#39;fn-aws-guardduty&#39;, &#39;package_version&#39;: &#39;1.0.0&#39;,</span>
 <span class="sd">         &#39;host&#39;: &#39;myhost.ibm.com&#39;, &#39;execution_time_ms&#39;: 1446, &#39;timestamp&#39;: &#39;2021-01-28 11:34:53&#39;</span>
@@ -1125,7 +1165,7 @@ Additional package dependencies may exist for each of these packages:</p>
       <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;aws_guardduty_archived&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
         <span class="s2">&quot;aws_guardduty_count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;aws_guardduty_detector_id&quot;</span><span class="p">:</span> <span class="s2">&quot;48bbf98612290af2215c7a02b7ccbc82&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;aws_guardduty_detector_id&quot;</span><span class="p">:</span> <span class="s2">&quot;48bbf98*******215c7a02b7ccbc82&quot;</span><span class="p">,</span>
         <span class="s2">&quot;aws_guardduty_finding_arn&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz&quot;</span><span class="p">,</span>
         <span class="s2">&quot;aws_guardduty_finding_id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxyyyyzzzz&quot;</span><span class="p">,</span>
         <span class="s2">&quot;aws_guardduty_finding_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Discovery:IAMUser/AnomalousBehavior&quot;</span><span class="p">,</span>
@@ -1185,11 +1225,11 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">                                  &#39;discovered_date&#39;: &#39;2020-11-25T13:46:37.960Z&#39;,</span>
 <span class="sd">                                  &#39;severity_code&#39;: &#39;Low&#39;,</span>
 <span class="sd">                                  &#39;properties&#39;: {&#39;aws_guardduty_finding_id&#39;: &#39;60baffd3f9042e38640f2300d5c5a631&#39;,</span>
-<span class="sd">                                                &#39;aws_guardduty_finding_arn&#39;: &#39;arn:aws:guardduty:us-west-2:xxxxyyyyzzzz:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631&#39;,</span>
+<span class="sd">                                                &#39;aws_guardduty_finding_arn&#39;: &#39;arn:aws:guardduty:us-west-2:xxxxyyyyzzzz:detector/f2baedb0*******929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631&#39;,</span>
 <span class="sd">                                                &#39;aws_guardduty_finding_type&#39;: &#39;UnauthorizedAccess:S3/MaliciousIPCaller.Custom&#39;,</span>
 <span class="sd">                                                &#39;aws_guardduty_finding_updated_at&#39;: &#39;2020-11-26T15:18:12.620Z&#39;, &#39;aws_guardduty_region&#39;: &#39;us-west-2&#39;,</span>
 <span class="sd">                                                &#39;aws_guardduty_resource_type&#39;: &#39;S3Bucket&#39;, &#39;aws_guardduty_count&#39;: 4,</span>
-<span class="sd">                                                &#39;aws_guardduty_detector_id&#39;: &#39;f2baedb0ac74f8f42fc929e15f56da6a&#39;},</span>
+<span class="sd">                                                &#39;aws_guardduty_detector_id&#39;: &#39;f2baedb*******2fc929e15f56da6a&#39;},</span>
 <span class="sd">                                  &#39;artifacts&#39;: [],</span>
 <span class="sd">                                  &#39;comments&#39;: [{&#39;text&#39;: {&#39;format&#39;: &#39;text&#39;, &#39;content&#39;: &quot;AWS GuardDuty finding Payload:\n&lt;FINDING_PAYLOAD_AS_STRING&gt;&quot;}}]</span>
 

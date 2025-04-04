@@ -302,7 +302,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">Phish Tank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
@@ -345,7 +344,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts<!-- omit in toc --></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
@@ -406,6 +404,9 @@
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="#cisco-umbrella-investigate"><span class="xref myst">Cisco Umbrella Investigate</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
 <ul>
@@ -439,30 +440,118 @@
 <li><p><a class="reference internal" href="#function---umbrella_pattern_search"><span class="xref myst">Function - umbrella_pattern_search</span></a></p></li>
 <li><p><a class="reference internal" href="#function---umbrella_threat_grid_sample"><span class="xref myst">Function - umbrella_threat_grid_sample</span></a></p></li>
 <li><p><a class="reference internal" href="#function---umbrella_threat_grid_samples"><span class="xref myst">Function - umbrella_threat_grid_samples</span></a></p></li>
-<li><p><a class="reference internal" href="#function---umbrella_timeline"><span class="xref myst">Function - umbrella_timeline</span></a></p>
-<ul>
+<li><p><a class="reference internal" href="#function---umbrella_timeline"><span class="xref myst">Function - umbrella_timeline</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---as-information-for-an-ip-address-or-asn"><span class="xref myst">Data Table - Umbrella Investigate - AS Information for an ip address or ASN</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns"><span class="xref myst">Columns:</span></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---as-information-for-an-ip-address-or-asn"><span class="xref myst">Data Table - Umbrella Investigate - AS Information for an ip address or ASN</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---categories-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Categories for a domain</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---category-identifiers"><span class="xref myst">Data Table - Umbrella Investigate - Category identifiers</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---classifiers-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Classifiers for a domain</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---co-occurrences-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Co-occurrences for a domain</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---dns-rr-history-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - DNS RR history for a domain</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---dns-rr-history-for-an-ip-address"><span class="xref myst">Data Table - Umbrella Investigate - DNS RR history for an ip address</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---domain-volume"><span class="xref myst">Data Table - Umbrella Investigate - Domain Volume</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---domain-whois-info-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Domain WHOIS info for a domain</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---latest-malicious-domains-for-an-ip"><span class="xref myst">Data Table - Umbrella Investigate - Latest Malicious Domains for an IP</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---pattern-search-with-start-epoch"><span class="xref myst">Data Table - Umbrella Investigate - Pattern search with start epoch</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---pattern-search-with-start-relative"><span class="xref myst">Data Table - Umbrella Investigate - Pattern search with start relative</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---related-domains-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Related Domains for a Domain</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---security-information-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Security information for a domain</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---threadgrid-sample-info-for-a-hash"><span class="xref myst">Data Table - Umbrella Investigate - ThreadGrid sample info for a hash</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---threadgrid-samples-for-a-resource"><span class="xref myst">Data Table - Umbrella Investigate - ThreadGrid samples for a resource</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---umbrella-investigate---timeline-for-a-resource"><span class="xref myst">Data Table - Umbrella Investigate - Timeline for a resource</span></a></p></li>
-<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---categories-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Categories for a domain</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-1"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-1"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---category-identifiers"><span class="xref myst">Data Table - Umbrella Investigate - Category identifiers</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-2"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-2"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---classifiers-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Classifiers for a domain</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-3"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-3"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---co-occurrences-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Co-occurrences for a domain</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-4"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-4"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---dns-rr-history-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - DNS RR history for a domain</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-5"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-5"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---dns-rr-history-for-an-ip-address"><span class="xref myst">Data Table - Umbrella Investigate - DNS RR history for an ip address</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-6"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-6"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---domain-volume"><span class="xref myst">Data Table - Umbrella Investigate - Domain Volume</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-7"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-7"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---domain-whois-info-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Domain WHOIS info for a domain</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-8"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-8"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---latest-malicious-domains-for-an-ip"><span class="xref myst">Data Table - Umbrella Investigate - Latest Malicious Domains for an IP</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-9"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-9"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---pattern-search-with-start-epoch"><span class="xref myst">Data Table - Umbrella Investigate - Pattern search with start epoch</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-10"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-10"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---pattern-search-with-start-relative"><span class="xref myst">Data Table - Umbrella Investigate - Pattern search with start relative</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-11"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-11"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---related-domains-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Related Domains for a Domain</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-12"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-12"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---security-information-for-a-domain"><span class="xref myst">Data Table - Umbrella Investigate - Security information for a domain</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-13"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-13"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---threadgrid-sample-info-for-a-hash"><span class="xref myst">Data Table - Umbrella Investigate - ThreadGrid sample info for a hash</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-14"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-14"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---threadgrid-samples-for-a-resource"><span class="xref myst">Data Table - Umbrella Investigate - ThreadGrid samples for a resource</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-15"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-15"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-table---umbrella-investigate---timeline-for-a-resource"><span class="xref myst">Data Table - Umbrella Investigate - Timeline for a resource</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name-16"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns-16"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -2378,7 +2467,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;umbinv_hash&quot;</span><span class="p">:</span> <span class="s2">&quot;a0f2a3c1dcd5b1cac71bf0c03f2ff1bd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;umbinv_hash&quot;</span><span class="p">:</span> <span class="s2">&quot;a0f2a3c*******ac71bf0c03f2ff1bd&quot;</span><span class="p">,</span>
     <span class="s2">&quot;umbinv_limit&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="s2">&quot;umbinv_offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;umbinv_sample_endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span>
@@ -2541,9 +2630,9 @@ Additional package dependencies may exist for each of these packages:</p>
           <span class="s2">&quot;firstSeen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
           <span class="s2">&quot;lastSeen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
           <span class="s2">&quot;magicType&quot;</span><span class="p">:</span> <span class="s2">&quot;PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;86e788dc3e886821eb103c8b9115e9fb&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="s2">&quot;166fbeea622e95bee0549274d8f70f42ca856cb1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;08483c38fee1dff34d52c23143ac5c3c5f91e00ca6032d4f4e28d1defaa673bf&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;86e788dc********eb103c8b9115e9fb&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="s2">&quot;166fbeea6********49274d8f70f42ca856cb1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;08483c38fee1dff34d52c23********5f91e00ca6032d4f4e28d1defaa673bf&quot;</span><span class="p">,</span>
           <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">19908237</span><span class="p">,</span>
           <span class="s2">&quot;threatScore&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
           <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="n">true</span>
@@ -2570,9 +2659,9 @@ Additional package dependencies may exist for each of these packages:</p>
           <span class="s2">&quot;firstSeen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
           <span class="s2">&quot;lastSeen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
           <span class="s2">&quot;magicType&quot;</span><span class="p">:</span> <span class="s2">&quot;PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;d90ef473ca59cb7355071318caa12949&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="s2">&quot;f6224cef252aee32c881a2939ed6b85b043d4b52&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;230a07cb6383b97017bc41a846c52ec79c0c33208055e93c6ba9bdceedca4038&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;d90ef47*******355071318caa12949&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="s2">&quot;f6224cef2*******c881a2939ed6b85b043d4b52&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;230a07cb6383b97017bc41*******ec79c0c33208055e93c6ba9bdceedca4038&quot;</span><span class="p">,</span>
           <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">517120</span><span class="p">,</span>
           <span class="s2">&quot;threatScore&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
           <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="n">true</span>

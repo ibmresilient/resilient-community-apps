@@ -46,8 +46,9 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 1/2021 | Initial Release |
+| 1.0.2 | 04/2025 | Converted example workflows to python3 |
 | 1.0.1 | 11/2023 | Convert Workflow/Script to Python3 |
+| 1.0.0 | 01/2021 | Initial Release |
 
 ---
 
@@ -91,13 +92,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=47.1.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -127,10 +128,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.9 or later are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=47.1.0
-* resilient_lib>=47.1.0
+* resilient_circuits>=51.0.0
+* resilient_lib>=51.0.0
 
 ---
 
@@ -209,7 +210,7 @@ inputs.api_void_artifact_type = artifact.type
 # convert_json_to_rich_text script to print readable formatted json in an incident note.
 inputs = results.get("inputs")
 artifact_value = inputs.get("api_void_artifact_value")
-header = u"APIVoid DNS Lookup: {0}".format(artifact_value)
+header = "APIVoid DNS Lookup: {0}".format(artifact_value)
 
 json_note = {
               "version": "1.1",

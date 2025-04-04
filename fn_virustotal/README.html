@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="search" title="Search" href="../search.html" /><link rel="next" title="VMRay Sandbox Analyzer" href="../fn_vmray_analyzer/README.html" /><link rel="prev" title="Utilities (Deprecated)" href="../fn_utilities/README.html" />
+<link rel="search" title="Search" href="../search.html" /><link rel="next" title="watsonx.ai for SOAR Analysts" href="../fn_watsonx_analyst/README.html" /><link rel="prev" title="Utilities (Deprecated)" href="../fn_utilities/README.html" />
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
         <title>VirusTotal - QRadar SOAR Apps</title>
@@ -302,7 +302,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">Phish Tank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
@@ -345,7 +344,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts<!-- omit in toc --></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
@@ -406,7 +404,14 @@
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#virustotal"><span class="xref myst">VirusTotal</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#110-changes"><span class="xref myst">1.1.0 Changes</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#key-features"><span class="xref myst">Key Features</span></a></p></li>
@@ -418,6 +423,12 @@
 <li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
 <li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
 <li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+<li><p><a class="reference internal" href="#virustotal-development-version"><span class="xref myst">VirusTotal Development Version</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#configuration"><span class="xref myst">Configuration</span></a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
@@ -428,7 +439,13 @@
 </li>
 <li><p><a class="reference internal" href="#function---virustotal"><span class="xref myst">Function - VirusTotal</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -809,7 +826,7 @@ Sample playbook using the VirusTotal function:
             <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">16570</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;jarm&quot;</span><span class="p">:</span> <span class="s2">&quot;29d29d15d29d29d21c42d42d0000003014e6e1a0bc19438ed392b132659e77&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;jarm&quot;</span><span class="p">:</span> <span class="s2">&quot;29d29d15d29d2*******2d0000003014e6e1a0bc19438ed392b132659e77&quot;</span><span class="p">,</span>
         <span class="s2">&quot;whois&quot;</span><span class="p">:</span> <span class="s2">&quot;Creation Date: 1995-08-14T04:00:00Z</span><span class="se">\n</span><span class="s2">DNSSEC: signedDelegation</span><span class="se">\n</span><span class="s2">Domain Name: EXAMPLE.COM</span><span class="se">\n</span><span class="s2">Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited</span><span class="se">\n</span><span class="s2">Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited</span><span class="se">\n</span><span class="s2">Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited</span><span class="se">\n</span><span class="s2">Name Server: A.IANA-SERVERS.NET</span><span class="se">\n</span><span class="s2">Name Server: B.IANA-SERVERS.NET</span><span class="se">\n</span><span class="s2">Registrar IANA ID: 376</span><span class="se">\n</span><span class="s2">Registrar URL: http://res-dom.iana.org</span><span class="se">\n</span><span class="s2">Registrar WHOIS Server: whois.iana.org</span><span class="se">\n</span><span class="s2">Registrar: RESERVED-Internet Assigned Numbers Authority</span><span class="se">\n</span><span class="s2">Registry Domain ID: 2336799_DOMAIN_COM-VRSN</span><span class="se">\n</span><span class="s2">Registry Expiry Date: 2023-08-13T04:00:00Z</span><span class="se">\n</span><span class="s2">Updated Date: 2022-08-14T07:01:31Z</span><span class="se">\n</span><span class="s2">created: 1992-01-01</span><span class="se">\n</span><span class="s2">domain: EXAMPLE.COM</span><span class="se">\n</span><span class="s2">organisation: Internet Assigned Numbers Authority</span><span class="se">\n</span><span class="s2">source: IANA&quot;</span><span class="p">,</span>
         <span class="s2">&quot;last_https_certificate_date&quot;</span><span class="p">:</span> <span class="mi">1684856030</span><span class="p">,</span>
         <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
@@ -1370,14 +1387,14 @@ Sample playbook using the VirusTotal function:
           <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;rsa&quot;</span><span class="p">:</span> <span class="p">{</span>
               <span class="s2">&quot;key_size&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
-              <span class="s2">&quot;modulus&quot;</span><span class="p">:</span> <span class="s2">&quot;c280778959b8456fba4ad911fa7badc757d07afbb6fadd05bba28171bbe17f21d25f2ef0d2724e7534f88d62e34ada5190d4013d9c0cc071f7e62fb6d6076726d0deff17cef085fd31c166ca876505472a5fc0abb88cc3bfd0177f63a35cf046fb86aafb4dd72a5e7f9ae013977dbefb7d35570d5d5e819835ea1642a2d3b074f7592ded38e7fe7a1bb336e67eae3f9ea61683de53014e8100aebb42f51f752934cde9848038ae3c3714c0f027ce3052b98adc5f22a079f84f4e4904e2757caa2f2a1e03ec714ca32a61fc6fca911e935a2e780858f6eebb34205d9ae6afc6d7f2bf0a7bfa8e9277e36c7b0c4086644a15ec70d7728e6330e10bef5a30972e25&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;modulus&quot;</span><span class="p">:</span> <span class="s2">&quot;c280778959b8456f*******fa7badc757d07afbb6fadd05bba28171bbe17f21d25f2ef0d2724e7534f88d62e34ada5190d4013d9c0cc071f7e62fb6d6076726d0deff17cef085fd31c166ca876505472a5fc0abb88cc3bfd0177f63a35cf046fb86aafb4dd72a5e7f9ae013977dbefb7d35570d5d5e819835ea1642a2d3b074f7592ded38e7fe7a1bb336e67eae3f9ea61683de53014e8100aebb42f51f752934cde9848038ae3c3714c0f027ce3052b98adc5f22a079f84f4e4904e2757caa2f2a1e03ec714ca32a61fc6fca911e935a2e780858f6eebb34205d9ae6afc6d7f2bf0a7bfa8e9277e36c7b0c4086644a15ec70d7728e6330e10bef5a30972e25&quot;</span><span class="p">,</span>
               <span class="s2">&quot;exponent&quot;</span><span class="p">:</span> <span class="s2">&quot;10001&quot;</span>
             <span class="p">},</span>
             <span class="s2">&quot;algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;RSA&quot;</span>
           <span class="p">},</span>
-          <span class="s2">&quot;thumbprint_sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;5ef2f214260ab8f58e55eea42e4ac04b0f171807d8d1185fddd67470e9ab6096&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;thumbprint_sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;5ef2f214260ab8f58e5*******ac04b0f171807d8d1185fddd67470e9ab6096&quot;</span><span class="p">,</span>
           <span class="s2">&quot;cert_signature&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;59e44ad8a982ba9a4af1630c6d762675b33c74bec5f73da79192f8cf062d5810edf3b8d6fc6cff139632cd4fe98724850b74a2c2f60ff5a7d87d768aaee9c9582b6e006fb9cd24eec442c54c16859d34613923bfc68e95c984a9b2e5410f4478d795b9cfd974bf584fe716ff7c4030c46c4e224dcb83673a93bf2bc5c59c1af243a1253b84f6f7536ea885aede14749130060df207d4c408ba4364c5e23fdaacc541afa437e8427674f713bb4a7d3659819bc744df8973b93342e860c24d615d125a10f6efff33891450e8d69fc6b95c2b35dbadeddd36b625f2958aac693f9afe1af815286dea185ac2d26218af4078b5fa5e098f53f9ccf823a1833123f4c6&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;59e44ad8a982*******30c6d762675b33c74bec5f73da79192f8cf062d5810edf3b8d6fc6cff139632cd4fe98724850b74a2c2f60ff5a7d87d768aaee9c9582b6e006fb9cd24eec442c54c16859d34613923bfc68e95c984a9b2e5410f4478d795b9cfd974bf584fe716ff7c4030c46c4e224dcb83673a93bf2bc5c59c1af243a1253b84f6f7536ea885aede14749130060df207d4c408ba4364c5e23fdaacc541afa437e8427674f713bb4a7d3659819bc744df8973b93342e860c24d615d125a10f6efff33891450e8d69fc6b95c2b35dbadeddd36b625f2958aac693f9afe1af815286dea185ac2d26218af4078b5fa5e098f53f9ccf823a1833123f4c6&quot;</span><span class="p">,</span>
             <span class="s2">&quot;signature_algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;sha256RSA&quot;</span>
           <span class="p">},</span>
           <span class="s2">&quot;validity&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1415,7 +1432,7 @@ Sample playbook using the VirusTotal function:
               <span class="s2">&quot;digitalSignature&quot;</span><span class="p">,</span>
               <span class="s2">&quot;keyEncipherment&quot;</span>
             <span class="p">],</span>
-            <span class="s2">&quot;1.3.6.1.4.1.11129.2.4.2&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567b1234567890abcde064d5db1acec55cb79db4cd13a12345678abcdefg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;1.3.6.1.4.1.11129.2.4.2&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567b123456789*******4d5db1acec55cb79db4cd13a12345678abcdefg&quot;</span><span class="p">,</span>
             <span class="s2">&quot;CA&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
             <span class="s2">&quot;ca_information_access&quot;</span><span class="p">:</span> <span class="p">{</span>
               <span class="s2">&quot;CA Issuers&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt&quot;</span><span class="p">,</span>
@@ -1620,12 +1637,12 @@ Sample playbook using the VirusTotal function:
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../fn_vmray_analyzer/README.html">
+          <a class="next-page" href="../fn_watsonx_analyst/README.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">VMRay Sandbox Analyzer</div>
+                <div class="title">watsonx.ai for SOAR Analysts<!-- omit in toc --></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -19,21 +19,23 @@
 # Yeti
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - Yeti](#function---yeti)
-- [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Yeti](#yeti)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - Yeti](#function---yeti)
+  - [Rules](#rules)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -169,7 +171,7 @@ results = {
       "created": "2022-04-04T18:52:23.699000",
       "description": null,
       "human_url": "http://localhost:8080/observable/624b3e67f533f89c2f700992",
-      "id": "624b3e67f533f89c2f700992",
+      "id": "624b3*******89c2f700992",
       "last_analyses": {},
       "sources": [],
       "tags": [

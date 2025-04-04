@@ -1,21 +1,25 @@
 # IBM XForce Collections
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - X-Force Utilities: Get Collection by ID](#function---x-force-utilities-get-collection-by-id)
-- [Function - X-Force Utilities: Query Collection](#function---x-force-utilities-query-collection)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [IBM XForce Collections](#ibm-xforce-collections)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+    - [1.1.0 Changes](#110-changes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - X-Force Utilities: Get Collection by ID](#function---x-force-utilities-get-collection-by-id)
+  - [Function - X-Force Utilities: Query Collection](#function---x-force-utilities-query-collection)
+  - [Playbooks](#playbooks)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -349,7 +353,7 @@ results = {
           },
           "2": {
             "data": {
-              "id": "cf23df2207d99a74fbe169e3eba035e633b65d94",
+              "id": "cf23df220*******169e3eba035e633b65d94",
               "type": "MAL"
             },
             "mutability": "IMMUTABLE",
@@ -397,7 +401,7 @@ results = {
           },
           "8": {
             "data": {
-              "id": "152c883836f1f3eec207395ac6f8e0c6",
+              "id": "152c8*******eec207395ac6f8e0c6",
               "type": "MAL"
             },
             "mutability": "IMMUTABLE",
@@ -405,7 +409,7 @@ results = {
           },
           "9": {
             "data": {
-              "id": "50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c",
+              "id": "50d858e0985ecc7f604*******5ab587f42c2570a884095a9e8ccacd0f6545c",
               "type": "MAL"
             },
             "mutability": "IMMUTABLE",
@@ -533,7 +537,7 @@ results = {
         "writable": false
       },
       {
-        "caseFileID": "7c551c65686c0866daafcee3d838f052",
+        "caseFileID": "7c551c65*******6daafcee3d838f052",
         "created": "2021-05-20T12:19:07.138Z",
         "links": [],
         "owner": {
@@ -547,7 +551,7 @@ results = {
         "writable": false
       },
       {
-        "caseFileID": "2a58b28a880eab0ddc23d856e4871a69",
+        "caseFileID": "2a58b28a*******ddc23d856e4871a69",
         "created": "2023-03-08T17:51:22.131Z",
         "links": [],
         "owner": {
@@ -562,7 +566,7 @@ results = {
         "writable": true
       },
       {
-        "caseFileID": "6db4c6bcafe3333fffaf5a754b7ae73d",
+        "caseFileID": "6db4c6bc*******fffaf5a754b7ae73d",
         "created": "2020-03-10T12:33:59.224Z",
         "links": [],
         "owner": {
@@ -576,13 +580,13 @@ results = {
         "writable": false
       },
       {
-        "caseFileID": "52adef79fe80b4958050c700a8b0da15",
+        "caseFileID": "52adef7*******958050c700a8b0da15",
         "created": "2019-07-22T17:20:40.817Z",
         "links": [],
         "owner": {
           "isDisabled": false,
           "name": "ZHENG LU",
-          "userid": "http://www.ibm.com/550002YAE9"
+          "userid": "http://www.ibm.com/55v*******YAE9"
         },
         "shared": true,
         "tags": [],
@@ -590,13 +594,13 @@ results = {
         "writable": false
       },
       {
-        "caseFileID": "7d889aac958a5dbebc01a16979140eb2",
+        "caseFileID": "7d889aac9*******bebc01a16979140eb2",
         "created": "2023-01-23T11:34:04.800Z",
         "links": [],
         "owner": {
           "isDisabled": false,
           "name": "X-Force Research",
-          "userid": "http://www.ibm.com/550004JMXN",
+          "userid": "http://www.ibm.com/55*******JMXN",
           "verified": "researcher"
         },
         "shared": true,
@@ -611,13 +615,13 @@ results = {
         "writable": false
       },
       {
-        "caseFileID": "e2fa5296f88a0c4ad37e4f4652c221db",
+        "caseFileID": "e2fa529*******ad37e4f4652c221db",
         "created": "2017-10-30T07:47:29.799Z",
         "links": [],
         "owner": {
           "isDisabled": false,
           "name": "Noah J, A",
-          "userid": "http://www.ibm.com/50SKQTFFS2"
+          "userid": "http://www.ibm.com/50S*******FS2"
         },
         "shared": true,
         "tags": [
@@ -631,7 +635,7 @@ results = {
         "writable": false
       },
       {
-        "caseFileID": "383879eab7c4e0c5d38c1c2e9709ffe9",
+        "caseFileID": "383879ea*******d38c1c2e9709ffe9",
         "created": "2018-04-10T13:05:35.686Z",
         "links": [],
         "owner": {

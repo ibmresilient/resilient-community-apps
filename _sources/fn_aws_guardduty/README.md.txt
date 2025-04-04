@@ -22,30 +22,47 @@
 
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - AWS GuardDuty: Archive finding](#function---aws-guardduty-archive-finding)
-- [Function - AWS GuardDuty: Refresh Finding](#function---aws-guardduty-refresh-finding)
+- [AWS GuardDuty](#aws-guardduty)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+    - [AWS GuardDuty App  1.1.0 Changes](#aws-guardduty-app--110-changes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Poller - AWS GuardDuty: Escalate Findings](#poller---aws-guardduty-escalate-findings)
+  - [Function - AWS GuardDuty: Archive finding](#function---aws-guardduty-archive-finding)
+  - [Function - AWS GuardDuty: Refresh Finding](#function---aws-guardduty-refresh-finding)
+  - [Playbooks](#playbooks)
   - [Custom Layouts](#custom-layouts)
-- [Data Table - GuardDuty Action/Actor Details](#data-table---guardduty-actionactor-details)
-- [Data Table - GuardDuty Finding Overview](#data-table---guardduty-finding-overview)
-- [Data Table - GuardDuty Resource - Access Key Details](#data-table---guardduty-resource---access-key-details)
-- [Data Table - GuardDuty Resource - Instance Details](#data-table---guardduty-resource---instance-details)
-- [Data Table - GuardDuty Resource - S3 Bucket Details](#data-table---guardduty-resource---s3-bucket-details)
-- [Data Table - GuardDuty Resource Affected](#data-table---guardduty-resource-affected)
-- [Custom Fields](#custom-fields)
-- [Custom Artifact Types](#custom-artifact-types)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+  - [Data Table - GuardDuty Action/Actor Details](#data-table---guardduty-actionactor-details)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Data Table - GuardDuty Finding Overview](#data-table---guardduty-finding-overview)
+      - [API Name:](#api-name-1)
+      - [Columns:](#columns-1)
+  - [Data Table - GuardDuty Resource - Access Key Details](#data-table---guardduty-resource---access-key-details)
+      - [API Name:](#api-name-2)
+      - [Columns:](#columns-2)
+  - [Data Table - GuardDuty Resource - Instance Details](#data-table---guardduty-resource---instance-details)
+      - [API Name:](#api-name-3)
+      - [Columns:](#columns-3)
+  - [Data Table - GuardDuty Resource - S3 Bucket Details](#data-table---guardduty-resource---s3-bucket-details)
+      - [API Name:](#api-name-4)
+      - [Columns:](#columns-4)
+  - [Data Table - GuardDuty Resource Affected](#data-table---guardduty-resource-affected)
+      - [API Name:](#api-name-5)
+      - [Columns:](#columns-5)
+  - [Custom Fields](#custom-fields)
+  - [Custom Artifact Types](#custom-artifact-types)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -288,8 +305,9 @@ Good
 Result: {'version': '1.0', 'success': True, 'reason': None,
          'content': {'status': 'ok'},
          'raw': '{"status": "ok"}',
-         'inputs': {'aws_gd_finding_id': 'c2bb95a17b879bffc96c58f8a1689785', 'aws_gd_region': 'us-east-2',
-                    'aws_gd_detector_id': '32b7017d2019dfe922abc4e07c3fdded'
+         'inputs': {'aws_gd_finding_id':      'c2bb95a17*******96c58f8a1689785', 
+         'aws_gd_region': 'us-east-2',
+                    'aws_gd_detector_id': '32b7017d*******22abc4e07c3fdded'
                     },
          'metrics': {'version': '1.0', 'package': 'fn-aws-guardduty', 'package_version': '1.0.0',
          'host': 'myhost.ibm.com', 'execution_time_ms': 1310, 'timestamp': '2021-01-28 11:31:30'
@@ -302,7 +320,7 @@ Result: {'version': '1.0', 'success': True, 'reason': None,
                      The request is rejected because the input detectorId is not owned by the current account.'},
                      'raw': '<content_as_string>',
          'inputs': {'aws_gd_finding_id': 'c2bb95a17b879bffc96c58f8a1689784', 'aws_gd_region': 'us-east-2',
-                    'aws_gd_detector_id': '32b7017d2019dfe922abc4e07c3fdfff'
+                    'aws_gd_detector_id': '32b7017*******22abc4e07c3fdfff'
                     },
          'metrics': {'version': '1.0', 'package': 'fn-aws-guardduty', 'package_version': '1.0.0',
          'host': 'myhost.ibm.com', 'execution_time_ms': 1446, 'timestamp': '2021-01-28 11:34:53'
@@ -577,7 +595,7 @@ results = {
       "properties": {
         "aws_guardduty_archived": "False",
         "aws_guardduty_count": "1",
-        "aws_guardduty_detector_id": "48bbf98612290af2215c7a02b7ccbc82",
+        "aws_guardduty_detector_id": "48bbf98*******215c7a02b7ccbc82",
         "aws_guardduty_finding_arn": "arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz",
         "aws_guardduty_finding_id": "xxxxyyyyzzzz",
         "aws_guardduty_finding_type": "Discovery:IAMUser/AnomalousBehavior",
@@ -643,11 +661,11 @@ Result: { 'version': '1.0',
                                   'discovered_date': '2020-11-25T13:46:37.960Z',
                                   'severity_code': 'Low',
                                   'properties': {'aws_guardduty_finding_id': '60baffd3f9042e38640f2300d5c5a631',
-                                                'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:xxxxyyyyzzzz:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
+                                                'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:xxxxyyyyzzzz:detector/f2baedb0*******929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
                                                 'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                                 'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z', 'aws_guardduty_region': 'us-west-2',
                                                 'aws_guardduty_resource_type': 'S3Bucket', 'aws_guardduty_count': 4,
-                                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'},
+                                                'aws_guardduty_detector_id': 'f2baedb*******2fc929e15f56da6a'},
                                   'artifacts': [],
                                   'comments': [{'text': {'format': 'text', 'content': "AWS GuardDuty finding Payload:\n<FINDING_PAYLOAD_AS_STRING>"}}]
 

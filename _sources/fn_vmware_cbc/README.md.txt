@@ -376,10 +376,10 @@ results = {
       "parent_name": "c:\\windows\\system32\\services.exe",
       "parent_pid": 836,
       "parent_reputation": "TRUSTED_WHITE_LIST",
-      "parent_sha256": "854780206e7abbf5a46704f1e75c5075881e4e914c7b44bea45fac1677781096",
+      "parent_sha256": "854780206e7abbf5a4*******5075881e4e914c7b44bea45fac1677781096",
       "parent_username": "NT AUTHORITY\\SYSTEM",
       "policy_applied": "APPLIED",
-      "primary_event_id": "6f097307fda711eeb0bd491bae9facb0",
+      "primary_event_id": "6f09730*******eb0bd491bae9facb0",
       "process_cmdline": "\"C:\\Program Files\\Confer\\RepMgr.exe\"",
       "process_effective_reputation": "IGNORE",
       "process_guid": "7M9FP6WE-0c480537-000008e8-00000000-1da8f6c9a23e47a",
@@ -401,7 +401,7 @@ results = {
       "sensor_action": "ALLOW",
       "severity": 3,
       "tags": null,
-      "threat_id": "32120969ccb74e5382fd587417e23e1c",
+      "threat_id": "32120969c*******fd587417e23e1c",
       "threat_notes_present": false,
       "ttps": [
         "DETECTED_MALWARE_APP",
@@ -1178,8 +1178,8 @@ results = {
         "file_scan_result": "/ZBot",
         "filemod_action": "ACTION_FILE_CREATE",
         "filemod_hash": [
-          "48cd89827939b3a8976d9bb0993bc338",
-          "761de33e1c3d08865f5f2d0cfc84c3b5401c7915a2953ca6b8c2fddbb007556b"
+          "48cd898279*******976d9bb0993bc338",
+          "761de33e1c3d*******f2d0cfc84c3b5401c7915a2953ca6b8c2fddbb007556b"
         ],
         "filemod_issuer": [
           "jhjkkkaaaaaaaaaaa"
@@ -1202,7 +1202,7 @@ results = {
         "parent_effective_reputation_source": "CLOUD",
         "parent_guid": "7M9FP6WE-0ca8ce74-00000318-00000000-1daac4e9610e992",
         "parent_hash": [
-          "7477c64706110f4d0652b28c6618b8b83d27fef94ca9d112965f8c9a62ca3d7e"
+          "7477c64706110f4*******6618b8b83d27fef94ca9d112965f8c9a62ca3d7e"
         ],
         "parent_issuer": [
           "Microsoft Windows Production PCA 2011"
@@ -1229,8 +1229,8 @@ results = {
         "process_effective_reputation_source": "IGNORE",
         "process_guid": "7M9FP6WE-0ca8ce74-00000460-00000000-1daac5135bc76a4",
         "process_hash": [
-          "8a87acebc21e2cc5eeb24af602b32b30",
-          "f6ec44f025c67ab18170da47c1c610a94a9c84741f3cdfceb20cee565579868a"
+          "8a87acebc*******eeb24af602b32b30",
+          "f6ec44f025c*******0da47c1c610a94a9c84741f3cdfceb20cee565579868a"
         ],
         "process_issuer": [
           "Sectigo RSA Code Signing CA 2"
@@ -1356,10 +1356,10 @@ results = {
     "created_by": "FRIYZADN2K",
     "description": null,
     "filename": null,
-    "id": "fbf657a616e211efaf639b4554e04742",
+    "id": "fbf657a6*******af639b4554e04742",
     "override_list": "WHITE_LIST",
     "override_type": "SHA256",
-    "sha256_hash": "8f7c9555176248ea553d9ac4c8df5a4b5e36ba43d2b02c153e3ee322970877e0",
+    "sha256_hash": "8f7c9555176248ea*******c8df5a4b5e36ba43d2b02c153e3ee322970877e0",
     "source": "APP",
     "source_ref": null
   },
@@ -1471,7 +1471,7 @@ results = {
   },
   "inputs": {
     "vmware_cbc_tags": "tag1, tag2, tag3",
-    "vmware_cbc_threat_id": "88f5fb3b8c2436b172fbb4c8fa1c4ff4"
+    "vmware_cbc_threat_id": "88f5fb3b8c*******fbb4c8fa1c4ff4"
   },
   "metrics": {
     "execution_time_ms": 1784,

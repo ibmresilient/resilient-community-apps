@@ -302,7 +302,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">Phish Tank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
@@ -345,7 +344,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts<!-- omit in toc --></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
@@ -425,6 +423,9 @@
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="#trusteer-pinpoint-detect"><span class="xref myst">Trusteer Pinpoint Detect</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
 <ul>
@@ -437,6 +438,16 @@
 <li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
 <li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
 <li><p><a class="reference internal" href="#python-environment"><span class="xref myst">Python Environment</span></a></p></li>
+<li><p><a class="reference internal" href="#ibm-trusteer-development-version"><span class="xref myst">IBM Trusteer Development Version</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#prerequisites"><span class="xref myst">Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#configure-trusteer-email-feeds"><span class="xref myst">Configure Trusteer Email Feeds</span></a></p></li>
+<li><p><a class="reference internal" href="#configure-soar-inbound-email-connection"><span class="xref myst">Configure SOAR Inbound Email Connection</span></a></p></li>
+<li><p><a class="reference internal" href="#the-caseincident-owner"><span class="xref myst">The Case/incident Owner</span></a></p></li>
+<li><p><a class="reference internal" href="#enable-the-rule-trusteer-ppd-parse-trusteer-email-v100"><span class="xref myst">Enable the Rule: Trusteer PPD: Parse Trusteer Email v1.0.0</span></a></p></li>
+<li><p><a class="reference internal" href="#permissions"><span class="xref myst">Permissions</span></a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
@@ -450,13 +461,24 @@
 <li><p><a class="reference internal" href="#function---trusteer-ppd-update-alert-classification"><span class="xref myst">Function - Trusteer PPD: Update Alert Classification</span></a></p></li>
 <li><p><a class="reference internal" href="#function---trusteer-ppd-update-classification-in-alert-datatable"><span class="xref myst">Function - Trusteer PPD: Update Classification in Alert Datatable</span></a></p></li>
 <li><p><a class="reference internal" href="#script---trusteer-ppd-create-artifacts"><span class="xref myst">Script - Trusteer PPD: Create Artifacts</span></a></p></li>
-<li><p><a class="reference internal" href="#script---trusteer-ppd-create-case-from-email"><span class="xref myst">Script - Trusteer PPD: Create Case from Email</span></a></p></li>
-<li><p><a class="reference internal" href="#data-table---trusteer-alerts"><span class="xref myst">Data Table - Trusteer Alerts</span></a></p></li>
+<li><p><a class="reference internal" href="#script---trusteer-ppd-create-case-from-email-v100"><span class="xref myst">Script - Trusteer PPD: Create Case from Email v1.0.0</span></a></p></li>
+<li><p><a class="reference internal" href="#data-table---trusteer-alerts"><span class="xref myst">Data Table - Trusteer Alerts</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#api-name"><span class="xref myst">API Name:</span></a></p></li>
+<li><p><a class="reference internal" href="#columns"><span class="xref myst">Columns:</span></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-artifact-types"><span class="xref myst">Custom Artifact Types</span></a></p></li>
 <li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -928,7 +950,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
     <span class="s2">&quot;trusteer_ppd_application_id&quot;</span><span class="p">:</span> <span class="s2">&quot;demo_app&quot;</span><span class="p">,</span>
     <span class="s2">&quot;trusteer_ppd_feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;pending_confirmation&quot;</span><span class="p">,</span>
     <span class="s2">&quot;trusteer_ppd_fraud_mo&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;trusteer_ppd_session_id&quot;</span><span class="p">:</span> <span class="s2">&quot;eaa3aef168e8aeadfb606bf2637c21f&quot;</span>
+    <span class="s2">&quot;trusteer_ppd_session_id&quot;</span><span class="p">:</span> <span class="s2">&quot;eaa3aef1*******dfb606bf2637c21f&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3517</span><span class="p">,</span>

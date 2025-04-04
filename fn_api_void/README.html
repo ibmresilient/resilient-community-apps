@@ -302,7 +302,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_parse_utilities/README.html">Parse Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_passivetotal/README.html">PassiveTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pastebin/README.html">PasteBin Creator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_phish_ai/README.html">Phish.AI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_phish_tank/README.html">Phish Tank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pipl/README.html">Pipl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_playbook_maker/README.html">Playbook Maker</a></li>
@@ -345,7 +344,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_vmray_analyzer/README.html">VMRay Sandbox Analyzer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts<!-- omit in toc --></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
@@ -467,13 +465,17 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.0</p></td>
-<td><p>1/2021</p></td>
-<td><p>Initial Release</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
 </tr>
 <tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>11/2023</p></td>
 <td><p>Convert Workflow/Script to Python3</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>01/2021</p></td>
+<td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
@@ -520,14 +522,14 @@ An example workflow is provided for each of the supported request types that wri
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.8131</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">46.0.8131</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=47.1.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -577,11 +579,11 @@ An example workflow is provided for each of the supported request types that wri
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.6 and Python 3.9 are supported.
+<p>Python 3.9 or later are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient_circuits&gt;=47.1.0</p></li>
-<li><p>resilient_lib&gt;=47.1.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
+<li><p>resilient_lib&gt;=51.0.0</p></li>
 </ul>
 </section>
 </section>
@@ -701,7 +703,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="c1"># convert_json_to_rich_text script to print readable formatted json in an incident note.</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
 <span class="n">artifact_value</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;api_void_artifact_value&quot;</span><span class="p">)</span>
-<span class="n">header</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;APIVoid DNS Lookup: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_value</span><span class="p">)</span>
+<span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;APIVoid DNS Lookup: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_value</span><span class="p">)</span>
 
 <span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span>
               <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1&quot;</span><span class="p">,</span>

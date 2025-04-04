@@ -235,7 +235,7 @@ results = {
   "inputs": {
     "axonius_attachment_name": "Axonius-Device-Shirley-Quilliams-iMac.json",
     "axonius_incident_id": 2144,
-    "axonius_internal_axon_id": "0de1ff00569723b2d11ec84665c4bd06",
+    "axonius_internal_axon_id": "0de1ff*******b2d11ec84665c4bd06",
     "axonius_task_id": null,
     "axonius_write_attachment": true
   },
@@ -350,7 +350,7 @@ results = {
           "tanium_asset_adapter",
           "zoom_adapter"
         ],
-        "internal_axon_id": "ca1df3031a00e387c8a7da086272f2b6",
+        "internal_axon_id": "ca1df3*******7c8a7da086272f2b6",
         "labels": [
           "Shirley"
         ],
@@ -697,7 +697,7 @@ results = {
   "content": {
     "value": [
       {
-        "id": "65ef47d95cd7f554699537f0",
+        "id": "65ef47*******54699537f0",
         "name": "addCustomData_002"
       }
     ]

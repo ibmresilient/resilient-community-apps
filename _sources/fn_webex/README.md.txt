@@ -1,12 +1,11 @@
 # Cisco Webex
 
 ## Table of Contents
-- [Cisco Webex for IBM QRadar SOAR](#cisco-webex-for-ibm-qradar-soar)
+- [Cisco Webex](#cisco-webex)
   - [Table of Contents](#table-of-contents)
   - [Release Notes](#release-notes)
   - [Overview](#overview)
     - [Key Features](#key-features)
-  - [* Example rules are included that activate a menu popup that prompts the user for inputs to customize the team, room or a meeting.](#-example-rules-are-included-that-activate-a-menu-popup-that-prompts-the-user-for-inputs-to-customize-the-team-room-or-a-meeting)
   - [Requirements](#requirements)
     - [SOAR platform](#soar-platform)
     - [Cloud Pak for Security](#cloud-pak-for-security)
@@ -21,7 +20,7 @@
   - [Function - Webex: Create Team](#function---webex-create-team)
   - [Function - Webex: Delete Room](#function---webex-delete-room)
   - [Function - Webex: Delete Team](#function---webex-delete-team)
-  - [Troubleshooting & Support](#troubleshooting--support)
+  - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
 
@@ -200,7 +199,7 @@ results = {
     "hostKey": "100001",
     "hostUserId": "hostuserid123",
     "href": "/v1/meetings/hostuserid123/globalCallinNumbers",
-    "id": "7abca37c1c124cb2a4e74661f4a8c47e",
+    "id": "7abca37c*******e74661f4a8c47e",
     "joinBeforeHostMinutes": "0",
     "links": "rel:globalCallinNumbers",
     "meetingNumber": "11111112222222",

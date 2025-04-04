@@ -1,43 +1,57 @@
 # Azure Automation Utilities
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Function - Azure Create Account](#function---azure-create-account)
-- [Function - Azure Create Credential](#function---azure-create-credential)
-- [Function - Azure Create Schedule](#function---azure-create-schedule)
-- [Function - Azure Delete Account](#function---azure-delete-account)
-- [Function - Azure Delete Credential](#function---azure-delete-credential)
-- [Function - Azure Delete Runbook](#function---azure-delete-runbook)
-- [Function - Azure Delete Schedule](#function---azure-delete-schedule)
-- [Function - Azure Execute Runbook](#function---azure-execute-runbook)
-- [Function - Azure Get Account](#function---azure-get-account)
-- [Function - Azure Get Agent Registration Information](#function---azure-get-agent-registration-information)
-- [Function - Azure Get Credential](#function---azure-get-credential)
-- [Function - Azure Get Job](#function---azure-get-job)
-- [Function - Azure Get Module Activity](#function---azure-get-module-activity)
-- [Function - Azure Get Node Report](#function---azure-get-node-report)
-- [Function - Azure Get Runbook](#function---azure-get-runbook)
-- [Function - Azure Get Schedule](#function---azure-get-schedule)
-- [Function - Azure List Statistics by Automation Account](#function---azure-list-statistics-by-automation-account)
-- [Function - Azure Regenerate Agent Registration Key](#function---azure-regenerate-agent-registration-key)
-- [Data Table - Azure Automation Accounts](#data-table---azure-automation-accounts)
-- [Data Table - Azure Automation Credentials](#data-table---azure-automation-credentials)
-- [Data Table - Azure Automation Runbooks](#data-table---azure-automation-runbooks)
-- [Data Table - Azure Automation Schedules](#data-table---azure-automation-schedules)
-- [Data Table - Azure Automation Statistics](#data-table---azure-automation-statistics)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Azure Automation Utilities](#azure-automation-utilities)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+    - [Custom Layouts](#custom-layouts)
+  - [Function - Azure Create Account](#function---azure-create-account)
+  - [Function - Azure Create Credential](#function---azure-create-credential)
+  - [Function - Azure Create Schedule](#function---azure-create-schedule)
+  - [Function - Azure Delete Account](#function---azure-delete-account)
+  - [Function - Azure Delete Credential](#function---azure-delete-credential)
+  - [Function - Azure Delete Runbook](#function---azure-delete-runbook)
+  - [Function - Azure Delete Schedule](#function---azure-delete-schedule)
+  - [Function - Azure Execute Runbook](#function---azure-execute-runbook)
+  - [Function - Azure Get Account](#function---azure-get-account)
+  - [Function - Azure Get Agent Registration Information](#function---azure-get-agent-registration-information)
+  - [Function - Azure Get Credential](#function---azure-get-credential)
+  - [Function - Azure Get Job](#function---azure-get-job)
+  - [Function - Azure Get Module Activity](#function---azure-get-module-activity)
+  - [Function - Azure Get Node Report](#function---azure-get-node-report)
+  - [Function - Azure Get Runbook](#function---azure-get-runbook)
+  - [Function - Azure Get Schedule](#function---azure-get-schedule)
+  - [Function - Azure List Statistics by Automation Account](#function---azure-list-statistics-by-automation-account)
+  - [Function - Azure Regenerate Agent Registration Key](#function---azure-regenerate-agent-registration-key)
+  - [Playbooks](#playbooks)
+  - [Data Table - Azure Automation Accounts](#data-table---azure-automation-accounts)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Data Table - Azure Automation Credentials](#data-table---azure-automation-credentials)
+      - [API Name:](#api-name-1)
+      - [Columns:](#columns-1)
+  - [Data Table - Azure Automation Runbooks](#data-table---azure-automation-runbooks)
+      - [API Name:](#api-name-2)
+      - [Columns:](#columns-2)
+  - [Data Table - Azure Automation Schedules](#data-table---azure-automation-schedules)
+      - [API Name:](#api-name-3)
+      - [Columns:](#columns-3)
+  - [Data Table - Azure Automation Statistics](#data-table---azure-automation-statistics)
+      - [API Name:](#api-name-4)
+      - [Columns:](#columns-4)
+  - [Custom Fields](#custom-fields)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -1176,12 +1190,12 @@ Retrieve the automation agent registration information.
 ```python
 results = {
   "content": {
-    "dscMetaConfiguration": "\r\n\tinstance of MSFT_WebDownloadManager as $MSFT_WebDownloadManager1ref\r\n\t{\r\n\tResourceID = \"[ConfigurationRepositoryWeb]AzureAutomationDSC\";\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::20::9::ConfigurationRepositoryWeb\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t};\r\n\r\n\tinstance of MSFT_WebResourceManager as $MSFT_WebResourceManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::27::9::ResourceRepositoryWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ResourceRepositoryWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_WebReportManager as $MSFT_WebReportManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::34::9::ReportServerWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ReportServerWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_DSCMetaConfiguration as $MSFT_DSCMetaConfiguration1ref\r\n\t{\r\n\t RefreshMode = \"Pull\";\r\n\t AllowModuleOverwrite = False;\r\n\t ActionAfterReboot = \"ContinueConfiguration\";\r\n\t RefreshFrequencyMins = 30;\r\n\t RebootNodeIfNeeded = False;\r\n\t ConfigurationModeFrequencyMins = 15;\r\n\t ConfigurationMode = \"ApplyAndMonitor\";\r\n\r\n\t  ResourceModuleManagers = {\r\n\t  $MSFT_WebResourceManager1ref  \r\n\t};\r\n\t  ReportManagers = {\r\n\t  $MSFT_WebReportManager1ref  \r\n\t };\r\n\t  ConfigurationDownloadManagers = {\r\n\t  $MSFT_WebDownloadManager1ref  \r\n\t };\r\n\t};\r\n\r\n\tinstance of OMI_ConfigurationDocument\r\n\t{\r\n\t Version=\"2.0.0\";\r\n\t MinimumCompatibleVersion = \"2.0.0\";\r\n\t CompatibleVersionAdditionalProperties= { \"MSFT_DSCMetaConfiguration:StatusRetentionTimeInDays\" };\r\n\t Author=\"azureautomation\";\r\n\t GenerationDate=\"04/17/2015 11:41:09\";\r\n\t GenerationHost=\"azureautomation-01\";\r\n\t Name=\"RegistrationMetaConfig\";\r\n\t};\r\n\t",
+    "dscMetaConfiguration": "\r\n\tinstance of MSFT_WebDownloadManager as $MSFT_WebDownloadManager1ref\r\n\t{\r\n\tResourceID = \"[ConfigurationRepositoryWeb]AzureAutomationDSC\";\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::20::9::ConfigurationRepositoryWeb\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t};\r\n\r\n\tinstance of MSFT_WebResourceManager as $MSFT_WebResourceManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::27::9::ResourceRepositoryWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ResourceRepositoryWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzC*******pGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_WebReportManager as $MSFT_WebReportManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::34::9::ReportServerWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ReportServerWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_DSCMetaConfiguration as $MSFT_DSCMetaConfiguration1ref\r\n\t{\r\n\t RefreshMode = \"Pull\";\r\n\t AllowModuleOverwrite = False;\r\n\t ActionAfterReboot = \"ContinueConfiguration\";\r\n\t RefreshFrequencyMins = 30;\r\n\t RebootNodeIfNeeded = False;\r\n\t ConfigurationModeFrequencyMins = 15;\r\n\t ConfigurationMode = \"ApplyAndMonitor\";\r\n\r\n\t  ResourceModuleManagers = {\r\n\t  $MSFT_WebResourceManager1ref  \r\n\t};\r\n\t  ReportManagers = {\r\n\t  $MSFT_WebReportManager1ref  \r\n\t };\r\n\t  ConfigurationDownloadManagers = {\r\n\t  $MSFT_WebDownloadManager1ref  \r\n\t };\r\n\t};\r\n\r\n\tinstance of OMI_ConfigurationDocument\r\n\t{\r\n\t Version=\"2.0.0\";\r\n\t MinimumCompatibleVersion = \"2.0.0\";\r\n\t CompatibleVersionAdditionalProperties= { \"MSFT_DSCMetaConfiguration:StatusRetentionTimeInDays\" };\r\n\t Author=\"azureautomation\";\r\n\t GenerationDate=\"04/17/2015 11:41:09\";\r\n\t GenerationHost=\"azureautomation-01\";\r\n\t Name=\"RegistrationMetaConfig\";\r\n\t};\r\n\t",
     "endpoint": "https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6",
     "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/agentRegistrationInformation/https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6",
     "keys": {
-      "primary": "1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==",
-      "secondary": "bC6hr123456789qPD2eeowEt9rDRqfJMnJmUOhP123450/x53Vezc3rqDhherrLzb123456MWhub+86IKwxssg=="
+      "primary": "1234RYKSRuyfmI*******7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==",
+      "secondary": "bC6hr123456789qP*******rDRqfJMnJmUOhP123450/x53Vezc3rqDhherrLzb123456MWhub+86IKwxssg=="
     }
   },
   "inputs": {
