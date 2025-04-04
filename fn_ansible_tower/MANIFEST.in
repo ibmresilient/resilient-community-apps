@@ -1,0 +1,8 @@
+include README.md
+include Dockerfile
+include MANIFEST.in
+include apikey_permissions.txt
+include fn_ansible_tower/lib/*
+include fn_ansible_tower/LICENSE
+recursive-include fn_ansible_tower/util *
+recursive-include doc *
