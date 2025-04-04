@@ -408,16 +408,102 @@ domains, as well as additional information about the page itself. urlscan.io wil
 record the DOM content, JavaScript global variables, cookies created by the page, and a myriad of other observations.</p>
 <p>This integration is a Resilient function that can be called from workflows, to submit a URL for analysis by urlscan.io.
 It returns the report metadata, report URL, and base64-encoded screenshot that is attached to the incident.</p>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#app-host-setup"><span class="xref myst">App Host Setup</span></a></p></li>
+<li><p><a class="reference internal" href="#integration-server-setup"><span class="xref myst">Integration Server Setup</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#pre-processing-script"><span class="xref myst">Pre-processing Script</span></a></p></li>
+<li><p><a class="reference internal" href="#post-processing-script"><span class="xref myst">Post-processing Script</span></a></p></li>
+<li><p><a class="reference internal" href="#other-notes"><span class="xref myst">Other Notes</span></a></p></li>
+</ul>
+</section>
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.1.6</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.5</p></td>
+<td><p>06/2021</p></td>
+<td><p>Bug fix error for non existing url</p></td>
+</tr>
+<tr class="row-even"><td><p>1.1.4</p></td>
+<td><p>09/2020</p></td>
+<td><p>Proxy support added</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.3</p></td>
+<td><p>05/2020</p></td>
+<td><p>Compatibility with older versions of resilient-circuits</p></td>
+</tr>
+<tr class="row-even"><td><p>1.1.2</p></td>
+<td><p>04/2020</p></td>
+<td><p>Support added for App Host</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.1</p></td>
+<td><p>04/2020</p></td>
+<td><p>Pinned version of resilient-lib to work with write_file_attachment <br> Updated customize.py so minimum required version of Resilient is v35.0</p></td>
+</tr>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>03/2020</p></td>
+<td><p>Removed workflow dependency on fn_utilities <br> Added incident_id parameter to workflow inputs</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.0</p></td>
+<td><p>12/2018</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="app-host-setup">
 <h3>App Host Setup<a class="headerlink" href="#app-host-setup" title="Link to this heading">¶</a></h3>
 <p>All the components for running this integration in a container already exist when using the App Host app.</p>
 <p>To install,</p>
-<ul>
+<ul class="simple">
 <li><p>Navigate to Administrative Settings and then the Apps tab.</p></li>
 <li><p>Click the Install button and select the downloaded file: app-fn_urlscanio-x.x.x.zip.</p></li>
-<li><p>Go to the Configuration tab and edit the app.config file, editing the API key for URLScanIO and making any additional setting changes.</p>
+<li><p>Go to the Configuration tab and edit the app.config file, editing the API key for URLScanIO and making any additional setting changes.</p></li>
+</ul>
+</section>
+<section id="integration-server-setup">
+<h3>Integration Server Setup<a class="headerlink" href="#integration-server-setup" title="Link to this heading">¶</a></h3>
+<p>Unzip file from AppExchange:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>unzip app-fn_urlscanio-1.1.5.zip
+</pre></div>
+</div>
+<p>The resulting .tar.gz file can be installed using</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install fn_urlscanio-x.x.x.tar.gz
+</pre></div>
+</div>
+<p>After installation, before running, you must import the customizations into your Resilient platform,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>resilient-circuits customize -l fn-urlscanio
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="app-configuration">
+<h2>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h2>
+<p>The following block is automatically added to your app.config file when running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">-u</span> <span class="pre">-l</span> <span class="pre">fn-urlscanio</span></code>.
+You will need to add your API key and have the flexibility to adjust the URL parameters if required.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -461,43 +547,6 @@ It returns the report metadata, report URL, and base64-encoded screenshot that i
 </tbody>
 </table>
 </div>
-</li>
-</ul>
-</section>
-<section id="integration-server-setup">
-<h3>Integration Server Setup<a class="headerlink" href="#integration-server-setup" title="Link to this heading">¶</a></h3>
-<p>Unzip file from AppExchange:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>unzip app-fn_urlscanio-1.1.5.zip
-</pre></div>
-</div>
-<p>The resulting .tar.gz file can be installed using</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install fn_urlscanio-x.x.x.tar.gz
-</pre></div>
-</div>
-<p>After installation, before running, you must import the customizations into your Resilient platform,</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>resilient-circuits customize -l fn-urlscanio
-</pre></div>
-</div>
-<br/>
-</section>
-</section>
-<section id="app-config-settings">
-<h2>app.config settings<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
-<p>The following block is automatically added to your app.config file when running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">config</span> <span class="pre">-u</span> <span class="pre">-l</span> <span class="pre">fn-urlscanio</span></code>.
-You will need to add your API key and have the flexibility to adjust the URL parameters if required.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">urlscanio</span><span class="p">]</span>
-<span class="n">urlscanio_report_url</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">urlscan</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span>
-<span class="n">urlscanio_screenshot_url</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">urlscan</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">screenshots</span>
-<span class="c1"># your API key for urlscan.io</span>
-<span class="n">urlscanio_api_key</span><span class="o">=</span><span class="n">xxx</span>
-
-<span class="c1"># Optional timeout (seconds)</span>
-<span class="c1"># timeout=300</span>
-<span class="c1"># Optional proxy settings</span>
-<span class="c1">#http_proxy=http://your_proxy.com</span>
-<span class="c1">#https_proxy=https://your_proxy.com</span>
-</pre></div>
-</div>
 </section>
 <section id="pre-processing-script">
 <h2>Pre-Processing Script<a class="headerlink" href="#pre-processing-script" title="Link to this heading">¶</a></h2>
@@ -539,49 +588,7 @@ You will need to add your API key and have the flexibility to adjust the URL par
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Link to this heading">¶</a></h2>
 <p>To regenerate the customization blob,
 <code class="docutils literal notranslate"><span class="pre">resilient-sdk</span> <span class="pre">codegen</span> <span class="pre">-p</span> <span class="pre">fn_urlscanio</span> <span class="pre">-m</span> <span class="pre">urlscanio</span> <span class="pre">--workflow</span> <span class="pre">example_urlscanio</span> <span class="pre">--rule</span> <span class="pre">&quot;Example:</span> <span class="pre">urlscan.io&quot;</span></code></p>
-<br/>
-</section>
-<section id="changelog">
-<h2>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Version</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1.0.0</p></td>
-<td><p>Initial Release</p></td>
-</tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
-<td><p>Removed workflow dependency on fn_utilities <br> Added incident_id parameter to workflow inputs</p></td>
-</tr>
-<tr class="row-even"><td><p>1.1.1</p></td>
-<td><p>Pinned version of resilient-lib to work with write_file_attachment <br> Updated customize.py so minimum required version of Resilient is v35.0</p></td>
-</tr>
-<tr class="row-odd"><td><p>1.1.2</p></td>
-<td><p>Support added for App Host</p></td>
-</tr>
-<tr class="row-even"><td><p>1.1.3</p></td>
-<td><p>Compatibility with older versions of resilient-circuits</p></td>
-</tr>
-<tr class="row-odd"><td><p>1.1.4</p></td>
-<td><p>Proxy support added</p></td>
-</tr>
-<tr class="row-even"><td><p>1.1.5</p></td>
-<td><p>Bug fix error for non existing url</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>When upgrading from a previous version. Add these lines to your existing app.config [urlscanio] settings</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optional proxy settings</span>
-<span class="c1">#http_proxy=http://your_proxy.com</span>
-<span class="c1">#https_proxy=https://your_proxy.com</span>
-</pre></div>
-</div>
-</section>
+<br/></section>
 </section>
 
         </article>
@@ -640,16 +647,17 @@ You will need to add your API key and have the flexibility to adjust the URL par
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">URLScan.io</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#app-host-setup">App Host Setup</a></li>
 <li><a class="reference internal" href="#integration-server-setup">Integration Server Setup</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#app-config-settings">app.config settings</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
 <li><a class="reference internal" href="#pre-processing-script">Pre-Processing Script</a></li>
 <li><a class="reference internal" href="#post-processing-script">Post-Processing Script</a></li>
 <li><a class="reference internal" href="#other-notes">Other notes</a></li>
-<li><a class="reference internal" href="#changelog">Changelog</a></li>
 </ul>
 </li>
 </ul>

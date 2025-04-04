@@ -9,6 +9,29 @@ record the DOM content, JavaScript global variables, cookies created by the page
 This integration is a Resilient function that can be called from workflows, to submit a URL for analysis by urlscan.io.
 It returns the report metadata, report URL, and base64-encoded screenshot that is attached to the incident.
 
+## Table of Contents
+- [Release Notes](#release-notes)
+- [Installation](#installation)
+  - [App Host Setup](#app-host-setup)
+  - [Integration Server Setup](#integration-server-setup)
+- [App Configuration](#app-configuration)
+- [Pre-processing Script](#pre-processing-script)
+- [Post-processing Script](#post-processing-script)
+- [Other Notes](#other-notes)
+
+
+## Release Notes
+
+| Version | Date | Description |
+| ------- | ----- | ----------- |
+| 1.1.6 | 04/2025 | Converted example workflows to python3 |
+| 1.1.5 | 06/2021 | Bug fix error for non existing url |
+| 1.1.4 | 09/2020 | Proxy support added |
+| 1.1.3 | 05/2020 | Compatibility with older versions of resilient-circuits |
+| 1.1.2 | 04/2020 | Support added for App Host |
+| 1.1.1 | 04/2020 | Pinned version of resilient-lib to work with write_file_attachment <br> Updated customize.py so minimum required version of Resilient is v35.0 |
+| 1.1.0 | 03/2020 | Removed workflow dependency on fn_utilities <br> Added incident_id parameter to workflow inputs |
+| 1.0.0 | 12/2018 | Initial Release |
 
 ## Installation
 ### App Host Setup
@@ -19,16 +42,6 @@ To install,
 * Navigate to Administrative Settings and then the Apps tab.
 * Click the Install button and select the downloaded file: app-fn_urlscanio-x.x.x.zip.
 * Go to the Configuration tab and edit the app.config file, editing the API key for URLScanIO and making any additional setting changes.
-
-
-  | Config | Required | Example | Description |
-  | ------ | :------: | ------- | ----------- |
-  | **urlscanio_report_url** | Yes | `https://urlscan.io/api/v1` | *URL to retrieve scan reports* |
-  | **urlscanio_screenshot_url** | Yes | `https://urlscan.io/screenshots` | *URL for website screenshots* |
-  | **urlscanio_api_key** | Yes | 1790000-0000-0000-0000-a1b2c3d4597 / *Provide your URLScanIO API key* |
-  | **timeout** | No | 300 / *Seconds to timeout reports which take a long time to complete. Default 5 minutes* |
-  | **http_proxy** | No | `http://your_proxy.com` | *Optional http proxy URL* |
-  | **https_proxy** | No | `https://your_proxy.com` | *Optional https proxy URL* |
 
 ### Integration Server Setup
 
@@ -46,24 +59,19 @@ After installation, before running, you must import the customizations into your
 
 <br/>
 
-## app.config settings
+## App Configuration
 
 The following block is automatically added to your app.config file when running `resilient-circuits config -u -l fn-urlscanio`.
 You will need to add your API key and have the flexibility to adjust the URL parameters if required.
 
-```
-[urlscanio]
-urlscanio_report_url=https://urlscan.io/api/v1
-urlscanio_screenshot_url=https://urlscan.io/screenshots
-# your API key for urlscan.io
-urlscanio_api_key=xxx
-
-# Optional timeout (seconds)
-# timeout=300
-# Optional proxy settings
-#http_proxy=http://your_proxy.com
-#https_proxy=https://your_proxy.com
-```
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| **urlscanio_report_url** | Yes | `https://urlscan.io/api/v1` | *URL to retrieve scan reports* |
+| **urlscanio_screenshot_url** | Yes | `https://urlscan.io/screenshots` | *URL for website screenshots* |
+| **urlscanio_api_key** | Yes | 1790000-0000-0000-0000-a1b2c3d4597 / *Provide your URLScanIO API key* |
+| **timeout** | No | 300 / *Seconds to timeout reports which take a long time to complete. Default 5 minutes* |
+| **http_proxy** | No | `http://your_proxy.com` | *Optional http proxy URL* |
+| **https_proxy** | No | `https://your_proxy.com` | *Optional https proxy URL* |
 
 ## Pre-Processing Script
 
@@ -108,23 +116,3 @@ To regenerate the customization blob,
 `resilient-sdk codegen -p fn_urlscanio -m urlscanio --workflow example_urlscanio --rule "Example: urlscan.io"`
 
 <br/>
-
-## Changelog
-
-| Version | Description |
-| ------- | ----------- |
-| 1.0.0   | Initial Release |
-| 1.1.0   | Removed workflow dependency on fn_utilities <br> Added incident_id parameter to workflow inputs |
-| 1.1.1 | Pinned version of resilient-lib to work with write_file_attachment <br> Updated customize.py so minimum required version of Resilient is v35.0 |
-| 1.1.2 | Support added for App Host |
-| 1.1.3 | Compatibility with older versions of resilient-circuits |
-| 1.1.4 | Proxy support added |
-| 1.1.5 | Bug fix error for non existing url |
-
-When upgrading from a previous version. Add these lines to your existing app.config [urlscanio] settings
-
-```
-# Optional proxy settings
-#http_proxy=http://your_proxy.com
-#https_proxy=https://your_proxy.com
-```
