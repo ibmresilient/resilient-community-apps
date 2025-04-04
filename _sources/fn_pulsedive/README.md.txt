@@ -25,14 +25,11 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-### v1.0.1
-* App Host support
-### v1.0.0
-* Initial Release
+| Version | Date | Description |
+| ------- | ----- | ----------- |
+| 1.0.2 | 04/2025 | Converted example workflows to python3 |
+| 1.0.1 | 12/2020 | AppHost Support added |
+| 1.0.0 | 04/2020 | Initial Release |
 
 ---
 
@@ -53,8 +50,8 @@ Resilient Circuits Components for 'fn_pulsedive'
 <!--
   List any Requirements
 -->
-* Resilient platform >= `v35.0.5343`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* Resilient platform >= `51.0.0`
+* An Integration Server running `resilient_circuits>=51.0.0`
     * The minimum set of Resilient API permissions if using an API key account:
         * Incidents.Edit.Fields
         * Workflows.Create
