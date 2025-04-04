@@ -1,0 +1,4 @@
+include README.md
+include fn_cve_search/util/*
+include fn_cve_search/LICENSE
+include screenshots/*

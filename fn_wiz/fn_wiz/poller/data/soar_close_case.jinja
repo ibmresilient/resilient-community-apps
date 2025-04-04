@@ -1,0 +1,19 @@
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  {% set resolution_mapping = '''{
+    "RESOLVED": "Resolved",
+    "REJECTED": "Unresolved"
+  }'''
+  %}
+
+  {% set close_message = "Closed by Wiz: Issue status:" %}
+
+  "plan_status": "C",
+  "resolution_id": "{{ status | soar_substitute(resolution_mapping) }}",
+  "resolution_summary": "{{close_message}} {{ status }}",
+  {# add additional fields based on your 'on close' field requirements #}
+  "properties": {
+      "wiz_issue_status": "{{ status }}"
+  }
+ 
+}
