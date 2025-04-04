@@ -18,16 +18,17 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='URL ScanIO',
     name='fn_urlscanio',
-    version='1.1.5',
+    version='1.1.6',
     license='MIT',
     author='IBM Resilient',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_urlscanio'",
     long_description="Resilient Circuits Components for 'fn_urlscanio'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib>=33.0.191'
+        'resilient_circuits>=51.0.0',
+        'resilient_lib>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
