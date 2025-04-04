@@ -1,20 +1,27 @@
 # VirusTotal
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - VirusTotal](#function---virustotal)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [VirusTotal](#virustotal)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+    - [1.1.0 Changes](#110-changes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+    - [VirusTotal Development Version](#virustotal-development-version)
+      - [Prerequisites](#prerequisites)
+      - [Configuration](#configuration)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - VirusTotal](#function---virustotal)
+  - [Playbooks](#playbooks)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -252,7 +259,7 @@ results = {
             "ttl": 16570
           }
         ],
-        "jarm": "29d29d15d29d29d21c42d42d0000003014e6e1a0bc19438ed392b132659e77",
+        "jarm": "29d29d15d29d2*******2d0000003014e6e1a0bc19438ed392b132659e77",
         "whois": "Creation Date: 1995-08-14T04:00:00Z\nDNSSEC: signedDelegation\nDomain Name: EXAMPLE.COM\nDomain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\nDomain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\nName Server: A.IANA-SERVERS.NET\nName Server: B.IANA-SERVERS.NET\nRegistrar IANA ID: 376\nRegistrar URL: http://res-dom.iana.org\nRegistrar WHOIS Server: whois.iana.org\nRegistrar: RESERVED-Internet Assigned Numbers Authority\nRegistry Domain ID: 2336799_DOMAIN_COM-VRSN\nRegistry Expiry Date: 2023-08-13T04:00:00Z\nUpdated Date: 2022-08-14T07:01:31Z\ncreated: 1992-01-01\ndomain: EXAMPLE.COM\norganisation: Internet Assigned Numbers Authority\nsource: IANA",
         "last_https_certificate_date": 1684856030,
         "tags": [],
@@ -813,14 +820,14 @@ results = {
           "public_key": {
             "rsa": {
               "key_size": 2048,
-              "modulus": "c280778959b8456fba4ad911fa7badc757d07afbb6fadd05bba28171bbe17f21d25f2ef0d2724e7534f88d62e34ada5190d4013d9c0cc071f7e62fb6d6076726d0deff17cef085fd31c166ca876505472a5fc0abb88cc3bfd0177f63a35cf046fb86aafb4dd72a5e7f9ae013977dbefb7d35570d5d5e819835ea1642a2d3b074f7592ded38e7fe7a1bb336e67eae3f9ea61683de53014e8100aebb42f51f752934cde9848038ae3c3714c0f027ce3052b98adc5f22a079f84f4e4904e2757caa2f2a1e03ec714ca32a61fc6fca911e935a2e780858f6eebb34205d9ae6afc6d7f2bf0a7bfa8e9277e36c7b0c4086644a15ec70d7728e6330e10bef5a30972e25",
+              "modulus": "c280778959b8456f*******fa7badc757d07afbb6fadd05bba28171bbe17f21d25f2ef0d2724e7534f88d62e34ada5190d4013d9c0cc071f7e62fb6d6076726d0deff17cef085fd31c166ca876505472a5fc0abb88cc3bfd0177f63a35cf046fb86aafb4dd72a5e7f9ae013977dbefb7d35570d5d5e819835ea1642a2d3b074f7592ded38e7fe7a1bb336e67eae3f9ea61683de53014e8100aebb42f51f752934cde9848038ae3c3714c0f027ce3052b98adc5f22a079f84f4e4904e2757caa2f2a1e03ec714ca32a61fc6fca911e935a2e780858f6eebb34205d9ae6afc6d7f2bf0a7bfa8e9277e36c7b0c4086644a15ec70d7728e6330e10bef5a30972e25",
               "exponent": "10001"
             },
             "algorithm": "RSA"
           },
-          "thumbprint_sha256": "5ef2f214260ab8f58e55eea42e4ac04b0f171807d8d1185fddd67470e9ab6096",
+          "thumbprint_sha256": "5ef2f214260ab8f58e5*******ac04b0f171807d8d1185fddd67470e9ab6096",
           "cert_signature": {
-            "signature": "59e44ad8a982ba9a4af1630c6d762675b33c74bec5f73da79192f8cf062d5810edf3b8d6fc6cff139632cd4fe98724850b74a2c2f60ff5a7d87d768aaee9c9582b6e006fb9cd24eec442c54c16859d34613923bfc68e95c984a9b2e5410f4478d795b9cfd974bf584fe716ff7c4030c46c4e224dcb83673a93bf2bc5c59c1af243a1253b84f6f7536ea885aede14749130060df207d4c408ba4364c5e23fdaacc541afa437e8427674f713bb4a7d3659819bc744df8973b93342e860c24d615d125a10f6efff33891450e8d69fc6b95c2b35dbadeddd36b625f2958aac693f9afe1af815286dea185ac2d26218af4078b5fa5e098f53f9ccf823a1833123f4c6",
+            "signature": "59e44ad8a982*******30c6d762675b33c74bec5f73da79192f8cf062d5810edf3b8d6fc6cff139632cd4fe98724850b74a2c2f60ff5a7d87d768aaee9c9582b6e006fb9cd24eec442c54c16859d34613923bfc68e95c984a9b2e5410f4478d795b9cfd974bf584fe716ff7c4030c46c4e224dcb83673a93bf2bc5c59c1af243a1253b84f6f7536ea885aede14749130060df207d4c408ba4364c5e23fdaacc541afa437e8427674f713bb4a7d3659819bc744df8973b93342e860c24d615d125a10f6efff33891450e8d69fc6b95c2b35dbadeddd36b625f2958aac693f9afe1af815286dea185ac2d26218af4078b5fa5e098f53f9ccf823a1833123f4c6",
             "signature_algorithm": "sha256RSA"
           },
           "validity": {
@@ -858,7 +865,7 @@ results = {
               "digitalSignature",
               "keyEncipherment"
             ],
-            "1.3.6.1.4.1.11129.2.4.2": "1234567b1234567890abcde064d5db1acec55cb79db4cd13a12345678abcdefg",
+            "1.3.6.1.4.1.11129.2.4.2": "1234567b123456789*******4d5db1acec55cb79db4cd13a12345678abcdefg",
             "CA": false,
             "ca_information_access": {
               "CA Issuers": "http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt",

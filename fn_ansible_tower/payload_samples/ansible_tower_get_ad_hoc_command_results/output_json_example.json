@@ -329,7 +329,7 @@
             "task_path": "",
             "host": "9.30.253.145",
             "uuid": "d843fc27-70c3-43ee-8aa9-a2e281f48ff1",
-            "guid": "2f1a3f714b6342c1bd00d107bec4bafa"
+            "guid": "2f1a3f********c1bd00d107bec4bafa"
           },
           "failed": false,
           "changed": false,
@@ -384,7 +384,7 @@
             "playbook": "__adhoc_playbook__",
             "playbook_uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
             "uuid": "377ae56e-9d75-413c-9f83-f09d8db34c81",
-            "guid": "2f1a3f714b6342c1bd00d107bec4bafa"
+            "guid": "2f1a3f********42c1bd00d107bec4bafa"
           },
           "failed": false,
           "changed": false,

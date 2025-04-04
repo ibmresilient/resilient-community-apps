@@ -18,8 +18,9 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='IOC Parser V2',
     name='fn_ioc_parser_v2',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -28,9 +29,9 @@ setup(
     long_description="""Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and Artifacts. 
                         All unique IOCs that are found are added to the Resilient Incident as an Artifact.""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'iocparser>=1.0.14',
-        'pdfminer.six>=20181108',
+        'pdfminer.six<20250327',
         'python-docx>=0.8.10',
         'xlrd>=1.2.0'
     ],

@@ -3,15 +3,15 @@
   "success": true,
   "reason": null,
   "content": {
-    "commandID_group": "89637CF1D7204D028522C81C4389301B",
-    "commandID_computer": "1CA9D4F37DD94CA88A9D93D09402E3D3"
+    "commandID_group": "89637CF1D7*******22C81C4389301B",
+    "commandID_computer": "1CA9D4F37*******A9D93D09402E3D3"
   },
   "raw": null,
   "inputs": {
-    "sep_group_ids": "E5E684A6092E5BB90F46E84BB6F35BBC",
+    "sep_group_ids": "E5E684A6092E*******46E84BB6F35BBC",
     "sep_undo": false,
-    "sep_hardwarekey": "8DACE2559C1C951E09CC0BF71D973BB7",
-    "sep_computer_ids": "01ECF4E8092E5BB91E4D52E45C3ABE4D"
+    "sep_hardwarekey": "8DACE2559C*******09CC0BF71D973BB7",
+    "sep_computer_ids": "01ECF4E80*******E4D52E45C3ABE4D"
   },
   "metrics": {
     "version": "1.0",

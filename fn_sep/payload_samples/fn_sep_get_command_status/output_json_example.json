@@ -16,8 +16,8 @@
         "subStateDesc": null,
         "binaryFileId": null,
         "resultInXML": null,
-        "computerId": "01ECF4E8092E5BB91E4D52E45C3ABE4D",
-        "hardwareKey": "8DACE2559C1C951E09CC0BF71D973BB7"
+        "computerId": "01ECF4E8*******4D52E45C3ABE4D",
+        "hardwareKey": "8DACE2559*******9CC0BF71D973BB7"
       }
     ],
     "size": 20,
@@ -48,7 +48,7 @@
   "raw": null,
   "inputs": {
     "sep_status_type": "quarantine",
-    "sep_commandid": "1CA9D4F37DD94CA88A9D93D09402E3D3",
+    "sep_commandid": "1CA9D4F37*******9D93D09402E3D3",
     "sep_incident_id": 2133
   },
   "metrics": {

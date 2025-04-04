@@ -3,7 +3,7 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "fbf657a616e211efaf639b4554e04742",
+    "id": "fbf657a616*******f639b4554e04742",
     "created_by": "FRIYZADN2K",
     "create_time": "2024-05-20T19:56:01.742Z",
     "override_list": "WHITE_LIST",
@@ -11,7 +11,7 @@
     "description": null,
     "source": "APP",
     "source_ref": null,
-    "sha256_hash": "8f7c9555176248ea553d9ac4c8df5a4b5e36ba43d2b02c153e3ee322970877e0",
+    "sha256_hash": "8f7c955517*******d9ac4c8df5a4b5e36ba43d2b02c153e3ee322970877e0",
     "filename": null
   },
   "raw": null,

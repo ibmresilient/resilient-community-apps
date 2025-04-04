@@ -67,8 +67,8 @@ Good
 Result: {'version': '1.0', 'success': True, 'reason': None,
          'content': {'status': 'ok'},
          'raw': '{"status": "ok"}',
-         'inputs': {'aws_gd_finding_id': 'c2bb95a17b879bffc96c58f8a1689785', 'aws_gd_region': 'us-east-2',
-                    'aws_gd_detector_id': '32b7017d2019dfe922abc4e07c3fdded'
+         'inputs': {'aws_gd_finding_id': 'c2bb9*******ffc96c58f8a1689785', 'aws_gd_region': 'us-east-2',
+                    'aws_gd_detector_id': '32b701*******e922abc4e07c3fdded'
                     },
          'metrics': {'version': '1.0', 'package': 'fn-aws-guardduty', 'package_version': '1.0.0',
          'host': 'myhost.ibm.com', 'execution_time_ms': 1310, 'timestamp': '2021-01-28 11:31:30'
@@ -80,8 +80,8 @@ Result: {'version': '1.0', 'success': True, 'reason': None,
                      'msg': 'An error occurred (BadRequestException) when calling the ArchiveFindings operation:
                      The request is rejected because the input detectorId is not owned by the current account.'},
                      'raw': '<content_as_string>',
-         'inputs': {'aws_gd_finding_id': 'c2bb95a17b879bffc96c58f8a1689784', 'aws_gd_region': 'us-east-2',
-                    'aws_gd_detector_id': '32b7017d2019dfe922abc4e07c3fdfff'
+         'inputs': {'aws_gd_finding_id': 'c2bb95a*******c96c58f8a1689784', 'aws_gd_region': 'us-east-2',
+                    'aws_gd_detector_id': '32b701*******922abc4e07c3fdfff'
                     },
          'metrics': {'version': '1.0', 'package': 'fn-aws-guardduty', 'package_version': '1.0.0',
          'host': 'myhost.ibm.com', 'execution_time_ms': 1446, 'timestamp': '2021-01-28 11:34:53'

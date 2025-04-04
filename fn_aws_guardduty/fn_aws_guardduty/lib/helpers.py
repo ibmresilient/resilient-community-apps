@@ -26,7 +26,7 @@ class IQuery(dict):
               "conditions":
                   [{"field_name":"plan_status", "method":"equals", "value":"A"},
                    {"field_name":"properties.aws_guardduty_finding_id", "method":"equals",
-                    "value":"b8baffd3f900972453b724a4147cba6f"},
+                    "value":"b8baffd*******3b724a4147cba6f"},
                    {"field_name":"properties.aws_guardduty_region", "method":"equals", "value":"us-west-2"}]}
           ],
           "sorts":[

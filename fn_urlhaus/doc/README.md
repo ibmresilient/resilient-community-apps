@@ -15,10 +15,12 @@
 # **User Guide:** fn_urlhaus_v1.0.2
 
 ## Table of Contents
-- [Key Features](#key-features)
-- [Function - URLhaus Submission](#function---urlhaus-submission)
-- [Function - URLhaus Lookup](#function---urlhaus-lookup)
-- [Rules](#rules)
+- [**User Guide:** fn\_urlhaus\_v1.0.2](#user-guide-fn_urlhaus_v102)
+  - [Table of Contents](#table-of-contents)
+  - [Key Features](#key-features)
+  - [Function - URLhaus Submission](#function---urlhaus-submission)
+  - [Function - URLhaus Lookup](#function---urlhaus-lookup)
+  - [Rules](#rules)
 
 ---
 
@@ -130,8 +132,8 @@ results = {
     'reason': None,
     'content': {
         'query_status': 'ok',
-        'md5_hash': '51dcd062feb030e94da803b3fa0c0f8d',
-        'sha256_hash': 'a13897aff5bbdee2bf78782be00ac516731e334463b3846c57df74c6167e97c8',
+        'md5_hash': '51dcd062f*******4da803b3fa0c0f8d',
+        'sha256_hash': 'a13897aff5bbdee2bf7*******0ac516731e334463b3846c57df74c6167e97c8',
         'file_type': 'doc',
         'file_size': '186404',
         'signature': 'Heodo',
@@ -142,7 +144,7 @@ results = {
         'virustotal': None,
         'imphash': None,
         'ssdeep': '3072:V4PrXcuQuvpzm4bkiaMQgAlSDyxS50XjwlxJ:iDRv1m4bnQgISDyxAYjwlxJ',
-        'tlsh': '6F040CDE30D9FC3EE74EA03A9C4AAE6E7212DF901EC8F1A910B4377D34B5390556A112',
+        'tlsh': '6F040CDE30D9FC3EE74EA*******6E7212DF901EC8F1A910B4377D34B5390556A112',
         'urls': [{
             'url_id': '437782',
             'url': 'http://drshekharbiswas.com/cgi-bin/report/4p38q98727977179317930u06alhqz405xm7q6yerm2a/',
@@ -169,10 +171,10 @@ results = {
             'lastseen': None
         }]
     },
-    'raw': '{"query_status": "ok", "md5_hash": "51dcd062feb030e94da803b3fa0c0f8d", "sha256_hash": "a13897aff5bbdee2bf78782be00ac516731e334463b3846c57df74c6167e97c8", ...}',
+    'raw': '{"query_status": "ok", "md5_hash": "51dcd0*******0e94da803b3fa0c0f8d", "sha256_hash": "a13897aff5bbdee2*******be00ac516731e334463b3846c57df74c6167e97c8", ...}',
     'inputs': {
         'urlhaus_artifact_type': 'Malware MD5 Hash',
-        'urlhaus_artifact_value': '51dcd062feb030e94da803b3fa0c0f8d'
+        'urlhaus_artifact_value': '51dcd06*******4da803b3fa0c0f8d'
     },
     'metrics': {
         'version': '1.0',

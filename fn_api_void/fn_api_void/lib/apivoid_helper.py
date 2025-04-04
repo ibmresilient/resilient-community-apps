@@ -7,7 +7,7 @@ import sys
 if sys.version_info.major >= 3:
     from urllib.parse import quote as url_encode
 else:
-    from urllib import quote as url_encode
+    from urllib.parse import quote as url_encode
 
 LOG = logging.getLogger(__name__)
 

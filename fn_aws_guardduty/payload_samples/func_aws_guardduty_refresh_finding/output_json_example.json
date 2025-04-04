@@ -213,7 +213,7 @@
     "incident_id": 2114,
     "aws_gd_finding_id": "xxxxyyyyzzzz",
     "aws_gd_region": "us-east-1",
-    "aws_gd_detector_id": "48bbf98612290af2215c7a02b7ccbc82"
+    "aws_gd_detector_id": "48bbf9861*******215c7a02b7ccbc82"
   },
   "metrics": {
     "version": "1.0",

@@ -1,3 +1,1517 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "report": {
+              "type": "object",
+              "properties": {
+                "ip": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                },
+                "blacklists": {
+                  "type": "object",
+                  "properties": {
+                    "engines": {
+                      "type": "object",
+                      "properties": {
+                        "0": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "12": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "13": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "10": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "11": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "14": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "1": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "15": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "17": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "2": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "16": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "18": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "19": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "20": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "21": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "22": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "24": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "25": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "27": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "23": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "26": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "28": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "29": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "3": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "30": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "31": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "33": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "32": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "34": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "35": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "36": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "4": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "38": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "39": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "40": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "37": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "41": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "5": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "6": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "42": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "43": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "44": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "45": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "46": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "47": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "48": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "50": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "54": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "49": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "51": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "53": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "52": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "55": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "59": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "56": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "57": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "58": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "62": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "7": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "60": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "61": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "63": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "8": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "65": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "64": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "9": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "66": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "69": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "67": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "68": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "70": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "71": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "72": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "73": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "76": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "74": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "75": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "77": {
+                          "type": "object",
+                          "properties": {
+                            "engine": {
+                              "type": "string"
+                            },
+                            "detected": {
+                              "type": "boolean"
+                            },
+                            "reference": {
+                              "type": "string"
+                            },
+                            "elapsed": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "detections": {
+                      "type": "integer"
+                    },
+                    "engines_count": {
+                      "type": "integer"
+                    },
+                    "detection_rate": {
+                      "type": "string"
+                    },
+                    "scantime": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "information": {
+                  "type": "object",
+                  "properties": {
+                    "reverse_dns": {
+                      "type": "string"
+                    },
+                    "is_eu": {
+                      "type": "boolean"
+                    },
+                    "continent_code": {
+                      "type": "string"
+                    },
+                    "continent_name": {
+                      "type": "string"
+                    },
+                    "country_code": {
+                      "type": "string"
+                    },
+                    "country_name": {
+                      "type": "string"
+                    },
+                    "country_currency": {
+                      "type": "string"
+                    },
+                    "country_calling_code": {
+                      "type": "string"
+                    },
+                    "region_name": {
+                      "type": "string"
+                    },
+                    "***": {
+                      "type": "string"
+                    },
+                    "latitude": {
+                      "type": "number"
+                    },
+                    "longitude": {
+                      "type": "number"
+                    },
+                    "isp": {
+                      "type": "string"
+                    },
+                    "asn": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "anonymity": {
+                  "type": "object",
+                  "properties": {
+                    "is_proxy": {
+                      "type": "boolean"
+                    },
+                    "is_webproxy": {
+                      "type": "boolean"
+                    },
+                    "is_vpn": {
+                      "type": "boolean"
+                    },
+                    "is_hosting": {
+                      "type": "boolean"
+                    },
+                    "is_tor": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "risk_score": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "credits_remained": {
+          "type": "number"
+        },
+        "estimated_queries": {
+          "type": "string"
+        },
+        "elapsed_time": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "api_void_request_type": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "api_void_artifact_type": {
+          "type": "string"
+        },
+        "api_void_artifact_value": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

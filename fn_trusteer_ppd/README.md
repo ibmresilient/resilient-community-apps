@@ -21,29 +21,41 @@
 # Trusteer Pinpoint Detect
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Function - Trusteer PPD: Get URL Links to Trusteer](#function---trusteer-ppd-get-url-links-to-trusteer)
-- [Function - Trusteer PPD: Update Alert Classification](#function---trusteer-ppd-update-alert-classification)
-- [Function - Trusteer PPD: Update Classification in Alert Datatable](#function---trusteer-ppd-update-classification-in-alert-datatable)
-- [Script - Trusteer PPD: Create Artifacts](#script---trusteer-ppd-create-artifacts)
-- [Script - Trusteer PPD: Create Case from Email](#script---trusteer-ppd-create-case-from-email)
-- [Data Table - Trusteer Alerts](#data-table---trusteer-alerts)
-- [Custom Fields](#custom-fields)
-- [Custom Artifact Types](#custom-artifact-types)
-- [Rules](#rules)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Trusteer Pinpoint Detect](#trusteer-pinpoint-detect)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+    - [IBM Trusteer Development Version](#ibm-trusteer-development-version)
+      - [Prerequisites](#prerequisites)
+      - [Configure Trusteer Email Feeds](#configure-trusteer-email-feeds)
+      - [Configure SOAR Inbound Email Connection](#configure-soar-inbound-email-connection)
+      - [The Case/incident Owner](#the-caseincident-owner)
+      - [Enable the Rule: Trusteer PPD: Parse Trusteer Email v1.0.0](#enable-the-rule-trusteer-ppd-parse-trusteer-email-v100)
+      - [Permissions](#permissions)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+    - [Custom Layouts](#custom-layouts)
+  - [Function - Trusteer PPD: Get URL Links to Trusteer](#function---trusteer-ppd-get-url-links-to-trusteer)
+  - [Function - Trusteer PPD: Update Alert Classification](#function---trusteer-ppd-update-alert-classification)
+  - [Function - Trusteer PPD: Update Classification in Alert Datatable](#function---trusteer-ppd-update-classification-in-alert-datatable)
+  - [Script - Trusteer PPD: Create Artifacts](#script---trusteer-ppd-create-artifacts)
+  - [Script - Trusteer PPD: Create Case from Email v1.0.0](#script---trusteer-ppd-create-case-from-email-v100)
+  - [Data Table - Trusteer Alerts](#data-table---trusteer-alerts)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Custom Fields](#custom-fields)
+  - [Custom Artifact Types](#custom-artifact-types)
+  - [Rules](#rules)
+  - [Playbooks](#playbooks)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -375,7 +387,7 @@ results = {
     "trusteer_ppd_application_id": "demo_app",
     "trusteer_ppd_feedback": "pending_confirmation",
     "trusteer_ppd_fraud_mo": null,
-    "trusteer_ppd_session_id": "eaa3aef168e8aeadfb606bf2637c21f"
+    "trusteer_ppd_session_id": "eaa3aef1*******dfb606bf2637c21f"
   },
   "metrics": {
     "execution_time_ms": 3517,

@@ -2,51 +2,88 @@
 
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - umbrella_classifiers](#function---umbrella_classifiers)
-- [Function - umbrella_dns_rr_hist](#function---umbrella_dns_rr_hist)
-- [Function - umbrella_domain_co_occurrences](#function---umbrella_domain_co_occurrences)
-- [Function - umbrella_domain_related_domains](#function---umbrella_domain_related_domains)
-- [Function - umbrella_domain_security_info](#function---umbrella_domain_security_info)
-- [Function - umbrella_domain_status_and_category](#function---umbrella_domain_status_and_category)
-- [Function - umbrella_domain_volume](#function---umbrella_domain_volume)
-- [Function - umbrella_domain_whois_info](#function---umbrella_domain_whois_info)
-- [Function - umbrella_ip_as_info](#function---umbrella_ip_as_info)
-- [Function - umbrella_ip_latest_malicious_domains](#function---umbrella_ip_latest_malicious_domains)
-- [Function - umbrella_pattern_search](#function---umbrella_pattern_search)
-- [Function - umbrella_threat_grid_sample](#function---umbrella_threat_grid_sample)
-- [Function - umbrella_threat_grid_samples](#function---umbrella_threat_grid_samples)
-- [Function - umbrella_timeline](#function---umbrella_timeline)
+- [Cisco Umbrella Investigate](#cisco-umbrella-investigate)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - umbrella\_classifiers](#function---umbrella_classifiers)
+  - [Function - umbrella\_dns\_rr\_hist](#function---umbrella_dns_rr_hist)
+  - [Function - umbrella\_domain\_co\_occurrences](#function---umbrella_domain_co_occurrences)
+  - [Function - umbrella\_domain\_related\_domains](#function---umbrella_domain_related_domains)
+  - [Function - umbrella\_domain\_security\_info](#function---umbrella_domain_security_info)
+  - [Function - umbrella\_domain\_status\_and\_category](#function---umbrella_domain_status_and_category)
+  - [Function - umbrella\_domain\_volume](#function---umbrella_domain_volume)
+  - [Function - umbrella\_domain\_whois\_info](#function---umbrella_domain_whois_info)
+  - [Function - umbrella\_ip\_as\_info](#function---umbrella_ip_as_info)
+  - [Function - umbrella\_ip\_latest\_malicious\_domains](#function---umbrella_ip_latest_malicious_domains)
+  - [Function - umbrella\_pattern\_search](#function---umbrella_pattern_search)
+  - [Function - umbrella\_threat\_grid\_sample](#function---umbrella_threat_grid_sample)
+  - [Function - umbrella\_threat\_grid\_samples](#function---umbrella_threat_grid_samples)
+  - [Function - umbrella\_timeline](#function---umbrella_timeline)
+  - [Playbooks](#playbooks)
   - [Custom Layouts](#custom-layouts)
-- [Data Table - Umbrella Investigate - AS Information for an ip address or ASN](#data-table---umbrella-investigate---as-information-for-an-ip-address-or-asn)
-- [Data Table - Umbrella Investigate - Categories for a domain](#data-table---umbrella-investigate---categories-for-a-domain)
-- [Data Table - Umbrella Investigate - Category identifiers](#data-table---umbrella-investigate---category-identifiers)
-- [Data Table - Umbrella Investigate - Classifiers for a domain](#data-table---umbrella-investigate---classifiers-for-a-domain)
-- [Data Table - Umbrella Investigate - Co-occurrences for a domain](#data-table---umbrella-investigate---co-occurrences-for-a-domain)
-- [Data Table - Umbrella Investigate - DNS RR history for a domain](#data-table---umbrella-investigate---dns-rr-history-for-a-domain)
-- [Data Table - Umbrella Investigate - DNS RR history for an ip address](#data-table---umbrella-investigate---dns-rr-history-for-an-ip-address)
-- [Data Table - Umbrella Investigate - Domain Volume](#data-table---umbrella-investigate---domain-volume)
-- [Data Table - Umbrella Investigate - Domain WHOIS info for a domain](#data-table---umbrella-investigate---domain-whois-info-for-a-domain)
-- [Data Table - Umbrella Investigate - Latest Malicious Domains for an IP](#data-table---umbrella-investigate---latest-malicious-domains-for-an-ip)
-- [Data Table - Umbrella Investigate - Pattern search with start epoch](#data-table---umbrella-investigate---pattern-search-with-start-epoch)
-- [Data Table - Umbrella Investigate - Pattern search with start relative](#data-table---umbrella-investigate---pattern-search-with-start-relative)
-- [Data Table - Umbrella Investigate - Related Domains for a Domain](#data-table---umbrella-investigate---related-domains-for-a-domain)
-- [Data Table - Umbrella Investigate - Security information for a domain](#data-table---umbrella-investigate---security-information-for-a-domain)
-- [Data Table - Umbrella Investigate - ThreadGrid sample info for a hash](#data-table---umbrella-investigate---threadgrid-sample-info-for-a-hash)
-- [Data Table - Umbrella Investigate - ThreadGrid samples for a resource](#data-table---umbrella-investigate---threadgrid-samples-for-a-resource)
-- [Data Table - Umbrella Investigate - Timeline for a resource](#data-table---umbrella-investigate---timeline-for-a-resource)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+  - [Data Table - Umbrella Investigate - AS Information for an ip address or ASN](#data-table---umbrella-investigate---as-information-for-an-ip-address-or-asn)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Data Table - Umbrella Investigate - Categories for a domain](#data-table---umbrella-investigate---categories-for-a-domain)
+      - [API Name:](#api-name-1)
+      - [Columns:](#columns-1)
+  - [Data Table - Umbrella Investigate - Category identifiers](#data-table---umbrella-investigate---category-identifiers)
+      - [API Name:](#api-name-2)
+      - [Columns:](#columns-2)
+  - [Data Table - Umbrella Investigate - Classifiers for a domain](#data-table---umbrella-investigate---classifiers-for-a-domain)
+      - [API Name:](#api-name-3)
+      - [Columns:](#columns-3)
+  - [Data Table - Umbrella Investigate - Co-occurrences for a domain](#data-table---umbrella-investigate---co-occurrences-for-a-domain)
+      - [API Name:](#api-name-4)
+      - [Columns:](#columns-4)
+  - [Data Table - Umbrella Investigate - DNS RR history for a domain](#data-table---umbrella-investigate---dns-rr-history-for-a-domain)
+      - [API Name:](#api-name-5)
+      - [Columns:](#columns-5)
+  - [Data Table - Umbrella Investigate - DNS RR history for an ip address](#data-table---umbrella-investigate---dns-rr-history-for-an-ip-address)
+      - [API Name:](#api-name-6)
+      - [Columns:](#columns-6)
+  - [Data Table - Umbrella Investigate - Domain Volume](#data-table---umbrella-investigate---domain-volume)
+      - [API Name:](#api-name-7)
+      - [Columns:](#columns-7)
+  - [Data Table - Umbrella Investigate - Domain WHOIS info for a domain](#data-table---umbrella-investigate---domain-whois-info-for-a-domain)
+      - [API Name:](#api-name-8)
+      - [Columns:](#columns-8)
+  - [Data Table - Umbrella Investigate - Latest Malicious Domains for an IP](#data-table---umbrella-investigate---latest-malicious-domains-for-an-ip)
+      - [API Name:](#api-name-9)
+      - [Columns:](#columns-9)
+  - [Data Table - Umbrella Investigate - Pattern search with start epoch](#data-table---umbrella-investigate---pattern-search-with-start-epoch)
+      - [API Name:](#api-name-10)
+      - [Columns:](#columns-10)
+  - [Data Table - Umbrella Investigate - Pattern search with start relative](#data-table---umbrella-investigate---pattern-search-with-start-relative)
+      - [API Name:](#api-name-11)
+      - [Columns:](#columns-11)
+  - [Data Table - Umbrella Investigate - Related Domains for a Domain](#data-table---umbrella-investigate---related-domains-for-a-domain)
+      - [API Name:](#api-name-12)
+      - [Columns:](#columns-12)
+  - [Data Table - Umbrella Investigate - Security information for a domain](#data-table---umbrella-investigate---security-information-for-a-domain)
+      - [API Name:](#api-name-13)
+      - [Columns:](#columns-13)
+  - [Data Table - Umbrella Investigate - ThreadGrid sample info for a hash](#data-table---umbrella-investigate---threadgrid-sample-info-for-a-hash)
+      - [API Name:](#api-name-14)
+      - [Columns:](#columns-14)
+  - [Data Table - Umbrella Investigate - ThreadGrid samples for a resource](#data-table---umbrella-investigate---threadgrid-samples-for-a-resource)
+      - [API Name:](#api-name-15)
+      - [Columns:](#columns-15)
+  - [Data Table - Umbrella Investigate - Timeline for a resource](#data-table---umbrella-investigate---timeline-for-a-resource)
+      - [API Name:](#api-name-16)
+      - [Columns:](#columns-16)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -1691,7 +1728,7 @@ Cisco Umbrella Investigate for Threat Grid sample for an MD5, SHA1 or SHA256 has
 results = {
   "content": {},
   "inputs": {
-    "umbinv_hash": "a0f2a3c1dcd5b1cac71bf0c03f2ff1bd",
+    "umbinv_hash": "a0f2a3c*******ac71bf0c03f2ff1bd",
     "umbinv_limit": 2,
     "umbinv_offset": 0,
     "umbinv_sample_endpoint": "basic"
@@ -1833,9 +1870,9 @@ results = {
           "firstSeen": null,
           "lastSeen": null,
           "magicType": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
-          "md5": "86e788dc3e886821eb103c8b9115e9fb",
-          "sha1": "166fbeea622e95bee0549274d8f70f42ca856cb1",
-          "sha256": "08483c38fee1dff34d52c23143ac5c3c5f91e00ca6032d4f4e28d1defaa673bf",
+          "md5": "86e788dc********eb103c8b9115e9fb",
+          "sha1": "166fbeea6********49274d8f70f42ca856cb1",
+          "sha256": "08483c38fee1dff34d52c23********5f91e00ca6032d4f4e28d1defaa673bf",
           "size": 19908237,
           "threatScore": 100,
           "visible": true
@@ -1862,9 +1899,9 @@ results = {
           "firstSeen": null,
           "lastSeen": null,
           "magicType": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
-          "md5": "d90ef473ca59cb7355071318caa12949",
-          "sha1": "f6224cef252aee32c881a2939ed6b85b043d4b52",
-          "sha256": "230a07cb6383b97017bc41a846c52ec79c0c33208055e93c6ba9bdceedca4038",
+          "md5": "d90ef47*******355071318caa12949",
+          "sha1": "f6224cef2*******c881a2939ed6b85b043d4b52",
+          "sha256": "230a07cb6383b97017bc41*******ec79c0c33208055e93c6ba9bdceedca4038",
           "size": 517120,
           "threatScore": 100,
           "visible": true

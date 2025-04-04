@@ -3,18 +3,18 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "7abca37c1c124cb2a4e74661f4a8c47e",
+    "id": "7abca37c*******a4e74661f4a8c47e",
     "meetingNumber": "25967357926",
     "title": "Soar Sample Instant Meeting",
     "agenda": "Testing the application",
     "password": "abcd12345",
-    "phoneAndVideoSystemPassword": "22231234",
+    "phoneAndVideoSystemPassword": "22*******234",
     "meetingType": "meetingSeries",
     "state": "active",
     "timezone": "UTC",
     "start": "2022-08-11T13:33:00Z",
     "end": "2022-08-11T14:18:00Z",
-    "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ODM0YjBlYi1mZmY1LTRjY2YtYTcwOC04Nzk1YmFjYjQ3NzU",
+    "hostUserId": "Y2lzY29zcG*******L1BFT1BMRS85ODM0YjBlYi1mZmY1LTRjY2YtYTcwOC04Nzk1YmFjYjQ3NzU",
     "hostDisplayName": "admin@examples-5xth.wbx.ai",
     "hostEmail": "admin@examples-5xth.wbx.ai",
     "hostKey": "109420",
@@ -57,7 +57,7 @@
   "raw": null,
   "inputs": {
     "webex_meeting_name": "Soar Sample Instant Meeting",
-    "webex_meeting_password": "abcd12345",
+    "webex_meeting_password": "ab*******45",
     "webex_meeting_agenda": "Testing the application"
   },
   "metrics": {

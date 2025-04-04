@@ -235,7 +235,7 @@
             "mutability": "IMMUTABLE",
             "data": {
               "type": "MAL",
-              "id": "cf23df2207d99a74fbe169e3eba035e633b65d94"
+              "id": "cf23df2207*******169e3eba035e633b65d94"
             }
           },
           "3": {
@@ -283,7 +283,7 @@
             "mutability": "IMMUTABLE",
             "data": {
               "type": "MAL",
-              "id": "152c883836f1f3eec207395ac6f8e0c6"
+              "id": "152c883836*******207395ac6f8e0c6"
             }
           },
           "9": {
@@ -291,7 +291,7 @@
             "mutability": "IMMUTABLE",
             "data": {
               "type": "MAL",
-              "id": "50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c"
+              "id": "50d858e0985ecc*******aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c"
             }
           }
         }
@@ -301,7 +301,7 @@
   },
   "raw": null,
   "inputs": {
-    "xforce_collection_id": "7c551c65686c0866daafcee3d838f052"
+    "xforce_collection_id": "7c551c65*******aafcee3d838f052"
   },
   "metrics": {
     "version": "1.0",

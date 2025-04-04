@@ -33,7 +33,7 @@
           "DELIVER_EXPLOIT"
         ],
         "event_description": "The file \"<share><link hash=\"761de33e1c3d08865f5f2d0cfc84c3b5401c7915a2953ca6b8c2fddbb007556b\">c:\\users\\administrator\\downloads\\temp4\\340s.exe\\340s.exe</link></share>\" was first detected on a local disk. The device was off the corporate network using the public address 170.225.223.22 (located in San Jose CA, United States). The file is not signed. The file was created by the application \"<share><link hash=\"f6ec44f025c67ab18170da47c1c610a94a9c84741f3cdfceb20cee565579868a\">c:\\program files\\confer\\repmgr.exe</link></share>\".",
-        "event_id": "cda5cca328c811efb47ec103488c1130",
+        "event_id": "cda5cca32*******b47ec103488c1130",
         "event_threat_score": [
           3
         ],
@@ -41,8 +41,8 @@
         "file_scan_result": "/ZBot",
         "filemod_action": "ACTION_FILE_CREATE",
         "filemod_hash": [
-          "48cd89827939b3a8976d9bb0993bc338",
-          "761de33e1c3d08865f5f2d0cfc84c3b5401c7915a2953ca6b8c2fddbb007556b"
+          "48cd8982*******976d9bb0993bc338",
+          "761de33e1c*******f2d0cfc84c3b5401c7915a2953ca6b8c2fddbb007556b"
         ],
         "filemod_issuer": [
           "jhjkkkaaaaaaaaaaa"
@@ -65,7 +65,7 @@
         "parent_effective_reputation_source": "CLOUD",
         "parent_guid": "7M9FP6WE-0ca8ce74-00000318-00000000-1daac4e9610e992",
         "parent_hash": [
-          "7477c64706110f4d0652b28c6618b8b83d27fef94ca9d112965f8c9a62ca3d7e"
+          "7477c64706110f4d0*******b8b83d27fef94ca9d112965f8c9a62ca3d7e"
         ],
         "parent_issuer": [
           "Microsoft Windows Production PCA 2011"

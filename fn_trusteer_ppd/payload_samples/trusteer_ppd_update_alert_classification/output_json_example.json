@@ -11,7 +11,7 @@
   },
   "raw": null,
   "inputs": {
-    "trusteer_ppd_session_id": "eaa3aef168e8aeadfb606bf2637c21f",
+    "trusteer_ppd_session_id": "eaa3aef*******b606bf2637c21f",
     "trusteer_ppd_feedback": "pending_confirmation",
     "trusteer_ppd_application_id": "demo_app",
     "trusteer_ppd_fraud_mo": null

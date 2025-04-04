@@ -3,11 +3,11 @@
   "success": true,
   "reason": null,
   "content": {
-    "commandID": "4C697374D15C433880A56800BAC25E56"
+    "commandID": "4C697374D*******0A56800BAC25E56"
   },
   "raw": null,
   "inputs": {
-    "sep_command_id": "367F5DE4A7F346E4A40B3475DFD93B06"
+    "sep_command_id": "367F5DE*******0B3475DFD93B06"
   },
   "metrics": {
     "version": "1.0",

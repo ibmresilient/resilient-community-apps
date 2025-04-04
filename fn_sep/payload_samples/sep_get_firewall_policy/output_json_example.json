@@ -7,7 +7,7 @@
     "configuration": {
       "enforced_rules": [
         {
-          "uid": "AF6C0B7F092E5BB90F1F6AAAA6A9091C",
+          "uid": "AF6C0B7F092E*******F6AAAA6A9091C",
           "name": "Block IPv6",
           "severity": 3,
           "action": "BLOCK",
@@ -23,7 +23,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040**************FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -39,7 +39,7 @@
           "time_slots": null
         },
         {
-          "uid": "93B197B4092E5BB97B99073C27A4A7FB",
+          "uid": "93B197*******7B99073C27A4A7FB",
           "name": "Block IPv6 over IPv4 (Teredo)",
           "severity": 3,
           "action": "BLOCK",
@@ -64,7 +64,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -80,7 +80,7 @@
           "time_slots": null
         },
         {
-          "uid": "C15FF9A5092E5BB903C0D2ECA39FB09D",
+          "uid": "C15FF9A50*******3C0D2ECA39FB09D",
           "name": "Block IPv6 over IPv4 (ISATAP)",
           "severity": 3,
           "action": "BLOCK",
@@ -99,7 +99,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04009*******0FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -115,7 +115,7 @@
           "time_slots": null
         },
         {
-          "uid": "3FA24409092E5BB9047C4962ECE67CBF",
+          "uid": "3FA24409*******7C4962ECE67CBF",
           "name": "Allow ICMPv6",
           "severity": 3,
           "action": "ALLOW",
@@ -181,7 +181,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -197,7 +197,7 @@
           "time_slots": null
         },
         {
-          "uid": "06DBD8D4092E5BB95C50F9F0BD7C1EBD",
+          "uid": "06DBD8D4092*******0F9F0BD7C1EBD",
           "name": "Block SNMP",
           "severity": 3,
           "action": "BLOCK",
@@ -205,7 +205,7 @@
             {
               "enabled": true,
               "svc_name": "SNMP Management",
-              "svc_uid": "CE856BE3092E5BB95C42D34F3BD620DD",
+              "svc_uid": "CE856BE3*******42D34F3BD620DD",
               "direction_id": 0,
               "ports": [
                 {
@@ -236,7 +236,7 @@
             {
               "enabled": true,
               "svc_name": "SNMP Management",
-              "svc_uid": "CE856BE3092E5BB95C42D34F3BD620DD",
+              "svc_uid": "CE856BE3092E*******D34F3BD620DD",
               "direction_id": 0,
               "ports": [
                 {
@@ -298,7 +298,7 @@
             {
               "enabled": true,
               "svc_name": "SNMP Client",
-              "svc_uid": "EF333F34092E5BB96FBAC8682039FA34",
+              "svc_uid": "EF333F3409*******AC8682039FA34",
               "direction_id": 0,
               "ports": [
                 {
@@ -332,7 +332,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040092E*******DDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -348,7 +348,7 @@
           "time_slots": null
         },
         {
-          "uid": "033A04EE092E5BB9145E670ACDEA46E7",
+          "uid": "033A04EE09*******5E670ACDEA46E7",
           "name": "Allow fragmented packets",
           "severity": 3,
           "action": "ALLOW",
@@ -364,7 +364,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -380,7 +380,7 @@
           "time_slots": null
         },
         {
-          "uid": "D6C2BB7E092E5BB9439171F2482999EF",
+          "uid": "D6C2BB7E*******171F2482999EF",
           "name": "Allow wireless EAPOL",
           "severity": 3,
           "action": "ALLOW",
@@ -396,7 +396,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -412,7 +412,7 @@
           "time_slots": null
         },
         {
-          "uid": "0EBEEDC5092E5BB94D53BF4F111AC78C",
+          "uid": "0EBEEDC50*******53BF4F111AC78C",
           "name": "Allow USB over IEEE802",
           "severity": 3,
           "action": "ALLOW",
@@ -428,7 +428,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040*******0FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -446,7 +446,7 @@
       ],
       "baseline_rules": [
         {
-          "uid": "69FF496F092E5BB94E898D1E4D224D28",
+          "uid": "69FF496F09*******4E898D1E4D224D28",
           "name": "Allow Local File Sharing to private IP addresses",
           "severity": 3,
           "action": "ALLOW",
@@ -548,7 +548,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04*******930FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -564,7 +564,7 @@
           "time_slots": null
         },
         {
-          "uid": "0F37D0BB092E5BB90B7A03EDE1B3DB2C",
+          "uid": "0F37D0BB*******0B7A03EDE1B3DB2C",
           "name": "Block Local File Sharing",
           "severity": 3,
           "action": "BLOCK",
@@ -623,7 +623,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC0400*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -639,7 +639,7 @@
           "time_slots": null
         },
         {
-          "uid": "98E6DD8D092E5BB94F3948010B0EEAC9",
+          "uid": "98E6DD8D*******4F3948010B0EEAC9",
           "name": "Allow Bootp",
           "severity": 3,
           "action": "ALLOW",
@@ -669,7 +669,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -685,7 +685,7 @@
           "time_slots": null
         },
         {
-          "uid": "0E2B7C47092E5BB97B9071E9F20B71B5",
+          "uid": "0E2B7C47092*******9071E9F20B71B5",
           "name": "Allow UPnP Discovery from private IP addresses",
           "severity": 3,
           "action": "ALLOW",
@@ -753,7 +753,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC0*******B930FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -769,7 +769,7 @@
           "time_slots": null
         },
         {
-          "uid": "0BC3E9F0092E5BB9669E0FD237C8578E",
+          "uid": "0BC3E9F0*******9669E0FD237C8578E",
           "name": "Block UPnP Discovery",
           "severity": 3,
           "action": "BLOCK",
@@ -794,7 +794,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04*******930FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -902,7 +902,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -918,7 +918,7 @@
           "time_slots": null
         },
         {
-          "uid": "D0B6ED57092E5BB92AD7E416CEC5B38E",
+          "uid": "D0B6ED57*******92AD7E416CEC5B38E",
           "name": "Block Web Service requests",
           "severity": 3,
           "action": "BLOCK",
@@ -967,7 +967,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -983,7 +983,7 @@
           "time_slots": null
         },
         {
-          "uid": "E232F5CA092E5BB9101039267C0E0589",
+          "uid": "E232F5CA092*******039267C0E0589",
           "name": "Allow LLMNR from private IP addresses",
           "severity": 3,
           "action": "ALLOW",
@@ -1051,7 +1051,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04009*******DDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1067,7 +1067,7 @@
           "time_slots": null
         },
         {
-          "uid": "F39698A8092E5BB9465A33C08E4E132B",
+          "uid": "F39698A8*******5A33C08E4E132B",
           "name": "Block LLMNR",
           "severity": 3,
           "action": "BLOCK",
@@ -1100,7 +1100,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC0400*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1116,7 +1116,7 @@
           "time_slots": null
         },
         {
-          "uid": "989BB854092E5BB93FABBA6EDC80EC8E",
+          "uid": "989BB854*******3FABBA6EDC80EC8E",
           "name": "Allow LLMNR from ipv6 traffic",
           "severity": 3,
           "action": "ALLOW",
@@ -1157,7 +1157,7 @@
           "time_slots": null
         },
         {
-          "uid": "EAD641B3092E5BB932821F06F1DF3BC0",
+          "uid": "EAD641B3092*******21F06F1DF3BC0",
           "name": "Allow Web Services Discovery from private IP addresses",
           "severity": 3,
           "action": "ALLOW",
@@ -1225,7 +1225,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC0400*******0FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1241,7 +1241,7 @@
           "time_slots": null
         },
         {
-          "uid": "D2A71E10092E5BB9148778DE794E7D5B",
+          "uid": "D2A71E10*******B9148778DE794E7D5B",
           "name": "Block Web Services Discovery",
           "severity": 3,
           "action": "BLOCK",
@@ -1266,7 +1266,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04009*******FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1282,7 +1282,7 @@
           "time_slots": null
         },
         {
-          "uid": "7D3F9127092E5BB9266A3276D4C51F7F",
+          "uid": "7D3F912709*******66A3276D4C51F7F",
           "name": "Allow SSDP from private IP addresses",
           "severity": 3,
           "action": "ALLOW",
@@ -1350,7 +1350,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC0400*******0FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1366,7 +1366,7 @@
           "time_slots": null
         },
         {
-          "uid": "39230892092E5BB957AF518273836C33",
+          "uid": "3923089209*******AF518273836C33",
           "name": "Block SSDP",
           "severity": 3,
           "action": "BLOCK",
@@ -1391,7 +1391,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC0400*******FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1407,7 +1407,7 @@
           "time_slots": null
         },
         {
-          "uid": "73E8BCB4092E5BB938013D7530FA8804",
+          "uid": "73E8BCB409*******38013D7530FA8804",
           "name": "Allow ping, pong and tracert",
           "severity": 3,
           "action": "ALLOW",
@@ -1474,7 +1474,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040*******B930FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1494,7 +1494,7 @@
           "time_slots": null
         },
         {
-          "uid": "ADB2292C092E5BB93065667F4A40BFF9",
+          "uid": "ADB2292C0*******93065667F4A40BFF9",
           "name": "Allow VPN",
           "severity": 4,
           "action": "ALLOW",
@@ -1502,7 +1502,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- PPTP",
-              "svc_uid": "C8013082092E5BB93CFA886C25C48A04",
+              "svc_uid": "C8013082*******BB93CFA886C25C48A04",
               "direction_id": 2,
               "ports": [
                 {
@@ -1518,7 +1518,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- PPTP",
-              "svc_uid": "C8013082092E5BB93CFA886C25C48A04",
+              "svc_uid": "C801308*******B93CFA886C25C48A04",
               "direction_id": 0,
               "ports": [
                 {
@@ -1544,7 +1544,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- PPTP",
-              "svc_uid": "C8013082092E5BB93CFA886C25C48A04",
+              "svc_uid": "C8013082*******3CFA886C25C48A04",
               "direction_id": 0,
               "protocol_ids": [
                 47,
@@ -1555,7 +1555,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Check Point",
-              "svc_uid": "FF34EE4A092E5BB92609F4E71C39D814",
+              "svc_uid": "FF34EE4A*******92609F4E71C39D814",
               "direction_id": 0,
               "ports": [
                 {
@@ -1576,7 +1576,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Check Point",
-              "svc_uid": "FF34EE4A092E5BB92609F4E71C39D814",
+              "svc_uid": "FF34EE4A0*******609F4E71C39D814",
               "direction_id": 0,
               "ports": [
                 {
@@ -1607,7 +1607,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Check Point",
-              "svc_uid": "FF34EE4A092E5BB92609F4E71C39D814",
+              "svc_uid": "FF34EE4A092*******609F4E71C39D814",
               "direction_id": 0,
               "ports": [
                 {
@@ -1628,7 +1628,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Check Point",
-              "svc_uid": "FF34EE4A092E5BB92609F4E71C39D814",
+              "svc_uid": "FF34EE4A09*******609F4E71C39D814",
               "direction_id": 0,
               "ports": [
                 {
@@ -1664,7 +1664,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Check Point",
-              "svc_uid": "FF34EE4A092E5BB92609F4E71C39D814",
+              "svc_uid": "FF34EE4A09*******92609F4E71C39D814",
               "direction_id": 0,
               "protocol_ids": [
                 17
@@ -1674,7 +1674,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- NetScreen",
-              "svc_uid": "5D7E9B38092E5BB968DCBE0FDFE2A339",
+              "svc_uid": "5D7E9B3809*******68DCBE0FDFE2A339",
               "direction_id": 0,
               "ports": [
                 {
@@ -1695,7 +1695,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- NetScreen",
-              "svc_uid": "5D7E9B38092E5BB968DCBE0FDFE2A339",
+              "svc_uid": "5D7E9B38*******68DCBE0FDFE2A339",
               "direction_id": 0,
               "protocol_ids": [
                 50
@@ -1705,7 +1705,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Cisco 5000",
-              "svc_uid": "50F33FE0092E5BB95DA9DB7BFD3A2E41",
+              "svc_uid": "50F33FE00*******DA9DB7BFD3A2E41",
               "direction_id": 0,
               "ports": [
                 {
@@ -1726,7 +1726,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Cisco 5000",
-              "svc_uid": "50F33FE0092E5BB95DA9DB7BFD3A2E41",
+              "svc_uid": "50F33FE00*******5DA9DB7BFD3A2E41",
               "direction_id": 0,
               "protocol_ids": [
                 50
@@ -1736,7 +1736,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Cisco 3000",
-              "svc_uid": "EF3159B9092E5BB94CDFCE3DB8806921",
+              "svc_uid": "EF3159B9*******B94CDFCE3DB8806921",
               "direction_id": 0,
               "ports": [
                 {
@@ -1772,7 +1772,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Nortel",
-              "svc_uid": "B8C0FD37092E5BB96C6760F6E662A23D",
+              "svc_uid": "B8C0FD37*******C6760F6E662A23D",
               "direction_id": 0,
               "ports": [
                 {
@@ -1788,7 +1788,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Nortel",
-              "svc_uid": "B8C0FD37092E5BB96C6760F6E662A23D",
+              "svc_uid": "B8C0FD370*******6C6760F6E662A23D",
               "direction_id": 0,
               "ports": [
                 {
@@ -1809,7 +1809,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Nortel",
-              "svc_uid": "B8C0FD37092E5BB96C6760F6E662A23D",
+              "svc_uid": "B8C0FD37*******6C6760F6E662A23D",
               "direction_id": 0,
               "ports": [
                 {
@@ -1830,7 +1830,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Nortel",
-              "svc_uid": "B8C0FD37092E5BB96C6760F6E662A23D",
+              "svc_uid": "B8C0FD37*******B96C6760F6E662A23D",
               "direction_id": 0,
               "protocol_ids": [
                 50
@@ -1840,7 +1840,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Aventail",
-              "svc_uid": "5A6BBF37092E5BB924BD0656C5EDC154",
+              "svc_uid": "5A6BBF3709*******24BD0656C5EDC154",
               "direction_id": 0,
               "ports": [
                 {
@@ -1861,7 +1861,7 @@
             {
               "enabled": true,
               "svc_name": "VPN --- Aventail",
-              "svc_uid": "5A6BBF37092E5BB924BD0656C5EDC154",
+              "svc_uid": "5A6BBF370*******924BD0656C5EDC154",
               "direction_id": 0,
               "protocol_ids": [
                 50
@@ -1874,7 +1874,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04009*******30FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1890,7 +1890,7 @@
           "time_slots": null
         },
         {
-          "uid": "E7E47214092E5BB92AB2B3A0E2776740",
+          "uid": "E7E472140*******2AB2B3A0E2776740",
           "name": "Allow Veritas Protocol",
           "severity": 4,
           "action": "ALLOW",
@@ -1906,7 +1906,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04009*******0FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1922,7 +1922,7 @@
           "time_slots": null
         },
         {
-          "uid": "E764F25C092E5BB90FF2A93E70D04A8C",
+          "uid": "E764F25C092*******F2A93E70D04A8C",
           "name": "Allow IGMP traffic",
           "severity": 4,
           "action": "ALLOW",
@@ -1941,7 +1941,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040092*******0FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -1957,7 +1957,7 @@
           "time_slots": null
         },
         {
-          "uid": "65AFBD1C092E5BB9643C123950557886",
+          "uid": "65AFBD1C0*******9643C123950557886",
           "name": "Allow Bonjour traffic",
           "severity": 3,
           "action": "ALLOW",
@@ -2012,7 +2012,7 @@
           "time_slots": null
         },
         {
-          "uid": "6A35F99F092E5BB95DDD5B2960C09319",
+          "uid": "6A35F99F*******B95DDD5B2960C09319",
           "name": "Block broadcast and multicast traffic and don't log",
           "severity": 1,
           "action": "BLOCK",
@@ -2034,7 +2034,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040092*******0FDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -2050,7 +2050,7 @@
           "time_slots": null
         },
         {
-          "uid": "0B2AE82F092E5BB978629101355BF16B",
+          "uid": "0B2AE82F092*******629101355BF16B",
           "name": "Block all other IP traffic and log",
           "severity": 1,
           "action": "BLOCK",
@@ -2066,7 +2066,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC04009vFDDC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -2092,7 +2092,7 @@
             {
               "enabled": true,
               "name": "All Adapters",
-              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "uid": "88FCC040092E5*******DC8EEE3946B6",
               "type": "ANY"
             }
           ],
@@ -2144,7 +2144,7 @@
       "mac": {
         "enforced_rules": [
           {
-            "uid": "A7132944092E5BB91799542349877DC4",
+            "uid": "A7132944092*******1799542349877DC4",
             "name": "Block IPv6 over IPv4 (Teredo)",
             "severity": 3,
             "action": "BLOCK",
@@ -2178,7 +2178,7 @@
             "time_slots": null
           },
           {
-            "uid": "438C14D8092E5BB93B8797FC3D2836C4",
+            "uid": "438C14D80*******93B8797FC3D2836C4",
             "name": "Allow ICMPv6",
             "severity": 3,
             "action": "ALLOW",
@@ -2253,7 +2253,7 @@
             "time_slots": null
           },
           {
-            "uid": "AB6FDFDC092E5BB9493E327E03CFE785",
+            "uid": "AB6FDFDC0*******493E327E03CFE785",
             "name": "Allow Mac Discovery from local computers",
             "severity": 3,
             "action": "ALLOW",
@@ -2299,7 +2299,7 @@
             "time_slots": null
           },
           {
-            "uid": "6EBCC33E092E5BB968E1C4FF9C750796",
+            "uid": "6EBCC33E*******68E1C4FF9C750796",
             "name": "Block Mac Discovery from external computers",
             "severity": 3,
             "action": "BLOCK",
@@ -2333,7 +2333,7 @@
             "time_slots": null
           },
           {
-            "uid": "7212F8B4092E5BB9415DE41EB43D4459",
+            "uid": "7212F8B*******415DE41EB43D4459",
             "name": "Allow outgoing ichat requests",
             "severity": 3,
             "action": "ALLOW",
@@ -2381,7 +2381,7 @@
             "time_slots": null
           },
           {
-            "uid": "94238995092E5BB9278B654265950A7E",
+            "uid": "94238995*******8B654265950A7E",
             "name": "Allow outgoing NTP requests",
             "severity": 3,
             "action": "ALLOW",
@@ -2417,7 +2417,7 @@
         ],
         "baseline_rules": [
           {
-            "uid": "53DACF1E092E5BB90D7BE4F2910F0F6A",
+            "uid": "53DACF1E09*******7BE4F2910F0F6A",
             "name": "Allow Local File Sharing to private IP addresses",
             "severity": 3,
             "action": "ALLOW",
@@ -2571,7 +2571,7 @@
             "time_slots": null
           },
           {
-            "uid": "77A01134092E5BB97F7828DF8D14642D",
+            "uid": "77A0113409*******F7828DF8D14642D",
             "name": "Block Local File Sharing to external computers",
             "severity": 3,
             "action": "BLOCK",
@@ -2672,7 +2672,7 @@
             "time_slots": null
           },
           {
-            "uid": "9507DAE4092E5BB9147007D3306BB8DC",
+            "uid": "9507DAE4*******47007D3306BB8DC",
             "name": "Allow Bootp",
             "severity": 3,
             "action": "ALLOW",
@@ -2711,7 +2711,7 @@
             "time_slots": null
           },
           {
-            "uid": "294E17C9092E5BB92AAFDCFC6AF01270",
+            "uid": "294E17C90v*******AAFDCFC6AF01270",
             "name": "Allow UPnP Discovery from private IP addresses",
             "severity": 3,
             "action": "ALLOW",
@@ -2899,7 +2899,7 @@
             "time_slots": null
           },
           {
-            "uid": "DF25F540092E5BB962A1555998460F41",
+            "uid": "DF25F5400*******62A1555998460F41",
             "name": "Block SSDP",
             "severity": 3,
             "action": "BLOCK",
@@ -2933,7 +2933,7 @@
             "time_slots": null
           },
           {
-            "uid": "19B6E398092E5BB96A30E07E951FE96B",
+            "uid": "19B6E3980*******A30E07E951FE96B",
             "name": "Allow ping, pong and tracert",
             "severity": 3,
             "action": "ALLOW",
@@ -2991,7 +2991,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- NetScreen",
-                "svc_uid": "5D7E9B38092E5BB968DCBE0FDFE2A339",
+                "svc_uid": "5D7E9B3809*******968DCBE0FDFE2A339",
                 "direction_id": 0,
                 "ports": [
                   {
@@ -3012,7 +3012,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- NetScreen",
-                "svc_uid": "5D7E9B38092E5BB968DCBE0FDFE2A339",
+                "svc_uid": "5D7E9B38*******B968DCBE0FDFE2A339",
                 "direction_id": 0,
                 "protocol_ids": [
                   50
@@ -3022,7 +3022,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- Cisco 5000",
-                "svc_uid": "50F33FE0092E5BB95DA9DB7BFD3A2E41",
+                "svc_uid": "50F33FE00*******5DA9DB7BFD3A2E41",
                 "direction_id": 0,
                 "ports": [
                   {
@@ -3043,7 +3043,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- Cisco 5000",
-                "svc_uid": "50F33FE0092E5BB95DA9DB7BFD3A2E41",
+                "svc_uid": "50F33FE009*******DA9DB7BFD3A2E41",
                 "direction_id": 0,
                 "protocol_ids": [
                   50
@@ -3053,7 +3053,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- Cisco 3000",
-                "svc_uid": "EF3159B9092E5BB94CDFCE3DB8806921",
+                "svc_uid": "EF3159B90*******CDFCE3DB8806921",
                 "direction_id": 0,
                 "ports": [
                   {
@@ -3089,7 +3089,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- OS X",
-                "svc_uid": "7889F07C092E5BB96A66B39A1E88630C",
+                "svc_uid": "7889F07C092*******66B39A1E88630C",
                 "direction_id": 0,
                 "ports": [
                   {
@@ -3105,7 +3105,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- OS X",
-                "svc_uid": "7889F07C092E5BB96A66B39A1E88630C",
+                "svc_uid": "7889F07C092*******B39A1E88630C",
                 "direction_id": 0,
                 "ports": [
                   {
@@ -3121,7 +3121,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- OS X",
-                "svc_uid": "7889F07C092E5BB96A66B39A1E88630C",
+                "svc_uid": "7889F07C0*******6B39A1E88630C",
                 "direction_id": 0,
                 "ports": [
                   {
@@ -3147,7 +3147,7 @@
               {
                 "enabled": true,
                 "svc_name": "VPN --- OS X",
-                "svc_uid": "7889F07C092E5BB96A66B39A1E88630C",
+                "svc_uid": "7889F07C0*******A66B39A1E88630C",
                 "direction_id": 0,
                 "ports": [
                   {
@@ -3185,7 +3185,7 @@
             "time_slots": null
           },
           {
-            "uid": "C0AFE420092E5BB91A59800472B588D8",
+            "uid": "C0AFE4200*******59800472B588D8",
             "name": "Allow IGMP traffic",
             "severity": 4,
             "action": "ALLOW",
@@ -3213,7 +3213,7 @@
             "time_slots": null
           },
           {
-            "uid": "8A7C6BF0092E5BB97C19F9DF273312A7",
+            "uid": "8A7C6BF00*******7C19F9DF273312A7",
             "name": "Allow outgoing web traffic",
             "severity": 4,
             "action": "ALLOW",
@@ -3271,7 +3271,7 @@
             "time_slots": null
           },
           {
-            "uid": "884D30DA092E5BB930DC6EBC4A3E9B5B",
+            "uid": "884D30DA09*******0DC6EBC4A3E9B5B",
             "name": "Block broadcast and multicast traffic and don't log",
             "severity": 1,
             "action": "BLOCK",
@@ -3302,7 +3302,7 @@
             "time_slots": null
           },
           {
-            "uid": "5D857B08092E5BB9744D3BD774298986",
+            "uid": "5D857B08*******44D3BD774298986",
             "name": "Allow Airport",
             "severity": 3,
             "action": "ALLOW",
@@ -3336,7 +3336,7 @@
             "time_slots": null
           },
           {
-            "uid": "711DC180092E5BB959A6ACFC5861CEAB",
+            "uid": "711DC18009*******59A6ACFC5861CEAB",
             "name": "Allow Kerberos",
             "severity": 3,
             "action": "ALLOW",
@@ -3384,7 +3384,7 @@
             "time_slots": null
           },
           {
-            "uid": "63475044092E5BB970FE9EACAB21EFB1",
+            "uid": "6347504*******970FE9EACAB21EFB1",
             "name": "Allow outgoing DLP",
             "severity": 3,
             "action": "ALLOW",
@@ -3452,7 +3452,7 @@
             "time_slots": null
           },
           {
-            "uid": "2F96536A092E5BB900FBB64BA54B9C2B",
+            "uid": "2F9653*******BB900FBB64BA54B9C2B",
             "name": "Allow outgoing JAMF",
             "severity": 3,
             "action": "ALLOW",
@@ -3529,7 +3529,7 @@
             "time_slots": null
           },
           {
-            "uid": "E3F78964092E5BB92FE6B57EC76E8C07",
+            "uid": "E3F78964*******92FE6B57EC76E8C07",
             "name": "Allow LDAP",
             "severity": 3,
             "action": "ALLOW",
@@ -3577,7 +3577,7 @@
             "time_slots": null
           },
           {
-            "uid": "45488FD5092E5BB9045BBC3330D499EA",
+            "uid": "45488FD509*******045BBC3330D499EA",
             "name": "Block all other IP traffic and log",
             "severity": 1,
             "action": "BLOCK",
@@ -3625,7 +3625,7 @@
   },
   "raw": null,
   "inputs": {
-    "sep_firewall_id": "7231E523092E5BB93F329A371754A877"
+    "sep_firewall_id": "7231E52309*******F329A371754A877"
   },
   "metrics": {
     "version": "1.0",

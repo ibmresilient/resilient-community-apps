@@ -24,7 +24,7 @@ def snake_to_camel(word):
 setup(
     name="fn_api_void",
     display_name="APIVoid Threat Analysis APIs",
-    version="1.0.1",
+    version="1.0.2",
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -32,8 +32,8 @@ setup(
     description="A IBM QRadar SOAR Function to integrate with the APIVoid API",
     long_description="Provides APIVoid's threat intelligence to enrich SOAR artifacts",
     install_requires=[
-        'resilient_circuits>=47.1.0',
-        'resilient_lib>=47.1.0'
+        'resilient_circuits>=51.0.0',
+        'resilient_lib>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

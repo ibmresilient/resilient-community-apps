@@ -88,8 +88,8 @@ Result: { 'version': '1.0',
                                     "gd_resource_affected": [{"cells": {"resource_type": {"value": "S3Bucket"}, "instance_id": {"value": "i-99999999"}, "instance_type": {"value": "m3.xlarge"}, "instance_state": {"value": "running"}, "resource_role": {"value": "TARGET"}, "instance_private_ip": {"value": "10.0.0.1"}, "instance_private_dns": {"value": "GeneratedFindingPrivateName"}, "instance_public_ip": {"value": "198.51.100.0"}, "instance_public_dns": {"value": "GeneratedFindingPublicDNSName"}, "s3bucket_name": {"value": "bucketName"}, "s3bucket_owner": {"value": "CanonicalId of Owner"}}}]
 
                       }}',
-            'inputs': {'incident_id': 2168, 'aws_gd_finding_id': '60baffd3f9042e38640f2300d5c5a631',
-                      'aws_gd_region': 'us-west-2', 'aws_gd_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'},
+            'inputs': {'incident_id': 2168, 'aws_gd_finding_id': '60baffd*******640f2300d5c5a631',
+                      'aws_gd_region': 'us-west-2', 'aws_gd_detector_id': 'f2baedb0ac*******29e15f56da6a'},
             'metrics': {'version': '1.0', 'package': 'fn-aws-guardduty', 'package_version': '1.0.0',
                         'host': 'Johnp-MacBook-Pro-2.galway.ie.ibm.com', 'execution_time_ms': 10739,
                         'timestamp': '2021-01-18 16:51:10'}

@@ -11,9 +11,9 @@
       "limit": 2,
       "samples": [
         {
-          "sha256": "08483c38fee1dff34d52c23143ac5c3c5f91e00ca6032d4f4e28d1defaa673bf",
-          "sha1": "166fbeea622e95bee0549274d8f70f42ca856cb1",
-          "md5": "86e788dc3e886821eb103c8b9115e9fb",
+          "sha256": "08483c38fe********52c23143ac5c3c5f91e00ca6032d4f4e28d1defaa673bf",
+          "sha1": "166fbeea62********0549274d8f70f42ca856cb1",
+          "md5": "86e788dc3********eb103c8b9115e9fb",
           "magicType": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
           "threatScore": 100,
           "size": 19908237,
@@ -176,9 +176,9 @@
           ]
         },
         {
-          "sha256": "230a07cb6383b97017bc41a846c52ec79c0c33208055e93c6ba9bdceedca4038",
-          "sha1": "f6224cef252aee32c881a2939ed6b85b043d4b52",
-          "md5": "d90ef473ca59cb7355071318caa12949",
+          "sha256": "230a07c********017bc41a846c52ec79c0c33208055e93c6ba9bdceedca4038",
+          "sha1": "f6224cef2********c881a2939ed6b85b043d4b52",
+          "md5": "d90ef473********7355071318caa12949",
           "magicType": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
           "threatScore": 100,
           "size": 517120,

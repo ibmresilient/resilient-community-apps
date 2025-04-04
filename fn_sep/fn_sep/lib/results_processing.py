@@ -72,7 +72,7 @@ def parse_scan_results(xml, status_type):
             'HASH_MATCHES': [{'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\temp\\suspicious_exe.exe'},
                              {'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\Users\\Administrator\\Desktop\\suspicious_exe.exe'},
                              {'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\Users\\Administrator\\Desktop\\suspicious_exe_copy.exe'}],
-            'FULL_MATCHES': [], 'artifact_value': '8f5cae16ef5cfd3fcd9a4d6d58de14137b92a845ce00f69b64c5b04b6b712a83',
+            'FULL_MATCHES': [], 'artifact_value': '8f5cae1*******fcd9a4d6d58de14137b92a845ce00f69b64c5b04b6b712a83',
             'artifact_type': 'SHA256 hash',
             'fail_remediation_count': 0,
             'MATCH': True

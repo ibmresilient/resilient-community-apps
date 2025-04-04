@@ -5,20 +5,20 @@
   "content": {
     "content": [
       {
-        "id": "23899461092E5BB937223FCF3A0605E3",
+        "id": "2389946*******B937223FCF3A0605E3",
         "name": "Default Group",
         "description": "",
         "fullPathName": "My Company\\Default Group",
         "numberOfPhysicalComputers": 1,
         "numberOfRegisteredUsers": 1,
-        "createdBy": "AF3C39A10A320801000000DBF200C60A                                                                                                ",
+        "createdBy": "AF3C39A*******01000000DBF200C60A                                                                                                ",
         "created": 1719408628197,
         "lastModified": 1719408628197,
         "policySerialNumber": "2389-07/09/2024 06:29:12 652",
         "policyDate": 1720506552652,
         "customIpsNumber": "",
         "domain": {
-          "id": "6E70F043092E5BB93F74FD57C083F99E",
+          "id": "6E70F0430*******3F74FD57C083F99E",
           "name": null
         },
         "policyInheritanceEnabled": true
@@ -41,7 +41,7 @@
   },
   "raw": null,
   "inputs": {
-    "sep_domain": "6E70F043092E5BB93F74FD57C083F99E",
+    "sep_domain": "6E70F043*******3F74FD57C083F99E",
     "sep_fullpathname": "My Company\\Default Group"
   },
   "metrics": {

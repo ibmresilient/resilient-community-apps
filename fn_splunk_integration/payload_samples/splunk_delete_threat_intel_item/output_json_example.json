@@ -8,7 +8,7 @@
   },
   "raw": null,
   "inputs": {
-    "splunk_threat_intel_key": "dc3c8a0ce1f2464897d8c1995d66e1e4",
+    "splunk_threat_intel_key": "dc3c8a0c*******7d8c1995d66e1e4",
     "splunk_threat_intel_type": "ip_intel",
     "splunk_label": null
   },

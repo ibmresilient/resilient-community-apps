@@ -5,7 +5,7 @@
   "content": {
     "assets": [
       {
-        "internal_axon_id": "ca1df3031a00e387c8a7da086272f2b6",
+        "internal_axon_id": "ca1df3031a00*******a086272f2b6",
         "adapters": [
           "cisco_meraki_adapter",
           "counter_act_adapter",

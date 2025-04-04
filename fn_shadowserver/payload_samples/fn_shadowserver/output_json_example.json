@@ -114,23 +114,23 @@
           "signature": "Gen:Win32.FileInfector.uwZ@a4T!Kcmi"
         }
       ],
-      "pehash": "243c35935ecc9829f30b30c45839cbf6",
+      "pehash": "243c35935e*******30b30c45839cbf6",
       "entropic": "5.952427",
       "filesize": "2438340",
-      "import_hash": "33f98db5bdb6a7013d52f0120248df35",
-      "md5": "dfe1832e02888422f48d6896dc8e8f73",
-      "tlsh": "c1b52a5273fa0254f2f35f75a8b7a3944939fea11d22e08e1164314d88b6f808e75bb7",
-      "sha1": "c56ba498d41caa7be3c1eb5588cec27c413eb208",
+      "import_hash": "33f98d*******013d52f0120248df35",
+      "md5": "dfe1832e*******2f48d6896dc8e8f73",
+      "tlsh": "c1b52a5273fa*******f35f75a8b7a3944939fea11d22e08e1164314d88b6f808e75bb7",
+      "sha1": "c56ba498d4*******e3c1eb5588cec27c413eb208",
       "magic": "PE32 executable (GUI) Intel 80386, for MS Windows",
-      "sha256": "d8d395f8744335fba53b0a4308e7b380a0aca86bfc8939ded9f4c8c5cb1e838a",
+      "sha256": "d8d395f87443*******a4308e7b380a0aca86bfc8939ded9f4c8c5cb1e838a",
       "first_seen": "2016-08-25 02:44:39",
-      "sha512": "7ca1fdfe537913b8854227efc1f11b00d405f2d21e416e7023c4ebed2bfa887d2bc4d4d553ce41667c99def47ea05e6ce4a773c4ee7173927f1d263e724c16c2"
+      "sha512": "7ca1fdfe5379*******efc1f11b00d405f2d21e416e7023c4ebed2bfa887d2bc4d4d553ce41667c99def47ea05e6ce4a773c4ee7173927f1d263e724c16c2"
     }
   ],
   "raw": null,
   "inputs": {
     "shadowserver_artifact_type": "Malware SHA-1 Hash",
-    "shadowserver_artifact_value": "c56ba498d41caa7be3c1eb5588cec27c413eb208"
+    "shadowserver_artifact_value": "c56ba498d4*******1eb5588cec27c413eb208"
   },
   "metrics": {
     "version": "1.0",
