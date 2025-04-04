@@ -18,8 +18,9 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='PulseDive',
     name='fn_pulsedive',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -27,7 +28,7 @@ setup(
     description="Resilient Circuits Components to Integrate with the Pulsedive",
     long_description="This integration contains Functions to search Pulsedive for Indicators, Threats, or Feeds, query Pulsedive for information on an indicator ID, threat ID, or feed ID and query Pulsedive for information on an indicator value, threat value, or feed value.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'resilient_lib'
     ],
     packages=find_packages(),

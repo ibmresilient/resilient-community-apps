@@ -199,7 +199,7 @@ class FunctionComponent(ResilientComponent):
                 attachment_name = u"pulsedive_search_{}.txt".format(pulsedive_search_type)
             else:
                 attachment_name = kwargs.get("attachment_name").replace(u" ", u"_")
-            log.info("%s attachment name: %s", attachment_name)
+            log.info("attachment name: %s", attachment_name)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
