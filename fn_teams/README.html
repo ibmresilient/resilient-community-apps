@@ -403,9 +403,9 @@
 <h1>Microsoft Teams<a class="headerlink" href="#microsoft-teams" title="Link to this heading">¶</a></h1>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="#microsoft-teams-for-ibm-qradar-soar"><span class="xref myst">Microsoft Teams for IBM QRadar SOAR</span></a></p>
 <ul>
+<li><p><a class="reference internal" href="#microsoft-teams-for-ibm-qradar-soar"><span class="xref myst">Microsoft Teams for IBM QRadar SOAR</span></a></p>
+<ul class="simple">
 <li><p><a class="reference internal" href="#table-of-contents"><span class="xref myst">Table of Contents</span></a></p></li>
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -448,11 +448,12 @@
 <li><p><a class="reference internal" href="#function---ms-teams-post-message"><span class="xref myst">Function - MS Teams: Post Message</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-post-message-for-workflows"><span class="xref myst">Function - MS Teams: Post Message for Workflows</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-read-message"><span class="xref myst">Function - MS Teams: Read Message</span></a></p></li>
-<li><p><a class="reference internal" href="#custom-layouts"><span class="xref myst">Custom Layouts</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#data-table---ms-teams-approval-process"><span class="xref myst">Data Table - MS Teams Approval Process</span></a></p></li>
 </ul>
-</li>
+<!--
+- [Custom Layouts](#custom-layouts)
+  - [Data Table - MS Teams Approval Process](#data-table---ms-teams-approval-process)
+-->
+<ul class="simple">
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
@@ -475,9 +476,9 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>3.0.0</p></td>
-<td><p>08/2024</p></td>
-<td><p>Added Approval Request process and ability to work with MS Teams Workflows.</p></td>
+<tr class="row-even"><td><p>2.2.0</p></td>
+<td><p>10/2024</p></td>
+<td><p>New function to support MS Teams Workflows</p></td>
 </tr>
 <tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>05/2023</p></td>
@@ -499,11 +500,11 @@
 </table>
 </div>
 <section id="changes">
-<h3>3.0.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
-<!-->
-<p>In v3.0, an approval request process has been added to make requests for process changes. Added is a datatable to track approval request with a poller to review changes in MS Teams based on approval or rejection replies. See <a class="reference internal" href="#v30-changes-for-poller"><span class="xref myst">V3.0 Changes for poller</span></a> for additional changes needed to the app.config file to enable this capability.
-–&gt;
-v3.0 supports MS Teams Workflows and Adaptive Cards. See the section <a class="reference internal" href="#ms-teams-workflows"><span class="xref myst">Setting up Workflows</span></a> for more information needed to configure this capability.</p>
+<h3>2.2.0 Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
+<!--
+In v3.0, an approval request process has been added to make requests for process changes. Added is a datatable to track approval request with a poller to review changes in MS Teams based on approval or rejection replies. See [V3.0 Changes for poller](#v30-changes-for-poller) for additional changes needed to the app.config file to enable this capability.
+-->
+<p>v2.2.0 supports MS Teams Workflows and Adaptive Cards. See the section <a class="reference internal" href="#ms-teams-workflows"><span class="xref myst">Setting up Workflows</span></a> for more information needed to configure this capability.</p>
 </section>
 <section id="id1">
 <h3>2.1.0 Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
@@ -912,7 +913,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <tr class="row-odd"><td><p><strong>selftest</strong></p></td>
 <td class="text-center"><p>Optional</p></td>
 <td><p>https://teams.microsoft.com/l/channel/xxx</p></td>
-<td><p>Webhook URL for channel connectors to test posting of messages.  <strong>This capability is deprecated and selftest_workflows should be used starting with V3.0</strong></p></td>
+<td><p>Webhook URL for channel connectors to test posting of messages.  <strong>This capability is deprecated and selftest_workflows should be used starting with V2.2</strong></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>selftest_workflows</strong></p></td>
 <td class="text-center"><p>Optional</p></td>
@@ -930,7 +931,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 </section>
 <section id="ms-teams-workflows">
 <h3>MS Teams Workflows<a class="headerlink" href="#ms-teams-workflows" title="Link to this heading">¶</a></h3>
-<p>In V3.0, messages can be sent via the MS Teams Workflows capability. Although a powerful way to set up complex capabilities, the basic enablement can be performed via these steps:</p>
+<p>In V2.2, messages can be sent via the MS Teams Workflows capability. Although a powerful way to set up complex capabilities, the basic enablement can be performed via these steps:</p>
 <ol class="arabic simple">
 <li><p>Within the MS Teams app (either Windows or Mac), select the Workflows app
 <img alt="screenshot: Workflows app" src="../_images/workflows_app.png" /></p></li>
@@ -942,8 +943,9 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 </ol>
 <p>The webhook request step contains the URL required to send Adaptive Cards to a teams channel.
 Copy this value and add it your app.config settings using a label of your choosing. This label will then be referred to in any message sent to the MS Teams channel via this Workflow.</p>
-<p><img alt="screenshot: Approval Playbook" src="../_images/approval_playbook.png" /></p>
 <!--
+![screenshot: Approval Playbook](./doc/screenshots/approval_playbook.png)
+
 #### V3.0 Changes for poller
 If running the poller for approval requests, a new app.config section has been added, `fn_teams_approval_process`. If the `poller_interval` is non-zero, then the poller will 
 execute, looking for pending approvals. 
@@ -1109,23 +1111,16 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ms_teams_post_result</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">post_message_workflow_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
-  <span class="c1">#</span>
-  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;msteams_approval_process&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Pending&quot;</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;channel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">approval_expiration</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">approval_message</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;soar_message_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">soar_message_id</span><span class="o">.</span><span class="n">message_id</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_group</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;task_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unable to Post Task Information to channel: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MS Teams approval post to channel </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span><span class="si">}</span><span class="s2"> failed with: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully queued workflow message to channel: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -2785,23 +2780,13 @@ rejection_words=reject, rejected, deny, denied, no
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>MS Teams: Send Approval Request</p></td>
-<td><p>Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the ‘MS Teams Approval Process’ datatable.</p></td>
-<td><p>Manual</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>MS Teams: Send Approval Request for Tasks</p></td>
-<td><p>Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the ‘MS Teams Approval Process’ datatable.</p></td>
-<td><p>Manual</p></td>
-<td><p>task</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
 </tbody>
 </table>
 </div>
+<!--
+| MS Teams: Send Approval Request | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | incident | `enabled` | `-` | 
+| MS Teams: Send Approval Request for Tasks | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | task | `enabled` | `-` | 
+-->
 <hr class="docutils" />
 <!--
 ## Custom Layouts
@@ -2903,7 +2888,7 @@ msteams_approval_process
 <li><a class="reference internal" href="#">Microsoft Teams</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#changes">3.0.0 Changes</a></li>
+<li><a class="reference internal" href="#changes">2.2.0 Changes</a></li>
 <li><a class="reference internal" href="#id1">2.1.0 Changes</a></li>
 </ul>
 </li>
