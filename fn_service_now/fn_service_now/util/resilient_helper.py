@@ -1,12 +1,10 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """ResilientHelper Module"""
 
 import base64
 import json
 from logging import getLogger
 from urllib.parse import urljoin
-
 from bs4 import BeautifulSoup
 from resilient import SimpleHTTPException
 from resilient_lib import RequestsCommon, IntegrationError
@@ -259,7 +257,7 @@ class ResilientHelper(object):
         err_msg = None
         get_url = f"/incidents/{incident_id}?text_content_output_format=always_text&handle_format=names"
 
-        # Get the incident from resilient api
+        # Get the incident from SOAR api
         try:
             LOG.debug("GET Incident from SOAR: ID %s URL: %s", incident_id, get_url)
             incident = client.get(get_url)
@@ -303,7 +301,7 @@ class ResilientHelper(object):
         """Function that gets the task from SOAR. Gets the task's instructions too"""
         err_msg = None
 
-        # Get the task from resilient api
+        # Get the task from SOAR api
         try:
             get_url = f"/tasks/{task_id}?text_content_output_format=always_text&handle_format=names"
             LOG.debug("GET Task from SOAR: ID %s URL: %s", task_id, get_url)
@@ -423,17 +421,18 @@ class ResilientHelper(object):
 
         return attachment
 
-    def generate_sn_request_data(self, res_client, res_datatable, incident_id, res_link, sn_table_name=None, task_id=None, init_note=None, sn_optional_fields=None):
+    def generate_sn_request_data(self, res_client, res_datatable, incident_id, res_link, sn_table_name=None, task_id=None, init_note=None, sn_optional_fields=None, add_soar_link=True):
         """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
         err_msg, request_data = None, None
 
         if not sn_table_name:
             sn_table_name = self.table_name
 
-        if res_link:
+        if res_link and add_soar_link:
             init_note += "\nSOAR link: " + res_link
-
-        LOG.debug("Generating request for ServiceNow. incident_id: %s task_id: %s sn_table_name: %s res_link: %s init_note: %s sn_optional_fields: %s res_datatable: %s", incident_id, task_id, sn_table_name, res_link, init_note, sn_optional_fields, res_datatable)
+            LOG.debug("Generating request for ServiceNow. incident_id: %s task_id: %s sn_table_name: %s res_link: %s init_note: %s sn_optional_fields: %s res_datatable: %s", incident_id, task_id, sn_table_name, res_link, init_note, sn_optional_fields, res_datatable)
+        else:
+            LOG.debug("Generating request for ServiceNow. incident_id: %s task_id: %s sn_table_name: %s init_note: %s sn_optional_fields: %s res_datatable: %s", incident_id, task_id, sn_table_name, init_note, sn_optional_fields, res_datatable)
 
         # Generate the res_id
         res_id = self.generate_res_id(incident_id, task_id)

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -7,14 +7,11 @@
 
 import json
 import logging
-
-from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
-                                                  ResilientHelper)
+from fn_service_now.util.resilient_helper import CONFIG_DATA_SECTION, ResilientHelper
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
 LOG.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """
@@ -22,11 +19,9 @@ def selftest_function(opts):
     To try and get a status_code=200, else its a failure
     """
     app_configs = opts.get(CONFIG_DATA_SECTION, {})
-
     res_helper = ResilientHelper(opts, app_configs)
 
     try:
-
         LOG.info("Trying to connect to %s", res_helper.host)
 
         res = res_helper.test_connection()
@@ -74,7 +69,6 @@ def selftest_function(opts):
         sn_table_name: {res_helper.table_name}
         sn_api_uri: {res_helper.api_uri}
         ---------"""
-
 
     LOG.error(err_reason_msg)
     return {

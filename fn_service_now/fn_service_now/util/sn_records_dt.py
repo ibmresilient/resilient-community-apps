@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Class to handle manipulating the ServiceNow Records Data Table"""
 
 class ServiceNowRecordsDataTable(object):
@@ -31,7 +31,7 @@ class ServiceNowRecordsDataTable(object):
             cells = row["cells"]
             if cells[cell_name] and cells[cell_name].get("value") and cells[cell_name].get("value") == cell_value:
                 return row
-        return None
+        return
 
     def get_sn_ref_id(self, res_id):
         """Returns the sn_ref_id that relates to the res_id"""
@@ -40,8 +40,7 @@ class ServiceNowRecordsDataTable(object):
         if row:
             cells = row["cells"]
             return str(cells["sn_records_dt_sn_ref_id"]["value"])
-
-        return None
+        return
 
     def get_sn_table_name(self, res_id):
         row = self.get_row("sn_records_dt_res_id", res_id)
@@ -49,8 +48,7 @@ class ServiceNowRecordsDataTable(object):
         if row:
             cells = row["cells"]
             return str(cells["sn_records_dt_snow_table"]["value"])
-
-        return None
+        return
 
     def add_row(self, time, name, res_type, res_id, sn_ref_id, res_status, snow_status, snow_table, link, parent_ref_id=None):
         """Adds a new row to the data table and returns that row"""
@@ -70,21 +68,13 @@ class ServiceNowRecordsDataTable(object):
         ]
 
         if parent_ref_id:
-            cells.append(
-                ("sn_records_dt_sn_parent_ref_id", parent_ref_id)
-            )
-
+            cells.append(("sn_records_dt_sn_parent_ref_id", parent_ref_id))
         formatted_cells = {}
-
         # Format the cells
         for cell in cells:
             formatted_cells[cell[0]] = {"value": cell[1]}
 
-        formatted_cells = {
-            "cells": formatted_cells
-        }
-
-        return self.res_client.post(uri, formatted_cells)
+        return self.res_client.post(uri, {"cells": formatted_cells})
 
     def update_row(self, row, cells_to_update):
         """Updates the row with the given cells_to_update and returns the updated row"""

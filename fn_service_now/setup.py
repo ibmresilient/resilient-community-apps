@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_service_now',
     display_name="ServiceNow",
-    version="2.3.0",
+    version="2.3.1",
     license="MIT",
     author="IBM SOAR",
     url="https://ibm.com/mysupport",

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -6,15 +6,11 @@
 from json import loads
 from logging import getLogger
 from time import time
-
 from resilient_circuits import (FunctionResult, ResilientComponent,
                                 StatusMessage, function, handler)
 from resilient_lib import ResultPayload, validate_fields
-
-from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
-                                                  ResilientHelper)
+from fn_service_now.util.resilient_helper import CONFIG_DATA_SECTION, ResilientHelper
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
-
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -24,26 +20,25 @@ class FunctionPayload(object):
         self.inputs = inputs
         # Local (to its table) unique id of ServiceNow record
         self.sn_ref_id = None
-        # Timestamp from Resilient Integration server when record was updated
+        # Timestamp from SOAR Integration server when record was updated
         self.sn_time_updated = None
 
     def as_dict(self):
         """Return this class as a Dictionary"""
         return self.__dict__
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_snow_update_record"""
+    """Component that implements SOAR function 'fn_snow_update_record"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_service_now", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_service_now", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("fn_snow_update_record")
     def _fn_snow_update_record_function(self, event, *args, **kwargs):
@@ -83,7 +78,7 @@ class FunctionComponent(ResilientComponent):
 
         yield StatusMessage("Function Inputs OK")
 
-        # Instantiate new Resilient API object
+        # Instantiate new SOAR API object
         res_client = self.rest_client()
 
         # Generate res_id using incident and task id

@@ -1,20 +1,15 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 from logging import getLogger
 from time import time
-
 from resilient_circuits import (FunctionResult, ResilientComponent,
                                 StatusMessage, function, handler)
 from resilient_lib import ResultPayload, validate_fields
-
-from fn_service_now.util.resilient_helper import (SN_STATE_COLOR_MAP,
-                                                  CONFIG_DATA_SECTION,
-                                                  ResilientHelper)
+from fn_service_now.util.resilient_helper import SN_STATE_COLOR_MAP, CONFIG_DATA_SECTION, ResilientHelper
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
-
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -30,19 +25,18 @@ class FunctionPayload(object):
         """Return this class as a Dictionary"""
         return self.__dict__
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_snow_close_record"""
+    """Component that implements SOAR function 'fn_snow_close_record"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_service_now", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_service_now", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("fn_snow_close_record")
     def _fn_snow_close_record_function(self, event, *args, **kwargs):
@@ -60,19 +54,19 @@ class FunctionComponent(ResilientComponent):
         # Get the function inputs:
         inputs = {
             # number (required)
-            "incident_id": kwargs.get("incident_id"),
+            "incident_id": kwargs.get("incident_id", None),
             # number (optional)
-            "task_id": kwargs.get("task_id"),
+            "task_id": kwargs.get("task_id", None),
             # number (optional)
-            "sn_res_id": kwargs.get("sn_res_id"),
+            "sn_res_id": kwargs.get("sn_res_id", None),
             # number (required)
-            "sn_record_state": kwargs.get("sn_record_state"),
+            "sn_record_state": kwargs.get("sn_record_state", None),
             # text (optional)
-            "sn_close_notes": kwargs.get("sn_close_notes"),
+            "sn_close_notes": kwargs.get("sn_close_notes", None),
             # text (optional)
-            "sn_close_code": kwargs.get("sn_close_code"),
+            "sn_close_code": kwargs.get("sn_close_code", None),
             # text (optional)
-            "sn_close_work_note": kwargs.get("sn_close_work_note")
+            "sn_close_work_note": kwargs.get("sn_close_work_note", None)
         }
 
         # Create payload dict with inputs
@@ -80,16 +74,16 @@ class FunctionComponent(ResilientComponent):
 
         yield StatusMessage("Function Inputs OK")
 
-        # Instantiate new Resilient API object
+        # Instantiate new SOAR API object
         res_client = self.rest_client()
 
         # Get the datatable and its data
         datatable = ServiceNowRecordsDataTable(
-            res_client, payload.inputs["incident_id"])
+            res_client, inputs.get("incident_id", None))
 
         # Generate the res_id
         res_id = res_helper.generate_res_id(
-            payload.inputs["incident_id"], payload.inputs["task_id"], payload.inputs["sn_res_id"])
+            inputs.get("incident_id", None), inputs.get("task_id", None), inputs.get("sn_res_id", None))
 
         # Get the sn_ref_id
         sn_ref_id = datatable.get_sn_ref_id(res_id)
@@ -100,12 +94,12 @@ class FunctionComponent(ResilientComponent):
         if not sn_ref_id:
             err_msg = "Failed to close this {0} in ServiceNow. This {0} has not been created in ServiceNow yet. {0} ID: {1}"
 
-            if payload.inputs["task_id"]:
-                err_msg = err_msg.format("Task", payload.inputs["task_id"])
+            if inputs.get("task_id", None):
+                err_msg = err_msg.format("Task", inputs.get("task_id", None))
 
             else:
                 err_msg = err_msg.format(
-                    "Incident", payload.inputs["incident_id"])
+                    "Incident", inputs.get("incident_id", None))
 
             payload.success = False
             payload.reason = err_msg
@@ -116,10 +110,10 @@ class FunctionComponent(ResilientComponent):
             request_data = {
                 "sn_ref_id": sn_ref_id,
                 "sn_table_name": res_helper.get_table_name(sn_table_name),
-                "sn_close_code": payload.inputs["sn_close_code"],
-                "sn_close_notes": payload.inputs["sn_close_notes"],
-                "sn_record_state": payload.inputs["sn_record_state"],
-                "sn_close_work_note": payload.inputs["sn_close_work_note"]
+                "sn_close_code": inputs.get("sn_close_code", None),
+                "sn_close_notes": inputs.get("sn_close_notes", None),
+                "sn_record_state": inputs.get("sn_record_state", None),
+                "sn_close_work_note": inputs.get("sn_close_work_note", None)
             }
 
             yield StatusMessage(f"Closing ServiceNow Record {sn_ref_id}")

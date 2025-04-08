@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -8,11 +8,8 @@ from logging import getLogger
 from resilient_circuits import (FunctionResult, ResilientComponent,
                                 StatusMessage, function, handler)
 from resilient_lib import ResultPayload, validate_fields
-
-from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
-                                                  ResilientHelper)
+from fn_service_now.util.resilient_helper import CONFIG_DATA_SECTION, ResilientHelper
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
-
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -29,23 +26,22 @@ class FunctionPayload(object):
         """Return this class as a Dictionary"""
         return self.__dict__
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_snow_add_attachment_to_record"""
+    """Component that implements SOAR function 'fn_snow_add_attachment_to_record"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_service_now", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_service_now", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("fn_snow_add_attachment_to_record")
     def _fn_snow_add_attachment_to_record_function(self, event, *args, **kwargs):
-        """Function: Function that adds a Resilient Attachment to a ServiceNow Record."""
+        """Function: Function that adds a SOAR Attachment to a ServiceNow Record."""
 
         log = getLogger(__name__)
 
@@ -61,7 +57,7 @@ class FunctionComponent(ResilientComponent):
             # number (required)
             "incident_id": kwargs.get("incident_id"),
             # number (optional)
-            "task_id": kwargs.get("task_id")
+            "task_id": kwargs.get("task_id", None)
         }
 
         # Create payload dict with inputs
@@ -69,7 +65,7 @@ class FunctionComponent(ResilientComponent):
 
         yield StatusMessage("Function Inputs OK")
 
-        # Instantiate new Resilient API object
+        # Instantiate new SOAR API object
         res_client = self.rest_client()
 
         yield StatusMessage(f"Getting attachment data. ID: {payload.inputs['attachment_id']}")

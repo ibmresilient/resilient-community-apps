@@ -46,7 +46,7 @@ class TestFnSnowCreateRecord:
       "sn_optional_fields": mock_pre_scrip_dict_to_json_str({
         "assignment_group": "IT Security"
       }),
-      "sn_table_name": None,
+      "sn_table_name": "incident",
       "sn_parent_ref_id": None
     }
 
@@ -104,9 +104,7 @@ class TestFnSnowCreateRecord:
 
         ResilientHelper.sn_api_request = MagicMock(return_value=mock_post_response)
 
-        mock_add_row_response = {
-          "id": 3
-        }
+        mock_add_row_response = {"id": 3}
 
         ServiceNowRecordsDataTable.add_row = MagicMock(return_value=mock_add_row_response)
 

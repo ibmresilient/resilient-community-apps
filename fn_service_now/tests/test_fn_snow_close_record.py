@@ -42,7 +42,7 @@ class TestFnSnowCloseRecord:
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
       "sn_close_code": "Solved (Permanently)",
-      "sn_close_work_note": "This was fixed by IBM Resilient team"
+      "sn_close_work_note": "This was fixed by IBM SOAR team"
     }
 
     output1 = {
@@ -60,7 +60,7 @@ class TestFnSnowCloseRecord:
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
       "sn_close_code": "Solved (Permanently)",
-      "sn_close_work_note": "This was fixed by IBM Resilient team"
+      "sn_close_work_note": "This was fixed by IBM SOAR team"
     }
 
     output2 = {
@@ -78,7 +78,7 @@ class TestFnSnowCloseRecord:
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
       "sn_close_code": "Solved (Permanently)",
-      "sn_close_work_note": "This was fixed by IBM Resilient team"
+      "sn_close_work_note": "This was fixed by IBM SOAR team"
     }
 
     output3 = {

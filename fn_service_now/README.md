@@ -14,6 +14,9 @@ docs/customize_resilient_guide/README
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
+### v2.3.1
+* Add new input for function fn_snow_create_record. The new boolean input, sn_add_soar_link_on_snow, will determine if a link to the SOAR incident will be added in a note on the ServiceNow incident.
+
 ### v2.3.0
 * Multiple tables can be used at the same time. See the "Create Record" function in **Customize SOAR Guide** for details.
 * Configuration test updated to ensure that ServiceNow app configuration includes table name in `ServiceNowAllowedTables` list.
