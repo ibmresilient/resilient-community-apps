@@ -35,8 +35,10 @@
   - [Function - MS Teams: Post Message](#function---ms-teams-post-message)
   - [Function - MS Teams: Post Message for Workflows](#function---ms-teams-post-message-for-workflows)
   - [Function - MS Teams: Read Message](#function---ms-teams-read-message)
+  <!--
   - [Custom Layouts](#custom-layouts)
     - [Data Table - MS Teams Approval Process](#data-table---ms-teams-approval-process)
+  -->
   - [Playbooks](#playbooks)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -45,17 +47,17 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 3.0.0 | 08/2024 | Added Approval Request process and ability to work with MS Teams Workflows. |
+| 2.2.0 | 10/2024 | New function to support MS Teams Workflows |
 | 2.1.0 | 05/2023 | Add playbooks and removed workflows|
 | 2.0.1 | 12/2022 | Bug fix in workflows for MS Teams: Enable Teams for Groups and MS Teams: Read messages |
 | 2.0.0 | 12/2022 | Added support for creating and deleting MS Groups, Teams and Channels |
 | 1.0.0 | 10/2019 | Post Incident/task information to MS Teams |
 
-### 3.0.0 Changes
-<!-->
+### 2.2.0 Changes
+<!--
 In v3.0, an approval request process has been added to make requests for process changes. Added is a datatable to track approval request with a poller to review changes in MS Teams based on approval or rejection replies. See [V3.0 Changes for poller](#v30-changes-for-poller) for additional changes needed to the app.config file to enable this capability.
 -->
-v3.0 supports MS Teams Workflows and Adaptive Cards. See the section [Setting up Workflows](#ms-teams-workflows) for more information needed to configure this capability.
+v2.2.0 supports MS Teams Workflows and Adaptive Cards. See the section [Setting up Workflows](#ms-teams-workflows) for more information needed to configure this capability.
 
 ### 2.1.0 Changes
 In v2.1, the existing rules and workflows have been replaced with playbooks.
@@ -291,12 +293,12 @@ The following table provides the settings you need to configure the app. These s
 | **secret_value** | Yes | oCN****************** | Certificate & secrets -> `Secret Value` |
 | **refresh_token** | Optional | eyxn****************** | Required only for delegated permissions |
 | **<channel_name>** | Optional | ****.webhook.office.com/webhookb2/ | Webhook URL for a channel |
-| **selftest** | Optional | https://teams.microsoft.com/l/channel/xxx | Webhook URL for channel connectors to test posting of messages.  **This capability is deprecated and selftest_workflows should be used starting with V3.0** |
+| **selftest** | Optional | https://teams.microsoft.com/l/channel/xxx | Webhook URL for channel connectors to test posting of messages.  **This capability is deprecated and selftest_workflows should be used starting with V2.2** |
 | **selftest_workflows** | Optional | https://azure.com/workflows/xxx | Webhook URL for Teams Workflows to test posting of messages. |
 | ***<webhook label>** | Optional | https://azure.com/workflows/xxx | Additional webhook URLs. Reference the `webhook label` used when post messaging via the functions which use the `teams_channel` input field. |
 
 ### MS Teams Workflows
-In V3.0, messages can be sent via the MS Teams Workflows capability. Although a powerful way to set up complex capabilities, the basic enablement can be performed via these steps:
+In V2.2, messages can be sent via the MS Teams Workflows capability. Although a powerful way to set up complex capabilities, the basic enablement can be performed via these steps:
 
 1. Within the MS Teams app (either Windows or Mac), select the Workflows app
 ![screenshot: Workflows app](./doc/screenshots/workflows_app.png)
@@ -309,9 +311,9 @@ In V3.0, messages can be sent via the MS Teams Workflows capability. Although a 
 The webhook request step contains the URL required to send Adaptive Cards to a teams channel. 
 Copy this value and add it your app.config settings using a label of your choosing. This label will then be referred to in any message sent to the MS Teams channel via this Workflow.
 
+<!--
 ![screenshot: Approval Playbook](./doc/screenshots/approval_playbook.png)
 
-<!--
 #### V3.0 Changes for poller
 If running the poller for approval requests, a new app.config section has been added, `fn_teams_approval_process`. If the `poller_interval` is non-zero, then the poller will 
 execute, looking for pending approvals. 
@@ -455,23 +457,16 @@ inputs.teams_channel = playbook.inputs.teams_channel
 <p>
 
 ```python
-import time
-results = playbook.functions.results.ms_teams_post_result
+results = playbook.functions.results.post_message_workflow_results
 
-if results["success"]:
-  #
-  row = incident.addRow("msteams_approval_process")
-  row["date"] = int(time.time()*1000)
-  row["status"] = "Pending"
-  row["channel"] = playbook.inputs.teams_channel
-  row["expiration"] = playbook.inputs.approval_expiration
-  row["message"] =playbook.inputs.approval_message
-  row["soar_message_id"] = playbook.properties.soar_message_id.message_id
-  row["group"] = playbook.inputs.teams_group
-  row["task_id"] = task.id
-  row["task_name"] = task.name
+if not results.get("success"):
+  text = f"Unable to Post Task Information to channel: {playbook.inputs.teams_channel}"
+  fail_reason = results.get("reason")
+  if fail_reason:
+    text = f"{text}:\n\tFailure reason: {fail_reason}"
+  incident.addNote(helper.createRichText(text))
 else:
-  incident.addNote(f"MS Teams approval post to channel {playbook.inputs.teams_channel} failed with: {results.reason}")
+  incident.addNote(f"Successfully queued workflow message to channel: {playbook.inputs.teams_channel}.")
 ```
 
 </p>
@@ -1773,8 +1768,11 @@ incident.addNote(note)
 | MS Teams: Post Task Information (PB) | None | Manual | task | `enabled` | `-` | 
 | MS Teams: Read Channel Messages From task (PB) | None | Manual | task | `enabled` | `-` | 
 | MS Teams: Read Channel Messages (PB) | None | Manual | incident | `enabled` | `-` | 
+
+<!--
 | MS Teams: Send Approval Request | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | incident | `enabled` | `-` | 
 | MS Teams: Send Approval Request for Tasks | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | task | `enabled` | `-` | 
+-->
 
 ---
 <!--
