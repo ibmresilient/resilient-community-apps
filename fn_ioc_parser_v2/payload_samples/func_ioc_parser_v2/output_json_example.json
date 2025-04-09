@@ -1,0 +1,255 @@
+{
+  "attachment_file_name": "search_for_py2_export_res.txt",
+  "iocs": [
+    {
+      "type": "uri",
+      "value": "customize.py",
+      "count": 48
+    },
+    {
+      "type": "uri",
+      "value": "Phish.AI",
+      "count": 2
+    },
+    {
+      "type": "uri",
+      "value": "urlscan.io",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "/dev/search_for_py2_export_res.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "HTML2PDF\\t\\n\\n\\n./fn_whois/fn_whois/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "\\n\\n\\n./fn_anomali_staxx/fn_anomali_staxx/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Import\\n\\n\\n./fn_cisco_enforcement/fn_cisco_enforcement/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Task\\t\\n\\n\\n./fn_thug/fn_thug/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "\\n\\n\\n./fn_twilio/fn_twilio/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Pastebin\\n\\n\\n./fn_spamhaus_query/fn_spamhaus_query/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Query\\n\\n\\n./fn_shodan/fn_shodan/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Maker\\n\\n\\n./fn_cloud_foundry/fn_cloud_foundry/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Application\\n\\n\\n./fn_digital_shadows_search/fn_digital_shadows_search/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Search\\n\\n\\n./fn_threatminer/fn_threatminer/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Subdomains\\n\\n\\n./fn_twitter_most_popular/fn_twitter_most_popular/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "\\n\\n\\n./fn_pulsedive/fn_pulsedive/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "ID\\n\\n\\n./fn_cb_protection/fn_cb_protection/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Request\\n\\n\\n./fn_google_maps_directions/fn_google_maps_directions/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Directions\\n\\n\\n./fn_icdx/fn_icdx/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Event\\n\\n\\n./fn_mxtoolbox/fn_mxtoolbox/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "query\\n\\n\\n./fn_url_to_dns/fn_url_to_dns/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "DNS\\n\\n\\n./fn_grr_search/fn_grr_search/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "URL\\n\\n\\n./fn_ipinfo/fn_ipinfo/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "IpInfo\\n\\n\\n./fn_apility/fn_apility/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "filefeed/data_feeder_plugins/filefeed/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "[Artifact]\\n\\n\\n./fn_alienvault_otx/fn_alienvault_otx/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "HTML\\n\\n\\n./fn_secureworks_ctp/fn_secureworks_ctp/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Ticket\\n\\n\\n./fn_mcafee_atd/fn_mcafee_atd/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Lookup\\n\\n\\n./fn_proofpoint_trap/fn_proofpoint_trap/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Member\\n\\n\\n./fn_crowdstrike_falcon/fn_crowdstrike_falcon/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "deprecated\\n./fn_machine_learning/fn_machine_learning/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "ml_predict\\n\\n\\n./fn_ioc_parser_v2/fn_ioc_parser_v2/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "\\n\\n\\n./fn_mcafee_opendxl/fn_mcafee_opendxl/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "\\n\\n\\n./fn_cve_search/fn_cve_search/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Browse\\n\\n\\n./fn_log_capture/fn_log_capture/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "deprecated\\n./older/fn_res_to_icd/fn_res_to_icd/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "deprecated\\n./older/fn_bluecoat_site_review/fn_bluecoat_site_review/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "deprecated\\n./older/fn_risk_fabric/fn_risk_fabric/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "deprecated\\n./older/fn_ldap_search/fn_ldap_search/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "DB\\n\\n\\n./fn_urlscanio/fn_urlscanio/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "urlscan.io\\n\\n\\n./fn_mcafee_esm/fn_mcafee_esm/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "URL\\n\\n\\n./fn_query_tor_network/fn_query_tor_network/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Network\\n\\n\\n./fn_hibp/fn_hibp/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "ThreatLog\\n\\n\\n./fn_machine_learning_nlp/fn_machine_learning_nlp/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "search\\n\\n\\n./fn_google_cloud_functions/fn_google_cloud_functions/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Commands\\n\\n\\n./fn_docker/fn_docker/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "deprecated\\n./fn_stix_shifter_wrapper/build/lib/fn_stix_shifter_wrapper/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Query\\n\\n\\n./fn_floss/fn_floss/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Input\\n\\n\\n./fn_geocoding/fn_geocoding/util/customize.py",
+      "count": 1
+    },
+    {
+      "type": "filename",
+      "value": "Address\\n\\n\\n./fn_email_header_validation/fn_email_header_validation/util/customize.py",
+      "count": 1
+    }
+  ]
+}
