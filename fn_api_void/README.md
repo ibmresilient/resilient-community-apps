@@ -513,7 +513,6 @@ else:
 
 
 
-
 ## Rules
 | Rule Name | Object | Workflow Triggered | Condition |
 | --------- | ------ | ------------------ | ---------- |
