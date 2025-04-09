@@ -6,7 +6,7 @@
 <link rel="search" title="Search" href="../../search.html" />
 
     <link rel="shortcut icon" href="../../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>Query CSV Files From Resilient - QRadar SOAR Apps</title>
+        <title>TOR - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -398,35 +398,48 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="query-csv-files-from-resilient">
-<h1>Query CSV Files From Resilient<a class="headerlink" href="#query-csv-files-from-resilient" title="Link to this heading">¶</a></h1>
-<p>Use Case:  Search a CSV file for rows that match a column value, or a regular expression.</p>
-<p>This integration can be run on the Resilient appliance or anywhere else.<br />
-The code is written in Python, and can be extended for your own purposes.</p>
-<p>Requires: Python version 2.7.9+ or 3.4+<br />
-Requires: rc-query-runner</p>
-<section id="resilient-server-setup">
-<h2>Resilient server setup<a class="headerlink" href="#resilient-server-setup" title="Link to this heading">¶</a></h2>
-<p>You must configure the following customizations to the Resilient server.
-Open the Administrator Settings –&gt; Actions, then:</p>
-<section id="message-destination">
-<h3>Message Destination<a class="headerlink" href="#message-destination" title="Link to this heading">¶</a></h3>
-<p>Create a Queue message destination with programmatic name <code class="docutils literal notranslate"><span class="pre">query_csv</span></code>.
-Select Yes for “expect acknowledgement”, and add the integration user
-to its users list.</p>
+          <section id="tor">
+<h1>TOR<a class="headerlink" href="#tor" title="Link to this heading">¶</a></h1>
+<p>The Query TOR Network API is a RESTful Web service allowing TOR Customers to query IP Addresses and Host names to search against TOR network Exit Nodes. This function utilizes this API to determine if a Resilient artifact is part of the TOR network.</p>
+<section id="using-tor-function">
+<h2>Using TOR Function<a class="headerlink" href="#using-tor-function" title="Link to this heading">¶</a></h2>
+<p>This package contains one rule and one workflow as an example.
+Below are details of the input and outputs of the API.</p>
+<p>Input : The function takes an IP Address or DNS Name contained as an artifact value
+Output : Returns the json query results through the variable ‘results’, which contains the following:</p>
+<ol class="arabic simple">
+<li><p>status – (if object found in TOR Network it will be ‘success’ or else ‘failed’)</p></li>
+<li><p>value  – (a Boolean value ‘1’ for success and ‘0’ for failures)</p></li>
+<li><p>data   – (a complete json data object from the result)</p></li>
+</ol>
 </section>
-<section id="rules">
-<h3>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h3>
-<p>Create automatic or manual rules with names corresponding to your query definition files.</p>
+<section id="resilient-configuration">
+<h2>Resilient Configuration<a class="headerlink" href="#resilient-configuration" title="Link to this heading">¶</a></h2>
+<p>Follow the steps to add a TOR section to your app.config file by running resilient-circuits config [-u | -c] and updating the fields:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> [fn_query_tor_network]
+ base_url = https://onionoo.torproject.org/details
+ flag = Exit      --(The Flag can be &#39;Running&#39;,&#39;Exit&#39; for more information on flag settings - https://metrics.torproject.org/onionoo.html)
+ data_fields = exit_addresses,or_addresses,host_name   -- (The data fields should be comma separated and no space should be given in between each fields)
+</pre></div>
+</div>
 </section>
-</section>
-<section id="tests">
-<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading">¶</a></h2>
-<p>Tests are <strong>destructive</strong>.  They remove all configuration (message destinations, rules, etc) and replace with the required test configuration.
-These tests should <em>ONLY</em> be run against an organization with nothing you want to save!</p>
-<p>Install the <code class="docutils literal notranslate"><span class="pre">pytest_resilient_circuits</span></code> package.</p>
-<p>To run the included tests, cd to the parent directory of your project, then:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">pytest</span> <span class="o">-</span><span class="n">s</span> <span class="o">--</span><span class="n">resilient_email</span> <span class="o">&lt;</span><span class="n">resilient</span> <span class="n">account</span> <span class="n">email</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">resilient_host</span> <span class="o">&lt;</span><span class="n">IP</span> <span class="ow">or</span> <span class="n">hostname</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">resilient_password</span> <span class="o">&lt;</span><span class="n">resilient</span> <span class="n">account</span> <span class="n">password</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">resilient_org</span> <span class="o">&lt;</span><span class="n">org</span> <span class="n">name</span><span class="o">&gt;</span>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>To install in “development mode”</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install -e ./fn_query_tor_network/
+</pre></div>
+</div>
+<p>After installation, the package will be loaded by <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">run</span></code>.</p>
+<p>To uninstall,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip uninstall fn_query_tor_network
+</pre></div>
+</div>
+<p>To package for distribution,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python ./fn_query_tor_network/setup.py sdist
+</pre></div>
+</div>
+<p>The resulting .tar.gz file can be installed using</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install &lt;filename&gt;.tar.gz
 </pre></div>
 </div>
 </section>
@@ -469,13 +482,10 @@ These tests should <em>ONLY</em> be run against an organization with nothing you
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Query CSV Files From Resilient</a><ul>
-<li><a class="reference internal" href="#resilient-server-setup">Resilient server setup</a><ul>
-<li><a class="reference internal" href="#message-destination">Message Destination</a></li>
-<li><a class="reference internal" href="#rules">Rules</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#tests">Tests</a></li>
+<li><a class="reference internal" href="#">TOR</a><ul>
+<li><a class="reference internal" href="#using-tor-function">Using TOR Function</a></li>
+<li><a class="reference internal" href="#resilient-configuration">Resilient Configuration</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
 </ul>
 </li>
 </ul>
