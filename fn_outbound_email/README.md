@@ -27,20 +27,21 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v2.1.2 | 05/2024 | Bug fix for imported packages |
-| v2.1.1 | 03/2024 | Bug fix for external paths to templates when running on windows integration server |
-| v2.1.0 | 5/2023 | Added message signing and encryption capabilities. Replaced workflows with playbooks |
-| v2.0.2 | 12/2022 | Bug fix when specifying your own default template |
-| v2.0.1 | 10/2022 | Bug fix |
-| v2.0.0 | 10/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
-| v1.3.1 | 1/2022 | Bug fixes for get_datatable function in template_helper.py |
-| v1.3.0 | 7/2021 | Username in app.config does not need to be an email |
-| v1.2.1 | 5/2021 | Bug fix for python 2 |
-| v1.2.0 | 4/2021 | Added capability for task attachments |
-| v1.1.1 | 2/2021 | Bug fixes associated with sending attachments |
-| v1.1.0 | 10/2020 | Bug fixes and send all or specific attachments |
-| v1.0.9 | 5/2020 | Edge Gateway (formerly App Host) compatibility |
-| v1.0.8 | 4/2020 | Initial Release |
+| 2.1.3 | 04/2025 |Converted example workflows to python3 |
+| 2.1.2 | 05/2024 | Bug fix for imported packages |
+| 2.1.1 | 03/2024 | Bug fix for external paths to templates when running on windows integration server |
+| 2.1.0 | 05/2023 | Added message signing and encryption capabilities. Replaced workflows with playbooks |
+| 2.0.2 | 12/2022 | Bug fix when specifying your own default template |
+| 2.0.1 | 10/2022 | Bug fix |
+| 2.0.0 | 10/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
+| 1.3.1 | 01/2022 | Bug fixes for get_datatable function in template_helper.py |
+| 1.3.0 | 07/2021 | Username in app.config does not need to be an email |
+| 1.2.1 | 05/2021 | Bug fix for python 2 |
+| 1.2.0 | 04/2021 | Added capability for task attachments |
+| 1.1.1 | 02/2021 | Bug fixes associated with sending attachments |
+| 1.1.0 | 10/2020 | Bug fixes and send all or specific attachments |
+| 1.0.9 | 05/2020 | Edge Gateway (formerly App Host) compatibility |
+| 1.0.8 | 04/2020 | Initial Release |
 
 ### 2.1 Changes
 In v2.1, the existing rules and workflows have been replaced with playbooks.
@@ -111,11 +112,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `50.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `50.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -147,11 +148,11 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does not** support a proxy server.
 
 ### Python Environment
-Python 3.6, 3.9, and 3.11 are supported.
+Python 3.9, and 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * Jinja2>=2.9.6
-* resilient_circuits>=50.0.0
-* resilient_lib>=50.0.0
+* resilient_circuits>=51.0.0
+* resilient_lib>=51.0.0
 * six
 * BeautifulSoup
 * python-smail
@@ -388,7 +389,7 @@ inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
 inputs.mail_from = "changeme@resilientsystems.com"
-inputs.mail_subject = u"[{0}] {1}".format(incident.id, incident.name)
+inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name)
 
 inputs.mail_body_html = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
 {% macro get_row(label,field_name) -%}
@@ -432,11 +433,11 @@ inputs.mail_body_html = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
 
 ```python
 if results.success:
-  noteText = u"""Email Sent if mail server is valid/authenticated\n
+  noteText = """Email Sent if mail server is valid/authenticated\n
   <br>From: {0}<br> To: {1}<br> CC: {2}<br> BCC: {3}<br> Subject: {4} <br>
-  Body: {5} <br>""".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text)
+  Body: {5} <br>""".format(results.content.inputs[0].strip("\"[]"), results.content.inputs[1].strip("\"[]"), results.content.inputs[2].strip("\"[]"), results.content.inputs[3].strip("\"[]"), results.content.inputs[4].strip("\""), results.content.text)
 else:
-  noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
+  noteText = "Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("\"[]"), results.content.inputs[1].strip("\"[]"))
 incident.addNote(helper.createRichText(noteText))
 ```
 

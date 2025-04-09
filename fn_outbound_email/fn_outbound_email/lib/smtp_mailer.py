@@ -189,7 +189,6 @@ class SendSMTPEmail(ResilientComponent):
                 LOG.info("Building SSL connection object")
                 smtp_connection = SMTP_SSL(host=self.smtp_server,
                                            port=self.smtp_port,
-                                           certfile=self.smtp_cafile,
                                            context=self.get_smtp_ssl_context(),
                                            timeout=self.smtp_conn_timeout)
             else:

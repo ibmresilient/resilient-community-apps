@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1710964320178,
+  "export_date": 1744033773348,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/mail_attachments",
       "hide_notification": false,
-      "id": 4976,
+      "id": 3528,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/mail_importance",
       "hide_notification": false,
-      "id": 4977,
+      "id": 3529,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -73,7 +73,7 @@
           "label": "high",
           "properties": null,
           "uuid": "28a6da02-a916-463a-baec-26b10471dd72",
-          "value": 967
+          "value": 3675
         },
         {
           "default": true,
@@ -82,7 +82,7 @@
           "label": "normal",
           "properties": null,
           "uuid": "5df194d5-7f42-494b-8bf0-219d6ffc56ee",
-          "value": 968
+          "value": 3676
         },
         {
           "default": false,
@@ -91,7 +91,7 @@
           "label": "low",
           "properties": null,
           "uuid": "b1bc1c8e-2a6b-4127-9c90-d829086c6293",
-          "value": 969
+          "value": 3677
         }
       ]
     },
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/mail_to",
       "hide_notification": false,
-      "id": 4978,
+      "id": 3530,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/mail_body",
       "hide_notification": false,
-      "id": 4979,
+      "id": 3531,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -163,7 +163,7 @@
       "deprecated": false,
       "export_key": "__function/mail_encryption_recipients",
       "hide_notification": false,
-      "id": 4980,
+      "id": 3532,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -192,7 +192,7 @@
       "deprecated": false,
       "export_key": "__function/mail_subject",
       "hide_notification": false,
-      "id": 4981,
+      "id": 3533,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -221,7 +221,7 @@
       "deprecated": false,
       "export_key": "__function/mail_template_label",
       "hide_notification": false,
-      "id": 4982,
+      "id": 3534,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -250,7 +250,7 @@
       "deprecated": false,
       "export_key": "__function/mail_from",
       "hide_notification": false,
-      "id": 4983,
+      "id": 3535,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -279,7 +279,7 @@
       "deprecated": false,
       "export_key": "__function/mail_merge_body",
       "hide_notification": false,
-      "id": 4984,
+      "id": 3536,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -308,7 +308,7 @@
       "deprecated": false,
       "export_key": "__function/mail_body_text",
       "hide_notification": false,
-      "id": 4985,
+      "id": 3537,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -337,7 +337,7 @@
       "deprecated": false,
       "export_key": "__function/mail_incident_id",
       "hide_notification": false,
-      "id": 4986,
+      "id": 3538,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -366,7 +366,7 @@
       "deprecated": false,
       "export_key": "__function/mail_in_reply_to",
       "hide_notification": false,
-      "id": 4987,
+      "id": 3539,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -395,7 +395,7 @@
       "deprecated": false,
       "export_key": "__function/mail_cc",
       "hide_notification": false,
-      "id": 4988,
+      "id": 3540,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -424,7 +424,7 @@
       "deprecated": false,
       "export_key": "__function/mail_body_html",
       "hide_notification": false,
-      "id": 4989,
+      "id": 3541,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -453,7 +453,7 @@
       "deprecated": false,
       "export_key": "__function/mail_inline_template",
       "hide_notification": false,
-      "id": 4990,
+      "id": 3542,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -482,7 +482,7 @@
       "deprecated": false,
       "export_key": "__function/mail_bcc",
       "hide_notification": false,
-      "id": 4991,
+      "id": 3543,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -511,7 +511,7 @@
       "deprecated": false,
       "export_key": "__function/mail_message_id",
       "hide_notification": false,
-      "id": 4992,
+      "id": 3544,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -540,7 +540,7 @@
       "deprecated": false,
       "export_key": "incident/email_message_id",
       "hide_notification": false,
-      "id": 4962,
+      "id": 3515,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -573,7 +573,7 @@
   ],
   "functions": [
     {
-      "created_date": 1710960499608,
+      "created_date": 1744019720594,
       "description": {
         "content": "Send a plain text or HTML-formatted email with Resilient Incident details in the email body as well as incident attachments added to this outgoing email.",
         "format": "text"
@@ -581,14 +581,14 @@
       "destination_handle": "email_outbound",
       "display_name": "Outbound Email: Send Email",
       "export_key": "send_email",
-      "id": 40,
+      "id": 347,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960499608,
+      "last_modified_time": 1744019720594,
       "name": "send_email",
       "output_description": {
         "content": null,
@@ -676,7 +676,7 @@
       "workflows": []
     },
     {
-      "created_date": 1710960499670,
+      "created_date": 1744019720718,
       "description": {
         "content": "Send a plain text or HTML-formatted email with SOAR incident details in the email body. Additional capability exists to refer to pre-defined templates as well add contextual email headers.",
         "format": "text"
@@ -684,14 +684,14 @@
       "destination_handle": "email_outbound",
       "display_name": "Outbound Email: Send Email 2",
       "export_key": "send_email2",
-      "id": 41,
+      "id": 348,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960499670,
+      "last_modified_time": 1744019720718,
       "name": "send_email2",
       "output_description": {
         "content": null,
@@ -829,13 +829,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 9,
+  "id": 129,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1710964318581,
+      "create_date": 1744033770942,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -844,7 +844,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1710964318581,
+      "update_date": 1744033770942,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -852,7 +852,9 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "4637db8f-91a7-4590-9a5d-ae88f99d5a70"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "email_outbound",
@@ -860,7 +862,7 @@
       "programmatic_name": "email_outbound",
       "tags": [],
       "users": [
-        "b@example.com"
+        "shresh@example.com"
       ],
       "uuid": "42f63ea2-5572-42e7-9bff-01a4e38083a9"
     }
@@ -875,11 +877,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bceb0dbe_4859_44fd_ac85_442853562cdb\" isExecutable=\"true\" name=\"playbook_bceb0dbe_4859_44fd_ac85_442853562cdb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_13klqhn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email 2\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bb874b84-b405-40ba-abed-5f7c594f2a99\"\u003e{\"inputs\":{\"9f9dde5a-65a6-4e39-81f5-53242747b03b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"5df194d5-7f42-494b-8bf0-219d6ffc56ee\"}},\"e09789bf-057c-4914-9877-455fb11e3f4d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"fdbcda16-d6f2-48d1-86d7-804e25890bc1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a4bfd9f7-f924-4289-8bb2-fd2e3c577eb4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"124e74e9-a891-442a-b257-7d79b0eeed45\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"3864ba99-ae8c-4926-9b76-9e8e691696f5\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d343f80b-4760-4f4a-b492-bf85dfc29261\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c6b538ef-a2e0-49b9-abe3-4a45339db160\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"823bffa7-4f34-4eda-8ba2-7a714d236ad7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1f86c63b-9f1e-46e5-a865-66fff55a1af4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"dde2204d-ab55-4817-98de-2013158e7687\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"77ebe14e-2028-4f38-b66e-c3566fdf1425\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"09f822a2-50a3-4556-8af0-e86ad8b072ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e8fa561a-aea1-42f7-8b9e-4615ff4046fa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d0ad610c-53ad-4288-a506-c638df53b4d3\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"import hashlib\\nimport time\\nfrom datetime import datetime\\n\\n# change this reflect a different message-id domain, as neeced\\nMESSAGE_ID_DOMAIN = \\\"qradarsoar.ibm.com\\\"\\n\\nNEW_LINE = \u0027\\\\n\u0027\\n\\nif playbook.inputs.get(\u0027mail_message_id\u0027):\\n  # generate a message-id\\n  seed_value = str(int(time.time()*1000))\\n  uuid_hash = hashlib.md5(seed_value.encode()).hexdigest()\\n  msg_id = \\\"{}-{}-{}-{}-{}\\\".format(uuid_hash[0:8], uuid_hash[8:12], uuid_hash[12:16], uuid_hash[16:20], uuid_hash[20:])\\n  inputs.mail_message_id = \\\"{}@{}\\\".format(msg_id, MESSAGE_ID_DOMAIN)\\n\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_body = playbook.inputs.mail_body.content if playbook.inputs.mail_body else None\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_to = row[\u0027from\u0027]\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_importance = playbook.inputs.mail_importance if playbook.inputs.mail_importance else None\\ninputs.mail_in_reply_to = row[\u0027message_id\u0027]\\ninputs.mail_incident_id = incident.id\\ninputs.mail_subject = \\\"re: {}\\\".format(row[\u0027subject\u0027])\\ninputs.mail_template_label = playbook.inputs.mail_template_select\\ninputs.mail_encryption_recipients = None\\n\\nif playbook.inputs.mail_merge_body:\\n    # Sent: Thursday, June 9, 2022, 01:03:54 PM EDT\\n    msg_sent = datetime.fromtimestamp(row[\u0027date_sent\u0027]/1000).strftime(\u0027%A, %B %d, %Y, %-I:%M:%S %p GMT\u0027)\\n    inputs.mail_merge_body = True\\n    original_email = f\\\"\\\"\\\"Sent: {msg_sent}\\n\u0026lt;br\u0026gt;From: {row[\u0027from\u0027]}\\n\u0026lt;br\u0026gt;{row[\u0027recipients\u0027].content}\\n\u0026lt;br\u0026gt;Subject: {row[\u0027subject\u0027]}\\n\u0026lt;br\u0026gt;\\n\u0026lt;br\u0026gt;\\n{row[\u0027body\u0027].content.replace(\\\"\u0026lt;br\u0026gt;\\\", \\\"\\\")}\\\"\\\"\\\"\\n  \\n    if inputs.mail_body:\\n        inputs.mail_body = f\\\"{inputs.mail_body}\u0026lt;hr\u0026gt;\\\"\\n    inputs.mail_body = f\\\"{inputs.mail_body if inputs.mail_body else \u0027\u0027}\u0026lt;div style=\u0027border-left: 2px solid gray\u0027\u0026gt;\u0026lt;div style=\u0027white-space: nowrap;margin-left: 5px\u0027\u0026gt;{original_email}\u0026lt;/div\u0026gt;\u0026lt;/div\u0026gt;\\\"\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13klqhn\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h146as\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1h146as\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zk3xv2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0zk3xv2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_13klqhn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1h146as\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0zk3xv2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bceb0dbe_4859_44fd_ac85_442853562cdb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zk3xv2\" id=\"Flow_0zk3xv2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h146as\" id=\"Flow_1h146as_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13klqhn\" id=\"Flow_13klqhn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.765625\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1710960500063,
+      "create_date": 1744019721544,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb",
@@ -905,7 +907,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_attachments",
             "hide_notification": false,
-            "id": 4993,
+            "id": 3545,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -920,7 +922,7 @@
             "templates": [],
             "text": "Case Attachments",
             "tooltip": "comma separated list of case attachments or \u0027*\u0027 for all",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "e6f26df8-83d2-464b-9e46-247eadb5af99",
             "values": []
           },
@@ -934,7 +936,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_body",
             "hide_notification": false,
-            "id": 4994,
+            "id": 3546,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -949,7 +951,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "824c44aa-5645-4ea9-ada6-bd10c33b0712",
             "values": []
           },
@@ -963,7 +965,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_cc",
             "hide_notification": false,
-            "id": 4995,
+            "id": 3547,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -978,7 +980,7 @@
             "templates": [],
             "text": "CC",
             "tooltip": "comma separated list of recipients",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "4d8f4295-61f8-42a7-9d60-098ca9633cea",
             "values": []
           },
@@ -992,7 +994,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_from",
             "hide_notification": false,
-            "id": 4996,
+            "id": 3548,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1007,7 +1009,7 @@
             "templates": [],
             "text": "From",
             "tooltip": "default is app.config from_email_address",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "7c66f64d-182a-4d71-9c55-cc9fd4248d45",
             "values": []
           },
@@ -1021,7 +1023,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_importance",
             "hide_notification": false,
-            "id": 4997,
+            "id": 3549,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1036,7 +1038,7 @@
             "templates": [],
             "text": "Importance",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "9b395060-5ede-4668-8032-9eb959ce2b97",
             "values": [
               {
@@ -1046,7 +1048,7 @@
                 "label": "low",
                 "properties": null,
                 "uuid": "2e07252a-39df-4cb8-9840-0d40bb23a0e0",
-                "value": 970
+                "value": 3678
               },
               {
                 "default": true,
@@ -1055,7 +1057,7 @@
                 "label": "normal",
                 "properties": null,
                 "uuid": "76fb7f9a-2235-491a-a7c2-0c77be2743ad",
-                "value": 971
+                "value": 3679
               },
               {
                 "default": false,
@@ -1064,7 +1066,7 @@
                 "label": "high",
                 "properties": null,
                 "uuid": "bc120ef1-80d7-4200-b68a-994189c03e65",
-                "value": 972
+                "value": 3680
               }
             ]
           },
@@ -1078,7 +1080,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_merge_body",
             "hide_notification": false,
-            "id": 4998,
+            "id": 3550,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1093,7 +1095,7 @@
             "templates": [],
             "text": "Include Original Email",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "3003c266-144d-4a79-aed7-b42c2ba46a83",
             "values": []
           },
@@ -1107,7 +1109,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_message_id",
             "hide_notification": false,
-            "id": 4999,
+            "id": 3551,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1122,7 +1124,7 @@
             "templates": [],
             "text": "Generate message-id",
             "tooltip": "generate a message id for this message",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "6b075e79-a433-466d-aa70-f6ea96256006",
             "values": []
           },
@@ -1136,7 +1138,7 @@
             "deprecated": false,
             "export_key": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb/mail_template_select",
             "hide_notification": false,
-            "id": 5000,
+            "id": 3552,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1151,7 +1153,7 @@
             "templates": [],
             "text": "Use Template",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1252,
             "uuid": "d3f16370-75ed-4c95-8731-cddcaaf733ff",
             "values": [
               {
@@ -1161,7 +1163,7 @@
                 "label": "\u003cadd template name from app.config\u003e",
                 "properties": null,
                 "uuid": "a96bd565-70dd-422d-9b09-9fd09808e418",
-                "value": 973
+                "value": 3681
               }
             ]
           }
@@ -1186,16 +1188,16 @@
         "uuid": "7d7fd259-5170-4cbb-b37c-9bec4eb904c4"
       },
       "has_logical_errors": false,
-      "id": 43,
+      "id": 222,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960500713,
+      "last_modified_time": 1744019722845,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1282,7 +1284,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_bceb0dbe-4859-44fd-ac85-442853562cdb",
-        "id": 43,
+        "id": 320,
         "name": "playbook_bceb0dbe_4859_44fd_ac85_442853562cdb",
         "type": "playbook",
         "uuid": "2b798dd5-564e-4ec5-bb83-b17123a10c9c"
@@ -1295,14 +1297,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29\" isExecutable=\"true\" name=\"playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0536wln\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c80cd55d-6ab8-4673-8273-1b8a0bf3b456\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_subject = u\\\"[{0}] {1}\\\".format(incident.id, incident.name)\\n\\ninputs.mail_body_html = \\\"\\\"\\\"{% set NOT_FOUND = [\\\"Not Found!\\\",\\\"-\\\",\\\"None\\\",None] %}\\n{% macro get_row(label,field_name) -%}\\n\\t{% set value = template_helper.get_incident_value(incident,field_name) %}\\n\\t{% set style = \\\"font-family: Calibri; color: rgb(31,73,125)\\\" %}\\n    {% if value and value not in NOT_FOUND and not value.startswith(\u0027-\u0027) %}\\n    \u0026lt;tr\u0026gt;\\n        \u0026lt;td width=\\\"100\\\" style=\\\"{{style}}; font-weight:bold\\\"\u0026gt;{{ label }}\u0026lt;/td\u0026gt;\\n        \u0026lt;td style=\\\"{{style}}\\\"\u0026gt;{{ value | striptags }}\u0026lt;/td\u0026gt;\\n    \u0026lt;/tr\u0026gt;\\n    {% endif %}\\n{%- endmacro %}\\n\u0026lt;table width=\\\"100%\\\" \u0026gt;\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT DETAILS\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n    {{ get_row(\u0027Severity:\u0027,\u0027severity_code\u0027) }}\\n    {{ get_row(\u0027Status:\u0027,\u0027plan_status\u0027) }}\u0026lt;br\u0026gt;\\n    {{ get_row(\u0027Created:\u0027,\u0027create_date\u0027) }}\u0026lt;br\u0026gt;\\n    {{ get_row(\u0027Category:\u0027,\u0027incident_type_ids\u0027) }}\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;br\u0026gt;\u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT DESCRIPTION\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n    {{ get_row(\u0027Description:\u0027,\u0027description\u0027) }}\\n\u0026lt;/tr\u0026gt;\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT LINK\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        {% set inc_url = template_helper.generate_incident_url(incident.id) %}\\n        \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{ inc_url }}\u0027\u0026gt;{{ incident.id }}: {{ incident.name }}\u0026lt;/a\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n\u0026lt;/table\u0026gt;\\n\u0026lt;br\u0026gt;\\n\\\"\\\"\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0536wln\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ls2nk4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0536wln\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ls2nk4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fx1d6i\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ls2nk4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fx1d6i\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fx1d6i\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fx1d6i\" id=\"Flow_1fx1d6i_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ls2nk4\" id=\"Flow_0ls2nk4_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0536wln\" id=\"Flow_0536wln_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29\" isExecutable=\"true\" name=\"playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0536wln\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c80cd55d-6ab8-4673-8273-1b8a0bf3b456\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_subject = \\\"[{0}] {1}\\\".format(incident.id, incident.name)\\n\\ninputs.mail_body_html = \\\"\\\"\\\"{% set NOT_FOUND = [\\\"Not Found!\\\",\\\"-\\\",\\\"None\\\",None] %}\\n{% macro get_row(label,field_name) -%}\\n\\t{% set value = template_helper.get_incident_value(incident,field_name) %}\\n\\t{% set style = \\\"font-family: Calibri; color: rgb(31,73,125)\\\" %}\\n    {% if value and value not in NOT_FOUND and not value.startswith(\u0027-\u0027) %}\\n    \u0026lt;tr\u0026gt;\\n        \u0026lt;td width=\\\"100\\\" style=\\\"{{style}}; font-weight:bold\\\"\u0026gt;{{ label }}\u0026lt;/td\u0026gt;\\n        \u0026lt;td style=\\\"{{style}}\\\"\u0026gt;{{ value | striptags }}\u0026lt;/td\u0026gt;\\n    \u0026lt;/tr\u0026gt;\\n    {% endif %}\\n{%- endmacro %}\\n\u0026lt;table width=\\\"100%\\\" \u0026gt;\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT DETAILS\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n    {{ get_row(\u0027Severity:\u0027,\u0027severity_code\u0027) }}\\n    {{ get_row(\u0027Status:\u0027,\u0027plan_status\u0027) }}\u0026lt;br\u0026gt;\\n    {{ get_row(\u0027Created:\u0027,\u0027create_date\u0027) }}\u0026lt;br\u0026gt;\\n    {{ get_row(\u0027Category:\u0027,\u0027incident_type_ids\u0027) }}\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;br\u0026gt;\u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT DESCRIPTION\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n    {{ get_row(\u0027Description:\u0027,\u0027description\u0027) }}\\n\u0026lt;/tr\u0026gt;\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT LINK\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        {% set inc_url = template_helper.generate_incident_url(incident.id) %}\\n        \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{ inc_url }}\u0027\u0026gt;{{ incident.id }}: {{ incident.name }}\u0026lt;/a\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n\u0026lt;/table\u0026gt;\\n\u0026lt;br\u0026gt;\\n\\\"\\\"\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0536wln\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ls2nk4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0536wln\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ls2nk4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fx1d6i\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ls2nk4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fx1d6i\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fx1d6i\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fx1d6i\" id=\"Flow_1fx1d6i_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ls2nk4\" id=\"Flow_0ls2nk4_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0536wln\" id=\"Flow_0536wln_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1710960500688,
+      "create_date": 1744019722806,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29",
@@ -1328,7 +1330,7 @@
             "deprecated": false,
             "export_key": "playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29/mail_attachments",
             "hide_notification": false,
-            "id": 5001,
+            "id": 3553,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1343,7 +1345,7 @@
             "templates": [],
             "text": "Attachments",
             "tooltip": "comma separated list of attachments for \u0027*\u0027 for all",
-            "type_id": 1057,
+            "type_id": 1253,
             "uuid": "577725db-e25d-4863-a238-37a3e169d0c5",
             "values": []
           },
@@ -1357,7 +1359,7 @@
             "deprecated": false,
             "export_key": "playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29/mail_cc",
             "hide_notification": false,
-            "id": 5002,
+            "id": 3554,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1372,7 +1374,7 @@
             "templates": [],
             "text": "CC",
             "tooltip": "comma separated list of recipients",
-            "type_id": 1057,
+            "type_id": 1253,
             "uuid": "175988f5-5cd2-4992-b4f7-9d9493ca4c5e",
             "values": []
           },
@@ -1386,7 +1388,7 @@
             "deprecated": false,
             "export_key": "playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29/mail_from",
             "hide_notification": false,
-            "id": 5003,
+            "id": 3555,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1401,7 +1403,7 @@
             "templates": [],
             "text": "From",
             "tooltip": "default is app.config from_email_address",
-            "type_id": 1057,
+            "type_id": 1253,
             "uuid": "8e146c4c-7b6a-4f48-b1f2-95f9a9d57925",
             "values": []
           },
@@ -1415,7 +1417,7 @@
             "deprecated": false,
             "export_key": "playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29/mail_to",
             "hide_notification": false,
-            "id": 5004,
+            "id": 3556,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1431,7 +1433,7 @@
             "templates": [],
             "text": "To",
             "tooltip": "",
-            "type_id": 1057,
+            "type_id": 1253,
             "uuid": "841c334a-39d5-4d51-bf8e-f99897f6af1c",
             "values": []
           }
@@ -1456,16 +1458,16 @@
         "uuid": "0ac345d4-1e5b-47c8-b498-81a837cd44a2"
       },
       "has_logical_errors": false,
-      "id": 44,
+      "id": 223,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960501132,
+      "last_modified_time": 1744020524724,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1512,7 +1514,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_105be3c5-e864-4c83-b6cf-021d5e5b0c29",
-        "id": 44,
+        "id": 321,
         "name": "playbook_105be3c5_e864_4c83_b6cf_021d5e5b0c29",
         "type": "playbook",
         "uuid": "a147bdf6-4705-4a5d-b022-9d02a6eb577d"
@@ -1520,7 +1522,7 @@
       "tags": [],
       "type": "default",
       "uuid": "105be3c5-e864-4c83-b6cf-021d5e5b0c29",
-      "version": 3
+      "version": 5
     },
     {
       "activation_type": "manual",
@@ -1528,11 +1530,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a\" isExecutable=\"true\" name=\"playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1q2oe63\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email 2\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bb874b84-b405-40ba-abed-5f7c594f2a99\"\u003e{\"inputs\":{\"9f9dde5a-65a6-4e39-81f5-53242747b03b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"5df194d5-7f42-494b-8bf0-219d6ffc56ee\"}},\"e09789bf-057c-4914-9877-455fb11e3f4d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"fdbcda16-d6f2-48d1-86d7-804e25890bc1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a4bfd9f7-f924-4289-8bb2-fd2e3c577eb4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"124e74e9-a891-442a-b257-7d79b0eeed45\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"3864ba99-ae8c-4926-9b76-9e8e691696f5\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d343f80b-4760-4f4a-b492-bf85dfc29261\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c6b538ef-a2e0-49b9-abe3-4a45339db160\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"823bffa7-4f34-4eda-8ba2-7a714d236ad7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1f86c63b-9f1e-46e5-a865-66fff55a1af4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"dde2204d-ab55-4817-98de-2013158e7687\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"77ebe14e-2028-4f38-b66e-c3566fdf1425\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"09f822a2-50a3-4556-8af0-e86ad8b072ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e8fa561a-aea1-42f7-8b9e-4615ff4046fa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d0ad610c-53ad-4288-a506-c638df53b4d3\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"import hashlib\\nimport time\\n\\nMESSAGE_ID_DOMAIN = \\\"qradarsoar.ibm.com\\\"\\n\\ninputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_subject = \\\"[{0}] {1}\\\".format(incident.id, incident.name) if not playbook.inputs.get(\u0027mail_subject\u0027) else playbook.inputs.mail_subject\\n\\nif playbook.inputs.get(\u0027mail_message_id\u0027):\\n  # generate a message-id\\n  seed_value = str(int(time.time()*1000))\\n  uuid_hash = hashlib.md5(seed_value.encode()).hexdigest()\\n  msg_id = \\\"{}-{}-{}-{}-{}\\\".format(uuid_hash[0:8], uuid_hash[8:12], uuid_hash[12:16], uuid_hash[16:20], uuid_hash[20:])\\n  inputs.mail_message_id = \\\"{}@{}\\\".format(msg_id, MESSAGE_ID_DOMAIN)\\n  \\nif playbook.inputs.get(\u0027mail_in_reply_to\u0027) and incident.properties.email_message_id:\\n  inputs.mail_in_reply_to = incident.properties.email_message_id\\n  \\nif playbook.inputs.get(\u0027mail_importance\u0027):\\n  inputs.mail_importance = playbook.inputs.mail_importance if playbook.inputs.mail_importance else None\\n\\nif playbook.inputs.get(\u0027mail_encryption_key\u0027):\\n  inputs.mail_encryption_recipients = playbook.inputs.mail_encryption_key.content\\n  \\nif playbook.inputs.get(\u0027mail_body\u0027) and playbook.inputs.get(\u0027mail_body\u0027).content:\\n  inputs.mail_body = playbook.inputs.mail_body.content\\nelif playbook.inputs.mail_template_select:\\n  inputs.mail_template_label = playbook.inputs.mail_template_select\\nelse:\\n  inputs.mail_inline_template = \\\"\\\"\\\"{% set NOT_FOUND = [\\\"Not Found!\\\",\\\"-\\\",\\\"None\\\",None] -%}\\n{% set style = \\\"font-family: Calibri; color: rgb(31,73,125)\\\" -%}\\n{% macro get_row(label, field_name) -%}\\n\\t{% set value = template_helper.get_incident_value(incident,field_name) -%}\\n    {% if value and value not in NOT_FOUND and not value.startswith(\u0027-\u0027) -%}\\n    \u0026lt;tr\u0026gt;\\n        \u0026lt;td width=\\\"100\\\" style=\\\"{{style}}; font-weight:bold\\\"\u0026gt;{{ label }}\u0026lt;/td\u0026gt;\\n        \u0026lt;td style=\\\"{{style}}\\\"\u0026gt;{{ value | striptags }}\u0026lt;/td\u0026gt;\\n    \u0026lt;/tr\u0026gt;\\n    {% endif -%}\\n{% endmacro -%}\\n\u0026lt;table width=\\\"100%\\\" \u0026gt;\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT DETAILS\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n    {{ get_row(\u0027Incident:\u0027,\u0027severity_code\u0027) }}\\n    {{ get_row(\u0027Severity:\u0027,\u0027severity_code\u0027) }}\\n    {{ get_row(\u0027Status:\u0027,\u0027plan_status\u0027) }}\u0026lt;br\u0026gt;\\n    {{ get_row(\u0027Created:\u0027,\u0027create_date\u0027) }}\u0026lt;br\u0026gt;\\n    {{ get_row(\u0027Category:\u0027,\u0027incident_type_ids\u0027) }}\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td colspan=\\\"2\\\"\u0026gt;\\n        \u0026lt;br\u0026gt;\u0026lt;h3 style=\\\"color: rgb(68,114,196)\\\"\u0026gt;INCIDENT DESCRIPTION\u0026lt;/h3\u0026gt;\\n        \u0026lt;hr size=\\\"1\\\" width=\\\"100%\\\" noshade style=\\\"color:#FFDF57\\\" align=\\\"center\\\"/\u0026gt;\\n    \u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n    {{ get_row(\u0027Description:\u0027,\u0027description\u0027) }}\\n\u0026lt;tr\u0026gt;\\n    \u0026lt;td width=\\\"100\\\" style=\\\"{{style}}; font-weight:bold\\\"\u0026gt;Incident link\u0026lt;/td\u0026gt;\\n    {% set inc_url = template_helper.generate_incident_url(incident.id) -%}\\n    \u0026lt;td style=\\\"{{style}}\\\"\u0026gt;\u0026lt;a target=\\\"_blank\\\" href=\\\"{{ inc_url }}\\\"\u0026gt;{{ incident.id }}: {{ incident.name }}\u0026lt;/a\u0026gt;\u0026lt;/td\u0026gt;\\n\u0026lt;/tr\u0026gt;\\n\u0026lt;/table\u0026gt;\\n\u0026lt;br\u0026gt;\\n\\\"\\\"\\\"\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q2oe63\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mmkb2k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1q2oe63\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mmkb2k\u003c/incoming\u003e\u003coutgoing\u003eFlow_0s3ktui\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0mmkb2k\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0s3ktui\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0s3ktui\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0s3ktui\" id=\"Flow_0s3ktui_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"389\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mmkb2k\" id=\"Flow_0mmkb2k_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"305\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q2oe63\" id=\"Flow_1q2oe63_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"305\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1710960501144,
+      "create_date": 1744019723729,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a",
@@ -1558,7 +1560,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_attachments",
             "hide_notification": false,
-            "id": 5005,
+            "id": 3557,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1573,7 +1575,7 @@
             "templates": [],
             "text": "Attachments",
             "tooltip": "comma separated list of attachments or \u0027*\u0027 for all",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "8a84550e-18d2-4751-b414-2342a6ab2d20",
             "values": []
           },
@@ -1587,7 +1589,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_body",
             "hide_notification": false,
-            "id": 5006,
+            "id": 3558,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -1602,7 +1604,7 @@
             "templates": [],
             "text": "Body",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "3a672cbd-7975-467a-a4ad-fe164ab8c513",
             "values": []
           },
@@ -1616,7 +1618,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_cc",
             "hide_notification": false,
-            "id": 5007,
+            "id": 3559,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1631,7 +1633,7 @@
             "templates": [],
             "text": "CC",
             "tooltip": "comma separated list of recipients",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "8d1c37fe-1be1-4485-a82c-6dad30739cd5",
             "values": []
           },
@@ -1645,7 +1647,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_encryption_key",
             "hide_notification": false,
-            "id": 5008,
+            "id": 3560,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -1660,7 +1662,7 @@
             "templates": [],
             "text": "Encryption Key",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "888798c8-8c22-47e4-bf06-aa99c5869afd",
             "values": []
           },
@@ -1674,7 +1676,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_from",
             "hide_notification": false,
-            "id": 5009,
+            "id": 3561,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1689,7 +1691,7 @@
             "templates": [],
             "text": "From",
             "tooltip": "default is app.config from_email_address",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "466d1de5-34d3-4ebc-bdea-49089f23893a",
             "values": []
           },
@@ -1703,7 +1705,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_importance",
             "hide_notification": false,
-            "id": 5010,
+            "id": 3562,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1718,7 +1720,7 @@
             "templates": [],
             "text": "Importance",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "9e443d83-a0a2-4c44-8ea8-5628a06236a2",
             "values": [
               {
@@ -1728,7 +1730,7 @@
                 "label": "high",
                 "properties": null,
                 "uuid": "3765037e-39dc-4536-b3cc-910d57c0236d",
-                "value": 974
+                "value": 3682
               },
               {
                 "default": true,
@@ -1737,7 +1739,7 @@
                 "label": "normal",
                 "properties": null,
                 "uuid": "dcc9a325-8f54-40c9-9446-fd1ef2eb9062",
-                "value": 975
+                "value": 3683
               },
               {
                 "default": false,
@@ -1746,7 +1748,7 @@
                 "label": "low",
                 "properties": null,
                 "uuid": "ec37dacb-e1a4-4d1c-a6ec-353f9bf869a8",
-                "value": 976
+                "value": 3684
               }
             ]
           },
@@ -1760,7 +1762,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_in_reply_to",
             "hide_notification": false,
-            "id": 5011,
+            "id": 3563,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1775,7 +1777,7 @@
             "templates": [],
             "text": "Use in_reply_to",
             "tooltip": "use original inbound email message-id",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "99aa0aaa-5f3f-444b-a5df-c8d3f178f6a2",
             "values": []
           },
@@ -1789,7 +1791,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_message_id",
             "hide_notification": false,
-            "id": 5012,
+            "id": 3564,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1804,7 +1806,7 @@
             "templates": [],
             "text": "Generate message_id",
             "tooltip": "generate a message_id for this message",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "41ec5cc0-c484-48b3-86c4-36a7e5245a28",
             "values": []
           },
@@ -1818,7 +1820,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_subject",
             "hide_notification": false,
-            "id": 5013,
+            "id": 3565,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1834,7 +1836,7 @@
             "templates": [],
             "text": "Subject",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "2029c498-c782-4f13-b31a-3717483d0d1d",
             "values": []
           },
@@ -1848,7 +1850,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_template_select",
             "hide_notification": false,
-            "id": 5014,
+            "id": 3566,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1863,7 +1865,7 @@
             "templates": [],
             "text": "Template",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "e2363fd3-fc16-40ac-be0b-12f5c045962e",
             "values": [
               {
@@ -1873,7 +1875,7 @@
                 "label": "\u003cchange to template names in app.config\u003e",
                 "properties": null,
                 "uuid": "a724a040-6659-4ecf-95c2-1d04800a597c",
-                "value": 977
+                "value": 3685
               }
             ]
           },
@@ -1887,7 +1889,7 @@
             "deprecated": false,
             "export_key": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a/mail_to",
             "hide_notification": false,
-            "id": 5015,
+            "id": 3567,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1903,7 +1905,7 @@
             "templates": [],
             "text": "To",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1254,
             "uuid": "b8bc76c2-e095-4e49-b732-cc5eec872ec8",
             "values": []
           }
@@ -1928,16 +1930,16 @@
         "uuid": "e1d2cfd9-edaa-4327-a3b5-ed36bb0b2dc5"
       },
       "has_logical_errors": false,
-      "id": 45,
+      "id": 224,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960501782,
+      "last_modified_time": 1744019725145,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2048,7 +2050,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_89511ef1-3764-4e49-925a-b6bbc4266c6a",
-        "id": 45,
+        "id": 322,
         "name": "playbook_89511ef1_3764_4e49_925a_b6bbc4266c6a",
         "type": "playbook",
         "uuid": "c4202967-7da8-449a-8f34-12687e0ac168"
@@ -2056,19 +2058,19 @@
       "tags": [],
       "type": "default",
       "uuid": "89511ef1-3764-4e49-925a-b6bbc4266c6a",
-      "version": 3
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208\" isExecutable=\"true\" name=\"playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_02t7qqu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c80cd55d-6ab8-4673-8273-1b8a0bf3b456\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from datetime import datetime\\n\\ninputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_subject = u\\\"[{0}] {1}\\\".format(incident.id, incident.name)\\n\\ncreation_date = datetime.fromtimestamp(incident.create_date/1000).strftime(\\\"%Y-%m-%d %H:%M:%S\\\")\\ntype_ids = u\\\", \\\".join(incident.incident_type_ids)\\nsev_code = u\\\"{}\\\".format(incident.severity_code)\\ncurrent_plan = u\\\"{}\\\".format(incident.plan_status)\\n\\ninputs.mail_body_text = u\\\"\\\"\\\"\\nIncident Summary:\\n    Severity Code: {0}\\n    Plan Status: {1}\\n    Created: {2}\\n    Incident Type: {3}\\n\\\"\\\"\\\".format(sev_code, current_plan, creation_date, type_ids)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"send_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02t7qqu\u003c/incoming\u003e\u003coutgoing\u003eFlow_14kc6o3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ydokmk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_02t7qqu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_14kc6o3\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Process Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2fd29061-36ba-418e-b9d6-a489c4ffca0b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14kc6o3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ydokmk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ydokmk\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ydokmk\" id=\"Flow_0ydokmk_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14kc6o3\" id=\"Flow_14kc6o3_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02t7qqu\" id=\"Flow_02t7qqu_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208\" isExecutable=\"true\" name=\"playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_02t7qqu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c80cd55d-6ab8-4673-8273-1b8a0bf3b456\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from datetime import datetime\\n\\ninputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_subject = \\\"[{0}] {1}\\\".format(incident.id, incident.name)\\n\\ncreation_date = datetime.fromtimestamp(incident.create_date/1000).strftime(\\\"%Y-%m-%d %H:%M:%S\\\")\\ntype_ids = \\\", \\\".join(incident.incident_type_ids)\\nsev_code = \\\"{}\\\".format(incident.severity_code)\\ncurrent_plan = \\\"{}\\\".format(incident.plan_status)\\n\\ninputs.mail_body_text = \\\"\\\"\\\"\\nIncident Summary:\\n    Severity Code: {0}\\n    Plan Status: {1}\\n    Created: {2}\\n    Incident Type: {3}\\n\\\"\\\"\\\".format(sev_code, current_plan, creation_date, type_ids)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"send_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02t7qqu\u003c/incoming\u003e\u003coutgoing\u003eFlow_14kc6o3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ydokmk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_02t7qqu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_14kc6o3\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Process Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2fd29061-36ba-418e-b9d6-a489c4ffca0b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14kc6o3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ydokmk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ydokmk\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ydokmk\" id=\"Flow_0ydokmk_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14kc6o3\" id=\"Flow_14kc6o3_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02t7qqu\" id=\"Flow_02t7qqu_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1710960501792,
+      "create_date": 1744019725092,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208",
@@ -2094,7 +2096,7 @@
             "deprecated": false,
             "export_key": "playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208/mail_attachments",
             "hide_notification": false,
-            "id": 5016,
+            "id": 3568,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2109,7 +2111,7 @@
             "templates": [],
             "text": "Case Attachments",
             "tooltip": "comma separated list of attachments for \u0027*\u0027 for all",
-            "type_id": 1059,
+            "type_id": 1255,
             "uuid": "5e3c8a27-8972-40be-b0ca-168b11585518",
             "values": []
           },
@@ -2123,7 +2125,7 @@
             "deprecated": false,
             "export_key": "playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208/mail_cc",
             "hide_notification": false,
-            "id": 5017,
+            "id": 3569,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2138,7 +2140,7 @@
             "templates": [],
             "text": "CC",
             "tooltip": "comma separated list of recipients",
-            "type_id": 1059,
+            "type_id": 1255,
             "uuid": "fd8b5871-cbe9-454f-839f-e36cef34f580",
             "values": []
           },
@@ -2152,7 +2154,7 @@
             "deprecated": false,
             "export_key": "playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208/mail_from",
             "hide_notification": false,
-            "id": 5018,
+            "id": 3570,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2167,7 +2169,7 @@
             "templates": [],
             "text": "From",
             "tooltip": "default is app.config from_email_address",
-            "type_id": 1059,
+            "type_id": 1255,
             "uuid": "6660a3fc-68d9-47ba-940a-e4463ab637fe",
             "values": []
           },
@@ -2181,7 +2183,7 @@
             "deprecated": false,
             "export_key": "playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208/mail_to",
             "hide_notification": false,
-            "id": 5019,
+            "id": 3571,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2197,7 +2199,7 @@
             "templates": [],
             "text": "To",
             "tooltip": "",
-            "type_id": 1059,
+            "type_id": 1255,
             "uuid": "e3e1dc5e-df48-4ad7-a20b-a2256d2aca9e",
             "values": []
           }
@@ -2222,32 +2224,32 @@
         "uuid": "8f8061dc-ddda-4848-af98-c0b473804c79"
       },
       "has_logical_errors": false,
-      "id": 46,
+      "id": 225,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960502286,
+      "last_modified_time": 1744033684180,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1710960501979,
+          "created_date": 1744019725536,
           "description": "",
           "enabled": false,
           "export_key": "Process Results",
-          "id": 66,
+          "id": 212,
           "language": "python3",
-          "last_modified_by": "b@example.com",
-          "last_modified_time": 1710960501979,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1744033679385,
           "name": "Process Results",
           "object_type": "incident",
           "playbook_handle": "example_send_incident_email_text",
           "programmatic_name": "example_send_incident_email_text_process_results",
-          "script_text": "results = playbook.functions.results.send_email_results\n\nif results.success:\n  noteText = u\"Email Sent if mail server is valid/authenticated\\n From: {0}\\n To: {1}\\n CC: {2}\\n BCC: {3}\\n Subject: {4}\\n Body: {5}\".format(results.content.inputs[0].strip(\"u\\\"[]\"), results.content.inputs[1].strip(\"u\\\"[]\"), results.content.inputs[2].strip(\"u\\\"[]\"), results.content.inputs[3].strip(\"u\\\"[]\"), results.content.inputs[4].strip(\"u\\\"\"), results.content.text )   \nelse:\n  noteText = u\"Email NOT Sent\\n From: {0}\\n To: {1}\".format(results.content.inputs[0].strip(\"u\\\"[]\"), results.content.inputs[1].strip(\"u\\\"[]\"))\nincident.addNote(noteText)\n",
+          "script_text": "results = playbook.functions.results.send_email_results\n\nif results.success:\n  noteText = \"Email Sent if mail server is valid/authenticated\\n From: {0}\\n To: {1}\\n CC: {2}\\n BCC: {3}\\n Subject: {4}\\n Body: {5}\".format(results.content.inputs[0].strip(\"\\\"[]\"), results.content.inputs[1].strip(\"\\\"[]\"), results.content.inputs[2].strip(\"\\\"[]\"), results.content.inputs[3].strip(\"\\\"[]\"), results.content.inputs[4].strip(\"\\\"\"), results.content.text )   \nelse:\n  noteText = \"Email NOT Sent\\n From: {0}\\n To: {1}\".format(results.content.inputs[0].strip(\"\\\"[]\"), results.content.inputs[1].strip(\"\\\"[]\"))\nincident.addNote(noteText)\n",
           "tags": [],
           "uuid": "2fd29061-36ba-418e-b9d6-a489c4ffca0b"
         }
@@ -2297,7 +2299,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a3bf15c2-087c-40db-b4c2-d229ea93f208",
-        "id": 46,
+        "id": 323,
         "name": "playbook_a3bf15c2_087c_40db_b4c2_d229ea93f208",
         "type": "playbook",
         "uuid": "6e1dffb5-f20b-4575-8e73-8b90342154a3"
@@ -2305,19 +2307,19 @@
       "tags": [],
       "type": "default",
       "uuid": "a3bf15c2-087c-40db-b4c2-d229ea93f208",
-      "version": 3
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_874b5761_e4d9_41da_8cf5_2d002a60519e\" isExecutable=\"true\" name=\"playbook_874b5761_e4d9_41da_8cf5_2d002a60519e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xaes61\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c80cd55d-6ab8-4673-8273-1b8a0bf3b456\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import datetime\\ninputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_subject = u\\\"[{0}] {1} Task:{2}\\\".format(incident.id, incident.name, task.name)\\n\\ncreation_date = datetime.datetime.fromtimestamp(incident.create_date/1000).strftime(\u0027%Y-%m-%d %H:%M:%S\u0027)\\ntype_ids = u\\\", \\\".join(incident.incident_type_ids)\\nsev_code = u\\\"{}\\\".format(incident.severity_code)\\ncurrent_plan = u\\\"{}\\\".format(incident.plan_status)\\n\\ninputs.mail_body_html = u\\\"\\\"\\\"\\n\u0026lt;h2\u0026gt;Incident Summary\u0026lt;/h2\u0026gt;\\n    Severity Code: {0}\\n\u0026lt;br\u0026gt;\\n    Plan Status: {1}\\n\u0026lt;br\u0026gt;\\n    Created: {2}\\n\u0026lt;br\u0026gt;\\n    Incident Type: {3}\\n\u0026lt;br\u0026gt;\\n    Incident Link: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_incident_url({6}) }}}}\u0027\u0026gt;{6}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Task: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_task_url({6},{7}) }}}}\u0027\u0026gt;{4}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Instructions: \\n\u0026lt;br\u0026gt;\\n{5}\\n\\\"\\\"\\\".format(sev_code, current_plan, creation_date, type_ids, task.name, task.instructions.get(\\\"content\\\") if task.instructions else \u0027-\u0027, incident.id, task.id)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xaes61\u003c/incoming\u003e\u003coutgoing\u003eFlow_1teawgu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1teawgu\u003c/incoming\u003e\u003coutgoing\u003eFlow_11ogju3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_11ogju3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xaes61\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1teawgu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_11ogju3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_874b5761_e4d9_41da_8cf5_2d002a60519e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11ogju3\" id=\"Flow_11ogju3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1teawgu\" id=\"Flow_1teawgu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xaes61\" id=\"Flow_0xaes61_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.578125\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_874b5761_e4d9_41da_8cf5_2d002a60519e\" isExecutable=\"true\" name=\"playbook_874b5761_e4d9_41da_8cf5_2d002a60519e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xaes61\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c80cd55d-6ab8-4673-8273-1b8a0bf3b456\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import datetime\\ninputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_from = playbook.inputs.mail_from\\ninputs.mail_subject = \\\"[{0}] {1} Task:{2}\\\".format(incident.id, incident.name, task.name)\\n\\ncreation_date = datetime.datetime.fromtimestamp(incident.create_date/1000).strftime(\u0027%Y-%m-%d %H:%M:%S\u0027)\\ntype_ids = \\\", \\\".join(incident.incident_type_ids)\\nsev_code = \\\"{}\\\".format(incident.severity_code)\\ncurrent_plan = \\\"{}\\\".format(incident.plan_status)\\n\\ninputs.mail_body_html = \\\"\\\"\\\"\\n\u0026lt;h2\u0026gt;Incident Summary\u0026lt;/h2\u0026gt;\\n    Severity Code: {0}\\n\u0026lt;br\u0026gt;\\n    Plan Status: {1}\\n\u0026lt;br\u0026gt;\\n    Created: {2}\\n\u0026lt;br\u0026gt;\\n    Incident Type: {3}\\n\u0026lt;br\u0026gt;\\n    Incident Link: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_incident_url({6}) }}}}\u0027\u0026gt;{6}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Task: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_task_url({6},{7}) }}}}\u0027\u0026gt;{4}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Instructions: \\n\u0026lt;br\u0026gt;\\n{5}\\n\\\"\\\"\\\".format(sev_code, current_plan, creation_date, type_ids, task.name, task.instructions.get(\\\"content\\\") if task.instructions else \u0027-\u0027, incident.id, task.id)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xaes61\u003c/incoming\u003e\u003coutgoing\u003eFlow_1teawgu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1teawgu\u003c/incoming\u003e\u003coutgoing\u003eFlow_11ogju3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_11ogju3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xaes61\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1teawgu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_11ogju3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_874b5761_e4d9_41da_8cf5_2d002a60519e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11ogju3\" id=\"Flow_11ogju3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1teawgu\" id=\"Flow_1teawgu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xaes61\" id=\"Flow_0xaes61_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.578125\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1710960502296,
+      "create_date": 1744019726226,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_874b5761_e4d9_41da_8cf5_2d002a60519e",
@@ -2343,7 +2345,7 @@
             "deprecated": false,
             "export_key": "playbook_874b5761_e4d9_41da_8cf5_2d002a60519e/mail_attachments",
             "hide_notification": false,
-            "id": 5020,
+            "id": 3572,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2358,7 +2360,7 @@
             "templates": [],
             "text": "Task Attachments",
             "tooltip": "comma separated list of task attachment names, or \u0027*\u0027 for all",
-            "type_id": 1060,
+            "type_id": 1256,
             "uuid": "920a709d-5455-4491-a83b-df5978fc1142",
             "values": []
           },
@@ -2372,7 +2374,7 @@
             "deprecated": false,
             "export_key": "playbook_874b5761_e4d9_41da_8cf5_2d002a60519e/mail_cc",
             "hide_notification": false,
-            "id": 5021,
+            "id": 3573,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2387,7 +2389,7 @@
             "templates": [],
             "text": "CC",
             "tooltip": "comma separated list of recipients",
-            "type_id": 1060,
+            "type_id": 1256,
             "uuid": "41a0d2f9-d8de-401b-bd3b-524c9f5345a0",
             "values": []
           },
@@ -2401,7 +2403,7 @@
             "deprecated": false,
             "export_key": "playbook_874b5761_e4d9_41da_8cf5_2d002a60519e/mail_from",
             "hide_notification": false,
-            "id": 5022,
+            "id": 3574,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2416,7 +2418,7 @@
             "templates": [],
             "text": "From",
             "tooltip": "default is app.config from_email_address",
-            "type_id": 1060,
+            "type_id": 1256,
             "uuid": "9be84ce3-fa8c-414a-8dab-de37719b5243",
             "values": []
           },
@@ -2430,7 +2432,7 @@
             "deprecated": false,
             "export_key": "playbook_874b5761_e4d9_41da_8cf5_2d002a60519e/mail_to",
             "hide_notification": false,
-            "id": 5023,
+            "id": 3575,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2446,7 +2448,7 @@
             "templates": [],
             "text": "To",
             "tooltip": "",
-            "type_id": 1060,
+            "type_id": 1256,
             "uuid": "aa7aa54b-eac6-4c49-b099-f42e45f21746",
             "values": []
           }
@@ -2471,16 +2473,16 @@
         "uuid": "f3e8fb20-3f10-4ffb-aece-07a02eb20806"
       },
       "has_logical_errors": false,
-      "id": 47,
+      "id": 226,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960502844,
+      "last_modified_time": 1744020458290,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2527,7 +2529,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_874b5761-e4d9-41da-8cf5-2d002a60519e",
-        "id": 47,
+        "id": 324,
         "name": "playbook_874b5761_e4d9_41da_8cf5_2d002a60519e",
         "type": "playbook",
         "uuid": "e8d96121-06de-4900-8127-8d4444519181"
@@ -2535,19 +2537,19 @@
       "tags": [],
       "type": "default",
       "uuid": "874b5761-e4d9-41da-8cf5-2d002a60519e",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d\" isExecutable=\"true\" name=\"playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ml0of8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email 2\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bb874b84-b405-40ba-abed-5f7c594f2a99\"\u003e{\"inputs\":{\"9f9dde5a-65a6-4e39-81f5-53242747b03b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"5df194d5-7f42-494b-8bf0-219d6ffc56ee\"}},\"e09789bf-057c-4914-9877-455fb11e3f4d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"fdbcda16-d6f2-48d1-86d7-804e25890bc1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a4bfd9f7-f924-4289-8bb2-fd2e3c577eb4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"124e74e9-a891-442a-b257-7d79b0eeed45\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"3864ba99-ae8c-4926-9b76-9e8e691696f5\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d343f80b-4760-4f4a-b492-bf85dfc29261\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c6b538ef-a2e0-49b9-abe3-4a45339db160\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"823bffa7-4f34-4eda-8ba2-7a714d236ad7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1f86c63b-9f1e-46e5-a865-66fff55a1af4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"dde2204d-ab55-4817-98de-2013158e7687\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"77ebe14e-2028-4f38-b66e-c3566fdf1425\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"09f822a2-50a3-4556-8af0-e86ad8b072ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e8fa561a-aea1-42f7-8b9e-4615ff4046fa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d0ad610c-53ad-4288-a506-c638df53b4d3\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"import hashlib\\nimport time\\nfrom datetime import datetime\\n\\nMESSAGE_ID_DOMAIN = \\\"qradarsoar.ibm.com\\\"\\n\\ninputs.mail_from = playbook.inputs.mail_from\\nif playbook.inputs.get(\u0027mail_message_id\u0027):\\n  # generate a message-id\\n  seed_value = str(int(time.time()*1000))\\n  uuid_hash = hashlib.md5(seed_value.encode()).hexdigest()\\n  msg_id = \\\"{}-{}-{}-{}-{}\\\".format(uuid_hash[0:8], uuid_hash[8:12], uuid_hash[12:16], uuid_hash[16:20], uuid_hash[20:])\\n  inputs.mail_message_id = \\\"{}@{}\\\".format(msg_id, MESSAGE_ID_DOMAIN)\\n  \\nif playbook.inputs.mail_in_reply_to and incident.properties.email_message_id:\\n  inputs.mail_in_reply_to = incident.properties.email_message_id\\n  \\nif playbook.inputs.get(\u0027mail_importance\u0027):\\n  inputs.mail_importance = playbook.inputs.mail_importance if playbook.inputs.mail_importance else None\\n  \\ninputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_subject = u\\\"[{0}] {1} Task: {2}\\\".format(incident.id, incident.name, task.name)\\ninputs.mail_encryption_recipients = playbook.inputs.mail_encryption_key.content\\n\\ncreation_date = datetime.fromtimestamp(incident.create_date/1000).strftime(\\\"%Y-%m-%d %H:%M:%S\\\")\\ntype_ids = u\\\", \\\".join(incident.incident_type_ids)\\nsev_code = u\\\"{}\\\".format(incident.severity_code)\\ncurrent_plan = u\\\"{}\\\".format(incident.plan_status)\\n\\nif playbook.inputs.get(\u0027mail_template_select\u0027):\\n  inputs.mail_template_label = playbook.inputs.mail_template_select\\nelse:\\n  inputs.mail_inline_template = u\\\"\\\"\\\"\\n\u0026lt;h2\u0026gt;Incident Summary\u0026lt;/h2\u0026gt;\\n    Severity Code: {0}\\n\u0026lt;br\u0026gt;\\n    Plan Status: {1}\\n\u0026lt;br\u0026gt;\\n    Created: {2}\\n\u0026lt;br\u0026gt;\\n    Incident Type: {3}\\n\u0026lt;br\u0026gt;\\n    Incident Link: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_incident_url({5}) }}}}\u0027\u0026gt;{5}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Task: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_task_url({5},{6}) }}}}\u0027\u0026gt;{4}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Instructions: \\n\u0026lt;br\u0026gt;\\n{7}\\n\\\"\\\"\\\".format(sev_code, current_plan, creation_date, type_ids, task.name, incident.id, task.id, task.instructions.get(\\\"content\\\") if task.instructions else \u0027-\u0027)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ml0of8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1n72crw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1n72crw\u003c/incoming\u003e\u003coutgoing\u003eFlow_07nuddt\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_07nuddt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ml0of8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1n72crw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_07nuddt\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07nuddt\" id=\"Flow_07nuddt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1n72crw\" id=\"Flow_1n72crw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ml0of8\" id=\"Flow_0ml0of8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.578125\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d\" isExecutable=\"true\" name=\"playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ml0of8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Outbound Email: Send Email 2\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bb874b84-b405-40ba-abed-5f7c594f2a99\"\u003e{\"inputs\":{\"9f9dde5a-65a6-4e39-81f5-53242747b03b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"5df194d5-7f42-494b-8bf0-219d6ffc56ee\"}},\"e09789bf-057c-4914-9877-455fb11e3f4d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"fdbcda16-d6f2-48d1-86d7-804e25890bc1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a4bfd9f7-f924-4289-8bb2-fd2e3c577eb4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"124e74e9-a891-442a-b257-7d79b0eeed45\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"3864ba99-ae8c-4926-9b76-9e8e691696f5\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d343f80b-4760-4f4a-b492-bf85dfc29261\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c6b538ef-a2e0-49b9-abe3-4a45339db160\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"823bffa7-4f34-4eda-8ba2-7a714d236ad7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1f86c63b-9f1e-46e5-a865-66fff55a1af4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"dde2204d-ab55-4817-98de-2013158e7687\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"77ebe14e-2028-4f38-b66e-c3566fdf1425\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"09f822a2-50a3-4556-8af0-e86ad8b072ea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e8fa561a-aea1-42f7-8b9e-4615ff4046fa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d0ad610c-53ad-4288-a506-c638df53b4d3\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"import hashlib\\nimport time\\nfrom datetime import datetime\\n\\nMESSAGE_ID_DOMAIN = \\\"qradarsoar.ibm.com\\\"\\n\\ninputs.mail_from = playbook.inputs.mail_from\\nif playbook.inputs.get(\u0027mail_message_id\u0027):\\n  # generate a message-id\\n  seed_value = str(int(time.time()*1000))\\n  uuid_hash = hashlib.md5(seed_value.encode()).hexdigest()\\n  msg_id = \\\"{}-{}-{}-{}-{}\\\".format(uuid_hash[0:8], uuid_hash[8:12], uuid_hash[12:16], uuid_hash[16:20], uuid_hash[20:])\\n  inputs.mail_message_id = \\\"{}@{}\\\".format(msg_id, MESSAGE_ID_DOMAIN)\\n  \\nif playbook.inputs.mail_in_reply_to and incident.properties.email_message_id:\\n  inputs.mail_in_reply_to = incident.properties.email_message_id\\n  \\nif playbook.inputs.get(\u0027mail_importance\u0027):\\n  inputs.mail_importance = playbook.inputs.mail_importance if playbook.inputs.mail_importance else None\\n  \\ninputs.mail_to = playbook.inputs.mail_to\\ninputs.mail_cc = playbook.inputs.mail_cc\\ninputs.mail_attachments = playbook.inputs.mail_attachments\\ninputs.mail_incident_id = incident.id\\ninputs.mail_subject = \\\"[{0}] {1} Task: {2}\\\".format(incident.id, incident.name, task.name)\\ninputs.mail_encryption_recipients = playbook.inputs.mail_encryption_key.content\\n\\ncreation_date = datetime.fromtimestamp(incident.create_date/1000).strftime(\\\"%Y-%m-%d %H:%M:%S\\\")\\ntype_ids = \\\", \\\".join(incident.incident_type_ids)\\nsev_code = \\\"{}\\\".format(incident.severity_code)\\ncurrent_plan = \\\"{}\\\".format(incident.plan_status)\\n\\nif playbook.inputs.get(\u0027mail_template_select\u0027):\\n  inputs.mail_template_label = playbook.inputs.mail_template_select\\nelse:\\n  inputs.mail_inline_template = \\\"\\\"\\\"\\n\u0026lt;h2\u0026gt;Incident Summary\u0026lt;/h2\u0026gt;\\n    Severity Code: {0}\\n\u0026lt;br\u0026gt;\\n    Plan Status: {1}\\n\u0026lt;br\u0026gt;\\n    Created: {2}\\n\u0026lt;br\u0026gt;\\n    Incident Type: {3}\\n\u0026lt;br\u0026gt;\\n    Incident Link: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_incident_url({5}) }}}}\u0027\u0026gt;{5}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Task: \u0026lt;a target=\u0027_blank\u0027 href=\u0027{{{{ template_helper.generate_task_url({5},{6}) }}}}\u0027\u0026gt;{4}\u0026lt;/a\u0026gt;\\n\u0026lt;br\u0026gt;\\n    Instructions: \\n\u0026lt;br\u0026gt;\\n{7}\\n\\\"\\\"\\\".format(sev_code, current_plan, creation_date, type_ids, task.name, incident.id, task.id, task.instructions.get(\\\"content\\\") if task.instructions else \u0027-\u0027)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"outbound_email_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ml0of8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1n72crw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Save Outbound Email Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7744a945-4634-43eb-8558-a3658c865f03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1n72crw\u003c/incoming\u003e\u003coutgoing\u003eFlow_07nuddt\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_07nuddt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ml0of8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1n72crw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_07nuddt\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07nuddt\" id=\"Flow_07nuddt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1n72crw\" id=\"Flow_1n72crw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ml0of8\" id=\"Flow_0ml0of8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.578125\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1710960502817,
+      "create_date": 1744019727226,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d",
@@ -2573,7 +2575,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_attachments",
             "hide_notification": false,
-            "id": 5024,
+            "id": 3576,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2588,7 +2590,7 @@
             "templates": [],
             "text": "Task Attachments",
             "tooltip": "comma separated list of task attachments or \u0027*\u0027 for all",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "13966f54-bd28-4857-a86e-362067ace8e5",
             "values": []
           },
@@ -2602,7 +2604,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_cc",
             "hide_notification": false,
-            "id": 5025,
+            "id": 3577,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2617,7 +2619,7 @@
             "templates": [],
             "text": "CC",
             "tooltip": "comma separated list of recipients",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "e286aaad-d85f-4078-9bc3-af601c606f5f",
             "values": []
           },
@@ -2631,7 +2633,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_encryption_key",
             "hide_notification": false,
-            "id": 5026,
+            "id": 3578,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -2646,7 +2648,7 @@
             "templates": [],
             "text": "Encryption Key",
             "tooltip": "",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "802ec6e4-2090-4a28-91cf-97d517953ddc",
             "values": []
           },
@@ -2660,7 +2662,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_from",
             "hide_notification": false,
-            "id": 5027,
+            "id": 3579,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2675,7 +2677,7 @@
             "templates": [],
             "text": "From",
             "tooltip": "default is app.config from_email_address",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "c6c84c4a-48d8-49b8-b0d6-2927fcf27ea3",
             "values": []
           },
@@ -2689,7 +2691,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_importance",
             "hide_notification": false,
-            "id": 5028,
+            "id": 3580,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2704,7 +2706,7 @@
             "templates": [],
             "text": "Importance",
             "tooltip": "",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "5b17dbbb-f5c4-4609-b145-a06387a8549e",
             "values": [
               {
@@ -2714,7 +2716,7 @@
                 "label": "low",
                 "properties": null,
                 "uuid": "e206224e-4861-40c4-a573-317a8cc6a7ab",
-                "value": 978
+                "value": 3686
               },
               {
                 "default": true,
@@ -2723,7 +2725,7 @@
                 "label": "normal",
                 "properties": null,
                 "uuid": "d69e28d0-5b12-4d3c-8c42-ef94f8843fb7",
-                "value": 979
+                "value": 3687
               },
               {
                 "default": false,
@@ -2732,7 +2734,7 @@
                 "label": "high",
                 "properties": null,
                 "uuid": "ead0c9cc-d968-4251-b0cb-572335d0fa2d",
-                "value": 980
+                "value": 3688
               }
             ]
           },
@@ -2746,7 +2748,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_in_reply_to",
             "hide_notification": false,
-            "id": 5029,
+            "id": 3581,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2761,7 +2763,7 @@
             "templates": [],
             "text": "Use in-reply-to",
             "tooltip": "Use original inbound email message-id",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "22963e7a-e5e2-4cdc-b3dd-d90d38f46d41",
             "values": []
           },
@@ -2775,7 +2777,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_message_id",
             "hide_notification": false,
-            "id": 5030,
+            "id": 3582,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2790,7 +2792,7 @@
             "templates": [],
             "text": "Generate message-id",
             "tooltip": "generate a message id for this message",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "4d8a6721-d670-45e8-91e0-307358c2be10",
             "values": []
           },
@@ -2804,7 +2806,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_template_select",
             "hide_notification": false,
-            "id": 5031,
+            "id": 3583,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2819,7 +2821,7 @@
             "templates": [],
             "text": "Template",
             "tooltip": "",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "b0967f53-f57d-469f-9063-cc11bff32dfe",
             "values": [
               {
@@ -2829,7 +2831,7 @@
                 "label": "\u003cchange to template names in app.config\u003e",
                 "properties": null,
                 "uuid": "7c9ce5a6-932a-49e0-9db9-42946f99f08b",
-                "value": 981
+                "value": 3689
               }
             ]
           },
@@ -2843,7 +2845,7 @@
             "deprecated": false,
             "export_key": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d/mail_to",
             "hide_notification": false,
-            "id": 5032,
+            "id": 3584,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2859,7 +2861,7 @@
             "templates": [],
             "text": "To",
             "tooltip": "",
-            "type_id": 1061,
+            "type_id": 1257,
             "uuid": "6f548137-f878-4e49-a34e-85435566ead3",
             "values": []
           }
@@ -2884,16 +2886,16 @@
         "uuid": "c7343a47-dd34-463a-bf16-9d85f06b6186"
       },
       "has_logical_errors": false,
-      "id": 48,
+      "id": 227,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 37,
-        "name": "b@example.com",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1710960503442,
+      "last_modified_time": 1744033600418,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2988,7 +2990,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1db4d4d7-ecff-4aba-91dc-0fb3d6d8262d",
-        "id": 48,
+        "id": 325,
         "name": "playbook_1db4d4d7_ecff_4aba_91dc_0fb3d6d8262d",
         "type": "playbook",
         "uuid": "041eaffd-21dc-4540-9a82-3ca025e82b9a"
@@ -2996,7 +2998,7 @@
       "tags": [],
       "type": "default",
       "uuid": "1db4d4d7-ecff-4aba-91dc-0fb3d6d8262d",
-      "version": 4
+      "version": 5
     }
   ],
   "regulators": null,
@@ -3004,14 +3006,14 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1710960498838,
+      "created_date": 1744019718654,
       "description": "Save outbound email results in the Email Conversations datatable",
       "enabled": false,
       "export_key": "Save Outbound Email Results",
-      "id": 65,
+      "id": 211,
       "language": "python3",
-      "last_modified_by": "b@example.com",
-      "last_modified_time": 1710960498838,
+      "last_modified_by": "shresh@example.com",
+      "last_modified_time": 1744019718654,
       "name": "Save Outbound Email Results",
       "object_type": "incident",
       "playbook_handle": null,
@@ -3022,10 +3024,14 @@
     }
   ],
   "server_version": {
-    "build_number": 9097,
-    "major": 50,
+    "build_number": 9339,
+    "f": 0,
+    "m": 0,
+    "major": 0,
     "minor": 0,
-    "version": "50.0.9097"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -3046,7 +3052,7 @@
           "deprecated": false,
           "export_key": "email_conversations/attachments",
           "hide_notification": false,
-          "id": 4964,
+          "id": 3516,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3062,7 +3068,7 @@
           "templates": [],
           "text": "Attachments",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "7c1fb005-e55d-4701-930b-cdcef5ec8752",
           "values": [],
           "width": 101
@@ -3077,7 +3083,7 @@
           "deprecated": false,
           "export_key": "email_conversations/body",
           "hide_notification": false,
-          "id": 4965,
+          "id": 3517,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3093,7 +3099,7 @@
           "templates": [],
           "text": "Body",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "02d7b87e-033a-4621-971f-17eec1b8f86b",
           "values": [],
           "width": 39
@@ -3108,7 +3114,7 @@
           "deprecated": false,
           "export_key": "email_conversations/date_sent",
           "hide_notification": false,
-          "id": 4966,
+          "id": 3518,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3124,7 +3130,7 @@
           "templates": [],
           "text": "Date Sent / Received",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "04ddcabb-fc33-4b44-ae22-9142e4cc8b32",
           "values": [],
           "width": 80
@@ -3139,7 +3145,7 @@
           "deprecated": false,
           "export_key": "email_conversations/from",
           "hide_notification": false,
-          "id": 4967,
+          "id": 3519,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3155,7 +3161,7 @@
           "templates": [],
           "text": "From",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "4f7308b0-52e7-4b37-ac2e-ae4657c98afc",
           "values": [],
           "width": 45
@@ -3170,7 +3176,7 @@
           "deprecated": false,
           "export_key": "email_conversations/importance",
           "hide_notification": false,
-          "id": 4968,
+          "id": 3520,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3186,7 +3192,7 @@
           "templates": [],
           "text": "Importance",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "b97876fd-f52c-47f6-a9f9-d116456adf9f",
           "values": [],
           "width": 92
@@ -3201,7 +3207,7 @@
           "deprecated": false,
           "export_key": "email_conversations/in_reply_to",
           "hide_notification": false,
-          "id": 4969,
+          "id": 3521,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3217,7 +3223,7 @@
           "templates": [],
           "text": "In Reply To",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "7d935596-2559-4ea2-abda-557be08d47b5",
           "values": [],
           "width": 44
@@ -3232,7 +3238,7 @@
           "deprecated": false,
           "export_key": "email_conversations/inbound_id",
           "hide_notification": false,
-          "id": 4970,
+          "id": 3522,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -3248,7 +3254,7 @@
           "templates": [],
           "text": "Id",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "294c15d0-d889-43b1-adf7-71ee89f93f93",
           "values": [],
           "width": 17
@@ -3263,7 +3269,7 @@
           "deprecated": false,
           "export_key": "email_conversations/message_id",
           "hide_notification": false,
-          "id": 4971,
+          "id": 3523,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3279,7 +3285,7 @@
           "templates": [],
           "text": "Message Id",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "4f079575-f34a-4de8-bcab-ad82f6f4d17d",
           "values": [],
           "width": 67
@@ -3294,7 +3300,7 @@
           "deprecated": false,
           "export_key": "email_conversations/recipients",
           "hide_notification": false,
-          "id": 4972,
+          "id": 3524,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3310,7 +3316,7 @@
           "templates": [],
           "text": "Recipients",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "484edd94-dc5f-4056-a907-b544de7b9726",
           "values": [],
           "width": 83
@@ -3325,7 +3331,7 @@
           "deprecated": false,
           "export_key": "email_conversations/source",
           "hide_notification": false,
-          "id": 4973,
+          "id": 3525,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3341,7 +3347,7 @@
           "templates": [],
           "text": "Source",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "72f44122-e58d-4849-99d7-63e3706353fc",
           "values": [],
           "width": 54
@@ -3356,7 +3362,7 @@
           "deprecated": false,
           "export_key": "email_conversations/status",
           "hide_notification": false,
-          "id": 4974,
+          "id": 3526,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3372,7 +3378,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "a5625a0e-df20-4b91-92f8-8fdc26da9bbb",
           "values": [],
           "width": 51
@@ -3387,7 +3393,7 @@
           "deprecated": false,
           "export_key": "email_conversations/subject",
           "hide_notification": false,
-          "id": 4975,
+          "id": 3527,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3403,7 +3409,7 @@
           "templates": [],
           "text": "Subject",
           "tooltip": "",
-          "type_id": 1055,
+          "type_id": 1251,
           "uuid": "890bfe86-a5f0-43ca-a961-d460a9fccbd6",
           "values": [],
           "width": 60
