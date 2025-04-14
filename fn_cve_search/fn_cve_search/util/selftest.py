@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -26,7 +26,7 @@ def selftest_function(opts):
 
         return {"state": "Success"}
     except Exception as e:
-        log.info("Failed Connection to CVE Database Error - {}".format(e))
+        log.info(f"Failed Connection to CVE Database Error - {e}")
         return {
             "state": "Failed",
             "reason": str(e)
