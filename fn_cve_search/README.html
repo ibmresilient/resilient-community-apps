@@ -328,7 +328,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_shodan/README.html">Shodan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_slack/README.html">Slack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_snapshot_url/README.html">Snapshot URL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_spamhaus_query/README.html">Spamhaus Lookup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_sumo_logic/README.html">Sumo Logic Cloud SIEM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">Task Utilities</a></li>
@@ -421,15 +420,27 @@
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Version</p></th>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
 <th class="head"><p>Change</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>6/2020</p></td>
-<td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3, updated both the workflows</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.2</p></td>
+<td><p>07/2020</p></td>
 <td><p>Proxy support added</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.1</p></td>
+<td><p>04/2020</p></td>
+<td><p>Added AppHost Support</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.0</p></td>
+<td><p>03/2019</p></td>
+<td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
@@ -479,8 +490,8 @@
 <section id="prerequisites">
 <h2>Prerequisites:<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Resilient Appliance &gt;= v31.0.0</p></li>
-<li><p>Integrations Server running resilient_circuits &gt;= v30.0.0</p></li>
+<li><p>Resilient Appliance &gt;= 51.0.0</p></li>
+<li><p>Integrations Server running resilient_circuits &gt;= 51.0.0</p></li>
 </ul>
 </section>
 <section id="installation">
@@ -504,18 +515,14 @@
 </pre></div>
 </div>
 </li>
-<li><p>Access your <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file and review the parameters added. Edit the <code class="docutils literal notranslate"><span class="pre">max_results_display</span></code> counter value to limit the maximum number of search results to display on table.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_cve_search</span><span class="p">]</span>
-<span class="c1"># Flag display maximum CVE Entries on the resilient table</span>
-<span class="n">max_results_display</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="c1"># Base URL of Common Vulnerability Exposures Data Base.</span>
-<span class="n">cve_base_url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cve</span><span class="o">.</span><span class="n">circl</span><span class="o">.</span><span class="n">lu</span><span class="o">/</span><span class="n">api</span>
-<span class="c1"># add proxies here or use [integrations] (see resilient-lib)</span>
-<span class="c1">#http_proxy=</span>
-<span class="c1">#https_proxy=</span>
-</pre></div>
-</div>
-</li>
+<li><p>Access your <code class="docutils literal notranslate"><span class="pre">app.config</span></code> file and review the parameters added. Edit the <code class="docutils literal notranslate"><span class="pre">max_results_display</span></code> counter value to limit the maximum number of search results to display on table.</p></li>
+</ul>
+<p>| Name | Required | Example |
+| ‘max_results_display’ | Yes | 50 |
+| ‘cve_base_url’ | Yes | https://cve.circl.lu/api |
+| ‘http_proxy’ | No | — |
+| ‘https_proxy’ | No | — |</p>
+<ul>
 <li><p>To uninstall CVE Function from Resilient, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip uninstall fn_cve_search
 </pre></div>

@@ -16,9 +16,12 @@
  ---
 
 ## Change Log
-| Date | Version | Change|
-|---|---|---|
-|6/2020 | 1.0.2 | Proxy support added |
+| Version | Date | Change|
+| ----- | ------- | --------|
+| 1.1.0 | 04/2025 | Converted example workflows to python3, updated both the workflows | 
+| 1.0.2 | 07/2020 | Proxy support added |
+| 1.0.1 | 04/2020 | Added AppHost Support |
+| 1.0.0 | 03/2019 | Initial Release |
 
 ## About This Package:
 **This package contains Resilient functions that allows one to search for Common Vulnerability Exposures (CVE).**
@@ -47,8 +50,8 @@
 ![screenshot](./screenshots/3_2.png)
 ## Prerequisites:
 
-* Resilient Appliance >= v31.0.0
-* Integrations Server running resilient_circuits >= v30.0.0
+* Resilient Appliance >= 51.0.0
+* Integrations Server running resilient_circuits >= 51.0.0
 
 ## Installation
 
@@ -70,16 +73,11 @@ This package requires that it be installed on a RHEL or CentOS platform using th
     ```
 * Access your `app.config` file and review the parameters added. Edit the `max_results_display` counter value to limit the maximum number of search results to display on table.
 
-	```
-	[fn_cve_search]
-	# Flag display maximum CVE Entries on the resilient table
-	max_results_display = 50
-	# Base URL of Common Vulnerability Exposures Data Base.
-	cve_base_url = https://cve.circl.lu/api
-    # add proxies here or use [integrations] (see resilient-lib)
-    #http_proxy=
-    #https_proxy=
-	```
+| Name | Required | Example |
+| 'max_results_display' | Yes | 50 |
+| 'cve_base_url' | Yes | https://cve.circl.lu/api |
+| 'http_proxy' | No | --- |
+| 'https_proxy' | No | --- |
 
 *  To uninstall CVE Function from Resilient, run:
 
