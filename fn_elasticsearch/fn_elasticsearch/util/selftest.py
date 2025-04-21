@@ -9,7 +9,7 @@ import logging
 from ssl import create_default_context
 from elasticsearch import Elasticsearch
 from resilient_lib import str_to_bool
-
+import traceback
 
 from fn_elasticsearch.util.helper import ElasticSearchHelper
 
@@ -73,5 +73,6 @@ def selftest_function(opts):
                     "reason": "Could not Ping the ElasticSearch instance, there may be an issue with your config. Reason : {0}".format(e)}
 
     except Exception as e:
+        log.debug(traceback.format_exc())
         return {"state": "failed",
                 "reason": "Encountered error while connecting to ElasticSearch. Please check your config. Reason {0}".format(e)}

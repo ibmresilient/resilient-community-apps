@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
             helper = ElasticSearchHelper(self.options)
             rc = ResultPayload(SECTION_ELASTICSEARCH, **kwargs)
 
-            validate_fields(["es_datastore_url", "es_auth_username", "es_auth_password"], self.options)
+            validate_fields(["es_datastore_url"], self.options)
 
             ELASTICSEARCH_BOOL_HTTP_AUTH = str_to_bool(
                 value=helper.get_config_option("es_use_http", True))
@@ -161,7 +161,7 @@ class FunctionComponent(ResilientComponent):
                 "query_results": query_results,
                 "success": (True if query_results is not None else False),
                 "matched_records": matched_records,
-                "returned_records": len(query_results)
+                "returned_records": len(query_results) if query_results else 0
             }
             yield StatusMessage("Successful: "+str(results["success"]))
             yield FunctionResult(results)

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.5.0.1475
 
-"""Generate the Resilient customizations required for fn_elasticsearch"""
+"""Generate the SOAR customizations required for fn_elasticsearch"""
 
 import base64
 import os
@@ -20,17 +22,30 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_elasticsearch",
-        "message_destinations": [u"fn_elasticsearch"],
-        "functions": [u"fn_elasticsearch_query"],
-        "workflows": [u"example_elasticsearch_query_from_artifact", u"example_elasticsearch_query_from_incident"],
-        "actions": [u"Example: ElasticSearch Query from Artifact", u"Example: ElasticSearch Query from Incident"],
+        "message_destinations": [
+            u"fn_elasticsearch"
+        ],
+        "functions": [
+            u"fn_elasticsearch_query"
+        ],
+        "workflows": [
+            u"example_elasticsearch_query_from_artifact",
+            u"example_elasticsearch_query_from_incident"
+        ],
+        "actions": [
+            u"Example: ElasticSearch Query from Artifact",
+            u"Example: ElasticSearch Query from Incident"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [
+            u"elasticsearch_query_from_artifact",
+            u"elasticsearch_query_from_incident"
+        ]
     }
 
 
@@ -39,7 +54,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.0.0
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
@@ -49,6 +64,9 @@ def customization_data(client=None):
     - Workflows:
         - example_elasticsearch_query_from_artifact
         - example_elasticsearch_query_from_incident
+    - Playbooks:
+        - elasticsearch_query_from_artifact
+        - elasticsearch_query_from_incident
     - Rules:
         - Example: ElasticSearch Query from Artifact
         - Example: ElasticSearch Query from Incident
