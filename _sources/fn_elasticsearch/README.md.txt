@@ -42,14 +42,15 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.9 | 06/2022 | Added support for disabling SSL Certificate verification |
-| 1.0.8 |  | Pinned dependency ``elasticsearch~=7.17`` |
-| 1.0.7 |  | Add support for AppHost |
-| 1.0.6 |  | Add resilient-lib dependency to setup.py |
-| 1.0.5 |  | Added logic to conditionally use doc_type depending on the major version of ElasticSearch and Updated documentation |
-| 1.0.4 |  | Customer hotfix related to breaking version changes to ElasticSearch library |
-| 1.0.3 |  | Bugfix http |
-| 1.0.2 |  |  Updated documentation and Added a selftest capability, to enable users to test their Elasticsearch connection before starting the integration server |
+| 1.0.10 | 04/2025 | Converted example workflows to python3, added 2 new playbooks |
+| 1.0.9 | 07/2022 | Added support for disabling SSL Certificate verification |
+| 1.0.8 | 02/2022 | Pinned dependency ``elasticsearch~=7.17`` |
+| 1.0.7 | 11/2020 | Add support for AppHost |
+| 1.0.6 | 02/2020 | Add resilient-lib dependency to setup.py |
+| 1.0.5 | 11/2019 | Added logic to conditionally use doc_type depending on the major version of ElasticSearch and Updated documentation |
+| 1.0.4 | 04/2019 | Customer hotfix related to breaking version changes to ElasticSearch library |
+| 1.0.3 | 12/2018 | Bugfix http |
+| 1.0.2 | 09/2018 |  Updated documentation and Added a selftest capability, to enable users to test their Elasticsearch connection before starting the integration server |
 
 ---
 
@@ -80,13 +81,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `43.0.7660`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.0.7660`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=43.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -117,11 +118,11 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Python 3.9 or later are supported.
 Additional package dependencies may exist for each of these packages:
 * elasticsearch~=7.17
-* resilient_circuits>=43.0.0
-* resilient_lib>=43.0.0
+* resilient_circuits>=51.0.0
+* resilient_lib>=51.0.0
 
 ###  Endpoint Information
 
@@ -315,7 +316,7 @@ results = {
   <p>
 
   ```python
-  if artifact.value is not None:
+  if artifact.value:
     inputs.es_query = artifact.value
   ```
 
@@ -347,7 +348,7 @@ results = {
                   <br> Query supplied: <b>{0}</b>
                   <br> Total matched records :<b>{1}</b>""".format(results.inputs["es_query"], results.matched_records)
 
-    if results.returned_records != 0:
+    if results.returned_records:
       noteText += """<br> Total returned records : <b>{0}</b>""".format(results.returned_records)
     incident.addNote(helper.createRichText(noteText))
   ```
@@ -362,6 +363,11 @@ results = {
 | Example: ElasticSearch Query from Artifact | artifact | `example_elasticsearch_query_from_artifact` |
 | Example: ElasticSearch Query from Incident | incident | `example_elasticsearch_query_from_incident` |
 
+## Playbooks
+| Playbook Name | Object | Workflow Triggered |
+| --------- | ------ | ------------------ |
+| ElasticSearch Query from Artifact | artifact | `elasticsearch_query_from_artifact` |
+| ElasticSearch Query from Incident | incident | `elasticsearch_query_from_incident` |
 ---
 
 

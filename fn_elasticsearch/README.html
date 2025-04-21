@@ -466,36 +466,40 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.9</p></td>
-<td><p>06/2022</p></td>
+<tr class="row-even"><td><p>1.0.10</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3, added 2 new playbooks</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.9</p></td>
+<td><p>07/2022</p></td>
 <td><p>Added support for disabling SSL Certificate verification</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.8</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p>1.0.8</p></td>
+<td><p>02/2022</p></td>
 <td><p>Pinned dependency <code class="docutils literal notranslate"><span class="pre">elasticsearch~=7.17</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.7</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p>1.0.7</p></td>
+<td><p>11/2020</p></td>
 <td><p>Add support for AppHost</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.6</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p>1.0.6</p></td>
+<td><p>02/2020</p></td>
 <td><p>Add resilient-lib dependency to setup.py</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.5</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p>1.0.5</p></td>
+<td><p>11/2019</p></td>
 <td><p>Added logic to conditionally use doc_type depending on the major version of ElasticSearch and Updated documentation</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.4</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p>1.0.4</p></td>
+<td><p>04/2019</p></td>
 <td><p>Customer hotfix related to breaking version changes to ElasticSearch library</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.3</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p>1.0.3</p></td>
+<td><p>12/2018</p></td>
 <td><p>Bugfix http</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>09/2018</p></td>
 <td><p>Updated documentation and Added a selftest capability, to enable users to test their Elasticsearch connection before starting the integration server</p></td>
 </tr>
 </tbody>
@@ -527,14 +531,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">43.0.7660</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">43.0.7660</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=43.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -584,12 +588,12 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Both Python 2.7 and Python 3.6 are supported.
+<p>Python 3.9 or later are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>elasticsearch~=7.17</p></li>
-<li><p>resilient_circuits&gt;=43.0.0</p></li>
-<li><p>resilient_lib&gt;=43.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
+<li><p>resilient_lib&gt;=51.0.0</p></li>
 </ul>
 </section>
 <section id="endpoint-information">
@@ -858,7 +862,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Workflows</summary>
   <details><summary>Example Pre-Process Script:</summary>
   <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">es_query</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 </div>
@@ -888,7 +892,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="s2">                &lt;br&gt; Query supplied: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
 <span class="s2">                &lt;br&gt; Total matched records :&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;es_query&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">matched_records</span><span class="p">)</span>
 
-  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">returned_records</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">returned_records</span><span class="p">:</span>
     <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt; Total returned records : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">returned_records</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
@@ -915,6 +919,29 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-odd"><td><p>Example: ElasticSearch Query from Incident</p></td>
 <td><p>incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">example_elasticsearch_query_from_incident</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Workflow Triggered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ElasticSearch Query from Artifact</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elasticsearch_query_from_artifact</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ElasticSearch Query from Incident</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elasticsearch_query_from_incident</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1010,6 +1037,7 @@ Refer to the documentation listed in the Requirements section for troubleshootin
 </li>
 <li><a class="reference internal" href="#function-elasticsearch-utilities-query">Function - ElasticSearch Utilities: Query</a></li>
 <li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
 </ul>
