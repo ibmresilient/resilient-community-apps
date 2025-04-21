@@ -21,8 +21,9 @@ def snake_to_camel(word):
 
 
 setup(
+    display_name='Clamav',
     name="fn_clamav",
-    version="1.1.0",
+    version="1.1.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -30,7 +31,7 @@ setup(
     description="Resilient Circuits Components for 'fn_clamav'",
     long_description="Resilient Circuits Components for 'fn_clamav'",
     install_requires=[
-        "resilient_circuits>=30.0.0",
+        "resilient_circuits>=51.0.0",
         "pyclamd >= 0.4.0"
     ],
     packages=find_packages(),

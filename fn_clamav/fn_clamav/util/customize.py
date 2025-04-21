@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.5.0.1475
 
-"""Generate the Resilient customizations required for fn_clamav"""
+"""Generate the SOAR customizations required for fn_clamav"""
 
 import base64
 import os
@@ -20,16 +22,27 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_clamav",
-        "message_destinations": [u"fn_clamav"],
-        "functions": [u"clamav_scan_stream"],
-        "workflows": [u"example_clamav_scan_artifact_attachment", u"example_clamav_scan_attachment"],
-        "actions": [u"Example: ClamAV scan artifact attachment", u"Example: ClamAV scan attachment"],
+        "message_destinations": [
+            u"fn_clamav"
+        ],
+        "functions": [
+            u"clamav_scan_stream"
+        ],
+        "workflows": [
+            u"example_clamav_scan_artifact_attachment",
+            u"example_clamav_scan_attachment"
+        ],
+        "actions": [
+            u"Example: ClamAV scan artifact attachment",
+            u"Example: ClamAV scan attachment"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -38,7 +51,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 41.0.6783
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

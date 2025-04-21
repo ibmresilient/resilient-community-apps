@@ -40,6 +40,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.1 | 03/2025 | Converted example workflows to python3 | 
 | 1.1.0 | 09/2021 | Convert to App Host|
 | 1.0.0 | 12/2018 | Initial Release |
 
@@ -75,7 +76,7 @@ Resilient Circuits Components for 'fn_clamav'
 <!--
   List any Requirements
 -->
-* resilient_circuits version 30 or later
+* resilient_circuits version 51 or later
 * Python package [pyclamd](https://xael.org/pages/pyclamd-en.html) >=0.4.
 
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
@@ -84,13 +85,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `41.0.6783`.
+* Resilient platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `41.0.6783`.
+* Resilient platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -120,10 +121,10 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does/does not** support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Both Python 3.9 or later are supported.
 Additional package dependencies may exist for each of these packages:
 * pyclamd >= 0.4.0
-* resilient_circuits>=30.0.0
+* resilient_circuits>=51.0.0
 
 ---
 
@@ -233,36 +234,36 @@ response = results.response
 file_name = results.file_name
 inputs = results.inputs
 
-if response is not None and response.stream[0] != "ERROR":
+if response and response.stream[0] != "ERROR":
     if response.stream[0] == "FOUND":
         color = "#ff402b"
 
-    if inputs.incident_id is not None and inputs.artifact_id is not None:
-        noteText = u"""<br>ClamAV scan complete
+    if inputs.incident_id and inputs.artifact_id:
+        noteText = """<br>ClamAV scan complete
                         <br><b>Incident ID:</b></br> '{0}'
                         <br><b>Artifact ID:</b></br> '{1}'
                         <br><b>Attachment Name:</b></br> '{2}'
                         <br><b>Scan Status:</b> <b style="color: {3}">{4}</b></br>""".format(inputs.incident_id,
                                                                                     inputs.artifact_id,
                                                                                     file_name, color, response.stream[1])
-    elif inputs.attachment_id is not None:
-        if inputs.task_id is not None:
-            noteText = u"""<br>ClamAV scan complete
+    elif inputs.attachment_id:
+        if inputs.task_id:
+            noteText = """<br>ClamAV scan complete
                           <br><b>Task ID:</b></br> '{0}'
                           <br><b>Attachment ID:</b></br> '{1}'
                           <br><b>Attachment Name:</b></br> '{2}'
                           <br><b>Scan Status:</b> <b style="color: {3}">{4}</b></br>""".format(inputs.task_id,
                                                                                       inputs.attachment_id,
                                                                                       file_name, color, response.stream[1])
-        elif inputs.incident_id is not None:
-            noteText = u"""<br>ClamAV scan complete
+        elif inputs.incident_id:
+            noteText = """<br>ClamAV scan complete
                           <br><b>Incident ID:</b></br> '{0}'
                           <br><b>Attachment ID:</b></br>'{1}'
                           <br><b>Attachment Name:</b></br> '{2}'
                           <br><b>Scan Status:</b> <b style="color: {3}">{4}</b></br>""".format(inputs.incident_id,
                                                                                       inputs.attachment_id,
                                                                                       file_name, color, response.stream[1])
-    if inputs.task_id is not None:
+    if inputs.task_id:
         task.addNote(helper.createRichText(noteText))
     else:
         incident.addNote(helper.createRichText(noteText))
