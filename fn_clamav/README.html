@@ -458,11 +458,15 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
+<td><p>03/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>09/2021</p></td>
 <td><p>Convert to App Host</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>12/2018</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -506,7 +510,7 @@ Resilient Circuits Components for ‘fn_clamav’</p>
   List any Requirements
 -->
 <ul class="simple">
-<li><p>resilient_circuits version 30 or later</p></li>
+<li><p>resilient_circuits version 51 or later</p></li>
 <li><p>Python package <a class="reference external" href="https://xael.org/pages/pyclamd-en.html">pyclamd</a> &gt;=0.4.</p></li>
 </ul>
 <p>This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.</p>
@@ -515,14 +519,14 @@ Resilient Circuits Components for ‘fn_clamav’</p>
 <p>The Resilient platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a Resilient platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">41.0.6783</span></code>.</p></li>
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a Resilient platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">41.0.6783</span></code>.</p></li>
+<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=30.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -572,11 +576,11 @@ Resilient Circuits Components for ‘fn_clamav’</p>
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Both Python 2.7 and Python 3.6 are supported.
+<p>Both Python 3.9 or later are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>pyclamd &gt;= 0.4.0</p></li>
-<li><p>resilient_circuits&gt;=30.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 </section>
@@ -732,36 +736,36 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="n">file_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">file_name</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 
-<span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">response</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;FOUND&quot;</span><span class="p">:</span>
         <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;#ff402b&quot;</span>
 
-    <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
+    <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="ow">and</span> <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span>
+        <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
 <span class="s2">                        &lt;br&gt;&lt;b&gt;Incident ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{0}</span><span class="s2">&#39;</span>
 <span class="s2">                        &lt;br&gt;&lt;b&gt;Artifact ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{1}</span><span class="s2">&#39;</span>
 <span class="s2">                        &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{2}</span><span class="s2">&#39;</span>
 <span class="s2">                        &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style=&quot;color: </span><span class="si">{3}</span><span class="s2">&quot;&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">,</span>
                                                                                     <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">,</span>
                                                                                     <span class="n">file_name</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">elif</span> <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
+    <span class="k">elif</span> <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span><span class="p">:</span>
+            <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Task ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{0}</span><span class="s2">&#39;</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{1}</span><span class="s2">&#39;</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{2}</span><span class="s2">&#39;</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style=&quot;color: </span><span class="si">{3}</span><span class="s2">&quot;&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
                                                                                       <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span><span class="p">,</span>
                                                                                       <span class="n">file_name</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">elif</span> <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
+        <span class="k">elif</span> <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">:</span>
+            <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Incident ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{0}</span><span class="s2">&#39;</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment ID:&lt;/b&gt;&lt;/br&gt;&#39;</span><span class="si">{1}</span><span class="s2">&#39;</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{2}</span><span class="s2">&#39;</span>
 <span class="s2">                          &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style=&quot;color: </span><span class="si">{3}</span><span class="s2">&quot;&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">,</span>
                                                                                       <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span><span class="p">,</span>
                                                                                       <span class="n">file_name</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span><span class="p">:</span>
         <span class="n">task</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
