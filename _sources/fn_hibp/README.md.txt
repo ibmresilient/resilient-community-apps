@@ -5,21 +5,23 @@
 ## History
 | Date | Version | Comments |
 | ---- | ------- | ---- |
-| 10/2022 | 2.0.4 | Fix for proxy support |
-| 5/2022 | 2.0.3 | Updated API call |
-| 6/2020 | 2.0.2 | Added proxy support |
-| 4/2020 | 2.0.1 |  Support added for App Host |
-| 11/2019 | 2.0.0 | Updated to use hibp api v3.0. Now requires an apikey |
+| 2.0.5 | 04/2025 | Converted example workflows to python3 |
+| 2.0.4 | 10/2022 | Fix for proxy support |
+| 2.0.3 | 10/2022 | Updated API call |
+| 2.0.2 | 07/2020 | Added proxy support |
+| 2.0.1 | 04/2020 | Support added for App Host |
+| 2.0.0 | 12/2019 | Updated to use hibp api v3.0. Now requires an apikey |
+| 1.0.0 | 11/2018 | Initial Release |
 
 
 ## app.config settings:
 Set if using a proxy
 
-    [fn_hibp]
-    ## Proxy settings if needed
-    #hibp_proxy_http=
-    #hibp_proxy_https=
-    hibp_api_key=< Have I Been Pwned API Key>
+| Config | Required | Example | Description |
+| ------ | -------- | ------- | ----------- |
+| hibp_proxy_http | no | ---- | Proxy settings if needed | 
+| hibp_proxy_https | no | --- | Proxy settings if needed |
+| hibp_api_key | Yes | ------ | Have I Been Pwned API Key |
 
 As of recent July 2019 changes, HIBP released v3 of the API (deprecating v2) and now requires a for-fee API Key (see https://haveibeenpwned.com/API/Key).
 If upgrading from version 1.0.0,  **manually** add the **hibp_api_key** setting to your app.config file.

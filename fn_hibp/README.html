@@ -213,7 +213,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../fn_service_now/docs/customize_resilient_guide/README.html">SOAR Customization Guide</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_remedy/README.html">Remedy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_siemplify/README.html">Siemplify</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_vmware_cbc/README.html">VMware Carbon Black Cloud</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_aws_iam/README.html">AWS IAM</a></li>
@@ -230,7 +229,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_algosec/README.html">AlgoSec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_anomali_staxx/README.html">Anomali Staxx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_ansible/README.html">Ansible for SOAR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_ansible_tower/README.html">Ansible Tower</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_api_void/README.html">APIVoid Threat Analysis APIs</a></li>
@@ -411,25 +409,33 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>10/2022</p></td>
-<td><p>2.0.4</p></td>
+<tr class="row-even"><td><p>2.0.5</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.0.4</p></td>
+<td><p>10/2022</p></td>
 <td><p>Fix for proxy support</p></td>
 </tr>
-<tr class="row-odd"><td><p>5/2022</p></td>
-<td><p>2.0.3</p></td>
+<tr class="row-even"><td><p>2.0.3</p></td>
+<td><p>10/2022</p></td>
 <td><p>Updated API call</p></td>
 </tr>
-<tr class="row-even"><td><p>6/2020</p></td>
-<td><p>2.0.2</p></td>
+<tr class="row-odd"><td><p>2.0.2</p></td>
+<td><p>07/2020</p></td>
 <td><p>Added proxy support</p></td>
 </tr>
-<tr class="row-odd"><td><p>4/2020</p></td>
-<td><p>2.0.1</p></td>
+<tr class="row-even"><td><p>2.0.1</p></td>
+<td><p>04/2020</p></td>
 <td><p>Support added for App Host</p></td>
 </tr>
-<tr class="row-even"><td><p>11/2019</p></td>
-<td><p>2.0.0</p></td>
+<tr class="row-odd"><td><p>2.0.0</p></td>
+<td><p>12/2019</p></td>
 <td><p>Updated to use hibp api v3.0. Now requires an apikey</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>11/2018</p></td>
+<td><p>Initial Release</p></td>
 </tr>
 </tbody>
 </table>
@@ -438,12 +444,33 @@
 <section id="app-config-settings">
 <h2>app.config settings:<a class="headerlink" href="#app-config-settings" title="Link to this heading">¶</a></h2>
 <p>Set if using a proxy</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[fn_hibp]
-## Proxy settings if needed
-#hibp_proxy_http=
-#hibp_proxy_https=
-hibp_api_key=&lt; Have I Been Pwned API Key&gt;
-</pre></div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>hibp_proxy_http</p></td>
+<td><p>no</p></td>
+<td><p>—-</p></td>
+<td><p>Proxy settings if needed</p></td>
+</tr>
+<tr class="row-odd"><td><p>hibp_proxy_https</p></td>
+<td><p>no</p></td>
+<td><p>—</p></td>
+<td><p>Proxy settings if needed</p></td>
+</tr>
+<tr class="row-even"><td><p>hibp_api_key</p></td>
+<td><p>Yes</p></td>
+<td><p>——</p></td>
+<td><p>Have I Been Pwned API Key</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <p>As of recent July 2019 changes, HIBP released v3 of the API (deprecating v2) and now requires a for-fee API Key (see https://haveibeenpwned.com/API/Key).
 If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp_api_key</strong> setting to your app.config file.</p>
