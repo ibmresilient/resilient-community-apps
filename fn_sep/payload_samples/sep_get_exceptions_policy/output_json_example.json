@@ -1,0 +1,64 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "sources": [],
+    "configuration": {
+      "files": [],
+      "non_pe_rules": [],
+      "directories": [],
+      "webdomains": [],
+      "certificates": [],
+      "applications": [],
+      "blacklistrules": [],
+      "applications_to_monitor": [
+        {
+          "rulestate": {
+            "enabled": true
+          },
+          "name": "net.exe"
+        }
+      ],
+      "mac": {
+        "files": []
+      },
+      "linux": {
+        "directories": [],
+        "extension_list": null
+      },
+      "extension_list": null,
+      "knownrisks": [],
+      "tamper_files": [],
+      "dns_and_host_applications": [],
+      "dns_and_host_blacklistrules": []
+    },
+    "lockedoptions": {
+      "knownrisk": true,
+      "extension": true,
+      "file": true,
+      "domain": true,
+      "securityrisk": false,
+      "sonar": true,
+      "application": true,
+      "dnshostfile": true,
+      "certificate": true
+    },
+    "enabled": true,
+    "desc": "Created automatically during product installation.",
+    "name": "Exceptions policy",
+    "lastmodifiedtime": 1720451135816
+  },
+  "raw": null,
+  "inputs": {
+    "sep_exceptions_id": "523B017*******97F83814D1657F3A4"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 1294,
+    "timestamp": "2024-07-10 10:45:19"
+  }
+}
